@@ -54,7 +54,7 @@ class CarcpartMapBuilder {
 
 		$tMap->addColumn('NUMORD', 'Numord', 'string', CreoleTypes::VARCHAR, false, 8);
 
-		$tMap->addColumn('CODALM', 'Codalm', 'string', CreoleTypes::VARCHAR, false, 6);
+		$tMap->addColumn('CODALM', 'Codalm', 'string', CreoleTypes::VARCHAR, false, 20);
 
 		$tMap->addColumn('CTRPER', 'Ctrper', 'string', CreoleTypes::VARCHAR, false, 50);
 
@@ -65,6 +65,14 @@ class CarcpartMapBuilder {
 		$tMap->addColumn('FECFAC', 'Fecfac', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('CODUBI', 'Codubi', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('NOMCLI', 'Nomcli', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('CANCAJ', 'Cancaj', 'double', CreoleTypes::NUMERIC, false, 10);
+
+		$tMap->addColumn('CANJAU', 'Canjau', 'double', CreoleTypes::NUMERIC, false, 10);
+
+		$tMap->addColumn('CODCEN', 'Codcen', 'string', CreoleTypes::VARCHAR, false, 4);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

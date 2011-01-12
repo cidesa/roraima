@@ -26,6 +26,15 @@ class pagtipretActions extends autopagtipretActions
     {
         $unitri=$this->MostrarUnidadesTributarias();
 		$this->optipret->setUnitri($unitri);
+
+       $t= new Criteria();
+       $t->setLimit(1);
+       $t->addDescendingOrderByColumn(OptipretPeer::CODTIP);
+       $reg= OptipretPeer::doSelectOne($t);
+       if ($reg)
+       {
+           $this->optipret->setCodtip(str_pad(($reg->getCodtip()+1),3,'0',STR_PAD_LEFT));
+       }else $this->optipret->setCodtip('001');
     }
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
@@ -100,6 +109,10 @@ $this->Bitacora('Guardo');
 	    {
 	      $this->optipret->setFactor($optipret['factor']);
 	    }
+            if (isset($optipret['mbasmi1']))
+	    {
+	      $this->optipret->setMbasmi($optipret['mbasmi1']);
+	    }
    }//if ($optipret['consustra']=='S')
    else
    {
@@ -111,6 +124,10 @@ $this->Bitacora('Guardo');
 	    {
 	      $this->optipret->setBasimp($optipret['basimp']);
 	    }
+      if (isset($optipret['mbasmi']))
+        {
+          $this->optipret->setMbasmi($optipret['mbasmi']);
+        }
       $this->optipret->setUnitri(0);
 	  $this->optipret->setPorsus(0);
 	  $this->optipret->setFactor(0);
@@ -171,6 +188,9 @@ $this->Bitacora('Guardo');
 	   $this->porret=$this->getRequestParameter('porret');
        $this->basimp=$this->getRequestParameter('basimp');
        $this->basimp1=$this->getRequestParameter('basimp1');
+           $this->mbasmi=$this->getRequestParameter('mbasmi');
+           $this->mbasmi1=$this->getRequestParameter('mbasmi1');
+           $this->limbaseret=H::getConfApp('limbaseret', 'pagtipret', 'tesoreria');
 
 	   if ($this->getRequestParameter('ajax')=='S')
 	   {
@@ -187,4 +207,22 @@ $this->Bitacora('Guardo');
 	  $this->mascaracontabilidad = Herramientas::ObtenerFormato('Contaba','Forcta');
 	  $this->loncta=strlen($this->mascaracontabilidad);
 	}
+
+  protected function saveOptipret($optipret)
+  {
+    if (!$optipret->getId()) {$optipret->save(); }
+    else {
+    	if ($optipret->getTiedatrel()=='S')
+    	{
+    		$a= new Criteria();
+    		$a->add(OptipretPeer::CODTIP,$optipret->getCodtip());
+    		$reg= OptipretPeer::doSelectOne($a);
+    		if ($reg){
+    			$reg->setCodcon($optipret->getCodcon());
+    			$reg->save();
+    		}
+    	}else $optipret->save();
+    }
+
+  }
 }

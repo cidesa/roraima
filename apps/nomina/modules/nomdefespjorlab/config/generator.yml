@@ -1,0 +1,46 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npdefjorlab
+    theme:            cidesaGenerator
+    fields:
+      codnom:
+        name: Nómina
+        msj_error: Código de Nómina es necesario
+        catalogo:  
+          catalogoweb: Npnomina_nomdefespvar
+          clase: Npnomina 
+          ajax: 0
+          parametros: getprincipal="getCodnom" getsecundario="getNomnom" campoprincipal="codnom" camposecundario="nomnom" campobase = "id"                 
+      idejor:      { name: Identificardor de Jornada, params: maxlength=3 size=5}
+      lunes:       { name: Lunes, type: checkbox_tag } 
+      martes:      { name: Martes, type: checkbox_tag }
+      miercoles:   { name: Miercoles, type: checkbox_tag }
+      jueves:      { name: Jueves, type: checkbox_tag }
+      viernes:     { name: Viernes, type: checkbox_tag }
+      sabado:      { name: Sabado, type: checkbox_tag }
+      domingo:     { name: Domingo, type: checkbox_tag }
+      
+    list:
+      title:    Listado de Jornadas
+      display:  [ =codnom, nomnom, idejor]
+      filters:  [ codnom, idejor]
+      fields:
+        nomnom:    { name: Nombre}
+      max_pers:           10
+      sort:     codnom
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~     
+          
+    edit:
+      title:   Edición de Jornada
+      display:
+        Datos Básicos:   [codnom, idejor]  
+        Dias para Jornada: [ lunes, martes, miercoles, jueves, viernes, sabado, domingo]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

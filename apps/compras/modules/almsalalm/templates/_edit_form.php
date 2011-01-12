@@ -61,13 +61,13 @@
   </table>
 
 <br>
- <?php echo label_for('casalalm[rifpro]', __($labels['casalalm{rifpro}']), 'class="required" Style="width:210px"') ?>
-  <div class="content<?php if ($sf_request->hasError('casalalm{rifpro}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('casalalm{rifpro}')): ?>
-    <?php echo form_error('casalalm{rifpro}', array('class' => 'form-error-msg')) ?>
+ <?php echo label_for('casalalm[codpro]', __($labels['casalalm{codpro}']), 'class="required" Style="width:210px"') ?>
+  <div class="content<?php if ($sf_request->hasError('casalalm{codpro}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('casalalm{codpro}')): ?>
+    <?php echo form_error('casalalm{codpro}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 <?php if ($casalalm->getId()=="") { ?>
-  <?php echo input_auto_complete_tag('casalalm[rifpro]', $casalalm->getRifpro(),
+  <?php echo input_auto_complete_tag('casalalm[codpro]', $casalalm->getCodpro(),
     'almsalalm/autocomplete?ajax=2',  array('autocomplete' => 'off','maxlength' => 18, 'onBlur'=> remote_function(array(
 			  'url'      => 'almsalalm/ajax',
 			  'complete' => 'AjaxJSON(request, json)',
@@ -75,11 +75,11 @@
 			  ))),
      array('use_style' => 'true') )?>  &nbsp;
 
-<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Caprovee_Almsalalm/clase/Caprovee/frame/sf_admin_edit_form/obj1/casalalm_rifpro/obj2/casalalm_nompro/campo1/rifpro/campo2/nompro','','','botoncat')?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Caprovee_Almsalalm/clase/Caprovee/frame/sf_admin_edit_form/obj1/casalalm_codpro/obj2/casalalm_nompro/campo1/codpro/campo2/nompro','','','botoncat')?>
     <?php } else { ?>
-     <?php $value= object_input_tag($casalalm,'getRifpro',array('maxlength' => 18,
+     <?php $value= object_input_tag($casalalm,'getCodpro',array('maxlength' => 18,
     'readonly'=>true,
-    'control_name'=>'casalalm[rifpro]') ); echo $value ? $value : '&nbsp;' ?>
+    'control_name'=>'casalalm[codpro]') ); echo $value ? $value : '&nbsp;' ?>
     <?php }?>
 
 <?php $value = object_input_tag($casalalm, 'getNompro', array (
@@ -149,6 +149,35 @@
    </tr>
   </table>
 <br>
+<?php echo label_for('casalalm[codcen]', __($labels['casalalm{codcen}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('casalalm{codcen}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('casalalm{codcen}')): ?>
+    <?php echo form_error('casalalm{codcen}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+<?php $value = object_input_tag($casalalm, 'getCodcen', array (
+  'size' => 20,
+  'control_name' => 'casalalm[codcen]',
+  'maxlength' => 4,
+  'readonly'  =>  $casalalm->getId()!='' ? true : false,
+  'onBlur'=> remote_function(array(
+       'url'      => 'almsalalm/ajax',
+       'script'   => true,
+       'condition' => "$('casalalm_codcen').value != '' && $('id').value == ''",
+       'complete' => 'AjaxJSON(request, json)',
+       'with' => "'ajax=8&cajtexmos=casalalm_descen&cajtexcom=casalalm_codcen&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+
+&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefcen_Almsolegr/clase/Cadefcen/frame/sf_admin_edit_form/obj1/casalalm_codcen/obj2/casalalm_descen/campo1/codcen/campo2/descen','','','botoncat')?>
+&nbsp;&nbsp;
+ <?php $value = object_input_tag($casalalm, 'getDescen', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'casalalm[descen]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+<br>
   <?php echo label_for('casalalm[observ]', __($labels['casalalm{observ}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('casalalm{observ}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('casalalm{observ}')): ?>
@@ -159,7 +188,7 @@
   'control_name' => 'casalalm[observ]',
   'size' => '100x3',
   'maxlength' => 1000,
-  'onkeyup' => '"ismaxlength(this)',
+  'onkeyup' => '"ismaxlength(this)"',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
@@ -174,6 +203,24 @@ echo grid_tag($obj);
 </form>
 
 <script type="text/javascript">
+  var id='<?php echo $casalalm->getId()?>';
+  if (id=='')
+  {
+	var manesolcorr='<?php echo $mansolocor; ?>';
+     if (manesolcorr=='S')
+     {
+        $('casalalm_codsal').value='########';
+     	$('casalalm_codsal').readOnly=true;
+        $('casalalm_rifpro').focus();
+     }
+  }
+
+  var deshab='<?php echo $bloqfec; ?>';
+  if (deshab=='S')
+  {
+  	$('trigger_casalalm_fecsal').hide();
+  	$('casalalm_fecsal').readOnly=true;
+  }
 function canttotal(e,id)
 {
 if (e.keyCode==13)
@@ -239,7 +286,7 @@ if (e.keyCode==13)
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($casalalm->getId()): ?>
+      <li class="float-left"><?php if ($casalalm->getId() && $oculeli!="S"): ?>
 <?php echo button_to(__('delete'), 'almsalalm/delete?id='.$casalalm->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),

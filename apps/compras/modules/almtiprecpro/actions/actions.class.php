@@ -67,42 +67,6 @@ class almtiprecproActions extends autoalmtiprecproActions
     }
     return sfView::SUCCESS;
 
-  }
-
-  /**
-   * Función principal para procesar la eliminación de registros 
-   * en el formulario.
-   *
-   */
-  public function executeDelete()
-  {
-    $this->catiprec = CatiprecPeer::retrieveByPk($this->getRequestParameter('id'));
-    $this->forward404Unless($this->catiprec);
-
-    try
-    {
-      $c= new Criteria();
-      $c->add(CarecaudPeer::CODTIPREC,$this->catiprec->getCodtiprec());
-      $datos= CarecaudPeer::doSelect($c);
-      if (!$datos)
-     {
-      $this->deleteCatiprec($this->catiprec);
-      $this->Bitacora('Elimino');
-     }
-     else
-     {
-       $this->getRequest()->setError('delete', 'Could not delete the selected Catiprec. Make sure it does not have any associated items.');
-      return $this->forward('almtiprecpro', 'list');
-     }
-
-    }
-    catch (PropelException $e)
-    {
-      $this->getRequest()->setError('delete', 'Could not delete the selected Catiprec. Make sure it does not have any associated items.');
-      return $this->forward('almtiprecpro', 'list');
-    }
-
-    return $this->redirect('almtiprecpro/list');
-  }
+  } 
 
 }

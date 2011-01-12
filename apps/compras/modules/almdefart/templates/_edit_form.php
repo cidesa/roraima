@@ -585,6 +585,22 @@ if ($cadefart->getAsiparrec()=='P')  {
       </th>
       </tr>
 
+      <tr>
+          <th>
+              <div id="divdoccom" style="display:none">
+               <?php echo label_for('cadefart[tipodoc]', __($labels['cadefart{tipodoc}']), 'class="" Style="width:200px"') ?>
+		  <?php echo Catalogo($cadefart,2,array(
+		  'getprincipal' => 'getTipodoc',
+		  'getsecundario' => 'getNomdoc',
+		  'campoprincipal' => 'tipodoc',
+		  'camposecundario' => 'nomdoc',
+		  'tamanoprincipal' => '4',
+		  'campobase' => 'id_ipdocpre',
+		  ), 'Cpdoccom_Predoccom', 'Cpdoccom', ''); ?>
+               </div>
+          </th>
+      </tr>
+
       </table>
     </div>
     </fieldset>
@@ -637,6 +653,9 @@ if ($cadefart->getAsiparrec()=='P')  {
   {
   	$('correlpro').show();
   }
+  var manorddon='<?php echo $cadefart->getManorddon();?>';
+  if (manorddon=='S')
+      $('divdoccom').show();
 
 
   function colocar(e,id)

@@ -116,6 +116,16 @@ class CaproveeMapBuilder {
 
 		$tMap->addColumn('CODTIPEMP', 'Codtipemp', 'string', CreoleTypes::VARCHAR, false, 4);
 
+		$tMap->addColumn('RAMGEN', 'Ramgen', 'string', CreoleTypes::VARCHAR, false, 1000);
+
+		$tMap->addColumn('ESTPRO', 'Estpro', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('CODBAN', 'Codban', 'string', CreoleTypes::VARCHAR, false, 4);
+
+		$tMap->addColumn('NUMCUE', 'Numcue', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, false, 3);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

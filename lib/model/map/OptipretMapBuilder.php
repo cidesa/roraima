@@ -52,6 +52,8 @@ class OptipretMapBuilder {
 
 		$tMap->addColumn('CODTIPSEN', 'Codtipsen', 'string', CreoleTypes::VARCHAR, false, 3);
 
+		$tMap->addColumn('MBASMI', 'Mbasmi', 'double', CreoleTypes::NUMERIC, false, 14);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

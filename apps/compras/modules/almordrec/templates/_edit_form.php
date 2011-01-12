@@ -2,10 +2,11 @@
 /**
  * Funciones de la vista.
  *
+ * 
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 34583 2009-11-09 16:23:42Z jlobaton $
  */
 // date: 2007/05/23 15:30:38
 ?>
@@ -22,7 +23,7 @@
 <?php echo input_hidden_tag('existeubicacion', '') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend> <?php echo __('Recepción')?></legend>
+<h2> <?php echo __('Recepción')?></h2>
 <div class="form-row">
 <table>
 <tr>
@@ -60,6 +61,36 @@
 </tr>
 </table>
 <br>
+
+<div id="almacen" style="display: none">
+<?php echo label_for('carcpart[codalm]', __($labels['carcpart{codalm}']), 'class="required"') ?>
+<div
+  class="content<?php if ($sf_request->hasError('carcpart{codalm}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('carcpart{codalm}')): ?> <?php echo form_error('carcpart{codalm}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+  <?php $value = object_input_tag($carcpart, 'getCodalm', array (
+  'size' => 10,
+  'maxlength' => 20,
+  'control_name' => 'carcpart[codalm]',
+  'onBlur'=> remote_function(array(
+              'url' => 'almordrec/ajax',
+        'condition' => "$('carcpart_codalm').value!=''",
+        'complete' => 'AjaxJSON(request, json)',
+          'with' => "'ajax=6&cajtexmos=carcpart_nomalm&cajtexcom=carcpart_codalm&codigo='+this.value",
+        )),
+)); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefalm_Alminvfis/clase/Cadefalm/frame/sf_admin_edit_form/obj1/carcpart_codalm/obj2/carcpart_nomalm/campo1/codalm/campo2/nomalm')?>
+
+<?php $value = object_input_tag($carcpart, 'getNomalm', array (
+'size' => 50,
+'maxlength' => 50,
+'disabled' => true,
+'control_name' => 'carcpart[nomalm]',
+        )); echo $value ? $value : '&nbsp;' ?> </div>
+</div>
+<br>
 <table>
 <tr>
 <th>&nbsp;</th>
@@ -80,11 +111,16 @@
 		   'condition' => "$('carcpart_ordcom').value != '' && $('id').value == ''",
 		   'script'   => true,
 		   'complete' => 'AjaxJSON(request, json),actualizarsaldos();',
-		   'with' => "'ajax=2&cajtexcom=carcpart_ordcom&codigo='+this.value+'&fecrec='+$('carcpart_fecrcp').value+'&numero='+$('carcpart_rcpart').value"
+		   'with' => "'ajax=2&cajtexcom=carcpart_ordcom&codigo='+this.value+'&fecrec='+$('carcpart_fecrcp').value+'&codalm='+$('carcpart_codalm').value+'&numero='+$('carcpart_rcpart').value"
 			  ))),
      array('use_style' => 'true')
   ) ?>&nbsp;
-<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/CaOrdCom_Almordrec/clase/CaOrdCom/frame/sf_admin_edit_form/obj1/carcpart_ordcom/campo1/ordcom/",'','','botoncat')?>
+<?php if (H::getConfApp2('manforent', 'compras', 'almordcom')=='S') 
+{  
+   echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/CaOrdCom_Almordrec2/clase/caordcom/frame/sf_admin_edit_form/obj1/carcpart_ordcom/campo1/ordcom/param1/'+$('carcpart_codalm').value+'",'','','botoncat');
+}else {
+    echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/CaOrdCom_Almordrec/clase/carcpart/frame/sf_admin_edit_form/obj1/carcpart_ordcom/campo1/ordcom",'','','botoncat');
+}?>
 
     </div>
 </th>
@@ -140,6 +176,27 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>
+
+  <?php echo label_for('carcpart[codcen]', __($labels['carcpart{codcen}']), 'class="required" Style="width:200px"') ?>
+  <div class="content<?php if ($sf_request->hasError('carcpart{codcen}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('carcpart{codcen}')): ?>
+    <?php echo form_error('carcpart{codcen}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($carcpart, 'getCodcen', array (
+  'size' => 20,
+  'control_name' => 'carcpart[codcen]',
+  'maxlength' => 4,
+  'readonly' => true,
+)); echo $value ? $value : '&nbsp;' ?>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <?php $value = object_input_tag($carcpart, 'getDescen', array (
+  'disabled' => true,
+  'size' => 57,
+  'control_name' => 'carcpart[descen]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+<br>
 <table>
 <tr>
 <th>
@@ -173,7 +230,7 @@
 </table>
 <br>
 <table>
-<tr>
+<tr align="left">
 <th>
   <?php echo label_for('carcpart[numfac]', __($labels['carcpart{numfac}']),'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('carcpart{numfac}')): ?> form-error<?php endif; ?>">
@@ -219,6 +276,45 @@
     </div>
 </th>
 </tr>
+
+<tr align="left">
+<th colspan="4">
+
+
+  <?php echo label_for('carcpart[nomcli]', __($recmer=='S' ? $labels['carcpart{nomcli}'] : '' ) , 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('carcpart{nomcli}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('carcpart{nomcli}')): ?>
+    <?php echo form_error('carcpart{nomcli}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = get_partial('nomcli', array('type' => 'edit', 'carcpart' => $carcpart, 'recmer' => $recmer )); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+
+<br>
+
+  <?php echo label_for('carcpart[cancaj]', __($recmer=='S' ? $labels['carcpart{cancaj}'] : '' ) , 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('carcpart{cancaj}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('carcpart{cancaj}')): ?>
+    <?php echo form_error('carcpart{cancaj}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = get_partial('cancaj', array('type' => 'edit', 'carcpart' => $carcpart, 'recmer' => $recmer )); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
+  <?php echo label_for('carcpart[canjau]', __($recmer=='S' ? $labels['carcpart{canjau}'] : '' ) , 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('carcpart{canjau}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('carcpart{canjau}')): ?>
+    <?php echo form_error('carcpart{canjau}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = get_partial('canjau', array('type' => 'edit', 'carcpart' => $carcpart, 'recmer' => $recmer )); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+</th>
+</tr>
 </table>
 </div>
 
@@ -241,7 +337,7 @@
 
 </form>
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($carcpart->getId()): ?>
+      <li class="float-left"><?php if ($carcpart->getId() && $oculeli!="S"): ?>
 <?php echo button_to(__('delete'), 'almordrec/delete?id='.$carcpart->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
@@ -249,3 +345,30 @@
 )) ?><?php endif; ?>
 </li>
   </ul>
+
+<script language="JavaScript" type="text/javascript">
+nuevo='<?php echo $carcpart->getId() ?>';
+if (nuevo=="")
+{
+     var manesolcorr='<?php echo $mansolocor; ?>';
+     if (manesolcorr=='S')
+     {
+        $('carcpart_rcpart').value='########';
+     	$('carcpart_rcpart').readOnly=true;
+        $('carcpart_ordcom').focus();
+     }
+}
+
+  var deshab='<?php echo $bloqfec; ?>';
+  if (deshab=='S')
+  {
+  	$('trigger_carcpart_fecrcp').hide();
+  	$('carcpart_fecrcp').readOnly=true;
+  }
+
+    var manforent='<?php echo H::getConfApp2('manforent', 'compras', 'almordcom'); ?>';
+    if (manforent=='S')
+    {
+        $('almacen').show();
+    }
+</script>

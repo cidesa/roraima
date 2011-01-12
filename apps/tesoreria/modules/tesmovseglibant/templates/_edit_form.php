@@ -161,7 +161,7 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($tsmovlib,array('getMonmov',true), array (
-  'size' => 15,
+  'size' => 20,
   'readonly'  =>  $tsmovlib->getId()!='' ? true : false ,
   'control_name' => 'tsmovlib[monmov]',
   'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
@@ -208,5 +208,12 @@
     $$('.botoncat')[0].disabled=true;
   	$$('.botoncat')[1].disabled=true;
   }
+
+  var deshab='<?php echo $bloqfec; ?>';
+    if (deshab=='S')
+    {
+    	$('trigger_tsmovlib_fecing').hide();
+    	$('tsmovlib_fecing').readOnly=true;
+    }
 </script>
 

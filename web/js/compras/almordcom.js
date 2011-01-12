@@ -38,20 +38,25 @@
   if(confirm('�Estas Seguro?'))
   {
     var valor = prompt('Desea Anular Orden con fecha: '+$('caordcom_fecord').value+' de C&oacute;digo:',motivo);
-    var fecha = prompt('Desea Anular Orden con fecha:',fecha);
+    if ($('fechaanuserv').value!='S') var fecha = prompt('Desea Anular Orden con fecha:',fecha);
       if (valor!=null)
       {
+    	if ($('fechaanuserv').value!='S') {
         if (fecha!=null)
         {
           if (Validar_fecha(fecha))
           {
             var fecha_valida=fecha;
-            new Ajax.Updater('anul', '/compras_dev.php/almordcom/salvaranu', {asynchronous:true, evalScripts:true, parameters:'ajax=1&valor='+valor+'&fecha='+fecha+'&ordcom='+document.getElementById('caordcom_ordcom').value+'&fecord='+document.getElementById('caordcom_fecord').value});
+            new Ajax.Updater('anul', '/compras_dev.php/almordcom/salvaranu', {asynchronous:true, evalScripts:true, parameters:'ajax=1&valor='+valor+'&fecha='+fecha+'&ordcom='+document.getElementById('caordcom_ordcom').value+'&fecord='+document.getElementById('caordcom_fecord').value+'&fecserv='+$('fechaanuserv').value});
         }
         else
         {
           alert_('Fecha de Anulaci&oacute;n Inv&aacute;lida');
         }
+      }
+      }else {
+    	  var fecha_valida=fecha;
+          new Ajax.Updater('anul', '/compras_dev.php/almordcom/salvaranu', {asynchronous:true, evalScripts:true, parameters:'ajax=1&valor='+valor+'&fecha='+fecha+'&ordcom='+document.getElementById('caordcom_ordcom').value+'&fecord='+document.getElementById('caordcom_fecord').value+'&fecserv='+$('fechaanuserv').value});
       }
     }
   }
@@ -272,6 +277,12 @@
        if ($(id).value!="")
        {
         new Ajax.Request('/compras_dev.php/almordcom/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&cajtexmos='+descripcion+'&cajtexcom='+id+'&unidad='+unidad+'&costo='+costo+'&partida='+partida+'&codigo='+cod+'&tipord='+$('caordcom_tipord').value})
+
+        if ($('caordcom_manunialt').value=='S')
+        {
+            new Ajax.Updater(unidad, getUrlModulo()+'ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=20&id='+$('id').value+'&codigo='+cod});
+        }
+
        }
     }
  }
@@ -484,12 +495,58 @@
 
     function actualizar_grid_dependientes()
     {
+       var filres=obtener_filas_grid('b',1);  //Limpiar Grid Resumen
+       var t=0;
+       while (t<filres)
+       {
+          var col1= "bx_"+t+"_1";
+          var col2= "bx_"+t+"_2";
+          var col3= "bx_"+t+"_3";
+          var col4= "bx_"+t+"_4";
+          var col5= "bx_"+t+"_5";
+          var col6= "bx_"+t+"_6";
+          var col7= "bx_"+t+"_7";
+          var col8= "bx_"+t+"_8";
+          var col9= "bx_"+t+"_9";
+          var col10= "bx_"+t+"_10";
+
+          $(col1).value="";
+          $(col2).value="";
+          $(col3).value="";
+          $(col4).value="0,00";
+          $(col5).value="0,00";
+          $(col6).value="0,00";
+          $(col7).value="0,00";
+          $(col8).value="0,00";
+          $(col9).value="0,00";
+          $(col10).value="0,00";
+         t++;
+       }
+
+       var filent=obtener_filas_grid('c',1); //Limpiar Grid Entregas
+       var p=0;
+       while (p<filent)
+       {
+          var col1= "cx_"+p+"_1";
+          var col2= "cx_"+p+"_2";
+          var col3= "cx_"+p+"_3";
+
+          $(col1).value="";
+          $(col2).value="";
+          $(col3).value="0,00";
+         p++;
+       }
+
+
+
+
      // colocar los datos en el grid resumen
      f=0;
      while (f < $('numero_filas_orden').value)
       {
         col_fila_art_1 = "ax_"+f+"_2";
         col_fila_art_2 = "ax_"+(f+1)+"_2";
+        col_fila_unidad = "ax_"+f+"_14";
         if($(col_fila_art_1).value=="" && $(col_fila_art_1).value=="") break;
          c=2;
          c2=1;
@@ -510,6 +567,12 @@
 
              $(col_fila_cantidad_recargo_grid_b).value=$(col_fila_cantidad_recargo_grid_a).value;
              $(col_fila_cantidad_total_grid_b).value=$(col_fila_cantidad_total_grid_a).value;
+
+            if ($('caordcom_manunialt').value=='S')
+            {
+                var cod=$(col_fila_art_1).value;
+                new Ajax.Updater(col_fila_unidad, getUrlModulo()+'ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=20&codigo='+cod});
+            }
       f++;
     }
 
@@ -892,8 +955,9 @@
       var calculo= (cantot*valcostos)-valcandes;
         $('totartsinrec').value=format(calculo.toFixed(2),'.',',','.');
         $('actualfila').value=fil;
+        var tipcom=$('caordcom_doccom').value;
 
-      new Ajax.Updater('grid_recargo', getUrlModulo()+'recargos', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json); distribuirRecargosenGrid(); $("recargos").show(); $("botonesmarcar").hide(); }, parameters:'articulo='+articulo+'&refsol='+refsol+'&codunidad='+codunidad+'&ordcom='+ordcom+'&nuevo='+nuevo})
+      new Ajax.Updater('grid_recargo', getUrlModulo()+'recargos', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json); distribuirRecargosenGrid(); $("recargos").show(); $("botonesmarcar").hide(); }, parameters:'articulo='+articulo+'&refsol='+refsol+'&codunidad='+codunidad+'&ordcom='+ordcom+'&tipcom='+tipcom+'&nuevo='+nuevo})
   }
   else
   {
@@ -1004,7 +1068,7 @@ function salvarmontorecargos()
         var monto_monrgo=toFloat2(aux3[2]);
         if (ctiprgo=="M" && monto_monrgo==0)
         {
-          $(monrgo).readOnly=false;
+          //$(monrgo).readOnly=false;
         }
         z++;
         }
@@ -1189,7 +1253,10 @@ function salvarmontorecargos()
         actualizarsaldos();
         actualizar_grid_dependientes();
       }//if ($(codart).value!="")
-   }//
+   }else
+   {
+     aplicarAnteriores(id);
+   }
   }
 
  function perderfocus(e,id,totcol)
@@ -1297,7 +1364,7 @@ function salvarmontorecargos()
 
  function GenerarResumenPartidas(id)
   {
-  if (id=='')
+  if (id=='' || $('caordcom_compro').value=='N')
   {
      f=0;
      total=150;
@@ -1435,7 +1502,8 @@ function salvarmontorecargos()
 	                 var col_fila_despar_res = "zx_"+filaresumen+"_2";
 	                 var col_fila_monto_res = "zx_"+filaresumen+"_3";
 		             $(col_fila_codpar_res).value=ccodpar;
-	    	         $(col_fila_monto_res).value=cmonrgo;
+					 var totalart=toFloat2(cmonrgo);
+	    	         $(col_fila_monto_res).value=format(totalart.toFixed(2),'.',',','.');
 	    	         filaresumen++;
 	    	     }
 		        z++;
@@ -1451,4 +1519,173 @@ function salvarmontorecargos()
   function otra()
   {
 
+  }
+
+  function aplicarAnteriores(ida)
+  {
+   var aux = ida.split("_");
+   var name=aux[0];
+   var fil=parseInt(aux[1]);
+
+   var infrecargos="ax"+"_0_18";
+   var distrib=$(infrecargos).value;
+   var articulo="ax"+"_0_2";
+   var valorarticulo=$(articulo).value;
+   if (valorarticulo!="" && fil!=0)
+   {
+    if (distrib!="")
+    {
+      var codart="ax"+"_"+fil+"_2";
+      if ($(codart).value!="")
+      {
+       var id="ax"+"_"+fil+"_1";
+
+       var canord="ax"+"_"+fil+"_5";
+       var canaju="ax"+"_"+fil+"_6";
+       var canrec="ax"+"_"+fil+"_7";
+       var cost="ax"+"_"+fil+"_9";
+       var dest="ax"+"_"+fil+"_11";
+       var recargo="ax"+"_"+fil+"_12";
+       var total="ax"+"_"+fil+"_13";
+       var haydistribucion="ax"+"_"+fil+"_18";
+
+       var valcanord=toFloat(canord);
+       var valcanaju=toFloat(canaju);
+       var valcanrec=toFloat(canrec);
+       var moncos=toFloat(cost);
+       var mondto=toFloat(dest);
+
+       var cantot=valcanord-valcanaju-valcanrec;
+       var monuni=moncos*cantot;
+	   var monrgotot=0;
+	   var cadena="";
+
+	    var z=0;
+	    var aux2=distrib.split("!");
+	    while (z<((aux2.length)-1))
+	    {
+	      var reg=aux2[z];
+	      var aux3=reg.split("_");
+	      var ccodrgo=aux3[0];
+	      var cdesrgo=aux3[1];
+	      var cmonrgotab=toFloat2(aux3[2]);
+	      var ctiprgo=aux3[3];
+	      var cmonrgo=toFloat2(aux3[4]);
+	      var ccodpar=aux3[5];
+
+		  if (ctiprgo=='M')
+		  {
+		    cmonrgo=cmonrgotab;
+		  }
+		  else if (ctiprgo=='P')
+		  {
+		    cmonrgo= ((monuni*cmonrgotab)/100);
+		  }
+		  else
+		  {cmonrgo=0;}
+
+	      cmonrgotabfor=format(cmonrgotab.toFixed(2),'.',',','.');
+	      cmonrgofor=format(cmonrgo.toFixed(2),'.',',','.');
+	      cadena=cadena + ccodrgo+'_' + cdesrgo+'_' + cmonrgotabfor +'_'+ ctiprgo +'_' + cmonrgofor +'_' + ccodpar + '!';
+	      monrgotot=monrgotot+cmonrgo;
+	      z++;
+	     }//while
+
+      $(haydistribucion).value=cadena;
+      $(recargo).value=format(monrgotot.toFixed(2),'.',',','.');
+      montottot=monuni-mondto+monrgotot;
+      $(total).value=format(montottot.toFixed(2),'.',',','.');
+      $(id).checked=true;
+      }//if ($(codart).value!="")
+
+    actualizarsaldos();
+    actualizar_grid_dependientes();
+   }// if (distrib!="")
+   else
+   {
+    alert_("No han sido aplicados Recargos al primer Art&iacute;culo del Detalle, C&oacute;digo: "+ valorarticulo+". Deben ser definidos estos Recargos para poder replicarlos al resto de los Art&iacute;culo del Detalle de la Solicitud ")
+   }
+  }
+  }
+
+  function limpiardatos()
+  {
+   if ($('caordcom_tipopro').value=='P'){
+    var f=0;
+    while (f < $('numero_filas_orden').value)
+    {
+      var filacheck = "ax_"+f+"_1";
+      var filarecargo = "ax_"+f+"_12";
+      var filatotal = "ax_"+f+"_13";
+      var filadatrec = "ax_"+f+"_18";
+
+      var num1=toFloat(filarecargo);
+      var num2=toFloat(filatotal);
+
+      var calculo= num2 - num1;
+      $(filatotal).value=format(calculo.toFixed(2),'.',',','.');
+
+      $(filacheck).value=false;
+      $(filarecargo).value="0,00";
+      $(filadatrec).value="";
+
+      f++;
+    }
+
+    actualizarsaldos();
+    }
+
+
+  }
+
+  function verificarcantidad(id)
+  {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fil=parseInt(aux[1]);
+   var col=parseInt(aux[2]);
+
+   var colart= col -4;
+   var art=name+"_"+fil+"_"+colart;
+
+     var f=0;
+      var can=0;
+      var am=totalregistros('ax',2,150);
+      while (f < am)
+      {
+        var campo="ax_"+f+"_2";
+        var campo2="ax_"+f+"_5";
+        var num1=toFloat(campo2);
+        if($(campo))
+        {
+          if ($(art).value==$(campo).value)
+          {
+             can=can + num1;
+          }
+        }
+            f++;
+      }
+
+      var acum=0;
+      var fa=0;
+      var ama=totalregistros('tx',1,150);
+      while (fa < ama)
+      {
+        var campo1="tx_"+fa+"_1";
+        var campo3="tx_"+fa+"_5";
+        var num2=toFloat(campo3);
+        if($(campo1))
+        {
+          if ($(art).value==$(campo1).value)
+          {
+             acum=acum +num2;
+          }
+        }
+            fa++;
+      }
+      if (acum>can)
+      {
+          alert_('El Cantidad a Entregar no corresponde Con la Cantidad Ordenada');
+          $(id).value='0,00';
+      }
   }

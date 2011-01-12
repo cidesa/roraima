@@ -1,8 +1,6 @@
 propel:
   _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model.nomina }
   npaccadm:
-    #_attributes:
-      #idMethod: native
     codaccadm:
       type: VARCHAR
       size: 4
@@ -12,10 +10,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npaccrac:
-    #_attributes:
-      #idMethod: native
     codaccadm:
       type: VARCHAR
       size: 4
@@ -28,10 +26,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npacumulacpt:
-    #_attributes:
-      #idMethod: native
     codacu:
       type: VARCHAR
       size: 3
@@ -43,7 +41,7 @@ propel:
       size: 3
     codnom:
       type: VARCHAR
-      size: 3      
+      size: 3
     tipacu:
       type: VARCHAR
       size: 1
@@ -55,24 +53,21 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npadeint:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     fecade:
       type: DATE
       required: true
-      ##primaryKey: true
     monade:
       type: NUMERIC
       size: 14
@@ -81,26 +76,23 @@ propel:
     observacion:
       type: VARCHAR
       size: 100
-      ##primaryKey: true
     fecsolade:
       type: DATE
-      ##primaryKey: true      
+      ##primaryKey: true
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npantpre:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     fecant:
       type: DATE
       required: true
-      ##primaryKey: true
     monant:
       type: NUMERIC
       size: 14
@@ -115,38 +107,33 @@ propel:
       size: 1000
     fecsolant:
       type: DATE
-      ##primaryKey: true  
+      ##primaryKey: true
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npasicaremp:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codcar:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codcat:
       type: VARCHAR
       size: 32
       required: true
-      ##primaryKey: true
     fecasi:
       type: DATE
       required: true
-      ##primaryKey: true
     nomemp:
       type: VARCHAR
       size: 510
@@ -170,7 +157,6 @@ propel:
       type: VARCHAR
       size: 1
       required: true
-      ##primaryKey: true
     nronom:
       type: VARCHAR
       size: 16
@@ -197,16 +183,30 @@ propel:
       type: VARCHAR
       size: 4
       ##required: true
-      ##primaryKey: true
     codtipcat:
       type: VARCHAR
       size: 4
       ##required: true
-      ##primaryKey: true
+    codmotcamcar:
+      type: VARCHAR
+      size: 4
+      ##required: true
+    codtie:
+      type: VARCHAR
+      size: 3
+      ##required: true  
+    juscam:
+      type: VARCHAR
+      size: 250
+    codcen:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
     _indexes:
       i01npasicaremp:
         - codnom
@@ -215,8 +215,6 @@ propel:
       i02npasicaremp:
         - codemp
   npasicarnom:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -228,10 +226,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npasicarpre:
-    #_attributes:
-      #idMethod: native
     codcat:
       type: VARCHAR
       size: 32
@@ -265,10 +263,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npasicarracemp:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -319,10 +317,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npasicatconemp:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -341,10 +339,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npasicodpre:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 3
@@ -360,25 +358,22 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npasicon:
-    #_attributes:
-      #idMethod: native
     codcat:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codcar:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     nomsus:
       type: VARCHAR
       size: 30
@@ -420,28 +415,25 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npasiconemp:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codcar:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     nomemp:
       type: VARCHAR
-      size: 31
+      size: 100
       required: true
     nomcon:
       type: VARCHAR
@@ -486,7 +478,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
     _indexes:
       i01npasiconemp:
         - activo
@@ -502,8 +496,6 @@ propel:
         - calcon
         - frecon
   npasiconempbck:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -563,10 +555,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npasiconnom:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -586,10 +578,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npasiconnom_aux:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -609,10 +601,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npasiconsue:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -626,81 +618,69 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npasiempcont:
-    #_attributes:
-      #idMethod: native
     codtipcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     nomemp:
       type: VARCHAR
       size: 250
       required: true
-      ##primaryKey: true
     feccal:
       type: DATE
       required: true
-      ##primaryKey: true
     fecdes:
       type: DATE
       required: true
-      ##primaryKey: true
     fechas:
       type: DATE
       required: true
-      ##primaryKey: true
     status:
       type: VARCHAR
       size: 1
       required: true
-      ##primaryKey: true
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npasinomcont:
-    #_attributes:
-      #idMethod: native
     codtipcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npasipre:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codasi:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     desasi:
       type: VARCHAR
       size: 50
@@ -718,49 +698,44 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npasoconcla:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codcla:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npasocontra:
-    #_attributes:
-      #idMethod: native
     codconant:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codconact:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npbancos:
-    #_attributes:
-      #idMethod: native
     codban:
       type: VARCHAR
       size: 2
       required: true
-      ##primaryKey: true
     nomban:
       type: VARCHAR
       size: 30
@@ -768,10 +743,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npbenemp:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -799,40 +774,39 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npbonocont:
-    #_attributes:
-      #idMethod: native
     codtipcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     anovig:
       type: DATE
       required: true
-      ##primaryKey: true
     desde:
       type: NUMERIC
       size: 2
       required: true
-      ##primaryKey: true
     hasta:
       type: NUMERIC
       size: 2
       required: true
-      ##primaryKey: true
     diauti:
       type: NUMERIC
-      size: 3
+      size: 10
+      scale: 5
       required: true
     diavac:
       type: NUMERIC
-      size: 3
+      size: 10
+      scale: 5
       required: true
     diapro:
       type: NUMERIC
-      size: 3      
+      size: 10
+      scale: 5
     anovighas:
       type: DATE
     calinc:
@@ -848,10 +822,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcajaho:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -875,10 +849,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcalcon:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 3
@@ -911,29 +885,26 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
     _indexes:
       i01npcalcon:
         - codcon
         - codnom
   npcalconcol:
-    #_attributes:
-      #idMethod: native
     codctr:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codcla:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     cantra:
       type: NUMERIC
       size: 5
@@ -955,33 +926,28 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcalislr:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     fecini:
       type: DATE
       required: true
-      ##primaryKey: true
     feccie:
       type: DATE
       required: true
-      ##primaryKey: true
     mesper:
       type: NUMERIC
       size: 2
       required: true
-      ##primaryKey: true
     anoper:
       type: NUMERIC
       size: 4
       required: true
-      ##primaryKey: true
     remune:
       type: NUMERIC
       size: 14
@@ -993,28 +959,24 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcalvac:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codcar:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     caudes:
       type: DATE
       required: true
-      ##primaryKey: true
     cauhas:
       type: DATE
       required: true
-      ##primaryKey: true
     disdes:
       type: DATE
     dishas:
@@ -1063,15 +1025,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcargos:
-    #_attributes:
-      #idMethod: native
     codcar:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     nomcar:
       type: VARCHAR
       size: 100
@@ -1119,13 +1080,30 @@ propel:
       scale: 0
     carvan:          #cargos vacantes
       type: INTEGER
-      size: 4
+    canmix:
+      type: NUMERIC
+      size: 6
+      scale: 0      
+    canphom:
+      type: NUMERIC
+      size: 6
+      scale: 0
+    canpmuj:
+      type: NUMERIC
+      size: 6
+      scale: 0
+    canvhom:
+      type: NUMERIC
+      size: 6
+      scale: 0
+    canvmuj:
+      type: NUMERIC
+      size: 6
+      scale: 0
     id:
       type: INTEGER
       required: true
   npcargosocp:
-    #_attributes:
-      #idMethod: native
     codcar:
       type: VARCHAR
       size: 16
@@ -1150,15 +1128,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcargosrac:
-    #_attributes:
-      #idMethod: native
     codcar:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     nomcar:
       type: VARCHAR
       size: 100
@@ -1176,12 +1153,10 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codocp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     punmin:
       type: NUMERIC
       size: 14
@@ -1223,15 +1198,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcarocp:
-    #_attributes:
-      #idMethod: native
     codcar:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     descar:
       type: VARCHAR
       size: 50
@@ -1248,7 +1222,6 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     funcar:
       type: VARCHAR
       size: 2500
@@ -1267,25 +1240,51 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcarpre:
-    #_attributes:
-      #idMethod: native
     codcat:
       type: VARCHAR
       size: 32
       required: true
-      ##primaryKey: true
     codcar:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     canpre:
       type: NUMERIC
       size: 6
       required: true
+    canhpre:
+      type: NUMERIC
+      size: 6
+      required: true
+    canmpre:
+      type: NUMERIC
+      size: 6
+      required: true
     canasi:
+      type: NUMERIC
+      size: 6
+      required: true
+    canhom:
+      type: NUMERIC
+      size: 6
+      required: true
+    canmuj:
+      type: NUMERIC
+      size: 6
+      required: true
+    canvac:
+      type: NUMERIC
+      size: 6
+      required: true
+    canhvac:
+      type: NUMERIC
+      size: 6
+      required: true
+    canmvac:
       type: NUMERIC
       size: 6
       required: true
@@ -1302,10 +1301,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcarrac:
-    #_attributes:
-      #idMethod: native
     codcarrac:
       type: VARCHAR
       size: 16
@@ -1327,7 +1326,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcatpre:
     _attributes:
       readOnly: true
@@ -1339,13 +1340,10 @@ propel:
       type: VARCHAR
       size: 100
   npcatprehis:
-    #_attributes:
-      #idMethod: native
     codcat:
       type: VARCHAR
       size: 32
       required: true
-      ##primaryKey: true
     nomcat:
       type: VARCHAR
       size: 100
@@ -1353,10 +1351,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcertificados:
-    #_attributes:
-      #idMethod: native
     codadi:
       type: VARCHAR
       size: 4
@@ -1369,10 +1367,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcestatickets:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -1412,10 +1410,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcienom:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -1466,25 +1464,22 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npciudad:
-    #_attributes:
-      #idMethod: native
     codciu:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codedo:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codpai:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     nomciu:
       type: VARCHAR
       size: 100
@@ -1492,10 +1487,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcodpostal:
-    #_attributes:
-      #idMethod: native
     codpos:
       type: VARCHAR
       size: 4
@@ -1505,10 +1500,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcomocp:
-    #_attributes:
-      #idMethod: native
     pascar:
       type: VARCHAR
       size: 3
@@ -1527,10 +1522,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npconaho:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -1548,10 +1543,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npconarc:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 3
@@ -1561,10 +1556,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npconasi:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 3
@@ -1583,32 +1578,29 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npconasi_old:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codasi:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codcpt:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npconceptosbono:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -1620,10 +1612,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npconceptoscategoria:
-    #_attributes:
-      #idMethod: native
     codcat:
       type: VARCHAR
       size: 16
@@ -1633,10 +1625,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npconceptosdeducciones:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -1648,10 +1640,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npconceptosprima:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -1663,10 +1655,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npconceptossalario:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -1678,10 +1670,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npconcomp:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -1691,10 +1683,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npconfon:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -1709,10 +1701,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npconian:
-    #_attributes:
-      #idMethod: native
     conian:
       type: VARCHAR
       size: 3
@@ -1722,10 +1714,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npconpri:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -1735,28 +1727,24 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npconret:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     fecini:
       type: DATE
       required: true
-      ##primaryKey: true
     feccie:
       type: DATE
       required: true
-      ##primaryKey: true
     monto:
       type: NUMERIC
       size: 14
@@ -1764,10 +1752,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npconsalint:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -1777,10 +1765,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npconsueldo:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -1790,10 +1778,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcontipaporet:
-    #_attributes:
-      #idMethod: native
     codtipapo:
       type: VARCHAR
       size: 4
@@ -1812,10 +1800,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcontra:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -1838,15 +1826,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcontrato:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codnom:
       type: VARCHAR
       size: 3
@@ -1862,10 +1849,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcuentas:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -1875,15 +1862,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdefcla:
-    #_attributes:
-      #idMethod: native
     codcla:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     descla:
       type: VARCHAR
       size: 250
@@ -1891,10 +1877,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdefconcasep:
-    #_attributes:
-      #idMethod: native
     tipo:
       type: VARCHAR
       size: 12
@@ -1907,15 +1893,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdefcpt:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     nomcon:
       type: VARCHAR
       size: 100
@@ -1960,20 +1945,18 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdefctb:
-    #_attributes:
-      #idMethod: native
     coduni:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codcta:
       type: VARCHAR
       size: 18
@@ -1989,15 +1972,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdefgen:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     loncodcar:
       type: NUMERIC
       size: 2
@@ -2105,23 +2087,28 @@ propel:
     diasem:
       type: NUMERIC
       size: 1
+    calesppres:
+      type: VARCHAR
+      size: 1
+    redondeo:
+      type: VARCHAR
+      size: 1
+      default: N
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdefjorlab:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     idejor:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     lunes:
       type: VARCHAR
       size: 1
@@ -2146,35 +2133,32 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdefmov:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     status:
       type: VARCHAR
       size: 1
       required: true
-      ##primaryKey: true
     mensaje:
       type: VARCHAR
       size: 250
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdefpagext:
-    #_attributes:
-      #idMethod: native
     codgrunom:
       type: VARCHAR
       size: 3
@@ -2192,10 +2176,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdefpar:
-    #_attributes:
-      #idMethod: native
     codcol:
       type: VARCHAR
       size: 100
@@ -2212,10 +2196,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdefpreliq:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -2239,10 +2223,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdefrepdin:
-    #_attributes:
-      #idMethod: native
     codrep:
       type: VARCHAR
       size: 100
@@ -2271,15 +2255,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdefvar:
-    #_attributes:
-      #idMethod: native
     codvar:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     desvar:
       type: VARCHAR
       size: 30
@@ -2288,7 +2271,6 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     valor1:
       type: NUMERIC
       size: 14
@@ -2312,10 +2294,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdepban:
-    #_attributes:
-      #idMethod: native
     numlin:
       type: NUMERIC
       size: 14
@@ -2326,13 +2308,13 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
     _indexes:
       i01npdepban:
         - numlin
   npdepbanfid:
-    #_attributes:
-      #idMethod: native
     numlin:
       type: NUMERIC
       size: 14
@@ -2345,10 +2327,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdepbanusu:
-    #_attributes:
-      #idMethod: native
     numlin:
       type: NUMERIC
       size: 14
@@ -2362,13 +2344,13 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
     _indexes:
       i01npdepbanusu:
         - numlin
   npdepcajaho:
-    #_attributes:
-      #idMethod: native
     numlin:
       type: NUMERIC
       size: 14
@@ -2382,10 +2364,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdepfid:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -2414,10 +2396,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdepfide:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -2430,20 +2412,18 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdesniv:
-    #_attributes:
-      #idMethod: native
     codigo:
       type: VARCHAR
       size: 6
       required: true
-      ##primaryKey: true
     consec:
       type: NUMERIC
       size: 2
       required: true
-      ##primaryKey: true
     nomabr:
       type: VARCHAR
       size: 10
@@ -2458,27 +2438,25 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdiaadicnom:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdiaext:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -2493,10 +2471,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdisccesta:
-    #_attributes:
-      #idMethod: native
     numlin:
       type: NUMERIC
       size: 14
@@ -2507,35 +2485,32 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
     _indexes:
       i01npdisccesta:
         - numlin
   npempjorlab:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     idejor:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npempleados_banco:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -2559,15 +2534,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npempvac:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     caudes:
       type: DATE
       required: true
@@ -2601,10 +2575,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npescalas:
-    #_attributes:
-      #idMethod: native
     grado:
       type: VARCHAR
       size: 2
@@ -2618,15 +2592,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npescsue:
-    #_attributes:
-      #idMethod: native
     codesc:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     valini:
       type: NUMERIC
       size: 14
@@ -2640,10 +2613,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npescuelas:
-    #_attributes:
-      #idMethod: native
     codescuela:
       type: VARCHAR
       size: 16
@@ -2659,20 +2632,18 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npestado:
-    #_attributes:
-      #idMethod: native
     codedo:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codpai:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     nomedo:
       type: VARCHAR
       size: 100
@@ -2680,15 +2651,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npestorg:
-    #_attributes:
-      #idMethod: native
     codniv:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     desniv:
       type: VARCHAR
       size: 100
@@ -2702,10 +2672,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npexplab:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -2748,29 +2718,30 @@ propel:
       scale: 2
     codniv:
       type: VARCHAR
-      size: 16
+      size: 32
     codnom:
       type: VARCHAR
       size: 3
+    dedica:
+      type: VARCHAR
+      size: 100
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npfalper:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codmot:
       type: VARCHAR
       size: 4
     codnom:
       type: VARCHAR
       size: 3
-      required: true
     nrodia:
       type: NUMERIC
       size: 4
@@ -2780,18 +2751,29 @@ propel:
     fecdes:
       type: DATE
       required: true
-      ##primaryKey: true
     fechas:
       type: DATE
       required: true
-      ##primaryKey: true
+    nrohoras:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    numctr:
+      type: VARCHAR
+      size: 8
+    hordes:
+      type: VARCHAR
+      size: 10
+    horhas:
+      type: VARCHAR
+      size: 10
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npfideicomiso:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -2812,10 +2794,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npfondoprestaciones:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -2846,10 +2828,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npforcaremp:
-    #_attributes:
-      #idMethod: native
     codcat:
       type: VARCHAR
       size: 16
@@ -2918,10 +2900,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npgrulab:
-    #_attributes:
-      #idMethod: native
     codgrulab:
       type: VARCHAR
       size: 4
@@ -2931,10 +2913,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npgrunom:
-    #_attributes:
-      #idMethod: native
     codgrunom:
       type: VARCHAR
       size: 3
@@ -2954,10 +2936,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npguarde:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 3
@@ -2968,36 +2950,41 @@ propel:
     nomcon:
       type: VARCHAR
       size: 250
+    rifgua:
+      type: VARCHAR
+      size: 15
+    ninsme:
+      type: VARCHAR
+      size: 30
+    solmevig:
+      type: BOOLEAN
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nphiineg:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     fecing:
       type: DATE
       required: true
-      ##primaryKey: true
     fecegr:
       type: DATE
       required: true
-      ##primaryKey: true
     observ:
       type: VARCHAR
       size: 250
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nphisasicaremp:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -3019,16 +3006,16 @@ propel:
       required: true
     nomemp:
       type: VARCHAR
-      size: 51
+      size: 100
     nomcar:
       type: VARCHAR
-      size: 30
+      size: 100
     nomnom:
       type: VARCHAR
-      size: 29
+      size: 100
     nomcat:
       type: VARCHAR
-      size: 40
+      size: 100
     unieje:
       type: VARCHAR
       size: 30
@@ -3053,10 +3040,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nphiscon:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -3119,10 +3106,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nphiscon_06022007_sincambio:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -3185,10 +3172,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nphiscon_borra:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -3246,10 +3233,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nphiscon_old:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -3258,7 +3245,6 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codcar:
       type: VARCHAR
       size: 16
@@ -3267,11 +3253,9 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     fecnom:
       type: DATE
       required: true
-      ##primaryKey: true
     monto:
       type: NUMERIC
       size: 14
@@ -3315,7 +3299,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
     _indexes:
       i01nphiscon:
         - codnom
@@ -3328,8 +3314,6 @@ propel:
         - codcon
         - fecnom
   nphiscon_r:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -3378,10 +3362,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nphispre:
-    #_attributes:
-      #idMethod: native
     codtippre:
       type: VARCHAR
       size: 4
@@ -3407,20 +3391,18 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nphojint:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     rifemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     nomemp:
       type: VARCHAR
       size: 100
@@ -3520,7 +3502,7 @@ propel:
       size: 31
     obsemp:
       type: VARCHAR
-      size: 100
+      size: 300
     tiefid:
       type: VARCHAR
       size: 1
@@ -3550,7 +3532,7 @@ propel:
       size: 30
     sercon:
       type: VARCHAR
-      size: 16
+      size: 32
     dirotr:
       type: VARCHAR
       size: 1000
@@ -3700,16 +3682,31 @@ propel:
     codtipemp:
       type: VARCHAR
       size: 3
+    numpuncue:
+      type: VARCHAR
+      size: 20
+    fecinicon:
+      type: DATE
+    fecfincon:
+      type: DATE
+    obsembret:
+      type: VARCHAR
+      size: 1000
+    codmot:
+      type: VARCHAR
+      size: 4
+    fecmat:
+      type: DATE
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
     _uniques:
       un_nphojint:
         - cedemp
   nphojintban:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -3722,10 +3719,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nphojintinc:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -3739,10 +3736,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npimppresoc:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -3770,6 +3767,10 @@ propel:
       size: 14
       scale: 2
     alibono:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    aliadi:
       type: NUMERIC
       size: 14
       scale: 2
@@ -3834,14 +3835,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
     _indexes:
       i01npimppresoc:
         - codemp
         - feccor
   npimppresoc1:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -3887,14 +3888,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
     _indexes:
       i01npimppresoc1:
         - codemp
         - feccor
   npimppresocant:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -3988,14 +3989,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
     _indexes:
       i01npimppresocant:
         - codemp
         - feccor
   npinfadi:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -4039,10 +4040,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npinfcur:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -4073,13 +4074,17 @@ propel:
       size: 1
     fecenttit:
       type: DATE
+    fecini:
+      type: DATE
+    fecfin:
+      type: DATE   
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npinfcur_rene:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -4129,10 +4134,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npinffam:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -4184,13 +4189,24 @@ propel:
     ocupac:
       type: VARCHAR
       size: 1
+    carben:
+      type: VARCHAR
+      size: 1
+    dissus:
+      type: VARCHAR
+      size: 1
+    fecing:
+      type: DATE
+    docgua:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npinstitutos:
-    #_attributes:
-      #idMethod: native
     codins:
       type: VARCHAR
       size: 4
@@ -4200,10 +4216,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npinteresesprestaciones:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -4231,18 +4247,16 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npintfecref:
-    #_attributes:
-      #idMethod: native
     feciniref:
       type: DATE
       required: true
-      ##primaryKey: true
     fecfinref:
       type: DATE
       required: true
-      ##primaryKey: true
     tasint:
       type: NUMERIC
       size: 5
@@ -4264,10 +4278,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npintfecrefdaniel:
-    #_attributes:
-      #idMethod: native
     feciniref:
       type: DATE
       required: true
@@ -4295,10 +4309,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npintfid:
-    #_attributes:
-      #idMethod: native
     fecdesde:
       type: DATE
     fechasta:
@@ -4335,15 +4349,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npintpre:
-    #_attributes:
-      #idMethod: native
     numdec:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     despre:
       type: DATE
       required: true
@@ -4358,10 +4371,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npislr:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -4375,10 +4388,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npjefes:
-    #_attributes:
-      #idMethod: native
     presupuesto:
       type: VARCHAR
       size: 100
@@ -4397,10 +4410,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npliqemp:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 10
@@ -4409,7 +4422,6 @@ propel:
       type: NUMERIC
       size: 8
       required: true
-      ##primaryKey: true
     tipcau:
       type: VARCHAR
       size: 4
@@ -4496,10 +4508,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npliquidacion_det:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -4526,14 +4538,16 @@ propel:
       type: VARCHAR
       size: 8
     dias:
-      type: INTEGER
+      type: NUMERIC
+      size: 14
+      scale: 2
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npmemcon:
-    #_attributes:
-      #idMethod: native
     codmen:
       type: VARCHAR
       size: 100
@@ -4543,10 +4557,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npmemos:
-    #_attributes:
-      #idMethod: native
     codmem:
       type: VARCHAR
       size: 100
@@ -4562,15 +4576,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npmotant:
-    #_attributes:
-      #idMethod: native
     codmotant:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     desmotant:
       type: VARCHAR
       size: 250
@@ -4578,15 +4591,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npmotfal:
-    #_attributes:
-      #idMethod: native
     codmotfal:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     desmotfal:
       type: VARCHAR
       size: 250
@@ -4595,18 +4607,19 @@ propel:
       type: VARCHAR
       size: 1
       required: true
+    esremun:
+      type: BOOLEAN
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npmotliq:
-    #_attributes:
-      #idMethod: native
     codmotliq:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     desmotliq:
       type: VARCHAR
       size: 250
@@ -4614,10 +4627,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npmovian:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -4631,10 +4644,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npmovrac:
-    #_attributes:
-      #idMethod: native
     nronom:
       type: VARCHAR
       size: 16
@@ -4725,10 +4738,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npmunicipios:
-    #_attributes:
-      #idMethod: native
     codmunicipio:
       type: VARCHAR
       size: 14
@@ -4738,10 +4751,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npnivedu:
-    #_attributes:
-      #idMethod: native
     codniv:
       type: VARCHAR
       size: 4
@@ -4751,40 +4764,34 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npnomcal:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codcar:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     frecon:
       type: VARCHAR
       size: 1
       required: true
-      ##primaryKey: true
     asided:
       type: VARCHAR
       size: 1
       required: true
-      ##primaryKey: true
     fecnom:
       type: DATE
     nomcon:
@@ -4822,7 +4829,6 @@ propel:
       type: VARCHAR
       size: 1
       required: true
-      ##primaryKey: true
       default: N
     fecnomespdes:
       type: DATE
@@ -4837,7 +4843,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
     _indexes:
       i01npnomcal:
         - codnom
@@ -4845,8 +4853,6 @@ propel:
         - codcar
         - codcon
   npnomcal_temp:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -4905,10 +4911,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npnomcalhcm:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -4925,10 +4931,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npnomespconnomtip:
-    #_attributes:
-      #idMethod: native
     codnomesp:
       type: VARCHAR
       size: 3
@@ -4947,10 +4953,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npnomespnomtip:
-    #_attributes:
-      #idMethod: native
     codnomesp:
       type: VARCHAR
       size: 3
@@ -4962,10 +4968,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npnomesptipos:
-    #_attributes:
-      #idMethod: native
     codnomesp:
       type: VARCHAR
       size: 3
@@ -4980,19 +4986,21 @@ propel:
       type: DATE
     nomintpre:
       type: VARCHAR
-      size: 1  
+      size: 1
+    nomdiaadi:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npnomina:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     nomnom:
       type: VARCHAR
       size: 100
@@ -5035,15 +5043,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npordpag:
-    #_attributes:
-      #idMethod: native
     numord:
       type: NUMERIC
       size: 8
       required: true
-      ##primaryKey: true
     tipcau:
       type: VARCHAR
       size: 4
@@ -5134,19 +5141,17 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nppagint:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     fecpag:
       type: DATE
       required: true
-      ##primaryKey: true
     monpag:
       type: NUMERIC
       size: 14
@@ -5160,15 +5165,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nppais:
-    #_attributes:
-      #idMethod: native
     codpai:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     nompai:
       type: VARCHAR
       size: 20
@@ -5176,7 +5180,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nppartidas:
     _attributes:
       readOnly: true
@@ -5188,8 +5194,6 @@ propel:
       type: VARCHAR
       size: 500
   nppercar:
-    #_attributes:
-      #idMethod: native
     codperfil:
       type: VARCHAR
       size: 4
@@ -5205,10 +5209,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npperemp:
-    #_attributes:
-      #idMethod: native
     codperfil:
       type: VARCHAR
       size: 4
@@ -5220,10 +5224,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npperfil:
-    #_attributes:
-      #idMethod: native
     codperfil:
       type: VARCHAR
       size: 4
@@ -5234,10 +5238,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npperxdis:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -5250,24 +5254,21 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nppreliq:
-    #_attributes:
-      #idMethod: native
     fecvig:
       type: DATE
       required: true
-      ##primaryKey: true
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     mes:
       type: NUMERIC
       size: 6
       required: true
-      ##primaryKey: true
     diapre:
       type: NUMERIC
       size: 14
@@ -5291,19 +5292,17 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nppresoc:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     feccor:
       type: DATE
       required: true
-      ##primaryKey: true
     feccal:
       type: DATE
     codcon:
@@ -5365,19 +5364,17 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nppresocant:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     feccor:
       type: DATE
       required: true
-      ##primaryKey: true
     feccal:
       type: DATE
     codcon:
@@ -5439,23 +5436,20 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nppresta:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     fecdes:
       type: DATE
       required: true
-      ##primaryKey: true
     fechas:
       type: DATE
       required: true
-      ##primaryKey: true
     monacu:
       type: NUMERIC
       size: 14
@@ -5464,10 +5458,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npprocar:
-    #_attributes:
-      #idMethod: native
     codprofes:
       type: VARCHAR
       size: 4
@@ -5483,10 +5477,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npprofesion:
-    #_attributes:
-      #idMethod: native
     codprofes:
       type: VARCHAR
       size: 4
@@ -5501,15 +5495,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nprac:
-    #_attributes:
-      #idMethod: native
     codigo:
       type: VARCHAR
       size: 6
       required: true
-      ##primaryKey: true
     forcod:
       type: VARCHAR
       size: 50
@@ -5529,10 +5522,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nprelcajaho:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -5555,10 +5548,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nprelconqui:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -5595,7 +5588,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
     _indexes:
       nprelconqui01:
         - codemp
@@ -5605,8 +5600,6 @@ propel:
       nprelconqui03:
         - codcon
   npsalint:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 3
@@ -5627,10 +5620,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npsalint_03022007:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 3
@@ -5651,10 +5644,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npsalint_05022007:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 3
@@ -5675,10 +5668,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npsalint_06022007:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 3
@@ -5699,10 +5692,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npseghcm:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -5732,14 +5725,14 @@ propel:
     montototal:
       type: NUMERIC
       size: 14
-      scale: 2    
+      scale: 2
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npsitemp:
-    #_attributes:
-      #idMethod: native
     codsitemp:
       type: VARCHAR
       size: 1
@@ -5752,15 +5745,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npsso:
-    #_attributes:
-      #idMethod: native
     numsso:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codemp:
       type: VARCHAR
       size: 16
@@ -5771,10 +5763,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npsucban:
-    #_attributes:
-      #idMethod: native
     codban:
       type: VARCHAR
       size: 2
@@ -5787,19 +5779,17 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptabpre:
-    #_attributes:
-      #idMethod: native
     fecpre:
       type: DATE
       required: true
-      ##primaryKey: true
     codcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     diames:
       type: NUMERIC
       size: 2
@@ -5816,10 +5806,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptasfid:
-    #_attributes:
-      #idMethod: native
     fecdesde:
       type: DATE
     fechasta:
@@ -5831,10 +5821,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptipact:
-    #_attributes:
-      #idMethod: native
     codtipact:
       type: VARCHAR
       size: 2
@@ -5845,15 +5835,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptipadi:
-    #_attributes:
-      #idMethod: native
     codtit:
       type: VARCHAR
       size: 2
       required: true
-      ##primaryKey: true
     destit:
       type: VARCHAR
       size: 40
@@ -5867,10 +5856,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptipaportes:
-    #_attributes:
-      #idMethod: native
     codtipapo:
       type: VARCHAR
       size: 4
@@ -5889,10 +5878,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptipcar:
-    #_attributes:
-      #idMethod: native
     codtipcar:
       type: VARCHAR
       size: 3
@@ -5904,10 +5893,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptipcla:
-    #_attributes:
-      #idMethod: native
     codtipcla:
       type: VARCHAR
       size: 2
@@ -5918,10 +5907,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptipcon:
-    #_attributes:
-      #idMethod: native
     codtipcon:
       type: VARCHAR
       size: 3
@@ -5951,19 +5940,22 @@ propel:
     fid:
       type: VARCHAR
       size: 1
-    fecdes: DATE
+    fecdes:
+      type: DATE
+    condia:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptipcon_old:
-    #_attributes:
-      #idMethod: native
     codtipcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     destipcon:
       type: VARCHAR
       size: 50
@@ -5991,15 +5983,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptipded:
-    #_attributes:
-      #idMethod: native
     codtip:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     destip:
       type: VARCHAR
       size: 100
@@ -6007,10 +5998,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptipesp:
-    #_attributes:
-      #idMethod: native
     codtipesp:
       type: VARCHAR
       size: 3
@@ -6021,10 +6012,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptipgas:
-    #_attributes:
-      #idMethod: native
     codtipgas:
       type: VARCHAR
       size: 4
@@ -6034,10 +6025,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptipniv:
-    #_attributes:
-      #idMethod: native
     codtipniv:
       type: VARCHAR
       size: 2
@@ -6061,15 +6052,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptippag:
-    #_attributes:
-      #idMethod: native
     codtippag:
       type: VARCHAR
       size: 2
       required: true
-      ##primaryKey: true
     nomtippag:
       type: VARCHAR
       size: 18
@@ -6077,10 +6067,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptippar:
-    #_attributes:
-      #idMethod: native
     tippar:
       type: VARCHAR
       size: 3
@@ -6090,10 +6080,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptipper:
-    #_attributes:
-      #idMethod: native
     codper:
       type: VARCHAR
       size: 4
@@ -6104,10 +6094,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptippre:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 3
@@ -6123,10 +6113,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptipret:
-    #_attributes:
-      #idMethod: native
     codret:
       type: VARCHAR
       size: 2
@@ -6136,10 +6126,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptitulos:
-    #_attributes:
-      #idMethod: native
     codniv:
       type: VARCHAR
       size: 4
@@ -6152,32 +6142,29 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npunicat:
-    #_attributes:
-      #idMethod: native
     coduni:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codcat:
       type: VARCHAR
       size: 32
       required: true
-      ##primaryKey: true
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npunieje:
-    #_attributes:
-      #idMethod: native
     coduni:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codniv:
       type: VARCHAR
       size: 16
@@ -6189,10 +6176,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npvacaciones:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -6216,28 +6203,24 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npvacant:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codcar:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     caudes:
       type: DATE
       required: true
-      ##primaryKey: true
     cauhas:
       type: DATE
       required: true
-      ##primaryKey: true
     diavac:
       type: NUMERIC
       size: 6
@@ -6259,23 +6242,20 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npvaccol:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     disdes:
       type: DATE
       required: true
-      ##primaryKey: true
     dishas:
       type: DATE
       required: true
-      ##primaryKey: true
     fecreg:
       type: DATE
     diavac:
@@ -6290,14 +6270,17 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npvacdefgen:
-    #_attributes:
-      #idMethod: native
     codnomvac:
       type: VARCHAR
       size: 3
     codconvac:
+      type: VARCHAR
+      size: 3
+    codconadi:
       type: VARCHAR
       size: 3
     pagoad:
@@ -6309,13 +6292,16 @@ propel:
     codconuti:
       type: VARCHAR
       size: 3
+    vacant:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npvacdiadis:
-    #_attributes:
-      #idMethod: native
     rangodesde:
       type: NUMERIC
       size: 2
@@ -6334,10 +6320,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npvacdiafer:
-    #_attributes:
-      #idMethod: native
     dia:
       type: NUMERIC
       size: 2
@@ -6350,10 +6336,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npvacdiasbonovac:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -6375,10 +6361,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npvacdisfrute:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -6403,32 +6389,28 @@ propel:
     diasbonovacpag:
       type: NUMERIC
       size: 14
-      scale: 2            
+      scale: 2
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npvacfra:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codcar:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     caudes:
       type: DATE
       required: true
-      ##primaryKey: true
     cauhas:
       type: DATE
       required: true
-      ##primaryKey: true
     diavac:
       type: NUMERIC
       size: 6
@@ -6448,10 +6430,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npvacjorlab:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -6482,10 +6464,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npvacliquidacion:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -6518,10 +6500,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npvacregcalnom:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -6546,10 +6528,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npvacregcondis:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -6568,10 +6550,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npvacregsal:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
@@ -6603,10 +6585,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npvacsalidas:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -6624,14 +6606,24 @@ propel:
     fechas:
       type: DATE
     fecpagbonvac:
-      type: DATE      
+      type: DATE
+    fecsalnom:
+      type: DATE
+    fecreinom:
+      type: DATE
+    sabvac:
+      type: INTEGER
+    domvac:
+      type: INTEGER
+    fervac:
+      type: INTEGER
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npvacsalidas_det:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 16
@@ -6660,21 +6652,20 @@ propel:
     diasbonovacpag:
       type: NUMERIC
       size: 14
-      scale: 2                  
+      scale: 2
     fecvac:
       type: DATE
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npasiparcon:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codcar:
       type: VARCHAR
       size: 16
@@ -6689,19 +6680,17 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npordfid:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     fecha:
       type: DATE
       required: true
-      ##primaryKey: true
     codemp:
       type: VARCHAR
       size: 16
@@ -6721,10 +6710,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npincapa:
-    #_attributes:
-      #idMethod: native
     codinc:
       type: VARCHAR
       size: 8
@@ -6740,15 +6729,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npincapa:
-    #_attributes:
-      #idMethod: native
     codinc:
       type: VARCHAR
       size: 8
       required: true
-      ##primaryKey: true
     desinc:
       type: VARCHAR
       size: 100
@@ -6760,15 +6748,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npintcon:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     fecdes:
       type: DATE
     fechas:
@@ -6779,15 +6766,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdiaantper:
-    #_attributes:
-      #idMethod: native
     codcon:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     fecdes:
       type: DATE
     fechas:
@@ -6797,15 +6783,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npprimashijos:
-    #_attributes:
-      #idMethod: native
     parfam:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     edaddes:
       type: NUMERIC
       size: 2
@@ -6821,13 +6806,16 @@ propel:
     estudios:
       type: VARCHAR
       size: 1
+    consest:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npprimaprofes:
-    #_attributes:
-      #idMethod: native
     grado:
       type: VARCHAR
       size: 4
@@ -6838,10 +6826,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npcargoscol:
-    #_attributes:
-      #idMethod: native
     codcarcol:
       type: VARCHAR
       size: 16
@@ -6855,15 +6843,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nptipcat:
-    #_attributes:
-      #idMethod: native
     codtipcat:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     destipcat:
       type: VARCHAR
       size: 100
@@ -6871,15 +6858,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdefespparpre:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     numdiames:
       type: INTEGER
       required: true
@@ -6902,7 +6888,7 @@ propel:
     factorbonvacfra:
       type: NUMERIC
       size: 14
-      scale: 2      
+      scale: 2
     tipsalvacven:
       type: VARCHAR
       size: 2
@@ -6917,33 +6903,34 @@ propel:
       type: VARCHAR
       size: 2
     numdiaant:
-      type: INTEGER
+      type: NUMERIC
+      size: 14
+      scale: 2
     poranoant:
       type: VARCHAR
       size: 1
     tipsaldiaant:
       type: VARCHAR
-      size: 2        
+      size: 2
     codpar:
       type: VARCHAR
       size: 32
     aguicom:
       type: VARCHAR
-      size: 1      
+      size: 1
     apartirmes:
-      type: INTEGER    
+      type: INTEGER
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   nppernom:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     anno:
       type: INTEGER
       required: true
@@ -6954,23 +6941,20 @@ propel:
     fecini:
       type: DATE
       required: true
-      ##primaryKey: true
     fecfin:
       type: DATE
       required: true
-      ##primaryKey: true
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npjuzgados:
-    #_attributes:
-      #idMethod: native
     codjuz:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     desjuz:
       type: VARCHAR
       size: 100
@@ -6987,7 +6971,6 @@ propel:
       type: VARCHAR
       size: 200
       required: true
-      ##primaryKey: true
     teljuz:
       type: VARCHAR
       size: 100
@@ -6995,15 +6978,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npbenefiemb:
-    #_attributes:
-      #idMethod: native
     cedrif:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     nomben:
       type: VARCHAR
       size: 200
@@ -7025,15 +7007,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npmaeemb:
-    #_attributes:
-      #idMethod: native
     codemb:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     desemb:
       type: VARCHAR
       size: 200
@@ -7068,15 +7049,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdetembben:
-    #_attributes:
-      #idMethod: native
     codemb:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codemp:
       type: VARCHAR
       size: 16
@@ -7096,15 +7076,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npdetembcon:
-    #_attributes:
-      #idMethod: native
     codemb:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codemp:
       type: VARCHAR
       size: 16
@@ -7120,15 +7099,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   npparamsalint:
-    #_attributes:
-      #idMethod: native
     codnom:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codcon:
       type: VARCHAR
       size: 3
@@ -7156,3 +7134,502 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  npestemp:
+    #_attributes:
+      #idMethod: native
+    codestemp:
+      type: VARCHAR
+      size: 1
+      required: true
+    desestemp:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdefubi:
+    #_attributes:
+      #idMethod: native
+    codubi:
+      type: VARCHAR
+      size: 3
+      required: true
+    desubi:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npfalperemp:
+    codemp:                #codigo empleaado
+      type: VARCHAR
+      size: 16
+      required: true
+    fecini:                #Fecha de Inicio
+      type: DATE
+      required: true
+    fecret:                #Fecha de Retorno
+      type: DATE
+      required: true
+    horas:                 #Fecha de Retorno
+      type: NUMERIC
+      size: 3
+    codmot:                #Motivo
+      type: VARCHAR
+      size: 4
+    observ:                #Observacion
+      type: VARCHAR
+      size: 1000
+    feccon:                #Fecha de Consignacion Soporte
+      type: DATE
+    ivss:                  #Ivss
+      type: BOOLEAN
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npconsuelaporet:
+    codtipapo:
+      type: VARCHAR
+      size: 4
+      required: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    tipo:
+      type: VARCHAR
+      size: 1
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  npmotcamcar:
+    codmotcamcar:
+      type: VARCHAR
+      size: 4
+      required: true
+    desmotcamcar:
+      type: VARCHAR
+      size: 1000
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro      
+  npdocent:
+    coddoc:
+      type: VARCHAR
+      size: 3
+      required: true
+    desdoc:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro            
+  npdocentporemp:
+    codemp:
+      type: VARCHAR
+      size: 16
+      #foreignTable: nphojint
+      #foreignReference: codemp
+    coddoc:
+      type: VARCHAR
+      size: 3
+      #foreignTable: npdocent
+      #foreignReference: coddoc
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  nptiempo:
+    codtie:
+      type: VARCHAR
+      size: 3
+    destie:
+      type: VARCHAR
+      size: 100
+    factor:
+      type: VARCHAR
+      size: 50  
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  npdefrepcon:
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+    codrep:
+      type: VARCHAR
+      size: 3
+    desrep:
+      type: VARCHAR
+      size: 1000
+    numcol:
+      type: INTEGER
+    descol:
+      type: VARCHAR
+      size: 1000
+    codcon:
+      type: VARCHAR
+      size: 3
+    sumtot:
+      type: VARCHAR
+      size: 1
+    sumval:
+      type: VARCHAR
+      size: 1
+  npdocemp:
+    coddoc:
+      type: VARCHAR
+      size: 10
+      required: true
+    desdoc:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  npinfdoc:
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    coddoc:
+      type: VARCHAR
+      size: 40
+      required: true   
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  npporhcm:
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    tipcar:
+      type: VARCHAR
+      size: 1
+      required: true   
+    tippar:
+      type: VARCHAR
+      size: 3
+      required: true   
+    edades:
+      type: NUMERIC
+      size: 14
+      scale: 2   
+    edahas:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    porcub:
+      type: NUMERIC
+      size: 14
+      scale: 2    
+    dissus:
+      type: VARCHAR
+      size: 1      
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  npmotegr:
+    codmot:
+      type: VARCHAR
+      size: 4
+      required: true
+    desmot:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  npasiconpar:
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      description: Nómina
+    codtipcar:
+      type: VARCHAR
+      size: 3
+      required: true
+      description: Tipo de Cargo
+    gracar:
+      type: VARCHAR
+      size: 3
+      description: NivelEscala
+    codtip:
+      type: VARCHAR
+      size: 4
+      description: Dedicación
+    codtipcat:
+      type: VARCHAR
+      size: 4
+      description: Categoría
+    codtie:
+      type: VARCHAR
+      size: 3
+      description: Condición
+    codestemp:
+      type: VARCHAR
+      size: 1
+      description: Estatus
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      description: Concepto
+    codpar:
+      type: VARCHAR
+      size: 16
+      required: true
+      description: Partida
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  npaumcar:
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      description: Nómina
+    cantidad:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+      description: Aumento por cantidad
+    porcentaje:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+      description: Aumento por Porcentaje
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+      description: Cargo
+    suecar:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+      description: Sueldo con Aumento
+    fecaum:
+      type: DATE
+      required: true
+      description: Fecha Aumento
+    motaum:
+      type: VARCHAR
+      size: 250
+      description: Motivo de Aumento
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  npdefespclaudet:
+    codnom:
+      type: VARCHAR
+      size: 3
+    descripclau:
+      type: VARCHAR
+      size: 250
+    codpar:
+      type: VARCHAR
+      size: 32
+    codret:
+      type: VARCHAR
+      size: 2
+    totret:
+      type: VARCHAR
+      size: 1
+    numdiaant:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    poranoant:
+      type: VARCHAR
+      size: 1
+    apartirmes:
+      type: INTEGER
+    pormesant:
+      type: VARCHAR
+      size: 1
+    tipsaldiaant:
+      type: VARCHAR
+      size: 2
+    admpub:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  npasicarcolemp:
+    codemp:
+      type: VARCHAR
+      size: 16
+    codcar:
+      type: VARCHAR
+      size: 16
+    fecdes:
+      type: DATE
+    fechas:
+      type: DATE
+    descrip:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  npasiconcar:
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  npcatnomemp:
+    codcat:
+      type: VARCHAR
+      size: 32
+      required: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  npcatnomempcon:
+    codcat:
+      type: VARCHAR
+      size: 32
+      required: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  npbonfinano:
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    desde:
+      type: NUMERIC
+      size: 5
+      scale: 2
+      required: true
+    hasta:
+      type: NUMERIC
+      size: 5
+      scale: 2
+      required: true
+    dias:
+      type: NUMERIC
+      size: 5
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro

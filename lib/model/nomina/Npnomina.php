@@ -17,6 +17,7 @@ class Npnomina extends BaseNpnomina
 {
   protected $objcalculo=array();
   protected $objconceptos=array();
+  protected $obj=array();
 
 
   public function getProfec_()

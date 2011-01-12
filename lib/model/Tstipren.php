@@ -15,4 +15,23 @@
  */ 
 class Tstipren extends BaseTstipren
 {
+  protected $tiedatrel="";
+
+  public function getTiedatrel()
+  {
+  	  $valor="N";
+  	  $d= new Criteria();
+  	  $d->add(TsdefbanPeer::TIPREN,self::getCodtip());
+  	  $resul= TsdefbanPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  } else $valor= 'N';
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
+  }
 }

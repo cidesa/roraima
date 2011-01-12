@@ -30,7 +30,9 @@ class FordisperproMapBuilder {
 		$tMap = $this->dbMap->addTable('fordisperpro');
 		$tMap->setPhpName('Fordisperpro');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fordisperpro_SEQ');
 
 		$tMap->addColumn('CODMET', 'Codmet', 'string', CreoleTypes::VARCHAR, true, 5);
 

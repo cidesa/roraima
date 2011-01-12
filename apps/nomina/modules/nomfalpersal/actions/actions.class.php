@@ -70,6 +70,10 @@ class nomfalpersalActions extends autonomfalpersalActions
 		{
 			$this->npfalper->setObserv($npfalper['observ']);
 		}
+                if (isset($npfalper['numctr']))
+                {
+                  $this->npfalper->setNumctr($npfalper['numctr']);
+                }
 
 		//$this->nphojint->setStaemp('P');
     if (isset($npfalper['fecdes']))
@@ -130,6 +134,14 @@ class nomfalpersalActions extends autonomfalpersalActions
         $this->npfalper->setFecdes(null);
       }
     }
+     if (isset($npfalper['nrodia']))
+    {
+      $this->npfalper->setNrodia($npfalper['nrodia']);
+  }
+    if (isset($npfalper['nrohoras']))
+    {
+      $this->npfalper->setNrohoras($npfalper['nrohoras']);
+    }
   }
 
   	/**
@@ -173,7 +185,6 @@ class nomfalpersalActions extends autonomfalpersalActions
   {
   	$this->updateNpfalperFromRequest();
   	$this->npfalper->setFecdes(date('Y-m-d'));
-  	//$this->npfalper->setFechas();
     $npfalper->save();
 	$c= new Criteria();
 	$c->add(NphojintPeer::CODEMP,$npfalper->getCodemp());

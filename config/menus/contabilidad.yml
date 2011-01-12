@@ -9,9 +9,45 @@ contabilidad:
         modulo: autenticacion.php
         modulo_dev: autenticacion_dev.php
       default:
-        modulo: contabilidadpresupuesto/aplicaciones/contabilidad
-        modulo_dev: contabilidadpresupuesto/aplicaciones/contabilidad
+        modulo: cp/aplicaciones/contabilidad
+        modulo_dev: cp/aplicaciones/contabilidad
       Configuraciones Generales:
+        modulo: contabilidad.php
+        modulo_dev: contabilidad_dev.php
+      Definiciones Específicas de Institución (v2.0 Beta):
+        modulo: contabilidad.php
+        modulo_dev: contabilidad_dev.php
+      Catálogo de Cuentas (v2.0 Beta):
+        modulo: contabilidad.php
+        modulo_dev: contabilidad_dev.php
+      Tipos de Cuentas (v2.0 Beta):
+        modulo: contabilidad.php
+        modulo_dev: contabilidad_dev.php
+      Actualizar Comprobantes (v2.0 Beta):
+        modulo: contabilidad.php
+        modulo_dev: contabilidad_dev.php
+      Comprobantes (v2.0 Beta):
+        modulo: contabilidad.php
+        modulo_dev: contabilidad_dev.php
+      Comprobantes de Ajustes Años Anteriores (v2.0 Beta):
+        modulo: contabilidad.php
+        modulo_dev: contabilidad_dev.php
+      Cierre de Período (v2.0 Beta):
+        modulo: contabilidad.php
+        modulo_dev: contabilidad_dev.php
+      Cierre de Ejercicio (v2.0 Beta):
+        modulo: contabilidad.php
+        modulo_dev: contabilidad_dev.php
+      Eliminar Comprobantes Anulados (v2.0 Beta):
+        modulo: contabilidad.php
+        modulo_dev: contabilidad_dev.php
+      Cerrar Etapa de Definición (v2.0 Beta):
+        modulo: contabilidad.php
+        modulo_dev: contabilidad_dev.php
+      Definición de Centro de Costo:
+        modulo: contabilidad.php
+        modulo_dev: contabilidad_dev.php
+      Asignación de Centro de Costo:
         modulo: contabilidad.php
         modulo_dev: contabilidad_dev.php
       Reportes:
@@ -21,16 +57,24 @@ contabilidad:
   menu:
     Configuraciones Generales:                                confincongen
     Definiciones Específicas de Institución:                  ConFinIns.php
-    Catálogo de Cuentas:                                      ConFinCue.php
-    Tipos de Cuentas:                                         ConFinTipCueCon.php
-    #Definición de Cuentas:                                   ConFinDefCue.php
-    #Cuentas Contables:                                       ConFinCueCon.php
-    Comprobantes:                                             ConFinCom.php
+    Definiciones Específicas de Institución (v2.0 Beta):      confinins
+    Definición de Centro de Costo:                            condefcencos
+    Catálogo de Cuentas:                                    ConFinCue.php
+    Catálogo de Cuentas (v2.0 Beta):                          ConFinCue
+    Tipos de Cuentas:                                     ConFinTipCueCon.php
+    Tipos de Cuentas (v2.0 Beta):                            confintipcuecon
+    Comprobantes:                                           ConFinCom.php
+    Comprobantes (v2.0 Beta):                                 confincom
+    Comprobantes de Ajustes Años Anteriores:                  confincomaj
     Actualizar Comprobantes:                                  ConFinActCom.php
+    Actualizar Comprobantes (v2.0 Beta):                      confinactcom
+    Asignación de Centro de Costo:                            conasigcencos
     Cierre de Período:                                        ConFinCiePer.php
+    Cierre de Período (v2.0 Beta):                            confincieper
     #Abrir Período:                                           ConFinAbrPer.php
     #Generar Comprobante de Cierre:                           ConFinComCie.php
     Cierre de Ejercicio:                                      ConFinCie.php
+    Cierre de Ejercicio  (v2.0 Beta):                         confincie
     #Definición para el Origen y Aplicación de Fondos:        ConOriApliFon.php
     #Definición para el Balan. Gener. y Estado de Resultados: ConDefBalGen.php
     #Trasladar Saldos:                                        BDSalActCon.php
@@ -50,8 +94,10 @@ contabilidad:
     Mantenimiento Específico:
       #Actualizar Maestro:                                    ConFinActMae.php
       #Actualizar Maestro por Cuentas:                        ConFinActMaeCue.php
-      Eliminar Comprobantes Anulados:                         ConFinEliCom.php
-      Cerrar Etapa de Definición:                             ConFinCieDef.php
+      Eliminar Comprobantes Anulados:                         confinelicom
+      Eliminar Comprobantes Anulados-v:                       ConFinEliCom.php
+      Cerrar Etapa de Definición:                             confinciedef
+      Cerrar Etapa de Definición-v:                           ConFinCieDef.php
       Cambiar Contraseña:                                     cambiopasswd
       #Cambiar Password de Usuario:                           PreCamPwd.php
       #Trasladar Saldos Contables del Ejercicio Anterior:     BDActSalCon.php

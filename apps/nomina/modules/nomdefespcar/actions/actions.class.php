@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomdefespcar
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 39449 2010-07-14 17:12:50Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -51,7 +51,7 @@ $this->Bitacora('Guardo');
     }
     else
     {
-      $this->labels = $this->getLabels();
+      $labels = $this->getLabels();
 	  $varemp = $this->getUser()->getAttribute('configemp');
 	  if(is_array($varemp))
 	    if(array_key_exists('aplicacion',$varemp))
@@ -59,13 +59,14 @@ $this->Bitacora('Guardo');
 		   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
 		     if(array_key_exists('nomdefespcar',$varemp['aplicacion']['nomina']['modulos']))
 		       if(array_key_exists('graocp',$varemp['aplicacion']['nomina']['modulos']['nomdefespcar']))
-	  		     $this->labels['npcargos{graocp}'] = $varemp['aplicacion']['nomina']['modulos']['nomdefespcar']['graocp'];
+	  		     $labels['npcargos{graocp}'] = $varemp['aplicacion']['nomina']['modulos']['nomdefespcar']['graocp'];
+	  $this->labels = $labels;
 
     }
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -122,9 +123,29 @@ $this->Bitacora('Guardo');
     {
       $this->npcargos->setCanhom($npcargos['canhom']);
     }
+	if (isset($npcargos['canmix']))
+    {
+      $this->npcargos->setCanmix($npcargos['canmix']);
+    }
 	if (isset($npcargos['carvan']))
     {
       $this->npcargos->setCarvan($npcargos['carvan']);
+    }
+    if (isset($npcargos['canpmuj']))
+    {
+      $this->npcargos->setCanpmuj($npcargos['canpmuj']);
+    }
+	if (isset($npcargos['canphom']))
+    {
+      $this->npcargos->setCanphom($npcargos['canphom']);
+    }
+    if (isset($npcargos['canvmuj']))
+    {
+      $this->npcargos->setCanvmuj($npcargos['canvmuj']);
+    }
+	if (isset($npcargos['canvhom']))
+    {
+      $this->npcargos->setCanvhom($npcargos['canvhom']);
     }
 
   }
@@ -266,12 +287,13 @@ $this->Bitacora('Guardo');
     return sfView::SUCCESS;
   }
 
-  
-  
-  
+
+
+
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -353,7 +375,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Función principal para procesar la eliminación de registros 
+   * Función principal para procesar la eliminación de registros
    * en el formulario.
    *
    */

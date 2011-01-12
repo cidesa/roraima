@@ -13,7 +13,7 @@ abstract class BaseOcmuniciPeer {
 	const CLASS_DEFAULT = 'lib.model.Ocmunici';
 
 	
-	const NUM_COLUMNS = 5;
+	const NUM_COLUMNS = 6;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -24,6 +24,9 @@ abstract class BaseOcmuniciPeer {
 
 	
 	const CODEDO = 'ocmunici.CODEDO';
+
+	
+	const CODCIU = 'ocmunici.CODCIU';
 
 	
 	const CODMUN = 'ocmunici.CODMUN';
@@ -40,18 +43,18 @@ abstract class BaseOcmuniciPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpai', 'Codedo', 'Codmun', 'Nommun', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (OcmuniciPeer::CODPAI, OcmuniciPeer::CODEDO, OcmuniciPeer::CODMUN, OcmuniciPeer::NOMMUN, OcmuniciPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpai', 'codedo', 'codmun', 'nommun', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codpai', 'Codedo', 'Codciu', 'Codmun', 'Nommun', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (OcmuniciPeer::CODPAI, OcmuniciPeer::CODEDO, OcmuniciPeer::CODCIU, OcmuniciPeer::CODMUN, OcmuniciPeer::NOMMUN, OcmuniciPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpai', 'codedo', 'codciu', 'codmun', 'nommun', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpai' => 0, 'Codedo' => 1, 'Codmun' => 2, 'Nommun' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (OcmuniciPeer::CODPAI => 0, OcmuniciPeer::CODEDO => 1, OcmuniciPeer::CODMUN => 2, OcmuniciPeer::NOMMUN => 3, OcmuniciPeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpai' => 0, 'codedo' => 1, 'codmun' => 2, 'nommun' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codpai' => 0, 'Codedo' => 1, 'Codciu' => 2, 'Codmun' => 3, 'Nommun' => 4, 'Id' => 5, ),
+		BasePeer::TYPE_COLNAME => array (OcmuniciPeer::CODPAI => 0, OcmuniciPeer::CODEDO => 1, OcmuniciPeer::CODCIU => 2, OcmuniciPeer::CODMUN => 3, OcmuniciPeer::NOMMUN => 4, OcmuniciPeer::ID => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpai' => 0, 'codedo' => 1, 'codciu' => 2, 'codmun' => 3, 'nommun' => 4, 'id' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
@@ -108,6 +111,8 @@ abstract class BaseOcmuniciPeer {
 		$criteria->addSelectColumn(OcmuniciPeer::CODPAI);
 
 		$criteria->addSelectColumn(OcmuniciPeer::CODEDO);
+
+		$criteria->addSelectColumn(OcmuniciPeer::CODCIU);
 
 		$criteria->addSelectColumn(OcmuniciPeer::CODMUN);
 
@@ -192,6 +197,719 @@ abstract class BaseOcmuniciPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinOcpais(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(OcmuniciPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(OcmuniciPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(OcmuniciPeer::CODPAI, OcpaisPeer::CODPAI);
+
+		$rs = OcmuniciPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinOcestado(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(OcmuniciPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(OcmuniciPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(OcmuniciPeer::CODEDO, OcestadoPeer::CODEDO);
+
+		$rs = OcmuniciPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinOcciudad(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(OcmuniciPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(OcmuniciPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(OcmuniciPeer::CODCIU, OcciudadPeer::CODCIU);
+
+		$rs = OcmuniciPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinOcpais(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		OcmuniciPeer::addSelectColumns($c);
+		$startcol = (OcmuniciPeer::NUM_COLUMNS - OcmuniciPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		OcpaisPeer::addSelectColumns($c);
+
+		$c->addJoin(OcmuniciPeer::CODPAI, OcpaisPeer::CODPAI);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = OcmuniciPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = OcpaisPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getOcpais(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addOcmunici($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initOcmunicis();
+				$obj2->addOcmunici($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinOcestado(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		OcmuniciPeer::addSelectColumns($c);
+		$startcol = (OcmuniciPeer::NUM_COLUMNS - OcmuniciPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		OcestadoPeer::addSelectColumns($c);
+
+		$c->addJoin(OcmuniciPeer::CODEDO, OcestadoPeer::CODEDO);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = OcmuniciPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = OcestadoPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getOcestado(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addOcmunici($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initOcmunicis();
+				$obj2->addOcmunici($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinOcciudad(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		OcmuniciPeer::addSelectColumns($c);
+		$startcol = (OcmuniciPeer::NUM_COLUMNS - OcmuniciPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		OcciudadPeer::addSelectColumns($c);
+
+		$c->addJoin(OcmuniciPeer::CODCIU, OcciudadPeer::CODCIU);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = OcmuniciPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = OcciudadPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getOcciudad(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addOcmunici($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initOcmunicis();
+				$obj2->addOcmunici($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(OcmuniciPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(OcmuniciPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+			$criteria->addJoin(OcmuniciPeer::CODPAI, OcpaisPeer::CODPAI);
+	
+			$criteria->addJoin(OcmuniciPeer::CODEDO, OcestadoPeer::CODEDO);
+	
+			$criteria->addJoin(OcmuniciPeer::CODCIU, OcciudadPeer::CODCIU);
+	
+		$rs = OcmuniciPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		OcmuniciPeer::addSelectColumns($c);
+		$startcol2 = (OcmuniciPeer::NUM_COLUMNS - OcmuniciPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			OcpaisPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + OcpaisPeer::NUM_COLUMNS;
+	
+			OcestadoPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + OcestadoPeer::NUM_COLUMNS;
+	
+			OcciudadPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + OcciudadPeer::NUM_COLUMNS;
+	
+			$c->addJoin(OcmuniciPeer::CODPAI, OcpaisPeer::CODPAI);
+	
+			$c->addJoin(OcmuniciPeer::CODEDO, OcestadoPeer::CODEDO);
+	
+			$c->addJoin(OcmuniciPeer::CODCIU, OcciudadPeer::CODCIU);
+	
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = OcmuniciPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+							
+				$omClass = OcpaisPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getOcpais(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addOcmunici($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initOcmunicis();
+					$obj2->addOcmunici($obj1);
+				}
+	
+
+							
+				$omClass = OcestadoPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3 = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getOcestado(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addOcmunici($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initOcmunicis();
+					$obj3->addOcmunici($obj1);
+				}
+	
+
+							
+				$omClass = OcciudadPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj4 = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getOcciudad(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addOcmunici($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initOcmunicis();
+					$obj4->addOcmunici($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+		
+		public static function doCountJoinAllExceptOcpais(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(OcmuniciPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(OcmuniciPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(OcmuniciPeer::CODEDO, OcestadoPeer::CODEDO);
+		
+				$criteria->addJoin(OcmuniciPeer::CODCIU, OcciudadPeer::CODCIU);
+		
+			$rs = OcmuniciPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
+		}
+	
+
+		
+		public static function doCountJoinAllExceptOcestado(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(OcmuniciPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(OcmuniciPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(OcmuniciPeer::CODPAI, OcpaisPeer::CODPAI);
+		
+				$criteria->addJoin(OcmuniciPeer::CODCIU, OcciudadPeer::CODCIU);
+		
+			$rs = OcmuniciPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
+		}
+	
+
+		
+		public static function doCountJoinAllExceptOcciudad(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(OcmuniciPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(OcmuniciPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(OcmuniciPeer::CODPAI, OcpaisPeer::CODPAI);
+		
+				$criteria->addJoin(OcmuniciPeer::CODEDO, OcestadoPeer::CODEDO);
+		
+			$rs = OcmuniciPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
+		}
+	
+
+	
+	public static function doSelectJoinAllExceptOcpais(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		OcmuniciPeer::addSelectColumns($c);
+		$startcol2 = (OcmuniciPeer::NUM_COLUMNS - OcmuniciPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			OcestadoPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + OcestadoPeer::NUM_COLUMNS;
+	
+			OcciudadPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + OcciudadPeer::NUM_COLUMNS;
+	
+			$c->addJoin(OcmuniciPeer::CODEDO, OcestadoPeer::CODEDO);
+	
+			$c->addJoin(OcmuniciPeer::CODCIU, OcciudadPeer::CODCIU);
+	
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = OcmuniciPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+				$omClass = OcestadoPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getOcestado(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addOcmunici($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initOcmunicis();
+					$obj2->addOcmunici($obj1);
+				}
+	
+				$omClass = OcciudadPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getOcciudad(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addOcmunici($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initOcmunicis();
+					$obj3->addOcmunici($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptOcestado(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		OcmuniciPeer::addSelectColumns($c);
+		$startcol2 = (OcmuniciPeer::NUM_COLUMNS - OcmuniciPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			OcpaisPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + OcpaisPeer::NUM_COLUMNS;
+	
+			OcciudadPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + OcciudadPeer::NUM_COLUMNS;
+	
+			$c->addJoin(OcmuniciPeer::CODPAI, OcpaisPeer::CODPAI);
+	
+			$c->addJoin(OcmuniciPeer::CODCIU, OcciudadPeer::CODCIU);
+	
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = OcmuniciPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+				$omClass = OcpaisPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getOcpais(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addOcmunici($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initOcmunicis();
+					$obj2->addOcmunici($obj1);
+				}
+	
+				$omClass = OcciudadPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getOcciudad(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addOcmunici($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initOcmunicis();
+					$obj3->addOcmunici($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptOcciudad(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		OcmuniciPeer::addSelectColumns($c);
+		$startcol2 = (OcmuniciPeer::NUM_COLUMNS - OcmuniciPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			OcpaisPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + OcpaisPeer::NUM_COLUMNS;
+	
+			OcestadoPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + OcestadoPeer::NUM_COLUMNS;
+	
+			$c->addJoin(OcmuniciPeer::CODPAI, OcpaisPeer::CODPAI);
+	
+			$c->addJoin(OcmuniciPeer::CODEDO, OcestadoPeer::CODEDO);
+	
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = OcmuniciPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+				$omClass = OcpaisPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getOcpais(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addOcmunici($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initOcmunicis();
+					$obj2->addOcmunici($obj1);
+				}
+	
+				$omClass = OcestadoPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getOcestado(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addOcmunici($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initOcmunicis();
+					$obj3->addOcmunici($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{

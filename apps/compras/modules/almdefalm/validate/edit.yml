@@ -8,7 +8,7 @@ names:
   cadefalm{codalm}:
     required:  Yes
     required_msg: El Código de la Ubicación no puedo estar en Blanco
-    validators: UniqueValidator, CorrelValidator
+    validators: UniqueValidator
 
   cadefalm{nomalm}:
     required:  Yes

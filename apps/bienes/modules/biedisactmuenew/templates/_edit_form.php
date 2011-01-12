@@ -100,6 +100,7 @@
 
   <?php $value = object_input_tag($bndismue, 'getNrodismue', array (
   'size' => 15,
+  'maxlength' => 10,
   'readonly'  =>  $bndismue->getId()!='' ? true : false ,
   'control_name' => 'bndismue[nrodismue]',
   'onKeyPress' => "javascript:if (event.keyCode==13 || event.keyCode==9){document.getElementById('bndismue_codmot').focus();}",
@@ -107,7 +108,14 @@
   )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <strong>Tipo</strong>&nbsp;&nbsp;&nbsp;
-<?php echo select_tag('bndismue[tipdismue]', options_for_select($tipos,$bndismue->getTipdismue()), array('disabled'  =>  $bndismue->getId()!='' ? true : false )); ?>
+<?php echo select_tag('bndismue[tipdismue]', options_for_select($tipos,$bndismue->getTipdismue()), array('disabled'  =>  $bndismue->getId()!='' ? true : false,
+    'onChange'=> remote_function(array(
+      'url'      => 'biedisactmuenew/ajax',
+      'complete' => 'AjaxJSON(request, json)',
+      'condition' => "$('bndismue_tipdismue').value != '' && $('id').value == '' ",
+      'with' => "'ajax=5&codact='+$('bndismue_codact').value+'&codmue='+$('bndismue_codmue').value+'&codigo='+this.value",
+     )),
+    )); ?>
 </div>
 <br>
   <?php echo label_for('bndismue[codmot]', __($labels['bndismue{codmot}']), 'class="required" ') ?>
@@ -157,6 +165,7 @@
   'maxlength' => 10,
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
 )); echo $value ? $value : '&nbsp;' ?>
+</div>
 </th>
 <th>
 </th>
@@ -176,6 +185,7 @@
   'maxlength' => 10,
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
 )); echo $value ? $value : '&nbsp;' ?>
+      </div>
 </th>
 <th>
 </th>
@@ -191,6 +201,24 @@
   'control_name' => 'bndismue[mondismue]',
   'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
 )); echo $value ? $value : '&nbsp;' ?>
+</div>
+</th>
+<th>
+</th>
+<th>
+    <div id="vidautil" style="display:none">
+<?php echo label_for('bndismue[vidutil]', __($labels['bndismue{vidutil}']), 'class=required id="label16" ' ) ?>
+  <div class="content<?php if ($sf_request->hasError('bndismue{vidutil}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bndismue{vidutil}')): ?>
+    <?php echo form_error('bndismue{vidutil}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+<?php $value = object_input_tag($bndismue, 'getVidutil', array (
+  'size' => 10,
+  'readonly'  =>  $bndismue->getId()!='' ? true : false ,
+  'control_name' => 'bndismue[vidutil]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+</div>
 </th>
 </tr>
 </table>
@@ -292,6 +320,19 @@
   'control_name' => 'bndismue[obsdismue]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
+
+    <br>
+<?php echo label_for('bndismue[logusu]', __($labels['bndismue{logusu}']), 'class="required"') ?>
+<div class="content<?php if ($sf_request->hasError('bndismue{logusu}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('bndismue{logusu}')): ?> <?php echo form_error('bndismue{logusu}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+  <?php $value = object_input_tag($bndismue, 'getNomuse', array (
+'size' => 60,
+'disabled' => true,
+'control_name' => 'bndismue[nomuse]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
 </div>
 
 
@@ -321,6 +362,18 @@ if ($bndismue->getId()=='') { ?>
 
 <div id="comp"></div>
 <script language="JavaScript" type="text/javascript">
+    var vida='<?php echo $bndismue->getVidau()?>';
+    if ($('id').value!='')
+    {
+        if ($('bndismue_vidutil').value!='')
+        {
+            $('vidautil').show();
+             if (vida=='S'){
+               $('label16').innerHTML = 'Vida Util (+)';}
+              else if (vida=='R') {$('label16').innerHTML = 'Vida Util (-)';}
+        }
+    }
+
   function comprobante(formulario)
   {
       window.open('/tesoreria_dev.php/confincomgen/edit/?formulario='+formulario,formulario,'menubar=no,toolbar=no,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80');

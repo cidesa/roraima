@@ -23,7 +23,7 @@
 
 <h1>
 <?php if ($cambiareti!="") {?>
-<?php echo __('Solicitud de Cotización',
+<?php echo __($nometifor,
 array()) ?>
 <?php }else {?>
 <?php echo __('Requisiciones por Departamento.(Solicitud de Egresos)',

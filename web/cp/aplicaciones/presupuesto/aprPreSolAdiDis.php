@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
@@ -8,6 +9,7 @@ validar(array(11,15),'','presoladidis.php');            //Seguridad  del Sistema
 $codemp = $_SESSION["codemp"];
 $bd     = new basedatosAdo($codemp);
 $tool   = new tools();
+$fecha_actual= date('d/m/Y');
 //limpiar
  $fecha  = "";
  $desc   = "";
@@ -131,7 +133,6 @@ $tool   = new tools();
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/funciones.js"></script>
@@ -156,7 +157,7 @@ $tool   = new tools();
 </style>
 </head>
 <body>
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
   <fieldset>
 
     <legend><span class="style3">Conformaci&oacute;n-Autorizaci&oacute;n-Aprobaci&oacute;n de Solicitud de Cr&eacute;dito Adici&oacute;n/Disminuci&oacute;n</span></legend>
@@ -232,7 +233,7 @@ $tool   = new tools();
       else
       {
         //alert("Longitud de Fecha inválida");
-        document.getElementById('fecha').value=mostrarfecha();
+        document.getElementById('fecha').value='<? echo $fecha_actual; ?>';;
         document.getElementById('fecha').focus();
       }
 

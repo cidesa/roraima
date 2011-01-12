@@ -29,6 +29,10 @@ abstract class BaseRhevaconcom extends BaseObject  implements Persistent {
 
 
 	
+	protected $feceval;
+
+
+	
 	protected $id;
 
 	
@@ -74,6 +78,28 @@ abstract class BaseRhevaconcom extends BaseObject  implements Persistent {
     else return $this->punval;
 
   }
+  
+  public function getFeceval($format = 'Y-m-d')
+  {
+
+    if ($this->feceval === null || $this->feceval === '') {
+      return null;
+    } elseif (!is_int($this->feceval)) {
+            $ts = adodb_strtotime($this->feceval);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feceval] as date/time value: " . var_export($this->feceval, true));
+      }
+    } else {
+      $ts = $this->feceval;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
   
   public function getId()
   {
@@ -132,6 +158,28 @@ abstract class BaseRhevaconcom extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setFeceval($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feceval] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feceval !== $ts) {
+      $this->feceval = $ts;
+      $this->modifiedColumns[] = RhevaconcomPeer::FECEVAL;
+    }
+
+	} 
+	
 	public function setId($v)
 	{
 
@@ -156,7 +204,9 @@ abstract class BaseRhevaconcom extends BaseObject  implements Persistent {
 
       $this->punval = $rs->getFloat($startcol + 4);
 
-      $this->id = $rs->getInt($startcol + 5);
+      $this->feceval = $rs->getDate($startcol + 5, null);
+
+      $this->id = $rs->getInt($startcol + 6);
 
       $this->resetModified();
 
@@ -164,7 +214,7 @@ abstract class BaseRhevaconcom extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 6; 
+            return $startcol + 7; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Rhevaconcom object", $e);
     }
@@ -327,6 +377,9 @@ abstract class BaseRhevaconcom extends BaseObject  implements Persistent {
 				return $this->getPunval();
 				break;
 			case 5:
+				return $this->getFeceval();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -344,7 +397,8 @@ abstract class BaseRhevaconcom extends BaseObject  implements Persistent {
 			$keys[2] => $this->getCodvalins(),
 			$keys[3] => $this->getPesval(),
 			$keys[4] => $this->getPunval(),
-			$keys[5] => $this->getId(),
+			$keys[5] => $this->getFeceval(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -376,6 +430,9 @@ abstract class BaseRhevaconcom extends BaseObject  implements Persistent {
 				$this->setPunval($value);
 				break;
 			case 5:
+				$this->setFeceval($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -390,7 +447,8 @@ abstract class BaseRhevaconcom extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setCodvalins($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setPesval($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setPunval($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[5], $arr)) $this->setFeceval($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -403,6 +461,7 @@ abstract class BaseRhevaconcom extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(RhevaconcomPeer::CODVALINS)) $criteria->add(RhevaconcomPeer::CODVALINS, $this->codvalins);
 		if ($this->isColumnModified(RhevaconcomPeer::PESVAL)) $criteria->add(RhevaconcomPeer::PESVAL, $this->pesval);
 		if ($this->isColumnModified(RhevaconcomPeer::PUNVAL)) $criteria->add(RhevaconcomPeer::PUNVAL, $this->punval);
+		if ($this->isColumnModified(RhevaconcomPeer::FECEVAL)) $criteria->add(RhevaconcomPeer::FECEVAL, $this->feceval);
 		if ($this->isColumnModified(RhevaconcomPeer::ID)) $criteria->add(RhevaconcomPeer::ID, $this->id);
 
 		return $criteria;
@@ -443,6 +502,8 @@ abstract class BaseRhevaconcom extends BaseObject  implements Persistent {
 		$copyObj->setPesval($this->pesval);
 
 		$copyObj->setPunval($this->punval);
+
+		$copyObj->setFeceval($this->feceval);
 
 
 		$copyObj->setNew(true);

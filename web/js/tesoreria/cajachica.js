@@ -99,12 +99,12 @@ function totalizarMonto(e)
    var articulo=$(id).value;
 
    var articulorepetido=false;
-   var am=totalregistros('ax',1,25);
+   var am=totalregistros2('ax',1,25);
    var i=0;
    while (i<am)
    {
     var codigo="ax"+"_"+i+"_1";
-
+    if ($(codigo)){
     var articulo2=$(codigo).value;
 
     if (i!=fila)
@@ -114,6 +114,7 @@ function totalizarMonto(e)
         articulorepetido=true;
         break;
       }
+    }
     }
    i++;
    }
@@ -228,12 +229,12 @@ function totalizarMonto(e)
    var cuenta=$(id).value;
 
    var cuentarepetida=false;
-   var am=totalregistros('ax',1,30);
+   var am=totalregistros2('ax',1,30);
    var i=0;
    while (i<am)
    {
     var codigo="ax"+"_"+i+"_1";
-
+    if ($(codigo)){
     var cuenta2=$(codigo).value;
 
     if (i!=fila)
@@ -243,6 +244,7 @@ function totalizarMonto(e)
         cuentarepetida=true;
         break;
       }
+    }
     }
    i++;
    }
@@ -287,3 +289,59 @@ function totalizarMonto(e)
       }
     }
  }
+
+ function cargarimp()
+ {
+    if ($('opordpag_cadesel').value!="")
+    {
+      new Ajax.Updater('detalle', getUrlModuloAjax(), {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=1&codigo='+$('opordpag_cadesel').value});
+    }
+ }
+
+ function martodos()
+ {
+   var filas=parseInt($('opordpag_filassal').value);
+   var i=0;
+   $('opordpag_cadesel').value="";
+   while (i<filas)
+   {
+     var check="bx_"+i+"_1";
+     var refsal="bx_"+i+"_2";
+     $(check).checked=true;
+     $('opordpag_cadesel').value=$('opordpag_cadesel').value+"/"+$(refsal).value;
+
+     i++;
+    }
+ }
+
+ function destodos()
+ {
+   var filas=parseInt($('opordpag_filassal').value);
+   var i=0;
+   while (i<filas)
+   {
+     var check="bx_"+i+"_1";
+
+     $(check).checked=false;
+     i++;
+    }
+    $('opordpag_cadesel').value="";
+ }
+
+ function guardarseleccion()
+ {   
+   var filas=parseInt($('opordpag_filassal').value);
+   var i=0;
+   $('opordpag_cadesel').value="";
+   while (i<filas)
+   {
+     var check="bx_"+i+"_1";
+     var refsal="bx_"+i+"_2";
+
+     if ($(check).checked==true)
+     {
+         $('opordpag_cadesel').value=$('opordpag_cadesel').value+"/"+$(refsal).value;
+     }
+     i++;
+    }
+}

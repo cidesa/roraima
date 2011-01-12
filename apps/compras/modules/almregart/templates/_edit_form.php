@@ -4,20 +4,21 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 41628 2010-12-03 15:30:36Z cramirez $
  */
 // date: 2007/03/20 10:29:35
 ?>
 
 <?php echo form_tag('almregart/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 <?php use_helper('tabs') ?>
 <?php echo javascript_include_tag('dFilter', 'ajax', 'compras/almregart', 'tools','observe') ?>
 <?php echo input_hidden_tag('totalfilas', '') ?>
+<?php echo input_hidden_tag('caregart[manartlot]', $caregart->getManartlot()) ?>
 
 <?php echo object_input_hidden_tag($caregart, 'getId') ?>
 
@@ -341,6 +342,19 @@
   'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>
+    <th>&nbsp;</th>
+      <th><?php echo label_for('caregart[cosunipri]', __($labels['caregart{cosunipri}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('caregart{cosunipri}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caregart{cosunipri}')): ?>
+    <?php echo form_error('caregart{cosunipri}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caregart, array('getCosunipri',true), array (
+  'size' => 15,
+  'control_name' => 'caregart[cosunipri]',
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div></th>
       </tr>
      </table>
      </div>
@@ -365,7 +379,7 @@
 </div></fieldset></th>
    </tr>
   </table>
-  </div>
+    </div>
 </fieldset>
 
 
@@ -384,7 +398,12 @@
 echo grid_tag($obj);
 ?>
 
+<div id="divGridUni" style="display:none">
 
+<?php
+echo grid_tag_v2($obj5);
+?>
+</div>
 </form>
 
 <?php include_partial('edit_actions', array('caregart' => $caregart)) ?>
@@ -397,3 +416,8 @@ echo grid_tag($obj);
 )) ?><?php endif; ?></li>
   </ul>
 
+<script type="">
+var manunialt='<?php echo $caregart->getManunialt(); ?>';
+if (manunialt=='S')
+  $('divGridUni').show();
+</script>

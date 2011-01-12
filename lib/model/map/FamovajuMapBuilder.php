@@ -44,6 +44,10 @@ class FamovajuMapBuilder {
 
 		$tMap->addColumn('CANAJU', 'Canaju', 'double', CreoleTypes::NUMERIC, false, 14);
 
+		$tMap->addColumn('PREAJU', 'Preaju', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('RECAJU', 'Recaju', 'double', CreoleTypes::NUMERIC, false, 14);
+
 		$tMap->addColumn('MONTOT', 'Montot', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);

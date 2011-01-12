@@ -15,4 +15,8 @@
  */ 
 class Catiprec extends BaseCatiprec
 {
+	public function __toString()
+    {
+		return $this->getDestiprec();
+    }
 }

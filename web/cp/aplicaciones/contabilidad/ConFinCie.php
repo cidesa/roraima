@@ -1,17 +1,18 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
 
-require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
-require_once($_SESSION["x"].'lib/general/funciones.php');
-require_once($_SESSION["x"].'lib/general/tools.php');
+require_once($_SESSION["x"].'/lib/bd/basedatosAdo.php');
+require_once($_SESSION["x"].'/lib/general/funciones.php');
+require_once($_SESSION["x"].'/lib/general/tools.php');
 validar(array(8,11,15));            //Seguridad  del Sistema
 $codemp=$_SESSION["codemp"];
 $bd=new basedatosAdo($codemp);
@@ -26,11 +27,10 @@ $modulo=$_SESSION["modulo"] . " > Def. Especificas > ".$forma;
 "http://www.w3.org/TR/html4/loose.dtd"-->
 <html>
 <head>
-<title><? echo $forma; ?></title>
+<title>SIGA - <? echo $forma; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/fecha.js"></script>
@@ -86,7 +86,7 @@ function MM_preloadImages() { //v3.0
         </tr>
       </table></td>
       </tr>
-    <form action="ConFinComGen.php" method="post" name="form1">
+    <form action="ConFinComGen.php" method="post" name="form1" onsubmit="return false;">
       <tr>
         <td class="box">
 <table width="100%" align="center" class="bodyline">

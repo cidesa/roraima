@@ -1,9 +1,10 @@
 <?
+session_name('cidesa');
 session_start();
 require($_SESSION["x"].'lib/bd/basedatosAdo.php');
 require($_SESSION["x"].'lib/general/funciones.php');
 require($_SESSION["x"].'lib/general/tools.php');
-validar(array(11,15));            //Seguridad  del Sistema
+if (validar(array(11,15))) {            //Seguridad  del Sistema
 $codemp=$_SESSION["codemp"];
 $bd=new basedatosAdo($codemp);
 $tools=new tools();
@@ -43,6 +44,7 @@ $tools=new tools();
       /////////////////////////////
     }
   }
+}
 
 
   function prueba()

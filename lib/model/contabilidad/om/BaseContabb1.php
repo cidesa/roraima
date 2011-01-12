@@ -697,7 +697,10 @@ abstract class BaseContabb1 extends BaseObject  implements Persistent {
 		if ($this->aContabb === null && (($this->codcta !== "" && $this->codcta !== null))) {
 						include_once 'lib/model/contabilidad/om/BaseContabbPeer.php';
 
-			$this->aContabb = ContabbPeer::retrieveByPK($this->codcta, $con);
+      $c = new Criteria();
+      $c->add(ContabbPeer::CODCTA,$this->codcta);
+      
+			$this->aContabb = ContabbPeer::doSelectOne($c, $con);
 
 			
 		}

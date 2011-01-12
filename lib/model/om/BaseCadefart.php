@@ -197,6 +197,10 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 
 
 	
+	protected $tipodoc;
+
+
+	
 	protected $id;
 
 	
@@ -540,6 +544,13 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
   {
 
     return $this->corext;
+
+  }
+  
+  public function getTipodoc()
+  {
+
+    return trim($this->tipodoc);
 
   }
   
@@ -1020,6 +1031,16 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setTipodoc($v)
+	{
+
+    if ($this->tipodoc !== $v) {
+        $this->tipodoc = $v;
+        $this->modifiedColumns[] = CadefartPeer::TIPODOC;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1128,7 +1149,9 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 
       $this->corext = $rs->getInt($startcol + 46);
 
-      $this->id = $rs->getInt($startcol + 47);
+      $this->tipodoc = $rs->getString($startcol + 47);
+
+      $this->id = $rs->getInt($startcol + 48);
 
       $this->resetModified();
 
@@ -1136,7 +1159,7 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 48; 
+            return $startcol + 49; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cadefart object", $e);
     }
@@ -1425,6 +1448,9 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 				return $this->getCorext();
 				break;
 			case 47:
+				return $this->getTipodoc();
+				break;
+			case 48:
 				return $this->getId();
 				break;
 			default:
@@ -1484,7 +1510,8 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 			$keys[44] => $this->getTipdocpre(),
 			$keys[45] => $this->getCornac(),
 			$keys[46] => $this->getCorext(),
-			$keys[47] => $this->getId(),
+			$keys[47] => $this->getTipodoc(),
+			$keys[48] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1642,6 +1669,9 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 				$this->setCorext($value);
 				break;
 			case 47:
+				$this->setTipodoc($value);
+				break;
+			case 48:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1698,7 +1728,8 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[44], $arr)) $this->setTipdocpre($arr[$keys[44]]);
 		if (array_key_exists($keys[45], $arr)) $this->setCornac($arr[$keys[45]]);
 		if (array_key_exists($keys[46], $arr)) $this->setCorext($arr[$keys[46]]);
-		if (array_key_exists($keys[47], $arr)) $this->setId($arr[$keys[47]]);
+		if (array_key_exists($keys[47], $arr)) $this->setTipodoc($arr[$keys[47]]);
+		if (array_key_exists($keys[48], $arr)) $this->setId($arr[$keys[48]]);
 	}
 
 	
@@ -1753,6 +1784,7 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CadefartPeer::TIPDOCPRE)) $criteria->add(CadefartPeer::TIPDOCPRE, $this->tipdocpre);
 		if ($this->isColumnModified(CadefartPeer::CORNAC)) $criteria->add(CadefartPeer::CORNAC, $this->cornac);
 		if ($this->isColumnModified(CadefartPeer::COREXT)) $criteria->add(CadefartPeer::COREXT, $this->corext);
+		if ($this->isColumnModified(CadefartPeer::TIPODOC)) $criteria->add(CadefartPeer::TIPODOC, $this->tipodoc);
 		if ($this->isColumnModified(CadefartPeer::ID)) $criteria->add(CadefartPeer::ID, $this->id);
 
 		return $criteria;
@@ -1877,6 +1909,8 @@ abstract class BaseCadefart extends BaseObject  implements Persistent {
 		$copyObj->setCornac($this->cornac);
 
 		$copyObj->setCorext($this->corext);
+
+		$copyObj->setTipodoc($this->tipodoc);
 
 
 		$copyObj->setNew(true);

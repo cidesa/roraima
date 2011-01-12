@@ -24,7 +24,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('biedefemp/edit_messages', array('bndefins' => $bndefins, 'labels' => $labels)) ?>
-<?php include_partial('biedefemp/edit_form', array('bndefins' => $bndefins, 'labels' => $labels, 'new' => $new)) ?>
+<?php include_partial('biedefemp/edit_form', array('bndefins' => $bndefins, 'labels' => $labels, 'new' => $new, 'defact'=> $defact, 'ubibie' => $ubibie)) ?>
 </div>
 
 <div id="sf_admin_footer">

@@ -49,24 +49,29 @@ class almaprreqActions extends autoalmaprreqActions
 
     if(!count($reg)>0)
     {
-      // Aquí va el código para traernos los registros que contendrá el grid
       $reg = array();
-      // Aquí va el código para generar arreglo de configuración del grid
-    $this->obj = array();
+      $this->obj = array();
     }
     	$c = new Criteria();
-    	//$c->add(CareqartPeer::APRREQ,'S', Criteria :: NOT_EQUAL);
     	$c->add(CareqartPeer::STAREQ,'A');
-        $sql = "(careqart.APRREQ<>'S' or careqart.APRREQ isnull)";
+        $sql = "((careqart.APRREQ<>'S' and careqart.APRREQ<>'R') or careqart.APRREQ isnull or careqart.APRREQ='D')";
         $c->add(CareqartPeer::APRREQ, $sql, Criteria :: CUSTOM);
     	$c->addAscendingOrderByColumn(CareqartPeer::REQART);
     	$c->addAscendingOrderByColumn(CareqartPeer::FECREQ);
     	$reg = CareqartPeer::doSelect($c);
 
-	    $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/almaprreq/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_careqart',$reg);
+        $this->careqart->setTotfil(count($reg));
+
+        $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/almaprreq/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_careqart');
+
+	    $this->columnas[1][0]->setHTML('onClick="verificar(this.id)"');
+	    $this->columnas[1][1]->setHTML('onClick="verificar(this.id)"');
+	    $this->columnas[1][2]->setHTML('onClick="verificar(this.id)"');
+            $this->columnas[1][3]->setHTML('type="text" size="10" readOnly=true onBlur="javascript:event.keyCode=13; ajaxmostrardetallereq(event,this.id);"');
+
+	    $this->obj =$this->columnas[0]->getConfig($reg);
 
         $this->careqart->setObj($this->obj);
-
 
   }
 
@@ -76,7 +81,8 @@ class almaprreqActions extends autoalmaprreqActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -163,6 +169,41 @@ class almaprreqActions extends autoalmaprreqActions
   public function deleting($clasemodelo)
   {
     return parent::deleting($clasemodelo);
+  }
+
+  /**
+   * FunciÃ³n para procesar _todas_ las funciones Ajax del formulario
+   * Cada funciÃ³n esta identificada con el valor de la vista "ajax"
+   * el cual traerÃ¡ el indice de lo que se quiere procesar.
+   *
+   */
+  public function executeAjax()
+  {
+    $codigo = $this->getRequestParameter('codigo','');
+    $ajax = $this->getRequestParameter('ajax','');
+    $cajtexmos = $this->getRequestParameter('cajtexmos','');
+    $cajtexcom = $this->getRequestParameter('cajtexcom','');
+    $javascript="";
+    switch ($ajax){
+      case '1':
+        $this->formulario=array();
+        $this->i="";
+        $i=0;
+        $form="sf_admin/almaprreq/almdetsolreq";
+        $f[$i]=$form.$i;
+        $this->getUser()->setAttribute('reqart',$codigo,$f[$i]);
+        $this->formulario=$f;
+        $this->i=$i;
+
+        $output = '[["","",""],["","",""],["","",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        break;
+      default:
+        $output = '[["","",""],["","",""],["","",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+        break;
+    }
   }
 
 

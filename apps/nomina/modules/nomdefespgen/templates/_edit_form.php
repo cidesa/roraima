@@ -211,6 +211,20 @@
 </div>
 </fieldset>
 </th>
+
+<th> &nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th align="center">
+<fieldset>
+<legend><?php echo __('Convertir Capital de Prestaciones a Bsf. a Partir del 2008')?></legend>
+<div class="form-row">
+  <?php if($npdefgen->getRedondeo()=='S') $val = true; else $val=false; ?>
+  <?php echo "Si ".radiobutton_tag('npdefgen[redondeo]', 'S', $val) ?>
+  <?php echo "  No ".radiobutton_tag('npdefgen[redondeo]', 'N', !$val) ?>
+</div>
+</div>
+</fieldset>
+</th>
+
 </tr>
 </table>
 </div>

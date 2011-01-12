@@ -13,7 +13,7 @@ abstract class BaseRhevaconcomPeer {
 	const CLASS_DEFAULT = 'lib.model.Rhevaconcom';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,6 +35,9 @@ abstract class BaseRhevaconcomPeer {
 	const PUNVAL = 'rhevaconcom.PUNVAL';
 
 	
+	const FECEVAL = 'rhevaconcom.FECEVAL';
+
+	
 	const ID = 'rhevaconcom.ID';
 
 	
@@ -43,18 +46,18 @@ abstract class BaseRhevaconcomPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codevdo', 'Codniv', 'Codvalins', 'Pesval', 'Punval', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (RhevaconcomPeer::CODEVDO, RhevaconcomPeer::CODNIV, RhevaconcomPeer::CODVALINS, RhevaconcomPeer::PESVAL, RhevaconcomPeer::PUNVAL, RhevaconcomPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codevdo', 'codniv', 'codvalins', 'pesval', 'punval', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codevdo', 'Codniv', 'Codvalins', 'Pesval', 'Punval', 'Feceval', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (RhevaconcomPeer::CODEVDO, RhevaconcomPeer::CODNIV, RhevaconcomPeer::CODVALINS, RhevaconcomPeer::PESVAL, RhevaconcomPeer::PUNVAL, RhevaconcomPeer::FECEVAL, RhevaconcomPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codevdo', 'codniv', 'codvalins', 'pesval', 'punval', 'feceval', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codevdo' => 0, 'Codniv' => 1, 'Codvalins' => 2, 'Pesval' => 3, 'Punval' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (RhevaconcomPeer::CODEVDO => 0, RhevaconcomPeer::CODNIV => 1, RhevaconcomPeer::CODVALINS => 2, RhevaconcomPeer::PESVAL => 3, RhevaconcomPeer::PUNVAL => 4, RhevaconcomPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('codevdo' => 0, 'codniv' => 1, 'codvalins' => 2, 'pesval' => 3, 'punval' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codevdo' => 0, 'Codniv' => 1, 'Codvalins' => 2, 'Pesval' => 3, 'Punval' => 4, 'Feceval' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (RhevaconcomPeer::CODEVDO => 0, RhevaconcomPeer::CODNIV => 1, RhevaconcomPeer::CODVALINS => 2, RhevaconcomPeer::PESVAL => 3, RhevaconcomPeer::PUNVAL => 4, RhevaconcomPeer::FECEVAL => 5, RhevaconcomPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('codevdo' => 0, 'codniv' => 1, 'codvalins' => 2, 'pesval' => 3, 'punval' => 4, 'feceval' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -117,6 +120,8 @@ abstract class BaseRhevaconcomPeer {
 		$criteria->addSelectColumn(RhevaconcomPeer::PESVAL);
 
 		$criteria->addSelectColumn(RhevaconcomPeer::PUNVAL);
+
+		$criteria->addSelectColumn(RhevaconcomPeer::FECEVAL);
 
 		$criteria->addSelectColumn(RhevaconcomPeer::ID);
 

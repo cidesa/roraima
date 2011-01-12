@@ -7,9 +7,9 @@
  *
  * @package    Roraima
  * @subpackage lib.model
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Caprovee.php 37135 2010-03-17 14:54:38Z dmartinez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -18,6 +18,18 @@ class Caprovee extends BaseCaprovee
   private $recargo ='';
   public $codtipesp='';
   public $destipesp='';
+  public $objrecaudos=array();
+  public $objcontactos=array();
+  public $objramos=array();
+  public $objretenciones=array();
+  protected $tiedatrel="";
+  protected $oculsave="";
+
+   public function __toString()
+  {
+    return array ($this->codpro => $this->codpro);
+  }
+
 
   public function hydrate(ResultSet $rs, $startcol = 1)
    {
@@ -125,6 +137,68 @@ class Caprovee extends BaseCaprovee
   public function getDespro()
   {
   return self::getNompro();
+  }
+
+  public function getDesban()
+  {
+    return Herramientas::getX('codban','cabanco','desban',self::getCodban());
+  }
+
+  public function getDestipcta()
+  {
+    return Herramientas::getX('codtip','tstipcue','destip',self::getCodtip());
+  }
+
+  public function getTiedatrel()
+  {
+  	$valor="N";
+  	if (self::getId()){
+  	  $d= new Criteria();
+  	  $d->add(CacotizaPeer::CODPRO,self::getCodpro());
+  	  $resul= CacotizaPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  }else {
+  	  $d= new Criteria();
+  	  $d->add(CaordcomPeer::CODPRO,self::getCodpro());
+  	  $resul= CaordcomPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  }else $valor= 'N';
+  	  }
+  	}
+
+
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
+  }
+
+  public function getOculsave()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almregpro',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('oculsave',$varemp['aplicacion']['compras']['modulos']['almregpro']))
+	       {
+	       	$dato=$varemp['aplicacion']['compras']['modulos']['almregpro']['oculsave'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setOculsave()
+  {
+  	return $this->oculsave;
   }
 
 }

@@ -1,0 +1,18 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Empresa
+    theme:            cidesaGenerator
+    fields:
+      codemp:      {name: Usuario Origen}
+      codempdes:   {name: Usuario Destino, params: size=5 maxlength=3 disabled=false}
+      salban:   {name: Saldos Bancarios}
+      movtra:   {name: Movimientos en Transito}
+      info:   {name: .}
+    edit:
+      title:          Trasladar Saldos en Bancos del Ejercicio Anterior
+      display:        [_codemp, _codempdes, _salban, _movtra,  _info]
+      actions:
+        _save:
+          name: Aceptar
+          params:  confirm=Esta Seguro que desea Trasladar los Saldos al Nuevo Periodo?

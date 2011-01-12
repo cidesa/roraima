@@ -464,7 +464,10 @@ abstract class BaseAtdetrecrub extends BaseObject  implements Persistent {
 		if ($this->aAtrubros === null && ($this->atrubros_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtrubrosPeer.php';
 
-			$this->aAtrubros = AtrubrosPeer::retrieveByPK($this->atrubros_id, $con);
+      $c = new Criteria();
+      $c->add(AtrubrosPeer::ID,$this->atrubros_id);
+      
+			$this->aAtrubros = AtrubrosPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -493,7 +496,10 @@ abstract class BaseAtdetrecrub extends BaseObject  implements Persistent {
 		if ($this->aAtrecaud === null && ($this->atrecaud_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtrecaudPeer.php';
 
-			$this->aAtrecaud = AtrecaudPeer::retrieveByPK($this->atrecaud_id, $con);
+      $c = new Criteria();
+      $c->add(AtrecaudPeer::ID,$this->atrecaud_id);
+      
+			$this->aAtrecaud = AtrecaudPeer::doSelectOne($c, $con);
 
 			
 		}

@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomdefespasicartipnomlot
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 39539 2010-07-20 17:05:26Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  * Manufacturado por JJSG
@@ -126,8 +126,23 @@ $this->Bitacora('Guardo');
     $c = new Criteria();
     $c->add(NpasicarnomPeer::CODNOM,$codigo);
     $per = NpasicarnomPeer::doSelect($c);
-    $filas_arreglo=200;
+    $filas_arreglo=300;
     //print $codigo;
+
+  	$filvac="";
+  	$varemp = $this->getUser()->getAttribute('configemp');
+	  if(is_array($varemp))
+	    if(array_key_exists('aplicacion',$varemp))
+	  	  if(array_key_exists('nomina',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+		     if(array_key_exists('nomasicarconnom',$varemp['aplicacion']['nomina']['modulos']))
+			 {
+				if(array_key_exists('filvac',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
+		        {
+		       	 $filvac=$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['filvac'];
+		        }
+
+			 }
 
 
     // Se crea el objeto principal de la clase OpcionesGrid
@@ -149,9 +164,9 @@ $this->Bitacora('Guardo');
     $col1->setAlineacionContenido(Columna::CENTRO);
     $col1->setNombreCampo('codcar');
     $col1->setHTML('type="text" size="10"');
-    $col1->setCatalogo('npcargos','sf_admin_edit_form', array('codcar' => 1, 'nomcar' => 2));
-    $col1->setJScript('onKeyPress="javascript:cadena=verificar_codigo_repetido(this.id)"');
-    $col1->setAjax('nomdefespasicartipnomlot',2,2);
+    $col1->setCatalogo('npcargos','sf_admin_edit_form', array('codcar' => 1, 'nomcar' => 2),'Npcargos_Nomhojint',array('param1' => $filvac));
+    $col1->setJScript('onBlur="javascript:event.keyCode=13; verificar_codigo_repetido(event,this.id)"');
+    //$col1->setAjax('nomdefespasicartipnomlot',2,2);
 
 
     $col2 = new Columna('Descripción');
@@ -240,6 +255,35 @@ $this->Bitacora('Guardo');
   {
   $grid=Herramientas::CargarDatosGrid($this,$this->obj);//0
   Nomina::Grabar_grid_nomdefespasicartipnomlot($npasicarnom,$grid);
+  }
+
+  public function executeDelete()
+  {
+    //$this->npasicarnom = NpasicarnomPeer::retrieveByPk($this->getRequestParameter('id'));
+    //$this->forward404Unless($this->npasicarnom);
+
+    try
+    {
+      $r= new Criteria();
+      $r->add(NpasicarnomPeer::CODNOM,$this->getRequestParameter('codnom'));
+      NpasicarnomPeer::doDelete($r);
+      $this->Bitacora('Elimino');
+    }
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'Could not delete the selected Npasicarnom. Make sure it does not have any associated items.');
+      return $this->forward('nomdefespasicartipnomlot', 'list');
+    }
+
+    return $this->redirect('nomdefespasicartipnomlot/list');
+  }
+
+
+
+
+  protected function deleteNpasicarnom($npasicarnom)
+  {
+
   }
 
 }

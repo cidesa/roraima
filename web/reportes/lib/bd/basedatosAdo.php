@@ -1,5 +1,6 @@
 <?php
 error_reporting(E_ERROR | E_PARSE);
+session_name('cidesa');
 session_start();
   require_once('../../adodb/adodb.inc.php');
   require_once("conexionAdo.php");

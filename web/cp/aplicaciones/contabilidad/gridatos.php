@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
 require_once($_SESSION["x"].'lib/general/funciones.php');
@@ -12,8 +13,19 @@ $bd=new basedatosAdo($codemp);
 <head>
 <title>Buscando...</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/JavaScript"  src="../../lib/general/js/prototype.js"></script>
 </head>
 <body>
+
+      <script>
+        new Ajax.Request(
+              '/herramientas.php/generales/mantenerSesion',
+              {
+                asynchronous:false,
+                evalScripts:false
+              });
+      </script>
+
 Buscando...
 <?
 $sql=$_GET["sql"];
@@ -46,6 +58,7 @@ validacuenta();
 
     $sql=str_replace("¿","'",$sql);
     $sql=str_replace("�","'",$sql);
+    $sql=str_replace("*","'",$sql);
     if ($tb=$z->buscar_datos($sql))
     {
       $valor=$tb->fields["campo1"];
@@ -65,7 +78,7 @@ validacuenta();
     {
     ?>
       <script>
-        alert("Esta Cuenta Presupuestaria No Existe...");
+        alert("Esta Cuenta Contable No Existe...");
         var id= '<?=$id;?>';
         opener.document.getElementById(id).value="";
         opener.document.getElementById(id).focus();

@@ -13,7 +13,7 @@ abstract class BaseForotrcreprePeer {
 	const CLASS_DEFAULT = 'lib.model.Forotrcrepre';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,10 +35,13 @@ abstract class BaseForotrcreprePeer {
 	const OBSERV = 'forotrcrepre.OBSERV';
 
 	
-	const NOMPAREGR = 'forotrcrepre.NOMPAREGR';
+	const CODFIN = 'forotrcrepre.CODFIN';
 
 	
 	const CODPRE = 'forotrcrepre.CODPRE';
+
+	
+	const NOMPAREGR = 'forotrcrepre.NOMPAREGR';
 
 	
 	const ID = 'forotrcrepre.ID';
@@ -49,18 +52,18 @@ abstract class BaseForotrcreprePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcat', 'Codparegr', 'Monpre', 'Codtip', 'Observ', 'Nomparegr', 'Codpre', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (ForotrcreprePeer::CODCAT, ForotrcreprePeer::CODPAREGR, ForotrcreprePeer::MONPRE, ForotrcreprePeer::CODTIP, ForotrcreprePeer::OBSERV, ForotrcreprePeer::NOMPAREGR, ForotrcreprePeer::CODPRE, ForotrcreprePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcat', 'codparegr', 'monpre', 'codtip', 'observ', 'nomparegr', 'codpre', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Codcat', 'Codparegr', 'Monpre', 'Codtip', 'Observ', 'Codfin', 'Codpre', 'Nomparegr', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (ForotrcreprePeer::CODCAT, ForotrcreprePeer::CODPAREGR, ForotrcreprePeer::MONPRE, ForotrcreprePeer::CODTIP, ForotrcreprePeer::OBSERV, ForotrcreprePeer::CODFIN, ForotrcreprePeer::CODPRE, ForotrcreprePeer::NOMPAREGR, ForotrcreprePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcat', 'codparegr', 'monpre', 'codtip', 'observ', 'codfin', 'codpre', 'nomparegr', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcat' => 0, 'Codparegr' => 1, 'Monpre' => 2, 'Codtip' => 3, 'Observ' => 4, 'Nomparegr' => 5, 'Codpre' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (ForotrcreprePeer::CODCAT => 0, ForotrcreprePeer::CODPAREGR => 1, ForotrcreprePeer::MONPRE => 2, ForotrcreprePeer::CODTIP => 3, ForotrcreprePeer::OBSERV => 4, ForotrcreprePeer::NOMPAREGR => 5, ForotrcreprePeer::CODPRE => 6, ForotrcreprePeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcat' => 0, 'codparegr' => 1, 'monpre' => 2, 'codtip' => 3, 'observ' => 4, 'nomparegr' => 5, 'codpre' => 6, 'id' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Codcat' => 0, 'Codparegr' => 1, 'Monpre' => 2, 'Codtip' => 3, 'Observ' => 4, 'Codfin' => 5, 'Codpre' => 6, 'Nomparegr' => 7, 'Id' => 8, ),
+		BasePeer::TYPE_COLNAME => array (ForotrcreprePeer::CODCAT => 0, ForotrcreprePeer::CODPAREGR => 1, ForotrcreprePeer::MONPRE => 2, ForotrcreprePeer::CODTIP => 3, ForotrcreprePeer::OBSERV => 4, ForotrcreprePeer::CODFIN => 5, ForotrcreprePeer::CODPRE => 6, ForotrcreprePeer::NOMPAREGR => 7, ForotrcreprePeer::ID => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcat' => 0, 'codparegr' => 1, 'monpre' => 2, 'codtip' => 3, 'observ' => 4, 'codfin' => 5, 'codpre' => 6, 'nomparegr' => 7, 'id' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -124,9 +127,11 @@ abstract class BaseForotrcreprePeer {
 
 		$criteria->addSelectColumn(ForotrcreprePeer::OBSERV);
 
-		$criteria->addSelectColumn(ForotrcreprePeer::NOMPAREGR);
+		$criteria->addSelectColumn(ForotrcreprePeer::CODFIN);
 
 		$criteria->addSelectColumn(ForotrcreprePeer::CODPRE);
+
+		$criteria->addSelectColumn(ForotrcreprePeer::NOMPAREGR);
 
 		$criteria->addSelectColumn(ForotrcreprePeer::ID);
 
@@ -230,6 +235,7 @@ abstract class BaseForotrcreprePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ForotrcreprePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

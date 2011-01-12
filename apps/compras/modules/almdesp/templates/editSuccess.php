@@ -15,8 +15,16 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Edición de Despachos',
-array()) ?></h1>
+<h1><?php
+$eti=H::getConfApp2('etidesp', 'compras', 'almdesp');
+if ($eti!="")
+{
+echo __('Edición de '.$eti,
+array());
+}else {
+echo __('Edición de Despachos',
+array());
+}?></h1>
 
 <div id="sf_admin_header">
 <?php include_partial('almdesp/edit_header', array('cadphart' => $cadphart)) ?>
@@ -24,7 +32,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('almdesp/edit_messages', array('cadphart' => $cadphart, 'labels' => $labels)) ?>
-<?php include_partial('almdesp/edit_form', array('cadphart' => $cadphart, 'obj' => $obj, 'mascarapartida' => $mascarapartida, 'forubi' => $forubi, 'lonubi'=>$lonubi, 'mascaraubicacionalm'=>$mascaraubicacionalm, 'lonubialm'=>$lonubialm, 'labels' => $labels)) ?>
+<?php include_partial('almdesp/edit_form', array('cadphart' => $cadphart, 'obj' => $obj, 'mascarapartida' => $mascarapartida, 'forubi' => $forubi, 'lonubi'=>$lonubi, 'mascaraubicacionalm'=>$mascaraubicacionalm, 'lonubialm'=>$lonubialm, 'dphdesh' => $dphdesh, 'labels' => $labels, 'mansolocor' => $mansolocor, 'bloqfec' => $bloqfec, 'oculeli' => $oculeli)) ?>
 </div>
 
 <div id="sf_admin_footer">

@@ -352,6 +352,10 @@ $this->Bitacora('Guardo');
 	{
 		$this->npnomesptipos->setNomintpre($npnomesptipos['nomintpre']);
 	}
+        if (isset($npnomesptipos['nomdiaadi']))
+	{
+		$this->npnomesptipos->setNomdiaadi($npnomesptipos['nomdiaadi']);
+	}
   }
 
   /**

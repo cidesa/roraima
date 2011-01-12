@@ -22,3 +22,7 @@
   'class' => 'sf_admin_action_create',
 )) ?></li>
   </ul>
+<script language="JavaScript" type="text/javascript">
+ var tieregrel='<?php echo $tstipcue->getTiedatrel(); ?>';
+  if (tieregrel=='S') $('save').hide();
+</script>

@@ -296,4 +296,6 @@ body {
 /*Limpiadores*/
 .left-cleaner { clear: left; }
 
-
+.dojoTree {
+  height: 300px;
+}

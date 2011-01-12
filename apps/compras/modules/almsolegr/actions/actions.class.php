@@ -7,7 +7,7 @@
  * @subpackage almsolegr
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -30,11 +30,12 @@ class almsolegrActions extends autoalmsolegrActions
 
 
 
-  
-  
+
+
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -45,55 +46,107 @@ class almsolegrActions extends autoalmsolegrActions
       $this->casolart = $this->getCasolartOrCreate();
       try{ $this->updateCasolartFromRequest();}
       catch (Exception $ex){}
-      $this->configGridDetalle();
-      $this->configGridRecargo($this->casolart->getReqart());
-      $this->configGridRazon();
-      $grid = Herramientas::CargarDatosGrid($this,$this->obj);
-      $grid2 = Herramientas::CargarDatosGrid($this,$this->obj2);
-      $grid3 = Herramientas::CargarDatosGrid($this,$this->obj3);
-      if (!Herramientas::validarPeriodoPresuesto($this->casolart->getFecreq()))
-      {
-       $this->fecper=142;
-       return false;
-      }
 
-      if (!Herramientas::validarPeriodoFiscal($this->casolart->getFecreq()))
-      {
-        $this->fecperfis=143;
-        return false;
-      }
-      if (count($grid[0])==0)
-      {
-      	$this->detallevacia=128;
-      	return false;
-      }
+		if ($this->casolart->getId())      //Validacion que permite guardar solamente la descripcion
+		{
+			$refsol = Herramientas::getX_vacio('refsol','caordcom','refsol',$this->casolart->getReqart());
+			if (!empty($refsol))
+			{
+				return true;
+			}
+		}
 
-		//Valida la Razon de Compra
-      //if (count($grid3[0])==0)
-      //{
-      //	$this->razonvacia=127;
-      //	return false;
-      //}
+		      $this->configGridDetalle();
+		      $this->configGridRecargo($this->casolart->getReqart());
+		      $this->configGridRazon();
+		      $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+		      $grid2 = Herramientas::CargarDatosGrid($this,$this->obj2);
+		      $grid3 = Herramientas::CargarDatosGrid($this,$this->obj3);
+		      if (!Herramientas::validarPeriodoPresuesto($this->casolart->getFecreq()))
+		      {
+		       $this->fecper=142;
+		       return false;
+		      }
 
-    /*  if ((count($grid2[0])>0) && ($this->getUser()->getAttribute('presiono','','almsolegr'))!='S')
-      {
-      	$this->salvarrecar=138;
-      	return false;
-      }*/
-      if (count($grid[0])!=0 || count($grid2[0])!=0)
-      {
-      SolicituddeEgresos::validarAlmsolegr($this->casolart,$grid,$grid2,$this->getRequestParameter('id'),$this->getRequestParameter('tiporecarg'),&$msj1,&$cod1,&$msj2,&$cod2,&$msj3,&$cod3);
-      $this->coderror1=$msj1;
-      $this->coderror2=$msj2;
-      $this->coderror3=$msj3;
-      $this->codigo1=$cod1;
-      $this->codigo2=$cod2;
-      $this->codigo3=$cod3;
-      if ($this->coderror1<>-1 || $this->coderror2<>-1 || $this->coderror3<>-1)
-      {
-       return false;
-      }else return true;
-      }
+		      if (!Herramientas::validarPeriodoFiscal($this->casolart->getFecreq()))
+		      {
+		        $this->fecperfis=143;
+		        return false;
+		      }
+		      if (count($grid[0])==0)
+		      {
+		      	$this->detallevacia=128;
+		      	return false;
+		      }
+
+			 //Validad Unidad Responsable
+			  $this->catbnubica="";
+			    $varemp = $this->getUser()->getAttribute('configemp');
+			    if ($varemp)
+				if(array_key_exists('aplicacion',$varemp))
+				 if(array_key_exists('compras',$varemp['aplicacion']))
+				   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+				     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos'])){
+				       if(array_key_exists('catbnubica',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+				       {
+				       	$this->catbnubica=$varemp['aplicacion']['compras']['modulos']['almsolegr']['catbnubica'];
+				       }
+			         }
+		      if ($this->catbnubica=='S')
+		      {
+		      	$p= new Criteria();
+		      	$p->add(BnubicaPeer::CODUBI,$this->getRequestParameter('casolart[unires]'));
+		      	$reg= BnubicaPeer::doSelectOne($p);
+		      	if (!$reg) {
+		      	$this->razonvacia=127;
+		      	return false;
+		      	}
+		      }else {
+		      	$p= new Criteria();
+		      	$p->add(NpcatprePeer::CODCAT,$this->getRequestParameter('casolart[unires]'));
+		      	$reg= NpcatprePeer::doSelectOne($p);
+		      	if (!$reg) {
+		      	$this->razonvacia=127;
+		      	return false;
+		      	}
+		      }
+
+		    /*  if ((count($grid2[0])>0) && ($this->getUser()->getAttribute('presiono','','almsolegr'))!='S')
+		      {
+		      	$this->salvarrecar=138;
+		      	return false;
+		      }*/
+		   $t= new Criteria();
+		   $result= CadefartPeer::doSelectOne($t);
+		   if ($result) {
+		      
+		     if($result->getPrcasopre()=='S' && $result->getPrcreqapr()!='S') {
+		      if (count($grid[0])!=0 || count($grid2[0])!=0)
+		      {
+		      SolicituddeEgresos::validarAlmsolegr($this->casolart,$grid,$grid2,$this->getRequestParameter('id'),$this->getRequestParameter('tiporecarg'),&$msj1,&$cod1,&$msj2,&$cod2,&$msj3,&$cod3);
+		      $this->coderror1=$msj1;
+		      $this->coderror2=$msj2;
+		      $this->coderror3=$msj3;
+		      $this->codigo1=$cod1;
+		      $this->codigo2=$cod2;
+		      $this->codigo3=$cod3;
+		      if ($this->coderror1<>-1 || $this->coderror2<>-1 || $this->coderror3<>-1)
+		      {
+		       return false;
+		      }
+
+		      SolicituddeEgresos::ultimoChequeo2($this->casolart,$grid,$grid2,$this->getRequestParameter('id'),$this->getRequestParameter('tiporecarg'),&$msj1,&$cod1,&$msj2,&$cod2);
+		      $this->coderror1=$msj1;
+		      $this->coderror2=$msj2;
+		      $this->codigo1=$cod1;
+		      $this->codigo2=$cod2;
+		      if ($this->coderror1<>-1 || $this->coderror2<>-1)
+		      {
+		       return false;
+		      }else return true;
+		      }
+		     }else return true;
+		   }else return true;
     }else return true;
    }
 
@@ -129,47 +182,62 @@ class almsolegrActions extends autoalmsolegrActions
       if ($this->getRequest()->getMethod() == sfRequest::POST)
       {
         $this->updateCasolartFromRequest();
-
-        if ($this->saveCasolart($this->casolart)==-1)
+		$save = $this->saveCasolart($this->casolart);
+        if ($save==-1)
         {
+	        $this->casolart->setId(Herramientas::getX_vacio('reqart','casolart','id',$this->casolart->getReqart()));
 
-        $this->casolart->setId(Herramientas::getX_vacio('reqart','casolart','id',$this->casolart->getReqart()));
+	        $this->setFlash('notice', 'Your modifications have been saved');
 
-        $this->setFlash('notice', 'Your modifications have been saved');
+	        $this->Bitacora('Guardo');
 
-        $this->Bitacora('Guardo');
+	         $c= new Criteria();
+		     $resul=CadefartPeer::doSelectOne($c);
+		     if ($resul)
+		     {
+		       if($resul->getPrcasopre()=='S' && $resul->getPrcreqapr()!='S')
+		       {
 
-         $c= new Criteria();
-	     $resul=CadefartPeer::doSelectOne($c);
-	     if ($resul)
-	     {
-	       if($resul->getPrcasopre()=='S' && $resul->getPrcreqapr()!='S')
-	       {
+		        $totaimp=SolicituddeEgresos::totalImputacion($this->casolart->getReqart());
+		        if (H::toFloat($this->casolart->getMonreq())!=$totaimp)
+		        {
+		        	$this->setFlash('notice', 'El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud');
+		        }
+		       }
+		     }
 
-	        $totaimp=SolicituddeEgresos::totalImputacion($this->casolart->getReqart());
-	        if (H::toFloat($this->casolart->getMonreq())!=$totaimp)
+
+	        if ($this->getRequestParameter('save_and_add'))
 	        {
-	        	$this->setFlash('notice', 'El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud');
+	          return $this->redirect('almsolegr/create');
 	        }
-	       }
-	     }
+	        else if ($this->getRequestParameter('save_and_list'))
+	        {
+	          return $this->redirect('almsolegr/list');
+	        }
+	        else
+	        {
+	          return $this->redirect('almsolegr/edit?id='.$this->casolart->getId());
+	        }
+       } else if ($save==-11){
 
+	        $this->setFlash('notice', 'Se ha guardado solamente la Descripcion ya que la solicitud tiene asociada una Orden de Compra.');
+	        $this->Bitacora('Guardo');
 
-        if ($this->getRequestParameter('save_and_add'))
-        {
-          return $this->redirect('almsolegr/create');
-        }
-        else if ($this->getRequestParameter('save_and_list'))
-        {
-          return $this->redirect('almsolegr/list');
-        }
-        else
-        {
-          return $this->redirect('almsolegr/edit?id='.$this->casolart->getId());
-        }
-       }
-       else
-       {
+	        if ($this->getRequestParameter('save_and_add'))
+	        {
+	          return $this->redirect('almsolegr/create');
+	        }
+	        else if ($this->getRequestParameter('save_and_list'))
+	        {
+	          return $this->redirect('almsolegr/list');
+	        }
+	        else
+	        {
+	          return $this->redirect('almsolegr/edit?id='.$this->casolart->getId());
+	        }
+
+       }else{
 
           $this->labels = $this->getLabels();
           $err = Herramientas::obtenerMensajeError($this->coderror);
@@ -234,7 +302,7 @@ class almsolegrActions extends autoalmsolegrActions
         if($this->razonvacia!=-1)
         {
          $err4 = Herramientas::obtenerMensajeError($this->razonvacia);
-         $this->getRequest()->setError('',$err4);
+         $this->getRequest()->setError('casolart{unires}',$err4);
         }
 
         if($this->detallevacia!=-1)
@@ -263,32 +331,43 @@ class almsolegrActions extends autoalmsolegrActions
 
     protected function saveCasolart($casolart)
     {
-      if ($casolart->getId() && $this->getRequestParameter('modifi')=='N')
+      if (($casolart->getId() && $this->getRequestParameter('modifi')=='N'))
       {
-        $casolart->save();
-        $this->coderror=-1;
-       	return $this->coderror;
-      }
-      else
-      {
-      $grid=Herramientas::CargarDatosGrid($this,$this->obj);
-      $grid2=Herramientas::CargarDatosGrid($this,$this->obj2);
-      $grid3=Herramientas::CargarDatosGrid($this,$this->obj3);
+        $refsol = Herramientas::getX_vacio('refsol','caordcom','refsol',$casolart->getReqart());
+  		if (!empty($refsol))
+  		{
+	  		$reg = CasolartPeer::retrieveByPKs($casolart->getId());
+	  		$reg1 = array();
+	  		$reg1 = $reg[0];
+	  		$reg1->setDesreq($casolart->getDesreq());
+			$reg1->save();
+			$this->coderror=-11;
+                }else{
+         $casolart->save();
+                    $this->coderror=-1;
+         }
 
-  	// Si en el parametro reqreqapr  de Cadefart, no requiere que la requisicion esta aprobada para despacharla
-  	// entonces de una vez grabo la requisicion como aprobada
-  	 if ($this->autoriza_solicutud_egreso=="") $casolart->setAprreq('S');
+       	return $this->coderror;
 
-      if (SolicituddeEgresos::salvarAlmsolegr($casolart,$grid,$grid2,$grid3,$this->getRequestParameter('generapre'),&$error))
-       {
-       	$this->coderror=$error;
-       	return $this->coderror;
-       }
-       else
-       {
-       	$this->coderror=$error;
-       	return $this->coderror;
-       }
+      }else{
+	      $grid=Herramientas::CargarDatosGrid($this,$this->obj);
+	      $grid2=Herramientas::CargarDatosGrid($this,$this->obj2);
+	      $grid3=Herramientas::CargarDatosGrid($this,$this->obj3);
+
+	  	// Si en el parametro reqreqapr  de Cadefart, no requiere que la requisicion esta aprobada para despacharla
+	  	// entonces de una vez grabo la requisicion como aprobada
+	  	 if ($this->autoriza_solicutud_egreso=="") $casolart->setAprreq('S');
+
+	      if (SolicituddeEgresos::salvarAlmsolegr($casolart,$grid,$grid2,$grid3,$this->getRequestParameter('generapre'),&$error))
+	       {
+	       	$this->coderror=$error;
+	       	return $this->coderror;
+	       }
+	       else
+	       {
+	       	$this->coderror=$error;
+	       	return $this->coderror;
+	       }
       }
      //$this->getUser()->getAttributeHolder()->remove('presiono','almsolegr');
 
@@ -432,6 +511,10 @@ class almsolegrActions extends autoalmsolegrActions
       {
         $this->casolart->setValmon($casolart['valmon']);
       }
+      if (isset($casolart['codcen']))
+      {
+        $this->casolart->setCodcen($casolart['codcen']);
+      }
 
         $this->casolart->setStareq('A');
 
@@ -442,10 +525,45 @@ class almsolegrActions extends autoalmsolegrActions
      $cajtexmos=$this->getRequestParameter('cajtexmos');
      $cajtexcom=$this->getRequestParameter('cajtexcom');
      $output=array();
+     $javascript=""; $dato="";
      if ($this->getRequestParameter('ajax')=='1')
       {
-        $dato=NpcatprePeer::getCategoria($this->getRequestParameter('codigo'));
-          $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+      	$catbnubica="";
+      	$fornumuni="";
+      	$varemp = $this->getUser()->getAttribute('configemp');
+	    if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('compras',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+		     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos'])){
+		       if(array_key_exists('catbnubica',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+		       {
+		       	$catbnubica=$varemp['aplicacion']['compras']['modulos']['almsolegr']['catbnubica'];
+		       }
+		       if(array_key_exists('fornumuni',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+		       {
+		       	$fornumuni=$varemp['aplicacion']['compras']['modulos']['almsolegr']['fornumuni'];
+		       }
+		     }
+      	if ($catbnubica=='S') {
+      	$dato=BnubicaPeer::getDesubi($this->getRequestParameter('codigo')); }
+        else {
+         $t= new Criteria();
+         if ($fornumuni!="S") {$t->add(NpcatprePeer::CODCAT,$this->getRequestParameter('codigo')); }
+         else {
+         	$loguse= $this->getUser()->getAttribute('loguse');
+         	$sql="npcatpre.codcat='".$this->getRequestParameter('codigo')."' and npcatpre.codcat in (select codcat from causuuni where loguse='".$loguse."')";
+         	$t->add(NpcatprePeer::CODCAT,$sql,Criteria::CUSTOM);
+         }
+         $reg= NpcatprePeer::doSelectOne($t);
+         if ($reg)
+         {
+         	$dato=$reg->getNomcat();
+         }else $javascript="alert('La Categoria no existe')";
+
+        }
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
       }
       else  if ($this->getRequestParameter('ajax')=='2')
       {
@@ -454,19 +572,49 @@ class almsolegrActions extends autoalmsolegrActions
       }
       else  if ($this->getRequestParameter('ajax')=='3')
       {
+	 	$catbnubica="";
+      	$varemp = $this->getUser()->getAttribute('configemp');
+	    if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('compras',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+		     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos'])){
+		       if(array_key_exists('catbnubica',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+		       {
+		       	$catbnubica=$varemp['aplicacion']['compras']['modulos']['almsolegr']['catbnubica'];
+		       }
+		     }
+
+            $longitudart=strlen(Herramientas::getMascaraArticulo());
+
+
 	 	$c= new Criteria();
 		$c->add(CaregartPeer::CODART,$this->getRequestParameter('codigo'));
       	$reg=CaregartPeer::doSelectOne($c);
   		if ($reg)
   		{
+                  if ($longitudart==strlen($this->getRequestParameter('codigo')))
+                  {
 	        $dato=htmlspecialchars($reg->getDesart());
 	        $dato1=$reg->getUnimed();
 	        $dato2=number_format($reg->getCosult(),2,',','.');
 	        $dato3=$reg->getCodpar();
-	        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$this->getRequestParameter('unidad').'","'.$dato1.'",""],["'.$this->getRequestParameter('costo').'","'.$dato2.'",""],["'.$this->getRequestParameter('partida').'","'.$dato3.'",""]]';
+	        if ($catbnubica=='S')
+	        $valuni="";
+	        else $valuni=$this->getRequestParameter('valuni');
+
+	        $unires=$this->getRequestParameter('unires');
+	        $costo=$this->getRequestParameter('costo');
+	        $javascript="$('$unires').focus(); $('$costo').focus();";
+	        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$this->getRequestParameter('unidad').'","'.$dato1.'",""],["'.$this->getRequestParameter('costo').'","'.$dato2.'",""],["'.$this->getRequestParameter('partida').'","'.$dato3.'",""],["'.$this->getRequestParameter('unires').'","'.$valuni.'",""],["javascript","'.$javascript.'",""]]';
+                  }else {
+                    $valuni="";
+  	            $javascript="alert('Articulo no es de Ultimo Nivel');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('". $this->getRequestParameter('unidad') ."').value='';$('". $this->getRequestParameter('costo') ."').value='0.00';$('". $this->getRequestParameter('partida') ."').value=''";
+        	    $output = '[["javascript","'.$javascript.'",""]]';
+  		}
   		}
   		else
-  		{
+  		{    $valuni="";
   			 $javascript="alert('Articulo no existe');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('". $this->getRequestParameter('unidad') ."').value='';$('". $this->getRequestParameter('costo') ."').value='0.00';$('". $this->getRequestParameter('partida') ."').value=''";
         	 $output = '[["javascript","'.$javascript.'",""]]';
   		}
@@ -556,6 +704,21 @@ class almsolegrActions extends autoalmsolegrActions
 
         $output = '[["'.$cajtexmos.'","'.$desrgo.'",""],["'.$cajtexcom.'","4","c"],["'.$this->getRequestParameter('monto').'","'.$monrgo.'",""],["'.$this->getRequestParameter('tipo').'","'.$tiprgo.'",""],["'.$this->getRequestParameter('moncal').'","'.$reccalformat.'",""],["javascript","'.$javascript.'",""]]';
       }
+      else  if ($this->getRequestParameter('ajax')=='10')
+      {
+        $q= new Criteria();
+        $q->add(CadefcenPeer::CODCEN,$this->getRequestParameter('codigo'));
+        $reg= CadefcenPeer::doSelectOne($q);
+        if ($reg)
+        {
+           $dato=$reg->getDescen(); $javascript="";
+        }else {
+            $dato="";
+            $javascript="alert('El Centro de Costo no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+        }
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+      }
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
     }
@@ -597,10 +760,11 @@ class almsolegrActions extends autoalmsolegrActions
 
        $mascaraarticulo=$this->mascaraarticulo;
        $lonart=strlen($this->mascaraarticulo);
-       $mascaracategoria=$this->mascaracategoria;
-       $loncat=strlen($this->mascaracategoria);
+       $mascaracategoria= Herramientas::getObtener_FormatoCategoria();
+       $loncat=strlen($mascaracategoria);
        $mascarapresupuesto=$this->mascarapresupuesto;
        $lonpre=strlen($this->mascarapresupuesto);
+       $precom=$this->precompromete;
 
        $opciones = new OpcionesGrid();
        $opciones->setEliminar(true);
@@ -616,6 +780,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col1->setNombreCampo('check');
        $col1->setEsGrabable(true);
        $col1->setHTML(' ');
+       if ($precom=='' && $this->oculrecnoprc=='S') $col1->setOculta(true);
        $col1->setJScript('onClick="totalmarcadas(this.id)"');
 
        $obj= array('codart' => 2, 'desart' => 3, 'unimed' => 4, 'cosult' => 9, 'codpar' => 13);
@@ -645,10 +810,10 @@ class almsolegrActions extends autoalmsolegrActions
        $col4->setAlineacionContenido(Columna::IZQUIERDA);
        $col4->setNombreCampo('unimed');
        $col4->setEsGrabable(true);
-       $col4->setHTML('type="text" size="25" readonly=true');
+       $col4->setHTML('type="text" size="25" maxlength="50"');
 
        $obj2= array('codcat' => 5);
-       $params2= array('param1' => $loncat);
+       $params2= array('param1' => $loncat, 'param2' => 'almsolegr');
 
        $col5 = new Columna('Cód. Unidad');
        $col5->setTipo(Columna::TEXTO);
@@ -689,6 +854,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col9->setNombreCampo('costo');
        $col9->setHTML('type="text" size="10"');
        $col9->setJScript('onKeypress="Total(event,this.id); recalcularecargos(event,this.id);"');
+       if ($precom=='' && $this->oculrecnoprc=='S') $col9->setOculta(true);
 
        $col10 = clone $col7;
        $col10->setTitulo('Descuento');
@@ -700,6 +866,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col11->setTitulo('Recargo');
        $col11->setNombreCampo('monrgo');
        $col11->setHTML('type="text" size="10" readonly=true');
+       if ($precom=='' && $this->oculrecnoprc=='S') $col11->setOculta(true);
 
        $col12 = clone $col11;
        $col12->setTitulo('Total');
@@ -734,6 +901,7 @@ class almsolegrActions extends autoalmsolegrActions
 	   $col16->setNombreCampo('anadir');
 	   $col16->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
 	   $col16->setJScript('onClick="mostrargridrecargos(this.id)"');
+	   if ($precom=='' && $this->oculrecnoprc=='S') $col16->setOculta(true);
 
 
 	  $col17 = new Columna('cadena_datos_recargo');
@@ -779,6 +947,7 @@ class almsolegrActions extends autoalmsolegrActions
        $loncat=strlen($this->mascaracategoria);
        $mascarapresupuesto=$this->mascarapresupuesto;
        $lonpre=strlen($this->mascarapresupuesto);
+       $precom=$this->precompromete;
 
        $opciones = new OpcionesGrid();
        $opciones->setEliminar(false);
@@ -794,6 +963,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col1->setNombreCampo('check');
        $col1->setEsGrabable(true);
        $col1->setHTML(' ');
+	   if ($precom=='' && $this->oculrecnoprc=='S') $col1->setOculta(true);
        $col1->setJScript('onClick="totalmarcadas(this.id)"');
 
        $col2 = new Columna('Cód. Artículo');
@@ -869,7 +1039,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col11->setTitulo('Recargo');
        $col11->setNombreCampo('monrgo');
        $col11->setHTML('type="text" size="10" readonly=true');
-
+       if ($precom=='' && $this->oculrecnoprc=='S') $col11->setOculta(true);
        $col12 = clone $col11;
        $col12->setTitulo('Total');
        $col12->setNombreCampo('montot');
@@ -903,7 +1073,7 @@ class almsolegrActions extends autoalmsolegrActions
 	   $col16->setNombreCampo('anadir');
 	   $col16->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
 	   $col16->setJScript('onClick="mostrargridrecargos(this.id)"');
-
+	   if ($precom=='' && $this->oculrecnoprc=='S') $col16->setOculta(true);
 
 	   $col17 = new Columna('cadena_datos_recargo');
        $col17->setTipo(Columna::TEXTO);
@@ -1172,8 +1342,6 @@ class almsolegrActions extends autoalmsolegrActions
   {
   	$this->autoriza_solicutud_egreso = Herramientas::ObtenerFormato('Cadefart','solreqapr');
     $this->mascaraarticulo = Herramientas::getMascaraArticulo();
-    $this->mascaracategoria = Herramientas::getObtener_FormatoCategoria();
-    $this->loncat=strlen($this->mascaracategoria);
     $this->mascarapresupuesto = Herramientas::formatoPresupuesto();
     $c= new Criteria();
     $regis= CadefartPeer::doSelectOne($c);
@@ -1191,36 +1359,96 @@ class almsolegrActions extends autoalmsolegrActions
     }
 
     $this->cambiareti="";
+    $this->numsoldesh="";
+    $this->mansolocor="";
+    $this->bloqfec="";
+    $this->oculeli="";
+    $this->nometifor="";
+    $this->oculrecnoprc="";
+    $this->catbnubica="";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
 	 if(array_key_exists('compras',$varemp['aplicacion']))
 	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
-	     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos']))
+	     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos'])){
 	       if(array_key_exists('cambiareti',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
 	       {
 	       	$this->cambiareti=$varemp['aplicacion']['compras']['modulos']['almsolegr']['cambiareti'];
 	       }
+           if(array_key_exists('numsoldesh',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->numsoldesh=$varemp['aplicacion']['compras']['modulos']['almsolegr']['numsoldesh'];
+	       }
+	       if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->mansolocor=$varemp['aplicacion']['compras']['modulos']['almsolegr']['mansolocor'];
+	       }
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->bloqfec=$varemp['aplicacion']['compras']['modulos']['almsolegr']['bloqfec'];
+	       }
+	       if(array_key_exists('oculeli',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->oculeli=$varemp['aplicacion']['compras']['modulos']['almsolegr']['oculeli'];
+	       }
+	       if(array_key_exists('nometifor',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->nometifor=$varemp['aplicacion']['compras']['modulos']['almsolegr']['nometifor'];
+	       }
+		    if(array_key_exists('oculrecnoprc',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->oculrecnoprc=$varemp['aplicacion']['compras']['modulos']['almsolegr']['oculrecnoprc'];
+	       }
+	       if(array_key_exists('catbnubica',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->catbnubica=$varemp['aplicacion']['compras']['modulos']['almsolegr']['catbnubica'];
+	       }
+         }
+    if ($this->catbnubica=='S'){
+    	$this->mascaracategoria=Herramientas::ObtenerFormato('Opdefemp','Forubi');
+    }else {
+    $this->mascaracategoria = Herramientas::getObtener_FormatoCategoria();
+    }
+    $this->loncat=strlen($this->mascaracategoria);
   }
 
   public function executeGenerarcompromiso()
   {
      $this->casolart = $this->getCasolartOrCreate();
-     if (SolicituddeEgresos::generaPrecompromiso($this->casolart,$this->casolart->getReqart(),&$msj))
-     {
-       SolicituddeEgresos::generarImputacionesPrecompromiso($this->casolart->getReqart());
-       $totaimp=SolicituddeEgresos::totalImputacion($this->casolart->getReqart());
-        if (H::convnume($this->casolart->getMonreq())!=$totaimp)
-        {
-           $this->msj="El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud";
-           $this->id=$this->casolart->getId();
-        }else{
-	       $this->msj="Se genero el Precompromiso satisfactoriamente";
-	       $this->id=$this->casolart->getId();
-        }
+      SolicituddeEgresos::verificarDispGenComp($this->casolart,&$msj1,&$cod1,&$msj2,&$cod2,&$cod3,&$msj3);
+     if ($msj3==-1) {
+      if ($msj1==-1)
+      {
+      	if ($msj2==-1) {
+	     if (SolicituddeEgresos::generaPrecompromiso($this->casolart,$this->casolart->getReqart(),&$msj))
+	     {
+	       SolicituddeEgresos::generarImputacionesPrecompromiso($this->casolart->getReqart());
+	       $totaimp=SolicituddeEgresos::totalImputacion($this->casolart->getReqart());
+	        if (H::convnume($this->casolart->getMonreq())!=$totaimp)
+	        {
+	           $this->msj="El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud";
+	           $this->id=$this->casolart->getId();
+	        }else{
+		       $this->msj="Se genero el Precompromiso satisfactoriamente";
+		       $this->id=$this->casolart->getId();
+	        }
 
-     }else {$this->msj="No se pudo grabar el compromiso, ya que existe la referencia en la base de datos";
-     $this->id=$this->casolart->getId();}
+	     }else {$this->msj="No se pudo grabar el compromiso, ya que existe la referencia en la base de datos";
+	     $this->id=$this->casolart->getId();}
+      	}else {
+      		$this->msj=" No Existe Disponibilidad de Dinero para efectuar la Operación. Recargo ".$cod2;
+            $this->id=$this->casolart->getId();
+      	}
+      }else {
+      	$this->msj=" No Existe Disponibilidad de Dinero para efectuar la Operación. Articulo ".$cod1." de Codigo Presupuestario". $cod3;
+        $this->id=$this->casolart->getId();
+      }
+     }else {
+        $this->msj="La Fecha se encuentra dentro un Período Cerrado";
+        $this->id=$this->casolart->getId();
+
+   }
    }
 
    public function executeAnular()
@@ -1309,6 +1537,7 @@ class almsolegrActions extends autoalmsolegrActions
         'casolart{mondes}' => 'Descripción',
         'casolart{valmon}' => 'Valor',
         'casolart{stareq}' => 'estatus',
+        'casolart{codcen}' => 'Centro de Costo',
       );
     }
 
@@ -1338,21 +1567,37 @@ class almsolegrActions extends autoalmsolegrActions
     $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/casolart/filters');
 
     $this->cambiareti="";
+    $this->fornumuni="";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
 	 if(array_key_exists('compras',$varemp['aplicacion']))
 	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
-	     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos']))
+	     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos'])){
 	       if(array_key_exists('cambiareti',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
 	       {
 	       	$this->cambiareti=$varemp['aplicacion']['compras']['modulos']['almsolegr']['cambiareti'];
 	       }
-
+	       if(array_key_exists('nometifor',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->nometifor=$varemp['aplicacion']['compras']['modulos']['almsolegr']['nometifor'];
+	       }
+	       if(array_key_exists('fornumuni',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$this->fornumuni=$varemp['aplicacion']['compras']['modulos']['almsolegr']['fornumuni'];
+	       }
+	     }
+   $loguse= $this->getUser()->getAttribute('loguse');
 
      // 15    // pager
     $this->pager = new sfPropelPager('Casolart', 15);
     $c = new Criteria();
+    if ($this->fornumuni=='S')
+    {
+      $this->sql="casolart.unires in (select codcat from causuuni where loguse='".$loguse."')";
+      $c->add(CasolartPeer::UNIRES,$this->sql,Criteria::CUSTOM);
+    }
+
     $this->addSortCriteria($c);
     $this->addFiltersCriteria($c);
     $this->pager->setCriteria($c);

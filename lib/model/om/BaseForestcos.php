@@ -408,6 +408,7 @@ abstract class BaseForestcos extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = ForestcosPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ForestcosPeer::doUpdate($this, $con);

@@ -1,10 +1,10 @@
 opciones:                  # Opciones generales
   name:                    a #identificador del grid dentro del formulario
-  eliminar:                false #si kiero qaparezk el boton eliminar
+  eliminar:                false
   tabla:                   contabc
   anchogrid:               750
   ancho:                   700
-  filas:                   0 #filas vacias x defecto
+  filas:                   0
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 2

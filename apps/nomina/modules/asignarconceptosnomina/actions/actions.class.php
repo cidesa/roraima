@@ -89,6 +89,7 @@ $this->Bitacora('Guardo');
 		        $col1->setNombreCampo('check');
 		        $col1->setHTML(' ');
 		        $col1->setJScript('');
+                        $col1->setJScript('onClick="chequearemplaedo(this.id)"');
 		        
 		        $col2 = new Columna('Codigo Concepto');
 		        $col2->setTipo(Columna::TEXTO);
@@ -140,10 +141,10 @@ $this->Bitacora('Guardo');
   public function configGridno($nomina='',$fre)
   {
 	      $sql="select 0 as check, a.codcon as codcon, b.codnom, a.nomcon as nomcon, (case when a.conact='S' then 'SI' else 'NO' end) as conact, a.id as id
-				from npdefcpt a left outer join npasiconnom b ON (a.codcon=b.codcon and b.codnom='".$nomina."') 
-				where trim(b.codnom) is null";
-				
-            $resp = Herramientas::BuscarDatos($sql,&$per); 
+				from npdefcpt a left outer join npasiconnom b ON (a.codcon=b.codcon and b.codnom='".$nomina."')
+				where trim(b.codnom) is null order by a.codcon";
+
+            $resp = Herramientas::BuscarDatos($sql,&$per);
 			$filas_arreglo=0;
 
 			    $opciones = new OpcionesGrid();
@@ -215,6 +216,7 @@ $this->Bitacora('Guardo');
     // Esta variable ajax debe ser usada en cada llamado para identificar
     // que objeto hace el llamado y por consiguiente ejecutar el código necesario
     $ajax = $this->getRequestParameter('ajax','');
+    $js="";
     
     // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
     // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
@@ -222,10 +224,16 @@ $this->Bitacora('Guardo');
 
     switch ($ajax){
       case '1':
-        // La variable $output es usada para retornar datos en formato de arreglo para actualizar 
-        // objetos en la vista. mas informacion en 
-        // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
-        $output = '[["","",""],["","",""],["","",""]]';  
+        $c= new Criteria();
+        $c->add(NpasicarempPeer::CODNOM,$this->getRequestParameter('codnom'));
+        $c->add(NpasiconempPeer::CODCON,$this->getRequestParameter('codcon'));
+        $c->addJoin(NpasicarempPeer::CODEMP,NpasiconempPeer::CODEMP);
+        $reg= NpasicarempPeer::doSelectOne($c);
+        if ($reg)
+        {
+            $js="alert('No puede destildar el concepto debido a que ya existe un empleado con esta n&oacute;mina y concepto asociado'); $('$codigo').checked=true;";
+        }
+        $output = '[["javascript","'.$js.'",""],["","",""],["","",""]]';
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';  
@@ -269,7 +277,8 @@ $this->Bitacora('Guardo');
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */

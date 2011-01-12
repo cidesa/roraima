@@ -1,9 +1,10 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty ($_SESSION["x"])) {
 ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 
@@ -20,10 +21,12 @@ $z = new tools();
 $modulo = "";
 $forma = "Causar";
 $modulo = $_SESSION["modulo"] . " > Ejecución Presupuestaria > " . $forma;
+$deshabfec= $_SESSION["configemp"]["aplicacion"]["presupuesto"]["modulos"]["precausar"]["bloqfec"];
+$fecha_actual= date('d/m/Y');
 
 //CARGAR MASCARA
 $sql = "SELECT forpre, to_char(fecini,'dd/mm/yyyy') as fecini, to_char(feccie,'dd/mm/yyyy') as feccie,
-    to_char(fecini,'yyyy') as anoinicio, to_char(feccie,'yyyy') as anocierre, nivdis
+    to_char(fecini,'yyyy') as anoinicio, to_char(feccie,'yyyy') as anocierre, nivdis, etadef
     from cpdefniv where codemp='001'";
 if ($tb = $z->buscar_datos($sql)) {
   $_SESSION["formato"] = $tb->fields["forpre"];
@@ -33,6 +36,7 @@ if ($tb = $z->buscar_datos($sql)) {
   $anoinicio = $tb->fields["anoinicio"];
   $anocierre = $tb->fields["anocierre"];
   $prenivdis = $tb->fields["nivdis"];
+  $etadef = $tb->fields["etadef"];
 } else {
   $_SESSION["formato"] = "";
 }
@@ -107,6 +111,8 @@ if (!empty ($_POST["var"])) {
     $desc = $tb->fields["descau"];
     $tipcau = $tb->fields["tipcau"];
     $sql2 = "select nomext from cpdoccau where tipcau='" . $tipcau . "' ";
+    $Eliminar = VerificarEliminar();
+
     if ($tb2 = $z->buscar_datos($sql2)) {
       $nomext = $tb2->fields["nomext"];
     } else {
@@ -130,7 +136,7 @@ if (!empty ($_POST["var"])) {
     }
     $status = $tb->fields["stacau"];
     //grid
-    $sql2 = "select * from cpimpcau where refcau='" . $codigo . "' order by refere,refprc";
+    $sql2 = "select * from cpimpcau where refcau='" . $codigo . "' order by codpre,refere,refprc";
     $grid1 = array ();
     $grid2 = array ();
     $grid3 = array ();
@@ -176,15 +182,29 @@ if (!empty ($_POST["var"])) {
     } else {
       $save = 'S';
     }
+
+    $sqla="select * from opordpag where numord='".$codigo."' ";
+    if ($ta=$z->buscar_datos($sqla))
+    {
+       $save='N';
+    }
+
+    $sql="select * from cppagos where refpag='".$codigo."' ";
+    if ($tb=$z->buscar_datos($sql))
+    {
+       $save='N';
+    }
+
+
   } else {
     $fc = '2';
-    $save = 'S';
+    if ($etadef=='C') $save = 'S'; else $save = 'N';
     $imec = 'I';
-    $block = 'N';
+    if ($etadef=='C') $block='N'; else $block='S';
     $disp = 'S';
     $check = '0';
     $codigo = $codigo;
-    $fecha = '';
+    $fecha = date('d/m/Y');
     $desc = "";
     $tipcau = "";
     $nomext = "";
@@ -198,14 +218,14 @@ if (!empty ($_POST["var"])) {
 
 } else // 1ra vez
   {
-  $save = 'S';
+  if ($etadef=='C') $save = 'S'; else $save = 'N';
   $imec = 'I';
   $disp = 'S';
   $fc = '1';
-  $block = 'N';
+  if ($etadef=='C') $block='N'; else $block='S';
   $check = '0';
   $codigo = '';
-  $fecha = '';
+  $fecha = date('d/m/Y');
   $desc = "";
   $tipcau = "";
   $nomext = "";
@@ -225,7 +245,7 @@ if (!empty ($_POST["var2"])) {
     $block = 'N';
     $check = '0';
     $codigo = '';
-    $fecha = '';
+    $fecha = date('d/m/Y');
     $desc = "";
     $tipcau = "";
     $nomext = "";
@@ -237,6 +257,24 @@ if (!empty ($_POST["var2"])) {
     $status = "";
   }
 }
+
+
+  function VerificarEliminar()
+  {
+     global $codigo;
+     global $z;
+     global $msg;
+
+     $Eliminar='Si';
+     $sql="select * from opordpag where numord = '".trim($codigo)."'";
+     if ($z->buscar_datos($sql))
+     {
+        $Eliminar="No";
+      	$msg="El Causado no puede ser Anulado o Eliminado,Porque Fue Generado Desde Otro Modulo";
+      }
+
+  return $Eliminar;
+  }
 ?>
 <script>
     function actualizarsaldos2()
@@ -248,7 +286,7 @@ if (!empty ($_POST["var2"])) {
         var acum4=0;
         var acum5=0;
 
-        while (i<=50)
+        while (i<=150)
         {
           var x2="x"+i+"2";
           var x3="x"+i+"3";
@@ -296,7 +334,6 @@ if (!empty ($_POST["var2"])) {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/funciones.js"></script>
@@ -335,7 +372,17 @@ MM_reloadPage(true);
 </head>
 
 <body onLoad="MM_preloadImages('../../images/rbut_01_f2.gif','../../images/rbut_02_f2.gif','../../images/rbut_03_f2.gif','../../images/rbut_04_f2.gif')">
-<form name="form1" id="form1" method="post" action="" enctype="multipart/form-data">
+<form name="form1" onsubmit="return false;" id="form1" method="post" action="" enctype="multipart/form-data">
+              <input name="fecini" type="hidden" id="fecini" value="" />
+                <input name="save"   type="hidden" id="save"   value="<? print $save;?>">
+                <input name="save2"  type="hidden" id="save2"  value="<? print $save2;?>">
+                <input name="trash"  type="hidden" id="trash" >
+                <input name="getf"   type="hidden" id="getf"  value="S">
+                <input name="del"    type="hidden" id="del"   value="N">
+                <input name="refere" type="hidden" id="refere">
+                <input name="montotemp" type="hidden" id="montotemp">
+                <input type="hidden" name="var"  id="var" />
+                <input type="hidden" name="var2" id="var2" />
 <table width="100%" align="center">
   <tr>
 <td width="100%">
@@ -404,8 +451,11 @@ if ($status == 'N') {
                             </font></strong></div></td>
                         <td width="36">&nbsp;</td>
                         <td width="158"> <div align="right">Fecha:
-                            <? if ($block=='N') { ?>
-                            <input name="fecha" type="text"  class="imagenInicio" id="fecha" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $fecha;?>" size="10" onKeyUp = "this.value=formateafecha(this.value);" onBlur="validar_fecha()" maxlenght="10">
+                            <? if ($block=='N') {  if ($deshabfec=='S') {?>
+                            <input name="fecha" type="text"  class="imagenInicio" id="fecha" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $fecha;?>" size="10" onKeyUp = "this.value=formateafecha(this.value);" readonly="true" maxlenght="10">
+                            <? } else { ?>
+                                <input name="fecha" type="text"  class="imagenInicio" id="fecha" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $fecha;?>" size="10" onKeyUp = "this.value=formateafecha(this.value);" onBlur="validar_fecha()" maxlenght="10">
+                            <? }?>
                             <? } else { ?>
                             <input name="fecha" type="text" id="fecha" value="<? print $fecha;?>" size="10" onKeyUp = "this.value=formateafecha(this.value);" readonly="true" maxlenght="10">
                             <? } ?>
@@ -536,11 +586,11 @@ if ($status == 'N') {
 if ($check != '1') //Nuevo
   {
   $i = 1;
-  while ($i <= 50) {
+  while ($i <= 150) {
 ?>
                 <tr>
                     <td  class="grid_line01_br"><input name="x<? print $i;?>0" type="text" class="imagenborrar" id="x<? print $i;?>0" onClick="eliminar(<? print $i;?>,6)" value="" size="1" ></td>
-                    <td  align="left" class="grid_line01_br"><input name="x<? print $i;?>1" id="x<? print $i;?>1" type="text" class="grid_txt01" size="32" onKeyDown="javascript:return dFilter (event.keyCode, this,'<?print $_SESSION["formato"];?>');" align="right"  value="" onBlur="enterGRID(this.id,'trash','x<? print $i;?>2');" onFocus="document.getElementById('getf').value='S'" onKeyPress="if (event.keyCode==13){ $('x<? print $i;?>2').focus();$('x<? print $i;?>2').select();}"></td>
+                    <td  align="left" class="grid_line01_br"><input name="x<? print $i;?>1" id="x<? print $i;?>1" type="text" class="grid_txt01" size="32" maxlength="<?print strlen($_SESSION["formato"])?>"onKeyDown="javascript:return dFilter (event.keyCode, this,'<?print $_SESSION["formato"];?>');" align="right"  value="" onBlur="enterGRID(this.id,'trash','x<? print $i;?>2');" onFocus="document.getElementById('getf').value='S'" onKeyPress="if (event.keyCode==13){ $('x<? print $i;?>2').focus();$('x<? print $i;?>2').select();}"></td>
                     <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>2" id="x<? print $i;?>2" type="text" class="grid_txt02" size="15" value="<? print number_format(0,2,'.',','); ?>" align="right"
                     onKeyPress = "" onBlur="document.getElementById('getf').value='S'; entermonto(event,'x<? print $i;?>1',this.id,'x<? print $i+1;?>1','x<? print $i;?>7');"
 
@@ -583,7 +633,7 @@ if ($check != '1') //Nuevo
     $i = $i +1;
   }
   //$i=$i+1;
-  while ($i <= 50) {
+  while ($i <= 150) {
 ?>
                               <tr>
                                 <td class="grid_line01_br"><input name="x<? print $i;?>0" type="text" class="imagenborrar" id="x<? print $i;?>0" onClick="eliminar(<? print $i;?>,6)" value="" size="1" ></td>
@@ -636,16 +686,7 @@ if ($check != '1') //Nuevo
   <tr>
             <td class="breadcrumb">
               <span class="style13">Registro de <? echo $forma; ?>...
-              <input name="fecini" type="hidden" id="fecini" value="" />
-                <input name="save"   type="hidden" id="save"   value="<? print $save;?>">
-                <input name="save2"  type="hidden" id="save2"  value="<? print $save2;?>">
-                <input name="trash"  type="hidden" id="trash" >
-                <input name="getf"   type="hidden" id="getf"  value="S">
-                <input name="del"    type="hidden" id="del"   value="N">
-                <input name="refere" type="hidden" id="refere">
-                <input name="montotemp" type="hidden" id="montotemp">
-                <input type="hidden" name="var"  id="var" />
-                <input type="hidden" name="var2" id="var2" />
+
               </span>
             </td>
   </tr>
@@ -654,6 +695,12 @@ if ($check != '1') //Nuevo
  </tr>
 </table>
 <script>
+  var etapa='<?php echo $etadef;?>';
+  if (etapa=='A')
+  {
+  	alert('La Etapa de Definicion esta Abierta. Debe cerrarla para registrar movimientos.');
+  }
+
   fc='<? print $fc; ?>';
   if (fc=='1')
   {
@@ -740,7 +787,7 @@ if ($check != '1') //Nuevo
       //window.open(pagina,"Catalogo","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=50,top=50");
 
            var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Precausar_Cpdoccau/clase/Cpdoccau/frame/form1/obj1/'+campo+'/obj2/'+campo2+'/obj3/'+campo3+'/campo1/tipcau/campo2/nomext/campo3/refier/submit/false';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Precausar_Cpdoccau/clase/Cpdoccau/frame/form1/obj1/'+campo+'/obj2/'+campo2+'/obj3/'+campo3+'/campo1/tipcau/campo2/nomext/campo3/refier/submit/false';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
 
      }
@@ -796,7 +843,7 @@ if ($check != '1') //Nuevo
 
 
            var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Preprecom_Opbenefi/clase/Opbenefi/frame/form1/obj1/'+campo+'/obj2/'+campo2+'/campo1/cedrif/campo2/nomben/submit/false';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Preprecom_Opbenefi/clase/Opbenefi/frame/form1/obj1/'+campo+'/obj2/'+campo2+'/campo1/cedrif/campo2/nomben/submit/false';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
 
       }
@@ -828,7 +875,7 @@ if ($check != '1') //Nuevo
       if (refere=='N')
       {
         i=1;
-        while (i<=50)
+        while (i<=150)
         {
           var x = "x"+i+c1;
           var y = "x"+i+c2;
@@ -840,14 +887,14 @@ if ($check != '1') //Nuevo
               campo  = "x1"+c1;
               campo2 = "x1"+c2;
               foco   = "x1"+fc;
-              i = 50;
+              i = 150;
             }
             else
             {
               campo  = x;
               campo2 = y;
               foco   = "x"+i+fc;
-              i = 50;
+              i = 150;
             }
           }
           i=i+1;
@@ -859,7 +906,7 @@ if ($check != '1') //Nuevo
         //window.open(pagina,"Catalogo","menubar=no,toolbar=no,scrollbars=yes,width=500,height=400,resizable=yes,left=50,top=50");
 
            var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/PreCompro_Cpasiini/clase/Cpasiini/frame/form1/obj1/'+campo+'/campo1/codpre/submit/false';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/PreCompro_Cpasiini/clase/Cpasiini/frame/form1/obj1/'+campo+'/campo1/codpre/submit/false';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
 
       }
@@ -878,9 +925,9 @@ if ($check != '1') //Nuevo
             if ((aux!="") && (r!='-'))
             {
               cuantos='1';
-              sql="select c.codpre as codigo, c.nompre as descripcion from cpdeftit a, cpdefniv b, cpasiini c where length(rtrim(a.codpre))= length(rtrim(b.forpre)) and c.codpre=a.codpre and trim(c.codpre)= trim(�"+cadena+"�) and c.mondis > 0 order by a.codpre";
+              sql="select c.codpre as codigo, c.nompre as descripcion, a.codcta as campo2 from cpdeftit a, cpdefniv b, cpasiini c where length(rtrim(a.codpre))= length(rtrim(b.forpre)) and c.codpre=a.codpre and trim(c.codpre)= trim(�"+cadena+"�) and c.mondis > 0 order by a.codpre";
              // select c.codpre as codigo, a.nompre as descripcion from cpdeftit a, cpdefniv b, cpasiini c where length(rtrim(a.codpre))=length(rtrim(b.forpre)) and c.codpre=a.codpre and c.mondis > 0 and a.codpre like upper(�%�) group by c.codpre, a.nompre order by c.codpre, a.nompre
-              pagina="gridatos.php?cuantos="+cuantos+"&id="+id+"&donde="+donde+"&foco="+foco+"&sql="+sql;
+              pagina="gridatos.php?cuantos="+cuantos+"&id="+id+"&donde="+donde+"&foco="+foco+"&sql2="+cadena+"&sql="+sql;
               window.open(pagina,"","menubar=no,toolbar=no,scrollbars=no,width=50,height=50,resizable=no,left=100,top=300");
             }
           }
@@ -940,14 +987,18 @@ if ($check != '1') //Nuevo
       //if (e.keyCode==13)
       //{
 	      f=document.form1;
-	      if (parseInt(id.length)==3)
-	      {
-	        j=parseInt(id.substring(1,2));
-	      }
-	      else
-	      {
-	        j=parseInt(id.substring(1,3));
-	      }
+	       if (parseInt(id.length)==3)
+	        {
+	          j=parseInt(id.substring(1,2));
+	        }
+	        else if (parseInt(id.length)==4)
+	        {
+	            j=parseInt(id.substring(1,3));
+	        }
+	        else
+	        {
+	            j=parseInt(id.substring(1,4));
+	        }
 
 	    var id2="x"+j+"2";
 	    var id8="x"+j+"8";
@@ -1031,14 +1082,18 @@ if ($check != '1') //Nuevo
     {
       f=document.form1;
       chk="N";
-      if (parseInt(id.length)==3)
-      {
-        j = parseInt(id.substring(1,2));
-      }
-      else
-      {
-        j = parseInt(id.substring(1,3));
-      }
+       if (parseInt(id.length)==3)
+        {
+          j=parseInt(id.substring(1,2));
+        }
+        else if (parseInt(id.length)==4)
+        {
+            j=parseInt(id.substring(1,3));
+        }
+        else
+        {
+            j=parseInt(id.substring(1,4));
+        }
       //j=parseInt(id.substring(1,2));
       val = document.getElementById(id).value;
       if (val!="")
@@ -1046,7 +1101,7 @@ if ($check != '1') //Nuevo
           if (j!=1)
           {
              i = 1;
-             while (i<=50)
+             while (i<=150)
               {
                 var x = "x"+i+"1";
                 if (j!=i)
@@ -1059,7 +1114,7 @@ if ($check != '1') //Nuevo
                     document.getElementById(id2).value = "";
                     alert("El código presupuestario está repetido");
                     document.getElementById(id).focus();
-                    i  = 51;
+                    i  = 151;
                     chk= "S";
                     return true;
                   }
@@ -1087,7 +1142,7 @@ if ($check != '1') //Nuevo
       else
       {
         //alert("Longitud de Fecha inválida");
-        document.getElementById('fecha').value=mostrarfecha();
+        document.getElementById('fecha').value='<? echo $fecha_actual; ?>';;
         document.getElementById('fecha').focus();
       }
     }
@@ -1179,7 +1234,7 @@ if ($check != '1') //Nuevo
         var acum2=0;
         var acum3=0;
         var acum4=0;
-        while (i<=50)
+        while (i<=150)
         {
           var x2="x"+i+"2";
           var x3="x"+i+"3";
@@ -1222,7 +1277,7 @@ if ($check != '1') //Nuevo
        {
          f=document.form1;
       var fila;
-      for (fila=i;fila<50;fila++)
+      for (fila=i;fila<150;fila++)
       {
         for (col=0;col<=c;col++)
         {
@@ -1242,7 +1297,7 @@ if ($check != '1') //Nuevo
 
       }
       //ultima fila
-      if (i==50)
+      if (i==150)
       {
         for (col=0;col<=c;col++)
         {
@@ -1279,10 +1334,6 @@ if ($check != '1') //Nuevo
       {
         salvar();
       }
-      //////////////////////////
-      else if(itemId == '0_print'){
-          print();
-      }
       else if(itemId == '0_new'){
 
       }
@@ -1300,15 +1351,41 @@ if ($check != '1') //Nuevo
       }
       else if(itemId == '0_delete')
       {
-              imec = "<? print $imec?>";
-        if (imec=='M')
-          {
-          anueli();
-                }
+		var imec = "<? print $imec?>";
+		var eliminar='<? echo $Eliminar; ?>';
+        var msg='<? echo $msg; ?>';
+
+        if ((eliminar=='Si') && (imec=='M')){
+        	anueli();
+        }else if (msg!=''){
+          alert(msg);
+       	}
+
       }
 
       else if(itemId == '0_calc'){
         alert("llamando la calculadora");
+      }
+      else if(itemId == '0_print'){
+
+        var refcau1 = '<? echo $codigo; ?>';
+        var feccau1  = '<? echo $fecha; ?>';
+        var tipcau1  = '<? echo $tipcau; ?>';
+        var estado = '<? echo $status; ?>';
+        if (estado=='A') est='Activo';
+        else if (estado=='N') est='Anulado';
+        else est='';
+        var codpre1= '<?php echo $grid1[1]?>';
+        var codpre2= '<?php echo $grid1[$cont]?>';
+        var comodin='%%';
+        var ruta='http://'+window.location.host;
+      //	Nueva estructura de los reportes
+      //	pagina=ruta+'/reportes/reportes/contabilidad/r.php=?r=comprobante.php?com1='+codigo+'&com2='+codigo+'&fecha1='+fecha+'&fecha2='+fecha+'&estado='+estado;
+
+	  //	Vieja estructura de los reportes
+      	pagina=ruta+'/reportes/reportes/presupuesto/rprecau.php?refcau1='+refcau1+'&refcau2='+refcau1+'&feccau1='+feccau1+'&feccau2='+feccau1+'&tipcau1='+tipcau1+'&tipcau2='+tipcau1+'&codpre1='+codpre1+'&codpre2='+codpre2+'&comodin='+comodin+'&estado='+est;
+      	window.open(pagina,1,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80");
+
       }
       else if(itemId == '0_calend'){
         alert("LLamando el Calendario");
@@ -1321,7 +1398,7 @@ if ($check != '1') //Nuevo
 
     aToolBar=new dhtmlXToolbarObject('toolbar_zone2','100%',16,"");
     aToolBar.setOnClickHandler(onButtonClick);
-    aToolBar.loadXML("../../lib/general/_toolbarV1.xml")
+    aToolBar.loadXML("../../lib/general/_toolbarV6.xml")
     aToolBar.setToolbarCSS("toolbar_zone2","toolbarText3");
     aToolBar.showBar();
 
@@ -1337,7 +1414,7 @@ if ($check != '1') //Nuevo
           //window.open(pagina,"","menubar=no,toolbar=no,scrollbars=yes,width=570,height=500,resizable=yes,left=50,top=50");
 
       var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Cpcausad_PreCausar/clase/Cpcausad/frame/form1/obj1/codigo/obj2/desc/campo1/refcau/campo2/descau/submit/true';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Cpcausad_PreCausar/clase/Cpcausad/frame/form1/obj1/codigo/obj2/desc/campo1/refcau/campo2/descau/submit/true';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
 
      }

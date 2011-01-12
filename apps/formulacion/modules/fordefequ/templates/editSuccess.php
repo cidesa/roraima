@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id:editSuccess.php 32813 2009-09-08 16:19:47Z lhernandez $
  */
 // date: 2007/06/18 08:40:34
 ?>
@@ -15,8 +15,15 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Definición de Directriz',
-array()) ?></h1>
+<h1>
+<?php if ($etiqueta!="") { ?>
+<?php echo __('Definición de '.$etiqueta,
+array()) ?>
+<?php }else { ?>
+<?php echo __('Definición de Directriz',
+array()) ?>
+<?php } ?>
+</h1>
 
 <div id="sf_admin_header">
 <?php include_partial('fordefequ/edit_header', array('fordefequ' => $fordefequ)) ?>
@@ -24,7 +31,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('fordefequ/edit_messages', array('fordefequ' => $fordefequ, 'labels' => $labels)) ?>
-<?php include_partial('fordefequ/edit_form', array('fordefequ' => $fordefequ, 'labels' => $labels)) ?>
+<?php include_partial('fordefequ/edit_form', array('fordefequ' => $fordefequ, 'etiqueta' => $etiqueta, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">

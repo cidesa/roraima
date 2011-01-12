@@ -19,7 +19,7 @@ class nomnommovnomconActions extends autonomnommovnomconActions
    * del formulario.
    *
    */
-  public function executeList()
+/*  public function executeList()
     {
     $this->processSort();
 
@@ -63,7 +63,24 @@ class nomnommovnomconActions extends autonomnommovnomconActions
     {
       $c->add(NpasiconnomPeer::CODNOM, $this->filters['codnom']);
     }
+    if (isset($this->filters['nomcon_is_empty']))
+    {
+      $criterion = $c->getNewCriterion(NpasiconempPeer::NOMCON, '');
+      $criterion->addOr($c->getNewCriterion(NpasiconempPeer::NOMCON, null, Criteria::ISNULL));
+      $c->add($criterion);
+    }
+    else if (isset($this->filters['nomcon']) && $this->filters['nomcon'] !== '')
+    {
+      $c->add(NpasiconempPeer::NOMCON, '%'.strtr($this->filters['nomcon'], '*', '%').'%', Criteria::LIKE);
+    $c->setIgnoreCase(true);
+    }
+  }*/
+
+  public function executeIndex()
+  {
+    return $this->redirect('nomnommovnomcon/edit');
   }
+
 
 	/**
    * Actualiza la informacion que viene de la vista 
@@ -111,7 +128,55 @@ class nomnommovnomconActions extends autonomnommovnomconActions
    * los datos del grid.
    *
    */
-  public function configGrid($codigonomina='', $codigoconcepto='')
+
+  public function ConfigGrid($codigonomina='', $codigoconcepto='')
+  {
+    $this->params=array();
+    //$this->npasiconemp = $this->getNpasiconempOrCreate();
+
+
+                $c = new Criteria();
+	 	$c->add(NpasicarempPeer::CODNOM,$codigonomina);
+		$c->add(NpasiconempPeer::CODCON,$codigoconcepto);
+		$c->add(NphojintPeer::STAEMP,'A');
+		$c->add(NpasicarempPeer::STATUS,'V');
+	 	$c->addJoin(NpasicarempPeer::CODEMP,NphojintPeer::CODEMP);
+	 	$c->addJoin(NpasiconempPeer::CODEMP,NpasicarempPeer::CODEMP);
+		$c->addJoin(NpasiconempPeer::CODCAR,NpasicarempPeer::CODCAR);
+		$c->addAscendingOrderByColumn(NpasiconempPeer::NOMEMP);
+		$per = NpasiconempPeer::doSelect($c);
+
+        $this->nfilgrid="";
+		$varemp = $this->getUser()->getAttribute('configemp');
+		if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('nomina',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+		     if(array_key_exists('nomnommovnomcon',$varemp['aplicacion']['nomina']['modulos'])){
+		       if(array_key_exists('nfilgrid',$varemp['aplicacion']['nomina']['modulos']['nomnommovnomcon']))
+		       {
+		       	$this->nfilgrid=$varemp['aplicacion']['nomina']['modulos']['nomnommovnomcon']['nfilgrid'];
+		       }
+		     }
+
+
+         if ($this->nfilgrid!="")
+         {
+           $filas_arreglo=$this->nfilgrid;
+         }else{
+		$filas_arreglo=150;
+         }
+		//print $codigo;
+
+
+      $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/nomnommovnomcon/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_empleado');
+
+       $this->obj = $this->columnas[0]->getConfig($per);
+
+       $this->npasiconemp->setGrid($this->obj);
+
+  }
+  public function configGrid_backup($codigonomina='', $codigoconcepto='')
 	  {
 
 		$c = new Criteria();
@@ -122,9 +187,29 @@ class nomnommovnomconActions extends autonomnommovnomconActions
 	 	$c->addJoin(NpasicarempPeer::CODEMP,NphojintPeer::CODEMP);
 	 	$c->addJoin(NpasiconempPeer::CODEMP,NpasicarempPeer::CODEMP);
 		$c->addJoin(NpasiconempPeer::CODCAR,NpasicarempPeer::CODCAR);
+		$c->addAscendingOrderByColumn(NpasiconempPeer::NOMEMP);
 		$per = NpasiconempPeer::doSelect($c);
 
+        $this->nfilgrid="";
+		$varemp = $this->getUser()->getAttribute('configemp');
+		if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('nomina',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+		     if(array_key_exists('nomnommovnomcon',$varemp['aplicacion']['nomina']['modulos'])){
+		       if(array_key_exists('nfilgrid',$varemp['aplicacion']['nomina']['modulos']['nomnommovnomcon']))
+		       {
+		       	$this->nfilgrid=$varemp['aplicacion']['nomina']['modulos']['nomnommovnomcon']['nfilgrid'];
+		       }
+		     }
+
+
+         if ($this->nfilgrid!="")
+         {
+           $filas_arreglo=$this->nfilgrid;
+         }else{
 		$filas_arreglo=150;
+         }
 		//print $codigo;
 
 
@@ -186,31 +271,22 @@ class nomnommovnomconActions extends autonomnommovnomconActions
 
 
 
-  protected function getNpasiconempOrCreate($id = 'id', $codcon = 'codcon', $codnom= 'codnom')
+  protected function getNpasiconempOrCreate($id = 'id')
   {
     if (!$this->getRequestParameter($id))
     {
-      $npasiconemp = new Npasiconemp();
+      $this->npasiconemp = new Npasiconemp();
       $this->configGrid();
 
     }
     else
     {
-
-      $c = new Criteria();
- 	  $c->add(NpasiconempPeer::CODCON,$this->getRequestParameter($codcon));
-  	  $npasiconemp = NpasiconempPeer::doSelectOne($c);
-  	  if (!$npasiconemp) $npasiconemp = new Npasiconemp();
-  	  $nomina=$this->getRequestParameter($codnom);
-      if ($nomina=="") $nomina=Herramientas::getX('CODCON','Npasiconnom','Codnom',$npasiconemp->getCodcon());
-      $npasiconemp->setCodnom($nomina);
-      $this->configGrid($npasiconemp->getCodnom(),$npasiconemp->getCodcon());
-
+      $npasiconemp = NpasiconempPeer::retrieveByPk($this->getRequestParameter($id));
 
       $this->forward404Unless($npasiconemp);
     }
 
-    return $npasiconemp;
+    return $this->npasiconemp;
   }
 
 
@@ -226,22 +302,26 @@ class nomnommovnomconActions extends autonomnommovnomconActions
 	 $cajtexcom=$this->getRequestParameter('cajtexcom');
 
 	 if ($this->getRequestParameter('ajax')=='1')
-
-       {//print $this->getRequestParameter('codigo');exit;
-       	$dato= Herramientas::getX('codnom','npnomina','nomnom',$this->getRequestParameter('codigo'));
-       //print $dato=NpnominaPeer::getDesnom(trim($this->getRequestParameter('codigo')));exit;
-	   $output = '[["'.$cajtexcom.'","'.$dato.'",""]]';
-	   $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-	   return sfView::HEADER_ONLY;
-       }
+           {//print $this->getRequestParameter('codigo');exit;
+            $dato= Herramientas::getX('codnom','npnomina','nomnom',$this->getRequestParameter('codigo'));
+           //print $dato=NpnominaPeer::getDesnom(trim($this->getRequestParameter('codigo')));exit;
+               $output = '[["'.$cajtexcom.'","'.$dato.'",""]]';
+               $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+               return sfView::HEADER_ONLY;
+           }
 
 	 else if ($this->getRequestParameter('ajax')=='2')
 	 {
-         $this->configGrid($this->getRequestParameter('codigonomina'),$this->getRequestParameter('codigoconcepto'));
+             $this->npasiconemp = $this->getNpasiconempOrCreate();
+             $dato=NpdefcptPeer::getNomconnom(trim($this->getRequestParameter('codigoconcepto')),trim($this->getRequestParameter('codigonomina')));
 
-         $dato=NpdefcptPeer::getNomconnom(trim($this->getRequestParameter('codigoconcepto')),trim($this->getRequestParameter('codigonomina')));
-	   $output = '[["'.$cajtexcom.'","'.$dato.'",""]]';
-	   $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+             if ($dato!='Registro no encontrado')
+             {
+                $this->configGrid($this->getRequestParameter('codigonomina'),$this->getRequestParameter('codigoconcepto'));
+             }
+             
+	     $output = '[["'.$cajtexcom.'","'.$dato.'",""]]';
+	     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 
 	 }
 
@@ -260,7 +340,7 @@ class nomnommovnomconActions extends autonomnommovnomconActions
    */
   protected function saveNpasiconemp($npasiconemp)
   {
-	$grid=Herramientas::CargarDatosGrid($this,$this->obj);
+	$grid=Herramientas::CargarDatosGridv2($this,$this->obj);
 	Nomina::salvarNomnommovnomcon($npasiconemp,$grid);
   }
 

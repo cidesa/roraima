@@ -34,19 +34,19 @@ class TsmovlibMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('tsmovlib_SEQ');
 
-		$tMap->addColumn('NUMCUE', 'Numcue', 'string', CreoleTypes::VARCHAR, true, 20);
+		$tMap->addForeignKey('NUMCUE', 'Numcue', 'string', CreoleTypes::VARCHAR, 'tsdefban', 'NUMCUE', true, 20);
 
 		$tMap->addColumn('REFLIB', 'Reflib', 'string', CreoleTypes::VARCHAR, true, 20);
 
 		$tMap->addColumn('FECLIB', 'Feclib', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('TIPMOV', 'Tipmov', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addForeignKey('TIPMOV', 'Tipmov', 'string', CreoleTypes::VARCHAR, 'tstipmov', 'CODTIP', true, 4);
 
 		$tMap->addColumn('DESLIB', 'Deslib', 'string', CreoleTypes::VARCHAR, true, 4000);
 
 		$tMap->addColumn('MONMOV', 'Monmov', 'double', CreoleTypes::NUMERIC, true, 14);
 
-		$tMap->addColumn('CODCTA', 'Codcta', 'string', CreoleTypes::VARCHAR, false, 32);
+		$tMap->addForeignKey('CODCTA', 'Codcta', 'string', CreoleTypes::VARCHAR, 'contabb', 'CODCTA', false, 32);
 
 		$tMap->addColumn('NUMCOM', 'Numcom', 'string', CreoleTypes::VARCHAR, false, 8);
 
@@ -81,6 +81,10 @@ class TsmovlibMapBuilder {
 		$tMap->addColumn('MOTANU', 'Motanu', 'string', CreoleTypes::VARCHAR, false, 250);
 
 		$tMap->addColumn('REFPAG', 'Refpag', 'string', CreoleTypes::VARCHAR, false, 8);
+
+		$tMap->addColumn('LOGUSE', 'Loguse', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('CEDRIF', 'Cedrif', 'string', CreoleTypes::VARCHAR, false, 15);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

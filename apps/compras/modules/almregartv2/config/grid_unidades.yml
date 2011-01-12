@@ -1,0 +1,21 @@
+opciones:                  # Opciones generales
+  name:                    f
+  eliminar:                true
+  tabla:                   caunialart
+  anchogrid:               500
+  ancho:                   500
+  filas:                   1
+  titulo:                  'Unidades Alternas'
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Unidad
+  tipo:                    t
+  nombrecampo:             unialt
+  esgrabable:              true
+  html:                    ["size=20 maxlength=15"]
+2:       # Columna 2
+  titulo:                  Relación
+  tipo:                    t
+  nombrecampo:             relart
+  esgrabable:              true
+  html:                    ["size=20 maxlength=15"]

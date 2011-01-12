@@ -1,10 +1,11 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
@@ -20,7 +21,7 @@ $z= new tools();
 $modulo="";
 $forma="Artículos de Ley";
 $modulo=$_SESSION["modulo"] . " > Def. Especificas > ".$forma;
-
+$validaporcentaje=$_SESSION["configemp"]["aplicacion"]["presupuesto"]["modulos"]["PreSolTrasla"]["valpor"];
 
   if (!empty($_POST["var"]))
   {
@@ -106,6 +107,7 @@ $modulo=$_SESSION["modulo"] . " > Def. Especificas > ".$forma;
         $staniv4=$tb->fields["staniv4"];
         $staniv5=$tb->fields["staniv5"];
         $staniv6=$tb->fields["staniv6"];
+        $portra=$tb->fields["portra"];
         $imec="M";
         $block='1';
         $save='S';
@@ -122,6 +124,7 @@ $modulo=$_SESSION["modulo"] . " > Def. Especificas > ".$forma;
         $staniv4="";
         $staniv5="";
         $staniv6="";
+        $portra=0;
         $imec="I";
         $block='1';
         $save='S';
@@ -139,6 +142,7 @@ $modulo=$_SESSION["modulo"] . " > Def. Especificas > ".$forma;
     $staniv4="";
     $staniv5="";
     $staniv6="";
+    $portra=0;
     $block='0';
     $save='N';
     $delete='N';
@@ -158,6 +162,7 @@ $modulo=$_SESSION["modulo"] . " > Def. Especificas > ".$forma;
     $staniv4="";
     $staniv5="";
     $staniv6="";
+    $portra=0;
     $block='0';
     $save='N';
     $delete='N';
@@ -173,7 +178,6 @@ $modulo=$_SESSION["modulo"] . " > Def. Especificas > ".$forma;
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" TYPE="text/css" MEDIA="screen" href="../../lib/css/tabber.css">
@@ -190,7 +194,7 @@ $modulo=$_SESSION["modulo"] . " > Def. Especificas > ".$forma;
 </head>
 
 <body>
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
 <table width="100%" align="center">
   <tr>
 <td width="100%">
@@ -268,6 +272,16 @@ $modulo=$_SESSION["modulo"] . " > Def. Especificas > ".$forma;
                               <td>&nbsp;</td>
                               <td>&nbsp;</td>
                             </tr>
+                            <?php if ($validaporcentaje=='S') {  ?>
+                            <tr>
+                              <td>Porcentaje Traslados</td>
+                              <td><input name="portra" type="text" class="imagenInicio" id="portra" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? echo number_format($portra,2,'.',','); ?>" size="15" maxlength="32" onKeyPress="validarmontopor(this.id)" onblur="event.keyCode=13;return formatoDecimal(event,this.id)"></td>
+                            </tr>
+                            <tr>
+                              <td>&nbsp;</td>
+                              <td>&nbsp;</td>
+                            </tr>
+                            <?php }  ?>
                             <tr>
                               <td colspan="2"><table border="0" cellspacing="0" cellpadding="0">
                                   <tr>
@@ -400,7 +414,7 @@ else
           //pagina="catalogo2.php?campo="+campo+"&campo2="+campo2+"&sql="+sql+"&foco="+foco;
           //window.open(pagina,"","menubar=no,toolbar=no,scrollbars=yes,width=570,height=500,resizable=yes,left=50,top=50");
 
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Cpartley_Preartley/clase/Cpartley/frame/form1/obj1/tipdoc/campo1/codart/submit/true';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Cpartley_Preartley/clase/Cpartley/frame/form1/obj1/tipdoc/campo1/codart/submit/true';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
      }
 
@@ -502,6 +516,22 @@ else
       else
       {
         return true;
+      }
+
+    }
+
+    function validarmontopor(id)
+    {
+      str3= document.getElementById(id).value.toString();
+      str3= str3.replace(',','');
+      str3= str3.replace(',','');
+      str3= str3.replace(',','');
+
+      var num3=parseFloat(str3);
+      if (num3>100)
+      {
+          alert('El Porcentaje debe ser menor o igual a 100');
+          document.getElementById(id).value='0.00'
       }
 
     }

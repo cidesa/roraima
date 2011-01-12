@@ -1,0 +1,31 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Nptiempo
+    theme:            cidesaGenerator
+    fields:
+      codtie: { name: Código, params: maxlength=3 size=6}
+      destie: { name: Descripción, params: maxlength=100 size=60}
+      factor: { name: Factor, params: maxlength=100 size=60}
+      ayuda:  { name: Ejemplo, params: size = 100 style=border:none value=" Factor= '/2' , el valor '/2' representa la operacion a realizar sobre el sueldo" }
+    list:
+      title:          Tiempos del Cargo
+      filters:        [codtie, destie ]
+      display:        [=codtie, destie ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort:   codtie
+    edit:
+      title:          Edición de Tiempos del Cargo
+      display:        
+        Datos:        [codtie, destie, factor, ayuda]
+      fields:
+        codtie: 
+          params:     maxlength=3  size=5  onBlur="$(this.id).value=$(this.id).value.pad(3,'0',0)"
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

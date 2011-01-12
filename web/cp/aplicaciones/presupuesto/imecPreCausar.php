@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
@@ -30,7 +31,7 @@ $z= new tools();
     }
 
     $i=1;
-    while ($i<=50)
+    while ($i<=150)
       {
         if (trim($_POST["x".$i."1"])!="")
         {
@@ -67,7 +68,7 @@ $z= new tools();
         else
         {
           $fin=$i-1;
-          $i=51;
+          $i=151;
         }
       }
 

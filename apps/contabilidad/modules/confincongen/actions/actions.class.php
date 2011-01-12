@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage confincongen
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 32378 2009-09-01 16:45:21Z lhernandez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2

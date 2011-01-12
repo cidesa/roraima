@@ -30,7 +30,9 @@ class FormetfinotrMapBuilder {
 		$tMap = $this->dbMap->addTable('formetfinotr');
 		$tMap->setPhpName('Formetfinotr');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('formetfinotr_SEQ');
 
 		$tMap->addColumn('CODMET', 'Codmet', 'string', CreoleTypes::VARCHAR, true, 5);
 
@@ -38,7 +40,7 @@ class FormetfinotrMapBuilder {
 
 		$tMap->addColumn('CODACT', 'Codact', 'string', CreoleTypes::VARCHAR, true, 5);
 
-		$tMap->addColumn('CODPAREGR', 'Codparegr', 'string', CreoleTypes::VARCHAR, true, 16);
+		$tMap->addColumn('CODPAREGR', 'Codparegr', 'string', CreoleTypes::VARCHAR, true, 32);
 
 		$tMap->addColumn('CODPARING', 'Codparing', 'string', CreoleTypes::VARCHAR, true, 32);
 

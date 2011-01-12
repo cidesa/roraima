@@ -82,7 +82,7 @@
   'disabled' => true,
   'control_name' => 'tscheemi[nomcue]',
   'size'=> 60,
-)); echo $value ? $value : '&nbsp;' ?>
+)); echo $value ? $value : '&nbsp;' ?>  <?php echo input_hidden_tag('tscheemi[nomrep]',  $tscheemi->getNomrep()) ?>
     </div>
 <br>
 <div id="divnumche">
@@ -110,7 +110,7 @@
          'url'      => 'tesmovemiche/ajax',
          'script'   => true,
           'complete' => 'AjaxJSON(request, json)',
-          'with' => "'ajax=2&cajtexmos=tscheemi_nomben&cajtexcom=tscheemi_cedrif&mostrardato=S&operacion='+document.getElementById('tscheemi_operacion').value+'&tipdoc='+document.getElementById('tscheemi_tipdoc').value+'&fecemi='+document.getElementById('tscheemi_fecemi').value+'&cedrif='+this.value"
+          'with' => "'ajax=2&cajtexmos=tscheemi_nomben&cajtexcom=tscheemi_cedrif&mostrardato=S&operacion='+document.getElementById('tscheemi_operacion').value+'&tipdoc='+document.getElementById('tscheemi_tipdoc').value+'&numcue='+document.getElementById('tscheemi_numcue').value+'&fecemi='+document.getElementById('tscheemi_fecemi').value+'&cedrif='+this.value"
      ))),
      array('use_style' => 'true')
   )
@@ -193,25 +193,52 @@
 
 ?>
 <script type="text/javascript">
+var deshab='<?php echo $bloqfec; ?>';
+if (deshab=='S')
+{
+	$('trigger_tscheemi_fecemi').hide();
+	$('tscheemi_fecemi').readOnly=true;
+} 
+
 var impche='<?php if($tscheemi->getEscheque()==true && $tscheemi->getId()!="") echo $impche; else echo 'N'?>';
+
+var numcomegr='<?php echo $numcomegr; ?>';
+if (numcomegr!="")
+{
+  alert_('El N&uacute;mero de Comprobante de Egresos es: '+numcomegr);
+}
 
 if (impche=='S')
 {
     if(confirm("¿Desea imprimir el/los Cheques emitidos?"))
     {
       var  numches='<? print $numches;?>';
+      var  numcues='<? print $numcues;?>';
       var  mosparform='<? print $pdfparform;?>';
       var anumche=numches.split(",");
+      var anumcue=numcues.split(",");
+      var nombrerep='<?php echo $tscheemi->getNomrep();?>';
 	  for (r=0;r<anumche.length;r++)
 	  {
 	  	var  ruta='http://'+'<?echo $this->getContext()->getRequest()->getHost();?>';
+             if (nombrerep!="")
+             {
 		if (mosparform=='S')
 		{
-			pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/tsrvoucher.php?numchedes="+anumche[r]+"&numchehas="+anumche[r];			
+			pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/"+nombrerep+".php?numchedes="+anumche[r]+"&numchehas="+anumche[r]+"&numcuedes="+anumcue[r]+"&numcuehas="+anumcue[r];
 		}else
 		{
-			pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/r.php?r=tsrvoucher.php&numchedes="+anumche[r]+"&numchehas="+anumche[r];			
+			pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/r.php?r="+nombrerep+".php&numchedes="+anumche[r]+"&numchehas="+anumche[r]+"&numchehas="+anumche[r]+"&numcuedes="+anumcue[r]+"&numcuehas="+anumcue[r];
 		}
+             }else {
+                if (mosparform=='S')
+		{
+			pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/tsrvoucher.php?numchedes="+anumche[r]+"&numchehas="+anumche[r]+"&numcuedes="+anumcue[r]+"&numcuehas="+anumcue[r];
+		}else
+		{
+			pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/r.php?r=tsrvoucher.php&numchedes="+anumche[r]+"&numchehas="+anumche[r]+"&numchehas="+anumche[r]+"&numcuedes="+anumcue[r]+"&numcuehas="+anumcue[r];
+		}
+             }
 		window.open(pagina,anumche[r],"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80");
 		
 	  }

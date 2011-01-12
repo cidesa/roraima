@@ -1,9 +1,10 @@
 <?
+session_name('cidesa');
 session_start();
-require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
-require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
-require_once($_SESSION["x"].'lib/general/tools.php');
-require_once($_SESSION["x"].'lib/general/funciones.php');
+require_once($_SESSION["x"].'/adodb/adodb-exceptions.inc.php');
+require_once($_SESSION["x"].'/lib/bd/basedatosAdo.php');
+require_once($_SESSION["x"].'/lib/general/tools.php');
+require_once($_SESSION["x"].'/lib/general/funciones.php');
 validar(array(11,15));            //Seguridad  del Sistema
 $codemp=$_SESSION["codemp"];
 $bd=new basedatosAdo($codemp);
@@ -34,6 +35,7 @@ $z= new tools();
   $tb=$bd->select($sql1);
     if (!$tb->EOF)
     {
+
     $sql="update contaba set
               forcta='".$formato."',
               numrup=".count($numrup).",
@@ -48,14 +50,14 @@ $z= new tools();
       $sql="insert into contaba (codemp,loncta,numrup,forcta,fecini,feccie,etadef)
     values ('001',".strlen(trim($formato)).",".count($numrup).",'".$formato."',to_date('".$fecini."','dd/mm/yyyy'),to_date('".$feccie."','dd/mm/yyyy'),'A')";
     }
-    
-      $sql = "Select id from contaba where codemp='001'";
-      
-      $tb=$bd->select($sql);
+
+      $sql2 = "Select id from contaba where codemp='001'";
+
+      $tb=$bd->select($sql2);
       $id = $tb->fields["id"];
       $bd->Log($id, 'con', 'Contabb', 'Confinins', !$tb->EOF ? 'A' : 'G');
 
-    
+
   $bd->actualizar($sql);
   ///////////////
 

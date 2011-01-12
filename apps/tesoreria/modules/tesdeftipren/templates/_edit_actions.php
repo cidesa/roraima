@@ -23,3 +23,7 @@
   'class' => 'sf_admin_action_create',
 )) ?></li>
   </ul>
+  <script language="JavaScript" type="text/javascript">
+ var tieregrel='<?php if($tstipren->getId()) echo $tstipren->getTiedatrel(); else echo "N"; ?>';
+  if (tieregrel=='S') $('save').hide();
+</script>

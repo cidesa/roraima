@@ -15,4 +15,27 @@
  */ 
 class Npestorg extends BaseNpestorg
 {
+    protected $cambiareti="";
+
+  public function getCambiareti()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('nomina',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+	     if(array_key_exists('nomdefespnivorg',$varemp['aplicacion']['nomina']['modulos'])){
+	       if(array_key_exists('cambiareti',$varemp['aplicacion']['nomina']['modulos']['nomdefespnivorg']))
+	       {
+	       	$dato=$varemp['aplicacion']['nomina']['modulos']['nomdefespnivorg']['cambiareti'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setCambiareti()
+  {
+  	return $this->cambiareti;
+  }
 }

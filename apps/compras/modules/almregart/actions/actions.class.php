@@ -5,24 +5,25 @@
  *
  * @package    Roraima
  * @subpackage almregart
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 41626 2010-12-03 15:28:54Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class almregartActions extends autoalmregartActions
 {
-    // variable donde se debe colocar el código de error generado en el validateEdit 
+    // variable donde se debe colocar el código de error generado en el validateEdit
   // para que sea procesado por el handleErrorEdit.
 private static $coderror=-1;
 
-    
-  
-  
+
+
+
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -34,6 +35,7 @@ private static $coderror=-1;
         $this->updateCaregartFromRequest();
 
         $grid=Herramientas::CargarDatosGrid($this,$this->obj);
+        $gridunid=Herramientas::CargarDatosGridv2($this,$this->obj2);
 
         self::$coderror=Articulos::validarAlmregart($this->caregart,$grid);
         if (self::$coderror<>-1){
@@ -58,6 +60,10 @@ private static $coderror=-1;
       // pager
       $this->pager = new sfPropelPager('Caregart',15);
       $c = new Criteria();
+      $modulo=sfContext::getInstance()->getUser()->getAttribute('menu','','autenticacion');
+      $mostodart=H::getConfAppGen('mostodart');
+      if ($modulo=='facturacion' && $mostodart!='S')
+       $c->add(CaregartPeer::TIPREG,'F');
       $this->addSortCriteria($c);
       $this->addFiltersCriteria($c);
       $this->pager->setCriteria($c);
@@ -75,6 +81,7 @@ private static $coderror=-1;
       $this->caregart = $this->getCaregartOrCreate();
       $this->setVars();
       $this->configGrid();
+      $this->configGridUnidades();
 
 
       if ($this->getRequest()->getMethod() == sfRequest::POST)
@@ -135,7 +142,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -144,6 +151,7 @@ $this->Bitacora('Guardo');
     $caregart = $this->getRequestParameter('caregart');
     $this->setVars();
     $this->configGrid();
+    $this->configGridUnidades();
 
     if (isset($caregart['codart']))
     {
@@ -241,7 +249,11 @@ $this->Bitacora('Guardo');
     {
       $this->caregart->setCtapro($caregart['ctapro']);
     }
-  }
+    if (isset($caregart['cosunipri']))
+    {
+      $this->caregart->setCosunipri($caregart['cosunipri']);
+    }
+    }
 
     /**
    * Esta función permite definir la configuración del grid de datos
@@ -380,40 +392,50 @@ $this->Bitacora('Guardo');
    */
   public function configGridAlmUbi($codart='',$codalm='',&$filas)
    {
+      $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
       $c = new Criteria();
-
-      $sql="select a.codalm, b.nomubi,coalesce((select c.exiact from caartalmubi c where c.codart='".$codart."' and c.codalm='".$codalm."' and c.codubi=a.codubi),0) as exiact, a.codubi,a.id
-      FROM  caalmubi a,cadefubi b
+      if ($manartlot=='S')
+      {
+          $sql="select a.codubi, b.nomubi, a.exiact, a.numlot, a.fecela, a.fecven, a.codalm, a.id
+            FROM  caartalmubi a, cadefubi b
+              where a.codubi=b.codubi
+            and a.codalm='".$codalm."'and a.codart='".$codart."'
+            order by a.codubi";
+      }else {
+      $sql="select a.codubi, b.nomubi, a.exiact, a.codalm, a.id
+            FROM  caartalmubi a, cadefubi b
       where a.codubi=b.codubi
-      AND a.Codalm='".$codalm."' order by a.codubi";
-    $resp = Herramientas::BuscarDatos($sql,&$per);
-    $filas=count($per);
-  /*  $this->setVars();
+            and a.codalm='".$codalm."'and a.codart='".$codart."'
+            order by a.codubi";
+      }
+      $resp = Herramientas::BuscarDatos($sql,&$per);
+      $filas=count($per);
+      $this->setVars();
 
       $mascaraubicacion=$this->mascaraubicacion;
-      $longmas=strlen($this->mascaraubicacion);*/
+      $longmas=strlen($this->mascaraubicacion);
 
       $opciones = new OpcionesGrid();
       $opciones->setEliminar(false);
       $opciones->setTabla('Caartalmubi');
-      $opciones->setAnchoGrid(600);
-    $opciones->setAncho(600);
+      $opciones->setAnchoGrid(650);
+      $opciones->setAncho(650);
       $opciones->setTitulo('Existencia por Almacen y Ubicación');
       $opciones->setName('c');
-      $opciones->setFilas(0);
+      $opciones->setFilas(10);
       $opciones->setHTMLTotalFilas(' ');
 
+      $params = array($codalm,'val2');
       $col1 = new Columna('Cod. Ubicacion');
       $col1->setTipo(Columna::TEXTO);
       $col1->setEsGrabable(true);
       $col1->setAlineacionObjeto(Columna::CENTRO);
       $col1->setAlineacionContenido(Columna::CENTRO);
       $col1->setNombreCampo('codubi');
-      //$col1->setCatalogo('cadefubi','sf_admin_edit_form', array('codubi'=> 1, 'nomubi'=> 2));
-      //$col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
+      $col1->setCatalogo('cadefubi','sf_admin_edit_form', array('codubi'=> 1, 'nomubi'=> 2),'Cadefubi_Almdes',$params);
+      $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"  onBlur="javascript:event.keyCode=13; ajax(event,this.id);"');
       //$col1->setAjax('almregart',3,2);
-      //$col1->setHTML('type="text" size="25" maxlength='.chr(39).$longmas.chr(39).'');
-      $col1->setHTML('type="text" size="20" readonly=true');
+      $col1->setHTML('type="text" size="20" maxlength='.chr(39).$longmas.chr(39).'');
 
       $col2 = new Columna('Ubicación');
       $col2->setTipo(Columna::TEXTO);
@@ -433,9 +455,41 @@ $this->Bitacora('Guardo');
       $col3->setJScript('onKeypress="entermonto_c(event,this.id)"');
       $col3->setEsTotal(true,'totalubi');
 
+
+      if ($manartlot=='S')
+      {
+          $col4 = new Columna('Número de Lote');
+          $col4->setTipo(Columna::TEXTO);
+          $col4->setEsGrabable(true);
+          $col4->setAlineacionObjeto(Columna::CENTRO);
+          $col4->setAlineacionContenido(Columna::CENTRO);
+          $col4->setNombreCampo('numlot');
+          $col4->setJScript('onBlur="javascript: Verifica_ubinumlote_repetido(this.id);"');
+          $col4->setHTML('type="text" size="15" maxlength="100"');
+
+	  $col5 = new Columna('Fecha de Elaboracion');
+	  $col5->setTipo(Columna::FECHA);
+	  $col5->setAlineacionObjeto(Columna::CENTRO);
+	  $col5->setAlineacionContenido(Columna::CENTRO);
+	  $col5->setEsGrabable(true);
+          $col5->setHTML(' ');
+	  $col5->setVacia(true);
+	  $col5->setNombreCampo('fecela');
+
+	  $col6 = clone $col5;
+	  $col6->setTitulo('Fecha Vencimiento');
+	  $col6->setNombreCampo('fecven');
+      }
+
       $opciones->addColumna($col1);
       $opciones->addColumna($col2);
       $opciones->addColumna($col3);
+      if ($manartlot=='S')
+      {
+         $opciones->addColumna($col4);
+         $opciones->addColumna($col5);
+         $opciones->addColumna($col6);
+      }
 
       $this->objAlmUbi = $opciones->getConfig($per);
   }
@@ -481,9 +535,10 @@ $this->Bitacora('Guardo');
     else
     {*/
      $grid=Herramientas::CargarDatosGrid($this,$this->obj);
+     $gridunid=Herramientas::CargarDatosGridv2($this,$this->obj5);
       /*try
       {*/
-       Articulos::salvarAlmregart($caregart,$grid);
+       Articulos::salvarAlmregart($caregart,$grid,$gridunid);
      /* }
        catch (Exception $ex)
       {*/
@@ -546,9 +601,19 @@ $this->Bitacora('Guardo');
       }
      else  if ($this->getRequestParameter('ajax')=='3')
       {
-          $dato=CadefubiPeer::getDesubicacion($this->getRequestParameter('codigo'));
-            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
-            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+         $javascript=""; $dato="";
+         $c = new Criteria();
+	 $c->addJoin(CadefubiPeer :: CODUBI, CaalmubiPeer :: CODUBI);
+	 $c->add(CaalmubiPeer :: CODALM, $this->getRequestParameter('codalm'));
+         $c->add(CadefubiPeer :: CODUBI, $this->getRequestParameter('codigo'));
+         $result= CadefubiPeer ::doSelectOne($c);
+         if ($result)
+         {
+            $dato=$result->getNomubi();
+         }else $javascript="alert('La Ubicación no se encuentra asociada al almacen'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+
+         $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
           return sfView::HEADER_ONLY;
       }
       else  if ($this->getRequestParameter('ajax')=='4')
@@ -649,14 +714,20 @@ $this->Bitacora('Guardo');
     {
       $articulo=$this->getRequestParameter('articulo');
       $almacen=$this->getRequestParameter('almacen');
-          $fila=$this->getRequestParameter('fil');
-         $totalfilas=0;
-         $javascript="";
+      $fila=$this->getRequestParameter('fil');
+      $javascript="";
+
       $this->configGridAlmUbi($articulo,$almacen,$totalfilas);
+
+      $t= new Criteria();
+      $t->add(CaalmubiPeer::CODALM,$almacen);
+      $reg= CaalmubiPeer::doSelectOne($t);
+      if (!$reg) $totalfilas=0;
+      else $totalfilas=1;
 
       if ($totalfilas!=0)
       {
-      	$javascript="$('divGrid').show();";
+      	//$javascript="$('divGrid').show();";
       }
       $output = '[["javascript","'.$javascript.'",""],["fila","'.$fila.'",""],["totalfilas","'.$totalfilas.'",""]]';
       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
@@ -703,7 +774,7 @@ $this->Bitacora('Guardo');
 
 
   /**
-   * Función principal para procesar la eliminación de registros 
+   * Función principal para procesar la eliminación de registros
    * en el formulario.
    *
    */
@@ -805,6 +876,24 @@ $this->Bitacora('Guardo');
       $opciones->addColumna($col2);
       $opciones->addColumna($col3);
       $this->obj2 = $opciones->getConfig($per);
+  }
+
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGridUnidades()
+  {
+      $c = new Criteria();
+      $c->add(CaunialartPeer::CODART,$this->caregart->getCodart());
+      $per = CaunialartPeer::doSelect($c);
+
+     $this->columnas = Herramientas :: getConfigGrid(sfConfig :: get('sf_app_module_dir') . '/almregart/' . sfConfig :: get('sf_app_module_config_dir_name') . '/grid_unidades');
+
+     $this->obj5 = $this->columnas[0]->getConfig($per);
   }
 
 }

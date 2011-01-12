@@ -76,6 +76,14 @@ class NpasicarempMapBuilder {
 
 		$tMap->addColumn('CODTIPCAT', 'Codtipcat', 'string', CreoleTypes::VARCHAR, false, 4);
 
+		$tMap->addColumn('CODMOTCAMCAR', 'Codmotcamcar', 'string', CreoleTypes::VARCHAR, false, 4);
+
+		$tMap->addColumn('CODTIE', 'Codtie', 'string', CreoleTypes::VARCHAR, false, 3);
+
+		$tMap->addColumn('JUSCAM', 'Juscam', 'string', CreoleTypes::VARCHAR, false, 250);
+
+		$tMap->addColumn('CODCEN', 'Codcen', 'string', CreoleTypes::VARCHAR, false, 4);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

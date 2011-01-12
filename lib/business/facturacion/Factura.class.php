@@ -4,29 +4,17 @@
  *
  * @package    Roraima
  * @subpackage facturacion
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Factura.class.php 38960 2010-06-15 19:04:48Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class Factura {
 
-  public static function salvarFactura($fafactur,$grid1,$grid2,$grid3,$grid4,$tipocaja,&$msj,&$msj2)
+  public static function salvarFactura($fafactur,$grid1,$grid2,$grid3,$grid4,$tipocaja,&$msj,&$msj2,&$msj3,$grid6)
   {
-    if (!self::grabarComprobanteOrden(&$fafactur,$grid1,&$msj))
-    {
-      return true;
-    }
-
-    if ($fafactur->getTipref()=='VC')
-    {
-      if (!self::grabarComprobanteInv(&$fafactur,$grid1,&$msj2))
-      {
-      	return true;
-      }
-    }
-
+     $nuevo=$fafactur->getId();
     if ($fafactur->getIncluircliente()=='S')
     {
       $facliente= new Facliente();
@@ -39,11 +27,37 @@ class Factura {
       $facliente->save();
     }
 
-    self::generarAsientos(&$fafactur,$grid1,$grid2,$grid3,$grid4,&$arrasientos,&$pos);
+    if (!self::grabarComprobanteOrden(&$fafactur,$grid1,&$msj))
+    {
+      return true;
+    }
+
+    if ($fafactur->getTipref()=='VC')
+    {
+      if (!self::grabarComprobanteInv(&$fafactur,$grid1,&$msj2))
+      {
+      	return true;
+      }
+    }    
+
+    if (!self::generarAsientos(&$fafactur,$grid1,$grid2,$grid3,$grid4,&$arrasientos,&$pos,&$msj3))
+    {
+      return true;
+    }    
 
     self::grabarComprobanteMaestro(&$fafactur,$arrasientos,&$pos);
 
     self::grabarFactura($fafactur,$grid1,$grid2,$grid3,$grid4,$tipocaja);
+
+    $usalib=H::getConfApp2('gridfaclib', 'facturacion', 'fafactur');
+    if ($usalib=='S')
+    {
+        if ($nuevo=="")
+        {
+            self::generaFacturaLibro($fafactur,$grid1,$grid4);
+        }
+        self::grabarFacturaLibro($fafactur,$grid6);
+    }
 
     if ($fafactur->getTipconpag()=='R') //Pago a Crédito
     {
@@ -58,6 +72,8 @@ class Factura {
     //  self::grabarImpIng($fafactur);
     }
 
+    $fafactur->save();
+    
     return true;
 
   }
@@ -86,8 +102,14 @@ class Factura {
 
     if ($monto>0)
     {
-      $correl=OrdendePago::Buscar_Correlativo();
       $numcomord="FO".substr($fafactur->getReffac(),2,6);
+       $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+        if ($confcorcom=='N')
+        {
+          $correl=$numcomord;
+        }else {
+           $correl=OrdendePago::Buscar_Correlativo();
+        }
       $fafactur->setNumcomord($correl);
 
       $contabc= new Contabc();
@@ -308,11 +330,12 @@ class Factura {
     return $busctasig;
   }
 
-  public static function generarAsientos(&$fafactur,$grid1,$grid2,$grid3,$grid4,&$arrasientos,&$pos)
+  public static function generarAsientos(&$fafactur,$grid1,$grid2,$grid3,$grid4,&$arrasientos,&$pos,&$msj3)
   {
-  	$salactual=H::convnume($fafactur->getTottotart()) - H::convnume($fafactur->getMondesc());
+  	$msj3=-1;
+  	$salactual=H::toFloat($fafactur->getTottotart()) - H::toFloat($fafactur->getMondesc());
   	$numcomord="FA".substr($fafactur->getReffac(),2,6);
-  	$correl=OrdendePago::Buscar_Correlativo();
+  	//$correl=OrdendePago::Buscar_Correlativo();
   	//$fafactur->setNumcom($correl);
   	$arrasientos=array();
   	$pos=0;
@@ -321,8 +344,13 @@ class Factura {
     if ($fafactur->getTipconpag()=='R') //Asiento Contable d Cta x Cobrar a Cliente
     {
       $ctacont=$fafactur->getCtacli();
+      if ($ctacont!=""){
       $desdoc=H::getX('codcta','Contabb','Descta',$ctacont);
       self::guardarAsientos($ctacont,$desdoc,'D',$salactual,&$arrasientos,&$pos);
+      }else{
+      	$msj3=1147;
+      	return false;
+      }
     }
     else
     {
@@ -343,8 +371,16 @@ class Factura {
             if ($reg)
             {
               $ctaban=$reg->getCodcta();
+              if ($ctaban!=""){
               $desdoc=H::getX('codcta','Contabb','Descta',$ctaban);
               self::guardarAsientos($ctaban,$desdoc,'D',$x[$j]->getMonpag(),&$arrasientos,&$pos);
+              }else{
+            	$msj3=1149;
+      	        return false;
+              }
+            }else{
+            	$msj3=1148;
+      	        return false;
             }
           }
           else  //Asiento Contable de Venta al Contado
@@ -354,8 +390,13 @@ class Factura {
             if ($reg)
             {
               $ctaVco= $reg->getCtavco();
+              if ($ctaVco!=""){
               $desdoc=H::getX('codcta','Contabb','Descta',$ctaVco);
               self::guardarAsientos($ctaVco,$desdoc,'D',$x[$j]->getMonpag(),&$arrasientos,&$pos);
+              }else{
+            	$msj3=1150;
+      	        return false;
+              }
             }
           }
         }
@@ -366,8 +407,13 @@ class Factura {
           if ($reg)
           {
             $ctaVco= $reg->getCtavco();
-            $desdoc=H::getX('codcta','Contabb','Descta',$ctaVco);
-            self::guardarAsientos($ctaVco,$desdoc,'D',$x[$j]->getMonpag(),&$arrasientos,&$pos);
+            if ($ctaVco!=""){
+              $desdoc=H::getX('codcta','Contabb','Descta',$ctaVco);
+              self::guardarAsientos($ctaVco,$desdoc,'D',$x[$j]->getMonpag(),&$arrasientos,&$pos);
+            }else{
+            	$msj3=1150;
+      	        return false;
+            }
           }
         }
 	  	$j++;
@@ -383,8 +429,13 @@ class Factura {
          if ($reg)
          {
            $ctaVco= $reg->getCtavco();
-           $desdoc=H::getX('codcta','Contabb','Descta',$ctaVco);
-           self::guardarAsientos($ctaVco,$desdoc,'C',$fafactur->getVuelto(),&$arrasientos,&$pos);
+           if ($ctaVco!="") {
+            $desdoc=H::getX('codcta','Contabb','Descta',$ctaVco);
+            self::guardarAsientos($ctaVco,$desdoc,'C',$fafactur->getVuelto(),&$arrasientos,&$pos);
+           }else{
+            	$msj3=1150;
+      	        return false;
+            }
          }
        }
        else
@@ -400,11 +451,22 @@ class Factura {
 	  {
          while($i<count($z))
          {
+           if ($z[$i]->getCoddesc()!="")
+           {
            if ($z[$i]->getCodcta()!="")
            {
             $cuencon=$z[$i]->getCodcta();
+            if ($cuencon!=""){
             $descrip=H::getX('codcta','Contabb','Descta',$cuencon);
             self::guardarAsientos($cuencon,$descrip,'D',$z[$i]->getMondesc(),&$arrasientos,&$pos);
+            }else{
+              $msj3=1151;
+      	      return false;
+            }
+           }else{
+              $msj3=1151;
+      	      return false;
+            }
            }
            $i++;
          }
@@ -416,12 +478,31 @@ class Factura {
 	  {
          while($l<count($w))
          {
+          if ($w[$l]->getCodrgo()!="")
+          {
            if ($w[$l]->getCodcta()!="")
            {
             $cuencon=$w[$l]->getCodcta();
-            $descrip=H::getX('codcta','Contabb','Descta',$cuencon);
-            self::guardarAsientos($cuencon,$descrip,'C',$w[$l]->getMonrgo(),&$arrasientos,&$pos);
-           }
+            if ($cuencon!=""){
+             $descrip=H::getX('codcta','Contabb','Descta',$cuencon);
+             $c = new Criteria();
+             $c->add(FargoartPeer::REFDOC,$fafactur->getReffac());
+             $c->add(FargoartPeer::CODRGO,$w[$l]->getCodrgo());
+             $per = FargoartPeer::doSelectOne($c);
+             if($per)
+                $monrgo=$per->getMonrgo();
+             else
+                $monrgo=$w[$l]->getMonrgo();
+             self::guardarAsientos($cuencon,$descrip,'C',$monrgo,&$arrasientos,&$pos);
+            }else{
+              $msj3=1152;
+      	      return false;
+            }
+           }else{
+              $msj3=1152;
+      	      return false;
+            }
+          }
            $l++;
          }
 	  }
@@ -439,7 +520,10 @@ class Factura {
              eval('$cant = $x[$j]->get'.ucfirst(strtolower($col)).'();');
              if ($x[$j]->getPrecio()!="") { $precio=$x[$j]->getPrecio(); }
              else { $precio=$x[$j]->getPrecioe();}
-             $monto_ingreso=round(($cant * $precio),2);
+             //$monto_ingreso=round(($cant * $precio),2);
+             $calculo=$cant * $precio;
+             $monto_ingreso=$calculo;
+
           }
           else
           {
@@ -463,8 +547,11 @@ class Factura {
           	  eval('$cant = $x[$j]->get'.ucfirst(strtolower($col)).'();');
           	  if ($x[$j]->getPrecio()!="") { $precio=$x[$j]->getPrecio(); }
              else { $precio=$x[$j]->getPrecioe();}
-              $monaux=round((($cant* $precio*$porcentaje)/100),2);
-              $monto_ingreso=round((($cant*$precio)-$monaux),2);
+              //$monaux=round((($cant* $precio*$porcentaje)/100),2);
+             $monaux=(($cant* $precio*$porcentaje)/100);
+              //$monto_ingreso=round((($cant*$precio)-$monaux),2);
+             $monto_ingreso=(($cant*$precio)-$monaux);
+
           }
 
           $cta_vta=H::getX('Codart','Caregart','Ctavta',$x[$j]->getCodart());
@@ -475,6 +562,9 @@ class Factura {
               $descrip=H::getX('codcta','Contabb','Descta',$cta_vta);
               self::guardarAsientos($cta_vta,$descrip,'C',$monto_ingreso,&$arrasientos,&$pos);
             }
+          }else{
+              $msj3=1153;
+      	      return false;
           }
 
           if ($x[$j]->getBlanco2()!='0,00' || $fafactur->getTipref()=='VC')
@@ -482,7 +572,8 @@ class Factura {
           	eval('$cant = $x[$j]->get'.ucfirst(strtolower($col)).'();');
           	if ($x[$j]->getPrecio()!="") { $precio=$x[$j]->getPrecio(); }
              else { $precio=$x[$j]->getPrecioe();}
-          	$monto_provee=round((($cant* $precio*$porcentaje)/100),2);
+          	//$monto_provee=round((($cant* $precio*$porcentaje)/100),2);
+                $monto_provee=(($cant* $precio*$porcentaje)/100);
           	if ($fafactur->getTipref()!='VC')
           	{
               $f= new Criteria();
@@ -500,12 +591,42 @@ class Factura {
 	              $descrip=H::getX('codcta','Contabb','Descta',$cta_provee);
 	              self::guardarAsientos($cta_provee,$descrip,'C',$monto_provee,&$arrasientos,&$pos);
 	            }
+          	}else{
+          	  $msj3=1154;
+      	      return false;
           	}
           }
 
         }
       	$j++;
       }
+
+      $i=0;
+      $acumdeb=0;
+      $acumcre=0;
+      while ($i<=($pos-1))
+      {
+            if ($arrasientos[$i]["2"]!="")
+            {
+              if ($arrasientos[$i]["2"]=='D')
+              {
+                  $acumdeb= $acumdeb + $arrasientos[$i]["3"];
+              }
+              else
+              {
+                    $acumcre= $acumcre + $arrasientos[$i]["3"];
+              }             
+            }
+            $i++;
+      }
+      if (H::toFloat($acumdeb)!=H::toFloat($acumcre))
+      {
+         $msj3=519;
+          return false;
+      }
+
+      
+     return true;
   }
 
   public static function guardarAsientos($ctacont,$desdoc,$debcre,$monto,&$arrasientos,&$pos)
@@ -548,7 +669,13 @@ class Factura {
   public static function grabarComprobanteMaestro(&$fafactur,$arrasientos,&$pos)
   {
     $reftra="FA".substr($fafactur->getReffac(),2,6);
+    $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+    if ($confcorcom=='N')
+    {
+      $correl3=$reftra;
+    }else {
     $correl3=OrdendePago::Buscar_Correlativo();
+    }
     $contabc = new Contabc();
     $contabc->setNumcom($correl3);
     $contabc->setReftra($reftra);
@@ -573,25 +700,25 @@ class Factura {
 	  {
 	  	if ($arrasientos[$i]["2"]!="")
 	  	{
-          $contabc1= new Contabc1();
-          $contabc1->setNumcom($correl3);
-          $contabc1->setFeccom($fafactur->getFecfac());
-          $contabc1->setCodcta($arrasientos[$i]["0"]);
-          $numasi= $i +1;
-          $contabc1->setNumasi($numasi);
-          $contabc1->setRefasi($fafactur->getReffac());
-          $contabc1->setDesasi($arrasientos[$i]["1"]);
-          if ($arrasientos[$i]["2"]=='D')
-          {
-          	$contabc1->setDebcre('D');
-          	$contabc1->setMonasi($arrasientos[$i]["3"]);
-          }
-          else
-          {
-          	$contabc1->setDebcre('C');
-          	$contabc1->setMonasi($arrasientos[$i]["3"]);
-          }
-          $contabc1->save();
+                  $contabc1= new Contabc1();
+                  $contabc1->setNumcom($correl3);
+                  $contabc1->setFeccom($fafactur->getFecfac());
+                  $contabc1->setCodcta($arrasientos[$i]["0"]);
+                  $numasi= $i +1;
+                  $contabc1->setNumasi($numasi);
+                  $contabc1->setRefasi($fafactur->getReffac());
+                  $contabc1->setDesasi($arrasientos[$i]["1"]);
+                  if ($arrasientos[$i]["2"]=='D')
+                  {
+                        $contabc1->setDebcre('D');
+                        $contabc1->setMonasi($arrasientos[$i]["3"]);
+                  }
+                  else
+                  {
+                        $contabc1->setDebcre('C');
+                        $contabc1->setMonasi($arrasientos[$i]["3"]);
+                  }
+                  $contabc1->save();
 	  	}
 	  	$i++;
 	  }
@@ -601,15 +728,22 @@ class Factura {
   public static function grabarComprobanteInv(&$fafactur,$grid1,&$msj2)
   {
     $grabarcomprobanteinv=true;
-    $msj2="";
+    $msj2=-1;
     $montotot=self::calcularCostoPro($fafactur,$grid1);
     $col=self::determinarReferenciaDoc($fafactur->getTipref());
     $cant=0;
 
     if ($montotot>0)
     {
-      $correl2=OrdendePago::Buscar_Correlativo();
-      $numcomprobinv="FI".substr($fafactur->getReffac(),2,6);
+       $numcomprobinv="FI".substr($fafactur->getReffac(),2,6);
+      $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+        if ($confcorcom=='N')
+        {
+          $correl2=$numcomprobinv;
+        }else {
+        $correl2=OrdendePago::Buscar_Correlativo();
+        }
+
       $fafactur->setNumcominv($correl2);
       $contabc= new Contabc();
       $contabc->setNumcom($correl2);
@@ -793,12 +927,37 @@ class Factura {
 
     $fafactur->setStatus('A');
     $fafactur->setCodcaj($tipocaja);
+    if ($fafactur->getNumcontrol()=='##########')
+    {
+       if (Herramientas::getVerCorrelativo('corfaccont','facorrelat',&$r))
+       {
+           $encontrado=false;
+            while (!$encontrado)
+            {
+              $numero=str_pad($r, 10, '0', STR_PAD_LEFT);
+
+              $sql="select numcontrol from fafactur where numcontrol='".$numero."'";
+              if (Herramientas::BuscarDatos($sql,&$result))
+              {
+                $r=$r+1;
+              }
+              else
+              {
+                $encontrado=true;
+              }
+            }
+            $fafactur->setNumcontrol(str_pad($r, 10, '0', STR_PAD_LEFT));
+
+         Herramientas::getSalvarCorrelativo('corfaccont','facorrelat','Referencia',$r,$msg);
+       }
+    }
+
     $fafactur->save();
 
-    self::grabarDetalleFactura($fafactur,$grid1);
     self::grabarDescuentoArticulo($fafactur,$grid1,$grid2);
     self::grabarRecargoArticulo($fafactur,$grid1,$grid4);
     self::grabarFormaPago($fafactur,$grid3);
+    self::grabarDetalleFactura($fafactur,$grid1);
   }
 
   public static function grabarDetalleFactura($fafactur,$grid1)
@@ -809,6 +968,7 @@ class Factura {
     $cantot=0;
     if ($x[$j]->getCodart()!="")
     {
+        $monto=0;
       while ($j<count($x))
 	  {
 	  	eval('$cantot = $x[$j]->get'.ucfirst(strtolower($col)).'();');
@@ -819,6 +979,16 @@ class Factura {
 	     {
 	     	$x[$j]->setPrecio($x[$j]->getPrecioe());
 	     }
+             $c = new Criteria();
+             $c->add(FaartfacproPeer::REFFAC,$fafactur->getProform());
+             $c->add(FaartfacproPeer::CODART,$x[$j]->getCodart());
+             $per = FaartfacproPeer::doSelectOne($c);
+             if($per)
+             {
+                 $per->setEstatus('P');
+                 $per->setNumfac($fafactur->getReffac());
+                 $per->save();
+             }
 	     $x[$j]->setCantot($cantot);
 	     $x[$j]->save();
 
@@ -834,8 +1004,15 @@ class Factura {
 	     	}
 	     }
 	    }
+            if($x[$j]->getMonrgo()!='')
+            {
+                $monto+=$x[$j]->getMonrgo();
+            }
 	    $j++;
 	  }
+          $sqlrec="update fargoart set monrgo='".$monto."'
+                     where  refdoc='".$fafactur->getReffac()."'";
+          H::insertarRegistros($sqlrec);
     }
 
     $z=$grid1[1];
@@ -856,14 +1033,14 @@ class Factura {
       $j=0;
       while ($j<count($z))
       {
-        if ($z[$j]->getCodart()!="" && $z[$j]->getDesc()!="0")
+        if ($z[$j]->getCodart()!="" && $z[$j]->getMontdesc()<>'0.0')
         {
            $acumart=0;
            $x=$grid2[0];
            $i=0;
            while ($i<count($x))
            {
-             if ($x[$i]->getCoddesc()!="" && $x[$i]->getMondesc()!="0.00")
+             if ($x[$i]->getCoddesc()!="" && $x[$i]->getMondesc()<>'0.0')
              {
                if ($x[$i]->getTipdesc()=="M")
                {
@@ -960,10 +1137,10 @@ class Factura {
   {
     $marcados=0;
     $marca="";
-    if ($tipo=='R') //Recargo
+//    if ($tipo=='R') //Recargo
     $indice='check';
-    else
-    $indice='desc';
+//    else
+//    $indice='desc';
 
     $z=$grid[0];
     $j=0;
@@ -1108,12 +1285,12 @@ class Factura {
       $cobdocume->setFecven($fecven);
       $cobdocume->setOridoc('FAC');
       $cobdocume->setDesdoc($fafactur->getDesfac());
-      $mondoc=(H::convnume($fafactur->getTottotart()) - H::convnume($fafactur->getTotmonrgo()));
+      $mondoc=(H::toFloat($fafactur->getTottotart()) - H::toFloat($fafactur->getTotmonrgo()));
       $cobdocume->setMondoc($mondoc);
-      $cobdocume->setRecdoc(H::convnume($fafactur->getTotmonrgo()));
-      $cobdocume->setDscdoc(H::convnume($fafactur->getMondesc()));
-      $cobdocume->setAbodoc(H::convnume($fafactur->getMoncan()));
-      $salact=H::convnume($fafactur->getTottotart()) - H::convnume($fafactur->getMondesc()) - H::convnume($fafactur->getMoncan());
+      $cobdocume->setRecdoc(H::toFloat($fafactur->getTotmonrgo()));
+      $cobdocume->setDscdoc(H::toFloat($fafactur->getMondesc()));
+      $cobdocume->setAbodoc(H::toFloat($fafactur->getMoncan()));
+      $salact=H::toFloat($fafactur->getTottotart()) - H::toFloat($fafactur->getMondesc()) - H::toFloat($fafactur->getMoncan());
       $cobdocume->setSaldoc($salact);
       $cobdocume->setStadoc('A');
       $cobdocume->setReffac($fafactur->getReffac());
@@ -1138,7 +1315,15 @@ class Factura {
           $cobrecdoc->setCodcli($fafactur->getCodcli());
           $cobrecdoc->setCodrec($x[$j]->getCodrgo());
           $cobrecdoc->setFecdoc($fafactur->getFecfac());
-          $cobrecdoc->setMonrec($x[$j]->getMonrgo());
+          $c = new Criteria();
+          $c->add(FargoartPeer::REFDOC,$fafactur->getReffac());
+          $c->add(FargoartPeer::CODRGO,$x[$j]->getCodrgo());
+          $per = FargoartPeer::doSelectOne($c);
+          if($per)
+            $monrgo=$per->getMonrgo();
+          else
+            $monrgo=$x[$j]->getMonrgo();
+          $cobrecdoc->setMonrec($monrgo);
           $cobrecdoc->save();
         }
       	$j++;
@@ -1970,6 +2155,99 @@ class Factura {
 	  }
     }
     return $pago_mayor_igual;
+  }
+
+  public static function grabarFacturaLibro($fafactur,$grid6)
+  {
+      $x=$grid6[0];
+      $i=0;
+      while ($i<count($x))
+      {
+        if ($x[$i]->getFecfac()!="" && $x[$i]->getRifpro()!="" && $x[$i]->getTotfac()>0)
+        {
+           $x[$i]->setReffac($fafactur->getReffac());
+           $x[$i]->setCodcli(H::getX('RIFPRO','Facliente','CODPRO',$x[$i]->getRifpro()));
+           $x[$i]->save();
+}
+       $i++;
+      }
+
+    $z=$grid6[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+        while ($j<count($z))
+        {
+          $z[$j]->delete();
+          $j++;
+        }
+    }
+  }
+  public static function generaFacturaLibro($fafactur,$grid1,$grid4)
+  {
+    $col=self::determinarReferenciaDoc($fafactur->getTipref());
+    $x=$grid1[0];
+    $j=0;
+    $cantot=0;
+    if ($x[$j]->getCodart()!="")
+    {
+      $monto=0;
+      $acum=0;
+      while ($j<count($x))
+      {
+            eval('$cantot = $x[$j]->get'.ucfirst(strtolower($col)).'();');
+	    if ($x[$j]->getCodart()!="" && $cantot>0)
+	    {
+	     if ($x[$j]->getPrecio()=="")
+	     {
+	     	$precio=$x[$j]->getPrecioe();
+	     }else $precio=$x[$j]->getPrecio();
+
+             $calculo=$cantot*$precio;
+
+             if($x[$j]->getMonrgo()==0 || $x[$j]->getMonrgo()=='')
+             {
+                $monto+=$calculo;
+             }else {
+                 $acum+=$calculo;
+             }
+	    }            
+	    $j++;
+     }
+    }
+
+    $z=$grid4[0];
+    $j=0;
+    $acumrec=0;
+    $valrec="";
+    while ($j<count($z))
+    {
+      if ($z[$j]->getCodrgo()!="")
+      {
+        $valrec=$z[$j]->getCodrgo();
+        $acumrec+=$z[$j]->getMonrgo();
+      }
+      $j++;
+    }
+
+
+      $fafaclib= new Fafaclib();
+      $fafaclib->setFecfac($fafactur->getFecfac());
+      $fafaclib->setReffac($fafactur->getReffac());
+      $fafaclib->setNumfac($fafactur->getReffac());
+      $fafaclib->setNumctr($fafactur->getNumcontrol());
+      $fafaclib->setCodcli($fafactur->getCodcli());
+      $fafaclib->setTotfac($fafactur->getMonfac());
+      if ($fafactur->getTipoven()=='E')
+        $fafaclib->setValfob($fafactur->getMonfac());
+      $fafaclib->setVenexec($monto);
+      $fafaclib->setBasimp($acum);
+      $fafaclib->setCrefis($fafactur->getMondesc());
+      if ($valrec!="") {
+      $fafaclib->setPoriva(H::getX('Codrgo','Farecarg','Monrgo',$valrec));
+      $fafaclib->setMoniva($acumrec);      
+      }
+      $fafaclib->save();
   }
 
 }

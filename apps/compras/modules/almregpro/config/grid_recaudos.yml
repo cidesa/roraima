@@ -19,7 +19,7 @@ opciones:                  # Opciones generales
   nombrecampo:             desrec
   esgrabable:              false
   html:                    [size="25" readonly="true"  ]
-       [size="15", readonly=true ]
+
 3:       # Columna 3
   titulo:                  Fecha Entrega
   tipo:                    f

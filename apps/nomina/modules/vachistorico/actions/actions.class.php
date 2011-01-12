@@ -136,22 +136,24 @@ private static $coderror=-1;
     $col5->setHTML('type="text" size="8" ');
 
 	$col6 = new Columna('Dias de Bono Vacacional');
-    $col6->setTipo(Columna::TEXTO);
+    $col6->setTipo(Columna::MONTO);
     $col6->setEsGrabable(true);
+    $col6->setAlineacionContenido(Columna::IZQUIERDA);
+    $col6->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col6->setEsNumerico(true);
     $col6->setNombreCampo('diasbonovac');
-	$col6->setJScript('onBlur="javascript:event.keyCode=13; enternumero(event,this.id);"');
-    $col6->setAlineacionObjeto(Columna::DERECHA);
-    $col6->setAlineacionContenido(Columna::DERECHA);
-    $col6->setHTML('type="text" size="8" ');
+    $col6->setJScript('onBlur = "javascript:event.keyCode=13;return entermontootro(event,this.id)"');
+    $col6->setHTML('type="text" size="10" ');
 
 	$col7 = new Columna('Dias de Bono Vacacional Pagados');
-    $col7->setTipo(Columna::TEXTO);
+    $col7->setTipo(Columna::MONTO);
     $col7->setEsGrabable(true);
+    $col7->setAlineacionContenido(Columna::IZQUIERDA);
+    $col7->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col7->setEsNumerico(true);
     $col7->setNombreCampo('diasbonovacpag');
-	$col7->setJScript('onBlur="javascript:event.keyCode=13; enternumero(event,this.id);"');
-    $col7->setAlineacionObjeto(Columna::DERECHA);
-    $col7->setAlineacionContenido(Columna::DERECHA);
-    $col7->setHTML('type="text" size="8" ');
+    $col7->setJScript('onBlur = "javascript:event.keyCode=13;return entermontootro(event,this.id)"');
+    $col7->setHTML('type="text" size="10" ');
 
 
     $opciones->addColumna($col1);

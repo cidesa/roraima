@@ -21,6 +21,7 @@ class Tssalcaj extends BaseTssalcaj
   protected $agregabenefi="N";
   protected $numcue="";
   protected $tipdoc="";
+  protected $check="";
 
   public function getNomben()
   {

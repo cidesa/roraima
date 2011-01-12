@@ -33,6 +33,12 @@
   'maxlength' => $lonact,
   'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$foract')",
   'readonly' => $bndefact->getId()!='' ? true : false ,
+'onBlur'=> remote_function(array(
+          'url'      => 'biecatact/ajax',
+          'condition' => "$('bndefact_codact').value != '' && $('id').value == ''",
+          'complete' => 'AjaxJSON(request, json)',
+          'with' => "'ajax=2&cajtexcom=bndefact_codact&codigo='+this.value",
+    )),
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>

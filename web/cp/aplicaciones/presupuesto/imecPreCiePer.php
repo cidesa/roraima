@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
@@ -23,15 +24,31 @@ $z= new tools();
          $sql="select * from cppereje where pereje='".$periodo."' AND cerrado='N'";
         if ($tb=$z->buscar_datos($sql))
            {
-              $sql = "update cppereje set cerrado='C' where pereje='".$periodo."'";
-          $bd->actualizar($sql);
-          Mensaje('El Periodo se Cerró con Exito.');
-          Regresar('PreCiePer.php');
+            if ($periodo!='01'){
+           	$sql2="select * from cppereje where pereje<'".$periodo."' order by pereje desc limit 1";
+           	if ($tb1=$z->buscar_datos($sql2))
+            {
+              if ($tb1->fields["cerrado"]!='N'){
+	              $sql = "update cppereje set cerrado='C' where pereje='".$periodo."'";
+	              $bd->actualizar($sql);
+	              Mensaje('El Periodo se Cerró con Exito.');
+	              Regresar('PreCiePer.php');
+              }else{
+              	Mensaje('El Periodo anterior a este, no esta Cerrado. Debe cerrarlo primero');
+                Regresar('PreCiePer.php');
+              }
+            }
+            }else{
+            	$sql = "update cppereje set cerrado='C' where pereje='".$periodo."'";
+                $bd->actualizar($sql);
+                Mensaje('El Periodo se Cerró con Exito.');
+                Regresar('PreCiePer.php');
+            }
            }
            else
            {
                Mensaje('El Periodo no Existe o Ya esta Cerrado.');
-            Regresar('PreCiePer.php');
+               Regresar('PreCiePer.php');
            }
     }else if ($var=='N'){ //Abrir
 
@@ -55,7 +72,7 @@ $z= new tools();
     $tb=$bd->select($sql);
     $id = $tb->fields["id"];
     $bd->Log($id, 'pre', 'Cppereje', 'Precieper', 'A');
-     
+
     }
 
     Mensaje('Error intente de Nuevo.');

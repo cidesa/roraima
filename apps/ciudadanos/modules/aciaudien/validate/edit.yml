@@ -1,0 +1,68 @@
+methods:
+  post:
+   - "ataudiencias{atciudadano_id}"
+   - "ataudiencias{atunidades_id}"
+   - "ataudiencias{motaud}"
+   - "ataudiencias{persona}"
+
+names:
+  ataudiencias{atciudadano_id}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: MyStringValidator2
+
+  ataudiencias{atunidades_id}:
+    required:  Yes
+    required_msg: Este campo es requerido
+
+  ataudiencias{motaud}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: MyStringValidator4
+
+  ataudiencias{persona}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: MyStringValidator2
+
+MyStringValidator1:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       12
+        max_error: El campo debe tener menos de 12 caracteres
+
+MyStringValidator2:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       50
+        max_error: El campo debe tener menos de 50 caracteres
+
+MyStringValidator3:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       1
+        max_error: El campo debe tener menos de 1 caracter
+
+MyStringValidator4:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       100
+        max_error: El campo debe tener menos de 100 caracteres
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type_error:   Por favor, Seleccione una opción
+        nan_error:    Por favor, Seleccione una opción
+        min:          1.00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          9999999999.99
+        max_error:    El valor debe contener maximo 9999999999.99

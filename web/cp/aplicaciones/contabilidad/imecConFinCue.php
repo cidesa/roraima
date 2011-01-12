@@ -1,8 +1,9 @@
 <?
+session_name('cidesa');
 session_start();
-require($_SESSION["x"].'lib/bd/basedatosAdo.php');
-require($_SESSION["x"].'lib/general/funciones.php');
-require($_SESSION["x"].'lib/general/tools.php');
+require($_SESSION["x"].'/lib/bd/basedatosAdo.php');
+require($_SESSION["x"].'/lib/general/funciones.php');
+require($_SESSION["x"].'/lib/general/tools.php');
 validar(array(11,15));            //Seguridad  del Sistema
 $codemp=$_SESSION["codemp"];
 $bd=new basedatosAdo($codemp);
@@ -239,6 +240,7 @@ $z=new tools();
     global $col5;
     global $col6;
     global $col7;
+    global $etadef;
 
       if ($cargable=='Si'){ $cargab='C';}else{ $cargab='N';}
       if ($tipo_saldo=='D'){ $debcre='D';}else{ $debcre='C';}
@@ -247,7 +249,10 @@ $z=new tools();
       $salprgper=str_replace(',','',$col6[1]); // Se le quita la ,
 
      if ($IncMod == "M"){
-       $sql="update contabb set descta='$descta', fecini=to_date('$fecini','DD/MM/YYYY'),feccie=to_date('$feccie','DD/MM/YYYY'), salant='$salant', salprgper='$salprgper', salacuper=0, cargab='$cargab', debcre='$debcre' where trim(codcta)='$codigo'";
+       if ($etadef=='C')
+         $sql="update contabb set descta='$descta' where trim(codcta)='$codigo'";
+       else
+         $sql="update contabb set descta='$descta', fecini=to_date('$fecini','DD/MM/YYYY'),feccie=to_date('$feccie','DD/MM/YYYY'), salant='$salant', salprgper='$salprgper', salacuper=0, cargab='$cargab', debcre='$debcre' where trim(codcta)='$codigo'";
        $bd->actualizar($sql);
 
     //Todos los movimientos heredan el tipo de saldo Deudor o Acreedor

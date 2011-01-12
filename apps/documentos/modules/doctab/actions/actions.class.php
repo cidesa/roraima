@@ -5,24 +5,14 @@
  *
  * @package    Roraima
  * @subpackage doctab
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 40192 2010-08-13 22:57:44Z lhernandez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class doctabActions extends autodoctabActions
 {
-
-  /*
-   * TODO: Colocar el Catálogo para seleccionar el Coddoc
-   * TODO: Verificar la carga de datos al modificar un registro.
-   * tSql="INSERT INTO "+Session("NOMUSU")+".DFTEMPORAL4 SELECT TIPPRC AS TIPO, NOMABR AS ABR, NOMEXT AS EXT FROM "+Session("NOMUSU")+".CPDOCPRC"
-                  tSql2="INSERT INTO "+Session("NOMUSU")+".DFTEMPORAL4 SELECT TIPCOM AS TIPO, NOMABR AS ABR, NOMEXT AS EXT FROM "+Session("NOMUSU")+".CPDOCCOM"
-                  tSql3="INSERT INTO "+Session("NOMUSU")+".DFTEMPORAL4 SELECT TIPCAU AS TIPO, NOMABR AS ABR, NOMEXT AS EXT FROM "+Session("NOMUSU")+".CPDOCCAU"
-                  tSql4="INSERT INTO "+Session("NOMUSU")+".DFTEMPORAL4 SELECT TIPPAG AS TIPO, NOMABR AS ABR, NOMEXT AS EXT FROM "+Session("NOMUSU")+".CPDOCPAG"
-
-   */
 
   public function getCampos($tabla){
 
@@ -71,11 +61,14 @@ class doctabActions extends autodoctabActions
     $this->tablas = Documentos::getTablas();
 
     $nomtab = $this->dftabtip->getNomtab();
+    $nomtabfk = $this->dftabtip->getNomtabfk();
 
-    if($nomtab){
-      $this->campos = $this->getCampos($nomtab);
-    } else $this->campos = array();
+    $params = array();
+    $params['campos'] = $this->getCampos($nomtab);
+    $params['camposfk'] = $this->getCampos($nomtabfk);
+    $params['tablas'] = $this->tablas;
 
+    $this->params = $params;
 
   }
 
@@ -87,18 +80,22 @@ class doctabActions extends autodoctabActions
    */
   public function executeAjax()
   {
-    if ($this->getRequestParameter('par')=='1')
+    if ($this->getRequestParameter('par')=='1' || $this->getRequestParameter('par')=='2')
     {
       $campo = $this->getRequestParameter('campo');
       $this->dftabtip = $this->getDftabtipOrCreate();
       $this->updateDftabtipFromRequest();
 
-      $this->campos = $this->getCampos($campo);
+      $campos = $this->getCampos($campo);
 
       $this->labels = $this->getLabels();
 
 
-      $this->tablas = Documentos::getTablas();
+      $tablas = Documentos::getTablas();
+
+      $campos = array('campos' => $campos, 'camposfk' => $campos, 'tablas' => $tablas );
+
+      $this->params = $campos;
     }
   }
 

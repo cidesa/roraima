@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require($_SESSION["x"].'lib/bd/basedatosAdo.php');

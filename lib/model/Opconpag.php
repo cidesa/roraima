@@ -15,4 +15,23 @@
  */ 
 class Opconpag extends BaseOpconpag
 {
+  protected $tiedatrel="";
+
+  public function getTiedatrel()
+  {
+  	  $valor="N";
+  	  $d= new Criteria();
+  	  $d->add(OpordpagPeer::CODCONCEPTO,self::getCodconcepto());
+  	  $resul= OpordpagPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  } else $valor= 'N';
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
+  }
 }

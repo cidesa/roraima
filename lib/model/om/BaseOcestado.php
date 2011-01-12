@@ -24,6 +24,27 @@ abstract class BaseOcestado extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aOcpais;
+
+	
+	protected $collOcmunicis;
+
+	
+	protected $lastOcmuniciCriteria = null;
+
+	
+	protected $collOcciudads;
+
+	
+	protected $lastOcciudadCriteria = null;
+
+	
+	protected $collCadefcenacos;
+
+	
+	protected $lastCadefcenacoCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -76,6 +97,10 @@ abstract class BaseOcestado extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = OcestadoPeer::CODPAI;
       }
   
+		if ($this->aOcpais !== null && $this->aOcpais->getCodpai() !== $v) {
+			$this->aOcpais = null;
+		}
+
 	} 
 	
 	public function setNomedo($v)
@@ -193,6 +218,15 @@ abstract class BaseOcestado extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aOcpais !== null) {
+				if ($this->aOcpais->isModified()) {
+					$affectedRows += $this->aOcpais->save($con);
+				}
+				$this->setOcpais($this->aOcpais);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = OcestadoPeer::doInsert($this, $con);
@@ -203,6 +237,30 @@ abstract class BaseOcestado extends BaseObject  implements Persistent {
 					$affectedRows += OcestadoPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
+
+			if ($this->collOcmunicis !== null) {
+				foreach($this->collOcmunicis as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collOcciudads !== null) {
+				foreach($this->collOcciudads as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collCadefcenacos !== null) {
+				foreach($this->collCadefcenacos as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
 
 			$this->alreadyInSave = false;
 		}
@@ -240,10 +298,42 @@ abstract class BaseOcestado extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
+												
+			if ($this->aOcpais !== null) {
+				if (!$this->aOcpais->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aOcpais->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = OcestadoPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collOcmunicis !== null) {
+					foreach($this->collOcmunicis as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collOcciudads !== null) {
+					foreach($this->collOcciudads as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collCadefcenacos !== null) {
+					foreach($this->collCadefcenacos as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -375,6 +465,23 @@ abstract class BaseOcestado extends BaseObject  implements Persistent {
 		$copyObj->setNomedo($this->nomedo);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getOcmunicis() as $relObj) {
+				$copyObj->addOcmunici($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getOcciudads() as $relObj) {
+				$copyObj->addOcciudad($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getCadefcenacos() as $relObj) {
+				$copyObj->addCadefcenaco($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -396,6 +503,458 @@ abstract class BaseOcestado extends BaseObject  implements Persistent {
 			self::$peer = new OcestadoPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setOcpais($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodpai(NULL);
+		} else {
+			$this->setCodpai($v->getCodpai());
+		}
+
+
+		$this->aOcpais = $v;
+	}
+
+
+	
+	public function getOcpais($con = null)
+	{
+		if ($this->aOcpais === null && (($this->codpai !== "" && $this->codpai !== null))) {
+						include_once 'lib/model/om/BaseOcpaisPeer.php';
+
+      $c = new Criteria();
+      $c->add(OcpaisPeer::CODPAI,$this->codpai);
+      
+			$this->aOcpais = OcpaisPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aOcpais;
+	}
+
+	
+	public function initOcmunicis()
+	{
+		if ($this->collOcmunicis === null) {
+			$this->collOcmunicis = array();
+		}
+	}
+
+	
+	public function getOcmunicis($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseOcmuniciPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collOcmunicis === null) {
+			if ($this->isNew()) {
+			   $this->collOcmunicis = array();
+			} else {
+
+				$criteria->add(OcmuniciPeer::CODEDO, $this->getCodedo());
+
+				OcmuniciPeer::addSelectColumns($criteria);
+				$this->collOcmunicis = OcmuniciPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(OcmuniciPeer::CODEDO, $this->getCodedo());
+
+				OcmuniciPeer::addSelectColumns($criteria);
+				if (!isset($this->lastOcmuniciCriteria) || !$this->lastOcmuniciCriteria->equals($criteria)) {
+					$this->collOcmunicis = OcmuniciPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastOcmuniciCriteria = $criteria;
+		return $this->collOcmunicis;
+	}
+
+	
+	public function countOcmunicis($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseOcmuniciPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(OcmuniciPeer::CODEDO, $this->getCodedo());
+
+		return OcmuniciPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addOcmunici(Ocmunici $l)
+	{
+		$this->collOcmunicis[] = $l;
+		$l->setOcestado($this);
+	}
+
+
+	
+	public function getOcmunicisJoinOcpais($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseOcmuniciPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collOcmunicis === null) {
+			if ($this->isNew()) {
+				$this->collOcmunicis = array();
+			} else {
+
+				$criteria->add(OcmuniciPeer::CODEDO, $this->getCodedo());
+
+				$this->collOcmunicis = OcmuniciPeer::doSelectJoinOcpais($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(OcmuniciPeer::CODEDO, $this->getCodedo());
+
+			if (!isset($this->lastOcmuniciCriteria) || !$this->lastOcmuniciCriteria->equals($criteria)) {
+				$this->collOcmunicis = OcmuniciPeer::doSelectJoinOcpais($criteria, $con);
+			}
+		}
+		$this->lastOcmuniciCriteria = $criteria;
+
+		return $this->collOcmunicis;
+	}
+
+
+	
+	public function getOcmunicisJoinOcciudad($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseOcmuniciPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collOcmunicis === null) {
+			if ($this->isNew()) {
+				$this->collOcmunicis = array();
+			} else {
+
+				$criteria->add(OcmuniciPeer::CODEDO, $this->getCodedo());
+
+				$this->collOcmunicis = OcmuniciPeer::doSelectJoinOcciudad($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(OcmuniciPeer::CODEDO, $this->getCodedo());
+
+			if (!isset($this->lastOcmuniciCriteria) || !$this->lastOcmuniciCriteria->equals($criteria)) {
+				$this->collOcmunicis = OcmuniciPeer::doSelectJoinOcciudad($criteria, $con);
+			}
+		}
+		$this->lastOcmuniciCriteria = $criteria;
+
+		return $this->collOcmunicis;
+	}
+
+	
+	public function initOcciudads()
+	{
+		if ($this->collOcciudads === null) {
+			$this->collOcciudads = array();
+		}
+	}
+
+	
+	public function getOcciudads($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseOcciudadPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collOcciudads === null) {
+			if ($this->isNew()) {
+			   $this->collOcciudads = array();
+			} else {
+
+				$criteria->add(OcciudadPeer::CODEDO, $this->getCodedo());
+
+				OcciudadPeer::addSelectColumns($criteria);
+				$this->collOcciudads = OcciudadPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(OcciudadPeer::CODEDO, $this->getCodedo());
+
+				OcciudadPeer::addSelectColumns($criteria);
+				if (!isset($this->lastOcciudadCriteria) || !$this->lastOcciudadCriteria->equals($criteria)) {
+					$this->collOcciudads = OcciudadPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastOcciudadCriteria = $criteria;
+		return $this->collOcciudads;
+	}
+
+	
+	public function countOcciudads($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseOcciudadPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(OcciudadPeer::CODEDO, $this->getCodedo());
+
+		return OcciudadPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addOcciudad(Occiudad $l)
+	{
+		$this->collOcciudads[] = $l;
+		$l->setOcestado($this);
+	}
+
+
+	
+	public function getOcciudadsJoinOcpais($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseOcciudadPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collOcciudads === null) {
+			if ($this->isNew()) {
+				$this->collOcciudads = array();
+			} else {
+
+				$criteria->add(OcciudadPeer::CODEDO, $this->getCodedo());
+
+				$this->collOcciudads = OcciudadPeer::doSelectJoinOcpais($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(OcciudadPeer::CODEDO, $this->getCodedo());
+
+			if (!isset($this->lastOcciudadCriteria) || !$this->lastOcciudadCriteria->equals($criteria)) {
+				$this->collOcciudads = OcciudadPeer::doSelectJoinOcpais($criteria, $con);
+			}
+		}
+		$this->lastOcciudadCriteria = $criteria;
+
+		return $this->collOcciudads;
+	}
+
+	
+	public function initCadefcenacos()
+	{
+		if ($this->collCadefcenacos === null) {
+			$this->collCadefcenacos = array();
+		}
+	}
+
+	
+	public function getCadefcenacos($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCadefcenacoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCadefcenacos === null) {
+			if ($this->isNew()) {
+			   $this->collCadefcenacos = array();
+			} else {
+
+				$criteria->add(CadefcenacoPeer::CODEDO, $this->getCodedo());
+
+				CadefcenacoPeer::addSelectColumns($criteria);
+				$this->collCadefcenacos = CadefcenacoPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CadefcenacoPeer::CODEDO, $this->getCodedo());
+
+				CadefcenacoPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCadefcenacoCriteria) || !$this->lastCadefcenacoCriteria->equals($criteria)) {
+					$this->collCadefcenacos = CadefcenacoPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCadefcenacoCriteria = $criteria;
+		return $this->collCadefcenacos;
+	}
+
+	
+	public function countCadefcenacos($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseCadefcenacoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CadefcenacoPeer::CODEDO, $this->getCodedo());
+
+		return CadefcenacoPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCadefcenaco(Cadefcenaco $l)
+	{
+		$this->collCadefcenacos[] = $l;
+		$l->setOcestado($this);
+	}
+
+
+	
+	public function getCadefcenacosJoinOcpais($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCadefcenacoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCadefcenacos === null) {
+			if ($this->isNew()) {
+				$this->collCadefcenacos = array();
+			} else {
+
+				$criteria->add(CadefcenacoPeer::CODEDO, $this->getCodedo());
+
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcpais($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CadefcenacoPeer::CODEDO, $this->getCodedo());
+
+			if (!isset($this->lastCadefcenacoCriteria) || !$this->lastCadefcenacoCriteria->equals($criteria)) {
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcpais($criteria, $con);
+			}
+		}
+		$this->lastCadefcenacoCriteria = $criteria;
+
+		return $this->collCadefcenacos;
+	}
+
+
+	
+	public function getCadefcenacosJoinOcciudad($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCadefcenacoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCadefcenacos === null) {
+			if ($this->isNew()) {
+				$this->collCadefcenacos = array();
+			} else {
+
+				$criteria->add(CadefcenacoPeer::CODEDO, $this->getCodedo());
+
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcciudad($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CadefcenacoPeer::CODEDO, $this->getCodedo());
+
+			if (!isset($this->lastCadefcenacoCriteria) || !$this->lastCadefcenacoCriteria->equals($criteria)) {
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcciudad($criteria, $con);
+			}
+		}
+		$this->lastCadefcenacoCriteria = $criteria;
+
+		return $this->collCadefcenacos;
+	}
+
+
+	
+	public function getCadefcenacosJoinOcmunici($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCadefcenacoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCadefcenacos === null) {
+			if ($this->isNew()) {
+				$this->collCadefcenacos = array();
+			} else {
+
+				$criteria->add(CadefcenacoPeer::CODEDO, $this->getCodedo());
+
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcmunici($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CadefcenacoPeer::CODEDO, $this->getCodedo());
+
+			if (!isset($this->lastCadefcenacoCriteria) || !$this->lastCadefcenacoCriteria->equals($criteria)) {
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcmunici($criteria, $con);
+			}
+		}
+		$this->lastCadefcenacoCriteria = $criteria;
+
+		return $this->collCadefcenacos;
 	}
 
 } 

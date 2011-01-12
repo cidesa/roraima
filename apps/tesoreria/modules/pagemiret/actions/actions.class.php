@@ -14,13 +14,15 @@
 class pagemiretActions extends autopagemiretActions
 {
 	public  $coderror1=-1;
+	public  $coderror2=-1;
 
 	
   
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -37,6 +39,25 @@ class pagemiretActions extends autopagemiretActions
           $this->coderror1=529;
           return false;
       	}
+
+      	$grid=Herramientas::CargarDatosGrid($this, $this->obj,true);
+      	$t=0;
+      	$contador=0;
+		$u=$grid[0];
+	     while ($t<count($u))
+	     {
+           if ($u[$t]["check"]=="1")
+           {
+             $contador++;
+           }
+	       $t++;
+	     }
+
+	     if ($contador==0)
+	     {
+	     	$this->coderror2=548;
+            return false;
+	     }
       }
       return true;
     }else return true;
@@ -57,6 +78,20 @@ class pagemiretActions extends autopagemiretActions
     $this->opordpag = $this->getOpordpagOrCreate();
     $this->mascara = Herramientas::ObtenerFormato('Contaba','Forcta');
     $this->lonmas=strlen($this->mascara);
+    $varemp = $this->getUser()->getAttribute('configemp');
+    $this->numdesh="";
+	if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('pagemiret',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('numorddesh',$varemp['aplicacion']['tesoreria']['modulos']['pagemiret']))
+	       {
+	       	$this->numdesh=$varemp['aplicacion']['tesoreria']['modulos']['pagemiret']['numorddesh'];
+	       }
+	     }
+
+
     if ($this->getRequestParameter('formulario')!="")
     {
      $this->getUser()->setAttribute('formulario',$this->getRequestParameter('formulario'));
@@ -139,11 +174,25 @@ $this->Bitacora('Guardo');
     $opordpag = $this->getRequestParameter('opordpag');
     $this->mascara = Herramientas::ObtenerFormato('Contaba','Forcta');
     $this->lonmas=strlen($this->mascara);
+    $varemp = $this->getUser()->getAttribute('configemp');
+    $this->numdesh="";
+	if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('pagemiret',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('numorddesh',$varemp['aplicacion']['tesoreria']['modulos']['pagemiret']))
+	       {
+	       	$this->numdesh=$varemp['aplicacion']['tesoreria']['modulos']['pagemiret']['numorddesh'];
+	       }
+	     }
+
     if ($this->getRequestParameter('formulario')!="")
     {
      $this->getUser()->setAttribute('formulario',$this->getRequestParameter('formulario'));
      $this->formulario=$this->getRequestParameter('formulario');
      $this->tipo=$this->getUser()->getAttribute('tipo',null,$this->getUser()->getAttribute('formulario'));
+     $this->nomext   = Herramientas::getX('TIPCAU','Cpdoccau','Nomext',$this->tipo);
      $this->concepto = $this->getUser()->getAttribute('concepto',null,$this->getUser()->getAttribute('formulario'));
      $this->tiporet = $this->getUser()->getAttribute('tiporet',null,$this->getUser()->getAttribute('formulario'));
     }
@@ -153,6 +202,7 @@ $this->Bitacora('Guardo');
      $this->tipo='';
      $this->concepto='';
      $this->tiporet='';
+     $this->nomext   = '';
     }
 
     if (isset($opordpag['numord']))
@@ -357,6 +407,9 @@ $this->Bitacora('Guardo');
     	$sqlfechas = "";
     }
 
+    $sqlche = "";
+    $sqltabla = "";
+
     $c =  new Criteria();
     $datos = OpdefempPeer::doSelectOne($c);
     if($datos){
@@ -372,9 +425,22 @@ $this->Bitacora('Guardo');
     	$emichepag = "";
     }
 
-    $SQL="SELECT 1 as check, A.NUMORD as numord,A.FECEMI as fecemi,B.CODPRE as codpre,B.MONRET as monret, nomben as nomben, 9 as id FROM OPORDPAG A,OPRETORD B".$sqltabla." WHERE A.NUMORD = B.NUMORD AND B.CODTIP = '".$codigo."' AND B.NUMRET = 'NOASIGNA' ".$sqlche.$sqlfecdes.$sqlfechas ." order by a.fecemi, a.numord";
+    $filordfac=H::getConfApp('filordfac', 'pagemiret', 'tesoreria');
+    if ($filordfac=='S')
+    {
+        $sqltabla = $sqltabla.", OPFACTUR D";
+        $sqlche = $sqlche." AND A.NUMORD = D.NUMORD";
+    }
+
+    $traeallord=H::getConfApp('traeallord', 'pagemiret', 'tesoreria');
+    if ($traeallord!='S')
+    $SQL="SELECT 0 as check, A.NUMORD as numord,A.FECEMI as fecemi,B.CODPRE as codpre,B.MONRET as monret, nomben as nomben, 9 as id FROM OPORDPAG A,OPRETORD B".$sqltabla." WHERE A.NUMORD = B.NUMORD AND B.CODTIP = '".$codigo."' AND B.NUMRET = 'NOASIGNA' ".$sqlche.$sqlfecdes.$sqlfechas ." order by a.fecemi, a.numord";
+    else
+      $SQL="SELECT 0 as check, A.NUMORD as numord,A.FECEMI as fecemi,B.CODPRE as codpre,B.MONRET as monret, nomben as nomben, B.CODTIP as codtip, C.DESTIP as destip, 9 as id FROM OPORDPAG A,OPRETORD B, OPTIPRET C".$sqltabla." WHERE A.NUMORD = B.NUMORD AND B.CODTIP=C.CODTIP AND B.NUMRET = 'NOASIGNA' ".$sqlche.$sqlfecdes.$sqlfechas ." order by a.fecemi, a.numord";
 
     $resp = Herramientas::BuscarDatos($SQL,&$all);
+    $this->numfila=count($all);
+
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(false);
     $opciones->setTabla('Opretord');
@@ -432,14 +498,35 @@ $this->Bitacora('Guardo');
     $col6->setNombreCampo('monret');
     $col6->setEsNumerico(true);
     $col6->setHTML('type="text" size="10" readonly=true');
-    $col6->setEsTotal(true,'opordpag_monord');
+    //$col6->setEsTotal(true,'opordpag_monord');
 
+  if ($traeallord=='S') {
+    $col7 = new Columna('Retención');
+    $col7->setTipo(Columna::TEXTO);
+    $col7->setEsGrabable(true);
+    $col7->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col7->setAlineacionContenido(Columna::IZQUIERDA);
+    $col7->setNombreCampo('codtip');
+    $col7->setHTML('type="text" size="10" readonly=true');
+
+    $col8 = new Columna('Descripción');
+    $col8->setTipo(Columna::TEXTO);
+    $col8->setEsGrabable(true);
+    $col8->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col8->setAlineacionContenido(Columna::IZQUIERDA);
+    $col8->setNombreCampo('destip');
+    $col8->setHTML('type="text" size="20" readonly=true');
+  }
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
     $opciones->addColumna($col4);
     $opciones->addColumna($col5);
     $opciones->addColumna($col6);
+   if ($traeallord=='S') {
+    $opciones->addColumna($col7);
+    $opciones->addColumna($col8);
+   }
 
     $this->obj = $opciones->getConfig($all);
    }
@@ -582,6 +669,11 @@ $this->Bitacora('Guardo');
       {
        $err = Herramientas::obtenerMensajeError($this->coderror1);
        $this->getRequest()->setError('opordpag{fecemi}',$err);
+      }
+      if($this->coderror2!=-1)
+      {
+       $err = Herramientas::obtenerMensajeError($this->coderror2);
+       $this->getRequest()->setError('',$err);
       }
     }
 

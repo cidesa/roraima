@@ -29,6 +29,14 @@
     </div>
     </div>
 
+        <div class="form-row">
+    <label for="filters_codcen"><?php echo __('Centro de Costo:') ?></label>
+    <div class="content">
+    <?php echo input_tag('filters[codcen]', isset($filters['codcen']) ? $filters['codcen'] : null, array (
+  'size' => 4,
+)) ?>
+    </div>
+    </div>
       </fieldset>
 
   <ul class="sf_admin_actions">

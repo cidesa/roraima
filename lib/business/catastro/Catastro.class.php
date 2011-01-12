@@ -238,5 +238,43 @@ class Catastro {
       	}
       }
     }
+
+  public static function validarUbicaGeo($codubigeo)
+  {
+     $nomabr="";
+     $loncc="";
+     $c = new Criteria();
+     $reg = CatnivcatPeer::doselect($c);
+     if ($reg) {
+  	foreach ($reg as $datos)
+  	{
+           if ($datos->getCatpar()=='Z')
+  	   {
+             $loncc = $datos->getLonniv();
+  	   }else{
+  	     $nomabr = $nomabr .'-'.$datos->getNomabr();
+  	   }
+  	}
+     }
+       
+     $formatocom = Herramientas::getX_vacio('catpar','catnivcat','forcodcat','Z');  //Z -> Cod.Catastral
+     $formatoubi = substr($formatocom,0,strlen($formatocom)-$loncc-1);
+     $posrup1=Herramientas::instr($formatoubi,'-',0,1);
+     $posrup1=$posrup1-1;
+     if (strlen(trim($codubigeo))<$posrup1)
+     {
+       return 101;
+     }
+
+    Herramientas::formarCodigoPadre($codubigeo,&$nivelcodigo,&$ultimo,$formatoubi);
+    $c= new Criteria();
+    $c->add(CatdivgeoPeer::CODDIVGEO,$ultimo);
+    $tabla = CatdivgeoPeer::doSelectOne($c);
+    if (!$tabla)
+    {
+       if ($nivelcodigo == 0) return 100;
+    }
+    return -1;
+  }
 }
 ?>

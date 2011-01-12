@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
@@ -69,7 +70,7 @@ function crearLog($valor)
                       reqaut='".$reqaut."'
                     where tipcom='".$tipdoc."' ";
         $bd->actualizar($sql);
-        crearLog('A');
+        //crearLog('A');
       }
       catch(Exception $e)
       {

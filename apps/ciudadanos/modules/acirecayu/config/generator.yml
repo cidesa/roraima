@@ -1,0 +1,32 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atrecayu
+    theme:            cidesaGenerator
+
+    fields:
+      attipayu_id:
+        name: Tipo Ayuda
+        params:     text_method=getDesayu include_custom=Seleccione...
+      desayu:      { name: Tipo Ayuda }
+      atrecaud_id:
+        name: Recaudo
+        params:     text_method=getDesrec include_custom=Seleccione...
+      desrec:      { name: Recaudo }
+    list:
+      title:          Definición de Tipos de Ayudas
+      display:        [=desayu, desrec]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [attipayu_id, atrecaud_id]
+      max_per_page:   5
+      sort:  atrecaud_id
+    edit:
+      title:          Edición de Tipos de Ayudas
+      display:        [attipayu_id, atrecaud_id]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

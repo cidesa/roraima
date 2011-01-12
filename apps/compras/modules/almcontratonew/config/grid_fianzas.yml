@@ -1,0 +1,40 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                true
+  tabla:                   cafiacon
+  anchogrid:               800
+  ancho:                   750
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Fecha
+  tipo:                    f
+  nombrecampo:             fecfia
+  esgrabable:              true
+  html:                    [size="15" maxlength=10]
+2:       # Columna 2
+  titulo:                  Número
+  tipo:                    t
+  nombrecampo:             numfia
+  html:                    ["size=20 maxlength=50 "]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Institución Financiera
+  tipo:                    t
+  nombrecampo:             insfin
+  html:                    ["size=40 maxlength=50 "]
+  esgrabable:              true
+4:       # Columna 4
+  titulo:                  Tipo
+  tipo:                    c
+  nombrecampo:             tipfia
+  html:                    [ ]
+  esgrabable:              true
+5:       # Columna 5
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monfia
+  esnumerico:              true
+  html:                    ["size=10"]

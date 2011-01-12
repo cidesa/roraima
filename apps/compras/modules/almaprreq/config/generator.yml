@@ -11,6 +11,6 @@ generator:
       title:          Aprobación de la Requisición por Lotes
       display:
         "Requisición":   [_grip]
-
+      hide:  [totfil]
       actions:
         _save:        ~

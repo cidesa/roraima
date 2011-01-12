@@ -24,7 +24,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('almcotiza/edit_messages', array('cacotiza' => $cacotiza, 'labels' => $labels)) ?>
-<?php include_partial('almcotiza/edit_form', array('cacotiza' => $cacotiza, 'moneda' => $moneda, 'valor' => $valor, 'aumdis' => $aumdis, 'numreg' => $numreg, 'labels' => $labels, 'obj' => $obj)) ?>
+<?php include_partial('almcotiza/edit_form', array('cacotiza' => $cacotiza, 'moneda' => $moneda, 'valor' => $valor, 'aumdis' => $aumdis, 'numreg' => $numreg, 'labels' => $labels, 'obj' => $obj, 'mansolocor' => $mansolocor, 'bloqfec' => $bloqfec, 'oculeli' => $oculeli)) ?>
 </div>
 
 <div id="sf_admin_footer">

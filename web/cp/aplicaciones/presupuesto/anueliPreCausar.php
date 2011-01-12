@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require($_SESSION["x"].'lib/bd/basedatosAdo.php');
 require($_SESSION["x"].'lib/general/funciones.php');
@@ -71,7 +72,7 @@ body {
 </style>
 </head>
 <body>
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
  <fieldset>
   <table width="100%"  border="0" align="center">
     <tr bgcolor="#FFFFCC">

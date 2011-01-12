@@ -100,6 +100,10 @@ class NpdefgenMapBuilder {
 
 		$tMap->addColumn('DIASEM', 'Diasem', 'double', CreoleTypes::NUMERIC, false, 1);
 
+		$tMap->addColumn('CALESPPRES', 'Calesppres', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('REDONDEO', 'Redondeo', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

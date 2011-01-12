@@ -44,13 +44,13 @@ class NphisasicarempMapBuilder {
 
 		$tMap->addColumn('FECASI', 'Fecasi', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('NOMEMP', 'Nomemp', 'string', CreoleTypes::VARCHAR, false, 51);
+		$tMap->addColumn('NOMEMP', 'Nomemp', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('NOMCAR', 'Nomcar', 'string', CreoleTypes::VARCHAR, false, 30);
+		$tMap->addColumn('NOMCAR', 'Nomcar', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('NOMNOM', 'Nomnom', 'string', CreoleTypes::VARCHAR, false, 29);
+		$tMap->addColumn('NOMNOM', 'Nomnom', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('NOMCAT', 'Nomcat', 'string', CreoleTypes::VARCHAR, false, 40);
+		$tMap->addColumn('NOMCAT', 'Nomcat', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('UNIEJE', 'Unieje', 'string', CreoleTypes::VARCHAR, false, 30);
 

@@ -15,4 +15,16 @@
  */ 
 class AcunidadPeer extends BaseAcunidadPeer
 {
+  public static function getAcunidades()
+  {
+    $result = array();
+
+    $acunidades = AcunidadPeer::doSelect(new Criteria());
+    foreach ($acunidades as $unidad){
+      $result[$unidad->getId()] = $unidad->getNomuni();
+    }
+
+    return $result;
+
+  }
 }

@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: editSuccess.php 40770 2010-09-28 16:56:47Z cramirez $
  */
 // date: 2007/08/17 10:18:40
 ?>
@@ -15,8 +15,15 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Edición de Niveles Organizacionales',
-array()) ?></h1>
+<h1>
+<?php if ($npestorg->getCambiareti()!="") {?>
+<?php echo __($npestorg->getCambiareti(),
+array()) ?>
+<?php }else {?>
+<?php echo __('Edición de Ubicaciones Administrativa',
+array()) ?>
+<?php }?>
+</h1>
 
 <div id="sf_admin_header">
 <?php include_partial('nomdefespnivorg/edit_header', array('npestorg' => $npestorg)) ?>

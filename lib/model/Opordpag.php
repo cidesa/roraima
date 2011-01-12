@@ -7,9 +7,9 @@
  *
  * @package    Roraima
  * @subpackage lib.model
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Opordpag.php 37987 2010-05-06 14:06:56Z dmartinez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -72,6 +72,14 @@ class Opordpag extends BaseOpordpag
   protected $referencias2 = '';
   protected $nombeneficiario="";
   protected $modbasimpiva="";
+  protected $objeto1=array();
+  protected $cadesel='';
+  protected $filassal=0;
+  protected $filordcbtp="";
+  protected $limbaseret="";
+  protected $numfilas=0;
+  protected $refcre='';
+  protected $refsolpag='';
 
    public function afterHydrate()
    {
@@ -393,4 +401,80 @@ class Opordpag extends BaseOpordpag
   return Herramientas::getX('CODCONCEPTO','Opconpag','Nomconcepto',self::getCodconcepto());
   }
 
+  public function getFilordcbtp()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('pagemiord',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('filordcbtp',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']))
+	       {
+	       	$dato=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['filordcbtp'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setFilordcbtp()
+  {
+  	return $this->filordcbtp;
+  }
+
+  public function getNomcue2()
+  {
+  	return Herramientas::getX('NUMCUE','Tsdefban','Nomcue',self::getNumcta());
+  }
+
+    public function getDestip2()
+    {
+            return Herramientas::getX('CODTIP','Tstipmov','Destip',self::getTipdoc());
+    }
+
+  public function getLimbaseret()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('pagtipret',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('limbaseret',$varemp['aplicacion']['tesoreria']['modulos']['pagtipret']))
+	       {
+	       	$dato=$varemp['aplicacion']['tesoreria']['modulos']['pagtipret']['limbaseret'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setLimbaseret()
+  {
+  	return $this->limbaseret;
+  }
+
+
+  public function getNumfilas()
+  {
+    $dato=150;
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('pagemiord',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('numfilas',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']))
+	       {
+	       	$dato=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['numfilas'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setNumfilas()
+  {
+  	return $this->numfilas;
+  }
 }

@@ -5,7 +5,7 @@ generator:
     theme:            default
 
     fields:
-      codnom:    { name: Código de la Nomina, params: maxlength=10,size=10  }
+      codnom:    { name: Código de la Nomina, params: maxlength=10 size=10  }
       codcon:    { name: Código del Concepto, params: size=20  }
       nomina:    { name: Nombre de la Nomina, params: size=20  }
       concepto:  { name: Nombre del Concepto, params: size=20  }

@@ -22,3 +22,8 @@
   'class' => 'sf_admin_action_create',
 )) ?></li>
   </ul>
+<script language="JavaScript" type="text/javascript">
+ var tieregrel='<?php echo $opbenefi->getTiedatrel(); ?>';
+  var oculs='<?php echo $opbenefi->getOculsave(); ?>';
+  if (tieregrel=='S' && oculs=='S') $('save').hide();
+</script>

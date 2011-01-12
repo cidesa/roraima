@@ -6,8 +6,8 @@
  *
  * @package    Roraima
  * @subpackage helper
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: SubmitClickHelper.php 32399 2009-09-01 19:26:24Z lhernandez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -15,21 +15,24 @@
   function submit_tag_click($value,$option)
   {
 
-  	$code = '<input type="button" id="'.$option['name'].'" name="'.$option['name'].'" value="'.$value.'" class="'.$option['class'].'" onclick="this.disabled=true;salvar();">';
+  	$code = '<input type="button" id="'.$option['name'].'" name="'.$option['name'].'" value="'.$value.'" class="'.$option['class'].'" onclick="this.disabled=true;salvar'.$option['name'].'();">';
 
     $context = sfContext::getInstance();
     $modulo = $context->getModuleName();
 
 	$url = '';
+	$params = '';
 
-	if(SF_ENVIRONMENT=='dev') $url = '/'.SF_APP.'_dev.php/'.$modulo.'/save';
-	else $url = '/'.SF_APP.'.php/'.$modulo.'/save';
+	if(array_key_exists('params',$option)) $params = $option['params'];
+
+	if(SF_ENVIRONMENT=='dev') $url = '/'.SF_APP.'_dev.php/'.$modulo.'/save'.$params;
+	else $url = '/'.SF_APP.'.php/'.$modulo.'/save'.$params;
 
     if(array_key_exists('form',$option)) $form = $option['form'];
     else $form = 'sf_admin_edit_form';
 
   	$code = $code.'<script type="text/javascript">
-					function salvar()
+					function salvar'.$option['name'].'()
 					{
 								f=document.'.$form.';
 								f.action="'.$url.'";

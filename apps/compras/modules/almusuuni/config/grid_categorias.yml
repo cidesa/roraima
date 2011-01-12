@@ -1,0 +1,19 @@
+opciones:                  # Opciones generales
+  eliminar:                true
+  tabla:                   Causuuni
+  anchogrid:               650
+  ancho:                   650
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código de Unidad
+  tipo:                    t
+  nombrecampo:             codcat
+  esgrabable:              true
+  html:                    [size="20"]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomcat
+  html:                    [size="60", readonly=true]

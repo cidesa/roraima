@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage biedefubi
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:actions.class.php 32375 2009-09-01 16:19:59Z lhernandez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -67,10 +67,11 @@ class biedefubiActions extends autobiedefubiActions
    */
   public function executeAjax()
   {
-   if ($this->getRequestParameter('ajax')=='1')
-   {
-    $cajtexmos=$this->getRequestParameter('cajtexmos');
+   $cajtexmos=$this->getRequestParameter('cajtexmos');
+   $cajtexcom=$this->getRequestParameter('cajtexcom');
     $codigo=$this->getRequestParameter('codigo');
+   if ($this->getRequestParameter('ajax')=='1')
+   {    
     $c= new Criteria();
     $c->add(BnubicaPeer::CODUBI,$codigo);
     $result=BnubicaPeer::doSelectOne($c);
@@ -89,6 +90,22 @@ class biedefubiActions extends autobiedefubiActions
 
      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
      return sfView::HEADER_ONLY;
+   }
+   else if ($this->getRequestParameter('ajax')=='2')
+   {
+       $valor=Bienes::validarCodubi($codigo);
+       
+       if ($valor==101){        
+           $javascript="alert('El Codigo no puede estar en Blanco ó longitud del código invalida'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+       }else if ($valor==100)
+       { 
+           $javascript="alert('Nivel Anterior No Existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+       }else {         
+           $javascript="";
+       }
+       $output = '[["javascript","'.$javascript.'",""]]';
+       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+       return sfView::HEADER_ONLY;
    }
   }
 

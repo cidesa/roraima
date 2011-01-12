@@ -12,8 +12,6 @@ default:
   stylesheets:    [main, estilos]
 
   javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, observe, ajax, dFilter]
-#  javascripts:    [%SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, ext/adapter/ext/ext-base, ext/adapter/prototype/ext-prototype-adapter, ext/ext-all, gridext.js]
 
-#ext/adapter/ext/ext-base, ext/adapter/prototype/ext-prototype-adapter, ext/ext-all
   has_layout:     on
   layout:         layout

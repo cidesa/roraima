@@ -1,0 +1,95 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   cadetent
+  anchogrid:               1000
+  ancho:                   1800
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código de Artículo
+  tipo:                    t
+  nombrecampo:             codart
+  html:                    ["size=20 "]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    a
+  nombrecampo:             desart
+  html:                    ["size=25x1  readonly=true"]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Cantidad
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             canrec
+  esnumerico:              true
+  html:                    ["size=10 onBlur='ValidarMontoGridv2(this); event.keyCode=13; costoenter(event,this.id)'"]
+4:       # Columna 4
+  titulo:                  Costo
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             cosart
+  esnumerico:              true
+  html:                    ["size=10 onBlur='ValidarMontoGridv2(this); event.keyCode=13; costoenter(event,this.id)'"]
+5:       # Columna 5
+  titulo:                  Total
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             montot
+  esnumerico:              true
+  html:                    ["size=10 readonly=true"]
+  estotal:                 [true, caentalm_monrcp]
+6:       # Columna 6
+  titulo:                  Código del Almacén
+  tipo:                    t
+  nombrecampo:             codalm
+  html:                    ["size=8 onBlur='toAjax(6,getUrlModuloAjax(),this.value,0,'&cajtexmos='+$(this.id).up().next(0).descendants()[0].id+'&codart='+$(this.id).up().previous(4).descendants()[0].value+'&codubi='+$(this.id).up().next(1).descendants()[0].id+'&desubi='+$(this.id).up().next(2).descendants()[0].id+'&numlot='+$(this.id).up().next(6).descendants()[0].id+'&cajtexcom='+this.id)'"]
+  esgrabable:              true
+  catalogo:                [cadefalm, sf_admin_edit_form, {Codalm: 6, Nomalm: 7}, Cadelfalm_Almordrec ]
+7:       # Columna 7
+  titulo:                  Nombre Almacén
+  tipo:                    a
+  nombrecampo:             nomalm
+  html:                    ["size=25x1  readonly=true"]
+  esgrabable:              true
+8:       # Columna 8
+  titulo:                  Código de Ubicación
+  tipo:                    t
+  nombrecampo:             codubi
+  html:                    ["size=10"]
+  esgrabable:              true  
+9:       # Columna 9
+  titulo:                  Nombre Ubicación
+  tipo:                    a
+  nombrecampo:             nomubi
+  html:                    ["size=25x1  readonly=true"]
+  esgrabable:              true
+10:       # Columna 10
+  titulo:                  Fecha de Vencimiento
+  tipo:                    f
+  nombrecampo:             fecven
+  esgrabable:              true
+  html:                    [size="15" maxlength=10]
+11:       # Columna 11
+  titulo:                  Número de Jaulas
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             numjau
+  esnumerico:              true
+  html:                    ["size=10"]
+12:       # Columna 12
+  titulo:                  Tamaño Métrico
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             tammet
+  esnumerico:              true
+  html:                    ["size=10"]
+13:       # Columna 13
+  titulo:                  Número de Lote
+  tipo:                    t
+  nombrecampo:             numlot
+  html:                    ["size=15 maxlength=100 "]
+  esgrabable:              true
+  oculta:                  true

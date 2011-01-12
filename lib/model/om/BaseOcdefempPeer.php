@@ -13,7 +13,7 @@ abstract class BaseOcdefempPeer {
 	const CLASS_DEFAULT = 'lib.model.Ocdefemp';
 
 	
-	const NUM_COLUMNS = 35;
+	const NUM_COLUMNS = 36;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -122,6 +122,9 @@ abstract class BaseOcdefempPeer {
 	const TIPCOM = 'ocdefemp.TIPCOM';
 
 	
+	const NUMINI = 'ocdefemp.NUMINI';
+
+	
 	const ID = 'ocdefemp.ID';
 
 	
@@ -130,18 +133,18 @@ abstract class BaseOcdefempPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nomemp', 'Diremp', 'Telemp', 'Faxemp', 'Emaemp', 'Porant', 'Plaini', 'Poraumobr', 'Pormul', 'Unitri', 'Codactproini', 'Codactini', 'Codactpar', 'Codactrei', 'Codactproter', 'Codactter', 'Codactrecpro', 'Codactrecdef', 'Codingres', 'Codconobr', 'Codconins', 'Codconsup', 'Codconpro', 'Codvalant', 'Codvalpar', 'Codvalfin', 'Codvalret', 'Codvalrec', 'Codparrec', 'Ivaant', 'Retant', 'Gencom', 'Tipcom', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (OcdefempPeer::CODEMP, OcdefempPeer::NOMEMP, OcdefempPeer::DIREMP, OcdefempPeer::TELEMP, OcdefempPeer::FAXEMP, OcdefempPeer::EMAEMP, OcdefempPeer::PORANT, OcdefempPeer::PLAINI, OcdefempPeer::PORAUMOBR, OcdefempPeer::PORMUL, OcdefempPeer::UNITRI, OcdefempPeer::CODACTPROINI, OcdefempPeer::CODACTINI, OcdefempPeer::CODACTPAR, OcdefempPeer::CODACTREI, OcdefempPeer::CODACTPROTER, OcdefempPeer::CODACTTER, OcdefempPeer::CODACTRECPRO, OcdefempPeer::CODACTRECDEF, OcdefempPeer::CODINGRES, OcdefempPeer::CODCONOBR, OcdefempPeer::CODCONINS, OcdefempPeer::CODCONSUP, OcdefempPeer::CODCONPRO, OcdefempPeer::CODVALANT, OcdefempPeer::CODVALPAR, OcdefempPeer::CODVALFIN, OcdefempPeer::CODVALRET, OcdefempPeer::CODVALREC, OcdefempPeer::CODPARREC, OcdefempPeer::IVAANT, OcdefempPeer::RETANT, OcdefempPeer::GENCOM, OcdefempPeer::TIPCOM, OcdefempPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nomemp', 'diremp', 'telemp', 'faxemp', 'emaemp', 'porant', 'plaini', 'poraumobr', 'pormul', 'unitri', 'codactproini', 'codactini', 'codactpar', 'codactrei', 'codactproter', 'codactter', 'codactrecpro', 'codactrecdef', 'codingres', 'codconobr', 'codconins', 'codconsup', 'codconpro', 'codvalant', 'codvalpar', 'codvalfin', 'codvalret', 'codvalrec', 'codparrec', 'ivaant', 'retant', 'gencom', 'tipcom', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nomemp', 'Diremp', 'Telemp', 'Faxemp', 'Emaemp', 'Porant', 'Plaini', 'Poraumobr', 'Pormul', 'Unitri', 'Codactproini', 'Codactini', 'Codactpar', 'Codactrei', 'Codactproter', 'Codactter', 'Codactrecpro', 'Codactrecdef', 'Codingres', 'Codconobr', 'Codconins', 'Codconsup', 'Codconpro', 'Codvalant', 'Codvalpar', 'Codvalfin', 'Codvalret', 'Codvalrec', 'Codparrec', 'Ivaant', 'Retant', 'Gencom', 'Tipcom', 'Numini', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (OcdefempPeer::CODEMP, OcdefempPeer::NOMEMP, OcdefempPeer::DIREMP, OcdefempPeer::TELEMP, OcdefempPeer::FAXEMP, OcdefempPeer::EMAEMP, OcdefempPeer::PORANT, OcdefempPeer::PLAINI, OcdefempPeer::PORAUMOBR, OcdefempPeer::PORMUL, OcdefempPeer::UNITRI, OcdefempPeer::CODACTPROINI, OcdefempPeer::CODACTINI, OcdefempPeer::CODACTPAR, OcdefempPeer::CODACTREI, OcdefempPeer::CODACTPROTER, OcdefempPeer::CODACTTER, OcdefempPeer::CODACTRECPRO, OcdefempPeer::CODACTRECDEF, OcdefempPeer::CODINGRES, OcdefempPeer::CODCONOBR, OcdefempPeer::CODCONINS, OcdefempPeer::CODCONSUP, OcdefempPeer::CODCONPRO, OcdefempPeer::CODVALANT, OcdefempPeer::CODVALPAR, OcdefempPeer::CODVALFIN, OcdefempPeer::CODVALRET, OcdefempPeer::CODVALREC, OcdefempPeer::CODPARREC, OcdefempPeer::IVAANT, OcdefempPeer::RETANT, OcdefempPeer::GENCOM, OcdefempPeer::TIPCOM, OcdefempPeer::NUMINI, OcdefempPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nomemp', 'diremp', 'telemp', 'faxemp', 'emaemp', 'porant', 'plaini', 'poraumobr', 'pormul', 'unitri', 'codactproini', 'codactini', 'codactpar', 'codactrei', 'codactproter', 'codactter', 'codactrecpro', 'codactrecdef', 'codingres', 'codconobr', 'codconins', 'codconsup', 'codconpro', 'codvalant', 'codvalpar', 'codvalfin', 'codvalret', 'codvalrec', 'codparrec', 'ivaant', 'retant', 'gencom', 'tipcom', 'numini', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nomemp' => 1, 'Diremp' => 2, 'Telemp' => 3, 'Faxemp' => 4, 'Emaemp' => 5, 'Porant' => 6, 'Plaini' => 7, 'Poraumobr' => 8, 'Pormul' => 9, 'Unitri' => 10, 'Codactproini' => 11, 'Codactini' => 12, 'Codactpar' => 13, 'Codactrei' => 14, 'Codactproter' => 15, 'Codactter' => 16, 'Codactrecpro' => 17, 'Codactrecdef' => 18, 'Codingres' => 19, 'Codconobr' => 20, 'Codconins' => 21, 'Codconsup' => 22, 'Codconpro' => 23, 'Codvalant' => 24, 'Codvalpar' => 25, 'Codvalfin' => 26, 'Codvalret' => 27, 'Codvalrec' => 28, 'Codparrec' => 29, 'Ivaant' => 30, 'Retant' => 31, 'Gencom' => 32, 'Tipcom' => 33, 'Id' => 34, ),
-		BasePeer::TYPE_COLNAME => array (OcdefempPeer::CODEMP => 0, OcdefempPeer::NOMEMP => 1, OcdefempPeer::DIREMP => 2, OcdefempPeer::TELEMP => 3, OcdefempPeer::FAXEMP => 4, OcdefempPeer::EMAEMP => 5, OcdefempPeer::PORANT => 6, OcdefempPeer::PLAINI => 7, OcdefempPeer::PORAUMOBR => 8, OcdefempPeer::PORMUL => 9, OcdefempPeer::UNITRI => 10, OcdefempPeer::CODACTPROINI => 11, OcdefempPeer::CODACTINI => 12, OcdefempPeer::CODACTPAR => 13, OcdefempPeer::CODACTREI => 14, OcdefempPeer::CODACTPROTER => 15, OcdefempPeer::CODACTTER => 16, OcdefempPeer::CODACTRECPRO => 17, OcdefempPeer::CODACTRECDEF => 18, OcdefempPeer::CODINGRES => 19, OcdefempPeer::CODCONOBR => 20, OcdefempPeer::CODCONINS => 21, OcdefempPeer::CODCONSUP => 22, OcdefempPeer::CODCONPRO => 23, OcdefempPeer::CODVALANT => 24, OcdefempPeer::CODVALPAR => 25, OcdefempPeer::CODVALFIN => 26, OcdefempPeer::CODVALRET => 27, OcdefempPeer::CODVALREC => 28, OcdefempPeer::CODPARREC => 29, OcdefempPeer::IVAANT => 30, OcdefempPeer::RETANT => 31, OcdefempPeer::GENCOM => 32, OcdefempPeer::TIPCOM => 33, OcdefempPeer::ID => 34, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nomemp' => 1, 'diremp' => 2, 'telemp' => 3, 'faxemp' => 4, 'emaemp' => 5, 'porant' => 6, 'plaini' => 7, 'poraumobr' => 8, 'pormul' => 9, 'unitri' => 10, 'codactproini' => 11, 'codactini' => 12, 'codactpar' => 13, 'codactrei' => 14, 'codactproter' => 15, 'codactter' => 16, 'codactrecpro' => 17, 'codactrecdef' => 18, 'codingres' => 19, 'codconobr' => 20, 'codconins' => 21, 'codconsup' => 22, 'codconpro' => 23, 'codvalant' => 24, 'codvalpar' => 25, 'codvalfin' => 26, 'codvalret' => 27, 'codvalrec' => 28, 'codparrec' => 29, 'ivaant' => 30, 'retant' => 31, 'gencom' => 32, 'tipcom' => 33, 'id' => 34, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nomemp' => 1, 'Diremp' => 2, 'Telemp' => 3, 'Faxemp' => 4, 'Emaemp' => 5, 'Porant' => 6, 'Plaini' => 7, 'Poraumobr' => 8, 'Pormul' => 9, 'Unitri' => 10, 'Codactproini' => 11, 'Codactini' => 12, 'Codactpar' => 13, 'Codactrei' => 14, 'Codactproter' => 15, 'Codactter' => 16, 'Codactrecpro' => 17, 'Codactrecdef' => 18, 'Codingres' => 19, 'Codconobr' => 20, 'Codconins' => 21, 'Codconsup' => 22, 'Codconpro' => 23, 'Codvalant' => 24, 'Codvalpar' => 25, 'Codvalfin' => 26, 'Codvalret' => 27, 'Codvalrec' => 28, 'Codparrec' => 29, 'Ivaant' => 30, 'Retant' => 31, 'Gencom' => 32, 'Tipcom' => 33, 'Numini' => 34, 'Id' => 35, ),
+		BasePeer::TYPE_COLNAME => array (OcdefempPeer::CODEMP => 0, OcdefempPeer::NOMEMP => 1, OcdefempPeer::DIREMP => 2, OcdefempPeer::TELEMP => 3, OcdefempPeer::FAXEMP => 4, OcdefempPeer::EMAEMP => 5, OcdefempPeer::PORANT => 6, OcdefempPeer::PLAINI => 7, OcdefempPeer::PORAUMOBR => 8, OcdefempPeer::PORMUL => 9, OcdefempPeer::UNITRI => 10, OcdefempPeer::CODACTPROINI => 11, OcdefempPeer::CODACTINI => 12, OcdefempPeer::CODACTPAR => 13, OcdefempPeer::CODACTREI => 14, OcdefempPeer::CODACTPROTER => 15, OcdefempPeer::CODACTTER => 16, OcdefempPeer::CODACTRECPRO => 17, OcdefempPeer::CODACTRECDEF => 18, OcdefempPeer::CODINGRES => 19, OcdefempPeer::CODCONOBR => 20, OcdefempPeer::CODCONINS => 21, OcdefempPeer::CODCONSUP => 22, OcdefempPeer::CODCONPRO => 23, OcdefempPeer::CODVALANT => 24, OcdefempPeer::CODVALPAR => 25, OcdefempPeer::CODVALFIN => 26, OcdefempPeer::CODVALRET => 27, OcdefempPeer::CODVALREC => 28, OcdefempPeer::CODPARREC => 29, OcdefempPeer::IVAANT => 30, OcdefempPeer::RETANT => 31, OcdefempPeer::GENCOM => 32, OcdefempPeer::TIPCOM => 33, OcdefempPeer::NUMINI => 34, OcdefempPeer::ID => 35, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nomemp' => 1, 'diremp' => 2, 'telemp' => 3, 'faxemp' => 4, 'emaemp' => 5, 'porant' => 6, 'plaini' => 7, 'poraumobr' => 8, 'pormul' => 9, 'unitri' => 10, 'codactproini' => 11, 'codactini' => 12, 'codactpar' => 13, 'codactrei' => 14, 'codactproter' => 15, 'codactter' => 16, 'codactrecpro' => 17, 'codactrecdef' => 18, 'codingres' => 19, 'codconobr' => 20, 'codconins' => 21, 'codconsup' => 22, 'codconpro' => 23, 'codvalant' => 24, 'codvalpar' => 25, 'codvalfin' => 26, 'codvalret' => 27, 'codvalrec' => 28, 'codparrec' => 29, 'ivaant' => 30, 'retant' => 31, 'gencom' => 32, 'tipcom' => 33, 'numini' => 34, 'id' => 35, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, )
 	);
 
 	
@@ -262,6 +265,8 @@ abstract class BaseOcdefempPeer {
 		$criteria->addSelectColumn(OcdefempPeer::GENCOM);
 
 		$criteria->addSelectColumn(OcdefempPeer::TIPCOM);
+
+		$criteria->addSelectColumn(OcdefempPeer::NUMINI);
 
 		$criteria->addSelectColumn(OcdefempPeer::ID);
 

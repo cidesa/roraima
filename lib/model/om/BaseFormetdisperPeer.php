@@ -210,6 +210,7 @@ abstract class BaseFormetdisperPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FormetdisperPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

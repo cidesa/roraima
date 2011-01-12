@@ -4,21 +4,21 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 41068 2010-10-20 17:12:48Z cramirez $
  */
 // date: 2007/05/17 08:22:33
 ?>
 <?php echo form_tag('almdefalm/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 
 <?php echo object_input_hidden_tag($cadefalm, 'getId') ?>
 <?php use_helper('PopUp') ?>
 <?php echo javascript_include_tag('ajax','dFilter','tools', 'observe') ?>
-
+<?php echo input_hidden_tag('cadefalm[codlongveinte]', $cadefalm->getCodlongveinte()) ?>
 <fieldset id="sf_fieldset_none" class="">
 
 <div class="form-row">
@@ -29,11 +29,11 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($cadefalm, 'getCodalm', array (
-  'size' => 10,
+  'size' => $cadefalm->getCodlongveinte()=='S' ? 25 : 10 ,
   'control_name' => 'cadefalm[codalm]',
   'readonly'  =>  $cadefalm->getId()!='' ? true : false ,
   'onBlur'  => "javascript:event.keyCode=13; enter(event,this.value);",
-  'maxlength' => 6,
+  'maxlength' => $cadefalm->getCodlongveinte()=='S' ? 20 : 6 ,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>
@@ -74,7 +74,92 @@
   <?php echo input_tag('cadefalm[nomcat]',$cadefalm->getNomcat(),'disabled=true; size=52'); ?>
 
     </div>
-    <br>
+<br>
+  <?php echo label_for('cadefalm[codtip]', __($labels['cadefalm{codtip}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('cadefalm{codtip}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('cadefalm{codtip}')): ?>
+    <?php echo form_error('cadefalm{codtip}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($cadefalm, 'getCodtip', array (
+  'size' => 20,
+  'control_name' => 'cadefalm[codtip]',
+  'onBlur' => remote_function(array(
+			  'url'      => 'almdefalm/ajax',
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=2&cajtexmos=cadefalm_nomtip&codigo='+this.value"
+			  ))
+)); echo $value ? $value : '&nbsp;' ?>
+
+  <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Catipalm_id/clase/Catipalm/frame/sf_admin_edit_form/obj1/cadefalm_codtip/obj2/cadefalm_nomtip/campo1/id/campo2/nomtip');?>
+
+  <?php echo input_tag('cadefalm[nomtip]',$cadefalm->getNomtip(),'disabled=true; size=52'); ?>
+
+
+    </div>
+<br>
+  <?php echo label_for('cadefalm[codedo]', __($labels['cadefalm{codedo}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('cadefalm{codedo}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('cadefalm{codedo}')): ?>
+    <?php echo form_error('cadefalm{codedo}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($cadefalm, 'getCodedo', array (
+  'size' => 20,
+  'control_name' => 'cadefalm[codedo]',
+  'onBlur' => remote_function(array(
+			  'url'      => 'almdefalm/ajax',
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=3&cajtexmos=cadefalm_nomedo&codigo='+this.value"
+			  ))
+)); echo $value ? $value : '&nbsp;' ?>
+
+  <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Catipalm_codedo/clase/Ocestado/frame/sf_admin_edit_form/obj1/cadefalm_codedo/obj2/cadefalm_nomedo/campo1/codedo/campo2/nomedo');?>
+
+  <?php echo input_tag('cadefalm[nomedo]',$cadefalm->getNomedo(),'disabled=true; size=52'); ?>
+
+
+    </div>
+<br>
+  <?php echo label_for('cadefalm[diralm]', __($labels['cadefalm{diralm}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('cadefalm{diralm}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('cadefalm{diralm}')): ?>
+    <?php echo form_error('cadefalm{diralm}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($cadefalm, 'getDiralm', array (
+  'size' => '77x4',
+  'maxlength' => 500,
+  'control_name' => 'cadefalm[diralm]',
+  'onKeyUp'=>"javascript:cadena=this.value;cadena=cadena.toUpperCase();this.value=cadena;",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+   <br>
+
+  <?php echo label_for('cadefalm[esptoven]', __($labels['cadefalm{esptoven}']), 'class="required" Style="width:120px"') ?>
+  <div class="content<?php if ($sf_request->hasError('cadefalm{esptoven}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('cadefalm{esptoven}')): ?>
+    <?php echo form_error('cadefalm{esptoven}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_checkbox_tag($cadefalm, 'getEsptoven', array (
+  'control_name' => 'cadefalm[esptoven]',
+  'onClick'  => 'mostrar();',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+   <br>
+
+    <div id="tipventa" style="display:none">
+  <?php echo label_for('cadefalm[codtippv]', __($labels['cadefalm{codtippv}']), 'class="required" Style="width:120px"') ?>
+  <div class="content<?php if ($sf_request->hasError('cadefalm{codtippv}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('cadefalm{codtippv}')): ?>
+    <?php echo form_error('cadefalm{codtippv}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+ <?php echo select_tag('cadefalm[codtippv]', options_for_select(CatipalmpvPeer::getTipos(),$cadefalm->getCodtippv(),'include_custom=Seleccione uno...'),array()) ?>
+    </div>
+</div>
 </div>
 
 </fieldset>
@@ -95,17 +180,37 @@
 
 
 <script type="text/javascript">
-
+if ($('id').value!="")
+{
+    if ($('cadefalm_esptoven').checked==true)
+    {
+       $('tipventa').show();
+    }
+}
 function enter(e,valor)
  {
 
    if (e.keyCode==13 || e.keyCode==9)
    {
      if (valor!='')
-     { valor=valor.pad(6, '0',0);}
+     {
+         var longveinte='<?php echo $cadefalm->getCodlongveinte(); ?>';
+         if (longveinte!='S')
+           valor=valor.pad(6, '0',0);
+     }
 
      $('cadefalm_codalm').value=valor;
    }
  }
 
+function mostrar()
+{
+    if ($('cadefalm_esptoven').checked==true)
+    {
+       $('tipventa').show();
+    }else {
+        $('cadefalm_codtippv').value='';
+        $('tipventa').hide();
+    }
+}
 </script>

@@ -75,14 +75,19 @@ class tesaprordActions extends autotesaprordActions
   {
     $c = new Criteria();
     $c->add(OpordpagPeer::STATUS,'N');
-    $c->add(OpordpagPeer::APROBADOORD,null);
-    $c->add(OpordpagPeer::APROBADOTES,null);
+    //$c->add(OpordpagPeer::APROBADOORD,null);
+    $sql = "(((opordpag.APROBADOORD<>'A' and opordpag.APROBADOORD<>'R') or opordpag.APROBADOORD isnull) and ((opordpag.APROBADOTES<>'A' and opordpag.APROBADOTES<>'R') or opordpag.APROBADOTES isnull))";
+    $c->add(OpordpagPeer::APROBADOORD, $sql, Criteria :: CUSTOM);
+    //$c->add(OpordpagPeer::APROBADOTES,null);
     $c->add(OpordpagPeer::NUMCHE,null);
     $detalle = OpordpagPeer::doSelect($c);
 
     $this->filas=count($detalle);
 
     $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/tesaprord/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_ordenes');
+
+    $this->columnas[1][0]->setHTML('onClick="verificar(this.id)"');
+	$this->columnas[1][1]->setHTML('onClick="verificar(this.id)"');
 
     $this->objeto =$this->columnas[0]->getConfig($detalle);
 

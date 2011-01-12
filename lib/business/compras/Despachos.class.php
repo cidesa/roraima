@@ -191,6 +191,7 @@ class Despachos
     public static function grabarDespachoArticulos($despacho,$grid)
     {
     $coddph=$despacho->getDphart();
+    $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
     $x=$grid[0];
       $j=0;
       while ($j<count($x))
@@ -211,6 +212,8 @@ class Despachos
           $detalle->setPreart($x[$j]->getPreart());
           $detalle->setCodalm($x[$j]->getCodalm());
           $detalle->setCodubi($x[$j]->getCodubi());
+          if ($manartlot=='S')
+              $detalle->setNumlot($x[$j]->getNrolot());
       	  $detalle->save();
 	     }//if ($x[$j]->getCandes()>0)
         $j++;
@@ -259,6 +262,7 @@ class Despachos
 
        $msj="";
        $x=$grid[0];
+       $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
        $j=0;
        while ($j<count($x))
        {
@@ -268,6 +272,8 @@ class Despachos
         $cantd=$x[$j]->getCandes();
         $calmacen=$x[$j]->getCodalm();
         $cubicacion=$x[$j]->getCodubi();
+        if ($manartlot=='S')
+            $numlot=$x[$j]->getNrolot();
          if (($codarti!="") and ($cantd>0))
          {
            $c = new Criteria();
@@ -287,6 +293,8 @@ class Despachos
                  $c->add(CaartalmubiPeer::CODART,$codarti);
                  $c->add(CaartalmubiPeer::CODALM,$calmacen);
                  $c->add(CaartalmubiPeer::CODUBI,$cubicacion);
+                 if ($manartlot=='S')
+                     $c->add(CaartalmubiPeer::NUMLOT,$numlot);
                  $alm = CaartalmubiPeer::doSelectOne($c);
                  if ($alm)
                  {
@@ -423,6 +431,7 @@ class Despachos
    public static function devolverArticulos($despacho)
     {
       $coddph=$despacho->getDphart();
+      $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 	  $c= new Criteria();
 	  $c->add(CaartdphPeer::DPHART,$coddph);
 	  $detalle= CaartdphPeer::doselect($c);
@@ -432,6 +441,8 @@ class Despachos
 	      $cantidesp=$arreglo->getCandph();
 	      $codalmacen=$arreglo->getCodalm();
           $codubicacion=$arreglo->getCodubi();
+          if ($manartlot=='S')
+              $numlot=$arreglo->getNumlot();
 	      if ($codarticulo!="" and $cantidesp>0)
 	      {
 	        $c = new Criteria();
@@ -448,6 +459,8 @@ class Despachos
 	                 $c->add(CaartalmubiPeer::CODART,$codarticulo);
 	                 $c->add(CaartalmubiPeer::CODALM,$codalmacen);
 	                 $c->add(CaartalmubiPeer::CODUBI,$codubicacion);
+                         if ($manartlot=='S')
+                             $c->add(CaartalmubiPeer::NUMLOT,$numlot);
 	                 $alm = CaartalmubiPeer::doSelectOne($c);
 	                 if ($alm)
 	                 {
@@ -511,13 +524,16 @@ class Despachos
     }
     }
 
-    public static function verificaexisydisp($codart,$codalm,$codubi,$candes,&$msg)
+    public static function verificaexisydisp($codart,$codalm,$codubi,$candes,&$msg,$numlot='')
     {
     	 	 $msg="";
+                 $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
     	 	 $c = new Criteria();
              $c->add(CaartalmubiPeer::CODART,$codart);
              $c->add(CaartalmubiPeer::CODALM,$codalm);
              $c->add(CaartalmubiPeer::CODUBI,$codubi);
+             if ($manartlot=='S')
+                 $c->add(CaartalmubiPeer::NUMLOT,$numlot);
              $alm = CaartalmubiPeer::doSelectOne($c);
               if ($alm)
               {

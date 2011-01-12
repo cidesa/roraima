@@ -1,0 +1,44 @@
+methods:
+  post:
+   - "rhtipcur{codtipcur}"
+   - "rhtipcur{destipcur}"
+   - "rhtipcur{codarecur}"   
+
+names:
+  rhtipcur{codtipcur}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codtipcur
+
+  rhtipcur{destipcur}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_destipcur
+    
+  rhtipcur{codarecur}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco
+    validators: Validator_codarecur
+
+
+Validator_codtipcur:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Rhtipcur
+        column:       codtipcur
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_destipcur:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripción no puede pasar mas de 100 caracteres        
+        
+Validator_codarecur:
+    class: CidesaExistValidator
+    param:
+        class:    Rharecur
+        column:   codarecur
+        unique_error:   El Código del Area del Curso no existe            

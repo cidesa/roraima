@@ -4,8 +4,8 @@ set:
   arg_separator.output:        |
     &amp;
 
-check:
-  zend.ze1_compatibility_mode: off
+#check:
+#  zend.ze1_compatibility_mode: off
 
 warn:
   magic_quotes_gpc:            off

@@ -37,6 +37,22 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 
 
 	
+	protected $fecven;
+
+
+	
+	protected $numjau;
+
+
+	
+	protected $tammet;
+
+
+	
+	protected $numlot;
+
+
+	
 	protected $id;
 
 	
@@ -95,6 +111,51 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
   {
 
     return trim($this->codubi);
+
+  }
+  
+  public function getFecven($format = 'Y-m-d')
+  {
+
+    if ($this->fecven === null || $this->fecven === '') {
+      return null;
+    } elseif (!is_int($this->fecven)) {
+            $ts = adodb_strtotime($this->fecven);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
+      }
+    } else {
+      $ts = $this->fecven;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getNumjau($val=false)
+  {
+
+    if($val) return number_format($this->numjau,2,',','.');
+    else return $this->numjau;
+
+  }
+  
+  public function getTammet($val=false)
+  {
+
+    if($val) return number_format($this->tammet,2,',','.');
+    else return $this->tammet;
+
+  }
+  
+  public function getNumlot()
+  {
+
+    return trim($this->numlot);
 
   }
   
@@ -175,6 +236,58 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setFecven($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecven !== $ts) {
+      $this->fecven = $ts;
+      $this->modifiedColumns[] = CadetentPeer::FECVEN;
+    }
+
+	} 
+	
+	public function setNumjau($v)
+	{
+
+    if ($this->numjau !== $v) {
+        $this->numjau = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetentPeer::NUMJAU;
+      }
+  
+	} 
+	
+	public function setTammet($v)
+	{
+
+    if ($this->tammet !== $v) {
+        $this->tammet = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetentPeer::TAMMET;
+      }
+  
+	} 
+	
+	public function setNumlot($v)
+	{
+
+    if ($this->numlot !== $v) {
+        $this->numlot = $v;
+        $this->modifiedColumns[] = CadetentPeer::NUMLOT;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -203,7 +316,15 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 
       $this->codubi = $rs->getString($startcol + 6);
 
-      $this->id = $rs->getInt($startcol + 7);
+      $this->fecven = $rs->getDate($startcol + 7, null);
+
+      $this->numjau = $rs->getFloat($startcol + 8);
+
+      $this->tammet = $rs->getFloat($startcol + 9);
+
+      $this->numlot = $rs->getString($startcol + 10);
+
+      $this->id = $rs->getInt($startcol + 11);
 
       $this->resetModified();
 
@@ -211,7 +332,7 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 8; 
+            return $startcol + 12; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cadetent object", $e);
     }
@@ -380,6 +501,18 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 				return $this->getCodubi();
 				break;
 			case 7:
+				return $this->getFecven();
+				break;
+			case 8:
+				return $this->getNumjau();
+				break;
+			case 9:
+				return $this->getTammet();
+				break;
+			case 10:
+				return $this->getNumlot();
+				break;
+			case 11:
 				return $this->getId();
 				break;
 			default:
@@ -399,7 +532,11 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 			$keys[4] => $this->getCosart(),
 			$keys[5] => $this->getCodalm(),
 			$keys[6] => $this->getCodubi(),
-			$keys[7] => $this->getId(),
+			$keys[7] => $this->getFecven(),
+			$keys[8] => $this->getNumjau(),
+			$keys[9] => $this->getTammet(),
+			$keys[10] => $this->getNumlot(),
+			$keys[11] => $this->getId(),
 		);
 		return $result;
 	}
@@ -437,6 +574,18 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 				$this->setCodubi($value);
 				break;
 			case 7:
+				$this->setFecven($value);
+				break;
+			case 8:
+				$this->setNumjau($value);
+				break;
+			case 9:
+				$this->setTammet($value);
+				break;
+			case 10:
+				$this->setNumlot($value);
+				break;
+			case 11:
 				$this->setId($value);
 				break;
 		} 	}
@@ -453,7 +602,11 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setCosart($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setCodalm($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setCodubi($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setFecven($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setNumjau($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setTammet($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setNumlot($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
 	}
 
 	
@@ -468,6 +621,10 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CadetentPeer::COSART)) $criteria->add(CadetentPeer::COSART, $this->cosart);
 		if ($this->isColumnModified(CadetentPeer::CODALM)) $criteria->add(CadetentPeer::CODALM, $this->codalm);
 		if ($this->isColumnModified(CadetentPeer::CODUBI)) $criteria->add(CadetentPeer::CODUBI, $this->codubi);
+		if ($this->isColumnModified(CadetentPeer::FECVEN)) $criteria->add(CadetentPeer::FECVEN, $this->fecven);
+		if ($this->isColumnModified(CadetentPeer::NUMJAU)) $criteria->add(CadetentPeer::NUMJAU, $this->numjau);
+		if ($this->isColumnModified(CadetentPeer::TAMMET)) $criteria->add(CadetentPeer::TAMMET, $this->tammet);
+		if ($this->isColumnModified(CadetentPeer::NUMLOT)) $criteria->add(CadetentPeer::NUMLOT, $this->numlot);
 		if ($this->isColumnModified(CadetentPeer::ID)) $criteria->add(CadetentPeer::ID, $this->id);
 
 		return $criteria;
@@ -512,6 +669,14 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		$copyObj->setCodalm($this->codalm);
 
 		$copyObj->setCodubi($this->codubi);
+
+		$copyObj->setFecven($this->fecven);
+
+		$copyObj->setNumjau($this->numjau);
+
+		$copyObj->setTammet($this->tammet);
+
+		$copyObj->setNumlot($this->numlot);
 
 
 		$copyObj->setNew(true);

@@ -24,6 +24,7 @@ class almajuocActions extends autoalmajuocActions
   {
 
     $this->caajuoc = $this->getCaajuocOrCreate();
+    $this->setVars();
 
     $this->configGrid();
 
@@ -141,7 +142,12 @@ $this->Bitacora('Guardo');
 
 	    if($reg_ordcom)
 	    {
+	    	if ($reg_ordcom->getStaord()!='N'){
 	      $output = '[["caajuoc_desord","'.$reg_ordcom->getDesord() .'",""],["caajuoc_codpro","'.$reg_ordcom->getCodpro().'",""],["caajuoc_nompro","'.$reg_ordcom->getNompro().'",""]]';
+	    	}else {
+	    		$this->mensaje="Orden de Compra esta Anulada...";
+ 	        $output = '[["caajuoc_desord","",""],["caajuoc_codpro","",""],["caajuoc_nompro","",""]]';
+	    	}
 	    }
 	    else
 	    {
@@ -154,7 +160,7 @@ $this->Bitacora('Guardo');
 
 	if ($this->mensaje!="")
 	   {
-	       $output = '[["caajuoc_desord","",""],["caajuoc_codpro","",""],["caajuoc_nompro","",""]]';
+	       $output = '[["caajuoc_desord","",""],["caajuoc_codpro","",""],["caajuoc_nompro","",""],["caajuoc_ordcom","",""]]';
 	   }
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
   }
@@ -413,6 +419,86 @@ $this->Bitacora('Guardo');
   {
     $this->caajuoc = $this->getCaajuocOrCreate();
     $this->updateCaajuocFromRequest();
+  }
+
+  protected function updateCaajuocFromRequest()
+  {
+    $caajuoc = $this->getRequestParameter('caajuoc');
+    $this->setVars();
+
+    if (isset($caajuoc['ajuoc']))
+    {
+      $this->caajuoc->setAjuoc($caajuoc['ajuoc']);
+    }
+    if (isset($caajuoc['ordcom']))
+    {
+      $this->caajuoc->setOrdcom($caajuoc['ordcom']);
+    }
+    if (isset($caajuoc['fecaju']))
+    {
+      if ($caajuoc['fecaju'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($caajuoc['fecaju']))
+          {
+            $value = $dateFormat->format($caajuoc['fecaju'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $caajuoc['fecaju'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->caajuoc->setFecaju($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->caajuoc->setFecaju(null);
+      }
+    }
+    if (isset($caajuoc['desaju']))
+    {
+      $this->caajuoc->setDesaju($caajuoc['desaju']);
+    }
+    if (isset($caajuoc['monaju']))
+    {
+      $this->caajuoc->setMonaju($caajuoc['monaju']);
+    }
+    if (isset($caajuoc['codpro']))
+    {
+      $this->caajuoc->setCodpro($caajuoc['codpro']);
+    }
+    if (isset($caajuoc['nompro']))
+    {
+      $this->caajuoc->setNompro($caajuoc['nompro']);
+    }
+  }
+
+  public function setVars()
+  {
+    $this->bloqfec="";
+    $this->oculeli="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almcotiza',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['compras']['modulos']['almcotiza']))
+	       {
+	       	$this->bloqfec=$varemp['aplicacion']['compras']['modulos']['almcotiza']['bloqfec'];
+	       }
+	       if(array_key_exists('oculeli',$varemp['aplicacion']['compras']['modulos']['almcotiza']))
+	       {
+	       	$this->oculeli=$varemp['aplicacion']['compras']['modulos']['almcotiza']['oculeli'];
+	       }
+         }
   }
 
 }

@@ -17,6 +17,10 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
 
 
 	
+	protected $codciu;
+
+
+	
 	protected $codmun;
 
 
@@ -26,6 +30,21 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
 
 	
 	protected $id;
+
+	
+	protected $aOcpais;
+
+	
+	protected $aOcestado;
+
+	
+	protected $aOcciudad;
+
+	
+	protected $collCadefcenacos;
+
+	
+	protected $lastCadefcenacoCriteria = null;
 
 	
 	protected $alreadyInSave = false;
@@ -45,6 +64,13 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
   {
 
     return trim($this->codedo);
+
+  }
+  
+  public function getCodciu()
+  {
+
+    return trim($this->codciu);
 
   }
   
@@ -77,6 +103,10 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = OcmuniciPeer::CODPAI;
       }
   
+		if ($this->aOcpais !== null && $this->aOcpais->getCodpai() !== $v) {
+			$this->aOcpais = null;
+		}
+
 	} 
 	
 	public function setCodedo($v)
@@ -87,6 +117,24 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = OcmuniciPeer::CODEDO;
       }
   
+		if ($this->aOcestado !== null && $this->aOcestado->getCodedo() !== $v) {
+			$this->aOcestado = null;
+		}
+
+	} 
+	
+	public function setCodciu($v)
+	{
+
+    if ($this->codciu !== $v) {
+        $this->codciu = $v;
+        $this->modifiedColumns[] = OcmuniciPeer::CODCIU;
+      }
+  
+		if ($this->aOcciudad !== null && $this->aOcciudad->getCodciu() !== $v) {
+			$this->aOcciudad = null;
+		}
+
 	} 
 	
 	public function setCodmun($v)
@@ -127,11 +175,13 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
 
       $this->codedo = $rs->getString($startcol + 1);
 
-      $this->codmun = $rs->getString($startcol + 2);
+      $this->codciu = $rs->getString($startcol + 2);
 
-      $this->nommun = $rs->getString($startcol + 3);
+      $this->codmun = $rs->getString($startcol + 3);
 
-      $this->id = $rs->getInt($startcol + 4);
+      $this->nommun = $rs->getString($startcol + 4);
+
+      $this->id = $rs->getInt($startcol + 5);
 
       $this->resetModified();
 
@@ -139,7 +189,7 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 5; 
+            return $startcol + 6; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Ocmunici object", $e);
     }
@@ -216,6 +266,29 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aOcpais !== null) {
+				if ($this->aOcpais->isModified()) {
+					$affectedRows += $this->aOcpais->save($con);
+				}
+				$this->setOcpais($this->aOcpais);
+			}
+
+			if ($this->aOcestado !== null) {
+				if ($this->aOcestado->isModified()) {
+					$affectedRows += $this->aOcestado->save($con);
+				}
+				$this->setOcestado($this->aOcestado);
+			}
+
+			if ($this->aOcciudad !== null) {
+				if ($this->aOcciudad->isModified()) {
+					$affectedRows += $this->aOcciudad->save($con);
+				}
+				$this->setOcciudad($this->aOcciudad);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = OcmuniciPeer::doInsert($this, $con);
@@ -226,6 +299,14 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
 					$affectedRows += OcmuniciPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
+
+			if ($this->collCadefcenacos !== null) {
+				foreach($this->collCadefcenacos as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
 
 			$this->alreadyInSave = false;
 		}
@@ -263,10 +344,38 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
+												
+			if ($this->aOcpais !== null) {
+				if (!$this->aOcpais->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aOcpais->getValidationFailures());
+				}
+			}
+
+			if ($this->aOcestado !== null) {
+				if (!$this->aOcestado->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aOcestado->getValidationFailures());
+				}
+			}
+
+			if ($this->aOcciudad !== null) {
+				if (!$this->aOcciudad->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aOcciudad->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = OcmuniciPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collCadefcenacos !== null) {
+					foreach($this->collCadefcenacos as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -293,12 +402,15 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
 				return $this->getCodedo();
 				break;
 			case 2:
-				return $this->getCodmun();
+				return $this->getCodciu();
 				break;
 			case 3:
-				return $this->getNommun();
+				return $this->getCodmun();
 				break;
 			case 4:
+				return $this->getNommun();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -313,9 +425,10 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
 		$result = array(
 			$keys[0] => $this->getCodpai(),
 			$keys[1] => $this->getCodedo(),
-			$keys[2] => $this->getCodmun(),
-			$keys[3] => $this->getNommun(),
-			$keys[4] => $this->getId(),
+			$keys[2] => $this->getCodciu(),
+			$keys[3] => $this->getCodmun(),
+			$keys[4] => $this->getNommun(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
@@ -338,12 +451,15 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
 				$this->setCodedo($value);
 				break;
 			case 2:
-				$this->setCodmun($value);
+				$this->setCodciu($value);
 				break;
 			case 3:
-				$this->setNommun($value);
+				$this->setCodmun($value);
 				break;
 			case 4:
+				$this->setNommun($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
@@ -355,9 +471,10 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
 
 		if (array_key_exists($keys[0], $arr)) $this->setCodpai($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodedo($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setCodmun($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setNommun($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[2], $arr)) $this->setCodciu($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setCodmun($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setNommun($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
 	
@@ -367,6 +484,7 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
 
 		if ($this->isColumnModified(OcmuniciPeer::CODPAI)) $criteria->add(OcmuniciPeer::CODPAI, $this->codpai);
 		if ($this->isColumnModified(OcmuniciPeer::CODEDO)) $criteria->add(OcmuniciPeer::CODEDO, $this->codedo);
+		if ($this->isColumnModified(OcmuniciPeer::CODCIU)) $criteria->add(OcmuniciPeer::CODCIU, $this->codciu);
 		if ($this->isColumnModified(OcmuniciPeer::CODMUN)) $criteria->add(OcmuniciPeer::CODMUN, $this->codmun);
 		if ($this->isColumnModified(OcmuniciPeer::NOMMUN)) $criteria->add(OcmuniciPeer::NOMMUN, $this->nommun);
 		if ($this->isColumnModified(OcmuniciPeer::ID)) $criteria->add(OcmuniciPeer::ID, $this->id);
@@ -404,10 +522,21 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
 
 		$copyObj->setCodedo($this->codedo);
 
+		$copyObj->setCodciu($this->codciu);
+
 		$copyObj->setCodmun($this->codmun);
 
 		$copyObj->setNommun($this->nommun);
 
+
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getCadefcenacos() as $relObj) {
+				$copyObj->addCadefcenaco($relObj->copy($deepCopy));
+			}
+
+		} 
 
 		$copyObj->setNew(true);
 
@@ -430,6 +559,277 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
 			self::$peer = new OcmuniciPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setOcpais($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodpai(NULL);
+		} else {
+			$this->setCodpai($v->getCodpai());
+		}
+
+
+		$this->aOcpais = $v;
+	}
+
+
+	
+	public function getOcpais($con = null)
+	{
+		if ($this->aOcpais === null && (($this->codpai !== "" && $this->codpai !== null))) {
+						include_once 'lib/model/om/BaseOcpaisPeer.php';
+
+      $c = new Criteria();
+      $c->add(OcpaisPeer::CODPAI,$this->codpai);
+      
+			$this->aOcpais = OcpaisPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aOcpais;
+	}
+
+	
+	public function setOcestado($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodedo(NULL);
+		} else {
+			$this->setCodedo($v->getCodedo());
+		}
+
+
+		$this->aOcestado = $v;
+	}
+
+
+	
+	public function getOcestado($con = null)
+	{
+		if ($this->aOcestado === null && (($this->codedo !== "" && $this->codedo !== null))) {
+						include_once 'lib/model/om/BaseOcestadoPeer.php';
+
+      $c = new Criteria();
+      $c->add(OcestadoPeer::CODEDO,$this->codedo);
+      
+			$this->aOcestado = OcestadoPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aOcestado;
+	}
+
+	
+	public function setOcciudad($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodciu(NULL);
+		} else {
+			$this->setCodciu($v->getCodciu());
+		}
+
+
+		$this->aOcciudad = $v;
+	}
+
+
+	
+	public function getOcciudad($con = null)
+	{
+		if ($this->aOcciudad === null && (($this->codciu !== "" && $this->codciu !== null))) {
+						include_once 'lib/model/om/BaseOcciudadPeer.php';
+
+      $c = new Criteria();
+      $c->add(OcciudadPeer::CODCIU,$this->codciu);
+      
+			$this->aOcciudad = OcciudadPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aOcciudad;
+	}
+
+	
+	public function initCadefcenacos()
+	{
+		if ($this->collCadefcenacos === null) {
+			$this->collCadefcenacos = array();
+		}
+	}
+
+	
+	public function getCadefcenacos($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCadefcenacoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCadefcenacos === null) {
+			if ($this->isNew()) {
+			   $this->collCadefcenacos = array();
+			} else {
+
+				$criteria->add(CadefcenacoPeer::CODMUN, $this->getCodmun());
+
+				CadefcenacoPeer::addSelectColumns($criteria);
+				$this->collCadefcenacos = CadefcenacoPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CadefcenacoPeer::CODMUN, $this->getCodmun());
+
+				CadefcenacoPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCadefcenacoCriteria) || !$this->lastCadefcenacoCriteria->equals($criteria)) {
+					$this->collCadefcenacos = CadefcenacoPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCadefcenacoCriteria = $criteria;
+		return $this->collCadefcenacos;
+	}
+
+	
+	public function countCadefcenacos($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseCadefcenacoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CadefcenacoPeer::CODMUN, $this->getCodmun());
+
+		return CadefcenacoPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCadefcenaco(Cadefcenaco $l)
+	{
+		$this->collCadefcenacos[] = $l;
+		$l->setOcmunici($this);
+	}
+
+
+	
+	public function getCadefcenacosJoinOcpais($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCadefcenacoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCadefcenacos === null) {
+			if ($this->isNew()) {
+				$this->collCadefcenacos = array();
+			} else {
+
+				$criteria->add(CadefcenacoPeer::CODMUN, $this->getCodmun());
+
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcpais($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CadefcenacoPeer::CODMUN, $this->getCodmun());
+
+			if (!isset($this->lastCadefcenacoCriteria) || !$this->lastCadefcenacoCriteria->equals($criteria)) {
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcpais($criteria, $con);
+			}
+		}
+		$this->lastCadefcenacoCriteria = $criteria;
+
+		return $this->collCadefcenacos;
+	}
+
+
+	
+	public function getCadefcenacosJoinOcestado($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCadefcenacoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCadefcenacos === null) {
+			if ($this->isNew()) {
+				$this->collCadefcenacos = array();
+			} else {
+
+				$criteria->add(CadefcenacoPeer::CODMUN, $this->getCodmun());
+
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcestado($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CadefcenacoPeer::CODMUN, $this->getCodmun());
+
+			if (!isset($this->lastCadefcenacoCriteria) || !$this->lastCadefcenacoCriteria->equals($criteria)) {
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcestado($criteria, $con);
+			}
+		}
+		$this->lastCadefcenacoCriteria = $criteria;
+
+		return $this->collCadefcenacos;
+	}
+
+
+	
+	public function getCadefcenacosJoinOcciudad($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCadefcenacoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCadefcenacos === null) {
+			if ($this->isNew()) {
+				$this->collCadefcenacos = array();
+			} else {
+
+				$criteria->add(CadefcenacoPeer::CODMUN, $this->getCodmun());
+
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcciudad($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CadefcenacoPeer::CODMUN, $this->getCodmun());
+
+			if (!isset($this->lastCadefcenacoCriteria) || !$this->lastCadefcenacoCriteria->equals($criteria)) {
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcciudad($criteria, $con);
+			}
+		}
+		$this->lastCadefcenacoCriteria = $criteria;
+
+		return $this->collCadefcenacos;
 	}
 
 } 

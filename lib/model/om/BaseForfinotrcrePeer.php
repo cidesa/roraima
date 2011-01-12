@@ -215,6 +215,7 @@ abstract class BaseForfinotrcrePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ForfinotrcrePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

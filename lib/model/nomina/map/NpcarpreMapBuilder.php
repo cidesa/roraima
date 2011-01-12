@@ -40,7 +40,21 @@ class NpcarpreMapBuilder {
 
 		$tMap->addColumn('CANPRE', 'Canpre', 'double', CreoleTypes::NUMERIC, true, 6);
 
+		$tMap->addColumn('CANHPRE', 'Canhpre', 'double', CreoleTypes::NUMERIC, true, 6);
+
+		$tMap->addColumn('CANMPRE', 'Canmpre', 'double', CreoleTypes::NUMERIC, true, 6);
+
 		$tMap->addColumn('CANASI', 'Canasi', 'double', CreoleTypes::NUMERIC, true, 6);
+
+		$tMap->addColumn('CANHOM', 'Canhom', 'double', CreoleTypes::NUMERIC, true, 6);
+
+		$tMap->addColumn('CANMUJ', 'Canmuj', 'double', CreoleTypes::NUMERIC, true, 6);
+
+		$tMap->addColumn('CANVAC', 'Canvac', 'double', CreoleTypes::NUMERIC, true, 6);
+
+		$tMap->addColumn('CANHVAC', 'Canhvac', 'double', CreoleTypes::NUMERIC, true, 6);
+
+		$tMap->addColumn('CANMVAC', 'Canmvac', 'double', CreoleTypes::NUMERIC, true, 6);
 
 		$tMap->addColumn('MONPRE', 'Monpre', 'double', CreoleTypes::NUMERIC, true, 17);
 

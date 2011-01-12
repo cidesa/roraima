@@ -78,49 +78,19 @@ abstract class BaseRhclacur extends BaseObject  implements Persistent {
   }
 
   
-  public function getHorini($format = 'Y-m-d')
+  public function getHorini()
   {
 
-    if ($this->horini === null || $this->horini === '') {
-      return null;
-    } elseif (!is_int($this->horini)) {
-            $ts = adodb_strtotime($this->horini);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [horini] as date/time value: " . var_export($this->horini, true));
-      }
-    } else {
-      $ts = $this->horini;
-    }
-    if ($format === null) {
-      return $ts;
-    } elseif (strpos($format, '%') !== false) {
-      return adodb_strftime($format, $ts);
-    } else {
-      return @adodb_date($format, $ts);
-    }
-  }
+    return trim($this->horini);
 
+  }
   
-  public function getHorfin($format = 'Y-m-d')
+  public function getHorfin()
   {
 
-    if ($this->horfin === null || $this->horfin === '') {
-      return null;
-    } elseif (!is_int($this->horfin)) {
-            $ts = adodb_strtotime($this->horfin);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [horfin] as date/time value: " . var_export($this->horfin, true));
-      }
-    } else {
-      $ts = $this->horfin;
-    }
-    if ($format === null) {
-      return $ts;
-    } elseif (strpos($format, '%') !== false) {
-      return adodb_strftime($format, $ts);
-    } else {
-      return @adodb_date($format, $ts);
-    }
-  }
+    return trim($this->horfin);
 
+  }
   
   public function getNumhor($val=false)
   {
@@ -160,6 +130,11 @@ abstract class BaseRhclacur extends BaseObject  implements Persistent {
 	public function setFeccla($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccla] from input: " . var_export($v, true));
@@ -177,35 +152,21 @@ abstract class BaseRhclacur extends BaseObject  implements Persistent {
 	public function setHorini($v)
 	{
 
-    if ($v !== null && !is_int($v)) {
-      $ts = adodb_strtotime($v);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [horini] from input: " . var_export($v, true));
+    if ($this->horini !== $v) {
+        $this->horini = $v;
+        $this->modifiedColumns[] = RhclacurPeer::HORINI;
       }
-    } else {
-      $ts = $v;
-    }
-    if ($this->horini !== $ts) {
-      $this->horini = $ts;
-      $this->modifiedColumns[] = RhclacurPeer::HORINI;
-    }
-
+  
 	} 
 	
 	public function setHorfin($v)
 	{
 
-    if ($v !== null && !is_int($v)) {
-      $ts = adodb_strtotime($v);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [horfin] from input: " . var_export($v, true));
+    if ($this->horfin !== $v) {
+        $this->horfin = $v;
+        $this->modifiedColumns[] = RhclacurPeer::HORFIN;
       }
-    } else {
-      $ts = $v;
-    }
-    if ($this->horfin !== $ts) {
-      $this->horfin = $ts;
-      $this->modifiedColumns[] = RhclacurPeer::HORFIN;
-    }
-
+  
 	} 
 	
 	public function setNumhor($v)
@@ -238,9 +199,9 @@ abstract class BaseRhclacur extends BaseObject  implements Persistent {
 
       $this->feccla = $rs->getDate($startcol + 2, null);
 
-      $this->horini = $rs->getDate($startcol + 3, null);
+      $this->horini = $rs->getString($startcol + 3);
 
-      $this->horfin = $rs->getDate($startcol + 4, null);
+      $this->horfin = $rs->getString($startcol + 4);
 
       $this->numhor = $rs->getFloat($startcol + 5);
 

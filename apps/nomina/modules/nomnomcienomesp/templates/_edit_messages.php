@@ -33,4 +33,9 @@
 <div class="save-error">
 <h2><?php echo __($sf_flash->get('notice2')) ?></h2>
 </div>
+
+<?php elseif ($sf_flash->has('error')): ?>
+<div class="save-error">
+<h2><?php echo __($sf_flash->get('error')) ?></h2>
+</div>
 <?php endif; ?>

@@ -15,4 +15,20 @@
  */ 
 class Tsconcil extends BaseTsconcil
 {
+    protected $ano="";
+    protected $movtxt="0";
+
+   public function getAno()
+   {
+      $contaba=ContabaPeer::doSelectOne(new Criteria());
+      if ($contaba)
+        $anno=substr($contaba->getFecini(),0,4);
+      else $anno=date('Y');
+     return $anno;
+}
+
+   public function setAno()
+   {
+     return $this->ano;
+   }
 }

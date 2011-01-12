@@ -1,13 +1,13 @@
 <?php
 /**
- * Calculo de Nóminas Especiales: Clase estática para el control de prenominas 
+ * Calculo de Nóminas Especiales: Clase estática para el control de prenominas
  * de nóminas especiales
  *
  * @package    Roraima
  * @subpackage nomina
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: CalculoNominaEspecial.class.php 34727 2009-11-13 13:25:56Z jlobaton $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -308,6 +308,7 @@ public static function CalculoPorFormula($grid,$codemp,$cargo,$conceptos,$codnom
 {
 	$especial='SI';
 	$valor1=Nomina::evaluar_Campo($grid["campo"],&$resecu,&$error,&$guardar,$codemp,$cargo,$conceptos["codcon"],$codnom,&$fecnom,$fechanac,$fechaing,$sexo,$especial,$desde,$hasta,$ultfec,$profec);
+
 	if ($nroope==0)
 	{
 		$booleanos[0]=Nomina::evaluar_Cond($valor1,$grid["operador"],$grid["valor"]);
@@ -328,7 +329,7 @@ public static function CalculoPorFormula($grid,$codemp,$cargo,$conceptos,$codnom
 	else // es la formula
 	{
 		if ($booleanos[0])
-		{
+		{		
 			// ejecuta y pasa a otro concepto
 			$cadena= trim(strtoupper($grid["confor"]));
 			$ecuacion=Nomina::posfix($cadena);
@@ -351,7 +352,6 @@ public static function ValidacionSalvar($vars,$error,$resecu,$codnom,$codemp,$ca
 		{
 			$vars='CON'.$vars;
 		}
-
 
 		if (!$error && $resecu!=0)
 		{

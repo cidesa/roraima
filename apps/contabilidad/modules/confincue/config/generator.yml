@@ -17,7 +17,7 @@ generator:
     edit:
       title:                    Catálogo de Cuentas
       display:
-        Datos de la cuenta:     [codcta, descta, _cargab, _debcre]
+        Datos de la cuenta:     [_codcta, descta, _cargab, _debcre]
         NONE:                   [_grid]
       actions:
         _list:        ~

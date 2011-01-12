@@ -1,8 +1,8 @@
 generator:
-  class:              sfPropelAdminGenerator
+  class:              cidesaPropelAdminGenerator
   param:
     model_class:      Caramart
-    theme:            default
+    theme:            cidesaGenerator
 
     fields:
       ramart:      { name : Código, params: maxlength=6 }

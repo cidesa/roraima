@@ -123,13 +123,14 @@ class almreqserActions extends autoalmreqserActions
 	$col4->setHTML('type="text" size="30x1" readonly=true');
 
     $col5 = new Columna('Realizado el...(Fecha)');
-    $col5->setTipo(Columna::TEXTO);
+    $col5->setTipo(Columna::FECHA);
     $col5->setEsGrabable(false);
     $col5->setNombreCampo('fecrea');
     $col5->setAlineacionObjeto(Columna::CENTRO);
 	$col5->setAlineacionContenido(Columna::CENTRO);
 	$col5->setHTML('type="text" size="10" readonly=true' );
 	$col5->setJScript('onKeyUp = "this.value=formateafecha(this.value);"');
+        $col5->setVacia(true);
 
    	// Se guardan las columnas en el objetos de opciones
 	$opciones->addColumna($col1);
@@ -279,7 +280,8 @@ $this->Bitacora('Guardo');
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */

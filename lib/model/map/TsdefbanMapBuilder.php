@@ -38,7 +38,7 @@ class TsdefbanMapBuilder {
 
 		$tMap->addColumn('NOMCUE', 'Nomcue', 'string', CreoleTypes::VARCHAR, true, 40);
 
-		$tMap->addColumn('TIPCUE', 'Tipcue', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addForeignKey('TIPCUE', 'Tipcue', 'string', CreoleTypes::VARCHAR, 'tstipcue', 'CODTIP', true, 3);
 
 		$tMap->addColumn('CODCTA', 'Codcta', 'string', CreoleTypes::VARCHAR, false, 32);
 
@@ -78,7 +78,7 @@ class TsdefbanMapBuilder {
 
 		$tMap->addColumn('USOCUE', 'Usocue', 'string', CreoleTypes::VARCHAR, false, 20);
 
-		$tMap->addColumn('TIPREN', 'Tipren', 'string', CreoleTypes::VARCHAR, false, 20);
+		$tMap->addForeignKey('TIPREN', 'Tipren', 'string', CreoleTypes::VARCHAR, 'tstipren', 'CODTIP', true, 20);
 
 		$tMap->addColumn('DESENL', 'Desenl', 'string', CreoleTypes::VARCHAR, false, 250);
 
@@ -101,6 +101,10 @@ class TsdefbanMapBuilder {
 		$tMap->addColumn('CANTDIG', 'Cantdig', 'double', CreoleTypes::NUMERIC, false, 2);
 
 		$tMap->addColumn('ENDOSABLE', 'Endosable', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('SALMIN', 'Salmin', 'double', CreoleTypes::NUMERIC, false, 20);
+
+		$tMap->addColumn('NOMREP', 'Nomrep', 'string', CreoleTypes::VARCHAR, false, 50);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

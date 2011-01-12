@@ -1,10 +1,11 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
 require_once($_SESSION["x"].'lib/general/tools.php');
 require_once($_SESSION["x"].'lib/general/funciones.php');
-validar(array(11,15));            //Seguridad  del Sistema
+if (validar(array(11,15))) {         //Seguridad  del Sistema
 $codemp=$_SESSION["codemp"];
 $bd=new basedatosAdo($codemp);
 $z= new tools();
@@ -18,6 +19,8 @@ $z= new tools();
     $numero   = substr($_POST["numero"],0,8);
 
     $i=1;
+    $acumdeb=0;
+    $acumcre=0;
 
     while ($i<=500)
       {
@@ -32,6 +35,8 @@ $z= new tools();
 	          $grid3[$i]=$_POST["x".$i."3"];
 	          $grid4[$i]=(float)str_replace(',','',$_POST["x".$i."4"]);
 	          $grid5[$i]=(float)str_replace(',','',$_POST["x".$i."5"]);
+                  $acumdeb= $acumdeb + $grid4[$i];
+                  $acumcre= $acumcre + $grid5[$i];
 	          $i=$i+1;
 	        }
 	        else
@@ -49,6 +54,7 @@ $z= new tools();
 
     $status = $_GET["status"];
     $imec   = $_GET["imec"];
+    $tipcom   = $_GET["tipcom"];
 
     if ($imec=='I' or $imec=='M'){
       if ($imec=='I') //Salvar
@@ -89,6 +95,7 @@ $z= new tools();
        //Mensaje("Codigo Eliminado");
        //Regresar("ConFinCue.php");
     }
+    }
 
   function GrabarComprobante()
   {
@@ -98,6 +105,7 @@ $z= new tools();
     global $fecha;
     global $desc;
     global $debitos;
+    global $creditos;
     global $status;
     global $grid1;
     global $grid2;
@@ -106,10 +114,29 @@ $z= new tools();
     global $grid5;
     global $bd;
     global $fin;
+    global $tipcom;
+    global $acumdeb;
+    global $acumcre;
 
     $bd->startTransaccion();
+// print 'Deb='.$debitos;
+// print '<br>';
+// print 'Cre='.$creditos;
+// print '<br>';
+// print 'AcumDeb='.$acumdeb;
+// print '<br>';
+// print 'AcumCre='.$acumcre;
+// print '<br>';
+// print $debitos-$creditos;
+// print '<br>';
+$acumdeb = round($acumdeb, 2);
+$acumcre = round($acumcre, 2);
+// print $acumdeb-$acumcre;
+// exit;
 
-    if ($imec=="I")
+    if (($debitos-$creditos)==0 || $imec=='E') {
+      if (($acumdeb-$acumcre)==0 || $imec=='E') {
+     if ($imec=="I")
     {
       try
       {
@@ -150,11 +177,24 @@ $z= new tools();
     {
       try
       {
-        $sql="update contabc set descom='".$desc."',
+        if ($status=='N')
+        {
+         $usua=$_SESSION["loguse"];
+          $sql="update contabc set descom='".$desc."',
                      moncom=".$debitos.",
                      stacom='".$status."',
-                     tipcom='CON'
+                     usuanu='".$usua."',
+                     tipcom='".$tipcom."'
             where numcom = '".$numero."' and feccom = to_date('".$fecha."','dd/mm/yyyy')";
+         
+        }else {
+
+         $sql="update contabc set descom='".$desc."',
+                     moncom=".$debitos.",
+                     stacom='".$status."',
+                     tipcom='".$tipcom."'
+            where numcom = '".$numero."' and feccom = to_date('".$fecha."','dd/mm/yyyy')";
+        }
 
        $bd->actualizar($sql);
 
@@ -163,6 +203,7 @@ $z= new tools();
 
             $tb=$bd->select($sql);
             $bd->Log($tb->fields["id"], 'con', 'Contabc', 'Confincom', 'A');
+        
 
 
       }
@@ -172,6 +213,7 @@ $z= new tools();
       }
     }
 
+    if ($imec=='I'  || ($imec=='M' && $tipcom=='CON')){
     // GRABAR ASIENTOS
 
       //Eliminamos primero los asientos para luego insertarlos
@@ -195,6 +237,48 @@ $z= new tools();
         $bd->actualizar($sql);
         $i=$i+1;
       }
+
+      $sql = "Select sum(monasi) as deb from contabc1 where numcom='".$numero."' AND feccom=to_date('".$fecha."','dd/mm/yyyy') and debcre='D'";
+      $tb=$bd->select($sql);
+      $tradeb=$tb->fields["deb"];
+
+      $sql1 = "Select sum(monasi) as cre from contabc1 where numcom='".$numero."' AND feccom=to_date('".$fecha."','dd/mm/yyyy') and debcre='C'";
+      $tb1=$bd->select($sql1);
+      $tracre=$tb1->fields["cre"];
+
+      if (($tradeb-$tracre)!=0)
+      {
+        $sql="delete from contabc1 where numcom = '".$numero."' and feccom = to_date('".$fecha."','dd/mm/yyyy')";
+        $bd->actualizar($sql);
+
+        $sqla="delete from contabc where numcom = '".$numero."' and feccom = to_date('".$fecha."','dd/mm/yyyy')";
+        $bd->actualizar($sqla);
+
+        Mensaje("El Comprobante no fue Guardado debido a que esta descuadrado");
+        ?>
+        <script language="javascript1.1" type="text/javascript">
+              location=("ConFinCom.php")
+          </script>
+        <?
+      }
+    }
+    }
+    else {
+        Mensaje("El Comprobante está Descuadrado");
+        ?>
+        <script language="javascript1.1" type="text/javascript">
+              location=("ConFinCom.php")
+          </script>
+        <?
+    }
+    }else {
+        Mensaje("El Comprobante está Descuadrado");
+        ?>
+        <script language="javascript1.1" type="text/javascript">
+              location=("ConFinCom.php")
+          </script>
+        <?
+    }
 
     $bd->completeTransaccion();
   }

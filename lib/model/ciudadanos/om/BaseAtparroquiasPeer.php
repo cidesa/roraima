@@ -275,8 +275,8 @@ abstract class BaseAtparroquiasPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(AtparroquiasPeer::ATMUNICIPIOS_ID, AtmunicipiosPeer::ID);
-
+			$criteria->addJoin(AtparroquiasPeer::ATMUNICIPIOS_ID, AtmunicipiosPeer::ID);
+	
 		$rs = AtparroquiasPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -298,11 +298,11 @@ abstract class BaseAtparroquiasPeer {
 		AtparroquiasPeer::addSelectColumns($c);
 		$startcol2 = (AtparroquiasPeer::NUM_COLUMNS - AtparroquiasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtmunicipiosPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtmunicipiosPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtparroquiasPeer::ATMUNICIPIOS_ID, AtmunicipiosPeer::ID);
-
+			AtmunicipiosPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtmunicipiosPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtparroquiasPeer::ATMUNICIPIOS_ID, AtmunicipiosPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -316,28 +316,28 @@ abstract class BaseAtparroquiasPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = AtmunicipiosPeer::getOMClass();
+							
+				$omClass = AtmunicipiosPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtmunicipios(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtparroquias($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtmunicipios(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtparroquias($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtparroquiass();
-				$obj2->addAtparroquias($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtparroquiass();
+					$obj2->addAtparroquias($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

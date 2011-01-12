@@ -78,6 +78,12 @@ class TscheemiMapBuilder {
 
 		$tMap->addColumn('PERAUT', 'Peraut', 'string', CreoleTypes::VARCHAR, false, 40);
 
+		$tMap->addColumn('NUMCOMEGR', 'Numcomegr', 'string', CreoleTypes::VARCHAR, false, 8);
+
+		$tMap->addColumn('MOTDEV', 'Motdev', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('FECDEV', 'Fecdev', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

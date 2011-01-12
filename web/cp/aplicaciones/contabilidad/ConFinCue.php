@@ -1,17 +1,18 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?php
 }
 
-require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
-require_once($_SESSION["x"].'lib/general/funciones.php');
-require_once($_SESSION["x"].'lib/general/tools.php');
+require_once($_SESSION["x"].'/lib/bd/basedatosAdo.php');
+require_once($_SESSION["x"].'/lib/general/funciones.php');
+require_once($_SESSION["x"].'/lib/general/tools.php');
 validar(array(8,11,15));            //Seguridad  del Sistema
 $codemp=$_SESSION["codemp"];
 $bd=new basedatosAdo($codemp);
@@ -38,7 +39,7 @@ $forcta="";
         ?>
         <script language="JavaScript" type="text/javascript">
                 alert('Debe configurar las Definiciones Específicas de la Institucion\npara poder cargar Cuentas Nuevas')
-                //location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+                //location=("http://"+window.location.host+"/autenticacion.php/login");
         </script>
         <?php
 
@@ -142,6 +143,18 @@ if (!empty($_GET["var"]))
         $cargab=trim($tb->fields["cargab"]);
         if ($debcre=='D'){ $ts_deudor='Si'; }else{ $ts_deudor='No'; }
         if ($cargab=='C'){ $c_si='Si'; }else{ $c_si='No'; }
+
+		$desha = 'N';
+		$camnomcatcta =  $_SESSION["configemp"]["aplicacion"]["contabilidad"]["modulos"]["confincue"]["camnomcatcta"];
+		if ($camnomcatcta != 'S')
+		{
+	        $sqla="select * from CONTABC1 where codcta='$codigo'";
+	        $ta=$bd->select($sqla);
+	        if (!$ta->EOF)
+	        {
+	        	$desha =  'S';
+	        }
+		}
 
       }else    //Si no consigue el codigo (NUEVO)
       {
@@ -264,7 +277,6 @@ if (!empty($_GET["var"]))
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/funciones.js"></script>
@@ -337,6 +349,22 @@ if (!empty($_GET["var"]))
 
   }
 
+    function deshabilitardatos()
+    {
+      var desha='<?php echo $desha; ?>';
+      if (desha=='S'){
+
+      document.getElementById("mcodigo").readOnly=true;
+      document.getElementById("descta").readOnly=true;
+      document.form1.RadioGroup2[0].disabled=true;
+      document.form1.RadioGroup2[1].disabled=true;
+      document.form1.RadioGroup1[0].disabled=true;
+      document.form1.RadioGroup1[1].disabled=true;
+      document.getElementById("x15").disabled=true
+      document.getElementById("x16").disabled=true
+     }
+     }
+
      function actualizar_saldos() //Actualiza el Saldo Actual
       {
       f=document.form1;
@@ -394,6 +422,17 @@ if (!empty($_GET["var"]))
       //document.getElementById("x21").focus()
     }
 
+    function Deshabilitardatos()
+    {
+      document.getElementById("mcodigo").readOnly=true;
+      document.getElementById("descta").readOnly=true;
+      document.form1.RadioGroup2[0].disabled=true;
+      document.form1.RadioGroup2[1].disabled=true;
+      document.form1.RadioGroup1[0].disabled=true;
+      document.form1.RadioGroup1[1].disabled=true;
+    }
+
+
   </script>
 
 <script language="JavaScript" type="text/JavaScript">
@@ -417,7 +456,7 @@ MM_reloadPage(true);
 </head>
 
 <body onLoad="MM_preloadImages('../../images/rbut_01_f2.gif','../../images/rbut_02_f2.gif','../../images/rbut_03_f2.gif','../../images/rbut_04_f2.gif')">
-<form name="form1" method="post" action="ConFinCue.php?var=9">
+<form name="form1" onsubmit="return false;" method="post" action="ConFinCue.php?var=9">
 <table width="100%" align="center">
   <tr>
 <td width="100%"><? require_once('../../lib/general/top.php'); ?></td>
@@ -620,7 +659,10 @@ MM_reloadPage(true);
 </table>  </tr>
 </td>
 </table>
-<script>desactivar()</script>
+<script>
+desactivar();
+deshabilitardatos();
+</script>
 </form>
 </body>
 <script language="JavaScript">
@@ -718,6 +760,13 @@ MM_reloadPage(true);
 
       else if(itemId == '0_save')
       {
+       var desha='<?php echo $desha; ?>';
+       var etadef='<? echo $etadef; ?>';
+    var incmod='<? echo $IncMod; ?>';
+
+
+       if (desha!='S') {
+      if ((etadef!='C') || (incmod=='I')) {  //Etapa de Definicion Cerrado
         if(confirm("¿Realmente desea Salvar?"))
         {
           f=document.form1;
@@ -733,6 +782,13 @@ MM_reloadPage(true);
                 f.action="imecConFinCue.php?imec=<? echo 'I'; ?>&IncMod=<? echo $IncMod; ?>";
                 f.submit();
             }
+        }
+        }else
+        {
+          alert('No puede realizar modificaciones la Cuenta Contable, la Etapa de Definición esta cerrada');
+        }
+        }else {
+          alert("No puede realizar modificaciones la Cuenta Contable ya esta siendo utilizada");
         }
       }
       //////////////////////////
@@ -841,7 +897,7 @@ MM_reloadPage(true);
           //pagina="catalogo2.php?campo="+campo+"&campo2="+campo2+"&sql="+sql+"&foco="+foco;
           //window.open(pagina,"","menubar=no,toolbar=no,scrollbars=yes,width=570,height=500,resizable=yes,left=50,top=50");
 
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Contabb_ConFinCue/clase/Contabb/frame/form1/obj1/mcodigo/campo1/codcta/submit/true';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Contabb_ConFinCue/clase/Contabb/frame/form1/obj1/mcodigo/campo1/codcta/submit/true';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
      }
 

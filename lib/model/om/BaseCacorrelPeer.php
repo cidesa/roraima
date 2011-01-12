@@ -13,7 +13,7 @@ abstract class BaseCacorrelPeer {
 	const CLASS_DEFAULT = 'lib.model.Cacorrel';
 
 	
-	const NUM_COLUMNS = 13;
+	const NUM_COLUMNS = 14;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -56,6 +56,9 @@ abstract class BaseCacorrelPeer {
 	const CORPAG = 'cacorrel.CORPAG';
 
 	
+	const CORCONT = 'cacorrel.CORCONT';
+
+	
 	const ID = 'cacorrel.ID';
 
 	
@@ -64,18 +67,18 @@ abstract class BaseCacorrelPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Corcom', 'Corser', 'Corsol', 'Correq', 'Correc', 'Cordes', 'Corcot', 'Cortra', 'Corent', 'Corsal', 'Corpro', 'Corpag', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CacorrelPeer::CORCOM, CacorrelPeer::CORSER, CacorrelPeer::CORSOL, CacorrelPeer::CORREQ, CacorrelPeer::CORREC, CacorrelPeer::CORDES, CacorrelPeer::CORCOT, CacorrelPeer::CORTRA, CacorrelPeer::CORENT, CacorrelPeer::CORSAL, CacorrelPeer::CORPRO, CacorrelPeer::CORPAG, CacorrelPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('corcom', 'corser', 'corsol', 'correq', 'correc', 'cordes', 'corcot', 'cortra', 'corent', 'corsal', 'corpro', 'corpag', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Corcom', 'Corser', 'Corsol', 'Correq', 'Correc', 'Cordes', 'Corcot', 'Cortra', 'Corent', 'Corsal', 'Corpro', 'Corpag', 'Corcont', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CacorrelPeer::CORCOM, CacorrelPeer::CORSER, CacorrelPeer::CORSOL, CacorrelPeer::CORREQ, CacorrelPeer::CORREC, CacorrelPeer::CORDES, CacorrelPeer::CORCOT, CacorrelPeer::CORTRA, CacorrelPeer::CORENT, CacorrelPeer::CORSAL, CacorrelPeer::CORPRO, CacorrelPeer::CORPAG, CacorrelPeer::CORCONT, CacorrelPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('corcom', 'corser', 'corsol', 'correq', 'correc', 'cordes', 'corcot', 'cortra', 'corent', 'corsal', 'corpro', 'corpag', 'corcont', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Corcom' => 0, 'Corser' => 1, 'Corsol' => 2, 'Correq' => 3, 'Correc' => 4, 'Cordes' => 5, 'Corcot' => 6, 'Cortra' => 7, 'Corent' => 8, 'Corsal' => 9, 'Corpro' => 10, 'Corpag' => 11, 'Id' => 12, ),
-		BasePeer::TYPE_COLNAME => array (CacorrelPeer::CORCOM => 0, CacorrelPeer::CORSER => 1, CacorrelPeer::CORSOL => 2, CacorrelPeer::CORREQ => 3, CacorrelPeer::CORREC => 4, CacorrelPeer::CORDES => 5, CacorrelPeer::CORCOT => 6, CacorrelPeer::CORTRA => 7, CacorrelPeer::CORENT => 8, CacorrelPeer::CORSAL => 9, CacorrelPeer::CORPRO => 10, CacorrelPeer::CORPAG => 11, CacorrelPeer::ID => 12, ),
-		BasePeer::TYPE_FIELDNAME => array ('corcom' => 0, 'corser' => 1, 'corsol' => 2, 'correq' => 3, 'correc' => 4, 'cordes' => 5, 'corcot' => 6, 'cortra' => 7, 'corent' => 8, 'corsal' => 9, 'corpro' => 10, 'corpag' => 11, 'id' => 12, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Corcom' => 0, 'Corser' => 1, 'Corsol' => 2, 'Correq' => 3, 'Correc' => 4, 'Cordes' => 5, 'Corcot' => 6, 'Cortra' => 7, 'Corent' => 8, 'Corsal' => 9, 'Corpro' => 10, 'Corpag' => 11, 'Corcont' => 12, 'Id' => 13, ),
+		BasePeer::TYPE_COLNAME => array (CacorrelPeer::CORCOM => 0, CacorrelPeer::CORSER => 1, CacorrelPeer::CORSOL => 2, CacorrelPeer::CORREQ => 3, CacorrelPeer::CORREC => 4, CacorrelPeer::CORDES => 5, CacorrelPeer::CORCOT => 6, CacorrelPeer::CORTRA => 7, CacorrelPeer::CORENT => 8, CacorrelPeer::CORSAL => 9, CacorrelPeer::CORPRO => 10, CacorrelPeer::CORPAG => 11, CacorrelPeer::CORCONT => 12, CacorrelPeer::ID => 13, ),
+		BasePeer::TYPE_FIELDNAME => array ('corcom' => 0, 'corser' => 1, 'corsol' => 2, 'correq' => 3, 'correc' => 4, 'cordes' => 5, 'corcot' => 6, 'cortra' => 7, 'corent' => 8, 'corsal' => 9, 'corpro' => 10, 'corpag' => 11, 'corcont' => 12, 'id' => 13, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
@@ -152,6 +155,8 @@ abstract class BaseCacorrelPeer {
 		$criteria->addSelectColumn(CacorrelPeer::CORPRO);
 
 		$criteria->addSelectColumn(CacorrelPeer::CORPAG);
+
+		$criteria->addSelectColumn(CacorrelPeer::CORCONT);
 
 		$criteria->addSelectColumn(CacorrelPeer::ID);
 

@@ -30,6 +30,7 @@
 <input id="numcom" name="numcom" type="hidden" value="<? print $tsmovlib->getNumcom(); ?>">
 <input id="refpag" name="refpag" type="hidden" value="<? print $tsmovlib->getRefpag(); ?>">
 <input id="formulario" name="formulario" type="hidden">
+<?php echo input_hidden_tag('tsmovlib[savemovcero]', $tsmovlib->getSavemovcero()) ?>
 
 <table width="100%">
   <tr>
@@ -122,6 +123,35 @@
   </tr>
   </table>
 
+<div id="divbene" style="display:none">
+<br>
+<?php echo label_for('tsmovlib[cedrif]', __($labels['tsmovlib{cedrif}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('tsmovlib{cedrif}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tsmovlib{cedrif}')): ?>
+    <?php echo form_error('tsmovlib{cedrif}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+<?php $value = object_input_tag($tsmovlib, 'getCedrif', array (
+  'size' => 10,
+  'maxlength' => 15,
+  'control_name' => 'tsmovlib[cedrif]',  
+  'onBlur'=> remote_function(array(
+        'url'      => 'tesmovseglib/ajax',
+        'condition' => "$('tsmovlib_cedrif').value != '' && $('id').value == ''",
+        'complete' => 'AjaxJSON(request, json)',
+        'with' => "'ajax=6&cajtexmos=tsmovlib_nomben&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+ &nbsp;
+ <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Opbenefi_Pagemiord/clase/Opbenefi/frame/sf_admin_edit_form/obj1/tsmovlib_cedrif/obj2/tsmovlib_nomben/campo1/cedrif/campo2/nomben','','','botoncat')?>
+&nbsp;
+ <?php $value = object_input_tag($tsmovlib, 'getNomben', array (
+  'disabled' => true,
+  'size' => 60,
+  'control_name' => 'tsmovlib[nomben]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+</div>
 
 <?php if ($tsmovlib->getId()!='')
     {?>
@@ -175,6 +205,7 @@
   'maxlength' => 80,
   'control_name' => 'tsmovlib[destip]',
    )); echo $value ? $value : '&nbsp;' ?><?php echo input_hidden_tag('tsmovlib[debcre]', $tsmovlib->getDebcre()) ?> <?php echo input_hidden_tag('tsmovlib[codcon]', $tsmovlib->getCodcon()) ?>
+  <?php echo input_hidden_tag('tsmovlib[ctaeje]', $tsmovlib->getCtaeje()) ?>
     </div>
 
 <br>
@@ -187,7 +218,7 @@
 
   <?php $value = object_input_tag($tsmovlib, 'getDeslib', array (
   'size' => 120,
-  'readonly'  =>  $tsmovlib->getId()!='' ? true : false ,
+  'readonly'  =>  ($tsmovlib->getId()!='' && $tsmovlib->getSavecedrif()!='S') ? true : false ,
   'maxlength' => 4000,
   'control_name' => 'tsmovlib[deslib]',
   'onBlur'  => "javascript: deslib()",
@@ -281,7 +312,7 @@
   'control_name' => 'tsmovlib[feccom]',
   'date_format' => 'dd/MM/yy',
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
-)); echo $value ? $value : '&nbsp;' ?>
+),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
     </div>
 
 <br>
@@ -301,7 +332,7 @@
          'before'   => 'if ($("tsmovlib_debcre").value=="C"){ var dc="D"}else { var dc="C"}',
          'script'   => true,
          'complete' => 'AjaxJSON(request, json)',
-         'with' => "'ajax=3&reftra='+document.getElementById('tsmovlib_reflib').value+'&tipo='+document.getElementById('tsmovlib_tipmov').value+'&fectra='+document.getElementById('tsmovlib_feccom').value+'&grabar=N'+'&destra='+document.getElementById('descom').value+'&ctas='+document.getElementById('tsmovlib_ctacon').value+'_'+document.getElementById('ctaeje').value+'&tipmov=X&mov='+document.getElementById('tsmovlib_debcre').value+'_'+dc+'&montos='+document.getElementById('tsmovlib_monmov').value+'_'+document.getElementById('tsmovlib_monmov').value+'&formulario=sf_admin/tesmovseglib/confincomgen&numcom='+$('tsmovlib_numcom').value.replace(/#/gi,'*')")
+         'with' => "'ajax=3&reftra='+document.getElementById('tsmovlib_reflib').value+'&tipo='+document.getElementById('tsmovlib_tipmov').value+'&fectra='+document.getElementById('tsmovlib_feccom').value+'&grabar=N'+'&destra='+document.getElementById('descom').value.replace(/%/gi,'*')+'&ctas='+document.getElementById('tsmovlib_ctacon').value+'_'+document.getElementById('tsmovlib_ctaeje').value+'&tipmov=X&mov='+document.getElementById('tsmovlib_debcre').value+'_'+dc+'&montos='+document.getElementById('tsmovlib_monmov').value+'_'+document.getElementById('tsmovlib_monmov').value+'&formulario=sf_admin/tesmovseglib/confincomgen&numcom='+$('tsmovlib_numcom').value.replace(/#/gi,'*')")
          ,array('id' => 'btncompro',)) ?>
 <? }?>
 </div>
@@ -313,7 +344,6 @@
 ?>
 </form>
 </div>
-
 
 </fieldset>
 
@@ -327,19 +357,31 @@ deshabilitarbotones();
 function deshabilitarbotones()
   { var id="";
     var id='<?php echo $tsmovlib->getId()?>';
+    var savecedrif='<?php echo $tsmovlib->getSavecedrif()?>';
+    if (savecedrif=='S') $('divbene').show();
     if (id!="")
     {
      $$('.botoncat')[0].disabled=true;
-  	 $$('.botoncat')[1].disabled=true;
+  	 //$$('.botoncat')[1].disabled=true;
+         $$('.botoncat')[2].disabled=true;
    	 $('trigger_tsmovlib_feclib').hide();
   	 $('trigger_tsmovlib_feccom').hide();
     }
+
+    var deshab='<?php echo $bloqfec; ?>';
+    if (deshab=='S')
+    {
+    	$('trigger_tsmovlib_fecing').hide();
+    	$('tsmovlib_fecing').readOnly=true;
+    	$('trigger_tsmovlib_feccom').hide();
+    	$('tsmovlib_feccom').readOnly=true;
+    }     
   }
 
 
   function comprobante(formulario)
   {
-      window.open('/tesoreria_dev.php/confincomgen/edit/?formulario='+formulario,formulario,'menubar=no,toolbar=no,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80');
+      window.open('/tesoreria'+getEnv()+'.php/confincomgen/edit/?formulario='+formulario,formulario,'menubar=no,toolbar=no,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80');
   }
 
 
@@ -419,9 +461,11 @@ if ($tsmovlib->getId()!='' && $anular=='S' && $tsmovlib->getTipmov()!='ANUC') { 
 <li class="float-rigth">
   <input type="button" name="Submit" value="Anular" class="sf_admin_action_delete" onclick="javascript:anular();" />
 </li>
+<?php if ($oculeli!="S") { ?>
 <li class="float-rigth">
   <input id="eliminarboton" type="button" name="Submit2" value="Eliminar" class="sf_admin_action_delete" onclick="javascript:eliminar();"/>
 </li>
+<?php } ?>
  <script type="text/javascript">
  	//$('eliminarboton').hide();
   //$('eliminarboton').hide();
@@ -436,12 +480,16 @@ $mod=false;
 function reflib(v)
 {
   var mod='<? print $mod;?>';
+  var genco='<?php echo $gencorrel?>';
   if (mod)
   {
   	valor=v;
   	valor=valor.pad(8, '0',0);
   	document.getElementById('tsmovlib_reflib').value=valor;
-  	//document.getElementById('tsmovlib_numcom').value= document.getElementById('tsmovlib_reflib').value;
+  	if (genco!='S') {
+            document.getElementById('tsmovlib_numcom').value= document.getElementById('tsmovlib_reflib').value;
+            document.getElementById('tsmovlib_numcom').readOnly=true;
+        }
 
   }
 }
@@ -449,7 +497,8 @@ function reflib(v)
  function fecmov(v)
 {
   var mod='<? print $mod;?>';
-  if (mod)
+  var deshab='<?php echo $bloqfec; ?>';
+  if (mod && deshab!="S")
   {
   	document.getElementById('tsmovlib_feccom').value= document.getElementById('tsmovlib_feclib').value;
   	$('tsmovlib_tipmov').focus();

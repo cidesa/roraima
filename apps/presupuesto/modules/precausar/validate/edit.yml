@@ -1,0 +1,93 @@
+methods:
+  post:
+   - "cpcausad{refcau}"
+   - "cpcausad{feccau}"
+   - "cpcausad{descau}"
+   - "cpcausad{tipcau}"
+   - "cpcausad{cedrif}"
+
+names:
+  cpcausad{refcau}:
+    required:  Yes
+    required_msg: La referencia del documento no puede estar en Blanco
+    validators: Validator_existencia, Validator_MyString
+
+  cpcausad{feccau}:
+    required:  Yes
+    required_msg: La fecha no puede estar en Blanco
+    validators: FechaValidator_periodo
+
+  cpcausad{descau}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_MyString_descau
+
+  cpcausad{tipcau}:
+    required:  Yes
+    required_msg: El tipo de precompromiso no puede estar en Blanco
+    validators: Validator_existe_tipcau
+
+  cpcausad{cedrif}:
+    required:  Yes
+    required_msg: La cedula/rif del beneficiario no puede estar en Blanco
+    validators: Validator_existe
+
+
+
+Validator_existencia:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Cpcausad
+        column:       refcau
+        unique_error: La referencia ya Existe intente con otra.
+
+Validator_existe:
+    class: CidesaExistValidator
+    param:
+        class:        Opbenefi
+        column:       cedrif
+        unique_error: La cedula/rif del beneficiario no existe.
+
+Validator_existe_tipcau:
+    class: CidesaExistValidator
+    param:
+        class:        Cpdoccau
+        column:       tipcau
+        unique_error: El tipo de documentos no existe.
+
+Validator_MyString2:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*[0-9]+$/' ]
+        values_error: El Codigo no puedo contener letras
+        min:       1
+        min_error: La descripcion no puede tener menos de 2 caracteres
+        max:       4
+        max_error: La descripcion no puede pasar mas de 40 caracteres
+
+Validator_MyString:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La referencia no puede tener menos de 2 caracteres
+        max:       8
+        max_error: La referencia no puede tener mas de 8 caracteres
+
+
+Validator_MyString_descau:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no puede tener menos de 1 caracteres
+        max:       1000
+        max_error: La descripción no puede tener mas de 1000 caracteres
+
+FechaValidator_periodo:
+    class: CidesaDateValidator
+    param:
+        class:        Cppereje
+        columnmin:    fecini
+        columnmax:    feccie
+        min_error:    La Fecha Especificada no puede ser Menor a la Fecha de Inicio del Período
+        max_error:    La Fecha Especificada no puede ser Mayor a la Fecha de Fin del Período
+        date_error:   Fecha Inválida

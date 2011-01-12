@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
@@ -130,7 +131,7 @@ $tool   = new tools();
                        fecanu = to_date('".$fecha."','dd/mm/yyyy'),
                        desanu ='".$desc."'
               where trim(refprc) = '".trim($codigo2)."'";
-        $bd->actualizar($sql);
+        //$bd->actualizar($sql);
 
 
         ?>
@@ -162,7 +163,6 @@ $tool   = new tools();
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/funciones.js"></script>
@@ -187,7 +187,7 @@ $tool   = new tools();
 </style>
 </head>
 <body>
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
   <fieldset>
 
     <legend><span class="style3">Conformaci&oacute;n-Autorizaci&oacute;n-Aprobaci&oacute;n de Solicitud de Traslado/Rectificaci&oacute;n</span></legend>

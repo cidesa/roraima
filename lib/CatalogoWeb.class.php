@@ -7,7 +7,7 @@
  * @subpackage lib
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -16,6 +16,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
   public function Caordcom_Almajuoc($params = array ()) {
 
     $this->c = new Criteria();
+	$this->c->add(CaordcomPeer :: STAORD, 'N',Criteria::NOT_EQUAL);
     if (count($params) > 0)
       $this->c->add(CaordcomPeer :: ORDCOM, $params[0]);
     $this->c->addJoin(CaordcomPeer :: ORDCOM, CaartordPeer :: ORDCOM);
@@ -257,8 +258,20 @@ class CatalogoWeb extends BaseCatalogoWeb {
     );
   }
 
-  public function Optipret_Pagemiret() {
-    $this->c = new Criteria();
+  public function Optipret_Pagemiret($proveedor=array()) {
+    $filretpro="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+      $filretpro = H::getConfApp ('filretpro', 'tesoreria', 'pagemiord');
+
+			$this->c = new Criteria();
+         if ($filretpro=='S' && count($proveedor)>0) {
+			$provee=$proveedor[0];
+	        $codpro=H::getX_vacio('RIFPRO','Caprovee','CODPRO',$provee);
+			$this->sql = "optipret.codtip in (select codret from caproret where codpro='".$codpro."')";
+			$this->c->add(OptipretPeer :: CODTIP, $this->sql, Criteria :: CUSTOM);
+         }
+
     $this->c->addAscendingOrderByColumn(OptipretPeer::CODTIP);
 
     $this->columnas = array (
@@ -274,10 +287,10 @@ class CatalogoWeb extends BaseCatalogoWeb {
   }
 
   public function Cpprecom_Pagemiord() {
-    $this->c = new Criteria();
-    $this->c->add(CpprecomPeer :: MONPRC, CpprecomPeer :: SALCAU, Criteria :: GREATHER_THAN);
-    $this->c->add(CpprecomPeer :: STAPRC, 'N', Criteria :: NOT_EQUAL);
-    //    $this->c->addAscendingOrderByColumn(CpprecomPeer::REFPRC);
+	$this->c = new Criteria();
+    $this->sql = "cpprecom.staprc <>'N'  and (Select Sum(monimp-monaju) as monprc from cpimpprc where refprc=cpprecom.refprc) > (Select Sum(moncau) as moncau from cpimpprc where refprc=cpprecom.refprc)";
+
+	$this->c->add(CpprecomPeer :: STAPRC, $this->sql, Criteria :: CUSTOM);
 
     $this->columnas = array (
       CpprecomPeer :: TIPPRC => 'Tipo',
@@ -289,25 +302,18 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Cpcompro_Pagemiord()
   {
+		$this->sql = "cpcompro.stacom <>'N'  and (Select Sum(monimp-monaju) as moncom from cpimpcom where refcom=cpcompro.refcom) > (Select Sum(moncau) as moncau from cpimpcom where refcom=cpcompro.refcom)";
 
-  	$this->sql = "cpcompro.moncom > ((Select Sum(MonCau) as moncau from cpimpcom where refcom=cpcompro.refcom)+(Select Sum(monaju) as monaju from cpimpcom where refcom=cpcompro.refcom))";
+		$this->c = new Criteria();
 
-    $this->c = new Criteria();
-    $this->c->add(CpcomproPeer :: MONCOM, $this->sql, Criteria :: CUSTOM);  //$this->c->add(CpcomproPeer :: MONCOM, CpcomproPeer :: SALCAU, Criteria :: NOT_EQUAL);
-
-
-    $a= new Criteria();
-    $dato=CadefartPeer::doSelectOne($a);
-    if ($dato)
-    {
-    	if ($dato->getComreqapr()=='S')
-    	{
-    		$this->c->add(CpcomproPeer :: APRCOM, 'S');
-    	}
-    }
-    $this->sql2="";
-    $this->c->add(CpcomproPeer :: STACOM, 'N', Criteria :: NOT_EQUAL);
-    //   $this->c->addAscendingOrderByColumn(CpcomproPeer::REFCOM);
+		$a = new Criteria();
+		$dato = CadefartPeer :: doSelectOne($a);
+		if ($dato) {
+			if ($dato->getComreqapr() == 'S') {
+				$this->c->add(CpcomproPeer :: APRCOM, 'S');
+			}
+		}
+		$this->c->add(CpcomproPeer :: STACOM, $this->sql, Criteria :: CUSTOM);
 
     $this->columnas = array (
       CpcomproPeer :: TIPCOM => 'Tipo',
@@ -323,16 +329,40 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   /**********************************Solicitud de Egresos**********************************/
   public function Npcatpre_Almsolegr($mascara) {
-    $mask = $mascara[0];
-    $this->c = new Criteria();
-    $this->sql = "length(CodCat) = '" . $mask . "'";
-    $this->c->add(NpcatprePeer :: CODCAT, $this->sql, Criteria :: CUSTOM);
-    //   $this->c->addAscendingOrderByColumn(NpcatprePeer::CODCAT);
+	//Cambios Solicitado por Monagas
+    $fornumuni="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('fornumuni',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
+	       {
+	       	$fornumuni=$varemp['aplicacion']['compras']['modulos']['almsolegr']['fornumuni'];
+	       }
+	     }
+      $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
 
-    $this->columnas = array (
-      NpcatprePeer :: CODCAT => 'Código',
-      NpcatprePeer :: NOMCAT => 'Descripción'
-    );
+           if (array_key_exists('1',$mascara)) $mask2=$mascara[1];
+           else $mask2="";
+
+
+		$mask = $mascara[0];
+		$this->c = new Criteria();
+		if ($fornumuni=='S' && $mask2=='almsolegr')
+		{
+		  $this->sql = "length(npcatpre.codcat) = '" . $mask . "' and npcatpre.codcat in (select codcat from causuuni where loguse='".$loguse."')";
+		}else {
+			$this->sql = "length(CodCat) = '" . $mask . "'";
+		}
+		$this->c->add(NpcatprePeer :: CODCAT, $this->sql, Criteria :: CUSTOM);
+		//   $this->c->addAscendingOrderByColumn(NpcatprePeer::CODCAT);
+
+		$this->columnas = array (
+			NpcatprePeer :: CODCAT => 'Código',
+			NpcatprePeer :: NOMCAT => 'Descripción'
+		);
   }
 
   public function Npcatpre_Categoriaxemp() {
@@ -359,7 +389,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Cotizaciones() {
     $this->c = new Criteria();
-   // $this->c->add(CaproveePeer::ESTPRO,'A');
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     $this->columnas = array (
       CaproveePeer :: RIFPRO => 'Código',
       CaproveePeer :: NOMPRO => 'Descripción',
@@ -597,8 +627,9 @@ class CatalogoWeb extends BaseCatalogoWeb {
   public function Opdefemp_pagdefemp($params) {
     $longitud = $params[0];
     $this->c = new Criteria();
-    $this->sql = "length(Codcta) = '" . $longitud . "'";
-    $this->c->add(ContabbPeer :: CODCTA, $this->sql, Criteria :: CUSTOM);
+    //$this->sql = "length(Codcta) = '" . $longitud . "'";
+    //$this->c->add(ContabbPeer :: CODCTA, $this->sql, Criteria :: CUSTOM);
+    $this->c->add(ContabbPeer :: CARGAB, 'C');
 
     $this->columnas = array (
       ContabbPeer :: DESCTA => 'Descripcion',
@@ -662,6 +693,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Bnubibie_Almreq() {
     $longitudUbic = Herramientas :: getX_vacio('codins', 'bndefins', 'lonubi', '001');
+    if ($longitudUbic=='') $longitudUbic=0;
     $this->c = new Criteria();
     $this->sql = "length(Codubi) = '" . $longitudUbic . "'";
     $this->c->add(BnubibiePeer :: CODUBI, $this->sql, Criteria :: CUSTOM);
@@ -933,7 +965,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
   public function Fordefpryaccmet_Forpoa($params = array()) {
     $this->c = new Criteria();
     $this->c->add(FordefpryaccmetPeer :: CODPRO, $params[0]);
-    $this->c->add(FordefpryaccmetPeer :: CODPRO, $params[0]);
+    //$this->c->add(FordefpryaccmetPeer :: CODPRO, $params[0]);
     $this->c->add(FordefpryaccmetPeer :: CODACCESP, $params[1]);
     //   $this->c->addAscendingOrderByColumn(FordefpryaccmetPeer::CODACCESP);
     $this->columnas = array (
@@ -994,7 +1026,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
       //$Longitud = $params[0];
       $formatouae = strlen(Herramientas :: ObtenerFormato('Fordefegrgen', 'Foruae'));
       $this->c = new Criteria();
-      $this->sql = "length(Codcat) = '" . $formatouae . "' and codcat like '" . $params[0] . "%'";
+      $this->sql = "length(Codcat) = '" . $formatouae . "'";
       $this->c->add(FordefcatprePeer :: CODCAT, $this->sql, Criteria :: CUSTOM);
       $this->c->addAscendingOrderByColumn(FordefcatprePeer::CODCAT);
     } else {
@@ -1100,7 +1132,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
   public function Caordcom_Bieregactmued() {
     $this->c = new Criteria;
     $this->c->addJoin(CaordcomPeer :: CODPRO, CaproveePeer :: CODPRO);
- //   $this->c->add(CaproveePeer::ESTPRO,'A');
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     //  $this->c->addAscendingOrderByColumn(CaordcomPeer::ORDCOM);
     $this->columnas = array (
       CaordcomPeer :: ORDCOM => 'Codigo',
@@ -1112,6 +1144,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Bnubibie_Bieregactmued($params = array ()) {
     $longitudUbic = Herramientas :: getX_vacio('codins', 'bndefins', 'lonubi', '001');
+    if ($longitudUbic=='') $longitudUbic=0;
     $this->c = new Criteria();
     $this->sql = "length(Codubi) = '" . $longitudUbic . "'";
     $this->c->add(BnubibiePeer :: CODUBI, $this->sql, Criteria :: CUSTOM);
@@ -1135,7 +1168,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Caprovee_Bieregactmued() {
     $this->c = new Criteria();
- //   $this->c->add(CaproveePeer::ESTPRO,'A');
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     //   $this->c->addAscendingOrderByColumn(CaproveePeer::CODPRO);
     $this->columnas = array (
       CaproveePeer :: CODPRO => 'Código',
@@ -1147,6 +1180,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
   /******************************** Bienes: biedefpar: Partidas  ********************************/
   public function Bnregmue_Bieregsegmue() {
     $this->c = new Criteria();
+    $this->c->add(BnregmuePeer::STAMUE,'A');
     //   $this->c->addAscendingOrderByColumn(BnregmuePeer::CODACT);
     $this->columnas = array (
       BnregmuePeer :: CODMUE => 'Código Activo',
@@ -1189,23 +1223,31 @@ class CatalogoWeb extends BaseCatalogoWeb {
   }
 
   public function Bndefact_Biedefconlotm() {
-    $this->c = new Criteria();
+            $longitudact = Herramientas :: getX_vacio('codins', 'bndefins', 'lonact', '001');
+            if ($longitudact=='') $longitudact=0;
+		$this->c = new Criteria();
+		$this->sql = "length(Codact) = '" . $longitudact . "'";
+		$this->c->add(BndefactPeer :: CODACT, $this->sql, Criteria :: CUSTOM);
+
+    $this->c->addAscendingOrderByColumn(BndefactPeer :: CODACT);
     $this->columnas = array (
       BndefactPeer :: CODACT => 'Código Nivel',
       BndefactPeer :: DESACT => 'Descripción'
     );
   }
 
-  public function Bndefact_Biedefconlotm1() {
-    $this->c = new Criteria();
-    $this->columnas = array (
-      BndefactPeer :: CODACT => 'Código Nivel',
-      BndefactPeer :: DESACT => 'Descripción'
-    );
-  }
+	public function Bndefact_Biedefconlotm1() {
+		$this->c = new Criteria();
+		$this->c->addAscendingOrderByColumn(BndefactPeer :: CODACT);
+		$this->columnas = array (
+			BndefactPeer :: CODACT => 'Código Nivel',
+			BndefactPeer :: DESACT => 'Descripción'
+		);
+	}
 
   public function Contabb_Biedefconlotm() {
     $this->c = new Criteria();
+    $this->c->add(ContabbPeer :: CARGAB, 'C');
     $this->columnas = array (
       ContabbPeer :: CODCTA => 'Código Cuenta',
       ContabbPeer :: DESCTA => 'Descripción'
@@ -1492,6 +1534,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Bnubibie_Bieregactinmd() {
     $longitudUbic = Herramientas :: getX_vacio('codins', 'bndefins', 'lonubi', '001');
+    if ($longitudUbic=='') $longitudUbic=0;
     $this->c = new Criteria();
     $this->sql = "length(Codubi) = '" . $longitudUbic . "'";
     $this->c->add(BnubibiePeer :: CODUBI, $this->sql, Criteria :: CUSTOM);
@@ -1515,7 +1558,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Caprovee_Bieregactinmd() {
     $this->c = new Criteria();
- //   $this->c->add(CaproveePeer::ESTPRO,'A');
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     //  $this->c->addAscendingOrderByColumn(CaproveePeer::CODPRO);
     $this->columnas = array (
       CaproveePeer :: CODPRO => 'Código',
@@ -1638,6 +1681,23 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Nphojint_Nomasicarconnom() {
     $this->c = new Criteria();
+    $this->c->add(NphojintPeer::STAEMP,'R',Criteria::NOT_EQUAL);
+    $filtro="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+        if(array_key_exists('aplicacion',$varemp))
+         if(array_key_exists('nomina',$varemp['aplicacion']))
+           if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+             if(array_key_exists('nomasicarconnom',$varemp['aplicacion']['nomina']['modulos'])){
+               if(array_key_exists('filasicar',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
+               {
+                $filtro=$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['filasicar'];
+               }
+         }
+    if ($filtro=='S') {
+        $this->sql="nphojint.codemp not in (select codemp from npasicaremp)";
+        $this->c->add(NphojintPeer::CODEMP,$this->sql,Criteria::CUSTOM);
+    }
 
     $this->columnas = array (
       NphojintPeer :: CODEMP => 'Código',
@@ -1748,26 +1808,35 @@ class CatalogoWeb extends BaseCatalogoWeb {
   }
 
   public function Caregart_Almsolegr($params = array ()) {
-    $tipo="";
-    $longitud = $params[0];
-    if ($params[1]!="") $tipo=$params[1];
-      if ($tipo=="C") $tipo="A";
-    $this->c = new Criteria();
-    if ($tipo!="" and $tipo!='M') $this->c->add(CaregartPeer::TIPO, $tipo);
-    $this->sql = "length(Codart) = '" . $longitud . "'";
-    $this->c->add(CaregartPeer :: CODART, $this->sql, Criteria :: CUSTOM);
+		$tipo = "";
+		$longitud = $params[0];
+		if ($params[1] != "")
+			$tipo = $params[1];
+		if ($tipo == "C")
+			$tipo = "A";
+                else if ($tipo == "T")
+                    $tipo = "S";
+		$this->c = new Criteria();
+		if ($tipo != "" and $tipo != 'M')
+			$this->c->add(CaregartPeer :: TIPO, $tipo);
 
+                $mostodart=H::getConfAppGen('mostodart');
+                if ($mostodart=='S') {
+                    $this->sql = "length(Codart) = '" . $longitud . "'"; }
+                else {
+                    $this->sql = "length(Codart) = '" . $longitud . "' and (tipreg is null)"; }
+		$this->c->add(CaregartPeer :: CODART, $this->sql, Criteria :: CUSTOM);
 
-    $this->columnas = array (
-      CaregartPeer :: CODART => 'Código',
-      CaregartPeer :: DESART => 'Descripción',
-      CaregartPeer :: UNIMED => 'Unidad de Medida',
-      CaregartPeer :: COSULT => 'Costo',
-      CaregartPeer :: EXITOT => 'Existencia',
-      CaregartPeer :: CODPAR => 'Codigo Partida'
-    );
+		$this->columnas = array (
+			CaregartPeer :: CODART => 'Código',
+			CaregartPeer :: DESART => 'Descripción',
+			CaregartPeer :: UNIMED => 'Unidad de Medida',
+			CaregartPeer :: COSULT => 'Costo',
+			CaregartPeer :: EXITOT => 'Existencia',
+			CaregartPeer :: CODPAR => 'Codigo Partida'
+		);
 
-  }
+	}
 
   ////////////////////////////////////////////////NOMCALCON////////////////////////////////////////
 
@@ -1870,14 +1939,24 @@ class CatalogoWeb extends BaseCatalogoWeb {
   }
 
   public function Bnubica_Almordcom() {
-    $this->c = new Criteria();
-    $this->c->addAscendingOrderByColumn(BnubicaPeer :: CODUBI);
+    $camcatejeadm=H::getConfApp2('camcatejeadm', 'tesoreria', 'tesdeffonant');
 
-    $this->columnas = array (
-      BnubicaPeer :: CODUBI => 'Código',
-      BnubicaPeer :: DESUBI => 'Descripción',
+		$this->c = new Criteria();
 
-    );
+                if ($camcatejeadm=='S')
+                {
+                  $this->columnas = array (
+                    CadefcenPeer :: CODCEN => 'Código',
+                    CadefcenPeer :: DESCEN => 'Descripción'
+                    );
+                }else {
+                    $this->c->addAscendingOrderByColumn(BnubicaPeer :: CODUBI);
+
+                    $this->columnas = array (
+                            BnubicaPeer :: CODUBI => 'Código',
+                            BnubicaPeer :: DESUBI => 'Descripción',
+                    );
+                }
   }
 
   public function Nphojint_Almordcom() {
@@ -1944,6 +2023,7 @@ class CatalogoWeb extends BaseCatalogoWeb {
 
   public function Bnubibie_Almdes() {
     $longitudUbic = Herramientas :: getX_vacio('codins', 'bndefins', 'lonubi', '001');
+    if ($longitudUbic=='') $longitudUbic=0;
     $this->c = new Criteria();
     $this->sql = "length(Codubi) = '" . $longitudUbic . "'";
     $this->c->add(BnubibiePeer :: CODUBI, $this->sql, Criteria :: CUSTOM);
@@ -2055,6 +2135,8 @@ $this->c= new Criteria();
 
   public function Bnregmue_Bieregsegmue1() {
     $this->c = new Criteria();
+    $this->c->add(BnregmuePeer::STAMUE,'A');
+
     $this->columnas = array (
       BnregmuePeer :: CODACT => 'Código Nivel',
       BnregmuePeer :: CODMUE => 'Código Activo',
@@ -2548,8 +2630,12 @@ $this->c= new Criteria();
     );
   }
 
-  public function Npcargos_Nomhojint() {
+  public function Npcargos_Nomhojint($params = array ()) {
     $this->c = new Criteria();
+	if (count($params)>0)
+	{
+		if ($params[0]!="") $this->c->add(NpcargosPeer :: CARVAN, 0,Criteria::GREATER_THAN);
+	}
     $this->columnas = array (
       NpcargosPeer :: CODCAR => 'Código',
       NpcargosPeer :: NOMCAR => 'Descripción del Cargo',
@@ -2707,6 +2793,8 @@ $this->c= new Criteria();
     $this->c->addSelectColumn("'' as APRREQ");
     $this->c->addSelectColumn("'' as USUAPR");
     $this->c->addSelectColumn("'1937-01-01' as FECAPR");
+    $this->c->addSelectColumn("'' as CODEMP");
+    $this->c->addSelectColumn("'' as CODCEN");
     $this->c->addSelectColumn("'' as ID");
 
     $this->c->addJoin(CasolartPeer :: REQART, CaartsolPeer :: REQART);
@@ -2756,6 +2844,8 @@ $this->c= new Criteria();
     $this->c->addSelectColumn("'' as APRREQ");
     $this->c->addSelectColumn("'' as USUAPR");
     $this->c->addSelectColumn("'1937-01-01' as FECAPR");
+    $this->c->addSelectColumn("'' as CODEMP");
+    $this->c->addSelectColumn("'' as CODCEN");
     $this->c->addSelectColumn("'' as ID");
 
     $this->c->addJoin(CasolartPeer :: REQART, CaartsolPeer :: REQART);
@@ -2806,9 +2896,20 @@ $this->c= new Criteria();
 
   public function Bndefact_Bieregactmued() {
     //$sql="select a.CodAct as codigo_nivel,a.DesAct as activo From BNDEFACT a, BNDEFINS b where length(RTrim(a.CodAct))=b.LonAct And codact like '2%%' Order By CodAct";
-
+            $filcat="";
+            $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+            if ($varemp)
+                if(array_key_exists('aplicacion',$varemp))
+                 if(array_key_exists('bienes',$varemp['aplicacion']))
+                   if(array_key_exists('modulos',$varemp['aplicacion']['bienes']))
+                     if(array_key_exists('bieregactmued',$varemp['aplicacion']['bienes']['modulos'])){
+                       if(array_key_exists('filcat',$varemp['aplicacion']['bienes']['modulos']['bieregactmued']))
+                       {
+                        $filcat=$varemp['aplicacion']['bienes']['modulos']['bieregactmued']['filcat'];
+                       }
+                     }
     $this->c = new Criteria();
-    $this->sql = "BNDEFINS.LonAct=length(RTrim(BNDEFACT.CodAct)) and  (codact like '2%%' or codact like '02%%')";
+		$this->sql = "cast (BNDEFINS.LonAct as integer)=length(RTrim(BNDEFACT.CodAct)) and  (codact like '".$filcat."%%')";
     $this->c->add(BndefinsPeer :: LONACT, $this->sql, Criteria :: CUSTOM);
     $this->c->addAscendingOrderByColumn(BndefactPeer :: CODACT);
 
@@ -2821,9 +2922,20 @@ $this->c= new Criteria();
 
   public function Bndefact_Bieregactinm() {
     //$sql="select a.CodAct as codigo_nivel,a.DesAct as activo From BNDEFACT a, BNDEFINS b where length(RTrim(a.CodAct))=b.LonAct And codact like '1%%' Order By CodAct";
-
+            $filcat="";
+            $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+            if ($varemp)
+                if(array_key_exists('aplicacion',$varemp))
+                 if(array_key_exists('bienes',$varemp['aplicacion']))
+                   if(array_key_exists('modulos',$varemp['aplicacion']['bienes']))
+                     if(array_key_exists('bieregactinmd',$varemp['aplicacion']['bienes']['modulos'])){
+                       if(array_key_exists('filcat',$varemp['aplicacion']['bienes']['modulos']['bieregactinmd']))
+                       {
+                        $filcat=$varemp['aplicacion']['bienes']['modulos']['bieregactinmd']['filcat'];
+                       }
+                     }
     $this->c = new Criteria();
-    $this->sql = "BNDEFINS.LonAct=length(RTrim(BNDEFACT.CodAct)) and  (codact like '1%%' or codact like '01%%')";
+		$this->sql = "cast (BNDEFINS.LonAct as integer)=length(RTrim(BNDEFACT.CodAct)) and  (codact like '".$filcat."%%')";
     $this->c->add(BndefinsPeer :: LONACT, $this->sql, Criteria :: CUSTOM);
     $this->c->addAscendingOrderByColumn(BndefactPeer :: CODACT);
 
@@ -3184,14 +3296,14 @@ $this->c= new Criteria();
     $this->c= new Criteria();
     $this->c->addJoin(CpasiiniPeer :: CODPRE,CpdeftitPeer :: CODPRE);
   $this->c->add(CpasiiniPeer :: PERPRE, '00');
-  $this->c->add(CpasiiniPeer :: MONDIS, 0, Criteria::GREATER_THAN);
+  $this->c->add(CpasiiniPeer :: MONDIS, 0, Criteria::GREATER_EQUAL);
 
     $this->c->addAscendingOrderByColumn(CpasiiniPeer::CODPRE);
 
     $this->columnas = array (
         CpasiiniPeer::CODPRE => 'Código Presupuestario',
         CpasiiniPeer::NOMPRE => 'Descripción',
-        CpdeftitPeer::ESTATUS => 'Estatus',
+        CpasiiniPeer :: MONDIS => 'Disponible',
     );
   }
 
@@ -3207,7 +3319,7 @@ $this->c= new Criteria();
     $this->columnas = array (
         CpasiiniPeer::CODPRE => 'Código Presupuestario',
         CpasiiniPeer::NOMPRE => 'Descripción',
-        CpdeftitPeer::ESTATUS => 'Estatus',
+        CpasiiniPeer :: MONDIS => 'Disponible',
     );
   }
 
@@ -3273,29 +3385,31 @@ $this->c= new Criteria();
     );
   }
 
-  public function Obras_Ocoferpre() {
-    $this->c = new Criteria();
-    $this->c->addAscendingOrderByColumn(OcregobrPeer :: CODOBR);
+	public function Obras_Ocoferpre() {
+		$this->c = new Criteria();
+		$this->c->addAscendingOrderByColumn(OcregobrPeer :: CODOBR);
 
-    $this->columnas = array (
-      OcregobrPeer :: CODOBR => 'Código',
-      OcregobrPeer :: DESOBR => 'Descripción'
-    );
-  }
+		$this->columnas = array (
+			OcregobrPeer :: CODOBR => 'Código',
+			OcregobrPeer :: DESOBR => 'Descripción',
+			OcregobrPeer :: CODPRE => 'Código Presupuestario'
+		);
+	}
 
-  public function Obras_Ocadjobr() {
-    $this->c = new Criteria();
-    $this->c->addAscendingOrderByColumn(OcregobrPeer :: CODOBR);
+	public function Obras_Ocadjobr() {
+		$this->c = new Criteria();
+		$this->c->addAscendingOrderByColumn(OcregobrPeer :: CODOBR);
 
-    $this->columnas = array (
-      OcregobrPeer :: CODOBR => 'Código',
-      OcregobrPeer :: DESOBR => 'Descripción',
-      OcregobrPeer :: CODTIPOBR => 'Tipo',
-      OcregobrPeer :: FECINI => 'Fecha Inicio',
-      OcregobrPeer :: FECFIN => 'Fecha Fin',
-      OcregobrPeer :: MONOBR => 'Monto'
-    );
-  }
+		$this->columnas = array (
+			OcregobrPeer :: CODOBR => 'Código',
+			OcregobrPeer :: DESOBR => 'Descripción',
+			OcregobrPeer :: CODTIPOBR => 'Tipo',
+			OcregobrPeer :: FECINI => 'Fecha Inicio',
+			OcregobrPeer :: FECFIN => 'Fecha Fin',
+			OcregobrPeer :: MONOBR => 'Monto',
+            OcregobrPeer :: CODPRE => 'Código Presupuestario'
+		);
+	}
 
   public function Tipofin_Ocreglic() {
     $this->c = new Criteria();
@@ -3563,28 +3677,36 @@ $this->c= new Criteria();
       NptipconPeer :: DESTIPCON => 'Descripción'
     );
   }
-    public function Presnomasicompre_npasipre($param) {
-      $c= new Criteria();
-      $c->add(NpasiprePeer::CODCON,$param[0]);
-      $rs = NPasiprePeer::doSelectone($c);
 
-    $this->c = new Criteria();
-    if($rs)
-      $this->c->add(NpasiprePeer::CODCON,$param[0]);
+	public function Presnomasicompre_npasipre($param) {
+		$c = new Criteria();
+		$c->add(NpasiprePeer :: CODCON, $param[0]);
+		$rs = NPasiprePeer :: doSelectone($c);
 
-      $this->c->addSelectColumn("'' AS CODCON");
-      $this->c->addSelectColumn(NpasiprePeer::CODASI);
-    $this->c->addSelectColumn(NpasiprePeer::DESASI);
-      $this->c->addSelectColumn("max(ID) AS ID");
+		$this->c = new Criteria();
+		if ($rs)
+			$this->c->add(NpasiprePeer :: CODCON, $param[0]);
 
-      $this->c->addGroupByColumn(NpasiprePeer::CODASI);
-      $this->c->addGroupByColumn(NpasiprePeer::DESASI);
+		$this->c->addSelectColumn("'' AS CODCON");
+		$this->c->addSelectColumn(NpasiprePeer :: CODASI);
+		$this->c->addSelectColumn(NpasiprePeer :: DESASI);
+		$this->c->addSelectColumn(NpasiprePeer :: TIPASI);
+		$this->c->addSelectColumn(NpasiprePeer :: AFEALIBV);
+        $this->c->addSelectColumn(NpasiprePeer :: AFEALIBF);
+		$this->c->addSelectColumn("max(ID) AS ID");
 
-      $this->columnas = array (
-        NpasiprePeer :: CODASI => 'Código Grupo',
-        NpasiprePeer :: DESASI => 'Descripción'
-      );
-    }
+		$this->c->addGroupByColumn(NpasiprePeer :: CODASI);
+		$this->c->addGroupByColumn(NpasiprePeer :: DESASI);
+		$this->c->addGroupByColumn(NpasiprePeer :: TIPASI);
+		$this->c->addGroupByColumn(NpasiprePeer :: AFEALIBV);
+		$this->c->addGroupByColumn(NpasiprePeer :: AFEALIBF);
+
+		$this->columnas = array (
+			NpasiprePeer :: CODASI => 'Código Grupo',
+			NpasiprePeer :: DESASI => 'Descripción'
+		);
+	}
+
 
 
       public function Npdefcpt_Presnomasiconpre_codnom($params = array ()){
@@ -3598,9 +3720,9 @@ $this->c= new Criteria();
       $this->c->addjoin(NpdefcptPeer::CODCON,NpasiconnomPeer::CODCON);
       $this->c->addjoin(NPasiconnomPeer::CODNOM,NpasinomcontPeer::CODNOM);
       $this->c->add(NpasinomcontPeer::CODTIPCON,$params[0]);
-      $sub = $this->c->getNewCriterion(NpdefcptPeer :: OPECON, "A", Criteria :: EQUAL);
-      $sub->addOr($this->c->getNewCriterion(NpdefcptPeer :: OPECON, "D", Criteria :: EQUAL));
-      $this->c->add($sub);
+      #$sub = $this->c->getNewCriterion(NpdefcptPeer :: OPECON, "A", Criteria :: EQUAL);
+      #$sub->addOr($this->c->getNewCriterion(NpdefcptPeer :: OPECON, "D", Criteria :: EQUAL));
+      #$this->c->add($sub);
       $this->c->setDistinct();
       $this->c->addAscendingOrderByColumn(NpdefcptPeer::CODCON);
       $this->columnas = array (
@@ -3738,7 +3860,7 @@ public function Tsmovlib_tesmovdeglib2()
   {
 
     $this->c= new Criteria();
-  //  $this->c->add(CaproveePeer::ESTPRO,'A');
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     $this->columnas = array (CaproveePeer::RIFPRO => 'Rif', CaproveePeer::NOMPRO => 'Nombre', CaproveePeer::CODPRO => 'Código');
 
 
@@ -3883,7 +4005,21 @@ public function Tsmovlib_tesmovdeglib2()
 
       $this->c->addJoin(NpcargosPeer::CODCAR, NpasicarnomPeer :: CODCAR);
 
-      if($params) $this->c->add(NpasicarnomPeer::CODNOM,$params[0]);
+      if ($params)
+      {
+      	if (count($params) > 1) 
+       {
+		  if ($params[1]!="") 
+                   {   
+                      //$sql="(npcargos.carvan -(select coalesce(count(codcar),0) as codcar from npasicaremp where codcar=npcargos.codcar group by codcar)) >0";
+                      //$this->c->add(NpcargosPeer :: CARVAN, $sql,Criteria::CUSTOM);
+                        $this->c->add(NpcargosPeer :: CARVAN,'0',Criteria::NOT_EQUAL);
+                      
+                   }
+      	}
+
+        $this->c->add(NpasicarnomPeer :: CODNOM, $params[0]);
+	}
 
       $this->columnas = array (
         NpcargosPeer :: CODCAR => 'Código',
@@ -3970,7 +4106,7 @@ public function Tsmovlib_tesmovdeglib2()
 
     public function Liemppar_caprovee() {
     $this->c = new Criteria();
- //   $this->c->add(CaproveePeer::ESTPRO,'A');
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     $this->c->addAscendingOrderByColumn(CaproveePeer :: CODPRO);
 
     $this->columnas = array (
@@ -3983,7 +4119,7 @@ public function Tsmovlib_tesmovdeglib2()
   {
     $this->c = new Criteria();
     $this->c->add(LiempofePeer::CODLIC, $param[0]);
-   // $this->c->add(CaproveePeer::ESTPRO,'A');
+    $this->c->add(CaproveePeer::ESTPRO,'A');
     $this->c->addJoin(CaproveePeer::CODPRO, LiempofePeer::CODPRO);
     $this->columnas = array (
       CaproveePeer :: CODPRO => 'Cod. Empresa',
@@ -4344,7 +4480,7 @@ public function Tsmovlib_tesmovdeglib2()
     $mascaraarticulo = Herramientas::getMascaraArticulo();
     $longitud = strlen($mascaraarticulo);
     $this->c = new Criteria();
-    $this->c->add(CaregartPeer :: TIPO, 'A');
+    //$this->c->add(CaregartPeer :: TIPO, 'A');
     $this->sql = "length(Codart) = '" . $longitud . "'";
     $this->c->add(CaregartPeer :: CODART, $this->sql, Criteria :: CUSTOM);
 
@@ -4441,6 +4577,8 @@ public function Tsmovlib_tesmovdeglib2()
     $this->c = new Criteria();
     $this->sql = "fapedido.status <> 'N' and fapedido.NROPED not in (select faartfac.codref from faartfac where faartfac.codref = fapedido.nroped and faartfac.reffac in (select fafactur.reffac from fafactur where fafactur.reffac = faartfac.reffac and fafactur.tipref = 'P' and fafactur.status <> 'N'))";
     $this->c->add(FapedidoPeer::NROPED,$this->sql,Criteria :: CUSTOM);
+    $sql = "(select sum(cantot) from faartped where nroped=Fapedido.nroped)>(select sum(coalesce(candes,0)) from faartped where nroped=Fapedido.nroped) ";
+    $this->c->add(FapedidoPeer :: NROPED, $sql, Criteria :: CUSTOM);
 
       $this->columnas = array (
       FapedidoPeer::NROPED => 'Número',
@@ -4466,6 +4604,8 @@ public function Tsmovlib_tesmovdeglib2()
     $this->c = new Criteria();
     $this->c->add(FafacturPeer::STATUS, 'N', Criteria::NOT_EQUAL);
     $this->c->add(FafacturPeer::TIPREF, 'D', Criteria::NOT_EQUAL);
+    $sql = "(select sum(cantot) from faartfac where reffac=Fafactur.reffac)>(select sum(coalesce(candes,0)) from faartfac where reffac=Fafactur.reffac) ";
+    $this->c->add(FafacturPeer :: REFFAC, $sql, Criteria :: CUSTOM);
 
     $this->columnas = array (
       FafacturPeer::REFFAC => 'Número',
@@ -4485,16 +4625,25 @@ public function Tsmovlib_tesmovdeglib2()
     );
   }
 
-  public function Caregart_Fapedido($params=array())
-  {
-    $longitud=$params[0];
-    $this->c= new Criteria();
-    $this->sql = "length(Codart) = '".$longitud."'";
-    $this->c->add(CaregartPeer::CODART, $this->sql, Criteria::CUSTOM);
+  public function Caregart_Fapedido($params = array ()) {
+		$longitud = $params[0];
+		$this->c = new Criteria();
+                $mostodart=H::getConfAppGen('mostodart');
+                if ($mostodart=='S') {
+                    $this->sql = "length(Codart) = '" . $longitud . "'";
+                }else  {
+                    $this->sql = "length(Codart) = '" . $longitud . "' and tipreg='F'";
+                }
+		$this->c->add(CaregartPeer :: CODART, $this->sql, Criteria :: CUSTOM);
 
-    $this->columnas = array (CaregartPeer::CODART => 'Código', CaregartPeer::DESART => 'Descripción', CaregartPeer::COSULT => 'Costo', CaregartPeer::CODPAR => 'Partida');
+		$this->columnas = array (
+			CaregartPeer :: CODART => 'Código',
+			CaregartPeer :: DESART => 'Descripción',
+			CaregartPeer :: COSULT => 'Costo',
+			CaregartPeer :: CODPAR => 'Partida'
+		);
 
-  }
+	}
 
   public function Fadefcom_Fapedido()
   {
@@ -4837,7 +4986,7 @@ public function Tsmovlib_tesmovdeglib2()
     if (count($param)==0)
     {
       $this->c = new Criteria();
-   //   $this->c->add(CaproveePeer::ESTPRO,'A');
+      $this->c->add(CaproveePeer::ESTPRO,'A');
 
       $this->columnas = array (
       CaproveePeer::RIFPRO => 'Rif',
@@ -4854,7 +5003,7 @@ public function Tsmovlib_tesmovdeglib2()
            $this->c = new Criteria();
            $this->c->add(CacotizaPeer::REFSOL,$param[0]);
            $this->c->add(CadetcotPeer::PRIORI,1);
- //          $this->c->add(CaproveePeer::ESTPRO,'A');
+           $this->c->add(CaproveePeer::ESTPRO,'A');
            $this->c->addJoin(CacotizaPeer::REFCOT,CadetcotPeer::REFCOT);
            $this->c->addJoin(CaproveePeer::CODPRO,CacotizaPeer::CODPRO);
            $this->c->setDistinct();
@@ -4868,7 +5017,7 @@ public function Tsmovlib_tesmovdeglib2()
       else
       {
         $this->c = new Criteria();
-//		$this->c->add(CaproveePeer::ESTPRO,'A');
+		$this->c->add(CaproveePeer::ESTPRO,'A');
 
           $this->columnas = array (
         	CaproveePeer::RIFPRO => 'Rif',
@@ -5177,78 +5326,76 @@ A.CODREDE"
 
   }
 
-  public function Cpcompro_PreAjuste($params= array())
-  {
-    $this->c = new Criteria();
-    $this->c->add(CpcomproPeer::STACOM,'A');
-    $this->sql = "feccom <= to_date('$params[0]','dd/mm/yyyy')";
-    $this->c->add(CpcomproPeer::FECCOM, $this->sql, Criteria::CUSTOM);
-    $this->sql = "(moncom-salaju-salcau) > 0";
-    $this->c->add(CpcomproPeer::MONCOM, $this->sql, Criteria::CUSTOM);
-    $this->c->addAscendingOrderByColumn(CpcomproPeer :: REFCOM);
+	public function Cpcompro_PreAjuste($params = array ()) {
+		$this->c = new Criteria();
+		$this->c->add(CpcomproPeer :: STACOM, 'A');
+                if ($params[1]=='S')
+	        $this->sql = "cpcompro.feccom <= to_date('".$params[0]."','dd/mm/yyyy')";
+                else
+                    $this->sql = "cpcompro.feccom <= to_date('".$params[0]."','dd/mm/yyyy') and (Select Sum(monimp-monaju-moncau) as moncom from cpimpcom where refcom=cpcompro.refcom) > 0";
+		//$this->sql = "feccom <= to_date('".$params[0]."','dd/mm/yyyy') and (moncom-salaju-salcau) > 0";
+		$this->c->add(CpcomproPeer :: FECCOM, $this->sql, Criteria :: CUSTOM);
+		$this->c->addAscendingOrderByColumn(CpcomproPeer :: REFCOM);
 
+		$this->columnas = array (
+			CpcomproPeer :: REFCOM => 'Referencia',
+			CpcomproPeer :: FECCOM => 'Fecha',
+			CpcomproPeer :: DESCOM => 'Descripcion',
+			CpcomproPeer :: MONCOM => 'Monto'
+		);
+	}
 
-    $this->columnas = array (
-      CpcomproPeer :: REFCOM => 'Referencia',
-      CpcomproPeer :: FECCOM => 'Fecha',
-      CpcomproPeer :: DESCOM => 'Descripcion',
-      CpcomproPeer :: MONCOM => 'Monto'
-    );
-  }
+	public function Cpcausad_PreAjuste($params = array ()) {
+		$this->c = new Criteria();
+		$this->c->add(CpcausadPeer :: STACAU, 'A');
+                if ($params[1]=='S')
+                 $this->sql = "cpcausad.feccau <= to_date('".$params[0]."','dd/mm/yyyy') ";
+                else $this->sql = "cpcausad.feccau <= to_date('".$params[0]."','dd/mm/yyyy') and (Select Sum(monimp-monaju-monpag) as moncau from cpimpcau where refcau=cpcausad.refcau) > 0";
+		//$this->sql = "feccau <= to_date('".$params[0]."','dd/mm/yyyy') and (moncau-salaju-salpag) > 0";
+		$this->c->add(CpcausadPeer :: FECCAU, $this->sql, Criteria :: CUSTOM);
+		$this->c->addAscendingOrderByColumn(CpcausadPeer :: REFCAU);
 
-  public function Cpcausad_PreAjuste($params= array())
-  {
-    $this->c = new Criteria();
-    $this->c->add(CpcausadPeer::STACAU,'A');
-    $this->sql = "feccau <= to_date('$params[0]','dd/mm/yyyy')";
-    $this->c->add(CpcausadPeer::FECCAU, $this->sql, Criteria::CUSTOM);
-    $this->sql = "(moncau-salaju-salpag) > 0";
-    $this->c->add(CpcausadPeer::MONCAU, $this->sql, Criteria::CUSTOM);
-    $this->c->addAscendingOrderByColumn(CpcausadPeer :: REFCAU);
+		$this->columnas = array (
+			CpcausadPeer :: REFCAU => 'Referencia',
+			CpcausadPeer :: FECCAU => 'Fecha',
+			CpcausadPeer :: DESCAU => 'Descripcion',
+			CpcausadPeer :: MONCAU => 'Monto'
+		);
+	}
 
-    $this->columnas = array (
-      CpcausadPeer :: REFCAU => 'Referencia',
-      CpcausadPeer :: FECCAU => 'Fecha',
-      CpcausadPeer :: DESCAU => 'Descripcion',
-      CpcausadPeer :: MONCAU => 'Monto'
-    );
-  }
+	public function Cppagos_PreAjuste($params = array ()) {
+		$this->c = new Criteria();
+		$this->c->add(CppagosPeer :: STAPAG, 'A');
+		$this->sql = "cppagos.fecpag <= to_date('".$params[0]."','dd/mm/yyyy') and (Select Sum(monimp-monaju) as monpag from cpimppag where refpag=cppagos.refpag) > 0";
+		//$this->sql = "fecpag <= to_date('".$params[0]."','dd/mm/yyyy') and (monpag-salaju) > 0";
+		$this->c->add(CppagosPeer :: FECPAG, $this->sql, Criteria :: CUSTOM);
+		$this->c->addAscendingOrderByColumn(CppagosPeer :: REFPAG);
 
-  public function Cppagos_PreAjuste($params= array())
-  {
-    $this->c = new Criteria();
-    $this->c->add(CppagosPeer::STAPAG,'A');
-    $this->sql = "fecpag <= to_date('$params[0]','dd/mm/yyyy')";
-    $this->c->add(CppagosPeer::FECPAG, $this->sql, Criteria::CUSTOM);
-    $this->sql = "(monpag-salaju) > 0";
-    $this->c->add(CppagosPeer::MONPAG, $this->sql, Criteria::CUSTOM);
-    $this->c->addAscendingOrderByColumn(CppagosPeer :: REFPAG);
+		$this->columnas = array (
+			CppagosPeer :: REFPAG => 'Referencia',
+			CppagosPeer :: FECPAG => 'Fecha',
+			CppagosPeer :: DESPAG => 'Descripcion',
+			CppagosPeer :: MONPAG => 'Monto'
+		);
+	}
 
-    $this->columnas = array (
-      CppagosPeer :: REFPAG => 'Referencia',
-      CppagosPeer :: FECPAG => 'Fecha',
-      CppagosPeer :: DESPAG => 'Descripcion',
-      CppagosPeer :: MONPAG => 'Monto'
-    );
-  }
+	public function Cpprecom_PreAjuste($params = array ()) {
+		$this->c = new Criteria();
+		$this->c->add(CpprecomPeer :: STAPRC, 'A');
+		if ($params[1]=='S')
+                  $this->sql = "cpprecom.fecprc <= to_date('".$params[0]."','dd/mm/yyyy')";
+                else $this->sql = "cpprecom.fecprc <= to_date('".$params[0]."','dd/mm/yyyy') and (Select Sum(monimp-monaju-moncom) as monprc from cpimpprc where refprc=cpprecom.refprc) > 0";
+		//$this->sql = "fecprc <= to_date('".$params[0]."','dd/mm/yyyy') and (monprc-salaju-salcom) > 0";
+		$this->c->add(CpprecomPeer :: FECPRC, $this->sql, Criteria :: CUSTOM);
+		$this->c->addAscendingOrderByColumn(CpprecomPeer :: REFPRC);
 
-  public function Cpprecom_PreAjuste($params= array())
-  {
-    $this->c = new Criteria();
-    $this->c->add(CpprecomPeer::STAPRC,'A');
-    $this->sql = "fecprc <= to_date('$params[0]','dd/mm/yyyy')";
-    $this->c->add(CpprecomPeer::FECPRC, $this->sql, Criteria::CUSTOM);
-    $this->sql = "(monprc-salaju-salcom) > 0";
-    $this->c->add(CpprecomPeer::MONPRC, $this->sql, Criteria::CUSTOM);
-    $this->c->addAscendingOrderByColumn(CpprecomPeer :: REFPRC);
-
-    $this->columnas = array (
-      CpprecomPeer :: REFPRC => 'Referencia',
-      CpprecomPeer :: FECPRC => 'Fecha',
-      CpprecomPeer :: DESPRC => 'Descripcion',
-      CpprecomPeer :: MONPRC => 'Monto'
-    );
-  }
+		$this->columnas = array (
+			CpprecomPeer :: REFPRC => 'Referencia',
+			CpprecomPeer :: FECPRC => 'Fecha',
+			CpprecomPeer :: DESPRC => 'Descripcion',
+			CpprecomPeer :: MONPRC => 'Monto'
+		);
+	}
 
 /////CATASTRO ////////
 
@@ -5663,6 +5810,852 @@ public function Catdefcatman_Cattramo($params = '') {
 		);
 
 	}
+
+ 	public function rhclacur_numcla($param = array ()) {
+ 		$this->c = new Criteria();
+
+ 		if (count($param) > 0) {
+ 			$this->c->add(RhclacurPeer :: CODCUR,$param[0]);
+ 		}
+ 		$this->c->addAscendingOrderByColumn(RhclacurPeer :: NUMCLA);
+ 		$this->columnas = array (
+ 			RhclacurPeer :: NUMCLA => 'Numero clase',
+ 			RhclacurPeer :: FECCLA => 'Fecha'
+ 		);
+ 	}
+
+ 	public function rhdefvalins_codvalins() {
+ 		$this->c = new Criteria();
+ 		$this->c->addAscendingOrderByColumn(RhdefvalinsPeer::CODVALINS);
+ 		$this->columnas = array (
+ 			RhdefvalinsPeer :: CODVALINS => 'Código',
+ 			RhdefvalinsPeer :: DESVALINS => 'Descripción'
+ 		);
+ 	}
+
+ 	public function rhdefniv_codniv() {
+ 		$this->c = new Criteria();
+ 		$this->c->addAscendingOrderByColumn(RhdefnivPeer::CODNIV);
+ 		$this->columnas = array (
+ 			RhdefnivPeer :: CODNIV => 'Código',
+ 			RhdefnivPeer :: DESNIV => 'Descripción'
+ 		);
+ 	}
+
+ 	public function Rhevaconcom_codevdo()
+ 	{
+ 		$this->c = new Criteria();
+ 		$this->c->addJoin(NphojintPeer::CODEMP,RhdatevaPeer::CODEVDO);
+ 		$this->c->addAscendingOrderByColumn(NphojintPeer::CODEMP);
+ 		$this->columnas = array (
+ 			NphojintPeer :: CODEMP => 'Código',
+ 			NphojintPeer :: NOMEMP => 'Nombre'
+ 		);
+ 	}
+
+ 	public function rhvalniv_codvalins($params = array()) {
+ 		$this->c = new Criteria();
+ 		$this->c->addAscendingOrderByColumn(RhvalnivPeer::CODNIV);
+ 		$this->columnas = array (
+ 			RhvalnivPeer :: CODVALINS => 'Código',
+ 			RhvalnivPeer :: DESVALINS => 'Descripción',
+ 			RhvalnivPeer :: PORVALINS => 'Porcentaje'
+ 		);
+ 	}
+
+ 	public function nphojint_codemp2()
+ 	{
+ 		$this->c = new Criteria();
+ 		$this->c->addAscendingOrderByColumn(NphojintPeer::CODEMP);
+ 		$this->columnas = array (
+ 			NphojintPeer :: CODEMP => 'Código',
+ 			NphojintPeer :: NOMEMP => 'Nombre',
+ 			NphojintPeer :: FECING => 'Descripcion'
+ 		);
+
+ 	}
+
+ 	public function rhdefind_codind()
+ 	{
+ 		$this->c = new Criteria();
+ 		$this->c->addAscendingOrderByColumn(RhdefindPeer::CODIND);
+ 		$this->columnas = array (
+ 			RhdefindPeer :: CODIND => 'Código',
+ 			RhdefindPeer :: DESIND => 'Nombre'
+ 		);
+
+ 	}
+
+ 	public function rhdefobj_codobj()
+ 	{
+ 		$this->c = new Criteria();
+ 		$this->c->addAscendingOrderByColumn(RhdefobjPeer::CODOBJ);
+ 		$this->columnas = array (
+ 			RhdefobjPeer :: CODOBJ => 'Código',
+ 			RhdefobjPeer :: DESOBJ => 'Nombre'
+ 		);
+ 	}
+	public function Npdefubi_Nomhojint()
+	{
+		$this->c = new Criteria();
+		$this->c->addAscendingOrderByColumn(NpdefubiPeer::CODUBI);
+		$this->columnas = array (
+			NpdefubiPeer :: CODUBI => 'Código',
+			NpdefubiPeer :: DESUBI => 'Nombre'
+		);
+	}
+
+	public function Ccsoldescuades_Pagemiord() {
+
+    // XX = ccsoldescuades c inner join ccsoldes e on c.ccsoldes_id=e.id
+    // YY = (XX) inner join ccdetcuades d on c.cccuades_id=d.cccuades_id
+    // ZZ = (YY) inner join cccredit b on e.cccredit_id=b.id
+    // X = (ZZ) inner join cpcompro f on b.cpcompro_id=f.id
+    // Y = (X) inner join ccdetcuades d on c.cccuades_id=d.cccuades_id
+    // Z = (Y) inner join cccredit b on e.cccredit_id=b.id
+    // (Z) inner join cpcompro f on b.cpcompro_id=f.id
+
+		$this->sql = "cpcompro.moncom > ((Select case when Sum(moncau) isnull then 0 else Sum(moncau) end as moncau from cpimpcom where refcom=cpcompro.refcom)+(Select case when Sum(monaju) isnull then 0 else Sum(monaju) end as monaju from cpimpcom where refcom=cpcompro.refcom))";
+
+		$this->c = new Criteria();
+
+    $this->c->addJoin(CcsoldescuadesPeer::CCSOLDES_ID,CcsoldesPeer::ID);
+    $this->c->addJoin(CcsoldescuadesPeer::CCCUADES_ID,CcdetcuadesPeer::CCCUADES_ID);
+    $this->c->addJoin(CcsoldesPeer::CCCREDIT_ID,CccreditPeer::ID);
+    $this->c->addJoin(CcsolliqPeer::CCSOLDES_ID,CcsoldesPeer::ID);
+    $this->c->addJoin(CccreditPeer::CPCOMPRO_ID,CpcomproPeer::ID);
+
+		$this->c->add(CpcomproPeer :: MONCOM, $this->sql, Criteria :: CUSTOM); //$this->c->add(CpcomproPeer :: MONCOM, CpcomproPeer :: SALCAU, Criteria :: NOT_EQUAL);
+
+		$a = new Criteria();
+		$dato = CadefartPeer :: doSelectOne($a);
+		if ($dato) {
+			if ($dato->getComreqapr() == 'S') {
+				$this->c->add(CpcomproPeer :: APRCOM, 'S');
+			}
+		}
+		$this->c->add(CpcomproPeer :: STACOM, 'N', Criteria :: NOT_EQUAL);
+    $this->c->add(CcdetcuadesPeer::CPCAUSAD_ID,null, Criteria :: ISNULL);
+
+		$this->columnas = array (
+			'ccdetcuades.CODIGO' => 'Cod. Det. Desembolso',
+			CcdetcuadesPeer :: MONTO => 'Monto',
+      'ccdetcuades.FECHA' => 'Fecha',
+			'ccdetcuades.RIFTER' => 'Cod. Beneficiario',
+      'ccdetcuades.NOMTER' => 'Nombre',
+      'ccdetcuades.REFCOM' => 'Compromiso',
+      'ccdetcuades.DESCOM' => 'Descripcion',
+		);
+
+	}
+
+	public function Fordefcatpre_Codcat($params=array()) {
+		$this->c = new Criteria();
+		$this->sql="length(codcat)='".$params[0]."'";
+		$this->c->add(FordefcatprePeer::CODCAT,$this->sql,Criteria::CUSTOM);
+
+		$this->columnas = array (
+			FordefcatprePeer :: CODCAT => 'Código',
+			FordefcatprePeer :: NOMCAT => 'Descripción',
+
+
+		);
+	}
+
+	public function Fordefparegr_Codparegr($params=array()) {
+
+            $this->c = new Criteria();
+                $this->sql="length(codparegr)='".$params[0]."'";
+		$this->c->add(FordefparegrPeer::CODPAREGR,$this->sql,Criteria::CUSTOM);
+
+		$this->columnas = array (
+			FordefparegrPeer :: CODPAREGR => 'Código',
+			FordefparegrPeer :: NOMPAREGR => 'Descripción',
+
+
+		);
+	}
+
+	public function Usuarios_Compras() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			UsuariosPeer :: LOGUSE => 'Usuario',
+			UsuariosPeer :: NOMUSE => 'Nombre'
+
+		);
+	}
+
+	public function Npcatpre2_Almsolegr($mascara) {
+		$mask = $mascara[0];
+		$this->c = new Criteria();
+		$this->sql = "length(CodCat) = '" . $mask . "'";
+
+		$this->c->add(NpcatprePeer :: CODCAT, $this->sql, Criteria :: CUSTOM);
+		//   $this->c->addAscendingOrderByColumn(NpcatprePeer::CODCAT);
+
+		$this->columnas = array (
+			NpcatprePeer :: CODCAT => 'Código',
+			NpcatprePeer :: NOMCAT => 'Descripción'
+		);
+	}
+
+	public function Opordpag_Bieregactmued() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			OpordpagPeer :: NUMORD => 'N° de Orden',
+			OpordpagPeer :: FECEMI => 'Fecha de Emisión',
+			OpordpagPeer :: DESORD => 'Descripción'
+
+		);
+	}
+
+	public function Npdocemp_nonhojint() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    NpdocempPeer :: CODDOC => 'Código',
+                    NpdocempPeer :: DESDOC => 'Descripción'
+            );
+	}
+
+	public function Codefcencos_Conasigcencos() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    CodefcencosPeer :: CODCENCOS => 'Código',
+                    CodefcencosPeer :: DESCENCOS => 'Descripción'
+            );
+	}
+
+	public function Contabb_Conasigcencos($param = array ()) {
+		$this->c = new Criteria();
+
+                $this->c->add(ContabbPeer :: CARGAB, 'C');
+                $this->c->add(Contabc1Peer :: NUMCOM, $param[0]);
+                $this->c->addJoin(ContabbPeer :: CODCTA, Contabc1Peer :: CODCTA);
+
+
+		$this->columnas = array (
+			ContabbPeer :: CODCTA => 'Código',
+			ContabbPeer :: DESCTA => 'Descripción',
+
+		);
+	}
+
+	public function Cadefcen_Almsolegr() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    CadefcenPeer :: CODCEN => 'Código',
+                    CadefcenPeer :: DESCEN => 'Descripción'
+            );
+	}
+
+	public function Nptippar_Nomdefhcmnom() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    NptipparPeer::TIPPAR => 'Tipo',
+                    NptipparPeer::DESPAR => 'Descripción'
+            );
+	
+
+        }
+        public function Viadeftiptra_codtiptra() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			ViadeftiptraPeer :: CODTIPTRA => 'Código',
+			ViadeftiptraPeer :: DESTIPTRA => 'Descripción',
+
+		);
+	}
+
+        public function Viadefnivapr_codnivapr() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			ViadefnivaprPeer :: CODNIVAPR => 'Código',
+			ViadefnivaprPeer :: DESNIVAPR => 'Descripción',
+
+		);
+	}
+
+        public function Viadefproced_codproced() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			ViadefprocedPeer :: CODPROCED => 'Código',
+			ViadefprocedPeer :: DESPROCED => 'Descripción',
+
+		);
+	}
+
+        public function Viadefniv_codniv() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			ViadefnivPeer :: CODNIV => 'Código',
+			ViadefnivPeer :: DESNIV => 'Descripción',
+
+		);
+	}
+
+        public function Viadefrub_codrub() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			ViadefrubPeer :: CODRUB => 'Código',
+			ViadefrubPeer :: DESRUB => 'Descripción',
+
+		);
+	}
+
+        public function Viadeffortra_codfortra() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			ViadeffortraPeer :: CODFORTRA => 'Código',
+			ViadeffortraPeer :: DESFORTRA => 'Descripción',
+
+		);
+	}
+
+        public function Viasolviatra_numsol() {
+		$this->c = new Criteria();
+                $this->c->add(ViasolviatraPeer::STATUS,'A');
+                $sql = "Viasolviatra.numsol not in  (select refsol from viacalviatra) ";
+		$this->c->add(ViasolviatraPeer :: NUMSOL, $sql, Criteria :: CUSTOM);
+		$this->columnas = array (
+			ViasolviatraPeer :: NUMSOL => 'Código',
+                        ViasolviatraPeer :: FECSOL => 'Fecha',
+			ViasolviatraPeer :: DESSOL => 'Descripción',
+
+
+		);
+	}
+        public function Viadefproced_codproced_apr() {
+		$this->c = new Criteria();
+                $this->c->add(ViadefprocedPeer::APROBACION,'S');
+		$this->columnas = array (
+			ViadefprocedPeer :: CODPROCED => 'Código',
+			ViadefprocedPeer :: DESPROCED => 'Descripción',
+
+		);
+	}
+
+        public function Viadefrub_codrub_cal() {
+		$this->c = new Criteria();
+                $this->c->add(ViadefrubPeer::TIPO,'C');
+		$this->columnas = array (
+			ViadefrubPeer :: CODRUB => 'Código',
+			ViadefrubPeer :: DESRUB => 'Descripción',
+
+		);
+	}
+        public function Viacalviatra_numsolvia() {
+		$this->c = new Criteria();
+                $this->c->addJoin(ViasolviatraPeer::NUMSOL,ViacalviatraPeer::REFSOL);
+                $this->c->add(ViacalviatraPeer::STATUS,'A');
+		$this->columnas = array (
+			ViasolviatraPeer :: NUMSOL => 'Referencia',
+                        ViasolviatraPeer :: CODEMP => 'Empleado',
+
+		);
+	}
+        public function viaestado_codpai() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			ViapaisPeer :: CODPAI => 'Código',
+                        ViapaisPeer :: NOMPAI => 'Nombre',
+
+		);
+	}
+        public function viaestado_codest($params = array()) {
+		$this->c = new Criteria();
+                if($params)
+                    $this->c->add(ViaestadoPeer :: CODPAI, $params[0]);
+		$this->columnas = array (
+			ViaestadoPeer :: CODEST => 'Código',
+                        ViaestadoPeer :: NOMEST => 'Nombre',
+
+		);
+	}
+        public function viaciudad_codciu($params = array ()) {
+		$this->c = new Criteria();
+                if($params)
+                    $this->c->add(ViaciudadPeer :: CODEST, $params[0]);
+                if(count($params)>1)
+                    $this->c->add(ViaciudadPeer :: CODPAI, $params[1]);
+		$this->columnas = array (
+			ViaciudadPeer :: CODCIU => 'Código',
+                        ViaciudadPeer :: NOMCIU => 'Nombre',
+
+		);
+	}
+
+	public function Segnivapr_Usuarios() {
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			SegnivaprPeer :: CODNIV => 'Código',
+			SegnivaprPeer :: DESNIV => 'Nombre'
+		);
+	}
+
+	public function Contabb_Confintipcuecon() {
+		$this->c = new Criteria();
+		$this->c->add(ContabbPeer :: CARGAB, 'N', Criteria :: NOT_EQUAL);
+
+		$this->columnas = array (
+			ContabbPeer :: CODCTA => 'Codigo',
+			ContabbPeer :: DESCTA => 'Descripción',
+
+		);
+	}
+
+	public function Contabb_Confincom($param = array ()) {
+		$this->c = new Criteria();
+		$this->c->add(ContabbPeer :: CARGAB, 'C');
+		$this->c->addAscendingOrderByColumn(ContabbPeer :: CODCTA);
+
+		$this->columnas = array (
+			ContabbPeer :: CODCTA => 'Código',
+			ContabbPeer :: DESCTA => 'Descripción',
+
+		);
+	}
+
+        public function Npmotegr_Nomhojint() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    NpmotegrPeer :: CODMOT => 'Código',
+                    NpmotegrPeer :: DESMOT => 'Descripción',
+
+            );
+	}
+
+	public function Npdefcpt_Npasiconemp($params) {
+		$this->c = new Criteria();
+		$this->c->add(NpasiconnomPeer :: CODNOM, $params[0]);
+		$this->c->addJoin(NpdefcptPeer :: CODCON, NpasiconnomPeer :: CODCON);
+
+		$this->columnas = array (
+			NpdefcptPeer :: CODCON => 'Código',
+                        NpdefcptPeer :: NOMCON => 'Nombre'
+		);
+	}
+        public function Fafacturpro_reffac() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    FafacturproPeer :: REFFAC => 'Proforma',
+                    FafacturproPeer :: FECFAC => 'Fecha',
+
+            );
+	}
+        public function viacalviatra_numcal() {
+		$this->c = new Criteria();
+		$this->columnas = array (
+			ViacalviatraPeer :: NUMCAL => 'Número Viatico',
+                        ViacalviatraPeer :: FECCAL => 'Fecha',
+
+		);
+	}
+
+	public function Opsolpag_Pagemiord() {
+
+		$this->c = new Criteria();
+
+    $this->c->add(OpsolpagPeer::STASOL,'A');
+
+		$this->columnas = array (
+			OpsolpagPeer::REFSOL => 'Nro. Solicitud',
+      OpsolpagPeer::MONSOL => 'Monto',
+      OpsolpagPeer::CEDRIF => 'Cedula/Rif',
+      OpsolpagPeer::NOMBEN => 'Nombre',
+      OpsolpagPeer::REFCOM => 'Compromiso',
+      //OpsolpagPeer::NUMSOLCRE => 'Nro. Sol. Cred.',
+      //OpsolpagPeer::NUMCRE => 'Nro. Credito',
+		);
+
+	}
+
+	public function Fordefcatpre_Forotrcrepre($params = array ()) {
+
+		$this->c = new Criteria();
+		$this->sql = "length(codcat) = '" . $params[0] . "'";
+		$this->c->add(FordefcatprePeer :: CODCAT, $this->sql, Criteria :: CUSTOM);
+
+		$this->columnas = array (
+			FordefcatprePeer :: CODCAT => 'Código',
+			FordefcatprePeer :: NOMCAT => 'Nombre'
+		);
+
+	}
+
+	public function Fordeforgpub_Forotrcrepre($params = array ()) {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FordeforgpubPeer :: CODORG => 'Código',
+			FordeforgpubPeer :: NOMORG => 'Nombre'
+		);
+
+	}
+
+	public function Fordefunieje_Forcatprogra() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FordefuniejePeer :: CODUNI => 'Código',
+			FordefuniejePeer :: NOMUNI => 'Nombre'
+		);
+
+	}
+
+	public function Fordefpro_Fordefmet() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FordefproPeer :: CODPRO => 'Código',
+			FordefproPeer :: DESPRO => 'Descripción'
+		);
+
+	}
+
+	public function Fordefproble_Forasoproobj() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FordefproblePeer :: CODPRO => 'Código',
+			FordefproblePeer :: NOMPRO => 'Descripción'
+		);
+
+	}
+
+	public function Fordefobj_Forasoproobj() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FordefobjPeer :: CODOBJ => 'Código',
+			FordefobjPeer :: DESOBJ => 'Descripción'
+		);
+
+	}
+
+	public function Fordefmet_Forasometobj() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FordefmetPeer :: CODMET => 'Código',
+			FordefmetPeer :: DESMET => 'Descripción'
+		);
+
+	}
+
+	public function Fordefact_Forasoactmet() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FordefactPeer :: CODACT => 'Código',
+			FordefactPeer :: DESACT => 'Descripción'
+		);
+
+	}
+
+	public function Fordefpro_Forasoactmet($params = array ()) {
+
+		$this->c = new Criteria();
+                $this->c->add( ForasoprometPeer::CODMET,$params[0]);
+                $this->c->addJoin(FordefproPeer::CODPRO, ForasoprometPeer::CODPRO);
+
+		$this->columnas = array (
+			FordefproPeer :: CODPRO => 'Código',
+			FordefproPeer :: DESPRO => 'Descripción'
+		);
+
+	}
+
+	public function Caregart_Forestcos($params = array ()) {
+		$this->c = new Criteria();
+		$longitud = $params[0];
+		$this->c = new Criteria();
+		$this->sql = "length(Codart) = '" . $longitud . "'";
+		$this->c->add(CaregartPeer :: CODART, $this->sql, Criteria :: CUSTOM);
+
+		$this->columnas = array (
+			CaregartPeer :: CODART => 'Codigo',
+			CaregartPeer :: DESART => 'Descripcion',
+			CaregartPeer :: UNIMED => 'Unidad',
+			CaregartPeer :: CODPAR => 'Partida',
+                        CaregartPeer :: COSULT => 'Costo'
+		);
+	}
+
+	public function Seggrupo_Segasigpergru() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			SeggrupoPeer :: CODGRU => 'Código',
+			SeggrupoPeer :: DESGRU => 'Descripción'
+		);
+
+	}
+
+	public function Fordefobr_Forpreobr() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FordefobrPeer :: CODOBR => 'Código',
+			FordefobrPeer :: NOMOBR => 'Descripción',
+                        FordefobrPeer :: CODPAREGR => 'Partida'
+		);
+
+	}
+
+	public function Fadescripfac_Fafacturpro() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FadescripfacPeer :: DESFAC => 'Descripción'
+		);
+
 }
 
+	public function Caprovee_Faregots() {
+		$this->c = new Criteria();
+		$this->c->add(CaproveePeer :: TIPO, 'P');
+
+		$this->columnas = array (
+			CaproveePeer :: RIFPRO => 'Código',
+			CaproveePeer :: NOMPRO => 'Descripción',
+			CaproveePeer :: CODPRO => 'Codigo'
+		);
+
+	}
+
+	public function Faregots_Fafacturpro() {
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FaregotsPeer :: CEDRIF => 'Cédula',
+			FaregotsPeer :: NOMOTS => 'Nombre',
+			FaregotsPeer :: RIFPRO => 'Cooperativa',
+                        FaregotsPeer :: PLACA => 'Placa'
+		);
+
+	}
+
+	public function Faobservafac_Fafacturpro() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FaobservafacPeer :: OBSFAC => 'Observación'
+		);
+
+	}
+
+	public function Fadefpro_Fafacturpro() {
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			FadefproPeer :: CODPROD => 'Código',
+			FadefproPeer :: DESPROD => 'Descripción'
+		);
+
+	}
+
+	public function Cadefcenaco_Almsolegr() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    CadefcenacoPeer :: CODCENACO => 'Código',
+                    CadefcenacoPeer :: DESCENACO => 'Descripción'
+            );
+	}
+
+	public function Tsuniadm_Tesdeffonant() {
+            $camcatejeadm=H::getConfApp2('camcatejeadm', 'tesoreria', 'tesdeffonant');
+
+
+
+            $this->c = new Criteria();
+
+            if ($camcatejeadm=='S')
+            {
+              $this->columnas = array (
+			BnubicaPeer :: CODUBI => 'Código',
+			BnubicaPeer :: DESUBI => 'Descripción',
+
+
+		);
+            }else {
+              $this->columnas = array (
+                    TsuniadmPeer :: CODUNIADM => 'Código',
+                    TsuniadmPeer :: DESUNIADM => 'Descripción'
+                );
+            }
+	}
+        
+	public function Npcargos_Forasoconcar($params = array ()) {
+		$longitud = $params[0];
+		$this->c = new Criteria();
+		$this->sql = "length(Codcar) = '" . $longitud . "'";
+		$this->c->add(NpcargosPeer :: CODCAR, $this->sql, Criteria :: CUSTOM);
+
+		$this->columnas = array (
+			NpcargosPeer :: CODCAR => 'Código',
+			NpcargosPeer :: NOMCAR => 'Nombre'
+		);
+}
+
+        public function Catipalm_id() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    #CatipalmPeer :: ID=> 'Código',
+                    CatipalmPeer :: NOMTIP => 'Descripción'
+            );
+	}
+
+        public function Catipalm_codedo() {
+            $this->c = new Criteria();
+            $this->columnas = array (
+                    OcestadoPeer :: CODEDO=> 'Código',
+                    OcestadoPeer :: NOMEDO => 'Estado'
+            );
+	}
+
+       public function Cadefalm_Camigtxt() {
+		$this->c = new Criteria();
+		$this->c->add( CadefalmPeer::ESPTOVEN,true);
+
+		$this->columnas = array (
+			CadefalmPeer :: CODALM => 'Codigo',
+			CadefalmPeer :: NOMALM => 'Descripcion'
+		);
+
+}
+
+	public function Bnregsem_Biedisactsem() {
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			BnregsemPeer :: CODACT => 'Activo',
+			BnregsemPeer :: CODSEM => 'Semoviente',
+			BnregsemPeer :: DESSEM => 'Nombre',
+                        BnregsemPeer :: VALINI => 'Valor',
+                        BnregsemPeer :: STASEM => 'Estatus',
+		);
+	}
+
+       public function Cagrucla_almcontrato() {
+		$this->c = new Criteria();
+
+                $this->columnas = array (
+			CagruclaPeer :: CODGRU => 'Codigo',
+			CagruclaPeer :: DESGRU => 'Descripcion'
+		);
+
+	}
+
+       public function Cadefcla_almcontrato() {
+		$this->c = new Criteria();
+
+                $this->columnas = array (
+			CadefclaPeer :: CODCLA => 'Codigo',
+			CadefclaPeer :: DESCLA => 'Descripcion'
+		);
+
+	}
+
+	public function CaOrdCom_Almordrec2($params=array()) {
+		//Este es el SQL Original
+		// $sql="Select a.OrdCom as Codigo,a.FecOrd as Fecha, a.DesOrd as Descripcion from CaOrdCom a,CPCompro b,CPDocCom c where a.StaOrd<>'N' and a.OrdCom=b.RefCom and b.TipCom=C.TipCom and (c.refprc<>'N' or  c.afeprc<>'N' or c.afecom<>'N' or c.afedis<>'N') order by a.OrdCom";
+		$this->c = new Criteria();
+		$this->c->addJoin(CaordcomPeer :: ORDCOM, CpcomproPeer :: REFCOM);
+		$this->c->addJoin(CpcomproPeer :: TIPCOM, CpdoccomPeer :: TIPCOM);
+                $this->c->addJoin(CaordcomPeer :: ORDCOM, CaentordPeer ::ORDCOM);
+		$this->c->add(CaordcomPeer :: STAORD, "N", Criteria :: NOT_EQUAL);
+                $this->c->add(CaentordPeer :: CODALM, $params[0]);
+		$sub = $this->c->getNewCriterion(CpdoccomPeer :: REFPRC, "N", Criteria :: NOT_EQUAL);
+		$sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFEPRC, "N", Criteria :: NOT_EQUAL));
+		$sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFECOM, "N", Criteria :: NOT_EQUAL));
+		$sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFEDIS, "N", Criteria :: NOT_EQUAL));
+		$this->c->add($sub);
+
+		$this->c->addJoin(CaordcomPeer :: ORDCOM, CaartordPeer :: ORDCOM);
+		$this->c->add(CaartordPeer :: CERART, null);
+		$this->sql = "Caartord.canord - Caartord.canaju > Caartord.canrec ";
+		$this->c->add(CaartordPeer :: CANORD, $this->sql, Criteria :: CUSTOM);
+		$this->c->setDistinct();
+
+		$this->c->addAscendingOrderByColumn(CaordcomPeer :: ORDCOM);
+
+		$this->columnas = array (
+			CaordcomPeer :: ORDCOM => 'Código',
+			CaordcomPeer :: FECORD => 'Fecha',
+			CaordcomPeer :: DESORD => 'Descripción'
+		);
+	}
+
+	public function Nppartidas_Precontra2() {
+
+          $sql2="SELECT (SUM(LONNIV)+COUNT(CATPAR)+1) as inipartida FROM CPNIVELES WHERE CATPAR='C'";
+          if (Herramientas::BuscarDatos($sql2,&$results))
+          {
+            $inicio=$results[0]["inipartida"];
+}
+
+          $consec=H::getX_vacio('CODEMP', 'Cpdefniv', 'Conpar', '001');
+          $sql="SELECT (SUM(LONNIV)+COUNT(CATPAR)-1) as lonpartida FROM CPNIVELES WHERE CATPAR='P' AND CONSEC<=".$consec.";";
+          if (Herramientas::BuscarDatos($sql,&$result))
+          {
+            $fin=$result[0]["lonpartida"];
+          }
+
+        $this->c = new Criteria();
+        $this->c->addSelectColumn(' SUBSTR(' . CpdeftitPeer :: CODPRE . ',' . $inicio . ',' . $fin . ') as CODPRE');
+        $this->c->addSelectColumn(CpdeftitPeer :: NOMPRE);
+        $this->c->addSelectColumn(CpdeftitPeer :: CODCTA);
+        $this->c->addSelectColumn(CpdeftitPeer :: STACOD);
+        $this->c->addSelectColumn(CpdeftitPeer :: CODUNI);
+        $this->c->addSelectColumn(CpdeftitPeer :: ESTATUS);
+        $this->c->addSelectColumn(CpdeftitPeer :: CODTIP);
+        $this->c->addSelectColumn(CpdeftitPeer :: ID);
+        $this->sql = "trim(substr(codpre,$inicio,$fin))!=''";
+        $this->c->add(CpdeftitPeer :: CODPRE, $this->sql, Criteria :: CUSTOM);
+        $this->c->setDistinct();
+
+        $this->columnas = array (
+                CpdeftitPeer :: CODPRE => 'Codigo Partida',
+                CpdeftitPeer :: NOMPRE => 'Nombre Partida',
+
+
+        );
+	}
+
+        public function Nppartidas_Precontra() {
+
+        $this->c = new Criteria();
+
+        $this->columnas = array (
+                PrepartidasPeer :: CODPAR => 'Codigo Partida',
+                PrepartidasPeer :: NOMPAR => 'Nombre Partida',
+
+        );
+	}
+
+                public function Almentdes_Cadphart() {
+        $this->c = new Criteria();
+
+
+        $this->columnas = array (
+                CadphartPeer :: DPHART => 'Número',
+                CadphartPeer :: DESDPH => 'Descripción',
+                CadphartPeer :: FECDPH => 'Fecha',
+
+
+        );
+	}
+}
 ?>

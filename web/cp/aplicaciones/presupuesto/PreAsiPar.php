@@ -1,10 +1,11 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
@@ -131,7 +132,6 @@ if (!empty($_POST["var"]))
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/funciones.js"></script>
@@ -181,7 +181,7 @@ MM_reloadPage(true);
 </head>
 
 <body onLoad="MM_preloadImages('../../images/rbut_01_f2.gif','../../images/rbut_02_f2.gif','../../images/rbut_03_f2.gif','../../images/rbut_04_f2.gif')">
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
 <table width="100%" align="center">
   <tr>
 <td width="100%">
@@ -463,7 +463,7 @@ MM_reloadPage(true);
 
 
          var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Preasipar_Cpdeftit/clase/Cpdeftit/frame/form1/obj1/'+campo2+'/obj2/'+campo+'/campo1/codpre/campo2/nompre/submit/true/param1/'+LonCat;
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Preasipar_Cpdeftit/clase/Cpdeftit/frame/form1/obj1/'+campo2+'/obj2/'+campo+'/campo1/codpre/campo2/nompre/submit/true/param1/'+LonCat;
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
 
      }

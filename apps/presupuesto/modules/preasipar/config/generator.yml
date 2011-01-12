@@ -5,16 +5,19 @@ generator:
     theme:            cidesaGenerator
     fields:
      codpre: { name: Código }
-     codpre1: { name: Código }
+     codigo1: { name: Código }
+     nompre: { name: Descripción }
+     nombre1: { name: Descripción }
      grid:   { name: . }
+     botones: {name: .}
 
 
     edit:
       title: Asignar Clasificador de Partidas
       display:
         Catégoria Presupuestaria Orígen: [ _codpre]
-        Catégoria Presupuestaria Destino: [_codpre1]
-        Partidas Seleccionadas: [ _grid ]
+        Catégoria Presupuestaria Destino: [_codigo1]
+        Partidas Seleccionadas: [ _botones, _grid ]
       actions:
         _delete:      ~
         _save:        ~

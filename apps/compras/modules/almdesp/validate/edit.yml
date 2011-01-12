@@ -65,7 +65,7 @@ UbicacionValidator:
 OrigenValidator:
     class: CidesaExistValidator
     param:
-        class:    Bnubibie
+        class:    Bnubica
         column:   codubi
         unique_error:   El Código de la Unidad no existe.
 

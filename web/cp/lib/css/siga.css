@@ -243,6 +243,7 @@ fieldset {
 	font-size: 12px;
 	text-align:left;
 }
+
 .grid_txt02 {
 	border: none;
 	margin: 0px;
@@ -264,6 +265,17 @@ fieldset {
 	font-size: 12px;
 	text-align:center;
 }
+
+.grid_txt04 {
+	border: none;
+	margin: 0px;
+	padding: 0px;
+	border-width: 0px;
+	padding-left: 3px;
+	font-size: 12px;
+	text-align:left;
+}
+
 
 .cell_left_line02 {
 	border-left-width: 1px;

@@ -12,7 +12,6 @@ generator:
       title: Configuracion Generales
       display:
         Formatos y Correlativos:  [_corcomp]
-        #Generales:  [btnelicomanu]
         Generales:  [btnmodcom]
 
       actions:

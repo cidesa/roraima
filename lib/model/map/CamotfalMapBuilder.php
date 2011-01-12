@@ -34,9 +34,9 @@ class CamotfalMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('camotfal_SEQ');
 
-		$tMap->addColumn('CODFAL', 'Codfal', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addPrimaryKey('CODFAL', 'Codfal', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('DESFAL', 'Desfal', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('DESFAL', 'Desfal', 'string', CreoleTypes::VARCHAR, true, 250);
 
 		$tMap->addColumn('TIPFAL', 'Tipfal', 'string', CreoleTypes::VARCHAR, true, 3);
 

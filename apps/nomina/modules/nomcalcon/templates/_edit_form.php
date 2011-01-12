@@ -161,6 +161,7 @@
 			echo input_hidden_tag('cajgrid2', '');
 			echo input_hidden_tag('cajgrid3', '');
 			echo input_hidden_tag('cajgrid4', '');
+                        echo input_hidden_tag('cajgrid5', '');
 
 	    ?>
 

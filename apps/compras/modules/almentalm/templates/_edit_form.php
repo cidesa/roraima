@@ -80,7 +80,7 @@
 			  ))),
      array('use_style' => 'true'))?>
      &nbsp;
-<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Caprovee_Almentalm/clase/Caprovee/frame/sf_admin_edit_form/obj1/caentalm_codpro/obj2/caentalm_nompro/campo1/rifpro/campo2/nompro','','','botoncat')?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Caprovee_Almentalm/clase/Caprovee/frame/sf_admin_edit_form/obj1/caentalm_codpro/obj2/caentalm_nompro/campo1/codpro/campo2/nompro','','','botoncat')?>
 
 <?php echo input_tag('caentalm[nompro]',$caentalm->getNompro(),'size=50,disabled=true'); ?>
     </div>
@@ -139,6 +139,38 @@
 	    </div>
     </th>
 </tr>
+<tr>
+    <th>
+<?php echo label_for('caentalm[codcen]', __($labels['caentalm{codcen}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caentalm{codcen}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caentalm{codcen}')): ?>
+    <?php echo form_error('caentalm{codcen}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+<?php $value = object_input_tag($caentalm, 'getCodcen', array (
+  'size' => 20,
+  'control_name' => 'caentalm[codcen]',
+  'maxlength' => 4,
+  'readonly'  =>  $caentalm->getId()!='' ? true : false,
+  'onBlur'=> remote_function(array(
+       'url'      => 'almdesp/ajax',
+       'script'   => true,
+       'condition' => "$('caentalm_codcen').value != '' && $('id').value == ''",
+       'complete' => 'AjaxJSON(request, json)',
+       'with' => "'ajax=7&cajtexmos=caentalm_descen&cajtexcom=caentalm_codcen&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+
+&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefcen_Almsolegr/clase/Cadefcen/frame/sf_admin_edit_form/obj1/caentalm_codcen/obj2/caentalm_descen/campo1/codcen/campo2/descen','','','botoncat')?>
+&nbsp;&nbsp;
+ <?php $value = object_input_tag($caentalm, 'getDescen', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'caentalm[descen]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+    </th>
+</tr>
 </table>
 </div>
 </fieldset>
@@ -155,7 +187,7 @@ echo grid_tag($obj);
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($caentalm->getId()): ?>
+      <li class="float-left"><?php if ($caentalm->getId() && $oculeli!="S"): ?>
 <?php echo button_to(__('delete'), 'almentalm/delete?id='.$caentalm->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
@@ -167,4 +199,21 @@ echo grid_tag($obj);
   var id="";
   var id='<?php echo $caentalm->getId()?>';
   actualiza(id);
+  if (id=='')
+  {
+	var manesolcorr='<?php echo $mansolocor; ?>';
+     if (manesolcorr=='S')
+     {
+        $('caentalm_rcpart').value='########';
+     	$('caentalm_rcpart').readOnly=true;
+        $('caentalm_codpro').focus();
+     }
+  }
+
+  var deshab='<?php echo $bloqfec; ?>';
+  if (deshab=='S')
+  {
+  	$('trigger_caentalm_fecrcp').hide();
+  	$('caentalm_fecrcp').readOnly=true;
+  }
 </script>

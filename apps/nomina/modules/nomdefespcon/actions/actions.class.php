@@ -13,6 +13,7 @@
  */
 class nomdefespconActions extends autonomdefespconActions
 {
+   public $coderror1=-1;
 
 /**
    * Función para procesar _todas_ las funciones Ajax del formulario
@@ -44,6 +45,20 @@ class nomdefespconActions extends autonomdefespconActions
 		$this->npdefcpt = $this->getNpdefcptOrCreate();
 		$this->formato= Herramientas::getMascaraPartida();
 		$this->longitud=strlen($this->formato);
+        $this->mancorrel="";
+  	    $varemp = $this->getUser()->getAttribute('configemp');
+	    if(is_array($varemp))
+	     if(array_key_exists('aplicacion',$varemp))
+	  	  if(array_key_exists('nomina',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+		     if(array_key_exists('nomdefespcon',$varemp['aplicacion']['nomina']['modulos']))
+			 {
+			 	if (array_key_exists('mancorrel',$varemp['aplicacion']['nomina']['modulos']['nomdefespcon']))
+		        {
+		       	 $this->mancorrel=$varemp['aplicacion']['nomina']['modulos']['nomdefespcon']['mancorrel'];
+		        }
+
+			 }
 
 		if ($this->getRequest()->getMethod() == sfRequest::POST)
 		{
@@ -103,6 +118,19 @@ $this->Bitacora('Guardo');
 		$npdefcpt = $this->getRequestParameter('npdefcpt');
 		$this->formato= Herramientas::getMascaraPartida();
 		$this->longitud=strlen($this->formato);
+        $this->mancorrel="";
+  	    $varemp = $this->getUser()->getAttribute('configemp');
+	    if(is_array($varemp))
+	     if(array_key_exists('aplicacion',$varemp))
+	  	  if(array_key_exists('nomina',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+		     if(array_key_exists('nomdefespcon',$varemp['aplicacion']['nomina']['modulos']))
+			 {
+			 	if (array_key_exists('mancorrel',$varemp['aplicacion']['nomina']['modulos']['nomdefespcon']))
+		        {
+		       	 $this->mancorrel=$varemp['aplicacion']['nomina']['modulos']['nomdefespcon']['mancorrel'];
+		        }
+			 }
 
 	if (isset($npdefcpt['codcon']))
     {
@@ -177,4 +205,66 @@ $this->Bitacora('Guardo');
 
     return $this->redirect('nomdefespcon/list');
   }
+
+  public function handleErrorEdit()
+  {
+    $this->preExecute();
+    $this->npdefcpt = $this->getNpdefcptOrCreate();
+    try{ $this->updateNpdefcptFromRequest();}catch(Exception $ex){}
+
+    $this->labels = $this->getLabels();
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if($this->coderr!=-1)
+      {
+       $err = Herramientas::obtenerMensajeError($this->coderr);
+       $this->getRequest()->setError('npdefcpt{codpar}',$err);
+      }
+    }
+
+    return sfView::SUCCESS;
+  }
+
+  /**
+   *
+   * FunciÃ³n que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones especÃ­ficas del negocio del formulario
+   * Para mayor informaciÃ³n vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
+  public function validateEdit()
+  {
+    $this->coderr =-1;
+
+    if($this->getRequest()->getMethod() == sfRequest::POST){
+     $this->npdefcpt = $this->getNpdefcptOrCreate();
+     try{ $this->updateNpdefcptFromRequest();}catch(Exception $ex){}
+     $this->valpar="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if(is_array($varemp))
+     if(array_key_exists('aplicacion',$varemp))
+          if(array_key_exists('nomina',$varemp['aplicacion']))
+           if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+             if(array_key_exists('nomdefespcon',$varemp['aplicacion']['nomina']['modulos']))
+             {
+                if (array_key_exists('valpar',$varemp['aplicacion']['nomina']['modulos']['nomdefespcon']))
+                {
+                 $this->valpar=$varemp['aplicacion']['nomina']['modulos']['nomdefespcon']['valpar'];
+                }
+             }
+    if ($this->valpar=="")
+    {
+        if ($this->getRequestParameter('npdefcpt[codpar]')=="")
+        {
+           $this->coderr=117;
+        }
+    }     
+
+   if($this->coderr!=-1){
+        return false;
+      } else return true;
+
+    }else return true;
+  }
+  
 }

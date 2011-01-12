@@ -52,30 +52,30 @@ $this->Bitacora('Guardo');
     }
   }
 
-   /**
-   * Función principal para procesar la eliminación de registros 
-   * en el formulario.
-   *
-   */
   public function executeDelete()
   {
     $this->optipben = OptipbenPeer::retrieveByPk($this->getRequestParameter('id'));
     $this->forward404Unless($this->optipben);
 
-     $id=$this->getRequestParameter('id');
-    $c= new Criteria();
-    $c->add(OpbenefiPeer::CODTIPBEN,$this->optipben->getCodtipben());
-    $dato=OpbenefiPeer::doSelect($c);
-    if (!$dato)
+    try
     {
+      $trae=H::getX_vacio('CODTIPBEN', 'Opbenefi', 'Codtipben', $this->optipben->getCodtipben());
+      if ($trae=="")
+      {
       $this->deleteOptipben($this->optipben);
       $this->Bitacora('Elimino');
+      }else {
+        $this->getRequest()->setError('delete', 'No se pudo borrar el registro Seleccioado. Porque tiene Beneficiarios asociados.');
+      return $this->forward('pagtipben', 'list');
+      }
     }
-    else
+    catch (PropelException $e)
     {
-      $this->setFlash('notice','El Tipo de Beneficiario no puede ser eliminado, porque hay Beneficiarios definidos con ese tipo');
-      return $this->redirect('pagtipben/edit?id='.$id);
+      $this->getRequest()->setError('delete', 'No se pudo borrar la registro seleccionado. AsegÃºrese de que no tiene ningÃºn tipo de registros asociados.');
+      return $this->forward('pagtipben', 'list');
     }
+
     return $this->redirect('pagtipben/list');
   }
+
 }

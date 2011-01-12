@@ -29,6 +29,10 @@ abstract class BaseNpnomesptipos extends BaseObject  implements Persistent {
 
 
 	
+	protected $nomdiaadi;
+
+
+	
 	protected $id;
 
 	
@@ -103,6 +107,13 @@ abstract class BaseNpnomesptipos extends BaseObject  implements Persistent {
 
   }
   
+  public function getNomdiaadi()
+  {
+
+    return trim($this->nomdiaadi);
+
+  }
+  
   public function getId()
   {
 
@@ -133,6 +144,11 @@ abstract class BaseNpnomesptipos extends BaseObject  implements Persistent {
 	public function setFecnomdes($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecnomdes] from input: " . var_export($v, true));
@@ -149,6 +165,11 @@ abstract class BaseNpnomesptipos extends BaseObject  implements Persistent {
 	
 	public function setFecnomhas($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -170,6 +191,16 @@ abstract class BaseNpnomesptipos extends BaseObject  implements Persistent {
     if ($this->nomintpre !== $v) {
         $this->nomintpre = $v;
         $this->modifiedColumns[] = NpnomesptiposPeer::NOMINTPRE;
+      }
+  
+	} 
+	
+	public function setNomdiaadi($v)
+	{
+
+    if ($this->nomdiaadi !== $v) {
+        $this->nomdiaadi = $v;
+        $this->modifiedColumns[] = NpnomesptiposPeer::NOMDIAADI;
       }
   
 	} 
@@ -198,7 +229,9 @@ abstract class BaseNpnomesptipos extends BaseObject  implements Persistent {
 
       $this->nomintpre = $rs->getString($startcol + 4);
 
-      $this->id = $rs->getInt($startcol + 5);
+      $this->nomdiaadi = $rs->getString($startcol + 5);
+
+      $this->id = $rs->getInt($startcol + 6);
 
       $this->resetModified();
 
@@ -206,7 +239,7 @@ abstract class BaseNpnomesptipos extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 6; 
+            return $startcol + 7; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npnomesptipos object", $e);
     }
@@ -369,6 +402,9 @@ abstract class BaseNpnomesptipos extends BaseObject  implements Persistent {
 				return $this->getNomintpre();
 				break;
 			case 5:
+				return $this->getNomdiaadi();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -386,7 +422,8 @@ abstract class BaseNpnomesptipos extends BaseObject  implements Persistent {
 			$keys[2] => $this->getFecnomdes(),
 			$keys[3] => $this->getFecnomhas(),
 			$keys[4] => $this->getNomintpre(),
-			$keys[5] => $this->getId(),
+			$keys[5] => $this->getNomdiaadi(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -418,6 +455,9 @@ abstract class BaseNpnomesptipos extends BaseObject  implements Persistent {
 				$this->setNomintpre($value);
 				break;
 			case 5:
+				$this->setNomdiaadi($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -432,7 +472,8 @@ abstract class BaseNpnomesptipos extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setFecnomdes($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setFecnomhas($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setNomintpre($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[5], $arr)) $this->setNomdiaadi($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -445,6 +486,7 @@ abstract class BaseNpnomesptipos extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpnomesptiposPeer::FECNOMDES)) $criteria->add(NpnomesptiposPeer::FECNOMDES, $this->fecnomdes);
 		if ($this->isColumnModified(NpnomesptiposPeer::FECNOMHAS)) $criteria->add(NpnomesptiposPeer::FECNOMHAS, $this->fecnomhas);
 		if ($this->isColumnModified(NpnomesptiposPeer::NOMINTPRE)) $criteria->add(NpnomesptiposPeer::NOMINTPRE, $this->nomintpre);
+		if ($this->isColumnModified(NpnomesptiposPeer::NOMDIAADI)) $criteria->add(NpnomesptiposPeer::NOMDIAADI, $this->nomdiaadi);
 		if ($this->isColumnModified(NpnomesptiposPeer::ID)) $criteria->add(NpnomesptiposPeer::ID, $this->id);
 
 		return $criteria;
@@ -485,6 +527,8 @@ abstract class BaseNpnomesptipos extends BaseObject  implements Persistent {
 		$copyObj->setFecnomhas($this->fecnomhas);
 
 		$copyObj->setNomintpre($this->nomintpre);
+
+		$copyObj->setNomdiaadi($this->nomdiaadi);
 
 
 		$copyObj->setNew(true);

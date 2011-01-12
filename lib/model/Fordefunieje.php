@@ -15,4 +15,8 @@
  */ 
 class Fordefunieje extends BaseFordefunieje
 {
+  public function getNomemp()
+  {
+    return Herramientas::getX('CODEMP','Nphojint','Nomemp',self::getCodemp());
+  }
 }

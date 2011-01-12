@@ -7,21 +7,28 @@
  *
  * @package    Roraima
  * @subpackage lib.model.nomina
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Npasicaremp.php 40791 2010-09-28 17:14:22Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class Npasicaremp extends BaseNpasicaremp
 {
 	private $codcon = '';
+        private $nivel = '';
 	protected $codnomnew="";
 	protected $codcarnew="";
 	protected $codcatnew="";
     protected $nomnomnew="";
 	protected $nomcarnew="";
 	protected $nomcatnew="";
+	protected $fecing=null;
+        protected $codtipcar="";
+        protected $mancencos="";
+        protected $check = 0;
+        protected $codmot = '';
+
 
 
 	public function getCodcon()
@@ -49,6 +56,7 @@ class Npasicaremp extends BaseNpasicaremp
 			return ' ';
 		}
 	}
+
 
 	public function getNomnom()
 	{
@@ -142,4 +150,46 @@ class Npasicaremp extends BaseNpasicaremp
 			return ' ';
 		}
   }
+  public function getFecing()
+  {
+  	return date('d/m/Y',strtotime(H::Getx('Codemp','Nphojint','Fecing',self::getCodemp())));
+  }
+
+  public function getCodtipcar()
+    {
+        return H::GetX('Codcar','Npcargos','codtip',self::getCodcar());
+    }
+
+  public function getDescen()
+  {
+	return Herramientas::getX('CODCEN','Cadefcen','Descen',self::getCodcen());
+  }
+
+  public function getMancencos()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('nomina',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+	     if(array_key_exists('nomasicarconnom',$varemp['aplicacion']['nomina']['modulos'])){
+	       if(array_key_exists('mancencos',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
+	       {
+	       	$dato=$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['mancencos'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setMancencos()
+  {
+  	return $this->mancencos;
+  }
+  public function getNivel()
+    {
+         $codniv = H::GetX('Codemp','Nphojint','Codniv',$this->codemp);
+         $nomniv = H::GetX('Codniv','Npestorg','Desniv',$codniv);
+         return $codniv.'  '.$nomniv;
+    }
 }

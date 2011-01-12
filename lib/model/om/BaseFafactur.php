@@ -4,111 +4,135 @@
 abstract class BaseFafactur extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $reffac;
 
 
-	
+
 	protected $fecfac;
 
 
-	
+
 	protected $codcli;
 
 
-	
+
 	protected $desfac;
 
 
-	
+
 	protected $tipref;
 
 
-	
+
 	protected $monfac;
 
 
-	
+
 	protected $mondesc;
 
 
-	
+
 	protected $codconpag;
 
 
-	
+
 	protected $numcom;
 
 
-	
+
 	protected $reapor;
 
 
-	
+
 	protected $fecanu;
 
 
-	
+
 	protected $status;
 
 
-	
+
 	protected $observ;
 
 
-	
+
 	protected $tipmon;
 
 
-	
+
 	protected $valmon;
 
 
-	
+
 	protected $numcomord;
 
 
-	
+
 	protected $numcominv;
 
 
-	
+
 	protected $sucursal;
 
 
-	
+
 	protected $motanu;
 
 
-	
+
 	protected $vuelto;
 
 
-	
+
 	protected $codcaj;
 
 
-	
+
+	protected $numcontrol;
+
+
+
+	protected $proform;
+
+
+
+	protected $codubi;
+
+
+
+	protected $tipoven;
+
+
+
+	protected $obsfac;
+
+
+
+	protected $codcenaco;
+
+
+
 	protected $id;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getReffac()
   {
 
     return trim($this->reffac);
 
   }
-  
+
   public function getFecfac($format = 'Y-m-d')
   {
 
@@ -130,28 +154,28 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
     }
   }
 
-  
+
   public function getCodcli()
   {
 
     return trim($this->codcli);
 
   }
-  
+
   public function getDesfac()
   {
 
     return trim($this->desfac);
 
   }
-  
+
   public function getTipref()
   {
 
     return trim($this->tipref);
 
   }
-  
+
   public function getMonfac($val=false)
   {
 
@@ -159,7 +183,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
     else return $this->monfac;
 
   }
-  
+
   public function getMondesc($val=false)
   {
 
@@ -167,28 +191,28 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
     else return $this->mondesc;
 
   }
-  
+
   public function getCodconpag()
   {
 
     return $this->codconpag;
 
   }
-  
+
   public function getNumcom()
   {
 
     return trim($this->numcom);
 
   }
-  
+
   public function getReapor()
   {
 
     return trim($this->reapor);
 
   }
-  
+
   public function getFecanu($format = 'Y-m-d')
   {
 
@@ -210,28 +234,28 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
     }
   }
 
-  
+
   public function getStatus()
   {
 
     return trim($this->status);
 
   }
-  
+
   public function getObserv()
   {
 
     return trim($this->observ);
 
   }
-  
+
   public function getTipmon()
   {
 
     return trim($this->tipmon);
 
   }
-  
+
   public function getValmon($val=false)
   {
 
@@ -239,35 +263,35 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
     else return $this->valmon;
 
   }
-  
+
   public function getNumcomord()
   {
 
     return trim($this->numcomord);
 
   }
-  
+
   public function getNumcominv()
   {
 
     return trim($this->numcominv);
 
   }
-  
+
   public function getSucursal()
   {
 
     return trim($this->sucursal);
 
   }
-  
+
   public function getMotanu()
   {
 
     return trim($this->motanu);
 
   }
-  
+
   public function getVuelto($val=false)
   {
 
@@ -275,21 +299,63 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
     else return $this->vuelto;
 
   }
-  
+
   public function getCodcaj()
   {
 
     return $this->codcaj;
 
   }
-  
+
+  public function getNumcontrol()
+  {
+
+    return trim($this->numcontrol);
+
+  }
+
+  public function getProform()
+  {
+
+    return trim($this->proform);
+
+  }
+
+  public function getCodubi()
+  {
+
+    return trim($this->codubi);
+
+  }
+
+  public function getTipoven()
+  {
+
+    return trim($this->tipoven);
+
+  }
+
+  public function getObsfac()
+  {
+
+    return trim($this->obsfac);
+
+  }
+
+  public function getCodcenaco()
+  {
+
+    return trim($this->codcenaco);
+
+  }
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setReffac($v)
 	{
 
@@ -297,11 +363,16 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->reffac = $v;
         $this->modifiedColumns[] = FafacturPeer::REFFAC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFecfac($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -315,8 +386,8 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = FafacturPeer::FECFAC;
     }
 
-	} 
-	
+	}
+
 	public function setCodcli($v)
 	{
 
@@ -324,9 +395,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->codcli = $v;
         $this->modifiedColumns[] = FafacturPeer::CODCLI;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDesfac($v)
 	{
 
@@ -334,9 +405,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->desfac = $v;
         $this->modifiedColumns[] = FafacturPeer::DESFAC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTipref($v)
 	{
 
@@ -344,9 +415,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->tipref = $v;
         $this->modifiedColumns[] = FafacturPeer::TIPREF;
       }
-  
-	} 
-	
+
+	}
+
 	public function setMonfac($v)
 	{
 
@@ -354,9 +425,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->monfac = Herramientas::toFloat($v);
         $this->modifiedColumns[] = FafacturPeer::MONFAC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setMondesc($v)
 	{
 
@@ -364,9 +435,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->mondesc = Herramientas::toFloat($v);
         $this->modifiedColumns[] = FafacturPeer::MONDESC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodconpag($v)
 	{
 
@@ -374,9 +445,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->codconpag = $v;
         $this->modifiedColumns[] = FafacturPeer::CODCONPAG;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNumcom($v)
 	{
 
@@ -384,9 +455,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->numcom = $v;
         $this->modifiedColumns[] = FafacturPeer::NUMCOM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setReapor($v)
 	{
 
@@ -394,11 +465,16 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->reapor = $v;
         $this->modifiedColumns[] = FafacturPeer::REAPOR;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFecanu($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -412,8 +488,8 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = FafacturPeer::FECANU;
     }
 
-	} 
-	
+	}
+
 	public function setStatus($v)
 	{
 
@@ -421,9 +497,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->status = $v;
         $this->modifiedColumns[] = FafacturPeer::STATUS;
       }
-  
-	} 
-	
+
+	}
+
 	public function setObserv($v)
 	{
 
@@ -431,9 +507,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->observ = $v;
         $this->modifiedColumns[] = FafacturPeer::OBSERV;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTipmon($v)
 	{
 
@@ -441,9 +517,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->tipmon = $v;
         $this->modifiedColumns[] = FafacturPeer::TIPMON;
       }
-  
-	} 
-	
+
+	}
+
 	public function setValmon($v)
 	{
 
@@ -451,9 +527,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->valmon = Herramientas::toFloat($v);
         $this->modifiedColumns[] = FafacturPeer::VALMON;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNumcomord($v)
 	{
 
@@ -461,9 +537,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->numcomord = $v;
         $this->modifiedColumns[] = FafacturPeer::NUMCOMORD;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNumcominv($v)
 	{
 
@@ -471,9 +547,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->numcominv = $v;
         $this->modifiedColumns[] = FafacturPeer::NUMCOMINV;
       }
-  
-	} 
-	
+
+	}
+
 	public function setSucursal($v)
 	{
 
@@ -481,9 +557,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->sucursal = $v;
         $this->modifiedColumns[] = FafacturPeer::SUCURSAL;
       }
-  
-	} 
-	
+
+	}
+
 	public function setMotanu($v)
 	{
 
@@ -491,9 +567,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->motanu = $v;
         $this->modifiedColumns[] = FafacturPeer::MOTANU;
       }
-  
-	} 
-	
+
+	}
+
 	public function setVuelto($v)
 	{
 
@@ -501,9 +577,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->vuelto = Herramientas::toFloat($v);
         $this->modifiedColumns[] = FafacturPeer::VUELTO;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodcaj($v)
 	{
 
@@ -511,9 +587,69 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->codcaj = $v;
         $this->modifiedColumns[] = FafacturPeer::CODCAJ;
       }
-  
-	} 
-	
+
+	}
+
+	public function setNumcontrol($v)
+	{
+
+    if ($this->numcontrol !== $v) {
+        $this->numcontrol = $v;
+        $this->modifiedColumns[] = FafacturPeer::NUMCONTROL;
+      }
+
+	}
+
+	public function setProform($v)
+	{
+
+    if ($this->proform !== $v) {
+        $this->proform = $v;
+        $this->modifiedColumns[] = FafacturPeer::PROFORM;
+      }
+
+	}
+
+	public function setCodubi($v)
+	{
+
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = FafacturPeer::CODUBI;
+      }
+
+	}
+
+	public function setTipoven($v)
+	{
+
+    if ($this->tipoven !== $v) {
+        $this->tipoven = $v;
+        $this->modifiedColumns[] = FafacturPeer::TIPOVEN;
+      }
+
+	}
+
+	public function setObsfac($v)
+	{
+
+    if ($this->obsfac !== $v) {
+        $this->obsfac = $v;
+        $this->modifiedColumns[] = FafacturPeer::OBSFAC;
+      }
+
+	}
+
+	public function setCodcenaco($v)
+	{
+
+    if ($this->codcenaco !== $v) {
+        $this->codcenaco = $v;
+        $this->modifiedColumns[] = FafacturPeer::CODCENACO;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -521,9 +657,9 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = FafacturPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -570,7 +706,19 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 
       $this->codcaj = $rs->getInt($startcol + 20);
 
-      $this->id = $rs->getInt($startcol + 21);
+      $this->numcontrol = $rs->getString($startcol + 21);
+
+      $this->proform = $rs->getString($startcol + 22);
+
+      $this->codubi = $rs->getString($startcol + 23);
+
+      $this->tipoven = $rs->getString($startcol + 24);
+
+      $this->obsfac = $rs->getString($startcol + 25);
+
+      $this->codcenaco = $rs->getString($startcol + 26);
+
+      $this->id = $rs->getInt($startcol + 27);
 
       $this->resetModified();
 
@@ -578,7 +726,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 22; 
+            return $startcol + 28;
     } catch (Exception $e) {
       throw new PropelException("Error populating Fafactur object", $e);
     }
@@ -589,8 +737,8 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -604,7 +752,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -626,7 +774,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -648,7 +796,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -658,8 +806,8 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = FafacturPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += FafacturPeer::doUpdate($this, $con);
@@ -669,17 +817,17 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -692,7 +840,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -714,14 +862,14 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = FafacturPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -789,6 +937,24 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 				return $this->getCodcaj();
 				break;
 			case 21:
+				return $this->getNumcontrol();
+				break;
+			case 22:
+				return $this->getProform();
+				break;
+			case 23:
+				return $this->getCodubi();
+				break;
+			case 24:
+				return $this->getTipoven();
+				break;
+			case 25:
+				return $this->getObsfac();
+				break;
+			case 26:
+				return $this->getCodcenaco();
+				break;
+			case 27:
 				return $this->getId();
 				break;
 			default:
@@ -796,7 +962,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = FafacturPeer::getFieldNames($keyType);
@@ -822,19 +988,25 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 			$keys[18] => $this->getMotanu(),
 			$keys[19] => $this->getVuelto(),
 			$keys[20] => $this->getCodcaj(),
-			$keys[21] => $this->getId(),
+			$keys[21] => $this->getNumcontrol(),
+			$keys[22] => $this->getProform(),
+			$keys[23] => $this->getCodubi(),
+			$keys[24] => $this->getTipoven(),
+			$keys[25] => $this->getObsfac(),
+			$keys[26] => $this->getCodcenaco(),
+			$keys[27] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = FafacturPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -902,11 +1074,29 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 				$this->setCodcaj($value);
 				break;
 			case 21:
+				$this->setNumcontrol($value);
+				break;
+			case 22:
+				$this->setProform($value);
+				break;
+			case 23:
+				$this->setCodubi($value);
+				break;
+			case 24:
+				$this->setTipoven($value);
+				break;
+			case 25:
+				$this->setObsfac($value);
+				break;
+			case 26:
+				$this->setCodcenaco($value);
+				break;
+			case 27:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = FafacturPeer::getFieldNames($keyType);
@@ -932,10 +1122,16 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[18], $arr)) $this->setMotanu($arr[$keys[18]]);
 		if (array_key_exists($keys[19], $arr)) $this->setVuelto($arr[$keys[19]]);
 		if (array_key_exists($keys[20], $arr)) $this->setCodcaj($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setId($arr[$keys[21]]);
+		if (array_key_exists($keys[21], $arr)) $this->setNumcontrol($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setProform($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setCodubi($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setTipoven($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setObsfac($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setCodcenaco($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setId($arr[$keys[27]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(FafacturPeer::DATABASE_NAME);
@@ -961,12 +1157,18 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FafacturPeer::MOTANU)) $criteria->add(FafacturPeer::MOTANU, $this->motanu);
 		if ($this->isColumnModified(FafacturPeer::VUELTO)) $criteria->add(FafacturPeer::VUELTO, $this->vuelto);
 		if ($this->isColumnModified(FafacturPeer::CODCAJ)) $criteria->add(FafacturPeer::CODCAJ, $this->codcaj);
+		if ($this->isColumnModified(FafacturPeer::NUMCONTROL)) $criteria->add(FafacturPeer::NUMCONTROL, $this->numcontrol);
+		if ($this->isColumnModified(FafacturPeer::PROFORM)) $criteria->add(FafacturPeer::PROFORM, $this->proform);
+		if ($this->isColumnModified(FafacturPeer::CODUBI)) $criteria->add(FafacturPeer::CODUBI, $this->codubi);
+		if ($this->isColumnModified(FafacturPeer::TIPOVEN)) $criteria->add(FafacturPeer::TIPOVEN, $this->tipoven);
+		if ($this->isColumnModified(FafacturPeer::OBSFAC)) $criteria->add(FafacturPeer::OBSFAC, $this->obsfac);
+		if ($this->isColumnModified(FafacturPeer::CODCENACO)) $criteria->add(FafacturPeer::CODCENACO, $this->codcenaco);
 		if ($this->isColumnModified(FafacturPeer::ID)) $criteria->add(FafacturPeer::ID, $this->id);
 
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(FafacturPeer::DATABASE_NAME);
@@ -976,19 +1178,19 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -1034,13 +1236,25 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 
 		$copyObj->setCodcaj($this->codcaj);
 
+		$copyObj->setNumcontrol($this->numcontrol);
+
+		$copyObj->setProform($this->proform);
+
+		$copyObj->setCodubi($this->codubi);
+
+		$copyObj->setTipoven($this->tipoven);
+
+		$copyObj->setObsfac($this->obsfac);
+
+		$copyObj->setCodcenaco($this->codcenaco);
+
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -1049,7 +1263,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -1058,4 +1272,4 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-} 
+}

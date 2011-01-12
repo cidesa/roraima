@@ -1,0 +1,63 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   npasiconemp
+  anchogrid:               750
+  ancho:                   750
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Marcar
+  tipo:                    k
+  nombrecampo:             check
+  esgrabable:			         true
+  html:                    [ ]
+2:       # Columna 2
+  titulo:                  Cod. Empleado
+  tipo:                    t
+  nombrecampo:             codemp
+  esgrabable:              true
+  html:                    ["size=20 readOnly=true"]
+3:       # Columna 3
+  titulo:                  Nombre
+  tipo:                    t
+  nombrecampo:             nomemp
+  html:                    ["size=30 readOnly=true"]
+4:       # Columna 4
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monto
+  esnumerico:              true
+  html:                    ["size=10 readOnly=true"]
+5:       # Columna 5
+  titulo:                  Cantidad
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             cantidad
+  esnumerico:              true
+  html:                    ["size=10 readOnly=true"]
+6:       # Columna 6
+  titulo:                  Monto 2
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             mon2
+  esnumerico:              true
+  html:                    ["size=10 readOnly=true"]
+  oculta:                  true
+7:       # Columna 7
+  titulo:                  Cantidad 2
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             can2
+  esnumerico:              true
+  html:                    ["size=10 readOnly=true"]
+  oculta:                  true
+8:       # Columna 8
+  titulo:                  Cargo
+  tipo:                    t
+  nombrecampo:             codcar
+  esgrabable:              true
+  html:                    ["size=20 readOnly=true"]
+  oculta:                  true

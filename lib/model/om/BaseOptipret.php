@@ -45,7 +45,35 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 
 
 	
+	protected $mbasmi;
+
+
+	
 	protected $id;
+
+	
+	protected $collOpretcons;
+
+	
+	protected $lastOpretconCriteria = null;
+
+	
+	protected $collOpretords;
+
+	
+	protected $lastOpretordCriteria = null;
+
+	
+	protected $collTsreprets;
+
+	
+	protected $lastTsrepretCriteria = null;
+
+	
+	protected $collTsretivas;
+
+	
+	protected $lastTsretivaCriteria = null;
 
 	
 	protected $alreadyInSave = false;
@@ -119,6 +147,14 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
   {
 
     return trim($this->codtipsen);
+
+  }
+  
+  public function getMbasmi($val=false)
+  {
+
+    if($val) return number_format($this->mbasmi,2,',','.');
+    else return $this->mbasmi;
 
   }
   
@@ -219,6 +255,16 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setMbasmi($v)
+	{
+
+    if ($this->mbasmi !== $v) {
+        $this->mbasmi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OptipretPeer::MBASMI;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -251,7 +297,9 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 
       $this->codtipsen = $rs->getString($startcol + 8);
 
-      $this->id = $rs->getInt($startcol + 9);
+      $this->mbasmi = $rs->getFloat($startcol + 9);
+
+      $this->id = $rs->getInt($startcol + 10);
 
       $this->resetModified();
 
@@ -259,7 +307,7 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 10; 
+            return $startcol + 11; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Optipret object", $e);
     }
@@ -347,6 +395,38 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collOpretcons !== null) {
+				foreach($this->collOpretcons as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collOpretords !== null) {
+				foreach($this->collOpretords as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collTsreprets !== null) {
+				foreach($this->collTsreprets as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collTsretivas !== null) {
+				foreach($this->collTsretivas as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -387,6 +467,38 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collOpretcons !== null) {
+					foreach($this->collOpretcons as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collOpretords !== null) {
+					foreach($this->collOpretords as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collTsreprets !== null) {
+					foreach($this->collTsreprets as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collTsretivas !== null) {
+					foreach($this->collTsretivas as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -434,6 +546,9 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 				return $this->getCodtipsen();
 				break;
 			case 9:
+				return $this->getMbasmi();
+				break;
+			case 10:
 				return $this->getId();
 				break;
 			default:
@@ -455,7 +570,8 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 			$keys[6] => $this->getPorsus(),
 			$keys[7] => $this->getFactor(),
 			$keys[8] => $this->getCodtipsen(),
-			$keys[9] => $this->getId(),
+			$keys[9] => $this->getMbasmi(),
+			$keys[10] => $this->getId(),
 		);
 		return $result;
 	}
@@ -499,6 +615,9 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 				$this->setCodtipsen($value);
 				break;
 			case 9:
+				$this->setMbasmi($value);
+				break;
+			case 10:
 				$this->setId($value);
 				break;
 		} 	}
@@ -517,7 +636,8 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setPorsus($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setFactor($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setCodtipsen($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
+		if (array_key_exists($keys[9], $arr)) $this->setMbasmi($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
 	}
 
 	
@@ -534,6 +654,7 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OptipretPeer::PORSUS)) $criteria->add(OptipretPeer::PORSUS, $this->porsus);
 		if ($this->isColumnModified(OptipretPeer::FACTOR)) $criteria->add(OptipretPeer::FACTOR, $this->factor);
 		if ($this->isColumnModified(OptipretPeer::CODTIPSEN)) $criteria->add(OptipretPeer::CODTIPSEN, $this->codtipsen);
+		if ($this->isColumnModified(OptipretPeer::MBASMI)) $criteria->add(OptipretPeer::MBASMI, $this->mbasmi);
 		if ($this->isColumnModified(OptipretPeer::ID)) $criteria->add(OptipretPeer::ID, $this->id);
 
 		return $criteria;
@@ -583,6 +704,29 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 
 		$copyObj->setCodtipsen($this->codtipsen);
 
+		$copyObj->setMbasmi($this->mbasmi);
+
+
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getOpretcons() as $relObj) {
+				$copyObj->addOpretcon($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getOpretords() as $relObj) {
+				$copyObj->addOpretord($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getTsreprets() as $relObj) {
+				$copyObj->addTsrepret($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getTsretivas() as $relObj) {
+				$copyObj->addTsretiva($relObj->copy($deepCopy));
+			}
+
+		} 
 
 		$copyObj->setNew(true);
 
@@ -605,6 +749,286 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 			self::$peer = new OptipretPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initOpretcons()
+	{
+		if ($this->collOpretcons === null) {
+			$this->collOpretcons = array();
+		}
+	}
+
+	
+	public function getOpretcons($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseOpretconPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collOpretcons === null) {
+			if ($this->isNew()) {
+			   $this->collOpretcons = array();
+			} else {
+
+				$criteria->add(OpretconPeer::CODTIP, $this->getCodtip());
+
+				OpretconPeer::addSelectColumns($criteria);
+				$this->collOpretcons = OpretconPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(OpretconPeer::CODTIP, $this->getCodtip());
+
+				OpretconPeer::addSelectColumns($criteria);
+				if (!isset($this->lastOpretconCriteria) || !$this->lastOpretconCriteria->equals($criteria)) {
+					$this->collOpretcons = OpretconPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastOpretconCriteria = $criteria;
+		return $this->collOpretcons;
+	}
+
+	
+	public function countOpretcons($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseOpretconPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(OpretconPeer::CODTIP, $this->getCodtip());
+
+		return OpretconPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addOpretcon(Opretcon $l)
+	{
+		$this->collOpretcons[] = $l;
+		$l->setOptipret($this);
+	}
+
+	
+	public function initOpretords()
+	{
+		if ($this->collOpretords === null) {
+			$this->collOpretords = array();
+		}
+	}
+
+	
+	public function getOpretords($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseOpretordPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collOpretords === null) {
+			if ($this->isNew()) {
+			   $this->collOpretords = array();
+			} else {
+
+				$criteria->add(OpretordPeer::CODTIP, $this->getCodtip());
+
+				OpretordPeer::addSelectColumns($criteria);
+				$this->collOpretords = OpretordPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(OpretordPeer::CODTIP, $this->getCodtip());
+
+				OpretordPeer::addSelectColumns($criteria);
+				if (!isset($this->lastOpretordCriteria) || !$this->lastOpretordCriteria->equals($criteria)) {
+					$this->collOpretords = OpretordPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastOpretordCriteria = $criteria;
+		return $this->collOpretords;
+	}
+
+	
+	public function countOpretords($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseOpretordPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(OpretordPeer::CODTIP, $this->getCodtip());
+
+		return OpretordPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addOpretord(Opretord $l)
+	{
+		$this->collOpretords[] = $l;
+		$l->setOptipret($this);
+	}
+
+	
+	public function initTsreprets()
+	{
+		if ($this->collTsreprets === null) {
+			$this->collTsreprets = array();
+		}
+	}
+
+	
+	public function getTsreprets($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsrepretPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsreprets === null) {
+			if ($this->isNew()) {
+			   $this->collTsreprets = array();
+			} else {
+
+				$criteria->add(TsrepretPeer::CODRET, $this->getCodtip());
+
+				TsrepretPeer::addSelectColumns($criteria);
+				$this->collTsreprets = TsrepretPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(TsrepretPeer::CODRET, $this->getCodtip());
+
+				TsrepretPeer::addSelectColumns($criteria);
+				if (!isset($this->lastTsrepretCriteria) || !$this->lastTsrepretCriteria->equals($criteria)) {
+					$this->collTsreprets = TsrepretPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastTsrepretCriteria = $criteria;
+		return $this->collTsreprets;
+	}
+
+	
+	public function countTsreprets($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsrepretPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(TsrepretPeer::CODRET, $this->getCodtip());
+
+		return TsrepretPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addTsrepret(Tsrepret $l)
+	{
+		$this->collTsreprets[] = $l;
+		$l->setOptipret($this);
+	}
+
+	
+	public function initTsretivas()
+	{
+		if ($this->collTsretivas === null) {
+			$this->collTsretivas = array();
+		}
+	}
+
+	
+	public function getTsretivas($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsretivaPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsretivas === null) {
+			if ($this->isNew()) {
+			   $this->collTsretivas = array();
+			} else {
+
+				$criteria->add(TsretivaPeer::CODRET, $this->getCodtip());
+
+				TsretivaPeer::addSelectColumns($criteria);
+				$this->collTsretivas = TsretivaPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(TsretivaPeer::CODRET, $this->getCodtip());
+
+				TsretivaPeer::addSelectColumns($criteria);
+				if (!isset($this->lastTsretivaCriteria) || !$this->lastTsretivaCriteria->equals($criteria)) {
+					$this->collTsretivas = TsretivaPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastTsretivaCriteria = $criteria;
+		return $this->collTsretivas;
+	}
+
+	
+	public function countTsretivas($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsretivaPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(TsretivaPeer::CODRET, $this->getCodtip());
+
+		return TsretivaPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addTsretiva(Tsretiva $l)
+	{
+		$this->collTsretivas[] = $l;
+		$l->setOptipret($this);
 	}
 
 } 

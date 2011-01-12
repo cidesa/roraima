@@ -44,10 +44,7 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 	protected $id;
 
 	
-	protected $collFarecpros;
-
-	
-	protected $lastFarecproCriteria = null;
+	protected $aCatiprec;
 
 	
 	protected $collCarecpros;
@@ -189,6 +186,11 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 	public function setFecemi($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecemi] from input: " . var_export($v, true));
@@ -205,6 +207,11 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 	
 	public function setFecven($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -238,6 +245,10 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = CarecaudPeer::CODTIPREC;
       }
   
+		if ($this->aCatiprec !== null && $this->aCatiprec->getCodtiprec() !== $v) {
+			$this->aCatiprec = null;
+		}
+
 	} 
 	
 	public function setObserv($v)
@@ -365,6 +376,15 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aCatiprec !== null) {
+				if ($this->aCatiprec->isModified()) {
+					$affectedRows += $this->aCatiprec->save($con);
+				}
+				$this->setCatiprec($this->aCatiprec);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CarecaudPeer::doInsert($this, $con);
@@ -375,14 +395,6 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 					$affectedRows += CarecaudPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
-
-			if ($this->collFarecpros !== null) {
-				foreach($this->collFarecpros as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
 
 			if ($this->collCarecpros !== null) {
 				foreach($this->collCarecpros as $referrerFK) {
@@ -428,18 +440,18 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
+												
+			if ($this->aCatiprec !== null) {
+				if (!$this->aCatiprec->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCatiprec->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = CarecaudPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
-
-				if ($this->collFarecpros !== null) {
-					foreach($this->collFarecpros as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
 
 				if ($this->collCarecpros !== null) {
 					foreach($this->collCarecpros as $referrerFK) {
@@ -637,10 +649,6 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 		if ($deepCopy) {
 									$copyObj->setNew(false);
 
-			foreach($this->getFarecpros() as $relObj) {
-				$copyObj->addFarecpro($relObj->copy($deepCopy));
-			}
-
 			foreach($this->getCarecpros() as $relObj) {
 				$copyObj->addCarecpro($relObj->copy($deepCopy));
 			}
@@ -671,108 +679,32 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 	}
 
 	
-	public function initFarecpros()
+	public function setCatiprec($v)
 	{
-		if ($this->collFarecpros === null) {
-			$this->collFarecpros = array();
-		}
-	}
 
-	
-	public function getFarecpros($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseFarecproPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
 
-		if ($this->collFarecpros === null) {
-			if ($this->isNew()) {
-			   $this->collFarecpros = array();
-			} else {
-
-				$criteria->add(FarecproPeer::CODREC, $this->getCodrec());
-
-				FarecproPeer::addSelectColumns($criteria);
-				$this->collFarecpros = FarecproPeer::doSelect($criteria, $con);
-			}
+		if ($v === null) {
+			$this->setCodtiprec(NULL);
 		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(FarecproPeer::CODREC, $this->getCodrec());
-
-				FarecproPeer::addSelectColumns($criteria);
-				if (!isset($this->lastFarecproCriteria) || !$this->lastFarecproCriteria->equals($criteria)) {
-					$this->collFarecpros = FarecproPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastFarecproCriteria = $criteria;
-		return $this->collFarecpros;
-	}
-
-	
-	public function countFarecpros($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/om/BaseFarecproPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
+			$this->setCodtiprec($v->getCodtiprec());
 		}
 
-		$criteria->add(FarecproPeer::CODREC, $this->getCodrec());
 
-		return FarecproPeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addFarecpro(Farecpro $l)
-	{
-		$this->collFarecpros[] = $l;
-		$l->setCarecaud($this);
+		$this->aCatiprec = $v;
 	}
 
 
 	
-	public function getFarecprosJoinFacliente($criteria = null, $con = null)
+	public function getCatiprec($con = null)
 	{
-				include_once 'lib/model/om/BaseFarecproPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
+		if ($this->aCatiprec === null && (($this->codtiprec !== "" && $this->codtiprec !== null))) {
+						include_once 'lib/model/om/BaseCatiprecPeer.php';
+
+			$this->aCatiprec = CatiprecPeer::retrieveByPK($this->codtiprec, $con);
+
+			
 		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collFarecpros === null) {
-			if ($this->isNew()) {
-				$this->collFarecpros = array();
-			} else {
-
-				$criteria->add(FarecproPeer::CODREC, $this->getCodrec());
-
-				$this->collFarecpros = FarecproPeer::doSelectJoinFacliente($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(FarecproPeer::CODREC, $this->getCodrec());
-
-			if (!isset($this->lastFarecproCriteria) || !$this->lastFarecproCriteria->equals($criteria)) {
-				$this->collFarecpros = FarecproPeer::doSelectJoinFacliente($criteria, $con);
-			}
-		}
-		$this->lastFarecproCriteria = $criteria;
-
-		return $this->collFarecpros;
+		return $this->aCatiprec;
 	}
 
 	

@@ -1,0 +1,49 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npasiconpar
+    theme:            cidesaGenerator
+    fields:
+      codnom:
+        name: Nómina
+        params: maxlength=3 size=10
+        catalogo:
+          catalogoweb: Npnomina_nomdefespvar
+          clase: Npnomina
+          ajax: 1
+          parametros: getprincipal="getCodnom" getsecundario="getNomnom" campoprincipal="codnom" camposecundario="nomnom" campobase = "id"
+          divupdate: divgrid
+          ajaxparams: +'."'".'&tipcar='."'+$('npasiconpar_codtipcar').value+'".'&gracar='."'+$('npasiconpar_gracar').value+'".'&dedicacion='."'+$('npasiconpar_codtip').value+'".'&categoria='."'+$('npasiconpar_codtipcat').value+'".'&condicion='."'+$('npasiconpar_codtie').value+'".'&estatus='."'+$('npasiconpar_codestemp').value".'
+      codtipcar:
+        name: Tipo de Cargo
+        params: maxlength=3 size=10
+        catalogo:
+          catalogoweb: Nptipcar_Nnpcomocp
+          clase: Nptipcar
+          ajax: 2
+          parametros: getprincipal="getCodtipcar" getsecundario="getDestipcar" campoprincipal="codtipcar" camposecundario="destipcar" campobase = "id"          
+      gracar:
+        name: Escala-Nivel
+        params: maxlength=3 size=10
+        catalogo:
+          catalogoweb: Npcargos_nomdefespcar
+          clase: Npcomocp
+          ajax: 3
+          parametros: getprincipal="getGracar" getsecundario="getPascar" campoprincipal="gracar" camposecundario="pascar" campobase = "id"
+          catalogoparams: /param1/'."'+$('npasiconpar_codtipcar').value+'".'
+          ajaxparams: +'."'".'&tipcar='."'+$('npasiconpar_codtipcar').value".'
+      codtip:   { name: Dedicación}
+      codtipcat:   { name: Categoría}
+      codtie:   { name: Condición}
+      codestemp:   { name: Estatus}
+      grid:   { name: .}
+    edit:
+      title:          Asignación de Partidas a Conceptos por Tipo de Cargo
+      display:
+        "Datos Generales":         [codtipcar, gracar, _codtip, _codtipcat, _codtie, _codestemp]
+        "Conceptos Partidas":    [codnom, _grid]
+      actions:
+        _list:          NONE
+        _save:          ~
+        _delete:        NONE
+        _create:        NONE

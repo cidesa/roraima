@@ -15,4 +15,15 @@
  */ 
 class Forasopromet extends BaseForasopromet
 {
+    protected $cantidades="";
+
+  public function getDespro()
+  {
+    return Herramientas::getX('CODPRO','Fordefpro','Despro',self::getCodpro());
+  }
+
+  public function getNomemp()
+  {
+    return Herramientas::getX('CODEMP','Nphojint','Nomemp',self::getCodemp());
+  }
 }

@@ -16,6 +16,7 @@
 class Casalalm extends BaseCasalalm
 {
   private $tipo = '';
+  protected $obj=array();
 
   public function getMonsal($val=false)
   {
@@ -61,4 +62,27 @@ class Casalalm extends BaseCasalalm
 	{
 		return Herramientas::getX('CODUBI','Cadefubi','Nomubi',self::getCodubi());
 	}
+
+  public function getDescen()
+  {
+	return Herramientas::getX('CODCEN','Cadefcen','Descen',self::getCodcen());
+  }
+
+    public function getDesreq()
+    {
+            return Herramientas::getX('REQART','Careqart','Desreq',self::getReqart());
+    }
+
+    public function getMansolocor()
+    {
+            return H::getConfApp2('mansolocor', 'compras', 'almsalalm');
+    }
+    public function getBloqfec()
+    {
+            return H::getConfApp2('bloqfec', 'compras', 'almsalalm');
+    }
+    public function getOculeli()
+    {
+            return H::getConfApp2('oculeli', 'compras', 'almsalalm');
+    }
 }

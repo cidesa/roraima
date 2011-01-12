@@ -4,14 +4,14 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 37989 2010-05-06 14:43:24Z dmartinez $
  */
 // date: 2007/07/09 16:18:38
 ?>
 <?php echo form_tag('pagemiord/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 
@@ -38,6 +38,10 @@
 <?php echo input_hidden_tag('opordpag[datosnomina]', $opordpag->getDatosnomina()) ?>
 <?php echo input_hidden_tag('opordpag[observe]', $opordpag->getObserve()) ?>
 <?php echo input_hidden_tag('opordpag[modbasimpiva]', $opordpag->getModbasimpiva()) ?>
+<?php echo input_hidden_tag('opordpag[limbaseret]', $opordpag->getLimbaseret()) ?>
+<?php echo input_hidden_tag('opordpag[numfilas]', $opordpag->getNumfilas()) ?>
+<?php echo input_hidden_tag('opordpag[refcre]', $opordpag->getRefcre()) ?>
+<?php echo input_hidden_tag('opordpag[refsolpag]', $opordpag->getRefsolpag()) ?>
 <table width="100%">
   <tr>
     <th><strong><font color="<? print $color;?>" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <? print $eti;?></font></strong></th>
@@ -133,7 +137,10 @@
 </div>
 
 <br><?php echo input_hidden_tag('opordpag[afectapre]', $opordpag->getAfectapre()) ?> <?php echo input_hidden_tag('partidas', '') ?><?php echo input_hidden_tag('opordpag[documento]', $opordpag->getDocumento()) ?>
-  <?php echo label_for('opordpag[desord]', __($labels['opordpag{desord}']), 'class="required" ') ?>
+
+<?php $cadestatus=substr($eti,0,6);?>
+
+ <?php echo label_for('opordpag[desord]', __($labels['opordpag{desord}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('opordpag{desord}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('opordpag{desord}')): ?>
     <?php echo form_error('opordpag{desord}', array('class' => 'form-error-msg')) ?>
@@ -141,6 +148,7 @@
 
   <?php $value = object_textarea_tag($opordpag, 'getDesord', array (
   'size' => '80x3',
+  'readonly'  =>  $cadestatus=='PAGADA' ? true : false ,
   'control_name' => 'opordpag[desord]',
   'maxlength'=> 1000,
   'onkeyup' => "javascript:return ismaxlength(this)",
@@ -243,7 +251,65 @@
   </table>
  &nbsp;&nbsp;&nbsp;<?php echo object_input_hidden_tag($opordpag, 'getCodctasec') ?>
 <br>
+<?php if ($opordpag->getFilordcbtp()=='S') { ?>
+<?php echo label_for('opordpag[numcta]', __($labels['opordpag{numcta}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('opordpag{numcta}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opordpag{numcta}')): ?>
+    <?php echo form_error('opordpag{numcta}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
+<?php echo input_auto_complete_tag('opordpag[numcta]', $opordpag->getNumcta(),
+    'pagemiord/autocomplete?ajax=8',  array('autocomplete' => 'off','maxlength' => 20, 'size' => 23, 'onBlur'=> remote_function(array(
+        'url'      => 'pagemiord/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('opordpag_numcta').value != ''",
+          'with' => "'ajax=25&cajtexmos=opordpag_nomcue2&cajtexcom=opordpag_numcta&codigo='+this.value"
+        ))),
+     array('use_style' => 'true')
+  )
+?>
+&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Tsdefban_Tesmovemiche/clase/Tsdefban/frame/sf_admin_edit_form/obj1/opordpag_numcta/obj2/opordpag_nomcue2/campo1/numcue/campo2/nomcue')?>
+
+&nbsp;
+  <?php $value = object_input_tag($opordpag, 'getNomcue2', array (
+  'disabled' => true,
+  'control_name' => 'opordpag[nomcue2]',
+  'size'=> 60,
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
+<?php echo label_for('opordpag[tipdoc]', __($labels['opordpag{tipdoc}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('opordpag{tipdoc}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opordpag{tipdoc}')): ?>
+    <?php echo form_error('opordpag{tipdoc}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+<?php echo input_auto_complete_tag('opordpag[tipdoc]', $opordpag->getTipdoc(),
+    'pagemiord/autocomplete?ajax=9',  array('autocomplete' => 'off','maxlength' => 4, 'size' => 23, 'onBlur'=> remote_function(array(
+       'url'      => 'pagemiord/ajax',
+       'condition' => "$('opordpag_tipdoc').value != ''",
+       'complete' => 'AjaxJSON(request, json)',
+       'with' => "'ajax=26&cajtexmos=opordpag_destip2&cajtexcom=opordpag_tipdoc&codigo='+this.value"
+        ))),
+     array('use_style' => 'true')
+  )
+  ?>
+&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cpdocpag_Tesmovemiche/clase/Cpdocpag/frame/sf_admin_edit_form/obj1/opordpag_tipdoc/obj2/opordpag_destip2/campo1/tippag/campo2/nomext')?>
+
+&nbsp;
+  <?php $value = object_input_tag($opordpag, 'getDestip2', array (
+   'disabled' => true,
+  'control_name' => 'opordpag[destip2]',
+  'size'=> 60,
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
+<br>
+<?php } ?>
  <table>
    <tr>
     <th><?php echo label_for('opordpag[coduni]', __($labels['opordpag{coduni}']), 'class="required"') ?>
@@ -621,20 +687,32 @@ if ( ($opordpag->getId()!='')) //ES CONSULTA
 <?php }?>
 </li>
 <li class="float-rigth">
-<?php if ($opordpag->getId() && $opordpag->getStatus()!='A'): ?>
+<?php if ($opordpag->getId() && $opordpag->getStatus()!='A' && $oculeli!='S'): ?>
   <input id="eliminarboton" type="button" name="Submit2" value="Eliminar" class="sf_admin_action_delete" onclick="javascript:eliminar();"/>
 <?php endif; ?>
 </li>
 </ul>
 <script type="text/javascript">
+var nuevo='<?php echo $opordpag->getId()?>';
+    if (nuevo=='')
+    {
+     var manesolcorr='<?php echo $mansolocor; ?>';
+     if (manesolcorr=='S')
+     {
+        $('opordpag_numord').value='########';
+     	$('opordpag_numord').readOnly=true;
+        $('opordpag_tipcau').focus();
+     }else{
+      $('opordpag_numord').focus();
+     }
+    }
+
 var ordpagval='<?echo $ordpagval;?>';
 if ($('opordpag_tipcau').value!='' && ($('opordpag_tipcau').value!=$('opnomina').value || $('opordpag_tipcau').value!='OPNN') && ($('opordpag_tipcau').value!=$('opaporte').value || $('opordpag_tipcau').value!='APOR') && ($('opordpag_tipcau').value!=$('opliquidacion').value || $('opordpag_tipcau').value!='LIQU') && ($('opordpag_tipcau').value!=$('opfideicomiso').value || $('opordpag_tipcau').value!='OPFD') && ($('opordpag_tipcau').value!=ordpagval || $('opordpag_tipcau').value!='OPVA'))
 {
   $('botonret').show();
 }
 mostarq();
-
-$('opordpag_numord').focus();
 actualiza();
 
 
@@ -685,6 +763,13 @@ function num(e) {
       actualizarsaldos();
       netos();
    }
+
+    var deshab='<?php echo $bloqfec; ?>';
+    if (deshab=='S')
+    {
+    	$('trigger_opordpag_fecemi').hide();
+    	$('opordpag_fecemi').readOnly=true;
+    }
   }
 
  function actualizarbenefi()
@@ -706,7 +791,7 @@ function num(e) {
 
  function actualizargrid()
  {
-   if (($('eliva').value!=0) || ($('elislr').value!=0) || ($('eltimbre')!=0))
+   if (($('eliva').value!=0) || ($('elislr').value!=0) || ($('eltimbre')!=0) || ($('elirs').value!=0))
     {
       $('divFac').show();
        n=0;
@@ -745,6 +830,12 @@ function num(e) {
      else{valor=valor.pad(8, '#',0);}
 
      $('opordpag_numord').value=valor;
+     var desh='<?php echo $numdesh; ?>';
+     if (desh=='S')
+     {
+     	$('opordpag_numord').readOnly=true;
+     }
+
    }
  }
 
@@ -854,7 +945,8 @@ function num(e) {
 
  function generar()
  {
-   var y=totalregistros('ax',2,50);
+   var nfil=parseInt($('opordpag_numfilas').value);
+   var y=totalregistros('ax',2,nfil);
   if ($('opordpag_cedrif').value=="" || $('opordpag_ctapag').value=="" || y<=0)
   {
     alert('Verique si introdujo los Datos del Beneficiario, el Código Contable y las Imputaciones Presupuestarias, para luego generar el comprobante');

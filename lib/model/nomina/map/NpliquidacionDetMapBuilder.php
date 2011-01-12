@@ -50,7 +50,7 @@ class NpliquidacionDetMapBuilder {
 
 		$tMap->addColumn('NUMORD', 'Numord', 'string', CreoleTypes::VARCHAR, false, 8);
 
-		$tMap->addColumn('DIAS', 'Dias', 'int', CreoleTypes::INTEGER, false, null);
+		$tMap->addColumn('DIAS', 'Dias', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

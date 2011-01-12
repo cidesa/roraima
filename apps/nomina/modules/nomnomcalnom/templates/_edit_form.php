@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author:dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id:_edit_form.php 34097 2009-10-16 19:24:31Z dmartinez $
  */
 // date: 2007/08/21 17:26:03
 ?>

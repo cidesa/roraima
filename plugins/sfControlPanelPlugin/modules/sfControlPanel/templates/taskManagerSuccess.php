@@ -19,20 +19,8 @@
     <li class="task"><?php echo link_to_remote_pane('build sql', 'sfControlPanel/taskExecute?task=propel-build-sql') ?></li>
     <li class="task"><?php echo link_to_remote_pane('insert sql', 'sfControlPanel/taskExecute?task=propel-insert-sql') ?></li>
     <li class="task"><?php echo link_to_remote_pane('build all', 'sfControlPanel/taskExecute?task=propel-build-all') ?></li>
+    <li class="task"></li>
     <li class="task"><?php echo link_to_remote_pane('check database', 'sfControlPanel/taskExecute?task=propel-check-database') ?></li>    
-  </ul>
-
-  <li class="category">Module</li>
-  <ul>
-    <li class="task"><?php echo link_to_function('add new module...', visual_effect('toggle_blind', 'add_new_module')) ?></li>
-  </ul>
-
-  <li class="category">Project</li>
-  <ul>
-    <li class="task"><?php echo link_to_remote_pane('freeze', 'sfControlPanel/taskExecute?task=freeze') ?></li>
-    <li class="task"><?php echo link_to_remote_pane('unfreeze', 'sfControlPanel/taskExecute?task=unfreeze') ?></li>
-    <li class="task"><?php echo link_to_remote_pane('sync', 'sfControlPanel/taskExecute?task=sync') ?></li>
-    <li class="task"><?php echo link_to_remote_pane('fix-perms', 'sfControlPanel/taskExecute?task=fix-perms') ?></li>
   </ul>
 
   <li class="category">Log files</li>
@@ -41,10 +29,6 @@
     <li class="task"><?php echo link_to_remote_pane('rotate logs', 'sfControlPanel/taskExecute?task=log-rotate') ?></li>
   </ul>
 
-  <li class="category">Plugin</li>
-  <ul>
-    <li class="task"><?php echo link_to_remote_pane('plugin list', 'sfControlPanel/taskExecute?task=plugin-list') ?></li>
-  </ul>
 
   <?php if (isset($batches)): ?>
   <li class="category">Batch</li>
@@ -66,7 +50,7 @@
 
   <li class="category">Subversion</li>
   <ul>
-    <li class="task"><?php echo link_to_remote_pane('Update', 'sfControlPanel/taskExecute?svn=update') ?></li>
+    <li class="task"><?php echo link_to_remote_pane('Update', 'scSvnManagementUI/svnUpdate') ?></li>
   </ul>
 
 

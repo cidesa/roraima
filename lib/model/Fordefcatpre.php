@@ -15,13 +15,36 @@
  */
 class Fordefcatpre extends BaseFordefcatpre
 {
- 	public function getCodunieje()
-	{
-		return "";
-	}
+    protected $longitud="";
+    protected $mascara="";
+    
+    public function getCodunieje()
+    {
+        return "";
+    }
 
-	public function getNomemp()
-	{
+    public function getNomemp()
+    {
       return Herramientas::getX('CODEMP','Nphojint','Nomemp',self::getCodemp());
-	}
+    }
+
+   public function getLongitud()
+   {
+     return strlen(H::getObtener_FormatoCategoria_Formulacion());
+   }
+
+   public function setLongitud()
+   {
+     return $this->longitud;
+   }
+
+   public function getMascara()
+   {
+     return H::getObtener_FormatoCategoria_Formulacion();
+   }
+
+   public function setMascara()
+   {
+     return $this->mascara;
+   }
 }

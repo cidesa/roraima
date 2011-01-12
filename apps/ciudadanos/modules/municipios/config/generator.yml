@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atmunicipios
+    theme:            cidesaGenerator
+
+    fields:
+      desmun:         { name: Municipio, validate: Vstring_1_30, msj_error: Debe insertar el nombre del municipio }
+      atestados_id:   { name: Estado, validate: Vstring_1_30, msj_error: Debe seleccionar el nombre del estado }
+      desest:         { name: Estados }
+    list:
+      fields:
+        atestados_desest: { name: Estado }
+      title:          Municipios
+      display:        [=desmun, desest]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [desmun]
+      max_per_page:   5
+    edit:
+      title:          Edición de Municipios
+      display:        [atestados_id, desmun ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

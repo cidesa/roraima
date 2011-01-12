@@ -24,7 +24,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('almajuoc/edit_messages', array('caajuoc' => $caajuoc, 'labels' => $labels)) ?>
-<?php include_partial('almajuoc/edit_form', array('caajuoc' => $caajuoc, 'labels' => $labels, 'obj' => $obj)) ?>
+<?php include_partial('almajuoc/edit_form', array('caajuoc' => $caajuoc, 'labels' => $labels, 'obj' => $obj, 'bloqfec' => $bloqfec, 'oculeli' => $oculeli)) ?>
 </div>
 
 <div id="sf_admin_footer">

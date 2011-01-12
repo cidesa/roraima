@@ -35,6 +35,37 @@ class OrdendePago
       	  $longitud='8';
       	  $nroorden=0;
       	  $formato='';
+        $noformatcont="";
+        $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+        if ($varemp)
+        if(array_key_exists('generales',$varemp)) {
+           if(array_key_exists('noformatcont',$varemp['generales']))
+           {
+            $noformatcont=$varemp['generales']['noformatcont'];
+           }
+     }
+          if ($noformatcont=='S')
+          {
+	      	$tienecorrelativo=true;
+	        $encontrado=false;
+	        while (!$encontrado)
+	        {
+	          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+
+	          $sql="select numord from opordpag where numord='".$numero."'";
+	          if (Herramientas::BuscarDatos($sql,&$result))
+	          {
+	            $r=$r+1;
+	          }
+	          else
+	          {
+	            $encontrado=true;
+	          }
+	        }
+
+	        $fondos->setNumord(str_pad($r, 8, '0', STR_PAD_LEFT));
+          }
+          else {
 	      $c = new Criteria();
 	      $c->add(ContabaPeer::CODEMP,'001');
 	      $per = ContabaPeer::doSelectOne($c);
@@ -103,6 +134,7 @@ class OrdendePago
 
 	        $fondos->setNumord(str_pad($r, 8, '0', STR_PAD_LEFT));
          }
+       }
       }
       else
       {
@@ -202,6 +234,7 @@ class OrdendePago
   public static function actualizarRetenciones($fondos,$grid)
   {
     $referencia=$fondos->getNumord();
+    $traeallord=H::getConfApp('traeallord', 'pagemiret', 'tesoreria');
     $x=$grid[0];
     $j=0;
     while ($j<count($x))
@@ -213,7 +246,9 @@ class OrdendePago
           $c = new Criteria();
           $c->add(OpretordPeer::NUMORD,$x[$j]['numord']);
           $c->add(OpretordPeer::CODPRE,$x[$j]['codpre']);
+          if ($traeallord!="S")
           $c->add(OpretordPeer::CODTIP,$fondos->getCodtip());
+          else $c->add(OpretordPeer::CODTIP,$x[$j]['codtip']);
           $numero= OpretordPeer::doSelectOne($c);
           if ($numero)
           {
@@ -224,7 +259,10 @@ class OrdendePago
         {
           $c = new Criteria();
           $c->add(OpretordPeer::NUMORD,$x[$j]['numord']);
+          $c->add(OpretordPeer::CODPRE,$x[$j]['codpre']);
+          if ($traeallord!="S")
           $c->add(OpretordPeer::CODTIP,$fondos->getCodtip());
+          else $c->add(OpretordPeer::CODTIP,$x[$j]['codtip']);
           $numero= OpretordPeer::doSelectOne($c);
           if ($numero)
           {
@@ -368,6 +406,35 @@ class OrdendePago
       	  $longitud='8';
       	  $nroorden=0;
       	  $formato='';
+          $noformatcont="";
+            $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+            if ($varemp)
+            if(array_key_exists('generales',$varemp)) {
+               if(array_key_exists('noformatcont',$varemp['generales']))
+               {
+                $noformatcont=$varemp['generales']['noformatcont'];
+               }
+         }
+          if ($noformatcont=='S')
+          {
+	      	$tienecorrelativo=true;
+	        $encontrado=false;
+	        while (!$encontrado)
+	        {
+	          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+
+	          $sql="select numord from opordpag where numord='".$numero."'";
+	          if (Herramientas::BuscarDatos($sql,&$result))
+	          {
+	            $r=$r+1;
+	          }
+	          else
+	          {
+	            $encontrado=true;
+	          }
+	        }
+	        $orden->setNumord(str_pad($r, 8, '0', STR_PAD_LEFT));
+          }else {
 	      $c = new Criteria();
 	      $c->add(ContabaPeer::CODEMP,'001');
 	      $per = ContabaPeer::doSelectOne($c);
@@ -436,6 +503,7 @@ class OrdendePago
 	        $orden->setNumord(str_pad($r, 8, '0', STR_PAD_LEFT));
         }
       }
+      }
       else
       {
         $orden->setNumord(str_replace('#','0',$orden->getNumord()));
@@ -461,6 +529,9 @@ class OrdendePago
    $orden->setNumche(null);
    $orden->setCtaban(null);
    $orden->setNumcom($numerocomp);
+   $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+   $orden->setLoguse($loguse);
+
    if ($cuentaporpagarrendicion!="")
    {
      $orden->setCtapag($cuentaporpagarrendicion);
@@ -480,7 +551,21 @@ class OrdendePago
    }//////////////////////
 
    $orden->save();
-   Comprobante::ActualizarReferenciaComprobante($numerocomp,$orden->getNumord());
+   Comprobante::ActualizarReferenciaComprobante($numerocomp,$orden->getNumord(),'OP');
+   $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+   $y = new Criteria();
+   $y->add(OpordpagPeer::NUMORD,$orden->getNumord());
+   $onedato=OpordpagPeer::doSelectOne($y);
+   if ($onedato)
+   {
+     if ($confcorcom=='N') {
+        $onedato->setNumcom("OP".substr($orden->getNumord(),2,6));
+        $onedato->save();
+     }
+
+
+   }
+
 
   }
 
@@ -522,7 +607,7 @@ class OrdendePago
     }
   }
 
-  public static function formload(&$afectarecargo,&$ordpagnom,&$ordpagapo,&$ordpagliq,&$ordpagfid,&$ordpagval,&$compadic,&$genctaord)
+  public static function formload(&$afectarecargo,&$ordpagnom,&$ordpagapo,&$ordpagliq,&$ordpagfid,&$ordpagval,&$compadic,&$genctaord,&$ordpagcre = '', &$ordpagsolpag = '')
   {
     $c = new Criteria();
     $reg= CadefartPeer::doSelectOne($c);
@@ -543,6 +628,8 @@ class OrdendePago
       $ordpagval=$reg2->getOrdval();
       $compadic=$reg2->getGencomadi();
       $genctaord=$reg2->getGenctaord();
+      $ordpagcre = $reg2->getOrdcre();
+      $ordpagsolpag = $reg2->getOrdsolpag();
     }
     else
     {
@@ -551,6 +638,7 @@ class OrdendePago
       $ordpagliq='####';
       $ordpagfid='####';
       $ordpagval='####';
+      $ordpagcre = '####';
       $compadic="";
       $genctaord="";
     }
@@ -764,7 +852,9 @@ class OrdendePago
                   $des="";
                   $mont1=$x[$j]->getMoncau();
                   $mont2=$x[$j]->getMonret();
-                  $monto=$mont1 - $mont2;
+                  #$monto=$mont1 - $mont2;
+                  #Cambios hecho por leobardo
+                  $monto=$mont1;
                 }else {
                   $codigocuenta=$regis2->getCodcta();
                   $tipo='D';
@@ -854,7 +944,6 @@ class OrdendePago
               }
             }
           }else { $msjuno='El Código Presupuestario no tiene asociado Codigo Contable válido'; return true;}
-        }
         if ($moncau>0)
         {
          if ($j==0)
@@ -871,6 +960,8 @@ class OrdendePago
           $tipo1=$tipo1.'_'.$tipo;
           $monto1=$monto1.'_'.$monto;
           }
+        }
+
         }
 
         $j++;
@@ -1102,7 +1193,14 @@ class OrdendePago
         $factura->setPorislr($x[$j]['porislr']);
         $factura->setMonislr($x[$j]['monislr']);
         $factura->setCodislr($x[$j]['codislr']);
+        if ($x[$j]['rifalt']=='')
+        $factura->setRifalt($orden->getCedrif());
+        else
         $factura->setRifalt($x[$j]['rifalt']);
+        $factura->setBasirs($x[$j]['basirs']);
+        $factura->setPorirs($x[$j]['porirs']);
+        $factura->setMonirs($x[$j]['monirs']);
+        $factura->setCodirs($x[$j]['codirs']);
 
         $factura->save();
       }
@@ -1221,7 +1319,20 @@ class OrdendePago
     {
       if ($datos->getStaprc()=='A')
       {
-        if ($datos->getMonprc()> $datos->getSalcau())
+      	  $SQL = "Select Sum(MonCau) as moncau from cpimpprc where refprc='".$codigo."'";
+          if (Herramientas::BuscarDatos($SQL,&$reg))
+          {
+            $montocausado= $reg[0]['moncau'];
+          }
+
+          $SQL1 = "Select Sum(monimp - monaju) as monprc from cpimpprc where refprc='".$codigo."'";
+          if (Herramientas::BuscarDatos($SQL1,&$reg2))
+          {
+            $montoprc= $reg2[0]['monprc'];
+          }
+
+
+        if ($montoprc > $montocausado)
         {
           $dateFormat = new sfDateFormat('es_VE');
           $fec1 = $dateFormat->format($fec, 'i', $dateFormat->getInputPattern('d'));
@@ -1295,13 +1406,13 @@ class OrdendePago
             $montocausado= $reg[0]['moncau'];
           }
 
-          $SQL1 = "Select Sum(monaju) as monaju from cpimpcom where refcom='".$codigo."'";
+          $SQL1 = "Select Sum(monimp-monaju) as moncom from cpimpcom where refcom='".$codigo."'";
           if (Herramientas::BuscarDatos($SQL1,&$reg2))
           {
-            $montoajustado= $reg2[0]['monaju'];
+            $montocom= $reg2[0]['moncom'];
           }
 
-          if (($datos->getMoncom()) > ($montocausado+$montoajustado))
+          if ($montocom > $montocausado)
           {
             $dateFormat = new sfDateFormat('es_VE');
             $fec2 = $dateFormat->format($fec, 'i', $dateFormat->getInputPattern('d'));
@@ -1377,13 +1488,13 @@ class OrdendePago
             $montocausado= $reg[0]['moncau'];
           }
 
-          $SQL1 = "Select Sum(monaju) as monaju from cpimpcom where refcom='".$codigo."'";
+          $SQL1 = "Select Sum(monimp-monaju) as moncom from cpimpcom where refcom='".$codigo."'";
           if (Herramientas::BuscarDatos($SQL1,&$reg2))
           {
-            $montoajustado= $reg2[0]['monaju'];
+            $montocom= $reg2[0]['moncom'];
           }
 
-          if (($datos->getMoncom()) > ($montocausado+$montoajustado))
+          if (($montocom) > ($montocausado))
           {
             $dateFormat = new sfDateFormat('es_VE');
             $fec2 = $dateFormat->format($fec, 'i', $dateFormat->getInputPattern('d'));
@@ -1548,6 +1659,12 @@ class OrdendePago
        case "1*MIL":
          $c= new Criteria();
          $c->add(TsrepretPeer::CODREP,'003');
+         $c->add(TsrepretPeer::CODRET,$col1);
+         $reg= TsrepretPeer::doSelectOne($c);
+         break;
+       case "IRS":
+         $c= new Criteria();
+         $c->add(TsrepretPeer::CODREP,'005');
          $c->add(TsrepretPeer::CODRET,$col1);
          $reg= TsrepretPeer::doSelectOne($c);
          break;
@@ -1835,30 +1952,85 @@ class OrdendePago
     return $comboboxislr;
   }
 
-  public static function facturar($numord,$id,$gridret,$arreglo,&$eliva,&$elislr,&$eltimbre,&$msj,&$comboiva,&$comboislr)
+  public static function llenarComboIrs($gridret,$colcod,$id)
+  {
+    $x=$gridret[0];
+    $comboboxirs=array();
+    $col1="";
+    $j=0;
+   if (count($x)>0)
+   {
+    while ($j<count($x))
+    {
+      $col1=$x[$j][$colcod];
+
+      $c= new Criteria();
+      $c->add(TsrepretPeer::CODREP,'005');
+      $c->add(TsrepretPeer::CODRET,$col1);
+      $resul= TsrepretPeer::doSelectOne($c);
+      if ($resul)
+      {
+        $b= new Criteria();
+        $b->add(OptipretPeer::CODTIP,$col1);
+        $result2= OptipretPeer::doSelectOne($b);
+        if ($result2)
+        {
+         if ($result2->getPorret()>0)
+         {
+           $comboboxirs[$result2->getPorret()] = $col1.'_'.$result2->getDestip();
+         }else{
+         	$comboboxirs[$result2->getPorsus()] = $col1.'_'.$result2->getDestip();
+         }
+        }
+      }
+     $j++;
+    }
+   }
+   else
+   {
+    $b= new Criteria();
+    $result2= OptipretPeer::doSelect($b);
+    if ($result2)
+    {
+      foreach ($result2 as $obj2)
+      {
+        $comboboxirs[$obj2->getPorret()] = $obj2->getCodtip().'_'.$obj2->getDestip();
+      }
+    }
+   }
+    return $comboboxirs;
+  }
+
+  public static function facturar($numord,$id,$gridret,$arreglo,&$eliva,&$elislr,&$elirs,&$eltimbre,&$msj,&$comboiva,&$comboislr,&$comboirs)
   {
     $eliva=0;
     $elislr=0;
     $eltimbre=0;
+    $elirs=0;
     $comboiva=array();
     $comboislr=array();
+    $comboirs=array();
     if ($numord!="")
     {
       if ($id=="")
       {
         $eliva=self::encontrarIva($gridret,'codtip',$id);
         $elislr=self::encontrarIslr($gridret,'codtip','montorete','ISLR',$id);
+        $elirs=self::encontrarIslr($gridret,'codtip','montorete','IRS',$id);
         $eltimbre=self::encontrarIslr($gridret,'codtip','montorete','1*MIL',$id);
         $comboiva=self::llenarComboIva($gridret,'codtip',$numord,$id,$arreglo);
         $comboislr=self::llenarComboIslr($gridret,'codtip','destip','porret',$id);
+        $comboirs=self::llenarComboIrs($gridret,'codtip','destip','porret',$id);
       }
       else
       {
         $eliva=self::encontrarIva($gridret,'codtip',$id);
         $elislr=self::encontrarIslr($gridret,'codtip','montoret','ISLR',$id);
         $eltimbre=self::encontrarIslr($gridret,'codtip','montoret','1*MIL',$id);
+        $elirs=self::encontrarIslr($gridret,'codtip','montoret','IRS',$id);
         $comboiva=self::llenarComboIva($gridret,'codtip',$numord,$id,$arreglo);
         $comboislr=self::llenarComboIslr($gridret,'codtip','destip','porret',$id);
+        $comboirs=self::llenarComboIrs($gridret,'codtip','destip','porret',$id);
       }
 
       /*if (($eliva!=0) or ($elislr!=0) or ($eltimbre)!=0)
@@ -2112,7 +2284,19 @@ class OrdendePago
          $opretord->setNumret($opretord->getNumord());
          $opretord->save();
        }
+     }else {
+         $h= new Criteria();
+         $h->add(OpretordPeer::NUMRET,$numero);
+         $result3= OpretordPeer::doSelect($h);
+         if ($result3)
+         {
+           foreach ($result3 as $opretord)
+           {
+             $opretord->setNumret('NOASIGNA');
+             $opretord->save();
+         }
      }
+    }
     }
     return true;
   }
@@ -2148,6 +2332,10 @@ class OrdendePago
     $resul= ContabcPeer::doSelectOne($c);
     if ($resul)
     {
+      $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+      if ($confcorcom=='N')
+      $numcom= 'RE'.substr($resul->getNumcom(),2,6);
+      else
       $numcom= Comprobante::Buscar_Correlativo();
       $fecha_aux=split("/",$fecha);
       $dateFormat = new sfDateFormat('es_VE');
@@ -2435,12 +2623,12 @@ class OrdendePago
    }
   }
 
-  public static function ArregloNomina($tipnom,$banco,$gasto,$fecha, $referencias,&$arreglodet,&$arregloret,&$dato,$impcpt='',$nomespecial='')
+  public static function ArregloNomina($tipnom,$banco,$gasto,$fecha, $referencias,&$arreglodet,&$arregloret,&$dato,$impcpt='',$nomespecial='',$codnomesp='')
   {
     $dato="";
     $result=array();
 	$impcpt=='X' ? $sqlimpcpt='' : $sqlimpcpt="AND  b.impcpt='S'";
-    $sql="SELECT a.codpre as codpre, a.monto as monto, a.asided as asided, a.codcon as codcon FROM NPCIENOM a,NPDEFCPT b WHERE  a.CODNOM = '".$tipnom."' AND a.CodTipGas='".$gasto."' AND a.CODBAN='".$banco."' AND  (a.ASIDED='A' OR a.ASIDED='D') AND a.especial='".$nomespecial."' AND a.FECNOM=TO_DATE('".$fecha."','YYYY-MM-DD') $sqlimpcpt  AND a.codcon=b.codcon Order By CodCon";
+    $sql="SELECT a.codpre as codpre, a.monto as monto, a.asided as asided, a.codcon as codcon FROM NPCIENOM a,NPDEFCPT b WHERE  a.CODNOM = '".$tipnom."' AND a.CodTipGas='".$gasto."' AND a.CODBAN='".$banco."' AND  (a.ASIDED='A' OR a.ASIDED='D') ".($nomespecial=='S' ? "AND a.especial='S' AND a.codnomesp='".$codnomesp."'" : "AND a.especial='N'")." AND a.FECNOM=TO_DATE('".$fecha."','YYYY-MM-DD') $sqlimpcpt  AND a.codcon=b.codcon Order By CodCon";
     if (Herramientas::BuscarDatos($sql,&$result))
     {
       $c= new Criteria();
@@ -2988,7 +3176,7 @@ class OrdendePago
   {
     $numeroorden="";
 
-    $numeroorden3="OP".substr($numord,2,6);
+    $numeroorden3="OA".substr($numord,2,6);
     $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
     if ($confcorcom=='N')
     {
@@ -3083,18 +3271,23 @@ class OrdendePago
       if ($x[$j]->getAprobadoord()=="1")
       {
         $x[$j]->setAprobadoord('A');
+        $x[$j]->save();
       }
       else
       {
       	$x[$j]->setAprobadoord(null);
+      	$x[$j]->save();
       }
-
-      $x[$j]->save();
+      if ($x[$j]->getCheck()=="1")
+      {
+        $x[$j]->setAprobadoord('R');
+        $x[$j]->save();
+      }
       $j++;
     }
   }
 
-  public static function aprobarOrdenesTes($opordpag,$grid,$numcomprob,$numorden)
+  public static function aprobarOrdenesTes($opordpag,$grid,$numcomprob,$numorden,$comprobaut)
   {
     $x=$grid[0];
     $j=0;
@@ -3110,25 +3303,150 @@ class OrdendePago
          $reg= OpdefempPeer::doSelectOne($e);
          if ($reg){
           if ($reg->getGencomalc()=="S"){
-           $orden1="OP".substr($x[$j]->getNumord(),2,6);
+          if ($comprobaut=='S')
+		    {
+		      self::grabarComprobanteAlcAutomatico($x[$j]->getNumord(),&$numcom,&$reftra);
+		      $orden1="OA".substr($x[$j]->getNumord(),2,6);
+		        if ($orden1==$reftra)
+		        {
+			      $x[$j]->setNumcomapr($numcom);
+		        }
+		    }else{
+           $orden1="OA".substr($x[$j]->getNumord(),2,6);
 	        if ($orden1==$numord[$l+1])
 	        {
 	          $x[$j]->setNumcomapr($numcom[$l+1]);
 	          $l++;
 	        }
+	        }
           }
          }
+         $x[$j]->save();
       }
       else
       {
       	$x[$j]->setAprobadotes(null);
+      	$x[$j]->save();
       }
-      $x[$j]->save();
+      if ($x[$j]->getCheck()=="1")
+      {
+        $x[$j]->setAprobadotes('R');
+        $x[$j]->save();
+      }
+
       $j++;
     }
   }
 
-public static function actualizarOrdenPag($orden,$grid3)
+  public static function salvarPagodeRetenciones($opordpag,$gridoculret,$gridfac,$usuario)
+  {
+    if ($opordpag->getIncmod()=='I')
+    {
+      self::grabarFacturasPagret($opordpag,$gridfac);
+      self::grabarRetencionesPagret($opordpag,$gridoculret);
+      $opordpag->setUsuret($usuario);
+      $opordpag->save();
+    }
+    else
+    {
+      self::grabarFacturasPagret($opordpag,$gridfac);
+      $opordpag->save();
+    }
+  }
+
+  public static function grabarFacturasPagret($orden,$grid2)
+  {
+    $referencia=$orden->getNumord();
+    //primero elimino todas las facturas, para luego guardar las que el usuario haya dejado en el grid
+    Herramientas::EliminarRegistro('Opfactur','Numord',$orden->getNumord());
+    $x=$grid2[0];
+    if (count($x)!=0)
+    {
+    $j=0;
+    while ($j<count($x))
+    {
+      if (($x[$j]['fecfac']!='') and (($x[$j]['numfac']!='') or ($x[$j]['notdeb']!='') or ($x[$j]['notcrd']!='')))
+      {
+        $factura= new Opfactur();
+        $factura->setNumord($referencia);
+        if ($x[$j]['tiptra']=='01')
+        {
+          $factura->setNumfac($x[$j]['numfac']);
+        }
+        else if ($x[$j]['tiptra']=='02')
+        {
+          $factura->setNumfac($x[$j]['notdeb']);
+        }
+        else
+        {
+          $factura->setNumfac($x[$j]['notcrd']);
+        }
+
+        if ($x[$j]['tiptra']=='01')
+        {
+          $factura->setFacafe($x[$j]['facafe']);
+        }
+        $factura->setFecfac($x[$j]['fecfac']);
+        $factura->setNumctr($x[$j]['numctr']);
+        $factura->setTiptra($x[$j]['tiptra']);
+        $factura->setPoriva($x[$j]['poriva']);
+        $factura->setTotfac($x[$j]['totfac']);
+        $factura->setExeiva($x[$j]['exeiva']);
+        $factura->setBasimp($x[$j]['basimp']);
+        $factura->setMonret($x[$j]['monret']);
+        $factura->setMoniva($x[$j]['moniva']);
+        $factura->setBasltf($x[$j]['basltf']);
+        $factura->setPorltf($x[$j]['porltf']);
+        $factura->setMonltf($x[$j]['monltf']);
+        $factura->setBasislr($x[$j]['basislr']);
+        $factura->setPorislr($x[$j]['porislr']);
+        $factura->setMonislr($x[$j]['monislr']);
+        $factura->setCodislr($x[$j]['codislr']);
+        $factura->setAliadi($x[$j]['aliadi']);
+        $factura->setRifalt($x[$j]['rifalt']);
+        $factura->setObservacion($x[$j]['observacion']);
+        $factura->save();
+      }
+      $j++;
+    }
+   }
+  }
+
+  public static function grabarRetencionesPagret($orden,$grid3)
+  {
+    $referencia=$orden->getNumord();
+    $x=$grid3[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]['codtip']!='')
+      {
+        $opretord= new Opretord();
+        $opretord->setNumord($referencia);
+        $opretord->setCodtip($x[$j]['codtip']);
+        $opretord->setMonret($x[$j]['monret']);
+        $opretord->setCodpre($x[$j]['codpre']);
+        $opretord->setNumret('NOASIGNA');
+        $opretord->setRefere($x[$j]['refere']);
+        $opretord->setCorrel(str_pad($j+1,3,'0',STR_PAD_LEFT));
+        $opretord->setMonbas(0);
+        $opretord->save();
+
+        $c= new Criteria();
+        $c->add(OpdetordPeer::NUMORD,$referencia);
+        $c->add(OpdetordPeer::CODPRE,$x[$j]['codpre']);
+        $resultado= OpdetordPeer::doSelectOne($c);
+        if ($resultado)
+        {
+        	$resultado->setMonret($x[$j]['monret']);
+        	$resultado->save();
+        }
+      }
+     $j++;
+    }
+  }
+
+   public static function actualizarOrdenPag($orden,$grid3)
   {
     $referencia=$orden->getNumord();
     $totalret=0;
@@ -3715,5 +4033,287 @@ public static function actualizarOrdenPag($orden,$grid3)
 
    return true;
   }
+
+  public static function grabarComprobanteAlcAutomatico($numord,&$correl2,&$reftra)
+  {
+    $numeroorden3="OA".substr($numord,2,6);
+    $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+    if ($confcorcom=='N')
+    {
+      $numerocomprob= $numeroorden3;
+    }else $numerocomprob= OrdendePago::Buscar_Correlativo();
+    $t= new Criteria();
+    $t->add(OpordpagPeer::NUMORD,$numord);
+    $data= OpordpagPeer::doSelectOne($t);
+    if ($data)
+    {
+      $ctapago=$data->getCtapag();
+      $monorden=$data->getMonord();
+      $desord= $data->getDesord();
+      $fecha=$data->getFecemi();
+      $bene=$data->getNomben();
+    }
+
+    $reftra = $numeroorden3;
+    $codigocuenta="";
+    $tipo="";
+    $des="";
+    $monto="";
+    $codigocuentas="";
+    $tipo1="";
+    $desc="";
+    $monto1="";
+    $codigocuenta2="";
+    $tipo2="";
+    $des2="";
+    $monto2="";
+    $cuentas="";
+    $tipos="";
+    $montos="";
+    $descr="";
+    $msjuno="";
+
+    $cuenta=$ctapago;
+    $monord=$monorden;
+    if ($monord>0)
+    {
+      $codigocuenta=$cuenta;
+      $tipo='D';
+      $des="";
+      $mon=$monorden;
+      $monto=$mon;
+    }
+
+    $c= new Criteria();
+    $c->add(TsrelasiordPeer::CTAGASXPAG,$ctapago);
+    $reg= TsrelasiordPeer::doSelectOne($c);
+    if ($reg)
+    {
+      $v= new Criteria();
+      $v->add(ContabbPeer::CODCTA,$reg->getCtaordxpag());
+      $dato= ContabbPeer::doSelectOne($v);
+      if ($dato)
+      {
+        $codigocuenta2=$dato->getCodcta();
+        $tipo2='C';
+        $des2="";
+        $mont=$monorden;
+        $monto2=$mont;
+      }
+    }
+
+    $cuentas=$codigocuenta2.'_'.$codigocuenta;
+    $tipos=$tipo2.'_'.$tipo;
+    $descr=$des2.'_'.$des;
+    $montos=$monto2.'_'.$monto;
+
+    $arrecuentas=split("_",$cuentas);
+    $arretipos=split("_",$tipos);
+    $arremontos=split("_",$montos);
+    $yapaso=array();
+    $dondesta=array();
+
+     foreach ($arrecuentas as $cta)
+     {
+       $dondesta=array_keys($yapaso,$cta);
+
+       if (count($dondesta)==0)
+       {
+	    $yapaso[]=$cta;
+	    // buscamos todas las posiciones de esa cta.
+	    $posiciones=array();
+        $posiciones=array_keys($arrecuentas,$cta); //arreglo con las posiciones
+
+         $contd=0;
+         $contc=0;
+         $acumd=0;
+         $acumc=0;
+
+         foreach ($posiciones as $pos)
+         {
+           if ($arretipos[$pos]=='D')  //DEBITO
+           {
+             $acumd=$acumd+Herramientas::toFloat($arremontos[$pos]);
+             $contd=$contd+1;
+           }
+           else  //CREDITO
+           {
+             $acumc=$acumc+Herramientas::toFloat($arremontos[$pos]);
+             $contc=$contc+1;
+           }
+
+         } // foreach 2
+
+	      if ($contd>=1)
+	      {
+           $new_ctas[]=$cta;
+           $new_descs[]=H::getX('codcta','Contabb','Descta',$cta);
+           $new_movs[]='D';
+           $new_montos[]=$acumd;
+	      }
+	      if ($contc>=1)
+	      {
+           $new_ctas[]=$cta;
+           $new_descs[]=H::getX('codcta','Contabb','Descta',$cta);
+           $new_movs[]='C';
+           $new_montos[]=$acumc;
+	      }
+
+	  } // if dondesta
+    } // foreach 1
+
+    $sumdeb=0;
+    $sumcre=0;
+
+    $i=0;
+	  while ($i<=(count($new_ctas)-1))
+	  {
+	  	if ($new_ctas[$i]!="")
+	  	{
+          if ($new_movs[$i]=='D')
+          {
+          	$sumdeb= $sumdeb +$new_montos[$i];
+          }
+          else
+          {
+          	$sumcre= $sumcre + $new_montos[$i];
+          }
+	  	}
+	  	$i++;
+	  }
+
+        $correl2=$numerocomprob;//OrdendePago::Buscar_Correlativo();
+	    $contabc = new Contabc();
+	    $contabc->setNumcom($correl2);
+	    $contabc->setReftra($reftra);
+	    $contabc->setFeccom($fecha);
+	    $contabc->setDescom($desord." - ".$bene);
+	    if ($sumdeb==$sumcre)
+	    $contabc->setStacom('D');
+	    else
+	    $contabc->setStacom('E');
+	    $contabc->setTipcom(null);
+	    $contabc->setMoncom($sumdeb);
+	    $contabc->save();
+
+      $i=0;
+	  while ($i<=(count($new_ctas)-1))
+	  {
+	  	if ($new_ctas[$i]!="")
+	  	{
+          $contabc1= new Contabc1();
+          $contabc1->setNumcom($correl2);
+          $contabc1->setFeccom($fecha);
+          $contabc1->setCodcta($new_ctas[$i]);
+          $numasi= $i +1;
+          $contabc1->setNumasi($numasi);
+          $contabc1->setRefasi($reftra);
+          $contabc1->setDesasi($new_descs[$i]);
+          if ($new_movs[$i]=='D')
+          {
+          	$contabc1->setDebcre('D');
+          	$contabc1->setMonasi($new_montos[$i]);
+          }
+          else
+          {
+          	$contabc1->setDebcre('C');
+          	$contabc1->setMonasi($new_montos[$i]);
+          }
+          $contabc1->save();
+	  	}
+	  	$i++;
+	  }
+    return true;
+  }
+
+  public static function aprobarOrdenesDirectas($opordpag,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getAprorddir()=="1")
+      {
+        $x[$j]->setAprorddir('A');
+        $x[$j]->save();
+      }
+      else
+      {
+      	$x[$j]->setAprorddir(null);
+      	$x[$j]->save();
+      }
+      if ($x[$j]->getCheck()=="1")
+      {
+        $x[$j]->setAprorddir('R');
+        $x[$j]->save();
+      }
+      $j++;
+    }
+  }
+
+  public static function anularComprobTes($numero,$fecha,$desc,&$msj)
+  {
+    $msj="";
+    $c= new Criteria();
+    $c->add(ContabcPeer::NUMCOM,$numero);
+    $resul= ContabcPeer::doSelectOne($c);
+    if ($resul)
+    {
+      $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+      if ($confcorcom=='N')
+      $numcom= 'RA'.substr($resul->getNumcomapr(),2,6);
+      else
+      $numcom= Comprobante::Buscar_Correlativo();
+      $fecha_aux=split("/",$fecha);
+      $dateFormat = new sfDateFormat('es_VE');
+      $fec = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
+
+      $contabc= new Contabc();
+      $contabc->setNumcom($numcom);
+      if (checkdate(intval($fecha_aux[1]),intval($fecha_aux[0]),intval($fecha_aux[2])))
+      { $contabc->setFeccom($fec);}
+      else { $contabc->setFeccom(date('Y-m-d'));}
+      //$contabc->setDescom($desc);
+      $contabc->setDescom($resul->getDescom());
+      $contabc->setStacom('D');
+      $contabc->setTipcom(null);
+      $contabc->setReftra($resul->getReftra());
+      $contabc->setMoncom($resul->getMoncom());
+      $contabc->save();
+
+      $a= new Criteria();
+      $a->add(Contabc1Peer::NUMCOM,$numero);
+      $a->addAscendingOrderByColumn(Contabc1Peer::DEBCRE);
+      $resul2= Contabc1Peer::doSelect($a);
+      if ($resul2)
+      {
+        foreach ($resul2 as $datos)
+        {
+          $numcom1= $numcom;
+          $contabc1= new Contabc1();
+          $contabc1->setNumcom($numcom1);
+          if (checkdate(intval($fecha_aux[1]),intval($fecha_aux[0]),intval($fecha_aux[2])))
+          { $contabc1->setFeccom($fec);}
+          $contabc1->setCodcta($datos->getCodcta());
+          $contabc1->setNumasi($datos->getNumasi());
+          $contabc1->setRefasi($datos->getRefasi());
+          $contabc1->setDesasi($datos->getDesasi());
+          if ($datos->getDebcre()=='D')
+          {  $contabc1->setDebcre('C');}
+          else { $contabc1->setDebcre('D');}
+          $contabc1->setMonasi($datos->getMonasi());
+          $contabc1->save();
+        }
+      }
+    }
+    else
+    {
+      $msj="El Comprobante Nro. ".$numero."no fue Anulado";
+      return true;
+    }
+
+  return true;
+  }
+
 }
 ?>

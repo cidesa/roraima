@@ -8,7 +8,7 @@ generator:
       codpro:       { name : Código}
       nompro:       { name : Nombre}
       rifpro:       { name : C.I./RIF}
-      nitpro:       { name : NIT}
+      nitpro:       { name : Tipo}
       dirpro:       { name : Dirección}
       telpro:       { name : Teléfono}
       nrocei:       { name : Nro.RNC}
@@ -38,6 +38,10 @@ generator:
       telrepleg:    { name : Teléfono}
       codtiprec:    { name : Grupo}
       destiprec:    { name : Descripción}
+      griprecaudos:    { name : . }
+      gripcontactos:   { name : . }
+      gripramos:       { name : . }
+      ramgen:          { name : Ramo General, params: size=20x2}
       nacpro:       { name : Nacionalidad}
       tipo:         { name : Actividad Principal}
       codctasec:    { name : Cta. Contable Asoc}
@@ -57,6 +61,11 @@ generator:
       recargo:            { name : Recaudos}
       codtipemp:          { name : Tipo de Empresa}
       destip:             { name : Descripción}
+      gripretenciones:       { name : . }
+      estpro:             { name : Estatus}
+      codban:             { name : Banco}
+      codtip:             { name : Tipo de Cuenta}
+      numcue:             { name : Numero de Cuenta}
 
     list:
       title:          Registro de Contratistas de Bienes o Servicio y Cooperativas
@@ -65,16 +74,21 @@ generator:
       max_per_page:	  10
       sort:           codpro
       fields:
-        codpro:      { params : maxlength=8 }
+        codpro:      { params : maxlength=15 }
       object_actions:
         _edit:        ~
         _delete:      ~
-
     edit:
       title:          Edición de Contratistas de Bienes o Servicio y Cooperativas
-      display:        [codpro, nompro, rifpro, nitpro, dirpro, telpro, nrocei, email, codram, nomram, limcre, codcta, descta, codord, desctacodord, codpercon, desctacodpercon, fecinscir, faxpro, numinscir, regmer, tomreg, capsus, fecreg, folreg, cappag, fecven, rifrepleg, nomrepleg, dirrepleg, codtiprec, destiprec, nacpro, tipo, codctasec, desctacodctasec, codordadi, desctacodordadi, codperconadi, desctacodperconadi, codordmercon, desctacodordmercon, codpermercon, desctacodpermercon, codordcontra, desctacodordcontra, codpercontra, desctacodpercontra, recargo, codtipemp, destip, telrepleg]
-      fields:
-        recargo:    { type: admin_double_list, params: through_class=Carecpro}
+      display:
+        NONE:         [codpro, nompro, rifpro, nitpro, dirpro, telpro, nrocei, email, codram, nomram, limcre, codcta, descta, codord, desctacodord, codpercon, desctacodpercon, fecinscir, estpro, faxpro, numinscir, regmer, tomreg, capsus, fecreg, folreg, cappag, fecven, rifrepleg, nomrepleg, dirrepleg, codtiprec, destiprec, nacpro, tipo, codctasec, desctacodctasec, codordadi, desctacodordadi, codperconadi, desctacodperconadi, codordmercon, desctacodordmercon, codpermercon, desctacodpermercon, codordcontra, desctacodordcontra, codpercontra, desctacodpercontra, recargo, codtipemp, destip, telrepleg, _codban, numcue, _codtip]
+        Recaudos:     [_codtiprec, _griprecaudos]
+        Contactos:    [ _gripcontactos]
+        Ramos:        [ _gripramos, ramgen]
+        Retenciones:        [ _gripretenciones]
+
+      #fields:
+      #  recargo:    { type: admin_double_list, params: through_class=Carecpro}
       actions:
         _list:        ~
         _save:        ~

@@ -20,6 +20,12 @@ abstract class BaseTstipcue extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collTsdefbans;
+
+	
+	protected $lastTsdefbanCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -181,6 +187,14 @@ abstract class BaseTstipcue extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collTsdefbans !== null) {
+				foreach($this->collTsdefbans as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -221,6 +235,14 @@ abstract class BaseTstipcue extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collTsdefbans !== null) {
+					foreach($this->collTsdefbans as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -341,6 +363,15 @@ abstract class BaseTstipcue extends BaseObject  implements Persistent {
 		$copyObj->setDestip($this->destip);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getTsdefbans() as $relObj) {
+				$copyObj->addTsdefban($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -362,6 +393,111 @@ abstract class BaseTstipcue extends BaseObject  implements Persistent {
 			self::$peer = new TstipcuePeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initTsdefbans()
+	{
+		if ($this->collTsdefbans === null) {
+			$this->collTsdefbans = array();
+		}
+	}
+
+	
+	public function getTsdefbans($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsdefbanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsdefbans === null) {
+			if ($this->isNew()) {
+			   $this->collTsdefbans = array();
+			} else {
+
+				$criteria->add(TsdefbanPeer::TIPCUE, $this->getCodtip());
+
+				TsdefbanPeer::addSelectColumns($criteria);
+				$this->collTsdefbans = TsdefbanPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(TsdefbanPeer::TIPCUE, $this->getCodtip());
+
+				TsdefbanPeer::addSelectColumns($criteria);
+				if (!isset($this->lastTsdefbanCriteria) || !$this->lastTsdefbanCriteria->equals($criteria)) {
+					$this->collTsdefbans = TsdefbanPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastTsdefbanCriteria = $criteria;
+		return $this->collTsdefbans;
+	}
+
+	
+	public function countTsdefbans($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsdefbanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(TsdefbanPeer::TIPCUE, $this->getCodtip());
+
+		return TsdefbanPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addTsdefban(Tsdefban $l)
+	{
+		$this->collTsdefbans[] = $l;
+		$l->setTstipcue($this);
+	}
+
+
+	
+	public function getTsdefbansJoinTstipren($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsdefbanPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsdefbans === null) {
+			if ($this->isNew()) {
+				$this->collTsdefbans = array();
+			} else {
+
+				$criteria->add(TsdefbanPeer::TIPCUE, $this->getCodtip());
+
+				$this->collTsdefbans = TsdefbanPeer::doSelectJoinTstipren($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(TsdefbanPeer::TIPCUE, $this->getCodtip());
+
+			if (!isset($this->lastTsdefbanCriteria) || !$this->lastTsdefbanCriteria->equals($criteria)) {
+				$this->collTsdefbans = TsdefbanPeer::doSelectJoinTstipren($criteria, $con);
+			}
+		}
+		$this->lastTsdefbanCriteria = $criteria;
+
+		return $this->collTsdefbans;
 	}
 
 } 

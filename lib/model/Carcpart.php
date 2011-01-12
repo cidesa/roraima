@@ -15,6 +15,7 @@
  */
 class Carcpart extends BaseCarcpart
 {
+    protected $codalm="";
   public function getNompro()
   {
   	return Herramientas::getX('CODPRO','Caprovee','Nompro',self::getCodpro());
@@ -64,4 +65,9 @@ class Carcpart extends BaseCarcpart
 	{
 		return Herramientas::getX('CODUBI','Cadefubi','Nomubi',self::getCodubi());
 	}
+
+  public function getDescen()
+  {
+	return Herramientas::getX('CODCEN','Cadefcen','Descen',self::getCodcen());
+}
 }

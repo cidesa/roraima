@@ -30,7 +30,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('tesdeftipmov/edit_messages', array('tstipmov' => $tstipmov, 'labels' => $labels)) ?>
-<?php include_partial('tesdeftipmov/edit_form', array('tstipmov' => $tstipmov, 'mascaracontabilidad' => $mascaracontabilidad, 'loncta' => $loncta, 'labels' => $labels)) ?>
+<?php include_partial('tesdeftipmov/edit_form', array('tstipmov' => $tstipmov, 'mascaracontabilidad' => $mascaracontabilidad, 'loncta' => $loncta, 'mancorrel' => $mancorrel, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">

@@ -25,8 +25,9 @@ generator:
         Compromiso:              [_afecom]
         Causado:                 [_afecau]
         Disponibilidad:          [_afedis]
+      hide:  [etadef]
       actions:
         _list:        ~
-        _create:      ~
         _save:        ~
+        _create:      ~
         _delete:      ~

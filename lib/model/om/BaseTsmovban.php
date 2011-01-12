@@ -56,6 +56,12 @@ abstract class BaseTsmovban extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aTsdefban;
+
+	
+	protected $aTstipmov;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -170,6 +176,10 @@ abstract class BaseTsmovban extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = TsmovbanPeer::NUMCUE;
       }
   
+		if ($this->aTsdefban !== null && $this->aTsdefban->getNumcue() !== $v) {
+			$this->aTsdefban = null;
+		}
+
 	} 
 	
 	public function setCodcta($v)
@@ -217,6 +227,10 @@ abstract class BaseTsmovban extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = TsmovbanPeer::TIPMOV;
       }
   
+		if ($this->aTstipmov !== null && $this->aTstipmov->getCodtip() !== $v) {
+			$this->aTstipmov = null;
+		}
+
 	} 
 	
 	public function setDesban($v)
@@ -400,6 +414,22 @@ abstract class BaseTsmovban extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aTsdefban !== null) {
+				if ($this->aTsdefban->isModified()) {
+					$affectedRows += $this->aTsdefban->save($con);
+				}
+				$this->setTsdefban($this->aTsdefban);
+			}
+
+			if ($this->aTstipmov !== null) {
+				if ($this->aTstipmov->isModified()) {
+					$affectedRows += $this->aTstipmov->save($con);
+				}
+				$this->setTstipmov($this->aTstipmov);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = TsmovbanPeer::doInsert($this, $con);
@@ -445,6 +475,20 @@ abstract class BaseTsmovban extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aTsdefban !== null) {
+				if (!$this->aTsdefban->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aTsdefban->getValidationFailures());
+				}
+			}
+
+			if ($this->aTstipmov !== null) {
+				if (!$this->aTstipmov->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aTstipmov->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = TsmovbanPeer::doValidate($this, $columns)) !== true) {
@@ -691,6 +735,70 @@ abstract class BaseTsmovban extends BaseObject  implements Persistent {
 			self::$peer = new TsmovbanPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setTsdefban($v)
+	{
+
+
+		if ($v === null) {
+			$this->setNumcue(NULL);
+		} else {
+			$this->setNumcue($v->getNumcue());
+		}
+
+
+		$this->aTsdefban = $v;
+	}
+
+
+	
+	public function getTsdefban($con = null)
+	{
+		if ($this->aTsdefban === null && (($this->numcue !== "" && $this->numcue !== null))) {
+						include_once 'lib/model/om/BaseTsdefbanPeer.php';
+
+      $c = new Criteria();
+      $c->add(TsdefbanPeer::NUMCUE,$this->numcue);
+      
+			$this->aTsdefban = TsdefbanPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aTsdefban;
+	}
+
+	
+	public function setTstipmov($v)
+	{
+
+
+		if ($v === null) {
+			$this->setTipmov(NULL);
+		} else {
+			$this->setTipmov($v->getCodtip());
+		}
+
+
+		$this->aTstipmov = $v;
+	}
+
+
+	
+	public function getTstipmov($con = null)
+	{
+		if ($this->aTstipmov === null && (($this->tipmov !== "" && $this->tipmov !== null))) {
+						include_once 'lib/model/om/BaseTstipmovPeer.php';
+
+      $c = new Criteria();
+      $c->add(TstipmovPeer::CODTIP,$this->tipmov);
+      
+			$this->aTstipmov = TstipmovPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aTstipmov;
 	}
 
 } 

@@ -42,6 +42,8 @@ class RhinscurMapBuilder {
 
 		$tMap->addColumn('FECINS', 'Fecins', 'int', CreoleTypes::DATE, false, null);
 
+		$tMap->addColumn('TIPPER', 'Tipper', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

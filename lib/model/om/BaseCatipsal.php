@@ -20,6 +20,12 @@ abstract class BaseCatipsal extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collCasalalms;
+
+	
+	protected $lastCasalalmCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -181,6 +187,14 @@ abstract class BaseCatipsal extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collCasalalms !== null) {
+				foreach($this->collCasalalms as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -221,6 +235,14 @@ abstract class BaseCatipsal extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collCasalalms !== null) {
+					foreach($this->collCasalalms as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -341,6 +363,15 @@ abstract class BaseCatipsal extends BaseObject  implements Persistent {
 		$copyObj->setDestipsal($this->destipsal);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getCasalalms() as $relObj) {
+				$copyObj->addCasalalm($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -362,6 +393,76 @@ abstract class BaseCatipsal extends BaseObject  implements Persistent {
 			self::$peer = new CatipsalPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initCasalalms()
+	{
+		if ($this->collCasalalms === null) {
+			$this->collCasalalms = array();
+		}
+	}
+
+	
+	public function getCasalalms($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCasalalmPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCasalalms === null) {
+			if ($this->isNew()) {
+			   $this->collCasalalms = array();
+			} else {
+
+				$criteria->add(CasalalmPeer::TIPMOV, $this->getCodtipsal());
+
+				CasalalmPeer::addSelectColumns($criteria);
+				$this->collCasalalms = CasalalmPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CasalalmPeer::TIPMOV, $this->getCodtipsal());
+
+				CasalalmPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCasalalmCriteria) || !$this->lastCasalalmCriteria->equals($criteria)) {
+					$this->collCasalalms = CasalalmPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCasalalmCriteria = $criteria;
+		return $this->collCasalalms;
+	}
+
+	
+	public function countCasalalms($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseCasalalmPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CasalalmPeer::TIPMOV, $this->getCodtipsal());
+
+		return CasalalmPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCasalalm(Casalalm $l)
+	{
+		$this->collCasalalms[] = $l;
+		$l->setCatipsal($this);
 	}
 
 } 

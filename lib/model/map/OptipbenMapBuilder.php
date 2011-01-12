@@ -36,7 +36,7 @@ class OptipbenMapBuilder {
 
 		$tMap->addColumn('CODTIPBEN', 'Codtipben', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('DESTIPBEN', 'Destipben', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('DESTIPBEN', 'Destipben', 'string', CreoleTypes::VARCHAR, true, 50);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

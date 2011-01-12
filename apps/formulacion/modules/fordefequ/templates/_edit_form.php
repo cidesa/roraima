@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id:_edit_form.php 32813 2009-09-08 16:19:47Z lhernandez $
  */
 // date: 2007/03/17 11:44:17
 ?>
@@ -27,7 +27,7 @@
 
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Datos de la Directriz') ?></legend>
+<legend><?php echo __('Datos') ?></legend>
 
 <div class="form-row">
   <?php echo label_for('fordefequ[codequ]', __($labels['fordefequ{codequ}']), 'class="required" ') ?>

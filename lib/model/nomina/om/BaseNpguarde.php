@@ -21,6 +21,18 @@ abstract class BaseNpguarde extends BaseObject  implements Persistent {
 
 
 	
+	protected $rifgua;
+
+
+	
+	protected $ninsme;
+
+
+	
+	protected $solmevig;
+
+
+	
 	protected $id;
 
 	
@@ -48,6 +60,27 @@ abstract class BaseNpguarde extends BaseObject  implements Persistent {
   {
 
     return trim($this->nomcon);
+
+  }
+  
+  public function getRifgua()
+  {
+
+    return trim($this->rifgua);
+
+  }
+  
+  public function getNinsme()
+  {
+
+    return trim($this->ninsme);
+
+  }
+  
+  public function getSolmevig()
+  {
+
+    return $this->solmevig;
 
   }
   
@@ -88,6 +121,36 @@ abstract class BaseNpguarde extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setRifgua($v)
+	{
+
+    if ($this->rifgua !== $v) {
+        $this->rifgua = $v;
+        $this->modifiedColumns[] = NpguardePeer::RIFGUA;
+      }
+  
+	} 
+	
+	public function setNinsme($v)
+	{
+
+    if ($this->ninsme !== $v) {
+        $this->ninsme = $v;
+        $this->modifiedColumns[] = NpguardePeer::NINSME;
+      }
+  
+	} 
+	
+	public function setSolmevig($v)
+	{
+
+    if ($this->solmevig !== $v) {
+        $this->solmevig = $v;
+        $this->modifiedColumns[] = NpguardePeer::SOLMEVIG;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -108,7 +171,13 @@ abstract class BaseNpguarde extends BaseObject  implements Persistent {
 
       $this->nomcon = $rs->getString($startcol + 2);
 
-      $this->id = $rs->getInt($startcol + 3);
+      $this->rifgua = $rs->getString($startcol + 3);
+
+      $this->ninsme = $rs->getString($startcol + 4);
+
+      $this->solmevig = $rs->getBoolean($startcol + 5);
+
+      $this->id = $rs->getInt($startcol + 6);
 
       $this->resetModified();
 
@@ -116,7 +185,7 @@ abstract class BaseNpguarde extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 4; 
+            return $startcol + 7; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npguarde object", $e);
     }
@@ -273,6 +342,15 @@ abstract class BaseNpguarde extends BaseObject  implements Persistent {
 				return $this->getNomcon();
 				break;
 			case 3:
+				return $this->getRifgua();
+				break;
+			case 4:
+				return $this->getNinsme();
+				break;
+			case 5:
+				return $this->getSolmevig();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -288,7 +366,10 @@ abstract class BaseNpguarde extends BaseObject  implements Persistent {
 			$keys[0] => $this->getCodcon(),
 			$keys[1] => $this->getNomgua(),
 			$keys[2] => $this->getNomcon(),
-			$keys[3] => $this->getId(),
+			$keys[3] => $this->getRifgua(),
+			$keys[4] => $this->getNinsme(),
+			$keys[5] => $this->getSolmevig(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -314,6 +395,15 @@ abstract class BaseNpguarde extends BaseObject  implements Persistent {
 				$this->setNomcon($value);
 				break;
 			case 3:
+				$this->setRifgua($value);
+				break;
+			case 4:
+				$this->setNinsme($value);
+				break;
+			case 5:
+				$this->setSolmevig($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -326,7 +416,10 @@ abstract class BaseNpguarde extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setCodcon($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setNomgua($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setNomcon($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
+		if (array_key_exists($keys[3], $arr)) $this->setRifgua($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setNinsme($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setSolmevig($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -337,6 +430,9 @@ abstract class BaseNpguarde extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpguardePeer::CODCON)) $criteria->add(NpguardePeer::CODCON, $this->codcon);
 		if ($this->isColumnModified(NpguardePeer::NOMGUA)) $criteria->add(NpguardePeer::NOMGUA, $this->nomgua);
 		if ($this->isColumnModified(NpguardePeer::NOMCON)) $criteria->add(NpguardePeer::NOMCON, $this->nomcon);
+		if ($this->isColumnModified(NpguardePeer::RIFGUA)) $criteria->add(NpguardePeer::RIFGUA, $this->rifgua);
+		if ($this->isColumnModified(NpguardePeer::NINSME)) $criteria->add(NpguardePeer::NINSME, $this->ninsme);
+		if ($this->isColumnModified(NpguardePeer::SOLMEVIG)) $criteria->add(NpguardePeer::SOLMEVIG, $this->solmevig);
 		if ($this->isColumnModified(NpguardePeer::ID)) $criteria->add(NpguardePeer::ID, $this->id);
 
 		return $criteria;
@@ -373,6 +469,12 @@ abstract class BaseNpguarde extends BaseObject  implements Persistent {
 		$copyObj->setNomgua($this->nomgua);
 
 		$copyObj->setNomcon($this->nomcon);
+
+		$copyObj->setRifgua($this->rifgua);
+
+		$copyObj->setNinsme($this->ninsme);
+
+		$copyObj->setSolmevig($this->solmevig);
 
 
 		$copyObj->setNew(true);

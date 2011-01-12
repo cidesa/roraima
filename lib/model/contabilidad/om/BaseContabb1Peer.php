@@ -310,8 +310,8 @@ abstract class BaseContabb1Peer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(Contabb1Peer::CODCTA, ContabbPeer::CODCTA);
-
+			$criteria->addJoin(Contabb1Peer::CODCTA, ContabbPeer::CODCTA);
+	
 		$rs = Contabb1Peer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -333,11 +333,11 @@ abstract class BaseContabb1Peer {
 		Contabb1Peer::addSelectColumns($c);
 		$startcol2 = (Contabb1Peer::NUM_COLUMNS - Contabb1Peer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		ContabbPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + ContabbPeer::NUM_COLUMNS;
-
-		$c->addJoin(Contabb1Peer::CODCTA, ContabbPeer::CODCTA);
-
+			ContabbPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + ContabbPeer::NUM_COLUMNS;
+	
+			$c->addJoin(Contabb1Peer::CODCTA, ContabbPeer::CODCTA);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -351,28 +351,28 @@ abstract class BaseContabb1Peer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = ContabbPeer::getOMClass();
+							
+				$omClass = ContabbPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getContabb(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addContabb1($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getContabb(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addContabb1($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initContabb1s();
-				$obj2->addContabb1($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initContabb1s();
+					$obj2->addContabb1($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

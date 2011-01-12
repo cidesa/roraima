@@ -22,7 +22,8 @@ class almdefartActions extends autoalmdefartActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -255,6 +256,10 @@ $this->Bitacora('Guardo');
     {
       $this->cadefart->setCorext($cadefart['corext']);
     }
+    if (isset($cadefart['tipodoc']))
+    {
+      $this->cadefart->setTipodoc($cadefart['tipodoc']);
+    }
 
   }
 
@@ -337,6 +342,31 @@ $this->Bitacora('Guardo');
 	      $output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","'.$dato.'",""]]';
 	    }
     }
+
+     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+     return sfView::HEADER_ONLY;
+   }else    if ($this->getRequestParameter('ajax')=='2')
+   {
+   	$output = '[["","",""]';
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $codigo=$this->getRequestParameter('codigo');
+    if ($codigo!="")
+    {
+	    $c= new Criteria();
+	    $c->add(CpdoccomPeer::TIPCOM,$codigo);
+	    $result=CpdoccomPeer::doSelectOne($c);
+	    if ($result)
+	    {
+	      $dato=$result->getNomext();
+	      $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+   }
+	    else
+	    {
+	      $javascript="alert('El Tipo de Compromiso no existe'); $('cadefart_tipodoc').value=''; $('cadefart_tipodoc').focus();";
+	      $dato="";
+	      $output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","'.$dato.'",""]]';
+  }
+}
 
      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
      return sfView::HEADER_ONLY;

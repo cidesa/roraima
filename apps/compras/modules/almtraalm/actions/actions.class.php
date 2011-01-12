@@ -51,7 +51,7 @@ $this->Bitacora('Guardo');
 	      }
       }
       else
-      {
+      {           $grid=Herramientas::CargarDatosGrid($this,$this->obj);
 	          $this->labels = $this->getLabels();
 	          $err = Herramientas::obtenerMensajeError($this->coderror);
          	  $this->getRequest()->setError('',$err);
@@ -122,7 +122,8 @@ $this->Bitacora('Guardo');
   	    $opciones->setEliminar(true);
   	else
   	    $opciones->setEliminar(false);
-  	if ($this->catraalm->getId()) $opciones->setFilas(0);
+  	if ($this->catraalm->getId()) { $opciones->setFilas(0); }
+        else { $opciones->setFilas(250); }
   	$opciones->setTabla('Cadettra');
   	$opciones->setName('a');
   	$opciones->setAnchoGrid(850);
@@ -130,6 +131,7 @@ $this->Bitacora('Guardo');
   	$opciones->setTitulo('Artículos');
   	$opciones->setHTMLTotalFilas(' ');
 
+        $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
   	// Se generan las columnas
   	$col1 = new Columna('Código  Artículo');
   	$col1->setTipo(Columna::TEXTO);
@@ -137,12 +139,19 @@ $this->Bitacora('Guardo');
   	$col1->setAlineacionObjeto(Columna::CENTRO);
   	$col1->setAlineacionContenido(Columna::CENTRO);
   	$col1->setNombreCampo('Codart');
+        $signo="-";
+        $signomas="+";
   	if (!$this->catraalm->getId())
   		$col1->setHTML('type="text" size="15"  maxlength="'.chr(39).$lonart.chr(39).'"');
   	else
   	   $col1->setHTML('type="text" size="15"  readonly=true');
 	if (!$this->catraalm->getId()) $col1->setCatalogo('caregart','sf_admin_edit_form', array('codart' => 1, 'desart' => 2, 'unimed' => 3),'Caregart_Almtraalm',$params);
+  	if ($manartlot=='S') {
+           if (!$this->catraalm->getId()) $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="toAjaxUpdater(obtenerColumna(this.id,5,'.chr(39).$signomas.chr(39).'),3,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$F("catraalm_codubiori")+'.chr(39).'!'.chr(39).'+$F("catraalm_almori")+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
+        }
+        else {
   	if (!$this->catraalm->getId()) $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="javascript:event.keyCode=13; ajaxdetalle(event,this.id);"');
+        }
 
   	$col2 = new Columna('Descripción');
   	$col2->setTipo(Columna::TEXTAREA);
@@ -184,6 +193,42 @@ $this->Bitacora('Guardo');
   	    $col5->setHTML('type="text" size="15" readonly=true');
     if (!$this->catraalm->getId()) $col5->setJScript('onKeypress="validarcantidad(event,this.id)"');
 
+    if ($manartlot=='S')
+    {
+        if ($this->catraalm->getId())
+        {
+           $col6= new Columna('Número de Lote');
+           $col6->setTipo(Columna::TEXTO);
+           $col6->setEsGrabable(true);
+           $col6->setAlineacionObjeto(Columna::CENTRO);
+           $col6->setAlineacionContenido(Columna::CENTRO);
+           $col6->setNombreCampo('numlot');
+           $col6->setHTML('type="text" size="15" readonly=true');
+         }
+         else
+          {
+                $col6= new Columna('Nro. de Lote');
+                $col6->setTipo(Columna::COMBOCLASE);
+                $col6->setEsGrabable(true);
+                $col6->setNombreCampo('numlot');
+                $col6->setCombosclase('Numlotxart');
+                $col6->setHTML(' ');
+          }
+
+           $col7= new Columna('codalm');
+	   $col7->setTipo(Columna::TEXTO);
+	   $col7->setEsGrabable(true);
+	   $col7->setNombreCampo('codalm');
+	   $col7->setOculta(true);
+
+
+           $col8= new Columna('codubi');
+	   $col8->setTipo(Columna::TEXTO);
+	   $col8->setEsGrabable(true);
+	   $col8->setNombreCampo('codubi');
+	   $col8->setOculta(true);
+    }
+
 
   	// Se guardan las columnas en el objetos de opciones
   	$opciones->addColumna($col1);
@@ -191,6 +236,12 @@ $this->Bitacora('Guardo');
   	$opciones->addColumna($col3);
   	$opciones->addColumna($col4);
   	$opciones->addColumna($col5);
+        if ($manartlot=='S')
+        {
+            $opciones->addColumna($col6);
+            $opciones->addColumna($col7);
+            $opciones->addColumna($col8);
+        }
 
 
   	// Ee genera el arreglo de opciones necesario para generar el grid
@@ -221,6 +272,34 @@ $this->Bitacora('Guardo');
   	$grid=Herramientas::CargarDatosGrid($this,$this->obj);
   	$grid_arreglo=Herramientas::CargarDatosGrid($this,$this->obj,true);
   	$grid_detallado=$grid_arreglo[0];
+        $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
+          $x    = $grid[0];
+          $j    = 0;
+          $encontro = false;
+          while ($j<count($x))
+          {
+             if ($x[$j]->getCanart()>0)
+             {
+                $encontro=true;
+                if ($manartlot=='S')
+                {
+                    if ($x[$j]->getNumlot()=="")
+                     {
+                             $this->coderror=577;
+                             return $this->coderror;
+                     }
+                }
+             }
+             $j++;
+          }
+       if (!$encontro)
+       {
+            $this->coderror=576;
+            return $this->coderror;
+       }
+
+
+
     if (!$catraalm->getId()) //REGISTRO NUEVO
     {
 	  	if (Articulos::salvarGrabar_Transferencia($catraalm,$grid,$grid_detallado,&$error_obtenido,&$codigo_articulo))
@@ -322,6 +401,8 @@ $this->Bitacora('Guardo');
 	  {
 	  	$dato=CadefalmPeer::getDesalmacen($this->getRequestParameter('codigo'));
 	  	$output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","6","c"]]';
+            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+            return sfView::HEADER_ONLY;
 	  }
 	  else if ($this->getRequestParameter('ajax')=='2')
 	    {
@@ -353,10 +434,72 @@ $this->Bitacora('Guardo');
 	         	$javascript="alert('Primero debe seleccionar un Almacén Destino...');$('catraalm_codubides').value='';$('catraalm_nomubides').value='';$('catraalm_codubides').focus();";
   			$output = '[["javascript","'.$javascript.'",""]]';
 	      }
+            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+            return sfView::HEADER_ONLY;
 	    }
 		else  if ($this->getRequestParameter('ajax')=='3')
 	    {
+	      	$manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
+                if ($manartlot=='S')
+                {
+                    $datos=split('!',$this->getRequestParameter('codigo'));
+                    $codart=$datos[0];
+                    $codubi=$datos[1];
+                    $codalm=$datos[2];
+                    $cajtexmos=$datos[3];
+                    $aux = split('_',$cajtexmos);
+                    $name=$aux[0];
+                    $fil=$aux[1];
+                    $cajtexcom=$name."_".$fil."_1";
+                    $cajunidad=$name."_".$fil."_3";
+                    $cajdispon=$name."_".$fil."_4";
+                    $cajcantra=$name."_".$fil."_5";
+                    $cajcodalm=$name."_".$fil."_7";
+                    $cajcodubi=$name."_".$fil."_8";
+                    $numlot="";
+                    $output = '[["","",""]]';
+                    if ($codart!="")
+                    {
 	      	$c= new Criteria();
+                        $c->add(CaregartPeer::CODART,$codart);
+                        $reg=CaregartPeer::doSelectOne($c);
+                        if ($codalm!="" and $codubi!="")
+                        {
+                            if ($reg)
+                            {
+                                $exiact=0;
+                                if (Almacen::ExistenciayObtenerDisponibilidadAlmArt($codart,$codalm,$codubi,&$exiact,&$numlot))
+                                {
+                                    $desart=htmlspecialchars($reg->getDesart());
+                                    $unimed=$reg->getUnimed();
+                                    $disponibilidad=$exiact;
+                                    $output = '[["'.$cajtexmos.'","'.$desart.'",""],["'.$cajunidad.'","'.$unimed.'",""],["'.$cajdispon.'","'.$disponibilidad.'",""],["'.$cajcodalm.'","'.$codalm.'",""],["'.$cajcodubi.'","'.$codubi.'",""]]';
+                                }//if (Despachos::verificaexisydisp($x[$j]->getCodart(),$cadphart['codalm'],$cadphart['codubi'],$x[$j]->getCandes(),&$msg)
+                                else
+                                {
+                                    $mensaje="El Artículo ".$codart." no esta definido en el Almacen ".$codalm." para la Ubicacion ".$codubi;
+                                    $javascript="alert('".$mensaje."');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('". $cajunidad ."').value='';$('". $cajdispon ."').value='0.00';$('". $cajcantra ."').value='0.00'";
+                                    $output = '[["javascript","'.$javascript.'",""]]';
+                                }
+                            }
+                            else
+                            {
+                                 $javascript="alert('Articulo no existe');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('". $cajunidad ."').value='';$('". $cajdispon ."').value='0.00';$('". $cajcantra ."').value='0.00'";
+                                 $output = '[["javascript","'.$javascript.'",""]]';
+                            }
+                        }//if ($this->getRequestParameter('almori')!="")
+                        else
+                        {
+                          $javascript="alert('Debe seleccionar el Almacén y la Ubicación Origen antes de incluir los artículos a transferir...');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('".$cajunidad ."').value='';$('".$cajdispon ."').value='0.00';$('". $cajcantra ."').value='0.00'";
+                          $output = '[["javascript","'.$javascript.'",""]]';
+                        }
+                    }//if ($codart!="")
+                  $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+                  $this->numlot=$numlot;
+                  $this->lotes=$this->ObtenerNumlotxart($codart,$codalm,$codubi);
+                }else {
+
+                $c= new Criteria();
 			$c->add(CaregartPeer::CODART,$this->getRequestParameter('codigo'));
 	      	$reg=CaregartPeer::doSelectOne($c);
 	      	if ($this->getRequestParameter('almori')!="" and $this->getRequestParameter('ubiori')!="")
@@ -389,10 +532,39 @@ $this->Bitacora('Guardo');
 	  		  $javascript="alert('Debe seleccionar el Almacén y la Ubicación Origen antes de incluir los artículos a transferir...');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('". $this->getRequestParameter('unidad') ."').value='';$('". $this->getRequestParameter('dispon') ."').value='0.00';$('". $this->getRequestParameter('cantransf') ."').value='0.00'";
 	          $output = '[["javascript","'.$javascript.'",""]]';
 	  		}
-	    }//else  if ($this->getRequestParameter('ajax')=='3')
   	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 	    return sfView::HEADER_ONLY;
 	}
+	    }//else  if ($this->getRequestParameter('ajax')=='3')
+
+	}
+
+       public function ObtenerNumlotxart($codart="",$codalm="",$codubi="")
+      {
+        $c = new Criteria();
+        $c->add(CaartalmubiPeer::CODALM,$codalm);
+        $c->add(CaartalmubiPeer::CODUBI,$codubi);
+        $c->add(CaartalmubiPeer::CODART,$codart);
+        $c->add(CaartalmubiPeer::EXIACT,0,Criteria::GREATER_THAN);
+        $c->addAscendingOrderByColumn(CaartalmubiPeer::FECVEN);
+
+        $datos = CaartalmubiPeer::doSelect($c);
+
+        $lotes = array();
+
+        foreach($datos as $obj_datos)
+        {
+         if ($obj_datos->getFecven()!="")
+         {
+            $fecven=date("d/m/Y",strtotime($obj_datos->getFecven()));
+            $lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot()." - ".$fecven);
+         }
+          else
+            $lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot());
+
+        }
+        return $lotes;
+      }
 
    public function executeAutocomplete()
 	{
@@ -451,7 +623,8 @@ $this->Bitacora('Guardo');
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */

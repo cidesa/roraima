@@ -36,7 +36,7 @@ class CargosolMapBuilder {
 
 		$tMap->addColumn('REQART', 'Reqart', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('CODRGO', 'Codrgo', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addForeignKey('CODRGO', 'Codrgo', 'string', CreoleTypes::VARCHAR, 'carecarg', 'CODRGO', true, 4);
 
 		$tMap->addColumn('MONRGO', 'Monrgo', 'double', CreoleTypes::NUMERIC, true, 14);
 

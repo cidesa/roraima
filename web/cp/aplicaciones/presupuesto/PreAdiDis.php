@@ -1,10 +1,11 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
@@ -22,10 +23,11 @@ $tools= new tools();
 $modulo="";
 $forma="Créditos Adiciones/Disminuciones";
 $modulo=$_SESSION["modulo"] . " > Ejecución Presupuestaria > ".$forma;
+$fecha_actual= date('d/m/Y');
 Limpiar();
  //lim�ar datos  del movimiento
  $i=1;
- while ($i<=50)
+ while ($i<=500)
  {
      $_POST["x".$i."1"]= "";
      $_POST["x".$i."2"]= "";
@@ -376,7 +378,7 @@ Limpiar();
         if ($tipo=='A')
         {
           $i=1;
-          while ($i<=50)
+          while ($i<=500)
           {
             if ((trim($_POST["x".$i."1"])!="")  and (number_format($_POST["x".$i."2"],2,'.',',')!= number_format(0,2,'.',','))  and (number_format($_POST["x".$i."3"],2,'.',',')!= number_format(0,2,'.',',')) )
             {
@@ -389,21 +391,21 @@ Limpiar();
                   {
                     $VerDispon="N";
                     $Msj="NO se puede Eliminar / Anular la Adición.. El Monto Disponible de la Partida " . trim($_POST["x".$i."1"]) . " es de " . number_format($MonDis,2,'.',',') .". Al Disminuirla por el Monto de la Adición quedaría Negativa.";
-                    $i=51;
+                    $i=251;
                   }//if ($MonDis < $_POST["x".$i."3"])
                 }  // if ($tb=$tool->buscar_datos($sql))
                 else
                 {
                   $VerDispon="N";
                   $Msj="La Partida " . trim($_POST["x".$i."1"]) . " no se encuentra en la Base de Datos. Por Favor Verifique";
-                  $i=51;
+                  $i=251;
                 }//else  if ($tb=$tool->buscar_datos($sql))
 
                 $i=$i+1;
             } //if ((trim($_POST["x".$i."1"])!="")  and (trim($_POST["x".$i."2"])!="") and (number_format($_POST["x".$i."3"],2,'.',',')!= number_format(0,2,'.',',')) )
             else
             {
-              $i=51;
+              $i=251;
             }
           } //while
         }  //if ($tipo=='A')
@@ -433,7 +435,7 @@ Limpiar();
        f=document.form1;
       i=1;
       var acum3=0;
-      while (i<=50)
+      while (i<=500)
       {
         var x3="x"+i+"3";
         str3= document.getElementById(x3).value.toString();
@@ -481,7 +483,6 @@ Limpiar();
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" TYPE="text/css" MEDIA="screen" href="../../lib/css/tabber.css">
@@ -512,7 +513,7 @@ Limpiar();
 </head>
 
 <body>
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
 <table width="100%" align="center">
   <tr>
 <td width="100%">
@@ -660,7 +661,7 @@ Limpiar();
                       <?
                       ////////   //////////
                      $i=1;
-                  while ($i<=50)
+                  while ($i<=500)
                   {
                      ?>
                         <tr>
@@ -857,7 +858,7 @@ else
     block='<? print $block;?>';
   if (block=="S")
   {
-  bloquearGrip(3,50,0);
+  bloquearGrip(3,500,0);
   }
   actualizarsaldos2();
 </script>
@@ -900,7 +901,7 @@ else
       else
       {
         //alert("Longitud de Fecha inválida");
-        document.getElementById('fecha').value=mostrarfecha();
+        document.getElementById('fecha').value='<? echo $fecha_actual; ?>';;
         document.getElementById('fecha').focus();
       }
     }
@@ -945,7 +946,7 @@ else
       f=document.form1;
 
       i=1;
-      while (i<=50)
+      while (i<=500)
       {
         var x="x"+i+1;
         var x4="x"+i+4;
@@ -956,14 +957,14 @@ else
             campo="x1"+1;
             campo3="x1"+4;
             foco="x1"+2;
-            i=50;
+            i=500;
           }
           else
           {
             campo=x;
             campo3=x4;
             foco="x"+i+2;
-            i=50;
+            i=500;
           }
         }
         i=i+1;
@@ -1063,9 +1064,13 @@ else
         {
           j=parseInt(id.substring(1,2));
         }
+        else if (parseInt(id.length)==4)
+        {
+            j=parseInt(id.substring(1,3));
+        }
         else
         {
-          j=parseInt(id.substring(1,3));
+            j=parseInt(id.substring(1,4));
         }
         var x="x"+j+"1"
         var y="x"+j+"2"
@@ -1109,7 +1114,7 @@ else
        f=document.form1;
         i=1;
         var acum3=0;
-        while (i<=50)
+        while (i<=500)
         {
           var x3="x"+i+"3";
           str3= document.getElementById(x3).value.toString();
@@ -1137,17 +1142,21 @@ else
       {
         j=parseInt(id.substring(1,2));
       }
-      else
-      {
-        j=parseInt(id.substring(1,3));
-      }
+        else if (parseInt(id.length)==4)
+        {
+            j=parseInt(id.substring(1,3));
+        }
+        else
+        {
+            j=parseInt(id.substring(1,4));
+        }
       val=document.getElementById(id).value;
       if (val!="")
       {
           if (j!=1)
           {
             i=1;
-             while (i<=50)
+             while (i<=500)
               {
                 var x="x"+i+"1";
                 if (j!=i)
@@ -1180,7 +1189,7 @@ else
        {
          f=document.form1;
       var fila;
-      for (fila=i;fila<50;fila++)
+      for (fila=i;fila<500;fila++)
       {
         for (col=0;col<=c;col++)
         {
@@ -1200,7 +1209,7 @@ else
 
       }
       //ultima fila
-      if (i==50)
+      if (i==500)
       {
         for (col=0;col<=c;col++)
         {
@@ -1274,7 +1283,7 @@ else
           f=document.form1;
           if (verificar())
               {
-                desbloquearGrip(3,50,1);
+                desbloquearGrip(3,500,1);
         document.form1.tipo[0].disabled=false
         document.form1.tipo[1].disabled=false
                 f.action="imecPreAdiDis.php?imec=<? print $imec?>";
@@ -1404,7 +1413,7 @@ else
           //pagina="catalogo2.php?campo="+campo+"&campo2="+campo2+"&sql="+sql+"&foco="+foco;
           //window.open(pagina,"","menubar=no,toolbar=no,scrollbars=yes,width=570,height=500,resizable=yes,left=50,top=50");
 
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Cpadidis_PreAdiDis/clase/Cpadidis/frame/form1/obj1/codigo/campo1/refadi/submit/true';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Cpadidis_PreAdiDis/clase/Cpadidis/frame/form1/obj1/codigo/campo1/refadi/submit/true';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
 
      }

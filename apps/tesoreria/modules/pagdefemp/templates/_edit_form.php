@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id: _edit_form.php 33258 2009-09-21 22:34:36Z dmartinez $
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 35165 2009-12-01 04:55:10Z lhernandez $
  */
 // date: 2007/07/03 12:48:57
 ?>
@@ -515,6 +515,78 @@
   'disabled' => true,
   'control_name' => 'opdefemp[nomtiptba]',
   )); echo $value ? $value : '&nbsp;' ?>
+<br>
+<br>
+<table>
+<tr>
+<th>
+  <?php echo label_for('opdefemp[ordcre]', __($labels['opdefemp{ordcre}']), 'class="required" Style="width:40px"') ?>
+  <div class="content<?php if ($sf_request->hasError('opdefemp{ordcre}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opdefemp{ordcre}')): ?>
+    <?php echo form_error('opdefemp{ordcre}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+ <?php echo input_auto_complete_tag('opdefemp[ordcre]', $opdefemp->getOrdcre(),
+  'pagdefemp/autocomplete?ajax=5',  array('autocomplete' => 'off','maxlength' => 4,
+  'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('opdefemp_ordcre').value=cadena",
+  'onBlur'=> remote_function(array(
+        'url'      => 'pagdefemp/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('opdefemp_ordcre').value != '' ",
+        'script' => true,
+        'with' => "'ajax=1&cajtexmos=opdefemp_nomtipcre&codigo='+this.value"
+        ))),
+     array('use_style' => 'true',)
+  )
+?></div>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp; <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Opdefemp_pagdefemp2/clase/Cpdoccau/frame/sf_admin_edit_form/obj1/opdefemp_nomtipcre/obj2/opdefemp_ordcre/campo1/nomext/campo2/tipcau/param1/1')?>
+</th>
+</tr>
+</table>
+<?php $value = object_input_tag($opdefemp, 'getNomtipcre', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'opdefemp[nomtipcre]',
+  )); echo $value ? $value : '&nbsp;' ?>
+
+
+<table>
+<tr>
+<th>
+  <?php echo label_for('opdefemp[ordsolpag]', __($labels['opdefemp{ordsolpag}']), 'class="required" Style="width:40px"') ?>
+  <div class="content<?php if ($sf_request->hasError('opdefemp{ordsolpag}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opdefemp{ordsolpag}')): ?>
+    <?php echo form_error('opdefemp{ordsolpag}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+ <?php echo input_auto_complete_tag('opdefemp[ordsolpag]', $opdefemp->getOrdsolpag(),
+  'pagdefemp/autocomplete?ajax=5',  array('autocomplete' => 'off','maxlength' => 4,
+  'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('opdefemp_ordsolpag').value=cadena",
+  'onBlur'=> remote_function(array(
+        'url'      => 'pagdefemp/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('opdefemp_ordsolpag').value != '' ",
+        'script' => true,
+        'with' => "'ajax=1&cajtexmos=opdefemp_nomsolpag&codigo='+this.value"
+        ))),
+     array('use_style' => 'true',)
+  )
+?></div>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp; <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Opdefemp_pagdefemp2/clase/Cpdoccau/frame/sf_admin_edit_form/obj1/opdefemp_nomsolpag/obj2/opdefemp_ordsolpag/campo1/nomext/campo2/tipcau/param1/1')?>
+</th>
+</tr>
+</table>
+<?php $value = object_input_tag($opdefemp, 'getNomsolpag', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'opdefemp[nomsolpag]',
+  )); echo $value ? $value : '&nbsp;' ?>
+
+
 </div>
   </fieldset>
  </th>
@@ -534,6 +606,21 @@
   'onKeyPress' => "javascript:if (event.keyCode==13 || event.keyCode==9){document.getElementById('opdefemp_genctaord').focus();}",
   'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
 )); echo $value ? $value : '&nbsp;' ?></div>
+
+<?php if ($opdefemp->getAprmonche()=='S') {?>
+<br>
+<?php echo label_for('opdefemp[monche]', __($labels['opdefemp{monche}']), 'class="required" Style="width:200px"') ?>
+<div class="content<?php if ($sf_request->hasError('opdefemp{monche}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('opdefemp{monche}')): ?> <?php echo form_error('opdefemp{monche}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+  <?php $value = object_input_tag($opdefemp, array('getMonche',true), array (
+  'size' => 12,
+  'control_name' => 'opdefemp[monche]',
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+ </div>
+<?php } ?>
 
 <br>
 

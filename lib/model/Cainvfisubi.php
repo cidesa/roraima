@@ -15,4 +15,5 @@
  */ 
 class Cainvfisubi extends BaseCainvfisubi
 {
+    protected $totalm="0,00";
 }

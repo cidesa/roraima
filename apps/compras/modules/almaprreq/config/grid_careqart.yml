@@ -3,38 +3,68 @@ opciones:                  # Opciones generales
   eliminar:                false
   tabla:                   careqart
   anchogrid:               820
-  ancho:                   780
+  ancho:                   820
   filas:                   0
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1
-  titulo:                  Actualizar
+  titulo:                  Aprobar
   tipo:                    k
   nombrecampo:             check
   html:                    [size="3"]
   esgrabable:              true
 2:       # Columna 2
+  titulo:                  Rechazar
+  tipo:                    k
+  nombrecampo:             check2
+  esgrabable:			   true
+  html:                    []
+3:       # Columna 3
+  titulo:                  Diferir
+  tipo:                    k
+  nombrecampo:             check3
+  esgrabable:			   true
+  html:                    []
+4:       # Columna 4
   titulo:                  Referencia
   tipo:                    t
   nombrecampo:             reqart
   html:                    [size="10" ]
   esgrabable:              true
-3:       # Columna 3
+5:       # Columna 5
   titulo:                  Descripcion
   tipo:                    a
   nombrecampo:             desreq
   html:                    [size="40x2" ]
   esgrabable:              false
-4:       # Columna 4
+6:       # Columna 6
   titulo:                  Fecha
   tipo:                    f
   nombrecampo:             fecreq
   html:                    [size="10"]
   esgrabable:              false
-5:       # Columna 5
+7:       # Columna 7
   titulo:                  Monto
   tipo:                    m
   nombrecampo:             monreq
   html:                    [size="10" ]
   esgrabable:              false
-
+8:       # Columna 8
+  titulo:                  N° de Memo
+  tipo:                    t
+  nombrecampo:             nummemo
+  html:                    [size="10" maxlength=10]
+  esgrabable:              true
+9:       # Columna 9
+  titulo:                  Justificacion
+  tipo:                    a
+  nombrecampo:             justif
+  html:                    [size="40x2" ]
+  esgrabable:              true
+10:       # Columna 10
+  titulo:                  Aprobado
+  tipo:                    t
+  nombrecampo:             aprreq
+  html:                    [size="10"]
+  esgrabable:              true
+  oculta:                  true

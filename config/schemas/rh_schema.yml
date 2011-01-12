@@ -1,64 +1,58 @@
 propel:
   _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
   rharecur:
-    #_attributes:
-      #idMethod: native
     codarecur:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     desarecur:
       type: VARCHAR
       size: 250
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhasicur:
-    #_attributes:
-      #idMethod: native
     codcur:
       type: VARCHAR
       size: 10
       required: true
-      ##primaryKey: true
     numcla:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     asicla:
       type: VARCHAR
       size: 1
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhclacur:
-    #_attributes:
-      #idMethod: native
     codcur:
       type: VARCHAR
       size: 10
       required: true
-      ##primaryKey: true
     numcla:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     feccla:
       type: DATE
     horini:
-      type: DATE
+      type: VARCHAR
+      size: 10
     horfin:
-      type: DATE
+      type: VARCHAR
+      size: 10
     numhor:
       type: NUMERIC
       size: 14
@@ -66,15 +60,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhdateva:
-    #_attributes:
-      #idMethod: native
     codevdo:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codevor:
       type: VARCHAR
       size: 16
@@ -90,15 +83,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhdefcur:
-    #_attributes:
-      #idMethod: native
     codcur:
       type: VARCHAR
       size: 10
       required: true
-      ##primaryKey: true
     descur:
       type: VARCHAR
       size: 250
@@ -129,15 +121,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhdefemp:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 3
       required: true
-      ##primaryKey: true
     faxemp:
       type: VARCHAR
       size: 15
@@ -152,15 +143,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhdefind:
-    #_attributes:
-      #idMethod: native
     codind:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     desind:
       type: VARCHAR
       size: 250
@@ -170,45 +160,54 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhdefniv:
-    #_attributes:
-      #idMethod: native
     codniv:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     desniv:
       type: VARCHAR
       size: 250
+    minpun:
+      type: INTEGER
+    maxpun:
+      type: INTEGER  
+    totpes:
+      type: INTEGER  
+    codran:
+      type: VARCHAR
+      size: 2
+    tipcal:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhdefobj:
-    #_attributes:
-      #idMethod: native
     codobj:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     desobj:
       type: VARCHAR
       size: 250
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhdefvalins:
-    #_attributes:
-      #idMethod: native
     codvalins:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     desvalins:
       type: VARCHAR
       size: 250
@@ -218,25 +217,22 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhevaconcom:
-    #_attributes:
-      #idMethod: native
     codevdo:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codniv:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codvalins:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     pesval:
       type: NUMERIC
       size: 14
@@ -245,28 +241,27 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    feceval:
+      type: DATE  
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhevaempobj:
-    #_attributes:
-      #idMethod: native
     codevdo:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codniv:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codobj:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     plaobj:
       type: NUMERIC
       size: 14
@@ -275,23 +270,31 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    pesobj:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    punobj:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    feceval:
+      type: DATE        
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhindniv:
-    #_attributes:
-      #idMethod: native
     codniv:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codind:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     porind:
       type: NUMERIC
       size: 14
@@ -299,42 +302,41 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhinscur:
-    #_attributes:
-      #idMethod: native
     codcur:
       type: VARCHAR
       size: 10
       required: true
-      ##primaryKey: true
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codcar:
       type: VARCHAR
       size: 16
     fecins:
       type: DATE
+    tipper:
+      type: VARCHAR
+      size: 1 
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhnotcur:
-    #_attributes:
-      #idMethod: native
     codcur:
       type: VARCHAR
       size: 10
       required: true
-      ##primaryKey: true
     codemp:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     notcur:
       type: NUMERIC
       size: 14
@@ -345,25 +347,22 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhrelobjind:
-    #_attributes:
-      #idMethod: native
     codevdo:
       type: VARCHAR
       size: 16
       required: true
-      ##primaryKey: true
     codniv:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codobj:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codind:
       type: VARCHAR
       size: 4
@@ -379,15 +378,14 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhtipcur:
-    #_attributes:
-      #idMethod: native
     codtipcur:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     destipcur:
       type: VARCHAR
       size: 250
@@ -397,35 +395,32 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhtitcur:
-    #_attributes:
-      #idMethod: native
     codtit:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     nomtit:
       type: VARCHAR
       size: 250
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   rhvalniv:
-    #_attributes:
-      #idMethod: native
     codniv:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     codvalins:
       type: VARCHAR
       size: 4
       required: true
-      ##primaryKey: true
     porvalins:
       type: NUMERIC
       size: 14
@@ -434,3 +429,60 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  rhprocur:
+    codcur:
+      type: VARCHAR
+      size: 10
+      required: true
+    cedpro:
+      type: VARCHAR
+      size: 10
+      required: true
+    nompro:
+      type: VARCHAR
+      size: 100
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  rhdefran:
+    codran:
+      type: VARCHAR
+      size: 2
+      required: true
+    desran:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  rhdefdetran:
+    codran:
+      type: VARCHAR
+      size: 2
+      required: true
+    valran:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    desdet:
+      type: VARCHAR
+      size: 60
+      required: true  
+    valdes:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    valhas:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true     
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true  

@@ -275,8 +275,8 @@ abstract class BaseAtrubrosPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(AtrubrosPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
+			$criteria->addJoin(AtrubrosPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+	
 		$rs = AtrubrosPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -298,11 +298,11 @@ abstract class BaseAtrubrosPeer {
 		AtrubrosPeer::addSelectColumns($c);
 		$startcol2 = (AtrubrosPeer::NUM_COLUMNS - AtrubrosPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AttipayuPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AttipayuPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtrubrosPeer::ATTIPAYU_ID, AttipayuPeer::ID);
-
+			AttipayuPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AttipayuPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtrubrosPeer::ATTIPAYU_ID, AttipayuPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -316,28 +316,28 @@ abstract class BaseAtrubrosPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = AttipayuPeer::getOMClass();
+							
+				$omClass = AttipayuPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAttipayu(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtrubros($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAttipayu(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtrubros($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtrubross();
-				$obj2->addAtrubros($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtrubross();
+					$obj2->addAtrubros($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

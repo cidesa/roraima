@@ -22,7 +22,13 @@ class biedefmotdisActions extends autobiedefmotdisActions
    *
    */
   public function executeEdit()
-  {
+  {  
+  	$this->corraut = H::getConfApp('corraut','bienes','biedefmotdis');	
+  	!$this->corraut? $this->corraut='' : ''; 
+  		
+  	$this->getUser()->setAttribute('corraut',$this->corraut,'biedefmotdis');  	
+   
+    
 
     parent::executeEdit();
 
@@ -54,6 +60,20 @@ class biedefmotdisActions extends autobiedefmotdisActions
       // $coderr = Compras::salvarAlmaujoc($caajuoc,$grid);
 
       // OJO ----> Eliminar esta linea al modificar este método
+
+      if($Bnmotdis->getCodmot()=='####')
+      {
+      	$c = new Criteria();
+      	$c->addDescendingOrderByColumn(BnmotdisPeer::CODMOT);
+      	$peer = BnmotdisPeer::doSelectOne($c);
+      	if($peer)
+      	{
+      		if(is_numeric($peer->getCodmot()))
+      		{
+      			$Bnmotdis->setCodmot(str_pad(intval($peer->getCodmot())+1,4,'0',STR_PAD_LEFT));
+      		}
+      	}
+      }	
       parent::saveBnmotdis($Bnmotdis);
 
       if(is_array($coderr)){

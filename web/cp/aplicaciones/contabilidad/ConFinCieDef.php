@@ -1,17 +1,18 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
 
-require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
-require_once($_SESSION["x"].'lib/general/funciones.php');
-require_once($_SESSION["x"].'lib/general/tools.php');
+require_once($_SESSION["x"].'/lib/bd/basedatosAdo.php');
+require_once($_SESSION["x"].'/lib/general/funciones.php');
+require_once($_SESSION["x"].'/lib/general/tools.php');
 validar(array(8,11,15));            //Seguridad  del Sistema
 $codemp=$_SESSION["codemp"];
 $bd=new basedatosAdo($codemp);
@@ -27,7 +28,9 @@ $fecha2=date('d-m-Y');
     $etadef = $_POST["sw"];
     $sql    = "update contaba set etadef='$etadef'";
     $bd->actualizar($sql);
-    Mensaje('La Etapa de Definicion se Abierto/Cerrado.');
+    if ($etadef=='A')
+       Mensaje('La Etapa de Definicion se ha Abierto.');
+    else Mensaje('La Etapa de Definicion se ha Cerrado');
   }
 
 ?>
@@ -39,7 +42,6 @@ $fecha2=date('d-m-Y');
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/fecha.js"></script>
@@ -89,7 +91,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
       </tr>
       <tr>
         <td class="box">
-        <form action="ConFinCieDef.php" method="post" name="form1">
+          <form action="ConFinCieDef.php" method="post" name="form1" onsubmit="return false;">
         <table width="100%" align="center" class="bodyline">
                   <td height="189" colspan="3" valign="top"><table width="100%" border="0" cellpadding="0" cellspacing="0">
                     <tr>
@@ -153,7 +155,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
      {
          var etadef='<? echo $etadef;?>';
        if (etadef=='A'){
-         if (confirm('Esta seguro que desea cerrar el Período?'))
+         if (confirm('Esta seguro que desea cerrar la Etapa de Definicion?'))
          {
            document.form1.submit();
          }

@@ -20,7 +20,8 @@ class pagbenficActions extends autopagbenficActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -244,30 +245,29 @@ $this->Bitacora('Guardo');
   }
   }
 
-   /**
-   * Función principal para procesar la eliminación de registros 
-   * en el formulario.
-   *
-   */
   public function executeDelete()
   {
     $this->opbenefi = OpbenefiPeer::retrieveByPk($this->getRequestParameter('id'));
     $this->forward404Unless($this->opbenefi);
 
-    $id=$this->getRequestParameter('id');
-    $c= new Criteria();
-    $c->add(OpordpagPeer::CEDRIF,$this->opbenefi->getCedrif());
-    $dato=OpordpagPeer::doSelect($c);
-    if (!$dato)
+    try
     {
-      $this->deleteOpbenefi($this->opbenefi);
-      $this->Bitacora('Elimino');
+      $tiene=H::getX_vacio('CEDRIF', 'Opordpag', 'CEDRIF', $this->opbenefi->getCedrif());
+      if ($tiene=="")
+      {
+        $this->deleteOpbenefi($this->opbenefi);
+        $this->Bitacora('Elimino');
+      }else {
+        $this->getRequest()->setError('delete', 'No se pudo borrar el registro seleccionado. Debido a que tiene Ordenes de Pago asociadas.');
+        return $this->forward('pagbenfic', 'list');
+}
     }
-    else
+    catch (PropelException $e)
     {
-      $this->setFlash('notice','El Beneficiario no puede ser eliminado, porque esta asociado a una Orden de Pago');
-      return $this->redirect('pagbenfic/edit?id='.$id);
+      $this->getRequest()->setError('delete', 'No se pudo borrar la registro seleccionado. Asegúrese de que no tiene ningún tipo de registros asociados.');
+      return $this->forward('pagbenfic', 'list');
     }
+
     return $this->redirect('pagbenfic/list');
   }
 

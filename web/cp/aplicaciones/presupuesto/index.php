@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 
 //$_SESSION["x"]='C:/AppServ/www/sistemafull/';
@@ -17,7 +18,6 @@ $_SESSION["sesion_usuario"]=session_id();
 <title>SIGA Contabilidad Financiera</title>
 <script  language="JavaScript" src="../../lib/general/js/fecha.js"></script>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <style>
 <!--
   .intd

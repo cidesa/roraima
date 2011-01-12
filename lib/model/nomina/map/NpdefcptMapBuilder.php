@@ -38,7 +38,7 @@ class NpdefcptMapBuilder {
 
 		$tMap->addColumn('NOMCON', 'Nomcon', 'string', CreoleTypes::VARCHAR, true, 100);
 
-		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, true, 16);
+		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, false, 16);
 
 		$tMap->addColumn('OPECON', 'Opecon', 'string', CreoleTypes::VARCHAR, true, 1);
 

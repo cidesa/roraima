@@ -1,0 +1,58 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   cpimppag
+  anchogrid:               850
+  ancho:                   1090
+  filas:                   7
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código Presupuestario
+  tipo:                    t
+  nombrecampo:             codpre
+  html:                    [size="30"]
+  oculta:                  false
+  esgrabable:              true
+  ajaxfila:                true
+  catalogo:                [cpasiini, sf_admin_edit_form, { codpre: 1 }, PreCompro_Cpasiini]
+2:       # Columna 2
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monimp
+  html:                    [size="10"]
+  oculta:                  false
+  esgrabable:              true
+  ajaxfila:                true
+  estotal:                 [true, cppagos_monpag]
+3:       # Columna 3
+  titulo:                  Ajuste
+  tipo:                    m
+  nombrecampo:             monaju
+  html:                    [size="10" readonly="true"]
+  esgrabable:              false
+4:       # Columna 4
+  titulo:                  Neto
+  tipo:                    m
+  nombrecampo:             monnet
+  html:                    [size="10" readonly="true"]
+  esgrabable:              false
+  estotal:                 [true, cppagos_monnet]
+5:       # Columna 5
+  titulo:                  Disponibilidad
+  tipo:                    m
+  nombrecampo:             mondis
+  html:                    [size="10" readonly="true"]
+  esgrabable:              false
+6:       # Columna 6
+  titulo:                  Referencia
+  tipo:                    t
+  nombrecampo:             refere
+  html:                    [size="8" readonly="true"]
+  esgrabable:              false
+7:       # Columna 7
+  titulo:                  Saldo para Pagar
+  tipo:                    m
+  nombrecampo:             salparpag
+  html:                    [size="10" readonly="true"]
+  esgrabable:              false

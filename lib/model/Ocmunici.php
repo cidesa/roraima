@@ -15,6 +15,11 @@
  */
 class Ocmunici extends BaseOcmunici
 {
+  public function __toString()
+  {
+    return $this->codmun;
+  }
+
 	public function getNompai()
 	{
 		return Herramientas::getX('codpai','ocpais','nompai',self::getCodpai());
@@ -23,4 +28,20 @@ class Ocmunici extends BaseOcmunici
 	{
 		return Herramientas::getX('codpai','ocestado','nomedo',self::getCodedo());
 	}
+
+ public static function getMunicipios($pais='',$estado='', $ciudad='')
+  {
+    $t= new Criteria();
+    $t->add(OcmuniciPeer::CODPAI,$pais);
+    $t->add(OcmuniciPeer::CODEDO,$estado);
+    $t->add(OcmuniciPeer::CODCIU,$ciudad);
+    $e = OcmuniciPeer::doSelect($t);
+    if($e){
+      $resp = array();
+      foreach($e as $esta){
+        $resp[$esta->getCodmun()] = $esta->getNommun();
+      }
+      return $resp;
+    }else return array();
+  }
 }

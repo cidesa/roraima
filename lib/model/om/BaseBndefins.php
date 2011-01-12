@@ -93,6 +93,14 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 
 
 	
+	protected $coractmue;
+
+
+	
+	protected $coractinm;
+
+
+	
 	protected $id;
 
 	
@@ -273,10 +281,27 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 
   }
   
-  public function getCorrmue()
+  public function getCorrmue($val=false)
   {
 
-    return $this->corrmue;
+    if($val) return number_format($this->corrmue,2,',','.');
+    else return $this->corrmue;
+
+  }
+  
+  public function getCoractmue($val=false)
+  {
+
+    if($val) return number_format($this->coractmue,2,',','.');
+    else return $this->coractmue;
+
+  }
+  
+  public function getCoractinm($val=false)
+  {
+
+    if($val) return number_format($this->coractinm,2,',','.');
+    else return $this->coractinm;
 
   }
   
@@ -440,6 +465,11 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 	public function setFecper($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecper] from input: " . var_export($v, true));
@@ -456,6 +486,11 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 	
 	public function setFeceje($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -505,8 +540,28 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 	{
 
     if ($this->corrmue !== $v) {
-        $this->corrmue = $v;
+        $this->corrmue = Herramientas::toFloat($v);
         $this->modifiedColumns[] = BndefinsPeer::CORRMUE;
+      }
+  
+	} 
+	
+	public function setCoractmue($v)
+	{
+
+    if ($this->coractmue !== $v) {
+        $this->coractmue = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BndefinsPeer::CORACTMUE;
+      }
+  
+	} 
+	
+	public function setCoractinm($v)
+	{
+
+    if ($this->coractinm !== $v) {
+        $this->coractinm = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BndefinsPeer::CORACTINM;
       }
   
 	} 
@@ -565,9 +620,13 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 
       $this->porrev = $rs->getString($startcol + 19);
 
-      $this->corrmue = $rs->getInt($startcol + 20);
+      $this->corrmue = $rs->getFloat($startcol + 20);
 
-      $this->id = $rs->getInt($startcol + 21);
+      $this->coractmue = $rs->getFloat($startcol + 21);
+
+      $this->coractinm = $rs->getFloat($startcol + 22);
+
+      $this->id = $rs->getInt($startcol + 23);
 
       $this->resetModified();
 
@@ -575,7 +634,7 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 22; 
+            return $startcol + 24; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Bndefins object", $e);
     }
@@ -786,6 +845,12 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 				return $this->getCorrmue();
 				break;
 			case 21:
+				return $this->getCoractmue();
+				break;
+			case 22:
+				return $this->getCoractinm();
+				break;
+			case 23:
 				return $this->getId();
 				break;
 			default:
@@ -819,7 +884,9 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 			$keys[18] => $this->getCodinc(),
 			$keys[19] => $this->getPorrev(),
 			$keys[20] => $this->getCorrmue(),
-			$keys[21] => $this->getId(),
+			$keys[21] => $this->getCoractmue(),
+			$keys[22] => $this->getCoractinm(),
+			$keys[23] => $this->getId(),
 		);
 		return $result;
 	}
@@ -899,6 +966,12 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 				$this->setCorrmue($value);
 				break;
 			case 21:
+				$this->setCoractmue($value);
+				break;
+			case 22:
+				$this->setCoractinm($value);
+				break;
+			case 23:
 				$this->setId($value);
 				break;
 		} 	}
@@ -929,7 +1002,9 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[18], $arr)) $this->setCodinc($arr[$keys[18]]);
 		if (array_key_exists($keys[19], $arr)) $this->setPorrev($arr[$keys[19]]);
 		if (array_key_exists($keys[20], $arr)) $this->setCorrmue($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setId($arr[$keys[21]]);
+		if (array_key_exists($keys[21], $arr)) $this->setCoractmue($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setCoractinm($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setId($arr[$keys[23]]);
 	}
 
 	
@@ -958,6 +1033,8 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(BndefinsPeer::CODINC)) $criteria->add(BndefinsPeer::CODINC, $this->codinc);
 		if ($this->isColumnModified(BndefinsPeer::PORREV)) $criteria->add(BndefinsPeer::PORREV, $this->porrev);
 		if ($this->isColumnModified(BndefinsPeer::CORRMUE)) $criteria->add(BndefinsPeer::CORRMUE, $this->corrmue);
+		if ($this->isColumnModified(BndefinsPeer::CORACTMUE)) $criteria->add(BndefinsPeer::CORACTMUE, $this->coractmue);
+		if ($this->isColumnModified(BndefinsPeer::CORACTINM)) $criteria->add(BndefinsPeer::CORACTINM, $this->coractinm);
 		if ($this->isColumnModified(BndefinsPeer::ID)) $criteria->add(BndefinsPeer::ID, $this->id);
 
 		return $criteria;
@@ -1030,6 +1107,10 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 		$copyObj->setPorrev($this->porrev);
 
 		$copyObj->setCorrmue($this->corrmue);
+
+		$copyObj->setCoractmue($this->coractmue);
+
+		$copyObj->setCoractinm($this->coractinm);
 
 
 		$copyObj->setNew(true);

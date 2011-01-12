@@ -22,13 +22,20 @@ class nomperprestamosActions extends autonomperprestamosActions
    * los datos del grid.
    *
    */
-  public function configGrid()
+  public function configGrid($codnom='', $codcon='')
    {
       $c = new Criteria();
+      if ($codnom==''){
 
   	  $sql = "Select Distinct(A.CodEmp) as codemp,B.NomEmp as nomemp,sum(A.Monto) as monto,sum(A.Cantidad) as cantidad," .
 			"Sum(A.Acumulado) as acumulado, a.id as id From NPAsiConEmp A,NpHojInt B,npasicaremp c " .
 			"where a.codcar=c.codcar and a.codemp=c.codemp and A.CodEmp=B.CodEmp and A.CodCon='" . $this->nptippre->getCodcon() . "' and B.StaEmp = 'A' and c.status='V' Group by a.id,a.Codemp,B.NomEmp Order By A.CodEmp";
+      }else {
+
+      $sql = "Select Distinct(A.CodEmp) as codemp,B.NomEmp as nomemp,sum(A.Monto) as monto,sum(A.Cantidad) as cantidad," .
+			"Sum(A.Acumulado) as acumulado, a.id as id From NPAsiConEmp A,NpHojInt B,npasicaremp c " .
+			"where a.codcar=c.codcar and a.codemp=c.codemp and A.CodEmp=B.CodEmp and A.CodCon='" . $codcon . "' and c.Codnom='".$codnom."' and B.StaEmp = 'A' and c.status='V' Group by a.id,a.Codemp,B.NomEmp,c.codnom Order By A.CodEmp";
+      }
 
       $resp = Herramientas::BuscarDatos($sql,&$per);
 
@@ -93,6 +100,7 @@ class nomperprestamosActions extends autonomperprestamosActions
   public function executeEdit()
   {
     $this->nptippre = $this->getNptippreOrCreate();
+    $this->configGrid();
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -145,7 +153,8 @@ $this->Bitacora('Guardo');
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -197,4 +206,21 @@ $this->Bitacora('Guardo');
          }//if($this->getRequest()->getMethod() == sfRequest::POST)
         return sfView::SUCCESS;
   }
+
+    public function executeAjax()
+    {
+       $cajtexmos=$this->getRequestParameter('cajtexmos');
+       $cajtexcom=$this->getRequestParameter('cajtexcom');
+
+      if ($this->getRequestParameter('ajax')=='1')
+      {
+        $this->nptippre = $this->getNptippreOrCreate();
+        $dato=Herramientas::getX('codnom','Npnomina','nomnom',$this->getRequestParameter('codigo'));
+        $this->configGrid($this->getRequestParameter('codigo'),$this->getRequestParameter('codcon'));
+        $this->nptippre->setObj($this->obj);
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+}
+      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    }
+
 }

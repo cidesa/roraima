@@ -17,6 +17,7 @@ class Cadefart extends BaseCadefart
 {
    	protected $corent="";
 	protected $corsal="";
+        protected $manorddon="";
 
    	public function getNomemp()
 	{
@@ -111,4 +112,32 @@ class Cadefart extends BaseCadefart
   {
   	 return Herramientas::getX('TIPPRC','Cpdocprc','Nomext',self::getTipdocpre());
   }
+
+  public function getManorddon()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almdefart',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('manorddon',$varemp['aplicacion']['compras']['modulos']['almdefart']))
+	       {
+	       	$dato=$varemp['aplicacion']['compras']['modulos']['almdefart']['manorddon'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setManorddon()
+  {
+  	return $this->manorddon;
+  }
+
+   public function getNomdoc()
+  {
+  	 return Herramientas::getX('TIPCOM','Cpdoccom','Nomext',self::getTipodoc());
+  }
+
 }

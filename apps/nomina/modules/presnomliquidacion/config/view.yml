@@ -1,0 +1,17 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Módulo Nómina
+    robots:       index, follow
+    description:  Módulo Nómina
+    keywords:     Módulo Nómina
+    language:     en
+
+  stylesheets:    [main]
+
+  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, observe, ajax, dFilter, nomina/presnomregsalint]
+
+  has_layout:     on
+  layout:         layout

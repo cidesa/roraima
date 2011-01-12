@@ -22,10 +22,10 @@ documentos:
       Unidades:                                             docuni
       Asignar Unidades a Usuarios:                          docusu
       Asignación de Tablas:                                 doctab
-      Ruta de Documentos:                                   docrut
+      Ruta de Documentos:                                   docrutv2
     Documentos:
-      Pendientes:                                             docpen/pendientes
-      Pendientes Por Lotes:                                   docpenlot/create
+      Pendientes:                                             docpenv2/pendientes
+      Pendientes Por Lotes:                                   docpenlot
     Reportes:
       Reporte de Asignación de Tablas:                        repasitab.php
       Reporte de Documentos:                                  repdoc.php

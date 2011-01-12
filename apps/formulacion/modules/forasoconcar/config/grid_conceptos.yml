@@ -1,0 +1,27 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   forconcar
+  anchogrid:               750
+  ancho:                   600
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Seleccione
+  tipo:                    k
+  nombrecampo:             check
+  esgrabable:			         true
+  html:                    [ ]
+2:       # Columna 2
+  titulo:                  Código
+  tipo:                    t
+  nombrecampo:             codcon
+  html:                    ["size=15 readonly=true"]
+  esgrabable:              true  
+2:       # Columna 3
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomcon
+  html:                    ["size=60 readonly=true"]
+  esgrabable:              true

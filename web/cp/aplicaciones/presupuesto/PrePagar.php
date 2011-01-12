@@ -6,13 +6,13 @@
 //    trig_incpag -> Referencia_Causad VARCHAR(100);
 
 /////////////////////////	/////////////////////////	/////////////////////////
-
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
@@ -28,7 +28,8 @@ $tools=new tools();
 $modulo="";
 $forma="Pagar";
 $modulo=$_SESSION["modulo"] . " > Ejecución Presupuestaria > ".$forma;
-
+$deshabfec= $_SESSION["configemp"]["aplicacion"]["presupuesto"]["modulos"]["prepagar"]["bloqfec"];
+$fecha_actual= date('d/m/Y');
 Limpiar();
 Obtener_FormatoPresup();
 if (!empty($_POST["var"]))
@@ -162,8 +163,10 @@ if (!empty($_POST["var"]))
 
        }else{
          $imec='I'; //IncMod = "M"  INCLUIR
-         $salvar='Si';
+         //$salvar='Si';
+         if ($etadef=='A') { $block='S'; $salvar='No'; }else { $block='N'; $salvar='Si'; }
          $fechaValida=true;
+         $fecpag=date('d/m/Y');
         // $fechaValida=validarFechaPresup($fecpag);
        }
     /*}else if ($var=='10'){   //Cuando viene por Refe. PreCompromiso
@@ -238,12 +241,12 @@ if (!empty($_POST["var"]))
      global $msg;
 
      $Eliminar='Si';
-     $sql="select * from tsmovlib where trim(reflib)='$refpag'";
+     $sql="select * from tsmovlib where refpag='$refpag'";
      if (!$tools->buscar_datos($sql))
      {
         $Eliminar="Si";
      }else{
-
+	   $Eliminar='No';
        $msg="El Pagado no puede ser Anulado o Eliminado porque se Originó en Otro Módulo"; }
 
   return $Eliminar;
@@ -277,7 +280,7 @@ if (!empty($_POST["var"]))
      $salvar="No";
      $msg="";
      $Eliminar="No";
-     $fecpag="";
+     $fecpag=date('d/m/Y');
      $despag="";
      $tippag="";
      $refcau="";
@@ -307,6 +310,7 @@ if (!empty($_POST["var"]))
   global $asignacion;
   global $NivelDisponibilidad;
   global $Formar_NivelDisponibilidad;
+  global $etadef;
 
     ////////// Definicion Presupuestaria ///////////
      $sql="select * from cpdefniv where  CodEmp='001'";
@@ -319,6 +323,7 @@ if (!empty($_POST["var"]))
      $anoinicio=substr($tb->fields["fecini"],0,4);
      $fechacierre=$tb->fields["feccie"];
      $anocierre=substr($tb->fields["feccie"],0,4);
+     $etadef=$tb->fields["etadef"];
      if (trim($tb->fields["asiper"])=='S'){ $asignacion=true; } else { $asignacion=false; }
 
     $sql="select LonNiv from CpNiveles where (Select SUM(LonNiv) AS LonNiv2 From CpNiveles where Consec<='$NivelDisponibilidad')  > 0";
@@ -354,7 +359,6 @@ if (!empty($_POST["var"]))
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/funciones.js"></script>
@@ -421,7 +425,18 @@ if (!empty($_POST["var"]))
   function ColocarFormatoLocal(key,valor,id)  //ColocarFormato a una caja de texto
     {
      // if (key.keyCode==13){
-        if (parseInt(id.length)==3){ j=parseInt(id.substring(1,2)); }else{	j=parseInt(id.substring(1,3));	}
+        if (parseInt(id.length)==3)
+        {
+          j=parseInt(id.substring(1,2));
+        }
+        else if (parseInt(id.length)==4)
+        {
+            j=parseInt(id.substring(1,3));
+        }
+        else
+        {
+            j=parseInt(id.substring(1,4));
+        }
         pos=j+1;
         aux="x"+pos+"1";
         aux1="x"+j+"5";
@@ -465,7 +480,11 @@ MM_reloadPage(true);
 </head>
 
 <body onLoad="MM_preloadImages('../../images/rbut_01_f2.gif','../../images/rbut_02_f2.gif','../../images/rbut_03_f2.gif','../../images/rbut_04_f2.gif')">
-<form name="form1" method="post">
+<form name="form1" onsubmit="return false;" method="post">
+      <?  ///// variable oculta que se necesita para guardar //// ?>
+      <!--input name="fecini" type="hidden" id="fecini" value="<? //echo $fecini; ?>" /-->
+  <?  /////////////////////////////////////////////////////// ?>
+  <input type="hidden" name="var" id="var" />
 <table width="100%" align="center">
   <tr>
 <td width="100%">
@@ -513,8 +532,11 @@ MM_reloadPage(true);
                   <td width="12%" height="24" class="form_label_01">Referencia:</td>
                   <td colspan="3" class="form_label_01"><input name="refpag" autocomplete = "off"  type="text" class="imagenInicio" id="refpag" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'"  value="<? print $refpag;?>" size="8" maxlength="8" onKeyPress="buscarenter(event)" onblur="if (document.getElementById('refpag').value!=''){ document.getElementById('refpag').value=document.getElementById('refpag').value.pad(8,'0',0); document.getElementById('var').value='9'; f.submit(); }else{ document.getElementById('refpag').value=document.getElementById('refpag').value.pad(8,'#',0);  document.getElementById('var').value='9'; f.submit();}"></td>
                   <td width="8%" class="form_label_01">Fecha: </td>
-                  <? if ($imec=='I') { ?>
+                  <? if ($imec=='I') { if ($deshabfec=='S') { ?>
+                  <td colspan="2"><input name="fecpag" autocomplete = "off" type="text" class="imagenInicio" id="fecpag" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $fecpag;?>" size="10" onKeyUp = "this.value=formateafecha(this.value);" readonly="true">
+                  <? } else { ?>
                   <td colspan="2"><input name="fecpag" autocomplete = "off" type="text" class="imagenInicio" id="fecpag" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $fecpag;?>" size="10" onKeyUp = "this.value=formateafecha(this.value);" onBlur="validar_fecha()">
+                  	<? }?>
                   <? } else { ?>
           <td colspan="2"><input name="fecpag" autocomplete = "off" type="text" class="imagenInicio" id="fecpag" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $fecpag;?>" size="10" onKeyUp = "this.value=formateafecha(this.value);" readonly="true">
                   <? } ?>
@@ -708,7 +730,7 @@ MM_reloadPage(true);
                   }   //EndIf
                 }
 
-              }else{ $sql="select * from cpimppag where trim(refpag)='$refpag'";	//Para la Busqueda
+              }else{ $sql="select * from cpimppag where trim(refpag)='$refpag' order by codpre";	//Para la Busqueda
 
               if ($tb=$tools->buscar_datos($sql)){
               $totajuste=0;
@@ -755,11 +777,11 @@ MM_reloadPage(true);
                       <?
               }else{
               $i=1;
-              while ($i<=50){
+              while ($i<=150){
               ?>
                       <tr>
                         <td class="grid_line01_br"><input name="x<? print $i;?>0"  autocomplete = "off" type="txt" class="imagenborrar" id="x<? print $i;?>0" onClick="eliminar_grip(<? print $i;?>,6)" value="" size="1" onFocus="this.blur()"></td>
-                        <td  align="left" class="grid_line01_br"><input name="x<? print $i;?>1" autocomplete = "off"  id="x<? print $i;?>1" type="text" class="grid_txt01" size="32"  align="left"  tabindex="2"  onKeyDown="javascript:return dFilter (event.keyCode, this,'<? echo $FormatoPresup; ?>');" onBlur="gridatos1(this.value,this.id,'x<? print $i;?>2','x<? print $i;?>2')" value=""></td>
+                        <td  align="left" class="grid_line01_br"><input name="x<? print $i;?>1" autocomplete = "off"  id="x<? print $i;?>1" type="text" class="grid_txt01" size="32"  maxlength="<? echo strlen($FormatoPresup) ?>" align="left"  tabindex="2"  onKeyDown="javascript:return dFilter (event.keyCode, this,'<? echo $FormatoPresup; ?>');" onBlur="gridatos1(this.value,this.id,'x<? print $i;?>2','x<? print $i;?>2')" value=""></td>
                         <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>2"  autocomplete = "off" id="x<? print $i;?>2" type="text" class="grid_txt02" size="15"  align="right"  tabindex="2"  onClick="QuitarComa(this.value,this.id)" onBlur="ColocarFormatoLocal(event,this.value,this.id); SaldoParaPagar(this.id);ColocarFormatoOnBlueLocal(event,this.value,this.id)" value="0.00"></td>
                         <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>3" autocomplete = "off"  id="x<? print $i;?>3" type="text" class="breadcrumbv2" size="15"   align="right" onKeyPress="actualizar_saldos2()" tabindex="2" value="0.00" ></td>
                         <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>4" autocomplete = "off"  id="x<? print $i;?>4" type="text" class="breadcrumbv2" size="15"  align="right"  onKeyPress="actualizar_saldos2()" tabindex="2" value="0.00"></td>
@@ -782,6 +804,7 @@ MM_reloadPage(true);
                   </div></td>
                 </tr>
               </table>
+              <input type="hidden" name="i" value="<? echo $i-1; ?>">
     </td>
       </tr>
       <tr>
@@ -801,11 +824,7 @@ MM_reloadPage(true);
   </tr>
   <tr>
     <td class="breadcrumb"><span class="style13">Registro de <? echo $forma; ?>...
-  <?  ///// variable oculta que se necesita para guardar //// ?>
-      <!--input name="fecini" type="hidden" id="fecini" value="<? //echo $fecini; ?>" /-->
-  <?  /////////////////////////////////////////////////////// ?>
-  <input type="hidden" name="i" value="<? echo $i-1; ?>">
-  <input type="hidden" name="var" id="var" />
+
     </span></td>
   </tr>
 </table>  </tr>
@@ -819,6 +838,12 @@ MM_reloadPage(true);
       document.form1.totneto.value='<? echo number_format($totneto,2,',','.'); ?>'
      }
 */
+
+ var etapa='<?php echo $etadef;?>';
+  if (etapa=='A')
+  {
+  	alert('La Etapa de Definicion esta Abierta. Debe cerrarla para registrar movimientos.');
+  }
 
   function actualizar_saldos2()
       {
@@ -885,7 +910,7 @@ actualizar_saldos2();</script>
     f=document.form1;
 
       i=1;
-      while (i<=50)
+      while (i<=150)
       {
         var x="x"+i+"1";
         if (document.getElementById(x).value=="")
@@ -897,7 +922,7 @@ actualizar_saldos2();</script>
             //campo2="x";
             foco="x1"+fc;
             img="x1"+im;
-            i=50;
+            i=150;
           }
           else
           {
@@ -906,7 +931,7 @@ actualizar_saldos2();</script>
             img="x"+i+im;
             campo2="x"+i+"5";
             //campo2="x";
-            i=50;
+            i=150;
           }
         }
         i=i+1;
@@ -918,7 +943,7 @@ actualizar_saldos2();</script>
       //window.open(pagina,"","menubar=no,toolbar=no,scrollbars=yes,width=500,height=400,resizable=yes,left=50,top=50");
 
            var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/PrePagar_Cpasiini/clase/Cpasiini/frame/form1/obj1/'+campo+'/campo1/codpre/submit/false';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/PrePagar_Cpasiini/clase/Cpasiini/frame/form1/obj1/'+campo+'/campo1/codpre/submit/false';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
      }
 
@@ -1029,10 +1054,6 @@ actualizar_saldos2();</script>
         }
       }
       }
-      //////////////////////////
-      else if(itemId == '0_print'){
-          print();
-      }
       else if(itemId == '0_new'){
 
       }
@@ -1076,6 +1097,28 @@ actualizar_saldos2();</script>
       else if(itemId == '0_calc'){
         alert("llamando la calculadora");
       }
+      else if(itemId == '0_print'){
+
+        var refpag1 = '<? echo $refpag; ?>';
+        var fecpag1  = '<? echo $fecpag; ?>';
+        var tippag1  = '<? echo $tippag; ?>';
+        var estado = '<? echo $stapag; ?>';
+        if (estado=='A') est='Activo';
+        else if (estado=='N') est='Anulado';
+        else est='';
+        var idfin='x'+'<?php echo $i-1?>'+'1';
+        var codpre1= document.getElementById("x11").value;
+        var codpre2= document.getElementById(idfin).value;
+        var comodin='%%';
+        var ruta='http://'+window.location.host;
+      //	Nueva estructura de los reportes
+      //	pagina=ruta+'/reportes/reportes/contabilidad/r.php=?r=comprobante.php?com1='+codigo+'&com2='+codigo+'&fecha1='+fecha+'&fecha2='+fecha+'&estado='+estado;
+
+	  //	Vieja estructura de los reportes
+      	pagina=ruta+'/reportes/reportes/presupuesto/rprepag.php?refpag1='+refpag1+'&refpag2='+refpag1+'&fecpag1='+fecpag1+'&fecpag2='+fecpag1+'&tippag1='+tippag1+'&tippag2='+tippag1+'&codpre1='+codpre1+'&codpre2='+codpre2+'&comodin='+comodin+'&estado='+est;
+      	window.open(pagina,1,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80");
+
+      }
       else if(itemId == '0_calend'){
         alert("LLamando el Calendario");
       }
@@ -1087,7 +1130,7 @@ actualizar_saldos2();</script>
 
     aToolBar=new dhtmlXToolbarObject('toolbar_zone2','100%',16,"");
     aToolBar.setOnClickHandler(onButtonClick);
-    aToolBar.loadXML("../../lib/general/_toolbarV1.xml")
+    aToolBar.loadXML("../../lib/general/_toolbarV6.xml");
     aToolBar.setToolbarCSS("toolbar_zone2","toolbarText3");
     aToolBar.showBar();
 
@@ -1150,7 +1193,7 @@ actualizar_saldos2();</script>
     //window.open(pagina,"","menubar=no,toolbar=no,scrollbars=yes,width=700,height=500,resizable=yes,left=50,top=50");
 
            var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Prepagar_Cpdocpag/clase/Cpdocpag/frame/form1/obj1/'+campo2+'/obj2/'+campo+'/obj3/'+campo3+'/campo1/tippag/campo2/nomext/campo3/refier/submit/false';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Prepagar_Cpdocpag/clase/Cpdocpag/frame/form1/obj1/'+campo2+'/obj2/'+campo+'/obj3/'+campo3+'/campo1/tippag/campo2/nomext/campo3/refier/submit/false';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
 
    }
@@ -1172,7 +1215,7 @@ actualizar_saldos2();</script>
     {
           //var sql='select nomben as nombre,cedrif as cedula_rif,dirben as dirección from opbenefi  order by cedrif';
           //catalogo2(campo,campo2,foco,sql);
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Preprecom_Opbenefi/clase/Opbenefi/frame/form1/obj1/'+campo2+'/obj2/'+campo+'/campo1/cedrif/campo2/nomben/submit/false';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Preprecom_Opbenefi/clase/Opbenefi/frame/form1/obj1/'+campo2+'/obj2/'+campo+'/campo1/cedrif/campo2/nomben/submit/false';
     }
     }
 
@@ -1220,20 +1263,24 @@ actualizar_saldos2();</script>
       f=document.form1;
       chk="N";
       if (parseInt(id.length)==3)
-      {
-        j=parseInt(id.substring(1,2));
-      }
-      else
-      {
-        j=parseInt(id.substring(1,3));
-      }
+        {
+          j=parseInt(id.substring(1,2));
+        }
+        else if (parseInt(id.length)==4)
+        {
+            j=parseInt(id.substring(1,3));
+        }
+        else
+        {
+            j=parseInt(id.substring(1,4));
+        }
       val=document.getElementById(id).value;
       if (val!="")
       {
           if (j!=1)
           {
             i=1;
-             while (i<=50)
+             while (i<=150)
               {
                 var x="x"+i+"1";
                 if (j!=i)
@@ -1246,7 +1293,7 @@ actualizar_saldos2();</script>
                     document.getElementById(id2).value="";
                     alert("El Título Presupuestario esta Repetido");
                     document.getElementById(id).focus();
-                    i=51;
+                    i=151;
                     chk="S";
                     return true;
                   }
@@ -1276,7 +1323,7 @@ actualizar_saldos2();</script>
             f=document.form1;
             cuantos='PreCompro-Grip';
             anocierre='<? echo $anocierre; ?>'
-            sql="Select nompre as campo1 From CPDEFTIT Where trim(CodPre)=�"+cadena+"�";
+            sql="Select nompre as campo1, codcta as campo2 From CPDEFTIT Where trim(CodPre)=�"+cadena+"�";
             //sql="Select b.nompre as campo1 From cpasiini a, CPDEFTIT b Where a.codpre=b.codpre and trim(a.CodPre)=�"+cadena+"� and a.perpre=�00� and a.monasi>0";
             //sql2="Select sum(a.MonDis) as mondis From CPAsiIni a, CPDEFTIT b Where a.codpre=b.codpre and trim(a.CodPre)=�"+cadena+"� and a.perpre=�00� and a.monasi>0";
             anocierre = '<? echo $anocierre;?>'
@@ -1299,7 +1346,15 @@ actualizar_saldos2();</script>
     {
     //alert(QuitarComaLocal(id));
     //alert(QuitarComaLocal(id2));
-      if (QuitarComaLocal(id) > QuitarComaLocal(id2)){ alert("El Monto a Pagar es mayor al Saldo del Pagado."); return false;}
+      if (QuitarComaLocal(id) > QuitarComaLocal(id2)){
+      	 if(confirm("El Monto a Pagar es mayor al Saldo del Pagado. ¿Desea realizar un Traspaso presupuestario"))
+        {
+         <?php $_SESSION["valpar"]='S';?>
+          window.open("PreSolTrasla.php","","menubar=no,toolbar=no,scrollbars=yes,width=600,height=600,resizable=no,left=200,top=200");
+        }
+
+      	//alert("El Monto a Pagar es mayor al Saldo del Pagado.");
+      	return false;}
     }else{
       alert("El Monto no puede ser Menor o Igual a 0.");
       return false;
@@ -1447,8 +1502,15 @@ actualizar_saldos2();</script>
         while (i<=fila)
         {
           var x2="x"+i+"2";
+          str10= document.getElementById(x2).value.toString();
+          str10= str10.replace(',','');
+          str10= str10.replace(',','');
+          str10= str10.replace(',','');
+          str10= str10.replace(',','');
+          var num10=parseFloat(str10);
 
-          if ($F(x2) > 0)
+
+          if (num10 > 0)
           {
           var x3="x"+i+"3";
           var x4="x"+i+"4";
@@ -1512,7 +1574,7 @@ actualizar_saldos2();</script>
       else
       {
         //alert("Longitud de Fecha inválida");
-        document.getElementById('fecpag').value=mostrarfecha();
+        document.getElementById('fecpag').value='<? echo $fecha_actual; ?>';;
         document.getElementById('fecpag').focus();
       }
 
@@ -1575,7 +1637,7 @@ actualizar_saldos2();</script>
           //window.open(pagina,"","menubar=no,toolbar=no,scrollbars=yes,width=570,height=500,resizable=yes,left=50,top=50");
 
       var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Cppagos_PrePagar/clase/Cppagos/frame/form1/obj1/refpag/obj2/despag/campo1/refpag/campo2/despag/submit/true';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Cppagos_PrePagar/clase/Cppagos/frame/form1/obj1/refpag/obj2/despag/campo1/refpag/campo2/despag/submit/true';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
      }
 
@@ -1587,9 +1649,13 @@ actualizar_saldos2();</script>
         {
           j=parseInt(id.substring(1,2));
         }
+        else if (parseInt(id.length)==4)
+        {
+            j=parseInt(id.substring(1,3));
+        }
         else
         {
-          j=parseInt(id.substring(1,3));
+            j=parseInt(id.substring(1,4));
         }
 
         var id10="x"+j+"10";  //Saldo para Pagar

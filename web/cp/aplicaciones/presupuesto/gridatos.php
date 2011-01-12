@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once ($_SESSION["x"] . 'lib/bd/basedatosAdo.php');
 require_once ($_SESSION["x"] . 'lib/general/funciones.php');
@@ -8,8 +9,27 @@ $codemp = $_SESSION["codemp"];
 $bd = new basedatosAdo($codemp);
 $z = new tools();
 ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Buscando...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script language="JavaScript"  src="../../lib/general/js/funciones.js"></script>
 <script type="text/JavaScript"  src="../../lib/general/js/prototype.js"></script>
+</head>
+<body>
+
+      <script>
+        new Ajax.Request(
+              '/herramientas_dev.php/generales/mantenerSesion',
+              {
+                asynchronous:false,
+                evalScripts:false
+              });
+      </script>
+
+Buscando...
+
 <script>
 function TrimString(sInString)
   {
@@ -25,6 +45,7 @@ $donde = $_GET["donde"];
 $donde2 = $_GET["donde2"];
 $foco = $_GET["foco"];
 $sql = $_GET["sql"];
+$letra = $_GET["letra"];
 $sql2 = $_GET["sql2"];
 $mon = $_GET["mon"];
 $fecha = $_GET["fecha"];
@@ -42,10 +63,23 @@ $referencia = $_GET["referencia"];
 $aumdis = $_GET["aumdis"];
 $monmov = $_GET["monmov"];
 $fecmov = $_GET["fecmov"];
+	$campo = $_GET["campo"];
+	$campo2 = $_GET["campo2"];
+	$campo3 = $_GET["campo3"];
+        $valor = $_GET["valor"];
+$arrbajo = $_GET["arrbajo"];
+$codpre=$_GET["codpre"];
+$validainyecccion=$_GET["valiny"];
+$validaporcentaje=$_GET["valpor"];
+$artley=$_GET["artley"];
+$afect=$_GET["afect"];
 
 if ($cuantos == '1') {
 	gridatos1();
 } else
+	if ($cuantos == '123') {
+		buscar1();
+	} else
 	if ($cuantos == 'ctacontable') {
 		ctacontable();
 	} else
@@ -55,6 +89,9 @@ if ($cuantos == '1') {
 			if ($cuantos == 'dossql') {
 				gridatosDosSql();
 			} else
+				if ($cuantos == 'dossql2') {
+					gridatosDosSqlOtro();
+				} else
 				if ($cuantos == "Busqueda3") {
 					gridatos3(); //Busqueda que devuelve 3 valores
 				} else
@@ -98,10 +135,16 @@ if ($cuantos == '1') {
            f.<?print $colmonto; ?>.value='0.00';
            f.<?print $colmonto; ?>.select;
            close();
+           opener.actualizar_saldos();
+           if(confirm("El Monto a Comprometer es mayor al Disponible. ¿Desea realizar un Traspaso presupuestario"))
+           {
+           	<?php $_SESSION["valpar"]='S';?>
+             window.open("PreSolTrasla.php","","menubar=no,toolbar=no,scrollbars=yes,width=600,height=600,resizable=no,left=200,top=200");
+           }
         </script>
         <?
 
-															Mensaje("El Monto a Precomprometer es mayor al Disponible.");
+															//Mensaje("El Monto a Precomprometer es mayor al Disponible.");
 														}
 
 													} else {
@@ -127,6 +170,9 @@ if ($cuantos == '1') {
 														} else
 															if ($cuantos == 'valfecaju') {
 																ValidarFechaAjuste();
+															}else
+															if ($cuantos == 'valpartra') {
+																ValidarPartidaTraslado();
 															}
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -143,6 +189,7 @@ function dispotraslado() {
 	global $anocierre;
 	global $prenivdis;
 	global $monmov;
+	global $arrbajo;
 	global $id;
 
 	$z = new tools();
@@ -173,9 +220,11 @@ function dispotraslado() {
 
 	if ($tipo == 'P') {
 		$AfeDis = "S";
+		$temp='PRC';
 
 	}
 	elseif ($tipo == 'C') {
+		$temp='COM';
 		$sql = "Select coalesce((case when Afedis='N' then 'N' else 'S' end),'S') as Afedis,
 		        (case when RefPrc='S' then 'P' else 'N' end) as refier from CPDocCom where TipCom='" . $tipdoc . "' ";
 
@@ -191,6 +240,7 @@ function dispotraslado() {
 
 	}
 	elseif ($tipo == 'A') {
+		$temp='CAU';
 		$sql = "Select coalesce((case when Afedis='N' then 'N' else 'S' end),'S') as Afedis,refier from CPDocCau where TipCau='" . $tipdoc . "'";
 		if ($tb = $z->buscar_datos($sql)) {
 			$AfeDis = $tb->fields["afedis"];
@@ -207,6 +257,7 @@ function dispotraslado() {
 
 	}
 	elseif ($tipo == 'G') {
+		$temp='PAG';
 		$sql = "Select coalesce((case when Afedis='N' then 'N' else 'S' end),'S') as Afedis,refier from CPDocPag where TipPag='" . $tipdoc . "'";
 
 		if ($tb = $z->buscar_datos($sql)) {
@@ -225,14 +276,21 @@ function dispotraslado() {
 		}
 
 	}
-
-	if ($AfeDis == "S") {
+	if ($AfeDis == "S" && $arrbajo=="") {
 		//SE DEBE CHEQUEAR POR NIVEL DE DISPONIBILIDAD
 		$codigobuscar = $z->formar_nivelDisponibilidad($codigo, $prenivdis);
-		$sql = "select sum(mondis) as montodis from cpasiini
-		          where codpre like trim('" . $codigobuscar . "%') and anopre='" . $anocierre . "' and perpre='00'";
-	}
-	//echo $sql;
+		$sqla = "select to_char(fecini,'YYYY') as ano, to_char(fecini,'MM') as fecini, to_char(feccie,'MM') as feccie from cpdefniv";
+          if ($tba = $z->buscar_datos($sqla))
+          {
+
+            $fecini = $tba->fields["fecini"];  //MM
+            $feccie = $tba->fields["feccie"];  //MM
+            $ano    = $tba->fields["ano"];     //YYYY
+          }
+		//$sql = "select sum(mondis) as montodis from cpasiini where codpre like trim('" . $codigobuscar . "%') and anopre='" . $anocierre . "' and perpre='00'";
+		$sql="select coalesce(obtener_ejecucion('".$codigobuscar."%','".$fecini."','".$feccie."','".$ano."','".$temp."'),0) as montodis from empresa";
+
+//echo $sql; exit;
 	if ($tb = $z->buscar_datos($sql)) {
 		$ChequearDisponibilidad = $tb->fields["montodis"];
 	} else {
@@ -253,12 +311,109 @@ function dispotraslado() {
     <?
 
 		cerrar();
-		Mensaje('El Monto a Ajustar es mayor al Monto Permitido.');
+		Mensaje('El Monto a Ajustar es mayor al Monto Disponible.');
 	}
+	}
+  		if ($arrbajo == "S") {
+		//SE DEBE CHEQUEAR POR NIVEL DE DISPONIBILIDAD
+		$codigobuscar = $z->formar_nivelDisponibilidad($codigo, $prenivdis);
+		$sqla = "select to_char(fecini,'YYYY') as ano, to_char(fecini,'MM') as fecini, to_char(feccie,'MM') as feccie from cpdefniv";
+          if ($tba = $z->buscar_datos($sqla))
+          {
+
+            $fecini = $tba->fields["fecini"];  //MM
+            $feccie = $tba->fields["feccie"];  //MM
+            $ano    = $tba->fields["ano"];     //YYYY
+          }
+
+		$sql="select sum(monasi +
+      coalesce(obtener_ejecucion(rtrim(codpre),'01','12','".$ano."','TRA'),0) +
+      coalesce(obtener_ejecucion(rtrim(codpre),'01','12','".$ano."','ADI'),0) -
+      coalesce(obtener_ejecucion(rtrim(codpre),'01','12','".$ano."','TRN'),0) -
+      coalesce(obtener_ejecucion(rtrim(codpre),'01','12','".$ano."','DIS'),0) -
+      coalesce(obtener_ejecucion(rtrim(codpre),'01','12','".$ano."','PRC'),0)) as montodis
+      from cpasiini where CodPre = '".$codigobuscar."' and anopre='".$ano."' and perpre='00'";
+
+//echo $sql; exit;
+	if ($tb = $z->buscar_datos($sql)) {
+		$ChequearDisponibilidad = $tb->fields["montodis"];
+	} else {
+		$ChequearDisponibilidad = 0;
+	}
+
+	//echo  $monmov. " p ";
+	//echo  $ChequearDisponibilidad;
+	//exit();
+
+	if ($monmov > $ChequearDisponibilidad) {
+?>
+    <script>
+      var id = '<? print $id; ?>';
+      opener.$(id).value=0;
+      //opener.$(id).focus();
+    </script>
+    <?
+
+		cerrar();
+		Mensaje('El Monto a Ajustar es mayor al Monto Disponible.');
+	}
+	}
+
 	cerrar();
 }
 
 function gridatos1() {
+	global $bd;
+	global $id;
+	global $donde;
+	global $foco;
+	global $sql;
+        global $sql2;
+	$z = new tools();
+
+	$sql = str_replace("?", "+", $sql);
+	$sql = str_replace("¿", "'", $sql);
+	$sql = str_replace("�", "'", $sql);
+ 
+	if ($tb = $z->buscar_datos($sql)) {
+            $sql2b="select codcta from cpdeftit where codpre='$sql2'";
+            if ($tb2 = $z->buscar_datos($sql2b)) {
+              if ($tb2->fields["codcta"]!="") {
+		$valor = $tb->fields["campo1"];
+                ?>
+                  <script>
+                    var donde= '<? print $donde;?>';
+                    var foco= '<? print $foco;?>';
+                    var valor= '<? print $valor;?>';
+                    opener.document.getElementById(donde).value=valor;
+                    opener.document.getElementById(foco).focus();
+                    close();
+                  </script>
+                <? } else {   ?>
+              <script>
+                alert("Codigo Presupuestario No Tiene Cuenta Contable Asociada");
+                var id= '<?=$id;?>';
+                var donde= '<? print $donde;?>';
+                opener.document.getElementById(id).value="";
+                opener.document.getElementById(donde).value="";
+                opener.document.getElementById(id).focus();
+                close();
+              </script>
+            <? } } } else {  ?>
+                          <script>
+                            alert("Codigo Presupuestario No Existe, No tiene Asignación Inicial o hay disponibilidad");
+                            var id= '<?=$id;?>';
+                            var donde= '<? print $donde;?>';
+                            opener.document.getElementById(id).value="";
+                            opener.document.getElementById(donde).value="";
+                            opener.document.getElementById(id).focus();
+                            close();
+                          </script>
+                        <?
+             } 
+}
+
+function buscar1() {
 	global $bd;
 	global $id;
 	global $donde;
@@ -286,7 +441,7 @@ function gridatos1() {
 	} else {
 ?>
       <script>
-        alert("Codigo Presupuestario No Existe o No tiene Asignación Inicial");
+        alert("Esta Cedula/Rif del Beneficiario No Existe.");
         var id= '<?=$id;?>';
         var donde= '<? print $donde;?>';
         opener.document.getElementById(id).value="";
@@ -298,6 +453,7 @@ function gridatos1() {
 
 	}
 }
+
 
 function ctacontable() {
 	global $bd;
@@ -393,14 +549,21 @@ function gridatos3() //Busqueda que devuelve 3 valores
 {
 	global $bd;
 	global $foco;
+    global $campo;
+    global $campo2;
+    global $campo3;
+    global $valor;
 	global $sql;
 	$z = new tools();
 
-	$campo = $_GET["campo"];
+/*	$campo = $_GET["campo"];
 	$campo2 = $_GET["campo2"];
-	$campo3 = $_GET["campo3"];
+	$campo3 = $_GET["campo3"];*/
+        //$sql=$sql." where trim(Tippag)='".$valor."' Order By Tippag";
 	$sql = str_replace("¿", "'", $sql);
 	$sql = str_replace("�", "'", $sql);
+	$sql = str_replace("*", "'", $sql);
+
 
 	if ($tb = $z->buscar_datos($sql)) {
 		$valor1 = $tb->fields["codigo"];
@@ -423,7 +586,7 @@ function gridatos3() //Busqueda que devuelve 3 valores
         opener.document.getElementById(foco).focus();
 
         //Desactivar el boton de Ref. Precompromiso
-        if (valor3=='A'){ opener.document.form1.busq_refpre.disabled=false; } else { opener.document.form1.busq_refpre.disabled=true;  }
+        if (valor3!='N'){ opener.document.form1.busq_refpre.disabled=false; } else { opener.document.form1.busq_refpre.disabled=true;  }
 
         close();
       </script>
@@ -433,7 +596,7 @@ function gridatos3() //Busqueda que devuelve 3 valores
 ?>
       <script>
         alert("No se ha encontrado ningun dato");
-        var id= '<?=$campo;?>';
+        var id= '<? print $campo;?>';
         var donde= '<? print $campo2;?>';
         opener.document.getElementById(id).value="";
         opener.document.getElementById(donde).value="";
@@ -534,6 +697,151 @@ function gridatosDosSql() {
 	}
 }
 
+function gridatosDosSqlOtro() {
+	global $bd;
+	global $id;
+	global $donde;
+	global $foco;
+	global $sql;
+	global $sql2;
+	global $mensaje;
+	global $anocierre;
+	global $letra;
+        global $codpre;
+        global $validainyecccion;
+
+	$MonDis = 1;   //Para que no validara el monto disponible
+        $mensaje1="";
+	$z = new tools();
+
+	$sql = str_replace("¿", "'", $sql);
+	$sql = str_replace("�", "'", $sql);
+	$sql2 = str_replace("¿", "'", $sql2);
+	$sql2 = str_replace("�", "'", $sql2);
+
+        // Validacion para que no permita sacar o inyectar monto al partidas que previamente se le ha hecho
+        if ($validainyecccion=='S')
+        {
+            if ($letra=='f') {
+              $sqla="select * from cpsolmovtra where coddes='".$codpre."'";
+              $mensaje1="El Codigo Presupuestario de Origen ya se le ha inyectado dinero";
+            } else {
+                $sqla="select * from cpsolmovtra where codori='".$codpre."'";
+                $mensaje1="El Codigo Presupuestario de Destino ya se le ha sacado dinero";
+            }
+            if ($tba=$z->buscar_datos($sqla))
+            {
+                Mensaje($mensaje1);
+                ?>
+                      <script>
+                        var id= '<?=$id;?>';
+                        var donde= '<? print $donde;?>';
+                        opener.document.getElementById(id).value="";
+                        opener.document.getElementById(donde).value="";
+                        opener.document.getElementById(id).focus();
+                        close();
+                      </script>
+                <?php
+            }else {
+                if ($letra=='f') {
+                $sqlb="select * from cpsoladidis a, cpsolmovadi b where a.refadi=b.refadi and a.adidis='A' and b.codpre='".$codpre."'";
+                  $mensaje1="El Codigo Presupuestario de Origen ya se le ha inyectado dinero";
+                }else {
+                 $sqlb="select * from cpsoladidis a, cpsolmovadi b where a.refadi=b.refadi and a.adidis='D' and b.codpre='".$codpre."'";
+                   $mensaje1="El Codigo Presupuestario de Destino ya se le ha sacado dinero";
+                }
+                 if ($tbb=$z->buscar_datos($sqlb))
+                 {
+                        Mensaje($mensaje1);
+                        ?>
+                              <script>
+                                var id= '<?=$id;?>';
+                                var donde= '<? print $donde;?>';
+                                opener.document.getElementById(id).value="";
+                                opener.document.getElementById(donde).value="";
+                                opener.document.getElementById(id).focus();
+                                close();
+                              </script>
+                        <?php
+                 } else $mensaje1="";
+            }
+        }else $mensaje1="";
+
+        if ($mensaje1=="") {
+
+	if ($tb = $z->buscar_datos($sql)) {
+        //$valor = $tb->fields["campo1"];
+        ///////////////
+
+        //if ($tb2 = $z->buscar_datos($sql2)) {
+        //Para que no validara el monto disponible
+        if ($anocierre)	 $MonDis = $valor = Monto_disponible_ejecucion($anocierre, $sql2 . '%', '00');
+
+        if ($MonDis >= 0){
+?>
+          <script>
+          var id= '<? print $foco;?>';
+          var letra= '<? print $letra;?>';
+          if (parseInt(id.length)==3)
+            {
+              j=parseInt(id.substring(1,2));
+            }
+            else
+            {
+              j=parseInt(id.substring(1,3));
+            }
+
+            var y=letra+j+"3"  //Posicion del Monto onible
+
+            var mondis= '<? print $MonDis; ?>';
+            var donde = '<? print $donde;?>';
+            var foco  = '<? print $foco;?>';
+            var valor = '<? print $valor;?>';
+
+      //Monto Disponible
+            mondis=parseFloat(mondis);
+            mondis=format(mondis.toFixed(2),'.','.',',');
+            opener.document.getElementById(y).value=mondis;
+
+            opener.document.getElementById(donde).value=valor;
+            opener.document.getElementById(foco).focus();
+            opener.document.getElementById(foco).select();
+            close();
+          </script>
+        <?
+
+
+		} else {
+			Mensaje($mensaje);
+?>
+          <script>
+            var id= '<?=$id;?>';
+            var donde= '<? print $donde;?>';
+            opener.document.getElementById(id).value="";
+            opener.document.getElementById(donde).value="";
+            opener.document.getElementById(id).focus();
+            close();
+          </script>
+        <?
+
+		}
+	} else {
+?>
+      <script>
+        alert("No se ha encontrado ningun dato");
+        var id= '<?=$id;?>';
+        var donde= '<? print $donde;?>';
+        opener.document.getElementById(id).value="";
+        opener.document.getElementById(donde).value="";
+        opener.document.getElementById(id).focus();
+        close();
+      </script>
+    <?
+
+	}
+        }
+}
+
 function disp() {
 	global $bd;
 	global $z;
@@ -587,7 +895,7 @@ function disp() {
 			//print $mon . 'xxxxxx ' . (($tb2->fields["mondis"]) - ($montomodif));
 
 			//if ($mon <= ( $mondis  - $montomodif)) {
-			if ($mon <= ( $mondis)) {
+			if ((float)$mon <= ( $mondis)) {
 				if ((float) $mon <= $mondis) {
 					$hay_disp = true;
 				} else {
@@ -777,12 +1085,17 @@ function disp2() {
               else  //no hay disponibilidad
               {
                 var donde= '<? print $donde;?>';
-                alert("El Monto a Causar es mayor al Disponible");
+           //     alert("El Monto a Causar es mayor al Disponible");
                 opener.document.getElementById('getf').value='N';
                 opener.$(idmontodisponible).value = 0;
                 opener.document.getElementById(id).value="0.00";
                 opener.actualizarsaldos2();
                 close();
+                if(confirm("El Monto a Causar es mayor al Disponible. ¿Desea realizar un Traspaso presupuestario"))
+                {
+                  <?php $_SESSION["valpar"]='S';?>
+                  window.open("PreSolTrasla.php","","menubar=no,toolbar=no,scrollbars=yes,width=600,height=600,resizable=no,left=200,top=200");
+                }
               }
           }
           else//no hay asignacion
@@ -1020,6 +1333,10 @@ function PreCompro_gridatos1() {
 
 	$disponibilidad = 0;
 	if ($tb = $z->buscar_datos($sql)) {
+
+        $sql2A="select codpre from cpasiini where codpre='$sql2'";
+        if ($tb2 = $z->buscar_datos($sql2A)) {
+         if ($tb->fields["campo2"]!="") {
 		$valor = $tb->fields["campo1"];
 
 		//if ($tb = $z->buscar_datos($sql2)) {
@@ -1055,11 +1372,34 @@ function PreCompro_gridatos1() {
         close();
       </script>
     <?
+    } else {
+    ?>
+          <script>
+            alert("Codigo Presupuestario No Tiene Cuenta Contable Asociada");
+            var id= '<?=$id;?>';
+            opener.document.getElementById(id).value="";
+            opener.document.getElementById(id).focus();
+            close();
+          </script>
+        <?
 
+            }
+    } else {
+    ?>
+          <script>
+            alert("Codigo Presupuestario No tiene Asignación Inicial");
+            var id= '<?=$id;?>';
+            opener.document.getElementById(id).value="";
+            opener.document.getElementById(id).focus();
+            close();
+          </script>
+        <?
+
+            }
 	} else {
 ?>
       <script>
-        alert("Codigo Presupuestario No Existe o No tiene Asignación Inicial");
+        alert("Codigo Presupuestario No Existe");
         var id= '<?=$id;?>';
         opener.document.getElementById(id).value="";
         opener.document.getElementById(id).focus();
@@ -1162,6 +1502,7 @@ function MostrarDetalleMovimiento() {
 	global $fecha;
 	global $fecmov;
 	global $cuantos;
+        global $afect;
 
 	$refmov = trim($refmov);
 	$sql2 = str_replace("¿", "'", $sql2);
@@ -1174,7 +1515,8 @@ function MostrarDetalleMovimiento() {
 		$montoimp = 0;
 		if ($refmov == "C") //Compromiso
 			{
-			if (($tbDet->fields["monimp"] - $tbDet->fields["monaju"] - $tbDet->fields["moncau"]) > 0) {
+		  if ($afect=='R') {
+                    if (($tbDet->fields["monimp"] - $tbDet->fields["monaju"] - $tbDet->fields["moncau"]) > 0) {
 				$montoimp = $tbDet->fields["monimp"] - $tbDet->fields["monaju"] - $tbDet->fields["moncau"];
 				$Mostrar = 'S';
 				$refere = $tbDet->fields["refere"];
@@ -1189,11 +1531,27 @@ function MostrarDetalleMovimiento() {
         <?
 
 			}
+                  }else  {
+                        $montoimp = $tbDet->fields["monimp"] - $tbDet->fields["monaju"] - $tbDet->fields["moncau"];
+                        $Mostrar = 'S';
+                        $refere = $tbDet->fields["refere"];
+                        ?>
+                            <script>
+                              var refere= '<? print $refere;?>';
+                              var i= '<? print $pos;?>';
+                              var x4="x"+i+"4";
+                              opener.document.getElementById(x4).value=refere;
+
+                            </script>
+                       <?
+                  }
 		} //if ($refmov=="C")
 
 		if ($refmov == "A") //Causados
 			{
-			if (($tbDet->fields["monimp"] - $tbDet->fields["monaju"] - $tbDet->fields["monpag"]) > 0) {
+		if ($afect=='R') {
+
+                    if (($tbDet->fields["monimp"] - $tbDet->fields["monaju"] - $tbDet->fields["monpag"]) > 0) {
 				$montoimp = $tbDet->fields["monimp"] - $tbDet->fields["monaju"] - $tbDet->fields["monpag"];
 				$Mostrar = 'S';
 				$refprc = $tbDet->fields["refprc"];
@@ -1212,6 +1570,24 @@ function MostrarDetalleMovimiento() {
         <?
 
 			}
+                }else {
+                    $montoimp = $tbDet->fields["monimp"] - $tbDet->fields["monaju"];
+				$Mostrar = 'S';
+				$refprc = $tbDet->fields["refprc"];
+				$refere = $tbDet->fields["refere"];
+            ?>
+                    <script>
+                      var refere= '<? print $refere;?>';
+                      var refprc= '<? print $refprc;?>';
+                      var i= '<? print $pos;?>';
+                      var x4="x"+i+"4";
+                      var x5="x"+i+"5";
+                      opener.document.getElementById(x4).value=refprc;
+                      opener.document.getElementById(x5).value=refere;
+
+                    </script>
+                    <?
+                }
 		} //if ($refmov=="A")
 
 		if ($refmov == "G") //Pagados
@@ -1243,11 +1619,16 @@ function MostrarDetalleMovimiento() {
 
 		if ($refmov == "P") //Precompromisos
 			{
-			if (($tbDet->fields["monimp"] - $tbDet->fields["monaju"]) > 0) {
-				$montoimp = $tbDet->fields["monimp"] - $tbDet->fields["monaju"];
+                    if ($afect=='R') {
+			if (($tbDet->fields["monimp"] - $tbDet->fields["monaju"] - $tbDet->fields["moncom"]) > 0) {
+				$montoimp = $tbDet->fields["monimp"] - $tbDet->fields["monaju"]- $tbDet->fields["moncom"];
 				$Mostrar = 'S';
 
 			}
+                    }else {
+                        $montoimp = $tbDet->fields["monimp"] - $tbDet->fields["monaju"];
+		        $Mostrar = 'S';
+                    }
 		} //if ($refmov=="P")
 
 		if ($Mostrar == "S") //Mostrar los datos en el grid
@@ -1375,6 +1756,56 @@ function ValidarFechaAjuste() {
 	} // if ($cuantos=='detmov')
 }
 
+function ValidarPartidaTraslado() {
+    global $cuantos;
+    global $sql;
+    global $sql2;
+    global $donde;
+    global $donde2;
+    global $letra;
+    global $z;
+
+    $sqla="select conpar from cpdefniv where codemp='001'";
+    $tba = $z->buscar_datos($sqla);
+    if ($tba) {
+        $consec=$tba->fields["conpar"];
+    }else $consec=0;
+
+    $sqlb="select (sum(lonniv)+count(catpar)) as inipartida from cpniveles where catpar='C'";
+    $tbb = $z->buscar_datos($sqlb);
+    if ($tbb) {
+        $inicio=$tbb->fields["inipartida"];
+    }else $inicio=0;
+
+    $sqlc="SELECT (SUM(lonniv)+COUNT(CATPAR)-1) as lonpartida FROM CPNIVELES WHERE CATPAR='P' AND CONSEC<=".$consec."";
+    $tbc = $z->buscar_datos($sqlc);
+    if ($tbc) {
+        $fin=$tbc->fields["lonpartida"];
+    }else $fin=0;
+
+    $codori=substr($sql,$inicio,$fin);
+    $coddes=substr($sql2,$inicio,$fin);
+
+    $sqld="select * from cpcontra where codparma='".$codori."' and codparde='".$coddes."'";
+    $tbd = $z->buscar_datos($sqld);
+    if (!$tbd) { ?>
+    <script type="text/javascript" language="JavaScript">
+        var idori='<?php echo $letra ?>';
+        var iddes='<?php echo $donde ?>';
+        var idmon='<?php echo $donde2 ?>';
+        alert('No esta Permitido hacer traslados de la Partida  <?php echo $codori?> a la partida <?php echo $coddes;?>, debe volver hacer la distribucion');
+        opener.document.getElementById(idori).value="";
+        opener.document.getElementById(iddes).value="";
+        opener.document.getElementById(idmon).value="0,00";
+        close();
+    </script>
+   <? }else {?>
+    <script type="text/javascript" language="JavaScript">
+        close();
+    </script>
+   <?  }
+}
+
 function dispTrasla() {
 	global $bd;
 	global $z;
@@ -1385,6 +1816,28 @@ function dispTrasla() {
 	global $prenivdis;
 	global $codigo;
 	global $referencia;
+        global $validaporcentaje;
+        global $artley;
+        global $letra;
+
+        $no_trasladar=false;
+        if ($validaporcentaje=='S' && $letra=='f') {
+            $sqla="select portra from cpartley where codart='".$artley."'";
+            if ($tba = $z->buscar_datos($sqla)) {
+                $porcentaje=$tba->fields["portra"];
+                $sqlb="select monasi from cpasiini where codpre='".$codigo."' and perpre='00' and anopre='".$anocierre."'";
+                if ($tbb = $z->buscar_datos($sqlb)) {
+                    $monasi=$tbb->fields["monasi"];
+                    $montotras=$monasi*($porcentaje/100);
+                    if ($monacu>$montotras)
+                    {
+                        $no_trasladar=true;
+                    }
+                    
+                }
+
+            }
+        }
 
 	$codigobuscar = $z->formar_nivelDisponibilidad($codigo, $prenivdis);
 
@@ -1422,7 +1875,23 @@ function dispTrasla() {
         var id= '<? print $id;?>';
         var hay_asig='<? print $hay_asig;?>';
         var hay_disp='<? print $hay_disp;?>';
-
+        var no_trasladar='<?php print $no_trasladar; ?>';
+        var validaporcen='<?php print $validaporcentaje; ?>';
+        var sigue=true;
+              if (validaporcen=='S') {
+              if (no_trasladar)
+              {
+                alert("El Monto del Traslado supera el porcentaje permitido a trasladar");
+                opener.document.getElementById('getf').value='N';
+                opener.document.getElementById(id).value="0.00";
+                opener.actualizarsaldos2();
+                opener.document.getElementById(id).focus();
+                opener.document.getElementById(id).select();
+                sigue=false;
+                close();
+              }
+              }
+         if (sigue) {
           if (hay_asig)
           {
               if (hay_disp)
@@ -1451,6 +1920,7 @@ function dispTrasla() {
             opener.document.getElementById(id).select();
             close();
           }
+         }
       </script>
     <?
 
@@ -1505,9 +1975,9 @@ function hayasig() {
 
 		$MonModifi = $ObtenerModificado;
 
-		if ($monmov <= $MonDis) {
+		//if ($monmov <= $MonDis) {
 			//verificar disponibilidad para el periodo
-			if ($monmov <= ($MonDis - $MonModifi)) {
+			//if ($monmov <= ($MonDis - $MonModifi)) {
 				$hay_disp = true;
 				if ($aumdis == "A") {
 					$TotMonDis = $MonDis + $monmov;
@@ -1515,8 +1985,8 @@ function hayasig() {
 				else {
 					$TotMonDis = $MonDis - $monmov;
 				} //else if $aumdis="A"
-			} //if ($monmov <= ($MonDis - $MonModifi))
-			else {
+			//} //if ($monmov <= ($MonDis - $MonModifi))
+			/*else {
 				$hay_disp = false;
 				if ($aumdis == "D") {
 					$TotMonDis = $MonDis - $MonModifi;
@@ -1525,8 +1995,8 @@ function hayasig() {
 					$TotMonDis = $MonDis + $MonModifi;
 				} //else if $aumdis="A"
 			} //else if ($monmov <= ($MonDis - $MonModifi))
-		} //if ($monmov <= $MonDis)
-		else {
+		//} //if ($monmov <= $MonDis)
+		/*else {
 			//Mensaje($MonModifi);
 			 $hay_disp = false;
 			if ($aumdis == "D") {
@@ -1536,7 +2006,7 @@ function hayasig() {
 				$TotMonDis = $MonDis + $MonModifi;
 			} //else if $aumdis="A"
 			/////
-		} //else if ($monmov <= $MonDis)
+		} //else if ($monmov <= $MonDis)*/
 	} else //if ($tb2=$z->buscar_datos($sql2))
 		{
 		$hay_asig = false;
@@ -1593,3 +2063,5 @@ function hayasig() {
 }
 ?>
 
+</body>
+</html>

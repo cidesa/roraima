@@ -29,6 +29,7 @@ echo grid_tag($objAlmUbi);
 <?php echo input_hidden_tag('fila', '') ?>
 <?php echo input_hidden_tag('totalubi', '') ?>
 <?php echo input_hidden_tag('totalubi2', '') ?>
+<?php echo input_hidden_tag('totalm2', '') ?>
 
 <div align="center">
 <?php echo link_to_function(image_tag('/images/salir.gif'), "salvarmontos()") ?>

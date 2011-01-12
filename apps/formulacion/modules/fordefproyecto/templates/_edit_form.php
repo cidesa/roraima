@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author:jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id:_edit_form.php 34632 2009-11-10 14:32:11Z jlobaton $
  */
 // date: 2007/06/27 17:25:29
 ?>
@@ -201,8 +201,8 @@
 	  <?php endif; ?>
 
 	  <?php $value = object_input_tag($fordefpry, 'getTieejeanopry', array (
-	  'size' => 7,
-	  'maxlength' =>5,
+	  'size' => 4,
+	  'maxlength' =>4,
 	  'control_name' => 'fordefpry[tieejeanopry]',
 	)); echo $value ? $value : '&nbsp;' ?>
     </div>
@@ -308,7 +308,7 @@
 
   <?php $value = object_textarea_tag($fordefpry, 'getDesobj', array (
   'disabled' => true,
-  'size' => '80x2',
+  'size' => '100x2',
   'control_name' => 'fordefpry[desobj]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
@@ -1046,6 +1046,37 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
     </th>
+
+    <th>
+    <?php echo label_for('fordefpry[numempfem]', __($labels['fordefpry{numempfem}']), 'class="required" style="width: 250px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{numempfem}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{numempfem}')): ?>
+    <?php echo form_error('fordefpry{numempfem}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($fordefpry, 'getNumempfem', array (
+  'size' => 4,
+  'maxlength' => 4,
+  'control_name' => 'fordefpry[numempfem]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+    </th>
+
+
+    <th>
+    <?php echo label_for('fordefpry[numempmas]', __($labels['fordefpry{numempmas}']), 'class="required" style="width: 250px"') ?>
+  <div class="content<?php if ($sf_request->hasError('fordefpry{numempmas}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('fordefpry{numempmas}')): ?>
+    <?php echo form_error('fordefpry{numempmas}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($fordefpry, 'getNumempmas', array (
+  'size' => 4,
+  'maxlength' => 4,
+  'control_name' => 'fordefpry[numempmas]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+    </th>
   </tr>
 </table>
 
@@ -1204,18 +1235,18 @@
 	 }
   }
  function validargrid(id)
- {
-    var aux = id.split("_");
+ {     
+   var aux = id.split("_");
    var name=aux[0];
    var fila=aux[1];
    var col=parseInt(aux[2]);
 
-   var coldes=col+1;
+    var coldes=col+1;
     var descripcion=name+"_"+fila+"_"+coldes;
 
 	if (organismo_repetido(id))
 	{
-		alert('El organismo se encuentra repetido');
+		alert('El organismo se encuentra asociado a ese Tipo de Contribucion');
 		$(id).value="";
 		$(descripcion).value="";
 
@@ -1230,20 +1261,24 @@
    var fila=aux[1];
    var col=parseInt(aux[2]);
 
-   var organismo=$(id).value;
+   var coltip=col-1;
+   var tipcont=name+"_"+fila+"_"+coltip;
+
+   var tipo_org=$(tipcont).value+'_'+$(id).value;
 
    var organismorepetido=false;
    var am=totalregistros('bx',1,50);
    var i=0;
    while (i<am)
    {
-    var codigo="bx"+"_"+i+"_1";
+    var tipo="bx"+"_"+i+"_1";
+    var codigo="bx"+"_"+i+"_2";
 
-    var organismo2=$(codigo).value;
+    var tipo_org2=$(tipo).value+'_'+$(codigo).value;
 
     if (i!=fila)
     {
-      if (organismo==organismo2)
+      if (tipo_org==tipo_org2)
       {
         organismorepetido=true;
         break;

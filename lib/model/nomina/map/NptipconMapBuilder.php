@@ -56,6 +56,8 @@ class NptipconMapBuilder {
 
 		$tMap->addColumn('FECDES', 'Fecdes', 'int', CreoleTypes::DATE, false, null);
 
+		$tMap->addColumn('CONDIA', 'Condia', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

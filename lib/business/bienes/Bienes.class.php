@@ -6,7 +6,7 @@
  * @subpackage bienes
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -24,7 +24,7 @@ class Bienes
   {
          $codact=$articulo->getCodact();
          $codmue=$articulo->getCodmue();
-
+    if (!$articulo->getId()) {
      $c = new Criteria();
      $c->add(BnregmuePeer::CODACT,$codact);
      $c->add(BnregmuePeer::CODMUE,$codmue);
@@ -32,7 +32,11 @@ class Bienes
 
      if ($objBnregmue)
        return 203;
-     else
+    }
+
+	 if ($articulo->getValini()<=0)
+	  return 208;
+
         return -1;
 
   }
@@ -238,8 +242,11 @@ class Bienes
 
          $c1= new Criteria();
          $c1->add(BndefconPeer::STACTA,'A');
+         $c1->add(BnregmuePeer::STAMUE,'A');
          $c1->addAscendingOrderByColumn(BndefconPeer::CODACT);
          $c1->addAscendingOrderByColumn(BndefconPeer::CODMUE); //Definición Contable
+         $c1->addJoin(BndefconPeer::CODACT, BnregmuePeer::CODACT);
+         $c1->addJoin(BndefconPeer::CODMUE, BnregmuePeer::CODMUE);
          $reg1= BndefconPeer::doSelect($c1);
 
          //Monto  Depreciación Mueble
@@ -258,8 +265,11 @@ class Bienes
 
          $c1= new Criteria();
          $c1->add(BndefconiPeer::STACTA,'A');
+         $c1->add(BnreginmPeer::STAINM,'A');
          $c1->addAscendingOrderByColumn(BndefconiPeer::CODACT);
          $c1->addAscendingOrderByColumn(BndefconiPeer::CODINM); //Definición Contable
+         $c1->addJoin(BndefconiPeer::CODACT, BnreginmPeer::CODACT);
+         $c1->addJoin(BndefconiPeer::CODINM, BnreginmPeer::CODINM);
          $reg1= BndefconiPeer::doSelect($c1);
 
          //Monto  Depreciación Inmueble
@@ -281,6 +291,7 @@ class Bienes
               {
                 $montodep=0;
                 $depmensual=0;
+                $montodeprec=0;
 
                 if ($tipoactivo=='1')
                 {
@@ -292,17 +303,18 @@ class Bienes
                 $difmes=Herramientas :: dateDiff('m', $dato->getFecreg(), $lafechadep) + 1;
                 $difdia=Herramientas :: dateDiff('d', $dato->getFecreg(), $lafechadep);
 
+
                 if ($dato->getDepmen()==0)
                 {
                   if ($dato->getViduti()>0)
                   {
                     $valorbien= (($dato->getValini() + $montomejora) - $dato->getValres());
                     $vidabien= ($dato->getViduti() + $vidamejora);
-                    $depmen= ($valorbien / $vidabien);
+                    $depmensual= ($valorbien / $vidabien);
                   }
-                  else $depmen=0;
+                  else $depmensual=0;
                 }
-                else $depmen=$dato->getDepmen();
+                else $depmensual=$dato->getDepmen();
 
                 if ($difdia>0)
                 {
@@ -317,6 +329,7 @@ class Bienes
                     if ($montomejora>0 && $vidamejora>0)
                     {
                       $difmes= (($dato->getViduti() - $difmes) + 1);
+                      $mesesdep= $difmes;
                       $valorbien= (($dato->getvalini()-$dato->getDepacu()) +$montomejora -$dato->getValres());
                       $vidabien= $difmes + $vidamejora;
 
@@ -461,8 +474,6 @@ class Bienes
     $result= BndepactPeer::doSelectOne($y);
     if ($result)
     {
-       $montomejora=$result[0]["mondismue"];
-       $vidamejora=$result[0]["vidutil"];
        $result->setMonmue($montodepm);
        $result->setMoninm($montodepi);
        $result->save();
@@ -488,7 +499,8 @@ class Bienes
     $descom="DEPRECIACION DE MUE. MES ".$mes." AÑO ".$anno;
 
     $sql="SELECT A.CTAAJUCAR as codcta, SUM(B.DEPMEN) as monto FROM BNDEFCON A, BnRegmue B WHERE A.CODACT=B.CODACT AND
-          A.CODMUE = B.CODMUE AND A.STACTA = 'A' AND B.STAMUE = 'A' AND B.FECEXP >= '".$fechacomp."' AND B.DEPACU > 0 Group By(a.CTAAJUCAR)";
+          A.CODMUE = B.CODMUE AND A.STACTA = 'A' AND B.STAMUE = 'A' --AND B.FECEXP >= '".$fechacomp."'
+              AND B.DEPACU > 0 Group By(a.CTAAJUCAR)";
     if (H::BuscarDatos($sql,&$result))
     {
        $i=0;
@@ -519,7 +531,8 @@ class Bienes
     }
     $result2=array();
     $sql1="SELECT A.CTAAJUABO as codcta, SUM(B.DEPMEN) as monto FROM BNDEFCON A, BnRegmue B WHERE A.CODACT=B.CODACT AND
-           A.CODMUE = B.CODMUE AND A.STACTA = 'A' AND B.STAMUE = 'A' AND B.FECEXP >= '".$fechacomp."' AND B.DEPACU > 0 Group By(a.CTAAJUABO)";
+           A.CODMUE = B.CODMUE AND A.STACTA = 'A' AND B.STAMUE = 'A' --AND B.FECEXP >= '".$fechacomp."'
+               AND B.DEPACU > 0 Group By(a.CTAAJUABO)";
     if (H::BuscarDatos($sql1,&$result2))
     {
       $l=0;
@@ -551,7 +564,8 @@ class Bienes
 
     $result3=array();
     $sql2="SELECT A.CTAAJUCAR as codcta, SUM(B.DEPMEN) as monto FROM BNDEFCONI A, BnRegInm B WHERE A.CODACT=B.CODACT AND
-           A.CODINM = B.CODINM AND A.STACTA = 'A' AND B.STAINM = 'A' AND B.FECEXP >= '".$fechacomp."' AND B.DEPACU > 0 Group By(A.CTAAJUCAR)";
+           A.CODINM = B.CODINM AND A.STACTA = 'A' AND B.STAINM = 'A' --AND B.FECEXP >= '".$fechacomp."'
+               AND B.DEPACU > 0 Group By(A.CTAAJUCAR)";
     if (H::BuscarDatos($sql2,&$result3))
     {
       $p=0;
@@ -583,7 +597,8 @@ class Bienes
 
     $result4=array();
     $sql3="SELECT A.CTAAJUABO as codcta, SUM(B.DEPMEN) as monto FROM BNDEFCONI A, BnRegInm B WHERE A.CODACT=B.CODACT AND
-           A.CODINM = B.CODINM AND A.STACTA = 'A' AND B.STAINM = 'A' AND B.FECEXP >= '".$fechacomp."' AND B.DEPACU > 0 Group By(A.CTAAJUABO)";
+           A.CODINM = B.CODINM AND A.STACTA = 'A' AND B.STAINM = 'A' --AND B.FECEXP >= '".$fechacomp."'
+               AND B.DEPACU > 0 Group By(A.CTAAJUABO)";
     if (H::BuscarDatos($sql3,&$result4))
     {
       $e=0;
@@ -635,10 +650,35 @@ class Bienes
 
   public static function salvarSaveBnregmue($clase)
   {
-  	if ($clase->getId()==''){
-	 	//self::GrabarMovimiento($clase);
+     if ($clase->getCodmue()=='########')
+     {
+      if (Herramientas::getVerCorrelativo('coractmue','bndefins',&$r))
+      {
+        $encontrado=false;
+        while (!$encontrado)
+        {
+          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+          $sql="select codmue from bnregmue where codmue='".$numero."'";
+          if (Herramientas::BuscarDatos($sql,&$result))
+          {
+             $r=$r+1;
+          }
+          else
+          {
+            $encontrado=true;
+          }
+        }
+        $clase->setCodmue(str_pad($r, 8, '0', STR_PAD_LEFT));
+       }
+       Herramientas::getSalvarCorrelativo('coractmue','bndefins','RegistroMuebles',$r,&$msg);
+    }
+     
+      $saveusu=H::getConfApp('saveusu','bienes','bieregactmued');
+     if ($saveusu=='S') {
+	     $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+	  	 $clase->setLogusu($loguse);
   	}
-     $clase->save();
+     $clase->save(); // La Disposición se Graba despues que Graba el Mueble pregunta si desea generarla.
      return -1;
   }
 
@@ -647,21 +687,7 @@ class Bienes
   	$c = new Criteria();
   	$c->add(BnregmuePeer::ID,$id);
   	$clase = BnregmuePeer::doselectone($c);
-
-
   	if ($clase){
-	  //	$tipoinc='';
-	  //	$c = new Criteria();
-	 // 	$per = BndefinsPeer::doselectone($c);
-	 // 	if ($per){
-	//		if ($per->getCodinc()){
-			//  	$c = new Criteria();
-			//  	$c->add(BndisbiePeer::CODDIS,$per->getCodinc());
-			//  	$per2 = BndisbiePeer::doselectone($c);
-		//		if ($per2){
-		//			$tipoinc = $per->getCodinc().' - '.$per2->getDesdis();
-		//		}
-
 			  	$c = new Criteria();
 			  	$c->add(BndisbiePeer::CODDIS,$clase->getCoddis());
 			  	$per2 = BndisbiePeer::doselectone($c);
@@ -670,7 +696,24 @@ class Bienes
 				}
 
 				if (H::getVerCorrelativo('corrmue','bndefins',&$output)){
+        $encontrado=false;
+        while (!$encontrado)
+        {
+          $numero=str_pad($output, 10, '0', STR_PAD_LEFT);
+
+          $sql="select nrodismue from bndismue where codact='".$clase->getCodact()."' and codmue='".$clase->getCodmue()."' and nrodismue='".$numero."'";
+          if (Herramientas::BuscarDatos($sql,&$result))
+          {
+            $output=$output+1;
+          }
+          else
+          {
+            $encontrado=true;
+          }
+        }
+
 			        $ref = str_pad($output, 10, '0', STR_PAD_LEFT);
+        $saveusu=H::getConfApp('saveusu','bienes','bieregactmued');
 	          		if (H::getSalvarCorrelativo('corrmue','bndefins','Registo de Disposicion de Bienes',$output,&$msg)){
 						$c = new Bndismue();
 						$c->setCodact($clase->getCodact());
@@ -681,6 +724,10 @@ class Bienes
 						$c->setMotdismue(Herramientas::getX('coddis','Bndisbie','desdis',$clase->getCoddis()));
 						$c->setCodubiori($clase->getCodubi());
 						$c->setMondismue($clase->getValini());
+                        if ($saveusu=='S') {
+                          $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+                          $c->setLogusu($loguse);
+                        }
 						$c->setStadismue('A');
 						$c->save();
 						return 'Se Genero una Incorporacion con el numero '.$ref;
@@ -689,13 +736,49 @@ class Bienes
 				}else{
 					return 'Error al Buscar el Correlativo';
 				}
-	//		}else{
-		//		return 'No esta definido El Codigo de la Incorporacion, Verifique en el modulo de Definicion de Empresa.';
-			//}
-	 // 	}else{
-	 // 		return 'No esta definido El Codigo de la Incorporacion, Verifique en el modulo de Definicion de Empresa.';
-	 // 	}
   	}
+  }
+
+  public static function validarCodubi($codubi)
+  {
+     $formato=Herramientas::ObtenerFormato('Bndefins','forubi');
+     $posrup1=Herramientas::instr($formato,'-',0,1);
+     $posrup1=$posrup1-1;
+     if (strlen(trim($codubi))<$posrup1)
+     {
+       return 101;
+     }
+
+    Herramientas::FormarCodigoPadre($codubi,&$nivelcodigo,&$ultimo,$formato);
+    $c= new Criteria();
+    $c->add(BnubibiePeer::CODUBI,$ultimo);
+    $bnubibie = BnubibiePeer::doSelectOne($c);
+    if (!$bnubibie)
+    {
+       if ($nivelcodigo == 0) return 100;
+    }
+    return -1;
+  }
+
+    public static function validarCodactivo($codact)
+  {
+     $formato=Herramientas::ObtenerFormato('Bndefins','foract');
+     $posrup1=Herramientas::instr($formato,'-',0,1);
+     $posrup1=$posrup1-1;
+     if (strlen(trim($codact))<$posrup1)
+     {
+       return 101;
+     }
+
+    Herramientas::FormarCodigoPadre($codact,&$nivelcodigo,&$ultimo,$formato);
+    $c= new Criteria();
+    $c->add(BndefactPeer::CODACT,$ultimo);
+    $bnubibie = BndefactPeer::doSelectOne($c);
+    if (!$bnubibie)
+    {
+       if ($nivelcodigo == 0) return 100;
+    }
+    return -1;
   }
 
 }

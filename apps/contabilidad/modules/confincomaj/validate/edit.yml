@@ -1,0 +1,51 @@
+methods:
+  post:
+   - "contabc{numcom}"
+   - "contabc{feccom}"
+   - "contabc{descom}"
+
+names:
+  contabc{numcom}:
+    required:  Yes
+    required_msg: El nÃºmero del comprobante no puede estar en Blanco
+    validators: Validator_existencia, Validator_MyString
+
+  contabc{feccom}:
+    required:  Yes
+    required_msg: La fecha es invalida
+    validators: FechaValidator
+
+  contabc{descom}:
+    required:  Yes
+    required_msg: La descripciÃ³n no puede estar en Blanco
+    validators: Validator_MyString_descom
+
+Validator_existencia:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Contabb
+        column:       codcta
+        unique_error: El nÃºmero del comprobante ya Existe intente con otro.
+
+Validator_MyString:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El nÃºmero de comprobante debe tener minimo 1 caracter
+        max:       8
+        max_error: El nÃºmero de comprobante debe tener mÃ¡ximo 8 caracteres
+
+Validator_MyString_descom:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripciÃ³n no puede tener menos de 1 caracteres
+        max:       1000
+        max_error: La descripciÃ³n no puede tener mas de 1000 caracteres
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha introducida es invalida

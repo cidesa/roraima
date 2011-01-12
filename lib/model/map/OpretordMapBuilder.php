@@ -36,7 +36,7 @@ class OpretordMapBuilder {
 
 		$tMap->addColumn('NUMORD', 'Numord', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addForeignKey('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, 'optipret', 'CODTIP', true, 3);
 
 		$tMap->addColumn('MONRET', 'Monret', 'double', CreoleTypes::NUMERIC, true, 14);
 

@@ -4,14 +4,14 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 40785 2010-09-28 17:03:56Z cramirez $
  */
 // date: 2007/03/16 17:33:55
 ?>
 <?php echo form_tag('vacliquidacion/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 
@@ -96,7 +96,7 @@
 			<strong>Sueldo Normal:</strong>&nbsp;
 			  <?php echo input_tag('nphojint_ultsue',$suenor, array (
 			  'size' => 13,
-			  'readonly'  =>  $nphojint->getId()!='' ? true : false ,  
+			  'readonly'  =>  $nphojint->getId()!='' ? true : false ,
 			  'name' => 'nphojint_ultsue',
 			  'maxlength' => 15,
 			  'onBlur'=> remote_function(array(
@@ -110,10 +110,14 @@
 			&nbsp;&nbsp;&nbsp;
 		</th>
 		<th>
-			<strong>Salario Integral:</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <?php if($sf_user->getAttribute('nomsalint','','vacliquidacion')=='S'){ ?>
+                            <strong>Salario Base:</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <?php }else { ?>
+                            <strong>Salario Integral:</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+                           <?php } ?>
 				  <?php echo input_tag('nphojint_suenor',$ultsue, array (
 				  'size' => 13,
-				  'readonly'  =>  $nphojint->getId()!='' ? true : false ,  
+				  'readonly'  =>  $nphojint->getId()!='' ? true : false ,
 				  'name' => 'nphojint_suenor',
 				  'maxlength' => 15,
 				  'onBlur'=> remote_function(array(
@@ -129,16 +133,16 @@
 		<th>
 			<?php if($factorvacv!=0 && !is_null($factorvacv)){?>
 				<strong>Salario Diario Vacaciones Vencidas <br> (Convencion Colectiva):
-			<?php }else{?>	
+			<?php }else{?>
 			    <strong>Salario Diario Vacaciones Vencidas :
-			<?php }?>	
+			<?php }?>
 			&nbsp;
 			  <?php echo input_tag('nphojint_suediario',$suediario, array (
 			  'size' => 13,
-			  'readonly'  =>  true,  
+			  'readonly'  =>  true,
 			  'name' => 'nphojint_suedia',
 			  'maxlength' => 15,
-			
+
 			));  ?>
 		</th>
 	</tr>
@@ -150,10 +154,10 @@
 			<strong>Ultimo Sueldo:</strong>&nbsp;&nbsp;
 				  <?php echo input_tag('nphojint_sueult',$sueult, array (
 				  'size' => 13,
-				  'readonly'  =>  true,  
+				  'readonly'  =>  true,
 				  'name' => 'nphojint_sueult',
 				  'maxlength' => 15,
-				  
+
 				));  ?>
 				&nbsp;&nbsp;&nbsp;
 		</th>
@@ -161,31 +165,31 @@
 			<strong>Salario Promedio:</strong>&nbsp;
 			  <?php echo input_tag('nphojint_suepro',$suepro, array (
 			  'size' => 13,
-			  'readonly'  =>  true,  
+			  'readonly'  =>  true,
 			  'name' => 'nphojint_suepro',
 			  'maxlength' => 15,
-			
+
 			));  ?>
-			
+
 			&nbsp;&nbsp;&nbsp;
 		</th>
 		<th>
 			<?php if($factorbonvf!=0 && !is_null($factorbonvf)){?>
 				<div id="divsuedia" >
-					<strong>Salario Diario Bono Vacacional Fraccionado <br>(Convencion Colectiva):</strong>&nbsp;	
-			<?php }else{?>	
+					<strong>Salario Diario Bono Vacacional Fraccionado <br>(Convencion Colectiva):</strong>&nbsp;
+			<?php }else{?>
 			    <div id="divsuedia" >
 			    	<strong>Salario Diario Bono Vacacional Fraccionado :</strong>&nbsp;
-			<?php }?>	
-				
+			<?php }?>
+
 			  <?php echo input_tag('nphojint_suedia',$suedia, array (
 			  'size' => 13,
-			  'readonly'  =>  true,  
+			  'readonly'  =>  true,
 			  'name' => 'nphojint_suedia',
 			  'maxlength' => 15,
-			
+
 			));  ?>
-			</div> 			
+			</div>
 		</th>
 	</tr>
 </table>
@@ -236,7 +240,7 @@
           elnum = FloattoFloatVE(elnum);
         }
         else{elnum = '0,00';}
-      $(id).value = elnum;     
+      $(id).value = elnum;
       return true;
     }
     else

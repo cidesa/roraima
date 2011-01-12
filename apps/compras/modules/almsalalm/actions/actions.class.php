@@ -157,10 +157,9 @@ $this->Bitacora('Guardo');
     {
       $this->casalalm->setNomalm($casalalm['nomalm']);
     }
-    if (isset($casalalm['rifpro']))
+    if (isset($casalalm['codpro']))
     {
-      $this->casalalm->setRifpro($casalalm['rifpro']);
-      $this->casalalm->setCodpro(Herramientas::getX_vacio('rifpro','caprovee','codpro',$casalalm['rifpro']));
+      $this->casalalm->setCodpro($casalalm['codpro']);
     }
 
     if (isset($casalalm['nompro']))
@@ -191,7 +190,10 @@ $this->Bitacora('Guardo');
     {
       $this->casalalm->setObserv($casalalm['observ']);
     }
-
+    if (isset($casalalm['codcen']))
+    {
+      $this->casalalm->setCodcen($casalalm['codcen']);
+    }
 
     $this->casalalm->setStasal('A');
   }
@@ -206,6 +208,7 @@ $this->Bitacora('Guardo');
   {
    $cajtexmos=$this->getRequestParameter('cajtexmos');
    $cajtexcom=$this->getRequestParameter('cajtexcom');
+   $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
    if ($this->getRequestParameter('ajax')=='1')
    {
     $datos=split('!',$this->getRequestParameter('codigo'));
@@ -213,6 +216,8 @@ $this->Bitacora('Guardo');
   	$codart=$datos[1];
   	$cajtexmos=$datos[2];
     $codubi="";
+        if ($manartlot=='S')
+          $numlot="";
   	$output = '[["","",""]]';
   	if ($codart=="")
   	{
@@ -244,6 +249,8 @@ $this->Bitacora('Guardo');
            {
              	$codubi=$alm->getCodubi();
              	$nomubi=CadefubiPeer::getDesubicacion($codubi);
+                if ($manartlot=='S')
+                  $numlot=$alm->getNumlot();
              	$output = '[["'.$cajtexmos.'","'.$nomalm.'",""],["'.$cajtexcom.'","6","c"],["'.$cajcodubi.'","'.$codubi.'",""],["'.$cajnomubi.'","'.$nomubi.'",""]]';
            }
            else//el almacen seleccionado no existe para el articulo introducido por el usuario
@@ -261,12 +268,19 @@ $this->Bitacora('Guardo');
 	    }// if ($datos)
 
   	}
+        if ($manartlot=='S')
+        {
+            $this->numlot=$numlot;
   	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+            $this->lotes=$this->ObtenerNumlotxart($codart,$codalm,$codubi);
+        }else {
+            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
+   }
    }
    else  if ($this->getRequestParameter('ajax')=='2')
    {
-     $dato=CaproveePeer::getNompro($this->getRequestParameter('codigo'));
+     $dato=eregi_replace("[\n|\r|\n\r]", "", Herramientas::getXx('Caprovee',array('codpro','estpro'),array($this->getRequestParameter('codigo'),'A'),'Nompro'));
      $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
      return sfView::HEADER_ONLY;
@@ -293,6 +307,8 @@ $this->Bitacora('Guardo');
 	  	$codalm=$datos[1];
 	  	$codart=$datos[2];
 	  	$cajtexmos=$datos[3];
+                if ($manartlot=='S')
+                    $numlot="";
 	  	$output = '[["","",""]]';
 	  	if ($codart=="")
 	  	{
@@ -316,6 +332,8 @@ $this->Bitacora('Guardo');
            	   if ($alm)
            	   {
            	   		$dato=CadefubiPeer::getDesubicacion($codubi);
+                                if ($manartlot=='S')
+                                    $numlot=$alm->getNumlot();
            	   		$javascript="";
            	   }
               else
@@ -335,8 +353,15 @@ $this->Bitacora('Guardo');
 	      }
 
 	  	}
+            if ($manartlot=='S')
+            {
+                $this->numlot=$numlot;
+  		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+  		$this->lotes=$this->ObtenerNumlotxart($codart,$codalm,$codubi);
+            }else {
   		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
+   }
    }
   else if ($this->getRequestParameter('ajax')=='6')
   {
@@ -345,6 +370,8 @@ $this->Bitacora('Guardo');
   	$cajtexmos=$datos[1];
     $codalm="";
     $codubi="";
+    if ($manartlot=='S')
+      $numlot="";
   	$output = '[["","",""]]';
   	if ($codart!="")
   	{
@@ -373,6 +400,8 @@ $this->Bitacora('Guardo');
              	$nomalm=CadefalmPeer::getDesalmacen($codalm);
              	$codubi=$alm->getCodubi();
              	$nomubi=CadefubiPeer::getDesubicacion($codubi);
+                if ($manartlot=='S')
+                    $numlot=$alm->getNumlot();
              	$output = '[["'.$cajtexmos.'","'.$desart.'",""],["'.$cajnomalm.'","'.$nomalm.'",""],["'.$cajcodalm.'","'.$codalm.'",""],["'.$cajcodubi.'","'.$codubi.'",""],["'.$cajnomubi.'","'.$nomubi.'",""]]';
            }
            else//el almacen seleccionado no existe para el articulo introducido por el usuario
@@ -390,8 +419,15 @@ $this->Bitacora('Guardo');
 	    }// if ($datos)
 
   	}//if ($codart!="")
+        if ($manartlot=='S')
+        {
+           $this->numlot=$numlot;
   	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+           $this->lotes=$this->ObtenerNumlotxart($codart,$codalm,$codubi);
+        }else {
+  	   $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
      return sfView::HEADER_ONLY;
+        }
 
   }else  if ($this->getRequestParameter('ajax')=='7')
    {
@@ -400,6 +436,23 @@ $this->Bitacora('Guardo');
      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
      return sfView::HEADER_ONLY;
    }
+   else  if ($this->getRequestParameter('ajax')=='8')
+      {
+        $q= new Criteria();
+        $q->add(CadefcenPeer::CODCEN,$this->getRequestParameter('codigo'));
+        $reg= CadefcenPeer::doSelectOne($q);
+        if ($reg)
+        {
+           $dato=$reg->getDescen(); $javascript="";
+        }else {
+            $dato="";
+            $javascript="alert('El Centro de Costo no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+  }
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+      }
   }
 
   public function executeAutocomplete()
@@ -458,6 +511,8 @@ $this->Bitacora('Guardo');
     	$opciones->setFilas(100);
     }
 
+    $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
+
     $col1 = new Columna('Código Artículo');
     $col1->setTipo(Columna::TEXTO);
     $col1->setEsGrabable(true);
@@ -472,6 +527,9 @@ $this->Bitacora('Guardo');
     {
     	$signo="+";
 	    $col1->setCatalogo('Caregart','sf_admin_edit_form', array('codart'=> 1, 'desart'=> 2),'Caregart_Almentalm');
+            if ($manartlot=='S')
+                $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="toAjaxUpdater(obtenerColumna(this.id,11,'.chr(39).$signo.chr(39).'),6,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signo.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
+            else
 	    $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="toAjax(6,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signo.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
 	    $col1->setHTML('type="text" size="15"  maxlength="'.chr(39).$lonart.chr(39).'"');
     }
@@ -540,10 +598,13 @@ $this->Bitacora('Guardo');
     }
     else
     {
-	    $col6->setHTML('type="text" size="8" maxlength="6"');
+	    $col6->setHTML('type="text" size="8" ');
 	    $col6->setCatalogo('Cadefalm','sf_admin_edit_form',$objalm,'Cadelfalm_Almordrec');
         $signo="-";
     	$signomas="+";
+        if ($manartlot=='S')
+            $col6->setJScript('onBlur="toAjaxUpdater(obtenerColumna(this.id,6,'.chr(39).$signomas.chr(39).'),1,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,5,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
+        else
 	    $col6->setJScript('onBlur="toAjax(1,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,5,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
     }
 
@@ -574,6 +635,9 @@ $this->Bitacora('Guardo');
     	$signomas="+";
 	    $col8->setHTML('type="text" size="8" maxlength="'.chr(39).$this->lonubi.chr(39).'"');
 	    $col8->setCatalogo('Cadefubi','sf_admin_edit_form',$objubi,'Cadefubi_Almdes',$params);
+            if ($manartlot=='S')
+                $col8->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$this->mascaraubi.chr(39).')"  onBlur="toAjaxUpdater(obtenerColumna(this.id,4,'.chr(39).$signomas.chr(39).'),5,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,2,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,7,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
+            else
 	    $col8->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$this->mascaraubi.chr(39).')"  onBlur="toAjax(5,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,2,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,7,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
     }
 
@@ -584,8 +648,52 @@ $this->Bitacora('Guardo');
 	$col9->setAlineacionObjeto(Columna::CENTRO);
 	$col9->setAlineacionContenido(Columna::CENTRO);
     $col9->setHTML('type="text" size="8x1" readonly=true');
+    
+    $col10 = new Columna('Número de Jaulas');
+	$col10->setTipo(Columna::MONTO);
+	$col10->setEsGrabable(true);
+	$col10->setNombreCampo('numjau');
+	$col10->setAlineacionObjeto(Columna::CENTRO);
+	$col10->setAlineacionContenido(Columna::CENTRO);
+    $col10->setHTML('type="text" size="10" ');
+    
+    $col11 = new Columna('Tamaño Métrico');
+	$col11->setTipo(Columna::MONTO);
+	$col11->setEsGrabable(true);
+	$col11->setNombreCampo('tammet');
+	$col11->setAlineacionObjeto(Columna::CENTRO);
+	$col11->setAlineacionContenido(Columna::CENTRO);
+    $col11->setHTML('type="text" size="10" ');	
+	    
+    if($this->recmer='S')
+    {
+    	$col10->setOculta(false);	
+    	$col11->setOculta(false);
+    }
 
 
+    if ($manartlot=='S')
+    {
+        if ($this->casalalm->getId())
+    {
+           $col12 = new Columna('Número de Lote');
+	   $col12->setTipo(Columna::TEXTO);
+	   $col12->setEsGrabable(true);
+	   $col12->setAlineacionObjeto(Columna::CENTRO);
+	   $col12->setAlineacionContenido(Columna::CENTRO);
+	   $col12->setNombreCampo('numlot');
+	   $col12->setHTML('type="text" size="15" readonly=true');
+     }
+     else
+      {
+	    $col12 = new Columna('Nro. de Lote');
+	    $col12->setTipo(Columna::COMBOCLASE);
+	    $col12->setEsGrabable(true);
+	    $col12->setNombreCampo('numlot');
+	    $col12->setCombosclase('Numlotxart');
+	    $col12->setHTML(' ');
+      }
+    }
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
@@ -596,6 +704,10 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col7);
     $opciones->addColumna($col8);
     $opciones->addColumna($col9);
+    $opciones->addColumna($col10);
+    $opciones->addColumna($col11);
+    if ($manartlot=='S')
+        $opciones->addColumna($col12);
     $this->obj = $opciones->getConfig($per);
 
   }
@@ -605,7 +717,8 @@ $this->Bitacora('Guardo');
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -628,26 +741,46 @@ $this->Bitacora('Guardo');
 			    	//verificar en el grid de articulos que todos los articulos pertenezcan al almacen y ubicacion indicada
 			    	//y verificar que al menos un articulo del grid tenga cantidad mayo que cero.
 			    	  $x=$grid[0];
+                                  $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 				      $j=0;
 				      $msg="";
 				      $h=0;
 				      $encontro=false;
 				      while ($j<count($x))
 				      {
+                                        if ($manartlot=='S')
+                                        {
+                                          if ($x[$j]->getCodalm()=="" or  $x[$j]->getCodubi()=="" or  $x[$j]->getNumlot()=="")
+                                             {
+                                                    $msg="Debe indicar el Código del Almacén, la Ubicación y el Nro. del Lote de todos los Artículos del Detalle de la Salida";
+                                                    $this->getRequest()->setError('',$msg);
+                                                            return false;
+                                             }// if ($x[$j]->getCodalm()=="" or  $x[$j]->getCodubi()=="")
+                                        }else {
 				       if ($x[$j]->getCodalm()=="" or  $x[$j]->getCodubi()=="" )
 				      	 {
 				      	 	$msg="Debe indicar el Código del Almacén, la Ubicación de todos los Artículos del Detalle de la Salida";
 				      	 	$this->getRequest()->setError('',$msg);
 			 				return false;
 				      	 }// if ($x[$j]->getCodalm()=="" or  $x[$j]->getCodubi()=="")
+                                        }
 				      	 if ($x[$j]->getCantot()>0)
 				      	 {
 				      	  $encontro=true;
+                                              if ($manartlot=='S')
+                                            {
+                                              if (!Despachos::verificaexisydisp($x[$j]->getCodart(),$x[$j]->getCodalm(),$x[$j]->getCodubi(),H::toFloat($x[$j]->getCantot()),&$msg,$x[$j]->getNumlot()))
+                                              {
+                                                                    $this->getRequest()->setError('',$msg);
+                                                                    return false;
+                                              }
+                                            }else {
 				          if (!Despachos::verificaexisydisp($x[$j]->getCodart(),$x[$j]->getCodalm(),$x[$j]->getCodubi(),H::toFloat($x[$j]->getCantot()),&$msg))
 		                  {
 							$this->getRequest()->setError('',$msg);
 			 				return false;
 		                  }
+                                            }
 				      	 }//if ($x[$j]->getCantot()>0)
 				      	 else
 				      	 {
@@ -703,6 +836,60 @@ $this->Bitacora('Guardo');
      $this->longart=strlen($this->mascaraarticulo);
      $this->mascaraubi= Herramientas::ObtenerFormato('Cadefart','Forubi');
      $this->lonubi=strlen($this->mascaraubi);
+    $this->mansolocor="";
+    $this->bloqfec="";
+    $this->oculeli="";
+    $this->recmer="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almsalalm',$varemp['aplicacion']['compras']['modulos'])){
+           if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almsalalm']))
+	       {
+	       	$this->mansolocor=$varemp['aplicacion']['compras']['modulos']['almsalalm']['mansolocor'];
+	       }
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['compras']['modulos']['almsalalm']))
+	       {
+	       	$this->bloqfec=$varemp['aplicacion']['compras']['modulos']['almsalalm']['bloqfec'];
+	       }
+	       if(array_key_exists('oculeli',$varemp['aplicacion']['compras']['modulos']['almsalalm']))
+	       {
+	       	$this->oculeli=$varemp['aplicacion']['compras']['modulos']['almsalalm']['oculeli'];
+	       }
+	       if(array_key_exists('recmer',$varemp['aplicacion']['compras']['modulos']['almsalalm']))
+	       {
+	       	$this->recmer=$varemp['aplicacion']['compras']['modulos']['almsalalm']['recmer'];
+	       }
+         }
+  }
+
+ public function ObtenerNumlotxart($codart="",$codalm="",$codubi="")
+   {
+    $c = new Criteria();
+    $c->add(CaartalmubiPeer::CODALM,$codalm);
+    $c->add(CaartalmubiPeer::CODUBI,$codubi);
+    $c->add(CaartalmubiPeer::CODART,$codart);
+    $c->add(CaartalmubiPeer::EXIACT,0,Criteria::GREATER_THAN);
+    $c->addAscendingOrderByColumn(CaartalmubiPeer::FECVEN);
+
+    $datos = CaartalmubiPeer::doSelect($c);
+
+    $lotes = array();
+
+    foreach($datos as $obj_datos)
+    {
+     if ($obj_datos->getFecven()!="")
+     {
+        $fecven=date("d/m/Y",strtotime($obj_datos->getFecven()));
+      	$lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot()." - ".$fecven);
+}
+      else
+      	$lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot());
+
+    }
+    return $lotes;
   }
 
 

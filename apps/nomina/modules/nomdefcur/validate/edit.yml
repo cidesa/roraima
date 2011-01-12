@@ -1,0 +1,98 @@
+methods:
+  post:
+   - "rhdefcur{codcur}"
+   - "rhdefcur{descur}"
+   - "rhdefcur{codtipcur}"
+   - "rhdefcur{codpro}"
+   - "rhdefcur{codtit}"
+   - "rhdefcur{fecini}"
+   - "rhdefcur{fecfin}"
+
+names:
+  rhdefcur{codcur}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codcur
+
+  rhdefcur{descur}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_descur
+    
+  rhdefcur{codtipcur}:
+    required:  Yes
+    required_msg: El Tipo no puede estar en Blanco
+    validators: Validator_codtipcur    
+
+  rhdefcur{codpro}:
+    required:  Yes
+    required_msg: El Instituto no puede estar en Blanco
+    validators: Validator_codpro
+    
+  rhdefcur{codtit}:
+    required:  Yes
+    required_msg: El titulo no puede estar en Blanco
+    validators: Validator_codtit       
+   
+  rhdefcur{fecini}:
+    required:  Yes
+    required_msg: La Fecha Inicial no puede estar en Blanco
+    validators: FechaValidator
+
+  rhdefcur{fecfin}:
+    required:  Yes
+    required_msg: La Fecha Final no puede estar en Blanco
+    validators: FechaValidator
+
+Validator_codcur:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Rhdefcur
+        column:       codcur
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_descur:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 100 caracteres
+
+Validator_codtipcur:
+    class: CidesaExistValidator
+    param:
+        class:    Rhtipcur
+        column:   codtipcur
+        unique_error:   El Código del Tipo del Curso no existe  
+ 
+Validator_codpro:
+    class: CidesaExistValidator
+    param:
+        class:    Caprovee
+        column:   codpro
+        unique_error:   El Código del Instituto del Curso no existe
+        
+Validator_codtit:
+    class: CidesaExistValidator
+    param:
+        class:    Rhtitcur
+        column:   codtit
+        unique_error:   El Código del Titulo del Curso no existe
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+        
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          0000000000,00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          9999999999,99

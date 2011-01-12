@@ -70,7 +70,7 @@ class tesmovsalcajActions extends autotesmovsalcajActions
       $params2= array('param1' => $loncat);
 
       $this->columnas[1][0]->setHTML('type="text" size="17" maxlength="'.chr(39).$lonarti.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascara.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;} perderfocus(event,this.id,7);" onBlur="javascript:event.keyCode=13; ajaxarticulos(event,this.id);"');
-      $this->columnas[1][0]->setCatalogo('caregart','sf_admin_edit_form',$obj,'Caregart_Fapedido',$params);
+      $this->columnas[1][0]->setCatalogo('caregart','sf_admin_edit_form',$obj,'Caregart_Forestcos',$params);
       $this->columnas[1][2]->setHTML('type="text" size="17" maxlength="'.chr(39).$loncat.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaracategoria.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;} perderfocus(event,this.id,7);" onBlur="javascript:event.keyCode=13; ajaxcategoria(event,this.id);"');
       $this->columnas[1][2]->setCatalogo('npcatpre','sf_admin_edit_form',$obj2,'Npcatpre_Almsolegr',$params2);
       $this->columnas[1][3]->setHTML(' size="10" onKeyPress=totalizarMonto(event);');
@@ -164,7 +164,7 @@ class tesmovsalcajActions extends autotesmovsalcajActions
         $resul= CaregartPeer::doSelectOne($u);
         if ($resul)
         {
-          $dato1=$resul->getDesart();
+          $dato1=eregi_replace("[\n|\r|\n\r]", "", $resul->getDesart());
           $dato2=number_format($resul->getCosult(),2,',','.');
           $dato3=$resul->getCodpar();
         }
@@ -194,7 +194,15 @@ class tesmovsalcajActions extends autotesmovsalcajActions
          if(!$reg)
          {
          	$javascript="alert('La Código Presupuestario formado por la Categoria y la Partida del articulo no existe --> $codpre'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+         }else {
+           $r1= new Criteria();
+           $r1->add(CpasiiniPeer::CODPRE,$codpre);
+           $reg1= CpasiiniPeer::doSelectOne($r1);
+            if(!$reg1)
+             {
+               $javascript="alert('La Código Presupuestario formado por la Categoria y la Partida del articulo no tiene asignación Inicial --> $codpre'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
          }
+       }
        }
         $output = '[["javascript","'.$javascript.'",""],["","",""],["","",""]]';
        break;
@@ -212,7 +220,8 @@ class tesmovsalcajActions extends autotesmovsalcajActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -232,7 +241,24 @@ class tesmovsalcajActions extends autotesmovsalcajActions
       if (count($x)==0)
       {
         $this->coderr=525;
-      }
+        return false;
+      }      
+      $dateFormat = new sfDateFormat('es_VE');
+      $fecha = $dateFormat->format($this->getRequestParameter('tssalcaj[fecsal]'), 'i', $dateFormat->getInputPattern('d'));
+      $fec1=split("-",$fecha);
+       if(H::validarPeriodoFiscal($fecha)==false)
+       {
+           $this->coderr=543;
+           return false;
+       }
+       if ($this->getRequestParameter('tssalcaj[numcue]')!=""){
+           if (Tesoreria::el_Banco_Esta_Cerrado($this->getRequestParameter('tssalcaj[numcue]'),$fec1[1],$fec1[0]))
+           {
+             $this->coderr=544;
+             return false;
+           }
+       }
+       
 
       if($this->coderr!=-1){
         return false;

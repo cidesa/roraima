@@ -5,16 +5,16 @@
  *
  * @package    Roraima
  * @subpackage nomfalperlle
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 41682 2010-12-09 19:30:41Z dmartinez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class nomfalperlleActions extends autonomfalperlleActions
 {
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -33,6 +33,18 @@ class nomfalperlleActions extends autonomfalperlleActions
     if (isset($npfalper['nrodia']))
     {
       $this->npfalper->setNrodia($npfalper['nrodia']);
+    }
+     if (isset($npfalper['nrohoras']))
+    {
+      $this->npfalper->setNrohoras($npfalper['nrohoras']);
+    }
+     if (isset($npfalper['hordes']))
+    {
+      $this->npfalper->setHordes($npfalper['hordes']);
+    }
+     if (isset($npfalper['horhas']))
+    {
+      $this->npfalper->setHorhas($npfalper['horhas']);
     }
     if (isset($npfalper['observ']))
     {
@@ -148,6 +160,19 @@ class nomfalperlleActions extends autonomfalperlleActions
 	 	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 	 	return sfView::HEADER_ONLY;
 	 }
+         if ($this->getRequestParameter('ajax')=='3')
+	 {
+                $fecdes=$this->getRequestParameter('fecdes');
+                $fechas=$this->getRequestParameter('fechas');
+	 	$sql="select to_date('$fechas','dd/mm/yyyy')-to_date('$fecdes','dd/mm/yyyy') as dias";
+                if(H::BuscarDatos($sql, $rs))
+                    $dias = $rs[0]['dias'];
+                else
+                    $dias=null;
+	 	$output = '[["npfalper_nrodia","'.$dias.'",""]]';
+	 	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	 	return sfView::HEADER_ONLY;
+	 }
 	}
 
   /**
@@ -163,7 +188,7 @@ class nomfalperlleActions extends autonomfalperlleActions
    */
   protected function saveNpfalper($npfalper)
   {
-    $npfalper->save();
+
 	$c= new Criteria();
 	$c->add(NphojintPeer::CODEMP,$npfalper->getCodemp());
 	$nphojint_up = NphojintPeer::doSelectOne($c);
@@ -172,6 +197,8 @@ class nomfalperlleActions extends autonomfalperlleActions
 		$nphojint_up->setStaemp('A');
   	    $nphojint_up->save();
 	}
+        $npfalper->setCodnom(H::getX_vacio('Codemp', 'Npasicaremp', 'Codnom', $npfalper->getCodemp()));
+        $npfalper->save();
   }
     /**
    * Función principal para el manejo de la accion list

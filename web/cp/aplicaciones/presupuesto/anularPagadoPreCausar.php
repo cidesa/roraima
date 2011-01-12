@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require($_SESSION["x"].'lib/bd/basedatosAdo.php');
 require($_SESSION["x"].'lib/general/funciones.php');
@@ -7,7 +8,7 @@ validar(array(15),'presupuesto','precausar.php');            //Seguridad  del Si
 $codemp = $_SESSION["codemp"];
 $bd     = new basedatosAdo($codemp);
 $z      = new tools();
-
+$fecha_actual= date('d/m/Y');
 if (!empty($_GET["ref"]))
 {
   $ref   = $_GET["ref"];
@@ -124,7 +125,7 @@ $fechahoy=date('d/m/Y');
 
 <body>
 
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
   <fieldset>
 
 
@@ -182,7 +183,7 @@ function cancelar()
       else
       {
         //alert("Longitud de Fecha inválida");
-        document.getElementById('fecha').value=mostrarfecha();
+        document.getElementById('fecha').value='<? echo $fecha_actual; ?>';;
         document.getElementById('fecha').focus();
       }
 

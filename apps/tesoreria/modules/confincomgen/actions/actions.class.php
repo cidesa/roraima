@@ -367,7 +367,7 @@ $this->Bitacora('Guardo');
     $opciones->setAncho(870);
     $opciones->setAnchoGrid(900);
     $opciones->setTitulo('Asientos Contable');
-	  $opciones->setFilas(50);
+    $opciones->setFilas($this->contabc->getNumfilas());
     $opciones->setHTMLTotalFilas(' ');
 
     $col1 = new Columna('Código de Cuenta');
@@ -376,7 +376,7 @@ $this->Bitacora('Guardo');
     $col1->setAlineacionObjeto(Columna::IZQUIERDA);
     $col1->setAlineacionContenido(Columna::IZQUIERDA);
     $col1->setNombreCampo('codcta');
-    $col1->setHTML('type="text" size="15" maxlength="25"');
+    $col1->setHTML('type="text" size="25" maxlength="25"');
     $col1->setCatalogo('contabb','sf_admin_edit_form', array('codcta' => 1,'descta' => 2,),'Confincomgen_Contabb');
     $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$formatocontable.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
     $col1->setAjax('confincomgen',1,2);
@@ -386,7 +386,7 @@ $this->Bitacora('Guardo');
     $col2->setAlineacionObjeto(Columna::IZQUIERDA);
     $col2->setAlineacionContenido(Columna::IZQUIERDA);
     $col2->setNombreCampo('Descta');
-    $col2->setHTML('type="text" size="40" disabled=true  maxlength="250" ');
+    $col2->setHTML('type="text" size="50" disabled=true  maxlength="250" ');
 
     $col3 = new Columna('Referencia');
     $col3->setTipo(Columna::TEXTO);
@@ -468,6 +468,18 @@ $this->Bitacora('Guardo');
     $this->monto = '';
     $this->formulario='';
     $this->gencorrel=$this->getUser()->getAttribute('confcorcom','S');
+    $this->bloqfec="";
+		$varemp = $this->getUser()->getAttribute('configemp');
+		if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+		     if(array_key_exists('confincomgen',$varemp['aplicacion']['tesoreria']['modulos'])){
+		       if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['confincomgen']))
+		       {
+		       	$this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['confincomgen']['bloqfec'];
+		       } 
+		     }    
   }
 
 
@@ -580,7 +592,8 @@ $this->Bitacora('Guardo');
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -633,6 +646,11 @@ $this->Bitacora('Guardo');
       	  $this->coderror2=519;
       	  return false;
       	}
+        if (!Tesoreria::validarCuentasGrid($grid))
+      	{
+      	  $this->coderror1=549;
+      	  return false;
+      	}
       }
 
       return true;
@@ -651,8 +669,23 @@ $this->Bitacora('Guardo');
     $cajtexcom=$this->getRequestParameter('cajtexcom');
     if ($this->getRequestParameter('ajax')=='1')
     {
-      $dato=ContabbPeer::getDescta($this->getRequestParameter('codigo'));
-      $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+      $r= new Criteria();
+      $r->add(ContabbPeer::CODCTA,$this->getRequestParameter('codigo'));
+      $reg= ContabbPeer::doSelectOne($r);
+      if ($reg)
+       {
+         if ($reg->getCargab()=='C')
+         {
+            $dato=$reg->getDescta(); $javascript="";
+         }else {
+             $javascript="alert('La Cuenta Contable no es cargable'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+             $dato="";
+    }
+       }else {
+           $javascript="alert('La Cuenta Contable no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+           $dato="";
+       }
+      $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
     }
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;

@@ -1,5 +1,5 @@
 <?
-require_once($_SESSION["x"].'adodb/adodb.inc.php');
+require_once($_SESSION["x"].'/adodb/adodb.inc.php');
 
 class conexionAdo
 {

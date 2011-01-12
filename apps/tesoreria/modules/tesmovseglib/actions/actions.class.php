@@ -26,7 +26,8 @@ class tesmovseglibActions extends autotesmovseglibActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -36,7 +37,8 @@ class tesmovseglibActions extends autotesmovseglibActions
     {
       $this->tsmovlib = $this->getTsmovlibOrCreate();
       try{ $this->updateTsmovlibFromRequest();}catch(Exception $ex){}
-
+    if ($this->tsmovlib->getId()=="")
+    {
       if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tsmovlib[feclib]'))==true)
   	{
       $this->coderror6=529;
@@ -79,10 +81,14 @@ class tesmovseglibActions extends autotesmovseglibActions
     return false;
     }
 
+    if ($this->getRequestParameter('tsmovlib[savemovcero]')!='S' || (H::toFloat($this->getRequestParameter('tsmovlib[monmov]'))>0))
+    {
       if (self::validarGeneraComprobante())
       {
     $this->coderror4=508;
     return false;
+    }
+    }
     }
 
       return true;
@@ -156,6 +162,7 @@ class tesmovseglibActions extends autotesmovseglibActions
       if ($this->getUser()->getAttribute('grabo',null,$this->getUser()->getAttribute('formulario'))=='S')
       {
         $numcom='';
+        if ($tsmovlib->getSavemovcero()!='S' || $tsmovlib->getMonmov()>0) {
         $getform=$this->getRequestParameter('formulario');
         $formulario=split('!',$getform);
 
@@ -189,10 +196,16 @@ class tesmovseglibActions extends autotesmovseglibActions
         }
 
         $this->getUser()->getAttributeHolder()->remove('grabo',$this->getUser()->getAttribute('formulario'));
+        }
         Tesoreria::salvarTesmovseglib($tsmovlib,$numcom);
         Tesoreria::actualiza_Bancos('A', $tsmovlib->getDebcre(), $tsmovlib->getNumcue(), $tsmovlib->getMonmov());
 
+      }else {
+        if ($tsmovlib->getSavemovcero()=='S') {
+          Tesoreria::salvarTesmovseglib($tsmovlib,"");
+          Tesoreria::actualiza_Bancos('A', $tsmovlib->getDebcre(), $tsmovlib->getNumcue(), $tsmovlib->getMonmov());
       }
+    }
     }
 
   }
@@ -207,16 +220,27 @@ class tesmovseglibActions extends autotesmovseglibActions
   {
     $this->tsmovlib = $this->getTsmovlibOrCreate();
     $this->cuentamov="";
+    $this->oculeli="";
+    $this->bloqfec="";
 	$varemp = $this->getUser()->getAttribute('configemp');
 	if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
 	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
 	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
-	     if(array_key_exists('tesmovseglib',$varemp['aplicacion']['tesoreria']['modulos']))
+	     if(array_key_exists('tesmovseglib',$varemp['aplicacion']['tesoreria']['modulos'])){
 	       if(array_key_exists('cuentamov',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
 	       {
 	       	$this->cuentamov=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['cuentamov'];
 	       }
+	     	 if(array_key_exists('oculeli',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
+	       {
+	       	$this->oculeli=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['oculeli'];
+	       }
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
+	       {
+	       	$this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['bloqfec'];
+	       } 
+	     }
 
     ///////////////////////////////////
     /* CHEQUEO PARA VER SI PUEDE O NO ANU/ELIMINAR */
@@ -276,8 +300,10 @@ class tesmovseglibActions extends autotesmovseglibActions
 
     if ($this->tsmovlib->getId()!='')
     {
+       $agreeti=H::getConfApp('agrstausu', 'tesoreria', 'tesmovseglib');
+       $nomusu=H::getX('LOGUSE','Usuarios','Nomuse',$this->tsmovlib->getLoguse());
       if (strtoupper($this->tsmovlib->getStatus())=='A')
-      {
+      {        
         $this->eti="ANULADO";
         $this->color='#CC0000';
         $this->anular='N';
@@ -286,12 +312,14 @@ class tesmovseglibActions extends autotesmovseglibActions
       {
         if (strtoupper($this->tsmovlib->getStacon())=='C')
         {
-          $this->eti="CONCILIADO";
+          if ($agreeti=='S') $this->eti="CONCILIADO. REALIZADO POR EL USUARIO ".$nomusu;
+          else $this->eti="CONCILIADO";
           $this->color='#0000CC';
         }
         if (strtoupper($this->tsmovlib->getStacon())=='N')
         {
-          $this->eti="NO CONCILIADO";
+          if ($agreeti=='S') $this->eti="NO CONCILIADO. REALIZADO POR EL USUARIO ".$nomusu;
+          else  $this->eti="NO CONCILIADO";
           $this->color='#0000CC';
         }
       }
@@ -388,7 +416,7 @@ $this->Bitacora('Guardo');
       $tsmovlib = TsmovlibPeer::retrieveByPk($this->getRequestParameter($id));
       $this->forward404Unless($tsmovlib);
 
-    $this->configGrid($tsmovlib->getReflib());
+    $this->configGrid($tsmovlib->getReflib(),$tsmovlib->getNumcue(),$tsmovlib->getTipmov());
     }
 
     return $tsmovlib;
@@ -440,8 +468,8 @@ $this->Bitacora('Guardo');
 		       	$this->cuentamov=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['cuentamov'];
 		       }
          if ($this->cuentamov=='S')
-           $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tsmovlib_debcre","'.$dato2.'",""],["ctaeje","'.$dato3.'",""]]';
-          else $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tsmovlib_debcre","'.$dato2.'",""],["tstipmov_codcon","'.$dato3.'",""]]';
+           $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tsmovlib_debcre","'.$dato2.'",""],["tsmovlib_ctaeje","'.$dato3.'",""]]';
+          else $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tsmovlib_debcre","'.$dato2.'",""],["tsmovlib_codcon","'.$dato3.'",""]]';
             $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
       }
@@ -475,10 +503,10 @@ $this->Bitacora('Guardo');
           {
             $this->getUser()->getAttributeHolder()->remove('formulario');
             $grabar=$this->getRequestParameter('grabar');
-            $reftra=$this->getRequestParameter('reftra');
+            $reftra=substr($this->getRequestParameter('reftra'),0,8);
             //$numcom=$this->getRequestParameter('numcom');
             $fectra=$this->getRequestParameter('fectra');
-            $destra= $this->getRequestParameter('destra');
+            $destra= str_replace('*','%',$this->getRequestParameter('destra'));
             $ctas=$this->getRequestParameter('ctas');
             $mov=$this->getRequestParameter('mov');
             $divmont=split('_',$this->getRequestParameter('montos'));
@@ -524,7 +552,7 @@ $this->Bitacora('Guardo');
             $reftra=$this->getRequestParameter('reftra');
             //$numcom=$this->getRequestParameter('numcom');
             $fectra=$this->getRequestParameter('fectra');
-            $destra= $this->getRequestParameter('destra');
+            $destra= str_replace('*','%',$this->getRequestParameter('destra'));
             $ctas=$this->getRequestParameter('ctas');
             $mov=$this->getRequestParameter('mov');
             $divmont=split('_',$this->getRequestParameter('montos'));
@@ -637,6 +665,22 @@ $this->Bitacora('Guardo');
 
       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
       return sfView::HEADER_ONLY;
+    }elseif ($this->getRequestParameter('ajax')=='6'){
+
+      $javascript=""; $dato="";
+      $q= new Criteria();
+      $q->add(OpbenefiPeer::CEDRIF,$this->getRequestParameter('codigo'));
+      $result= OpbenefiPeer::doSelectOne($q);
+      if ($result)
+       {
+         $dato=$result->getNomben();
+       }else{
+           $javascript="alert('El Beneficiario no existe'); $('tsmovlib_cedrif').value=''; $('tsmovlib_cedrif').focus();";
+       }
+
+      $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+      return sfView::HEADER_ONLY;
     }
   }
 
@@ -686,11 +730,14 @@ $this->Bitacora('Guardo');
    * los datos del grid.
    *
    */
-  public function configGrid($numche='')
+  public function configGrid($numche='',$numcue='',$tipmov='')
   {
 
       $c = new Criteria();
-    $c->add(OpordpagPeer::NUMCHE,$numche);
+    $c->add(OpordchePeer::NUMCHE,$numche);
+    $c->add(OpordchePeer::CODCTA,$numcue);
+    $c->add(OpordchePeer::TIPMOV,$tipmov);
+    $c->addJoin(OpordpagPeer::NUMORD,OpordchePeer::NUMORD);
     $obj = OpordpagPeer::doSelect($c);
 
       $opciones = new OpcionesGrid();
@@ -761,6 +808,28 @@ $this->Bitacora('Guardo');
     $this->compadic='';
     $this->eti='';
     $this->color='';
+  $this->cuentamov="";
+    $this->oculeli="";
+    $this->bloqfec="";
+	$varemp = $this->getUser()->getAttribute('configemp');
+	if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('tesmovseglib',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('cuentamov',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
+	       {
+	       	$this->cuentamov=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['cuentamov'];
+	       }
+	     	 if(array_key_exists('oculeli',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
+	       {
+	       	$this->oculeli=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['oculeli'];
+	       }
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
+	       {
+	       	$this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['bloqfec'];
+	       } 	        
+	     }
       $sql="select * from tsmovban where numcue='".$this->tsmovlib->getNumcue()."' and refban='".$this->tsmovlib->getReflib()."' and tipmov= '".$this->tsmovlib->getTipmov()."'";
     if (!Herramientas::BuscarDatos($sql,&$tsmovban))
   {
@@ -948,7 +1017,18 @@ $this->Bitacora('Guardo');
     {
       $this->tsmovlib->setDebcre($tsmovlib['debcre']);
     }
-
+    if (isset($tsmovlib['cedrif']))
+    {
+      $this->tsmovlib->setCedrif($tsmovlib['cedrif']);
+    }
+    if (isset($tsmovlib['ctaeje']))
+    {
+      $this->tsmovlib->setCtaeje($tsmovlib['ctaeje']);
+    }
+    if (isset($tsmovlib['savemovcero']))
+    {
+      $this->tsmovlib->setSavemovcero($tsmovlib['savemovcero']);
+  }
   }
 
     public function executeEliminar()
@@ -1001,8 +1081,13 @@ $this->Bitacora('Guardo');
               if ($escheque==1)
               {
                 $this->msg=$this->msg.Tesoreria::anular_Eliminar_Cheque('E',$numcue,$reflib);
+                if ($this->msg==''){
                 $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+                if ($this->msg==''){
                 $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('E',$reflib,$numcue,$feclib,$refpag);
+                }
+                }
+
               }
               else
               {
@@ -1012,11 +1097,14 @@ $this->Bitacora('Guardo');
                   if ($tabla[0]["refier"]=='A')
                   {
                     $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+                    if ($this->msg==''){
                     $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('E',$reflib,$numcue,$feclib,$refpag);
+                    }
                   }
                   else
                   {
                     $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('E',$reflib,$numcue,$feclib,$refpag);
+                    if ($this->msg==''){
                   $c = new Criteria();
                   $c->add(OpdetperPeer::NUMCHE,$reflib);
                   $c->add(OpdetperPeer::CTABAN,$numcue);
@@ -1028,9 +1116,11 @@ $this->Bitacora('Guardo');
                     $opdetper->setNumche(null);
                     $opdetper->save();
                   }
+                    }
                   }
                 }
               }
+            if ($this->msg==''){
               $c = new Criteria();
             $c->add(TsmovlibPeer::NUMCUE,$numcue);
             $c->add(TsmovlibPeer::REFLIB,$reflib);
@@ -1042,10 +1132,12 @@ $this->Bitacora('Guardo');
             Tesoreria::actualiza_Bancos('E',$debcre,$numcue,$monmov);
             Tesoreria::anular_Eliminar('E',$numcomadi,$feccomadi,$compadic,$feccom,$numcom,$numcom,$feclib);
             $this->SalvarBitacora($ideeli ,'Elimino');
+            } else { return $this->msg; }
             }
             else
             {
-              if ($tsmovlib[0]["tipmov"]=='ANUC')
+               $savemovcero=H::getConfApp('savemovcero', 'tesoreria', 'tesmovseglib');
+              if ($tsmovlib[0]["tipmov"]=='ANUC' || $savemovcero=='S')
               {
 
               $c = new Criteria();
@@ -1084,6 +1176,20 @@ $this->Bitacora('Guardo');
 
     $dateFormat = new sfDateFormat($this->getUser()->getCulture());
     $fec = $dateFormat->format($feclib, 'i', $dateFormat->getInputPattern('d'));
+    
+   $this->bloqfec="";
+		$varemp = $this->getUser()->getAttribute('configemp');
+		if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+		     if(array_key_exists('tesmovseglib',$varemp['aplicacion']['tesoreria']['modulos'])){
+		       if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']))
+		       {
+		       	$this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglib']['bloqfec'];
+		       } 
+		     }    
+    
 
     $c = new Criteria();
     $c->add(TsmovlibPeer::NUMCUE,$numcue);
@@ -1104,7 +1210,9 @@ $this->Bitacora('Guardo');
     $aux=split("-",$feclib_m);
     $feclib=$aux[2].'/'.$aux[1].'/'.$aux[0];
     $fecanu=$this->getRequestParameter('fecanu');
-    //$fecanu=date('d/m/Y');
+    $dateFormat = new sfDateFormat('es_VE');
+    $fecanu_m= $dateFormat->format($this->getRequestParameter('fecanu'), 'i', $dateFormat->getInputPattern('d'));
+
     $tipmov=$this->getRequestParameter('tipmov');
     $numcom=$this->getRequestParameter('numcom');
     $desanu=$this->getRequestParameter('desanu');
@@ -1115,32 +1223,51 @@ $this->Bitacora('Guardo');
     $fechacom=$this->getRequestParameter('fechacom');
     $numcom=$this->getRequestParameter('numcom');
     $numcom2=$this->getRequestParameter('numcom2');
-    //if($numcom2=='********')
-    $numcom2 = "########";
+    if($numcom2=='********')
+       $numcom2 = "########";
     if($numcom=='********') $numcom = "########";
     $this->msgpercer="";
     $idmovseglib=$this->getRequestParameter('id');
     $this->id=$idmovseglib;
     $this->msg='';
 
-   if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tsmovlib[feclib]'))==true)
+    $anoactual=date('Y');
+    $anofeclib=substr($feclib_m,0,4);
+   if ($fecanu_m>date('Y-m-d'))
+   {
+       $coderror=565;
+     $this->msgpercer = Herramientas::obtenerMensajeError($coderror);
+   }
+   elseif ($fecanu_m<$feclib_m)
+   {
+       $coderror=571;
+     $this->msgpercer = Herramientas::obtenerMensajeError($coderror);
+   }
+   else {
+  if ($anofeclib==$anoactual)
+  {
+   if (Tesoreria::validaPeriodoCerrado($fecanu)==true)
    {
      $coderror=529;
      $this->msgpercer = Herramientas::obtenerMensajeError($coderror);
    }
    else
    {
-    $sql="Select stacon,tipmov,monmov,codcta,numcue From TsMovLib Where NumCue = '".$numcue."' And RefLib = '".$reflib."' and TipMov = '".$tipmov."' ";
+    $sql="Select stacon,tipmov,monmov,codcta,numcue,cedrif From TsMovLib Where NumCue = '".$numcue."' And RefLib = '".$reflib."' and TipMov = '".$tipmov."' ";
     if (Herramientas::BuscarDatos($sql,&$tsmovlib))
       {
-        if (!$tsmovlib[0]["stacon"]!='C')
+        if ($tsmovlib[0]["stacon"]!='C')
         {
           $escheque=H::getX('CODTIP','Tstipmov','Escheque',$tsmovlib[0]["tipmov"]);
           if ($escheque==1)
           {
             $this->msg=$this->msg.Tesoreria::anular_Eliminar_Cheque('A',$numcue,$reflib);
+            if ($this->msg==''){
             $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+            if ($this->msg==''){
             $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu, $refpag);
+          }
+            }
           }
           else
           {
@@ -1150,12 +1277,14 @@ $this->Bitacora('Guardo');
               if ($tabla[0]["refier"]=='A')
               {
                 $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+                if ($this->msg==''){
                 $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu,$refpag);
+              }
               }
               else
               {
                 $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu,$refpag);
-
+             if ($this->msg==''){
               $c = new Criteria();
               $c->add(OpdetperPeer::NUMCHE,$reflib);
               $c->add(OpdetperPeer::CTABAN,$numcue);
@@ -1170,16 +1299,17 @@ $this->Bitacora('Guardo');
               }
             }
           }
+          }
           $sql3="select debcre from tstipmov where codtip='".$tipmov."'";
           if (Herramientas::BuscarDatos($sql3,&$tstipmov))
           {
             $afecta=$tstipmov[0]["debcre"];
           }
-
+          if ($this->msg==''){
           // Generar Nuevo comprobante contable
-          if($numcom2=='########') $numcom2=Comprobante::Buscar_Correlativo();
-          $this->msg=$this->msg.Tesoreria::anular_Eliminar('A',$numcomadi,$feccomadi,$compadic,$fechacom,$numcom,$numcom2,$fecanu,$reflib2);
-
+          //if($numcom2=='########') $numcom2=Comprobante::Buscar_Correlativo();
+          $this->msg=$this->msg.Tesoreria::anular_Eliminar('A',$numcomadi,$feccomadi,$compadic,$fechacom,$numcom,&$numcom2,$fecanu,$reflib2);
+          if ($this->msg==''){
           // GENERAR NUEVO MOVIMIENTO SEGUN LIBRO
           $tsmovlibA= new Tsmovlib();
           $dateFormat = new sfDateFormat($this->getUser()->getCulture());
@@ -1189,6 +1319,7 @@ $this->Bitacora('Guardo');
           $tsmovlibA->setReflib($reflib2);
           $tsmovlibA->setRefpag($refpag);
           $tsmovlibA->setFeclib($fec);
+          $tsmovlibA->setFecing(date('Y-m-d'));
           if ($afecta=='C')
           {
             $tsmovlibA->setTipmov('ANUC');
@@ -1204,15 +1335,175 @@ $this->Bitacora('Guardo');
           $tsmovlibA->setFeccom($fec);
           $tsmovlibA->setStatus('C');
           $tsmovlibA->setStacon('C');
-          $tsmovlibA->setDeslib('Cheque Anulado');
+          $tsmovlibA->setDeslib('Movimiento Anulado');
           $tsmovlibA->setReflibpad($reflib);
           $tsmovlibA->setTipmovpad($tipmov);
+          $tsmovlibA->setCedrif($tsmovlib[0]["cedrif"]);
           $tsmovlibA->save();
 
           Tesoreria::actualiza_Bancos('A','D',$numcue,$monmov);
+          }
+          }
         }//if (!$tsmovlib[0]["stacon"]!='C')
       }//  if (Herramientas::BuscarDatos($sql,&$tsmovlib))
      }//else if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tsmovlib[feclib]'))==true)
+  }
+  else{
+  	$form="sf_admin/tesmovseglib/confincomgen";
+    $grabo=$this->getUser()->getAttribute('grabo',null,$form.'0');
+    if ($grabo=='') {
+    $this->msg=1; ///Generar el Comprobante
+    Tesoreria::grabarCompAnulacionMovLibAnoANt($numcue,$reflib,$tipmov,$fecanu,&$msjuno,&$comprobante);
+    $concom=1;
+    $this->msjuno="";
+    if ($msjuno=="")
+    {
+      $i=0;
+      while ($i<$concom)
+      {
+       $f[$i]=$form.$i;
+       $this->getUser()->setAttribute('grabar',$comprobante[$i]->getGrabar(),$f[$i]);
+       $this->getUser()->setAttribute('reftra',$comprobante[$i]->getReftra(),$f[$i]);
+       $this->getUser()->setAttribute('numcomp',$comprobante[$i]->getNumcom(),$f[$i]);
+       $this->getUser()->setAttribute('fectra',$comprobante[$i]->getFectra(),$f[$i]);
+       $this->getUser()->setAttribute('destra',$comprobante[$i]->getDestra(),$f[$i]);
+       $this->getUser()->setAttribute('ctas', $comprobante[$i]->getCtas(),$f[$i]);
+       $this->getUser()->setAttribute('desctas', $comprobante[$i]->getDesc(),$f[$i]);
+       $this->getUser()->setAttribute('tipmov', '');
+       $this->getUser()->setAttribute('mov', $comprobante[$i]->getMov(),$f[$i]);
+       $this->getUser()->setAttribute('montos', $comprobante[$i]->getMontos(),$f[$i]);
+       $i++;
+      }
+      $this->i=$concom-1;
+      $this->formulario=$f;
+      }else
+      {
+        $this->msjuno=$msjuno;
+      }
+    }else{ ///Grabar el comprobante y generar la anulacion
+
+    $sql="Select stacon,tipmov,monmov,codcta,numcue,cedrif From TsMovLib Where NumCue = '".$numcue."' And RefLib = '".$reflib."' and TipMov = '".$tipmov."' ";
+    if (Herramientas::BuscarDatos($sql,&$tsmovlib))
+      {
+        if ($tsmovlib[0]["stacon"]!='C')
+        {
+          $escheque=H::getX('CODTIP','Tstipmov','Escheque',$tsmovlib[0]["tipmov"]);
+          if ($escheque==1)
+          {
+            $this->msg=$this->msg.Tesoreria::anular_Eliminar_Cheque('A',$numcue,$reflib);
+            if ($this->msg==''){
+            $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+            if ($this->msg==''){
+            $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu, $refpag);
+          }
+            }
+          }
+          else
+          {
+            $sql2="select refier from cpdocpag where tippag='".$tsmovlib[0]["tipmov"]."' ";
+            if (Herramientas::BuscarDatos($sql2,&$tabla))
+            {
+              if ($tabla[0]["refier"]=='A')
+              {
+                $this->msg=$this->msg.Tesoreria::actualiza_Orden_De_Pago($reflib,$numcue,$tipmov);
+                if ($this->msg==''){
+                $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu,$refpag);
+              }
+              }
+              else
+              {
+                $this->msg=$this->msg.Tesoreria::anular_Eliminar_Imppag('A',$reflib,$numcue,$fecanu,$refpag);
+              if ($this->msg==''){
+              $c = new Criteria();
+              $c->add(OpdetperPeer::NUMCHE,$reflib);
+              $c->add(OpdetperPeer::CTABAN,$numcue);
+              $c->add(OpdetperPeer::TIPMOV,$tipmov);
+              $opdetper = OpdetperPeer::doSelectOne($c);
+              if ($opdetper)
+              {
+                $opdetper->setFecpag(null);
+                $opdetper->setNumche(null);
+                $opdetper->save();
+              }
+              }
+            }
+          }
+          }
+          $sql3="select debcre from tstipmov where codtip='".$tipmov."'";
+          if (Herramientas::BuscarDatos($sql3,&$tstipmov))
+          {
+            $afecta=$tstipmov[0]["debcre"];
+          }
+         if ($this->msg==''){
+          // Grabar Nuevo comprobante contable
+          if ($this->getUser()->getAttribute('grabo',null,$this->getUser()->getAttribute('formulario'))=='S')
+	      {
+	        $numcomq='';
+	        $concom=1;
+	        $i=0;
+	        while ($i<$concom)
+	        {
+	          $formcont="sf_admin/tesmovseglib/confincomgen".$i;
+	          $numcom=$this->getUser()->getAttribute('contabc[numcom]',null,$formcont);
+	          $reftra=$this->getUser()->getAttribute('contabc[reftra]',null,$formcont);
+	          $feccom=$this->getUser()->getAttribute('contabc[feccom]',null,$formcont);
+	          $descom=$this->getUser()->getAttribute('contabc[descom]',null,$formcont);
+	          $debito=$this->getUser()->getAttribute('debito',null,$formcont);
+	          $credito=$this->getUser()->getAttribute('credito',null,$formcont);
+	          $grid=$this->getUser()->getAttribute('grid',null,$formcont);
+
+	          $this->getUser()->getAttributeHolder()->remove('contabc[numcom]',$formcont);
+	          $this->getUser()->getAttributeHolder()->remove('contabc[reftra]',$formcont);
+	          $this->getUser()->getAttributeHolder()->remove('contabc[feccom]',$formcont);
+	          $this->getUser()->getAttributeHolder()->remove('contabc[descom]',$formcont);
+	          $this->getUser()->getAttributeHolder()->remove('debito',$formcont);
+	          $this->getUser()->getAttributeHolder()->remove('credito',$formcont);
+	          $this->getUser()->getAttributeHolder()->remove('grid',$formcont);
+
+	          $numcomq = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formcont));
+	          $i++;
+	        }
+	        $this->getUser()->getAttributeHolder()->remove('grabo',$this->getUser()->getAttribute('formulario'));
+
+          // GENERAR NUEVO MOVIMIENTO SEGUN LIBRO
+          $tsmovlibA= new Tsmovlib();
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+          $fec = $dateFormat->format($fecanu, 'i', $dateFormat->getInputPattern('d'));
+
+          $tsmovlibA->setNumcue($tsmovlib[0]["numcue"]);
+          $tsmovlibA->setReflib($reflib2);
+          $tsmovlibA->setRefpag($refpag);
+          $tsmovlibA->setFeclib($fec);
+          $tsmovlibA->setFecing(date('Y-m-d'));
+          if ($afecta=='C')
+          {
+            $tsmovlibA->setTipmov('ANUC');
+          }
+          else if ($afecta=='D')
+          {
+            $tsmovlibA->setTipmov('ANUD');
+          }
+          $tsmovlibA->setMonmov($tsmovlib[0]["monmov"]);
+          $tsmovlibA->setNumcom($numcomq);
+          $tsmovlibA->setMotanu($desanu);
+          $tsmovlibA->setCodcta($tsmovlib[0]["codcta"]);
+          $tsmovlibA->setFeccom($fec);
+          $tsmovlibA->setStatus('C');
+          $tsmovlibA->setStacon('C');
+          $tsmovlibA->setDeslib('Cheque Anulado');
+          $tsmovlibA->setReflibpad($reflib);
+          $tsmovlibA->setTipmovpad($tipmov);
+          $tsmovlibA->setCedrif($tsmovlib[0]["cedrif"]);
+          $tsmovlibA->save();
+
+          Tesoreria::actualiza_Bancos('A','D',$numcue,$monmov);
+          }
+        }//if (!$tsmovlib[0]["stacon"]!='C')
+      }//  if (Herramientas::BuscarDatos($sql,&$tsmovlib))
+    }
+    }
+  }
+   }
     return sfView::SUCCESS;
   }
 

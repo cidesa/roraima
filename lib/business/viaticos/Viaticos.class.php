@@ -398,6 +398,137 @@ class Viaticos
     return -1;
   }
 
+  public static function GenerarCompromisov2($clasemodelo,$monto,&$refcom)
+  {
+  try{
+       $refcom='';
+       if (Herramientas::getVerCorrelativo('corcom','cpdefniv',&$r))
+          {
+            $ref = str_pad($r, 8, '0', STR_PAD_LEFT);
+            $refcom = Herramientas::getBuscar_correlativoV2($ref,'cpdefniv','corcom','cpcompro','refcom');
+
+            H::getSalvarCorrelativo('corcom','cpdefniv','Registo Solicitud de Viatico',$refcom,&$msg);
+
+            $cpcompro_new = new Cpcompro();
+            $cpcompro_new->setRefcom($refcom);
+            $cpcompro_new->setTipcom($clasemodelo->getTipcom());
+            $cpcompro_new->setFeccom($clasemodelo->getFecha());
+            $cpcompro_new->setAnocom(substr($clasemodelo->getFecha(),0,4));
+            $cpcompro_new->setStacom('A');
+            $cpcompro_new->setRefprc('NULO');
+            $cpcompro_new->setDescom($clasemodelo->getDescrip());
+            $cpcompro_new->setMoncom($monto);
+            $cpcompro_new->setSalcau(0);
+            $cpcompro_new->setSalpag(0);
+            $cpcompro_new->setSalaju(0);
+            $cpcompro_new->setCedrif($clasemodelo->getCodemp());
+            $cpcompro_new->save();
+
+        //Imputaciones
+            $c = new Criteria();
+            $c->add(ViadetcalviatraPeer::NUMCAL,$clasemodelo->getNumcal());
+            $per = ViadetcalviatraPeer::doSelect($c);
+            if($per)
+            {
+                foreach($per as $r)
+                {
+                    $codigo=$clasemodelo->getCodcat().'-'.$r->getPartida();
+                    $obj = H::GetX('Codpre','Cpasiini','Nompre',$codigo);
+                    if($obj)
+                    {
+                        $cpimpcom_new = new Cpimpcom();
+                        $cpimpcom_new->setRefcom($refcom);
+                        $cpimpcom_new->setCodpre($codigo);
+                        $cpimpcom_new->setMonimp($r->getMontot());
+                        $cpimpcom_new->setMoncau(0);
+                        $cpimpcom_new->setMonpag(0);
+                        $cpimpcom_new->setMonaju(0);
+                        $cpimpcom_new->setRefere('NULO');
+                        $cpimpcom_new->setStaimp('A');
+                        $cpimpcom_new->save();
+                    }else
+                        return 'V007';
+                }
+
+            }
+          }else{
+            return 2;  //El numero inicial del Correlativo no ha sido definido
+          }
+      return -1;
+  } catch (Exception $ex){
+    //exit($ex);
+    return 0;
+  }
+
+  }
+
+  public static function GenerarCompromisoviarelvia($clasemodelo,$grid,&$refcom)
+  {
+  try{
+       $refcom='';
+       if (Herramientas::getVerCorrelativo('corcom','cpdefniv',&$r))
+          {
+            $ref = str_pad($r, 8, '0', STR_PAD_LEFT);
+            $refcom = Herramientas::getBuscar_correlativoV2($ref,'cpdefniv','corcom','cpcompro','refcom');
+
+            H::getSalvarCorrelativo('corcom','cpdefniv','Registo Solicitud de Viatico',$refcom,&$msg);
+            $per=$grid[0];
+            $montot=0;
+            $codemp='';
+            if(count($per)>0)
+            {
+                foreach($per as $r)
+                {
+                    $codigo=$r->getCodcat().'-'.$r->getCodpar();
+                    $obj = H::GetX('Codpre','Cpasiini','Nompre',$codigo);
+                    if($obj)
+                    {
+                        $cpimpcom_new = new Cpimpcom();
+                        $cpimpcom_new->setRefcom($refcom);
+                        $cpimpcom_new->setCodpre($codigo);
+                        $cpimpcom_new->setMonimp($r->getMontonet());
+                        $cpimpcom_new->setMoncau(0);
+                        $cpimpcom_new->setMonpag(0);
+                        $cpimpcom_new->setMonaju(0);
+                        $cpimpcom_new->setRefere('NULO');
+                        $cpimpcom_new->setStaimp('A');
+                        $cpimpcom_new->save();
+                        $montot+=$r->getMontonet();
+                        $codemp=$r->getCodemp();
+                    }else
+                        return 'V007';
+                }
+
+            }
+
+            #MAESTRO
+            $cpcompro_new = new Cpcompro();
+            $cpcompro_new->setRefcom($refcom);
+            $cpcompro_new->setTipcom($clasemodelo->getTipcom());
+            $cpcompro_new->setFeccom($clasemodelo->getFecha());
+            $cpcompro_new->setAnocom(substr($clasemodelo->getFecha(),0,4));
+            $cpcompro_new->setStacom('A');
+            $cpcompro_new->setRefprc('NULO');
+            $cpcompro_new->setDescom($clasemodelo->getDescrip());
+            $cpcompro_new->setMoncom($montot);
+            $cpcompro_new->setSalcau(0);
+            $cpcompro_new->setSalpag(0);
+            $cpcompro_new->setSalaju(0);
+            $cpcompro_new->setCedrif($codemp);
+            $cpcompro_new->save();
+
+
+          }else{
+            return 2;  //El numero inicial del Correlativo no ha sido definido
+          }
+      return -1;
+  } catch (Exception $ex){
+    //exit($ex);
+    return 0;
+  }
+
+  }
+
 /////////
 }
 ?>

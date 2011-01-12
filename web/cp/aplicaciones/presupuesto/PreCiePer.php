@@ -1,10 +1,11 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
@@ -32,7 +33,6 @@ $fecha2=date('d-m-Y');
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/fecha.js"></script>
@@ -98,7 +98,7 @@ function MM_jumpMenu(targ,selObj,restore){ //v3.0
           <!--DWLayoutTable-->
                 <tr>
                   <td height="22" colspan="3" class="form_label_01">
-          <form action="" method="post" name="form1">
+          <form action="" method="post" name="form1" onsubmit="return false;">
             <table width="100%" border="0" cellpadding="0" cellspacing="2">
                     <tr>
                       <td width="22%"><strong>Periodo:</strong></td>

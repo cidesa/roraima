@@ -521,24 +521,109 @@
         {
 			$formato = date('ym');
 			$longitud='4';
-        }elseif ($tb[0]["corcomp"]=='AAMM####')
+            $mes=date('m');
+           $sql1="select substring(numcom,5,4) as num from contabc where substring(numcom,3,2)='".$mes."' order by feccom desc limit 1";
+           $tb1 = $con->select($sql1)->GetArray();
+           if ($tb1)
+           {
+             $cor=$tb1[0]["num"]+1;
+      	   }else $cor=1;
+
+         while(!$valido){
+	      $numcom = $formato.str_pad((string)$cor, $longitud, "0", STR_PAD_LEFT);
+
+	      $sql = "Select * from contabc where numcom = '".$numcom."'";
+	      $contabc = $con->select($sql)->GetArray();
+	      if(count($contabc)==0){
+	        $valido = true;
+	      }else $cor=1;
+	    }
+
+        }elseif ($tb[0]["corcomp"]=='MMAA####')
         {
 			$formato = date('my');
 			$longitud='4';
+            $mes=date('m');
+           $sql1="select substring(numcom,5,4) as num from contabc where substring(numcom,1,2)='".$mes."' order by feccom desc limit 1";
+           $tb1 = $con->select($sql1)->GetArray();
+           if ($tb1)
+           {
+             $cor=$tb1[0]["num"]+1;
+      	   }else $cor=1;
+
+         while(!$valido){
+	      $numcom = $formato.str_pad((string)$cor, $longitud, "0", STR_PAD_LEFT);
+
+	      $sql = "Select * from contabc where numcom = '".$numcom."'";
+	      $contabc = $con->select($sql)->GetArray();
+	      if(count($contabc)==0){
+	        $valido = true;
+	      }else $cor=1;
+	    }
+
+        }else{
+	    while(!$valido){
+	      $num = getNextvalSecuencia('contabc_numcom_seq',$con);
+		  $numcom = $formato.str_pad((string)$num, $longitud, "0", STR_PAD_LEFT);
+
+	      $sql = "Select * from contabc where numcom = '".$numcom."'";
+	      $contabc = $con->select($sql)->GetArray();
+	      if(count($contabc)==0){
+	        $valido = true;
+	      }
+	    }
         }
       }
-    while(!$valido){
-      $num = getNextvalSecuencia('contabc_numcom_seq',$con);
-	  $numcom = $formato.str_pad((string)$num, $longitud, "0", STR_PAD_LEFT);
 
-      $sql = "Select * from contabc where numcom = '".$numcom."'";
-      $contabc = $con->select($sql)->GetArray();
-      if(count($contabc)==0){
-        $valido = true;
-      }
-    }
     return $numcom;
   }
 
+
+
+	function VerificarFormatoPadre($codigo)
+	{
+		global $bd;
+		global $z;
+
+		$arr = array();
+		$i=0;
+		$f=0;
+		$error = true;
+        $key=0;
+
+	    $sql = "select lonniv from cpniveles order by consec";
+	    $tb = $bd->select($sql)->GetArray();
+
+        //if ($tb=$z->buscar_datos($sql)){
+        //while (!$tb->EOF)
+        for ($i=0; $i<count($tb);$i++)
+		{
+			$posi = $i==0 ? '' : $r = $i-1;
+            //echo "i= ".$i."<br>";
+            //echo "posi= ".$posi."<br>";
+			//echo "valorant= ".$posicion=$arr[$posi];
+			//echo "<br>"."tb[posi][lonniv]=".$tb[$posi]["lonniv"]."<br>";
+			//echo $posicion+$tb[$i]["lonniv"]+$f."<br>"."<br>";
+
+
+			$posicion=$arr[$posi];
+			$arr[] = $posicion+$tb[$i]["lonniv"]+$f;
+
+			$f=1;
+
+			//$i++;
+			//$tb->MoveNext();
+		}
+
+//		echo '<br>' ;
+//		print_R($arr);
+	//	exit();
+		if (!in_array(strlen($codigo), $arr))
+		{
+			$error = false;
+		}
+//        }
+		return $error;
+	}
 
 ?>

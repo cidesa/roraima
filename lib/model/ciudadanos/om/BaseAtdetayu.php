@@ -601,7 +601,10 @@ abstract class BaseAtdetayu extends BaseObject  implements Persistent {
 		if ($this->aAtayudas === null && ($this->atayudas_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtayudasPeer.php';
 
-			$this->aAtayudas = AtayudasPeer::retrieveByPK($this->atayudas_id, $con);
+      $c = new Criteria();
+      $c->add(AtayudasPeer::ID,$this->atayudas_id);
+      
+			$this->aAtayudas = AtayudasPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -630,7 +633,10 @@ abstract class BaseAtdetayu extends BaseObject  implements Persistent {
 		if ($this->aAtdonaciones === null && ($this->atdonaciones_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtdonacionesPeer.php';
 
-			$this->aAtdonaciones = AtdonacionesPeer::retrieveByPK($this->atdonaciones_id, $con);
+      $c = new Criteria();
+      $c->add(AtdonacionesPeer::ID,$this->atdonaciones_id);
+      
+			$this->aAtdonaciones = AtdonacionesPeer::doSelectOne($c, $con);
 
 			
 		}

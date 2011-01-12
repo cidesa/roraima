@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 //require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
@@ -34,7 +35,7 @@ function crearLog($valor)
   $tb=$bd->select($sql);
   $id = $tb->fields["id"];
   $bd->Log($id, 'pre', 'Cpsoladidis', 'Presoladidis', $valor);
-  
+
 }
 
   try{
@@ -46,7 +47,7 @@ function crearLog($valor)
     }
 
     $cont=1;
-    while ($cont<=50)
+    while ($cont<=500)
     {
       if ($_POST["x".$cont."1"]!='')
       {
@@ -71,17 +72,18 @@ function crearLog($valor)
         $cont=$cont+1;
       }else
       {
-        $cont=51;
+        $cont=501;
       }
     }
       ///////////////
-      $bd->startTransaccion();
+      //$bd->startTransaccion();
         Grabar_Adicion();
         Grabar_GridMovAdi();
-      $bd->completeTransaccion();
+     // $bd->completeTransaccion();
       ///////////////
 
-         Mensaje("Los Datos de la Solicitud Fueron Guardado Con Exito.");
+         Mensaje("Los Datos de la Solicitud Fueron Guardado Con Exito. Referencia: ".$codigo);
+         LanzarReporte('presupuesto','preadidispre.php&codadides='.$codigo.'&codadihas='.$codigo.'');
          Regresar("PreSolAdiDis.php");
 
     }
@@ -125,7 +127,7 @@ function crearLog($valor)
           exit;
         }else{
 
-           $bd->startTransaccion();
+          // $bd->startTransaccion();
 
           if ($imec=='I')
           {
@@ -211,7 +213,7 @@ function crearLog($valor)
             crearLog('A');
           }
 
-          $bd->completeTransaccion();
+          //$bd->completeTransaccion();
         }
       }//try
       catch(Exception $e)
@@ -245,6 +247,8 @@ function crearLog($valor)
         $sql    = "insert into cpsolmovadi (RefAdi,CodPre,PerPre,MonMov,StaMov)
                  values ('".$codigo."','".$col1[$conta]."','".$col2[$conta]."',".$col3[$conta].",'A')";
 
+//echo $sql;
+//exit();
         $bd->actualizar($sql);
 
         $conta++;

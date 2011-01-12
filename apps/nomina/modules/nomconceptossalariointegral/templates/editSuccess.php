@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: editSuccess.php 32813 2009-09-08 16:19:47Z lhernandez $
  */
 // date: 2008/05/13 17:02:09
 ?>
@@ -14,10 +14,13 @@
 <?php use_stylesheet('/sf/sf_admin/css/main') ?>
 
 <div id="sf_admin_container">
-
+<?php if($sf_user->getAttribute('nomsalint','','nomconceptossalariointegral')=='S') { ?>
+    <h1><?php echo __('Edición de Conceptos para el Salario Base',
+    array()) ?></h1>
+<?php }else { ?>
 <h1><?php echo __('Edición de Conceptos para el Salario Integral',
 array()) ?></h1>
-
+<?php } ?>
 <div id="sf_admin_header">
 <?php include_partial('nomconceptossalariointegral/edit_header', array('npnomina' => $npnomina)) ?>
 </div>

@@ -1,17 +1,18 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
 
-require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
-require_once($_SESSION["x"].'lib/general/funciones.php');
-require_once($_SESSION["x"].'lib/general/tools.php');
+require_once($_SESSION["x"].'/lib/bd/basedatosAdo.php');
+require_once($_SESSION["x"].'/lib/general/funciones.php');
+require_once($_SESSION["x"].'/lib/general/tools.php');
 validar(array(8,11,15));            //Seguridad  del Sistema
 $codemp=$_SESSION["codemp"];
 $bd=new basedatosAdo($codemp);
@@ -78,11 +79,27 @@ if (!empty($_GET["var"]))
 
 }
 
-      $sql="SELECT * from contaba where codemp='001'";
+      $sql="SELECT to_char(fecini,'dd/mm/yyyy') as fecinic, to_char(feccie,'dd/mm/yyyy') as feccier, feccie from contaba where codemp='001'";
       $tb=$bd->select($sql);
       if (!$tb->EOF)
         {
         	$modulo = $modulo."  *** Ejercicio Fiscal: ".substr($tb->fields["feccie"],0,4)." ***";
+               
+           if (!empty($_GET["var"]))
+           {   
+             $var=$_GET["var"];
+           }
+
+               if ($var=='A')
+                {
+                  $fechaini=$_POST["fechaini"];
+                  $fechafin=$_POST["fechafin"];
+                  $fecini=$fechaini;
+                  $fecfin=$fechafin;
+                }else {
+                $fecini=$tb->fields["fecinic"];
+                $fecfin=$tb->fields["feccier"];
+                }
         }
 
 
@@ -104,7 +121,6 @@ if (!empty($_GET["var"]))
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/fecha.js"></script>
@@ -113,6 +129,7 @@ if (!empty($_GET["var"]))
 <script language="JavaScript"  src="../../lib/general/toolbar/js/dhtmlXToolbar.js"></script>
 <script language="JavaScript"  src="../../lib/general/toolbar/js/dhtmlXCommon.js"></script>
 <script type='text/javascript' src='../../lib/general/js/dFilter.js'></script>
+<script type='text/javascript' src='../../lib/general/js/funciones.js'></script>
 <script type="text/JavaScript"  src="../../lib/general/js/prototype.js"></script>
 
 
@@ -125,7 +142,7 @@ if (!empty($_GET["var"]))
   </tr>
   <tr>
     <td align="center">
-  <form name="form1" method="post">
+  <form name="form1" onsubmit="return false;" method="post">
   <table width="600" border="0"  class="box" >
       <tr>
         <td class="breadcrumb">SIGA <? echo $modulo; ?>
@@ -140,6 +157,13 @@ if (!empty($_GET["var"]))
             <div  align="center" id="toolbar_zone2" style="border :0px solid Silver;"/>					</td>
         </tr>
       </table></td>
+      </tr>
+      <tr>
+          <th>Fecha Desde:
+           <input name="fechaini" type="text"  class="imagenInicio" id="fechaini" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $fecini;?>" size="10" onKeyUp = "this.value=formateafecha(this.value);">
+           &nbsp; &nbsp;&nbsp; Fecha Hasta:
+           <input name="fechafin" type="text"  class="imagenInicio" id="fechafin" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $fecfin;?>" size="10" onKeyUp = "this.value=formateafecha(this.value);" onBlur="if (($('fechaini').value!='' && $('fechafin').value!='')){ document.form1.action='ConFinActCom.php?var=A'; document.form1.submit(); }">
+          </th>
       </tr>
       <tr>
         <td><table width="100%" border="0">
@@ -163,7 +187,7 @@ if (!empty($_GET["var"]))
     <?
     //////// Cargar_Comprobantes //////////
     $i=1;
-    $sql="select numcom,feccom,descom from contabc where stacom='D' order by feccom,numcom ASC";
+    $sql="select numcom,feccom,descom from contabc where stacom='D' and (feccom<=to_date('".$fecfin."','dd/mm/yyyy') and feccom>=to_date('".$fecini."','dd/mm/yyyy')) order by feccom,numcom ASC";
     if ($tb=$tools->buscar_datos($sql)){
       while (!$tb->EOF){
       //while ($i<=12)
@@ -250,7 +274,7 @@ if (!empty($_GET["var"]))
         if(confirm("¿Realmente desea Salvar?"))
         {
           f=document.form1;
-          i='<? echo $i-1; ?>'
+          i='<? echo $i-1; ?>'          
           cont=1;
           estado='No';
           while(cont<=i)
@@ -265,7 +289,7 @@ if (!empty($_GET["var"]))
             f.action="imecConFinActCom.php?imec=<? echo 'S'; ?>";
             f.submit();
           }
-        }
+        } 
       }
       //////////////////////////
       else if(itemId == '0_print'){

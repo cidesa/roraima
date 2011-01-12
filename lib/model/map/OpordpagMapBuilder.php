@@ -40,7 +40,7 @@ class OpordpagMapBuilder {
 
 		$tMap->addColumn('FECEMI', 'Fecemi', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('CEDRIF', 'Cedrif', 'string', CreoleTypes::VARCHAR, true, 15);
+		$tMap->addColumn('CEDRIF', 'Cedrif', 'string', CreoleTypes::VARCHAR, false, 15);
 
 		$tMap->addColumn('NOMBEN', 'Nomben', 'string', CreoleTypes::VARCHAR, true, 250);
 
@@ -153,6 +153,22 @@ class OpordpagMapBuilder {
 		$tMap->addColumn('CODCONCEPTO', 'Codconcepto', 'string', CreoleTypes::VARCHAR, false, 4);
 
 		$tMap->addColumn('NUMFORPRE', 'Numforpre', 'string', CreoleTypes::VARCHAR, false, 8);
+
+		$tMap->addColumn('MOTRECORD', 'Motrecord', 'string', CreoleTypes::VARCHAR, false, 500);
+
+		$tMap->addColumn('MOTRECTES', 'Motrectes', 'string', CreoleTypes::VARCHAR, false, 500);
+
+		$tMap->addColumn('APRORDDIR', 'Aprorddir', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('CODCAJCHI', 'Codcajchi', 'string', CreoleTypes::VARCHAR, false, 3);
+
+		$tMap->addColumn('NUMCTA', 'Numcta', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('TIPDOC', 'Tipdoc', 'string', CreoleTypes::VARCHAR, false, 4);
+
+		$tMap->addColumn('LOGUSE', 'Loguse', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('CODFONANT', 'Codfonant', 'string', CreoleTypes::VARCHAR, false, 3);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

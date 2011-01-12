@@ -1,10 +1,11 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
@@ -154,7 +155,6 @@ $modulo=$_SESSION["modulo"] . " > Def. Especificas > Documentos > ".$forma;
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/fecha.js"></script>
@@ -169,7 +169,7 @@ $modulo=$_SESSION["modulo"] . " > Def. Especificas > Documentos > ".$forma;
 </head>
 
 <body>
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
 <table width="100%" align="center">
   <tr>
 <td width="100%">
@@ -298,7 +298,7 @@ else
           //pagina="catalogo2.php?campo="+campo+"&campo2="+campo2+"&sql="+sql+"&foco="+foco;
           //window.open(pagina,"","menubar=no,toolbar=no,scrollbars=yes,width=570,height=500,resizable=yes,left=50,top=50");
 
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Cpdocprc_Predocpre/clase/Cpdocprc/frame/form1/obj1/tipdoc/campo1/tipprc/submit/true';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Cpdocprc_Predocpre/clase/Cpdocprc/frame/form1/obj1/tipdoc/campo1/tipprc/submit/true';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
 
      }

@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "npdocemp{coddoc}"
+   - "npdocemp{desdoc}"
+
+names:
+  npdocemp{coddoc}:
+    required:  Yes
+    required_msg: El CÃ³digo del Documento no puedo estar en Blanco
+    validators: UniqueValidator
+
+  npdocemp{desdoc}:
+    required:  Yes
+    required_msg: La DescripciÃ³n del Documento no puedo estar en Blanco
+    validators: DescripcionValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Npdocemp
+        column:   coddoc
+        unique_error:   El CÃ³digo del Documento ya existe. Por Favor, CambiÃ©lo por otro.
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La DescripciÃ³n del Documento no puede tener menos de 5 caracteres
+        max:       250
+        max_error: La DescripciÃ³n del Documento no puede tener mÃ¡s de 250 caracteres

@@ -7,14 +7,16 @@
  *
  * @package    Roraima
  * @subpackage lib.model
- * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Opdefemp.php 34269 2009-10-26 21:21:50Z dmartinez $
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Opdefemp.php 39850 2010-08-03 17:19:28Z lhernandez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class Opdefemp extends BaseOpdefemp
 {
+	protected $aprmonche="";
+
 	public function getNomemp()
 	{
 		return Herramientas::getX('codemp','empresa','nomemp',self::getCodemp());
@@ -97,4 +99,36 @@ class Opdefemp extends BaseOpdefemp
 	{
 		return Herramientas::getX('tipcau','cpdoccau','nomext',self::getOrdtba());
 	}
+
+	public function getNomtipcre()
+	{
+		return Herramientas::getX('tipcau','cpdoccau','nomext',self::getOrdcre());
+	}
+
+  public function getNomsolpag()
+	{
+		return Herramientas::getX('tipcau','cpdoccau','nomext',self::getOrdsolpag());
+	}
+
+  public function getAprmonche()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('tesmovemiche',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('aprmonche',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+	       {
+	       	$dato=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['aprmonche'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setAprmonche()
+  {
+  	return $this->aprmonche;
+  }
 }

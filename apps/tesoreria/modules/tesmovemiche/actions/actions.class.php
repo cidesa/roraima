@@ -20,7 +20,9 @@ class tesmovemicheActions extends autotesmovemicheActions
  private $coderror5 =-1;
  private $coderror6 =-1;
  private $arraynumche="";
+ private $arraynumcue="";
  private $form="sf_admin/tesmovemiche/confincomgen";
+ private $infogebos='';
 
   public function executeIndex()
   {
@@ -32,7 +34,7 @@ class tesmovemicheActions extends autotesmovemicheActions
     if (!$this->getRequestParameter($id))
     {
       $tscheemi = new Tscheemi();
-      $this->configGridOrdPag('S',$this->getRequestParameter('tscheemi[cedrif]'),$this->getRequestParameter('tscheemi[fecemi]'));
+      $this->configGridOrdPag('S',$this->getRequestParameter('tscheemi[cedrif]'),$this->getRequestParameter('tscheemi[fecemi]'),$this->getRequestParameter('tscheemi[numeroord]'),$this->getRequestParameter('tscheemi[fecord]'),$this->getRequestParameter('tscheemi[numcue]'),$this->getRequestParameter('tscheemi[tipdoc]'));
       $this->configGridCompro('S',$this->getRequestParameter('tscheemi[cedrif]'));
       $this->configGridPrecom('S',$this->getRequestParameter('tscheemi[cedrif]'));
       $this->configGridPagDir();
@@ -40,10 +42,12 @@ class tesmovemicheActions extends autotesmovemicheActions
     else
     {
       $tscheemi = TscheemiPeer::retrieveByPk($this->getRequestParameter($id));
+      if ($tscheemi) {
       $this->configGridOrdPag('S',$tscheemi->getCedrif(),$tscheemi->getFecemi());
       $this->configGridCompro('S',$tscheemi->getCedrif());
       $this->configGridPrecom('S',$tscheemi->getCedrif());
       $this->configGridPagDir();
+      }
       $this->forward404Unless($tscheemi);
     }
     return $tscheemi;
@@ -62,15 +66,28 @@ class tesmovemicheActions extends autotesmovemicheActions
     $this->impche=$this->getRequestParameter('impche');
     $this->numcomegr=$this->getRequestParameter('numcomegr');
     $this->numches=$this->getRequestParameter('numches');
+    $this->numcues=$this->getRequestParameter('numcues');
     $this->getUser()->setAttribute('tschemi_operacion',"");
     $this->comprobaut="";
+    $this->bloqfec="";
     $varemp = $this->getUser()->getAttribute('configemp');
-    if ($varemp)
-	if(array_key_exists('generales',$varemp))
-     if(array_key_exists('comprobaut',$varemp['generales']))
-	 {
-	   $this->comprobaut=$varemp['generales']['comprobaut'];
-	 }
+    if ($varemp) {
+			if(array_key_exists('generales',$varemp)) {
+		     if(array_key_exists('comprobaut',$varemp['generales']))
+				 {
+				   $this->comprobaut=$varemp['generales']['comprobaut'];
+				 }
+			}
+	    if(array_key_exists('aplicacion',$varemp))
+			 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+			   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+			     if(array_key_exists('tesmovemiche',$varemp['aplicacion']['tesoreria']['modulos'])){
+			       if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+			       {
+			       	$this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['bloqfec'];
+			       }
+			     }
+    }
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
          $this->updateTscheemiFromRequest();
@@ -84,8 +101,13 @@ class tesmovemicheActions extends autotesmovemicheActions
           $r = TscheemiPeer::doSelectOne($c);
           if ($r) {$this->tscheemi->setId($r->getId()); $this->tscheemi->setNumcomegr($r->getNumcomegr());}
 
-          $this->setFlash('notice', 'Your modifications have been saved');
-$this->Bitacora('Guardo');
+          if ($this->arraynumche!=""){
+              $this->setFlash('notice', 'Tus modificaciones han sido guardadas. '.$this->infogebos);
+              $this->Bitacora('Guardo');
+          }else {
+          	  $this->setFlash('notice', $this->arraynumcue);
+              $this->Bitacora('Guardo');
+          }
 
           if ($this->getRequestParameter('save_and_list'))
           {
@@ -93,7 +115,9 @@ $this->Bitacora('Guardo');
           }
           else
           {
-            return $this->redirect('tesmovemiche/edit?impche=S&numches='.$this->arraynumche.'&id='.$this->tscheemi->getId().'&numcomegr='.$this->tscheemi->getNumcomegr());
+          	if ($this->tscheemi->getId())
+            return $this->redirect('tesmovemiche/edit?impche=S&numches='.$this->arraynumche.'&numcues='.$this->arraynumcue.'&id='.$this->tscheemi->getId().'&numcomegr='.$this->tscheemi->getNumcomegr());
+            else return $this->redirect('tesmovemiche/edit?impche=S&numches='.$this->arraynumche.'&numcues='.$this->arraynumcue.'&numcomegr='.$this->tscheemi->getNumcomegr());
           }
      }
     else
@@ -235,6 +259,15 @@ $this->Bitacora('Guardo');
     {
       $this->tscheemi->setNombensus($tscheemi['nombensus']);
     }
+     if (isset($tscheemi['numeroord']))
+    {
+      $this->tscheemi->setNumeroord($tscheemi['numeroord']);
+    }
+     if (isset($tscheemi['fecord']))
+    {
+      $this->tscheemi->setFecord($tscheemi['fecord']);
+    }
+
      //Se guarda el nombre del usuario actual del sistema
      $this->tscheemi->setCodemi($this->getUser()->getAttribute('usuario'));
   }
@@ -291,7 +324,7 @@ $this->Bitacora('Guardo');
 
       else if ($this->getRequestParameter('ajax')=='3')//NRO CUENTA BANCARIA
       {
-      	$javascript="";
+      	$javascript=""; $nomrep="";
       	$bloqueado=$this->getRequestParameter('bloq');
           if (trim($this->getRequestParameter('codigo'))!='')
           {
@@ -309,6 +342,7 @@ $this->Bitacora('Guardo');
                      if ($bloqueado=="")
                      {
                       $dato=TsdefbanPeer::getNomcue($this->getRequestParameter('codigo'));
+                      $nomrep=H::getX_vacio('NUMCUE', 'Tsdefban', 'Nomrep', $this->getRequestParameter('codigo'));
 		              $numche=TsdefbanPeer::getNumche($this->getRequestParameter('codigo'));
 		              $numche=str_pad($numche,8,"0",STR_PAD_LEFT);
 		              $c = new Criteria();
@@ -330,6 +364,7 @@ $this->Bitacora('Guardo');
                         TsbloqbanPeer::doDelete($t1);
 
                         $dato=TsdefbanPeer::getNomcue($this->getRequestParameter('codigo'));
+                        $nomrep=H::getX_vacio('NUMCUE', 'Tsdefban', 'Nomrep', $this->getRequestParameter('codigo'));
 		                $numche=TsdefbanPeer::getNumche($this->getRequestParameter('codigo'));
 		                $numche=str_pad($numche,8,"0",STR_PAD_LEFT);
 		                $c = new Criteria();
@@ -356,6 +391,7 @@ $this->Bitacora('Guardo');
                   	else
                   	{
                   		$dato=TsdefbanPeer::getNomcue($this->getRequestParameter('codigo'));
+                                $nomrep=H::getX_vacio('NUMCUE', 'Tsdefban', 'Nomrep', $this->getRequestParameter('codigo'));
 		                $numche=TsdefbanPeer::getNumche($this->getRequestParameter('codigo'));
 		                $numche=str_pad($numche,8,"0",STR_PAD_LEFT);
 		                $c = new Criteria();
@@ -369,6 +405,7 @@ $this->Bitacora('Guardo');
               }else
               {
 	              $dato=TsdefbanPeer::getNomcue($this->getRequestParameter('codigo'));
+                      $nomrep=H::getX_vacio('NUMCUE', 'Tsdefban', 'Nomrep', $this->getRequestParameter('codigo'));
 	              $numche=TsdefbanPeer::getNumche($this->getRequestParameter('codigo'));
 	              $numche=str_pad($numche,8,"0",STR_PAD_LEFT);
 	              $c = new Criteria();
@@ -381,6 +418,7 @@ $this->Bitacora('Guardo');
           	else
           	{
           	  $dato=TsdefbanPeer::getNomcue($this->getRequestParameter('codigo'));
+                  $nomrep=H::getX_vacio('NUMCUE', 'Tsdefban', 'Nomrep', $this->getRequestParameter('codigo'));
               $numche=TsdefbanPeer::getNumche($this->getRequestParameter('codigo'));
               $numche=str_pad($numche,8,"0",STR_PAD_LEFT);
               $c = new Criteria();
@@ -389,8 +427,26 @@ $this->Bitacora('Guardo');
               if ($tipmov)
               {if($tipmov->getEscheque()==false) $numche=''; }
           	}
+          	$this->numchedesh="";
+            $varemp = $this->getUser()->getAttribute('configemp');
+			if ($varemp)
+			if(array_key_exists('aplicacion',$varemp))
+			 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+			   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+			     if(array_key_exists('tesmovemiche',$varemp['aplicacion']['tesoreria']['modulos'])){
+			       if(array_key_exists('numchedesh',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+			       {
+			       	$this->numchedesh=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['numchedesh'];
+			       }
+			     }
+			 if ($this->numchedesh=='S')
+			 {
+			 	$javascript=$javascript." $('tscheemi_numche').readOnly=true;";
+			 }
 
-              $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tscheemi_numche","'.$numche.'",""],["tscheemi_bloqueado","'.$bloqueado.'",""],["javascript","'.$javascript.'",""]]';
+
+
+              $output = '[["'.$cajtexmos.'","'.$dato.'",""],["tscheemi_numche","'.$numche.'",""],["tscheemi_bloqueado","'.$bloqueado.'",""],["javascript","'.$javascript.'",""],["tscheemi_nomrep","'.$nomrep.'",""]]';
               $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
               return sfView::HEADER_ONLY;
           }//if ($this->getRequestParameter('codigo')!='')
@@ -420,7 +476,7 @@ $this->Bitacora('Guardo');
       	$resul=OpordpagPeer::doSelectOne($c);
       	$fecemi = $this->getRequestParameter('tscheemi_fecemi');
       	if ($resul)
-      	{ $dato=htmlspecialchars($resul->getDesord());}else{ $dato="";}
+      	{ $dato=eregi_replace("[\n|\r|\n\r]", "", htmlspecialchars($resul->getDesord()));}else{ $dato="";}
       	//print strtotime($resul->getFecemi()).'----'.strtotime($fecemi);
       	$dateFormat = new sfDateFormat('es_VE');
         $fecemi = $dateFormat->format($fecemi, 'i', $dateFormat->getInputPattern('d'));
@@ -464,6 +520,12 @@ $this->Bitacora('Guardo');
         return sfView::HEADER_ONLY;
 
       }
+	  else if ($this->getRequestParameter('ajax')=='7')//Filtro por NUMERO DE ORDEN
+	  {
+         $dato=$this->getRequestParameter('cedrif');
+         $valormayuscula=$this->getRequestParameter('cedrif');
+         $jstscheemi = ',["tscheemi_numeroord","'.$this->getRequestParameter('numord').'",""],["tscheemi_fecord","'.$this->getRequestParameter('fecord').'",""]';
+	  }
 
 
       $refiere="";
@@ -484,7 +546,7 @@ $this->Bitacora('Guardo');
         if ($refiere=="A")
           {
              $operacion="ordpag";
-             $this->configGridOrdPag($mostrardato,$this->getRequestParameter('cedrif'),$this->getRequestParameter('fecemi'));
+             $this->configGridOrdPag($mostrardato,$this->getRequestParameter('cedrif'),$this->getRequestParameter('fecemi'),$this->getRequestParameter('numord'),$this->getRequestParameter('fecord'),$this->getRequestParameter('numcue'),$this->getRequestParameter('tipdoc'));
           }
 
           if ($refiere=="C")
@@ -550,6 +612,10 @@ $this->Bitacora('Guardo');
 		       {
 		       	$this->mancomegr=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['mancomegr'];
 		       }
+		       if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+		       {
+		       	$this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['bloqfec'];
+		       }
 		     }
 
 	  	$this->comprobaut="";
@@ -577,7 +643,7 @@ $this->Bitacora('Guardo');
              //print_r($this->gridOrdPag);print 'SSS';exit;
 	         $grid=Herramientas::CargarDatosGrid($this,$this->gridOrdPag);
 	         if ($this->ValidarDatosenGrid($grid))
-	            Cheques::ActualizaOrdPag($this->tscheemi,$grid,$tippag,$despag,"","S",$che,&$concom,&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut);
+	            Cheques::ActualizaOrdPag($this->tscheemi,$grid,$tippag,$despag,"","S",$che,&$concom,&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,$che);
 	         else
 	            $this->msgerr="Debe seleccionar al menos una orden de pago...";
 	      }
@@ -586,7 +652,7 @@ $this->Bitacora('Guardo');
 	      {
 	           $grid=Herramientas::CargarDatosGrid($this,$this->gridCompro);
 	           if ($this->ValidarDatosenGrid($grid))
-	             Cheques::ActualizaCompro($this->tscheemi,$grid,"",$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut);
+	             Cheques::ActualizaCompro($this->tscheemi,$grid,"",$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,$che);
 	           else
 	            $this->msgerr="Debe seleccionar al menos un compromiso...";
 	      }
@@ -595,7 +661,7 @@ $this->Bitacora('Guardo');
 	      {
 	           $grid=Herramientas::CargarDatosGrid($this,$this->gridPrecom);
 	           if ($this->ValidarDatosenGrid($grid))
-	               Cheques::ActualizaPrecom($this->tscheemi,$grid,"",$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut);
+	               Cheques::ActualizaPrecom($this->tscheemi,$grid,"",$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,$che);
 	           else
 	            $this->msgerr="Debe seleccionar al menos un precompromiso...";
 	      }
@@ -609,7 +675,7 @@ $this->Bitacora('Guardo');
 	           $x=$grid[0];
 	           if (count($x)>0)
 	           {
-	              Cheques::ActualizaPagDir($this->tscheemi,$grid,"",$concep,$descue,$condto,$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut);
+	              Cheques::ActualizaPagDir($this->tscheemi,$grid,"",$concep,$descue,$condto,$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,$che);
 	           }
 	           else
 	           {
@@ -623,7 +689,7 @@ $this->Bitacora('Guardo');
 	           $montpnrn=$this->getRequestParameter('tscheemi[montotpagnap]');
 	           $dctopnrn=$this->getRequestParameter('tscheemi[mondtopagnap]');
            	   $condpnrn=$this->getRequestParameter('tscheemi[condtopagnap]');
-	           Cheques::ActualizaPagExtPre($this->tscheemi,"",$concpnrn,$montpnrn,$dctopnrn,$condpnrn,$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut);
+	           Cheques::ActualizaPagExtPre($this->tscheemi,"",$concpnrn,$montpnrn,$dctopnrn,$condpnrn,$ctapag,$desctacre,$che,"S",&$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,$che);
 	        }
      }//if  validaciones de campos distinto de vacio
      else
@@ -700,7 +766,7 @@ $this->Bitacora('Guardo');
    * los datos del grid.
    *
    */
-  public function configGridOrdPag($mostrardatos, $cedrif=' ', $fecemi='31/12/2020')
+  public function configGridOrdPag($mostrardatos, $cedrif=' ', $fecemi='31/12/2020', $numord='', $fecord='31/12/2020', $numcue='',$tipdoc='')
    {
   //////////////////////
   //GRID
@@ -720,6 +786,8 @@ $this->Bitacora('Guardo');
 	            $fecemi = $dateFormat->format($fecemi, 'i', $dateFormat->getInputPattern('d'));
 	        }
         }
+
+
             /////////////////////////////////
         $c = new Criteria();
         if (trim($cedrif)!="") { $c->add(OpordpagPeer::CEDRIF,$cedrif);};
@@ -736,7 +804,77 @@ $this->Bitacora('Guardo');
           }
         }//////////////////////
 
-        $c->add(OpordpagPeer::STATUS,"N");
+        $this->aprorddir="";
+        $this->filnumordfec="";
+        $this->filordcbtp="";
+		$varemp = $this->getUser()->getAttribute('configemp');
+		if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria'])) {
+		     if(array_key_exists('tesmovemiche',$varemp['aplicacion']['tesoreria']['modulos'])){
+		       if(array_key_exists('aprorddirec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+		       {
+		       	$this->aprorddir=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['aprorddirec'];
+		       }
+		       if(array_key_exists('filnumordfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+		       {
+		       	$this->filnumordfec=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['filnumordfec'];
+		     }
+		     }
+		     if(array_key_exists('pagemiord',$varemp['aplicacion']['tesoreria']['modulos'])){
+		       if(array_key_exists('filordcbtp',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']))
+		       {
+		       	$this->filordcbtp=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['filordcbtp'];
+		       }
+		     }
+
+		   }
+            if ($this->filnumordfec=='S'){
+		        //darle formato a la fecha de la orden de pago
+		        $valor=split("/",$fecord);
+		        if (count($valor)>1)
+		        {
+			        if (trim($fecord)!="")
+			        {
+			            $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+			            $fecord = $dateFormat->format($fecord, 'i', $dateFormat->getInputPattern('d'));
+			        }
+		        }
+
+		        if (trim($numord)!="") { $c->add(OpordpagPeer::NUMORD,$numord);};
+		        if (trim($fecord)!="") { $c->add(OpordpagPeer::FECEMI,$fecord);}
+            }
+
+           if ($this->filordcbtp=='S')
+           {
+           	 if (trim($numcue)!="") { $c->add(OpordpagPeer::NUMCTA,$numcue);};
+		     if (trim($tipdoc)!="") { $c->add(OpordpagPeer::TIPDOC,$tipdoc);}
+           }
+
+    $c->add(OpordpagPeer::STATUS,"N");
+
+		if ($this->aprorddir=="S")
+		{
+		  if (trim($cedrif)!="") {
+
+		  $this->sql2="((opordpag.tipcau in (select tipcau from cpdoccau where
+                       cpdoccau.refier='N' and cpdoccau.afeprc='S' and cpdoccau.afecom='S' and cpdoccau.afecau='S' and cpdoccau.afedis='R') AND opordpag.aprorddir='A')
+                       or opordpag.tipcau not in (select tipcau from cpdoccau where
+                       cpdoccau.refier='N' and cpdoccau.afeprc='S' and cpdoccau.afecom='S' and cpdoccau.afecau='S' and cpdoccau.afedis='R')
+                       and opordpag.CEDRIF='".$cedrif."' AND opordpag.FECEMI<='".$fecemi."')";
+		  }else{
+		  	$this->sql2=" ((opordpag.tipcau in (select tipcau from cpdoccau where
+                       cpdoccau.refier='N' and cpdoccau.afeprc='S' and cpdoccau.afecom='S' and cpdoccau.afecau='S' and cpdoccau.afedis='R') AND opordpag.aprorddir='A')
+                       or opordpag.tipcau not in (select tipcau from cpdoccau where
+                       cpdoccau.refier='N' and cpdoccau.afeprc='S' and cpdoccau.afecom='S' and cpdoccau.afecau='S' and cpdoccau.afedis='R'))";
+		  }
+		  $c->add(OpordpagPeer::APRORDDIR,$this->sql2,Criteria::CUSTOM);
+		}
+    $c->addAscendingOrderByColumn(OpordpagPeer::FECEMI);
+    $c->addAscendingOrderByColumn(OpordpagPeer::NUMORD);
+    
+
         $per = OpordpagPeer::doSelect($c);
         if (!$per)
         {
@@ -1239,19 +1377,22 @@ $this->Bitacora('Guardo');
            $despag=$this->getRequestParameter('tscheemi[descriordpag]');
            $concom="";
            $grid=Herramientas::CargarDatosGrid($this,$this->gridOrdPag);
-           Cheques::ActualizaOrdPag($tscheemi,$grid,$tippag,$despag,$numcomche,"N",&$this->arraynumche,$concom,$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut);
+           Cheques::ActualizaOrdPag($tscheemi,$grid,$tippag,$despag,$numcomche,"N",&$this->arraynumche,$concom,$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,&$this->arraynumcue);
+           if(H::getConfApp('entpaggebos', 'tesoreria', 'tsmovemiche')=='S'){
+             $this->infogebos = Cheques::EnterarPagoGeBOS($tscheemi,$grid);
+           }
         }
         //compromisos
       else if ($tscheemi->getOperacion()=='compro')
       {
            $grid=Herramientas::CargarDatosGrid($this,$this->gridCompro);
-           Cheques::ActualizaCompro($tscheemi,$grid,$numcom,$ctapag,$desctacre,&$this->arraynumche,"N",$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut);
+           Cheques::ActualizaCompro($tscheemi,$grid,$numcom,$ctapag,$desctacre,&$this->arraynumche,"N",$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,&$this->arraynumcue);
       }
       //precompromisos
       else if ($tscheemi->getOperacion()=='precom')
       {
            $grid=Herramientas::CargarDatosGrid($this,$this->gridPrecom);
-           Cheques::ActualizaPrecom($tscheemi,$grid,$numcom,$ctapag,$desctacre,&$this->arraynumche,"N",$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut);
+           Cheques::ActualizaPrecom($tscheemi,$grid,$numcom,$ctapag,$desctacre,&$this->arraynumche,"N",$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,&$this->arraynumcue);
       }
       //Pagos Directos
         else if ($tscheemi->getOperacion()=='pagdir')
@@ -1260,7 +1401,7 @@ $this->Bitacora('Guardo');
            $descue=$this->getRequestParameter('tscheemi[mondtopagdir]');
            $condto=$this->getRequestParameter('tscheemi[condtopagdir]');
            $grid=Herramientas::CargarDatosGrid($this,$this->gridPagdir);
-           Cheques::ActualizaPagDir($tscheemi,$grid,$numcom,$concep,$descue,$condto,$ctapag,$desctacre,&$this->arraynumche,"N",$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut);
+           Cheques::ActualizaPagDir($tscheemi,$grid,$numcom,$concep,$descue,$condto,$ctapag,$desctacre,&$this->arraynumche,"N",$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,&$this->arraynumcue);
         }
         //pagos Extrapresupuesto
         else if ($tscheemi->getOperacion()=='pagnopre')
@@ -1269,7 +1410,7 @@ $this->Bitacora('Guardo');
            $montpnrn=$this->getRequestParameter('tscheemi[montotpagnap]');
            $dctopnrn=$this->getRequestParameter('tscheemi[mondtopagnap]');
            $condpnrn=$this->getRequestParameter('tscheemi[condtopagnap]');
-           Cheques::ActualizaPagExtPre($tscheemi,$numcom,$concpnrn,$montpnrn,$dctopnrn,$condpnrn,$ctapag,$desctacre,&$this->arraynumche,"N",$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut);
+           Cheques::ActualizaPagExtPre($tscheemi,$numcom,$concpnrn,$montpnrn,$dctopnrn,$condpnrn,$ctapag,$desctacre,&$this->arraynumche,"N",$comprobante,$this->reqfirma,$this->mancomegr,$this->comprobaut,&$this->arraynumcue);
         }
 
 
@@ -1296,14 +1437,27 @@ $this->Bitacora('Guardo');
     $this->impche="";
     $this->numcomegr="";
     $this->numches="";
+    $this->numcues="";
     $this->comprobaut="";
+    $this->bloqfec="";
     $varemp = $this->getUser()->getAttribute('configemp');
-    if ($varemp)
-	if(array_key_exists('generales',$varemp))
+    if ($varemp) {
+			if(array_key_exists('generales',$varemp)) {
      if(array_key_exists('comprobaut',$varemp['generales']))
 	 {
 	   $this->comprobaut=$varemp['generales']['comprobaut'];
 	 }
+			}
+	    if(array_key_exists('aplicacion',$varemp))
+			 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+			   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+			     if(array_key_exists('tesmovemiche',$varemp['aplicacion']['tesoreria']['modulos'])){
+			       if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+			       {
+			       	$this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['bloqfec'];
+			       }
+			     }
+    }
 
     $this->labels = $this->getLabels();
 
@@ -1355,7 +1509,8 @@ $this->Bitacora('Guardo');
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -1366,11 +1521,42 @@ $this->Bitacora('Guardo');
       $this->tscheemi = $this->getTscheemiOrCreate();
       try{ $this->updateTscheemiFromRequest();}catch(Exception $ex){}
 
+      if ($this->tscheemi->getFecemi()>date('Y-m-d'))
+      {
+            $this->coderror6=564;
+            return false;
+      }
+
   	  if (!Herramientas::validarPeriodoPresuesto($this->getRequestParameter('tscheemi[fecemi]')))
       {
         $this->coderror5=142;
         return false;
       }
+     /* $aprmonche=H::getConfApp('aprmonche','tesoreria','tesmovemiche');
+      if ($aprmonche=='S')
+      {
+        $t= new Criteria();
+        $reg= OpdefempPeer::doSelectOne($t);
+        if ($reg)
+        {
+        	if ($this->getUser()->getAttribute('tschemi_operacion','vacio')=='ordpag')
+        	  $monto=H::toFloat($this->getRequestParameter('tscheemi[montotordpag]'));
+        	else if ($this->getUser()->getAttribute('tschemi_operacion','vacio')=='compro')
+        	   $monto=H::toFloat($this->getRequestParameter('tscheemi[montotcompro]'));
+        	else if ($this->getUser()->getAttribute('tschemi_operacion','vacio')=='precom')
+        	  $monto=H::toFloat($this->getRequestParameter('tscheemi[montotprecom]'));
+        	else if ($this->getUser()->getAttribute('tschemi_operacion','vacio')=='pagdir')
+              $monto=H::toFloat($this->getRequestParameter('tscheemi[totnetpagdir]'));
+            else if ($this->getUser()->getAttribute('tschemi_operacion','vacio')=='pagnopre')
+              $monto=H::toFloat($this->getRequestParameter('tscheemi[totnetpagnap]'));
+
+        	if ($monto > H::toFloat($reg->getMonche()))
+        	{
+               $this->coderror4=553;
+               return false;
+        	}
+        }
+      }*/
 
 
       if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tscheemi[fecemi]'))==true)
@@ -1471,6 +1657,29 @@ $this->Bitacora('Guardo');
           return false;
        }
      }
+	 
+	 $c = new Criteria();
+	 $c->add(TstipmovPeer::CODTIP,$this->getRequestParameter('tscheemi[tipdoc]'));
+	 $rsc = TstipmovPeer::doSelectOne($c);
+	 if($rsc)
+	 	if($rsc->getEscheque()=='t' || $rsc->getEscheque()==true)
+		{
+			 $c = new Criteria();
+			 $c->add(TsdefchequeraPeer::NUMCUE,$this->tscheemi->getNumcue());
+			 $c->add(TsdefchequeraPeer::ACTIVA,'SI');
+			 $objp = TsdefchequeraPeer::doSelectOne($c);
+			 if($objp)
+			 {
+			 	if($objp->getNumchedes()>$this->tscheemi->getNumche() || $objp->getNumchehas()<$this->tscheemi->getNumche())
+				{
+					$this->coderror2=547;
+					return false;
+				}
+		
+			 }		
+		}
+	 
+	 
 
       return true;
     }else return true;

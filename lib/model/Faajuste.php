@@ -8,7 +8,7 @@
  * @package    Roraima
  * @subpackage lib.model
  * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Faajuste.php 34082 2009-10-16 14:15:16Z dmartinez $
+ * @version SVN: $Id: Faajuste.php 41205 2010-10-27 17:28:28Z dmartinez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -17,9 +17,41 @@ class Faajuste extends BaseFaajuste
 {
 	public $obj = array();
 
-	public $codpro = '';
+	protected  $codpro = "";
+        protected  $rifpro = "";
+        protected  $nompro = "";
+        protected  $dirpro = "";
+        protected  $telpro = "";
 
-	public function getCodpro()
+   public function afterHydrate()
+  {
+    if (self::getTipaju() == 'P'){
+            $c1 = new Criteria();
+            $c1->add(FapedidoPeer::NROPED, self::getCodref());
+            $reg1 = FapedidoPeer::doSelectOne($c1);
+            if ($reg1){
+                    $this->codpro = $reg1->getCodcli();
+            }
+    }
+    else if (self::getTipaju() == 'NE'){
+            $c1 = new Criteria();
+            $c1->add(FanotentPeer::NRONOT, self::getCodref());
+            $reg1 = FanotentPeer::doSelectOne($c1);
+            if ($reg1){
+                    $this->codpro = $reg1->getCodcli();
+            }
+    }
+    else if (self::getTipaju() == 'F'){
+            $c1 = new Criteria();
+            $c1->add(FafacturPeer::REFFAC, self::getCodref());
+            $reg1 = FafacturPeer::doSelectOne($c1);
+            if ($reg1){
+                    $this->codpro = $reg1->getCodcli();
+            }
+    }
+  }
+
+/*	public function getCodpro()
     {
     	$codpro = '';
         $c = new Criteria();
@@ -56,26 +88,26 @@ class Faajuste extends BaseFaajuste
   		}
 
         return $codpro;
-    }
+    }*/
 
 	public function getRifpro()
     {
-        return Herramientas::getX('CODPRO','Facliente','Rifpro',self::getCodpro());
+        return Herramientas::getX('CODPRO','Facliente','Rifpro',$this->codpro);
     }
 
     public function getNompro()
     {
-  	    return Herramientas::getX('CODPRO','Facliente','Nompro',self::getCodpro());
+  	    return Herramientas::getX('CODPRO','Facliente','Nompro',$this->codpro);
     }
 
     public function getDirpro()
     {
-  	    return Herramientas::getX('CODPRO','Facliente','Dirpro',self::getCodpro());
+  	    return Herramientas::getX('CODPRO','Facliente','Dirpro',$this->codpro);
     }
 
     public function getTelpro()
     {
-  	    return Herramientas::getX('CODPRO','Facliente','Telpro',self::getCodpro());
+  	    return Herramientas::getX('CODPRO','Facliente','Telpro',$this->codpro);
     }
 
 }

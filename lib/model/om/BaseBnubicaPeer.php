@@ -3,61 +3,73 @@
 
 abstract class BaseBnubicaPeer {
 
-	
+
 	const DATABASE_NAME = 'propel';
 
-	
+
 	const TABLE_NAME = 'bnubica';
 
-	
+
 	const CLASS_DEFAULT = 'lib.model.Bnubica';
 
-	
-	const NUM_COLUMNS = 4;
 
-	
+	const NUM_COLUMNS = 8;
+
+
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
-	
+
 	const CODUBI = 'bnubica.CODUBI';
 
-	
+
 	const DESUBI = 'bnubica.DESUBI';
 
-	
+
 	const STACOD = 'bnubica.STACOD';
 
-	
-	const ID = 'bnubica.ID';
+
+	const CEDEMP = 'bnubica.CEDEMP';
 
 	
+	const NOMEMP = 'bnubica.NOMEMP';
+
+
+	const NOMCAR = 'bnubica.NOMCAR';
+
+
+	const NOMJEF = 'bnubica.NOMJEF';
+
+
+	const ID = 'bnubica.ID';
+
+
 	private static $phpNameMap = null;
 
 
-	
+
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codubi', 'Desubi', 'Stacod', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (BnubicaPeer::CODUBI, BnubicaPeer::DESUBI, BnubicaPeer::STACOD, BnubicaPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codubi', 'desubi', 'stacod', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codubi', 'Desubi', 'Stacod', 'Cedemp', 'Nomemp', 'Nomcar', 'Nomjef', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (BnubicaPeer::CODUBI, BnubicaPeer::DESUBI, BnubicaPeer::STACOD, BnubicaPeer::CEDEMP, BnubicaPeer::NOMEMP, BnubicaPeer::NOMCAR, BnubicaPeer::NOMJEF, BnubicaPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codubi', 'desubi', 'stacod', 'cedemp', 'nomemp', 'nomcar', 'nomjef', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
-	
+
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codubi' => 0, 'Desubi' => 1, 'Stacod' => 2, 'Id' => 3, ),
-		BasePeer::TYPE_COLNAME => array (BnubicaPeer::CODUBI => 0, BnubicaPeer::DESUBI => 1, BnubicaPeer::STACOD => 2, BnubicaPeer::ID => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('codubi' => 0, 'desubi' => 1, 'stacod' => 2, 'id' => 3, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codubi' => 0, 'Desubi' => 1, 'Stacod' => 2, 'Cedemp' => 3, 'Nomemp' => 4, 'Nomcar' => 5, 'Nomjef' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (BnubicaPeer::CODUBI => 0, BnubicaPeer::DESUBI => 1, BnubicaPeer::STACOD => 2, BnubicaPeer::CEDEMP => 3, BnubicaPeer::NOMEMP => 4, BnubicaPeer::NOMCAR => 5, BnubicaPeer::NOMJEF => 6, BnubicaPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('codubi' => 0, 'desubi' => 1, 'stacod' => 2, 'cedemp' => 3, 'nomemp' => 4, 'nomcar' => 5, 'nomjef' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
-	
+
 	public static function getMapBuilder()
 	{
 		include_once 'lib/model/map/BnubicaMapBuilder.php';
 		return BasePeer::getMapBuilder('lib.model.map.BnubicaMapBuilder');
 	}
-	
+
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
@@ -71,7 +83,7 @@ abstract class BaseBnubicaPeer {
 		}
 		return self::$phpNameMap;
 	}
-	
+
 	static public function translateFieldName($name, $fromType, $toType)
 	{
 		$toNames = self::getFieldNames($toType);
@@ -82,7 +94,7 @@ abstract class BaseBnubicaPeer {
 		return $toNames[$key];
 	}
 
-	
+
 
 	static public function getFieldNames($type = BasePeer::TYPE_PHPNAME)
 	{
@@ -92,13 +104,13 @@ abstract class BaseBnubicaPeer {
 		return self::$fieldNames[$type];
 	}
 
-	
+
 	public static function alias($alias, $column)
 	{
 		return str_replace(BnubicaPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
-	
+
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
@@ -108,6 +120,14 @@ abstract class BaseBnubicaPeer {
 
 		$criteria->addSelectColumn(BnubicaPeer::STACOD);
 
+		$criteria->addSelectColumn(BnubicaPeer::CEDEMP);
+
+		$criteria->addSelectColumn(BnubicaPeer::NOMEMP);
+
+		$criteria->addSelectColumn(BnubicaPeer::NOMCAR);
+
+		$criteria->addSelectColumn(BnubicaPeer::NOMJEF);
+
 		$criteria->addSelectColumn(BnubicaPeer::ID);
 
 	}
@@ -115,7 +135,7 @@ abstract class BaseBnubicaPeer {
 	const COUNT = 'COUNT(bnubica.ID)';
 	const COUNT_DISTINCT = 'COUNT(DISTINCT bnubica.ID)';
 
-	
+
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -139,7 +159,7 @@ abstract class BaseBnubicaPeer {
 						return 0;
 		}
 	}
-	
+
 	public static function doSelectOne(Criteria $criteria, $con = null)
 	{
 		$critcopy = clone $criteria;
@@ -150,12 +170,12 @@ abstract class BaseBnubicaPeer {
 		}
 		return null;
 	}
-	
+
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
 		return BnubicaPeer::populateObjects(BnubicaPeer::doSelectRS($criteria, $con));
 	}
-	
+
 	public static function doSelectRS(Criteria $criteria, $con = null)
 	{
 		if ($con === null) {
@@ -171,35 +191,35 @@ abstract class BaseBnubicaPeer {
 
 						return BasePeer::doSelect($criteria, $con);
 	}
-	
+
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
-	
+
 				$cls = BnubicaPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
-		
+
 			$obj = new $cls();
 			$obj->hydrate($rs);
 			$results[] = $obj;
-			
+
 		}
 		return $results;
 	}
-	
+
 	public static function getTableMap()
 	{
 		return Propel::getDatabaseMap(self::DATABASE_NAME)->getTable(self::TABLE_NAME);
 	}
 
-	
+
 	public static function getOMClass()
 	{
 		return BnubicaPeer::CLASS_DEFAULT;
 	}
 
-	
+
 	public static function doInsert($values, $con = null)
 	{
 		if ($con === null) {
@@ -210,7 +230,7 @@ abstract class BaseBnubicaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(BnubicaPeer::ID); 
+		$criteria->remove(BnubicaPeer::ID);
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -226,7 +246,7 @@ abstract class BaseBnubicaPeer {
 		return $pk;
 	}
 
-	
+
 	public static function doUpdate($values, $con = null)
 	{
 		if ($con === null) {
@@ -236,7 +256,7 @@ abstract class BaseBnubicaPeer {
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
+			$criteria = clone $values;
 			$comparison = $criteria->getComparison(BnubicaPeer::ID);
 			$selectCriteria->add(BnubicaPeer::ID, $criteria->remove(BnubicaPeer::ID), $comparison);
 
@@ -247,7 +267,7 @@ abstract class BaseBnubicaPeer {
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
 
-	
+
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
@@ -264,7 +284,7 @@ abstract class BaseBnubicaPeer {
 		}
 	}
 
-	
+
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
@@ -282,10 +302,10 @@ abstract class BaseBnubicaPeer {
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
-		$affectedRows = 0; 
+		$affectedRows = 0;
 		try {
 									$con->begin();
-			
+
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
 			return $affectedRows;
@@ -295,7 +315,7 @@ abstract class BaseBnubicaPeer {
 		}
 	}
 
-	
+
 	public static function doValidate(Bnubica $obj, $cols = null)
 	{
 		$columns = array();
@@ -330,7 +350,7 @@ abstract class BaseBnubicaPeer {
     return $res;
 	}
 
-	
+
 	public static function retrieveByPK($pk, $con = null)
 	{
 		if ($con === null) {
@@ -347,7 +367,7 @@ abstract class BaseBnubicaPeer {
 		return !empty($v) > 0 ? $v[0] : null;
 	}
 
-	
+
 	public static function retrieveByPKs($pks, $con = null)
 	{
 		if ($con === null) {
@@ -365,7 +385,7 @@ abstract class BaseBnubicaPeer {
 		return $objs;
 	}
 
-} 
+}
 if (Propel::isInit()) {
 			try {
 		BaseBnubicaPeer::getMapBuilder();

@@ -225,6 +225,7 @@ abstract class BaseFormetfinotrPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FormetfinotrPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

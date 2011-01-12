@@ -1,17 +1,18 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
 
-require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
-require_once($_SESSION["x"].'lib/general/funciones.php');
-require_once($_SESSION["x"].'lib/general/tools.php');
+require_once($_SESSION["x"].'/lib/bd/basedatosAdo.php');
+require_once($_SESSION["x"].'/lib/general/funciones.php');
+require_once($_SESSION["x"].'/lib/general/tools.php');
 validar(array(8,11,15));            //Seguridad  del Sistema
 $codemp=$_SESSION["codemp"];
 $bd=new basedatosAdo($codemp);
@@ -43,6 +44,7 @@ $_SESSION["formato"]="";
     $resultado=$tb->fields["codctd"];
     $capital=$tb->fields["codcta"];
     $orden=$tb->fields["codord"];
+    $etadef=$tb->fields["etadef"];
 
     if ($activos!="")
     {
@@ -208,7 +210,6 @@ $_SESSION["formato"]="";
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/fecha.js"></script>
@@ -250,7 +251,7 @@ MM_reloadPage(true);
 </head>
 
 <body onLoad="MM_preloadImages('../../images/rbut_01_f2.gif','../../images/rbut_02_f2.gif','../../images/rbut_03_f2.gif','../../images/rbut_04_f2.gif')">
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
 <table width="100%" align="center">
   <tr>
 <td width="100%">
@@ -432,8 +433,17 @@ MM_reloadPage(true);
                             <tr>
                               <td>&nbsp;</td>
                               <td width="20%">&nbsp;</td>
-                              <td width="67%"><input name="resant" type="text" id="resant" class="imagenInicio"  onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" onKeyPress="buscarenter(event,this.value,this.id)" value="<? print $resant;?>" size="20" onKeyDown="javascript:return dFilter (event.keyCode, this,'<?print $_SESSION["formato"];?>');" onBlur="buscar(this.value,this.id);">
-                                <input name="Submit2" type="button" class="botton" value="..." onClick="catalogo('resant','resant','resant','2');"></td>
+                              <? if ($etadef!='C') {?>
+                              <td width="67%">                                  
+                                  <input name="resant" type="text" id="resant" class="imagenInicio"  onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" onKeyPress="buscarenter(event,this.value,this.id)" value="<? print $resant;?>" size="20" onKeyDown="javascript:return dFilter (event.keyCode, this,'<?print $_SESSION["formato"];?>');" onBlur="buscar(this.value,this.id);">
+                                <input name="Submit2" type="button" class="botton" value="..." onClick="catalogo('resant','resant','resant','2');">
+                              </td>
+                             <? } else { ?>
+                              <td width="67%">                                  
+                                <input name="resant" type="text" id="resant" readonly="true" class="imagenInicio"  onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" onKeyPress="buscarenter(event,this.value,this.id)" value="<? print $resant;?>" size="20" >
+                             </td>
+                            <? } ?>
+
                             </tr>
                           </table>
          </fieldset>			   </td>
@@ -454,8 +464,14 @@ MM_reloadPage(true);
                             <tr>
                               <td>&nbsp;</td>
                               <td width="20%">&nbsp;</td>
+                              <? if ($etadef!='C') {?>
                               <td width="67%"><input name="resact" type="text" class="imagenInicio" id="resact" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" onKeyPress="buscarenter(event,this.value,this.id)" value="<? print $resact;?>" size="20" onKeyDown="javascript:return dFilter (event.keyCode, this,'<?print $_SESSION["formato"];?>');" onBlur="buscar(this.value,this.id);">
                                 <input name="Submit22" type="button" class="botton" value="..." onClick="catalogo('resact','resact','resact','2');"></td>
+                              <? } else { ?>
+                              <td width="67%">
+                                <input name="resact" type="text" class="imagenInicio" id="resact" readonly="true" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" onKeyPress="buscarenter(event,this.value,this.id)" value="<? print $resact;?>" size="20">
+                              </td>
+                              <? } ?>
                             </tr>
                           </table>
         </fieldset>				</td>

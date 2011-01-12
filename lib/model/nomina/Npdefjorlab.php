@@ -15,33 +15,44 @@
  */ 
 class Npdefjorlab extends BaseNpdefjorlab
 {
-	
-	public function getDias()
-	{
-		$dias = '';
-
-		if(self::getDomingo() == '1' ) $dias = $dias.'Domingo, ';  
-		if(self::getLunes() == '2' ) $dias = $dias.'Lunes, ';
-		if(self::getMartes() == '3' ) $dias = $dias.'Martes, ';
-		if(self::getMiercoles() == '4' ) $dias = $dias.'Miercoles, ';
-		if(self::getJueves() == '5' ) $dias = $dias.'Jueves, ';
-		if(self::getViernes() == '6' ) $dias = $dias.'Viernes, ';
-		if(self::getSabado() == '7' ) $dias = $dias.'Sabado, ';
-
-		return $dias;
-		
-	}
-	
-	public function getNomnom()
-	{
-		
-		$c = new Criteria();
-		$c->add(NpnominaPeer::CODNOM,self::getCodnom());
-		$nomnom = NpnominaPeer::doSelectOne($c);
-		
-		if($nomnom) return $nomnom->getNomnom();
-		else '';
-		
-	}
-	
+ protected $lunes=0;
+ 
+ public function hydrate(ResultSet $rs, $startcol = 1)
+   {
+      parent::hydrate($rs, $startcol);
+	  if($this->lunes == 'S' || $this->lunes()==1)
+	    $this->lunes='S';
+	  else
+	  	$this->lunes=0;	
+			
+	  if($this->martes == 'S' || $this->martes == 1)
+	    $this->martes='S';
+	  else
+	  	$this->martes=0;	
+	  if($this->miercoles == 'S' || $this->miercoles == 1)
+	    $this->miercoles='S';
+	  else
+	  	$this->miercoles=0;		
+	  if($this->jueves == 'S' || $this->jueves == 1)
+	    $this->jueves='S';
+	  else
+	  	$this->jueves=0;		
+	  if($this->viernes == 'S' || $this->viernes == 1)
+	    $this->viernes='S';
+	  else
+	  	$this->viernes=0;		
+	  if($this->sabado == 'S' || $this->sabado == 1)
+	    $this->sabado='S';
+	  else
+	  	$this->sabado=0;		
+	  if($this->domingo == 'S' || $this->domingo == 1)
+	    $this->domingo='S';
+	  else
+	  	$this->domingo=0;		
+   }	
+   
+   public function getNomnom()
+   {
+   	 return H::GetX('Codnom','Npnomina','Nomnom',$this->codnom);
+   }
 }

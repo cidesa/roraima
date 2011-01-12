@@ -3,6 +3,7 @@ methods:
    - "npasicaremp{codemp}"
    - "npasicaremp{codcar}"
    - "npasicaremp{codcat}"
+   - "npasicaremp{codcen}"
 
 names:
   npasicaremp{codemp}:
@@ -18,6 +19,10 @@ names:
   npasicaremp{codcat}:
     required:  No
     validators: CategoriaValidator
+
+  npasicaremp{codcen}:
+    required:  No
+    validators: CentroValidator
 
 UniqueValidator:
     class: sfPropelUniqueValidator
@@ -39,3 +44,10 @@ CategoriaValidator:
         class:    Npcatpre
         column:   codcat
         unique_error:   El Código de la Categoria no existe.
+
+CentroValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Cadefcen
+        column:   codcen
+        unique_error:   El Centro de Costo no existe.

@@ -126,52 +126,13 @@ class almregrgoActions extends autoalmregrgoActions
   }
 
 
-  public function deleteCarecarg($Carecarg)
-  {
-
-    $coderr = -1;
-
-    // habilitar la siguiente línea si se usa grid
-    //$grid=Herramientas::CargarDatosGrid($this,$this->obj);
-
-    try {
-
-      // Modificar la siguiente línea para llamar al método
-      // correcto en la clase del negocio, ej:
-      // $coderr = Compras::EliminarAlmaujoc($caajuoc,$grid);
-
-      // OJO ----> Eliminar esta linea al modificar este método
-      parent::deleteCarecarg($Carecarg);
-
-      if(is_array($coderr)){
-        foreach ($coderror as $ERR){
-          $err = Herramientas::obtenerMensajeError($ERR);
-          $this->getRequest()->setError('',$err);
-          $this->ActualizarGrid();
-        }
-      }elseif($coderr!=-1){
-        $err = Herramientas::obtenerMensajeError($coderror);
-        $this->getRequest()->setError('',$err);
-        $this->ActualizarGrid();
-      }
-
-
-    } catch (Exception $ex) {
-
-      $coderror = 0;
-      $err = Herramientas::obtenerMensajeError($coderror);
-      $this->getRequest()->setError('',$err);
-
-    }
-
-  }
-
-  
+ 
   
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -191,16 +152,31 @@ class almregrgoActions extends autoalmregrgoActions
 
        //Para que el codigo no se pueda cambiar al editar el registro:
        $this->carecarg= $this->getCarecargOrCreate();
+       $this->setVars();
        $carecarg = $this->getRequestParameter('carecarg');
        $valor = $carecarg['codrgo'];
+       $codpre = $carecarg['codpre'];
        $campo='codrgo';
 
        $resp=Herramientas::ValidarCodigo($valor,$this->carecarg,$campo);
+
+       if($this->tipoformato=='R'){
+        $respcodpre = H::getX('codpar', 'Nppartidas', 'codpar', $codpre);
+       }else{
+         $respcodpre = H::getX('codpre', 'Cpdeftit', 'codpre', $codpre);
+       }
+       
+       if($respcodpre==H::REGVACIO){
+         $resp1 = 499;
+       }else $resp1 = -1;
 
       if($resp!=-1)
       {
         $this->coderror = $resp;
         return false;
+      }elseif($resp1!=-1){
+        $this->coderror = $resp1;
+        return false;        
       }
       else return true;
     }else return true;

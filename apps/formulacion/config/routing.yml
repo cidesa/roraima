@@ -5,7 +5,7 @@ homepage:
 
 default_symfony:
   url:   /symfony/:action/*
-  param: { module: default }
+  param: { module: main }
 
 default_index:
   url:   /:module

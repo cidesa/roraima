@@ -1,0 +1,30 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   npbonfinano
+  anchogrid:               900
+  ancho:                   500
+  filas:                   1
+  titulo:                  ' Bono Fin de AÃ±o '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Desde
+  tipo:                    m
+  nombrecampo:             desde
+  html:                    [size=24 ]
+  oculta:                  false
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Hasta
+  tipo:                    m
+  nombrecampo:             hasta
+  html:                    [size=24 ]
+  oculta:                  false
+  esgrabable:              true  
+3:       # Columna 3
+  titulo:                  Dias
+  tipo:                    m
+  nombrecampo:             dias
+  html:                    [size=24 ]
+  oculta:                  false
+  esgrabable:              true

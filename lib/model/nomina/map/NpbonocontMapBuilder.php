@@ -4,25 +4,25 @@
 
 class NpbonocontMapBuilder {
 
-	
+
 	const CLASS_NAME = 'lib.model.nomina.map.NpbonocontMapBuilder';
 
-	
+
 	private $dbMap;
 
-	
+
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-	
+
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-	
+
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -42,11 +42,11 @@ class NpbonocontMapBuilder {
 
 		$tMap->addColumn('HASTA', 'Hasta', 'double', CreoleTypes::NUMERIC, true, 2);
 
-		$tMap->addColumn('DIAUTI', 'Diauti', 'double', CreoleTypes::NUMERIC, true, 3);
+		$tMap->addColumn('DIAUTI', 'Diauti', 'double', CreoleTypes::NUMERIC, true, 10);
 
-		$tMap->addColumn('DIAVAC', 'Diavac', 'double', CreoleTypes::NUMERIC, true, 3);
+		$tMap->addColumn('DIAVAC', 'Diavac', 'double', CreoleTypes::NUMERIC, true, 10);
 
-		$tMap->addColumn('DIAPRO', 'Diapro', 'double', CreoleTypes::NUMERIC, false, 3);
+		$tMap->addColumn('DIAPRO', 'Diapro', 'double', CreoleTypes::NUMERIC, false, 10);
 
 		$tMap->addColumn('ANOVIGHAS', 'Anovighas', 'int', CreoleTypes::DATE, false, null);
 
@@ -58,5 +58,5 @@ class NpbonocontMapBuilder {
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	} 
-} 
+	}
+}

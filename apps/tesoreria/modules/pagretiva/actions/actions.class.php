@@ -26,7 +26,7 @@ private static $coderror=-1;
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
-  public function validateEdit()
+  /*public function validateEdit()
   {
     if($this->getRequest()->getMethod() == sfRequest::POST)
 	{

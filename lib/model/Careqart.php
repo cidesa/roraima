@@ -17,11 +17,18 @@ class Careqart extends BaseCareqart
 {
 	protected $obj = array();
 	protected $check = '';
+	protected $check2 = '';
+	protected $check3 = '';
+	protected $totfil = '';
 
 	public function getDesubi()
 	{
-		return  Herramientas::getX('codubi','bnubibie','desubi',self::getCodcatreq());
+		return  Herramientas::getX('codubi','bnubica','desubi',self::getCodcatreq());
 	}
 
+  public function getDescen()
+  {
+	return Herramientas::getX('CODCEN','Cadefcen','Descen',self::getCodcen());
+  }
 
 }

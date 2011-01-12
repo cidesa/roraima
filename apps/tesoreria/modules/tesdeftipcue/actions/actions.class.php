@@ -13,31 +13,6 @@
  */
 class tesdeftipcueActions extends autotesdeftipcueActions
 {
-    /**
-   * Función principal para procesar la eliminación de registros 
-   * en el formulario.
-   *
-   */
-  public function executeDelete()
-  {
-    $this->tstipcue = TstipcuePeer::retrieveByPk($this->getRequestParameter('id'));
-    $this->forward404Unless($this->tstipcue);
-    $id=$this->getRequestParameter('id');
-    $c= new Criteria();
-    $c->add(TsdefbanPeer::TIPCUE,$this->tstipcue->getCodtip());
-    $dato=TsdefbanPeer::doSelect($c);
-    if (!$dato)
-    { $this->deleteTstipcue($this->tstipcue);}
-    else {
-
-        $this->setFlash('notice','El tipo de Cuenta no puede ser eliminado, porque esta asociado a un banco');
-      return $this->redirect('tesdeftipcue/edit?id='.$id);
-    }
-    $this->Bitacora('Elimino');
-    return $this->redirect('tesdeftipcue/list');
-  }
-
-
   /**
    * Función principal para el manejo de las acciones create y edit
    * del formulario.

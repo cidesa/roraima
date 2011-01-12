@@ -4,7 +4,8 @@ generator:
     model_class:      Bndefcon
     theme:            default
     fields:
-      codact:      { name : Código Nivel }
+      codact:      { name : Desde }
+      codact1:      { name : Hasta }      
       codmue:      { name : Código Activo }
       desmue:      { name : Descripción }
 
@@ -33,13 +34,11 @@ generator:
       display:        [codact, codmue, desmue]
       filters:        [codact, codmue]
       object_actions:
-        _edit:        ~
-        _delete:      ~
       max_per_page:   5
       sort:   codact
     edit:
       title:          Definición Contable de Muebles por Lotes
-      display:        [codact, codmue, desmue, ctadepcar, descta, ctadepabo, desctaabo, ctaajucar, desctaajucar, ctaajuabo, desctaajuabo, ctarevcar, desctarevcar, ctarevabo, desctarevabo, ctapercar, desctapercar, ctaperabo, desctaperabo]
+      display:        [codact, codmue, desmue, ctadepcar, descta, ctadepabo, desctaabo, ctaajucar, desctaajucar, ctaajuabo, desctaajuabo, ctarevcar, desctarevcar, ctarevabo, desctarevabo, ctapercar, desctapercar, ctaperabo, desctaperabo, codact1]
       actions:
         _list:        ~
         _save:        ~

@@ -46,7 +46,7 @@ class OpbenefiMapBuilder {
 
 		$tMap->addColumn('NITBEN', 'Nitben', 'string', CreoleTypes::VARCHAR, false, 15);
 
-		$tMap->addColumn('CODTIPBEN', 'Codtipben', 'string', CreoleTypes::VARCHAR, false, 3);
+		$tMap->addForeignKey('CODTIPBEN', 'Codtipben', 'string', CreoleTypes::VARCHAR, 'optipben', 'CODTIPBEN', true, 3);
 
 		$tMap->addColumn('TIPPER', 'Tipper', 'string', CreoleTypes::VARCHAR, false, 1);
 

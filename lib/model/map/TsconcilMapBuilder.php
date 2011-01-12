@@ -50,7 +50,7 @@ class TsconcilMapBuilder {
 
 		$tMap->addColumn('FECBAN', 'Fecban', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('DESREF', 'Desref', 'string', CreoleTypes::VARCHAR, false, 100);
+		$tMap->addColumn('DESREF', 'Desref', 'string', CreoleTypes::VARCHAR, false, 1000);
 
 		$tMap->addColumn('MONLIB', 'Monlib', 'double', CreoleTypes::NUMERIC, false, 14);
 

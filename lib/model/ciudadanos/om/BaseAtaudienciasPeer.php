@@ -390,10 +390,10 @@ abstract class BaseAtaudienciasPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(AtaudienciasPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtaudienciasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
-
+			$criteria->addJoin(AtaudienciasPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
+	
+			$criteria->addJoin(AtaudienciasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+	
 		$rs = AtaudienciasPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -415,16 +415,16 @@ abstract class BaseAtaudienciasPeer {
 		AtaudienciasPeer::addSelectColumns($c);
 		$startcol2 = (AtaudienciasPeer::NUM_COLUMNS - AtaudienciasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AtunidadesPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtunidadesPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtaudienciasPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtaudienciasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
-
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AtunidadesPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtunidadesPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtaudienciasPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtaudienciasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -438,112 +438,112 @@ abstract class BaseAtaudienciasPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = AtciudadanoPeer::getOMClass();
+							
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtciudadano(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtaudiencias($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtciudadano(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtaudiencias($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtaudienciass();
-				$obj2->addAtaudiencias($obj1);
-			}
-
-
-					
-			$omClass = AtunidadesPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3 = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtunidades(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtaudiencias($obj1); 					break;
+				if ($newObject) {
+					$obj2->initAtaudienciass();
+					$obj2->addAtaudiencias($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj3->initAtaudienciass();
-				$obj3->addAtaudiencias($obj1);
-			}
+							
+				$omClass = AtunidadesPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj3 = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtunidades(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtaudiencias($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initAtaudienciass();
+					$obj3->addAtaudiencias($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
 	}
 
 
-	
-	public static function doCountJoinAllExceptAtciudadano(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtaudienciasPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtaudienciasPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAtciudadano(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(AtaudienciasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtaudienciasPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtaudienciasPeer::COUNT);
+			}
 
-		$rs = AtaudienciasPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptAtunidades(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtaudienciasPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtaudienciasPeer::COUNT);
+				$criteria->addJoin(AtaudienciasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+		
+			$rs = AtaudienciasPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
+	
 
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAtunidades(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtaudienciasPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtaudienciasPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(AtaudienciasPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
+		
+			$rs = AtaudienciasPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-		$criteria->addJoin(AtaudienciasPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
-
-		$rs = AtaudienciasPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
+	
 
 	
 	public static function doSelectJoinAllExceptAtciudadano(Criteria $c, $con = null)
@@ -557,11 +557,11 @@ abstract class BaseAtaudienciasPeer {
 		AtaudienciasPeer::addSelectColumns($c);
 		$startcol2 = (AtaudienciasPeer::NUM_COLUMNS - AtaudienciasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtunidadesPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtunidadesPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtaudienciasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
-
+			AtunidadesPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtunidadesPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtaudienciasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -574,28 +574,28 @@ abstract class BaseAtaudienciasPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtunidadesPeer::getOMClass();
+				$omClass = AtunidadesPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtunidades(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtaudiencias($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtunidades(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtaudiencias($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtaudienciass();
-				$obj2->addAtaudiencias($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtaudienciass();
+					$obj2->addAtaudiencias($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -614,11 +614,11 @@ abstract class BaseAtaudienciasPeer {
 		AtaudienciasPeer::addSelectColumns($c);
 		$startcol2 = (AtaudienciasPeer::NUM_COLUMNS - AtaudienciasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtciudadanoPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtaudienciasPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
-
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtaudienciasPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -631,28 +631,28 @@ abstract class BaseAtaudienciasPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtciudadanoPeer::getOMClass();
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtciudadano(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtaudiencias($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtciudadano(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtaudiencias($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtaudienciass();
-				$obj2->addAtaudiencias($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtaudienciass();
+					$obj2->addAtaudiencias($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

@@ -36,7 +36,7 @@ class CarazcomMapBuilder {
 
 		$tMap->addColumn('CODRAZCOM', 'Codrazcom', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('DESRAZCOM', 'Desrazcom', 'string', CreoleTypes::VARCHAR, false, 255);
+		$tMap->addColumn('DESRAZCOM', 'Desrazcom', 'string', CreoleTypes::VARCHAR, true, 255);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

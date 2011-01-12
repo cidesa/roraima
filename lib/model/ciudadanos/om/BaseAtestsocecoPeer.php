@@ -985,14 +985,14 @@ abstract class BaseAtestsocecoPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(AtestsocecoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
-		$criteria->addJoin(AtestsocecoPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtestsocecoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
-
-		$criteria->addJoin(AtestsocecoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
-
+			$criteria->addJoin(AtestsocecoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+	
+			$criteria->addJoin(AtestsocecoPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
+	
+			$criteria->addJoin(AtestsocecoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+	
+			$criteria->addJoin(AtestsocecoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
+	
 		$rs = AtestsocecoPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -1014,26 +1014,26 @@ abstract class BaseAtestsocecoPeer {
 		AtestsocecoPeer::addSelectColumns($c);
 		$startcol2 = (AtestsocecoPeer::NUM_COLUMNS - AtestsocecoPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtayudasPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AttipvivPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AttipvivPeer::NUM_COLUMNS;
-
-		AttipprovivPeer::addSelectColumns($c);
-		$startcol6 = $startcol5 + AttipprovivPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtestsocecoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
-		$c->addJoin(AtestsocecoPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtestsocecoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
-
-		$c->addJoin(AtestsocecoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
-
+			AtayudasPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AttipvivPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AttipvivPeer::NUM_COLUMNS;
+	
+			AttipprovivPeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + AttipprovivPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtestsocecoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+	
+			$c->addJoin(AtestsocecoPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtestsocecoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+	
+			$c->addJoin(AtestsocecoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -1047,230 +1047,230 @@ abstract class BaseAtestsocecoPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = AtayudasPeer::getOMClass();
+							
+				$omClass = AtayudasPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtayudas(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtestsoceco($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtayudas(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtestsoceco($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtestsocecos();
-				$obj2->addAtestsoceco($obj1);
-			}
-
-
-					
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3 = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtciudadano(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtestsoceco($obj1); 					break;
+				if ($newObject) {
+					$obj2->initAtestsocecos();
+					$obj2->addAtestsoceco($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj3->initAtestsocecos();
-				$obj3->addAtestsoceco($obj1);
-			}
+							
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj3 = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-					
-			$omClass = AttipvivPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4 = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAttipviv(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtestsoceco($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtciudadano(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtestsoceco($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtestsocecos();
-				$obj4->addAtestsoceco($obj1);
-			}
-
-
-					
-			$omClass = AttipprovivPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj5 = new $cls();
-			$obj5->hydrate($rs, $startcol5);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj5 = $temp_obj1->getAttipproviv(); 				if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj5->addAtestsoceco($obj1); 					break;
+				if ($newObject) {
+					$obj3->initAtestsocecos();
+					$obj3->addAtestsoceco($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj5->initAtestsocecos();
-				$obj5->addAtestsoceco($obj1);
-			}
+							
+				$omClass = AttipvivPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj4 = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAttipviv(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtestsoceco($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initAtestsocecos();
+					$obj4->addAtestsoceco($obj1);
+				}
+	
+
+							
+				$omClass = AttipprovivPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj5 = new $cls();
+				$obj5->hydrate($rs, $startcol5);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getAttipproviv(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addAtestsoceco($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj5->initAtestsocecos();
+					$obj5->addAtestsoceco($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
 	}
 
 
-	
-	public static function doCountJoinAllExceptAtayudas(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtestsocecoPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtestsocecoPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAtayudas(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(AtestsocecoPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtestsocecoPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtestsocecoPeer::COUNT);
+			}
 
-		$criteria->addJoin(AtestsocecoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
-
-		$criteria->addJoin(AtestsocecoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
-
-		$rs = AtestsocecoPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptAtciudadano(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtestsocecoPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtestsocecoPeer::COUNT);
+				$criteria->addJoin(AtestsocecoPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtestsocecoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+		
+				$criteria->addJoin(AtestsocecoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
+		
+			$rs = AtestsocecoPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-		$criteria->addJoin(AtestsocecoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
-		$criteria->addJoin(AtestsocecoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
-
-		$criteria->addJoin(AtestsocecoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
-
-		$rs = AtestsocecoPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
 	
-	public static function doCountJoinAllExceptAttipviv(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
 
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtestsocecoPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtestsocecoPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAtciudadano(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(AtestsocecoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtestsocecoPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtestsocecoPeer::COUNT);
+			}
 
-		$criteria->addJoin(AtestsocecoPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
-
-		$criteria->addJoin(AtestsocecoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
-
-		$rs = AtestsocecoPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptAttipproviv(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtestsocecoPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtestsocecoPeer::COUNT);
+				$criteria->addJoin(AtestsocecoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+		
+				$criteria->addJoin(AtestsocecoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+		
+				$criteria->addJoin(AtestsocecoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
+		
+			$rs = AtestsocecoPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
+	
 
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAttipviv(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtestsocecoPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtestsocecoPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(AtestsocecoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+		
+				$criteria->addJoin(AtestsocecoPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtestsocecoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
+		
+			$rs = AtestsocecoPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
+	
 
-		$criteria->addJoin(AtestsocecoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+		
+		public static function doCountJoinAllExceptAttipproviv(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(AtestsocecoPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtestsocecoPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtestsocecoPeer::COUNT);
+			}
 
-		$criteria->addJoin(AtestsocecoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
-
-		$rs = AtestsocecoPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(AtestsocecoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+		
+				$criteria->addJoin(AtestsocecoPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
+		
+				$criteria->addJoin(AtestsocecoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+		
+			$rs = AtestsocecoPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-	}
-
+	
 
 	
 	public static function doSelectJoinAllExceptAtayudas(Criteria $c, $con = null)
@@ -1284,21 +1284,21 @@ abstract class BaseAtestsocecoPeer {
 		AtestsocecoPeer::addSelectColumns($c);
 		$startcol2 = (AtestsocecoPeer::NUM_COLUMNS - AtestsocecoPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AttipvivPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AttipvivPeer::NUM_COLUMNS;
-
-		AttipprovivPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AttipprovivPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtestsocecoPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtestsocecoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
-
-		$c->addJoin(AtestsocecoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
-
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AttipvivPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AttipvivPeer::NUM_COLUMNS;
+	
+			AttipprovivPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AttipprovivPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtestsocecoPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtestsocecoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+	
+			$c->addJoin(AtestsocecoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -1311,72 +1311,72 @@ abstract class BaseAtestsocecoPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtciudadanoPeer::getOMClass();
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtciudadano(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtestsoceco($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtciudadano(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtestsoceco($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtestsocecos();
-				$obj2->addAtestsoceco($obj1);
-			}
-
-			$omClass = AttipvivPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAttipviv(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtestsoceco($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initAtestsocecos();
+					$obj2->addAtestsoceco($obj1);
 				}
-			}
+	
+				$omClass = AttipvivPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initAtestsocecos();
-				$obj3->addAtestsoceco($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-			$omClass = AttipprovivPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4  = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAttipproviv(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtestsoceco($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAttipviv(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtestsoceco($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtestsocecos();
-				$obj4->addAtestsoceco($obj1);
-			}
+				if ($newObject) {
+					$obj3->initAtestsocecos();
+					$obj3->addAtestsoceco($obj1);
+				}
+	
+				$omClass = AttipprovivPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAttipproviv(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtestsoceco($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initAtestsocecos();
+					$obj4->addAtestsoceco($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -1395,21 +1395,21 @@ abstract class BaseAtestsocecoPeer {
 		AtestsocecoPeer::addSelectColumns($c);
 		$startcol2 = (AtestsocecoPeer::NUM_COLUMNS - AtestsocecoPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtayudasPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
-
-		AttipvivPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AttipvivPeer::NUM_COLUMNS;
-
-		AttipprovivPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AttipprovivPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtestsocecoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
-		$c->addJoin(AtestsocecoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
-
-		$c->addJoin(AtestsocecoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
-
+			AtayudasPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
+	
+			AttipvivPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AttipvivPeer::NUM_COLUMNS;
+	
+			AttipprovivPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AttipprovivPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtestsocecoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+	
+			$c->addJoin(AtestsocecoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+	
+			$c->addJoin(AtestsocecoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -1422,72 +1422,72 @@ abstract class BaseAtestsocecoPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtayudasPeer::getOMClass();
+				$omClass = AtayudasPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtayudas(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtestsoceco($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtayudas(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtestsoceco($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtestsocecos();
-				$obj2->addAtestsoceco($obj1);
-			}
-
-			$omClass = AttipvivPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAttipviv(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtestsoceco($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initAtestsocecos();
+					$obj2->addAtestsoceco($obj1);
 				}
-			}
+	
+				$omClass = AttipvivPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initAtestsocecos();
-				$obj3->addAtestsoceco($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-			$omClass = AttipprovivPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4  = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAttipproviv(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtestsoceco($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAttipviv(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtestsoceco($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtestsocecos();
-				$obj4->addAtestsoceco($obj1);
-			}
+				if ($newObject) {
+					$obj3->initAtestsocecos();
+					$obj3->addAtestsoceco($obj1);
+				}
+	
+				$omClass = AttipprovivPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAttipproviv(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtestsoceco($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initAtestsocecos();
+					$obj4->addAtestsoceco($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -1506,21 +1506,21 @@ abstract class BaseAtestsocecoPeer {
 		AtestsocecoPeer::addSelectColumns($c);
 		$startcol2 = (AtestsocecoPeer::NUM_COLUMNS - AtestsocecoPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtayudasPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AttipprovivPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AttipprovivPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtestsocecoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
-		$c->addJoin(AtestsocecoPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtestsocecoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
-
+			AtayudasPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AttipprovivPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AttipprovivPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtestsocecoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+	
+			$c->addJoin(AtestsocecoPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtestsocecoPeer::ATTIPPROVIV_ID, AttipprovivPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -1533,72 +1533,72 @@ abstract class BaseAtestsocecoPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtayudasPeer::getOMClass();
+				$omClass = AtayudasPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtayudas(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtestsoceco($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtayudas(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtestsoceco($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtestsocecos();
-				$obj2->addAtestsoceco($obj1);
-			}
-
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtciudadano(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtestsoceco($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initAtestsocecos();
+					$obj2->addAtestsoceco($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initAtestsocecos();
-				$obj3->addAtestsoceco($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-			$omClass = AttipprovivPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4  = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAttipproviv(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtestsoceco($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtciudadano(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtestsoceco($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtestsocecos();
-				$obj4->addAtestsoceco($obj1);
-			}
+				if ($newObject) {
+					$obj3->initAtestsocecos();
+					$obj3->addAtestsoceco($obj1);
+				}
+	
+				$omClass = AttipprovivPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAttipproviv(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtestsoceco($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initAtestsocecos();
+					$obj4->addAtestsoceco($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -1617,21 +1617,21 @@ abstract class BaseAtestsocecoPeer {
 		AtestsocecoPeer::addSelectColumns($c);
 		$startcol2 = (AtestsocecoPeer::NUM_COLUMNS - AtestsocecoPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtayudasPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
-
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtciudadanoPeer::NUM_COLUMNS;
-
-		AttipvivPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AttipvivPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtestsocecoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
-		$c->addJoin(AtestsocecoPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
-
-		$c->addJoin(AtestsocecoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
-
+			AtayudasPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
+	
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			AttipvivPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AttipvivPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtestsocecoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+	
+			$c->addJoin(AtestsocecoPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
+	
+			$c->addJoin(AtestsocecoPeer::ATTIPVIV_ID, AttipvivPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -1644,72 +1644,72 @@ abstract class BaseAtestsocecoPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtayudasPeer::getOMClass();
+				$omClass = AtayudasPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtayudas(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtestsoceco($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtayudas(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtestsoceco($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtestsocecos();
-				$obj2->addAtestsoceco($obj1);
-			}
-
-			$omClass = AtciudadanoPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtciudadano(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtestsoceco($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initAtestsocecos();
+					$obj2->addAtestsoceco($obj1);
 				}
-			}
+	
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initAtestsocecos();
-				$obj3->addAtestsoceco($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-			$omClass = AttipvivPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4  = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAttipviv(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtestsoceco($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtciudadano(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtestsoceco($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtestsocecos();
-				$obj4->addAtestsoceco($obj1);
-			}
+				if ($newObject) {
+					$obj3->initAtestsocecos();
+					$obj3->addAtestsoceco($obj1);
+				}
+	
+				$omClass = AttipvivPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAttipviv(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtestsoceco($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initAtestsocecos();
+					$obj4->addAtestsoceco($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

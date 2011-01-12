@@ -46,7 +46,7 @@ class CarecaudMapBuilder {
 
 		$tMap->addColumn('CANUTR', 'Canutr', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('CODTIPREC', 'Codtiprec', 'string', CreoleTypes::VARCHAR, false, 4);
+		$tMap->addForeignKey('CODTIPREC', 'Codtiprec', 'string', CreoleTypes::VARCHAR, 'catiprec', 'CODTIPREC', true, 4);
 
 		$tMap->addColumn('OBSERV', 'Observ', 'string', CreoleTypes::VARCHAR, false, 100);
 

@@ -23,3 +23,9 @@
   'confirm' => '¿Desea crear un nuevo registro?. Perderá cualquier cambio en la ventana actual',
 )) ?></li>
   </ul>
+
+<script language="JavaScript" type="text/javascript">
+ var tieregrel='<?php echo $caregart->getTiedatrel(); ?>';
+  var oculs='<?php echo $caregart->getOculsave(); ?>';
+  if (tieregrel=='S' && oculs=='S') $('save').hide();
+</script>

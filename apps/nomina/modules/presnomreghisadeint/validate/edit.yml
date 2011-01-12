@@ -29,18 +29,18 @@ MyNumberValidator:
     class: CidesaStringValidator
     param:
         values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
-        values_error:El Campo solo puede contener valores númericos
-        
+        values_error: El Campo solo puede contener valores númericos
+
 Validator_codcon:
     class: CidesaExistValidator
     param:
         class:        Nptipcon
         column:       codtipcon
-        unique_error: El Código del Contrato debe Existir.        
-    
+        unique_error: El Código del Contrato debe Existir.
+
 Validator_codemp:
     class: CidesaExistValidator
     param:
         class:        Nphojint
         column:       codemp
-        unique_error: El Código del Empleado debe Existir.                
+        unique_error: El Código del Empleado debe Existir.

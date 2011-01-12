@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
@@ -31,7 +32,7 @@ function crearLog($valor)
   $tb=$bd->select($sql);
   $id = $tb->fields["id"];
   $bd->Log($id, 'pre', 'Cpprecom', 'Preprecom', $valor);
-  
+
 }
     if (!$z->validarFechaPresup($fecha))
     {
@@ -40,7 +41,7 @@ function crearLog($valor)
     }
 
     $i=1;
-    while ($i<=20)
+    while ($i<=150)
       {
         if (trim($_POST["x".$i."1"])!="")
         {
@@ -65,7 +66,7 @@ function crearLog($valor)
         else
         {
           $fin=$i-1;
-          $i=21;
+          $i=151;
         }
       }
 

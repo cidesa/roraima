@@ -15,4 +15,14 @@
  */ 
 class Rhindniv extends BaseRhindniv
 {
+	protected $obj_indniv=array();
+	
+	public  function getDesniv()
+	{
+		return H::GetX('Codniv','Rhdefniv','Desniv',$this->codniv);
+	}
+	public  function getDesind()
+	{
+		return H::GetX('Codind','Rhdefind','Desind',$this->codind);
+	}
 }

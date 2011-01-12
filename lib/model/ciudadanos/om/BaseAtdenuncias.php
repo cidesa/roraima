@@ -692,7 +692,10 @@ abstract class BaseAtdenuncias extends BaseObject  implements Persistent {
 		if ($this->aAtunidades === null && ($this->atunidades_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtunidadesPeer.php';
 
-			$this->aAtunidades = AtunidadesPeer::retrieveByPK($this->atunidades_id, $con);
+      $c = new Criteria();
+      $c->add(AtunidadesPeer::ID,$this->atunidades_id);
+      
+			$this->aAtunidades = AtunidadesPeer::doSelectOne($c, $con);
 
 			
 		}

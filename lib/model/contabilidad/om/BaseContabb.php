@@ -52,6 +52,18 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collTsmovlibs;
+
+	
+	protected $lastTsmovlibCriteria = null;
+
+	
+	protected $collCpdeftits;
+
+	
+	protected $lastCpdeftitCriteria = null;
+
+	
 	protected $collContabb1s;
 
 	
@@ -425,6 +437,22 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collTsmovlibs !== null) {
+				foreach($this->collTsmovlibs as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collCpdeftits !== null) {
+				foreach($this->collCpdeftits as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			if ($this->collContabb1s !== null) {
 				foreach($this->collContabb1s as $referrerFK) {
 					if (!$referrerFK->isDeleted()) {
@@ -481,6 +509,22 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collTsmovlibs !== null) {
+					foreach($this->collTsmovlibs as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collCpdeftits !== null) {
+					foreach($this->collCpdeftits as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 				if ($this->collContabb1s !== null) {
 					foreach($this->collContabb1s as $referrerFK) {
@@ -708,6 +752,14 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 		if ($deepCopy) {
 									$copyObj->setNew(false);
 
+			foreach($this->getTsmovlibs() as $relObj) {
+				$copyObj->addTsmovlib($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getCpdeftits() as $relObj) {
+				$copyObj->addCpdeftit($relObj->copy($deepCopy));
+			}
+
 			foreach($this->getContabb1s() as $relObj) {
 				$copyObj->addContabb1($relObj->copy($deepCopy));
 			}
@@ -739,6 +791,216 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 			self::$peer = new ContabbPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initTsmovlibs()
+	{
+		if ($this->collTsmovlibs === null) {
+			$this->collTsmovlibs = array();
+		}
+	}
+
+	
+	public function getTsmovlibs($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsmovlibPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsmovlibs === null) {
+			if ($this->isNew()) {
+			   $this->collTsmovlibs = array();
+			} else {
+
+				$criteria->add(TsmovlibPeer::CODCTA, $this->getCodcta());
+
+				TsmovlibPeer::addSelectColumns($criteria);
+				$this->collTsmovlibs = TsmovlibPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(TsmovlibPeer::CODCTA, $this->getCodcta());
+
+				TsmovlibPeer::addSelectColumns($criteria);
+				if (!isset($this->lastTsmovlibCriteria) || !$this->lastTsmovlibCriteria->equals($criteria)) {
+					$this->collTsmovlibs = TsmovlibPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastTsmovlibCriteria = $criteria;
+		return $this->collTsmovlibs;
+	}
+
+	
+	public function countTsmovlibs($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsmovlibPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(TsmovlibPeer::CODCTA, $this->getCodcta());
+
+		return TsmovlibPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addTsmovlib(Tsmovlib $l)
+	{
+		$this->collTsmovlibs[] = $l;
+		$l->setContabb($this);
+	}
+
+
+	
+	public function getTsmovlibsJoinTsdefban($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsmovlibPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsmovlibs === null) {
+			if ($this->isNew()) {
+				$this->collTsmovlibs = array();
+			} else {
+
+				$criteria->add(TsmovlibPeer::CODCTA, $this->getCodcta());
+
+				$this->collTsmovlibs = TsmovlibPeer::doSelectJoinTsdefban($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(TsmovlibPeer::CODCTA, $this->getCodcta());
+
+			if (!isset($this->lastTsmovlibCriteria) || !$this->lastTsmovlibCriteria->equals($criteria)) {
+				$this->collTsmovlibs = TsmovlibPeer::doSelectJoinTsdefban($criteria, $con);
+			}
+		}
+		$this->lastTsmovlibCriteria = $criteria;
+
+		return $this->collTsmovlibs;
+	}
+
+
+	
+	public function getTsmovlibsJoinTstipmov($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseTsmovlibPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collTsmovlibs === null) {
+			if ($this->isNew()) {
+				$this->collTsmovlibs = array();
+			} else {
+
+				$criteria->add(TsmovlibPeer::CODCTA, $this->getCodcta());
+
+				$this->collTsmovlibs = TsmovlibPeer::doSelectJoinTstipmov($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(TsmovlibPeer::CODCTA, $this->getCodcta());
+
+			if (!isset($this->lastTsmovlibCriteria) || !$this->lastTsmovlibCriteria->equals($criteria)) {
+				$this->collTsmovlibs = TsmovlibPeer::doSelectJoinTstipmov($criteria, $con);
+			}
+		}
+		$this->lastTsmovlibCriteria = $criteria;
+
+		return $this->collTsmovlibs;
+	}
+
+	
+	public function initCpdeftits()
+	{
+		if ($this->collCpdeftits === null) {
+			$this->collCpdeftits = array();
+		}
+	}
+
+	
+	public function getCpdeftits($criteria = null, $con = null)
+	{
+				include_once 'lib/model/presupuesto/om/BaseCpdeftitPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCpdeftits === null) {
+			if ($this->isNew()) {
+			   $this->collCpdeftits = array();
+			} else {
+
+				$criteria->add(CpdeftitPeer::CODCTA, $this->getCodcta());
+
+				CpdeftitPeer::addSelectColumns($criteria);
+				$this->collCpdeftits = CpdeftitPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CpdeftitPeer::CODCTA, $this->getCodcta());
+
+				CpdeftitPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCpdeftitCriteria) || !$this->lastCpdeftitCriteria->equals($criteria)) {
+					$this->collCpdeftits = CpdeftitPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCpdeftitCriteria = $criteria;
+		return $this->collCpdeftits;
+	}
+
+	
+	public function countCpdeftits($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/presupuesto/om/BaseCpdeftitPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CpdeftitPeer::CODCTA, $this->getCodcta());
+
+		return CpdeftitPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCpdeftit(Cpdeftit $l)
+	{
+		$this->collCpdeftits[] = $l;
+		$l->setContabb($this);
 	}
 
 	

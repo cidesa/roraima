@@ -1,0 +1,90 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   cadetsal
+  anchogrid:               1000
+  ancho:                   1800
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código de Artículo
+  tipo:                    t
+  nombrecampo:             codart
+  html:                    ["size=20 "]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    a
+  nombrecampo:             desart
+  html:                    ["size=25x1  readonly=true"]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Cantidad
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             cantot
+  esnumerico:              true
+  html:                    ["size=10 onBlur='ValidarMontoGridv2(this); event.keyCode=13; canttotal(event,this.id)'"]
+4:       # Columna 4
+  titulo:                  Costo
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             cosart
+  esnumerico:              true
+  html:                    ["size=10 onBlur='ValidarMontoGridv2(this); event.keyCode=13; canttotal(event,this.id)'"]
+5:       # Columna 5
+  titulo:                  Total
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             totart
+  esnumerico:              true
+  html:                    ["size=10 readonly=true"]
+  estotal:                 [true, casalalm_monsal]
+6:       # Columna 6
+  titulo:                  Código del Almacén
+  tipo:                    t
+  nombrecampo:             codalm
+  html:                    ["size=8 "]
+  esgrabable:              true
+  catalogo:                [cadefalm, sf_admin_edit_form, {Codalm: 6, Nomalm: 7}, Cadelfalm_Almordrec ]
+7:       # Columna 7
+  titulo:                  Nombre Almacén
+  tipo:                    a
+  nombrecampo:             nomalm
+  html:                    ["size=25x1  readonly=true"]
+  esgrabable:              true
+8:       # Columna 8
+  titulo:                  Código de Ubicación
+  tipo:                    t
+  nombrecampo:             codubi
+  html:                    ["size=10"]
+  esgrabable:              true  
+9:       # Columna 9
+  titulo:                  Nombre Ubicación
+  tipo:                    a
+  nombrecampo:             nomubi
+  html:                    ["size=25x1  readonly=true"]
+  esgrabable:              true
+10:       # Columna 10
+  titulo:                  Número de Jaulas
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             numjau
+  esnumerico:              true
+  html:                    ["size=10"]
+11:       # Columna 11
+  titulo:                  Tamaño Métrico
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             tammet
+  esnumerico:              true
+  html:                    ["size=10"]
+12:       # Columna 12
+  titulo:                  Número de Lote
+  tipo:                    c
+  nombrecampo:             numlot
+  #combosclase:             Numlotxart
+  html:                    [" "]
+  esgrabable:              true
+  oculta:                  true

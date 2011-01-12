@@ -6,8 +6,8 @@
  *
  * @package    Roraima
  * @subpackage helper
- * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: GridHelper.php 33429 2009-09-25 15:17:24Z jlobaton $
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: GridHelper.php 41861 2010-12-30 15:22:12Z lhernandez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -41,6 +41,7 @@ function grid_tag($obj,$objelim = array())
   $default = $obj["default"];
   $funcionajax = $obj["funcionajax"];
   $jseliminar = $obj["jseliminar"];
+  $camposcombo=$obj["camposcombo"];
 
   $modulo = sfContext::getInstance()->getModuleName();
 
@@ -332,6 +333,14 @@ function grid_tag($obj,$objelim = array())
              $tagw .= select_tag($name.'x_'.$i.'_'.$jmasuno, options_for_select($combo[$j],$get,'include_custom=Seleccione...'), 'style="border:none" '.$taghtml.' '.$js[$j].' '.$blur);
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
              break;
+           case 'cc':
+             $campocombo=$camposcombo[$j];
+             $metodocombo = 'get'.$campocombo;
+             $getcombo = $datos[$i]->$metodocombo();
+             $tagw = '     <td class="grid_fila" >';
+             $tagw .= select_tag($name.'x_'.$i.'_'.$jmasuno, options_for_select($getcombo,$get,'include_custom=Seleccione...'), 'style="border:none" '.$taghtml.' '.$js[$j].' '.$blur);
+             $tagw .= $catobj.$btnobj.$tagId.'</td>';
+             break;
            case 'k':
              $tagw = '     <td class="grid_fila" align="center" height="15">';
              $tagw .= checkbox_tag($name.'x_'.$i.'_'.$jmasuno, 1,(bool)$get, 'style="border:none" class="grid_txtcenter" '.$taghtml.' '.$js[$j].' '.$blur);
@@ -494,6 +503,11 @@ function grid_tag($obj,$objelim = array())
            case 'c':
              $tagw = '     <td class="grid_fila" >';
              $tagw .= select_tag($name.'x_'.$i.'_'.$jmasuno, options_for_select($combo[$j],'','include_custom=Seleccione...'), 'style="border:none" '.$taghtml.' '.$js[$j].' '.$blur);
+             $tagw .= $catobj.$btnobj.$tagId.'</td>';
+             break;
+           case 'cc':
+             $tagw = '     <td class="grid_fila" >';
+             $tagw .= select_tag($name.'x_'.$i.'_'.$jmasuno, options_for_select(array(),'','include_custom=Seleccione...'), 'style="border:none" '.$taghtml.' '.$js[$j].' '.$blur);
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
              break;
            case 'k':
@@ -764,8 +778,8 @@ function grid_tag($obj,$objelim = array())
  *
  * @package    Roraima
  * @subpackage helper
- * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: GridHelper.php 33429 2009-09-25 15:17:24Z jlobaton $
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: GridHelper.php 41861 2010-12-30 15:22:12Z lhernandez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -806,6 +820,12 @@ function grid_tag_v2($obj,$objelim = array())
   $ajaxcolumna= $obj["ajaxcolumna"];
   $ajaxgrid   = $obj["ajaxgrid"];
   $ajaxadicionales = $obj["ajaxadicionales"];
+  $tabla      = $obj["tabla"];
+  $camposcombo=$obj["camposcombo"];
+  $onchange=$obj["onchange"];
+  $tabindex= $obj["tabindex"];
+  $tabindexstart=$obj["tabindexstart"];
+  $tabindexstart--;
 
   $jsfilas = array();
   $jsobjs = array();
@@ -837,7 +857,7 @@ function grid_tag_v2($obj,$objelim = array())
       background-color: #FFFFFF;
     }
   </style>
-  '.javascript_include_tag('tools', 'dFilter', 'grid', 'numberformat');
+  '.javascript_include_tag('tools', 'dFilter', 'grid', 'numberformat', 'event.simulate');
   /////////////////
   // Inicio Grid //
   /////////////////
@@ -948,20 +968,28 @@ function grid_tag_v2($obj,$objelim = array())
         if($g!=(count($camposadic)-1)) $ajaxadic .= ",";
       }
 
+      $change="";
+      $blur="";
+
       if ($ajax[$j]!="") {
         $aj=split("-",$ajax[$j]);
         $mos=$name.substr($aj[1],0,1)."_".$i."_".substr($aj[1],1,strlen($aj[1]));
         $com=$name.substr($aj[2],0,1)."_".$i."_".substr($aj[2],1,strlen($aj[2]));
         $for=$aj[3];
-        $blur=" accionAjax('".url_for($for.'/ajax')."','$funcionajax[$j]','$aj[0]','$mos','$com',this.value); ";
+        $jsajax = " accionAjax('".url_for($for.'/ajax')."','$funcionajax[$j]','$aj[0]','$mos','$com',this.value); ";
       }elseif($ajaxfila[$j]) {
-         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxfila')."','".$name."','fila','".$i."',new Array(".$ajaxadic.")); ";
+        $jsajax = " accionRemotaGrid('".url_for($modulo.'/ajaxfila')."','".$name."','fila','".$i."',new Array(".$ajaxadic."),this); ";
       }elseif($ajaxcolumna[$j]) {
-         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxcolumna')."','".$name."','columna','".($j+1)."',new Array(".$ajaxadic.")); ";
+        $jsajax=" accionRemotaGrid('".url_for($modulo.'/ajaxcolumna')."','".$name."','columna','".($j+1)."',new Array(".$ajaxadic."),this); ";
       }elseif($ajaxgrid[$j]) {
-         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxgrid')."','".$name."','grid','0',new Array(".$ajaxadic.")); ";
-      }else $blur="";
+         $jsajax=" accionRemotaGrid('".url_for($modulo.'/ajaxgrid')."','".$name."','grid','0',new Array(".$ajaxadic."),this); ";
+      }else $jsajax="";
 
+      if($onchange[$j]){
+        $change=$jsajax;
+      }else{
+        $blur=$jsajax;
+      }
       //print 'onBlur='.$blur;
 
       ///////////////
@@ -1038,17 +1066,7 @@ function grid_tag_v2($obj,$objelim = array())
           } // switch
           $getid = $datos[$i]->getId();
         }else{
-          if(array_key_exists(strtolower($campo),$datos[$i])){
-              switch ($tiposobj[$j]){
-                case 'm':
-                  $nro = $datos[$i][strtolower($campo)];
-                  if(H::isFloat($nro)) $get = number_format($nro, 2, ',','.');
-                  else $get = $datos[$i][strtolower($campo)];
-                  break;
-                default:
-                  $get = $datos[$i][strtolower($campo)];
-              }
-          }
+          if(array_key_exists(strtolower($campo),$datos[$i])) $get = $datos[$i][strtolower($campo)];
           else {
             switch ($tiposobj[$j]){
               case 'f':
@@ -1091,41 +1109,57 @@ function grid_tag_v2($obj,$objelim = array())
        if (!$oculta[$j]) {
          if(is_array($html[$j])) $taghtml = implode(" ", $html[$j]);
          else  $taghtml = $html[$j];
+         if($tabindex){
+           if(!strstr($taghtml, 'readonly')){
+              $tabindexopc = $tabindexstart++;
+           }else $tabindexopc = '';
+         }else $tabindexopc = '';
+
          switch ($tiposobj[$j]){
            case 'f':   //Fecha
              $tagw ='     <td class="grid_fila g_'.$name.'_f '.$name.'c'.$j.'" align="left" height="10">';
-
-             $tagw .= input_date_tag($name.'x_'.$i.'_'.$jmasuno, @adodb_date("Y-m-d",adodb_strtotime($get)), array (
+       			 if ($get!=''){  $valor2 = @adodb_date("Y-m-d",adodb_strtotime($get)); }else{ $valor2 = ''; }
+               $tagw .= input_date_tag($name.'x_'.$i.'_'.$jmasuno, $valor2, array (
                 'name' => 'grid'.$name.'['.$i.']['.$j.']',
                 'rich' => true,
                 'maxlength' => 10,
                 'calendar_button_img' => '/sf/sf_admin/images/date.png',
                 'onkeyup' => "javascript: mascara(this,'/',patron,true)",
                 'style' => 'border:none',
-                'class' => 'grid_txtleft',
+                'class' => 'grid_txtleft '.$name.'fil'.$i.' '.$name.'col'.$jmasuno,
                 'onblur' => $blur.' '.$js[$j],
+                'tabindex' => $tabindexopc,
+                 'onchange' => $change,
              ),$taghtml.' ');
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
              break;
            case 't':   //texto
              $tagw = '     <td class="grid_fila g_'.$name.'_t '.$name.'c'.$j.'" align="left" height="15">';
-             $tagw .= input_tag($name.'x_'.$i.'_'.$jmasuno,$get, 'name="grid'.$name.'['.$i.']['.$j.']" style="border:none" class="grid_txtleft" onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml);
+             $tagw .= input_tag($name.'x_'.$i.'_'.$jmasuno,$get, 'name="grid'.$name.'['.$i.']['.$j.']" style="border:none" class="grid_txtleft '.$name.'fil'.$i.' '.$name.'col'.$jmasuno.'" tabindex="'.$tabindexopc.'" onChange="'.$change.'" onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml);
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
              break;
            case 'a':   //texto
              $tagw = '     <td class="grid_fila g_'.$name.'_t '.$name.'c'.$j.'" align="left" height="15">';
-             $tagw .= textarea_tag($name.'x_'.$i.'_'.$jmasuno,$get, 'name="grid'.$name.'['.$i.']['.$j.']" style="border:none"  onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml);
+             $tagw .= textarea_tag($name.'x_'.$i.'_'.$jmasuno,$get, 'name="grid'.$name.'['.$i.']['.$j.']" style="border:none" class="'.$name.'fil'.$i.' '.$name.'col'.$jmasuno.'" tabindex="'.$tabindexopc.'" onChange="'.$change.'"  onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml);
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
              break;
            case 'm':   //Monto
              $tagw = '     <td class="grid_fila g_'.$name.'_m '.$name.'c'.$j.'" align="right" height="25">';
-             $tagw .= input_tag($name.'x_'.$i.'_'.$jmasuno,$get, 'name="grid'.$name.'['.$i.']['.$j.']" style="border:none" class="grid_txtright" onBlur=" javascript: obj=this; ValidarMontoGridv2(obj); '.$blur.' '.$js[$j].' " '.$taghtml);
+             $tagw .= input_tag($name.'x_'.$i.'_'.$jmasuno,$get, 'name="grid'.$name.'['.$i.']['.$j.']" style="border:none" class="grid_txtright '.$name.'fil'.$i.' '.$name.'col'.$jmasuno.'" tabindex="'.$tabindexopc.'" onChange="'.$change.'" onBlur=" javascript: obj=this; ValidarMontoGridv2(obj); '.$blur.' '.$js[$j].' " '.$taghtml);
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
              $jsobjs[] = $name.'x_'.$i.'_'.$jmasuno;
              break;
            case 'c':  //Combo
              $tagw = '     <td class="grid_fila g_'.$name.'_c '.$name.'c'.$j.'" >';
-             $tagw .= select_tag($name.'x_'.$i.'_'.$jmasuno, options_for_select($combo[$j],$get,'include_custom=Seleccione...'), 'name="grid'.$name.'['.$i.']['.$j.']" style="border:none" onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml.' '.$js[$j].' '.$blur);
+             $tagw .= select_tag($name.'x_'.$i.'_'.$jmasuno, options_for_select( (is_array($combo[$j]) && $combo[$j]!='') ? $combo[$j] : call_user_func(array(ucfirst($tabla).'Peer', $combo[$j])) ,$get,'include_custom=Seleccione...'), 'name="grid'.$name.'['.$i.']['.$j.']" class="'.$name.'fil'.$i.' '.$name.'col'.$jmasuno.'" style="border:none" tabindex="'.$tabindexopc.'" onChange="'.$change.'" onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml.' '.$js[$j].' '.$blur);
+             $tagw .= $catobj.$btnobj.$tagId.'</td>';
+             break;
+           case 'cc': //Otro Tipo de Combo
+             $campocombo=$camposcombo[$j];
+             $metodocombo = 'get'.$campocombo;
+             $getcombo = $datos[$i]->$metodocombo();
+             $tagw = '     <td class="grid_fila" >';
+             $tagw .= select_tag($name.'x_'.$i.'_'.$jmasuno, options_for_select($getcombo,$get,'include_custom=Seleccione...'), 'style="border:none" class="'.$name.'fil'.$i.' '.$name.'col'.$jmasuno.'" '.$taghtml.' '.$js[$j].' tabindex="'.$tabindexopc.'" onChange="'.$change.'" onBlur="'.$blur.'"');
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
              break;
            case 'k':   //check
@@ -1136,7 +1170,7 @@ function grid_tag_v2($obj,$objelim = array())
              else{
                $checked=true;
              }
-             $tagw .= checkbox_tag($name.'x_'.$i.'_'.$jmasuno,1,$checked, 'name="grid'.$name.'['.$i.']['.$j.']" style="border:none" class="grid_txtcenter" onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml);
+             $tagw .= checkbox_tag($name.'x_'.$i.'_'.$jmasuno,1,$checked, 'name="grid'.$name.'['.$i.']['.$j.']" style="border:none" class="grid_txtcenter '.$name.'fil'.$i.' '.$name.'col'.$jmasuno.'" tabindex="'.$tabindexopc.'" onChange="'.$change.'" onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml);
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
          }
        }else {
@@ -1192,19 +1226,28 @@ function grid_tag_v2($obj,$objelim = array())
         if($g!=(count($camposadic)-1)) $ajaxadic .= ",";
       }
 
+      $change="";
+      $blur="";
+
       if ($ajax[$j]!="") {
         $aj=split("-",$ajax[$j]);
         $mos=$name.substr($aj[1],0,1)."_".$i.'?'."_".substr($aj[1],1,strlen($aj[1]));
         $com=$name.substr($aj[2],0,1)."_".$i.'?'."_".substr($aj[2],1,strlen($aj[2]));
         $for=$aj[3];
-        $blur=" accionAjax('".url_for($for.'/ajax')."','$funcionajax[$j]','$aj[0]','$mos','$com',this.value); ";
+        $jsajax=" accionAjax('".url_for($for.'/ajax')."','$funcionajax[$j]','$aj[0]','$mos','$com',this.value); ";
       }elseif($ajaxfila[$j]) {
-         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxfila')."','".$name."','fila','".$i.'?'."',new Array(".$ajaxadic.")); ";
+         $jsajax=" accionRemotaGrid('".url_for($modulo.'/ajaxfila')."','".$name."','fila','".$i.'?'."',new Array(".$ajaxadic."),this); ";
       }elseif($ajaxcolumna[$j]) {
-         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxcolumna')."','".$name."','columna','".($j+1)."',new Array(".$ajaxadic.")); ";
+         $jsajax=" accionRemotaGrid('".url_for($modulo.'/ajaxcolumna')."','".$name."','columna','".($j+1)."',new Array(".$ajaxadic."),this); ";
       }elseif($ajaxgrid[$j]) {
-         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxgrid')."','".$name."','grid','0',new Array(".$ajaxadic.")); ";
-      }else $blur="";
+         $jsajax=" accionRemotaGrid('".url_for($modulo.'/ajaxgrid')."','".$name."','grid','0',new Array(".$ajaxadic."),this); ";
+      }else $jsajax="";
+
+      if($onchange[$j]){
+        $change=$jsajax;
+      }else{
+        $blur=$jsajax;
+      }
 
       ///////////////
       // Catalogos //
@@ -1272,7 +1315,12 @@ function grid_tag_v2($obj,$objelim = array())
        if (!$oculta[$j]) {
          if(is_array($html[$j])) $taghtml = implode(" ", $html[$j]);
          else  $taghtml = $html[$j];
-
+         if($tabindex){
+           if(!strstr($taghtml, 'readonly')){
+              $tabindexopc = $tabindexstart++;
+           }else $tabindexopc = '';
+         }else $tabindexopc = '';
+         
          switch ($tiposobj[$j]){
            case 'f':
              $tagw ='     <td class="grid_fila g_'.$name.'_f '.$name.'c'.$j.'?'.'" align="left" height="10">';
@@ -1285,30 +1333,37 @@ function grid_tag_v2($obj,$objelim = array())
                 'calendar_button_img' => '/sf/sf_admin/images/date.png',
                 'onkeyup' => "javascript: mascara(this,'/',patron,true)",
                 'style' => 'border:none',
-                'class' => 'grid_txtleft',
+                'class' => 'grid_txtleft '.$name.'fil'.$i.' '.$name.'col'.$jmasuno,
                 'onblur' => $blur.' '.$js[$j],
+                'tabindex' =>  $tabindexopc,
+                'onchange' => $change,
              ),$taghtml.' ');
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
              break;
            case 't':
              $tagw = '     <td class="grid_fila g_'.$name.'_t '.$name.'c'.$j.'" align="left" height="15">';
-             $tagw .= input_tag($name.'x_'.$i.'?'.'_'.$jmasuno,$default[$j], 'name="grid'.$name.'['.$i.'?'.']['.$j.']" style="border:none" class="grid_txtleft" onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml);
+             $tagw .= input_tag($name.'x_'.$i.'?'.'_'.$jmasuno,$default[$j], 'name="grid'.$name.'['.$i.'?'.']['.$j.']" style="border:none" class="grid_txtleft '.$name.'fil'.$i.' '.$name.'col'.$jmasuno.'" tabindex="'.$tabindexopc.'" onChange="'.$change.'" onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml);
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
              break;
            case 'a':
              $tagw = '     <td class="grid_fila g_'.$name.'_t '.$name.'c'.$j.'" align="left" height="15">';
-             $tagw .= textarea_tag($name.'x_'.$i.'?'.'_'.$jmasuno,$default[$j], 'name="grid'.$name.'['.$i.'?'.']['.$j.']" style="border:none"  onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml);
+             $tagw .= textarea_tag($name.'x_'.$i.'?'.'_'.$jmasuno,$default[$j], 'name="grid'.$name.'['.$i.'?'.']['.$j.']" style="border:none" class="'.$name.'fil'.$i.' '.$name.'col'.$jmasuno.'" tabindex="'.$tabindexopc.'"  onChange="'.$change.'" onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml);
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
              break;
            case 'm':
              $tagw = '     <td class="grid_fila g_'.$name.'_m '.$name.'c'.$j.'" align="right" height="25">';
-             $tagw .= input_tag($name.'x_'.$i.'?'.'_'.$jmasuno,$default[$j], 'name="grid'.$name.'['.$i.'?'.']['.$j.']" style="border:none" class="grid_txtright" onBlur=" javascript: obj=this; ValidarMontoGridv2(obj); '.$blur.' '.$js[$j].' " '.$taghtml);
+             $tagw .= input_tag($name.'x_'.$i.'?'.'_'.$jmasuno,$default[$j], 'name="grid'.$name.'['.$i.'?'.']['.$j.']" style="border:none" class="grid_txtright '.$name.'fil'.$i.' '.$name.'col'.$jmasuno.'" tabindex="'.$tabindexopc.'" onChange="'.$change.'" onBlur=" javascript: obj=this; ValidarMontoGridv2(obj); '.$blur.' '.$js[$j].' " '.$taghtml);
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
              $jsobjs[] = $name.'x_'.$i.'_'.$jmasuno;
              break;
            case 'c':
              $tagw = '     <td class="grid_fila g_'.$name.'_c '.$name.'c'.$j.'" >';
-             $tagw .= select_tag($name.'x_'.$i.'?'.'_'.$jmasuno, options_for_select($combo[$j],$default[$j],'include_custom=Seleccione...'), 'name="grid'.$name.'['.$i.'?'.']['.$j.']" style="border:none" onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml.' '.$js[$j].' '.$blur);
+             $tagw .= select_tag($name.'x_'.$i.'?'.'_'.$jmasuno, options_for_select((is_array($combo[$j]) && $combo[$j]!='') ? $combo[$j] : call_user_func(array(ucfirst($tabla).'Peer', $combo[$j])),$default[$j],'include_custom=Seleccione...'), 'name="grid'.$name.'['.$i.'?'.']['.$j.']" class="'.$name.'fil'.$i.' '.$name.'col'.$jmasuno.'" style="border:none" tabindex="'.$tabindexopc.'" onChange="'.$change.'" onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml.' '.$js[$j].' '.$blur);
+             $tagw .= $catobj.$btnobj.$tagId.'</td>';
+             break;
+           case 'cc':
+             $tagw = '     <td class="grid_fila" >';
+             $tagw .= select_tag($name.'x_'.$i.'_'.$jmasuno, options_for_select(array(),'','include_custom=Seleccione...'), 'class="'.$name.'fil'.$i.' '.$name.'col'.$jmasuno.'" style="border:none" '.$taghtml.' '.$js[$j].' tabindex="'.$tabindexopc.'" onChange="'.$change.'" onBlur="'.$blur.'"');
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
              break;
            case 'k':
@@ -1319,7 +1374,7 @@ function grid_tag_v2($obj,$objelim = array())
                $checked=true;
              }
              $tagw = '     <td class="grid_fila g_'.$name.'_k '.$name.'c'.$j.'" align="center" height="15">';
-             $tagw .= checkbox_tag($name.'x_'.$i.'?'.'_'.$jmasuno, 1,$checked, 'name="grid'.$name.'['.$i.'?'.']['.$j.']" style="border:none" class="grid_txtcenter" onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml.' ');
+             $tagw .= checkbox_tag($name.'x_'.$i.'?'.'_'.$jmasuno, 1,$checked, 'name="grid'.$name.'['.$i.'?'.']['.$j.']" style="border:none" class="grid_txtcenter '.$name.'fil'.$i.' '.$name.'col'.$jmasuno.'" tabindex="'.$tabindexopc.'" onChange="'.$change.'" onBlur=" '.$blur.' '.$js[$j].' " '.$taghtml.' ');
              $tagw .= $catobj.$btnobj.$tagId.'</td>';
          }
        }else {
@@ -1351,7 +1406,7 @@ function grid_tag_v2($obj,$objelim = array())
   /////////////////////////////
 
 
-  if($filas_vacias>0) $botonnuevafila = button_tag_click('      Nueva Fila',"NuevaFilaGrid('".$name."');",array('name' => $name.'_incluir', 'html' => "id='".$name."_incluir'", 'html' => "class=sf_admin_action_nueva_fila")).'  '.input_hidden_tag($name.'_nuevo', $tagnuevo);
+  if($filas_vacias>0) $botonnuevafila = button_tag_click('      Nueva Fila',"NuevaFilaGrid('".$name."');",array('name' => $name.'_incluir', 'html' => "id='".$name."_incluir' tabindex='".($tabindex ? ($tabindexopc+4000) : $tabindexopc )."'", 'html' => "class=sf_admin_action_nueva_fila")).'  '.input_hidden_tag($name.'_nuevo', $tagnuevo);
   else $botonnuevafila = '';
 
 
@@ -1408,7 +1463,7 @@ function grid_tag_v2($obj,$objelim = array())
   foreach($jsfilas as $fila){
     $arrayfilas[] = "Array("."'".implode("', '",$fila)."'".")";
   }
-  if ($arrayfilas) $strarrayfilas = "Array(".implode(", ",$arrayfilas).")";
+  $strarrayfilas = "Array(".implode(", ",$arrayfilas).")";
 
   $strarrayobjs = "Array("."'".implode("', '",$jsobjs)."'".")";
 
@@ -1425,6 +1480,8 @@ function grid_tag_v2($obj,$objelim = array())
         var inputs_grid_'.$name.' = null;
         var ArrTotales_'.$name.' = new Array('.$campostotales.');
         var grid_acum_'.$name.'='.$acum.';
+        var tabindexstart_'.$name.'='.$tabindexstart.';
+        var tabindex_'.$name.'='.($tabindex ? 'true' : 'false').';
 
         Event.observe(window, "load",
           function() {

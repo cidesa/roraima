@@ -51,4 +51,31 @@ $this->Bitacora('Guardo');
       $this->labels = $this->getLabels();
     }
   }
+
+    public function executeDelete()
+  {
+    $this->fortipfin = FortipfinPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->fortipfin);
+
+    try
+    {
+      $c= new Criteria();
+      $c->add(OpordpagPeer::TIPFIN,$this->fortipfin->getCodfin());
+      $reg= OpordpagPeer::doSelectOne($c);
+      if (!$reg){
+	      $this->deleteFortipfin($this->fortipfin);
+	      $this->Bitacora('Elimino');
+      }else{
+      	$this->getRequest()->setError('delete', 'No se pudo borrar la registro seleccionado. Asegúrese de que no tiene ningún tipo de registros asociados.');
+        return $this->forward('pretipfin', 'list');
+      }
+    }
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'No se pudo borrar la registro seleccionado. Asegúrese de que no tiene ningún tipo de registros asociados.');
+      return $this->forward('pretipfin', 'list');
+    }
+
+    return $this->redirect('pretipfin/list');
+  }
 }

@@ -1,0 +1,24 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atmisiones
+    theme:            cidesaGenerator
+
+    fields:
+      desmis:         { name: Nombre, params: size=40, validate: Vstring_1_50, msj_error: Debe insertar la descripción de la misión }
+    list:
+      title:          Misiones Socialistas
+      display:        [=desmis]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [desmis]
+      max_per_page:   5
+    edit:
+      title:          Edición de Misiones Socialistas
+      display:        [desmis]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

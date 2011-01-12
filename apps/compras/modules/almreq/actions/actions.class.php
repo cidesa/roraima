@@ -20,7 +20,8 @@ class almreqActions extends autoalmreqActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -152,6 +153,10 @@ class almreqActions extends autoalmreqActions
     {
       $this->careqart->setDesubi($careqart['desubi']);
     }
+    if (isset($careqart['codcen']))
+    {
+      $this->careqart->setCodcen($careqart['codcen']);
+    }
 
   }
 
@@ -167,7 +172,7 @@ class almreqActions extends autoalmreqActions
     $cajtexcom=$this->getRequestParameter('cajtexcom');
     if ($this->getRequestParameter('ajax')=='1')
     {
-      $dato=BnubibiePeer::getDesubicacion($this->getRequestParameter('codigo'));
+      $dato=BnubicaPeer::getDesubi($this->getRequestParameter('codigo'));
       $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
     }
     else  if ($this->getRequestParameter('ajax')=='2')
@@ -180,6 +185,20 @@ class almreqActions extends autoalmreqActions
       $dato=NpcatprePeer::getCategoria($this->getRequestParameter('codigo'));
       $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
     }
+    else  if ($this->getRequestParameter('ajax')=='4')
+      {
+        $q= new Criteria();
+        $q->add(CadefcenPeer::CODCEN,$this->getRequestParameter('codigo'));
+        $reg= CadefcenPeer::doSelectOne($q);
+        if ($reg)
+        {
+           $dato=$reg->getDescen(); $javascript="";
+        }else {
+            $dato="";
+            $javascript="alert('El Centro de Costo no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+        }
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+      }
 
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
@@ -305,12 +324,35 @@ class almreqActions extends autoalmreqActions
   {
   	// Si en el parametro reqreqapr  de Cadefart, no requiere que la requisicion esta aprobada para despacharla
   	// entonces de una vez grabo la requisicion como aprobada
-
+     if ($careqart->getId() && ($careqart->getAprreq()=='S' || (Herramientas::getHay_Despacho($careqart->getReqart()))))
+     {
+       $careqart->save();
+     }else {
   	 if ($this->autorizareq=="") $careqart->setAprreq('S');
 
-     $grid=Herramientas::CargarDatosGrid($this,$this->obj);
-     Articulos::salvarAlmreqart($careqart,$grid);
+         $grid=Herramientas::CargarDatosGrid($this,$this->obj);
+         Articulos::salvarAlmreqart($careqart,$grid);
+     }
      return -1;
+  }
+
+  public function executeDelete()
+  {
+    $this->careqart = CareqartPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->careqart);
+
+    try
+    {
+      $this->deleteCareqart($this->careqart);
+      $this->Bitacora('Elimino');
+    }
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'No se pudo borrar la registro seleccionado. Asegúrese de que no tiene ningún tipo de registros asociados.');
+      return $this->forward('almreq', 'list');
+    }
+
+    return $this->forward('almreq', 'list');
   }
 
   protected function deleteCareqart($careqart)
@@ -319,6 +361,9 @@ class almreqActions extends autoalmreqActions
     {
       $careqart->delete();
       Herramientas::EliminarRegistro('Caartreq','reqart',$this->careqart->getReqart());
+    }else{
+      $err = Herramientas::obtenerMensajeError(2100);
+      $this->getRequest()->setError('delete', $err);
     }
   }
 
@@ -328,9 +373,46 @@ class almreqActions extends autoalmreqActions
     $this->longmasart=strlen($this->mascaraarticulo);
     $this->formatocategoria = Herramientas::getObtener_FormatoCategoria();
     $this->longcat=strlen($this->formatocategoria);
-    $this->forubi = Herramientas::ObtenerFormato('Bndefins','forubi');
-    $this->lonubi= Herramientas::ObtenerFormato('Bndefins','lonubi');
+    $this->forubi = Herramientas::ObtenerFormato('Opdefemp','Forubi');//Herramientas::ObtenerFormato('Bndefins','forubi');
+    $this->lonubi= strlen($this->forubi);//Herramientas::ObtenerFormato('Bndefins','lonubi');
     $this->autorizareq= Herramientas::ObtenerFormato('Cadefart','reqreqapr');
+    $varemp = $this->getUser()->getAttribute('configemp');
+    $this->numdesh="";
+    $this->mansolocor="";
+    $this->bloqfec="";
+    $this->oculeli="";
+    $this->cambiaretiuni="";
+    $this->nometiuni="";
+	if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almreq',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('reqartdesh',$varemp['aplicacion']['compras']['modulos']['almreq']))
+	       {
+	       	$this->numdesh=$varemp['aplicacion']['compras']['modulos']['almreq']['reqartdesh'];
+	       }
+           if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almreq']))
+	       {
+	       	$this->mansolocor=$varemp['aplicacion']['compras']['modulos']['almreq']['mansolocor'];
+	       }
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['compras']['modulos']['almreq']))
+	       {
+	       	$this->bloqfec=$varemp['aplicacion']['compras']['modulos']['almreq']['bloqfec'];
+	       }
+	       if(array_key_exists('oculeli',$varemp['aplicacion']['compras']['modulos']['almreq']))
+	       {
+	       	$this->oculeli=$varemp['aplicacion']['compras']['modulos']['almreq']['oculeli'];
+	       }
+	       if(array_key_exists('cambiaretiuni',$varemp['aplicacion']['compras']['modulos']['almreq']))
+	       {
+	       	$this->cambiaretiuni=$varemp['aplicacion']['compras']['modulos']['almreq']['cambiaretiuni'];
+	       }
+	       if(array_key_exists('nometiuni',$varemp['aplicacion']['compras']['modulos']['almreq']))
+	       {
+	       	$this->nometiuni=$varemp['aplicacion']['compras']['modulos']['almreq']['nometiuni'];
+	       }
+	     }
   }
 
   /**
@@ -414,4 +496,47 @@ class almreqActions extends autoalmreqActions
      return sfView::HEADER_ONLY;
 
    }
+
+  protected function getLabels()
+  {
+    $this->cambiaretiuni="";
+    $this->nometiuni="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+	if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almreq',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('cambiaretiuni',$varemp['aplicacion']['compras']['modulos']['almreq']))
+	       {
+	       	$this->cambiaretiuni=$varemp['aplicacion']['compras']['modulos']['almreq']['cambiaretiuni'];
+	       }
+	       if(array_key_exists('nometiuni',$varemp['aplicacion']['compras']['modulos']['almreq']))
+	       {
+	       	$this->nometiuni=$varemp['aplicacion']['compras']['modulos']['almreq']['nometiuni'];
+	       }
+	     }
+
+  	if ($this->cambiaretiuni=='S'){
+    return array(
+      'careqart{reqart}' => 'Número:',
+      'careqart{fecreq}' => 'Fecha:',
+      'careqart{desreq}' => 'Descripción:',
+      'careqart{monreq}' => 'Monto:',
+      'careqart{codcatreq}' => $this->nometiuni,
+      'careqart{desubi}' => 'Descripción Unidad:',
+      'careqart{codcen}' => 'Centro de Costo:',
+    );
+  	}else{
+  	return array(
+      'careqart{reqart}' => 'Número:',
+      'careqart{fecreq}' => 'Fecha:',
+      'careqart{desreq}' => 'Descripción:',
+      'careqart{monreq}' => 'Monto:',
+      'careqart{codcatreq}' => 'Unidad:',
+      'careqart{desubi}' => 'Descripción Unidad:',
+      'careqart{codcen}' => 'Centro de Costo:',
+    );
+  	}
+  }
 }

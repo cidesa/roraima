@@ -115,11 +115,13 @@ if (e.keyCode==13 || e.keyCode==9)
    	 //var codubi=document.getElementById('carcpart_codubi').value;
    	 var codalm=$(cajcodalm).value;
    	 var codubi=$(cajcodubi).value;
+         var orden=$('carcpart_ordcom').value;
+         var idcanrec=canrec;
    	 var canrec=numcanrec;
    	 if (codalm=='' || codubi=='')
    	    alert_("Debe indicar el C&oacute;digo del Almac&eacute;n y el de la Ubicaci&oacute;n para el art&iacute;culo "+codart);
    	 else
-   	     new Ajax.Request('/compras_dev.php/almordrec/ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json), verificar(); }, parameters:'ajax=5&codalm='+codalm+'&canrec='+canrec+'&codubi='+codubi+'&codart='+codart})
+   	     new Ajax.Request('/compras_dev.php/almordrec/ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json), verificar(); }, parameters:'ajax=5&codalm='+codalm+'&canrec='+canrec+'&codubi='+codubi+'&orden='+orden+'&idcanrec='+idcanrec+'&codart='+codart})
  }
 
 }

@@ -13,7 +13,7 @@ abstract class BaseOpdetordPeer {
 	const CLASS_DEFAULT = 'lib.model.Opdetord';
 
 	
-	const NUM_COLUMNS = 7;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -38,6 +38,12 @@ abstract class BaseOpdetordPeer {
 	const MONRET = 'opdetord.MONRET';
 
 	
+	const REFSAL = 'opdetord.REFSAL';
+
+	
+	const REFFON = 'opdetord.REFFON';
+
+	
 	const ID = 'opdetord.ID';
 
 	
@@ -46,18 +52,18 @@ abstract class BaseOpdetordPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numord', 'Refcom', 'Codpre', 'Moncau', 'Mondes', 'Monret', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (OpdetordPeer::NUMORD, OpdetordPeer::REFCOM, OpdetordPeer::CODPRE, OpdetordPeer::MONCAU, OpdetordPeer::MONDES, OpdetordPeer::MONRET, OpdetordPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numord', 'refcom', 'codpre', 'moncau', 'mondes', 'monret', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Numord', 'Refcom', 'Codpre', 'Moncau', 'Mondes', 'Monret', 'Refsal', 'Reffon', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (OpdetordPeer::NUMORD, OpdetordPeer::REFCOM, OpdetordPeer::CODPRE, OpdetordPeer::MONCAU, OpdetordPeer::MONDES, OpdetordPeer::MONRET, OpdetordPeer::REFSAL, OpdetordPeer::REFFON, OpdetordPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numord', 'refcom', 'codpre', 'moncau', 'mondes', 'monret', 'refsal', 'reffon', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numord' => 0, 'Refcom' => 1, 'Codpre' => 2, 'Moncau' => 3, 'Mondes' => 4, 'Monret' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (OpdetordPeer::NUMORD => 0, OpdetordPeer::REFCOM => 1, OpdetordPeer::CODPRE => 2, OpdetordPeer::MONCAU => 3, OpdetordPeer::MONDES => 4, OpdetordPeer::MONRET => 5, OpdetordPeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('numord' => 0, 'refcom' => 1, 'codpre' => 2, 'moncau' => 3, 'mondes' => 4, 'monret' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Numord' => 0, 'Refcom' => 1, 'Codpre' => 2, 'Moncau' => 3, 'Mondes' => 4, 'Monret' => 5, 'Refsal' => 6, 'Reffon' => 7, 'Id' => 8, ),
+		BasePeer::TYPE_COLNAME => array (OpdetordPeer::NUMORD => 0, OpdetordPeer::REFCOM => 1, OpdetordPeer::CODPRE => 2, OpdetordPeer::MONCAU => 3, OpdetordPeer::MONDES => 4, OpdetordPeer::MONRET => 5, OpdetordPeer::REFSAL => 6, OpdetordPeer::REFFON => 7, OpdetordPeer::ID => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('numord' => 0, 'refcom' => 1, 'codpre' => 2, 'moncau' => 3, 'mondes' => 4, 'monret' => 5, 'refsal' => 6, 'reffon' => 7, 'id' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -122,6 +128,10 @@ abstract class BaseOpdetordPeer {
 		$criteria->addSelectColumn(OpdetordPeer::MONDES);
 
 		$criteria->addSelectColumn(OpdetordPeer::MONRET);
+
+		$criteria->addSelectColumn(OpdetordPeer::REFSAL);
+
+		$criteria->addSelectColumn(OpdetordPeer::REFFON);
 
 		$criteria->addSelectColumn(OpdetordPeer::ID);
 

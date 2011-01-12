@@ -1,0 +1,63 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Caentalm
+    theme:            cidesaGenerator
+    fields:
+      rcpart:  {  name: Número, params : size=10 maxlength=8  onFocus=readonly(this.id) onBlur="cambiar(this.id)" }
+      fecrcp:  {  name: Fecha, params: date_format='dd/MM/yyyy' size=10 maxlength=10 onkeyup="mascara(this,'/',patron,true)" }
+      codpro:
+        name: Contratista de Bienes o Servicio y Cooperativa
+        params: maxlength=20
+        catalogo:
+          catalogoweb: Caprovee_Almentalm
+          clase: Caprovee
+          ajax: 1
+          parametros: getprincipal="getCodpro" getsecundario="getNompro" campoprincipal="codpro" camposecundario="nompro" campobase = "id"
+      desrcp:  {  name: Descripción, params : size=100 maxlength=100 }
+      tipmov:
+        name: Tipo Movimiento
+        params: maxlength=3
+        catalogo:
+          catalogoweb: Catipent_Almentalm
+          clase: Catipent
+          ajax: 2
+          parametros: getprincipal="getTipmov" getsecundario="getDestipent" campoprincipal="tipmov" camposecundario="destipent" campobase = "id"
+      monrcp:  {  name: Monto Total, params : readOnly=true}
+      codcen:
+        name: Centro de Costo
+        params: maxlength=4
+        catalogo:
+          catalogoweb: Cadefcen_Almsolegr
+          clase: Cadefcen
+          ajax: 3
+          parametros: getprincipal="getCodcen" getsecundario="getDescen" campoprincipal="codcen" camposecundario="descen" campobase = "id"
+      dphart:
+        name: Refiere a Despacho
+        params: size=15  maxlength=8
+        catalogo:
+          catalogoweb: Almentdes_Cadphart
+          clase: Cadphart
+          ajax: 4
+          parametros: getprincipal="getDphart" getsecundario="getDesdph" campoprincipal="dphart" camposecundario="desdph" campobase = "id"
+          divupdate: divgrid
+      grid:  {  name: .}
+    list:
+      title:   Entradas de Almacén PDVAL
+      display:        [=rcpart, fecrcp, desrcp, monrcp]
+      filters: [rcpart, fecrcp, codcen, dphart]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:    rcpart
+    edit:
+      title:   Entradas de Almacén PDVAL
+      display:
+        "Datos de la Entrada":   [rcpart, dphart, _fecrcp, codpro, desrcp, tipmov, codcen, monrcp]
+        "Detalle de la Entrada":   [ _grid]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

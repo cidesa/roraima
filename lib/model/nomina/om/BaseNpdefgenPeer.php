@@ -13,7 +13,7 @@ abstract class BaseNpdefgenPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npdefgen';
 
 	
-	const NUM_COLUMNS = 34;
+	const NUM_COLUMNS = 36;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -119,6 +119,12 @@ abstract class BaseNpdefgenPeer {
 	const DIASEM = 'npdefgen.DIASEM';
 
 	
+	const CALESPPRES = 'npdefgen.CALESPPRES';
+
+	
+	const REDONDEO = 'npdefgen.REDONDEO';
+
+	
 	const ID = 'npdefgen.ID';
 
 	
@@ -127,18 +133,18 @@ abstract class BaseNpdefgenPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Loncodcar', 'Loncodemp', 'Loncodorg', 'Loncoduni', 'Rupcar', 'Rupemp', 'Ruporg', 'Rupuni', 'Forcar', 'Foremp', 'Fororg', 'Foruni', 'Redmon', 'Codpre', 'Codvac', 'Codvacfra', 'Codvaccol', 'Codislr', 'Codpres', 'Codsso', 'Sueint', 'Asiconnom', 'Cierac', 'Foresc', 'Numrec', 'Forcarrac', 'Forcarocp', 'Correl', 'Porctick', 'Unitrib', 'Numtick', 'Diasem', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpdefgenPeer::CODEMP, NpdefgenPeer::LONCODCAR, NpdefgenPeer::LONCODEMP, NpdefgenPeer::LONCODORG, NpdefgenPeer::LONCODUNI, NpdefgenPeer::RUPCAR, NpdefgenPeer::RUPEMP, NpdefgenPeer::RUPORG, NpdefgenPeer::RUPUNI, NpdefgenPeer::FORCAR, NpdefgenPeer::FOREMP, NpdefgenPeer::FORORG, NpdefgenPeer::FORUNI, NpdefgenPeer::REDMON, NpdefgenPeer::CODPRE, NpdefgenPeer::CODVAC, NpdefgenPeer::CODVACFRA, NpdefgenPeer::CODVACCOL, NpdefgenPeer::CODISLR, NpdefgenPeer::CODPRES, NpdefgenPeer::CODSSO, NpdefgenPeer::SUEINT, NpdefgenPeer::ASICONNOM, NpdefgenPeer::CIERAC, NpdefgenPeer::FORESC, NpdefgenPeer::NUMREC, NpdefgenPeer::FORCARRAC, NpdefgenPeer::FORCAROCP, NpdefgenPeer::CORREL, NpdefgenPeer::PORCTICK, NpdefgenPeer::UNITRIB, NpdefgenPeer::NUMTICK, NpdefgenPeer::DIASEM, NpdefgenPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'loncodcar', 'loncodemp', 'loncodorg', 'loncoduni', 'rupcar', 'rupemp', 'ruporg', 'rupuni', 'forcar', 'foremp', 'fororg', 'foruni', 'redmon', 'codpre', 'codvac', 'codvacfra', 'codvaccol', 'codislr', 'codpres', 'codsso', 'sueint', 'asiconnom', 'cierac', 'foresc', 'numrec', 'forcarrac', 'forcarocp', 'correl', 'porctick', 'unitrib', 'numtick', 'diasem', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Loncodcar', 'Loncodemp', 'Loncodorg', 'Loncoduni', 'Rupcar', 'Rupemp', 'Ruporg', 'Rupuni', 'Forcar', 'Foremp', 'Fororg', 'Foruni', 'Redmon', 'Codpre', 'Codvac', 'Codvacfra', 'Codvaccol', 'Codislr', 'Codpres', 'Codsso', 'Sueint', 'Asiconnom', 'Cierac', 'Foresc', 'Numrec', 'Forcarrac', 'Forcarocp', 'Correl', 'Porctick', 'Unitrib', 'Numtick', 'Diasem', 'Calesppres', 'Redondeo', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpdefgenPeer::CODEMP, NpdefgenPeer::LONCODCAR, NpdefgenPeer::LONCODEMP, NpdefgenPeer::LONCODORG, NpdefgenPeer::LONCODUNI, NpdefgenPeer::RUPCAR, NpdefgenPeer::RUPEMP, NpdefgenPeer::RUPORG, NpdefgenPeer::RUPUNI, NpdefgenPeer::FORCAR, NpdefgenPeer::FOREMP, NpdefgenPeer::FORORG, NpdefgenPeer::FORUNI, NpdefgenPeer::REDMON, NpdefgenPeer::CODPRE, NpdefgenPeer::CODVAC, NpdefgenPeer::CODVACFRA, NpdefgenPeer::CODVACCOL, NpdefgenPeer::CODISLR, NpdefgenPeer::CODPRES, NpdefgenPeer::CODSSO, NpdefgenPeer::SUEINT, NpdefgenPeer::ASICONNOM, NpdefgenPeer::CIERAC, NpdefgenPeer::FORESC, NpdefgenPeer::NUMREC, NpdefgenPeer::FORCARRAC, NpdefgenPeer::FORCAROCP, NpdefgenPeer::CORREL, NpdefgenPeer::PORCTICK, NpdefgenPeer::UNITRIB, NpdefgenPeer::NUMTICK, NpdefgenPeer::DIASEM, NpdefgenPeer::CALESPPRES, NpdefgenPeer::REDONDEO, NpdefgenPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'loncodcar', 'loncodemp', 'loncodorg', 'loncoduni', 'rupcar', 'rupemp', 'ruporg', 'rupuni', 'forcar', 'foremp', 'fororg', 'foruni', 'redmon', 'codpre', 'codvac', 'codvacfra', 'codvaccol', 'codislr', 'codpres', 'codsso', 'sueint', 'asiconnom', 'cierac', 'foresc', 'numrec', 'forcarrac', 'forcarocp', 'correl', 'porctick', 'unitrib', 'numtick', 'diasem', 'calesppres', 'redondeo', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Loncodcar' => 1, 'Loncodemp' => 2, 'Loncodorg' => 3, 'Loncoduni' => 4, 'Rupcar' => 5, 'Rupemp' => 6, 'Ruporg' => 7, 'Rupuni' => 8, 'Forcar' => 9, 'Foremp' => 10, 'Fororg' => 11, 'Foruni' => 12, 'Redmon' => 13, 'Codpre' => 14, 'Codvac' => 15, 'Codvacfra' => 16, 'Codvaccol' => 17, 'Codislr' => 18, 'Codpres' => 19, 'Codsso' => 20, 'Sueint' => 21, 'Asiconnom' => 22, 'Cierac' => 23, 'Foresc' => 24, 'Numrec' => 25, 'Forcarrac' => 26, 'Forcarocp' => 27, 'Correl' => 28, 'Porctick' => 29, 'Unitrib' => 30, 'Numtick' => 31, 'Diasem' => 32, 'Id' => 33, ),
-		BasePeer::TYPE_COLNAME => array (NpdefgenPeer::CODEMP => 0, NpdefgenPeer::LONCODCAR => 1, NpdefgenPeer::LONCODEMP => 2, NpdefgenPeer::LONCODORG => 3, NpdefgenPeer::LONCODUNI => 4, NpdefgenPeer::RUPCAR => 5, NpdefgenPeer::RUPEMP => 6, NpdefgenPeer::RUPORG => 7, NpdefgenPeer::RUPUNI => 8, NpdefgenPeer::FORCAR => 9, NpdefgenPeer::FOREMP => 10, NpdefgenPeer::FORORG => 11, NpdefgenPeer::FORUNI => 12, NpdefgenPeer::REDMON => 13, NpdefgenPeer::CODPRE => 14, NpdefgenPeer::CODVAC => 15, NpdefgenPeer::CODVACFRA => 16, NpdefgenPeer::CODVACCOL => 17, NpdefgenPeer::CODISLR => 18, NpdefgenPeer::CODPRES => 19, NpdefgenPeer::CODSSO => 20, NpdefgenPeer::SUEINT => 21, NpdefgenPeer::ASICONNOM => 22, NpdefgenPeer::CIERAC => 23, NpdefgenPeer::FORESC => 24, NpdefgenPeer::NUMREC => 25, NpdefgenPeer::FORCARRAC => 26, NpdefgenPeer::FORCAROCP => 27, NpdefgenPeer::CORREL => 28, NpdefgenPeer::PORCTICK => 29, NpdefgenPeer::UNITRIB => 30, NpdefgenPeer::NUMTICK => 31, NpdefgenPeer::DIASEM => 32, NpdefgenPeer::ID => 33, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'loncodcar' => 1, 'loncodemp' => 2, 'loncodorg' => 3, 'loncoduni' => 4, 'rupcar' => 5, 'rupemp' => 6, 'ruporg' => 7, 'rupuni' => 8, 'forcar' => 9, 'foremp' => 10, 'fororg' => 11, 'foruni' => 12, 'redmon' => 13, 'codpre' => 14, 'codvac' => 15, 'codvacfra' => 16, 'codvaccol' => 17, 'codislr' => 18, 'codpres' => 19, 'codsso' => 20, 'sueint' => 21, 'asiconnom' => 22, 'cierac' => 23, 'foresc' => 24, 'numrec' => 25, 'forcarrac' => 26, 'forcarocp' => 27, 'correl' => 28, 'porctick' => 29, 'unitrib' => 30, 'numtick' => 31, 'diasem' => 32, 'id' => 33, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Loncodcar' => 1, 'Loncodemp' => 2, 'Loncodorg' => 3, 'Loncoduni' => 4, 'Rupcar' => 5, 'Rupemp' => 6, 'Ruporg' => 7, 'Rupuni' => 8, 'Forcar' => 9, 'Foremp' => 10, 'Fororg' => 11, 'Foruni' => 12, 'Redmon' => 13, 'Codpre' => 14, 'Codvac' => 15, 'Codvacfra' => 16, 'Codvaccol' => 17, 'Codislr' => 18, 'Codpres' => 19, 'Codsso' => 20, 'Sueint' => 21, 'Asiconnom' => 22, 'Cierac' => 23, 'Foresc' => 24, 'Numrec' => 25, 'Forcarrac' => 26, 'Forcarocp' => 27, 'Correl' => 28, 'Porctick' => 29, 'Unitrib' => 30, 'Numtick' => 31, 'Diasem' => 32, 'Calesppres' => 33, 'Redondeo' => 34, 'Id' => 35, ),
+		BasePeer::TYPE_COLNAME => array (NpdefgenPeer::CODEMP => 0, NpdefgenPeer::LONCODCAR => 1, NpdefgenPeer::LONCODEMP => 2, NpdefgenPeer::LONCODORG => 3, NpdefgenPeer::LONCODUNI => 4, NpdefgenPeer::RUPCAR => 5, NpdefgenPeer::RUPEMP => 6, NpdefgenPeer::RUPORG => 7, NpdefgenPeer::RUPUNI => 8, NpdefgenPeer::FORCAR => 9, NpdefgenPeer::FOREMP => 10, NpdefgenPeer::FORORG => 11, NpdefgenPeer::FORUNI => 12, NpdefgenPeer::REDMON => 13, NpdefgenPeer::CODPRE => 14, NpdefgenPeer::CODVAC => 15, NpdefgenPeer::CODVACFRA => 16, NpdefgenPeer::CODVACCOL => 17, NpdefgenPeer::CODISLR => 18, NpdefgenPeer::CODPRES => 19, NpdefgenPeer::CODSSO => 20, NpdefgenPeer::SUEINT => 21, NpdefgenPeer::ASICONNOM => 22, NpdefgenPeer::CIERAC => 23, NpdefgenPeer::FORESC => 24, NpdefgenPeer::NUMREC => 25, NpdefgenPeer::FORCARRAC => 26, NpdefgenPeer::FORCAROCP => 27, NpdefgenPeer::CORREL => 28, NpdefgenPeer::PORCTICK => 29, NpdefgenPeer::UNITRIB => 30, NpdefgenPeer::NUMTICK => 31, NpdefgenPeer::DIASEM => 32, NpdefgenPeer::CALESPPRES => 33, NpdefgenPeer::REDONDEO => 34, NpdefgenPeer::ID => 35, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'loncodcar' => 1, 'loncodemp' => 2, 'loncodorg' => 3, 'loncoduni' => 4, 'rupcar' => 5, 'rupemp' => 6, 'ruporg' => 7, 'rupuni' => 8, 'forcar' => 9, 'foremp' => 10, 'fororg' => 11, 'foruni' => 12, 'redmon' => 13, 'codpre' => 14, 'codvac' => 15, 'codvacfra' => 16, 'codvaccol' => 17, 'codislr' => 18, 'codpres' => 19, 'codsso' => 20, 'sueint' => 21, 'asiconnom' => 22, 'cierac' => 23, 'foresc' => 24, 'numrec' => 25, 'forcarrac' => 26, 'forcarocp' => 27, 'correl' => 28, 'porctick' => 29, 'unitrib' => 30, 'numtick' => 31, 'diasem' => 32, 'calesppres' => 33, 'redondeo' => 34, 'id' => 35, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, )
 	);
 
 	
@@ -257,6 +263,10 @@ abstract class BaseNpdefgenPeer {
 		$criteria->addSelectColumn(NpdefgenPeer::NUMTICK);
 
 		$criteria->addSelectColumn(NpdefgenPeer::DIASEM);
+
+		$criteria->addSelectColumn(NpdefgenPeer::CALESPPRES);
+
+		$criteria->addSelectColumn(NpdefgenPeer::REDONDEO);
 
 		$criteria->addSelectColumn(NpdefgenPeer::ID);
 

@@ -1,10 +1,11 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
@@ -14,11 +15,10 @@ if (empty($_SESSION["x"]))
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title><? echo $forma; ?></title>
+<title>COMPROBANTES - <? echo $forma; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/fecha.js"></script>
@@ -31,9 +31,9 @@ if (empty($_SESSION["x"]))
 <script type="text/JavaScript"  src="../../lib/general/js/prototype.js"></script>
 
 <?
-require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
-require_once($_SESSION["x"].'lib/general/funciones.php');
-require_once($_SESSION["x"].'lib/general/tools.php');
+require_once($_SESSION["x"].'/lib/bd/basedatosAdo.php');
+require_once($_SESSION["x"].'/lib/general/funciones.php');
+require_once($_SESSION["x"].'/lib/general/tools.php');
 validar(array(8,11,15));            //Seguridad  del Sistema
 $codemp=$_SESSION["codemp"];
 $bd=new basedatosAdo($codemp);
@@ -44,6 +44,8 @@ $modulo="";
 $forma="Comprobantes";
 $modulo=$_SESSION["modulo"] . " > Contabilidad Financiera > ".$forma;
 $block="1";
+$fecha_actual= date('d/m/Y');
+$perrepcta=$camnomcatcta =  $_SESSION["configemp"]["aplicacion"]["contabilidad"]["modulos"]["confincom"]["perrepcta"];
 ////
 function verificar_cierre($fecha){
   global $z;
@@ -121,6 +123,7 @@ function verificar_cierre($fecha){
   {
     $var=$_GET["var"];
     $ValidarEliminarComprobante=1;
+
     if ($var=='C')           ////  Busqueda Comprobante  ////
     //if (( $var=='C') and ($_POST["numero"]!='########'))////  Busqueda Comprobante  ////
     {
@@ -147,13 +150,50 @@ function verificar_cierre($fecha){
          $sql="select *, to_char(feccom,'dd/mm/yyyy') as feccom from contabc
           where trim(upper(numcom))='".$numero."' ";
 
+			//if (($fecha) !='') { $sql = $sql." and feccom=to_date('".$fecha."','dd/mm/yyyy')";  }
+
 		//	--and feccom=to_date('".$fecha."','dd/mm/yyyy')
 
           if ($tb=$z->buscar_datos($sql))
           {
             $desc   = $tb->fields["descom"];
             $fecha  = $tb->fields["feccom"];
-            $tipcom = $tb->fields["tipcom"];
+			$tipcom = $tb->fields["tipcom"];
+                        $user=$tb->fields["usuanu"];
+                        
+                        
+              $sqlw="select nomuse from ".'"SIMA_USER".'."usuarios where loguse='".$user."'";
+              if ($tbw=$z->buscar_datos($sqlw))
+              {
+                    $usuanu = $tbw->fields["nomuse"];
+              }else $usuanu  = "";
+
+			 $sql1="select * from contaba1
+	            where to_date('".$fecha."','dd/mm/yyyy')>=fecdes and to_date('".$fecha."','dd/mm/yyyy')<=fechas";
+	          if ($tb1=$z->buscar_datos($sql1))
+	          {
+	            if (strtoupper($tb1->fields["status"])=='C')
+	            {
+	              $block="2"; //blokear completo cajitas de texto
+	                          //Permite a la funcion eliminar mandar un mensaje
+	              $save="N";
+	            }
+	            else if (strtoupper($tb1->fields["status"])=='A')
+	            {
+	              $block="1"; //blokear medio cajitas de texto
+	                          //Permite a la funcion eliminar mandar un mensaje
+	              $save="S";
+	            }
+	          }
+
+			#Cambia el nombre de la descripcion cuando el comprobante sea de otro modulo
+			$camnomcatcta =  $_SESSION["configemp"]["aplicacion"]["contabilidad"]["modulos"]["confincom"]["camnomcatcta"];
+
+			if ($camnomcatcta=='S')
+			{
+				$tipcom = 'CON';
+			}
+
             if (strtoupper($tb->fields["stacom"])=='D')
             {
               $status="DIFERIDO";
@@ -180,7 +220,7 @@ function verificar_cierre($fecha){
               $act="S";
             }
 
-            $sql2="select * from contabc1 where numcom='".$numero."' and feccom=to_date('".$fecha."','dd/mm/yyyy') order by numcom,debcre desc,numasi";
+            $sql2="select * from contabc1 where numcom='".$numero."' order by numcom,debcre desc,numasi"; // and feccom=to_date('".$fecha."','dd/mm/yyyy')
             if ($tb2=$z->buscar_datos($sql2))
             {
               $check='1';
@@ -215,8 +255,7 @@ function verificar_cierre($fecha){
             }
               $imec="M";
               //VERIFICAR CIERRE
-//echo $fecha.' 555';
-			if ($fecha!='')
+			/*if ($fecha!='')
 			{
                $sql="select * from contaba1
                 where to_date('".$fecha."','dd/mm/yyyy')>=fecdes and to_date('".$fecha."','dd/mm/yyyy')<=fechas";
@@ -242,7 +281,7 @@ function verificar_cierre($fecha){
                 $save="N";
                 $fecha='';
               }
-			}
+			}*/
           }
           else//SI NO HAY DATOS
           {
@@ -284,6 +323,45 @@ function verificar_cierre($fecha){
           }
       }
     }
+
+
+    else if ($var=='fecha')
+			{
+				$fecha = $_POST["fecha"];
+				$numero = $_POST["numero"];
+	            //VERIFICAR CIERRE
+	              $sql="select * from contaba1
+	              where to_date('".$fecha."','dd/mm/yyyy')>=fecdes and to_date('".$fecha."','dd/mm/yyyy')<=fechas";
+	            if ($tb=$z->buscar_datos($sql))
+	            {
+	              if (strtoupper($tb->fields["status"])=='C')
+	              {
+	                Mensaje("La Fecha del Comprobante debe pertenecer a un Período Abierto");
+	                $numero=strtoupper(trim(str_pad($_POST["numero"],8,'0',STR_PAD_LEFT)));
+	                $block='1';
+	                $save="N";
+	                $fecha="";
+	                ?>
+	                  <script>
+	                    document.form1.fecha.focus();
+	                  </script>
+	                <?
+	              }
+	              else if (strtoupper($tb->fields["status"])=='A')
+	              {
+	                $block="3"; //blokear medio cajitas de texto menos descripcion
+	                $save="S";
+	              }
+	            }
+	            else
+	            {
+	              Mensaje("ADVERTENCIA: La Fecha del Comprobante esta fuera del Período del Ejercicio Fiscal");
+	              $block="3"; //blokear medio cajitas de texto menos descripcion
+	              $save="N";
+	              $fecha='';
+	            }
+          }
+
     else if ($var=='1')//PRIMERO
     {
       if ($tb=$z->primerRegistro('contabc','numcom'))
@@ -680,6 +758,7 @@ function verificar_cierre($fecha){
       else $numero=strtoupper(trim(str_pad($_POST["numero"],8,'0',STR_PAD_LEFT)));
       $desc="";
       $fecha="";
+      $usuanu="";
       $check='0';
       $block='0';
       $status="";
@@ -691,7 +770,8 @@ function verificar_cierre($fecha){
     {
       $numero="";
       $desc="";
-      $fecha="";
+      $usuanu="";
+      $fecha=date('d/m/Y');
       $check='0';
       $block='-';//desblokea todo y pone foco en numero
       $status="";
@@ -705,7 +785,8 @@ function verificar_cierre($fecha){
   {
     $numero="";
     $desc="";
-    $fecha="";
+    $usuanu="";
+    $fecha=date('d/m/Y');
     $check='0';
     $block='-';//desblokea todo y pone foco en numero
     $status="";
@@ -769,9 +850,60 @@ function verificar_cierre($fecha){
         }
         document.form1.debitos.value=format(acum.toFixed(2),'.','.',',');
         document.form1.creditos.value=format(acum2.toFixed(2),'.','.',',');
+        var difere= acum-acum2;
+        document.form1.monto4.value=format(difere.toFixed(2),'.','.',',');
 
        }
 
+
+  function desabilitargrid()
+  {
+    //f = document.form1;
+    var status      = '<? echo $status; ?>';
+    var tipcom= '<?php  echo $tipcom;?>';
+    //var totalfil= parseInt('<?php  echo $tipcom;?>') + 50;
+
+    if (status == 'DIFERIDO' || tipcom!='CON')
+    {
+    	bloquearGrip(1,50,1);
+    }
+
+  }
+
+  function desabilitarcomotromod()
+  {
+    var check = '<? echo $check; ?>';
+    var tipcom= '<?php  echo $tipcom;?>';
+    var totalfil= parseInt('<?php  echo $cont;?>') + 50;
+
+    if (tipcom!='CON' && check=='1')
+    {
+     document.getElementById('numero').readOnly=true;
+     document.getElementById('fecha').readOnly=true;
+     document.getElementById('desc').readOnly=true;
+
+     var l=1;
+     while (l<=totalfil)
+     {
+        var x1="x"+l+"1";
+        var x2="x"+l+"2";
+        var x3="x"+l+"3";
+        var x4="x"+l+"4";
+        var x5="x"+l+"5";
+
+        document.getElementById(x1).readOnly=true;
+        document.getElementById(x2).readOnly=true;
+        document.getElementById(x3).readOnly=true;
+        document.getElementById(x4).readOnly=true;
+        document.getElementById(x5).readOnly=true;
+
+       l++;
+     }
+
+
+    }
+
+  }
 </script>
 
 
@@ -800,7 +932,7 @@ MM_reloadPage(true);
 </head>
 
 <body onLoad="MM_preloadImages('../../images/rbut_01_f2.gif','../../images/rbut_02_f2.gif','../../images/rbut_03_f2.gif','../../images/rbut_04_f2.gif')">
-<form name="form1" method="post" action="ConFinCom.php?var=C">
+<form name="form1" onsubmit="return false;" method="post" action="ConFinCom.php?var=C">
 <table width="100%" align="center">
   <tr>
 <td width="100%">
@@ -844,17 +976,19 @@ MM_reloadPage(true);
                   </td>
                   <td width="10%">
                   </td>
+                  <td width="10%">
+                  </td>
                   <td>
                    <input type="button" value="Catálogo de Cuentas" onClick="catalogocuentas()"/>
                   </td>
                       <tr>
                         <td width="13%" height="22" class="form_label_01">N&uacute;mero:</td>
-                        <td width="56%" class="form_label_01">
+                        <td width="80%" class="form_label_01" colspan="3">
                           <?
               if  (($block=='0') || ($block=='-'))
               {
             ?>
-                          <input name="numero" type="text" class="imagenInicio" id="numero" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? echo $numero; ?>" size="10" maxlength="8" onblur="if (($('numero').value!='') && ($F('numero')!='########')){ $('numero').value=$('numero').value.pad(8,'0',0); f.action='ConFinCom.php?var=C'; f.submit(); } else { $('numero').value='########';  }">
+                          <input name="numero" type="text" class="imagenInicio" id="numero" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? echo $numero; ?>" size="10" maxlength="8" onblur="if (($('numero').value!='') && ($F('numero')!='########')){ $('numero').value=$('numero').value.pad(8,'0',0); f.action='ConFinCom.php?var=C'; f.submit(); } else { $('numero').value='########'; f.action='ConFinCom.php?var=C'; f.submit(); $('save').value='S' }">
             <?
               }
               else if ( ($block=='1') || ($block=='2') || ($block=='3') )
@@ -871,7 +1005,8 @@ MM_reloadPage(true);
             <strong><font color="#0000CC" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <? print $status;?></font></strong>
                         <?
               }
-              else if (($status=="ANULADO") || ($status=="REVERSADO") || ($status=="DESCUADRADO"))
+
+              else if (($status=="REVERSADO") || ($status=="DESCUADRADO"))
               {
             ?>
             <strong><font color="#CC0000" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <? print $status."    ";?></font></strong>
@@ -883,27 +1018,35 @@ MM_reloadPage(true);
             <strong><font color="#009900" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <? print $status."      ";?></font></strong>
                         <?
               }
+              else if (($status=="ANULADO"))
+              {
+                ?>
+                <strong><font color="#CC0000" size="1" face="Verdana, Arial, Helvetica, sans-serif"> <? print $status." POR: " ;?><?php print $usuanu?></font></strong>
+                <?
+              }
 
             ?>            </td>
-                        <td width="4%" class="form_label_01">
+
+
               <?
                 if ($act=="S")
                 {
               ?>
-              <a href='javascript: actualizar();'><img src="../../images/act.gif" width="16" height="16"></a>
+              <a href='javascript: actualizar();'><img src="../../images/act.gif" width="16" height="16" alt=""></a>
               <?
                 }
               ?>
                </td>
 
-                        <td width="27%" class="form_label_01">Fecha:
+                        <td width="1%" class="form_label_01">Fecha:
                           <?
               //if  (($block=='0') || ($block=='1') || ($block=='-'))
 
               if ($imec=="I")
               {
             ?>
-                 <input name="fecha" type="text"  class="imagenInicio" id="fecha" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $fecha;?>" size="10" onKeyUp = "this.value=formateafecha(this.value);" onBlur="if (($('fecha').value!='')){ f.action='ConFinCom.php?var=C'; f.submit(); }">
+                 <input name="fecha" type="text"  class="imagenInicio" id="fecha" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $fecha;?>" size="10" onKeyUp = "this.value=formateafecha(this.value);" onBlur="if (($('fecha').value!='' && $('desc').value=='' && $('x11').value=='')){ f.action='ConFinCom.php?var=fecha'; f.submit(); }">
+
             <?
               }
               //else if (($block=='2') || ($block=='3'))
@@ -916,19 +1059,26 @@ MM_reloadPage(true);
             ?>              </td>
                       </tr>
                       <tr valign="middle">
-                        <td height="40%" class="form_label_01">Descripci&oacute;n:</td>
+                        <td height="40%" class="form_label_01" colspan="3">Descripci&oacute;n:</td>
                         <td colspan="3" class="form_label_01">
             <?
             //if ((trim($status)=="DIFERIDO") and (trim($tipcom)=="CON"))
             if ((trim($status)=="DIFERIDO"))
             { ?>
-          <input name="desc" type="text"  class="imagenInicio" id="desc" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? echo $desc;?>" size="70"  onKeyPress="focos(event,'x11')">
+          <textarea rows="2" cols="60"  name="desc"  class="imagenInicio" id="desc" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'"  onKeyPress="focos(event,'x11')"><? echo $desc;?></textarea>
             <? }else if ($status==''){ ?>
-          <input name="desc" type="text"  class="imagenInicio" id="desc" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? echo $desc;?>" size="70"  onKeyPress="focos(event,'x11')">
+          <textarea rows="2" cols="60" name="desc"  class="imagenInicio" id="desc" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'"  onKeyPress="focos(event,'x11')"><? echo $desc;?></textarea>
 
-            <? }else { ?>
+            <? }else {
 
-          <input name="desc" type="text"  class="imagenInicio" id="desc" readonly="true" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? echo $desc;?>" size="70">
+			/*if ($camnomcatcta=='S')
+			{
+				$tipcom = 'CON';
+			}
+            	*/
+            	 ?>
+
+          	<textarea rows="2" cols="60" name="desc"  class="imagenInicio" id="desc" readonly="true" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'"  ><? echo $desc;?></textarea>
       <? }
               // FOCOS
               if ($block=='-')
@@ -974,11 +1124,11 @@ MM_reloadPage(true);
                       <!--DWLayoutTable-->
                       <tr> <a></a>
 
-                        <td width="4%" class="tpButtons"><a href='javascript: catalogo2(1,2,2,"G");'><img src="../../lib/general/toolbar/imgs/iconNewNewsEntry.gif" width="16" height="16"></a></td>
+                        <td width="4%" class="tpButtons"><a href="javascript: catalogoA(1,2,2,2,'G');"><img src="../../lib/general/toolbar/imgs/iconNewNewsEntry.gif" width="16" height="16"></a></td>
                           <td colspan="7" class="tpButtons">Asientos</td>
                         </tr>
                         <tr valign="bottom" bgcolor="#ECEBE6">
-                          <td height="1" colspan="6" valign="top"><div class="grid02" id="grid01">
+                          <td height="1" colspan="8" valign="top"><div class="grid02" id="grid01">
                             <table  width="100%" border="0" cellpadding="0" cellspacing="0">
                               <tr>
                                 <td width="2%" class="queryheader" ></td>
@@ -994,16 +1144,16 @@ MM_reloadPage(true);
         if ($check!='1')
         {
           $i=1;
-          while ($i<=50)
+          while ($i<=100)
           {
            ?>
                               <tr>
                                 <td class="grid_line01_br" ><input name="x<? print $i;?>0" type="txt" class="imagenborrar" id="x<? print $i;?>0" onClick="eliminar(<? print $i;?>,5)" value="" size="1" ></td>
-                                <td class="grid_line01_br"><input name="x<? print $i;?>1" id="x<? print $i;?>1" type="text" class="grid_txt01" size="30" value="" tabindex="1" onKeyDown="javascript:return dFilter (event.keyCode, this,'<?print $_SESSION["formato"];?>');" onBlur="gridatos1(this.value,this.id,'x<? print $i;?>2','x<? print $i;?>2')"></td>
-                                <td  align="left" class="grid_line01_br"><input name="x<? print $i;?>2" id="x<? print $i;?>2" type="text" class="grid_txt01" size="30" value="" align="right" tabindex="2" onKeyPress="focos(event,'x<? print $i;?>3')">                                </td>
-                                <td class="grid_line01_br"><input name="x<? print $i;?>3" id="x<? print $i;?>3" type="text" class="grid_txt02" size="15" value="" onKeyPress="focos(event,'x<? print $i;?>4')" maxlength="8"></td>
-                                <td class="grid_line01_br" align="right"><input name="x<? print $i;?>4" id="x<? print $i;?>4" type="text" class="grid_txt02" size="15" value="0.00" onBlur="montos(event,this.id,'x<? print $i;?>5')" onBlur="chequeamonto(this.id,'x<? print $i;?>5');" onKeyDown="chequeamonto(this.id,'x<? print $i;?>5');">                                </td>
-                                <td class="grid_line01_br" align="right"><input name="x<? print $i;?>5" id="x<? print $i;?>5" type="text" class="grid_txt02" size="15" value="0.00" onBlur="montos2(event,this.id,'x<? print $i;?>4')" onBlur="chequeamonto2(this.id,'x<? print $i;?>4');" onKeyDown="chequeamonto2(this.id,'x<? print $i;?>4');">                                </td>
+                                <td class="grid_line01_br"><input name="x<? print $i;?>1" id="x<? print $i;?>1" type="text" class="grid_txt01" size="30" value=""  onKeyDown="javascript:return dFilter (event.keyCode, this,'<?print $_SESSION["formato"];?>');" onBlur="gridatos1(this.value,this.id,'x<? print $i;?>2','x<? print $i;?>2')"></td>
+                                <td  align="left" class="grid_line01_br"><textarea rows="1" cols="35" name="x<? print $i;?>2" id="x<? print $i;?>2" class="grid_txt04" align="right"  onKeyPress="focos(event,'x<? print $i;?>3')"></textarea>                                </td>
+                                <td class="grid_line01_br"><input name="x<? print $i;?>3" id="x<? print $i;?>3" type="text" class="grid_txt02" size="15" value=""  onKeyPress="focos(event,'x<? print $i;?>4')" maxlength="8"></td>
+                                <td class="grid_line01_br" align="right"><input name="x<? print $i;?>4" id="x<? print $i;?>4" type="text" class="grid_txt02" size="15"  value="0.00" onBlur="montos(event,this.id,'x<? print $i;?>5')" onBlur="chequeamonto(this.id,'x<? print $i;?>5');" onKeyDown="chequeamonto(this.id,'x<? print $i;?>5');">                                </td>
+                                <td class="grid_line01_br" align="right"><input name="x<? print $i;?>5" id="x<? print $i;?>5" type="text" class="grid_txt02" size="15" value="0.00"  onBlur="montos2(event,this.id,'x<? print $i;?>4')" onBlur="chequeamonto2(this.id,'x<? print $i;?>4');" onKeyDown="chequeamonto2(this.id,'x<? print $i;?>4');">                                </td>
                               </tr>
                               <?
 
@@ -1019,7 +1169,7 @@ MM_reloadPage(true);
                               <tr>
                                 <td class="grid_line01_br"><input name="x<? print $i;?>0" type="txt" class="imagenborrar" id="x<? print $i;?>0" onClick="eliminar(<? print $i;?>,5)" value="" size="1" ></td>
                                 <td class="grid_line01_br" align="left"><input name="x<? print $i;?>1" id="x<? print $i;?>1" type="text" class="grid_txt01" size="30" value="<? print $grid1[$i];?>" onKeyDown="javascript:return dFilter (event.keyCode, this,'<?print $_SESSION["formato"];?>');" onBlur="gridatos1(this.value,this.id,'x<? print $i;?>2','x<? print $i;?>3')"></td>
-                                <td  align="left" class="grid_line01_br"><input name="x<? print $i;?>2" id="x<? print $i;?>2" type="text" class="grid_txt01" size="30" value="<? print $grid2[$i];?>">                                </td>
+                                <td  align="left" class="grid_line01_br"><textarea rows="1" cols="35" name="x<? print $i;?>2" id="x<? print $i;?>2"  class="grid_txt04" >  <? print $grid2[$i];?>  </textarea>                            </td>
                                 <td class="grid_line01_br"><input name="x<? print $i;?>3" id="x<? print $i;?>3" type="text" class="grid_txt02" size="15" value="<? print $grid3[$i];?>" onKeyPress="focos(event,'x<? print $i;?>4')" maxlength="8"></td>
                                 <td class="grid_line01_br"><input name="x<? print $i;?>4" id="x<? print $i;?>4" type="text" class="grid_txt02" size="15" value="<? print number_format($grid4[$i],2,'.',',');?>" onBlur="montos(event,this.id,'x<? print $i;?>5')">                                </td>
                                 <td class="grid_line01_br"><input name="x<? print $i;?>5" id="x<? print $i;?>5" type="text" class="grid_txt02" size="15" value="<? print number_format($grid5[$i],2,'.',',');?>" onBlur="montos2(event,this.id)">                                </td>
@@ -1028,13 +1178,13 @@ MM_reloadPage(true);
           $i=$i+1;
           }
           //$i=$i+1;
-          while ($i<=50)
+          while ($i<=100)
           {
           ?>
                               <tr>
                                 <td class="grid_line01_br"><input name="x<? print $i;?>0" type="txt" class="imagenborrar" id="x<? print $i;?>0" onClick="eliminar(<? print $i;?>,5)" value="" size="1" ></td>
                                 <td class="grid_line01_br"><input name="x<? print $i;?>1" id="x<? print $i;?>1" type="text" class="grid_txt01" size="30" value="" onKeyDown="javascript:return dFilter (event.keyCode, this,'<?print $_SESSION["formato"];?>');" onBlur="gridatos1(this.value,this.id,'x<? print $i;?>2','x<? print $i;?>3')"></td>
-                                <td class="grid_line01_br" align="left"><input name="x<? print $i;?>2" id="x<? print $i;?>2" type="text" class="grid_txt01" size="30" value="" align="right">                                </td>
+                                <td class="grid_line01_br" align="left"><textarea rows="1" cols="35" name="x<? print $i;?>2" id="x<? print $i;?>2" class="grid_txt04"  align="right">  </textarea>                            </td>
                                 <td class="grid_line01_br"><input name="x<? print $i;?>3" id="x<? print $i;?>3" type="text" class="grid_txt02" size="15" value="" onKeyPress="focos(event,'x<? print $i;?>4')" maxlength="8"></td>
                                 <td class="grid_line01_br"><input name="x<? print $i;?>4" id="x<? print $i;?>4" type="text" class="grid_txt02" size="15" value="0.00" onBlur="montos(event,this.id,'x<? print $i;?>5')">                                </td>
                                 <td class="grid_line01_br"><input name="x<? print $i;?>5" id="x<? print $i;?>5" type="text" class="grid_txt02" size="15" value="0.00" onBlur="montos2(event,this.id)">                                </td>
@@ -1053,6 +1203,12 @@ MM_reloadPage(true);
                         <td width="41%" height="17" align="center" class="queryheader"><span class="style9">Saldo</span></td>
 
                         <td width="18%" height="17" class="queryheader">
+                          <div align="center"><span class="style9">Diferencia</span></div></td>
+
+                        <td width="19%" align="right" bgcolor="#CCFFFF">
+                          <input name="difer" type="text" class="cajadetextosimple" id="monto4" size="15" readonly="true"></td>
+
+                        <td width="18%" height="17" class="queryheader">
                           <div align="center"><span class="style9">Totales</span></div></td>
 
                         <td width="19%" align="right" bgcolor="#CCFFFF">
@@ -1063,7 +1219,10 @@ MM_reloadPage(true);
                               <input name="creditos" type="text" class="cajadetextosimple" id="creditos" size="15" readonly="true">
                             </div></td>
 
-                        <td width="4%" align="right" bgcolor="#CCFFFF"><!--DWLayoutEmptyCell-->&nbsp;</td>
+                        <td width="10%" align="right" bgcolor="#CCFFFF">
+                        &nbsp;
+                        </td>
+
                         </tr>
                         <? // } ?>
                       </table>
@@ -1091,8 +1250,12 @@ MM_reloadPage(true);
 </body>
  <script>
   actualizarsaldos2();
+  desabilitargrid();
+  desabilitarcomotromod();
 </script>
 <script language="JavaScript">
+
+
 
   function catalogocuentas()
   {
@@ -1117,6 +1280,7 @@ MM_reloadPage(true);
     {
       if (e.keyCode==13)
       {
+
         a=repetido2(id,donde);
         if (a==false)
         {
@@ -1150,8 +1314,10 @@ MM_reloadPage(true);
       }
       var ref   = 'x'+j+'3';
       var refant = 'x'+ja+'3';
-
+      var valctarep='<?php echo $perrepcta; ?>';
+         if (valctarep!='S'){
           a=repetido2(id,donde);
+         }else {a=false;}
           if (a==false)
           {
             cadena=rayitasfc(tira);
@@ -1159,13 +1325,13 @@ MM_reloadPage(true);
 
             f=document.form1;
             cuantos='1';
-            sql="select codcta as codigo, descta as campo1 from contabb where upper(cargab)=¿C¿ and trim(codcta)=trim(¿"+cadena+"¿)";
+            sql="select codcta as codigo, descta as campo1 from contabb where upper(cargab)=*C* and trim(codcta)=trim(*"+cadena+"*)";
             pagina="gridatos.php?cuantos="+cuantos+"&id="+id+"&donde="+donde+"&foco="+foco+"&sql="+sql;
 
           //  $(x).value='';
 
 	       //Para repetir la referencia anterior
-		    if ($F(refant)) $(ref).value = $(refant).value;
+		    //if ($F(refant)) $(ref).value = $(refant).value;
 
             window.open(pagina,"Catalogo","menubar=no,toolbar=no,scrollbars=no,width=500,height=20,resizable=no,left=100,top=300");
           }
@@ -1330,6 +1496,9 @@ MM_reloadPage(true);
 
 	          var num=parseFloat(str);
 	          var num2=parseFloat(str2);
+            num = parseFloat(num.toFixed(2));
+            num2 = parseFloat(num2.toFixed(2));
+
 	          acum=acum+num;
 	          acum2=acum2+num2;
 	          document.getElementById(x).value=format(num.toFixed(2),'.','.',',');
@@ -1340,8 +1509,12 @@ MM_reloadPage(true);
           	i=501;
           }
         }
+        acum = parseFloat(acum.toFixed(2));
+        acum2 = parseFloat(acum2.toFixed(2));
         document.form1.debitos.value=format(acum.toFixed(2),'.','.',',');
         document.form1.creditos.value=format(acum2.toFixed(2),'.','.',',');
+        var difere= acum-acum2;
+        document.form1.monto4.value=format(difere.toFixed(2),'.','.',',');
 
       //}
      }
@@ -1419,10 +1592,10 @@ MM_reloadPage(true);
       {
         return false;
       }
-      else if ( (!verificar_campo_clave(1,f.x14.value,"No puede salvar sin introducir al menos un debito en el comprobante")) && (!verificar_campo_clave(1,f.x15.value,"No puede salvar sin introducir al menos un crédito en el comprobante"))  )
+     /* else if ( (!verificar_campo_clave(1,f.x14.value,"No puede salvar sin introducir al menos un debito en el comprobante")) && (!verificar_campo_clave(1,f.x15.value,"No puede salvar sin introducir al menos un crédito en el comprobante"))  )
       {
         return false;
-      }
+      }*/
       else if (f.debitos.value!=f.creditos.value)
       {
         alert("No puede salvar el comprobante ya que se encuentra descuadrado");
@@ -1515,7 +1688,7 @@ MM_reloadPage(true);
      //Para repetir la referencia anterior
 	  if ($F(refant)) $(ref).value = $(refant).value;
 
-           //pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Contabb_Confincom/clase/Contabb/frame/form1/obj1/codcta/campo1/'+$campo1+'/campo2/'+$campo2+'/submit/true';
+           //pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Contabb_Confincom/clase/Contabb/frame/form1/obj1/codcta/campo1/'+$campo1+'/campo2/'+$campo2+'/submit/true';
           //window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
      }
 
@@ -1566,7 +1739,7 @@ MM_reloadPage(true);
 
       function salvar()
       {
-          f = document.form1;
+		  f=document.form1;
           // PRENDER Y APAGAR EL SALVAR
           save      = f.save.value;
           estatus   = f.status.value;
@@ -1574,7 +1747,7 @@ MM_reloadPage(true);
           imec    = '<? echo $imec; ?>';
           btnmodcom = '<? echo $btn["btnmodcom"]; ?>';
 
-	      if ((estatus!='N' && estatus!='R' && estatus!='A') || estatus=='D' )
+	      if ((estatus!='N' && estatus!='R' && estatus!='A') || estatus=='D'  || estatus=='')
 	      {
 		      if ((btnmodcom=='f') && (tipcom!='CON')  && (imec!='I') ){
 		      		alert('No se Puede modificar este Comprobante por que no fue Generado por el Modulo de Contabilidad');
@@ -1588,7 +1761,7 @@ MM_reloadPage(true);
 		                  status=f.status.value;
 		                  if (status=='AC'){ status='A' }
 		                  imec='<? print $imec;?>';
-		                  f.action="imecConFinCom.php?imec="+imec+"&status="+status;
+		                  f.action="imecConFinCom.php?imec="+imec+"&tipcom="+tipcom+"&status="+status;
 		                  f.submit();
 		                }
 		              }
@@ -1614,9 +1787,6 @@ MM_reloadPage(true);
         salvar();
       }
       //////////////////////////
-      else if(itemId == '0_print'){
-          print();
-      }
       else if(itemId == '0_new'){
         alert("Nuevo Formulario");
       }
@@ -1651,6 +1821,22 @@ MM_reloadPage(true);
       else if(itemId == '0_calc'){
         alert("llamando la calculadora");
       }
+
+      else if(itemId == '0_print'){
+
+			var codigo = '<? echo $numero; ?>'
+			var fecha  = '<? echo $fecha; ?>'
+			var estado = 'T';
+	        var ruta='http://'+window.location.host;
+      //	Nueva estructura de los reportes
+      //	pagina=ruta+'/reportes/reportes/contabilidad/r.php=?r=comprobante.php?com1='+codigo+'&com2='+codigo+'&fecha1='+fecha+'&fecha2='+fecha+'&estado='+estado;
+
+	  //	Vieja estructura de los reportes
+      	pagina=ruta+'/reportes/reportes/contabilidad/rCOMPROBANTE.php?com1='+codigo+'&com2='+codigo+'&fecha1='+fecha+'&fecha2='+fecha+'&estado='+estado;
+      	window.open(pagina,1,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80");
+
+      }
+
       else if(itemId == '0_calend'){
         alert("LLamando el Calendario");
       }
@@ -1662,7 +1848,7 @@ MM_reloadPage(true);
 
     aToolBar=new dhtmlXToolbarObject('toolbar_zone2','100%',16,"");
     aToolBar.setOnClickHandler(onButtonClick);
-    aToolBar.loadXML("../../lib/general/_toolbarV1.xml")
+    aToolBar.loadXML("../../lib/general/_toolbarV6.xml")
     aToolBar.setToolbarCSS("toolbar_zone2","toolbarText3");
     aToolBar.showBar();
 
@@ -1672,23 +1858,29 @@ MM_reloadPage(true);
      f=document.form1;
      var status=f.status.value;
      var block='<? echo $block; ?>';
+     tipcom    = '<? echo $tipcom; ?>';
+     btnmodcom = '<? echo $btn["btnmodcom"]; ?>';
 
     if (status == 'N')
     {
-      alert('Este Comprobante esta Nulo, no se puede Eliminar');
+      alert('Este Comprobante esta Anulado, no se puede Eliminar');
     }
      if (block=='2')
      {
        alert('La Fecha del Comprobante pertenece a un periodo Cerrado.');
-
-         }else{
+     }else{
         if (block=='3'){
-           alert('ADVERTENCIA: La Fecha del Comprobante esta fuera del Perodo del Ejercicio Fiscal.');		 }
+           alert('ADVERTENCIA: La Fecha del Comprobante esta fuera del Perodo del Ejercicio Fiscal.');
+           }
 
+
+      if ((btnmodcom=='f') && (tipcom!='CON') ){
+      		alert('No se Puede eliminar este Comprobante por que no fue Generado por el Modulo de Contabilidad');
+      }else {
       if (status=='A'){
-        if(confirm("Realmente desea Reversar este comprobante?"))
+        if(confirm("Realmente desea colocar este comprobante Diferido nuevamente?"))
         {
-          f.action="imecConFinCom.php?imec=<? echo 'E'; ?>&status=R";
+          f.action="imecConFinCom.php?imec=<? echo 'E'; ?>&status=D";
           f.submit();
         }
 
@@ -1707,7 +1899,7 @@ MM_reloadPage(true);
           f.action="imecConFinCom.php?imec=<? echo 'E'; ?>&status=N";
           f.submit();
         }
-      }
+      }}
       }
      }
 
@@ -1818,6 +2010,49 @@ MM_reloadPage(true);
     {
       f.status.value="E";
     }
+
+  }
+
+  function catalogoA(c1,c2,c3,fc,tipo)
+  {
+   f=document.form1;
+
+   i=1;
+   while (i<=150)
+   {
+     var x="x"+i+c1;
+     var y="x"+i+c2;
+     if (document.getElementById(x).value=="")
+     {
+       if (i==1)
+       {
+         campo="x1"+c1;
+         campo2="x1"+c2;
+         foco="x1"+fc;
+         i=150;
+       }
+       else
+       {
+         campo=x;
+         campo2=y;
+         foco="x"+i+fc;
+         i=150;
+       }
+     }
+     i=i+1;
+   }
+
+   //campo="x1"+c1;
+   //campo2="x1"+c2;
+   //campo3=c3;
+   //foco=fc;
+   //sql='select tipcau as codigo,nomext as nombre_extendido, refier as refiere, nomabr as nombre_abreviado from cpdoccau where tipcau like(�%�) order by tipcau';
+   //pagina="catalogo3.php?campo="+campo+"&campo2="+campo2+"&campo3="+campo3+"&sql="+sql+"&foco="+foco+"&tipo="+tipo;
+   //window.open(pagina,"Catalogo","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=50,top=50");
+
+        var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
+       pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Contabb_Pagemiord/clase/Contabb/frame/form1/obj1/'+campo+'/obj2/'+campo2+'/campo1/codcta/campo2/descta/submit/false';
+       window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
 
   }
 

@@ -6,7 +6,7 @@ dev:
   .settings:
     # E_ALL | E_STRICT = 4095
     error_reporting:        4095
-    web_debug:              off
+    web_debug:              on
     cache:                  off
     no_script_name:         off
     etag:                   off

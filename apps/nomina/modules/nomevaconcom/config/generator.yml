@@ -1,0 +1,55 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Rhevaconcom
+    theme:            cidesaGenerator
+    fields:
+      display:         [codemp, nomemp, codevdo, feceval, codniv]
+      codevdo:
+        name: Código
+        msj_error: El Código es necesario
+        catalogo:  
+          catalogoweb: Rhevaconcom_codevdo
+          clase: Nphojint
+          ajax: 1
+          parametros: getprincipal="getCodemp" getsecundario="getNomemp" campoprincipal="codemp" camposecundario="nomemp" campobase = "id"           
+      codniv:
+        name: Código
+        msj_error: El Código es necesario
+        catalogo:  
+          catalogoweb: rhdefniv_codniv
+          clase: Rhdefniv
+          ajax: 2
+          parametros: getprincipal="getCodniv" getsecundario="getDesniv" campoprincipal="codniv" camposecundario="desniv" campobase = "id"           
+      feceval:           { name: Fecha Evaluación}    
+      cargoevdo:         { name: Cargo, params: style="border:none" size=100}
+      nomemp:           { name: Nombre}
+      desniv:            { name: Descripción}
+      desvalins:         { name: Descripción}
+      gridvalniv:        { name: .}
+      minpun:            { name: . , params: disabled=false style="display:none" }
+      maxpun:            { name: . , params: disabled=false style="display:none"}
+      tipcal:            { name: . , params: disabled=false style="display:none"}
+
+    list:
+      title:              Listado de Personal Evaluado
+      display:            [=codevdo, nomemp, codniv, desniv, codvalins, desvalins]
+      filters:            [codevdo, codniv, codvalins]
+      max_pers:           10
+      sort:               codevdo
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Evaluar control de Competencia y Eficiencia
+      display:
+        Datos del Empleado:   [codevdo, cargoevdo]  
+        Datos del Nivel:      [codniv, feceval, minpun, maxpun, tipcal]
+        Datos de Valores:     [_gridvalniv]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

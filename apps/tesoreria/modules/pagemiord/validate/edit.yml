@@ -16,7 +16,7 @@ names:
   opordpag{numord}:
     required:  Yes
     required_msg: La Referencia no puedo estar en Blanco
-    validators: UniqueValidator
+   # validators: UniqueValidator
 
   opordpag{fecemi}:
     required:  Yes

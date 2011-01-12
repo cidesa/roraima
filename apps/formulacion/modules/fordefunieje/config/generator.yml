@@ -1,0 +1,35 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fordefunieje
+    theme:            cidesaGenerator
+    fields:
+      coduni: { name: Código, params : size=5 maxlength=3  onFocus=readonly(this.id) onBlur="this.value=this.value.pad(3, '0',0);" }
+      nomuni: { name: Nombre, params : size=80 maxlength=250 }
+      codemp:
+        name: Código
+        params: maxlength=16
+        catalogo:
+          catalogoweb: Nphojint_Nomfalperper
+          clase: Nphojint
+          ajax: 1
+          parametros: getprincipal="getCodemp" getsecundario="getNomemp" campoprincipal="codemp" camposecundario="nomemp" campobase = "id"
+    list:
+      title:          Unidades Ejecutoras
+      filters:        [coduni, codemp]
+      display:        [=coduni, nomuni]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:      coduni
+    edit:
+      title:          Edición  de Unidad Ejecutora
+      display:
+        "DefiniciÃ³n de la Unidad":   [coduni, nomuni]
+        "Funcionario Responsable":   [codemp]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

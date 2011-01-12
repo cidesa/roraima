@@ -70,11 +70,18 @@ echo grid_tag($obj);
 </form>
 
 <script>
-function verificar_codigo_repetido(id)
+function verificar_codigo_repetido(e,id)
   {
+  	 if (e.keyCode==13 || e.keyCode==9) {
      f=0;
      i=id.split('_');
+     var name=i[0];
+     var fil=parseInt(i[1]);
+     var col=parseInt(i[2]);
      i=i[1];
+
+    var coldes=col+1;
+    var nombre=name+"_"+fil+"_"+coldes;
      contador_repetido=0;
      while (f<10)
       {
@@ -92,10 +99,14 @@ function verificar_codigo_repetido(id)
       }
       if (contador_repetido>0)
       {
-      // alert(contador_repetido + ' Código de cargo repetido, Verifique sus datos');
+       alert('Código de cargo repetido, Verifique sus datos');
        $(id).value='';
+       $(nombre).value='';
+      }else{
+        new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=2&cajtexmos='+nombre+'&codigo='+$(id).value})
       }
        i=0;
        f=0;
+  	 }
 }
 </script>

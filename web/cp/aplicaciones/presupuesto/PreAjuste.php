@@ -1,10 +1,11 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
@@ -22,7 +23,9 @@ $tools  = new tools();
 $modulo = "";
 $forma  = "Ajustes Ejecución";
 $modulo = $_SESSION["modulo"] . " > Ejecución Presupuestaria > ".$forma;
+$deshabfec= $_SESSION["configemp"]["aplicacion"]["presupuesto"]["modulos"]["preajuste"]["bloqfec"];
 $block="S";
+$fecha_actual= date('d/m/Y');
  //limpiar datos  del movimiento
  $i=1;
  while ($i<=50)
@@ -68,6 +71,7 @@ $block="S";
  if (!empty($_POST["refmov"])) {  $refmov = strtoupper(trim(str_pad($_POST["refmov"],8,'0',STR_PAD_LEFT)));}
  if (!empty($_POST["fecmov"])) {  $fecmov = $_POST["fecmov"];}
  if (!empty($_POST["desmov"])) {  $desmov = $_POST["desmov"];}
+ if (!empty($_POST["afec"])) {  $afect = $_POST["afec"];}
 
 if ($var!='9') {Limpiar();}
 
@@ -251,7 +255,7 @@ if ($var!='9') {Limpiar();}
     $estado="";
     $block="S";
     $status="";
-    $fecha="";
+    $fecha=date('d/m/Y');
     $tipaju="";
     $destipaju="";
     $refmov="";
@@ -316,7 +320,6 @@ if ($var!='9') {Limpiar();}
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" TYPE="text/css" MEDIA="screen" href="../../lib/css/tabber.css">
@@ -360,7 +363,7 @@ if ($var!='9') {Limpiar();}
       else
       {
        // alert("Longitud de Fecha inválida");
-        document.getElementById('fecha').value=mostrarfecha();
+        document.getElementById('fecha').value='<? echo $fecha_actual; ?>';;
         document.getElementById('fecha').focus();
       }
     }
@@ -369,7 +372,7 @@ if ($var!='9') {Limpiar();}
 </head>
 
 <body>
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
 <table width="100%" align="center">
   <tr>
 <td width="100%">
@@ -446,8 +449,11 @@ if ($var!='9') {Limpiar();}
                                   <td width="99">
                             <? if ($ModoConsulta=='S') { ?>
                                <input name="fecha" type="text" id="fecha" value="<? print $fecha;?>" size="10"  readonly="true" class="imagenInicio2">
-                            <? } else { ?>
+                            <? } else { if ($deshabfec=='S') {?>
+                            	<input name="fecha" type="text" id="fecha" value="<? print $fecha;?>" size="10"  readonly="true" class="imagenInicio2">
+                            <? } else {?>
                             <input name="fecha" type="text"  class="imagenInicio" id="fecha" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $fecha;?>" size="10" maxlength="10"  onKeyUp = "this.value=formateafecha(this.value);" onBlur="validar_fecha()">
+                            <? } ?>
                             <? } ?>
                   </td>
                                 </tr>
@@ -478,6 +484,19 @@ if ($var!='9') {Limpiar();}
                                         <input name="destipaju" type="text" class="imagenInicio2" id="destipaju" value="<? print $destipaju;?>" size="61"  readonly="true">
                                       </div></td>
                                     </tr>
+                                    </tr>
+                                <tr>
+                                  <td width="44">Afecta:</td>
+                                  <td width="53"><select name="afec" id="afec">
+                                  <? if ($afect=='R'){ ?><option value="<? print $afect;?>">(-)</option> <? } ?>
+                                  <? if ($afect=='S'){ ?><option value="<? print $afect;?>">(+)</option> <? } ?>
+                                  	<? if ($afect==''){ ?> <option value=""></option>  <? } ?>
+                                  <? if ($afect!=''){ ?> <option value=""></option>  <? } ?>
+				                  <? if ($afect!='R'){ ?> <option value="R" >(-)</option> <? } ?>
+				                  <? if ($afect!='S'){ ?> <option value="S">(+)</option> <? } ?>
+                                </select>
+                                 </td>
+                                </tr>
                                   </table>
                   </fieldset>
                 <fieldset>
@@ -490,7 +509,7 @@ if ($var!='9') {Limpiar();}
                      <? if ($ModoConsulta=='S')   { ?>
                                      <input name="refmov" type="text" class="imageninicio2" id="refmov" value="<? print $refmov;?>" size="8" maxlength="8" readonly="true">
                                     <? } else {?>
-                    <input name="refmov" type="text" class="imagenInicio" id="refmov" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" onKeyPress="enterB(event,'refmov','fecmov','desmov','x12')" value="<? print $refmov;?>" size="8" maxlength="8">
+                    <input name="refmov" type="text" class="imagenInicio" id="refmov" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" onKeyPress="enterB(event,'refmov','fecmov','desmov','')" value="<? print $refmov;?>" size="8" maxlength="8">
                   <? } ?>								  </td>
                                   <td colspan="2">
                   <? if ($ModoConsulta=='S')   { ?>
@@ -513,6 +532,9 @@ if ($var!='9') {Limpiar();}
                                   <td colspan="6"><textarea name="desmov"  cols="66" rows="2" wrap="VIRTUAL" class="imagenInicio2" id="desmov"  readonly="true" ><? print $desmov;?></textarea>
                  </td>
                                 </tr>
+
+
+
                 </table>
                 </fieldset>
                             </fieldset>
@@ -550,7 +572,7 @@ if ($var!='9') {Limpiar();}
                      ?>
                         <tr>
                           <td  align="left"  class="grid_line01_br"><input name="x<? print $i;?>1" id="x<? print $i;?>1" type="text" class="grid_txt01" size="32" align="right"  value="<? print  $_POST["x".$i."1"];?>"  readonly="true"></td>
-                          <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>2" id="x<? print $i;?>2" type="text" class="grid_txt02" size="18" value="<? if (empty($_POST["x".$i."2"])) {print number_format(0,2,'.',',');}  else {print number_format($_POST["x".$i."2"],2,'.',',');}  ?>" align="right"  onKeyPress="entermonto(event,this.id,'x<? print $i+1;?>2')" onBlur="disp(this.id)"></td>
+                          <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>2" id="x<? print $i;?>2" type="text" class="grid_txt02" size="18" value="<? if (empty($_POST["x".$i."2"])) {print number_format(0,2,'.',',');}  else {print number_format($_POST["x".$i."2"],2,'.',',');}  ?>" align="right"  onKeyPress="entermonto(event,this.id,'x<? print $i ?>1')" onBlur="disp(this.id)"></td>
                           <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>3" id="x<? print $i;?>3" type="text" class="breadcrumbv2" size="16" value="<? if (empty($_POST["x".$i."3"])) {print number_format(0,2,'.',',');}  else {print number_format($_POST["x".$i."3"],2,'.',',');}  ?>" align="right" readonly="true" ></td>
                           <td  align="center" class="grid_line01_br"><input name="x<? print $i;?>4" id="x<? print $i;?>4" type="text" class="breadcrumbv2" size="18" align="right"  value="<? print  $_POST["x".$i."4"];?>"  readonly="true"></td>
                           <td  align="center"  class="grid_line01_br"><input name="x<? print $i;?>5" id="x<? print $i;?>5" type="text" class="breadcrumbv2" size="22" align="right"  value="<? print  $_POST["x".$i."5"];?>"  readonly="true"></td>
@@ -639,6 +661,8 @@ else
 <? require_once('../../lib/general/bottom.php'); ?>
 </body>
   <script>
+    if (document.getElementById('afec').value!="") document.getElementById('afec').disabled=true;
+
         block='<? print $block;?>';
       if (block=="S")
       {
@@ -681,47 +705,54 @@ else
           mon = mon.replace(',','');
           mon = mon.replace(',','');
           mon = mon.replace(',','');
+          mon=parseFloat(mon);
 
           var mon2 = document.getElementById(x3).value.toString();
           mon2 = mon2.replace(',','');
           mon2 = mon2.replace(',','');
           mon2 = mon2.replace(',','');
+          mon2=parseFloat(mon2);
 
 
        cod = $F(x).substring(0,1);//verificamos q no sean puras rayitas
 
       if ((cod!="--") && (cod!=""))
       {
-        if ( (mon < 0) && (Math.abs(mon) > mon2) ){
+      	if (document.getElementById('afec').value=='R') {
+          if (mon > mon2 ){
           $(x2).value = 0.00;
           alert('El monto a ajustar no puede ser menor al monto de la imputacion');
-
-        //}else if ($F(id)==0){
-         // $(x2).value = 0.00;
-         //alert('El monto a ajustar no puede ser igual a 0');
-
-        }else if ($F(id)>0){
+       }else if ($F(id)>0){
           var referencia = $F(x4) + "/" + $F(x5) + "/" + $F(x6);
-
-
           var cadena=rayitasfc(aux);
-         // fecha=document.getElementById('fecha').value;
           var anocierre='<? print $anocierre;?>';
           var prenivdis='<? print $prenivdis;?>';
-
           var refmov = '<? print $refmov;?>';
           if(refmov=='') refmov=$('refmov').value;
           var codigo=$F(x);
-
           var RefiereA = $F('reftipaju');
-
-       cuantos="dispotraslado";
-          //sql="select mondis as campo1 from cpasiini where trim(codpre) = trim(�"+cadena+"�) and perpre=�00�";
-          //pagina="gridatos.php?cuantos="+cuantos+"&id="+monto+"&donde="+donde+"&foco="+foco+"&sql="+sql+"&mon="+mon+"&fecha="+fecha+"&anocierre="+anocierre+"&prenivdis="+prenivdis+"&codigo="+codigo;
+          cuantos="dispotraslado";
 
           pagina = "gridatos.php?cuantos="+cuantos+"&tipo="+RefiereA+"&refmov="+refmov+"&codigo="+codigo+"&otro="+referencia+"&anocierre="+anocierre+"&prenivdis="+prenivdis+"&monmov="+mon+"&id="+id;
           window.open(pagina,"","menubar=no,toolbar=no,scrollbars=no,width=50,height=50,resizable=no,left=300,top=300");
-        }
+          }
+      	}else {
+           if (mon>0){
+	          var referencia = $F(x4) + "/" + $F(x5) + "/" + $F(x6);
+	          var cadena=rayitasfc(aux);
+	          var anocierre='<? print $anocierre;?>';
+	          var prenivdis='<? print $prenivdis;?>';
+
+	          var refmov = '<? print $refmov;?>';
+	          if(refmov=='') refmov=$('refmov').value;
+	          var codigo=$F(x);
+	          var RefiereA = $F('reftipaju');
+	          cuantos="dispotraslado";
+	          var arrbajo=document.getElementById('afec').value;
+	          pagina = "gridatos.php?cuantos="+cuantos+"&tipo="+RefiereA+"&refmov="+refmov+"&codigo="+codigo+"&otro="+referencia+"&anocierre="+anocierre+"&prenivdis="+prenivdis+"&monmov="+mon+"&arrbajo="+arrbajo+"&id="+id;
+	          window.open(pagina,"","menubar=no,toolbar=no,scrollbars=no,width=50,height=50,resizable=no,left=300,top=300");
+	        }
+      	}
       }
 
     }
@@ -772,7 +803,7 @@ else
         campo3=c3;
         foco=fc;
 
-        pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Cpdocaju_Predocaju/clase/Cpdocaju/frame/form1/obj1/'+campo+'/obj2/'+campo2+'/obj3/'+campo3+'/campo1/tipaju/campo2/nomext/campo3/refier';
+        pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Cpdocaju_Predocaju/clase/Cpdocaju/frame/form1/obj1/'+campo+'/obj2/'+campo2+'/obj3/'+campo3+'/campo1/tipaju/campo2/nomext/campo3/refier';
         window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
 
        //sql='Select tipaju as Codigo,nomext as Nombre_Extendido,refier as Refiere from CpDocAju where trim (tipaju) like(�%�) order by tipaju';
@@ -791,6 +822,7 @@ else
        {
           if (f.tipaju.value!="")
         {
+        	if (document.getElementById('afec').value!=""){
           aux= document.getElementById(id).value.toUpperCase();
           document.getElementById(id).value=aux.toUpperCase();
           aux=aux.pad(8, "0",0);
@@ -801,24 +833,41 @@ else
             tipo='MOV';
             refmov=document.getElementById('reftipaju').value;
             fecha=document.getElementById('fecha').value;
+            afect=document.getElementById('afec').value;
             if (refmov=="C")
-              {sql='Select to_char(feccom,�dd/mm/yyyy�) as campo1,descom as campo2 From CPCompro Where StaCom=�A� and feccom <= to_date(�'+fecha+'�,�dd/mm/yyyy�) and (moncom-salaju-salcau)>0 and trim (refcom) =trim(�'+aux+'�)';
+              {
+                if (document.getElementById('afec').value=="R")  
+                     sql='Select to_char(feccom,�dd/mm/yyyy�) as campo1,descom as campo2 From CPCompro Where StaCom=�A� and feccom <= to_date(�'+fecha+'�,�dd/mm/yyyy�) and (moncom-salaju-salcau)>0 and trim (refcom) =trim(�'+aux+'�)';
+                else sql='Select to_char(feccom,�dd/mm/yyyy�) as campo1,descom as campo2 From CPCompro Where StaCom=�A� and feccom <= to_date(�'+fecha+'�,�dd/mm/yyyy�) and trim (refcom) =trim(�'+aux+'�)';
                sql2='Select * From CPImpCom Where trim (refcom) =trim(�'+aux+'�) order by Codpre';	}
             if (refmov=="A")
-              {sql='Select to_char(feccau,�dd/mm/yyyy�) as campo1,descau as campo2 From CPCausad Where StaCau=�A� and feccau <= to_date(�'+fecha+'�,�dd/mm/yyyy�) and (moncau-salaju-salpag)>0 and trim (refcau) =trim(�'+aux+'�)';
+              {
+                if (document.getElementById('afec').value=="R")  
+                  sql='Select to_char(feccau,�dd/mm/yyyy�) as campo1,descau as campo2 From CPCausad Where StaCau=�A� and feccau <= to_date(�'+fecha+'�,�dd/mm/yyyy�) and (moncau-salaju-salpag)>0 and trim (refcau) =trim(�'+aux+'�)';
+                else sql='Select to_char(feccau,�dd/mm/yyyy�) as campo1,descau as campo2 From CPCausad Where StaCau=�A� and feccau <= to_date(�'+fecha+'�,�dd/mm/yyyy�) and trim (refcau) =trim(�'+aux+'�)';
                sql2='Select * From CPImpCau Where trim (refcau) =trim(�'+aux+'�) order by Codpre';	}
             if (refmov=="G")
               {sql='Select to_char(fecpag,�dd/mm/yyyy�) as campo1,despag as campo2 From CPPagos Where StaPag=�A� and fecpag <= to_date(�'+fecha+'�,�dd/mm/yyyy�) and (monpag-salaju)>0 and trim (refpag) =trim(�'+aux+'�)';
                sql2='Select * From CPImpPag Where trim (refpag) =trim(�'+aux+'�) order by Codpre';	}
             if (refmov=="P")
-              {sql='Select to_char(fecprc,�dd/mm/yyyy�) as campo1,desprc as campo2 From CPPrecom Where StaPrc=�A� and fecprc <= to_date(�'+fecha+'�,�dd/mm/yyyy�) and (monprc-salaju-salcom)>0 and trim (refprc) =trim(�'+aux+'�)';
+              {
+                 if (document.getElementById('afec').value=="R")
+                  sql='Select to_char(fecprc,�dd/mm/yyyy�) as campo1,desprc as campo2 From CPPrecom Where StaPrc=�A� and fecprc <= to_date(�'+fecha+'�,�dd/mm/yyyy�) and (monprc-salaju-salcom)>0 and trim (refprc) =trim(�'+aux+'�)';
+                 else
+                  sql='Select to_char(fecprc,�dd/mm/yyyy�) as campo1,desprc as campo2 From CPPrecom Where StaPrc=�A� and fecprc <= to_date(�'+fecha+'�,�dd/mm/yyyy�) and trim (refprc) =trim(�'+aux+'�)';
                sql2='Select * From CPImpPrc Where trim (refprc) =trim(�'+aux+'�) order by Codpre';	}
 
 
-            pagina="gridatos.php?cuantos="+cuantos+"&id="+id+"&donde="+donde+"&foco="+foco+"&otro="+otro+"&tipo="+tipo+"&refmov="+refmov+"&fecha="+fecha+"&sql="+sql+"&sql2="+sql2;
+            pagina="gridatos.php?cuantos="+cuantos+"&id="+id+"&donde="+donde+"&foco="+foco+"&otro="+otro+"&tipo="+tipo+"&refmov="+refmov+"&fecha="+fecha+"&sql="+sql+"&afect="+afect+"&sql2="+sql2;
             window.open(pagina,"Catalogo","menubar=no,toolbar=no,scrollbars=no,width=50,height=50,resizable=no,left=100,top=300");
           } //if (aux!="")
+        	}
+          else
+        {
+             alert("Debe indicar si el ajuste afecta disponibilidad o disminuye la disponibilidad...");
+        }// else if (f.codigo.tipcau.value!="")
          }// if (f.codigo.tipcau.value!="")
+
         else
         {
              alert("Debe introducir el tipo de ajuste...");
@@ -842,6 +891,7 @@ else
           campo3=c3;
           foco='submit';
           refmov=document.getElementById('reftipaju').value;
+          afect=document.getElementById('afec').value;
           fecaju=document.getElementById('fecha').value;
           fecaju=fecaju.replace('/','-');
           fecaju=fecaju.replace('/','-');
@@ -859,10 +909,10 @@ else
             devolver='/campo1/refprc/campo2/fecprc/campo3/desprc';
           }
 
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/'+catalogo+'/clase/'+clase+'/frame/form1/obj1/'+campo+'/obj2/'+campo2+'/obj3/'+campo3+devolver+'/param1/'+fecaju+'/submit/true';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/'+catalogo+'/clase/'+clase+'/frame/form1/obj1/'+campo+'/obj2/'+campo2+'/obj3/'+campo3+devolver+'/param1/'+fecaju+'/param2/'+afect+'/submit/true';
 //          pagina="catalogo3.php?campo="+campo+"&campo2="+campo2+"&campo3="+campo3+"&sql="+sql+"&foco="+foco+"&tipo="+tipo;
 
-//          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Precompro_Cpdoccom/clase/Cpdoccom/frame/form1/obj1/'+campo2+'/obj2/'+campo+'/obj3/'+campo3+'/campo1/tipcom/campo2/nomext/campo3/refprc/submit/false';
+//          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Precompro_Cpdoccom/clase/Cpdoccom/frame/form1/obj1/'+campo2+'/obj2/'+campo+'/obj3/'+campo3+'/campo1/tipcom/campo2/nomext/campo3/refprc/submit/false';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
 
 
@@ -1030,6 +1080,7 @@ else
           f=document.form1;
           if (verificar())
               {
+                document.getElementById('afec').disabled=false;
                 f.action="imecPreAjuste.php";
                 f.submit();
                 }
@@ -1138,7 +1189,7 @@ else
           //pagina="catalogo2.php?campo="+campo+"&campo2="+campo2+"&sql="+sql+"&foco="+foco;
           //window.open(pagina,"","menubar=no,toolbar=no,scrollbars=yes,width=570,height=500,resizable=yes,left=50,top=50");
 
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Cpajuste_PreAjuste/clase/Cpajuste/frame/form1/obj1/codigo/campo1/refaju/submit/true';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Cpajuste_PreAjuste/clase/Cpajuste/frame/form1/obj1/codigo/campo1/refaju/submit/true';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
 
      }

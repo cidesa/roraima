@@ -314,13 +314,18 @@
 
 	function compareDate(dateA, dateB, dateC)
 	{
-	   dateA1=new Date(dateA);
-	   dateB1=new Date(dateB);
-	   dateC1=new Date(dateC);
+		 a = dateA.split('/');
+	   dateA1=new Date(a[2],a[1],a[0]);
+
+		 a = dateB.split('/');
+	   dateB1=new Date(a[2],a[1],a[0]);
+
+		 a = dateC.split('/');
+	   dateC1=new Date(a[2],a[1],a[0]);
 
 	   timeDifference = dateA1 - dateB1;
 	   timeDifference2 = dateA1 - dateC1;
-	//alert(timeDifference);
+
 	   if ((timeDifference >= 0) && (timeDifference2 <= 0))
 	      return 1;  //verdadero
 	   else if ((timeDifference <= 0) && (timeDifference2 >= 0))
@@ -331,6 +336,13 @@
 
 	function compareDate2(dateA, dateB)
 	{
+		 a = dateA.split('/');
+	   dateA=new Date(a[2],a[1],a[0]);
+
+		 a = dateB.split('/');
+	   dateB=new Date(a[2],a[1],a[0]);
+
+
 	   dateA1=new Date(dateA);
 	   dateB1=new Date(dateB);
 

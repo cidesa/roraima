@@ -15,6 +15,14 @@
  */ 
 class Opbenefi extends BaseOpbenefi
 {
+	protected $tiedatrel="";
+	protected $oculsave="";
+
+   public function __toString()
+  {
+    return $this->cedrif;
+  }
+
 	public function getNomcuentacont()
 	{
 		return Herramientas::getX('Codcta','contabb','descta',trim(self::getCodcta()));
@@ -46,5 +54,46 @@ class Opbenefi extends BaseOpbenefi
 	public function getNomctacajchi()
 	{
 		return Herramientas::getX('Codcta','contabb','descta',trim(self::getCodctacajchi()));
-	}	
+	}
+
+  public function getTiedatrel()
+  {
+  	  $valor="N";
+  	  $d= new Criteria();
+  	  $d->add(OpordpagPeer::CEDRIF,self::getCedrif());
+  	  $resul= OpordpagPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  } else $valor= 'N';
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
+  }
+
+  public function getOculsave()
+  {
+
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('pagbenfic',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('oculsave',$varemp['aplicacion']['tesoreria']['modulos']['pagbenfic']))
+	       {
+	       	$dato=$varemp['aplicacion']['tesoreria']['modulos']['pagbenfic']['oculsave'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setOculsave()
+  {
+  	return $this->oculsave;
+  }
 }

@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomdefespparpre
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 39707 2010-07-26 23:02:39Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -16,7 +16,7 @@ class nomdefespparpreActions extends autonomdefespparpreActions
 
   // Para incluir funcionalidades al executeEdit()
   /**
-   * Función para colocar el codigo necesario en  
+   * Función para colocar el codigo necesario en
    * el proceso de edición.
    * Aquí se pueden buscar datos adicionales que necesite la vista
    * Esta función es parte de la acción executeEdit, que maneja tanto
@@ -27,12 +27,13 @@ class nomdefespparpreActions extends autonomdefespparpreActions
    */
   public function editing()
   {
+   $nomsalint = H::getConfAppGen('nomsalint');
    $this->arrsal=array('UD'=>'Ultimo Devengado',
                        'SP'=>'Salario Promedio',
-					   'SI'=>'Salario Integral',
+					   'SI'=> $nomsalint=='S' ? 'Salario Base' : 'Salario Integral',
 					   'SN'=>'Salario Normal');
    $this->params=array('arrsal'=>$this->arrsal);
-
+   $this->configGridClau();
   }
 
   /**
@@ -42,67 +43,16 @@ class nomdefespparpreActions extends autonomdefespparpreActions
    * los datos del grid.
    *
    */
-  public function configGrid($reg = array(),$regelim = array())
+  public function configGridClau($reg=array())
   {
-    $this->regelim = $regelim;
-
-    if(!count($reg)>0)
-    {
-      // Aquí va el código para traernos los registros que contendrá el grid
-      $reg = array();
-      // Aquí va el código para generar arreglo de configuración del grid
-    $this->obj = array();
-    }
-
-    // Insertar el criterio de la busqueda de registros del Grid
-    // Por ejemplo:
-
-    // $c = new Criteria();
-    // $c->add(CaartaocPeer::AJUOC ,$this->caajuoc->getAjuoc());
-    // $reg = CaartaocPeer::doSelect($c);
-
-    // De esta forma se carga la configuración del grid de un archivo yml
-    // y se le pasa el parámetro de los registros encontrados ($reg)
-    //                                                                            /nombreformulario/
-    // $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/formulario/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_caartaoc',$reg);
-
-    // Si no se quiere cargar la configuración del grid de un .yml, sedebe hacer a pie.
-    // Por ejemplo:
-
-    /*
-    // Se crea el objeto principal de la clase OpcionesGrid
-    $opciones = new OpcionesGrid();
-    // Se configuran las opciones globales del Grid
-    $opciones->setEliminar(true);
-    $opciones->setTabla('Caartalm');
-    $opciones->setAnchoGrid(1150);
-    $opciones->setTitulo('Existencia por Almacenes');
-    $opciones->setHTMLTotalFilas(' ');
-    // Se generan las columnas
-    $col1 = new Columna('Cod. Almacen');
-    $col1->setTipo(Columna::TEXTO);
-    $col1->setEsGrabable(true);
-    $col1->setAlineacionObjeto(Columna::CENTRO);
-    $col1->setAlineacionContenido(Columna::CENTRO);
-    $col1->setNombreCampo('codalm');
-    $col1->setCatalogo('cadefalm','sf_admin_edit_form','2');
-    $col1->setAjax(2,2);
-
-    $col2 = new Columna('Descripción');
-    $col2->setTipo(Columna::TEXTO);
-    $col2->setAlineacionObjeto(Columna::IZQUIERDA);
-    $col2->setAlineacionContenido(Columna::IZQUIERDA);
-    $col2->setNombreCampo('codalm');
-    $col2->setHTML('type="text" size="25" disabled=true');
-
-    // Se guardan las columnas en el objetos de opciones
-    $opciones->addColumna($col1);
-    $opciones->addColumna($col2);
-
-    // Se genera el arreglo de opciones necesario para generar el grid
-    $this->obj = $opciones->getConfig($per);
-     */
-
+      $c = new Criteria();
+      $c->add(NpdefespclaudetPeer::CODNOM,$this->npdefespparpre->getCodnom());
+      $reg = NpdefespclaudetPeer::doSelect($c);
+      $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/nomdefespparpre/'.sfConfig::get('sf_app_module_config_dir_name').'/gridclau');
+      $this->obj[1][10]->setCombo($this->arrsal);
+      $this->obj[1][11]->setCombo(array('N'=>'NO','S'=>'SI'));
+      $this->obj = $this->obj[0]->getConfig($reg);
+      $this->npdefespparpre->setObjclau($this->obj);
 
   }
 
@@ -148,12 +98,13 @@ class nomdefespparpreActions extends autonomdefespparpreActions
   }
 
 
-  
-  
-  
+
+
+
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -200,11 +151,14 @@ class nomdefespparpreActions extends autonomdefespparpreActions
    */
   public function updateError()
   {
-  	$this->arrsal=array('UD'=>'Ultimo Devengado',
+   $nomsalint = H::getConfAppGen('nomsalint');
+   $this->arrsal=array('UD'=>'Ultimo Devengado',
                        'SP'=>'Salario Promedio',
-					   'SI'=>'Salario Integral',
+					   'SI'=> $nomsalint=='S' ? 'Salario Base' : 'Salario Integral',
 					   'SN'=>'Salario Normal');
    $this->params=array('arrsal'=>$this->arrsal);
+   $grid = Herramientas::CargarDatosGridv2($this,$this->obj);
+   $this->configGridClau();
     //$this->configGrid();
 
     //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
@@ -214,9 +168,9 @@ class nomdefespparpreActions extends autonomdefespparpreActions
   }
 
   /**
-   * Función para colocar el codigo necesario para 
+   * Función para colocar el codigo necesario para
    * el proceso de guardar.
-   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Esta función debe retornar un valor igual a -1 si no hubo
    * Inconvenientes al guardar, y != de -1 si existe algún error.
    * Si es diferente de -1 el valor devuelto debe ser un código de error
    * Válido que exista en el archivo config/errores.yml
@@ -224,15 +178,29 @@ class nomdefespparpreActions extends autonomdefespparpreActions
    */
   public function saving($clasemodelo)
   {
-  	$clasemodelo->getPoranoant()==1 ? $clasemodelo->setPoranoant('S') : $clasemodelo->setPoranoant('N');
+        /*$grid = Herramientas::CargarDatosGridv2($this,$this->obj);
+        $objupdate = $grid[0];
+            foreach($objupdate as $x)
+            {
+                    $x->setCodnom($clasemodelo->getCodnom());
+                    $x->getTotret()==1 ? $x->setTotret('S') : $x->setTotret(null);
+                    $x->getPormesant()==1 ? $x->setPormesant('S') : $x->setPormesant(null);
+                    $x->getPoranoant()==1 ? $x->setPoranoant('S') : $x->setPoranoant(null);
+                    $x->save();
+            }
+        $objdelete = $grid[1];
+            foreach($objdelete as $z)
+            {
+                    $z->delete();
+            }*/
 	$clasemodelo->getAguicom()==1 ? $clasemodelo->setAguicom('S') : $clasemodelo->setAguicom('N');
     return parent::saving($clasemodelo);
   }
 
   /**
-   * Función para colocar el codigo necesario para 
+   * Función para colocar el codigo necesario para
    * el proceso de eliminar.
-   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Esta función debe retornar un valor igual a -1 si no hubo
    * Inconvenientes al guardar, y != de -1 si existe algún error.
    * Si es diferente de -1 el valor devuelto debe ser un código de error
    * Válido que exista en el archivo config/errores.yml

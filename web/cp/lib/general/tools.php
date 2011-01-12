@@ -38,10 +38,10 @@ class tools
           {
             // Guardar en segbitaco
             if($log) $id = $tb->fields["id"];
-            
+
             $sql2="delete from ".strtoupper($tabla)." WHERE RTRIM(".strtoupper($cod).")=RTRIM('".$like."')";
             $bd->actualizar($sql2);
-            
+
             if($log) $bd->Log($id, $mod, ucfirst(strtolower($tabla)), ucfirst(strtolower($formulario)), 'E');
             $bd->completeTransaccion();
             return true;
@@ -646,6 +646,7 @@ function conCredencial($credenciales, $modulo,$permiso)
           location=("http://"+window.location.host+"/autenticacion<?php echo $env;  ?>.php/generales/nocredentials");
         </script>
         <?
+        return false;
       endif;
 
   else:
@@ -656,7 +657,10 @@ function conCredencial($credenciales, $modulo,$permiso)
                 location=("http://"+window.location.host+"/autenticacion<?php echo $env;  ?>.php/login");
               </script>
               <?
+              return false;
   endif;
+
+  return true;
 
   }
 
@@ -1097,4 +1101,5 @@ function fentrada2($cad){
   <? }
 
 ?>
+
 

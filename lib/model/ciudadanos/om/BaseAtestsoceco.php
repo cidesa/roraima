@@ -3779,7 +3779,10 @@ abstract class BaseAtestsoceco extends BaseObject  implements Persistent {
 		if ($this->aAtayudas === null && ($this->atayudas_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtayudasPeer.php';
 
-			$this->aAtayudas = AtayudasPeer::retrieveByPK($this->atayudas_id, $con);
+      $c = new Criteria();
+      $c->add(AtayudasPeer::ID,$this->atayudas_id);
+      
+			$this->aAtayudas = AtayudasPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -3808,7 +3811,10 @@ abstract class BaseAtestsoceco extends BaseObject  implements Persistent {
 		if ($this->aAtciudadano === null && ($this->atciudadano_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtciudadanoPeer.php';
 
-			$this->aAtciudadano = AtciudadanoPeer::retrieveByPK($this->atciudadano_id, $con);
+      $c = new Criteria();
+      $c->add(AtciudadanoPeer::ID,$this->atciudadano_id);
+      
+			$this->aAtciudadano = AtciudadanoPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -3837,7 +3843,10 @@ abstract class BaseAtestsoceco extends BaseObject  implements Persistent {
 		if ($this->aAttipviv === null && ($this->attipviv_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAttipvivPeer.php';
 
-			$this->aAttipviv = AttipvivPeer::retrieveByPK($this->attipviv_id, $con);
+      $c = new Criteria();
+      $c->add(AttipvivPeer::ID,$this->attipviv_id);
+      
+			$this->aAttipviv = AttipvivPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -3866,7 +3875,10 @@ abstract class BaseAtestsoceco extends BaseObject  implements Persistent {
 		if ($this->aAttipproviv === null && ($this->attipproviv_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAttipprovivPeer.php';
 
-			$this->aAttipproviv = AttipprovivPeer::retrieveByPK($this->attipproviv_id, $con);
+      $c = new Criteria();
+      $c->add(AttipprovivPeer::ID,$this->attipproviv_id);
+      
+			$this->aAttipproviv = AttipprovivPeer::doSelectOne($c, $con);
 
 			
 		}

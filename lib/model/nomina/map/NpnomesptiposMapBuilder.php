@@ -44,6 +44,8 @@ class NpnomesptiposMapBuilder {
 
 		$tMap->addColumn('NOMINTPRE', 'Nomintpre', 'string', CreoleTypes::VARCHAR, false, 1);
 
+		$tMap->addColumn('NOMDIAADI', 'Nomdiaadi', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

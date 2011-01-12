@@ -13,7 +13,7 @@ abstract class BaseRhinscurPeer {
 	const CLASS_DEFAULT = 'lib.model.Rhinscur';
 
 	
-	const NUM_COLUMNS = 5;
+	const NUM_COLUMNS = 6;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -32,6 +32,9 @@ abstract class BaseRhinscurPeer {
 	const FECINS = 'rhinscur.FECINS';
 
 	
+	const TIPPER = 'rhinscur.TIPPER';
+
+	
 	const ID = 'rhinscur.ID';
 
 	
@@ -40,18 +43,18 @@ abstract class BaseRhinscurPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcur', 'Codemp', 'Codcar', 'Fecins', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (RhinscurPeer::CODCUR, RhinscurPeer::CODEMP, RhinscurPeer::CODCAR, RhinscurPeer::FECINS, RhinscurPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcur', 'codemp', 'codcar', 'fecins', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codcur', 'Codemp', 'Codcar', 'Fecins', 'Tipper', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (RhinscurPeer::CODCUR, RhinscurPeer::CODEMP, RhinscurPeer::CODCAR, RhinscurPeer::FECINS, RhinscurPeer::TIPPER, RhinscurPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcur', 'codemp', 'codcar', 'fecins', 'tipper', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcur' => 0, 'Codemp' => 1, 'Codcar' => 2, 'Fecins' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (RhinscurPeer::CODCUR => 0, RhinscurPeer::CODEMP => 1, RhinscurPeer::CODCAR => 2, RhinscurPeer::FECINS => 3, RhinscurPeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcur' => 0, 'codemp' => 1, 'codcar' => 2, 'fecins' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codcur' => 0, 'Codemp' => 1, 'Codcar' => 2, 'Fecins' => 3, 'Tipper' => 4, 'Id' => 5, ),
+		BasePeer::TYPE_COLNAME => array (RhinscurPeer::CODCUR => 0, RhinscurPeer::CODEMP => 1, RhinscurPeer::CODCAR => 2, RhinscurPeer::FECINS => 3, RhinscurPeer::TIPPER => 4, RhinscurPeer::ID => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcur' => 0, 'codemp' => 1, 'codcar' => 2, 'fecins' => 3, 'tipper' => 4, 'id' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
@@ -112,6 +115,8 @@ abstract class BaseRhinscurPeer {
 		$criteria->addSelectColumn(RhinscurPeer::CODCAR);
 
 		$criteria->addSelectColumn(RhinscurPeer::FECINS);
+
+		$criteria->addSelectColumn(RhinscurPeer::TIPPER);
 
 		$criteria->addSelectColumn(RhinscurPeer::ID);
 

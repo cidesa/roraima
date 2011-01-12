@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require($_SESSION["x"].'lib/bd/basedatosAdo.php');
 require($_SESSION["x"].'lib/general/funciones.php');
@@ -7,7 +8,7 @@ validar(array(15),'presupuesto','preprecom.php');            //Seguridad  del Si
 $codemp = $_SESSION["codemp"];
 $bd     = new basedatosAdo($codemp);
 $z      = new tools();
-
+$fecha_actual= date('d/m/Y');
 if (!empty($_GET["ref"]))
 {
   $ref   = $_GET["ref"];
@@ -27,9 +28,7 @@ if (!empty($_POST["operacion"]))
     {
       if ($z->validarFechaPresup($fecha))
       {
-       // $bd->startTransaccion();
-        //anularPrecom();
-      //  $bd->completeTransaccion();
+       anularPrecom();
         ?>
         <script>
           //window.close();
@@ -38,6 +37,7 @@ if (!empty($_POST["operacion"]))
           //window.opener.opener.close();
           window.opener.close();
           close();
+          alert('El registro ha sido anulado con éxito, por favor actualize la pagina.');
         </script>
         <?
       }
@@ -72,14 +72,14 @@ $fechahoy=date('d/m/Y');
         //Primero el Precompromiso
         $sql="update cpprecom set DESANU='$descrip', FECANU=to_date('$fecha','dd/mm/yyyy'), STAPRC='N' where refprc='$refere'";
         $bd->actualizar($sql);
-        
+
         // Guardar en Segbitaco
         $sql = "Select id from cpprecom where refprc='$refere'";
 
         $tb=$bd->select($sql);
         $bd->Log($tb->fields["id"], 'pre', 'Cpprecom', 'Preprecom', 'N');
-        
-        
+
+
         anularImpprc();
       }
       catch(Exception $e)
@@ -118,7 +118,6 @@ $fechahoy=date('d/m/Y');
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" TYPE="text/css" MEDIA="screen" href="../../lib/css/tabber.css">
@@ -153,7 +152,7 @@ function abrirventana()
  }
 </script>
 
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
   <fieldset>
 
 
@@ -245,7 +244,7 @@ function salvar()
       else
       {
         //alert("Longitud de Fecha inválida");
-        document.getElementById('fecha').value=mostrarfecha();
+        document.getElementById('fecha').value='<? echo $fecha_actual; ?>';;
         document.getElementById('fecha').focus();
       }
 

@@ -15,4 +15,18 @@
  */ 
 class EmpresaPeer extends BaseEmpresaPeer
 {
+  public static function getEmpresas()
+  {
+    $resp = array();
+    $result=array();
+    $sql='select * from "SIMA_USER".empresa';
+    $m = Herramientas::BuscarDatos($sql,&$result);
+    if($m){
+      foreach($result as $mon){
+        $resp[$mon["codemp"]] = $mon["nomemp"];
+      }
+    }
+    return $resp;
+  }
+  
 }

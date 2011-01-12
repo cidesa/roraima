@@ -215,6 +215,7 @@ abstract class BaseForperotrcrePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ForperotrcrePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

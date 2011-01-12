@@ -1,4 +1,6 @@
-<?session_start();
+<?
+session_name('cidesa');
+session_start();
 
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
 require_once($_SESSION["x"].'lib/general/funciones.php');

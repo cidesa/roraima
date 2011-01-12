@@ -15,6 +15,8 @@
  */
 class Npcomocp extends BaseNpcomocp
 {
+    protected $grades="";
+    protected $grahas="";
 	  public function getDestipcar()
 	  {
 	  	return Herramientas::getX('Codtipcar','Nptipcar','Destipcar',self::getCodtipcar());

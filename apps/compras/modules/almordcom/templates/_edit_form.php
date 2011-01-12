@@ -4,14 +4,14 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 41832 2010-12-23 16:58:10Z cramirez $
  */
 // date: 2007/06/04 16:53:16
 ?>
 <?php echo form_tag('almordcom/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 
@@ -26,7 +26,7 @@
 <input id="parcial" name="parcial" value="N" type="hidden">
 <input id="cancotpril" name="cancotpril" value="0" type="hidden">
 <input id="numero_filas_recargos" name="numero_filas_recargos" value="10" type="hidden">
-<input id="numero_filas_orden" name="numero_filas_orden" value="50" type="hidden">
+<input id="numero_filas_orden" name="numero_filas_orden" value="150" type="hidden">
 <input id="sumatoria_recargos" name="sumatoria_recargos" type="hidden">
 <input id="sumatoria_detalle_orden" name="sumatoria_detalle_orden" type="hidden">
 <input id="sumatoria_recargos" name="sumatoria_recargos" type="hidden">
@@ -41,6 +41,10 @@
 <?php echo input_hidden_tag('caordcom[gencomalc]', $caordcom->getGencomalc()) ?>
 <?php echo input_hidden_tag('caordcom[eti]', $caordcom->getEti()) ?>
 <?php echo input_hidden_tag('caordcom[tipopro]', $caordcom->getTipopro()) ?>
+<?php echo input_hidden_tag('caordcom[compro]', $caordcom->getCompro()) ?>
+<?php echo input_hidden_tag('fechaanuserv', $fechaanuserv) ?>
+<?php echo input_hidden_tag('caordcom[manorddon]', $caordcom->getManorddon()) ?>
+<?php echo input_hidden_tag('caordcom[manunialt]', $caordcom->getManunialt()) ?>
 
 <input id="codigo_presupuestario_sin_disponibilidad" name="codigo_presupuestario_sin_disponibilidad" type="hidden">
 <script language="JavaScript" type="text/javascript">
@@ -52,7 +56,6 @@
   </tr>
 </table>
 
-
 <fieldset id="sf_fieldset_none" class="">
 <legend><?php echo __('Datos de la Orden')?></legend>
 <div class="form-row">
@@ -63,12 +66,11 @@
 <div class="content<?php if ($sf_request->hasError('caordcom{ordcom}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('caordcom{ordcom}')): ?> <?php echo form_error('caordcom{ordcom}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?> <?php $value = object_input_tag($caordcom, 'getOrdcom', array (
-'readonly' => $readonly,
-'size' => 8,
+'readonly'  =>  $caordcom->getId()!='' ? true : false ,
+'size' => 10,
 'maxlength' => 8,
 'control_name' => 'caordcom[ordcom]',
-'onKeyPress'  => "javascript: enter(event,this.value);",
-'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '#',0);document.getElementById('caordcom_ordcom').value=valor;document.getElementById('caordcom_ordcom').disabled=false;",
+'onBlur'  => "javascript:event.keyCode=13; enter(event,this.value);",
 )); echo $value ? $value : '&nbsp;' ?>
 <div class="sf_admin_edit_help"><?php echo __('Máximo 8 caracteres') ?></div>
 </div>
@@ -172,11 +174,11 @@ echo input_tag('caordcom[refsol]', $caordcom->getRefsol(), array (
  'maxlength' => 8,
  'control_name' => 'caordcom[refsol]',
  'onBlur'=> remote_function(array(
-              'update'   => 'grid',
+          'update'   => 'grid',
           'script' => true,
           'condition' => "$('caordcom_refsol').value != '' && $('id').value == ''",
-              'url' => 'almordcom/grid?ajax=1&referencia=1',
-        'complete' => 'AjaxJSON(request, json), Mostrar_mensaje_fecha_egresos_invalidad(),$("botonesmarcar").hide()',
+          'url' => 'almordcom/grid?ajax=1&referencia=1',
+          'complete' => 'AjaxJSON(request, json), Mostrar_mensaje_fecha_egresos_invalidad(),$("botonesmarcar").hide(),limpiardatos(),actualizarsaldos()',
           'with' => "'cajtexmos=caordcom_monord&filas_orden=numero_filas_orden&cajtexmos2=caordcom_rifpro&cajtexmos3=caordcom_nompro&ordcom='+this.value+'&fecord='+document.getElementById('caordcom_fecord').value+'&refsol='+document.getElementById('caordcom_refsol').value",
         ))))
  . '&nbsp;'. button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Casolart_Almcotiza/clase/Casolart/frame/sf_admin_edit_form/obj1/caordcom_refsol/campo1/reqart",'','','botoncat')
@@ -282,16 +284,21 @@ elseif ($caordcom->getTipo()=='T')
 {
   $v1=false; $v2=false; $v3=false; $v4=false; $v5=true;
 }
+elseif ($caordcom->getTipo()=='P')
+{
+  $v1=false; $v2=true; $v3=false; $v4=false; $v5=false;
+}
 else
 {
   $v1=false; $v2=false; $v3=true; $v4=false; $v5=false;
 }
 
 ?> <?php echo __(" Adjudicación Directa ").radiobutton_tag('caordcom[tipo]', 'A', $v1) ?>&nbsp;
-<?php echo __(" Licitación ").radiobutton_tag('caordcom[tipo]', 'L', $v2) ?>&nbsp;
+<?php echo __(" $etiqtipord ").radiobutton_tag('caordcom[tipo]', 'L', $v2) ?>&nbsp;
 <?php echo __(" Compra ").radiobutton_tag('caordcom[tipo]', 'C', $v3) ?>&nbsp;
 <?php echo __(" Compra Eventual ").radiobutton_tag('caordcom[tipo]', 'E', $v4) ?>
 <?php echo __(" Contratación ").radiobutton_tag('caordcom[tipo]', 'T', $v5) ?>
+<?php echo __(" Consulta de Precio ").radiobutton_tag('caordcom[tipo]', 'P', $v2) ?>
 <div class="sf_admin_edit_help"><?php echo __('Seleccione una Opción') ?></div>  </div>
 <br>
   <?php echo label_for('caordcom[tipo]', __('Descuento:'), 'class="required" ') ?>
@@ -314,7 +321,7 @@ else
          'submit' => 'sf_admin_edit_form',
          )) ?>
 <? } ?> <div id="comp"></div>
-<? if (($caordcom->getId()!='') and ($aprobacion=='S')) { ?>
+<? if ($caordcom->getId()!='' and $aprobacion=='S' and $caordcom->getCompro()=='N') { ?>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <?php echo submit_to_remote('Submit2', 'Generar Compromiso', array(
          'url'      => 'almordcom/ajaxcompromiso',
@@ -368,7 +375,9 @@ echo grid_tag($obj_recargos);
   <div align="right">
     <?php if ($caordcom->getOrdcom()==''){ ?>
       <?php echo link_to_function(image_tag('/images/salir.gif'), "salvarmontorecargos()")?>
-    <?php } else {?>
+    <?php } else if ($caordcom->getOrdcom()!='' && $caordcom->getCompro()=='N') {?>
+    	<?php echo link_to_function(image_tag('/images/salir.gif'), "salvarmontorecargos()")?>
+    	<?php }else {?>
       <?php echo link_to_function(image_tag('/images/salir.gif'), "$('recargos').hide();")?>
     <?php }?>
   </div>
@@ -382,7 +391,7 @@ echo grid_tag($obj_recargos);
 </fieldset>
 </div>
 
-<? if ($caordcom->getOrdcom()=='') { ?>
+<? if ($caordcom->getOrdcom()=='' || ($caordcom->getOrdcom()!='' && $caordcom->getCompro()=='N')) { ?>
 <div align="left" id="botonesmarcar">
 
 <table>
@@ -653,6 +662,63 @@ echo grid_tag($obj_recargos);
 'control_name' => 'caordcom[nomemp]',
 )); echo $value ? $value : '&nbsp;' ?>
 <div class="sf_admin_edit_help"><?php echo __('Máximo 16 caracteres') ?></div></div>
+
+<br>
+<?php echo label_for('caordcom[codcen]', __($labels['caordcom{codcen}']), 'class="required"') ?>
+<div
+  class="content<?php if ($sf_request->hasError('caordcom{codcen}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('caordcom{codcen}')): ?> <?php echo form_error('caordcom{codcen}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+  <?php $value = object_input_tag($caordcom, 'getCodcen', array (
+  'size' => 10,
+  'maxlength' => 4,
+  'control_name' => 'caordcom[codcen]',
+  'onBlur'=> remote_function(array(
+              'url' => 'almordcom/ajax',
+        'condition' => "$('caordcom_codcen').value!=''",
+        'complete' => 'AjaxJSON(request, json)',
+          'with' => "'ajax=17&cajtexmos=caordcom_descen&cajtexcom=caordcom_codcen&codigo='+this.value",
+        )),
+)); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefcen_Almsolegr/clase/Cadefcen/frame/sf_admin_edit_form/obj1/caordcom_codcen/obj2/caordcom_descen/campo1/codcen/campo2/descen')?>
+
+<?php $value = object_input_tag($caordcom, 'getDescen', array (
+'size' => 50,
+'maxlength' => 50,
+'disabled' => true,
+'control_name' => 'caordcom[descen]',
+)); echo $value ? $value : '&nbsp;' ?>
+<div class="sf_admin_edit_help"><?php echo __('Máximo 4 caracteres') ?></div></div>
+<br>
+<?php echo label_for('caordcom[codcenaco]', __($labels['caordcom{codcenaco}']), 'class="required"') ?>
+<div
+  class="content<?php if ($sf_request->hasError('caordcom{codcenaco}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('caordcom{codcenaco}')): ?> <?php echo form_error('caordcom{codcenaco}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+  <?php $value = object_input_tag($caordcom, 'getCodcenaco', array (
+  'size' => 10,
+  'maxlength' => 4,
+  'control_name' => 'caordcom[codcenaco]',
+  'onBlur'=> remote_function(array(
+              'url' => 'almordcom/ajax',
+        'condition' => "$('caordcom_codcenaco').value!=''",
+        'complete' => 'AjaxJSON(request, json)',
+          'with' => "'ajax=19&cajtexmos=caordcom_descenaco&cajtexcom=caordcom_codcenaco&codigo='+this.value",
+        )),
+)); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefcenaco_Almsolegr/clase/Cadefcenaco/frame/sf_admin_edit_form/obj1/caordcom_codcenaco/obj2/caordcom_descenaco/campo1/codcenaco/campo2/descenaco')?>
+
+<?php $value = object_input_tag($caordcom, 'getDescenaco', array (
+'size' => 50,
+'maxlength' => 50,
+'disabled' => true,
+'control_name' => 'caordcom[descenaco]',
+)); echo $value ? $value : '&nbsp;' ?>
+<div class="sf_admin_edit_help"><?php echo __('Máximo 4 caracteres') ?></div></div>
 </div>
 </fieldset>
 
@@ -859,24 +925,154 @@ echo grid_tag($obj_recargos);
 </div>
 
 </fieldset>
+
 <?php tabPageOpenClose("tp1", "tabPage10", 'Resumen por Partida Presupuestaria');?>
 <fieldset>
 <div class="form-row">
 <?php echo grid_tag($obj_respartidas);?>
 </div>
 </fieldset>
+
+<?php tabPageOpenClose("tp1", "tabPage11", 'Forma de Entrega o Despacho de la Orden');?>
+<fieldset>
+<div class="form-row">
+<?php echo grid_tag($obj_formas);?>
+</div>
+</fieldset>
+
+<?php if ($caordcom->getManorddon()=='S') tabPageOpenClose("tp1", "tabPage12", 'Datos del Beneficiario de la Donación');?>
+<div id="datbendon" style="display:none">
+<fieldset>
+<div class="form-row">
+<?php echo label_for('caordcom[tipocom]', __($labels['caordcom{tipocom}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{tipocom}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{tipocom}')): ?>
+    <?php echo form_error('caordcom{tipocom}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caordcom, 'getTipocom', array (
+  'size' => 60,
+  'maxlength' => 50,
+  'control_name' => 'caordcom[tipocom]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
+<br>
+
+<?php echo label_for('caordcom[ceddon]', __($labels['caordcom{ceddon}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{ceddon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{ceddon}')): ?>
+    <?php echo form_error('caordcom{ceddon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caordcom, 'getCeddon', array (
+  'size' => 15,
+  'maxlength' => 15,
+  'control_name' => 'caordcom[ceddon]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
+<br>
+
+<?php echo label_for('caordcom[nomdon]', __($labels['caordcom{nomdon}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{nomdon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{nomdon}')): ?>
+    <?php echo form_error('caordcom{nomdon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caordcom, 'getNomdon', array (
+  'size' => 60,
+  'maxlength' => 50,
+  'control_name' => 'caordcom[nomdon]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
+<br>
+
+<?php echo label_for('caordcom[sexdon]', __($labels['caordcom{sexdon}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{sexdon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{sexdon}')): ?>
+    <?php echo form_error('caordcom{sexdon}', array('class' => 'form-error-msg')) ?>
+    <?php endif; ?>
+
+    <? if ($caordcom->getSexdon()=='M')  {
+      ?><?php echo radiobutton_tag('caordcom[sexdon]', 'M', true)        ."   Masculino".'&nbsp;&nbsp;';
+          echo radiobutton_tag('caordcom[sexdon]', 'F', false)."     Femenino";?>
+        <?
+    }else{
+      echo radiobutton_tag('caordcom[sexdon]', 'M', false)        ."Masculino".'&nbsp;&nbsp;';
+      echo radiobutton_tag('caordcom[sexdon]', 'F', true)."   Femenino";
+
+    } ?>
+  </div>
+
+<br>
+
+<?php echo label_for('caordcom[fecdon]', __($labels['caordcom{fecdon}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{fecdon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{fecdon}')): ?>
+    <?php echo form_error('caordcom{fecdon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_date_tag($caordcom, 'getFecdon', array (
+  'rich' => true,
+  'maxlength' => 10,
+  'size' => 10,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'caordcom[fecdon]',
+  'date_format' => 'dd/MM/yy',
+  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+  'onChange'=> remote_function(array(
+        'url'      => 'almordcom/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+          'with' => "'ajax=18&cajtexmos=caordcom_edadon&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
+<br>
+
+<?php echo label_for('caordcom[edadon]', __($labels['caordcom{edadon}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{edadon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{edadon}')): ?>
+    <?php echo form_error('caordcom{edadon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caordcom, 'getEdaact', array (
+  'size' => 3,
+  'readonly' => true,
+  'control_name' => 'caordcom[edadon]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
+<br>
+
+ <?php echo label_for('caordcom[serdon]', __($labels['caordcom{serdon}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{serdon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{serdon}')): ?>
+    <?php echo form_error('caordcom{serdon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php echo select_tag('caordcom[serdon]', options_for_select(array('M' => 'Medicina', 'T' => 'Materiales', 'O' => 'Otro'),$caordcom->getSerdon(),'include_custom=Seleccione Uno')) ?>
+  </div>
+</div>
+</fieldset>
+</div>
+
 <?php tabInit();?>
 <?php include_partial('edit_actions', array('caordcom' => $caordcom)) ?>
 </form>
 
 
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($caordcom->getId() and $caordcom->getStaord()!='N') : ?>
+      <li class="float-left">
+      <?php if ($oculeli!="S"): ?>
+      <?php if ($caordcom->getId() and $caordcom->getStaord()!='N') : ?>
 <?php echo button_to(__('delete'), 'almordcom/delete?id='.$caordcom->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
   'class' => 'sf_admin_action_delete',
-)) ?><?php endif; ?>
+)) ?><?php endif; ?> <?php endif; ?>
 </li>
 
 <?php if ($caordcom->getId()!='' and $caordcom->getStaord()!='N') { ?>
@@ -895,7 +1091,27 @@ nuevo='<?php echo $caordcom->getId() ?>';
 if (nuevo!="")
 {
 	actualizarsaldos();
-}
+}else{
+     var manesolcorr='<?php echo $mansolocor; ?>';
+     if (manesolcorr=='S')
+     {
+        $('caordcom_ordcom').value='########';
+     	$('caordcom_ordcom').readOnly=true;
+        $('caordcom_doccom').focus();
+     }
+  }
+
+  var deshab='<?php echo $bloqfec; ?>';
+  if (deshab=='S')
+  {
+  	$('trigger_caordcom_fecord').hide();
+  	$('caordcom_fecord').readOnly=true;
+  }
+
+  var manorddon='<?php echo $caordcom->getManorddon();?>';
+  if (manorddon=='S')
+      $('datbendon').show();
+
  // if ($('caordcom_refsol').value=='') $('div_solicitud').hide();
    if ($('id').value=='' ||  $('caordcom_refsol').value=='')  $('div_solicitud').hide();
    var idordcom=$('id').value;
@@ -913,6 +1129,11 @@ function enter(e,valor)
      {valor=valor.pad(8, '#',0);}
 
      $('caordcom_ordcom').value=valor;
+     var ordcomdesh='<?php echo $ordcomdesh; ?>';
+     if (ordcomdesh=='S')
+     {
+     	$('caordcom_ordcom').readOnly=true;
+     }
    }
  }
 
@@ -956,6 +1177,42 @@ function enter(e,valor)
           window.open(pagina,1,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80")
       }
   }
+
+  function verificardetalle(id)
+  {
+
+   var aux = id.split("_");
+   var name=aux[0];
+   var fil=parseInt(aux[1]);
+   var col=parseInt(aux[2]);
+
+   var coldes= col +1;
+   var descrip=name+"_"+fil+"_"+coldes;
+
+      var f=0;
+      var am=totalregistros('ax',2,150);
+      var enc=false
+      while (f < am && !enc)
+      {
+        var campo="ax_"+f+"_2";
+        if($(campo))
+        {
+          if ($(id).value==$(campo).value)
+          {
+             enc=true;
+          }
+        }
+            f++;
+      }
+      if (!enc)
+      {
+          alert_('El Art&iacute;culo no se encuentra en detalle de la orden');
+          $(id).value='';
+          $(id).focus();
+          $(descrip).value='';
+      }
+  }
+
 
 </script>
 

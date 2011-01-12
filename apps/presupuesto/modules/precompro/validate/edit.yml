@@ -29,10 +29,8 @@ names:
 
   cpcompro{cedrif}:
     required:  Yes
-    required_msg: El tipo de compromiso no puede estar en Blanco
+    required_msg: El código del beneficiario no puede estar en Blanco
     validators: Validator_existe
-
-
 
 Validator_existencia:
     class: sfPropelUniqueValidator

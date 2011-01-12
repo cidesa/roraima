@@ -5,15 +5,47 @@
  *
  * @package    Roraima
  * @subpackage nomdefespnivorg
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 40772 2010-09-28 16:57:18Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class nomdefespnivorgActions extends autonomdefespnivorgActions
 {
   public $coderror1=-1;
+
+  public function executeList()
+  {
+    $this->processSort();
+
+    $this->processFilters();
+
+    $this->cambiareti="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('nomina',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+	     if(array_key_exists('nomdefespnivorg',$varemp['aplicacion']['nomina']['modulos'])){
+	       if(array_key_exists('cambiareti',$varemp['aplicacion']['nomina']['modulos']['nomdefespnivorg']))
+	       {
+	       	$this->cambiareti=$varemp['aplicacion']['nomina']['modulos']['nomdefespnivorg']['cambiareti'];
+	       }
+	     }
+
+    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/npestorg/filters');
+
+
+     // 15    // pager
+    $this->pager = new sfPropelPager('Npestorg', 15);
+    $c = new Criteria();
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    $this->pager->setCriteria($c);
+    $this->pager->setPage($this->getRequestParameter('page', 1));
+    $this->pager->init();
+  }
 
   /**
    * Función principal para el manejo de las acciones create y edit
@@ -56,7 +88,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -84,12 +116,13 @@ $this->Bitacora('Guardo');
     }
   }
 
-  
-  
-  
+
+
+
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -109,7 +142,7 @@ $this->Bitacora('Guardo');
     }
 
   /**
-   * Función principal para procesar la eliminación de registros 
+   * Función principal para procesar la eliminación de registros
    * en el formulario.
    *
    */
@@ -131,13 +164,13 @@ $this->Bitacora('Guardo');
      }
      else
      {
-     	$this->setFlash('notice','El Nivel Organizacional no puede ser eliminado, ya que posee niveles que dependen de el');
+     	$this->setFlash('notice','La Ubicación Administrativa no puede ser eliminado, ya que posee niveles que dependen de el');
         return $this->redirect('nomdefespnivorg/edit?id='.$id);
      }
     }
     else
     {
-      $this->setFlash('notice','El Nivel Organizacional no puede ser eliminado, ya que se encuentra asociado a una Unidad Ejecutora');
+      $this->setFlash('notice','La Ubicación Administrativa no puede ser eliminado, ya que se encuentra asociado a una Unidad Ejecutora');
       return $this->redirect('nomdefespnivorg/edit?id='.$id);
     }
 

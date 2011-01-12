@@ -4,14 +4,14 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 41820 2010-12-22 21:49:52Z cramirez $
  */
 // date: 2007/03/22 20:35:46
 ?>
 <?php echo form_tag('nomfalperlle/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 <?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
@@ -113,6 +113,19 @@
   'control_name' => 'npfalper[nrodia]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
+
+    <br>
+      <?php echo label_for('npfalper[nrohoras]', __($labels['npfalper{nrohoras}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npfalper{nrohoras}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npfalper{nrohoras}')): ?>
+    <?php echo form_error('npfalper{nrohoras}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npfalper, 'getNrohoras', array (
+  'size' => 7,
+  'control_name' => 'npfalper[nrohoras]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
 </div>
 
 <div class="form-row">
@@ -125,6 +138,21 @@
   <?php $value = object_input_tag($npfalper, 'getObserv', array (
   'size' => 80,
   'control_name' => 'npfalper[observ]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+    <div class="form-row">
+  <?php echo label_for('npfalper[numctr]', __($labels['npfalper{numctr}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npfalper{numctr}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npfalper{numctr}')): ?>
+    <?php echo form_error('npfalper{numctr}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npfalper, 'getNumctr', array (
+  'size' => 10,
+  'control_name' => 'npfalper[numctr]',
+  'maxlength' => 8,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
@@ -142,6 +170,18 @@
   'control_name' => 'npfalper[fecdes]',
   'date_format' => 'dd/MM/yyyy',
 )); echo $value ? $value : '&nbsp;' ?>
+  </div>
+
+  <?php echo label_for('npfalper[hordes]', __($labels['npfalper{hordes}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npfalper{hordes}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npfalper{hordes}')): ?>
+    <?php echo form_error('npfalper{hordes}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npfalper, 'getHordes', array (
+  'size' => 7,
+  'control_name' => 'npfalper[hordes]',
+)); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
 
@@ -154,9 +194,21 @@
 
   <?php $value = object_input_date_tag($npfalper, 'getFechas', array (
   'rich' => true,
+  'onChange' => "toAjax(3,getUrlModulo()+'/ajax',this.value,'','&fecdes='+$('npfalper_fecdes').value+'&fechas='+$('npfalper_fechas').value)",
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'npfalper[fechas]',
   'date_format' => 'dd/MM/yyyy',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+  <?php echo label_for('npfalper[horhas]', __($labels['npfalper{horhas}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npfalper{horhas}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npfalper{horhas}')): ?>
+    <?php echo form_error('npfalper{horhas}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npfalper, 'getHorhas', array (
+  'size' => 7,
+  'control_name' => 'npfalper[horhas]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>

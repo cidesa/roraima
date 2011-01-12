@@ -32,12 +32,6 @@ function link_to_toggle($text, $element)
   return link_to_function($text, visual_effect('toggle_blind', $element, array('duration' => 0.5)));  
 }
 
-function lcfirst($name)
-{
-  $first_letter = strtolower(substr($name, 0, 1));
-
-  return $first_letter.substr($name, 1, strlen($name)-1);
-}
 
 function link_to_file($path, $name = null)
 {

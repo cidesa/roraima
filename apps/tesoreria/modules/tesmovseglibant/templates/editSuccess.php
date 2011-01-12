@@ -24,7 +24,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('tesmovseglibant/edit_messages', array('tsmovlib' => $tsmovlib, 'labels' => $labels)) ?>
-<?php include_partial('tesmovseglibant/edit_form', array('tsmovlib' => $tsmovlib, 'labels' => $labels)) ?>
+<?php include_partial('tesmovseglibant/edit_form', array('tsmovlib' => $tsmovlib, 'bloqfec' => $bloqfec, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">

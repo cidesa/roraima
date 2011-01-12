@@ -1,0 +1,81 @@
+methods:
+  post:
+
+   - "atayudas{atbenefi}"
+   - "atayudas{fecsol}"   
+   - "atayudas{attipayu_id}"
+#   - "atayudas{desayu}"
+#   - "atayudas{motayu}"
+
+names:
+
+  atayudas{atbenefi}:
+    required:  Yes
+    required_msg: Debe Seleccionar un Beneficiario
+    validators: MyStringValidator1, validadorexistencia
+
+  atayudas{attipayu_id}:
+    required:  Yes
+    required_msg:
+    validators: MyStringValidator2
+
+  atayudas{fecsol}:
+    required:  Yes
+    required_msg: La Fecha no puedo estar en Blanco
+    validators: FechaValidator
+
+#  atayudas{desayu}:
+#    required:  Yes
+#    required_msg: La descripción de la ayuda no puede estar vacío
+#    validators: MyStringValidator3
+
+#  atayudas{motayu}:
+#    required:  Yes
+#    required_msg: El motivo de la ayuda no puede estar vacío
+#    validators: MyStringValidator4
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+MyStringValidator1:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: Debe Seleccionar un Solicitante
+        max:       200
+        max_error: Debe Seleccionar un Solicitante
+
+MyStringValidator2:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: Debe seleccionar un Tipo de Ayuda
+        max:       200
+        max_error: Debe seleccionar un Tipo de Ayuda
+
+MyStringValidator3:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripción no puede tener menos de 2 caracteres
+        max:       200
+        max_error: La Descripción no puede pasar mas de 8 caracteres
+
+MyStringValidator4:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El motivo no puede tener menos de 2 caracteres
+        max:       200
+        max_error: El motivo no puede pasar mas de 8 caracteres
+
+validadorexistencia:
+    class: CidesaExistValidator
+    param:
+        class:     Atciudadano
+        column:    id
+        unique_error: La cédula del beneficiario no existe. Por Favor verifique la información.

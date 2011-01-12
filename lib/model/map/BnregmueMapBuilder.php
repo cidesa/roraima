@@ -142,6 +142,14 @@ class BnregmueMapBuilder {
 
 		$tMap->addColumn('CODRESPAT', 'Codrespat', 'string', CreoleTypes::VARCHAR, false, 30);
 
+		$tMap->addColumn('TIPPRO', 'Tippro', 'string', CreoleTypes::VARCHAR, false, 4);
+
+		$tMap->addColumn('LOGUSU', 'Logusu', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('NUMORD', 'Numord', 'string', CreoleTypes::VARCHAR, false, 8);
+
+		$tMap->addColumn('CODUBIADM', 'Codubiadm', 'string', CreoleTypes::VARCHAR, false, 30);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

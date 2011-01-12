@@ -9,7 +9,7 @@
  * @subpackage lib.model
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -26,6 +26,10 @@ class Caordcom extends BaseCaordcom
     protected $genctaalc="";
     private $eti="";
     protected $tipopro="";
+    protected $compro="";
+    protected $oculsave="";
+    protected $manorddon="";
+    protected $traemot="";
 
 
     public function getReptipcom()
@@ -198,8 +202,9 @@ class Caordcom extends BaseCaordcom
       	$si="Anulada el ".date('d/m/Y',strtotime(self::getFecanu()));
       }else{
         $c= new Criteria();
-        $c->add(OpdetordPeer::REFCOM,self::getOrdcom());
-        $data= OpdetordPeer::doSelectOne($c);
+        $c->add(CpimpcauPeer::REFERE,self::getOrdcom());
+        $c->add(CpimpcauPeer::STAIMP,'N',Criteria::NOT_EQUAL);
+        $data= CpimpcauPeer::doSelectOne($c);
         if ($data)
         {
           $d= new Criteria();
@@ -210,8 +215,8 @@ class Caordcom extends BaseCaordcom
           	$fecha=H::getX('NUMCHE','Tscheemi','fecemi',$reg->getNumche());
           	$si="Pagada con el N° de Cheque: ".$reg->getNumche()." el ".date('d/m/Y',strtotime($fecha));
           }else{
-          	$fecha=H::getX('NUMORD','Opordpag','fecemi',$data->getNumord());
-          	$si="Causada con N° de Orden ".$data->getNumord()." el ".date('d/m/Y',strtotime($fecha));
+          	$fecha=H::getX('refcau','cpcausad','feccau',$data->getRefcau());
+          	$si="Causada con N° de Orden ".$data->getRefcau()." el ".date('d/m/Y',strtotime($fecha));
           }
         }else $si="Pendiente por Causar";
       }
@@ -220,5 +225,118 @@ class Caordcom extends BaseCaordcom
 
    return $si;
     }
+
+
+  public function getCompro()
+  {
+  	  $d= new Criteria();
+  	  $d->add(CpcomproPeer::REFCOM,self::getOrdcom());
+  	  $resul= CpcomproPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	return 'S';
+  	  }else return 'N';
+  }
+
+  public function setCompro()
+  {
+  	return $this->compro;
+  }
+
+  public function getOculsave()
+  {
+
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almordcom',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('oculsave',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$dato=$varemp['aplicacion']['compras']['modulos']['almordcom']['oculsave'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setOculsave()
+  {
+  	return $this->oculsave;
+  }
+
+  public function getDescen()
+  {
+	return Herramientas::getX('CODCEN','Cadefcen','Descen',self::getCodcen());
+  }
+
+  public function getDescenaco()
+  {
+	return Herramientas::getX('CODCENACO','Cadefcenaco','Descenaco',self::getCodcenaco());
+  }
+
+    public function getEdaact()
+  {
+  	if (self::getFecdon())
+  	{
+		$sql = "select  Extract(year from age(now(),'" . self::getFecdon() . "')) as edad";
+		if (Herramientas :: BuscarDatos($sql, & $result))
+			return $result[0]['edad'];
+		else
+		    return self::getEdadon();
+  	}
+  	else
+  	    return 0;
+  }
+
+  public function getManorddon()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almdefart',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('manorddon',$varemp['aplicacion']['compras']['modulos']['almdefart']))
+	       {
+	       	$dato=$varemp['aplicacion']['compras']['modulos']['almdefart']['manorddon'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setManorddon()
+  {
+  	return $this->manorddon;
+  }
+
+  public function getTraemot()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almordcom',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('traemot',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$dato=$varemp['aplicacion']['compras']['modulos']['almordcom']['traemot'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setTraemot()
+  {
+  	return $this->traemot;
+  }
+
+  public function getManunialt()
+  {
+    return H::getConfApp2('manunialt', 'compras', 'almregart');
+  }
 
 }

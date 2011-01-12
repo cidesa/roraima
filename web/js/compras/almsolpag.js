@@ -87,3 +87,63 @@ function ajaxcodigospre(e,id)
     new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=4&fila='+fil+'&monto='+monto+'&letra='+letra+'&codigo='+codpre+'&idmonto='+id})
    }
   }
+
+
+ function ajaxcategorias(e,id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fil=parseInt(aux[1]);
+   var col=parseInt(aux[2]);
+
+   var coldes=col+1;
+   var descripcion=name+"_"+fil+"_"+coldes;
+   var cod=$(id).value;
+
+   if (e.keyCode==13 || e.keyCode==9)
+   {
+     if ($(id).value!="")
+     {
+        if (!codigocat_repetido(id))
+        {
+          new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=2&cajtexmos='+descripcion+'&cajtexcom='+id+'&codigo='+cod})
+        }
+        else
+        {
+          alert('La Codigo de la Categoria esta Repetido');
+          $(id).value="";
+        }
+      }
+    }
+ }
+
+ function codigocat_repetido(id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fila=aux[1];
+   var col=parseInt(aux[2]);
+
+   var codigocat=$(id).value;
+
+   var codigocatrepetido=false;
+   var am=obtener_filas_grid('a',1);
+   var i=0;
+   while (i<am)
+   {
+    var codigo="ax"+"_"+i+"_1";
+    var codigocat2=$(codigo).value;
+
+    if (i!=fila)
+    {
+      if (codigocat==codigocat2)
+      {
+        codigocatrepetido=true;
+        break;
+      }
+    }
+   i++;
+   }
+   return codigocatrepetido;
+ }
+

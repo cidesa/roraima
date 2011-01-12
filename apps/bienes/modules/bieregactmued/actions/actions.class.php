@@ -32,7 +32,7 @@ private static $coderror=-1;
     $cajtexmos=$this->getRequestParameter('cajtexmos');
     $cajtexcom=$this->getRequestParameter('cajtexcom');
       $result=array();
-      $sql="select a.codact as codigo_nivel,a.DesAct as activo From bndefact a, bndefins b where length(RTrim(a.CodAct))=b.LonAct and a.codact='".$this->getRequestParameter('codigo')."' Order By codact";
+      $sql="select a.codact as codigo_nivel,a.DesAct as activo From bndefact a, bndefins b where length(RTrim(a.CodAct))=cast(b.LonAct as integer) and a.codact='".$this->getRequestParameter('codigo')."' Order By codact";
     if (Herramientas::BuscarDatos($sql,&$result))
     {
       $dato=$result[0]['codigo_nivel'];
@@ -57,14 +57,26 @@ private static $coderror=-1;
       $cajtexmos_dos=$this->getRequestParameter('cajtexmos_dos');
       $cajtexmos_tres=$this->getRequestParameter('cajtexmos_tres');
       $result=array();
-      $sql="Select a.ordcom as orden,a.codpro as proveedor, to_char(a.fecord,'dd/mm/yyyy') as fecha, b.nompro as nompro from caordcom a, caprovee b  where  a.codpro=b.codpro and a.ordcom='".$this->getRequestParameter('codigo')."' order By ordcom";
+      $sql="Select a.ordcom as orden,a.codpro as proveedor, to_char(a.fecord,'dd/mm/yyyy') as fecha, b.nompro as nompro, a.desord from caordcom a, caprovee b  where  a.codpro=b.codpro and a.ordcom='".$this->getRequestParameter('codigo')."' order By ordcom";
     if (Herramientas::BuscarDatos($sql,&$result))
     {
       $dato=$result[0]['orden'];
       $dato1=$result[0]['proveedor'];
       $dato2=$result[0]['nompro'];
       $dato3=$result[0]['fecha'];
-          $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexmos_uno.'","'.$dato1.'",""],["'.$cajtexmos_dos.'","'.$dato2.'",""],["'.$cajtexmos_tres.'","'.$dato3.'",""]]';
+      $descripcion = H::getConfApp('descripcion','bienes','bieregactmued');
+      !$descripcion? $descripcion='' : '';
+      if($descripcion=='S')
+      {
+        $cajtexmos_cuatro='bnregmue_desmue';
+        $dato4=$result[0]['desord'];
+      }else
+      {
+        $cajtexmos_cuatro='';
+        $dato4='';
+      }      
+
+      $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexmos_uno.'","'.$dato1.'",""],["'.$cajtexmos_dos.'","'.$dato2.'",""],["'.$cajtexmos_tres.'","'.$dato3.'",""],["'.$cajtexmos_cuatro.'","'.$dato4.'",""]]';
     }
     else
     {
@@ -78,9 +90,17 @@ private static $coderror=-1;
    {
     $cajtexmos=$this->getRequestParameter('cajtexmos');
     $cajtexcom=$this->getRequestParameter('cajtexcom');
-        $dato=BnubibiePeer::getDesubicacion(trim($this->getRequestParameter('codigo')));
-
-    $output = '[["'.$cajtexcom.'","'.$dato.'",""]]';
+    $dato=""; $dato1=""; $javascript=""; $dato2="";
+    $t= new Criteria();
+    $t->add(BnubibiePeer::CODUBI,$this->getRequestParameter('codigo'));
+    $reg= BnubibiePeer::doSelectOne($t);
+    if ($reg)
+    {
+     $dato=$reg->getDesubi();
+     $dato1=$reg->getCodubiadm();
+     $dato2=H::getX('CODUBI','Bnubica','Desubi',$dato1);
+    }else {$javascript="alert('La Ubicacion Fisica no existe'); $('bnregmue_codubi').value=''; $('bnregmue_codubi').focus();";}
+    $output = '[["'.$cajtexcom.'","'.$dato.'",""],["bnregmue_codubiadm","'.$dato1.'",""],["desubiadm","'.$dato2.'",""],["javascript","'.$javascript.'",""]]';
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
    }
@@ -135,6 +155,56 @@ private static $coderror=-1;
 
      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
      return sfView::HEADER_ONLY;
+   }
+   elseif ($this->getRequestParameter('ajax')=='7')
+   {
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $cajtexcom=$this->getRequestParameter('cajtexcom');
+
+    $l= new Criteria();
+    $l->add(CatipproPeer::CODPRO,$this->getRequestParameter('codigo'));
+    $reg= CatipproPeer::doSelectOne($l);
+    if ($reg)
+    {
+      $dato=$reg->getDespro();
+      $javascript="";
+    }
+     else {
+     	$javascript="alert('El Proyecto no existe'); $('$cajtexcom').value='';"; $dato="";
+     }
+    $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
+
+   }
+   elseif ($this->getRequestParameter('ajax')=='8')
+   {
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $cajtexcom=$this->getRequestParameter('cajtexcom');
+    $javascript="";
+    $c= new Criteria();
+    $c->add(OpordpagPeer::NUMORD,$this->getRequestParameter('codigo'));
+    $reg= OpordpagPeer::doSelectOne($c);
+    if (!$reg)
+     { $javascript="alert('El Numero de Orden de Pago no existe'); $('$cajtexcom').value=''; "; }
+    else {
+      $numfac=H::getX_vacio('NUMORD', 'Opfactur', 'Numfac', $reg->getNumord());
+      $javascript="$('bnregmue_ordrcp').value='$numfac'; "; 
+    }
+
+    $output = '[["javascript","'.$javascript.'",""]]';
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
+  }
+   elseif ($this->getRequestParameter('ajax')=='9')
+   {
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $cajtexcom=$this->getRequestParameter('cajtexcom');
+    $dato=BnubicaPeer::getDesubi($this->getRequestParameter('codigo'));
+
+    $output = '[["'.$cajtexcom.'","'.$dato.'",""]]';
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
    }
 
   }
@@ -533,6 +603,22 @@ private static $coderror=-1;
     {
       $this->bnregmue->setCodresuso($bnregmue['codresuso']);
     }
+    if (isset($bnregmue['tippro']))
+    {
+      $this->bnregmue->setTippro($bnregmue['tippro']);
+    }
+    if (isset($bnregmue['numord']))
+    {
+      $this->bnregmue->setNumord($bnregmue['numord']);
+  }
+    if (isset($bnregmue['savenumord']))
+    {
+      $this->bnregmue->setSavenumord($bnregmue['savenumord']);
+    }
+    if (isset($bnregmue['codubiadm']))
+    {
+      $this->bnregmue->setCodubiadm(trim($bnregmue['codubiadm']));
+    }
   }
 
   public function setVars()
@@ -541,6 +627,8 @@ private static $coderror=-1;
     $this->lonubi= Herramientas::ObtenerFormato('Bndefins','lonubi');
     $this->foract = Herramientas::ObtenerFormato('Bndefins','foract');
     $this->lonact=Herramientas::ObtenerFormato('Bndefins','lonact');
+    $this->forubiadm = Herramientas::ObtenerFormato('Opdefemp','Forubi');
+    $this->lonubiadm=strlen($this->forubiadm);
     $this->incorporacion='';
 
   }
@@ -554,6 +642,21 @@ private static $coderror=-1;
   {
     $this->bnregmue = $this->getBnregmueOrCreate();
     $this->incorporacion = $this->getRequestParameter('incorporacion');
+	$this->desincorp = '';
+
+	if($this->bnregmue->getCodmue())
+	{
+		$c = new Criteria();
+		$sql="substr(bndismue.tipdismue,1,6)=bndisbie.coddis";
+		$c->add(BndisbiePeer::CODDIS,$sql,Criteria :: CUSTOM);
+		$c->add(BndismuePeer::CODMUE,$this->bnregmue->getCodmue());
+		$c->add(BndisbiePeer::DESINC,'S');
+		$per = BndismuePeer::doSelectOne($c);
+		if($per)
+		{
+			$this->desincorp = 'D E S I N C O R P O R A D O';
+		}
+	}
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -638,12 +741,14 @@ private static $coderror=-1;
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
   public function validateEdit()
     {
+      $this->desincorp='';
       if($this->getRequest()->getMethod() == sfRequest::POST)
       {
         $this->bnregmue = $this->getBnregmueOrCreate();

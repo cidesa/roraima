@@ -13,7 +13,7 @@ abstract class BaseNpinfcurPeer {
 	const CLASS_DEFAULT = 'lib.model.nomina.Npinfcur';
 
 	
-	const NUM_COLUMNS = 10;
+	const NUM_COLUMNS = 12;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -47,6 +47,12 @@ abstract class BaseNpinfcurPeer {
 	const FECENTTIT = 'npinfcur.FECENTTIT';
 
 	
+	const FECINI = 'npinfcur.FECINI';
+
+	
+	const FECFIN = 'npinfcur.FECFIN';
+
+	
 	const ID = 'npinfcur.ID';
 
 	
@@ -55,18 +61,18 @@ abstract class BaseNpinfcurPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nomtit', 'Descur', 'Instit', 'Durcur', 'Anocul', 'Codprofes', 'Activo', 'Fecenttit', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpinfcurPeer::CODEMP, NpinfcurPeer::NOMTIT, NpinfcurPeer::DESCUR, NpinfcurPeer::INSTIT, NpinfcurPeer::DURCUR, NpinfcurPeer::ANOCUL, NpinfcurPeer::CODPROFES, NpinfcurPeer::ACTIVO, NpinfcurPeer::FECENTTIT, NpinfcurPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nomtit', 'descur', 'instit', 'durcur', 'anocul', 'codprofes', 'activo', 'fecenttit', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nomtit', 'Descur', 'Instit', 'Durcur', 'Anocul', 'Codprofes', 'Activo', 'Fecenttit', 'Fecini', 'Fecfin', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpinfcurPeer::CODEMP, NpinfcurPeer::NOMTIT, NpinfcurPeer::DESCUR, NpinfcurPeer::INSTIT, NpinfcurPeer::DURCUR, NpinfcurPeer::ANOCUL, NpinfcurPeer::CODPROFES, NpinfcurPeer::ACTIVO, NpinfcurPeer::FECENTTIT, NpinfcurPeer::FECINI, NpinfcurPeer::FECFIN, NpinfcurPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nomtit', 'descur', 'instit', 'durcur', 'anocul', 'codprofes', 'activo', 'fecenttit', 'fecini', 'fecfin', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nomtit' => 1, 'Descur' => 2, 'Instit' => 3, 'Durcur' => 4, 'Anocul' => 5, 'Codprofes' => 6, 'Activo' => 7, 'Fecenttit' => 8, 'Id' => 9, ),
-		BasePeer::TYPE_COLNAME => array (NpinfcurPeer::CODEMP => 0, NpinfcurPeer::NOMTIT => 1, NpinfcurPeer::DESCUR => 2, NpinfcurPeer::INSTIT => 3, NpinfcurPeer::DURCUR => 4, NpinfcurPeer::ANOCUL => 5, NpinfcurPeer::CODPROFES => 6, NpinfcurPeer::ACTIVO => 7, NpinfcurPeer::FECENTTIT => 8, NpinfcurPeer::ID => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nomtit' => 1, 'descur' => 2, 'instit' => 3, 'durcur' => 4, 'anocul' => 5, 'codprofes' => 6, 'activo' => 7, 'fecenttit' => 8, 'id' => 9, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nomtit' => 1, 'Descur' => 2, 'Instit' => 3, 'Durcur' => 4, 'Anocul' => 5, 'Codprofes' => 6, 'Activo' => 7, 'Fecenttit' => 8, 'Fecini' => 9, 'Fecfin' => 10, 'Id' => 11, ),
+		BasePeer::TYPE_COLNAME => array (NpinfcurPeer::CODEMP => 0, NpinfcurPeer::NOMTIT => 1, NpinfcurPeer::DESCUR => 2, NpinfcurPeer::INSTIT => 3, NpinfcurPeer::DURCUR => 4, NpinfcurPeer::ANOCUL => 5, NpinfcurPeer::CODPROFES => 6, NpinfcurPeer::ACTIVO => 7, NpinfcurPeer::FECENTTIT => 8, NpinfcurPeer::FECINI => 9, NpinfcurPeer::FECFIN => 10, NpinfcurPeer::ID => 11, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nomtit' => 1, 'descur' => 2, 'instit' => 3, 'durcur' => 4, 'anocul' => 5, 'codprofes' => 6, 'activo' => 7, 'fecenttit' => 8, 'fecini' => 9, 'fecfin' => 10, 'id' => 11, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
@@ -137,6 +143,10 @@ abstract class BaseNpinfcurPeer {
 		$criteria->addSelectColumn(NpinfcurPeer::ACTIVO);
 
 		$criteria->addSelectColumn(NpinfcurPeer::FECENTTIT);
+
+		$criteria->addSelectColumn(NpinfcurPeer::FECINI);
+
+		$criteria->addSelectColumn(NpinfcurPeer::FECFIN);
 
 		$criteria->addSelectColumn(NpinfcurPeer::ID);
 

@@ -1,0 +1,16 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atdetest
+    theme:            cidesaGenerator
+    fields:
+      created_at:     {name: Fecha}
+    list:
+      display:        [created_at, usuario, desde, hasta ]
+      title:          Cambios de Estados del Expediente
+      actions:        NONE
+    edit:
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require($_SESSION["x"].'lib/bd/basedatosAdo.php');
@@ -6,8 +7,13 @@ require($_SESSION["x"].'lib/general/funciones.php');
 require($_SESSION["x"].'lib/general/tools.php');
 validar(array(11,15));            //Seguridad  del Sistema
 $codemp=$_SESSION["codemp"];
+$loguse=$_SESSION["loguse"];
 $bd=new basedatosAdo($codemp);
 $tools=new tools();
+$numfilas= $_SESSION["configemp"]["aplicacion"]["presupuesto"]["modulos"]["precompro"]["numfilas"];
+if ($numfilas!="")
+    $numfil=$numfilas;
+else $numfil=150;
 
     ////////  Recibimos las Variables por el POST  /////////
   try
@@ -19,6 +25,7 @@ $tools=new tools();
     $feccom  = trim($_POST["feccom"]);
     $tipcom  = trim($_POST["tipcom"]);
     $cedrif  = trim($_POST["cedrif"]);
+    $codubi  = trim($_POST["codubi"]);
     $refprc  = substr(trim($_POST["refprc"]),0,8);
     //$refprc  = trim($_POST["refprc"]);
 
@@ -33,7 +40,7 @@ $tools=new tools();
     }
 
       $cont = 1;
-      while ($cont<=50)
+      while ($cont<=$numfil)
       {
         if ($_POST["x".$cont."1"]!='')
         {
@@ -41,26 +48,34 @@ $tools=new tools();
 
           if (substr(trim($_POST["x".$cont."1"]),0,2)!="--")
           {
-          //  echo (float)str_replace(',','',$_POST["x".$cont."2"])."<br>";
+              $cod1=$_POST["x".$cont."1"];
+              $sql = "select a.codpre from cpdeftit a, cpasiini b where a.codpre=b.codpre and a.codpre='$cod1'";
+             if (!$tb=$tools->buscar_datos($sql)) {
+                  Mensaje("El Codigo Presupuestario ".$cod1." no Existe o no tiene Asignacion Inicial");
+                  Regresar("PreCompro.php");
+                  exit;
+              }else
+                {
 
-            if ((float)str_replace(',','',$_POST["x".$cont."2"])!=0)
-            {
-              $col1[$cont] = $_POST["x".$cont."1"];
-              $col2[$cont] = (float)str_replace(',','',$_POST["x".$cont."2"]);
-              $col3[$cont] = (float)str_replace(',','',$_POST["x".$cont."3"]);
-              $col4[$cont] = (float)str_replace(',','',$_POST["x".$cont."4"]);
-                $col7[$cont] = $_POST["x".$cont."7"];
-            }else
-            {
-              Mensaje("Existe Monto con valor 0, No se puede Guardar.");
-              Regresar("PreCompro.php");
-              exit;
-            }
+                 if ((float)str_replace(',','',$_POST["x".$cont."2"])!=0)
+                {
+                  $col1[$cont] = $_POST["x".$cont."1"];
+                  $col2[$cont] = (float)str_replace(',','',$_POST["x".$cont."2"]);
+                  $col3[$cont] = (float)str_replace(',','',$_POST["x".$cont."3"]);
+                  $col4[$cont] = (float)str_replace(',','',$_POST["x".$cont."4"]);
+                    $col7[$cont] = $_POST["x".$cont."7"];
+                }else
+                {
+                  Mensaje("Existe Monto con valor 0, No se puede Guardar.");
+                  Regresar("PreCompro.php");
+                  exit;
+                }
+                }
           }
           $cont=$cont+1;
         }else
         {
-          $cont=51;
+          $cont=151;
         }
 
       }
@@ -72,19 +87,23 @@ $tools=new tools();
         Grabar_Compromiso();
         Grabar_GridImpCom();
       }
-      
+
       // Guardar en Segbitaco
       $sql = "Select id from cpcompro where refcom='$refcom'";
-  
+
       $tb=$bd->select($sql);
       $id = $tb->fields["id"];
       $bd->Log($id, 'pre', 'Cpcompro', 'Precompro', $imec=='I' ? 'G' : 'A');
-      
+
       //$bd->completeTransaccion();
       ///////////////
 
         Mensaje("Los Datos Del Compromiso Fueron Guardado Con Exito.");
-        LanzarReporte('presupuesto','cprcompromiso.php&refcomdes='.$refcom.'&refcomhas='.$refcom.'');
+        $imprepapr =  $_SESSION["configemp"]["aplicacion"]["presupuesto"]["modulos"]["precompro"]["imprepapr"];
+		if ($imprepapr=='S')	{
+		}else{
+		  LanzarReporte('presupuesto','cprcompromiso.php&refcomdes='.$refcom.'&refcomhas='.$refcom.'');
+		}
         Regresar("PreCompro.php");
     }
     }
@@ -173,6 +192,8 @@ $tools=new tools();
     global $imec;
     global $col1;
     global $totmont;
+    global $codubi;
+    global $loguse;
 
   try
     {
@@ -241,14 +262,14 @@ $tools=new tools();
           {
             //Si esta activo la opcion de Aprobacion,
             //colocar en el Compromiso N ( no esta aprobada)
-            $reqaut = iif($tb->fields["reqaut"]=='S','N','');
+            $reqaut = iif($tb->fields["reqaut"]=='S','N','S');
           }
 
       if ($imec=='I')
       {
       $feccom_ano=substr($feccom,6,4);
-      $sql="insert into CPCompro (RefCom,TipCom,CedRif,RefPrc,TipPrc,FecCom,AnoCom,DesCom,DesAnu,MonCom,SalCau,SalPag,SalAju,StaCom,Aprcom)
-          values ('".$refcom."','".$tipcom."','".$cedrif."','".$refprc."','',to_date('".$feccom."','dd/mm/yyyy'),'$feccom_ano','".$descom."','',".$totmont.",0,0,0,'A','$reqaut')";
+      $sql="insert into CPCompro (RefCom,TipCom,CedRif,RefPrc,TipPrc,FecCom,AnoCom,DesCom,DesAnu,MonCom,SalCau,SalPag,SalAju,StaCom,Aprcom,Codubi,Loguse)
+          values ('".$refcom."','".$tipcom."','".$cedrif."','".$refprc."','',to_date('".$feccom."','dd/mm/yyyy'),'$feccom_ano','".$descom."','',".$totmont.",0,0,0,'A','$reqaut','$codubi','$loguse')";
 
         $bd->actualizar($sql);
 

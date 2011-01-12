@@ -1,10 +1,11 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
@@ -302,7 +303,6 @@ if (!empty($_GET["var"]))
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/funciones.js"></script>
@@ -372,7 +372,7 @@ MM_reloadPage(true);
 </head>
 
 <body onLoad="MM_preloadImages('../../images/rbut_01_f2.gif','../../images/rbut_02_f2.gif','../../images/rbut_03_f2.gif','../../images/rbut_04_f2.gif')">
-<form name="form1" method="post" action="PreAsiIni.php?var=<? echo '9'; ?>">
+<form name="form1" onsubmit="return false;" method="post" action="PreAsiIni.php?var=<? echo '9'; ?>">
 <table width="100%" align="center">
   <tr>
 <td width="100%">
@@ -428,7 +428,7 @@ MM_reloadPage(true);
                     </tr>
                     <tr>
                       <td>Descripci&oacute;n </td>
-                      <td><input name="nompre" type="text" class="imagenInicio" id="nompre" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? echo $nompre; ?>" size="32" readonly="true"></td>
+                      <td><input name="nompre" type="text" class="imagenInicio" id="nompre" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? echo $nompre; ?>" size="32" readonly="true" maxlength="500"></td>
                     </tr>
                   </table>
            </fieldset>
@@ -753,7 +753,7 @@ MM_reloadPage(true);
 
 
         var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Preasiini_Cpdeftit/clase/Cpdeftit/frame/form1/obj1/codpre/obj2/nompre/campo1/codpre/campo2/nompre/submit/true';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Preasiini_Cpdeftit/clase/Cpdeftit/frame/form1/obj1/codpre/obj2/nompre/campo1/codpre/campo2/nompre/submit/true';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
 
      }

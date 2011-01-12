@@ -1,0 +1,51 @@
+methods:
+  post:
+   - "fordefact{codact}"
+   - "fordefact{desact}"
+   - "fordefact{nomabr}"
+
+names:
+  fordefact{codact}:
+    required:  Yes
+    required_msg: El Código de la Meta no puede estar en Blanco
+    validators: CorrelValidator, Validator_codact
+
+  fordefact{desact}:
+    required:  Yes
+    required_msg: La Descripción de la Meta no puede estar en Blanco
+    validators: Validator_desact
+
+  fordefact{nomabr}:
+    required:  Yes
+    required_msg: El Nombre Abreviado de la Meta no puede estar en Blanco
+    validators: Validator_nomabr
+
+
+Validator_codact:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fordefact
+        column:       codact
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desact:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La descripción no puede tener menos de 5 caracteres
+        max:       1000
+        max_error: La descripción no puede pasar más de 1000 caracteres
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos
+
+Validator_nomabr:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: El Nombre Abreviado no puede tener menos de 5 caracteres
+        max:       50
+        max_error: El Nombre Abreviado no puede pasar más de 50 caracteres

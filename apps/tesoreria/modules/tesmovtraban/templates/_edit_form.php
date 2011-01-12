@@ -256,7 +256,7 @@
 </th>
 </tr>
 </table>
-
+<div id="comprobante">
 <br>
 
 <table>
@@ -336,10 +336,16 @@
 </tr>
 </table>
 </div>
+</div>
 </fieldset>
 
 <script type="text/javascript">
 var id='<?php echo $tsmovtra->getId()?>';
+var auto='<?php echo $comprobaut;?>';
+if (auto=='S')
+{
+$('comprobante').hide();
+}
     if (id=="")
     {
 		var confcorcom='<?php echo $sf_user->getAttribute('confcorcom')?>';

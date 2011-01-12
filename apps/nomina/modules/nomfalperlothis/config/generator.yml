@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npfalper
+    theme:            cidesaGenerator
+    fields:
+      codnom:
+        name: NÃ³mina
+        msj_error: La NÃ³mina es necesaria
+        catalogo:
+          catalogoweb:  Npnomina_nomdefespvar
+          clase:  Npnomina
+          ajax: 1
+          parametros:   getprincipal="getCodnom" getsecundario="getNomnom" campoprincipal="codnom" camposecundario="nomnom" campobase="id"
+          divupdate:    divgridemp
+          ajaxparams: +'."'".'&fecdes='."'+$('npfalper_fecdes').value".'
+      fecdes:  { name: Fecha }
+      gridemp: { name: .}
+
+    edit:
+      title:          Historico de Registro de Permiso y/o Faltas por nomina en lote
+      display:
+        Datos Generales:   [fecdes, codnom ]
+        Datos Empleados:   [_gridemp]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

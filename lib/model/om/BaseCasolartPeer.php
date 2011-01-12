@@ -13,7 +13,7 @@ abstract class BaseCasolartPeer {
 	const CLASS_DEFAULT = 'lib.model.Casolart';
 
 	
-	const NUM_COLUMNS = 21;
+	const NUM_COLUMNS = 23;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -80,6 +80,12 @@ abstract class BaseCasolartPeer {
 	const FECAPR = 'casolart.FECAPR';
 
 	
+	const CODEMP = 'casolart.CODEMP';
+
+	
+	const CODCEN = 'casolart.CODCEN';
+
+
 	const ID = 'casolart.ID';
 
 	
@@ -88,18 +94,18 @@ abstract class BaseCasolartPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Reqart', 'Fecreq', 'Desreq', 'Monreq', 'Stareq', 'Motreq', 'Benreq', 'Mondes', 'Obsreq', 'Unires', 'Tipmon', 'Valmon', 'Fecanu', 'Codpro', 'Reqcom', 'Tipfin', 'Tipreq', 'Aprreq', 'Usuapr', 'Fecapr', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CasolartPeer::REQART, CasolartPeer::FECREQ, CasolartPeer::DESREQ, CasolartPeer::MONREQ, CasolartPeer::STAREQ, CasolartPeer::MOTREQ, CasolartPeer::BENREQ, CasolartPeer::MONDES, CasolartPeer::OBSREQ, CasolartPeer::UNIRES, CasolartPeer::TIPMON, CasolartPeer::VALMON, CasolartPeer::FECANU, CasolartPeer::CODPRO, CasolartPeer::REQCOM, CasolartPeer::TIPFIN, CasolartPeer::TIPREQ, CasolartPeer::APRREQ, CasolartPeer::USUAPR, CasolartPeer::FECAPR, CasolartPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('reqart', 'fecreq', 'desreq', 'monreq', 'stareq', 'motreq', 'benreq', 'mondes', 'obsreq', 'unires', 'tipmon', 'valmon', 'fecanu', 'codpro', 'reqcom', 'tipfin', 'tipreq', 'aprreq', 'usuapr', 'fecapr', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
+		BasePeer::TYPE_PHPNAME => array ('Reqart', 'Fecreq', 'Desreq', 'Monreq', 'Stareq', 'Motreq', 'Benreq', 'Mondes', 'Obsreq', 'Unires', 'Tipmon', 'Valmon', 'Fecanu', 'Codpro', 'Reqcom', 'Tipfin', 'Tipreq', 'Aprreq', 'Usuapr', 'Fecapr', 'Codemp', 'Codcen', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CasolartPeer::REQART, CasolartPeer::FECREQ, CasolartPeer::DESREQ, CasolartPeer::MONREQ, CasolartPeer::STAREQ, CasolartPeer::MOTREQ, CasolartPeer::BENREQ, CasolartPeer::MONDES, CasolartPeer::OBSREQ, CasolartPeer::UNIRES, CasolartPeer::TIPMON, CasolartPeer::VALMON, CasolartPeer::FECANU, CasolartPeer::CODPRO, CasolartPeer::REQCOM, CasolartPeer::TIPFIN, CasolartPeer::TIPREQ, CasolartPeer::APRREQ, CasolartPeer::USUAPR, CasolartPeer::FECAPR, CasolartPeer::CODEMP, CasolartPeer::CODCEN, CasolartPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('reqart', 'fecreq', 'desreq', 'monreq', 'stareq', 'motreq', 'benreq', 'mondes', 'obsreq', 'unires', 'tipmon', 'valmon', 'fecanu', 'codpro', 'reqcom', 'tipfin', 'tipreq', 'aprreq', 'usuapr', 'fecapr', 'codemp', 'codcen', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Reqart' => 0, 'Fecreq' => 1, 'Desreq' => 2, 'Monreq' => 3, 'Stareq' => 4, 'Motreq' => 5, 'Benreq' => 6, 'Mondes' => 7, 'Obsreq' => 8, 'Unires' => 9, 'Tipmon' => 10, 'Valmon' => 11, 'Fecanu' => 12, 'Codpro' => 13, 'Reqcom' => 14, 'Tipfin' => 15, 'Tipreq' => 16, 'Aprreq' => 17, 'Usuapr' => 18, 'Fecapr' => 19, 'Id' => 20, ),
-		BasePeer::TYPE_COLNAME => array (CasolartPeer::REQART => 0, CasolartPeer::FECREQ => 1, CasolartPeer::DESREQ => 2, CasolartPeer::MONREQ => 3, CasolartPeer::STAREQ => 4, CasolartPeer::MOTREQ => 5, CasolartPeer::BENREQ => 6, CasolartPeer::MONDES => 7, CasolartPeer::OBSREQ => 8, CasolartPeer::UNIRES => 9, CasolartPeer::TIPMON => 10, CasolartPeer::VALMON => 11, CasolartPeer::FECANU => 12, CasolartPeer::CODPRO => 13, CasolartPeer::REQCOM => 14, CasolartPeer::TIPFIN => 15, CasolartPeer::TIPREQ => 16, CasolartPeer::APRREQ => 17, CasolartPeer::USUAPR => 18, CasolartPeer::FECAPR => 19, CasolartPeer::ID => 20, ),
-		BasePeer::TYPE_FIELDNAME => array ('reqart' => 0, 'fecreq' => 1, 'desreq' => 2, 'monreq' => 3, 'stareq' => 4, 'motreq' => 5, 'benreq' => 6, 'mondes' => 7, 'obsreq' => 8, 'unires' => 9, 'tipmon' => 10, 'valmon' => 11, 'fecanu' => 12, 'codpro' => 13, 'reqcom' => 14, 'tipfin' => 15, 'tipreq' => 16, 'aprreq' => 17, 'usuapr' => 18, 'fecapr' => 19, 'id' => 20, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
+		BasePeer::TYPE_PHPNAME => array ('Reqart' => 0, 'Fecreq' => 1, 'Desreq' => 2, 'Monreq' => 3, 'Stareq' => 4, 'Motreq' => 5, 'Benreq' => 6, 'Mondes' => 7, 'Obsreq' => 8, 'Unires' => 9, 'Tipmon' => 10, 'Valmon' => 11, 'Fecanu' => 12, 'Codpro' => 13, 'Reqcom' => 14, 'Tipfin' => 15, 'Tipreq' => 16, 'Aprreq' => 17, 'Usuapr' => 18, 'Fecapr' => 19, 'Codemp' => 20, 'Codcen' => 21, 'Id' => 22, ),
+		BasePeer::TYPE_COLNAME => array (CasolartPeer::REQART => 0, CasolartPeer::FECREQ => 1, CasolartPeer::DESREQ => 2, CasolartPeer::MONREQ => 3, CasolartPeer::STAREQ => 4, CasolartPeer::MOTREQ => 5, CasolartPeer::BENREQ => 6, CasolartPeer::MONDES => 7, CasolartPeer::OBSREQ => 8, CasolartPeer::UNIRES => 9, CasolartPeer::TIPMON => 10, CasolartPeer::VALMON => 11, CasolartPeer::FECANU => 12, CasolartPeer::CODPRO => 13, CasolartPeer::REQCOM => 14, CasolartPeer::TIPFIN => 15, CasolartPeer::TIPREQ => 16, CasolartPeer::APRREQ => 17, CasolartPeer::USUAPR => 18, CasolartPeer::FECAPR => 19, CasolartPeer::CODEMP => 20, CasolartPeer::CODCEN => 21, CasolartPeer::ID => 22, ),
+		BasePeer::TYPE_FIELDNAME => array ('reqart' => 0, 'fecreq' => 1, 'desreq' => 2, 'monreq' => 3, 'stareq' => 4, 'motreq' => 5, 'benreq' => 6, 'mondes' => 7, 'obsreq' => 8, 'unires' => 9, 'tipmon' => 10, 'valmon' => 11, 'fecanu' => 12, 'codpro' => 13, 'reqcom' => 14, 'tipfin' => 15, 'tipreq' => 16, 'aprreq' => 17, 'usuapr' => 18, 'fecapr' => 19, 'codemp' => 20, 'codcen' => 21, 'id' => 22, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
 	);
 
 	
@@ -193,6 +199,10 @@ abstract class BaseCasolartPeer {
 
 		$criteria->addSelectColumn(CasolartPeer::FECAPR);
 
+		$criteria->addSelectColumn(CasolartPeer::CODEMP);
+
+		$criteria->addSelectColumn(CasolartPeer::CODCEN);
+
 		$criteria->addSelectColumn(CasolartPeer::ID);
 
 	}
@@ -272,6 +282,167 @@ abstract class BaseCasolartPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinTsdesmon(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CasolartPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CasolartPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CasolartPeer::TIPMON, TsdesmonPeer::CODMON);
+
+		$rs = CasolartPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinTsdesmon(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CasolartPeer::addSelectColumns($c);
+		$startcol = (CasolartPeer::NUM_COLUMNS - CasolartPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		TsdesmonPeer::addSelectColumns($c);
+
+		$c->addJoin(CasolartPeer::TIPMON, TsdesmonPeer::CODMON);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CasolartPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = TsdesmonPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getTsdesmon(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCasolart($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCasolarts();
+				$obj2->addCasolart($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CasolartPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CasolartPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CasolartPeer::TIPMON, TsdesmonPeer::CODMON);
+
+		$rs = CasolartPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CasolartPeer::addSelectColumns($c);
+		$startcol2 = (CasolartPeer::NUM_COLUMNS - CasolartPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		TsdesmonPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + TsdesmonPeer::NUM_COLUMNS;
+
+		$c->addJoin(CasolartPeer::TIPMON, TsdesmonPeer::CODMON);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CasolartPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = TsdesmonPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getTsdesmon(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCasolart($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCasolarts();
+				$obj2->addCasolart($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{

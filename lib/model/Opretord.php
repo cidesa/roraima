@@ -19,6 +19,7 @@ class Opretord extends BaseOpretord
   private $fecemi = '';
   private $estaislr = '';
   private $esta1xmil = '';
+  private $estairs = '';
   private $esta = '';
 
   public function setCheck($val)
@@ -145,5 +146,15 @@ class Opretord extends BaseOpretord
   public function getMontoret()
   {
   return $this->montoret;
+  }
+
+  public function getEstairs()
+  {
+  return $this->estairs;
+  }
+
+  public function setEstairs($val)
+  {
+  $this->estairs = $val;
   }
 }

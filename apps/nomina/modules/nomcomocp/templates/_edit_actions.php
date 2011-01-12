@@ -18,4 +18,7 @@
   'class' => 'sf_admin_action_save',
   'form' => 'sf_admin_edit_form',
 )) ?></li>
+        <li><?php echo button_to(__('create'), 'nomcomocp/create', array (
+  'class' => 'sf_admin_action_create',
+)) ?></li>
 </ul>

@@ -9,7 +9,7 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 
 
 	
-	protected $codciu;
+	protected $codpai;
 
 
 	
@@ -17,7 +17,7 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 
 
 	
-	protected $codpai;
+	protected $codciu;
 
 
 	
@@ -28,22 +28,22 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 	protected $id;
 
 	
-	protected $collViadettipsers;
+	protected $aOcpais;
 
 	
-	protected $lastViadettipserCriteria = null;
+	protected $aOcestado;
 
 	
-	protected $collViaciuentes;
+	protected $collOcmunicis;
 
 	
-	protected $lastViaciuenteCriteria = null;
+	protected $lastOcmuniciCriteria = null;
 
 	
-	protected $collViaregdetsolvias;
+	protected $collCadefcenacos;
 
 	
-	protected $lastViaregdetsolviaCriteria = null;
+	protected $lastCadefcenacoCriteria = null;
 
 	
 	protected $alreadyInSave = false;
@@ -52,10 +52,10 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 	protected $alreadyInValidation = false;
 
   
-  public function getCodciu()
+  public function getCodpai()
   {
 
-    return trim($this->codciu);
+    return trim($this->codpai);
 
   }
   
@@ -66,10 +66,10 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 
   }
   
-  public function getCodpai()
+  public function getCodciu()
   {
 
-    return trim($this->codpai);
+    return trim($this->codciu);
 
   }
   
@@ -87,14 +87,18 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 
   }
 	
-	public function setCodciu($v)
+	public function setCodpai($v)
 	{
 
-    if ($this->codciu !== $v) {
-        $this->codciu = $v;
-        $this->modifiedColumns[] = OcciudadPeer::CODCIU;
+    if ($this->codpai !== $v) {
+        $this->codpai = $v;
+        $this->modifiedColumns[] = OcciudadPeer::CODPAI;
       }
   
+		if ($this->aOcpais !== null && $this->aOcpais->getCodpai() !== $v) {
+			$this->aOcpais = null;
+		}
+
 	} 
 	
 	public function setCodedo($v)
@@ -105,14 +109,18 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = OcciudadPeer::CODEDO;
       }
   
+		if ($this->aOcestado !== null && $this->aOcestado->getCodedo() !== $v) {
+			$this->aOcestado = null;
+		}
+
 	} 
 	
-	public function setCodpai($v)
+	public function setCodciu($v)
 	{
 
-    if ($this->codpai !== $v) {
-        $this->codpai = $v;
-        $this->modifiedColumns[] = OcciudadPeer::CODPAI;
+    if ($this->codciu !== $v) {
+        $this->codciu = $v;
+        $this->modifiedColumns[] = OcciudadPeer::CODCIU;
       }
   
 	} 
@@ -141,11 +149,11 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
   {
     try {
 
-      $this->codciu = $rs->getString($startcol + 0);
+      $this->codpai = $rs->getString($startcol + 0);
 
       $this->codedo = $rs->getString($startcol + 1);
 
-      $this->codpai = $rs->getString($startcol + 2);
+      $this->codciu = $rs->getString($startcol + 2);
 
       $this->nomciu = $rs->getString($startcol + 3);
 
@@ -234,6 +242,22 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aOcpais !== null) {
+				if ($this->aOcpais->isModified()) {
+					$affectedRows += $this->aOcpais->save($con);
+				}
+				$this->setOcpais($this->aOcpais);
+			}
+
+			if ($this->aOcestado !== null) {
+				if ($this->aOcestado->isModified()) {
+					$affectedRows += $this->aOcestado->save($con);
+				}
+				$this->setOcestado($this->aOcestado);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = OcciudadPeer::doInsert($this, $con);
@@ -245,24 +269,16 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
-			if ($this->collViadettipsers !== null) {
-				foreach($this->collViadettipsers as $referrerFK) {
+			if ($this->collOcmunicis !== null) {
+				foreach($this->collOcmunicis as $referrerFK) {
 					if (!$referrerFK->isDeleted()) {
 						$affectedRows += $referrerFK->save($con);
 					}
 				}
 			}
 
-			if ($this->collViaciuentes !== null) {
-				foreach($this->collViaciuentes as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
-			if ($this->collViaregdetsolvias !== null) {
-				foreach($this->collViaregdetsolvias as $referrerFK) {
+			if ($this->collCadefcenacos !== null) {
+				foreach($this->collCadefcenacos as $referrerFK) {
 					if (!$referrerFK->isDeleted()) {
 						$affectedRows += $referrerFK->save($con);
 					}
@@ -305,29 +321,35 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
+												
+			if ($this->aOcpais !== null) {
+				if (!$this->aOcpais->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aOcpais->getValidationFailures());
+				}
+			}
+
+			if ($this->aOcestado !== null) {
+				if (!$this->aOcestado->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aOcestado->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = OcciudadPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
 
-				if ($this->collViadettipsers !== null) {
-					foreach($this->collViadettipsers as $referrerFK) {
+				if ($this->collOcmunicis !== null) {
+					foreach($this->collOcmunicis as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
 					}
 				}
 
-				if ($this->collViaciuentes !== null) {
-					foreach($this->collViaciuentes as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
-
-				if ($this->collViaregdetsolvias !== null) {
-					foreach($this->collViaregdetsolvias as $referrerFK) {
+				if ($this->collCadefcenacos !== null) {
+					foreach($this->collCadefcenacos as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -353,13 +375,13 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getCodciu();
+				return $this->getCodpai();
 				break;
 			case 1:
 				return $this->getCodedo();
 				break;
 			case 2:
-				return $this->getCodpai();
+				return $this->getCodciu();
 				break;
 			case 3:
 				return $this->getNomciu();
@@ -377,9 +399,9 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 	{
 		$keys = OcciudadPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getCodciu(),
+			$keys[0] => $this->getCodpai(),
 			$keys[1] => $this->getCodedo(),
-			$keys[2] => $this->getCodpai(),
+			$keys[2] => $this->getCodciu(),
 			$keys[3] => $this->getNomciu(),
 			$keys[4] => $this->getId(),
 		);
@@ -398,13 +420,13 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setCodciu($value);
+				$this->setCodpai($value);
 				break;
 			case 1:
 				$this->setCodedo($value);
 				break;
 			case 2:
-				$this->setCodpai($value);
+				$this->setCodciu($value);
 				break;
 			case 3:
 				$this->setNomciu($value);
@@ -419,9 +441,9 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 	{
 		$keys = OcciudadPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setCodciu($arr[$keys[0]]);
+		if (array_key_exists($keys[0], $arr)) $this->setCodpai($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodedo($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setCodpai($arr[$keys[2]]);
+		if (array_key_exists($keys[2], $arr)) $this->setCodciu($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setNomciu($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
 	}
@@ -431,9 +453,9 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(OcciudadPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(OcciudadPeer::CODCIU)) $criteria->add(OcciudadPeer::CODCIU, $this->codciu);
-		if ($this->isColumnModified(OcciudadPeer::CODEDO)) $criteria->add(OcciudadPeer::CODEDO, $this->codedo);
 		if ($this->isColumnModified(OcciudadPeer::CODPAI)) $criteria->add(OcciudadPeer::CODPAI, $this->codpai);
+		if ($this->isColumnModified(OcciudadPeer::CODEDO)) $criteria->add(OcciudadPeer::CODEDO, $this->codedo);
+		if ($this->isColumnModified(OcciudadPeer::CODCIU)) $criteria->add(OcciudadPeer::CODCIU, $this->codciu);
 		if ($this->isColumnModified(OcciudadPeer::NOMCIU)) $criteria->add(OcciudadPeer::NOMCIU, $this->nomciu);
 		if ($this->isColumnModified(OcciudadPeer::ID)) $criteria->add(OcciudadPeer::ID, $this->id);
 
@@ -466,11 +488,11 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setCodciu($this->codciu);
+		$copyObj->setCodpai($this->codpai);
 
 		$copyObj->setCodedo($this->codedo);
 
-		$copyObj->setCodpai($this->codpai);
+		$copyObj->setCodciu($this->codciu);
 
 		$copyObj->setNomciu($this->nomciu);
 
@@ -478,16 +500,12 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 		if ($deepCopy) {
 									$copyObj->setNew(false);
 
-			foreach($this->getViadettipsers() as $relObj) {
-				$copyObj->addViadettipser($relObj->copy($deepCopy));
+			foreach($this->getOcmunicis() as $relObj) {
+				$copyObj->addOcmunici($relObj->copy($deepCopy));
 			}
 
-			foreach($this->getViaciuentes() as $relObj) {
-				$copyObj->addViaciuente($relObj->copy($deepCopy));
-			}
-
-			foreach($this->getViaregdetsolvias() as $relObj) {
-				$copyObj->addViaregdetsolvia($relObj->copy($deepCopy));
+			foreach($this->getCadefcenacos() as $relObj) {
+				$copyObj->addCadefcenaco($relObj->copy($deepCopy));
 			}
 
 		} 
@@ -516,17 +534,81 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 	}
 
 	
-	public function initViadettipsers()
+	public function setOcpais($v)
 	{
-		if ($this->collViadettipsers === null) {
-			$this->collViadettipsers = array();
+
+
+		if ($v === null) {
+			$this->setCodpai(NULL);
+		} else {
+			$this->setCodpai($v->getCodpai());
+		}
+
+
+		$this->aOcpais = $v;
+	}
+
+
+	
+	public function getOcpais($con = null)
+	{
+		if ($this->aOcpais === null && (($this->codpai !== "" && $this->codpai !== null))) {
+						include_once 'lib/model/om/BaseOcpaisPeer.php';
+
+      $c = new Criteria();
+      $c->add(OcpaisPeer::CODPAI,$this->codpai);
+      
+			$this->aOcpais = OcpaisPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aOcpais;
+	}
+
+	
+	public function setOcestado($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodedo(NULL);
+		} else {
+			$this->setCodedo($v->getCodedo());
+		}
+
+
+		$this->aOcestado = $v;
+	}
+
+
+	
+	public function getOcestado($con = null)
+	{
+		if ($this->aOcestado === null && (($this->codedo !== "" && $this->codedo !== null))) {
+						include_once 'lib/model/om/BaseOcestadoPeer.php';
+
+      $c = new Criteria();
+      $c->add(OcestadoPeer::CODEDO,$this->codedo);
+      
+			$this->aOcestado = OcestadoPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aOcestado;
+	}
+
+	
+	public function initOcmunicis()
+	{
+		if ($this->collOcmunicis === null) {
+			$this->collOcmunicis = array();
 		}
 	}
 
 	
-	public function getViadettipsers($criteria = null, $con = null)
+	public function getOcmunicis($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseViadettipserPeer.php';
+				include_once 'lib/model/om/BaseOcmuniciPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -535,36 +617,36 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 			$criteria = clone $criteria;
 		}
 
-		if ($this->collViadettipsers === null) {
+		if ($this->collOcmunicis === null) {
 			if ($this->isNew()) {
-			   $this->collViadettipsers = array();
+			   $this->collOcmunicis = array();
 			} else {
 
-				$criteria->add(ViadettipserPeer::OCCIUDAD_ID, $this->getId());
+				$criteria->add(OcmuniciPeer::CODCIU, $this->getCodciu());
 
-				ViadettipserPeer::addSelectColumns($criteria);
-				$this->collViadettipsers = ViadettipserPeer::doSelect($criteria, $con);
+				OcmuniciPeer::addSelectColumns($criteria);
+				$this->collOcmunicis = OcmuniciPeer::doSelect($criteria, $con);
 			}
 		} else {
 						if (!$this->isNew()) {
 												
 
-				$criteria->add(ViadettipserPeer::OCCIUDAD_ID, $this->getId());
+				$criteria->add(OcmuniciPeer::CODCIU, $this->getCodciu());
 
-				ViadettipserPeer::addSelectColumns($criteria);
-				if (!isset($this->lastViadettipserCriteria) || !$this->lastViadettipserCriteria->equals($criteria)) {
-					$this->collViadettipsers = ViadettipserPeer::doSelect($criteria, $con);
+				OcmuniciPeer::addSelectColumns($criteria);
+				if (!isset($this->lastOcmuniciCriteria) || !$this->lastOcmuniciCriteria->equals($criteria)) {
+					$this->collOcmunicis = OcmuniciPeer::doSelect($criteria, $con);
 				}
 			}
 		}
-		$this->lastViadettipserCriteria = $criteria;
-		return $this->collViadettipsers;
+		$this->lastOcmuniciCriteria = $criteria;
+		return $this->collOcmunicis;
 	}
 
 	
-	public function countViadettipsers($criteria = null, $distinct = false, $con = null)
+	public function countOcmunicis($criteria = null, $distinct = false, $con = null)
 	{
-				include_once 'lib/model/om/BaseViadettipserPeer.php';
+				include_once 'lib/model/om/BaseOcmuniciPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -573,23 +655,23 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 			$criteria = clone $criteria;
 		}
 
-		$criteria->add(ViadettipserPeer::OCCIUDAD_ID, $this->getId());
+		$criteria->add(OcmuniciPeer::CODCIU, $this->getCodciu());
 
-		return ViadettipserPeer::doCount($criteria, $distinct, $con);
+		return OcmuniciPeer::doCount($criteria, $distinct, $con);
 	}
 
 	
-	public function addViadettipser(Viadettipser $l)
+	public function addOcmunici(Ocmunici $l)
 	{
-		$this->collViadettipsers[] = $l;
+		$this->collOcmunicis[] = $l;
 		$l->setOcciudad($this);
 	}
 
 
 	
-	public function getViadettipsersJoinViaregtiptab($criteria = null, $con = null)
+	public function getOcmunicisJoinOcpais($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseViadettipserPeer.php';
+				include_once 'lib/model/om/BaseOcmuniciPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -598,33 +680,33 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 			$criteria = clone $criteria;
 		}
 
-		if ($this->collViadettipsers === null) {
+		if ($this->collOcmunicis === null) {
 			if ($this->isNew()) {
-				$this->collViadettipsers = array();
+				$this->collOcmunicis = array();
 			} else {
 
-				$criteria->add(ViadettipserPeer::OCCIUDAD_ID, $this->getId());
+				$criteria->add(OcmuniciPeer::CODCIU, $this->getCodciu());
 
-				$this->collViadettipsers = ViadettipserPeer::doSelectJoinViaregtiptab($criteria, $con);
+				$this->collOcmunicis = OcmuniciPeer::doSelectJoinOcpais($criteria, $con);
 			}
 		} else {
 									
-			$criteria->add(ViadettipserPeer::OCCIUDAD_ID, $this->getId());
+			$criteria->add(OcmuniciPeer::CODCIU, $this->getCodciu());
 
-			if (!isset($this->lastViadettipserCriteria) || !$this->lastViadettipserCriteria->equals($criteria)) {
-				$this->collViadettipsers = ViadettipserPeer::doSelectJoinViaregtiptab($criteria, $con);
+			if (!isset($this->lastOcmuniciCriteria) || !$this->lastOcmuniciCriteria->equals($criteria)) {
+				$this->collOcmunicis = OcmuniciPeer::doSelectJoinOcpais($criteria, $con);
 			}
 		}
-		$this->lastViadettipserCriteria = $criteria;
+		$this->lastOcmuniciCriteria = $criteria;
 
-		return $this->collViadettipsers;
+		return $this->collOcmunicis;
 	}
 
 
 	
-	public function getViadettipsersJoinViaregtipser($criteria = null, $con = null)
+	public function getOcmunicisJoinOcestado($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseViadettipserPeer.php';
+				include_once 'lib/model/om/BaseOcmuniciPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -633,40 +715,40 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 			$criteria = clone $criteria;
 		}
 
-		if ($this->collViadettipsers === null) {
+		if ($this->collOcmunicis === null) {
 			if ($this->isNew()) {
-				$this->collViadettipsers = array();
+				$this->collOcmunicis = array();
 			} else {
 
-				$criteria->add(ViadettipserPeer::OCCIUDAD_ID, $this->getId());
+				$criteria->add(OcmuniciPeer::CODCIU, $this->getCodciu());
 
-				$this->collViadettipsers = ViadettipserPeer::doSelectJoinViaregtipser($criteria, $con);
+				$this->collOcmunicis = OcmuniciPeer::doSelectJoinOcestado($criteria, $con);
 			}
 		} else {
 									
-			$criteria->add(ViadettipserPeer::OCCIUDAD_ID, $this->getId());
+			$criteria->add(OcmuniciPeer::CODCIU, $this->getCodciu());
 
-			if (!isset($this->lastViadettipserCriteria) || !$this->lastViadettipserCriteria->equals($criteria)) {
-				$this->collViadettipsers = ViadettipserPeer::doSelectJoinViaregtipser($criteria, $con);
+			if (!isset($this->lastOcmuniciCriteria) || !$this->lastOcmuniciCriteria->equals($criteria)) {
+				$this->collOcmunicis = OcmuniciPeer::doSelectJoinOcestado($criteria, $con);
 			}
 		}
-		$this->lastViadettipserCriteria = $criteria;
+		$this->lastOcmuniciCriteria = $criteria;
 
-		return $this->collViadettipsers;
+		return $this->collOcmunicis;
 	}
 
 	
-	public function initViaciuentes()
+	public function initCadefcenacos()
 	{
-		if ($this->collViaciuentes === null) {
-			$this->collViaciuentes = array();
+		if ($this->collCadefcenacos === null) {
+			$this->collCadefcenacos = array();
 		}
 	}
 
 	
-	public function getViaciuentes($criteria = null, $con = null)
+	public function getCadefcenacos($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseViaciuentePeer.php';
+				include_once 'lib/model/om/BaseCadefcenacoPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -675,36 +757,36 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 			$criteria = clone $criteria;
 		}
 
-		if ($this->collViaciuentes === null) {
+		if ($this->collCadefcenacos === null) {
 			if ($this->isNew()) {
-			   $this->collViaciuentes = array();
+			   $this->collCadefcenacos = array();
 			} else {
 
-				$criteria->add(ViaciuentePeer::OCCIUDAD_ID, $this->getId());
+				$criteria->add(CadefcenacoPeer::CODCIU, $this->getCodciu());
 
-				ViaciuentePeer::addSelectColumns($criteria);
-				$this->collViaciuentes = ViaciuentePeer::doSelect($criteria, $con);
+				CadefcenacoPeer::addSelectColumns($criteria);
+				$this->collCadefcenacos = CadefcenacoPeer::doSelect($criteria, $con);
 			}
 		} else {
 						if (!$this->isNew()) {
 												
 
-				$criteria->add(ViaciuentePeer::OCCIUDAD_ID, $this->getId());
+				$criteria->add(CadefcenacoPeer::CODCIU, $this->getCodciu());
 
-				ViaciuentePeer::addSelectColumns($criteria);
-				if (!isset($this->lastViaciuenteCriteria) || !$this->lastViaciuenteCriteria->equals($criteria)) {
-					$this->collViaciuentes = ViaciuentePeer::doSelect($criteria, $con);
+				CadefcenacoPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCadefcenacoCriteria) || !$this->lastCadefcenacoCriteria->equals($criteria)) {
+					$this->collCadefcenacos = CadefcenacoPeer::doSelect($criteria, $con);
 				}
 			}
 		}
-		$this->lastViaciuenteCriteria = $criteria;
-		return $this->collViaciuentes;
+		$this->lastCadefcenacoCriteria = $criteria;
+		return $this->collCadefcenacos;
 	}
 
 	
-	public function countViaciuentes($criteria = null, $distinct = false, $con = null)
+	public function countCadefcenacos($criteria = null, $distinct = false, $con = null)
 	{
-				include_once 'lib/model/om/BaseViaciuentePeer.php';
+				include_once 'lib/model/om/BaseCadefcenacoPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -713,23 +795,23 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 			$criteria = clone $criteria;
 		}
 
-		$criteria->add(ViaciuentePeer::OCCIUDAD_ID, $this->getId());
+		$criteria->add(CadefcenacoPeer::CODCIU, $this->getCodciu());
 
-		return ViaciuentePeer::doCount($criteria, $distinct, $con);
+		return CadefcenacoPeer::doCount($criteria, $distinct, $con);
 	}
 
 	
-	public function addViaciuente(Viaciuente $l)
+	public function addCadefcenaco(Cadefcenaco $l)
 	{
-		$this->collViaciuentes[] = $l;
+		$this->collCadefcenacos[] = $l;
 		$l->setOcciudad($this);
 	}
 
 
 	
-	public function getViaciuentesJoinViaregente($criteria = null, $con = null)
+	public function getCadefcenacosJoinOcpais($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseViaciuentePeer.php';
+				include_once 'lib/model/om/BaseCadefcenacoPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -738,40 +820,33 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 			$criteria = clone $criteria;
 		}
 
-		if ($this->collViaciuentes === null) {
+		if ($this->collCadefcenacos === null) {
 			if ($this->isNew()) {
-				$this->collViaciuentes = array();
+				$this->collCadefcenacos = array();
 			} else {
 
-				$criteria->add(ViaciuentePeer::OCCIUDAD_ID, $this->getId());
+				$criteria->add(CadefcenacoPeer::CODCIU, $this->getCodciu());
 
-				$this->collViaciuentes = ViaciuentePeer::doSelectJoinViaregente($criteria, $con);
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcpais($criteria, $con);
 			}
 		} else {
 									
-			$criteria->add(ViaciuentePeer::OCCIUDAD_ID, $this->getId());
+			$criteria->add(CadefcenacoPeer::CODCIU, $this->getCodciu());
 
-			if (!isset($this->lastViaciuenteCriteria) || !$this->lastViaciuenteCriteria->equals($criteria)) {
-				$this->collViaciuentes = ViaciuentePeer::doSelectJoinViaregente($criteria, $con);
+			if (!isset($this->lastCadefcenacoCriteria) || !$this->lastCadefcenacoCriteria->equals($criteria)) {
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcpais($criteria, $con);
 			}
 		}
-		$this->lastViaciuenteCriteria = $criteria;
+		$this->lastCadefcenacoCriteria = $criteria;
 
-		return $this->collViaciuentes;
+		return $this->collCadefcenacos;
 	}
 
-	
-	public function initViaregdetsolvias()
-	{
-		if ($this->collViaregdetsolvias === null) {
-			$this->collViaregdetsolvias = array();
-		}
-	}
 
 	
-	public function getViaregdetsolvias($criteria = null, $con = null)
+	public function getCadefcenacosJoinOcestado($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseViaregdetsolviaPeer.php';
+				include_once 'lib/model/om/BaseCadefcenacoPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -780,96 +855,33 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 			$criteria = clone $criteria;
 		}
 
-		if ($this->collViaregdetsolvias === null) {
+		if ($this->collCadefcenacos === null) {
 			if ($this->isNew()) {
-			   $this->collViaregdetsolvias = array();
+				$this->collCadefcenacos = array();
 			} else {
 
-				$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
+				$criteria->add(CadefcenacoPeer::CODCIU, $this->getCodciu());
 
-				ViaregdetsolviaPeer::addSelectColumns($criteria);
-				$this->collViaregdetsolvias = ViaregdetsolviaPeer::doSelect($criteria, $con);
-			}
-		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
-
-				ViaregdetsolviaPeer::addSelectColumns($criteria);
-				if (!isset($this->lastViaregdetsolviaCriteria) || !$this->lastViaregdetsolviaCriteria->equals($criteria)) {
-					$this->collViaregdetsolvias = ViaregdetsolviaPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastViaregdetsolviaCriteria = $criteria;
-		return $this->collViaregdetsolvias;
-	}
-
-	
-	public function countViaregdetsolvias($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/om/BaseViaregdetsolviaPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
-
-		return ViaregdetsolviaPeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addViaregdetsolvia(Viaregdetsolvia $l)
-	{
-		$this->collViaregdetsolvias[] = $l;
-		$l->setOcciudad($this);
-	}
-
-
-	
-	public function getViaregdetsolviasJoinViaregsolvia($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseViaregdetsolviaPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collViaregdetsolvias === null) {
-			if ($this->isNew()) {
-				$this->collViaregdetsolvias = array();
-			} else {
-
-				$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
-
-				$this->collViaregdetsolvias = ViaregdetsolviaPeer::doSelectJoinViaregsolvia($criteria, $con);
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcestado($criteria, $con);
 			}
 		} else {
 									
-			$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
+			$criteria->add(CadefcenacoPeer::CODCIU, $this->getCodciu());
 
-			if (!isset($this->lastViaregdetsolviaCriteria) || !$this->lastViaregdetsolviaCriteria->equals($criteria)) {
-				$this->collViaregdetsolvias = ViaregdetsolviaPeer::doSelectJoinViaregsolvia($criteria, $con);
+			if (!isset($this->lastCadefcenacoCriteria) || !$this->lastCadefcenacoCriteria->equals($criteria)) {
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcestado($criteria, $con);
 			}
 		}
-		$this->lastViaregdetsolviaCriteria = $criteria;
+		$this->lastCadefcenacoCriteria = $criteria;
 
-		return $this->collViaregdetsolvias;
+		return $this->collCadefcenacos;
 	}
 
 
 	
-	public function getViaregdetsolviasJoinViaregente($criteria = null, $con = null)
+	public function getCadefcenacosJoinOcmunici($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseViaregdetsolviaPeer.php';
+				include_once 'lib/model/om/BaseCadefcenacoPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -878,61 +890,26 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 			$criteria = clone $criteria;
 		}
 
-		if ($this->collViaregdetsolvias === null) {
+		if ($this->collCadefcenacos === null) {
 			if ($this->isNew()) {
-				$this->collViaregdetsolvias = array();
+				$this->collCadefcenacos = array();
 			} else {
 
-				$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
+				$criteria->add(CadefcenacoPeer::CODCIU, $this->getCodciu());
 
-				$this->collViaregdetsolvias = ViaregdetsolviaPeer::doSelectJoinViaregente($criteria, $con);
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcmunici($criteria, $con);
 			}
 		} else {
 									
-			$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
+			$criteria->add(CadefcenacoPeer::CODCIU, $this->getCodciu());
 
-			if (!isset($this->lastViaregdetsolviaCriteria) || !$this->lastViaregdetsolviaCriteria->equals($criteria)) {
-				$this->collViaregdetsolvias = ViaregdetsolviaPeer::doSelectJoinViaregente($criteria, $con);
+			if (!isset($this->lastCadefcenacoCriteria) || !$this->lastCadefcenacoCriteria->equals($criteria)) {
+				$this->collCadefcenacos = CadefcenacoPeer::doSelectJoinOcmunici($criteria, $con);
 			}
 		}
-		$this->lastViaregdetsolviaCriteria = $criteria;
+		$this->lastCadefcenacoCriteria = $criteria;
 
-		return $this->collViaregdetsolvias;
-	}
-
-
-	
-	public function getViaregdetsolviasJoinViaregact($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseViaregdetsolviaPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collViaregdetsolvias === null) {
-			if ($this->isNew()) {
-				$this->collViaregdetsolvias = array();
-			} else {
-
-				$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
-
-				$this->collViaregdetsolvias = ViaregdetsolviaPeer::doSelectJoinViaregact($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
-
-			if (!isset($this->lastViaregdetsolviaCriteria) || !$this->lastViaregdetsolviaCriteria->equals($criteria)) {
-				$this->collViaregdetsolvias = ViaregdetsolviaPeer::doSelectJoinViaregact($criteria, $con);
-			}
-		}
-		$this->lastViaregdetsolviaCriteria = $criteria;
-
-		return $this->collViaregdetsolvias;
+		return $this->collCadefcenacos;
 	}
 
 } 

@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id:_edit_form.php 32813 2009-09-08 16:19:47Z lhernandez $
  */
 // date: 2007/03/27 13:12:48
 ?>
@@ -19,7 +19,7 @@
 <?php echo javascript_include_tag('tools') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Datos del Sub Sub Objetivo')?></legend>
+<legend><?php echo __('Datos')?></legend>
 <div class="form-row">
   <?php echo label_for('fordefsubsubobj[codequ]', __($labels['fordefsubsubobj{codequ}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('fordefsubsubobj{codequ}')): ?> form-error<?php endif; ?>">

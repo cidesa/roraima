@@ -6,6 +6,8 @@
 <?php use_stylesheet('/css/main.css') ?>
 <?php use_stylesheet('/sf/sf_admin/css/main') ?>
 
+<?php echo javascript_include_tag('event.simulate.js'); ?>
+
 
 <?php
   $i=0;
@@ -30,9 +32,10 @@ else $submit = '';
    {
      f=opener.document;".
    "".$cod."" .
-       "self.close();
-   firstObj.focus();
-   $submit
+      "self.close();
+     firstObj.focus();
+     Event.simulate(firstObj,'change');
+     $submit
    }
 
 "; ?>

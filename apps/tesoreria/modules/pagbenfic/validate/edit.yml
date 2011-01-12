@@ -10,12 +10,17 @@ methods:
    - "opbenefi{codordadi}"
    - "opbenefi{codperconadi}"
    - "opbenefi{codctacajchi}"
+   - "opbenefi{nomben}"
 
 names:
   opbenefi{cedrif}:
     required:  Yes
     required_msg: C.I o R.I.F no puedo estar en Blanco
     validators: [Validator_cedrif, String1a15Validator ]
+
+  opbenefi{nomben}:
+    required:  Yes
+    required_msg: El Nombre del Beneficiario no puedo estar en Blanco
 
   opbenefi{nitben}:
     required:  No

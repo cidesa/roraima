@@ -1,0 +1,25 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atgrudon
+    theme:            cidesaGenerator
+
+    fields:
+      codgru:         { name: Código, validate: Vstring_1_20, msj_error: Debe insertar el código del grupo }
+      desgru:         { name: Descripción, validate: Vstring_1_50, msj_error: Debe insertar la descripción del grupo de items }
+    list:
+      title:          Grupos de las Donaciones
+      display:        [=codgru, desgru]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [codgru, desgru]
+      max_per_page:   5
+    edit:
+      title:          Edición de Grupos de Donaciones
+      display:        [codgru, desgru]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -5,7 +5,7 @@ generator:
     theme:            cidesaGenerator
 
     fields:
-      refprc: { name: Referencia }
+      refprc: { name: Referencia, params: onblur=rellenar() maxlength=8 }
       fecprc: { name: Fecha, params: date_format='dd/MM/yy' }
       desprc: { name: Descripción, type: textarea_tag, params: size=80x5 }
       monprc: { name: Total }
@@ -39,11 +39,11 @@ generator:
     edit:
       title:  Edición de Precompromisos
       display:
-        Datos del documento:   [_mensaje, refprc, fecprc, desprc ]
+        Datos del documento:   [_mensaje, _refprc, fecprc, desprc ]
         Tipo Precompromiso:  [ tipprc ]
         Datos del Beneficiario: [cedrif]
-        Saldos:                [salaju, _salpre, salcom, salcau, salpag, monprc]
         Imputaciones Presupuestarias: [_grid]
+        Saldos:                [salaju, _salpre, salcom, salcau, salpag, monprc]
       actions:
         _list:        ~
         _save:        ~

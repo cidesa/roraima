@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage nomconceptossalariointegral
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 40764 2010-09-28 16:49:19Z cramirez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -16,6 +16,27 @@ class nomconceptossalariointegralActions extends autonomconceptossalariointegral
   public $coderror=-1;
 
 
+  public function executeList()
+  {
+    $this->getUser()->setAttribute('nomsalint',H::getConfAppGen('nomsalint'),'nomconceptossalariointegral');
+    $this->processSort();
+
+    $this->processFilters();
+
+    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/npnomina/filters');
+
+
+     // 15    // pager
+    $this->pager = new sfPropelPager('Npnomina', 15);
+    $c = new Criteria();
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    $this->pager->setCriteria($c);
+    $this->pager->setPage($this->getRequestParameter('page', 1));
+    $this->pager->init();
+  }
+
+
    /**
    * Función principal para el manejo de las acciones create y edit
    * del formulario.
@@ -23,7 +44,6 @@ class nomconceptossalariointegralActions extends autonomconceptossalariointegral
    */
   public function executeEdit()
   {
-
     //$this->npconsalint = $this->getNpconsalintOrCreate();
     $this->npnomina = $this->getNpnominaOrCreate();
 

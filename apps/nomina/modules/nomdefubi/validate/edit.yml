@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "npdefubi{codubi}"
+   - "npdefubi{desubi}"
+
+names:
+  npdefubi{codubi}:
+    required:  Yes
+    required_msg: El Código de Ubicación física no puedo estar en Blanco
+    validators: UniqueValidator
+
+  npdefubi{desubi}:
+    required:  Yes
+    required_msg: La Descripción de la Ubicación no puedo estar en Blanco
+    validators: DescripcionValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Npdefubi
+        column:   codubi
+        unique_error:   El Código de la Ubicación ya existe. Por Favor, Cambiélo por otro.
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Descripción de la Ubicación no puede tener menos de 5 caracteres
+        max:       250
+        max_error: La Descripción de la Ubicación no puede tener más de 250 caracteres

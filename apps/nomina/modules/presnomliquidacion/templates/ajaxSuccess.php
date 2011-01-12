@@ -50,5 +50,6 @@ echo grid_tag_v2($objdeduc); ?>
   </ul>  
 <?php }?>
 <script language="JavaScript">
-	$('total_liq').value = number_format(FloatVEtoFloat($('total_asi').value) - FloatVEtoFloat($('total_ded').value),"2",",",".");		
+totvacaciones();  totasignaciones(); totdeducciones();
+$('total_liq').value = number_format(FloatVEtoFloat($('total_asi').value) - FloatVEtoFloat($('total_ded').value),"2",",",".");
 </script>

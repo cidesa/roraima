@@ -46,7 +46,30 @@ class almcotizaActions extends autoalmcotizaActions
 	       	$this->error=163;
 	       	return false;
 	       }
-	      else
+
+	    $this->valrecaud="";
+	    $varemp = $this->getUser()->getAttribute('configemp');
+	    if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('compras',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+		     if(array_key_exists('almcotiza',$varemp['aplicacion']['compras']['modulos'])){
+	           if(array_key_exists('valrecaud',$varemp['aplicacion']['compras']['modulos']['almcotiza'])){
+		       {
+		       	$this->valrecaud=$varemp['aplicacion']['compras']['modulos']['almcotiza']['valrecaud'];
+		       }
+	           }}
+
+		if ($this->valrecaud=='S')
+		{
+            $err=Compras::validarRecaudosVen($this->getRequestParameter('cacotiza[rifpro]'),$this->getRequestParameter('cacotiza[feccot]'));
+            if($err!=-1)
+	       {
+	       	$this->error=$err;
+	       	return false;
+	       }
+		}
+
 	        return true;
        } //if (!$this->cacotiza->getId())
        else //Edición
@@ -201,8 +224,38 @@ $this->Bitacora('Guardo');
 	$cajtexcom=$this->getRequestParameter('cajtexcom');
     if ($this->getRequestParameter('ajax')=='1')
     {
-     $dato=CaproveePeer::getNompro($this->getRequestParameter('codigo'));
-     $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+		$this->valrecaud="";
+		$varemp = $this->getUser()->getAttribute('configemp');
+		if ($varemp)
+		if(array_key_exists('aplicacion',$varemp))
+		 if(array_key_exists('compras',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+		     if(array_key_exists('almcotiza',$varemp['aplicacion']['compras']['modulos'])){
+		       if(array_key_exists('valrecaud',$varemp['aplicacion']['compras']['modulos']['almcotiza'])){
+		       {
+		       	$this->valrecaud=$varemp['aplicacion']['compras']['modulos']['almcotiza']['valrecaud'];
+		       }
+		      }
+		    }
+
+		if ($this->valrecaud=='S')
+		{
+		    $err=Compras::validarRecaudosVen($this->getRequestParameter('codigo'),$this->getRequestParameter('fecha'));
+		    if($err!=-1)
+		   {
+              if ($err==20) $javascript="alert('El proveedor tiene recaudos Vencidos.'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+              if ($err==21) $javascript="alert('El proveedor no tiene Recaudos.'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+             $dato="";
+		   }else {
+	          $dato=CaproveePeer::getNompro($this->getRequestParameter('codigo'));
+	          $javascript="";
+		   }
+		}else {
+			 $dato=CaproveePeer::getNompro($this->getRequestParameter('codigo'));
+	         $javascript="";
+		}
+
+     $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
 
      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
      return sfView::HEADER_ONLY;
@@ -569,7 +622,28 @@ $this->Bitacora('Guardo');
     $cacotiza = $this->getRequestParameter('cacotiza');
     $this->provee= $cacotiza['rifpro'];
     $this->moneda = Herramientas::cargarMoneda();
-
+    $this->mansolocor="";
+    $this->bloqfec="";
+    $this->oculeli="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almcotiza',$varemp['aplicacion']['compras']['modulos'])){
+           if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almcotiza']))
+	       {
+	       	$this->mansolocor=$varemp['aplicacion']['compras']['modulos']['almcotiza']['mansolocor'];
+	       }
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['compras']['modulos']['almcotiza']))
+	       {
+	       	$this->bloqfec=$varemp['aplicacion']['compras']['modulos']['almcotiza']['bloqfec'];
+	       }
+	       if(array_key_exists('oculeli',$varemp['aplicacion']['compras']['modulos']['almcotiza']))
+	       {
+	       	$this->oculeli=$varemp['aplicacion']['compras']['modulos']['almcotiza']['oculeli'];
+	       }
+         }
   }
 
   /**
@@ -682,6 +756,10 @@ $this->Bitacora('Guardo');
     {
       $this->cacotiza->setPorant($cacotiza['porant']);
     }
+    if (isset($cacotiza['obscot']))
+    {
+      $this->cacotiza->setObscot($cacotiza['obscot']);
+    }
 
   }
 
@@ -711,6 +789,76 @@ $this->Bitacora('Guardo');
       $this->getRequest()->setError('',$err);
     }
 
+  }
+
+  protected function getLabels()
+  {
+    $this->nometiref="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almcotiza',$varemp['aplicacion']['compras']['modulos'])){
+           if(array_key_exists('nometiref',$varemp['aplicacion']['compras']['modulos']['almcotiza']))
+	       {
+	       	$this->nometiref=$varemp['aplicacion']['compras']['modulos']['almcotiza']['nometiref'];
+	       }
+         }
+
+     if($this->nometiref!="")
+     {
+		return array(
+		  'cacotiza{refcot}' => 'Número:',
+		  'cacotiza{feccot}' => 'Fecha:',
+		  'cacotiza{tipmon}' => 'Moneda:',
+		  'cacotiza{valmon}' => 'Valor:',
+		  'cacotiza{codpro}' => 'Código del Contratistas de Bienes o Servicio y Cooperativas:',
+		  'cacotiza{rifpro}' => 'RIF de la Contratistas de Bienes o Servicio y Cooperativas:',
+		  'cacotiza{nompro}' => 'Descripción:',
+		  'cacotiza{descot}' => 'Descripción:',
+		  'cacotiza{refsol}' => 'N° de Solicitud:',
+		  'cacotiza{desreq}' => 'Desreq:',
+		  'cacotiza{refpro}' => $this->nometiref.':',
+		  'cacotiza{moncot}' => 'Monto Total:',
+		  'cacotiza{conpag}' => 'Código:',
+		  'cacotiza{desconpag}' => 'Descripción:',
+		  'cacotiza{forent}' => 'Código:',
+		  'cacotiza{desforent}' => 'Descripción:',
+		  'cacotiza{mondes}' => 'Monto Descuento:',
+		  'cacotiza{monrec}' => 'Monto Recargo:',
+		  'cacotiza{tipo}' => 'Descuenta:',
+		  'cacotiza{porvan}' => '% del VAN de las Ofertas:',
+		  'cacotiza{porant}' => '% del Anticipo:',
+		  'cacotiza{obscot}' => 'Observación:',
+		);
+     }else {
+
+    return array(
+      'cacotiza{refcot}' => 'Número:',
+      'cacotiza{feccot}' => 'Fecha:',
+      'cacotiza{tipmon}' => 'Moneda:',
+      'cacotiza{valmon}' => 'Valor:',
+      'cacotiza{codpro}' => 'Código del Contratistas de Bienes o Servicio y Cooperativas:',
+      'cacotiza{rifpro}' => 'RIF de la Contratistas de Bienes o Servicio y Cooperativas:',
+      'cacotiza{nompro}' => 'Descripción:',
+      'cacotiza{descot}' => 'Descripción:',
+      'cacotiza{refsol}' => 'N° de Solicitud:',
+      'cacotiza{desreq}' => 'Desreq:',
+      'cacotiza{refpro}' => 'Referencia:',
+      'cacotiza{moncot}' => 'Monto Total:',
+      'cacotiza{conpag}' => 'Código:',
+      'cacotiza{desconpag}' => 'Descripción:',
+      'cacotiza{forent}' => 'Código:',
+      'cacotiza{desforent}' => 'Descripción:',
+      'cacotiza{mondes}' => 'Monto Descuento:',
+      'cacotiza{monrec}' => 'Monto Recargo:',
+      'cacotiza{tipo}' => 'Descuenta:',
+      'cacotiza{porvan}' => '% del VAN de las Ofertas:',
+      'cacotiza{porant}' => '% del Anticipo:',
+      'cacotiza{obscot}' => 'Observación:',
+    );
+  }
   }
 
 }

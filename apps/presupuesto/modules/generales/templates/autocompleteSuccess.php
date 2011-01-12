@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: autocompleteSuccess.php 36423 2010-02-09 21:11:15Z dmartinez $
  */
 // date: 2007/04/09 17:27:37
 ?>

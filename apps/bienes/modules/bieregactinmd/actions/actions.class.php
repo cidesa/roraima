@@ -57,7 +57,7 @@ private static $coderror=-1;
     $cajtexmos=$this->getRequestParameter('cajtexmos');
     $cajtexcom=$this->getRequestParameter('cajtexcom');
       $result=array();
-      $sql="select a.codact as codigo_nivel,a.DesAct as activo From bndefact a, bndefins b where length(RTrim(a.CodAct))=b.LonAct and a.codact='".$this->getRequestParameter('codigo')."' and (codact like '1%%' or codact like '01%%') Order By codact";
+      $sql="select a.codact as codigo_nivel,a.DesAct as activo From bndefact a, bndefins b where length(RTrim(a.CodAct))=cast(b.LonAct as integer) and a.codact='".$this->getRequestParameter('codigo')."' and (codact like '1%%' or codact like '01%%') Order By codact";
     if (Herramientas::BuscarDatos($sql,&$result))
     {
       $dato=$result[0]['codigo_nivel'];
@@ -81,14 +81,25 @@ private static $coderror=-1;
       $cajtexmos_dos=$this->getRequestParameter('cajtexmos_dos');
       $cajtexmos_tres=$this->getRequestParameter('cajtexmos_tres');
       $result=array();
-      $sql="Select a.ordcom as orden,a.codpro as proveedor, to_char(a.fecord,'dd/mm/yyyy') as fecha, b.nompro as nompro from caordcom a, caprovee b  where b.estpro='A' and a.codpro=b.codpro and a.ordcom='".$this->getRequestParameter('codigo')."' order By ordcom";
+      $sql="Select a.ordcom as orden,a.codpro as proveedor, to_char(a.fecord,'dd/mm/yyyy') as fecha, b.nompro as nompro, a.desord from caordcom a, caprovee b  where b.estpro='A' and a.codpro=b.codpro and a.ordcom='".$this->getRequestParameter('codigo')."' order By ordcom";
     if (Herramientas::BuscarDatos($sql,&$result))
     {
       $dato=$result[0]['orden'];
       $dato1=$result[0]['proveedor'];
       $dato2=$result[0]['nompro'];
       $dato3=$result[0]['fecha'];
-      $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexmos_uno.'","'.$dato1.'",""],["'.$cajtexmos_dos.'","'.$dato2.'",""],["'.$cajtexmos_tres.'","'.$dato3.'",""]]';
+      $descripcion = H::getConfApp('descripcion','bienes','bieregactinmd');
+      !$descripcion? $descripcion='' : '';
+      if($descripcion=='S')
+      {
+        $cajtexmos_cuatro='bnreginm_desinm';
+        $dato4=$result[0]['desord'];
+      }else
+      {
+        $cajtexmos_cuatro='';
+        $dato4='';
+      }
+      $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexmos_uno.'","'.$dato1.'",""],["'.$cajtexmos_dos.'","'.$dato2.'",""],["'.$cajtexmos_tres.'","'.$dato3.'",""],["'.$cajtexmos_cuatro.'","'.$dato4.'",""]]';
     }
     else
     {
@@ -131,6 +142,24 @@ private static $coderror=-1;
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
    }
+    elseif ($this->getRequestParameter('ajax')=='6')
+   {
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $cajtexcom=$this->getRequestParameter('cajtexcom');
+    $javascript="";
+    $c= new Criteria();
+    $c->add(OpordpagPeer::NUMORD,$this->getRequestParameter('codigo'));
+    $reg= OpordpagPeer::doSelectOne($c);
+    if (!$reg)
+     { $javascript="alert('El Numero de Orden de Pago no existe'); $('$cajtexcom').value=''; "; }
+    else {
+      $numfac=H::getX_vacio('NUMORD', 'Opfactur', 'Numfac', $reg->getNumord());
+      $javascript="$('bnreginm_ordrcp').value='$numfac'; ";
+    }
+    $output = '[["javascript","'.$javascript.'",""]]';
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
+   }
   }
 
     /**
@@ -169,7 +198,8 @@ private static $coderror=-1;
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -192,5 +222,32 @@ private static $coderror=-1;
       }else return true;
     }
 
+  protected function saveBnreginm($bnreginm)
+  {
+    if ($bnreginm->getCodinm()=='########')
+    {
+      if (Herramientas::getVerCorrelativo('coractinm','bndefins',&$r))
+      {
+        $encontrado=false;
+        while (!$encontrado)
+        {
+          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+          $sql="select codinm from bnreginm where codinm='".$numero."'";
+          if (Herramientas::BuscarDatos($sql,&$result))
+          {
+             $r=$r+1;
+          }
+          else
+          {
+            $encontrado=true;
+          }
+        }
+        $bnreginm->setCodinm(str_pad($r, 8, '0', STR_PAD_LEFT));
+       }
+       Herramientas::getSalvarCorrelativo('coractinm','bndefins','RegistroInMuebles',$r,&$msg);
+    }
 
+      $bnreginm->save();
+
+}
 }

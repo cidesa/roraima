@@ -5,13 +5,13 @@
   'date_format' => 'dd/MM/yyyy',
   'maxlength' => 10,
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
-  'onBlur'=> remote_function(array(
+  /*'onBlur'=> remote_function(array(
         'update' => 'detalle',
         'url'      => 'tesrencajchi/ajax',
         'complete' => 'AjaxJSON(request, json)',
         'condition' => "$('opordpag_fecemi').value != '' && $('id').value == ''",
         'with' => "'ajax=1&tipcau='+$('opordpag_tipcau').value+'&codigo='+this.value"
-        ))
+        ))*/
 ),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
 
 <script language="JavaScript" type="text/javascript">

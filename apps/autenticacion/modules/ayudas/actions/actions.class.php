@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage ayudas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * @version    SVN: $Id$
+ * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:actions.class.php 32375 2009-09-01 16:19:59Z lhernandez $
+ * @version    SVN: $Id:actions.class.php 32375 2009-09-01 16:19:59Z lhernandez $
  */
 class ayudasActions extends sfActions
 {
@@ -17,11 +17,13 @@ class ayudasActions extends sfActions
    */
   public function executeIndex()
   {
-    $this->menu = $this->getRequestParameter('m','');
+    $this->redirect('http://'.$this->getRequest()->getHost().'/ayudas/doku.php');
 
-    $this->m = Herramientas::obtenerMenuAyuda($this->menu);
+    //$this->menu = $this->getRequestParameter('m','');
 
-    $this->ayuda = sfConfig::get('app_ayuda');
+    //$this->m = Herramientas::obtenerMenuAyuda($this->menu);
+
+    //$this->ayuda = sfConfig::get('app_ayuda');
 
     //print_r(array_values($this->m));
 

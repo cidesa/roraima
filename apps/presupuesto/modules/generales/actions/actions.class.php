@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage generales
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * @version    SVN: $Id$
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 36423 2010-02-09 21:11:15Z dmartinez $
+ * @version    SVN: $Id: actions.class.php 36423 2010-02-09 21:11:15Z dmartinez $
  */
 class generalesActions extends sfActions
 {
@@ -199,5 +199,9 @@ class generalesActions extends sfActions
 
   }
 
+  public function executeDisabled()
+  {
+
+  }
 
 }

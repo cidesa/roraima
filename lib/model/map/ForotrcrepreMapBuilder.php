@@ -30,11 +30,13 @@ class ForotrcrepreMapBuilder {
 		$tMap = $this->dbMap->addTable('forotrcrepre');
 		$tMap->setPhpName('Forotrcrepre');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('forotrcrepre_SEQ');
 
 		$tMap->addColumn('CODCAT', 'Codcat', 'string', CreoleTypes::VARCHAR, true, 16);
 
-		$tMap->addColumn('CODPAREGR', 'Codparegr', 'string', CreoleTypes::VARCHAR, true, 16);
+		$tMap->addColumn('CODPAREGR', 'Codparegr', 'string', CreoleTypes::VARCHAR, true, 32);
 
 		$tMap->addColumn('MONPRE', 'Monpre', 'double', CreoleTypes::NUMERIC, true, 14);
 
@@ -42,9 +44,11 @@ class ForotrcrepreMapBuilder {
 
 		$tMap->addColumn('OBSERV', 'Observ', 'string', CreoleTypes::VARCHAR, false, 250);
 
-		$tMap->addColumn('NOMPAREGR', 'Nomparegr', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('CODFIN', 'Codfin', 'string', CreoleTypes::VARCHAR, false, 4);
 
-		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, false, 32);
+		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, false, 4);
+
+		$tMap->addColumn('NOMPAREGR', 'Nomparegr', 'string', CreoleTypes::VARCHAR, false, 250);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

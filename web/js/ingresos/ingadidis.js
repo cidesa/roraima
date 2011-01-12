@@ -1,3 +1,14 @@
+/**
+ * Librerías Javascript
+ *
+ * @package    Roraima
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ * 
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
+
  function repetido(e,id)
  {
    var aux = id.split("_");
@@ -114,9 +125,10 @@
    var codigo=$(idcod).value;
 
    var disponible="ax_"+fila+"_3";
+   var cod="ax_"+fila+"_1";
 
    if ($('ciadidis_adidis_A').checked){ var tipo='A';}else{var tipo='D';}
 
-   new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&monto='+monto+'&codigo='+codigo+'&ano='+ano+'&cajtexmos='+disponible+'&tipo='+tipo})
+   new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&monto='+monto+'&codigo='+codigo+'&ano='+ano+'&cajtexmos='+disponible+'&cajtexcom='+cod+'&cajmon='+id+'&tipo='+tipo})
 
  }

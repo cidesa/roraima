@@ -4,18 +4,24 @@ generator:
     model_class:      Tspararc
     theme:            cidesaGenerator
     fields:
-      numcue: { name: Número de Cuenta, params: size20 maxlength=20}
+      numcue: { name: Número de Cuenta, params: size=20 maxlength=20}
       nomcue: { name: Descripción }
       inicue: { name: Posición Inicial}
       fincue: { name: Cantidad Caracteres}
       iniref: { name: Posición Inicial}
       finref: { name: Cantidad Caracteres}
+      digsigp: { name: N° Dígitos Sig. +}
+      digsign: { name: N° Dígitos Sig. -}
       inifec: { name: Posición Inicial}
       finfec: { name: Cantidad Caracteres}
+      forfec: { name: Formato Fecha, params: size=10 maxlength=10}
       initip: { name: Posición Inicial}
       fintip: { name: Cantidad Caracteres}
+      valdefp: { name: Valor por Defecto +, params: size=10 maxlength=4}
+      valdefn: { name: Valor por Defecto -, params: size=10 maxlength=4}
       inides: { name: Posición Inicial}
       findes: { name: Cantidad Caracteres}
+      valdefd: { name: Valor por Defecto, params: size=60 maxlength=250}
       inimon: { name: Posición Inicial}
       finmon: { name: Cantidad Caracteres}
     list:
@@ -32,10 +38,10 @@ generator:
       display:
         "Cuenta Bancaria":  [_numcue]
         "Número de cuenta": [inicue, fincue]
-        "Referencia": [iniref, finref]
-        "Fecha Movimiento": [inifec, finfec]
-        "Tipo de Movimiento": [initip, fintip]
-        "Descripción": [inides, findes]
+        "Referencia": [iniref, finref, digsigp, digsign]
+        "Fecha Movimiento": [inifec, finfec, forfec]
+        "Tipo de Movimiento": [initip, fintip, valdefp, valdefn]
+        "Descripción": [inides, findes, valdefd]
         "Monto": [inimon, finmon]
       actions:
         _list:        ~

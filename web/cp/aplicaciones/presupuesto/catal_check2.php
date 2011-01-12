@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
@@ -51,7 +52,7 @@ $z=new tools();
    $i=1;
    while ($i<=$sel)
    {
-		$sql="select refprc as ref, codpre as codpre, (monimp-moncom) as monto, moncau as causado, monaju as ajustado, monpag as pagado from cpimpprc where trim(refprc)=trim('".$ref[$i]."') ";
+		$sql="select refprc as ref, codpre as codpre, (monimp-moncom-monaju) as monto, 0 as causado, 0 as ajustado, 0 as pagado from cpimpprc where trim(refprc)=trim('".$ref[$i]."') ";
 
    		if ($tb=$z->buscar_datos($sql))
 		{
@@ -113,7 +114,7 @@ $sql='Select ' .
 					opener.document.getElementById(x5).value=format('<? print $tb->fields["monto"];?>','.','.',',');
 					opener.document.getElementById(x6).value=format('<? print $tb->fields["ajustado"];?>','.','.',',');
 					opener.document.getElementById(x7).value='<? print $tb->fields["ref"];?>';
-					opener.document.getElementById(x8).value=format('<? print $tb->fields["monto"] - $tb->fields["causado"];?>','.','.',',');
+					opener.document.getElementById(x8).value=format('<? print $tb->fields["monto"];?>','.','.',',');
 				</script>
 				<?
 				$desprc=$tb->fields["desprc"];

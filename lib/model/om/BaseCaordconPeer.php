@@ -13,7 +13,7 @@ abstract class BaseCaordconPeer {
 	const CLASS_DEFAULT = 'lib.model.Caordcon';
 
 	
-	const NUM_COLUMNS = 16;
+	const NUM_COLUMNS = 28;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -65,6 +65,42 @@ abstract class BaseCaordconPeer {
 	const CANCUO = 'caordcon.CANCUO';
 
 	
+	const FECPTO = 'caordcon.FECPTO';
+
+	
+	const NUMCON = 'caordcon.NUMCON';
+
+	
+	const NUMPTO = 'caordcon.NUMPTO';
+
+	
+	const NUMRES = 'caordcon.NUMRES';
+
+	
+	const OTORGA = 'caordcon.OTORGA';
+
+	
+	const FECFIR = 'caordcon.FECFIR';
+
+	
+	const OTOANT = 'caordcon.OTOANT';
+
+	
+	const MONOTO = 'caordcon.MONOTO';
+
+	
+	const PAMOPAG = 'caordcon.PAMOPAG';
+
+	
+	const CUMRESP = 'caordcon.CUMRESP';
+
+	
+	const OTOESP = 'caordcon.OTOESP';
+
+	
+	const MONAES = 'caordcon.MONAES';
+
+	
 	const ID = 'caordcon.ID';
 
 	
@@ -73,18 +109,18 @@ abstract class BaseCaordconPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Ordcon', 'Feccon', 'Tipcon', 'Codpro', 'Descon', 'Objcon', 'Fecini', 'Feccul', 'Mulatrini', 'Lapgar', 'Mulatrcul', 'Stacon', 'Moncon', 'Fecanu', 'Cancuo', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CaordconPeer::ORDCON, CaordconPeer::FECCON, CaordconPeer::TIPCON, CaordconPeer::CODPRO, CaordconPeer::DESCON, CaordconPeer::OBJCON, CaordconPeer::FECINI, CaordconPeer::FECCUL, CaordconPeer::MULATRINI, CaordconPeer::LAPGAR, CaordconPeer::MULATRCUL, CaordconPeer::STACON, CaordconPeer::MONCON, CaordconPeer::FECANU, CaordconPeer::CANCUO, CaordconPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('ordcon', 'feccon', 'tipcon', 'codpro', 'descon', 'objcon', 'fecini', 'feccul', 'mulatrini', 'lapgar', 'mulatrcul', 'stacon', 'moncon', 'fecanu', 'cancuo', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Ordcon', 'Feccon', 'Tipcon', 'Codpro', 'Descon', 'Objcon', 'Fecini', 'Feccul', 'Mulatrini', 'Lapgar', 'Mulatrcul', 'Stacon', 'Moncon', 'Fecanu', 'Cancuo', 'Fecpto', 'Numcon', 'Numpto', 'Numres', 'Otorga', 'Fecfir', 'Otoant', 'Monoto', 'Pamopag', 'Cumresp', 'Otoesp', 'Monaes', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CaordconPeer::ORDCON, CaordconPeer::FECCON, CaordconPeer::TIPCON, CaordconPeer::CODPRO, CaordconPeer::DESCON, CaordconPeer::OBJCON, CaordconPeer::FECINI, CaordconPeer::FECCUL, CaordconPeer::MULATRINI, CaordconPeer::LAPGAR, CaordconPeer::MULATRCUL, CaordconPeer::STACON, CaordconPeer::MONCON, CaordconPeer::FECANU, CaordconPeer::CANCUO, CaordconPeer::FECPTO, CaordconPeer::NUMCON, CaordconPeer::NUMPTO, CaordconPeer::NUMRES, CaordconPeer::OTORGA, CaordconPeer::FECFIR, CaordconPeer::OTOANT, CaordconPeer::MONOTO, CaordconPeer::PAMOPAG, CaordconPeer::CUMRESP, CaordconPeer::OTOESP, CaordconPeer::MONAES, CaordconPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('ordcon', 'feccon', 'tipcon', 'codpro', 'descon', 'objcon', 'fecini', 'feccul', 'mulatrini', 'lapgar', 'mulatrcul', 'stacon', 'moncon', 'fecanu', 'cancuo', 'fecpto', 'numcon', 'numpto', 'numres', 'otorga', 'fecfir', 'otoant', 'monoto', 'pamopag', 'cumresp', 'otoesp', 'monaes', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Ordcon' => 0, 'Feccon' => 1, 'Tipcon' => 2, 'Codpro' => 3, 'Descon' => 4, 'Objcon' => 5, 'Fecini' => 6, 'Feccul' => 7, 'Mulatrini' => 8, 'Lapgar' => 9, 'Mulatrcul' => 10, 'Stacon' => 11, 'Moncon' => 12, 'Fecanu' => 13, 'Cancuo' => 14, 'Id' => 15, ),
-		BasePeer::TYPE_COLNAME => array (CaordconPeer::ORDCON => 0, CaordconPeer::FECCON => 1, CaordconPeer::TIPCON => 2, CaordconPeer::CODPRO => 3, CaordconPeer::DESCON => 4, CaordconPeer::OBJCON => 5, CaordconPeer::FECINI => 6, CaordconPeer::FECCUL => 7, CaordconPeer::MULATRINI => 8, CaordconPeer::LAPGAR => 9, CaordconPeer::MULATRCUL => 10, CaordconPeer::STACON => 11, CaordconPeer::MONCON => 12, CaordconPeer::FECANU => 13, CaordconPeer::CANCUO => 14, CaordconPeer::ID => 15, ),
-		BasePeer::TYPE_FIELDNAME => array ('ordcon' => 0, 'feccon' => 1, 'tipcon' => 2, 'codpro' => 3, 'descon' => 4, 'objcon' => 5, 'fecini' => 6, 'feccul' => 7, 'mulatrini' => 8, 'lapgar' => 9, 'mulatrcul' => 10, 'stacon' => 11, 'moncon' => 12, 'fecanu' => 13, 'cancuo' => 14, 'id' => 15, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Ordcon' => 0, 'Feccon' => 1, 'Tipcon' => 2, 'Codpro' => 3, 'Descon' => 4, 'Objcon' => 5, 'Fecini' => 6, 'Feccul' => 7, 'Mulatrini' => 8, 'Lapgar' => 9, 'Mulatrcul' => 10, 'Stacon' => 11, 'Moncon' => 12, 'Fecanu' => 13, 'Cancuo' => 14, 'Fecpto' => 15, 'Numcon' => 16, 'Numpto' => 17, 'Numres' => 18, 'Otorga' => 19, 'Fecfir' => 20, 'Otoant' => 21, 'Monoto' => 22, 'Pamopag' => 23, 'Cumresp' => 24, 'Otoesp' => 25, 'Monaes' => 26, 'Id' => 27, ),
+		BasePeer::TYPE_COLNAME => array (CaordconPeer::ORDCON => 0, CaordconPeer::FECCON => 1, CaordconPeer::TIPCON => 2, CaordconPeer::CODPRO => 3, CaordconPeer::DESCON => 4, CaordconPeer::OBJCON => 5, CaordconPeer::FECINI => 6, CaordconPeer::FECCUL => 7, CaordconPeer::MULATRINI => 8, CaordconPeer::LAPGAR => 9, CaordconPeer::MULATRCUL => 10, CaordconPeer::STACON => 11, CaordconPeer::MONCON => 12, CaordconPeer::FECANU => 13, CaordconPeer::CANCUO => 14, CaordconPeer::FECPTO => 15, CaordconPeer::NUMCON => 16, CaordconPeer::NUMPTO => 17, CaordconPeer::NUMRES => 18, CaordconPeer::OTORGA => 19, CaordconPeer::FECFIR => 20, CaordconPeer::OTOANT => 21, CaordconPeer::MONOTO => 22, CaordconPeer::PAMOPAG => 23, CaordconPeer::CUMRESP => 24, CaordconPeer::OTOESP => 25, CaordconPeer::MONAES => 26, CaordconPeer::ID => 27, ),
+		BasePeer::TYPE_FIELDNAME => array ('ordcon' => 0, 'feccon' => 1, 'tipcon' => 2, 'codpro' => 3, 'descon' => 4, 'objcon' => 5, 'fecini' => 6, 'feccul' => 7, 'mulatrini' => 8, 'lapgar' => 9, 'mulatrcul' => 10, 'stacon' => 11, 'moncon' => 12, 'fecanu' => 13, 'cancuo' => 14, 'fecpto' => 15, 'numcon' => 16, 'numpto' => 17, 'numres' => 18, 'otorga' => 19, 'fecfir' => 20, 'otoant' => 21, 'monoto' => 22, 'pamopag' => 23, 'cumresp' => 24, 'otoesp' => 25, 'monaes' => 26, 'id' => 27, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, )
 	);
 
 	
@@ -167,6 +203,30 @@ abstract class BaseCaordconPeer {
 		$criteria->addSelectColumn(CaordconPeer::FECANU);
 
 		$criteria->addSelectColumn(CaordconPeer::CANCUO);
+
+		$criteria->addSelectColumn(CaordconPeer::FECPTO);
+
+		$criteria->addSelectColumn(CaordconPeer::NUMCON);
+
+		$criteria->addSelectColumn(CaordconPeer::NUMPTO);
+
+		$criteria->addSelectColumn(CaordconPeer::NUMRES);
+
+		$criteria->addSelectColumn(CaordconPeer::OTORGA);
+
+		$criteria->addSelectColumn(CaordconPeer::FECFIR);
+
+		$criteria->addSelectColumn(CaordconPeer::OTOANT);
+
+		$criteria->addSelectColumn(CaordconPeer::MONOTO);
+
+		$criteria->addSelectColumn(CaordconPeer::PAMOPAG);
+
+		$criteria->addSelectColumn(CaordconPeer::CUMRESP);
+
+		$criteria->addSelectColumn(CaordconPeer::OTOESP);
+
+		$criteria->addSelectColumn(CaordconPeer::MONAES);
 
 		$criteria->addSelectColumn(CaordconPeer::ID);
 

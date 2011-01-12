@@ -29,6 +29,14 @@ abstract class BaseFamovaju extends BaseObject  implements Persistent {
 
 
 	
+	protected $preaju;
+
+
+	
+	protected $recaju;
+
+
+	
 	protected $montot;
 
 
@@ -76,6 +84,22 @@ abstract class BaseFamovaju extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->canaju,2,',','.');
     else return $this->canaju;
+
+  }
+  
+  public function getPreaju($val=false)
+  {
+
+    if($val) return number_format($this->preaju,2,',','.');
+    else return $this->preaju;
+
+  }
+  
+  public function getRecaju($val=false)
+  {
+
+    if($val) return number_format($this->recaju,2,',','.');
+    else return $this->recaju;
 
   }
   
@@ -144,6 +168,26 @@ abstract class BaseFamovaju extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setPreaju($v)
+	{
+
+    if ($this->preaju !== $v) {
+        $this->preaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FamovajuPeer::PREAJU;
+      }
+  
+	} 
+	
+	public function setRecaju($v)
+	{
+
+    if ($this->recaju !== $v) {
+        $this->recaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FamovajuPeer::RECAJU;
+      }
+  
+	} 
+	
 	public function setMontot($v)
 	{
 
@@ -178,9 +222,13 @@ abstract class BaseFamovaju extends BaseObject  implements Persistent {
 
       $this->canaju = $rs->getFloat($startcol + 4);
 
-      $this->montot = $rs->getFloat($startcol + 5);
+      $this->preaju = $rs->getFloat($startcol + 5);
 
-      $this->id = $rs->getInt($startcol + 6);
+      $this->recaju = $rs->getFloat($startcol + 6);
+
+      $this->montot = $rs->getFloat($startcol + 7);
+
+      $this->id = $rs->getInt($startcol + 8);
 
       $this->resetModified();
 
@@ -188,7 +236,7 @@ abstract class BaseFamovaju extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 7; 
+            return $startcol + 9; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Famovaju object", $e);
     }
@@ -351,9 +399,15 @@ abstract class BaseFamovaju extends BaseObject  implements Persistent {
 				return $this->getCanaju();
 				break;
 			case 5:
-				return $this->getMontot();
+				return $this->getPreaju();
 				break;
 			case 6:
+				return $this->getRecaju();
+				break;
+			case 7:
+				return $this->getMontot();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -371,8 +425,10 @@ abstract class BaseFamovaju extends BaseObject  implements Persistent {
 			$keys[2] => $this->getNumlot(),
 			$keys[3] => $this->getCanord(),
 			$keys[4] => $this->getCanaju(),
-			$keys[5] => $this->getMontot(),
-			$keys[6] => $this->getId(),
+			$keys[5] => $this->getPreaju(),
+			$keys[6] => $this->getRecaju(),
+			$keys[7] => $this->getMontot(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
@@ -404,9 +460,15 @@ abstract class BaseFamovaju extends BaseObject  implements Persistent {
 				$this->setCanaju($value);
 				break;
 			case 5:
-				$this->setMontot($value);
+				$this->setPreaju($value);
 				break;
 			case 6:
+				$this->setRecaju($value);
+				break;
+			case 7:
+				$this->setMontot($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
@@ -421,8 +483,10 @@ abstract class BaseFamovaju extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setNumlot($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setCanord($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setCanaju($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setMontot($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
+		if (array_key_exists($keys[5], $arr)) $this->setPreaju($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setRecaju($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setMontot($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
 	
@@ -435,6 +499,8 @@ abstract class BaseFamovaju extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FamovajuPeer::NUMLOT)) $criteria->add(FamovajuPeer::NUMLOT, $this->numlot);
 		if ($this->isColumnModified(FamovajuPeer::CANORD)) $criteria->add(FamovajuPeer::CANORD, $this->canord);
 		if ($this->isColumnModified(FamovajuPeer::CANAJU)) $criteria->add(FamovajuPeer::CANAJU, $this->canaju);
+		if ($this->isColumnModified(FamovajuPeer::PREAJU)) $criteria->add(FamovajuPeer::PREAJU, $this->preaju);
+		if ($this->isColumnModified(FamovajuPeer::RECAJU)) $criteria->add(FamovajuPeer::RECAJU, $this->recaju);
 		if ($this->isColumnModified(FamovajuPeer::MONTOT)) $criteria->add(FamovajuPeer::MONTOT, $this->montot);
 		if ($this->isColumnModified(FamovajuPeer::ID)) $criteria->add(FamovajuPeer::ID, $this->id);
 
@@ -476,6 +542,10 @@ abstract class BaseFamovaju extends BaseObject  implements Persistent {
 		$copyObj->setCanord($this->canord);
 
 		$copyObj->setCanaju($this->canaju);
+
+		$copyObj->setPreaju($this->preaju);
+
+		$copyObj->setRecaju($this->recaju);
 
 		$copyObj->setMontot($this->montot);
 

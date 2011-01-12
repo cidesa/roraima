@@ -23,13 +23,13 @@ function validarNivel() {
 
 function validarCmbTipo(idActual) {
 	name='a';
-	id=idActual;
+	idActual = name+"x_0_1";
 	contC=0;
 	contP=0;
 	i=1;
 
 	while ($(idActual)) {
-		if ($F(idActual)!='Seleccione..') {
+		if ($F(idActual)=='C' || $F(idActual)=='P') {
 			if ($F(idActual)=='C') {
 				contC=contC+1;
 			} else {
@@ -39,22 +39,19 @@ function validarCmbTipo(idActual) {
 		idActual = name+"x_"+i+"_"+'1';
 		i++;
 	}
-
 	if (contC > $('cpdefniv_rupcat').value) {
-		alert_('El N&uacute;mero de Rupturas para la Categor&iacute;a ya est&aacute; satisfecho');
-    	$(id).value='';
+		alert('No se pueden agregar mas Categorias');
   	}
-
   	if (contP > $('cpdefniv_ruppar').value) {
-  		alert_('El N&uacute;mero de Rupturas para la Partida ya est&aacute; satisfecho');
-  		$(id).value='';
+  		alert('No se pueden agregar mas Partidas');
   	}
 }
 
-function actualizarFormato(id) {
+function actualizarFormato2(id) {
 	$('cpdefniv_forpre').value='';
 
 	var totfil = objs_filas_a.size();
+        alert('total'+totfil);
 	var fila = true;
 	var fil=0;
 

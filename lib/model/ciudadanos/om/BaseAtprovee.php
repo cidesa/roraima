@@ -1038,6 +1038,41 @@ abstract class BaseAtprovee extends BaseObject  implements Persistent {
 		return $this->collAtayudass;
 	}
 
+
+	
+	public function getAtayudassJoinAtunidades($criteria = null, $con = null)
+	{
+				include_once 'lib/model/ciudadanos/om/BaseAtayudasPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtayudass === null) {
+			if ($this->isNew()) {
+				$this->collAtayudass = array();
+			} else {
+
+				$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtunidades($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+			if (!isset($this->lastAtayudasCriteria) || !$this->lastAtayudasCriteria->equals($criteria)) {
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtunidades($criteria, $con);
+			}
+		}
+		$this->lastAtayudasCriteria = $criteria;
+
+		return $this->collAtayudass;
+	}
+
 	
 	public function initAtpresupuestosRelatedByAtprovee1()
 	{

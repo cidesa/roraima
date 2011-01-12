@@ -25,6 +25,7 @@
 <?php use_helper('PopUp') ?>
 
 <fieldset id="sf_fieldset_none" class="">
+    <legend><?php echo __('Código de Nivel')?></legend>
 <div class="form-row">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <?php echo label_for('bndefcon[codact]', __($labels['bndefcon{codact}']), 'class="required" ') ?>
@@ -35,6 +36,7 @@
 
 <?php $value = object_input_tag($bndefcon, 'getCodact', array (
   'size' => 30,
+  'maxlength' => strlen($mascaracatalogo),
   'control_name' => 'bndefcon[codact]',
   'onKeypress' => "javascript:cadena=rayitas(this.value);document.getElementById('bndefcon_codact').value=cadena;",
   'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaracatalogo')",
@@ -56,13 +58,14 @@
 </div>
 <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<?php echo label_for('bndefcon[codact1]', __($labels['bndefcon{codact}']), 'class="required" ') ?>
-<div class="content<?php if ($sf_request->hasError('bndefcon{codact}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('bndefcon{codact}')): ?> <?php echo form_error('bndefcon{codact}', array('class' => 'form-error-msg')) ?>
+<?php echo label_for('bndefcon[codact1]', __($labels['bndefcon{codact1}']), 'class="required" ') ?>
+<div class="content<?php if ($sf_request->hasError('bndefcon{codact1}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('bndefcon{codact1}')): ?> <?php echo form_error('bndefcon{codact}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?>
 
-<?php $value = object_input_tag($bndefcon, 'getCodact', array (
+<?php $value = object_input_tag($bndefcon, 'getCodact1', array (
 	'size' => 30,
+        'maxlength' => strlen($mascaracatalogo),
 	'control_name' => 'bndefcon[codact1]',
 	'onKeypress' => "javascript:cadena=rayitas(this.value);document.getElementById('bndefcon_codact1').value=cadena;",
     'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaracatalogo')",
@@ -96,7 +99,7 @@
 <?php if ($sf_request->hasError('bndefcon{ctadepcar}')): ?> <?php echo form_error('bndefcon{ctadepcar}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?>
 
-<?php echo input_auto_complete_tag('bndefcon[codcta]', $bndefcon->getCodcta(),
+<?php echo input_auto_complete_tag('bndefcon[ctadepcar]', $bndefcon->getCtadepcar(),
     'biedefconlotm/autocomplete?ajax=1', array('size' => 30, 'autocomplete' => 'off', 'onBlur'=> remote_function(array(
       'url'      => 'biedefconlotm/ajax',
       'complete' => 'AjaxJSON(request, json)',
@@ -107,7 +110,7 @@
   )
   ?>
 
-<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_Biedefconlotm/clase/Contabb/frame/sf_admin_edit_form/obj1/bndefcon_codcta/obj2/bndefcon_descta/campo1/codcta/campo2/descta'); ?>
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_Biedefconlotm/clase/Contabb/frame/sf_admin_edit_form/obj1/bndefcon_ctadepcar/obj2/bndefcon_descta/campo1/codcta/campo2/descta'); ?>
 
 <?php $value = object_input_tag($bndefcon, 'getDescta', array (
 'disabled' => true,

@@ -1,0 +1,23 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Usuarios
+    theme:            cidesaGenerator
+    fields:
+      loguse:
+        name: Usuario
+        params: maxlength=50
+        catalogo:
+          catalogoweb: Usuarios_Compras
+          clase: Usuarios
+          ajax: 1
+          parametros: getprincipal="getLoguse" getsecundario="getNomuse" campoprincipal="loguse" camposecundario="nomuse" campobase = "id"
+          divupdate: divgrid
+      grid: { name: . }
+    edit:
+      title:          Asignación de Unidad Solicitante a Usuarios
+      display:
+        "NONE": [loguse]
+        "Unidades Solicitantes": [_grid]
+      actions:
+        _save:        ~

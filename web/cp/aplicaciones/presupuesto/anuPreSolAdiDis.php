@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
 require_once($_SESSION["x"].'lib/general/tools.php');
@@ -9,7 +10,8 @@ $bd     = new basedatosAdo($codemp);
 $tool   = new tools();
 $z=new tools();
 $btn = $z->ConfBotones();
-
+$fecha_actual= date('d/m/Y');
+$validafecha=$_SESSION["configemp"]["aplicacion"]["presupuesto"]["modulos"]["PreSolAdiDis"]["valfec"];
   try
   {
 
@@ -122,7 +124,6 @@ $btn = $z->ConfBotones();
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" TYPE="text/css" MEDIA="screen" href="../../lib/css/tabber.css">
@@ -161,7 +162,7 @@ function Opciones()
   global $codigo;
   global $btn;
 ?>
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
  <table width="100%" height="100"  border="0" align="center" cellpadding="0" cellspacing="0"  bgcolor="#FFFFCC">
  <tr bgcolor="#FFFFCC">
 <td height="30" colspan="4">
@@ -221,7 +222,7 @@ function Opciones()
     $fecha=date('d/m/Y');
 
   ?>
-    <form name="form1" method="post" action="">
+    <form name="form1" onsubmit="return false;" method="post" action="">
   <fieldset>
 
     <legend><span class="style3">Anular Adiciones/Disminuciones</span></legend>
@@ -264,6 +265,11 @@ function Opciones()
 </body>
 
 <script language="javascript1.2">
+  var deshafec='<?php echo $validafecha;?>';
+  if (deshafec=='S')
+  {
+     document.getElementById('fecha').readOnly=true;
+  }
 function anular()
 {
     f=document.form1;
@@ -293,7 +299,7 @@ function salvar()
   f=document.form1;
   //verificar datos completos
   fecha=$F('fecha');
-  fecpre= '<? echo $fecpre;?>'
+  fecpre= '<? echo fentrada($fecpre);?>'
 
   if (TrimString(f.fecha.value)=="")
   {
@@ -323,7 +329,7 @@ function salvar()
       else
       {
         //alert("Longitud de Fecha inválida");
-        document.getElementById('fecha').value=mostrarfecha();
+        document.getElementById('fecha').value='<? echo $fecha_actual; ?>';;
         document.getElementById('fecha').focus();
       }
 

@@ -4,25 +4,25 @@
 
 class NphojintMapBuilder {
 
-	
+
 	const CLASS_NAME = 'lib.model.nomina.map.NphojintMapBuilder';
 
-	
+
 	private $dbMap;
 
-	
+
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-	
+
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-	
+
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -104,7 +104,7 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('NUMCUE', 'Numcue', 'string', CreoleTypes::VARCHAR, false, 31);
 
-		$tMap->addColumn('OBSEMP', 'Obsemp', 'string', CreoleTypes::VARCHAR, false, 100);
+		$tMap->addColumn('OBSEMP', 'Obsemp', 'string', CreoleTypes::VARCHAR, false, 300);
 
 		$tMap->addColumn('TIEFID', 'Tiefid', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -124,7 +124,7 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('TENOTR', 'Tenotr', 'string', CreoleTypes::VARCHAR, false, 30);
 
-		$tMap->addColumn('SERCON', 'Sercon', 'string', CreoleTypes::VARCHAR, false, 16);
+		$tMap->addColumn('SERCON', 'Sercon', 'string', CreoleTypes::VARCHAR, false, 32);
 
 		$tMap->addColumn('DIROTR', 'Dirotr', 'string', CreoleTypes::VARCHAR, false, 1000);
 
@@ -226,7 +226,19 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('CODTIPEMP', 'Codtipemp', 'string', CreoleTypes::VARCHAR, false, 3);
 
+		$tMap->addColumn('NUMPUNCUE', 'Numpuncue', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('FECINICON', 'Fecinicon', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('FECFINCON', 'Fecfincon', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('OBSEMBRET', 'Obsembret', 'string', CreoleTypes::VARCHAR, false, 1000);
+
+		$tMap->addColumn('CODMOT', 'Codmot', 'string', CreoleTypes::VARCHAR, false, 4);
+
+		$tMap->addColumn('FECMAT', 'Fecmat', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	} 
-} 
+	}
+}

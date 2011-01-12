@@ -1,0 +1,90 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atciudadano
+    theme:            cidesaGenerator
+
+    fields:
+      cedciu:      { name: Cédula, params: size=10 maxlength=10 }
+      nomciu:      { name: Nombre, params: size=60 maxlength=60 }
+      apeciu:      { name: Apellido, params: size=60 maxlength=60 }
+      _tipo:       { name: Pertenece a, params: size=60 maxlength=60 } # Cooperativa, Particular, Consejo Comunal, Empresa, Organismo del Estado
+      _sexo:       { name: Teléfono, params: size=20 maxlength=20 }
+
+      fecnac:      { name: Fecha Nacimiento, params: onblur="$('atciudadano_edaact').value=calcular_edad(this.value)" }
+      edaact:      { name: Edad, params: size=4 maxlength=4 }
+      pais:        { name: Pais Nacimiento }
+      conext:      { name: Con Ext }
+      lugnac:      { name: Lugar de Nacimiento }
+      nacciu:      { name: Nacionalidad } # nacionalidad
+      dirnac:      { name: Dirección de Nacimiento } # direccion de nacimiento
+      estciv:      { name: Estado Civil }
+      telhab:
+        name: Telefono Habitación
+        params:  onkeyup=mascara(this,'-',Array(4,7),true)
+      teladihab:
+        name: Telefono Adicional
+        params:  onkeyup=mascara(this,'-',Array(4,7),true)
+      prociu:      { name: Profesión } # Profesion Beneficiario
+      atestados_id:     { name: Estado }
+      atmunicipios_id:  { name: Municipio }
+      atparroquias_id:  { name: Parroquia }
+      ciudad:      { name: Ciudad }
+      caserio:     { name: Cacerío }
+      dirhab:      { name: Dirección Habitación }
+      dirtra:      { name: Dirección Trabajo }
+      concomciu:   { name: Consejo Comunal }
+      carconcomciu:     { name: Cargo en el CC }
+      nota:        { name: Inf. Adicional }
+      grains:      { name: Grado de Instrucción }
+      traciu:
+        name: ¿Tiene Trabajo?
+      nomemp:      { name: Empresa }
+      diremp:      { name: Dirección del lugar de trabajo }
+      telemp:      { name: Telefono }
+      attiping_id: { name: Tipo Ingreso } # Mensual, semanal, quincenal
+      moning:      { name: Ingresos }
+      attipviv_id: { name: Tipo de Vivienda }
+      attipproviv_id: { name: Tenencia de la Vivienda }
+      estados:  { name: Estado }
+      municipios:  { name: Municipio }
+      parroquias:  { name: Parroquia }
+
+      grufam:  { name: Grupo Familiar }
+      atinsrefier_id:  {name:  Instituciones }
+      ayusolant:  {name:  Seleccione }
+      insayuant :  {name:  Institución, params: size=50 maxlength=50 }
+      seguro:  { name:  Nombre del Seguro }
+      segpri:
+        name: ¿Tiene Seguro Privado?
+      atmisiones_id: { name:  Misión principal a la que pertenece }
+    list:
+      title:          Registro de Paciente/Solicitante/Ciudadano
+      fields:
+        consejoc:    { name: Consejo Comunal }
+      display:        [=cedciu, nomciu, apeciu]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [cedciu, nomciu, apeciu]
+      max_per_page:   5
+    edit:
+      title:          Edición de Paciente/Solicitante/Ciudadano
+      display:
+        Datos Personales: [cedciu, nomciu, apeciu, _sexo, _estciv]
+        Datos Nacimiento: [fecnac, edaact, _nacciu, pais ]
+        Seguro: [_segpri, seguro]
+        Dirección Habitacion:        [_atestados_id, _atmunicipios_id, _atparroquias_id, ciudad, caserio, sector, urbanizacion, zona , attipviv_id, attipproviv_id]
+        Información de Contacto: [telhab, teladihab ]
+        Participación Social: [concomciu, carconcomciu, atmisiones_id ]
+        Información Profesional: [_traciu, grains, prociu, diremp, telemp, attiping_id, moning ]
+        #Procedencia:      [_tipo]
+        Referido por:     [atinsrefier_id]
+        Carga Familiar:   [_grufam]        
+        Ayuda Solicitada Anteriormente:     [_ayusolant, insayuant]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+

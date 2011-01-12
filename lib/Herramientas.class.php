@@ -6,8 +6,8 @@
  *
  * @package    Roraima
  * @subpackage lib
- * @author     $Author: jlobaton $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Herramientas.class.php 32959 2009-09-10 16:47:51Z jlobaton $
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Herramientas.class.php 40790 2010-09-28 17:10:35Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -736,8 +736,13 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
   {
     $c = new Criteria();
     $c->add(CadphartserPeer::REQART,$campo);
-    $reg = CadphartserPeer::doSelectone($c);
-    if ($reg) return true; else return false;
+    $reg_servicios = CadphartserPeer::doSelectone($c);
+
+    $c = new Criteria();
+    $c->add(CadphartPeer::REQART,$campo);
+    $reg_compras = CadphartPeer::doSelectone($c);
+
+    if ($reg_servicios || $reg_compras) return true; else return false;
   }
 
   public static function getMascaraCategoria(){
@@ -1140,10 +1145,12 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
 
    public static function insertarRegistros($sql)
    {
-    $reg = EmpresaPeer::doCount(new Criteria());
-    $con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
+    $con = Propel::getConnection(EmpresaPeer::DATABASE_NAME);
     $stmt = $con->createStatement();
-    $rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
+    $rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_ASSOC);
+
+    return true;
+
    }
 
      public static function dia_semana ($dia, $mes, $ano)
@@ -1217,7 +1224,7 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
     return $json .= '["","",""]]';
   }
 
-  public static function grid_to_json($arra = array(), $grid='a')
+  public static function grid_to_json($arra = array(), $grid='a', $extra='')
   {
     $json = '[';
     foreach($arra as $key0 => $value0){
@@ -1226,9 +1233,28 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
         $json .= '["'.$grid.'x_'.$key0.'_'.($key1+1).'","'.$value1.'",""], ';
       }
     }
-    return $json .= '["","",""]]';
+    return $json .= '["","",""]'.$extra.']';
   }
 
+  public static function array_to_json($arra = array())
+  {
+    $json = '[';
+    foreach($arra as $key0 => $value0){
+
+      if(strstr($key0, 'grid') && is_array($value0)){
+          $gridname = substr($key0, 4);
+          foreach($value0 as $gkey0 => $gvalue0){
+            foreach($gvalue0 as $gkey1 => $gvalue1){
+              $json .= '["'.$gridname.'x_'.$gkey0.'_'.($gkey1+1).'","'.$gvalue1.'",""], ';
+            }
+          }
+      }else{
+          $json .= '["'.$key0.'","'.$value0.'",""], ';
+      }
+
+    }
+    return $json .= '["","",""]]';
+  }
 
   public function recorrerArreglo($carmodulo=array(),&$mod)
   {
@@ -1987,6 +2013,7 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
   }
   public static function FormatoMonto($value,$dec='2')
   {
+    $value = floatval($value);
     $for='VE';
     if ($value==' ')
       $value=0;
@@ -2019,12 +2046,13 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
   {
 
     $usuario = UsuariosPeer::retrieveByPK(sfContext::getInstance()->getUser()->getAttribute('usuario_id'));
-
+    if ($usuario) {
     $c = new Criteria();
     $c->add(NphojintPeer::CEDEMP,$usuario->getCedemp());
     $nphojint = NphojintPeer::doSelectOne($c);
     if($nphojint) return $nphojint->getCodemp();
     else return '';
+    }else return '';
 
   }
 
@@ -2185,6 +2213,502 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
 		}
 		return '-1';	  
 	}
+
+
+	public static function DiasdeSemana($fecha)
+	{
+    	$fecha = str_replace("/","-",$fecha);
+    	list($dia,$mes,$anio)=explode("-",$fecha);
+
+	    return (((mktime ( 0, 0, 0, $mes, $dia, $anio) - mktime ( 0, 0, 0, 7, 17, 2006))/(60*60*24))+700000) % 7;
+	}
+
+
+	public static function DiasHabiles($FechaIni)
+	{
+	    $FechaFin  = substr($FechaIni,6,4)."/".substr($FechaIni,3,2)."/".substr($FechaIni,0,2);
+	    $dHabil = 0;
+	    while ($dHabil < 25){
+				$FechaFin = H::dateadd("d", 1, $FechaIni,'+');
+	        if (H::DiasdeSemana(H::FormatoFecha($FechaFin)) <> 6 and H::DiasdeSemana(H::FormatoFecha($FechaFin)) <> 0 ){
+	            $dHabil = $dHabil + 1;
+	        }
+	        $FechaIni = $FechaFin;
+	    }
+
+	  return H::FormatoFecha($FechaFin);
+	}
+
+
+	public static function VerificarFormatoPadre($codigo)
+	{
+		$c = new Criteria();
+		$c->addAscendingOrderByColumn(CpnivelesPeer::CONSEC);
+		$reg = CpnivelesPeer::doselect($c);
+		$arr = array();
+		$i=0;
+		$f=0;
+		$error = '-1';
+		foreach($reg as $key => $val)
+		{
+			$posicion = $i==0 ? '' : $arr[$i-1];
+			$arr[] = $posicion+$val->getLonniv()+$f;
+			$f=1;
+			$i++;
+		}
+		if (!in_array(strlen($codigo), $arr))
+		{
+			$error = '1352';
+		}
+		return $error;
+	}
+
+   public static function insertarRegistros2($sql)
+   {
+    //$reg = EmpresaPeer::doCount(new Criteria());
+    $con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
+    $stmt = $con->createStatement();
+    $rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
+   }
+
+      public static function getConfApp($var,$aplicacion='',$modulo='')
+   {
+     if($aplicacion) $aplicacion= sfConfig::get('sf_app');
+     if($modulo) $modulo= sfContext::getInstance()->getModuleName();
+     $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+      if ($varemp){
+        if(array_key_exists('aplicacion',$varemp))
+         if(array_key_exists($aplicacion,$varemp['aplicacion']))
+           if(array_key_exists('modulos',$varemp['aplicacion'][$aplicacion]))
+             if(array_key_exists($modulo,$varemp['aplicacion'][$aplicacion]['modulos']))
+               if(array_key_exists($var,$varemp['aplicacion'][$aplicacion]['modulos'][$modulo]))
+               {
+                 return $varemp['aplicacion'][$aplicacion]['modulos'][$modulo][$var];
+               }
+      }else return false;
+      return false;
+   }
+   public static function getConfAppGen($var)
+   {
+     $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+       if ($varemp && is_array($varemp)){
+        if(array_key_exists('generales',$varemp))
+               if(array_key_exists($var,$varemp['generales']))
+               {
+                 return $varemp['generales'][$var];
+               }
+      }else return false;
+      return false;
+   }
+
+
+   public static function ValidarGridVacio($grid,$objvalida,$arr=false)
+  {
+    $err = self::ValidarGrid($grid);
+    if ($err=='-1')
+    {
+      foreach($grid[0] as $x)
+      {
+         if(!$arr)
+         {
+            foreach($objvalida as $r)
+             {
+                 eval('$campo=$x->get'.ucfirst($r).'();');
+                 if($campo=='')
+                     return 411;
+}
+         }
+      }
+      return -1;
+    }else
+      return $err;
+  }
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////FUNCION MONTO ESCRITO//////////////////////////////////////
+  public static function obtenermontoescrito($numero)
+  {
+  $poscoma=0;
+  $nombre='';
+  $contmil=0;
+  $nrochar=1;
+  $tira="";
+  $primero="";
+  $segundo="";
+  $tercero="";
+  $cuarto="";
+  $quinto="";
+  $sexto="";
+  $sepmil1="";
+  $sepmil2="";
+  $sepmil3="";
+  $sepmil4="";
+  $sepmil5="";
+  $sepmil6="";
+  $tira3="";
+  $melones=" MILLONES ";
+  $billones=" BILLONES ";
+  //Formatear el N�mero en Estudio
+  $monchar=number_format($numero,2,".",",")."";
+  $monchar=trim($monchar);
+  $pospunto=strpos($monchar,'.'); //Posici�n del Punto Decimal
+  $indchar=$pospunto;             //Comienzo del recorrido de lectura
+                                  //Se determina directamente
+                                  //la parte decimal del n�mero
+  $decimal=" CON ".substr($monchar,$pospunto+1)."/100";
+  while($indchar>=0)        //Comienza el ciclo m�s externo
+  {
+     $contmil=$contmil+1;
+     $indchar=$indchar - 1;
+     $contchar=1;
+     $tira3="";
+     $num1="";
+     $num2="";
+     $num3="";
+     $nro=substr($monchar,$indchar,1);
+     while(($indchar>=0)&&($contchar<=3))
+     {
+         $sql="SELECT coalesce(NOMNUM,' ')  as nomnum
+               FROM NUMEROS
+               WHERE NUM = ".$nro." AND
+               POS=".$contchar.";";
+         self::BuscarDatos($sql, $arrsql);
+         #$arrsql=$conn->select($sql);
+         if (count($arrsql)>0)
+         {
+            $nombre=$arrsql[0]["nomnum"];
+         }
+         else
+         {
+         	$nombre="";
+         }
+
+         if ($contchar==1)
+	     {
+	            $numant=$nro+0;
+	            $num1=$nombre;
+	     }//if ($contchar=1)
+         elseif ($contchar==2)
+     {
+            $num2=$nombre;
+      $nro=$nro+0;
+            if($nro==1)
+      {
+         $nro=$nro+"";
+               if ($numant==1)
+         {
+                  $num1="";
+                  $num2="ONCE";
+               }//if ($numant=1)
+         elseif ($numant==2)
+         {
+                  $num1="";
+                  $num2="DOCE";
+               }//elseif ($numant=2)
+         elseif ($numant==3)
+         {
+                  $num1="";
+                  $num2="TRECE";
+               }//elseif ($numant=3)
+         elseif ($numant==4)
+         {
+                  $num1="";
+                  $num2="CATORCE";
+               }//elseif ($numant=4)
+               elseif ($numant==5)
+         {
+                  $num1="";
+                  $num2="QUINCE";
+               }//elseif ($numant=5)
+            }//if($nro=1)
+     }//elseif ($contchar=2)
+         elseif ($contchar==3)
+     {
+            $num3=$nombre;
+         }//elseif ($contchar=3)
+         $indchar=$indchar -1;
+         $contchar=$contchar + 1;
+         $nro=substr($monchar,$indchar,$nrochar);
+     if (trim($nro)==",")
+     {
+       $nro="-1";
+     } //if ($nro=",")
+
+     }//while(($indchar>=0)&&($contchar<=3))
+    if (trim($num2)<>"")
+    {
+        if ($numant<>0)
+        {
+         $operador = " Y ";
+        }//if ($numant<>0)
+        else
+        {
+         $operador ="";
+        }//else
+    }//if ($num2<>"")
+    else
+    {
+       $operador="";
+    }//else
+
+     if (trim($num2)=="ONCE" || trim($num2)=="DOCE" || trim($num2)=="TRECE" || trim($num2)=="CATORCE" || trim($num2)=="QUINCE")
+     {
+      $operador="";
+     }//if ($num2="ONCE" || $num2="DOCE" || $num2="TRECE" || $num2="CATORCE" || $num2="QUINCE")
+
+      if (trim($num1)=="CERO")
+    {
+       if (trim($num2)<>"" || trim($num3)<>"")
+       {
+         $num1="";
+         $operador="";
+       }//if ($num2<>"" || $num3<>"")
+    }//if ($num1="CERO")
+
+    if (trim($num3)=="CIENTO")
+    {
+       if (trim($num2)=="" && trim($num1)=="")
+       {
+        $num3="CIEN";
+        $num2="";
+        $operador="";
+        $num1="";
+       }//if ($num2="" && $num1="")
+    }//if ($num3="CIENTO")
+
+    if (trim($num1)=="UNO")
+    {
+       if ($contmil>1)
+       {
+        $num1="UN";
+       }//if ($contmil>1)
+    }//if ($num1="UNO")
+
+        $tira3= $num3." ".$num2.$operador.$num1;
+      if ($contmil==1)
+    {
+          $primero=$tira3;
+    }//if ($contmil=1)
+      elseif ($contmil==2)
+    {
+          $segundo=$tira3;
+          if (trim($segundo)=="CERO")
+      {
+             $segundo="";
+             if (trim($primero)=="CERO")
+       {
+                $primero="";
+             }//if ($primero="CERO")
+          }//if ($segundo="CERO")
+      else
+      {
+             $sepmil2=" MIL ";
+             if (trim($primero)=="CERO")
+       {
+                $primero="";
+             }//if ($primero="CERO")
+          }//else
+       }//elseif ($contmil=2)
+    elseif ($contmil==3)
+    {
+          $tercero= $tira3;
+          if (trim($num1)=="UN")
+      {
+             $sepmil3=" MILLON ";
+          }//if ($num1="UN")
+      else
+      {
+             $sepmil3=" MILLONES ";
+          }//else
+          if (trim($tercero)=="CERO")
+      {
+             $tercero="";
+          }//if ($tercero="CERO")
+    }//elseif ($contmil=3)
+      elseif ($contmil==4)
+    {
+         $cuarto=$tira3;
+         if (trim($cuarto)<>"CERO")
+     {
+            if (trim($sepmil3)=="MILLON")
+      {
+               $sepmil3=" MILLONES ";
+            }//if ($sepmil3="MILLON")
+            $sepmil4=" MIL ";
+     }//if ($cuarto<>"CERO")
+         else
+     {
+            $cuarto="";
+         }//else
+      }//elseif ($contmil=4)
+    elseif ($contmil==5)
+     {
+         $quinto=$tira3;
+         if (trim($num1)=="UN")
+     {
+            $sepmil5=" BILLON ";
+         }//if ($num1="UN")
+     else
+     {
+            $sepmil5=" BILLONES ";
+         }//else
+
+         if (trim($tercero)=="" && trim($cuarto)=="")
+     {
+            $sepmil3="";
+         }//if ($tercero="" && $cuarto="")
+
+
+         if (trim($quinto)<>"CERO")
+     {
+             if (trim($cuarto)=="CERO")
+       {
+                $cuarto="";
+                $sepmil4="";
+             }//if ($cuarto="CERO")
+         }//if ($quinto<>"CERO")
+     }//elseif ($contmil=5)
+     elseif ($contmil==6)
+   {
+         $sexto=$tira3;
+         if (trim($sexto)<>"CERO")
+     {
+            $sepmil6=" MIL ";
+            if (trim($sepmil5)=="BILLON")
+      {
+               $sepmil5=" BILLONES ";
+            }//if ($sepmil5="BILLON")
+            if (trim($quinto)=="CERO")
+      {
+                $quinto="";
+            }//if ($quinto="CERO")
+         }//if ($sexto<>"CERO")
+     }//elseif ($contmil=6)
+  } // while($indchar>=0)
+  return $sexto.$sepmil6.$quinto.$sepmil5.$cuarto.$sepmil4.$tercero.$sepmil3.$segundo.$sepmil2.$primero.$sepmil1.$decimal;
+  }//function montoescrito($numero)
+  /////////////////////////////////////////////////////////////////////////////////////////////////////
+  public static function ValidarHora($hora)
+  {
+    $auxhora = split(":",$hora);
+    $separadorhora=substr($hora,2,1);
+    $formatohora=substr($hora,5);
+    if(count($auxhora)>1 && strlen($hora)==7 && $separadorhora==':')
+        if(strtoupper($formatohora)=="AM" || strtoupper($formatohora)=="PM")
+        {
+            $phoras=$auxhora[0];
+            $pmin=substr($auxhora[1],0,2);
+            if(is_numeric($phoras))
+                if(intval($phoras)>=1 && intval($phoras)<=12)
+                    return true;
+                else
+                    return false;
+            else
+                return false;
+            if(is_numeric($pmin))
+                if(intval($pmin)>=0 && intval($pmin)<=59)
+                    return true;
+                else
+                    return false;
+            else
+                return false;
+        }else
+            return false;
+     else
+        return false;
+
+}
+
+  public static function getObtener_FormatoCategoria_Formulacion()
+  {
+    $result=array();
+    $sql = "Select rupcat, ruppar, forpre From ForDefNiv";
+    $i=1;
+    if (Herramientas::BuscarDatos($sql,&$result))
+    {
+      $categoria = $result[0]['rupcat'];
+      $partidas = $result[0]['ruppar'];
+      $codpre = $result[0]['forpre'];
+      $posicion=0;
+      while ($i<=$categoria)
+      {
+        $posicion=Herramientas::instr($codpre,'-',$posicion,1)+$posicion;
+        $i++;
+}
+      $formatocategoria = substr($codpre, 0, $posicion - 1);
+      return $formatocategoria;
+    }
+    else return '#';
+  }
+
+   public static function getConfApp2($var,$aplicacion='',$modulo='')
+   {
+     $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+     if ($varemp && is_array($varemp)){
+        if(array_key_exists('aplicacion',$varemp))
+         if(is_array($varemp['aplicacion']))
+         if(array_key_exists($aplicacion,$varemp['aplicacion']))
+           if(is_array($varemp['aplicacion'][$aplicacion]))
+           if(array_key_exists('modulos',$varemp['aplicacion'][$aplicacion]))
+             if(is_array($varemp['aplicacion'][$aplicacion]['modulos']))
+             if(array_key_exists($modulo,$varemp['aplicacion'][$aplicacion]['modulos']))
+               if(is_array($varemp['aplicacion'][$aplicacion]['modulos'][$modulo]))
+               if(array_key_exists($var,$varemp['aplicacion'][$aplicacion]['modulos'][$modulo]))
+               {
+                 return $varemp['aplicacion'][$aplicacion]['modulos'][$modulo][$var];
+               }
+      }else return false;
+      return false;
+   }
+
+public static function restaFechas($dFecIni, $dFecFin)
+{
+    $dFecIni = str_replace("-","",$dFecIni);
+    $dFecIni = str_replace("/","",$dFecIni);
+    $dFecFin = str_replace("-","",$dFecFin);
+    $dFecFin = str_replace("/","",$dFecFin);
+
+    ereg( "([0-9]{1,2})([0-9]{1,2})([0-9]{2,4})", $dFecIni, $aFecIni);
+    ereg( "([0-9]{1,2})([0-9]{1,2})([0-9]{2,4})", $dFecFin, $aFecFin);
+
+    $date1 = mktime(0,0,0,$aFecIni[2], $aFecIni[1], $aFecIni[3]);
+    $date2 = mktime(0,0,0,$aFecFin[2], $aFecFin[1], $aFecFin[3]);
+
+    return round(($date2 - $date1) / (60 * 60 * 24));
+}
+
+  public static function getMascaraPartidaGenerica()
+  {
+    $result=array();
+    $consec=H::getX_vacio('CODEMP', 'Cpdefniv', 'Conpar', '001');
+    $i=0;
+    $formato="";
+    $ruptura="";
+      $sql = "SELECT lonniv FROM CPNIVELES where catpar='P' and consec<='".$consec."' ORDER BY CONSEC";
+      if (Herramientas::BuscarDatos($sql,&$result))
+      {
+        while ($i<count($result))
+        {
+          $lon= $result[$i]['lonniv'];
+          $num='';
+          $j=0;
+          while ($j<$lon)
+          {
+            $num=$num.'#';
+            $j++;
+          }
+
+          if ($i!=(count($result)-1))
+          {
+            $num=$num.'-';
+          }
+
+          $ruptura=$ruptura.$num;
+          $i++;
+        }
+      }//if (Herramientas::BuscarDatos($sql,&$result))
+    return $ruptura;
+  }
+
 }
 
 class H extends Herramientas

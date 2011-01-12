@@ -1,0 +1,29 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                false
+  tabla:                   npcatnomempcon
+  anchogrid:               700
+  ancho:                   600
+  filas:                   1
+  titulo:                  'Conceptos Asociados '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Concepto
+  tipo:                    t
+  nombrecampo:             codcon
+  html:                    ["size=10 maxlength=3 onBlur='toAjax(4,getUrlModuloAjax(),this.value,0,'&cajtexmos='+$(this.id).up().next(0).descendants()[0].id+'&cajtexcom='+this.id)'"]
+  esgrabable:              true
+  catalogo:                [npdefcpt, sf_admin_edit_form, {Codcon: 1, Nomcon: 2}, Npdefcpt_asignarcategoriaxemp ]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomcon
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monto
+  esnumerico:              true
+  html:                    ["size=10 "]

@@ -7,8 +7,8 @@
  *
  * @package    Roraima
  * @subpackage lib.model.nomina
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Npasiconemp.php 37599 2010-04-15 16:03:38Z cramirez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -20,6 +20,17 @@ class Npasiconemp extends BaseNpasiconemp
    private $status = '';
    protected $codnom = '';
    protected $codnom2='';
+   protected $grid='';
+   protected $objcon=array('');
+   protected $archixls='';
+   protected $codcar2 = '';
+   protected $tipo = '';
+   protected $aumento = '';
+   protected $mon2 = '0,00';
+   protected $can2 = '0,00';
+   protected $filas = '';
+
+   
 
 
    public function hydrate(ResultSet $rs, $startcol = 1)
@@ -120,4 +131,15 @@ class Npasiconemp extends BaseNpasiconemp
 	return $nomnom->getNomnom();
 	else return '';
   }
+
+    public function getNomcar2()
+    {
+            $c = new Criteria();
+            $c->add(NpcargosPeer::CODCAR,self::getCodcar2());
+            $nomcar = NpcargosPeer::doSelectone($c);
+            if ($nomcar)
+            return $nomcar->getNomcar();
+            else
+            return ' ';
+    }
 }

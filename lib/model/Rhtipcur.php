@@ -15,4 +15,10 @@
  */ 
 class Rhtipcur extends BaseRhtipcur
 {
+	protected $desarecur="";
+	
+	public function getDesarecur()
+	{
+		return H::getx('Codarecur','Rharecur','Desarecur',$this->codarecur);
+	}
 }

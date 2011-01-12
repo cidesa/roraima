@@ -16,8 +16,10 @@
 class Cacotiza extends BaseCacotiza
 {
 	private $rifpro = '';
-	
-	
+	protected $justifica="";
+	protected $priori2="";
+
+
 	public function getNompro()
 	{
 	  return Herramientas::getX('codpro','caprovee','nompro',self::getCodpro());

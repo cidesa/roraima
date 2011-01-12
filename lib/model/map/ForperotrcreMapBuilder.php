@@ -30,15 +30,17 @@ class ForperotrcreMapBuilder {
 		$tMap = $this->dbMap->addTable('forperotrcre');
 		$tMap->setPhpName('Forperotrcre');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('forperotrcre_SEQ');
 
 		$tMap->addColumn('CODCAT', 'Codcat', 'string', CreoleTypes::VARCHAR, true, 16);
 
-		$tMap->addColumn('CODPAREGR', 'Codparegr', 'string', CreoleTypes::VARCHAR, true, 16);
+		$tMap->addColumn('CODPAREGR', 'Codparegr', 'string', CreoleTypes::VARCHAR, true, 32);
 
 		$tMap->addColumn('PERPRE', 'Perpre', 'string', CreoleTypes::VARCHAR, true, 2);
 
-		$tMap->addColumn('MONPER', 'Monper', 'double', CreoleTypes::NUMERIC, true, 14);
+		$tMap->addColumn('MONPER', 'Monper', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

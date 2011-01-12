@@ -5,7 +5,7 @@ generator:
     theme:            default
 
     fields:
-      codubi: {name: Código, params: maxlength=32}
+      codubi: {name: Código, params: maxlength=30}
       desubi: {name: Descripción, params: maxlength=250}
       dirubi: {name: Dirección, params: maxlength=500}
       codubiadm: {name: Cod. Ubicación Administrativa}

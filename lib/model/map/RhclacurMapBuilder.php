@@ -40,9 +40,9 @@ class RhclacurMapBuilder {
 
 		$tMap->addColumn('FECCLA', 'Feccla', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('HORINI', 'Horini', 'int', CreoleTypes::DATE, false, null);
+		$tMap->addColumn('HORINI', 'Horini', 'string', CreoleTypes::VARCHAR, false, 10);
 
-		$tMap->addColumn('HORFIN', 'Horfin', 'int', CreoleTypes::DATE, false, null);
+		$tMap->addColumn('HORFIN', 'Horfin', 'string', CreoleTypes::VARCHAR, false, 10);
 
 		$tMap->addColumn('NUMHOR', 'Numhor', 'double', CreoleTypes::NUMERIC, false, 14);
 

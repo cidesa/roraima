@@ -72,6 +72,22 @@ echo grid_tag($obj2);
 </form>
 
 <script language="JavaScript" type="text/javascript">
+  function chequearemplaedo(id)
+  {
+    var aux = id.split("_");
+    var name=aux[0];
+    var fil=parseInt(aux[1]);
+    var col=parseInt(aux[2]);
   
+    var codcon=$(name+"_"+fil+"_2").value;
+    var codnom=$('npnomina_codnom').value;
+
+    if ($(id).checked==false)
+    {
+       new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=1&codigo='+id+'&codnom='+codnom+'&codcon='+codcon})
+    }
+
+
+  }
 </script>
   

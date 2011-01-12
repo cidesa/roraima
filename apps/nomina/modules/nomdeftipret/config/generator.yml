@@ -5,7 +5,7 @@ generator:
     theme:            default
 
     fields:
-      codret:    { name: Código, params: maxlength=10,size=10  }
+      codret:    { name: Código, params: maxlength=10 size=10  }
       desret:    { name: Descripción, params: size=20  }
 
     list:

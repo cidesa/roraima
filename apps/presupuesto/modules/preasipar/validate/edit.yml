@@ -1,0 +1,38 @@
+methods:
+  post:
+   - "cpdeftit{codpre}"
+   - "cpdeftit{nompre}"
+   - "cpdeftit{codigo1}"
+
+names:
+  cpdeftit{codpre}:
+    required:  Yes
+    required_msg: Debe llenar la categoria presupuestaria origen
+    validators: Validator_codpre
+
+  cpdeftit{nompre}:
+    required:  Yes
+    required_msg: Debe llenar la descripcion de la categoria
+    validators: Validator_MyString2
+
+  cpdeftit{codigo1}:
+    required:  Yes
+    required_msg: Debe llenar la categoria presupuestaria destino
+    validators: Validator_codpre
+
+
+Validator_MyString2:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripcón debe tener al menos un caracter
+        max:       100
+        max_error: La Descripcón no puede tener mas de 100 caracteres
+
+Validator_codpre:
+  class: sfStringValidator
+  param:
+    min:       1
+    min_error: El Codigo no puede tener menos de 1 caracteres
+    max:       40
+    max_error: El Codigo no puede tener mas de 15 caracteres

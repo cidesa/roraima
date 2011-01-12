@@ -30,7 +30,9 @@ class ForestcosMapBuilder {
 		$tMap = $this->dbMap->addTable('forestcos');
 		$tMap->setPhpName('Forestcos');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('forestcos_SEQ');
 
 		$tMap->addColumn('CODMET', 'Codmet', 'string', CreoleTypes::VARCHAR, true, 5);
 
@@ -40,7 +42,7 @@ class ForestcosMapBuilder {
 
 		$tMap->addColumn('CODART', 'Codart', 'string', CreoleTypes::VARCHAR, true, 20);
 
-		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, false, 16);
+		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, false, 32);
 
 		$tMap->addColumn('CANUNI', 'Canuni', 'double', CreoleTypes::NUMERIC, false, 14);
 
@@ -50,7 +52,7 @@ class ForestcosMapBuilder {
 
 		$tMap->addColumn('TOTPRE', 'Totpre', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('CODFIN', 'Codfin', 'string', CreoleTypes::VARCHAR, false, 4);
+		$tMap->addColumn('CODFIN', 'Codfin', 'string', CreoleTypes::VARCHAR, false, 32);
 
 		$tMap->addColumn('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, false, 4);
 

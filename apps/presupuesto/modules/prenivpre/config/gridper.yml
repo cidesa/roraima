@@ -12,16 +12,16 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             pereje
   esgrabable:			   true
-  html:                    [ size=3 readonly=true ]
+  html:                    [ size=3 readOnly=true ]
 2:       # Columna 2
   titulo:                  Fecha Desde
   tipo:                    t
   nombrecampo:             fecdes2
   esgrabable:			   true
-  html:                    [ size=10 readonly=true ]
+  html:                    [ size=10 readOnly=true ]
 3:       # Columna 3
   titulo:                  Fecha Hasta
   tipo:                    t
   nombrecampo:             fechas2
   esgrabable:			   true
-  html:                    [ size=10 readonly=true ]
+  html:                    [ size=10 readOnly=true ]

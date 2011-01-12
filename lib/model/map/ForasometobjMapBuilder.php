@@ -30,7 +30,9 @@ class ForasometobjMapBuilder {
 		$tMap = $this->dbMap->addTable('forasometobj');
 		$tMap->setPhpName('Forasometobj');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('forasometobj_SEQ');
 
 		$tMap->addColumn('CODOBJ', 'Codobj', 'string', CreoleTypes::VARCHAR, true, 5);
 

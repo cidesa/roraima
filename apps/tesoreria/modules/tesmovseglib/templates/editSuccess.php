@@ -28,7 +28,7 @@ array()) ?></h1>
 'compadic' => $compadic,'eti'=>$eti,'color'=>$color,
 'ctaeje'=>$ctaeje,'desctaeje'=>$desctaeje,'ctaingdif'=>$ctaingdif,'desctaingdif'=>$desctaingdif,
 'ctaing'=>$ctaing,'desctaing'=>$desctaing,
-'anular'=>$anular,
+'anular'=>$anular, 'oculeli' => $oculeli, 'bloqfec' => $bloqfec, 
 'gencorrel'=>$gencorrel,
 )) ?>
 </div>

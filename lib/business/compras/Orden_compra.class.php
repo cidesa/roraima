@@ -32,192 +32,248 @@ class Orden_compra
  * aqui se hacen todos los procesos
  * de validacion y gfuardar del formulariop almordcom
  */
-  public static function Salvar($caordcom,$arreglo_arreglo,$arreglo_objetos,$arreglo_campos,&$coderror)
+  public static function Salvar($caordcom,$arreglo_arreglo,$arreglo_objetos,$arreglo_campos,$grid_detalle_formas_entrega,&$coderror)
   {
-    $refiereprecom = '';
-  $afectacompro = '';
-  $afectadis = '';
-  $referencia='';
-  $codconpag='';
-  $codforent='';
-  $genero_compromiso='';
-  $coderror=-1;
-      self::Obtener_formatocategoria(&$formatocategoria,&$tiporec,&$manejacompra,&$manejaservicio);
-      self::obtener_moneda($caordcom,&$moneda,&$posneg,&$codigomoneda);
-      self::definir_tasa_cambio($caordcom,$moneda,&$tasacambio,&$combo1_text,&$multiplicar_grid_por_tasacambio,&$monedasol,&$tip_fin);
-      $codigo_proveedor=$arreglo_campos[3];
-      $hay_presupuesto=true;
-      $referencia=$arreglo_campos[5];
-      $codconpag=$arreglo_campos[6];
-      $codforent=$arreglo_campos[7];
-      $genero_compromiso=$arreglo_campos[8];
-      $grid_detalle_orden_arreglos=$arreglo_arreglo[0][0];
-      $grid_detalle_resumen=$arreglo_arreglo[1][0];
-      $grid_detalle_entregas=$arreglo_arreglo[2][0];
-      $grid_detalle_recargo=$arreglo_arreglo[3][0];
 
-      //exit($grid_detalle_orden_arreglos[0]['codpre']);
-      //exit(print_r($grid_detalle_recargo));
+       $refere1="";
+       $t= new Criteria();
+       $t->add(CpimppagPeer::REFERE,$caordcom->getOrdcom());
+       $result=CpimppagPeer::doSelectOne($t);
+       if ($result)
+       {
+           if ($result->getStaimp()!='N')
+           {
+             $refere1=$result->getRefere();
+           }
+       }
 
-        $i=0;
-        $result=array();
-        $sql = "Select refprc,afecom,afedis From CpDocCom Where TipCom='".$caordcom->getDoccom()."'";
-        if (Herramientas::BuscarDatos($sql,&$result))
-        {
-          $refiereprecom = $result[0]['refprc'];
-          $afectacompro = $result[0]['afecom'];
-          $afectadis = $result[0]['afedis'];
-        }
-        if ($referencia==0) // para saber de que tabla me lo estoy trayendo
-        {
-          $campo11='rgoart';//tabla Caartord
-          $campo10='dtoart';//tabla Caartord
-        }
-        else
-        {
-          $campo11='monrgo';//tabla Caartsol
-          $campo10='mondes';//tabla Caartord
-        }
+	//$refere1 = Herramientas::getX_vacio('refere','cpimppag','refere',$caordcom->getOrdcom());
 
-        if (trim($caordcom->getRefsol())!='')
-        {
-          $c= new Criteria();
-          $c->add(CasolartPeer::REQART,$caordcom->getRefsol());
-          $casolart2 = CasolartPeer::doSelectOne($c);
-          if (count($casolart2)>0)
-          {
-            if ($tasacambio>$monedasol)
-            {
-                $totalaju=0;
-                $sigo=true;
-                if ($afectadis=='R')
-                {
-                  $i=0;
-                  while ($i<count($grid_detalle_orden_arreglos))
-                  {
-                    $chequear_disponibilidad=self::Chequear_disponibilidad_incremento($caordcom,$grid_detalle_orden_arreglos,$i,$referencia,$tiporec,$tasacambio,$monedasol);
-                    if (!$chequear_disponibilidad)
-                    {
-                      $sigo=false;
-                      break;
-                    }
-                    else
-                    {
-                      if ($tiporec=='C')// columna 16 del grid detalle orden
-                        $totalaju=($grid_detalle_orden_arreglos[$i][$campo11]-$grid_detalle_orden_arreglos[$i][$campo10])-((($grid_detalle_orden_arreglos[$i][$campo11]-$grid_detalle_orden_arreglos[$i][$campo10])/$tasacambio)*$monedasol);
-                      else
-                        $totalaju=((($grid_detalle_orden_arreglos[$i][$campo11]-$grid_detalle_orden_arreglos[$i][$campo10])/$tasacambio)*$monedasol);
-                    }
-                    $i++;
-                  }
-                }
-                if ($sigo)
-                {
-                  $sigo=self::Grabar_orden_compra($caordcom,$grid_detalle_orden_arreglos,$grid_detalle_recargo,$arreglo_objetos,$arreglo_campos,$moneda,$codigomoneda,$codigo_proveedor,$referencia,$codconpag,$codforent);
-                  if (($afectadis=='R') and ($sigo))
-                  {
-                    if (!self::chequear_disponibilidad_incremento_recargo($caordcom,&$detalle_arreglo_recargos_obtenido,&$total_ajuste))
-                      $sigo=false;
-                  }
-                }
-                if ($sigo)
-                {
-                  if ($hay_presupuesto)
-                  {
-                    if (count($detalle_arreglo_recargos_obtenido)>0)
-                    {
-                      $grabo=self::Grabar_ajuste_solicitud($caordcom,$total_ajuste,$grid_detalle_orden_arreglos,$detalle_arreglo_recargos_obtenido,$tiporec,$tasacambio,$monedasol,$referencia);
-                      if (!$grabo)
-                        $sigo=false;
-                    }
-                  }
-                }
-                if ($sigo)
-                {
-                  if ($afectacompro=='S')
-                  {
-                    // grabo imputacion
-                    $c= new Criteria();
-                    $cadefart_search = CadefartPeer::doSelectOne($c);
-                    if (($cadefart_search->getComasopre()=='S') and ($cadefart_search->getComreqapr()=='S'))
-                      $aprobacion='S';
-                    else
-                      $aprobacion='N';
-                    if ($aprobacion=='S')
-                    {
-                      if (substr($genero_compromiso, 0, 1)=='S')//SE EJECUTA SI L DOY AL BOTON GENERAR COMPROMISO
-                        self::Grabar_compromiso($caordcom);
-                    }
-                    else
-                      self::Grabar_compromiso($caordcom);
-                  }
-                }
-                $c= new Criteria();
-                $opdefemp = OpdefempPeer::doSelectOne($c);
-                if (count($opdefemp)>0)
-                {
-                  if ($opdefemp->getGenctaord()=='S')
-                  {
-                      //self::Grabar_comprobante_orden($caordcom) //segunda fase
-                  }
-                }
-            }
-            else  // $tasacambio==$monedasol
-            {
-              self::Grabar_orden_compra($caordcom,$grid_detalle_orden_arreglos,$grid_detalle_recargo,$arreglo_objetos,$arreglo_campos,$moneda,$codigomoneda,$codigo_proveedor,$referencia,$codconpag,$codforent);
-            if ($afectacompro=='S')
-            {
-                  // grabo imputacion
-                $c= new Criteria();
-                $cadefart_search = CadefartPeer::doSelectOne($c);
-                if (($cadefart_search->getComasopre()=='S') and ($cadefart_search->getComreqapr()=='S'))
-                    $aprobacion='S';
-                else
-                    $aprobacion='N';
-                if ($aprobacion=='S')
-                {
-                    if (substr($genero_compromiso, 0, 1)=='S')//SE EJECUTA SI L DOY AL BOTON GENERAR COMPROMISO
-                      self::Grabar_compromiso($caordcom);
-                }
-                else
-                  self::Grabar_compromiso($caordcom);
-              }
-             }
-           }  //if (count($casolart2)>0)
-        }
-        else  //REFSOL
-        {
-          if (self::Grabar_orden_compra($caordcom,$grid_detalle_orden_arreglos,$grid_detalle_recargo,$arreglo_objetos,$arreglo_campos,$moneda,$codigomoneda,$codigo_proveedor,$referencia,$codconpag,$codforent))
-          {
-            if ($afectacompro=='S')
-            {
-              // grabo imputacion
-              $c= new Criteria();
-              $cadefart_search = CadefartPeer::doSelectOne($c);
-              if (($cadefart_search->getComasopre()=='S') and ($cadefart_search->getComreqapr()=='S'))
-                $aprobacion='S';
-              else
-                $aprobacion='N';
+       $refere2="";
+       $t2= new Criteria();
+       $t2->add(CpimpcauPeer::REFERE,$caordcom->getOrdcom());
+       $result2=CpimpcauPeer::doSelectOne($t2);
+       if ($result2)
+       {
+           if ($result2->getStaimp()!='N')
+           {
+             $refere2=$result->getRefere();
+           }
+       }
+        
+	//$refere2 = Herramientas::getX_vacio('refere','cpimpcau','refere',$caordcom->getOrdcom());
+	$refere0 = Herramientas::getX_vacio('refcom','cpimpcom','refcom',$caordcom->getOrdcom());
 
-              if ($aprobacion=='S')
-              {
-                if (substr($genero_compromiso, 0, 1)=='S')//SE EJECUTA SI L DOY AL BOTON GENERAR COMPROMISO
-                  self::Grabar_compromiso($caordcom);
-              }
-              else
-                self::Grabar_compromiso($caordcom);
+	if (((!empty($refere1)) or (!empty($refere2)) or (!empty($refere0))) and ($caordcom->getId()))
+	{
+		$coderror=109;
+		return false;
+  	}else{
 
-            }
-            $c= new Criteria();
-            $opdefemp = OpdefempPeer::doSelectOne($c);
-            if (count($opdefemp)>0)
-            {
-              //if ($opdefemp->getGencomadi()=='S')
-                  //self::Grabar_comprobante_orden($caordcom) //segunda fase
-            }
-          }    // si grabo orden_de_compra
-     }  //REFSOL
-      //exit($caordcom->getOrdcom());
+      /*if ($caordcom->getId()){
+                $reg = CaordcomPeer::retrieveByPKs($caordcom->getId());
+                $reg1 = array();
+                $reg1 = $reg[0];
+                $reg1->setDesord($caordcom->getDesord());
+                $reg1->save();
+                $coderror=-11;
+          }else {*/
+ 	      $refiereprecom = '';
+		  $afectacompro = '';
+		  $afectadis = '';
+		  $referencia='';
+		  $codconpag='';
+		  $codforent='';
+		  $genero_compromiso='';
+		  $coderror=-1;
+		      self::Obtener_formatocategoria(&$formatocategoria,&$tiporec,&$manejacompra,&$manejaservicio);
+		      self::obtener_moneda($caordcom,&$moneda,&$posneg,&$codigomoneda);
+		      self::definir_tasa_cambio($caordcom,$moneda,&$tasacambio,&$combo1_text,&$multiplicar_grid_por_tasacambio,&$monedasol,&$tip_fin);
+		      $codigo_proveedor=$arreglo_campos[3];
+		      $hay_presupuesto=true;
+		      $referencia=$arreglo_campos[5];
+		      $codconpag=$arreglo_campos[6];
+		      $codforent=$arreglo_campos[7];
+		      $genero_compromiso=$arreglo_campos[8];
+		      $grid_detalle_orden_arreglos=$arreglo_arreglo[0][0];
+		      $grid_detalle_resumen=$arreglo_arreglo[1][0];
+		      $grid_detalle_entregas=$arreglo_arreglo[2][0];
+		      $grid_detalle_recargo=$arreglo_arreglo[3][0];
+
+		      //exit($grid_detalle_orden_arreglos[0]['codpre']);
+		      //exit(print_r($grid_detalle_recargo));
+
+		        $i=0;
+		        $result=array();
+		        $sql = "Select refprc,afecom,afedis From CpDocCom Where TipCom='".$caordcom->getDoccom()."'";
+		        if (Herramientas::BuscarDatos($sql,&$result))
+		        {
+		          $refiereprecom = $result[0]['refprc'];
+		          $afectacompro = $result[0]['afecom'];
+		          $afectadis = $result[0]['afedis'];
+		        }
+		        if ($referencia==0) // para saber de que tabla me lo estoy trayendo
+		        {
+		          $campo11='rgoart';//tabla Caartord
+		          $campo10='dtoart';//tabla Caartord
+		        }
+		        else
+		        {
+		          $campo11='monrgo';//tabla Caartsol
+		          $campo10='mondes';//tabla Caartord
+		        }
+
+		        if (trim($caordcom->getRefsol())!='')
+		        {
+		          $c= new Criteria();
+		          $c->add(CasolartPeer::REQART,$caordcom->getRefsol());
+		          $casolart2 = CasolartPeer::doSelectOne($c);
+		          if (count($casolart2)>0)
+		          {
+		            if ($tasacambio>$monedasol)
+		            {
+		                $totalaju=0;
+		                $sigo=true;
+		                if ($afectadis=='R')
+		                {
+		                  $i=0;
+		                  while ($i<count($grid_detalle_orden_arreglos))
+		                  {
+		                    $chequear_disponibilidad=self::Chequear_disponibilidad_incremento($caordcom,$grid_detalle_orden_arreglos,$i,$referencia,$tiporec,$tasacambio,$monedasol);
+		                    if (!$chequear_disponibilidad)
+		                    {
+		                      $sigo=false;
+		                      break;
+		                    }
+		                    else
+		                    {
+		                      if ($tiporec=='C')// columna 16 del grid detalle orden
+		                        $totalaju=($grid_detalle_orden_arreglos[$i][$campo11]-$grid_detalle_orden_arreglos[$i][$campo10])-((($grid_detalle_orden_arreglos[$i][$campo11]-$grid_detalle_orden_arreglos[$i][$campo10])/$tasacambio)*$monedasol);
+		                      else
+		                        $totalaju=((($grid_detalle_orden_arreglos[$i][$campo11]-$grid_detalle_orden_arreglos[$i][$campo10])/$tasacambio)*$monedasol);
+		                    }
+		                    $i++;
+		                  }
+		                }
+		                if ($sigo)
+		                {
+		                  $sigo=self::Grabar_orden_compra($caordcom,$grid_detalle_orden_arreglos,$grid_detalle_recargo,$arreglo_objetos,$arreglo_campos,$moneda,$codigomoneda,$codigo_proveedor,$referencia,$codconpag,$codforent);
+                                  if ($sigo)
+                                  {
+                                      self::Grabar_grid_resumen2($caordcom, $grid_detalle_resumen);
+                                      self::Grabar_grid_entregas2($caordcom, $grid_detalle_entregas);
+                                  }
+		                  if (($afectadis=='R') and ($sigo))
+		                  {
+		                    if (!self::chequear_disponibilidad_incremento_recargo($caordcom,&$detalle_arreglo_recargos_obtenido,&$total_ajuste))
+		                      $sigo=false;
+		                  }
+		                }
+		                if ($sigo)
+		                {
+		                  if ($hay_presupuesto)
+		                  {
+		                    if (count($detalle_arreglo_recargos_obtenido)>0)
+		                    {
+		                      $grabo=self::Grabar_ajuste_solicitud($caordcom,$total_ajuste,$grid_detalle_orden_arreglos,$detalle_arreglo_recargos_obtenido,$tiporec,$tasacambio,$monedasol,$referencia);
+		                      if (!$grabo)
+		                        $sigo=false;
+		                    }
+		                  }
+		                }
+		                if ($sigo)
+		                {
+		                  if ($afectacompro=='S')
+		                  {
+		                    // grabo imputacion
+		                    $c= new Criteria();
+		                    $cadefart_search = CadefartPeer::doSelectOne($c);
+		                    if (($cadefart_search->getComasopre()=='S') and ($cadefart_search->getComreqapr()=='S'))
+		                      $aprobacion='S';
+		                    else
+		                      $aprobacion='N';
+		                    if ($aprobacion=='S')
+		                    {
+		                      if (substr($genero_compromiso, 0, 1)=='S')//SE EJECUTA SI L DOY AL BOTON GENERAR COMPROMISO
+		                        self::Grabar_compromiso($caordcom);
+		                    }
+		                    else
+		                      self::Grabar_compromiso($caordcom);
+		                  }
+		                }
+		                $c= new Criteria();
+		                $opdefemp = OpdefempPeer::doSelectOne($c);
+		                if (count($opdefemp)>0)
+		                {
+		                  if ($opdefemp->getGenctaord()=='S')
+		                  {
+		                      //self::Grabar_comprobante_orden($caordcom) //segunda fase
+		                  }
+		                }
+		            }
+		            else  // $tasacambio==$monedasol
+		            {
+		              self::Grabar_orden_compra($caordcom,$grid_detalle_orden_arreglos,$grid_detalle_recargo,$arreglo_objetos,$arreglo_campos,$moneda,$codigomoneda,$codigo_proveedor,$referencia,$codconpag,$codforent);
+                              self::Grabar_grid_resumen2($caordcom, $grid_detalle_resumen);
+                              self::Grabar_grid_entregas2($caordcom, $grid_detalle_entregas);
+
+		            if ($afectacompro=='S')
+		            {
+		                  // grabo imputacion
+		                $c= new Criteria();
+		                $cadefart_search = CadefartPeer::doSelectOne($c);
+		                if (($cadefart_search->getComasopre()=='S') and ($cadefart_search->getComreqapr()=='S'))
+		                    $aprobacion='S';
+		                else
+		                    $aprobacion='N';
+		                if ($aprobacion=='S')
+		                {
+		                    if (substr($genero_compromiso, 0, 1)=='S')//SE EJECUTA SI L DOY AL BOTON GENERAR COMPROMISO
+		                      self::Grabar_compromiso($caordcom);
+		                }
+		                else
+		                  self::Grabar_compromiso($caordcom);
+		              }
+		             }
+		           }  //if (count($casolart2)>0)
+		        }
+		        else  //REFSOL
+		        {
+		          if (self::Grabar_orden_compra($caordcom,$grid_detalle_orden_arreglos,$grid_detalle_recargo,$arreglo_objetos,$arreglo_campos,$moneda,$codigomoneda,$codigo_proveedor,$referencia,$codconpag,$codforent))
+		          {
+                             self::Grabar_grid_resumen2($caordcom, $grid_detalle_resumen);
+                             self::Grabar_grid_entregas2($caordcom, $grid_detalle_entregas);
+		            if ($afectacompro=='S')
+		            {
+		              // grabo imputacion
+		              $c= new Criteria();
+		              $cadefart_search = CadefartPeer::doSelectOne($c);
+		              if (($cadefart_search->getComasopre()=='S') and ($cadefart_search->getComreqapr()=='S'))
+		                $aprobacion='S';
+		              else
+		                $aprobacion='N';
+
+		              if ($aprobacion=='S')
+		              {
+		                if (substr($genero_compromiso, 0, 1)=='S')//SE EJECUTA SI L DOY AL BOTON GENERAR COMPROMISO
+		                  self::Grabar_compromiso($caordcom);
+		              }
+		              else
+		                self::Grabar_compromiso($caordcom);
+
+		            }
+		            $c= new Criteria();
+		            $opdefemp = OpdefempPeer::doSelectOne($c);
+		            if (count($opdefemp)>0)
+		            {
+		              //if ($opdefemp->getGencomadi()=='S')
+		                  //self::Grabar_comprobante_orden($caordcom) //segunda fase
+		            }
+		          }    // si grabo orden_de_compra
+		     }  //REFSOL
+		      //exit($caordcom->getOrdcom());
+          self::grabarFormasEntrega($caordcom,$grid_detalle_formas_entrega);
+  	}
    return true;
   }
 
@@ -399,15 +455,24 @@ class Orden_compra
                   else
                       $grid['monrgo'] = "0.00";
 
-                  if ($result[$i]['montot']>0)
+                  if ($result[$i]['montot']>0 && $tipopro!='P')
                       $grid['montot'] =$result[$i]['montot'];
+                  else if ($result[$i]['montot']>0 && $tipopro=='P')
+                      $grid['montot'] =$result[$i]['montot'] -$result[$i]['monrgo'];
                   else
                       $grid['montot'] = "0.00";
 
-                    if (($result[$i]['codpar']!='') and ($result[$i]['codcat']))
+                  if ($refsol!="") {
+                  if (($result[$i]['codpar']!='') and ($result[$i]['codcat']))
+                        $grid['codigopre']=$result[$i]['codcat'].'-'.$result[$i]['codpar'];
+                    else
+                        $grid['codigopre']=$partidaregart;
+                  }else {
+                      if (($result[$i]['codpar']!='') and ($result[$i]['codcat']))
                         $grid['codpre']=$result[$i]['codcat'].'-'.$result[$i]['codpar'];
                     else
                         $grid['codpre']=$partidaregart;
+                  }
 
                     if ($result[$i]['codpar']!='')
                         $grid['codpar']=$result[$i]['codpar'];
@@ -481,7 +546,7 @@ class Orden_compra
             }
             if (!$espro1)
             {
-                  $msg="La Contratistas de Bienes o Servicio y Cooperativas de la Orden de Compra es :".$rif." y no es mismo al de la Cotización seleccionada como Nro 1, se cambiara por la Contratistas de Bienes o Servicio y Cooperativas que posee la Prioridad 1";
+                  $msg="La Contratistas de Bienes o Servicio y Cooperativas de la cotizacion asociada a la  Solicitud no se le ha asignado Prioridad";
                   $rifpro=$strrifpro;
             }
         }
@@ -567,7 +632,7 @@ class Orden_compra
  *esta se ejecuta en el executeSalvaranu
  *ya su ves esta es llamada en un javascript en el js almordcom
  */
-  public static function Salvar_anular($caordcom,$descripcion,$fecanu, &$coderror)
+  public static function Salvar_anular($caordcom,$descripcion,$fecanu,&$coderror)
   {
     $coderror=-1;
     $result=array();
@@ -593,8 +658,10 @@ class Orden_compra
         {
           if ($caordcom->getTipord()=='C')
             $numerocomprob='OC'.substr($caordcom->getOrdcom(), 2, 6);
-          elseif($caordcom->getTipord()=='S' || $caordcom->getTipord()=='T')
+          elseif($caordcom->getTipord()=='S')
             $numerocomprob='OS'.substr($caordcom->getOrdcom(), 2, 6);
+          else if ($caordcom->getTipord()=='T')
+            $numerocomprob='CO'.substr($caordcom->getOrdcom(), 2, 6);
           else
             $numerocomprob='OC'.substr($caordcom->getOrdcom(), 2, 6);
 
@@ -623,6 +690,11 @@ class Orden_compra
               $sql4 = "select * from cpimpcau where refere='".$result3[0]['ordcom']."' and STAIMP<>'N'";
           if (!Herramientas::BuscarDatos($sql4,&$result4))
           {
+              $traemot=H::getConfApp('traemot', 'almordcom', 'compras');
+              $loguse=sfContext::getInstance()->getUser()->getAttribute('loguse');
+              if ($traemot=='S')
+                $sql5="Update Caordcom set fecanu='".$fecanu."',staord='N',motanu='".$descripcion."',usuanu='".$loguse."'  where ordcom='".$caordcom->getOrdcom()."'";
+              else
                 $sql5="Update Caordcom set fecanu='".$fecanu."',staord='N'  where ordcom='".$caordcom->getOrdcom()."'";
               Herramientas::insertarRegistros($sql5);
                       $referenciacomp = $result3[0]['refcom'];
@@ -888,6 +960,7 @@ class Orden_compra
       $campo11='dtoart';//tabla Caartord
       $campo9='preart';//tabla Caartord
       $campo13='totart';//tabla Caartord
+      $campo15='codpre';//tabla Caartord
     }
     else
     {
@@ -895,6 +968,7 @@ class Orden_compra
       $campo11='dondes';//tabla Caartsol
       $campo9='costo';//tabla Caartsol
       $campo13='montot';//tabla Caartsol
+      $campo15='codigopre';//tabla Caartsol
     }
     $mitotal = 0;
     $codigo_presupuestario='';
@@ -906,7 +980,7 @@ class Orden_compra
         $j=0;
           while ($j<count($grid_detalle_orden_arreglos))
           {
-            if (str_replace("'","",$grid_detalle_orden_arreglos[$fila]['codpre'])==str_replace("'","",$grid_detalle_orden_arreglos[$j]['codpre']))
+            if (str_replace("'","",$grid_detalle_orden_arreglos[$fila][$campo15])==str_replace("'","",$grid_detalle_orden_arreglos[$j][$campo15]))
             {
               if ($tiporec=='C')
                 $elmonto=str_replace("'","",$grid_detalle_orden_arreglos[$j][$campo13]);
@@ -919,11 +993,11 @@ class Orden_compra
         if ($caordcom->getId()!='')
            $mitotal = $mitotal - $grid_detalle_orden_arreglos[$fila][$campo11];
 
-        if ($grid_detalle_orden_arreglos[$fila]['codpre']!='')
+        if ($grid_detalle_orden_arreglos[$fila][$campo15]!='')
         {
            $codigo_presupuestario =  $grid_detalle_orden_arreglos[$fila]['codcat']."-".$grid_detalle_orden_arreglos[$fila]['codpar'];
            $mondis=Herramientas::Monto_disponible($codigo_presupuestario);
-           if ($mitotal<=$mondis)
+           if (H::toFloat($mitotal)<=H::toFloat($mondis))
            {
                $chequear_disponibilidad=true;
                $sobregiro=false;
@@ -1128,8 +1202,11 @@ class Orden_compra
                       else
                         $cadisrgo_new->setCodpre(str_replace("'","",$arreglo_grid[$j]["codcat"]).'-'.Herramientas::getX_vacio('codrgo','carecarg','codpre',str_replace("'","",$arreglo_grid_recargo[$i]["codrgo"])));
                    }
-                   else
-                      $cadisrgo_new->setCodpre(str_replace("'","",$arreglo_grid[$j]["codpre"]));
+                   else {
+                      if ($referencia==1)
+                      $cadisrgo_new->setCodpre(str_replace("'","",$arreglo_grid[$j]["codigopre"]));
+                      else $cadisrgo_new->setCodpre(str_replace("'","",$arreglo_grid[$j]["codpre"]));
+                   }
                 }
                 self::monto_recargo($acum, $arreglo_grid_recargo[$i]["recargototal"], $total_articulo,&$monto_recargo);
                 //$cadisrgo_new->setMonrgo(str_replace("'","",$arreglo_grid[$j][$campo11]));
@@ -1187,6 +1264,12 @@ class Orden_compra
               $cpcompro_new->setCedrif($caordcom->getRifpro());
               $cpcompro_new->setStacom('A');
               $cpcompro_new->setTipo($caordcom->getTipo());
+              $reqaut=H::getX('TIPCOM','Cpdoccom','Reqaut',$caordcom->getDoccom());
+              if ($reqaut=='S')              
+                $cpcompro_new->setAprcom('N');
+              else 
+                $cpcompro_new->setAprcom('S');
+              
               $cpcompro_new->save();
         $result=array();
         $sql1='';
@@ -1346,12 +1429,15 @@ class Orden_compra
 
   public static function Grabar_orden_compra($caordcom,$grid_detalle_orden_arreglos,$grid_detalle_recargo,$arreglo_objetos,$arreglo_campos,$moneda,$codigomoneda,$codigo_proveedor,$referencia,$codconpag,$codforent)
   {
+    $prefijomixto=H::getConfApp('prefijomixto', 'compras', 'almordcom');
     if (Herramientas::getX_vacio('ordcom','caordcom','ordcom',$caordcom->getOrdcom())=='')
     {
-        if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+        if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M'))
               $tipord='corser';
-           else
-              $tipord='corcom';
+        else if ($caordcom->getTipord()=='T')
+            $tipord='corcont';
+        else
+            $tipord='corcom';
 
           if (Herramientas::getVerCorrelativo($tipord,'cacorrel',&$r))
           {
@@ -1361,6 +1447,56 @@ class Orden_compra
               	  $longitud='8';
               	  $nroorden=0;
               	  $formato='';
+                  $noformatcont="";
+                    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+                    if ($varemp)
+                    if(array_key_exists('generales',$varemp)) {
+                       if(array_key_exists('noformatcont',$varemp['generales']))
+                       {
+                        $noformatcont=$varemp['generales']['noformatcont'];
+                       }
+                 }
+
+                  if ($noformatcont=='S')
+                  {
+                    $encontrado=false;
+	            while (!$encontrado)
+	            {
+	              $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+	                  if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M'))
+	                  $numero='OS'.(substr($numero,2,strlen($numero)));
+                          else if ($caordcom->getTipord()=='T')
+                            $numero='CO'.(substr($numero,2,strlen($numero)));
+	                  else
+	                    $numero='OC'.(substr($numero,2,strlen($numero)));
+	                $sql="select ordcom from caordcom where ordcom='".$numero."'";
+	                if (Herramientas::BuscarDatos($sql,&$result))
+	                {
+	                  $r=$r+1;
+	                }
+	                else
+	                {
+	                  $encontrado=true;
+	                }
+	            }//while (!$encontrado)
+                    $caordcom->setOrdcom(str_pad($r, 8, '0', STR_PAD_LEFT));
+                    Herramientas::getSalvarCorrelativo($tipord,'cacorrel','cacorrel',$r,&$msg);
+                
+
+                    if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M') || ($caordcom->getTipord()=='T'))
+                     {
+                       if ($prefijomixto!="" && $caordcom->getTipord()=='M')
+                          $caordcom->setOrdcom($prefijomixto.substr($caordcom->getOrdcom(), 2, 6));
+                       else if ($caordcom->getTipord()=='T')
+                          $caordcom->setOrdcom('CO'.substr($caordcom->getOrdcom(), 2, 6));
+                       else $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
+                     }
+                     else
+                     {
+                       $caordcom->setOrdcom('OC'.substr($caordcom->getOrdcom(), 2, 6));
+                     }
+                  }
+                  else {
 			      $c = new Criteria();
 			      $c->add(ContabaPeer::CODEMP,'001');
 			      $per = ContabaPeer::doSelectOne($c);
@@ -1414,10 +1550,12 @@ class Orden_compra
 	            while (!$encontrado)
 	            {
 	              $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
-	                  if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
-	                  $numero='OS'.(substr($numero,2,strlen($numero)));
-	                else
-	                    $numero='OC'.(substr($numero,2,strlen($numero)));
+	                  if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M'))
+                              $numero='OS'.(substr($numero,2,strlen($numero)));
+                          else if ($caordcom->getTipord()=='T')
+                              $numero='CO'.(substr($numero,2,strlen($numero)));
+                          else
+                              $numero='OC'.(substr($numero,2,strlen($numero)));
 	                $sql="select ordcom from caordcom where ordcom='".$numero."'";
 	                if (Herramientas::BuscarDatos($sql,&$result))
 	                {
@@ -1432,11 +1570,18 @@ class Orden_compra
                 Herramientas::getSalvarCorrelativo($tipord,'cacorrel','cacorrel',$r,&$msg);
                 //$caordcom->setOrdcom(Herramientas::getBuscar_correlativo($caordcom->getOrdcom(),'cadefart',$tipord,'caordcom','ordcom'));
 
-                if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
-                 $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
-                else
-                 $caordcom->setOrdcom('OC'.substr($caordcom->getOrdcom(), 2, 6));
+                if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M') || ($caordcom->getTipord()=='T'))
+                 {
+                   if ($prefijomixto!="" && $caordcom->getTipord()=='M')
+                      $caordcom->setOrdcom($prefijomixto.substr($caordcom->getOrdcom(), 2, 6));
+                   else if ($caordcom->getTipord()=='T')
+                      $caordcom->setOrdcom('CO'.substr($caordcom->getOrdcom(), 2, 6));
+                   else $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
               }
+                else {
+                 $caordcom->setOrdcom('OC'.substr($caordcom->getOrdcom(), 2, 6)); }
+              }
+                }
               }
               else
               {
@@ -1444,11 +1589,18 @@ class Orden_compra
                 $caordcom->setOrdcom(str_pad($caordcom->getOrdcom(), 8, '0', STR_PAD_LEFT));
                 //$caordcom->setOrdcom(Herramientas::getBuscar_correlativo($caordcom->getOrdcom(),'cadefart',$tipord,'caordcom','ordcom'));
 
-                if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
-		          $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
-		        else
-		          $caordcom->setOrdcom('OC'.substr($caordcom->getOrdcom(), 2, 6));
+                if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='M') || ($caordcom->getTipord()=='T'))
+		 {
+                     if ($prefijomixto!="" && $caordcom->getTipord()=='M')
+                        $caordcom->setOrdcom($prefijomixto.substr($caordcom->getOrdcom(), 2, 6));
+                     else if ($caordcom->getTipord()=='T')
+                        $caordcom->setOrdcom('CO'.substr($caordcom->getOrdcom(), 2, 6));
+                     else $caordcom->setOrdcom('OS'.substr($caordcom->getOrdcom(), 2, 6));
+
               }
+		 else {
+		  $caordcom->setOrdcom('OC'.substr($caordcom->getOrdcom(), 2, 6)); }
+           }
            }
 
           // campos
@@ -1494,19 +1646,34 @@ class Orden_compra
               $caordcom_new->setCodmun($caordcom->getCodmun());
               $caordcom_new->setAplart($caordcom->getAplart());
               $caordcom_new->setAplart6($caordcom->getAplart6());
+              $caordcom_new->setUnimed($caordcom->getUnimed());
 
               $caordcom_new->setNumsigecof($caordcom->getNumsigecof());
               $caordcom_new->setFecsigecof($caordcom->getFecsigecof());
               $caordcom_new->setExpsigecof($caordcom->getExpsigecof());
+              $caordcom_new->setCodcen($caordcom->getCodcen());
+              $caordcom_new->setCodcenaco($caordcom->getCodcenaco());
               $caordcom_new->setForent($codforent);
               $caordcom_new->setConpag($codconpag);
               $caordcom_new->getMonord();
               $caordcom->getOrdcom();
+
+              if ($caordcom->getManorddon()=='S')  // En Caso de una OC de Donación
+              {
+                  $caordcom_new->setTipocom($caordcom->getTipocom());
+                  $caordcom_new->setCeddon($caordcom->getCeddon());
+                  $caordcom_new->setNomdon($caordcom->getNomdon());
+                  $caordcom_new->setFecdon($caordcom->getFecdon());
+                  $caordcom_new->setSexdon($caordcom->getSexdon());
+                  $caordcom_new->setEdadon($caordcom->getEdadon());
+                  $caordcom_new->setSerdon($caordcom->getSerdon());
+              }
+
               $caordcom_new->save();
               self::Grabar_detalles_orden_compra($caordcom,$grid_detalle_orden_objetos,$grid_detalle_recargo,$total_recargo,$referencia,$codconpag,$codforent);//grabo en el grid general de detalle de la orden
-              self::Grabar_grid_resumen($caordcom,$grid_detalle_resumen_objetos);//grabo en el grid resumen
+              //self::Grabar_grid_resumen($caordcom,$grid_detalle_resumen_objetos);//grabo en el grid resumen
               //self::Grabar_recargos($caordcom,$grid_detalle_recargo);//grabo recargo general
-              self::Grabar_grid_entregas($caordcom,$grid_detalle_entrega_objetos);//grabo en el grid entrega
+              //self::Grabar_grid_entregas($caordcom,$grid_detalle_entrega_objetos);//grabo en el grid entrega
               //self::Grabar_distribucion_recargo($caordcom,$grid_detalle_orden_arreglos,$grid_detalle_recargo,$referencia);
               self::grabarDistribucionRgo($caordcom,$grid_detalle_orden_arreglos);
               self::grabarRecargo($caordcom);
@@ -1522,6 +1689,18 @@ class Orden_compra
       $caordcom_mod= CaordcomPeer::doSelectOne($c);
       if (count($caordcom_mod)>0)
       {
+          $moddesord=H::getConfApp('moddesord', 'almordcom', 'compras');
+          if ($moddesord=='S')
+          {
+              $t= new Criteria();
+              $t->add(CpimpcauPeer::REFERE,$caordcom->getOrdcom());
+              $registro= CpimpcauPeer::doSelect($t);
+              if (!$registro)
+              {
+                 $caordcom_mod->setDesord($caordcom->getDesord());
+              }
+          }
+
 		  $caordcom_mod->setCodmedcom($caordcom->getCodmedcom());
 		  $caordcom_mod->setCodprocom($caordcom->getCodprocom());
 		  $caordcom_mod->setCodpai($caordcom->getCodpai());
@@ -1532,9 +1711,44 @@ class Orden_compra
 		  $caordcom_mod->setNumsigecof($caordcom->getNumsigecof());
 		  $caordcom_mod->setFecsigecof($caordcom->getFecsigecof());
 		  $caordcom_mod->setExpsigecof($caordcom->getExpsigecof());
-          $caordcom_mod->setDesord($caordcom->getDesord());
-          $caordcom_mod->setNotord($caordcom->getNotord());
+                  $caordcom_mod->setCodcen($caordcom->getCodcen());
+                  $caordcom_mod->setCodcenaco($caordcom->getCodcenaco());
+                  $caordcom_mod->setDesord($caordcom->getDesord());
+                  $caordcom_mod->setNotord($caordcom->getNotord());
+                  $caordcom_mod->setUnimed($caordcom->getUnimed());
+
+                  if ($caordcom->getManorddon()=='S') // En Caso de una OC de Donación
+                  {
+                      $caordcom_mod->setTipocom($caordcom->getTipocom());
+                      $caordcom_mod->setCeddon($caordcom->getCeddon());
+                      $caordcom_mod->setNomdon($caordcom->getNomdon());
+                      $caordcom_mod->setFecdon($caordcom->getFecdon());
+                      $caordcom_mod->setSexdon($caordcom->getSexdon());
+                      $caordcom_mod->setEdadon($caordcom->getEdadon());
+                      $caordcom_mod->setSerdon($caordcom->getSerdon());
+                  }
+
+        if ($caordcom_mod->getCompro()=='N') {
+         $caordcom_mod->setMonord($caordcom->getMonord());
           $caordcom_mod->save();
+        // campos
+        $total_detalle_orden=$arreglo_campos[0];
+        $total_descuento=$arreglo_campos[1];
+        $total_recargo=$arreglo_campos[2];
+        //arreglos de arreglos
+        $grid_detalle_orden_objetos=$grid_detalle_orden_arreglos;
+        //arreglos de objetos
+        $grid_detalle_resumen_objetos=$arreglo_objetos[0];
+        $grid_detalle_entrega_objetos=$arreglo_objetos[1];
+
+        self::Grabar_detalles_orden_compra($caordcom,$grid_detalle_orden_objetos,$grid_detalle_recargo,$total_recargo,$referencia,$codconpag,$codforent);//grabo en el grid general de detalle de la orden
+        //self::Grabar_grid_resumen($caordcom,$grid_detalle_resumen_objetos);//grabo en el grid resumen
+        //self::Grabar_grid_entregas($caordcom,$grid_detalle_entrega_objetos);//grabo en el grid entrega
+        self::grabarDistribucionRgo($caordcom,$grid_detalle_orden_arreglos);
+        self::grabarRecargo($caordcom);
+        return true;
+        }else  { $caordcom_mod->save(); }
+
       }
       return false;
     }
@@ -1602,7 +1816,7 @@ class Orden_compra
       while ($j<count($x)) {
       if ($x[$j]->getCodart()!="")
       {
-        $x[$j]->setOrdcom($caordcom->getOrdcom());
+        $x[$j]->setOrdcom($caordcom->getOrdcom());                
         $x[$j]->save();
       }
         $j++;
@@ -1617,6 +1831,56 @@ class Orden_compra
 
       }
     }
+
+      public static function Grabar_grid_resumen2($caordcom,$grid_resumen)
+  {
+      if ($caordcom->getId()){
+    		Herramientas::EliminarRegistro("Caresordcom", "Ordcom", $caordcom->getOrdcom());
+    	}
+
+      $i=0;
+      while ($i<count($grid_resumen)) {
+      if ($grid_resumen[$i]['codart']!="")
+      {
+        $caresordcom_new = new Caresordcom();
+        $caresordcom_new->setOrdcom($caordcom->getOrdcom());
+        $caresordcom_new->setCodart(str_replace("'","",$grid_resumen[$i]['codart']));
+        $caresordcom_new->setDesres($grid_resumen[$i]['desres']);
+        $caresordcom_new->setCodartpro(str_replace("'","",$grid_resumen[$i]['codartpro']));
+        $caresordcom_new->setCanord(str_replace("'","",$grid_resumen[$i]['canord']));
+        $caresordcom_new->setCanaju(str_replace("'","",$grid_resumen[$i]['canaju']));
+        $caresordcom_new->setCanrec(str_replace("'","",$grid_resumen[$i]['canrec']));
+        $caresordcom_new->setCantot(str_replace("'","",$grid_resumen[$i]['cantot']));
+        $caresordcom_new->setCosto(str_replace("'","",$grid_resumen[$i]['costo']));
+        $caresordcom_new->setRgoart(str_replace("'","",$grid_resumen[$i]['rgoart']));
+        $caresordcom_new->setTotart(str_replace("'","",$grid_resumen[$i]['totart']));
+        $caresordcom_new->save();
+      }
+        $i++;
+      }
+    }
+
+      public static function Grabar_grid_entregas2($caordcom,$grid_entregas)
+  {
+      if ($caordcom->getId()){
+    		Herramientas::EliminarRegistro("Caartfec", "Ordcom", $caordcom->getOrdcom());
+    	}
+
+      $i=0;
+      while ($i<count($grid_entregas)) {
+      if ($grid_entregas[$i]['codart']!="")
+      {
+        $caartfec_new = new Caartfec();
+        $caartfec_new->setOrdcom($caordcom->getOrdcom());
+        $caartfec_new->setCodart(str_replace("'","",$grid_entregas[$i]['codart']));
+        $caartfec_new->setDesart($grid_entregas[$i]['desart']);
+        $caartfec_new->setCanart(str_replace("'","",$grid_entregas[$i]['canart']));
+        $caartfec_new->setFecent(str_replace("'","",$grid_entregas[$i]['fecent']));        
+        $caartfec_new->save();
+      }
+        $i++;
+      }
+  }
 
 
   public static function Grabar_detalles_orden_compra($caordcom,$grid_detalle,$grid_detalle_recargo,$total_recargo,$referencia,$codconpag,$codforent)
@@ -1645,6 +1909,9 @@ class Orden_compra
     }
     if (count($grid_detalle)>0)
     {
+    	if ($caordcom->getId()){
+    		Herramientas::EliminarRegistro("Caartord", "Ordcom", $caordcom->getOrdcom());
+    	}
       $i=0;
       $a=0;
         while ($i<count($grid_detalle))
@@ -1969,8 +2236,10 @@ class Orden_compra
                       $genctaord = $result[0]['genctaord'];
                     if ($caordcom->getTipord()=='C')
                       $numerocomprobante='OC'.substr($caordcom->getOrdcom(), 2, 6);
-                    elseif   ($caordcom->getTipord()=='S' || $caordcom->getTipord()=='T')
+                    elseif   ($caordcom->getTipord()=='S')
                       $numerocomprobante='OS'.substr($caordcom->getOrdcom(), 2, 6);
+                    elseif ($caordcom->getTipord()=='T')
+                      $numerocomprobante='CO'.substr($caordcom->getOrdcom(), 2, 6);
                     else
                       $numerocomprobante='OC'.substr($caordcom->getOrdcom(), 2, 6);
 
@@ -1997,7 +2266,7 @@ class Orden_compra
 
                   Herramientas::EliminarRegistro("Caartfec", "Ordcom", $caordcom->getOrdcom());
 
-                  if ($afectacompro='S')
+                  if ($afectacompro=='S')
                     self::Eliminar_compromiso($caordcom);
                   self::Eliminar_recargos($caordcom);
                   //Actualizamos la Solicitud de Egresos
@@ -2190,26 +2459,44 @@ class Orden_compra
   {
 
   $arreglo_grid=$grid_detalle_orden_arreglos;
+      $t= new Criteria();
+      $t->add(CpdoccomPeer::TIPCOM,$caordcom->getDoccom());
+      $reg= CpdoccomPeer::doSelectOne($t);
+      if ($reg)
+      {
+      	$refprc=$reg->getRefprc();
+      	$afeprc=$reg->getAfeprc();
+      	$afecom=$reg->getAfecom();
+      	$afedis=$reg->getAfedis();
+      }else {
+      	$refprc="";
+      	$afeprc="";
+      	$afecom="";
+      	$afedis="";
+      }
 
   $j=0;
   while ($j<count($arreglo_grid))
   {
    $marcado=$arreglo_grid[$j]["check"];
    $unidad=$arreglo_grid[$j]["codcat"];
-   $codpresu=$arreglo_grid[$j]["codpre"];;
+   if ($caordcom->getRefsol()!="" && $caordcom->getId()=="")
+   $codpresu=$arreglo_grid[$j]["codigopre"];
+   else $codpresu=$arreglo_grid[$j]["codpre"];
    if ($marcado=="1")
    {
-    if ($caordcom->getRefsol()!="")
+    if ($caordcom->getRefsol()!="" && $caordcom->getId()=="")
     //si la orden de compra refiere a Solicitud de egreso, los recargos son iguales a los de la solicitud,
     //de lo contrario si es orden de compra directa los recargos son los que el usuario haya introducido
     {
-    $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
-    $c= new Criteria();
-    $c->add(CadisrgoPeer::REQART,$caordcom->getRefsol());
-    $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
-    $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
-    $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
-    $recargos= CadisrgoPeer::doSelect($c);
+    	
+	    $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
+	    $c= new Criteria();
+	    $c->add(CadisrgoPeer::REQART,$caordcom->getRefsol());
+	    $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
+	    $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
+	    $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
+	    $recargos= CadisrgoPeer::doSelect($c);
          foreach ($recargos as $cadisrgo_ordcom)
          {
            $distribucion = new Cadisrgo();
@@ -2222,12 +2509,82 @@ class Orden_compra
            $distribucion->setTipdoc($caordcom->getDoccom());
            $distribucion->save();
          }
+    	
+
+         if ($refprc=='N' && $afeprc=='S' && $afecom=='S' && $afedis=='R')
+         {
+         	 if ($arreglo_grid[$j]["datosrecargo"]!='')
+		     {
+		    $cadenarec=split('!',$arreglo_grid[$j]["datosrecargo"]);
+	              $c= new Criteria();
+		        $c->add(CadisrgoPeer::REQART,$caordcom->getOrdcom());
+		        $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
+		        $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
+		        //$c->add(CadisrgoPeer::CODRGO,$aux2[0]);
+		        $c->add(CadisrgoPeer::TIPDOC,$caordcom->getDoccom());
+		        CadisrgoPeer::doDelete($c);
+		        $r=0;
+		        while ($r<(count($cadenarec)-1))
+		        {
+		          $aux=$cadenarec[$r];
+		          $aux2=split('_',$aux);
+		          if ($aux2[0]!="" && Herramientas::toFloat($aux2[4])>0)
+		          {
+		            $distribucion = new Cadisrgo();
+		          $distribucion->setReqart($caordcom->getOrdcom());
+		          $distribucion->setCodart(str_replace("'","",$arreglo_grid[$j]["codart"]));
+		          $distribucion->setCodcat(str_replace("'","",$arreglo_grid[$j]["codcat"]));
+		          $distribucion->setCodrgo($aux2[0]);
+
+		          $c = new Criteria();
+		          $tiporec = CadefartPeer::doSelectOne($c);
+		          if ($tiporec)
+		          {
+		          if ($tiporec->getAsiparrec()!='C')
+		          {
+		            $c = new Criteria();
+		            $c->add(CarecargPeer::CODRGO,$aux2[0]);
+		            $presupuesto = CarecargPeer::doSelectOne($c);
+		            if ($presupuesto)
+		            {
+		            if ($tiporec->getAsiparrec()=='P')
+		            {
+		            $distribucion->setCodpre($presupuesto->getCodpre());
+		            }
+		            else
+		            {
+		            $codigo= $unidad.'-'.$presupuesto->getCodpre();
+		            $distribucion->setCodpre($codigo);
+		            }
+		            }
+		          }
+		          else
+		          {
+		            $distribucion->setCodpre($codpresu);
+		          }
+		          }
+		          $montorecargo= Herramientas::toFloat($aux2[4]);
+		          $distribucion->setMonrgo($montorecargo);
+		          $distribucion->setTipdoc($caordcom->getDoccom());
+		          $distribucion->save();
+		          }
+		          $r++;
+		        }//while
+		     }//if ($x[$j]->getDatosrecargo()!="")
+         }
     }
     else//if ($caordcom->getRefsol()!="")
     {
      if ($arreglo_grid[$j]["datosrecargo"]!='')
      {
     $cadenarec=split('!',$arreglo_grid[$j]["datosrecargo"]);
+        $c= new Criteria();
+        $c->add(CadisrgoPeer::REQART,$caordcom->getOrdcom());
+        $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
+        $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
+        //$c->add(CadisrgoPeer::CODRGO,$aux2[0]);
+        $c->add(CadisrgoPeer::TIPDOC,$caordcom->getDoccom());
+        CadisrgoPeer::doDelete($c);
         $r=0;
         while ($r<(count($cadenarec)-1))
         {
@@ -2235,14 +2592,6 @@ class Orden_compra
           $aux2=split('_',$aux);
           if ($aux2[0]!="" && Herramientas::toFloat($aux2[4])>0)
           {
-              $c= new Criteria();
-        $c->add(CadisrgoPeer::REQART,$caordcom->getOrdcom());
-        $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
-        $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
-        $c->add(CadisrgoPeer::CODRGO,$aux2[0]);
-        $c->add(CadisrgoPeer::TIPDOC,$caordcom->getDoccom());
-        CadisrgoPeer::doDelete($c);
-
             $distribucion = new Cadisrgo();
           $distribucion->setReqart($caordcom->getOrdcom());
           $distribucion->setCodart(str_replace("'","",$arreglo_grid[$j]["codart"]));
@@ -2324,7 +2673,9 @@ class Orden_compra
   {
    $marcado=$arreglo_grid[$j]["check"];
    $unidad=$arreglo_grid[$j]["codcat"];
-   $codpresu=$arreglo_grid[$j]["codpre"];;
+   if ($caordcom->getRefsol()!="")
+   $codpresu=$arreglo_grid[$j]["codigopre"];
+   else $codpresu=$arreglo_grid[$j]["codpre"];
    if ($marcado=="1")
    {
     if ($caordcom->getRefsol()!="")
@@ -2568,8 +2919,10 @@ class Orden_compra
     $numerocomprob= '########'; $codigocuenta=""; $codigocuenta2="";
     $tipo2=""; $tipo=""; $des2=""; $des=""; $monto2=""; $monto="";
 
-    if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+    if (($caordcom->getTipord()=='S'))
       $tipord='corser';
+    else if ($caordcom->getTipord()=='T')
+            $tipord='corcont';
     else
       $tipord='corcom';
 
@@ -2581,8 +2934,10 @@ class Orden_compra
         while (!$encontrado)
         {
           $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
-          if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+          if (($caordcom->getTipord()=='S'))
             $numero='OS'.(substr($numero,2,strlen($numero)));
+          else if ($caordcom->getTipord()=='T')
+            $numero='CO'.(substr($numero,2,strlen($numero)));
           else
             $numero='OC'.(substr($numero,2,strlen($numero)));
           $sql="select ordcom from caordcom where ordcom='".$numero."'";
@@ -2604,8 +2959,10 @@ class Orden_compra
       }
     }
 
-    if (($caordcom->getTipord()=='S') || ($caordcom->getTipord()=='T'))
+    if (($caordcom->getTipord()=='S'))
       $reftra='OS'.substr($reftra, 2, 6);
+    else if ($caordcom->getTipord()=='T')
+      $reftra='CO'.substr($reftra, 2, 6);
     else
       $reftra='OC'.substr($reftra, 2, 6);
 
@@ -2789,6 +3146,322 @@ class Orden_compra
   	}
   	return $total;
   }
+  
+  public static function verificarDispComprometer($caordcom,&$error1,&$cod1,&$error2,&$error3)
+  {
+    $hay_disponibilidad=false;
+  	$error1=-1;
+  	$error2=-1;	
+        $error3=-1;
+	$cod1="";
+        $fec=split('-',$caordcom->getFecord());
+        $feccom=$fec[2].'/'.$fec[1].'/'.$fec[0];
+      if (!Herramientas::validarPeriodoPresuesto($feccom))
+      {
+        $error3=151;
+        return false;
+      }
+  	if ($caordcom->AfectaDisponibilidad())
+	{
+		$l= new Criteria();
+		$l->add(CaartordPeer::ORDCOM,$caordcom->getOrdcom());
+		$objetos= CaartordPeer::doSelect($l);
+		if ($objetos)
+		{
+			foreach ($objetos as $obj)
+			{
+				$hay_disponibilidad=true;
+				self::chequear_disponibilidad_presupuesto2($caordcom, $obj->getCodpre(), $obj->getDtoart(), $obj->getCodcat(), $obj->getCodpar(), &$sobregiro, &$codigo_presupuestario_sin_disponibilidad);
+				if ($sobregiro)
+	            { $hay_disponibilidad=false; }
+	
+	            if(!$hay_disponibilidad)
+	            {
+	              $cod1=$codigo_presupuestario_sin_disponibilidad;
+	              $error1=118;
+	              return false;
+	            }
+			}
+			self::armarArregloTotalesRecargo2($caordcom,&$grid_recargos_detalle);
+			if ($hay_disponibilidad)
+			{
+			$i=0;
+            $grid_total_unidad=array();
+            if (count($grid_recargos_detalle)>0)
+            {
+              while ($i<count($grid_recargos_detalle))
+              {
+                if ($grid_recargos_detalle[$i]['monrgo'] >0)
+                {
+                $hay_disponiblididad_recargos=self::chequear_disponibilidad_recargo2($grid_recargos_detalle[$i]['codrgo'],$grid_recargos_detalle[$i]['monrgo'],$objetos,$grid_recargos_detalle,&$sobregiro_recargo,$grid_total_unidad);
+                if (!$hay_disponiblididad_recargos)
+                {
+                    $error2=119;
+                    return false;
+                }
+              }
+              $i++;
+              }
+            }				
+			}
+		}
+	}
+
+  }
+  
+  
+  public static function chequear_disponibilidad_presupuesto2($caordcom,$codpre,$dtco,$categoria,$partida,&$sobregiro,&$codigo_presupuestario_sin_disponibilidad)
+  {
+   
+    $mitotal = 0;
+    $codigo_presupuestario='';
+    $chequear_disponibilidad=false;
+    $sobregiro=true;
+    $tiporec = Herramientas::getX_vacio('codemp','cadefart','asiparrec','001');
+	$l= new Criteria();
+	$l->add(CaartordPeer::ORDCOM,$caordcom->getOrdcom());
+	$objetos= CaartordPeer::doSelect($l);
+	if ($objetos)
+	{
+		foreach ($objetos as $obj)
+		{
+			if ($codpre==$obj->getCodpre())
+			{
+				if ($tiporec=='C')
+                  $elmonto=$obj->getTotart();
+                else
+                  $elmonto=($obj->getTotart()-$obj->getRgoart());
+				
+              $mitotal=$mitotal+$elmonto;
+			}
+		}
+		
+		if ($caordcom->getId()!='')
+           $mitotal = $mitotal - $dtco;
+		if ($codpre!="")
+		{
+		   $codigo_presupuestario =  $categoria."-".$partida;
+           $mondis=Herramientas::Monto_disponible($codigo_presupuestario);
+           if ($mitotal<=$mondis)
+           {
+               $chequear_disponibilidad=true;
+               $sobregiro=false;
+           }
+		}
+		
+	}
+    $codigo_presupuestario_sin_disponibilidad=$codigo_presupuestario;
+    return $chequear_disponibilidad;
+  }
+  
+  public static function armarArregloTotalesRecargo2($caordcom,&$arrTotRec)
+  {
+    $arr_recargo=array();
+    $indarr_rec=0;
+    $l= new Criteria();
+	$l->add(CaartordPeer::ORDCOM,$caordcom->getOrdcom());
+	$objetos= CaartordPeer::doSelect($l);
+	if ($objetos)
+	{
+		foreach ($objetos as $obj)
+		{
+		   $marcado=$obj->getCheck();
+		   $unidad=$obj->getCodcat();
+		   $codpresu=$obj->getCodpre();
+		   if ($marcado=="1")
+		   {
+		     if ($obj->getDatosrecargo()!='')
+		     {
+  		        $cadenarec=split('!',$obj->getDatosrecargo());
+		        $r=0;
+		        while ($r<(count($cadenarec)-1))
+		        {
+		          $aux=$cadenarec[$r];
+		          $aux2=split('_',$aux);
+		          if ($aux2[0]!="" && Herramientas::toFloat($aux2[4])>0)
+		          {
+		              $arr_recargo[$indarr_rec]['codart']=$obj->getCodart();
+			          $arr_recargo[$indarr_rec]['codcat']=$obj->getCodcat();
+			          $arr_recargo[$indarr_rec]['codrgo']=$aux2[0];
+			          $montorecargo= Herramientas::toFloat($aux2[4]);
+			          $arr_recargo[$indarr_rec]['monrgo']=$montorecargo;
+			           $arr_recargo[$indarr_rec]['codpar']=$aux2[5];
+			          $indarr_rec++;
+		          }
+		          $r++;
+		        }
+		     }
+		   }
+		}
+	}
+
+    $h = 0;
+    $arrTotRec=array();
+    $cont=-1;
+    while ($h < count($arr_recargo))
+     {
+        $codrgo=$arr_recargo[$h]['codrgo'];
+        if (SolicituddeEgresos::BuscarCodrgoenArreglo($arrTotRec,$codrgo,&$j))
+        {
+            $arrTotRec[$j]['monrgo']= $arrTotRec[$j]['monrgo'] + $arr_recargo[$h]['monrgo'];
+        }
+        else
+        {
+            $cont++;
+            $arrTotRec[$cont]['codrgo'] = $arr_recargo[$h]['codrgo'];//codrgo
+            $arrTotRec[$cont]['monrgo'] = $arr_recargo[$h]['monrgo'];//monrgo
+        }
+      $h++;
+     }
+  }
+  
+  public static function chequear_disponibilidad_recargo2($codigo,$elmonto,$objetos,$grid_detalle_recargo,&$sobregiro_recargo,$grid_total_unidad)
+  {
+      $codigo=str_replace("'","",$codigo);
+      $chequear_disponibilidad_recargo = false;
+      $sobregiro_recargo = true;
+      $tiporec = Herramientas::getX_vacio('codemp','cadefart','asiparrec','001');
+      if ($codigo=='')
+        $mitotal=0;
+      else
+        $mitotal=$elmonto;
+      $result=array();
+      $sql = "Select codpre from CaRecArg where CodRgo = '".$codigo."'";
+      if (Herramientas::BuscarDatos($sql,&$result))
+      {
+          if (trim($tiporec)=='P')
+          {
+            $mitotal=$elmonto;
+            $codigo_presupuestario = str_replace("'","",$result[0]['codpre']);
+            $mondis=Herramientas::Monto_disponible($codigo_presupuestario);
+            if ($mitotal <= $mondis)
+            {
+                $chequear_disponibilidad_recargo = true;
+                $sobregiro_recargo = false;
+            }
+          }
+        elseif (trim($tiporec)=='R')
+        {
+            $grid_total_unidad=self::acumular_unidad2($elmonto,$objetos,$grid_total_unidad);
+            $j=0;
+            while ($j<count($grid_total_unidad))
+            {
+                $codigo_presupuestario = $grid_total_unidad[$j][0].'-'.$result[0]['codpre'];
+                $mitotal=$grid_total_unidad[$j][1];
+                $mondis=Herramientas::Monto_disponible($codigo_presupuestario);
+                if ($mitotal <= $mondis)
+                {
+                    $chequear_disponibilidad_recargo = true;
+                    $sobregiro_recargo = false;
+                }
+                $j++;
+            }
+          }
+       }
+
+      return $chequear_disponibilidad_recargo;
+  }  
+  
+  public static function acumular_unidad2($elmonto,$objetos,$grid_total_unidad)
+  {
+    $acum=0;
+	foreach ($objetos as $obj)
+	{
+		if ($obj->getCheck()=='1' && $obj->getPreart()>0)
+		  $acum= $acum + ($obj->getCanord() * $obj->getPreart());
+	}
+
+	foreach ($objetos as $obj)
+	{
+		if ($obj->getCheck()=='1')
+		{
+			$totart=$obj->getCanord() * $obj->getPreart();
+			$j=0;
+	        if (count($grid_total_unidad)>0)
+	        {
+	            while ($j<count($grid_total_unidad))
+	            {
+	                $encontrado=false;
+	                if ($obj->getCodcat()==$grid_total_unidad[$j][0])
+	                {
+	                  $encontrado=true;
+	                  $fila=$j;
+	                  break;
+	                }
+	                $j++;
+	            }
+	            if ($encontrado)
+	            {
+	              self::monto_recargo($acum,$elmonto,$totart,&$monto_recargo);
+	              $grid_total_unidad[$fila][1]=$grid_total_unidad[$fila][1]+$monto_recargo;
+	            }
+	            else
+	            {
+	              $var=count($grid_total_unidad);
+	              $grid_total_unidad[$var][0]=$obj->getCodcat();
+	              self::monto_recargo($acum,$elmonto,$totart,&$monto_recargo);
+	              $grid_total_unidad[$var][1]=$monto_recargo;
+	            }
+	        }
+	        else
+	        {
+	          $grid_total_unidad[$j][0]=$obj->getCodcat();
+	          self::monto_recargo($acum,$elmonto,$totart,&$monto_recargo);
+	          $grid_total_unidad[$j][1]=$monto_recargo;
+	        }
+		}
+	}
+
+     return $grid_total_unidad;
+  }  
+
+  public static function grabarFormasEntrega($caordcom,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCodart()!='' && $x[$j]->getCodalm()!='' && $x[$j]->getCanent()>0)
+      {
+      	$x[$j]->setOrdcom($caordcom->getOrdcom());
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
+  public static function VerificarDuplicidadArticulosDetalleOrden($grid_detalle_detallado, $codart){
+
+
+    foreach($grid_detalle_detallado as $det){
+      $count = 0;
+      foreach ($grid_detalle_detallado as $detdet){
+        if($det['codart']==$detdet['codart'] && $det['codart']==$detdet['codart']){
+          $count++;
+          $codart = $det['codart'];
+        }
+      }
+
+      if($count>1) return false;
+
+    }
+    return true;
+
+
+  }
+
+
 
 
 }// fin

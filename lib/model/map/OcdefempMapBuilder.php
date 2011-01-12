@@ -102,6 +102,8 @@ class OcdefempMapBuilder {
 
 		$tMap->addColumn('TIPCOM', 'Tipcom', 'string', CreoleTypes::VARCHAR, false, 4);
 
+		$tMap->addColumn('NUMINI', 'Numini', 'string', CreoleTypes::VARCHAR, false, 10);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

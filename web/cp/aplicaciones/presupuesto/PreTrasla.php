@@ -1,10 +1,11 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
@@ -20,12 +21,17 @@ $tools= new tools();
 
 
 $modulo="";
-$forma="Traslados";
+$newetiq=$_SESSION["configemp"]["aplicacion"]["presupuesto"]["modulos"]["PreTrasla"]["cameti"];
+if ($newetiq!="")
+    $forma=$newetiq."s";
+else
+    $forma="Traspasos";
 $modulo=$_SESSION["modulo"] . " > Ejecución Presupuestaria > ".$forma;
+$fecha_actual= date('d/m/Y');
 Limpiar();
  //limáar datos  del movimiento
  $i=1;
- while ($i<=20)
+ while ($i<=250)
  {
      $_POST["x".$i."1"]= "";
      $_POST["x".$i."2"]= "";
@@ -160,7 +166,7 @@ if  (!empty($_GET["mod"])) {$mod=$_GET["mod"];}
                 }
             }//if (strtoupper(trim($status))=="N")
 
-             //cargar datos  movimientos traslados  (grid)
+             //cargar datos  movimientos traspasos  (grid)
 
              $gridNomTitPre1=array();
              $gridNomTitPre2=array();
@@ -189,7 +195,7 @@ if  (!empty($_GET["mod"])) {$mod=$_GET["mod"];}
             if (Verificar_Disponibilidad()==false) { $Eliminar='N'; };
 
            }//if (!$tb->EOF)
-          else //no existe el traslado, se verifica que exista la solicitud y se muestran sus datos
+          else //no existe el traspaso, se verifica que exista la solicitud y se muestran sus datos
            {
             $sql = "Select *,to_char(feccon,'dd/mm/yyyy') as  feccon,to_char(fecpre,'dd/mm/yyyy') as  fecpre, to_char(fectra,'dd/mm/yyyy') as fectra From CPSolTrasla Where trim(RefTra) = '".trim($codigo)."' ";
 
@@ -216,7 +222,7 @@ if  (!empty($_GET["mod"])) {$mod=$_GET["mod"];}
                 }//if (trim($tb->fields["feccon"])!="")
                 $desc=$tb->fields["destra"];
 
-                 //cargar datos  movimientos traslados  (grid)
+                 //cargar datos  movimientos traspasos  (grid)
                  $gridNomTitPre1=array();
                  $gridNomTitPre2=array();
                   //cargar datos
@@ -239,18 +245,18 @@ if  (!empty($_GET["mod"])) {$mod=$_GET["mod"];}
                }
                else
               {
-                 Mensaje("Esta Solicitud de Traslado no esta Aprobada");
+                 Mensaje("Esta Solicitud de Traspaso  no esta Aprobada");
                  $codigo="";
                  $mod="";
               }	// if (strtoupper(trim($stapre))=="S")
             }
             else
             {
-               Mensaje("No Existe Esta Solicitud de Traslado");
+               Mensaje("No Existe Esta Solicitud de Traspaso");
                $codigo="";
                $mod="";
             }	//if (!$tb->EOF)
-          } //else, no existe el  traslado
+          } //else, no existe el  Traspaso
         }//si no esta vacio codigo
     }
 
@@ -366,7 +372,7 @@ if  (!empty($_GET["mod"])) {$mod=$_GET["mod"];}
         $VerDispon="S";
         $Msj="";
         $i=1;
-        while ($i<=20)
+        while ($i<=250)
         {
           if ((trim($_POST["x".$i."1"])!="")  and (trim($_POST["x".$i."2"])!="") and (number_format($_POST["x".$i."3"],2,'.',',')!= number_format(0,2,'.',',')) )
           {
@@ -379,22 +385,22 @@ if  (!empty($_GET["mod"])) {$mod=$_GET["mod"];}
                 if ($MonDis < $MonTra)
                 {
                   $VerDispon="N";
-                  $Msj="NO se puede  � Anular el Traslado. El Monto Disponible de la Partida " . trim($_POST["x".$i."2"]) . " es de " . number_format($MonDis,2,'.',',') .". Al Disminuirla por el Monto del Traslado quedaría Negativa.";
-                  $i=21;
+                  $Msj="NO se puede  � Anular el Traspaso. El Monto Disponible de la Partida " . trim($_POST["x".$i."2"]) . " es de " . number_format($MonDis,2,'.',',') .". Al Disminuirla por el Monto del Traspaso  quedaría Negativa.";
+                  $i=251;
                 }//if ($MonDis < $_POST["x".$i."3"])
               }	// if ($tb=$tool->buscar_datos($sql))
               else
               {
                 $VerDispon="N";
                 $Msj="La Partida " . trim($_POST["x".$i."2"]) . " no se encuentra en la Base de Datos. Por Favor Verifique";
-                $i=21;
+                $i=251;
               }//else  if ($tb=$tool->buscar_datos($sql))
 
               $i=$i+1;
           } //if ((trim($_POST["x".$i."1"])!="")  and (trim($_POST["x".$i."2"])!="") and (number_format($_POST["x".$i."3"],2,'.',',')!= number_format(0,2,'.',',')) )
           else
           {
-            $i=21;
+            $i=251;
           }
         } //while
 
@@ -423,7 +429,7 @@ if  (!empty($_GET["mod"])) {$mod=$_GET["mod"];}
        f=document.form1;
       i=1;
       var acum3=0;
-      while (i<=20)
+      while (i<=250)
       {
         var x3="x"+i+"3";
         str3= document.getElementById(x3).value.toString();
@@ -451,7 +457,6 @@ if  (!empty($_GET["mod"])) {$mod=$_GET["mod"];}
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" TYPE="text/css" MEDIA="screen" href="../../lib/css/tabber.css">
@@ -482,7 +487,7 @@ if  (!empty($_GET["mod"])) {$mod=$_GET["mod"];}
 </head>
 
 <body>
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
 <table width="100%" align="center">
   <tr>
 <td width="100%">
@@ -536,7 +541,11 @@ if  (!empty($_GET["mod"])) {$mod=$_GET["mod"];}
                           <tr>
                             <td colspan="3">
                               <fieldset>
-                              <legend>Datos del Traslado</legend>
+                            <? if ($newetiq!="") { ?>
+                            <legend>Datos del <?php echo $newetiq;?> </legend>
+                            <? }else { ?>
+                            <legend>Datos del Traspaso</legend>
+                            <? } ?>                              
                               <table width="100%" border="0">
                                 <tr>
                                   <td width="1">&nbsp;</td>
@@ -595,7 +604,11 @@ if  (!empty($_GET["mod"])) {$mod=$_GET["mod"];}
                   <img src="../../lib/general/toolbar/imgs/iconNewNewsEntry.gif" width="16" height="16" border="0">
                   <? } ?>
                   </td>
-                  <td width="500"  class="tpButtons">MOVIMIENTOS DEL TRASLADO </td>
+                  <td width="500"  class="tpButtons"><? if ($newetiq!="") { ?>
+                           MOVIMIENTOS DEL <?php echo strtoupper($newetiq);?>
+                            <? }else { ?>
+                            MOVIMIENTOS DEL TRASPASO
+                            <? } ?>   </td>
             </tr>
             <tr>
             <td colspan="4">
@@ -613,7 +626,7 @@ if  (!empty($_GET["mod"])) {$mod=$_GET["mod"];}
                       <?
                       ////////   //////////
                      $i=1;
-                  while ($i<=20)
+                  while ($i<=250)
                   {
                     if ($block=="S")
                     {
@@ -845,7 +858,7 @@ else
         if (fecha.length!=10)
           {
         //alert("Longitud de Fecha inválida");
-        document.getElementById('fecha').value=mostrarfecha();
+        document.getElementById('fecha').value='<? echo $fecha_actual; ?>';;
         document.getElementById('fecha').focus();
         }
       }
@@ -917,7 +930,7 @@ else
       c1=f.cajaactual.value;
       fc=f.cajafoco.value;
       i=1;
-      while (i<=20)
+      while (i<=250)
       {
         var x="x"+i+c1;
         if (document.getElementById(x).value=="")
@@ -926,13 +939,13 @@ else
           {
             campo="x1"+c1;
             foco="x1"+fc;
-            i=20;
+            i=250;
           }
           else
           {
             campo=x;
             foco="x"+i+fc;
-            i=20;
+            i=250;
           }
         }
         i=i+1;
@@ -1019,9 +1032,13 @@ else
         {
           j=parseInt(id.substring(1,2));
         }
+        else if (parseInt(id.length)==4)
+        {
+            j=parseInt(id.substring(1,3));
+        }
         else
         {
-          j=parseInt(id.substring(1,3));
+            j=parseInt(id.substring(1,4));
         }
         var x="x"+j+"1"
         var y="x"+j+"2"
@@ -1062,7 +1079,7 @@ else
        f=document.form1;
         i=1;
         var acum3=0;
-        while (i<=20)
+        while (i<=250)
         {
           var x3="x"+i+"3";
           str3= document.getElementById(x3).value.toString();
@@ -1090,9 +1107,13 @@ else
     {
       j=parseInt(id.substring(1,2));
     }
-    else
+    else if (parseInt(id.length)==4)
     {
         j=parseInt(id.substring(1,3));
+    }
+    else
+    {
+        j=parseInt(id.substring(1,4));
     }
 
      if (j!=1)
@@ -1123,9 +1144,13 @@ else
     {
       j=parseInt(id.substring(1,2));
     }
-    else
+    else if (parseInt(id.length)==4)
     {
         j=parseInt(id.substring(1,3));
+    }
+    else
+    {
+        j=parseInt(id.substring(1,4));
     }
 
 
@@ -1155,7 +1180,7 @@ else
           if (j!=1)
           {
             i=1;
-             while (i<=20)
+             while (i<=250)
               {
                 var x="x"+i+c1;
                 var y="x"+i+c2;
@@ -1165,9 +1190,9 @@ else
                   {
                     document.getElementById(id).value="";
                     document.getElementById(id2).value="";
-                    alert("El Movimiento esta Repetido en el Traslado");
+                    alert("El Movimiento esta Repetido en el Traspaso");
                     document.getElementById(id).focus();
-                    i=21;
+                    i=251;
                     chk="S";
                     return true;
                   }
@@ -1215,12 +1240,12 @@ else
       var x="x"+row+"1";
 
          i=1;
-         while (i<=20)
+         while (i<=250)
       {
         var y="x"+i+"2";
         if (document.getElementById(x).value == document.getElementById(y).value)
          {
-           i=21;
+           i=251;
          chk="S";
          document.getElementById(x).value="";
            alert("El Título Presupuestario no puede ser Origen del Movimiento");
@@ -1243,12 +1268,12 @@ else
       var x="x"+row+"2";
 
          i=1;
-         while (i<=20)
+         while (i<=250)
       {
         var y="x"+i+"1";
         if (document.getElementById(x).value == document.getElementById(y).value)
          {
-           i=21;
+           i=251;
          chk="S";
           document.getElementById(x).value="";
          alert("El Título Presupuestario no puede ser Destino del Movimiento");
@@ -1277,7 +1302,7 @@ else
       var x="x"+row+"1";
       f=document.form1;
       i=1;
-      while (i<=20)
+      while (i<=250)
       {
           if (i!=row)
          {
@@ -1304,7 +1329,7 @@ else
        {
          f=document.form1;
         var fila;
-        for (fila=i;fila<20;fila++)
+        for (fila=i;fila<250;fila++)
         {
           for (col=0;col<=c;col++)
           {
@@ -1324,7 +1349,7 @@ else
 
       }
       //ultima fila
-      if (i==20)
+      if (i==250)
       {
         for (col=0;col<=c;col++)
         {
@@ -1340,7 +1365,7 @@ else
            }
         }
 
-      }//if (fila==20)
+      }//if (fila==250)
       actualizarsaldos2()
      }
 
@@ -1372,17 +1397,17 @@ else
       f=document.form1;
       if (TrimString(f.desc.value)=="")
       {
-        alert("No puede salvar sin introducir Descripción del Traslado");
+        alert("No puede salvar sin introducir Descripción del Traspaso");
         return false;
       }
       else if (TrimString(f.fecha.value)=="")
       {
-        alert("No puede salvar sin introducir la Fecha del Traslado");
+        alert("No puede salvar sin introducir la Fecha del Traspaso");
         return false;
       }
       else if (TrimString(f.totmon.value)=="0.00")
       {
-        alert("No puede salvar sin introducir el Monto del Traslado");
+        alert("No puede salvar sin introducir el Monto del Traspaso");
         return false;
       }else if (fecha<fecha2){
       alert('La fecha no puede ser menor a la solicitud');
@@ -1457,13 +1482,14 @@ else
           status='<? echo $status; ?>';
           if (status=="N")
           {
-             alert("El Traslado ya esta Anulado");
+             alert("El Traspaso  ya esta Anulado");
           }
           else
           {
           var fechainicio='<? echo $fechainicio; ?>';
           var fechacierre='<? echo $fechacierre; ?>';
-          if (compareDate(document.getElementById('fecha').value,fechainicio,fechacierre)==0)
+
+          if (compareDate($('fecha').value,fechainicio,fechacierre)==0)
           {
             alert("La Fecha debe estar entre la Fecha de Inicio y la Fecha Final del Ejercicio");
           }else{
@@ -1546,7 +1572,7 @@ else
           //window.open(pagina,"","menubar=no,toolbar=no,scrollbars=yes,width=570,height=500,resizable=yes,left=50,top=50");
 
           var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
-              pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Cptrasla_PreTrasla/clase/Cptrasla/frame/form1/obj1/codigo/campo1/reftra/submit/true';
+              pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Cptrasla_PreTrasla/clase/Cptrasla/frame/form1/obj1/codigo/campo1/reftra/submit/true';
               window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
      }
   </script>

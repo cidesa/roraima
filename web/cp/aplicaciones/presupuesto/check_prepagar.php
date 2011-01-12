@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 
    require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
@@ -29,7 +30,6 @@ session_start();
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 
 <style type="text/css">
 <!--
@@ -40,7 +40,7 @@ session_start();
 
 <body>
 <table width="83%" border="0">
-<form action="" method="post" name="form1">
+<form action="" method="post" name="form1" onsubmit="return false;">
   <tr>
     <td colspan="2">
     <table width="663" border="0" class="recuadro">

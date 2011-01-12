@@ -15,4 +15,8 @@
  */ 
 class DfrutadocPeer extends BaseDfrutadocPeer
 {
+  public static function getAcunidades()
+  {
+    return AcunidadPeer::getAcunidades();
+  }
 }

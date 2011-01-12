@@ -34,9 +34,11 @@ class OcmuniciMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('ocmunici_SEQ');
 
-		$tMap->addColumn('CODPAI', 'Codpai', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addForeignKey('CODPAI', 'Codpai', 'string', CreoleTypes::VARCHAR, 'ocpais', 'CODPAI', true, 4);
 
-		$tMap->addColumn('CODEDO', 'Codedo', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addForeignKey('CODEDO', 'Codedo', 'string', CreoleTypes::VARCHAR, 'ocestado', 'CODEDO', true, 4);
+
+		$tMap->addForeignKey('CODCIU', 'Codciu', 'string', CreoleTypes::VARCHAR, 'occiudad', 'CODCIU', true, 4);
 
 		$tMap->addColumn('CODMUN', 'Codmun', 'string', CreoleTypes::VARCHAR, true, 4);
 

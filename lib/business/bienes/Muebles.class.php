@@ -158,6 +158,14 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
 	  {
 	     Herramientas::getSalvarCorrelativo('corrmue','bndefins','Referencia',$r,&$msg);
 	  }
+
+      $clase->setValini($clase->getMondismue());
+      $saveusu=H::getConfApp('saveusu','bienes','biedisactmuenew');
+     if ($saveusu=='S') {
+	     $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+	  	 $clase->setLogusu($loguse);
+     }
+
       $clase->save();
       return -1;
 
@@ -170,8 +178,13 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
   {
     try{
       #Paso 1
+      $d= new Criteria();
+      $data = BndisbiePeer::doSelectOne($d);
+      if ($data) {$longitud=strlen($data->getCoddis());}
+
+
       $c = new Criteria();
-      $c->add(BndisbiePeer::CODDIS,substr($clase->getTipdismue(),0,10));
+      $c->add(BndisbiePeer::CODDIS,substr($clase->getTipdismue(),0,$longitud));
       $bndisbie = BndisbiePeer::doSelectOne($c);
       $encontro = false;
       $adiciona = false;
@@ -202,6 +215,14 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
         if (($adiciona) and $clase->getId()=='')
         {
           $bnregmue->setValadi($clase->getValadi() + $clase->getMondismue());
+        }
+        ///Actualizar Vida Util segun sea el caso
+        if ($bndisbie->getViduti()!='N'){
+            if ($bndisbie->getViduti()=='S'){  //Aumenta
+                $bnregmue->setAumviduti($bnregmue->getAumviduti()+ $clase->getVidutil());
+            }else{  //Disminuye
+              $bnregmue->setDimviduti($bnregmue->getDimviduti()+ $clase->getVidutil());
+            }
         }
         $bnregmue->save();
       }
@@ -272,9 +293,9 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
     $msjuno = "";
     $msjdos = "";
 
-    $depacu   = H::FormatoMonto($bnregmue->getDepacu(),0);
-    $valini   = H::FormatoMonto($bnregmue->getValini(),0);
-    $valadi   = H::FormatoMonto($bnregmue->getValadi(),0);;
+    $depacu   = $bnregmue->getDepacu();
+    $valini   = $bnregmue->getValini();
+    $valadi   = $bnregmue->getValadi();
     $descri = split('-',$clase->getTipdismue());
     $descripC = $descri[1];
     $ctadepcar= $bndefcon->getCtadepcar();  //CuentaCar
@@ -288,17 +309,28 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
         $tipo1 = 'D';
         $monto1 = $clase->getMondismue();
     }else{
-        $codigocuenta1  = $ctadepcar;
-        $desc1 = $descripC;
-        $tipo1 = 'D';
-        $monto1 = $depacu;
+
+        if ($depacu>0)
+        {
+            $codigocuenta1  = $ctadepcar;
+            $desc1 = $descripC;
+            $tipo1 = 'D';
+            $monto1 = $depacu;            
+        }
 
         if (($valini + $valadi) - $depacu > 0)
         {
+          if ($depacu>0){
           $codigocuenta1  = $codigocuenta1."_".$CuentaPedida;
           $desc1 = $desc1."_".$descripC;
           $tipo1 = $tipo1."_".'D';
           $monto1 = $monto1."_".(($valini + $valadi) - $depacu);
+          }else{
+              $codigocuenta1  = $CuentaPedida;
+          $desc1 = $descripC;
+          $tipo1 = 'D';
+          $monto1 = (($valini + $valadi) - $depacu);
+          }
         }
 
         $codigocuenta2 = $CuentaAbo;
@@ -398,6 +430,87 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
     } catch (Exception $ex){
       return 0;
     }
+  }
+
+  public static function actualizarUbicacion($codact,$codmue)
+  {
+    try
+    {
+      $c= new Criteria();
+      $c->add(BnregmuePeer::CODACT,$codact);
+      $c->add(BnregmuePeer::CODMUE,$codmue);
+      $reg= BnregmuePeer::doSelectOne($c);
+      if ($reg)
+      {
+         $sql="select  codubiori,codubides from bndismue where id = (
+				select max(id) from (
+				select codubiori,codubides,id from bndismue where codact='".$codact."' and codmue='".$codmue."' and ( length(trim(codubiori))>0 and length(trim(codubides)) > 0 )
+				union
+				select codubiori,codubides,id from bndismue where codact='".$codact."' and codmue='".$codmue."' and substring(tipdismue,1, instr1(tipdismue,' ')-1)='".$reg->getCoddis()."'
+				) as bienes	)";
+	     if (Herramientas::BuscarDatos($sql,&$result))
+	     {
+           if (trim($result[0]["codubides"])=="")
+           {
+           	 $reg->setCodubi($result[0]["codubiori"]);
+           }else {
+           	$reg->setCodubi($result[0]["codubides"]);
+           }
+           $reg->save();
+	     }
+      }
+
+      return -1;
+
+    } catch (Exception $ex){
+      return 0;
+    }
+  }
+
+  public static function salvarDefConMue($clase)
+  {
+       $sql="select codact, codmue from bnregmue where codact>='".$clase->getCodact()."' and codact<='".$clase->getCodact1()."' and stamue='A'";
+       if (Herramientas::BuscarDatos($sql,&$result)){
+         $i=0;
+         while ($i<count($result))
+         {
+           $z= new Criteria();
+           $z->add(BndefconPeer::CODACT,$result[$i]["codact"]);
+           $z->add(BndefconPeer::CODMUE,$result[$i]["codmue"]);
+           $registro= BndefconPeer::doSelectOne($z);
+           if ($registro)
+           {
+               $registro->setCodact($registro->getCodact());
+               $registro->setCodmue($registro->getCodmue());
+               $registro->setCtadepcar($clase->getCtadepcar());
+               $registro->setCtadepabo($clase->getCtadepabo());
+               $registro->setCtaajucar($clase->getCtaajucar());
+               $registro->setCtaajuabo($clase->getCtaajuabo());
+               $registro->setCtapercar($clase->getCtapercar());
+               $registro->setCtaperabo($clase->getCtaperabo());
+               $registro->setCtarevcar($clase->getCtarevcar());
+               $registro->setCtarevabo($clase->getCtarevabo());
+               $registro->setStacta('A');
+               $registro->save();
+           }else{
+               $bndefcon= new Bndefcon();
+               $bndefcon->setCodact($result[$i]["codact"]);
+               $bndefcon->setCodmue($result[$i]["codmue"]);
+               $bndefcon->setCtadepcar($clase->getCtadepcar());
+               $bndefcon->setCtadepabo($clase->getCtadepabo());
+               $bndefcon->setCtaajucar($clase->getCtaajucar());
+               $bndefcon->setCtaajuabo($clase->getCtaajuabo());
+               $bndefcon->setCtapercar($clase->getCtapercar());
+               $bndefcon->setCtaperabo($clase->getCtaperabo());
+               $bndefcon->setCtarevcar($clase->getCtarevcar());
+               $bndefcon->setCtarevabo($clase->getCtarevabo());
+               $bndefcon->setStacta('A');
+               $bndefcon->save();
+           }
+           $i++;
+         }
+           
+       }
   }
 
 }

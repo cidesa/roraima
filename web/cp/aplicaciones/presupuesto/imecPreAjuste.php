@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
@@ -19,6 +20,7 @@ $z= new tools();
     $tipaju = $_POST["tipaju"];
     $refmov = $_POST["refmov"];
     $fecmov = $_POST["fecmov"];
+    $afectap = $_POST["afec"];
 
     $desanu = $_POST["desmov"];
     $totaju = (float)(str_replace(',','',$_POST["totmon"]));
@@ -44,7 +46,8 @@ $z= new tools();
           Mensaje("La Fecha del Ajuste no puede ser menor a la Fecha del Movimiento");
           Regresar('PreAjuste.php');
 
-        }else{
+        }
+        else{
 
           $bd->startTransaccion();
 
@@ -157,12 +160,18 @@ $z= new tools();
               /*$sql="insert into CPMovAju (RefAju,CodPre,MonAju,StaMov,RefPrc,RefCom,RefCau,RefPag)
                 values ('".$codigo."','".$_POST["x".$i."1"]."',($monto*(-1)),'A','".$refprc."','".$refcom."','".$refcau."','NULO')";
               */
-
+              if ($monto>0) {
+               if ($afectap=='R'){
               $sql="insert into CPMovAju (RefAju,CodPre,MonAju,StaMov,RefPrc,RefCom,RefCau,RefPag)
                 values ('".$codigo."','".$_POST["x".$i."1"]."',($monto),'A','".$refprc."','".$refcom."','".$refcau."','NULO')";
-
+               }else {
+               	$monto1=$monto*-1;
+               	$sql="insert into CPMovAju (RefAju,CodPre,MonAju,StaMov,RefPrc,RefCom,RefCau,RefPag)
+                values ('".$codigo."','".$_POST["x".$i."1"]."',($monto1),'A','".$refprc."','".$refcom."','".$refcau."','NULO')";
+               }
 
               $bd->actualizar($sql);
+              }
 
             } 	//if ((trim($_POST["x".$i."1"])!="")  and (number_format($_POST["x".$i."2"],2,'.',',')!= number_format(0,2,'.',',')) )
            // else
@@ -182,7 +191,7 @@ $z= new tools();
 
         // Guardar en Segbitaco
         $sql = "Select id from cpajuste where trim(RefAju) = '".trim($codigo)."'";
-  
+
         $tb=$bd->select($sql);
         $id = $tb->fields["id"];
         $bd->Log($id, 'pre', 'Cpajuste', 'Preajuste', $imec=='M' ? 'A' : 'G' );

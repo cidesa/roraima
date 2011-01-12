@@ -198,6 +198,7 @@ abstract class BaseFormetdisper extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FormetdisperPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FormetdisperPeer::doUpdate($this, $con);

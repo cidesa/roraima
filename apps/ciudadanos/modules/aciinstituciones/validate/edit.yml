@@ -1,0 +1,21 @@
+methods:
+  post:
+   - "atinsrefier{desinsref}"
+
+names:
+  atinsrefier{desinsref}:
+    required:  Yes
+    required_msg: Debe insertar el nombre de la Institución
+    validators: Vstring_1_50_0
+
+
+
+Vstring_1_50_0:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no puede tener menos de 1 caracteres
+        max:       50
+        max_error: La descripción no puede pasar mas de 50 caracteres
+
+

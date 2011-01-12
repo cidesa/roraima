@@ -18,6 +18,8 @@ class tesrencajchiActions extends autotesrencajchiActions
    * del formulario.
    *
    */
+protected $codigo = -1;
+
   public function executeList()
   {
     $this->processSort();
@@ -69,7 +71,8 @@ class tesrencajchiActions extends autotesrencajchiActions
    */
   public function configGrid()
   {
-    $this->configGridDetalle($this->opordpag->getNumord(),$this->opordpag->getCodcat(),$this->opordpag->getTipcau(),$this->getRequestParameter('opordpag[fecemi]'));
+    $this->configGridSalida();
+    $this->configGridDetalle($this->opordpag->getNumord());
   }
 
   /**
@@ -79,14 +82,41 @@ class tesrencajchiActions extends autotesrencajchiActions
    * los datos del grid.
    *
    */
-  public function configGridDetalle($numord='',$codcat='',$tipren='',$fecha='')
+  public function configGridSalida($fechades='', $fechahas='', $codcaj='')
   {
-    if ($fecha=='') $fecha=date('d/m/Y');
+    if ($fechades=='')  $fechades=date('Y-m-d');
+    if ($fechahas=='') $fechahas=date('Y-m-d');
+
+    $sql="tssalcaj.fecsal>=to_date('".$fechades."','yyyy-mm-dd')  and tssalcaj.fecsal<= to_date('".$fechahas."','yyyy-mm-dd')";
+
+    $a= new Criteria();
+    $a->add(TssalcajPeer::FECSAL,$sql,Criteria::CUSTOM);
+    $a->add(TssalcajPeer::STASAL,'P');
+    $a->add(TssalcajPeer::CODCAJ,$codcaj);
+    $det= TssalcajPeer::doSelect($a);
+
+    $this->filsal=count($det);
+    $this->opordpag->setFilassal($this->filsal);
+
+    $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/tesrencajchi/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_tssalcaj');
+    $this->columnas[1][0]->setHTML('onClick="guardarseleccion()"');
+    $this->objeto1 =$this->columnas[0]->getConfig($det);
+
+    $this->opordpag->setObjeto1($this->objeto1);
+  }
+
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
+  public function configGridDetalle($numord='',$arreglo=array())
+  {
     if ($numord=='')
-    {
-      $sql = "Select A.Codcat||'-'||B.CodPar as codpre,Sum(A.MonSal) as moncau, '' as id From TSDetSal A,CARegArt B Where A.RefSal In (Select C.RefSal From TSSalCaj C Where C.FecSal<=TO_DATE('".$fecha."','dd/mm/yyyy') And C.StaSal='P') And A.CodArt=B.CodArt Group By A.Codcat,B.CodPar";
-    Herramientas :: BuscarDatos($sql, & $reg);
-    $detalle=$reg;
+    {      
+      $detalle=$arreglo;
     }
     else
     {
@@ -121,15 +151,16 @@ class tesrencajchiActions extends autotesrencajchiActions
     switch ($ajax){
       case '1':
         $javascript="";
-        //$fecha=date('Y-m-d',strtotime($codigo));
+        $this->entrada='1';
         $this->params=array();
         $this->labels = $this->getLabels();
         $this->opordpag = $this->getOpordpagOrCreate();
         $this->setVars();
-        $this->configGridDetalle('',$this->opordpag->getCodcat(),$this->opordpag->getTipcau(),$codigo);
+        $arre=Tesoreria::FormarArreImp($codigo);
+        $this->configGridDetalle('',$arre);
         $filajax=$this->filajax;
         $javascript="totalfil('$filajax');";
-        $output = '[["javascript","'.$javascript.'",""],["","",""],["","",""]]';
+        $output = '[["javascript","'.$javascript.'",""],["opordpag_filasord","'.$filajax.'",""],["","",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         break;
       case '2':
@@ -190,6 +221,23 @@ class tesrencajchiActions extends autotesrencajchiActions
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
         break;
+      case '5':
+        $this->entrada='2';
+        $javascript="";
+        $arredes=split('/',$this->getRequestParameter('fecdes'));
+        $arrehas=split('/',$codigo);
+        $fechades=$arredes[2]."-".$arredes[1]."-".$arredes[0];
+        $fechahas=$arrehas[2]."-".$arrehas[1]."-".$arrehas[0];
+
+        $this->params=array();
+        $this->labels = $this->getLabels();
+        $this->opordpag = $this->getOpordpagOrCreate();
+        $this->setVars();        
+        $this->configGridSalida($fechades,$fechahas,$this->getRequestParameter('codcajchi'));
+        $filsal=$this->filsal;
+        $output = '[["javascript","'.$javascript.'",""],["opordpag_filassal","'.$filsal.'",""],["","",""]]';        
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
@@ -204,13 +252,15 @@ class tesrencajchiActions extends autotesrencajchiActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
   public function validateEdit()
   {
     $this->coderr =-1;
+    $this->codigo =-1;
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
      $this->opordpag = $this->getOpordpagOrCreate();
@@ -239,6 +289,13 @@ class tesrencajchiActions extends autotesrencajchiActions
         return false;
       }
 
+        if (!Tesoreria::validarDisponibilidadPresuCajChi($grid,1,&$cod))
+        {
+          $this->codigo=$cod;
+          $this->coderr=118;
+          return false;
+        }
+
       if($this->coderr!=-1){
         return false;
       } else return true;
@@ -255,14 +312,6 @@ class tesrencajchiActions extends autotesrencajchiActions
 
     public function setVars()
   {
-    $b= new Criteria();
-    $dat=OpdefempPeer::doSelectOne($b);
-    if ($dat)
-    {
-      $this->opordpag->setTipcau($dat->getTiprencajchi());
-      $this->opordpag->setCedrif($dat->getCedrifcajchi());
-      $this->opordpag->setCodcat($dat->getCodcatcajchi());
-    }
     $mascaraubi=Herramientas::ObtenerFormato('Opdefemp','Forubi');
     $this->opordpag->setMascaraubi($mascaraubi);
     $this->opordpag->setLonubi(strlen($mascaraubi));
@@ -302,6 +351,13 @@ class tesrencajchiActions extends autotesrencajchiActions
           $this->getUser()->getAttributeHolder()->remove('credito',$formulario[$i]);
           $this->getUser()->getAttributeHolder()->remove('grid',$formulario[$i]);
 
+          $c = new Criteria();
+    	  $c->add(OpdefempPeer::CODEMP,'001');
+    	  $per = OpdefempPeer::doSelectOne($c);
+           if ($this->getUser()->getAttribute('confcorcom')=='N')
+           {  $numerocomp = H::iif($per->getOrdconpre()=='t',$reftra,$numcom); }
+           else
+           {  $numerocomp = H::iif($per->getOrdconpre()=='t','OP'.substr($numerocomp = Comprobante::Buscar_Correlativo(),2,strlen($numcom)),$numcom); }
           $numerocomp = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
           $opordpag->setNumcom($numerocomp);
          }
@@ -311,7 +367,8 @@ class tesrencajchiActions extends autotesrencajchiActions
       $this->getUser()->getAttributeHolder()->remove('grabo',$form.'0');
 
       $grid=Herramientas::CargarDatosGridv2($this,$this->objeto,true);
-      Tesoreria::salvarRendicionCajaChica($opordpag,$grid,$numerocomp);
+      $grid1=Herramientas::CargarDatosGridv2($this,$this->objeto1);
+      Tesoreria::salvarRendicionCajaChica($opordpag,$grid,$numerocomp,$grid1);
     }
     return -1;
 
@@ -346,7 +403,43 @@ class tesrencajchiActions extends autotesrencajchiActions
                 return $this->msj="El Comprobante no puede ser Eliminado, ya que se perdio la asociacion con Contabilidad";
               }
           }*/
+         // Actualizar salidas de Caja Chica
+           $t= new Criteria();
+           $t->add(OpdetordPeer::NUMORD,$opordpag->getNumord());
+           $datos=OpdetordPeer::doSelect($t);
+           if ($datos)
+           {
+               foreach ($datos as $objdat)
+               {
+                   $cadenarefe=split(',',$objdat->getRefsal());
+                    $r=0;
+                    while ($r<(count($cadenarefe)))
+                    {
+                        $aux=$cadenarefe[$r];
+                        $a= new Criteria();
+                        $a->add(TssalcajPeer::REFSAL,$aux);
+                        $data= TssalcajPeer::doSelectOne($a);
+                        if ($data)
+                        {
+                           $data->setStasal('P');
+                           $data->save();
+                        }
 
+                        $r++;
+                    }
+                    if ($r==0)
+                    {
+                       $a= new Criteria();
+                       $a->add(TssalcajPeer::REFSAL,$objdat->getRefsal());
+                       $data= TssalcajPeer::doSelectOne($a);
+                       if ($data)
+                       {
+                           $data->setStasal('P');
+                           $data->save();
+                       }
+                    }
+               }
+           }
           Herramientas::EliminarRegistro('Opdetord','Numord',$data->getNumord());
           OrdendePago::eliminarCausado($data->getNumord());
         }else { return 527;}
@@ -354,17 +447,6 @@ class tesrencajchiActions extends autotesrencajchiActions
     }else { return 526;}
    }//if ($opordpag)
 
-   $a= new Criteria();
-   $a->add(TssalcajPeer::FECSAL,$opordpag->getFecemi(),Criteria::LESS_EQUAL);
-   $data= TssalcajPeer::doSelect($a);
-   if ($data)
-   {
-     foreach ($data as $obj)
-     {
-       $obj->setStasal('P');
-       $obj->save();
-     }
-    }
     $opordpag->delete();
     return -1;
   }
@@ -390,6 +472,15 @@ class tesrencajchiActions extends autotesrencajchiActions
      $this->setVars();
      $this->configGrid();
      $detalle=Herramientas::CargarDatosGridv2($this,$this->objeto,true);
+     $c = new Criteria();
+     $c->add(TsdefcajchiPeer::CODCAJ,$this->opordpag->getCodcajchi());
+     $reg= TsdefcajchiPeer::doSelectOne($c);
+     if ($reg)
+     {
+     	$this->opordpag->setCedrif($reg->getCedrif());
+     	$this->opordpag->setCodcat($reg->getCodcat());
+     }
+
      if ($this->opordpag->getCedrif()=="" || $this->opordpag->getCodcat()=="" || count($detalle[0])==0)
      {
        $msjtres="No se puede Generar el Comprobante, Verique si introdujo los Datos del Beneficiario y el Código Categoria de Caja Chica en la definicion de Empresa ó las Imputaciones Presupuestarias, para luego generar el comprobante";
@@ -495,6 +586,47 @@ class tesrencajchiActions extends autotesrencajchiActions
          { $resul->setFecanu($fec);}
          $resul->setDesanu($desanu);
          $resul->setStatus('A');
+
+
+         // Actualizar salidas de Caja Chica
+           $t= new Criteria();
+           $t->add(OpdetordPeer::NUMORD,$resul->getNumord());
+           $datos=OpdetordPeer::doSelect($t);
+           if ($datos)
+           {
+               foreach ($datos as $objdat)
+               {
+                   $cadenarefe=split(',',$objdat->getRefsal());
+                    $r=0;
+                    while ($r<(count($cadenarefe)))
+                    {
+                        $aux=$cadenarefe[$r];
+                        $a= new Criteria();
+                        $a->add(TssalcajPeer::REFSAL,$aux);
+                        $data= TssalcajPeer::doSelectOne($a);
+                        if ($data)
+                        {
+                           $data->setStasal('P');
+                           $data->save();
+                        }
+                        
+                        $r++;
+                    }
+                    if ($r==0)
+                    {
+                       $a= new Criteria();
+                       $a->add(TssalcajPeer::REFSAL,$objdat->getRefsal());
+                       $data= TssalcajPeer::doSelectOne($a);
+                       if ($data)
+                       {
+                           $data->setStasal('P');
+                           $data->save();
+                       }
+                    }
+               }
+           }
+           
+
          $resul->save();
       }
       else
@@ -514,6 +646,31 @@ class tesrencajchiActions extends autotesrencajchiActions
     if ($grabo=='')
     { return true;}
     else { return false;}
+  }
+
+  /**
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   *
+   */
+  public function handleErrorEdit()
+  {
+    $this->params=array();
+    $this->preExecute();
+    $this->opordpag = $this->getOpordpagOrCreate();
+    $this->updateOpordpagFromRequest();
+	$this->updateError();
+    $this->labels = $this->getLabels();
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if($this->coderr!=-1){
+        $err = Herramientas::obtenerMensajeError($this->coderr);
+        if ($this->coderr==118)
+        $this->getRequest()->setError('',$err.' '.$this->codigo);
+        else $this->getRequest()->setError('',$err);
+      }
+    }
+    return sfView::SUCCESS;
   }
 
 

@@ -21,10 +21,6 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
 
 	
-	protected $priayu;
-
-
-	
 	protected $atpriayu_id;
 
 
@@ -149,6 +145,10 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
 
 	
+	protected $atunidades_id;
+
+
+	
 	protected $id;
 
 	
@@ -180,6 +180,9 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
 	
 	protected $aAtmedico;
+
+	
+	protected $aAtunidades;
 
 	
 	protected $collAtestsocecos;
@@ -218,6 +221,12 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 	protected $lastAtpresupuestoCriteria = null;
 
 	
+	protected $collAtdetests;
+
+	
+	protected $lastAtdetestCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -242,13 +251,6 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
   {
 
     return $this->parentesco;
-
-  }
-  
-  public function getPriayu()
-  {
-
-    return $this->priayu;
 
   }
   
@@ -546,6 +548,13 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
   }
 
   
+  public function getAtunidadesId()
+  {
+
+    return $this->atunidades_id;
+
+  }
+  
   public function getId()
   {
 
@@ -583,16 +592,6 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
     if ($this->parentesco !== $v) {
         $this->parentesco = $v;
         $this->modifiedColumns[] = AtayudasPeer::PARENTESCO;
-      }
-  
-	} 
-	
-	public function setPriayu($v)
-	{
-
-    if ($this->priayu !== $v) {
-        $this->priayu = $v;
-        $this->modifiedColumns[] = AtayudasPeer::PRIAYU;
       }
   
 	} 
@@ -978,6 +977,20 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setAtunidadesId($v)
+	{
+
+    if ($this->atunidades_id !== $v) {
+        $this->atunidades_id = $v;
+        $this->modifiedColumns[] = AtayudasPeer::ATUNIDADES_ID;
+      }
+  
+		if ($this->aAtunidades !== null && $this->aAtunidades->getId() !== $v) {
+			$this->aAtunidades = null;
+		}
+
+	} 
+	
 	public function setId($v)
 	{
 
@@ -998,69 +1011,69 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
       $this->parentesco = $rs->getInt($startcol + 2);
 
-      $this->priayu = $rs->getInt($startcol + 3);
+      $this->atpriayu_id = $rs->getInt($startcol + 3);
 
-      $this->atpriayu_id = $rs->getInt($startcol + 4);
+      $this->atsolici = $rs->getInt($startcol + 4);
 
-      $this->atsolici = $rs->getInt($startcol + 5);
+      $this->atbenefi = $rs->getInt($startcol + 5);
 
-      $this->atbenefi = $rs->getInt($startcol + 6);
+      $this->attipayu_id = $rs->getInt($startcol + 6);
 
-      $this->attipayu_id = $rs->getInt($startcol + 7);
+      $this->atrubros_id = $rs->getInt($startcol + 7);
 
-      $this->atrubros_id = $rs->getInt($startcol + 8);
+      $this->atestayu_id = $rs->getInt($startcol + 8);
 
-      $this->atestayu_id = $rs->getInt($startcol + 9);
+      $this->attrasoc_id = $rs->getInt($startcol + 9);
 
-      $this->attrasoc_id = $rs->getInt($startcol + 10);
+      $this->atprovee_id = $rs->getInt($startcol + 10);
 
-      $this->atprovee_id = $rs->getInt($startcol + 11);
+      $this->proayu = $rs->getString($startcol + 11);
 
-      $this->proayu = $rs->getString($startcol + 12);
+      $this->nroofi = $rs->getString($startcol + 12);
 
-      $this->nroofi = $rs->getString($startcol + 13);
+      $this->desayu = $rs->getString($startcol + 13);
 
-      $this->desayu = $rs->getString($startcol + 14);
+      $this->motayu = $rs->getString($startcol + 14);
 
-      $this->motayu = $rs->getString($startcol + 15);
+      $this->created_at = $rs->getTimestamp($startcol + 15, null);
 
-      $this->created_at = $rs->getTimestamp($startcol + 16, null);
+      $this->updated_at = $rs->getTimestamp($startcol + 16, null);
 
-      $this->updated_at = $rs->getTimestamp($startcol + 17, null);
+      $this->usucre = $rs->getString($startcol + 17);
 
-      $this->usucre = $rs->getString($startcol + 18);
+      $this->usumod = $rs->getString($startcol + 18);
 
-      $this->usumod = $rs->getString($startcol + 19);
+      $this->codpre = $rs->getString($startcol + 19);
 
-      $this->codpre = $rs->getString($startcol + 20);
+      $this->detayu = $rs->getString($startcol + 20);
 
-      $this->detayu = $rs->getString($startcol + 21);
+      $this->monayu = $rs->getFloat($startcol + 21);
 
-      $this->monayu = $rs->getFloat($startcol + 22);
+      $this->monapr = $rs->getFloat($startcol + 22);
 
-      $this->monapr = $rs->getFloat($startcol + 23);
+      $this->atmedico_id = $rs->getInt($startcol + 23);
 
-      $this->atmedico_id = $rs->getInt($startcol + 24);
+      $this->respat = $rs->getString($startcol + 24);
 
-      $this->respat = $rs->getString($startcol + 25);
+      $this->infmed = $rs->getString($startcol + 25);
 
-      $this->infmed = $rs->getString($startcol + 26);
+      $this->obsmed = $rs->getString($startcol + 26);
 
-      $this->obsmed = $rs->getString($startcol + 27);
+      $this->fecdiasoc = $rs->getDate($startcol + 27, null);
 
-      $this->fecdiasoc = $rs->getDate($startcol + 28, null);
+      $this->usudiasoc = $rs->getString($startcol + 28);
 
-      $this->usudiasoc = $rs->getString($startcol + 29);
+      $this->resdiasoc = $rs->getString($startcol + 29);
 
-      $this->resdiasoc = $rs->getString($startcol + 30);
+      $this->fecvisdoc = $rs->getDate($startcol + 30, null);
 
-      $this->fecvisdoc = $rs->getDate($startcol + 31, null);
+      $this->usuvisdoc = $rs->getString($startcol + 31);
 
-      $this->usuvisdoc = $rs->getString($startcol + 32);
+      $this->resvisdoc = $rs->getString($startcol + 32);
 
-      $this->resvisdoc = $rs->getString($startcol + 33);
+      $this->fecsol = $rs->getDate($startcol + 33, null);
 
-      $this->fecsol = $rs->getDate($startcol + 34, null);
+      $this->atunidades_id = $rs->getInt($startcol + 34);
 
       $this->id = $rs->getInt($startcol + 35);
 
@@ -1228,6 +1241,13 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 				$this->setAtmedico($this->aAtmedico);
 			}
 
+			if ($this->aAtunidades !== null) {
+				if ($this->aAtunidades->isModified()) {
+					$affectedRows += $this->aAtunidades->save($con);
+				}
+				$this->setAtunidades($this->aAtunidades);
+			}
+
 
 						if ($this->isModified()) {
 				if ($this->isNew()) {
@@ -1282,6 +1302,14 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
 			if ($this->collAtpresupuestos !== null) {
 				foreach($this->collAtpresupuestos as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collAtdetests !== null) {
+				foreach($this->collAtdetests as $referrerFK) {
 					if (!$referrerFK->isDeleted()) {
 						$affectedRows += $referrerFK->save($con);
 					}
@@ -1385,6 +1413,12 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->aAtunidades !== null) {
+				if (!$this->aAtunidades->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aAtunidades->getValidationFailures());
+				}
+			}
+
 
 			if (($retval = AtayudasPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
@@ -1439,6 +1473,14 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 					}
 				}
 
+				if ($this->collAtdetests !== null) {
+					foreach($this->collAtdetests as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
 
 			$this->alreadyInValidation = false;
 		}
@@ -1467,100 +1509,100 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 				return $this->getParentesco();
 				break;
 			case 3:
-				return $this->getPriayu();
-				break;
-			case 4:
 				return $this->getAtpriayuId();
 				break;
-			case 5:
+			case 4:
 				return $this->getAtsolici();
 				break;
-			case 6:
+			case 5:
 				return $this->getAtbenefi();
 				break;
-			case 7:
+			case 6:
 				return $this->getAttipayuId();
 				break;
-			case 8:
+			case 7:
 				return $this->getAtrubrosId();
 				break;
-			case 9:
+			case 8:
 				return $this->getAtestayuId();
 				break;
-			case 10:
+			case 9:
 				return $this->getAttrasocId();
 				break;
-			case 11:
+			case 10:
 				return $this->getAtproveeId();
 				break;
-			case 12:
+			case 11:
 				return $this->getProayu();
 				break;
-			case 13:
+			case 12:
 				return $this->getNroofi();
 				break;
-			case 14:
+			case 13:
 				return $this->getDesayu();
 				break;
-			case 15:
+			case 14:
 				return $this->getMotayu();
 				break;
-			case 16:
+			case 15:
 				return $this->getCreatedAt();
 				break;
-			case 17:
+			case 16:
 				return $this->getUpdatedAt();
 				break;
-			case 18:
+			case 17:
 				return $this->getUsucre();
 				break;
-			case 19:
+			case 18:
 				return $this->getUsumod();
 				break;
-			case 20:
+			case 19:
 				return $this->getCodpre();
 				break;
-			case 21:
+			case 20:
 				return $this->getDetayu();
 				break;
-			case 22:
+			case 21:
 				return $this->getMonayu();
 				break;
-			case 23:
+			case 22:
 				return $this->getMonapr();
 				break;
-			case 24:
+			case 23:
 				return $this->getAtmedicoId();
 				break;
-			case 25:
+			case 24:
 				return $this->getRespat();
 				break;
-			case 26:
+			case 25:
 				return $this->getInfmed();
 				break;
-			case 27:
+			case 26:
 				return $this->getObsmed();
 				break;
-			case 28:
+			case 27:
 				return $this->getFecdiasoc();
 				break;
-			case 29:
+			case 28:
 				return $this->getUsudiasoc();
 				break;
-			case 30:
+			case 29:
 				return $this->getResdiasoc();
 				break;
-			case 31:
+			case 30:
 				return $this->getFecvisdoc();
 				break;
-			case 32:
+			case 31:
 				return $this->getUsuvisdoc();
 				break;
-			case 33:
+			case 32:
 				return $this->getResvisdoc();
 				break;
-			case 34:
+			case 33:
 				return $this->getFecsol();
+				break;
+			case 34:
+				return $this->getAtunidadesId();
 				break;
 			case 35:
 				return $this->getId();
@@ -1578,38 +1620,38 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 			$keys[0] => $this->getNroexp(),
 			$keys[1] => $this->getRefdoc(),
 			$keys[2] => $this->getParentesco(),
-			$keys[3] => $this->getPriayu(),
-			$keys[4] => $this->getAtpriayuId(),
-			$keys[5] => $this->getAtsolici(),
-			$keys[6] => $this->getAtbenefi(),
-			$keys[7] => $this->getAttipayuId(),
-			$keys[8] => $this->getAtrubrosId(),
-			$keys[9] => $this->getAtestayuId(),
-			$keys[10] => $this->getAttrasocId(),
-			$keys[11] => $this->getAtproveeId(),
-			$keys[12] => $this->getProayu(),
-			$keys[13] => $this->getNroofi(),
-			$keys[14] => $this->getDesayu(),
-			$keys[15] => $this->getMotayu(),
-			$keys[16] => $this->getCreatedAt(),
-			$keys[17] => $this->getUpdatedAt(),
-			$keys[18] => $this->getUsucre(),
-			$keys[19] => $this->getUsumod(),
-			$keys[20] => $this->getCodpre(),
-			$keys[21] => $this->getDetayu(),
-			$keys[22] => $this->getMonayu(),
-			$keys[23] => $this->getMonapr(),
-			$keys[24] => $this->getAtmedicoId(),
-			$keys[25] => $this->getRespat(),
-			$keys[26] => $this->getInfmed(),
-			$keys[27] => $this->getObsmed(),
-			$keys[28] => $this->getFecdiasoc(),
-			$keys[29] => $this->getUsudiasoc(),
-			$keys[30] => $this->getResdiasoc(),
-			$keys[31] => $this->getFecvisdoc(),
-			$keys[32] => $this->getUsuvisdoc(),
-			$keys[33] => $this->getResvisdoc(),
-			$keys[34] => $this->getFecsol(),
+			$keys[3] => $this->getAtpriayuId(),
+			$keys[4] => $this->getAtsolici(),
+			$keys[5] => $this->getAtbenefi(),
+			$keys[6] => $this->getAttipayuId(),
+			$keys[7] => $this->getAtrubrosId(),
+			$keys[8] => $this->getAtestayuId(),
+			$keys[9] => $this->getAttrasocId(),
+			$keys[10] => $this->getAtproveeId(),
+			$keys[11] => $this->getProayu(),
+			$keys[12] => $this->getNroofi(),
+			$keys[13] => $this->getDesayu(),
+			$keys[14] => $this->getMotayu(),
+			$keys[15] => $this->getCreatedAt(),
+			$keys[16] => $this->getUpdatedAt(),
+			$keys[17] => $this->getUsucre(),
+			$keys[18] => $this->getUsumod(),
+			$keys[19] => $this->getCodpre(),
+			$keys[20] => $this->getDetayu(),
+			$keys[21] => $this->getMonayu(),
+			$keys[22] => $this->getMonapr(),
+			$keys[23] => $this->getAtmedicoId(),
+			$keys[24] => $this->getRespat(),
+			$keys[25] => $this->getInfmed(),
+			$keys[26] => $this->getObsmed(),
+			$keys[27] => $this->getFecdiasoc(),
+			$keys[28] => $this->getUsudiasoc(),
+			$keys[29] => $this->getResdiasoc(),
+			$keys[30] => $this->getFecvisdoc(),
+			$keys[31] => $this->getUsuvisdoc(),
+			$keys[32] => $this->getResvisdoc(),
+			$keys[33] => $this->getFecsol(),
+			$keys[34] => $this->getAtunidadesId(),
 			$keys[35] => $this->getId(),
 		);
 		return $result;
@@ -1636,100 +1678,100 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 				$this->setParentesco($value);
 				break;
 			case 3:
-				$this->setPriayu($value);
-				break;
-			case 4:
 				$this->setAtpriayuId($value);
 				break;
-			case 5:
+			case 4:
 				$this->setAtsolici($value);
 				break;
-			case 6:
+			case 5:
 				$this->setAtbenefi($value);
 				break;
-			case 7:
+			case 6:
 				$this->setAttipayuId($value);
 				break;
-			case 8:
+			case 7:
 				$this->setAtrubrosId($value);
 				break;
-			case 9:
+			case 8:
 				$this->setAtestayuId($value);
 				break;
-			case 10:
+			case 9:
 				$this->setAttrasocId($value);
 				break;
-			case 11:
+			case 10:
 				$this->setAtproveeId($value);
 				break;
-			case 12:
+			case 11:
 				$this->setProayu($value);
 				break;
-			case 13:
+			case 12:
 				$this->setNroofi($value);
 				break;
-			case 14:
+			case 13:
 				$this->setDesayu($value);
 				break;
-			case 15:
+			case 14:
 				$this->setMotayu($value);
 				break;
-			case 16:
+			case 15:
 				$this->setCreatedAt($value);
 				break;
-			case 17:
+			case 16:
 				$this->setUpdatedAt($value);
 				break;
-			case 18:
+			case 17:
 				$this->setUsucre($value);
 				break;
-			case 19:
+			case 18:
 				$this->setUsumod($value);
 				break;
-			case 20:
+			case 19:
 				$this->setCodpre($value);
 				break;
-			case 21:
+			case 20:
 				$this->setDetayu($value);
 				break;
-			case 22:
+			case 21:
 				$this->setMonayu($value);
 				break;
-			case 23:
+			case 22:
 				$this->setMonapr($value);
 				break;
-			case 24:
+			case 23:
 				$this->setAtmedicoId($value);
 				break;
-			case 25:
+			case 24:
 				$this->setRespat($value);
 				break;
-			case 26:
+			case 25:
 				$this->setInfmed($value);
 				break;
-			case 27:
+			case 26:
 				$this->setObsmed($value);
 				break;
-			case 28:
+			case 27:
 				$this->setFecdiasoc($value);
 				break;
-			case 29:
+			case 28:
 				$this->setUsudiasoc($value);
 				break;
-			case 30:
+			case 29:
 				$this->setResdiasoc($value);
 				break;
-			case 31:
+			case 30:
 				$this->setFecvisdoc($value);
 				break;
-			case 32:
+			case 31:
 				$this->setUsuvisdoc($value);
 				break;
-			case 33:
+			case 32:
 				$this->setResvisdoc($value);
 				break;
-			case 34:
+			case 33:
 				$this->setFecsol($value);
+				break;
+			case 34:
+				$this->setAtunidadesId($value);
 				break;
 			case 35:
 				$this->setId($value);
@@ -1744,38 +1786,38 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setNroexp($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setRefdoc($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setParentesco($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setPriayu($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setAtpriayuId($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setAtsolici($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setAtbenefi($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setAttipayuId($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setAtrubrosId($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setAtestayuId($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setAttrasocId($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setAtproveeId($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setProayu($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setNroofi($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setDesayu($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setMotayu($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setCreatedAt($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setUpdatedAt($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setUsucre($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setUsumod($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setCodpre($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setDetayu($arr[$keys[21]]);
-		if (array_key_exists($keys[22], $arr)) $this->setMonayu($arr[$keys[22]]);
-		if (array_key_exists($keys[23], $arr)) $this->setMonapr($arr[$keys[23]]);
-		if (array_key_exists($keys[24], $arr)) $this->setAtmedicoId($arr[$keys[24]]);
-		if (array_key_exists($keys[25], $arr)) $this->setRespat($arr[$keys[25]]);
-		if (array_key_exists($keys[26], $arr)) $this->setInfmed($arr[$keys[26]]);
-		if (array_key_exists($keys[27], $arr)) $this->setObsmed($arr[$keys[27]]);
-		if (array_key_exists($keys[28], $arr)) $this->setFecdiasoc($arr[$keys[28]]);
-		if (array_key_exists($keys[29], $arr)) $this->setUsudiasoc($arr[$keys[29]]);
-		if (array_key_exists($keys[30], $arr)) $this->setResdiasoc($arr[$keys[30]]);
-		if (array_key_exists($keys[31], $arr)) $this->setFecvisdoc($arr[$keys[31]]);
-		if (array_key_exists($keys[32], $arr)) $this->setUsuvisdoc($arr[$keys[32]]);
-		if (array_key_exists($keys[33], $arr)) $this->setResvisdoc($arr[$keys[33]]);
-		if (array_key_exists($keys[34], $arr)) $this->setFecsol($arr[$keys[34]]);
+		if (array_key_exists($keys[3], $arr)) $this->setAtpriayuId($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setAtsolici($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setAtbenefi($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setAttipayuId($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setAtrubrosId($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setAtestayuId($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setAttrasocId($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setAtproveeId($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setProayu($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setNroofi($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setDesayu($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setMotayu($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setCreatedAt($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setUpdatedAt($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setUsucre($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setUsumod($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setCodpre($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setDetayu($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setMonayu($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setMonapr($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setAtmedicoId($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setRespat($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setInfmed($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setObsmed($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setFecdiasoc($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setUsudiasoc($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setResdiasoc($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setFecvisdoc($arr[$keys[30]]);
+		if (array_key_exists($keys[31], $arr)) $this->setUsuvisdoc($arr[$keys[31]]);
+		if (array_key_exists($keys[32], $arr)) $this->setResvisdoc($arr[$keys[32]]);
+		if (array_key_exists($keys[33], $arr)) $this->setFecsol($arr[$keys[33]]);
+		if (array_key_exists($keys[34], $arr)) $this->setAtunidadesId($arr[$keys[34]]);
 		if (array_key_exists($keys[35], $arr)) $this->setId($arr[$keys[35]]);
 	}
 
@@ -1787,7 +1829,6 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(AtayudasPeer::NROEXP)) $criteria->add(AtayudasPeer::NROEXP, $this->nroexp);
 		if ($this->isColumnModified(AtayudasPeer::REFDOC)) $criteria->add(AtayudasPeer::REFDOC, $this->refdoc);
 		if ($this->isColumnModified(AtayudasPeer::PARENTESCO)) $criteria->add(AtayudasPeer::PARENTESCO, $this->parentesco);
-		if ($this->isColumnModified(AtayudasPeer::PRIAYU)) $criteria->add(AtayudasPeer::PRIAYU, $this->priayu);
 		if ($this->isColumnModified(AtayudasPeer::ATPRIAYU_ID)) $criteria->add(AtayudasPeer::ATPRIAYU_ID, $this->atpriayu_id);
 		if ($this->isColumnModified(AtayudasPeer::ATSOLICI)) $criteria->add(AtayudasPeer::ATSOLICI, $this->atsolici);
 		if ($this->isColumnModified(AtayudasPeer::ATBENEFI)) $criteria->add(AtayudasPeer::ATBENEFI, $this->atbenefi);
@@ -1819,6 +1860,7 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(AtayudasPeer::USUVISDOC)) $criteria->add(AtayudasPeer::USUVISDOC, $this->usuvisdoc);
 		if ($this->isColumnModified(AtayudasPeer::RESVISDOC)) $criteria->add(AtayudasPeer::RESVISDOC, $this->resvisdoc);
 		if ($this->isColumnModified(AtayudasPeer::FECSOL)) $criteria->add(AtayudasPeer::FECSOL, $this->fecsol);
+		if ($this->isColumnModified(AtayudasPeer::ATUNIDADES_ID)) $criteria->add(AtayudasPeer::ATUNIDADES_ID, $this->atunidades_id);
 		if ($this->isColumnModified(AtayudasPeer::ID)) $criteria->add(AtayudasPeer::ID, $this->id);
 
 		return $criteria;
@@ -1855,8 +1897,6 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		$copyObj->setRefdoc($this->refdoc);
 
 		$copyObj->setParentesco($this->parentesco);
-
-		$copyObj->setPriayu($this->priayu);
 
 		$copyObj->setAtpriayuId($this->atpriayu_id);
 
@@ -1920,6 +1960,8 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
 		$copyObj->setFecsol($this->fecsol);
 
+		$copyObj->setAtunidadesId($this->atunidades_id);
+
 
 		if ($deepCopy) {
 									$copyObj->setNew(false);
@@ -1946,6 +1988,10 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
 			foreach($this->getAtpresupuestos() as $relObj) {
 				$copyObj->addAtpresupuesto($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getAtdetests() as $relObj) {
+				$copyObj->addAtdetest($relObj->copy($deepCopy));
 			}
 
 		} 
@@ -1995,7 +2041,10 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		if ($this->aCaordcom === null && ($this->refdoc !== null)) {
 						include_once 'lib/model/om/BaseCaordcomPeer.php';
 
-			$this->aCaordcom = CaordcomPeer::retrieveByPK($this->refdoc, $con);
+      $c = new Criteria();
+      $c->add(CaordcomPeer::ID,$this->refdoc);
+      
+			$this->aCaordcom = CaordcomPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -2024,7 +2073,10 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		if ($this->aAtpriayu === null && ($this->atpriayu_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtpriayuPeer.php';
 
-			$this->aAtpriayu = AtpriayuPeer::retrieveByPK($this->atpriayu_id, $con);
+      $c = new Criteria();
+      $c->add(AtpriayuPeer::ID,$this->atpriayu_id);
+      
+			$this->aAtpriayu = AtpriayuPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -2053,7 +2105,10 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		if ($this->aAtciudadanoRelatedByAtsolici === null && ($this->atsolici !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtciudadanoPeer.php';
 
-			$this->aAtciudadanoRelatedByAtsolici = AtciudadanoPeer::retrieveByPK($this->atsolici, $con);
+      $c = new Criteria();
+      $c->add(AtciudadanoPeer::ID,$this->atsolici);
+      
+			$this->aAtciudadanoRelatedByAtsolici = AtciudadanoPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -2082,7 +2137,10 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		if ($this->aAtciudadanoRelatedByAtbenefi === null && ($this->atbenefi !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtciudadanoPeer.php';
 
-			$this->aAtciudadanoRelatedByAtbenefi = AtciudadanoPeer::retrieveByPK($this->atbenefi, $con);
+      $c = new Criteria();
+      $c->add(AtciudadanoPeer::ID,$this->atbenefi);
+      
+			$this->aAtciudadanoRelatedByAtbenefi = AtciudadanoPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -2111,7 +2169,10 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		if ($this->aAttipayu === null && ($this->attipayu_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAttipayuPeer.php';
 
-			$this->aAttipayu = AttipayuPeer::retrieveByPK($this->attipayu_id, $con);
+      $c = new Criteria();
+      $c->add(AttipayuPeer::ID,$this->attipayu_id);
+      
+			$this->aAttipayu = AttipayuPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -2140,7 +2201,10 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		if ($this->aAtrubros === null && ($this->atrubros_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtrubrosPeer.php';
 
-			$this->aAtrubros = AtrubrosPeer::retrieveByPK($this->atrubros_id, $con);
+      $c = new Criteria();
+      $c->add(AtrubrosPeer::ID,$this->atrubros_id);
+      
+			$this->aAtrubros = AtrubrosPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -2169,7 +2233,10 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		if ($this->aAtestayu === null && ($this->atestayu_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtestayuPeer.php';
 
-			$this->aAtestayu = AtestayuPeer::retrieveByPK($this->atestayu_id, $con);
+      $c = new Criteria();
+      $c->add(AtestayuPeer::ID,$this->atestayu_id);
+      
+			$this->aAtestayu = AtestayuPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -2198,7 +2265,10 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		if ($this->aAttrasoc === null && ($this->attrasoc_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAttrasocPeer.php';
 
-			$this->aAttrasoc = AttrasocPeer::retrieveByPK($this->attrasoc_id, $con);
+      $c = new Criteria();
+      $c->add(AttrasocPeer::ID,$this->attrasoc_id);
+      
+			$this->aAttrasoc = AttrasocPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -2227,7 +2297,10 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		if ($this->aAtprovee === null && ($this->atprovee_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtproveePeer.php';
 
-			$this->aAtprovee = AtproveePeer::retrieveByPK($this->atprovee_id, $con);
+      $c = new Criteria();
+      $c->add(AtproveePeer::ID,$this->atprovee_id);
+      
+			$this->aAtprovee = AtproveePeer::doSelectOne($c, $con);
 
 			
 		}
@@ -2256,11 +2329,46 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		if ($this->aAtmedico === null && ($this->atmedico_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtmedicoPeer.php';
 
-			$this->aAtmedico = AtmedicoPeer::retrieveByPK($this->atmedico_id, $con);
+      $c = new Criteria();
+      $c->add(AtmedicoPeer::ID,$this->atmedico_id);
+      
+			$this->aAtmedico = AtmedicoPeer::doSelectOne($c, $con);
 
 			
 		}
 		return $this->aAtmedico;
+	}
+
+	
+	public function setAtunidades($v)
+	{
+
+
+		if ($v === null) {
+			$this->setAtunidadesId(NULL);
+		} else {
+			$this->setAtunidadesId($v->getId());
+		}
+
+
+		$this->aAtunidades = $v;
+	}
+
+
+	
+	public function getAtunidades($con = null)
+	{
+		if ($this->aAtunidades === null && ($this->atunidades_id !== null)) {
+						include_once 'lib/model/ciudadanos/om/BaseAtunidadesPeer.php';
+
+      $c = new Criteria();
+      $c->add(AtunidadesPeer::ID,$this->atunidades_id);
+      
+			$this->aAtunidades = AtunidadesPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aAtunidades;
 	}
 
 	
@@ -3066,6 +3174,146 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		$this->lastAtpresupuestoCriteria = $criteria;
 
 		return $this->collAtpresupuestos;
+	}
+
+	
+	public function initAtdetests()
+	{
+		if ($this->collAtdetests === null) {
+			$this->collAtdetests = array();
+		}
+	}
+
+	
+	public function getAtdetests($criteria = null, $con = null)
+	{
+				include_once 'lib/model/ciudadanos/om/BaseAtdetestPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtdetests === null) {
+			if ($this->isNew()) {
+			   $this->collAtdetests = array();
+			} else {
+
+				$criteria->add(AtdetestPeer::ATAYUDAS_ID, $this->getId());
+
+				AtdetestPeer::addSelectColumns($criteria);
+				$this->collAtdetests = AtdetestPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(AtdetestPeer::ATAYUDAS_ID, $this->getId());
+
+				AtdetestPeer::addSelectColumns($criteria);
+				if (!isset($this->lastAtdetestCriteria) || !$this->lastAtdetestCriteria->equals($criteria)) {
+					$this->collAtdetests = AtdetestPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastAtdetestCriteria = $criteria;
+		return $this->collAtdetests;
+	}
+
+	
+	public function countAtdetests($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/ciudadanos/om/BaseAtdetestPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(AtdetestPeer::ATAYUDAS_ID, $this->getId());
+
+		return AtdetestPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addAtdetest(Atdetest $l)
+	{
+		$this->collAtdetests[] = $l;
+		$l->setAtayudas($this);
+	}
+
+
+	
+	public function getAtdetestsJoinAtestayuRelatedByAtestayuDesde($criteria = null, $con = null)
+	{
+				include_once 'lib/model/ciudadanos/om/BaseAtdetestPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtdetests === null) {
+			if ($this->isNew()) {
+				$this->collAtdetests = array();
+			} else {
+
+				$criteria->add(AtdetestPeer::ATAYUDAS_ID, $this->getId());
+
+				$this->collAtdetests = AtdetestPeer::doSelectJoinAtestayuRelatedByAtestayuDesde($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtdetestPeer::ATAYUDAS_ID, $this->getId());
+
+			if (!isset($this->lastAtdetestCriteria) || !$this->lastAtdetestCriteria->equals($criteria)) {
+				$this->collAtdetests = AtdetestPeer::doSelectJoinAtestayuRelatedByAtestayuDesde($criteria, $con);
+			}
+		}
+		$this->lastAtdetestCriteria = $criteria;
+
+		return $this->collAtdetests;
+	}
+
+
+	
+	public function getAtdetestsJoinAtestayuRelatedByAtestayuHasta($criteria = null, $con = null)
+	{
+				include_once 'lib/model/ciudadanos/om/BaseAtdetestPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtdetests === null) {
+			if ($this->isNew()) {
+				$this->collAtdetests = array();
+			} else {
+
+				$criteria->add(AtdetestPeer::ATAYUDAS_ID, $this->getId());
+
+				$this->collAtdetests = AtdetestPeer::doSelectJoinAtestayuRelatedByAtestayuHasta($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtdetestPeer::ATAYUDAS_ID, $this->getId());
+
+			if (!isset($this->lastAtdetestCriteria) || !$this->lastAtdetestCriteria->equals($criteria)) {
+				$this->collAtdetests = AtdetestPeer::doSelectJoinAtestayuRelatedByAtestayuHasta($criteria, $con);
+			}
+		}
+		$this->lastAtdetestCriteria = $criteria;
+
+		return $this->collAtdetests;
 	}
 
 } 

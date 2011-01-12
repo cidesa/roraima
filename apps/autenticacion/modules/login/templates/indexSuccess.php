@@ -27,6 +27,14 @@
 
     </div>
   </div>
+    <div id="copyleft">
+      <dl>
+        <p>Copyleft CIDESA 2007. </p>
+        <p>Distribuido bajo la licencia GNU/GPL V2.0 </p>
+        <p>Venezuela - Lara - Barquisimeto</p>
+      </dl>
+    </div>
+
 </div>
 
 

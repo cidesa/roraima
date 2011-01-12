@@ -1,0 +1,46 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Ataudiencias
+    theme:            cidesaGenerator
+
+    fields:
+      atsolici_id:
+        name:       Nombre
+        params:     text_method=getNombre include_custom=Seleccione... disabled=true
+      atunidades_id:
+        name:       Unidad
+        params:     text_method=getDesuni include_custom=Seleccione... disabled=true
+      motaud:       { name: Motivo, type: textarea_tag, params: cols=60 rows=2 rich=false readonly=true }
+      persona:      { name: Dirigido a, params: readonly=true }
+      _status:      { name: Estado, validate: Vstring_1_10, msj_error: Debe seleccionar un estado }
+      fecha:        { name: Fecha de Audiencia, validate: Vfecha, msj_error: Debe seleccionar una fecha de audiencia }
+      lugar:        { name: Lugar de la Audiencia, type: textarea_tag, params: cols=60 rows=2 rich=false, validate: Vstring_1_100, msj_error: Debe insertar el lugar de la audiencia }
+      observacion:  { name: Observación, type: textarea_tag, params: cols=60 rows=2 rich=false }
+      fechar:       { name: Fecha Registro, type: plain, params: readonly=true }
+      fechaa:       { name: Fecha Atención, type: plain, params: readonly=true }
+    list:
+      fields:
+        atsolici_id:
+          name:       Nombre
+          params:     text_method=getNombre include_custom=Seleccione...
+        atunidades_id:
+          name:       Unidad
+          params:     text_method=getDesuni include_custom=Seleccione...
+      title:          Atención de Audiencias
+      display:        [=nombre, unidad, status]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [atsolici_id, atunidades_id]
+      max_per_page:   5
+      sort:           atsolici_id
+    edit:
+      title:          Atendiendo Audiencias
+      display:
+        Solicitado por:    [atsolici]
+        Detalle Solicitud: [atunidades_id, persona, motaud ]
+        Datos de Atención: [_status, fecha, lugar, observacion, fechar, fechaa ]
+      actions:
+        _list:        ~
+        _save:        ~

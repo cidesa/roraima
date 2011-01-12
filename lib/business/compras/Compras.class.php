@@ -7,7 +7,7 @@
  * @subpackage compras
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -419,21 +419,55 @@ class Compras {
    * @return void
    */
 
-  public static function salvarPrioridadCotizaciones($grid, $reqart, $actsolegr, $casolart, & $error) {
+  public static function salvarPrioridadCotizaciones($grid, $reqart, $actsolegr, $casolart, & $error, $grid1) {
     $gridnuevo = array ();
     $gridnuevo2 = array ();
     $gridnuevorec = array ();
     if ($casolart->getPorcostart()=='1')
     {
-      self::asignarPrioridadCostArt($reqart);
+      self::asignarPrioridadCostArt($reqart,$casolart);
     }else if ($casolart->getPormoncot()=='1')
     {
-      self::asignarPrioridadMonCot($reqart);
-    }else {
+      self::asignarPrioridadMonCot($reqart,$casolart);
+    }
+    else if ($casolart->getPortimeent()=='1')
+    {
+      self::asignarPrioridadTimEnt($reqart,$casolart);
+    }
+    else if ($casolart->getPorprovee()=='1')
+    {
+        $x = $grid1[0];
+	    $j = 0;
+	    while ($j < count($x)) {
+
+	      $t= new criteria();
+	      $t->add(CadetcotPeer::REFCOT,$x[$j]->getRefcot());
+	      $resul= CadetcotPeer::doSelect($t);
+	      if ($resul)
+	      {
+	      	foreach ($resul as $dat)
+	      	{
+	      		$dat->setPriori($x[$j]->getPriori2());
+	      		$dat->setJustifica($x[$j]->getJustifica());
+                        if ($x[$j]->getPriori2()==1 && $casolart->getObservaciones()!="")
+                          $dat->setObservaciones($casolart->getObservaciones());
+                        else 
+                          $dat->setObservaciones($x[$j]->getObservaciones());
+	      		$dat->save();
+	      	}
+	      }
+	      $j++;
+	    }
+    }
+    else {
 	    $x = $grid[0];
 	    $j = 0;
 	    while ($j < count($x)) {
+              if ($x[$j]->getPriori()!='') {
+               if ($x[$j]->getPriori()==1 && $casolart->getObservaciones()!="")
+                  $x[$j]->setObservaciones($casolart->getObservaciones());
 	      $x[$j]->save();
+              }
 	      $j++;
 	    }
     }
@@ -461,12 +495,12 @@ class Compras {
             if ($costonew != $resul2->getCosto()) {
               $gridnuevo[$indice -1][2] = $costonew;
             } else {
-              $gridnuevo[$indice -1][2] = $resul2->getCosto();
+              $gridnuevo[$indice -1][2] = $resul2->getCosto(); //Costo nuevo
             }
             $monuni = ($gridnuevo[$indice -1][2] * $gridnuevo[$indice -1][1]);
             $gridnuevo[$indice -1][3] = $datos->getMondes();
             $gridnuevo[$indice -1][4] = $resul2->getMonrgo();
-            $gridnuevo[$indice -1][5] = $monuni -$gridnuevo[$indice -1][3];
+            $gridnuevo[$indice -1][5] = $monuni -$gridnuevo[$indice -1][3]+$gridnuevo[$indice -1][4];
             $c=new Criteria();
             $c->add(CadisrgoPeer::REQART,$reqart);
             $reg= CadisrgoPeer::doSelect($c);
@@ -475,29 +509,15 @@ class Compras {
             } else {
               $gridnuevo[$indice -1][6] = 0;
             }
-            $gridnuevo[$indice -1][7] = $monuni -$gridnuevo[$indice -1][3];
+            $gridnuevo[$indice -1][7] = $resul2->getMontot();//$monuni -$gridnuevo[$indice -1][3];
             $gridnuevo[$indice -1][8] = $resul2->getCodcat().'-'.$resul2->getCodpre();
             $gridnuevo[$indice -1][9] = $resul2->getMonrgo();
             $gridnuevo[$indice -1][10] = $resul2->getCodcat();
+            $gridnuevo[$indice -1][11] = $resul2->getCosto(); //Costo viejo
           	}
           }
         }
       }
-
- /*     $c = new Criteria();
-      $c->add(CargosolPeer :: REQART, $reqart);
-      $dat = CargosolPeer :: doSelect($c);
-      if ($dat) {
-        foreach ($dat as $resultado) {
-          $indice2 = count($gridnuevo2) + 1;
-          $gridnuevo2[$indice2 -1][0] = $resultado->getCodrgo();
-          $gridnuevo2[$indice2 -1][1] = $resultado->getMonrgo();
-          $gridnuevo2[$indice2 -1][2] = $resultado->getTipdoc();
-          $gridnuevo2[$indice2 -1][3] = "";
-          $gridnuevo2[$indice2 -1][4] = $resultado->getMonrgo();
-        }
-      }
-*/
 
       $c = new Criteria();
       $c->add(CadisrgoPeer :: REQART, $reqart);
@@ -514,6 +534,7 @@ class Compras {
           $gridnuevorec[$indice2 -1][6] = $resultado->getCodcat();
         }
       }
+      $nopuedeaumentar=false;
       $z = 0;
       while ($z < count($gridnuevo)) {
         if ($gridnuevo[$z][2] != "") {
@@ -530,7 +551,8 @@ class Compras {
               }
             }
             $error = 133;
-            break;
+            return true;
+            //break;
           } else
             if ($gridnuevo[$z][2] < 0) {
               $c = new Criteria();
@@ -545,18 +567,12 @@ class Compras {
                 }
               }
               $error = 134;
-              break;
+              return true;
+              //break;
             } else {
-              if ($gridnuevo[$z][1] != "") {
+              if ($gridnuevo[$z][1] != "") { //&& ($gridnuevo[$z][2]>$gridnuevo[$z][11])) {
                 $r = 0;
-           /*     while ($r < count($gridnuevo2)) {
-                  self :: distribuirRecargos(& $gridnuevo2, & $gridnuevo, $r, 'R');
-                  $r++;
-                }*/
-
                 self :: distribuirRecargos(& $gridnuevo2, & $gridnuevo,'S',&$gridnuevorec);
-               /* $producto = ($gridnuevo[$z][2] * $gridnuevo[$z][1]);
-                $gridnuevo[$z][5] = $producto - $gridnuevo[$z][3];*/
                 self :: recalcularRecargos(&$gridnuevo2, &$gridnuevo, &$nopuedeaumentar, $reqart,&$gridnuevorec);
                 if ($gridnuevo[$z][5] > $gridnuevo[$z][7]) {
                   $tiporec = Herramientas :: getX('CODEMP', 'Cadefart', 'Asiparrec', '001');
@@ -587,6 +603,7 @@ class Compras {
             $datos->setJustifica(null);
             $datos->save();
           }
+          $error = 164;
         }
         $error = 135;
       }
@@ -602,6 +619,29 @@ class Compras {
       self :: montoTotal($gridnuevo, & $montototal1, & $montototal2);
       $resul->setMonreq($montototal1);
       $resul->setMondes($montototal2);
+
+
+    $actdessol="";  // Se creo para actualizar la descripcion de la solicitud cuando gane un unico proveedor
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almpriori',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('actdessol',$varemp['aplicacion']['compras']['modulos']['almpriori']))
+	       {
+	       	$actdessol=$varemp['aplicacion']['compras']['modulos']['almpriori']['actdessol'];
+	       }
+         }
+      if ($actdessol=='S') {
+        $sql = "select a.refsol, a.codpro, b.priori, a.descot from cacotiza a inner join cadetcot b on a.refcot=b.refcot where b.priori=1 and a.refsol='".$reqart."'
+        group by a.refsol, a.codpro, b.priori, a.descot";
+        if (Herramientas::BuscarDatos($sql,&$result)){
+          if(count($result)==1){
+             $resul->setDesreq($result[0]["descot"]);
+          }
+        }
+      }
       $resul->save();
     }
 
@@ -1246,6 +1286,15 @@ class Compras {
 
     // Código para validaciones del negocio
     // Debe retornar el código de error, si existe, si no retorna -1
+    $t= new Criteria();
+    $t->add(CpimpcauPeer::REFERE,$reg->getOrdcom());
+    $t->add(CpimpcauPeer::STAIMP,'N',Criteria::NOT_EQUAL);
+    $resultado= CpimpcauPeer::doSelect($t);
+    if ($resultado)
+    {
+    	$result=197;
+    }
+
 
     return $result;
 
@@ -1742,8 +1791,8 @@ class Compras {
           return true;
         }
 
+         }
       }
-    }
     return false;
 
   }
@@ -2325,6 +2374,40 @@ class Compras {
     }
   }
 
+    public static function validarAlmpriori2($grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    $total1=0;
+    $total2=0;
+
+    while ($j<count($x))
+    {
+      if ($x[$j]->getPriori2()==1)
+      {
+        $total1=$total1 +1;
+      }
+      else
+      {
+        $total2=$total2 +1;
+      }
+      $j++;
+    }
+
+    if ($total1==0)
+    {
+      return 164;
+    }
+    else if ($total1>1)
+    {
+     return 165;
+    }
+    else
+    {
+      return -1;
+    }
+  }
+
   public static function ObtenerTipoDocumentoPrecompromiso()
   {
       $cri= new Criteria();
@@ -2345,7 +2428,7 @@ class Compras {
       return $tipdoc;
   }
 
-  public static function asignarPrioridadCostArt($reqart)
+  public static function asignarPrioridadCostArt($reqart,$casolart)
   {
      $sql="select a.refcot,a.codart,a.canord,a.costo,a.totdet,b.codpro,
         (case when a.costo>0 then a.costo else 1000000000000000000000000 end) as orden,
@@ -2385,6 +2468,8 @@ class Compras {
             if ($detcot)
             {
                 $detcot->setPriori($priori);
+                if ($priori==1 && $casolart->getObservaciones()!="")
+                  $detcot->setObservaciones($casolart->getObservaciones());
                 $detcot->save();
             }
             $codartori=$arr[$con]['codart'];
@@ -2393,7 +2478,7 @@ class Compras {
        }//if ($arr)
   }
 
-  public static function asignarPrioridadMonCot($reqart)
+  public static function asignarPrioridadMonCot($reqart,$casolart)
   {
       $c = new Criteria();
       $c->add(CacotizaPeer :: REFSOL, $reqart);
@@ -2413,6 +2498,8 @@ class Compras {
 	          foreach ($data as $obj)
 	          {
 	          	$obj->setPriori($priori);
+                        if ($priori==1 && $casolart->getObservaciones()!="")
+                           $obj->setObservaciones($casolart->getObservaciones());
 	          	$obj->setJustifica(null);
 	          	$obj->save();
 	          }
@@ -2605,6 +2692,7 @@ class Compras {
           $gridnuevorec[$indice2 -1][6] = $resultado->getCodcat();
         }
       }
+      $nopuedeaumentar=true;
       $z = 0;
       while ($z < count($gridnuevo)) {
         if ($gridnuevo[$z][2] != "") {
@@ -2621,7 +2709,8 @@ class Compras {
               }
             }
             $error = 133;
-            break;
+            return true;
+            //break;
           } else
             if ($gridnuevo[$z][2] < 0) {
               $c = new Criteria();
@@ -2636,7 +2725,8 @@ class Compras {
                 }
               }
               $error = 134;
-              break;
+              return true;
+              //break;
             } else {
               if ($gridnuevo[$z][1] != "") {
                 $r = 0;
@@ -2671,11 +2761,696 @@ class Compras {
             $datos->setJustifica(null);
             $datos->save();
           }
-        }
-        $error = 135;
+        $error = 164;
       }
+        $error = 135;
+    }
     }
     return true;
+  }
+
+
+
+  public static function ValidarAlmRamart($clasemodelo)
+  {
+
+      $reg2 = Herramientas::getX_vacio('codram','caprovee','ramart',$clasemodelo->getRamart());
+      $reg = Herramientas::getX_vacio('ramart','caregart','ramart',$clasemodelo->getRamart());
+
+     if ($reg=='' && $reg2=='')
+     {
+     	$clasemodelo->delete();
+     	return -1;
+     }else{
+     	return 6;
+     }
+  }
+
+  public static function validarRecaudosVen($rifpro,$fecha)
+  {
+     $dateFormat = new sfDateFormat('es_VE');
+     $fecval = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
+
+     $codpro=H::getX('RIFPRO','Caprovee','Codpro',$rifpro);
+     $l= new Criteria();
+     $l->add(CarecproPeer::CODPRO,$codpro);
+     $resul= CarecproPeer::doSelect($l);
+     if ($resul)
+     {
+     	foreach ($resul as $obj)
+     	{
+           if ($obj->getFecven()<$fecval)
+           {
+           	return 20;
+           }
+     	}
+     }else {
+       return 21;
+     }
+
+     return -1;
+  }
+
+  public static function asignarPrioridadTimEnt($reqart,$casolart)
+  {
+      $c = new Criteria();
+      $c->add(CacotizaPeer :: REFSOL, $reqart);
+      $c->addJoin(CacotizaPeer :: REFCOT, CadetcotPeer :: REFCOT);
+      $c->addAscendingOrderByColumn(CadetcotPeer::CODART);
+      $c->addAscendingOrderByColumn(CadetcotPeer::FECENT);
+      $result = CadetcotPeer :: doSelect($c);
+      if ($result)
+      {
+      	$priori=0;
+      	$j=1;
+      	foreach ($result as $datos)
+      	{
+            if ($j==1) $codartori=$datos->getCodart();
+      	    if ($codartori==$datos->getCodart())
+            {
+              $priori++;
+            }
+            else
+            {
+             $codartori=$datos->getCodart();
+             $priori=1;
+            }
+		  	$datos->setPriori($priori);
+                        if ($priori==1 && $casolart->getObservaciones()!="")
+                          $datos->setObservaciones($casolart->getObservaciones());
+		  	$datos->setJustifica(null);
+		  	$datos->save();
+
+		   $j++;
+        }
+      }
+  }
+
+  public static function salvarUnidadesUsuari($clasemodelo,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCodcat()!='')
+      {
+      	$x[$j]->setLoguse($clasemodelo->getloguse());
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
+  public static function MigrarVentas($clase,&$cadena, &$caderr=array(), $urlauto='')
+  {
+    $err=-1;
+    $cadena="";
+    $arreglo=array();
+    if($urlauto) $url = $urlauto;
+    else $url = sfConfig::get('sf_upload_dir')."//".$clase->getArchivo();
+    $file = fopen($url,  "r");
+    if ($file)
+    {
+        if(true)
+        {
+            $delimiter=";";
+        $cont=0;
+            $rr=0;
+            $valor='';
+            $codqpr='';#CODIGO ARTICULO QPR
+            $nomqpr='';#NOMBRE ARTICULO QPR
+            $canqpr=0;#CANTIDAD
+            $preqpr=0;#TOTAL SIN IVA
+            $depiva='';#DEPARTAMENTO IVA
+            $preuni=0;#PRECIO UNITARIO
+            $col_codqpr=5;#COLUMNA CODIGO ARTICULO QPR DEL CSV
+            $col_nomqpr=6;#COLUMNA NOMBRE ARTICULO QPR DEL CSV
+            $col_canqpr=8;#COLUMNA CANTIDAD DEL CSV
+            $col_preqpr=9;#COLUMNA TOTAL SIN IVA DEL CSV
+            $col_depiva=15;#COLUMNA DEPARTAMENTO IVA DEL CSV
+            $col_preuni=17;#COLUMNA PRECIO UNITARIO DEL CSV
+
+            while(!feof($file))
+            {
+                $line=fgets($file, 255);
+                if ($cont>=4)
+                {
+                    $codalm=$clase->getCodalm();
+                    $fecven=$clase->getFecven();
+                    $auxline=explode(";",$line);
+                    array_key_exists($col_codqpr-1,$auxline) ? $codqpr=$auxline[$col_codqpr-1] : '';
+                    array_key_exists($col_nomqpr-1,$auxline) ? $nomqpr=$auxline[$col_nomqpr-1] : '';
+                    array_key_exists($col_canqpr-1,$auxline) ? $canqpr=H::FormatoNum($auxline[$col_canqpr-1]) : '';
+                    array_key_exists($col_preqpr-1,$auxline) ? $preqpr=H::FormatoNum($auxline[$col_preqpr-1]) : '';
+                    array_key_exists($col_depiva-1,$auxline) ? $depiva=$auxline[$col_depiva-1] : '';
+                    array_key_exists($col_preuni-1,$auxline) ? $preuni=H::FormatoNum($auxline[$col_preuni-1]) : '';
+
+                   $y= new Criteria();
+                   $y->add(CaequiartPeer::CODQPR,$codqpr);
+                   $resul= CaequiartPeer::doSelectOne($y);
+                   if ($resul)
+                   {
+                       $arreglo[$rr]["codalm"]=$codalm;
+                       $arreglo[$rr]["fecven"]=$fecven;
+                       $arreglo[$rr]["codart"]=$codqpr;
+                       $arreglo[$rr]["desart"]=$nomqpr;
+                       $arreglo[$rr]["fecmig"]=date('Y-m-d');
+                       $arreglo[$rr]["cantidad"]=floatval($canqpr);
+                       $arreglo[$rr]["subtot"]=floatval($preqpr);
+                       $sql = "select moniva from caivaqpro where depto='$depiva'";
+                       if(H::BuscarDatos($sql, $rs))
+                          $moniva = $rs[0]['moniva'];
+                       else
+                          $moniva = 0;
+                       $iva = ($preqpr * $moniva)/100;
+                       $arreglo[$rr]["iva"]=$iva;
+                       $arreglo[$rr]["precio"]=floatval($preuni);
+                       $arreglo[$rr]["usumig"]=sfContext::getInstance()->getUser()->getAttribute('loguse');
+                       $arreglo[$rr]["codart2"]=$resul->getCodart();
+                       $arreglo[$rr]["coding"]=H::getX_vacio('codart', 'caregart', 'coding', $resul->getCodart());
+                       $rr++;
+                   }else {
+                     if(strlen($codqpr)==13){
+                       $cadena.=$codqpr."-";
+                       $caderr[] = $line;
+                     } else $cadena = '';
+                   }
+                }
+                $cont++;
+            }
+            $arrasientos=array();
+            $pos=0;
+            $i=0;
+            while ($i<count($arreglo))
+            {
+                if ($arreglo[$i]["codart"]!="")
+                {
+                  if ($arreglo[$i]["coding"]!="")
+                    {
+                      self::guardarAsientos($arreglo[$i]["coding"],$arreglo[$i]["subtot"],$arreglo[$i]["iva"],&$arrasientos,&$pos);
+                    }else {
+                      return 557;
+                    }
+                }
+                $i++;
+            }
+          self::grabarMigracion($arreglo);
+          self::grabarIngreso($codalm,$arreglo,&$cireging);
+          self::grabarImpIng($cireging,$arrasientos);
+        }else
+        {
+            $cont=0;
+        $t= new Criteria();
+        $t->add(CacontxtalmPeer::CODALM,$clase->getCodalm());
+        $regis= CacontxtalmPeer::doSelectOne($t);
+        if ($regis)
+        {
+          while(!feof($file))
+          {
+            $almacen=fgets($file, 255);
+            if ($cont>=4)
+            {             
+               $codalm=$clase->getCodalm();
+               $fecven=$clase->getFecven();
+
+               $codartqprg= trim(substr($almacen,$regis->getIniart()-1,$regis->getFinart()));
+               if ($codartqprg!='') {
+               $desartqprg= trim(substr($almacen,$regis->getInides()-1,$regis->getFindes()));
+               $cantidad=trim(substr($almacen,$regis->getInican()-1,$regis->getFincan()));
+               if (is_numeric(H::toFloat($cantidad)))
+                 {
+                   $canart=H::toFloat($cantidad);
+                 }else $canart=0;
+
+               $subtot=trim(substr($almacen,$regis->getInisub()-1,$regis->getFinsub()));
+               if (is_numeric(H::toFloat($subtot)))
+                 {
+                   $subart=H::toFloat($subtot);
+                 }else $subart=0;
+               $iva=trim(substr($almacen,$regis->getIniiva()-1,$regis->getFiniva()));
+               $precio=trim(substr($almacen,$regis->getInipre()-1,$regis->getFinpre()));
+               if (is_numeric(H::toFloat($precio)))
+                 {
+                   $preart=H::toFloat($precio);
+                 }else $preart=0;
+
+               $y= new Criteria();
+               $y->add(CaequiartPeer::CODQPR,$codartqprg);
+               $resul= CaequiartPeer::doSelectOne($y);
+               if ($resul)
+               {                 
+                   $arreglo[$cont]["codalm"]=$codalm;
+                   $arreglo[$cont]["fecven"]=$fecven;
+                   $arreglo[$cont]["codart"]=$codartqprg;
+                   $arreglo[$cont]["desart"]=$desartqprg;
+                   $arreglo[$cont]["fecmig"]=date('Y-m-d');
+                   $arreglo[$cont]["cantidad"]=$canart;
+                   $arreglo[$cont]["subtot"]=$subart;
+                   $arreglo[$cont]["iva"]=$iva;
+                   $arreglo[$cont]["precio"]=$preart;
+                   $arreglo[$cont]["usumig"]=sfContext::getInstance()->getUser()->getAttribute('loguse');
+                   $arreglo[$cont]["codart2"]=$resul->getCodart();
+                   $arreglo[$cont]["coding"]=H::getX_vacio('codart', 'caregart', 'coding', $resul->getCodart());
+               }
+               else {
+                 $cadena=$cadena.$codartqprg."-";
+               }
+               }
+            }
+            $cont++;
+          }
+            $arrasientos=array();
+            $pos=0;
+            $i=0;
+            while ($i<count($arreglo))
+            {
+                if ($arreglo[$i]["codart"]!="")
+                {
+                  if ($arreglo[$i]["coding"]!="")
+                    {
+                      self::guardarAsientos($arreglo[$i]["coding"],$arreglo[$i]["subtot"],$arreglo[$i]["iva"],&$arrasientos,&$pos);
+                    }else {
+                        return 557;
+                    }
+                }
+                $i++;
+            }
+
+          self::grabarMigracion($arreglo);
+          self::grabarIngreso($codalm,$arreglo,&$cireging);
+          self::grabarImpIng($cireging,$arrasientos);
+        }else {
+          $err=556;
+        }
+        }
+    }else {
+      $err=541;
+    }
+    fclose ($file);
+    unlink($url);
+
+    return $err;
+  }
+
+  public static function grabarMigracion($arreglo)
+  {
+    $i=0;
+    while ($i<count($arreglo))
+    {
+                 //Actualizo el Articulo y el Inventario
+                   $u= new Criteria();
+       $u->add(CaregartPeer::CODART,$arreglo[$i]["codart2"]);
+                   $resg= CaregartPeer::doSelectOne($u);
+                   if ($resg)
+                   {
+                     $tipoart=$resg->getTipo();
+                     if ($tipoart=='A')
+                     {
+             $act1=$resg->getExitot() - H::toFloat($arreglo[$i]["cantidad"]);
+             $dis1=$resg->getDistot() - H::toFloat($arreglo[$i]["cantidad"]);
+                         $resg->setExitot($act1);
+                         $resg->setDistot($dis1);
+                         $resg->save();
+
+                         $c = new Criteria();
+             $c->add(CaartalmubiPeer::CODART,$arreglo[$i]["codart2"]);
+             $c->add(CaartalmubiPeer::CODALM,$arreglo[$i]["codalm"]);
+                         $alm = CaartalmubiPeer::doSelectOne($c);
+                         if ($alm)
+                         {
+                if($alm->getExiact()>=H::toFloat($arreglo[$i]["cantidad"]))
+                             {
+                     $act2=$alm->getExiact() - H::toFloat($arreglo[$i]["cantidad"]);
+                                 $alm->setExiact($act2);
+                                 $alm->save();
+                             }
+                         }// if ($alm)
+                         $c = new Criteria();
+             $c->add(CaartalmPeer::CODART,$arreglo[$i]["codart2"]);
+             $c->add(CaartalmPeer::CODALM,$arreglo[$i]["codalm"]);
+                         $reg = CaartalmPeer::doSelectOne($c);
+                         if ($reg)
+                         {
+                if($reg->getExiact()>=H::toFloat($arreglo[$i]["cantidad"]))
+                             {
+                     $act2=$reg->getExiact() - H::toFloat($arreglo[$i]["cantidad"]);
+                                 $reg->setExiact($act2);
+                                 $reg->save();
+                             }
+                         }// if ($alm)
+                       }//   if ($tipoart='A')
+                   }
+
+               //Grabo todos los movimientos de ventas
+               $camigtxtven = new Camigtxtven();
+       $camigtxtven->setCodalm($arreglo[$i]["codalm"]);
+       $camigtxtven->setFecven($arreglo[$i]["fecven"]);
+       $camigtxtven->setCodart($arreglo[$i]["codart"]);
+       $camigtxtven->setDesart(utf8_encode($arreglo[$i]["desart"]));
+       $camigtxtven->setFecmig($arreglo[$i]["fecmig"]);
+       $camigtxtven->setCantidad($arreglo[$i]["cantidad"]);
+       $camigtxtven->setSubtot($arreglo[$i]["subtot"]);
+       $camigtxtven->setIva($arreglo[$i]["iva"]);
+       $camigtxtven->setPrecio($arreglo[$i]["precio"]);
+       $camigtxtven->setUsumig($arreglo[$i]["usumig"]);
+               $camigtxtven->save();
+
+        $i++;
+              }
+            }
+
+
+  public static function guardarAsientos($coding,$subtot,$iva,&$arrasientos,&$pos)
+  {
+    $i=0;
+	while ($i<=($pos-1))
+	{
+          if ($arrasientos[$i]["0"]==$coding)
+          {
+            $arrasientos[$i]["1"]=($arrasientos[$i]["1"] + $subtot);
+            $arrasientos[$i]["2"]=($arrasientos[$i]["2"] + $iva);
+            return true;
+          }
+	   $i++;
+        }   
+	$arrasientos[$pos]["0"]=$coding;
+        $arrasientos[$pos]["1"]=$subtot;
+        $arrasientos[$pos]["2"]=$iva;
+        $pos= $pos +1;
+    return true;
+    }
+
+  public static function grabarIngreso($codalm,$arreglo,&$cireging)
+  {
+    if (Herramientas::getVerCorrelativo('coring','cidefniv',&$r))
+    {
+        $encontrado=false;
+        while (!$encontrado)
+        {
+          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+          $sql="select refing from cireging where refing='".$numero."'";
+          if (Herramientas::BuscarDatos($sql,&$result))
+          {
+            $r=$r+1;
+  }
+          else
+          {
+            $encontrado=true;
+          }
+        }
+    }
+
+    $acumnet=0;
+    $acumrec=0;
+    $i=0;
+    while ($i<count($arreglo))
+    {
+        if ($arreglo[$i]["codart"]!="")
+        {
+          $acumnet=$acumnet+$arreglo[$i]["subtot"];  //Acumulador del Neto
+          $acumrec=$acumrec+$arreglo[$i]["iva"];     //Acumulador del Recargo
+}
+        $i++;
+    }
+
+     $sql="select codtip, rifcon from cidefniv";
+     if (Herramientas::BuscarDatos($sql,&$result2))
+     {
+  	$cireging= new Cireging();
+  	$cireging->setRefing($numero);
+  	$cireging->setCodtip($result2[0]["codtip"]);
+  	$cireging->setFecing(date('Y-m-d'));
+  	$cireging->setAnoing(date('Y'));
+  	$cireging->setDesing('INGRESO GENERADO POR MIGRACIÓN DE PUNTO DE VENTA DEL ALMACÉN '.$codalm);
+  	$cireging->setRifcon($result2[0]["codtip"]);
+  	$cireging->setDesanu(null);
+  	$moning= $acumnet;
+  	$cireging->setMoning($moning);
+  	$cireging->setMonrec($acumrec);
+  	$cireging->setMondes(0);
+  	$cireging->setMontot($moning);
+  	$cireging->setPrevis('S');
+  	$cireging->setStaing('A');
+        $cireging->save();
+
+        Herramientas::getSalvarCorrelativo('coring','cidefniv','Referencia',$r,$msg);
+    }
+  }
+
+  public static function grabarImpIng($cireging,$arrasientos)
+  {
+    $c= new Criteria();
+    $c->add(CiimpingPeer::REFING,$cireging->getRefing());
+    $c->add(CiimpingPeer::FECING,$cireging->getFecing());
+    CiimpingPeer::doDelete($c);
+
+      $i=0;
+      while ($i<count($arrasientos))
+      {
+        $ciimping= new Ciimping();
+        $ciimping->setRefing($cireging->getRefing());
+        $ciimping->setFecing($cireging->getFecing());
+        $ciimping->setCodpre($arrasientos[$i]["0"]);
+        $ciimping->setMoning($arrasientos[$i]["1"]);
+        $ciimping->setMonrec($arrasientos[$i]["2"]);
+        $ciimping->setMondes(0);
+        $ciimping->setMontot($arrasientos[$i]["1"]);
+        $ciimping->setMonaju(0);
+        $ciimping->setStaimp('A');
+        $ciimping->save();
+        $i++;
+      }
+
+    return true;
+  }
+
+  public static function grabarContrato($caordcon,$grid,$grid2,$grid3,$grid4)
+  {
+      if (!$caordcon->getId()) {
+
+           $t= new Criteria();
+           $t->setLimit(1);
+           $t->addDescendingOrderByColumn(CaordconPeer::ORDCON);
+           $reg= CaordconPeer::doSelectOne($t);
+           if ($reg)
+           {
+               $caordcon->setOrdcon(str_pad(($reg->getOrdcon()+1),8,'0',STR_PAD_LEFT));
+           }else $caordcon->setOrdcon('00000001');
+}
+      $caordcon->setStacon('A');
+      if ($caordcon->getFeccon()=="")
+      {
+          $caordcon->setFeccon(date('Y-m-d'));
+      }
+      $caordcon->save();
+      self::grabarDetalleContrato($caordcon, $grid);
+      self::grabarFianzasContrato($caordcon, $grid2);
+      self::grabarClausulasContrato($caordcon, $grid3);
+      self::grabarCronogramaContrato($caordcon, $grid4);
+  }
+
+  public static function grabarDetalleContrato($clasemodelo,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCodpre()!='')
+      {
+      	$x[$j]->setOrdcon($clasemodelo->getOrdcon());
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
+  public static function grabarFianzasContrato($clasemodelo,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getNumfia()!='' && $x[$j]->getMonfia()>0)
+      {
+      	$x[$j]->setOrdcon($clasemodelo->getOrdcon());
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
+  public static function grabarClausulasContrato($clasemodelo,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getDescla()!='')
+      {
+      	$x[$j]->setOrdcon($clasemodelo->getOrdcon());
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
+  public static function grabarCronogramaContrato($clasemodelo,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getNropag()!='')
+      {
+      	$x[$j]->setOrdcon($clasemodelo->getOrdcon());
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
+  public static function grabarClausulasGrupo($clasemodelo,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCodcla()!='')
+      {
+      	$x[$j]->setCodgru($clasemodelo->getCodgru());
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
+  public static function GenerarCompromisov2($clasemodelo,$monto,&$refcom)
+  {
+  try{
+       $refcom='';
+       if (Herramientas::getVerCorrelativo('corcom','cpdefniv',&$r))
+          {
+            $ref = str_pad($r, 8, '0', STR_PAD_LEFT);
+            $refcom = Herramientas::getBuscar_correlativoV2($ref,'cpdefniv','corcom','cpcompro','refcom');
+
+            H::getSalvarCorrelativo('corcom','cpdefniv','Registo Contrato',$refcom,&$msg);
+
+            if($clasemodelo->getTipcon()=='O')
+                $tipcom='001';
+            else#if($clasemodelo->getTipcon()=='S')
+                $tipcom='CS';
+
+            $cpcompro_new = new Cpcompro();
+            $cpcompro_new->setRefcom($refcom);
+            $cpcompro_new->setTipcom($tipcom);
+            $cpcompro_new->setFeccom($clasemodelo->getFeccon());
+            $cpcompro_new->setAnocom(substr($clasemodelo->getFeccon(),0,4));
+            $cpcompro_new->setStacom('A');
+            $cpcompro_new->setRefprc('NULO');
+            $cpcompro_new->setDescom($clasemodelo->getDescon());
+            $cpcompro_new->setMoncom($monto);
+            $cpcompro_new->setSalcau(0);
+            $cpcompro_new->setSalpag(0);
+            $cpcompro_new->setSalaju(0);
+            $cpcompro_new->setCedrif($clasemodelo->getCodpro());
+            $cpcompro_new->save();
+
+        //Imputaciones
+            $c = new Criteria();
+            $c->add(CadetordcPeer::ORDCON,$clasemodelo->getOrdcon());
+            $per = CadetordcPeer::doSelect($c);
+            if($per)
+            {
+                foreach($per as $r)
+                {
+                    $cpimpcom_new = new Cpimpcom();
+                    $cpimpcom_new->setRefcom($refcom);
+                    $cpimpcom_new->setCodpre($r->getCodpre());
+                    $cpimpcom_new->setMonimp($r->getMoncon());
+                    $cpimpcom_new->setMoncau(0);
+                    $cpimpcom_new->setMonpag(0);
+                    $cpimpcom_new->setMonaju(0);
+                    $cpimpcom_new->setRefere('NULO');
+                    $cpimpcom_new->setStaimp('A');
+                    $cpimpcom_new->save();
+}
+
+            }
+          }else{
+            return 2;  //El numero inicial del Correlativo no ha sido definido
+          }
+      return -1;
+  } catch (Exception $ex){
+    //exit($ex);
+    return 0;
+  }
+
   }
 
 }

@@ -1,9 +1,10 @@
 <?
+session_name('cidesa');
 session_start();
 //   require_once("../../../lib/genegociocatalogo.php");
-   require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
-   require_once($_SESSION["x"].'lib/general/funciones.php');
-   require_once($_SESSION["x"].'lib/general/funciones2.php');
+   require_once($_SESSION["x"].'/lib/bd/basedatosAdo.php');
+   require_once($_SESSION["x"].'/lib/general/funciones.php');
+   require_once($_SESSION["x"].'/lib/general/funciones2.php');
    $obj=new negociocatalogo2();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -13,7 +14,6 @@ session_start();
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -140,7 +140,7 @@ echo $filtro;
    $filtro=" limit 20";*/
   $i=1;
 ?>
-<form name="form1" method="post" action="catalogo2.php">
+<form name="form1" onsubmit="return false;" method="post" action="catalogo2.php">
     <input name="filtro" type="hidden" id="filtro" value="<?print $filtro;?>">
   <input name="sqlant" type="hidden" id="sqlant" value="<?print $sqlant;?>">
   <input name="sql" type="hidden" id="sql" value="<?print $sql;?>">

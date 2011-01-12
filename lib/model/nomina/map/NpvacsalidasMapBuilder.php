@@ -48,6 +48,16 @@ class NpvacsalidasMapBuilder {
 
 		$tMap->addColumn('FECPAGBONVAC', 'Fecpagbonvac', 'int', CreoleTypes::DATE, false, null);
 
+		$tMap->addColumn('FECSALNOM', 'Fecsalnom', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('FECREINOM', 'Fecreinom', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('SABVAC', 'Sabvac', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('DOMVAC', 'Domvac', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('FERVAC', 'Fervac', 'int', CreoleTypes::INTEGER, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

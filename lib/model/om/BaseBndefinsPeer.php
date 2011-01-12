@@ -13,7 +13,7 @@ abstract class BaseBndefinsPeer {
 	const CLASS_DEFAULT = 'lib.model.Bndefins';
 
 	
-	const NUM_COLUMNS = 22;
+	const NUM_COLUMNS = 24;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -83,6 +83,12 @@ abstract class BaseBndefinsPeer {
 	const CORRMUE = 'bndefins.CORRMUE';
 
 	
+	const CORACTMUE = 'bndefins.CORACTMUE';
+
+	
+	const CORACTINM = 'bndefins.CORACTINM';
+
+	
 	const ID = 'bndefins.ID';
 
 	
@@ -91,18 +97,18 @@ abstract class BaseBndefinsPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codins', 'Nomins', 'Dirins', 'Telins', 'Faxins', 'Email', 'Edoins', 'Munins', 'Paqins', 'Foract', 'Desact', 'Lonact', 'Forubi', 'Desubi', 'Lonubi', 'Fecper', 'Feceje', 'Coddes', 'Codinc', 'Porrev', 'Corrmue', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (BndefinsPeer::CODINS, BndefinsPeer::NOMINS, BndefinsPeer::DIRINS, BndefinsPeer::TELINS, BndefinsPeer::FAXINS, BndefinsPeer::EMAIL, BndefinsPeer::EDOINS, BndefinsPeer::MUNINS, BndefinsPeer::PAQINS, BndefinsPeer::FORACT, BndefinsPeer::DESACT, BndefinsPeer::LONACT, BndefinsPeer::FORUBI, BndefinsPeer::DESUBI, BndefinsPeer::LONUBI, BndefinsPeer::FECPER, BndefinsPeer::FECEJE, BndefinsPeer::CODDES, BndefinsPeer::CODINC, BndefinsPeer::PORREV, BndefinsPeer::CORRMUE, BndefinsPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codins', 'nomins', 'dirins', 'telins', 'faxins', 'email', 'edoins', 'munins', 'paqins', 'foract', 'desact', 'lonact', 'forubi', 'desubi', 'lonubi', 'fecper', 'feceje', 'coddes', 'codinc', 'porrev', 'corrmue', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
+		BasePeer::TYPE_PHPNAME => array ('Codins', 'Nomins', 'Dirins', 'Telins', 'Faxins', 'Email', 'Edoins', 'Munins', 'Paqins', 'Foract', 'Desact', 'Lonact', 'Forubi', 'Desubi', 'Lonubi', 'Fecper', 'Feceje', 'Coddes', 'Codinc', 'Porrev', 'Corrmue', 'Coractmue', 'Coractinm', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (BndefinsPeer::CODINS, BndefinsPeer::NOMINS, BndefinsPeer::DIRINS, BndefinsPeer::TELINS, BndefinsPeer::FAXINS, BndefinsPeer::EMAIL, BndefinsPeer::EDOINS, BndefinsPeer::MUNINS, BndefinsPeer::PAQINS, BndefinsPeer::FORACT, BndefinsPeer::DESACT, BndefinsPeer::LONACT, BndefinsPeer::FORUBI, BndefinsPeer::DESUBI, BndefinsPeer::LONUBI, BndefinsPeer::FECPER, BndefinsPeer::FECEJE, BndefinsPeer::CODDES, BndefinsPeer::CODINC, BndefinsPeer::PORREV, BndefinsPeer::CORRMUE, BndefinsPeer::CORACTMUE, BndefinsPeer::CORACTINM, BndefinsPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codins', 'nomins', 'dirins', 'telins', 'faxins', 'email', 'edoins', 'munins', 'paqins', 'foract', 'desact', 'lonact', 'forubi', 'desubi', 'lonubi', 'fecper', 'feceje', 'coddes', 'codinc', 'porrev', 'corrmue', 'coractmue', 'coractinm', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codins' => 0, 'Nomins' => 1, 'Dirins' => 2, 'Telins' => 3, 'Faxins' => 4, 'Email' => 5, 'Edoins' => 6, 'Munins' => 7, 'Paqins' => 8, 'Foract' => 9, 'Desact' => 10, 'Lonact' => 11, 'Forubi' => 12, 'Desubi' => 13, 'Lonubi' => 14, 'Fecper' => 15, 'Feceje' => 16, 'Coddes' => 17, 'Codinc' => 18, 'Porrev' => 19, 'Corrmue' => 20, 'Id' => 21, ),
-		BasePeer::TYPE_COLNAME => array (BndefinsPeer::CODINS => 0, BndefinsPeer::NOMINS => 1, BndefinsPeer::DIRINS => 2, BndefinsPeer::TELINS => 3, BndefinsPeer::FAXINS => 4, BndefinsPeer::EMAIL => 5, BndefinsPeer::EDOINS => 6, BndefinsPeer::MUNINS => 7, BndefinsPeer::PAQINS => 8, BndefinsPeer::FORACT => 9, BndefinsPeer::DESACT => 10, BndefinsPeer::LONACT => 11, BndefinsPeer::FORUBI => 12, BndefinsPeer::DESUBI => 13, BndefinsPeer::LONUBI => 14, BndefinsPeer::FECPER => 15, BndefinsPeer::FECEJE => 16, BndefinsPeer::CODDES => 17, BndefinsPeer::CODINC => 18, BndefinsPeer::PORREV => 19, BndefinsPeer::CORRMUE => 20, BndefinsPeer::ID => 21, ),
-		BasePeer::TYPE_FIELDNAME => array ('codins' => 0, 'nomins' => 1, 'dirins' => 2, 'telins' => 3, 'faxins' => 4, 'email' => 5, 'edoins' => 6, 'munins' => 7, 'paqins' => 8, 'foract' => 9, 'desact' => 10, 'lonact' => 11, 'forubi' => 12, 'desubi' => 13, 'lonubi' => 14, 'fecper' => 15, 'feceje' => 16, 'coddes' => 17, 'codinc' => 18, 'porrev' => 19, 'corrmue' => 20, 'id' => 21, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
+		BasePeer::TYPE_PHPNAME => array ('Codins' => 0, 'Nomins' => 1, 'Dirins' => 2, 'Telins' => 3, 'Faxins' => 4, 'Email' => 5, 'Edoins' => 6, 'Munins' => 7, 'Paqins' => 8, 'Foract' => 9, 'Desact' => 10, 'Lonact' => 11, 'Forubi' => 12, 'Desubi' => 13, 'Lonubi' => 14, 'Fecper' => 15, 'Feceje' => 16, 'Coddes' => 17, 'Codinc' => 18, 'Porrev' => 19, 'Corrmue' => 20, 'Coractmue' => 21, 'Coractinm' => 22, 'Id' => 23, ),
+		BasePeer::TYPE_COLNAME => array (BndefinsPeer::CODINS => 0, BndefinsPeer::NOMINS => 1, BndefinsPeer::DIRINS => 2, BndefinsPeer::TELINS => 3, BndefinsPeer::FAXINS => 4, BndefinsPeer::EMAIL => 5, BndefinsPeer::EDOINS => 6, BndefinsPeer::MUNINS => 7, BndefinsPeer::PAQINS => 8, BndefinsPeer::FORACT => 9, BndefinsPeer::DESACT => 10, BndefinsPeer::LONACT => 11, BndefinsPeer::FORUBI => 12, BndefinsPeer::DESUBI => 13, BndefinsPeer::LONUBI => 14, BndefinsPeer::FECPER => 15, BndefinsPeer::FECEJE => 16, BndefinsPeer::CODDES => 17, BndefinsPeer::CODINC => 18, BndefinsPeer::PORREV => 19, BndefinsPeer::CORRMUE => 20, BndefinsPeer::CORACTMUE => 21, BndefinsPeer::CORACTINM => 22, BndefinsPeer::ID => 23, ),
+		BasePeer::TYPE_FIELDNAME => array ('codins' => 0, 'nomins' => 1, 'dirins' => 2, 'telins' => 3, 'faxins' => 4, 'email' => 5, 'edoins' => 6, 'munins' => 7, 'paqins' => 8, 'foract' => 9, 'desact' => 10, 'lonact' => 11, 'forubi' => 12, 'desubi' => 13, 'lonubi' => 14, 'fecper' => 15, 'feceje' => 16, 'coddes' => 17, 'codinc' => 18, 'porrev' => 19, 'corrmue' => 20, 'coractmue' => 21, 'coractinm' => 22, 'id' => 23, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
 	);
 
 	
@@ -197,6 +203,10 @@ abstract class BaseBndefinsPeer {
 		$criteria->addSelectColumn(BndefinsPeer::PORREV);
 
 		$criteria->addSelectColumn(BndefinsPeer::CORRMUE);
+
+		$criteria->addSelectColumn(BndefinsPeer::CORACTMUE);
+
+		$criteria->addSelectColumn(BndefinsPeer::CORACTINM);
 
 		$criteria->addSelectColumn(BndefinsPeer::ID);
 

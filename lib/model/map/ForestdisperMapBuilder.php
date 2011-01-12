@@ -30,7 +30,9 @@ class ForestdisperMapBuilder {
 		$tMap = $this->dbMap->addTable('forestdisper');
 		$tMap->setPhpName('Forestdisper');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('forestdisper_SEQ');
 
 		$tMap->addColumn('CODMET', 'Codmet', 'string', CreoleTypes::VARCHAR, true, 5);
 

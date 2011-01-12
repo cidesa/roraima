@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 39564 2010-07-21 15:44:04Z cramirez $
  */
 // date: 2007/03/29 17:49:48
 ?>
@@ -119,7 +119,7 @@
         'url'      => 'nomasicarconnom/ajax',
         'complete' => 'AjaxJSON(request, json)',
 		'condition' => "$(this.id).value!='' && $('id').value=='' ",
-          'with' => "'ajax=3&cajtexmos=npasicaremp_nomcar&cajtexcom=npasicaremp_codcar&codemp='+$('npasicaremp_codemp').value+'&codnom='+$('npasicaremp_codnom').value+'&frecuen='+$('frecuencal').value+'&codigo='+this.value"
+        'with' => "'ajax=3&cajtexmos=npasicaremp_nomcar&cajtexcom=npasicaremp_codcar&codemp='+$('npasicaremp_codemp').value+'&codnom='+$('npasicaremp_codnom').value+'&frecuen='+$('frecuencal').value+'&codigo='+this.value"
         ))),
      array('use_style' => 'true')
   )
@@ -127,7 +127,7 @@
  </div>
 </th>
 <th>
- <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Nomasicarconnom_Npasicarnom/clase/Npcargos/frame/sf_admin_edit_form/obj1/npasicaremp_codcar/obj2/npasicaremp_nomcar/obj3/sueldo/campo1/codcar/campo2/nomcar/campo3/sueldo/param1/'+$('npasicaremp_codnom').value+'") ?>   </div>
+ <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Nomasicarconnom_Npasicarnom/clase/Npcargos/frame/sf_admin_edit_form/obj1/npasicaremp_codcar/obj2/npasicaremp_nomcar/obj3/sueldo/campo1/codcar/campo2/nomcar/campo3/sueldo/param1/'+$('npasicaremp_codnom').value+'/param2/".$filvac) ?>   </div>
 <th>
 <?php $value = object_input_tag($npasicaremp, 'getNomcar', array (
   'readonly' => true,
@@ -135,6 +135,25 @@
   'control_name' => 'npasicaremp[nomcar]',
 )); echo $value ? $value : '&nbsp;' ?><?php echo input_hidden_tag('sueldo', '') ?>
 </th>
+</tr>
+</table>
+<table>
+<tr>
+    <th colspan="2">
+<?php echo label_for('npasicaremp[nivel]', __($labels['npasicaremp{nivel}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npasicaremp{nivel}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npasicaremp{nivel}')): ?>
+    <?php echo form_error('npasicaremp{nivel}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npasicaremp, 'getNivel', array (
+  'size' => 87,
+  'readonly' => true,
+  'control_name' => 'npasicaremp[nivel]',
+)); echo $value ? $value : '&nbsp;' ?>
+ </div>
+</th>
+
 </tr>
 </table>
 </div>
@@ -156,7 +175,7 @@
  </div>
 </div>
 <?php }else{ ?>
-<?php if($sf_user->getAttribute('codcar','','nomasicarconnom')==$npasicaremp->getCodcar() && $sf_user->getAttribute('codcar','','nomasicarconnom')!='') {?>
+<?php if($sf_user->getAttribute('codcar','','nomasicarconnom')==$npasicaremp->getCodtipcar() && $sf_user->getAttribute('codcar','','nomasicarconnom')!='') {?>
 	<div class="form-row" id="gridcatded">
 <?php }else{?>
  	<div class="form-row" id="gridcatded" style="display:none">
@@ -214,8 +233,23 @@
 
  <?php //echo select_tag('npasicaremp[tipgas]', options_for_select($tipos,$npasicaremp->getCodtipgas(),'include_custom=Seleccione Uno')); ?>
  <?php if ($npasicaremp->getCodtipgas()!='') $tipos=$npasicaremp->getCodtipgas(); ?>
- <?php echo select_tag('npasicaremp[codtipgas]', objects_for_select(NptipgasPeer::doSelect(new Criteria()),'getCodtipgas','getDestipgas',$tipos,'include_custom=Seleccione')) ?>
+ <?php echo select_tag('npasicaremp[codtipgas]', objects_for_select(NptipgasPeer::doSelect(new Criteria()),'getCodtipgas','getDestipgas',$tipos,'include_custom=Seleccione Uno')) ?>
+<br>
+<br>
+</th>
+</tr>
+<tr>
+<th>
+<?php if($sf_user->getAttribute('varforma','','nomasicarconnom') == 'S') {?>
+<?php echo label_for('npasicaremp[codtie]', __($labels['npasicaremp{codtie}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npasicaremp{codtie}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npasicaremp{codtie}')): ?>
+    <?php echo form_error('npasicaremp{codtie}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
+  <?php echo select_tag('npasicaremp[codtie]', options_for_select($listatiempo,$npasicaremp->getCodtie(),'include_custom=Seleccione Uno')) ?>
+    </div>
+<?php }?>
 </th>
 </tr>
 </table>
@@ -259,15 +293,52 @@
 </th>
 </tr>
 </table>
+
+<div id="divcencos" style="display:none">
+<br>
+<?php echo label_for('npasicaremp[codcen]', __($labels['npasicaremp{codcen}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npasicaremp{codcen}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npasicaremp{codcen}')): ?>
+    <?php echo form_error('npasicaremp{codcen}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+<?php $value = object_input_tag($npasicaremp, 'getCodcen', array (
+  'size' => 20,
+  'control_name' => 'npasicaremp[codcen]',
+  'maxlength' => 4,
+  'readonly'  =>  $npasicaremp->getId()!='' ? true : false,
+  'onBlur'=> remote_function(array(
+       'url'      => 'nomasicarconnom/ajax',
+       'script'   => true,
+       'condition' => "$('npasicaremp_codcen').value != '' && $('id').value == ''",
+       'complete' => 'AjaxJSON(request, json)',
+       'with' => "'ajax=7&cajtexmos=npasicaremp_descen&cajtexcom=npasicaremp_codcen&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+
+&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefcen_Almsolegr/clase/Cadefcen/frame/sf_admin_edit_form/obj1/npasicaremp_codcen/obj2/npasicaremp_descen/campo1/codcen/campo2/descen','','','botoncat')?>
+&nbsp;&nbsp;
+ <?php $value = object_input_tag($npasicaremp, 'getDescen', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'npasicaremp[descen]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
 </div>
 
 </fieldset>
 
 <div id="divGrid">
 <form name="form1" id="form1">
-<?
-echo grid_tag($obj);
-?>
+
+
+<table width="100%">
+  <tr>
+    <th><strong><font color="#CC0000" size="3" face="Verdana, Arial, Helvetica, sans-serif"> <? echo __('Si el Empleado no tiene asociado ningun concepto el sistema por defecto traera marcado todos los conceptos')?></font></strong></th>
+  </tr>
+</table>
+<? echo grid_tag($obj); ?>
 </form>
 </div>
 
@@ -309,5 +380,11 @@ echo grid_tag($obj);
     {
 	    $$('.botoncat')[0].disabled=true;
 	    $$('.botoncat')[1].disabled=true;
+            $$('.botoncat')[2].disabled=true;
+   }
+   var mancencos='<?php echo $npasicaremp->getMancencos(); ?>';
+   if (mancencos=='S')
+   {
+       $('divcencos').show();
    }
 </script>

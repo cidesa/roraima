@@ -1,10 +1,11 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
@@ -21,6 +22,12 @@ $tools=new tools();
 $modulo="";
 $forma="Comprometer";
 $modulo=$_SESSION["modulo"] . " > Ejecución Presupuestaria > ".$forma;
+$deshabfec= $_SESSION["configemp"]["aplicacion"]["presupuesto"]["modulos"]["precompro"]["bloqfec"];
+$numfilas= $_SESSION["configemp"]["aplicacion"]["presupuesto"]["modulos"]["precompro"]["numfilas"];
+if ($numfilas!="")
+    $numfil=$numfilas;
+else $numfil=150;
+$fecha_actual= date('d/m/Y');
 
 Limpiar();
 Obtener_FormatoPresup();
@@ -141,11 +148,14 @@ if (!empty($_POST["var"]))
         $block='S';
         //Cargar_GridImpCom();
 
+
        }else{
          $imec='I'; //IncMod = "M"  INCLUIR
-         $salvar='Si';
+         //$salvar='Si';
+         if ($etadef=='A') { $block='S'; $salvar='No'; }else { $block='N'; $salvar='Si'; }
+         $feccom=date('d/m/Y');
          $fechaValida=true;
-         $block='N';
+         //$block='N';
         // $fechaValida=validarFechaPresup($feccom);
        }
 
@@ -181,6 +191,8 @@ if (!empty($_POST["var"]))
   global $reqaut;
   global $montoreal;
   global $aprcom;
+  global $codubi;
+  global $desubi;
 
      $RegistroConsultado = $tb->fields["refcom"];
      $feccom = $tb->fields["feccom"];
@@ -202,6 +214,7 @@ if (!empty($_POST["var"]))
      $monaju = trim($tb->fields["monaju"]);
      $Eliminar = VerificarEliminar();
      $aprcom = $tb->fields["aprcom"];
+     $codubi = trim($tb->fields["codubi"]);
 
       $sql="select nomext, reqaut from CPDocCom where trim(tipcom)='$tipcom'";
        if ($tb=$tools->buscar_datos($sql)) { $nomext = $tb->fields["nomext"]; $reqaut = $tb->fields["reqaut"]; }else{ $nomext=""; }
@@ -211,6 +224,9 @@ if (!empty($_POST["var"]))
 
       $sql="select nomben from Opbenefi where trim(cedrif)='$cedrif'";
        if ($tb=$tools->buscar_datos($sql)) { $nomben=$tb->fields["nomben"]; }else{ $nomben=""; }
+
+       $sql="select desubi from bnubica where trim(codubi)='$codubi'";
+       if ($tb=$tools->buscar_datos($sql)) { $desubi = $tb->fields["desubi"];}else{ $desubi=""; }
 
        if ($stacom=='N'){
          if ($fecanu<>''){ $estatus='Anulado el '.$fecanu; } else { $estatus='Anulado'; }
@@ -227,13 +243,13 @@ if (!empty($_POST["var"]))
 
      $Eliminar='Si';
     if (substr($refcom,0,2)=='OC'){
-         $sql="select * from caordcom where trim(ordcom) like '%".substr($refcom,3,6)."'";
+         $sql="select * from caordcom where ordcom like '%".substr($refcom,3,6)."'";
           if ($tools->buscar_datos($sql)){
           $Eliminar="No";
           $msg="El Compromiso NO Puede Ser Eliminado,Porque Fue Generado Desde Otro Modulo";
         }
     }else if (substr($refcom,0,2)=='OS'){
-         $sql="select * from caordser where trim(ordser) like '%".substr($refcom,2,6)."'";
+         $sql="select * from caordser where ordser like '%".substr($refcom,2,6)."'";
           if ($tools->buscar_datos($sql)){
           $Eliminar="No";
           $msg="El Compromiso NO Puede Ser Eliminado,Porque Fue Generado Desde Otro Modulo";
@@ -265,6 +281,8 @@ if (!empty($_POST["var"]))
   global $estatus;
   global $msg;
   global $refiereprc;
+  global $codubi;
+  global $desuni;
 
      $descta="";
      $salvar="No";
@@ -286,6 +304,8 @@ if (!empty($_POST["var"]))
      $nomben="";
      $estatus="";
      $refiereprc="";
+     $codubi="";
+     $desubi="";
   }
 
   function Obtener_FormatoPresup()
@@ -301,6 +321,7 @@ if (!empty($_POST["var"]))
   global $asignacion;
   global $NivelDisponibilidad;
   global $Formar_NivelDisponibilidad;
+  global $etadef;
 
     ////////// Definicion Presupuestaria ///////////
      $sql="select * from cpdefniv where  CodEmp='001'";
@@ -313,6 +334,7 @@ if (!empty($_POST["var"]))
      $anoinicio           = substr($tb->fields["fecini"],0,4);
      $fechacierre         = $tb->fields["feccie"];
      $anocierre           = substr($tb->fields["feccie"],0,4);
+     $etadef           = $tb->fields["etadef"];
 
      if (trim($tb->fields["asiper"])=='S'){ $asignacion=true; } else { $asignacion=false; }
 
@@ -358,8 +380,9 @@ if (!empty($_POST["var"]))
       var acum4=0;
 
       var valor_total=0;
+      var am='<?php echo $numfil; ?>';
 
-      while (i <= 50)
+      while (i <= am)
       {
         var x2="x"+i+"2";
         var x3="x"+i+"3";
@@ -463,7 +486,18 @@ if (!empty($_POST["var"]))
     {
       if (key.keyCode==13)
       {
-        if (parseInt(id.length)==3){ j=parseInt(id.substring(1,2)); }else{  j=parseInt(id.substring(1,3));  }
+        if (parseInt(id.length)==3)
+        {
+          j=parseInt(id.substring(1,2));
+        }
+        else if (parseInt(id.length)==4)
+        {
+            j=parseInt(id.substring(1,3));
+        }
+        else
+        {
+            j=parseInt(id.substring(1,4));
+        }
         var pos=j+1;
         var aux="x"+pos+"1";
 
@@ -484,7 +518,6 @@ if (!empty($_POST["var"]))
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/funciones.js"></script>
@@ -579,7 +612,11 @@ MM_reloadPage(true);
 </head>
 
 <body onLoad="MM_preloadImages('../../images/rbut_01_f2.gif','../../images/rbut_02_f2.gif','../../images/rbut_03_f2.gif','../../images/rbut_04_f2.gif')">
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
+      <?  ///// variable oculta que se necesita para guardar //// ?>
+      <input name="fecini" type="hidden" id="fecini" value="<? //echo $fecini; ?>" />
+      <input type="hidden" name="var" id="var" />
+  <?  /////////////////////////////////////////////////////// ?>
 <table width="100%" align="center">
   <tr>
 <td width="100%">
@@ -610,8 +647,10 @@ MM_reloadPage(true);
           <input type="button" name="Submit4" value="&gt;|" onClick="ultimo()">-->
         <!-- /td-->
         <td align="CENTER" width="22%">
-            <?php  if((iif($aprcom==$reqaut,'S','N')=='N' and $stacom!='N')){ ?><input name="AprCom" type="button" class="important" id="AprCom" value="APROBAR" onClick="Aprobar_Compromiso();" > <? } ?>
-            <?php  if((iif($aprcom=='S','S','')=='S' and $stacom!='N')){ ?><div class="letras_rojas">Este Documento ha sido Aprobado</div><? } ?>
+            <?php  if((iif($aprcom=='N','N','')=='N' and $stacom!='N')){ ?><div class="letras_rojas">Pendiente de Aprobación</div><? } ?>
+            <?php  if((iif($aprcom==$reqaut,'S','N')=='N'  and $aprcom!='R' and $stacom!='N')){ ?><input name="AprCom" type="button" class="important" id="AprCom" value="APROBAR" onClick="Aprobar_Compromiso();" > <? } ?>
+            <?php  if((iif($aprcom=='S','S','')=='S' and $stacom!='N')){ ?><div class="letras_rojas">Documento Aprobado</div><? } ?>
+            <?php  if((iif($aprcom=='R','R','')=='R' and $stacom!='N')){ ?><div class="letras_rojas">Documento Rechazado</div><? } ?>
         </td>
           <td align="right" width="61%">
           <?  // MENU PRINCIPAL  // ?>
@@ -630,8 +669,13 @@ MM_reloadPage(true);
                   <td colspan="3" class="form_label_01"><input name="refcom" type="text" class="imagenInicio" id="refcom" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'"  value="<? print $refcom;?>" size="8" maxlength="8" onKeyPress="buscarenter(event)" onblur="if (document.getElementById('refcom').value!=''){ document.getElementById('refcom').value=document.getElementById('refcom').value.pad(8,'0',0); document.getElementById('var').value='9'; f.submit(); }else{ document.getElementById('refcom').value=document.getElementById('refcom').value.pad(8,'#',0);  document.getElementById('var').value='9'; f.submit();}"></td>
                   <td width="8%" class="form_label_01">Fecha: </td>
                   <?
-                  if ($block!='S') { ?>
-                  <td colspan="2"><input name="feccom" type="text"  class="imagenInicio" id="feccom" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $feccom;?>" size="10" onKeyUp = "this.value=formateafecha(this.value);" onBlur="validar_fecha()"></td>
+                  if ($block!='S') { if ($deshabfec=='S') {?>
+                  <td colspan="2"><input name="feccom" type="text"  class="imagenInicio" id="feccom" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $feccom;?>" size="10" onKeyUp = "this.value=formateafecha(this.value);" readonly="true"></td>
+                  <? } else {  ?>
+                  	<td colspan="2"><input name="feccom" type="text"  class="imagenInicio" id="feccom" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $feccom;?>" size="10" onKeyUp = "this.value=formateafecha(this.value);" onBlur="validar_fecha()"></td>
+                  <? }?>
+
+
           <? } else {  ?>
                   <td colspan="2"><input name="feccom" type="text"  class="imagenInicio" id="feccom" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $feccom;?>" size="10" onKeyUp = "this.value=formateafecha(this.value);" readonly="true"></td>
           <? } ?>
@@ -690,6 +734,13 @@ MM_reloadPage(true);
                   <td class="form_label_01"><input name="refprc" type="text"  class="imagenInicio" id="refprc" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $refprc;?>" size="13" maxlength="15" readonly="true"></td>
                   <td class="form_label_01"><input name="busq_refpre" type="button" id="busq_refpre" value="..." onClick="javascript: catalogo(desprc.id,refprc.id,refprc.id,3);"></td>
                   <td colspan="4" class="form_label_01"><input name="desprc" type="text"  class="imagenInicio" id="desprc" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $desprc;?>" size="52" readonly="true"></td>
+                </tr>
+                <tr valign="middle">
+                  <td height="24" colspan="2" class="form_label_01">Unidad Solicitante :
+                  </td>
+                  <td width="12%" class="form_label_01"><input name="codubi" type="text"  class="imagenInicio" id="codubi" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $codubi;?>" size="13" maxlength="30" ></td>
+                  <td width="6%" class="form_label_01"><input name="busq_ubi" type="button" id="busq_ubi" value="..." onClick="javascript: catalogo(desubi.id,codubi.id,codubi.id,4);"></td>
+                  <td colspan="4" class="form_label_01"><input name="desubi" type="text"  class="imagenInicio" id="desubi" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $desubi;?>" size="52" readonly="true"></td>
                 </tr>
                 <tr valign="middle">
                   <td height="17" colspan="2" class="form_label_01">Monto Compromiso : </td>
@@ -773,16 +824,16 @@ MM_reloadPage(true);
                         ?>
                       <tr>
                         <td class="grid_line01_br"><input name="x<? print $i;?>0" type="txt" class="imagenborrar" id="x<? print $i;?>0" onClick="eliminar_grip(<? print $i;?>,7)" value="" size="1" onFocus="this.blur()"></td>
-                        <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>1" id="x<? print $i;?>1" type="text" class="grid_txt02" size="32" value="<? print $tb->fields["codpre"]; ?>"   tabindex="2"></td>
+                        <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>1" id="x<? print $i;?>1" type="text" class="grid_txt02" size="32" maxlength="<? print strlen($tb->fields["codpre"]); ?>" value="<? print $tb->fields["codpre"]; ?>"   tabindex="2"></td>
                         <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>2" id="x<? print $i;?>2" type="text" class="grid_txt02" size="15" value="<? print number_format($tb->fields["monimp"],2,'.',','); ?>" align="right"  tabindex="2" ></td>
-                        <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>3" id="x<? print $i;?>3" type="text" class="breadcrumbv2" size="15" value="<? print number_format($tb->fields["moncau"],2,'.',','); ?>" align="right"  tabindex="2" ></td>
-                        <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>4" id="x<? print $i;?>4" type="text" class="breadcrumbv2" size="15" value="<? print number_format($tb->fields["monpag"],2,'.',','); ?>" align="right"  tabindex="2" ></td>
+                        <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>3" id="x<? print $i;?>3" type="text" class="breadcrumbv2" size="15" value="<? print number_format($tb->fields["moncau"],2,'.',','); ?>" align="right"  tabindex="2" readonly="true"></td>
+                        <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>4" id="x<? print $i;?>4" type="text" class="breadcrumbv2" size="15" value="<? print number_format($tb->fields["monpag"],2,'.',','); ?>" align="right"  tabindex="2" readonly="true"></td>
                          <? if ($refiereprc=='N'){ ?>
                         <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>5" id="x<? print $i;?>5" type="text" class="breadcrumbv2" size="18" value="0.00" align="right"  tabindex="2" readonly="true" ></td>
                         <? } ?>
-                        <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>6" id="x<? print $i;?>6" type="text" class="breadcrumbv2" size="15" value="<? print number_format(($tb->fields["monaju"]*(-1)),2,'.',','); ?>" align="right"  tabindex="2" ></td>
-                        <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>7" id="x<? print $i;?>7" type="text" class="breadcrumbv2" size="15" value="<? echo $cod_bus[$tg]; ?>" align="right"   tabindex="2" ></td>
-                        <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>8" id="x<? print $i;?>8" type="text" class="breadcrumbv2" size="15" value="<? echo number_format($tb->fields["monto"] - $tb->fields["causado"],2,'.',','); ?>" align="right"   tabindex="2" ></td>
+                        <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>6" id="x<? print $i;?>6" type="text" class="breadcrumbv2" size="15" value="<? print number_format(($tb->fields["monaju"]*(-1)),2,'.',','); ?>" align="right"  tabindex="2" readonly="true"></td>
+                        <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>7" id="x<? print $i;?>7" type="text" class="breadcrumbv2" size="15" value="<? echo $cod_bus[$tg]; ?>" align="right"   tabindex="2" readonly="true"></td>
+                        <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>8" id="x<? print $i;?>8" type="text" class="breadcrumbv2" size="15" value="<? echo number_format($tb->fields["monto"] - $tb->fields["causado"],2,'.',','); ?>" align="right"   tabindex="2" readonly="true"></td>
                       </tr>
                       <?
                     $tb->MoveNext();
@@ -791,7 +842,7 @@ MM_reloadPage(true);
                   }   //EndIf
                 }
 
-              }else{ $sql="select * from cpimpcom where trim(refcom)='$refcom'";
+              }else{ $sql="select * from cpimpcom where trim(refcom)='$refcom' order by codpre";
 
               if ($tb=$tools->buscar_datos($sql)){
               $totcausado = 0;
@@ -807,15 +858,15 @@ MM_reloadPage(true);
                     ?>
                   <tr>
                     <td  class="grid_line01_br"><input name="x<? print $i;?>0" type="txt" class="imagenborrar" id="x<? print $i;?>0" onClick="eliminar_grip(<? print $i;?>,6)" value="" size="1" onFocus="this.blur()"></td>
-                    <td  align="left"  class="grid_line01_br"><input name="x<? print $i;?>1" id="x<? print $i;?>1" type="text" class="grid_txt02" size="32" value="<? print $tb->fields["codpre"]; ?>" align="right"  tabindex="2"></td>
+                    <td  align="left"  class="grid_line01_br"><input name="x<? print $i;?>1" id="x<? print $i;?>1" type="text" maxlength="<? print strlen($tb->fields["codpre"]); ?>" class="grid_txt02" size="32" value="<? print $tb->fields["codpre"]; ?>" align="right"  tabindex="2"></td>
                     <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>2" id="x<? print $i;?>2" type="text" class="grid_txt02" size="15" value="<? print number_format($tb->fields["monimp"],2,'.',','); ?>" align="right"  tabindex="2" ></td>
-                    <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>3" id="x<? print $i;?>3" type="text" class="breadcrumbv2" size="15" value="<? print number_format($tb->fields["moncau"],2,'.',','); ?>" align="right"  tabindex="2" ></td>
-                    <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>4" id="x<? print $i;?>4" type="text" class="breadcrumbv2" size="15" value="<? print number_format($tb->fields["monpag"],2,'.',','); ?>" align="right"  tabindex="2" ></td>
+                    <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>3" id="x<? print $i;?>3" type="text" class="breadcrumbv2" size="15" value="<? print number_format($tb->fields["moncau"],2,'.',','); ?>" align="right"  tabindex="2" readonly="true"></td>
+                    <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>4" id="x<? print $i;?>4" type="text" class="breadcrumbv2" size="15" value="<? print number_format($tb->fields["monpag"],2,'.',','); ?>" align="right"  tabindex="2" readonly="true"></td>
                      <? //if ($refiereprc=='N'){ ?>
                     <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>5" id="x<? print $i;?>5" type="text" class="breadcrumbv2" size="18" value="" align="right"  tabindex="2" readonly="true" ></td>
                     <? //} ?>
-                    <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>6" id="x<? print $i;?>6" type="text" class="breadcrumbv2" size="15" value="<? print number_format(($tb->fields["monaju"]* (-1)),2,'.',','); ?>" align="right"  tabindex="2" ></td>
-                    <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>7" id="x<? print $i;?>7" type="text" class="breadcrumbv2" size="15" value="<? echo $refere; ?>" align="right"   tabindex="2" ></td>
+                    <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>6" id="x<? print $i;?>6" type="text" class="breadcrumbv2" size="15" value="<? print number_format(($tb->fields["monaju"]* (-1)),2,'.',','); ?>" align="right"  tabindex="2" readonly="true"></td>
+                    <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>7" id="x<? print $i;?>7" type="text" class="breadcrumbv2" size="15" value="<? echo $refere; ?>" align="right"   tabindex="2" readonly="true"></td>
                     <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>8" id="x<? print $i;?>8" type="text" class="breadcrumbv2" size="15" value="<? echo number_format($tb->fields["monimp"] - $tb->fields["moncau"],2,'.',','); ?>" align="right"   tabindex="2" readonly="true" ></td>
                   </tr>
                   <?
@@ -827,18 +878,18 @@ MM_reloadPage(true);
               </script> <?
               }else{
 	              $i=1;
-	              while ($i<=50){
+	              while ($i<=$numfil){
 	              //javascript:alert(event.KeyCode); if (event.KeyCode==13){ verificar_saldo(event,this.id); }
 	              //ColocarFormatoLocal(event,this.value,this.id)
 	              ?>
 	              <tr>
 	                <td  class="grid_line01_br"><input name="x<? print $i;?>0" type="txt" class="imagenborrar" id="x<? print $i;?>0" onClick="eliminar_grip(<? print $i;?>,7)" value="" size="1" onFocus="this.blur()"></td>
-	                <td  align="left"  class="grid_line01_br"><input name="x<? print $i;?>1" id="x<? print $i;?>1" type="text" class="grid_txt01" size="32"  align="left"  tabindex="2"  onKeyDown="javascript:return dFilter (event.keyCode, this,'<? echo $FormatoPresup; ?>');" onBlur="if ($F('refiereprc')=='N') gridatos1(this.value,this.id,'x<? print $i;?>2','x<? print $i;?>2')" value=""></td>
+                        <td  align="left"  class="grid_line01_br"><input name="x<? print $i;?>1" id="x<? print $i;?>1" type="text" class="grid_txt01" size="32"  align="left"  tabindex="2"  maxlength='<? echo strlen($FormatoPresup); ?>' onKeyDown="javascript:return dFilter (event.keyCode, this,'<? echo $FormatoPresup; ?>');" onBlur="if ($F('refiereprc')=='N') gridatos1(this.value,this.id,'x<? print $i;?>2','x<? print $i;?>2')" value=""></td>
 	                <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>2" id="x<? print $i;?>2" type="text" class="grid_txt02" size="15"  align="right" tabindex="2"  onKeyPress="entermonto(event,'x<? print $i;?>1',this.id,'x<? print $i+1;?>1')"  onClick="QuitarComa(this.value,this.id)" onBlur="verificar_saldo(event,this.id)" value="0.00"></td>
-	                <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>3" id="x<? print $i;?>3" type="text" class="breadcrumbv2" size="15"  align="right" onKeyPress="actualizar_saldos2()" tabindex="2" value="0.00" ></td>
-	                <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>4" id="x<? print $i;?>4" type="text" class="breadcrumbv2" size="15"  align="right" onKeyPress="actualizar_saldos2()" tabindex="2" value="0.00"></td>
+	                <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>3" id="x<? print $i;?>3" type="text" class="breadcrumbv2" size="15"  align="right" tabindex="2" value="0.00" readonly="true"></td>
+	                <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>4" id="x<? print $i;?>4" type="text" class="breadcrumbv2" size="15"  align="right" tabindex="2" value="0.00" readonly="true"></td>
 	                 <?  /* if ($refiereprc=='N'){ Mensaje($refiereprc); */ ?>
-	                <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>5" id="x<? print $i;?>5" type="text" class="breadcrumbv2" size="18" align="right" tabindex="2" readonly="true" value="0.00"></td>
+	                <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>5" id="x<? print $i;?>5" type="text" class="breadcrumbv2" size="18" align="right" tabindex="2" readonly="true" value="0.00" readonly="true"></td>
 	                <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>6" id="x<? print $i;?>6" type="text" class="breadcrumbv2" size="15" align="right" tabindex="2"  readonly="true"></td>
 	                <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>7" id="x<? print $i;?>7" type="text" class="breadcrumbv2" size="15" value="" align="right"   tabindex="2" readonly="true"></td>
 	                <td  align="right" class="grid_line01_br"><input name="x<? print $i;?>8" id="x<? print $i;?>8" type="text" class="breadcrumbv2" size="12" value="" align="right"   tabindex="2" readonly="true"></td>
@@ -872,10 +923,7 @@ MM_reloadPage(true);
   </tr>
   <tr>
     <td class="breadcrumb"><span class="style13">Registro de <? echo $forma; ?>...
-  <?  ///// variable oculta que se necesita para guardar //// ?>
-      <input name="fecini" type="hidden" id="fecini" value="<? //echo $fecini; ?>" />
-      <input type="hidden" name="var" id="var" />
-  <?  /////////////////////////////////////////////////////// ?>
+
     </span></td>
   </tr>
 </table>  </tr>
@@ -892,6 +940,11 @@ MM_reloadPage(true);
 <input name="trash" type="hidden" id="trash">
 
  <script>
+ var etapa='<?php echo $etadef;?>';
+  if (etapa=='A')
+  {
+  	alert('La Etapa de Definicion esta Abierta. Debe cerrarla para registrar movimientos.');
+  }
   cont='<? print $i; ?>'
   imec='<? print $imec; ?>'
   actualizar_saldos2cont(cont);
@@ -927,7 +980,7 @@ function validar_fecha()
       else
       {
         //alert("Longitud de Fecha inválida");
-        document.getElementById('feccom').value=mostrarfecha();
+        document.getElementById('feccom').value='<? echo $fecha_actual; ?>';;
         document.getElementById('feccom').focus();
       }
 
@@ -999,10 +1052,6 @@ function validar_fecha()
         }
       }
       }
-      //////////////////////////
-      else if(itemId == '0_print'){
-          print();
-      }
       else if(itemId == '0_new'){
 
       }
@@ -1047,6 +1096,25 @@ function validar_fecha()
       else if(itemId == '0_calc'){
         alert("llamando la calculadora");
       }
+      else if(itemId == '0_print'){
+
+        var numcom1 = '<? echo $refcom; ?>';
+        var feccom1  = '<? echo $feccom; ?>';
+        var tipcom1  = '<? echo $tipcom; ?>';
+        var combodes = '<? echo $estatus; ?>';
+        var idfin='x'+'<?php echo $i-1?>'+'1';
+        var codpre1= document.getElementById("x11").value;
+        var codpre2= document.getElementById(idfin).value;
+        var comodin='%%';
+        var ruta='http://'+window.location.host;
+      //	Nueva estructura de los reportes
+      	pagina=ruta+'/reportes/reportes/presupuesto/r.php=?r=precom.php?numcom1='+numcom1+'&numcom2='+numcom1+'&feccom1='+feccom1+'&feccom2='+feccom1+'&tipcom1='+tipcom1+'&tipcom2='+tipcom1+'&codpre1='+codpre1+'&codpre2='+codpre2+'&comodin='+comodin+'&combodes='+combodes;
+
+	  //	Vieja estructura de los reportes
+      	//pagina=ruta+'/reportes/reportes/presupuesto/rprecom.php?numcom1='+numcom1+'&numcom2='+numcom1+'&feccom1='+feccom1+'&feccom2='+feccom1+'&tipcom1='+tipcom1+'&tipcom2='+tipcom1+'&codpre1='+codpre1+'&codpre2='+codpre2+'&comodin='+comodin+'&combodes='+combodes;
+      	window.open(pagina,1,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80");
+
+      }
       else if(itemId == '0_calend'){
         alert("LLamando el Calendario");
       }
@@ -1058,7 +1126,7 @@ function validar_fecha()
 
     aToolBar=new dhtmlXToolbarObject('toolbar_zone2','100%',16,"");
     aToolBar.setOnClickHandler(onButtonClick);
-    aToolBar.loadXML("../../lib/general/_toolbarV1.xml");
+    aToolBar.loadXML("../../lib/general/_toolbarV6.xml");
     aToolBar.setToolbarCSS("toolbar_zone2","toolbarText3");
     aToolBar.showBar();
 
@@ -1104,7 +1172,8 @@ function validar_fecha()
       if (refere=='N')
       {
         i = 1;
-        while (i<=50)
+        var am='<?php echo $numfil; ?>';
+        while (i<=am)
         {
           var x = "x"+i+c1;
           var y = "x"+i+c2;
@@ -1115,14 +1184,14 @@ function validar_fecha()
               campo  = "x1"+c1;
               campo2 = "x1"+c2;
               foco   = "x1"+fc;
-              i      = 50;
+              i      = am;
             }
             else
             {
               campo  = x;
               campo2 = y;
               foco   = "x"+i+fc;
-              i      = 50;
+              i      = am;
             }
           }
           i=i+1;
@@ -1135,7 +1204,7 @@ function validar_fecha()
         //window.open(pagina,"Catalogo","menubar=no,toolbar=no,scrollbars=yes,width=580,height=400,resizable=yes,left=50,top=50");
 
           var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/PreCompro_Cpasiini/clase/Cpasiini/frame/form1/obj1/'+campo+'/campo1/codpre/submit/false';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/PreCompro_Cpasiini/clase/Cpasiini/frame/form1/obj1/'+campo+'/campo1/codpre/submit/false';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
 
       }
@@ -1166,7 +1235,7 @@ function validar_fecha()
       //window.open(pagina,"","menubar=no,toolbar=no,scrollbars=yes,width=460,height=500,resizable=yes,left=50,top=50");
 
           var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Precompro_Cpdoccom/clase/Cpdoccom/frame/form1/obj1/'+campo2+'/obj2/'+campo+'/obj3/'+campo3+'/campo1/tipcom/campo2/nomext/campo3/refprc/submit/false';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Precompro_Cpdoccom/clase/Cpdoccom/frame/form1/obj1/'+campo2+'/obj2/'+campo+'/obj3/'+campo3+'/campo1/tipcom/campo2/nomext/campo3/refprc/submit/false';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
 
 
@@ -1191,7 +1260,7 @@ function validar_fecha()
             //var sql='select nomben as nombre,cedrif as cedula_rif,dirben as dirección from opbenefi order by cedrif';
             //catalogo2(campo,campo2,foco,sql);
 
-            pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Preprecom_Opbenefi/clase/Opbenefi/frame/form1/obj1/'+campo2+'/obj2/'+campo+'/campo1/cedrif/campo2/nomben/submit/false';
+            pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Preprecom_Opbenefi/clase/Opbenefi/frame/form1/obj1/'+campo2+'/obj2/'+campo+'/campo1/cedrif/campo2/nomben/submit/false';
         }
         else if (refere=='S')
         {
@@ -1199,7 +1268,7 @@ function validar_fecha()
             {
                 //var sql='select nomben as nombre,cedrif as cedula_rif,dirben as dirección from opbenefi order by cedrif';
                 //catalogo2(campo,campo2,foco,sql);
-                pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Preprecom_Opbenefi/clase/Opbenefi/frame/form1/obj1/'+campo2+'/obj2/'+campo+'/campo1/cedrif/campo2/nomben/submit/false';
+                pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Preprecom_Opbenefi/clase/Opbenefi/frame/form1/obj1/'+campo2+'/obj2/'+campo+'/campo1/cedrif/campo2/nomben/submit/false';
             }
         }
     }
@@ -1210,9 +1279,14 @@ function validar_fecha()
       if (refere=='S')
       {
           var feccom=document.getElementById("feccom").value;
-          var sql='Select DesPrc as Descripcion,RefPrc as Referencia,CedRif as Beneficiario,to_char(FecPrc,�dd/mm/yyyy�) as Fecha,MonPrc as Monto From CPPrecom Where StaPrc=�A� and SALCOM < MONPRC-SALAJU and FecPrc <=  to_date((�'+feccom+'�),�dd/mm/yyyy�) and RefPrc like upper(�%�) Order By RefPrc';
+          var sql='Select DesPrc as Descripcion,RefPrc as Referencia,CedRif as Beneficiario,to_char(FecPrc,�dd/mm/yyyy�) as Fecha,(MonPrc-Salaju) as Monto From CPPrecom Where StaPrc=�A� and SALCOM < MONPRC-SALAJU and FecPrc <=  to_date((�'+feccom+'�),�dd/mm/yyyy�) and RefPrc like upper(�%�) Order By RefPrc';
           catalogo_check(campo,campo2,'submit',sql);
       }
+    }
+   else if (sw==4) {
+      var sql='Select Desubi as Descripcion,Codubi as Codigo From Bnubica where Codubi like upper(�%�) Order By Codubi';
+      catalogo2(campo,campo2,foco,sql);
+
     }
 
   if (pagina!=''){
@@ -1240,21 +1314,26 @@ function validar_fecha()
     {
       f=document.form1;
       chk="N";
-      if (parseInt(id.length)==3)
-      {
-        j=parseInt(id.substring(1,2));
-      }
-      else
-      {
-        j=parseInt(id.substring(1,3));
-      }
+        if (parseInt(id.length)==3)
+        {
+          j=parseInt(id.substring(1,2));
+        }
+        else if (parseInt(id.length)==4)
+        {
+            j=parseInt(id.substring(1,3));
+        }
+        else
+        {
+            j=parseInt(id.substring(1,4));
+        }
       val=document.getElementById(id).value;
       if (val!="")
       {
           if (j!=1)
           {
             i=1;
-             while (i<=50)
+            var am='<?php echo $numfil; ?>';
+             while (i<=am)
               {
                 var x="x"+i+"1";
                 if (j!=i)
@@ -1267,7 +1346,7 @@ function validar_fecha()
                     document.getElementById(id2).value="";
                     alert("El Título Presupuestario esta Repetido");
                     document.getElementById(id).focus();
-                    i=51;
+                    i=am;
                     chk="S";
                     return true;
                   }
@@ -1296,7 +1375,7 @@ function validar_fecha()
 
               f=document.form1;
               cuantos='PreCompro-Grip';
-              sql="Select nompre as campo1 From CPDEFTIT Where trim(CodPre)=�"+cadena+"�";
+              sql="Select nompre as campo1, codcta as campo2 From CPDEFTIT Where trim(CodPre)=�"+cadena+"�";
               //sql="Select a.codpre as codigo, b.nompre as descripcion From cpasiini a, CPDEFTIT b Where a.codpre=b.codpre and trim(a.CodPre)=�"+cadena+"� and a.perpre=�00� and a.monasi>0";
               //sql2="Select sum(a.MonDis) as mondis From cpasiini a, CPDEFTIT b Where a.codpre=b.codpre and trim(a.CodPre)=�"+cadena+"� and a.perpre=�00� and a.monasi>0";
               anocierre = '<? echo $anocierre;?>'
@@ -1330,13 +1409,17 @@ function validar_fecha()
               //alert(Formar_NivelDisponibilidad);
             // obtener fila actual
             if (parseInt(id.length)==3)
-            {
-              j=parseInt(id.substring(1,2));
-            }
-            else
-            {
-              j=parseInt(id.substring(1,3));
-            }
+	        {
+	          j=parseInt(id.substring(1,2));
+	        }
+	        else if (parseInt(id.length)==4)
+	        {
+	            j=parseInt(id.substring(1,3));
+	        }
+	        else
+	        {
+	            j=parseInt(id.substring(1,4));
+	        }
             var id5="x"+j+"5" //Columna de Disponibilidad
             var id2="x"+j+"2" //Columna de Monto
             var id3="x"+j+"3" //Columna de Causado
@@ -1393,13 +1476,17 @@ function validar_fecha()
 
 
             if (parseInt(id.length)==3)
-            {
-              j=parseInt(id.substring(1,2));
-            }
-            else
-            {
-              j=parseInt(id.substring(1,3));
-            }
+	        {
+	          j=parseInt(id.substring(1,2));
+	        }
+	        else if (parseInt(id.length)==4)
+	        {
+	            j=parseInt(id.substring(1,3));
+	        }
+	        else
+	        {
+	            j=parseInt(id.substring(1,4));
+	        }
 
           var id33="x"+j+"1";
             var id2="x"+j+"2" //Columna de Monto
@@ -1458,8 +1545,8 @@ function validar_fecha()
           f=document.form1;
           cuantos='Busqueda3';
           valor=document.getElementById(campo).value;
-          sql='Select NomExt as Nombre_Extendido,TipCom as Codigo, NomAbr as Nombre_Abreviado,RefPrc as Refiere From CPDocCom where trim(TipCom)=(�'+valor+'�) Order By TipCom';
-          pagina="gridatos.php?campo="+campo+"&campo2="+campo2+"&campo3="+campo3+"&sql="+sql+"&foco="+foco+"&cuantos="+cuantos;
+          sql='Select NomExt as Nombre_Extendido,TipCom as Codigo, NomAbr as Nombre_Abreviado,RefPrc as Refiere From CPDocCom where trim(TipCom)=(*'+valor+'*) Order By TipCom';
+          pagina="gridatos.php?campo="+campo+"&campo2="+campo2+"&campo3="+campo3+"&sql="+sql+"&foco="+foco+"&valor="+valor+"&cuantos="+cuantos;
           window.open(pagina,"","menubar=no,toolbar=no,scrollbars=yes,width=500,height=20,resizable=yes,left=10,top=300");
         }
       }
@@ -1479,8 +1566,9 @@ function validar_fecha()
       var acum4=0;
 
       var valor_total=0;
+      var am='<?php echo $numfil; ?>';
 
-      while (i<=50)
+      while (i<=am)
       {
         //alert(i);
         var x2="x"+i+"2";
@@ -1535,7 +1623,8 @@ function validar_fecha()
        {
          f=document.form1;
       var fila;
-      for (fila=i;fila<50;fila++)
+      var am='<?php echo $numfil; ?>';
+      for (fila=i;fila<am;fila++)
       {
         for (col=0;col<=c;col++)
         {
@@ -1548,7 +1637,7 @@ function validar_fecha()
 
       }
       //ultima fila
-      if (i==50)
+      if (i==am)
       {
         for (col=0;col<=c;col++)
         {
@@ -1571,7 +1660,7 @@ function validar_fecha()
           //pagina="catalogo2.php?campo="+campo+"&campo2="+campo2+"&sql="+sql+"&foco="+foco;
           //window.open(pagina,"","menubar=no,toolbar=no,scrollbars=yes,width=570,height=500,resizable=yes,left=50,top=50");
 
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Cpcompro_Precompro/clase/Cpcompro/frame/form1/obj1/refcom/obj2/descom/campo1/refcom/campo2/descom/submit/true';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Cpcompro_Precompro/clase/Cpcompro/frame/form1/obj1/refcom/obj2/descom/campo1/refcom/campo2/descom/submit/true';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
      }
 
@@ -1580,13 +1669,17 @@ function validar_fecha()
       if (e.keyCode==13)
       {
           if (parseInt(id.length)==3)
-          {
-            j=parseInt(id.substring(1,2));
-          }
-          else
-          {
+        {
+          j=parseInt(id.substring(1,2));
+        }
+        else if (parseInt(id.length)==4)
+        {
             j=parseInt(id.substring(1,3));
-          }
+        }
+        else
+        {
+            j=parseInt(id.substring(1,4));
+        }
 
       cont = j + 1;
       var id_nuevo="x"+cont+"1";

@@ -23,6 +23,7 @@ class Columna
   CONST COMBO = 'c';
   CONST TEXTAREA = 'a';
   CONST CHECK = 'k';
+  CONST COMBOCLASE = 'cc';
 
 
   private $titulo='';
@@ -59,6 +60,9 @@ class Columna
   private $ajaxgrid = false;
   private $ajaxadicionales = array();
   private $anchogrid='900';
+  private $valida='';
+  private $cc='';
+  private $onchange=false;
 
   /**
    * Estable el nombre de la cabecera de la columna
@@ -293,8 +297,7 @@ class Columna
    */
   public function setCombo($val){
 
-    if(is_array($val)) $this->combo = $val;
-    else $this->combo = array();
+    $this->combo = $val;
 
   }
 
@@ -360,6 +363,17 @@ class Columna
 
   }
 
+  /**
+   * Establece si el ajax se ejecutara por el onchange en vez del onblur
+   *
+   * @param $val string con el valor por defecto
+   * @return void
+   */
+  public function setAjaxonchange($val){
+
+    $this->onchange = $val;
+
+  }
 
   /**
    * Constructor de la columna
@@ -657,6 +671,65 @@ class Columna
 
     return $this->anchogrid;
 
+  }
+  /**
+   * Retorna el valor por defecto para el grid
+   *
+   * @return void
+   */
+  public function getValida(){
+
+    return $this->valida;
+
+}
+
+  /**
+   * Valida si la columna retorna vacio
+   *
+   * @param $val string con el valor por defecto
+   * @return void
+   */
+  public function setValida($val){
+
+    $this->valida = $val;
+
+  }
+
+     /**
+   * Estable el nombre del metodo en la clase que
+   * contiene los datos para cargar el combo.
+   *
+   * @param $val (string) Nombre del metodo
+   * @return void
+   */
+  public function setCombosclase($val){
+    $x = array();
+    $x=split('_',$val);
+    $i=0;
+    $this->cc="";
+    while ($i<count($x)){
+    	$y= $this->cc;
+        $this->cc = $y.ucfirst(strtolower($x[$i]));
+       $i++;
+    }
+  }
+
+    /**
+   * Obtiene el nombre del campo en la tabla a la que hace referencia
+   *
+   * @return string
+   */
+  public function getCombosclase(){ // $campos
+    return $this->cc;
+  }
+
+    /**
+   * Obtiene el valor que identifica si el ajax es por el onblur o por onchange
+   *
+   * @return bool
+   */
+  public function getAjaxonchange(){ // $campos
+    return $this->onchange;
   }
 
 }

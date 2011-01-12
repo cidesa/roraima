@@ -11,12 +11,14 @@ names:
     validators: UniqueValidator
 
   fordefunimed{desunimed}:
-    required:  No
+    required:  Yes
+    required_msg: La Descripción de la Unidad de Medida no puedo estar en Blanco.
     validators: DescripcionValidator
 
   fordefunimed{nomabrunimed}:
-    required:  No
-    validators: AbreviadoValidator
+    required:  Yes
+    required_msg: La Abreviatura de la Unidad de Medida no puedo estar en Blanco.
+    validators: AbreviadoValidator, UnicaAbreviaturaValidator
 
 UniqueValidator:
     class: sfPropelUniqueValidator
@@ -24,6 +26,13 @@ UniqueValidator:
         class:    Fordefunimed
         column:   codunimed
         unique_error:   El Código de la Unidad de Medida ya existe. Por Favor, Cambiélo por otro.
+
+UnicaAbreviaturaValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Fordefunimed
+        column:   nomabrunimed
+        unique_error:   La Abreviatura de la Unidad de Medida ya existe. Por Favor, Cambiélo por otro.
 
 DescripcionValidator:
     class: sfStringValidator

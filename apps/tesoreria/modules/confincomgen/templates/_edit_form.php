@@ -38,7 +38,8 @@
   'maxlength' => 8,
   'size' => 20,
   'control_name' => 'contabc[numcom]',
-  'readonly'  =>  $gencorrel=='S' ? true : false ,
+  //'readonly'  =>  $gencorrel=='S' ? true : false ,
+  'readonly'  =>  true,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
@@ -150,8 +151,8 @@ function llenar_codigo(e)
     //num = document.getElementById('contabc_numcom').value;
     num = document.getElementById('contabc_reftra').value;
     i=0;
-
-    while (i<51)
+    var numfil=parseInt('<?php echo $contabc->getNumfilas()?>') +1;
+    while (i<numfil)
     {
       fil= "ax_"+i+"_3";
 
@@ -171,7 +172,8 @@ function llenar_fecha(e)
     fecha = document.getElementById('contabc_feccom').value;
     fecha=(fecha.substr(6,4)) + "-" + (fecha.substr(3,2))+ "-" + (fecha.substr(0,2));
     i=0;
-    while (i<51)
+    var numfil=parseInt('<?php echo $contabc->getNumfilas()?>') +1;
+    while (i<numfil)
     {
       fil= "ax_"+i+"_4";
 
@@ -191,8 +193,8 @@ function llenar2()
     num = document.getElementById('contabc_reftra').value;
     n = 7;
     i=0;
-
-    while (i<51)
+    var numfil=parseInt('<?php echo $contabc->getNumfilas()?>') +1;
+    while (i<numfil)
     {
       fil= "ax_"+i+"_3";
 
@@ -207,14 +209,21 @@ function llenar2()
     //fecha=(fecha.substr(6,4)) + "-" + (fecha.substr(3,2))+ "-" + (fecha.substr(0,2));
     n = 7;
     i=0;
-    while (i<51)
+    var numfil=parseInt('<?php echo $contabc->getNumfilas()?>') +1;
+    while (i<numfil)
     {
       fil= "ax_"+i+"_4";
+      var catfec="trigger_ax_"+i+"_4";
 
       if (document.getElementById(fil))
       {
         document.getElementById(fil).value=fecha;
-
+        var deshab='<?php echo $bloqfec; ?>';
+        if (deshab=='S')
+        {
+        	$(catfec).hide();
+        	$(fil).readOnly=true;
+        } 
       }
       i++;
     }
@@ -297,6 +306,13 @@ function llenar4()
 
 </form>
 <script type="text/javascript">
+var deshab='<?php echo $bloqfec; ?>';
+if (deshab=='S')
+{
+	$('trigger_contabc_feccom').hide();
+	$('contabc_feccom').readOnly=true;
+} 
+
 <!--
 actualizarsaldos();
 //-->

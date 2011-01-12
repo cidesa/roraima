@@ -13,7 +13,7 @@ abstract class BaseOcregobrPeer {
 	const CLASS_DEFAULT = 'lib.model.Ocregobr';
 
 	
-	const NUM_COLUMNS = 21;
+	const NUM_COLUMNS = 22;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -27,6 +27,9 @@ abstract class BaseOcregobrPeer {
 
 	
 	const DESOBR = 'ocregobr.DESOBR';
+
+	
+	const FECREG = 'ocregobr.FECREG';
 
 	
 	const FECINI = 'ocregobr.FECINI';
@@ -88,18 +91,18 @@ abstract class BaseOcregobrPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codobr', 'Codtipobr', 'Desobr', 'Fecini', 'Fecfin', 'Unocon', 'Codpre', 'Codpai', 'Codedo', 'Codmun', 'Codpar', 'Codsec', 'Dirobr', 'Monobr', 'Staobr', 'Despre', 'Subtot', 'Moniva', 'Ivaobr', 'Codpreiva', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (OcregobrPeer::CODOBR, OcregobrPeer::CODTIPOBR, OcregobrPeer::DESOBR, OcregobrPeer::FECINI, OcregobrPeer::FECFIN, OcregobrPeer::UNOCON, OcregobrPeer::CODPRE, OcregobrPeer::CODPAI, OcregobrPeer::CODEDO, OcregobrPeer::CODMUN, OcregobrPeer::CODPAR, OcregobrPeer::CODSEC, OcregobrPeer::DIROBR, OcregobrPeer::MONOBR, OcregobrPeer::STAOBR, OcregobrPeer::DESPRE, OcregobrPeer::SUBTOT, OcregobrPeer::MONIVA, OcregobrPeer::IVAOBR, OcregobrPeer::CODPREIVA, OcregobrPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codobr', 'codtipobr', 'desobr', 'fecini', 'fecfin', 'unocon', 'codpre', 'codpai', 'codedo', 'codmun', 'codpar', 'codsec', 'dirobr', 'monobr', 'staobr', 'despre', 'subtot', 'moniva', 'ivaobr', 'codpreiva', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
+		BasePeer::TYPE_PHPNAME => array ('Codobr', 'Codtipobr', 'Desobr', 'Fecreg', 'Fecini', 'Fecfin', 'Unocon', 'Codpre', 'Codpai', 'Codedo', 'Codmun', 'Codpar', 'Codsec', 'Dirobr', 'Monobr', 'Staobr', 'Despre', 'Subtot', 'Moniva', 'Ivaobr', 'Codpreiva', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (OcregobrPeer::CODOBR, OcregobrPeer::CODTIPOBR, OcregobrPeer::DESOBR, OcregobrPeer::FECREG, OcregobrPeer::FECINI, OcregobrPeer::FECFIN, OcregobrPeer::UNOCON, OcregobrPeer::CODPRE, OcregobrPeer::CODPAI, OcregobrPeer::CODEDO, OcregobrPeer::CODMUN, OcregobrPeer::CODPAR, OcregobrPeer::CODSEC, OcregobrPeer::DIROBR, OcregobrPeer::MONOBR, OcregobrPeer::STAOBR, OcregobrPeer::DESPRE, OcregobrPeer::SUBTOT, OcregobrPeer::MONIVA, OcregobrPeer::IVAOBR, OcregobrPeer::CODPREIVA, OcregobrPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codobr', 'codtipobr', 'desobr', 'fecreg', 'fecini', 'fecfin', 'unocon', 'codpre', 'codpai', 'codedo', 'codmun', 'codpar', 'codsec', 'dirobr', 'monobr', 'staobr', 'despre', 'subtot', 'moniva', 'ivaobr', 'codpreiva', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codobr' => 0, 'Codtipobr' => 1, 'Desobr' => 2, 'Fecini' => 3, 'Fecfin' => 4, 'Unocon' => 5, 'Codpre' => 6, 'Codpai' => 7, 'Codedo' => 8, 'Codmun' => 9, 'Codpar' => 10, 'Codsec' => 11, 'Dirobr' => 12, 'Monobr' => 13, 'Staobr' => 14, 'Despre' => 15, 'Subtot' => 16, 'Moniva' => 17, 'Ivaobr' => 18, 'Codpreiva' => 19, 'Id' => 20, ),
-		BasePeer::TYPE_COLNAME => array (OcregobrPeer::CODOBR => 0, OcregobrPeer::CODTIPOBR => 1, OcregobrPeer::DESOBR => 2, OcregobrPeer::FECINI => 3, OcregobrPeer::FECFIN => 4, OcregobrPeer::UNOCON => 5, OcregobrPeer::CODPRE => 6, OcregobrPeer::CODPAI => 7, OcregobrPeer::CODEDO => 8, OcregobrPeer::CODMUN => 9, OcregobrPeer::CODPAR => 10, OcregobrPeer::CODSEC => 11, OcregobrPeer::DIROBR => 12, OcregobrPeer::MONOBR => 13, OcregobrPeer::STAOBR => 14, OcregobrPeer::DESPRE => 15, OcregobrPeer::SUBTOT => 16, OcregobrPeer::MONIVA => 17, OcregobrPeer::IVAOBR => 18, OcregobrPeer::CODPREIVA => 19, OcregobrPeer::ID => 20, ),
-		BasePeer::TYPE_FIELDNAME => array ('codobr' => 0, 'codtipobr' => 1, 'desobr' => 2, 'fecini' => 3, 'fecfin' => 4, 'unocon' => 5, 'codpre' => 6, 'codpai' => 7, 'codedo' => 8, 'codmun' => 9, 'codpar' => 10, 'codsec' => 11, 'dirobr' => 12, 'monobr' => 13, 'staobr' => 14, 'despre' => 15, 'subtot' => 16, 'moniva' => 17, 'ivaobr' => 18, 'codpreiva' => 19, 'id' => 20, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
+		BasePeer::TYPE_PHPNAME => array ('Codobr' => 0, 'Codtipobr' => 1, 'Desobr' => 2, 'Fecreg' => 3, 'Fecini' => 4, 'Fecfin' => 5, 'Unocon' => 6, 'Codpre' => 7, 'Codpai' => 8, 'Codedo' => 9, 'Codmun' => 10, 'Codpar' => 11, 'Codsec' => 12, 'Dirobr' => 13, 'Monobr' => 14, 'Staobr' => 15, 'Despre' => 16, 'Subtot' => 17, 'Moniva' => 18, 'Ivaobr' => 19, 'Codpreiva' => 20, 'Id' => 21, ),
+		BasePeer::TYPE_COLNAME => array (OcregobrPeer::CODOBR => 0, OcregobrPeer::CODTIPOBR => 1, OcregobrPeer::DESOBR => 2, OcregobrPeer::FECREG => 3, OcregobrPeer::FECINI => 4, OcregobrPeer::FECFIN => 5, OcregobrPeer::UNOCON => 6, OcregobrPeer::CODPRE => 7, OcregobrPeer::CODPAI => 8, OcregobrPeer::CODEDO => 9, OcregobrPeer::CODMUN => 10, OcregobrPeer::CODPAR => 11, OcregobrPeer::CODSEC => 12, OcregobrPeer::DIROBR => 13, OcregobrPeer::MONOBR => 14, OcregobrPeer::STAOBR => 15, OcregobrPeer::DESPRE => 16, OcregobrPeer::SUBTOT => 17, OcregobrPeer::MONIVA => 18, OcregobrPeer::IVAOBR => 19, OcregobrPeer::CODPREIVA => 20, OcregobrPeer::ID => 21, ),
+		BasePeer::TYPE_FIELDNAME => array ('codobr' => 0, 'codtipobr' => 1, 'desobr' => 2, 'fecreg' => 3, 'fecini' => 4, 'fecfin' => 5, 'unocon' => 6, 'codpre' => 7, 'codpai' => 8, 'codedo' => 9, 'codmun' => 10, 'codpar' => 11, 'codsec' => 12, 'dirobr' => 13, 'monobr' => 14, 'staobr' => 15, 'despre' => 16, 'subtot' => 17, 'moniva' => 18, 'ivaobr' => 19, 'codpreiva' => 20, 'id' => 21, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
 	);
 
 	
@@ -158,6 +161,8 @@ abstract class BaseOcregobrPeer {
 		$criteria->addSelectColumn(OcregobrPeer::CODTIPOBR);
 
 		$criteria->addSelectColumn(OcregobrPeer::DESOBR);
+
+		$criteria->addSelectColumn(OcregobrPeer::FECREG);
 
 		$criteria->addSelectColumn(OcregobrPeer::FECINI);
 

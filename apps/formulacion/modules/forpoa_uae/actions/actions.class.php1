@@ -6,7 +6,7 @@
  * @package    siga
  * @subpackage forpoa_uae
  * @author     Your name here
- * @version    SVN: $Id$
+ * @version    SVN: $Id:actions.class.php1 32379 2009-09-01 16:59:06Z lhernandez $
  */
 class forpoa_uaeActions extends autoforpoa_uaeActions
 {

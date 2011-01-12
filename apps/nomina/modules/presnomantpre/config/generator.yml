@@ -6,10 +6,10 @@ generator:
     fields:
       codemp: { name: Codigo}
       nomemp: { name: Nombre}
-      monant: { name: Antiguedad Acumulada}
+      monto: { name: Antiguedad Acumulada}
       fecant: {name: Fecha del Anticipo}
       observacion: { name: Observacion}
-      monto: { name: Monto del Anticipo}
+      monant: { name: Monto del Anticipo}
       fecsolant: { name: Fecha Solicitud Anticipo}
 
     list:

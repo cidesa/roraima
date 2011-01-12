@@ -37,6 +37,7 @@ class Ocregcon extends BaseOcregcon
   protected $contratado=0.00;
   protected $contrapar=0.00;
   protected $disponible='';
+  protected $tipcom="";
 
  public function getDesobr()
   {

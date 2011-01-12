@@ -267,6 +267,7 @@ abstract class BaseForestfuefin extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = ForestfuefinPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ForestfuefinPeer::doUpdate($this, $con);

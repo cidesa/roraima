@@ -393,6 +393,30 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
 
 	
+	protected $numpuncue;
+
+
+	
+	protected $fecinicon;
+
+
+	
+	protected $fecfincon;
+
+
+	
+	protected $obsembret;
+
+
+	
+	protected $codmot;
+
+
+	
+	protected $fecmat;
+
+
+
 	protected $id;
 
 	
@@ -1223,6 +1247,93 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
   }
   
+  public function getNumpuncue()
+  {
+
+    return trim($this->numpuncue);
+
+  }
+  
+  public function getFecinicon($format = 'Y-m-d')
+  {
+
+    if ($this->fecinicon === null || $this->fecinicon === '') {
+      return null;
+    } elseif (!is_int($this->fecinicon)) {
+            $ts = adodb_strtotime($this->fecinicon);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecinicon] as date/time value: " . var_export($this->fecinicon, true));
+      }
+    } else {
+      $ts = $this->fecinicon;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFecfincon($format = 'Y-m-d')
+  {
+
+    if ($this->fecfincon === null || $this->fecfincon === '') {
+      return null;
+    } elseif (!is_int($this->fecfincon)) {
+            $ts = adodb_strtotime($this->fecfincon);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfincon] as date/time value: " . var_export($this->fecfincon, true));
+      }
+    } else {
+      $ts = $this->fecfincon;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getObsembret()
+  {
+
+    return trim($this->obsembret);
+
+  }
+  
+  public function getCodmot()
+  {
+
+    return trim($this->codmot);
+
+  }
+  
+  public function getFecmat($format = 'Y-m-d')
+  {
+
+    if ($this->fecmat === null || $this->fecmat === '') {
+      return null;
+    } elseif (!is_int($this->fecmat)) {
+            $ts = adodb_strtotime($this->fecmat);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecmat] as date/time value: " . var_export($this->fecmat, true));
+      }
+    } else {
+      $ts = $this->fecmat;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+
   public function getId()
   {
 
@@ -1312,6 +1423,11 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 	
 	public function setFecnac($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1450,6 +1566,11 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 	public function setFecing($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecing] from input: " . var_export($v, true));
@@ -1466,6 +1587,11 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 	
 	public function setFecret($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1484,6 +1610,11 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 	public function setFecrei($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrei] from input: " . var_export($v, true));
@@ -1500,6 +1631,11 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 	
 	public function setFecadmpub($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1557,6 +1693,11 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 	
 	public function setFeccotsso($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -1965,6 +2106,11 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 	public function setFecgra($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecgra] from input: " . var_export($v, true));
@@ -2001,6 +2147,11 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 	
 	public function setFecgaceta($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -2129,6 +2280,11 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 	public function setFeccoracu($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccoracu] from input: " . var_export($v, true));
@@ -2253,6 +2409,102 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNumpuncue($v)
+	{
+
+    if ($this->numpuncue !== $v) {
+        $this->numpuncue = $v;
+        $this->modifiedColumns[] = NphojintPeer::NUMPUNCUE;
+      }
+  
+	} 
+	
+	public function setFecinicon($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecinicon] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecinicon !== $ts) {
+      $this->fecinicon = $ts;
+      $this->modifiedColumns[] = NphojintPeer::FECINICON;
+    }
+
+	} 
+	
+	public function setFecfincon($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfincon] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfincon !== $ts) {
+      $this->fecfincon = $ts;
+      $this->modifiedColumns[] = NphojintPeer::FECFINCON;
+    }
+
+	} 
+	
+	public function setObsembret($v)
+	{
+
+    if ($this->obsembret !== $v) {
+        $this->obsembret = $v;
+        $this->modifiedColumns[] = NphojintPeer::OBSEMBRET;
+      }
+  
+	} 
+	
+	public function setCodmot($v)
+	{
+
+    if ($this->codmot !== $v) {
+        $this->codmot = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODMOT;
+      }
+  
+	} 
+	
+	public function setFecmat($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecmat] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecmat !== $ts) {
+      $this->fecmat = $ts;
+      $this->modifiedColumns[] = NphojintPeer::FECMAT;
+    }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -2459,7 +2711,19 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
       $this->codtipemp = $rs->getString($startcol + 95);
 
-      $this->id = $rs->getInt($startcol + 96);
+      $this->numpuncue = $rs->getString($startcol + 96);
+
+      $this->fecinicon = $rs->getDate($startcol + 97, null);
+
+      $this->fecfincon = $rs->getDate($startcol + 98, null);
+
+      $this->obsembret = $rs->getString($startcol + 99);
+
+      $this->codmot = $rs->getString($startcol + 100);
+
+      $this->fecmat = $rs->getDate($startcol + 101, null);
+
+      $this->id = $rs->getInt($startcol + 102);
 
       $this->resetModified();
 
@@ -2467,7 +2731,7 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 97; 
+            return $startcol + 103;
     } catch (Exception $e) {
       throw new PropelException("Error populating Nphojint object", $e);
     }
@@ -2919,6 +3183,24 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 				return $this->getCodtipemp();
 				break;
 			case 96:
+				return $this->getNumpuncue();
+				break;
+			case 97:
+				return $this->getFecinicon();
+				break;
+			case 98:
+				return $this->getFecfincon();
+				break;
+			case 99:
+				return $this->getObsembret();
+				break;
+			case 100:
+				return $this->getCodmot();
+				break;
+			case 101:
+				return $this->getFecmat();
+				break;
+			case 102:
 				return $this->getId();
 				break;
 			default:
@@ -3027,7 +3309,13 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 			$keys[93] => $this->getTipcueaho(),
 			$keys[94] => $this->getNumcueaho(),
 			$keys[95] => $this->getCodtipemp(),
-			$keys[96] => $this->getId(),
+			$keys[96] => $this->getNumpuncue(),
+			$keys[97] => $this->getFecinicon(),
+			$keys[98] => $this->getFecfincon(),
+			$keys[99] => $this->getObsembret(),
+			$keys[100] => $this->getCodmot(),
+			$keys[101] => $this->getFecmat(),
+			$keys[102] => $this->getId(),
 		);
 		return $result;
 	}
@@ -3332,6 +3620,24 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 				$this->setCodtipemp($value);
 				break;
 			case 96:
+				$this->setNumpuncue($value);
+				break;
+			case 97:
+				$this->setFecinicon($value);
+				break;
+			case 98:
+				$this->setFecfincon($value);
+				break;
+			case 99:
+				$this->setObsembret($value);
+				break;
+			case 100:
+				$this->setCodmot($value);
+				break;
+			case 101:
+				$this->setFecmat($value);
+				break;
+			case 102:
 				$this->setId($value);
 				break;
 		} 	}
@@ -3437,7 +3743,13 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[93], $arr)) $this->setTipcueaho($arr[$keys[93]]);
 		if (array_key_exists($keys[94], $arr)) $this->setNumcueaho($arr[$keys[94]]);
 		if (array_key_exists($keys[95], $arr)) $this->setCodtipemp($arr[$keys[95]]);
-		if (array_key_exists($keys[96], $arr)) $this->setId($arr[$keys[96]]);
+		if (array_key_exists($keys[96], $arr)) $this->setNumpuncue($arr[$keys[96]]);
+		if (array_key_exists($keys[97], $arr)) $this->setFecinicon($arr[$keys[97]]);
+		if (array_key_exists($keys[98], $arr)) $this->setFecfincon($arr[$keys[98]]);
+		if (array_key_exists($keys[99], $arr)) $this->setObsembret($arr[$keys[99]]);
+		if (array_key_exists($keys[100], $arr)) $this->setCodmot($arr[$keys[100]]);
+		if (array_key_exists($keys[101], $arr)) $this->setFecmat($arr[$keys[101]]);
+		if (array_key_exists($keys[102], $arr)) $this->setId($arr[$keys[102]]);
 	}
 
 	
@@ -3541,6 +3853,12 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NphojintPeer::TIPCUEAHO)) $criteria->add(NphojintPeer::TIPCUEAHO, $this->tipcueaho);
 		if ($this->isColumnModified(NphojintPeer::NUMCUEAHO)) $criteria->add(NphojintPeer::NUMCUEAHO, $this->numcueaho);
 		if ($this->isColumnModified(NphojintPeer::CODTIPEMP)) $criteria->add(NphojintPeer::CODTIPEMP, $this->codtipemp);
+		if ($this->isColumnModified(NphojintPeer::NUMPUNCUE)) $criteria->add(NphojintPeer::NUMPUNCUE, $this->numpuncue);
+		if ($this->isColumnModified(NphojintPeer::FECINICON)) $criteria->add(NphojintPeer::FECINICON, $this->fecinicon);
+		if ($this->isColumnModified(NphojintPeer::FECFINCON)) $criteria->add(NphojintPeer::FECFINCON, $this->fecfincon);
+		if ($this->isColumnModified(NphojintPeer::OBSEMBRET)) $criteria->add(NphojintPeer::OBSEMBRET, $this->obsembret);
+		if ($this->isColumnModified(NphojintPeer::CODMOT)) $criteria->add(NphojintPeer::CODMOT, $this->codmot);
+		if ($this->isColumnModified(NphojintPeer::FECMAT)) $criteria->add(NphojintPeer::FECMAT, $this->fecmat);
 		if ($this->isColumnModified(NphojintPeer::ID)) $criteria->add(NphojintPeer::ID, $this->id);
 
 		return $criteria;
@@ -3763,6 +4081,18 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		$copyObj->setNumcueaho($this->numcueaho);
 
 		$copyObj->setCodtipemp($this->codtipemp);
+
+		$copyObj->setNumpuncue($this->numpuncue);
+
+		$copyObj->setFecinicon($this->fecinicon);
+
+		$copyObj->setFecfincon($this->fecfincon);
+
+		$copyObj->setObsembret($this->obsembret);
+
+		$copyObj->setCodmot($this->codmot);
+
+		$copyObj->setFecmat($this->fecmat);
 
 
 		if ($deepCopy) {

@@ -1,10 +1,11 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
 require_once($_SESSION["x"].'lib/general/tools.php');
 require_once($_SESSION["x"].'lib/general/funciones.php');
-validar(array(11,15));            //Seguridad  del Sistema
+validar(array(11,15),'contabilidad','confincie');            //Seguridad  del Sistema
 $codemp=$_SESSION["codemp"];
 $bd=new basedatosAdo($codemp);
 $z= new tools();
@@ -82,16 +83,16 @@ $z= new tools();
      		 ".chr(34)."$CodOrigen".chr(34).".contabb1.codcta=".chr(34)."$CodDestino".chr(34).".contabb.codcta and
      		 ".chr(34)."$CodOrigen".chr(34).".contabb1.PerEje='12')";
 
-	  $bd->actualizar($sql);
+	  //$bd->actualizar($sql);
 
 ///echo $sql."<br>";
 
 		//"Saldos Iniciales de las Cuentas Contables Actualizadas ", vbInformation
        $sql = "update ".chr(34)."$CodDestino".chr(34).".contabb set salant=0,salprgper=0,salacuper=0 where ".chr(34)."$CodDestino".chr(34).".contabb.codcta like '$CodIngreso%' " ;
-       $bd->actualizar($sql);
+       //$bd->actualizar($sql);
 ///echo $sql."<br>";
 	   $sql = "update ".chr(34)."$CodDestino".chr(34).".contabb set salant=0,salprgper=0,salacuper=0 where ".chr(34)."$CodDestino".chr(34).".contabb.codcta like '$CodEgreso%' " ;
-	   $bd->actualizar($sql);
+	   //$bd->actualizar($sql);
 ///echo $sql."<br>";
 	   //$sql = "update ".chr(34)."$CodDestino".chr(34).".contabb1 set salact=0,totdeb=0,totcre=0 where ".chr(34)."$CodDestino".chr(34).".contabb1.codcta like '$CodIngreso%' " ;
 	   //$bd->actualizar($sql);

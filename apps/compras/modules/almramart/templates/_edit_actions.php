@@ -23,3 +23,8 @@
 )) ?></li>
 
   </ul>
+
+  <script language="JavaScript" type="text/javascript">
+ var tieregrel='<?php echo $caramart->getTiedatrel(); ?>';
+  if (tieregrel=='S') $('save').hide();
+</script>

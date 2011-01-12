@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage fordefproyecto
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author:jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:actions.class.php 34632 2009-11-10 14:32:11Z jlobaton $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -123,7 +123,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -474,6 +474,15 @@ $this->Bitacora('Guardo');
     {
       $this->fordefpry->setPoravafin($fordefpry['poravafin']);
     }
+    if (isset($fordefpry['numempfem']))
+    {
+      $this->fordefpry->setNumempfem($fordefpry['numempfem']);
+    }
+    if (isset($fordefpry['numempmas']))
+    {
+      $this->fordefpry->setNumempmas($fordefpry['numempmas']);
+    }
+
   }
   public function executeCombo()
   {
@@ -749,33 +758,29 @@ $this->Bitacora('Guardo');
     $opciones->setTitulo('Conexiones Inter-Institucionales');
     $opciones->setHTMLTotalFilas(' ');
 
-    $col1 = new Columna('Codigo');
-    $col1->setTipo(Columna::TEXTO);
+    $col1 = new Columna('Tipo de Contribución');
+    $col1->setTipo(Columna::COMBO);
     $col1->setEsGrabable(true);
-    $col1->setAlineacionObjeto(Columna::CENTRO);
-    $col1->setAlineacionContenido(Columna::CENTRO);
-    $col1->setNombreCampo('codorg');
-    //$col1->setAjax('almcotiza',3,2);
-    $col1->setJScript('onBlur="ajax(this.id)"');
-    //$col1->setCatalogo('Caregart','sf_admin_edit_form',$obj,'Caregart_Almcotiza',$params);
-    $col1->setCatalogo('fordeforgpub','sf_admin_edit_form',array('codorg' => 1,'nomorg' => 2));
-    $col1->setHTML('type="text" size="5" maxlength="4" ');
+    $col1->setNombreCampo('tipcnx');
+    $col1->setCombo(self::cargarTipoCont());
+    $col1->setHTML(' ');
 
-
-	$col2 = new Columna('Descripción');
+    $col2 = new Columna('Codigo');
     $col2->setTipo(Columna::TEXTO);
+    $col2->setEsGrabable(true);
     $col2->setAlineacionObjeto(Columna::CENTRO);
     $col2->setAlineacionContenido(Columna::CENTRO);
-    $col2->setNombreCampo('nomorg');
-    $col2->setHTML('type="text" size="25" readonly=true');
+    $col2->setNombreCampo('codorg');
+    $col2->setJScript('onBlur="ajax(this.id)"');
+    $col2->setCatalogo('fordeforgpub','sf_admin_edit_form',array('codorg' => 2,'nomorg' => 3));
+    $col2->setHTML('type="text" size="5" maxlength="4" ');
 
-	$col3 = new Columna('Tipo de Contribución');
-    $col3->setTipo(Columna::COMBO);
-    $col3->setEsGrabable(true);
-    $col3->setNombreCampo('tipcnx');
-    $col3->setCombo(self::cargarTipoCont());
-    $col3->setHTML(' ');
-
+    $col3 = new Columna('Descripción');
+    $col3->setTipo(Columna::TEXTO);
+    $col3->setAlineacionObjeto(Columna::CENTRO);
+    $col3->setAlineacionContenido(Columna::CENTRO);
+    $col3->setNombreCampo('nomorg');
+    $col3->setHTML('type="text" size="25" readonly=true');
 
 	$col4 = new Columna('Detalles/Observaciones');
     $col4->setTipo(Columna::TEXTO);
@@ -926,10 +931,194 @@ $this->Bitacora('Guardo');
     $this->updateFordefpryFromRequest();
     }catch(Exception $ex){}
 
+    $grid=Herramientas::CargarDatosGrid($this, $this->obj);
+    $grid2=Herramientas::CargarDatosGrid($this, $this->obj2);
 
     $this->labels = $this->getLabels();
 
     return sfView::SUCCESS;
+  }
+
+  protected function getLabels()
+  {
+    $this->etiq="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+    if(array_key_exists('aplicacion',$varemp))
+     if(array_key_exists('formulacion',$varemp['aplicacion']))
+       if(array_key_exists('modulos',$varemp['aplicacion']['formulacion']))
+         if(array_key_exists('fordefequ',$varemp['aplicacion']['formulacion']['modulos'])){
+           if(array_key_exists('etiqueta',$varemp['aplicacion']['formulacion']['modulos']['fordefequ']))
+           {
+            $this->etiq=$varemp['aplicacion']['formulacion']['modulos']['fordefequ']['etiqueta'];
+           }
+         }
+
+        $this->etiq2="";
+        $varemp = $this->getUser()->getAttribute('configemp');
+        if ($varemp)
+        if(array_key_exists('aplicacion',$varemp))
+         if(array_key_exists('formulacion',$varemp['aplicacion']))
+           if(array_key_exists('modulos',$varemp['aplicacion']['formulacion']))
+             if(array_key_exists('fordefsubobj',$varemp['aplicacion']['formulacion']['modulos'])){
+               if(array_key_exists('etiqueta',$varemp['aplicacion']['formulacion']['modulos']['fordefsubobj']))
+               {
+                $this->etiq2=$varemp['aplicacion']['formulacion']['modulos']['fordefsubobj']['etiqueta'];
+               }
+             }
+        $this->etiq3="";
+        $varemp = $this->getUser()->getAttribute('configemp');
+        if ($varemp)
+        if(array_key_exists('aplicacion',$varemp))
+         if(array_key_exists('formulacion',$varemp['aplicacion']))
+           if(array_key_exists('modulos',$varemp['aplicacion']['formulacion']))
+             if(array_key_exists('fordefsubsubobj',$varemp['aplicacion']['formulacion']['modulos'])){
+               if(array_key_exists('etiqueta',$varemp['aplicacion']['formulacion']['modulos']['fordefsubsubobj']))
+               {
+                $this->etiq3=$varemp['aplicacion']['formulacion']['modulos']['fordefsubsubobj']['etiqueta'];
+               }
+             }
+
+ if ($this->etiq!=""){
+
+    return array(
+      'fordefpry{codpro}' => 'CÃ³digo:',
+      'fordefpry{proacc}' => 'Proyecto o AcciÃ³n Centralizada:',
+      'fordefpry{nompro}' => 'Nombre:',
+      'fordefpry{codprg}' => 'Programa:',
+      'fordefpry{desprg}' => 'DescripciÃ³n:',
+      'fordefpry{fecini}' => 'Fecha Inicio:',
+      'fordefpry{feccul}' => 'Fecha CulminaciÃ³n:',
+      'fordefpry{montotpry}' => 'Monto Total del Proyecto:',
+      'fordefpry{ubigeo}' => 'UbicaciÃ³n GeogrÃ¡fica:',
+      'fordefpry{codemp}' => 'Responsable:',
+      'fordefpry{nomemp2}' => 'Nombre:',
+      'fordefpry{uniejepri}' => 'Unid. Ejecut. Principal:',
+      'fordefpry{descat}' => 'DescripciÃ³n:',
+      'fordefpry{enupro}' => 'Enunciado del Problema:',
+      'fordefpry{desobjnva}' => 'Objetivo EstratÃ©gico Nueva Etapa:',
+      'fordefpry{objestins}' => 'Objetivo EstratÃ©gico Institucional:',
+      'fordefpry{objeesppro}' => 'Objetivo EspecÃ­fico del Proyecto:',
+      'fordefpry{objpndes}' => 'Objetivo de PNDES:',
+      'fordefpry{codequ}' => $this->etiq.':',
+      'fordefpry{desobj}' => 'Objetivo de la '.$this->etiq.':',
+      'fordefpry{codsubobj}' => $this->etiq2.':',
+      'fordefpry{codsubsubobj}' => $this->etiq3.':',
+      'fordefpry{respro}' => 'Bien o Servicio:',
+      'fordefpry{unimedres}' => 'Unidad de Medida:',
+      'fordefpry{desunimed}' => 'DescripciÃ³n:',
+      'fordefpry{benpro}' => 'Beneficiarios Directos:',
+      'fordefpry{nroempdir}' => 'NÃºmero Estimado de Empleos Directos:',
+      'fordefpry{nroempind}' => 'NÃºmero Estimado de Empleos Indirectos:',
+      'fordefpry{codsta}' => 'Estatus del Proyectos:',
+      'fordefpry{dessta}' => 'DescripciÃ³n:',
+      'fordefpry{codpryonapre}' => 'Codigo Proyecto Onapre:',
+      'fordefpry{tieejeanopry}' => 'Tiempo de Ejecucion del Proyecto AÃ±o(s):',
+      'fordefpry{tieejemespry}' => 'Mes(es):',
+      'fordefpry{codobjnvaeta}' => 'Objetivo EstratÃ©gico Nueva Etapa:',
+      'fordefpry{sitobjdes}' => 'SituacÃ­on Objetivo Deseada:',
+      'fordefpry{tieimpmes}' => 'Mes(es):',
+      'fordefpry{tieimpano}' => 'Tiempo de Impacto Ano(s):',
+      'fordefpry{accinm}' => 'Acciones Inmediatas:',
+      'fordefpry{accdif}' => 'Acciones Diferidas:',
+      'fordefpry{codsitpre}' => 'SituaciÃ³n Presupuestaria:',
+      'fordefpry{tieejeanopry}' => 'Tiempo de Ejecucion del Proyecto AÃ±o(s):',
+      'fordefpry{tieejemespry}' => 'Mes(es):',
+      'fordefpry{coddir}' => 'Programa:',
+      'fordefpry{codobjnvaeta}' => 'Objetivo EstratÃ©gico Nueva Etapa:',
+      'fordefpry{codsec}' => 'Sector:',
+      'fordefpry{codsubsec}' => 'Sub-Programas:',
+      'fordefpry{indsitact}' => 'Indicacodor de la GestiÃ³n:',
+      'fordefpry{fecultdat}' => 'Fecha Ultima Data:',
+      'fordefpry{forind}' => 'FÃ³rmula del Indicador:',
+      'fordefpry{fueind}' => 'Fuente del Indicador:',
+      'fordefpry{indsitobj}' => 'Indicador de la SituaciÃ³n Objetivo:',
+      'fordefpry{cantmet}' => 'Cantidad:',
+      'fordefpry{nucdesend}' => 'Nucleo de Desarrollo EndÃ³geno:',
+      'fordefpry{zonecodes}' => 'Zonas EconÃ³micas de Desarrollo Sustentable (ZEDES):',
+      'fordefpry{comindust}' => 'Complejo Industrial:',
+      'fordefpry{uniadsemp}' => 'Unidad de AdscripciÃ³n:',
+      'fordefpry{caremp}' => 'Cargo:',
+      'fordefpry{telemp}' => 'TelÃ©fono(s):',
+      'fordefpry{faxemp}' => 'Fax:',
+      'fordefpry{emaemp}' => 'E-mail:',
+      'fordefpry{placontin}' => 'Plan de Contingencia:',
+      'fordefpry{desbrepry}' => 'Descripcion Breve del Proyecto:',
+      'fordefpry{poravafis}' => 'Porcentaje de Avance FÃ­sico del Proyecto:',
+      'fordefpry{poravafin}' => 'Porcentaje de Avance Financiero del Proyecto:',
+      'fordefpry{numempfem}' => 'Nro de Empleado Femenino:',
+      'fordefpry{numempmas}' => 'Nro de Empleado Masculino:',
+    );
+ }else {
+         return array(
+      'fordefpry{codpro}' => 'CÃ³digo:',
+      'fordefpry{proacc}' => 'Proyecto o AcciÃ³n Centralizada:',
+      'fordefpry{nompro}' => 'Nombre:',
+      'fordefpry{codprg}' => 'Programa:',
+      'fordefpry{desprg}' => 'DescripciÃ³n:',
+      'fordefpry{fecini}' => 'Fecha Inicio:',
+      'fordefpry{feccul}' => 'Fecha CulminaciÃ³n:',
+      'fordefpry{montotpry}' => 'Monto Total del Proyecto:',
+      'fordefpry{ubigeo}' => 'UbicaciÃ³n GeogrÃ¡fica:',
+      'fordefpry{codemp}' => 'Responsable:',
+      'fordefpry{nomemp2}' => 'Nombre:',
+      'fordefpry{uniejepri}' => 'Unid. Ejecut. Principal:',
+      'fordefpry{descat}' => 'DescripciÃ³n:',
+      'fordefpry{enupro}' => 'Enunciado del Problema:',
+      'fordefpry{desobjnva}' => 'Objetivo EstratÃ©gico Nueva Etapa:',
+      'fordefpry{objestins}' => 'Objetivo EstratÃ©gico Institucional:',
+      'fordefpry{objeesppro}' => 'Objetivo EspecÃ­fico del Proyecto:',
+      'fordefpry{objpndes}' => 'Objetivo de PNDES:',
+      'fordefpry{codequ}' => 'DirectrÃ­z:',
+      'fordefpry{desobj}' => 'Objetivo de la DirectrÃ­z:',
+      'fordefpry{codsubobj}' => 'Estrategia:',
+      'fordefpry{codsubsubobj}' => 'PolÃ­tica:',
+      'fordefpry{respro}' => 'Bien o Servicio:',
+      'fordefpry{unimedres}' => 'Unidad de Medida:',
+      'fordefpry{desunimed}' => 'DescripciÃ³n:',
+      'fordefpry{benpro}' => 'Beneficiarios Directos:',
+      'fordefpry{nroempdir}' => 'NÃºmero Estimado de Empleos Directos:',
+      'fordefpry{nroempind}' => 'NÃºmero Estimado de Empleos Indirectos:',
+      'fordefpry{codsta}' => 'Estatus del Proyectos:',
+      'fordefpry{dessta}' => 'DescripciÃ³n:',
+      'fordefpry{codpryonapre}' => 'Codigo Proyecto Onapre:',
+      'fordefpry{tieejeanopry}' => 'Tiempo de Ejecucion del Proyecto AÃ±o(s):',
+      'fordefpry{tieejemespry}' => 'Mes(es):',
+      'fordefpry{codobjnvaeta}' => 'Objetivo EstratÃ©gico Nueva Etapa:',
+      'fordefpry{sitobjdes}' => 'SituacÃ­on Objetivo Deseada:',
+      'fordefpry{tieimpmes}' => 'Mes(es):',
+      'fordefpry{tieimpano}' => 'Tiempo de Impacto Ano(s):',
+      'fordefpry{accinm}' => 'Acciones Inmediatas:',
+      'fordefpry{accdif}' => 'Acciones Diferidas:',
+      'fordefpry{codsitpre}' => 'SituaciÃ³n Presupuestaria:',
+      'fordefpry{tieejeanopry}' => 'Tiempo de Ejecucion del Proyecto AÃ±o(s):',
+      'fordefpry{tieejemespry}' => 'Mes(es):',
+      'fordefpry{coddir}' => 'Programa:',
+      'fordefpry{codobjnvaeta}' => 'Objetivo EstratÃ©gico Nueva Etapa:',
+      'fordefpry{codsec}' => 'Sector:',
+      'fordefpry{codsubsec}' => 'Sub-Programas:',
+      'fordefpry{indsitact}' => 'Indicacodor de la GestiÃ³n:',
+      'fordefpry{fecultdat}' => 'Fecha Ultima Data:',
+      'fordefpry{forind}' => 'FÃ³rmula del Indicador:',
+      'fordefpry{fueind}' => 'Fuente del Indicador:',
+      'fordefpry{indsitobj}' => 'Indicador de la SituaciÃ³n Objetivo:',
+      'fordefpry{cantmet}' => 'Cantidad:',
+      'fordefpry{nucdesend}' => 'Nucleo de Desarrollo EndÃ³geno:',
+      'fordefpry{zonecodes}' => 'Zonas EconÃ³micas de Desarrollo Sustentable (ZEDES):',
+      'fordefpry{comindust}' => 'Complejo Industrial:',
+      'fordefpry{uniadsemp}' => 'Unidad de AdscripciÃ³n:',
+      'fordefpry{caremp}' => 'Cargo:',
+      'fordefpry{telemp}' => 'TelÃ©fono(s):',
+      'fordefpry{faxemp}' => 'Fax:',
+      'fordefpry{emaemp}' => 'E-mail:',
+      'fordefpry{placontin}' => 'Plan de Contingencia:',
+      'fordefpry{desbrepry}' => 'Descripcion Breve del Proyecto:',
+      'fordefpry{poravafis}' => 'Porcentaje de Avance FÃ­sico del Proyecto:',
+      'fordefpry{poravafin}' => 'Porcentaje de Avance Financiero del Proyecto:',
+      'fordefpry{numempfem}' => 'Nro de Empleado Femenino:',
+      'fordefpry{numempmas}' => 'Nro de Empleado Masculino:',
+    );
+ }
   }
 
 }

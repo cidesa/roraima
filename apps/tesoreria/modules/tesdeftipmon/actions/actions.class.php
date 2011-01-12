@@ -60,16 +60,25 @@ $this->Bitacora('Guardo');
    */
   public function handleErrorEdit()
   {
-    $this->preExecute();
-    $this->tsdesmon = $this->getTsdesmonOrCreate();
-    try{
-    $this->updateTsdesmonFromRequest();
-    }catch(Exception $ex){}
 
     $this->labels = $this->getLabels();
 
     return sfView::SUCCESS;
   }
-  
+
+  public function validateEdit()
+  {
+    $this->tsdesmon = $this->getTsdesmonOrCreate();
+    $this->updateTsdesmonFromRequest();
+
+    if ($this->getRequest()->getMethod() == sfRequest::POST){
+      if($this->tsdesmon->getTiedatrel()!='S') return true;
+      else {
+
+        $this->getRequest()->setError('', H::obtenerMensajeError(572));
+        return false;
+      }
+    }
+  }
   
 }

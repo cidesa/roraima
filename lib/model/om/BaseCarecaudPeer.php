@@ -212,6 +212,167 @@ abstract class BaseCarecaudPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinCatiprec(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CarecaudPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CarecaudPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CarecaudPeer::CODTIPREC, CatiprecPeer::CODTIPREC);
+
+		$rs = CarecaudPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinCatiprec(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CarecaudPeer::addSelectColumns($c);
+		$startcol = (CarecaudPeer::NUM_COLUMNS - CarecaudPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		CatiprecPeer::addSelectColumns($c);
+
+		$c->addJoin(CarecaudPeer::CODTIPREC, CatiprecPeer::CODTIPREC);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CarecaudPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = CatiprecPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getCatiprec(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCarecaud($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCarecauds();
+				$obj2->addCarecaud($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CarecaudPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CarecaudPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CarecaudPeer::CODTIPREC, CatiprecPeer::CODTIPREC);
+
+		$rs = CarecaudPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CarecaudPeer::addSelectColumns($c);
+		$startcol2 = (CarecaudPeer::NUM_COLUMNS - CarecaudPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		CatiprecPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + CatiprecPeer::NUM_COLUMNS;
+
+		$c->addJoin(CarecaudPeer::CODTIPREC, CatiprecPeer::CODTIPREC);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CarecaudPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = CatiprecPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getCatiprec(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCarecaud($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCarecauds();
+				$obj2->addCarecaud($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{

@@ -1,0 +1,23 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Tsuniadm
+    theme:            cidesaGenerator
+
+    fields:
+      coduniadm:     { name: Código, params : size=20 maxlength=30  onFocus=readonly(this.id) }
+      desuniadm:     { name: Descripción, params : maxlength=250 }
+    list:
+      display:       [=coduniadm, desuniadm]
+      title: Unidades Administrativas
+      filters:       [coduniadm, desuniadm]
+      object_actions:
+        _edit:       ~
+        _delete:     ~
+    edit:
+      title: Edición de Unidad Administrativa
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

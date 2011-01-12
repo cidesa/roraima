@@ -47,9 +47,20 @@ class tesaprordtesActions extends autotesaprordtesActions
 	       }
 	       }
 	     }
+    $this->comprobaut="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('generales',$varemp))
+	{
+		if(array_key_exists('comprobaut',$varemp['generales']))
+		{
+		   $this->comprobaut=$varemp['generales']['comprobaut'];
+		}
+	}
 
     $this->configGrid();
     $this->opordpag->setFilasord($this->filas);
+    $this->opordpag->setObserve($this->comprobaut);
   }
 
 
@@ -77,13 +88,18 @@ class tesaprordtesActions extends autotesaprordtesActions
     $c = new Criteria();
     $c->add(OpordpagPeer::STATUS,'N');
     $c->add(OpordpagPeer::APROBADOORD,'A');
-    $c->add(OpordpagPeer::APROBADOTES,null);
+    //$c->add(OpordpagPeer::APROBADOTES,null);
+   $sql = "((opordpag.APROBADOTES<>'A' and opordpag.APROBADOTES<>'R') or opordpag.APROBADOTES isnull)";
+    $c->add(OpordpagPeer::APROBADOTES, $sql, Criteria :: CUSTOM);
     $c->add(OpordpagPeer::NUMCHE,null);
     $detalle = OpordpagPeer::doSelect($c);
 
     $this->filas=count($detalle);
 
     $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/tesaprordtes/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_ordenes');
+
+    $this->columnas[1][0]->setHTML('onClick="verificar(this.id)"');
+	$this->columnas[1][1]->setHTML('onClick="verificar(this.id)"');
 
     $this->objeto =$this->columnas[0]->getConfig($detalle);
 
@@ -127,14 +143,27 @@ class tesaprordtesActions extends autotesaprordtesActions
     $this->coderr =-1;
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
+
+    $this->comprobaut="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('generales',$varemp))
+	{
+		if(array_key_exists('comprobaut',$varemp['generales']))
+		{
+		   $this->comprobaut=$varemp['generales']['comprobaut'];
+		}
+	}
       $e= new Criteria();
       $reg= OpdefempPeer::doSelectOne($e);
       if ($reg){
        if ($reg->getGencomalc()=="S"){
+         if ($this->comprobaut!='S'){
 	      if (self::validarGeneraComprobante())
 	      {
 	        $this->coderr=508;
 	      }
+         }
        }
       }
 
@@ -164,6 +193,17 @@ class tesaprordtesActions extends autotesaprordtesActions
 	       }
 	       }
 	     }
+
+    $this->comprobaut="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('generales',$varemp))
+	{
+		if(array_key_exists('comprobaut',$varemp['generales']))
+		{
+		   $this->comprobaut=$varemp['generales']['comprobaut'];
+		}
+	}
 
     $this->configGrid();
     $grid=Herramientas::CargarDatosGridv2($this,$this->objeto);
@@ -207,7 +247,18 @@ class tesaprordtesActions extends autotesaprordtesActions
 	}
 
     $grid=Herramientas::CargarDatosGridv2($this,$this->objeto);
-    OrdendePago::aprobarOrdenesTes($opordpag,$grid,$numcompro,$numorden);
+    $this->comprobaut="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('generales',$varemp))
+	{
+		if(array_key_exists('comprobaut',$varemp['generales']))
+		{
+		   $this->comprobaut=$varemp['generales']['comprobaut'];
+		}
+	}
+
+    OrdendePago::aprobarOrdenesTes($opordpag,$grid,$numcompro,$numorden,$this->comprobaut);
    return -1;
  }
 

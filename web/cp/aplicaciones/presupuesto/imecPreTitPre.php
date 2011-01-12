@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require($_SESSION["x"].'lib/bd/basedatosAdo.php');
 require($_SESSION["x"].'lib/general/funciones.php');
@@ -29,7 +30,7 @@ function crearLog($valor)
   $tb=$bd->select($sql);
   $id = $tb->fields["id"];
   $bd->Log($id, 'pre', 'Cpdeftit', 'Pretitpre', $valor);
-  
+
 }
 
   if (!empty($_GET["imec"]))
@@ -37,52 +38,59 @@ function crearLog($valor)
     $imec=$_GET["imec"];
     if ($imec=='I' || $imec=='M' ) //Salvar
     {
-      //////////// Grabar_Cuenta ////////////
-      //validamos que la cta contable exista
-      $sqlv="select * from contabb where codcta='".$codcta."'";
-      if ($tbv=$z->buscar_datos($sqlv))
-      {
-        $bd->startTransaccion();
-          Grabar_CodigoPre();
-          ModificarNombreEnAsignacionInicial();
-        $bd->completeTransaccion();
-      }
-      else
-      {
+    	if (VerificarFormatoPadre($codigopre))
+    	{
+	      //////////// Grabar_Cuenta ////////////
+	      //validamos que la cta contable exista
+	      $sqlv="select * from contabb where codcta='".$codcta."'";
+	      if ($tbv=$z->buscar_datos($sqlv))
+	      {
+	        $bd->startTransaccion();
+	          Grabar_CodigoPre();
+	          ModificarNombreEnAsignacionInicial();
+	        $bd->completeTransaccion();
+	      }
+	      else
+	      {
 
-        ////////// Definicion Presupuestaria ///////////
-        $sql="select forpre from cpdefniv";
-        if ($tb=$z->buscar_datos($sql))
-        {
-          $MascaraPresupuesto=trim($tb->fields["forpre"]);
-          if (empty($MascaraPresupuesto))
-          {
-            Mensaje("La Definición Presupuestaria no ha sido grabada");
-            Regresar("PreTitPre.php");
-          }else{
-            //print $MascaraPresupuesto.'--'.$codcta;exit();
-                    if(strlen($MascaraPresupuesto)==strlen($codcta)){
-              Mensaje("La Cuenta Contable que ud asoció NO EXISTE.");
-              Regresar("PreTitPre.php");
-            }else{
-              $bd->startTransaccion();
-                $codcta='';
-                Grabar_CodigoPre();
-                ModificarNombreEnAsignacionInicial();
-              $bd->completeTransaccion();
-            }
-          }
-        }else{
-              Mensaje("No Esta Definido El Formato Presupuestario.");
-              Regresar("PreTitPre.php");
-        }
+	        ////////// Definicion Presupuestaria ///////////
+	        $sql="select forpre from cpdefniv";
+	        if ($tb=$z->buscar_datos($sql))
+	        {
+	          $MascaraPresupuesto=trim($tb->fields["forpre"]);
+	          if (empty($MascaraPresupuesto))
+	          {
+	            Mensaje("La Definición Presupuestaria no ha sido grabada");
+	            Regresar("PreTitPre.php");
+	          }else{
+	            //print $MascaraPresupuesto.'--'.$codcta;exit();
+	                    if(strlen($MascaraPresupuesto)==strlen($codcta)){
+	              Mensaje("La Cuenta Contable que ud asoció NO EXISTE.");
+	              Regresar("PreTitPre.php");
+	            }else{
+	              $bd->startTransaccion();
+	                $codcta='';
+	                Grabar_CodigoPre();
+	                ModificarNombreEnAsignacionInicial();
+	              $bd->completeTransaccion();
+	            }
+	          }
+	        }else{
+	              Mensaje("No Esta Definido El Formato Presupuestario.");
+	              Regresar("PreTitPre.php");
+	        }
 
 
-      }
-      ///////////////////////////////////////
+	      }
+	      ///////////////////////////////////////
 
-         Mensaje("Código Guardado");
-         Regresar("PreTitPre.php?var=9&mcodigo=$codigopre");
+	         Mensaje("Código Guardado");
+	         Regresar("PreTitPre.php?var=9&mcodigo=$codigopre");
+
+    	}
+	         Mensaje("El Codigo introducido no cumple con el Formato Presupuestario");
+	         Regresar("PreTitPre.php?codigopre=$codigopre");
+
       }
 
 
@@ -143,7 +151,7 @@ function crearLog($valor)
        $bd->actualizar($sql);
        crearLog('G');
      }
-      
+
   }
 ?>
 

@@ -780,20 +780,20 @@ abstract class BaseAtpresupuestoPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
-		$criteria->addJoin(AtpresupuestoPeer::ATPROVEE1, AtproveePeer::ID);
-
-		$criteria->addJoin(AtpresupuestoPeer::ATPROVEE2, AtproveePeer::ID);
-
-		$criteria->addJoin(AtpresupuestoPeer::ATPROVEE3, AtproveePeer::ID);
-
-		$criteria->addJoin(AtpresupuestoPeer::ATPROVEE4, AtproveePeer::ID);
-
-		$criteria->addJoin(AtpresupuestoPeer::ATPROVEE5, AtproveePeer::ID);
-
-		$criteria->addJoin(AtpresupuestoPeer::ATPROVEE6, AtproveePeer::ID);
-
+			$criteria->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+	
+			$criteria->addJoin(AtpresupuestoPeer::ATPROVEE1, AtproveePeer::ID);
+	
+			$criteria->addJoin(AtpresupuestoPeer::ATPROVEE2, AtproveePeer::ID);
+	
+			$criteria->addJoin(AtpresupuestoPeer::ATPROVEE3, AtproveePeer::ID);
+	
+			$criteria->addJoin(AtpresupuestoPeer::ATPROVEE4, AtproveePeer::ID);
+	
+			$criteria->addJoin(AtpresupuestoPeer::ATPROVEE5, AtproveePeer::ID);
+	
+			$criteria->addJoin(AtpresupuestoPeer::ATPROVEE6, AtproveePeer::ID);
+	
 		$rs = AtpresupuestoPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -815,41 +815,41 @@ abstract class BaseAtpresupuestoPeer {
 		AtpresupuestoPeer::addSelectColumns($c);
 		$startcol2 = (AtpresupuestoPeer::NUM_COLUMNS - AtpresupuestoPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtayudasPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtproveePeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AtproveePeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol6 = $startcol5 + AtproveePeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol7 = $startcol6 + AtproveePeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol8 = $startcol7 + AtproveePeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol9 = $startcol8 + AtproveePeer::NUM_COLUMNS;
-
-		$c->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
-		$c->addJoin(AtpresupuestoPeer::ATPROVEE1, AtproveePeer::ID);
-
-		$c->addJoin(AtpresupuestoPeer::ATPROVEE2, AtproveePeer::ID);
-
-		$c->addJoin(AtpresupuestoPeer::ATPROVEE3, AtproveePeer::ID);
-
-		$c->addJoin(AtpresupuestoPeer::ATPROVEE4, AtproveePeer::ID);
-
-		$c->addJoin(AtpresupuestoPeer::ATPROVEE5, AtproveePeer::ID);
-
-		$c->addJoin(AtpresupuestoPeer::ATPROVEE6, AtproveePeer::ID);
-
+			AtayudasPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtproveePeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AtproveePeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + AtproveePeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol7 = $startcol6 + AtproveePeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol8 = $startcol7 + AtproveePeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol9 = $startcol8 + AtproveePeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+	
+			$c->addJoin(AtpresupuestoPeer::ATPROVEE1, AtproveePeer::ID);
+	
+			$c->addJoin(AtpresupuestoPeer::ATPROVEE2, AtproveePeer::ID);
+	
+			$c->addJoin(AtpresupuestoPeer::ATPROVEE3, AtproveePeer::ID);
+	
+			$c->addJoin(AtpresupuestoPeer::ATPROVEE4, AtproveePeer::ID);
+	
+			$c->addJoin(AtpresupuestoPeer::ATPROVEE5, AtproveePeer::ID);
+	
+			$c->addJoin(AtpresupuestoPeer::ATPROVEE6, AtproveePeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -863,377 +863,377 @@ abstract class BaseAtpresupuestoPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = AtayudasPeer::getOMClass();
+							
+				$omClass = AtayudasPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtayudas(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtpresupuesto($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtayudas(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtpresupuesto($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtpresupuestos();
-				$obj2->addAtpresupuesto($obj1);
-			}
-
-
-					
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3 = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtproveeRelatedByAtprovee1(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtpresupuestoRelatedByAtprovee1($obj1); 					break;
+				if ($newObject) {
+					$obj2->initAtpresupuestos();
+					$obj2->addAtpresupuesto($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj3->initAtpresupuestosRelatedByAtprovee1();
-				$obj3->addAtpresupuestoRelatedByAtprovee1($obj1);
-			}
+							
+				$omClass = AtproveePeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj3 = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-					
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4 = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAtproveeRelatedByAtprovee2(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtpresupuestoRelatedByAtprovee2($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtproveeRelatedByAtprovee1(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtpresupuestoRelatedByAtprovee1($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtpresupuestosRelatedByAtprovee2();
-				$obj4->addAtpresupuestoRelatedByAtprovee2($obj1);
-			}
-
-
-					
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj5 = new $cls();
-			$obj5->hydrate($rs, $startcol5);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj5 = $temp_obj1->getAtproveeRelatedByAtprovee3(); 				if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj5->addAtpresupuestoRelatedByAtprovee3($obj1); 					break;
+				if ($newObject) {
+					$obj3->initAtpresupuestosRelatedByAtprovee1();
+					$obj3->addAtpresupuestoRelatedByAtprovee1($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj5->initAtpresupuestosRelatedByAtprovee3();
-				$obj5->addAtpresupuestoRelatedByAtprovee3($obj1);
-			}
+							
+				$omClass = AtproveePeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj4 = new $cls();
+				$obj4->hydrate($rs, $startcol4);
 
-					
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj6 = new $cls();
-			$obj6->hydrate($rs, $startcol6);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj6 = $temp_obj1->getAtproveeRelatedByAtprovee4(); 				if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj6->addAtpresupuestoRelatedByAtprovee4($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAtproveeRelatedByAtprovee2(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtpresupuestoRelatedByAtprovee2($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj6->initAtpresupuestosRelatedByAtprovee4();
-				$obj6->addAtpresupuestoRelatedByAtprovee4($obj1);
-			}
-
-
-					
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj7 = new $cls();
-			$obj7->hydrate($rs, $startcol7);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj7 = $temp_obj1->getAtproveeRelatedByAtprovee5(); 				if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj7->addAtpresupuestoRelatedByAtprovee5($obj1); 					break;
+				if ($newObject) {
+					$obj4->initAtpresupuestosRelatedByAtprovee2();
+					$obj4->addAtpresupuestoRelatedByAtprovee2($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj7->initAtpresupuestosRelatedByAtprovee5();
-				$obj7->addAtpresupuestoRelatedByAtprovee5($obj1);
-			}
+							
+				$omClass = AtproveePeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj5 = new $cls();
+				$obj5->hydrate($rs, $startcol5);
 
-					
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj8 = new $cls();
-			$obj8->hydrate($rs, $startcol8);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj8 = $temp_obj1->getAtproveeRelatedByAtprovee6(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj8->addAtpresupuestoRelatedByAtprovee6($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getAtproveeRelatedByAtprovee3(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addAtpresupuestoRelatedByAtprovee3($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj8->initAtpresupuestosRelatedByAtprovee6();
-				$obj8->addAtpresupuestoRelatedByAtprovee6($obj1);
-			}
+				if ($newObject) {
+					$obj5->initAtpresupuestosRelatedByAtprovee3();
+					$obj5->addAtpresupuestoRelatedByAtprovee3($obj1);
+				}
+	
 
+							
+				$omClass = AtproveePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj6 = new $cls();
+				$obj6->hydrate($rs, $startcol6);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj6 = $temp_obj1->getAtproveeRelatedByAtprovee4(); 					if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj6->addAtpresupuestoRelatedByAtprovee4($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj6->initAtpresupuestosRelatedByAtprovee4();
+					$obj6->addAtpresupuestoRelatedByAtprovee4($obj1);
+				}
+	
+
+							
+				$omClass = AtproveePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj7 = new $cls();
+				$obj7->hydrate($rs, $startcol7);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj7 = $temp_obj1->getAtproveeRelatedByAtprovee5(); 					if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj7->addAtpresupuestoRelatedByAtprovee5($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj7->initAtpresupuestosRelatedByAtprovee5();
+					$obj7->addAtpresupuestoRelatedByAtprovee5($obj1);
+				}
+	
+
+							
+				$omClass = AtproveePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj8 = new $cls();
+				$obj8->hydrate($rs, $startcol8);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj8 = $temp_obj1->getAtproveeRelatedByAtprovee6(); 					if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj8->addAtpresupuestoRelatedByAtprovee6($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj8->initAtpresupuestosRelatedByAtprovee6();
+					$obj8->addAtpresupuestoRelatedByAtprovee6($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
 	}
 
 
-	
-	public static function doCountJoinAllExceptAtayudas(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtpresupuestoPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtpresupuestoPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAtayudas(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(AtpresupuestoPeer::ATPROVEE1, AtproveePeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtpresupuestoPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtpresupuestoPeer::COUNT);
+			}
 
-		$criteria->addJoin(AtpresupuestoPeer::ATPROVEE2, AtproveePeer::ID);
-
-		$criteria->addJoin(AtpresupuestoPeer::ATPROVEE3, AtproveePeer::ID);
-
-		$criteria->addJoin(AtpresupuestoPeer::ATPROVEE4, AtproveePeer::ID);
-
-		$criteria->addJoin(AtpresupuestoPeer::ATPROVEE5, AtproveePeer::ID);
-
-		$criteria->addJoin(AtpresupuestoPeer::ATPROVEE6, AtproveePeer::ID);
-
-		$rs = AtpresupuestoPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptAtproveeRelatedByAtprovee1(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtpresupuestoPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtpresupuestoPeer::COUNT);
+				$criteria->addJoin(AtpresupuestoPeer::ATPROVEE1, AtproveePeer::ID);
+		
+				$criteria->addJoin(AtpresupuestoPeer::ATPROVEE2, AtproveePeer::ID);
+		
+				$criteria->addJoin(AtpresupuestoPeer::ATPROVEE3, AtproveePeer::ID);
+		
+				$criteria->addJoin(AtpresupuestoPeer::ATPROVEE4, AtproveePeer::ID);
+		
+				$criteria->addJoin(AtpresupuestoPeer::ATPROVEE5, AtproveePeer::ID);
+		
+				$criteria->addJoin(AtpresupuestoPeer::ATPROVEE6, AtproveePeer::ID);
+		
+			$rs = AtpresupuestoPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-		$criteria->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
-		$rs = AtpresupuestoPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
 	
-	public static function doCountJoinAllExceptAtproveeRelatedByAtprovee2(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
 
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtpresupuestoPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtpresupuestoPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAtproveeRelatedByAtprovee1(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtpresupuestoPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtpresupuestoPeer::COUNT);
+			}
 
-		$rs = AtpresupuestoPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptAtproveeRelatedByAtprovee3(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtpresupuestoPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtpresupuestoPeer::COUNT);
+				$criteria->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+		
+			$rs = AtpresupuestoPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-		$criteria->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
-		$rs = AtpresupuestoPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
 	
-	public static function doCountJoinAllExceptAtproveeRelatedByAtprovee4(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
 
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtpresupuestoPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtpresupuestoPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAtproveeRelatedByAtprovee2(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtpresupuestoPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtpresupuestoPeer::COUNT);
+			}
 
-		$rs = AtpresupuestoPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptAtproveeRelatedByAtprovee5(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtpresupuestoPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtpresupuestoPeer::COUNT);
+				$criteria->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+		
+			$rs = AtpresupuestoPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-		$criteria->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
-		$rs = AtpresupuestoPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
 	
-	public static function doCountJoinAllExceptAtproveeRelatedByAtprovee6(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
 
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(AtpresupuestoPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(AtpresupuestoPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptAtproveeRelatedByAtprovee3(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtpresupuestoPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtpresupuestoPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+		
+			$rs = AtpresupuestoPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
+	
 
-		$criteria->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+		
+		public static function doCountJoinAllExceptAtproveeRelatedByAtprovee4(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
 
-		$rs = AtpresupuestoPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtpresupuestoPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtpresupuestoPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+		
+			$rs = AtpresupuestoPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-	}
+	
 
+		
+		public static function doCountJoinAllExceptAtproveeRelatedByAtprovee5(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtpresupuestoPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtpresupuestoPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+		
+			$rs = AtpresupuestoPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
+		}
+	
+
+		
+		public static function doCountJoinAllExceptAtproveeRelatedByAtprovee6(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(AtpresupuestoPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(AtpresupuestoPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+		
+			$rs = AtpresupuestoPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
+		}
+	
 
 	
 	public static function doSelectJoinAllExceptAtayudas(Criteria $c, $con = null)
@@ -1247,36 +1247,36 @@ abstract class BaseAtpresupuestoPeer {
 		AtpresupuestoPeer::addSelectColumns($c);
 		$startcol2 = (AtpresupuestoPeer::NUM_COLUMNS - AtpresupuestoPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtproveePeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtproveePeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + AtproveePeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + AtproveePeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol6 = $startcol5 + AtproveePeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol7 = $startcol6 + AtproveePeer::NUM_COLUMNS;
-
-		AtproveePeer::addSelectColumns($c);
-		$startcol8 = $startcol7 + AtproveePeer::NUM_COLUMNS;
-
-		$c->addJoin(AtpresupuestoPeer::ATPROVEE1, AtproveePeer::ID);
-
-		$c->addJoin(AtpresupuestoPeer::ATPROVEE2, AtproveePeer::ID);
-
-		$c->addJoin(AtpresupuestoPeer::ATPROVEE3, AtproveePeer::ID);
-
-		$c->addJoin(AtpresupuestoPeer::ATPROVEE4, AtproveePeer::ID);
-
-		$c->addJoin(AtpresupuestoPeer::ATPROVEE5, AtproveePeer::ID);
-
-		$c->addJoin(AtpresupuestoPeer::ATPROVEE6, AtproveePeer::ID);
-
+			AtproveePeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtproveePeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + AtproveePeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + AtproveePeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol6 = $startcol5 + AtproveePeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol7 = $startcol6 + AtproveePeer::NUM_COLUMNS;
+	
+			AtproveePeer::addSelectColumns($c);
+			$startcol8 = $startcol7 + AtproveePeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtpresupuestoPeer::ATPROVEE1, AtproveePeer::ID);
+	
+			$c->addJoin(AtpresupuestoPeer::ATPROVEE2, AtproveePeer::ID);
+	
+			$c->addJoin(AtpresupuestoPeer::ATPROVEE3, AtproveePeer::ID);
+	
+			$c->addJoin(AtpresupuestoPeer::ATPROVEE4, AtproveePeer::ID);
+	
+			$c->addJoin(AtpresupuestoPeer::ATPROVEE5, AtproveePeer::ID);
+	
+			$c->addJoin(AtpresupuestoPeer::ATPROVEE6, AtproveePeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -1289,138 +1289,138 @@ abstract class BaseAtpresupuestoPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtproveePeer::getOMClass();
+				$omClass = AtproveePeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtproveeRelatedByAtprovee1(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtpresupuestoRelatedByAtprovee1($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtproveeRelatedByAtprovee1(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtpresupuestoRelatedByAtprovee1($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtpresupuestosRelatedByAtprovee1();
-				$obj2->addAtpresupuestoRelatedByAtprovee1($obj1);
-			}
-
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getAtproveeRelatedByAtprovee2(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addAtpresupuestoRelatedByAtprovee2($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initAtpresupuestosRelatedByAtprovee1();
+					$obj2->addAtpresupuestoRelatedByAtprovee1($obj1);
 				}
-			}
+	
+				$omClass = AtproveePeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initAtpresupuestosRelatedByAtprovee2();
-				$obj3->addAtpresupuestoRelatedByAtprovee2($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4  = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getAtproveeRelatedByAtprovee3(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addAtpresupuestoRelatedByAtprovee3($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getAtproveeRelatedByAtprovee2(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addAtpresupuestoRelatedByAtprovee2($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initAtpresupuestosRelatedByAtprovee3();
-				$obj4->addAtpresupuestoRelatedByAtprovee3($obj1);
-			}
-
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj5  = new $cls();
-			$obj5->hydrate($rs, $startcol5);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj5 = $temp_obj1->getAtproveeRelatedByAtprovee4(); 				if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj5->addAtpresupuestoRelatedByAtprovee4($obj1);
-					break;
+				if ($newObject) {
+					$obj3->initAtpresupuestosRelatedByAtprovee2();
+					$obj3->addAtpresupuestoRelatedByAtprovee2($obj1);
 				}
-			}
+	
+				$omClass = AtproveePeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj5->initAtpresupuestosRelatedByAtprovee4();
-				$obj5->addAtpresupuestoRelatedByAtprovee4($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj4  = new $cls();
+				$obj4->hydrate($rs, $startcol4);
 
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj6  = new $cls();
-			$obj6->hydrate($rs, $startcol6);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj6 = $temp_obj1->getAtproveeRelatedByAtprovee5(); 				if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj6->addAtpresupuestoRelatedByAtprovee5($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getAtproveeRelatedByAtprovee3(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addAtpresupuestoRelatedByAtprovee3($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj6->initAtpresupuestosRelatedByAtprovee5();
-				$obj6->addAtpresupuestoRelatedByAtprovee5($obj1);
-			}
-
-			$omClass = AtproveePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj7  = new $cls();
-			$obj7->hydrate($rs, $startcol7);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj7 = $temp_obj1->getAtproveeRelatedByAtprovee6(); 				if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj7->addAtpresupuestoRelatedByAtprovee6($obj1);
-					break;
+				if ($newObject) {
+					$obj4->initAtpresupuestosRelatedByAtprovee3();
+					$obj4->addAtpresupuestoRelatedByAtprovee3($obj1);
 				}
-			}
+	
+				$omClass = AtproveePeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj7->initAtpresupuestosRelatedByAtprovee6();
-				$obj7->addAtpresupuestoRelatedByAtprovee6($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj5  = new $cls();
+				$obj5->hydrate($rs, $startcol5);
 
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj5 = $temp_obj1->getAtproveeRelatedByAtprovee4(); 					if ($temp_obj5->getPrimaryKey() === $obj5->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj5->addAtpresupuestoRelatedByAtprovee4($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj5->initAtpresupuestosRelatedByAtprovee4();
+					$obj5->addAtpresupuestoRelatedByAtprovee4($obj1);
+				}
+	
+				$omClass = AtproveePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj6  = new $cls();
+				$obj6->hydrate($rs, $startcol6);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj6 = $temp_obj1->getAtproveeRelatedByAtprovee5(); 					if ($temp_obj6->getPrimaryKey() === $obj6->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj6->addAtpresupuestoRelatedByAtprovee5($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj6->initAtpresupuestosRelatedByAtprovee5();
+					$obj6->addAtpresupuestoRelatedByAtprovee5($obj1);
+				}
+	
+				$omClass = AtproveePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj7  = new $cls();
+				$obj7->hydrate($rs, $startcol7);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj7 = $temp_obj1->getAtproveeRelatedByAtprovee6(); 					if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj7->addAtpresupuestoRelatedByAtprovee6($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj7->initAtpresupuestosRelatedByAtprovee6();
+					$obj7->addAtpresupuestoRelatedByAtprovee6($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -1439,11 +1439,11 @@ abstract class BaseAtpresupuestoPeer {
 		AtpresupuestoPeer::addSelectColumns($c);
 		$startcol2 = (AtpresupuestoPeer::NUM_COLUMNS - AtpresupuestoPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtayudasPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
+			AtayudasPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -1456,28 +1456,28 @@ abstract class BaseAtpresupuestoPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtayudasPeer::getOMClass();
+				$omClass = AtayudasPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtayudas(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtpresupuesto($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtayudas(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtpresupuesto($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtpresupuestos();
-				$obj2->addAtpresupuesto($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtpresupuestos();
+					$obj2->addAtpresupuesto($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -1496,11 +1496,11 @@ abstract class BaseAtpresupuestoPeer {
 		AtpresupuestoPeer::addSelectColumns($c);
 		$startcol2 = (AtpresupuestoPeer::NUM_COLUMNS - AtpresupuestoPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtayudasPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
+			AtayudasPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -1513,28 +1513,28 @@ abstract class BaseAtpresupuestoPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtayudasPeer::getOMClass();
+				$omClass = AtayudasPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtayudas(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtpresupuesto($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtayudas(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtpresupuesto($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtpresupuestos();
-				$obj2->addAtpresupuesto($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtpresupuestos();
+					$obj2->addAtpresupuesto($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -1553,11 +1553,11 @@ abstract class BaseAtpresupuestoPeer {
 		AtpresupuestoPeer::addSelectColumns($c);
 		$startcol2 = (AtpresupuestoPeer::NUM_COLUMNS - AtpresupuestoPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtayudasPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
+			AtayudasPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -1570,28 +1570,28 @@ abstract class BaseAtpresupuestoPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtayudasPeer::getOMClass();
+				$omClass = AtayudasPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtayudas(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtpresupuesto($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtayudas(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtpresupuesto($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtpresupuestos();
-				$obj2->addAtpresupuesto($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtpresupuestos();
+					$obj2->addAtpresupuesto($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -1610,11 +1610,11 @@ abstract class BaseAtpresupuestoPeer {
 		AtpresupuestoPeer::addSelectColumns($c);
 		$startcol2 = (AtpresupuestoPeer::NUM_COLUMNS - AtpresupuestoPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtayudasPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
+			AtayudasPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -1627,28 +1627,28 @@ abstract class BaseAtpresupuestoPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtayudasPeer::getOMClass();
+				$omClass = AtayudasPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtayudas(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtpresupuesto($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtayudas(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtpresupuesto($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtpresupuestos();
-				$obj2->addAtpresupuesto($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtpresupuestos();
+					$obj2->addAtpresupuesto($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -1667,11 +1667,11 @@ abstract class BaseAtpresupuestoPeer {
 		AtpresupuestoPeer::addSelectColumns($c);
 		$startcol2 = (AtpresupuestoPeer::NUM_COLUMNS - AtpresupuestoPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtayudasPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
+			AtayudasPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -1684,28 +1684,28 @@ abstract class BaseAtpresupuestoPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtayudasPeer::getOMClass();
+				$omClass = AtayudasPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtayudas(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtpresupuesto($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtayudas(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtpresupuesto($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtpresupuestos();
-				$obj2->addAtpresupuesto($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtpresupuestos();
+					$obj2->addAtpresupuesto($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -1724,11 +1724,11 @@ abstract class BaseAtpresupuestoPeer {
 		AtpresupuestoPeer::addSelectColumns($c);
 		$startcol2 = (AtpresupuestoPeer::NUM_COLUMNS - AtpresupuestoPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtayudasPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
-
+			AtayudasPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtayudasPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtpresupuestoPeer::ATAYUDAS_ID, AtayudasPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -1741,28 +1741,28 @@ abstract class BaseAtpresupuestoPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = AtayudasPeer::getOMClass();
+				$omClass = AtayudasPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtayudas(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtpresupuesto($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtayudas(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtpresupuesto($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtpresupuestos();
-				$obj2->addAtpresupuesto($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtpresupuestos();
+					$obj2->addAtpresupuesto($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

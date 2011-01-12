@@ -1,0 +1,24 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atestados
+    theme:            cidesaGenerator
+
+    fields:
+      desest:         { name: Nombre, validate: Vstring_1_30, msj_error: Debe insertar el nombre del estado }
+    list:
+      title:          Estados
+      display:        [=desest]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [desest]
+      max_per_page:   5
+    edit:
+      title:          Edición de Estados
+      display:        [desest]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

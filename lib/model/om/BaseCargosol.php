@@ -32,6 +32,9 @@ abstract class BaseCargosol extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aCarecarg;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -99,6 +102,10 @@ abstract class BaseCargosol extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = CargosolPeer::CODRGO;
       }
   
+		if ($this->aCarecarg !== null && $this->aCarecarg->getCodrgo() !== $v) {
+			$this->aCarecarg = null;
+		}
+
 	} 
 	
 	public function setMonrgo($v)
@@ -240,6 +247,15 @@ abstract class BaseCargosol extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aCarecarg !== null) {
+				if ($this->aCarecarg->isModified()) {
+					$affectedRows += $this->aCarecarg->save($con);
+				}
+				$this->setCarecarg($this->aCarecarg);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CargosolPeer::doInsert($this, $con);
@@ -285,6 +301,14 @@ abstract class BaseCargosol extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aCarecarg !== null) {
+				if (!$this->aCarecarg->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCarecarg->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = CargosolPeer::doValidate($this, $columns)) !== true) {
@@ -465,6 +489,35 @@ abstract class BaseCargosol extends BaseObject  implements Persistent {
 			self::$peer = new CargosolPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setCarecarg($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodrgo(NULL);
+		} else {
+			$this->setCodrgo($v->getCodrgo());
+		}
+
+
+		$this->aCarecarg = $v;
+	}
+
+
+	
+	public function getCarecarg($con = null)
+	{
+		if ($this->aCarecarg === null && (($this->codrgo !== "" && $this->codrgo !== null))) {
+						include_once 'lib/model/om/BaseCarecargPeer.php';
+
+			$this->aCarecarg = CarecargPeer::retrieveByPK($this->codrgo, $con);
+
+			
+		}
+		return $this->aCarecarg;
 	}
 
 } 

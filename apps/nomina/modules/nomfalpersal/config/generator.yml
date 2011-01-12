@@ -5,14 +5,16 @@ generator:
     theme:            default
 
     fields:
-      codemp:  { name: Codigo, params: maxlength=16,size=16  }
-      codmot:  { name: Motivo, params: maxlength=4,size=4  }
-      nrodia:  { name: Codigo}
+      codemp:  { name: Codigo, params: maxlength=16 size=16  }
+      codmot:  { name: Motivo, params: maxlength=4 size=4  }
+      nrodia:  { name: N° de Días}
       observ:  { name: Observacion}
+      numctr:  { name: N° de Control, params: maxlength=8 size=10  }
       fechas:  { name: Fecha Hasta, params: date_format='dd/MM/yyyy'}
       fecdes:  { name: Fecha Desde, params: date_format='dd/MM/yyyy'}
       nomemp:  { name: Nombre}
       desmotfal:  { name: Descripcion}
+      nrohoras:  { name: N° de Horas}
 
     list:
       title:          Definicion de Salida
@@ -24,4 +26,9 @@ generator:
       max_per_page:   10
     edit:
       title:          Edición de Salida
-      display:       [=codemp, nomemp, codmot, desmotfal, observ, fecdes, fechas]
+      display:       [=codemp, nomemp, codmot, desmotfal, observ, numctr, fecdes, fechas, nrodia, nrohoras]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -21,6 +21,10 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 
 
 	
+	protected $fecreg;
+
+
+	
 	protected $fecini;
 
 
@@ -118,6 +122,28 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
     return trim($this->desobr);
 
   }
+  
+  public function getFecreg($format = 'Y-m-d')
+  {
+
+    if ($this->fecreg === null || $this->fecreg === '') {
+      return null;
+    } elseif (!is_int($this->fecreg)) {
+            $ts = adodb_strtotime($this->fecreg);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
+      }
+    } else {
+      $ts = $this->fecreg;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
   
   public function getFecini($format = 'Y-m-d')
   {
@@ -309,8 +335,35 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setFecreg($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreg !== $ts) {
+      $this->fecreg = $ts;
+      $this->modifiedColumns[] = OcregobrPeer::FECREG;
+    }
+
+	} 
+	
 	public function setFecini($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -328,6 +381,11 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 	
 	public function setFecfin($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -513,41 +571,43 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 
       $this->desobr = $rs->getString($startcol + 2);
 
-      $this->fecini = $rs->getDate($startcol + 3, null);
+      $this->fecreg = $rs->getDate($startcol + 3, null);
 
-      $this->fecfin = $rs->getDate($startcol + 4, null);
+      $this->fecini = $rs->getDate($startcol + 4, null);
 
-      $this->unocon = $rs->getString($startcol + 5);
+      $this->fecfin = $rs->getDate($startcol + 5, null);
 
-      $this->codpre = $rs->getString($startcol + 6);
+      $this->unocon = $rs->getString($startcol + 6);
 
-      $this->codpai = $rs->getString($startcol + 7);
+      $this->codpre = $rs->getString($startcol + 7);
 
-      $this->codedo = $rs->getString($startcol + 8);
+      $this->codpai = $rs->getString($startcol + 8);
 
-      $this->codmun = $rs->getString($startcol + 9);
+      $this->codedo = $rs->getString($startcol + 9);
 
-      $this->codpar = $rs->getString($startcol + 10);
+      $this->codmun = $rs->getString($startcol + 10);
 
-      $this->codsec = $rs->getString($startcol + 11);
+      $this->codpar = $rs->getString($startcol + 11);
 
-      $this->dirobr = $rs->getString($startcol + 12);
+      $this->codsec = $rs->getString($startcol + 12);
 
-      $this->monobr = $rs->getFloat($startcol + 13);
+      $this->dirobr = $rs->getString($startcol + 13);
 
-      $this->staobr = $rs->getString($startcol + 14);
+      $this->monobr = $rs->getFloat($startcol + 14);
 
-      $this->despre = $rs->getString($startcol + 15);
+      $this->staobr = $rs->getString($startcol + 15);
 
-      $this->subtot = $rs->getFloat($startcol + 16);
+      $this->despre = $rs->getString($startcol + 16);
 
-      $this->moniva = $rs->getFloat($startcol + 17);
+      $this->subtot = $rs->getFloat($startcol + 17);
 
-      $this->ivaobr = $rs->getFloat($startcol + 18);
+      $this->moniva = $rs->getFloat($startcol + 18);
 
-      $this->codpreiva = $rs->getString($startcol + 19);
+      $this->ivaobr = $rs->getFloat($startcol + 19);
 
-      $this->id = $rs->getInt($startcol + 20);
+      $this->codpreiva = $rs->getString($startcol + 20);
+
+      $this->id = $rs->getInt($startcol + 21);
 
       $this->resetModified();
 
@@ -555,7 +615,7 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 21; 
+            return $startcol + 22; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Ocregobr object", $e);
     }
@@ -712,57 +772,60 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 				return $this->getDesobr();
 				break;
 			case 3:
-				return $this->getFecini();
+				return $this->getFecreg();
 				break;
 			case 4:
-				return $this->getFecfin();
+				return $this->getFecini();
 				break;
 			case 5:
-				return $this->getUnocon();
+				return $this->getFecfin();
 				break;
 			case 6:
-				return $this->getCodpre();
+				return $this->getUnocon();
 				break;
 			case 7:
-				return $this->getCodpai();
+				return $this->getCodpre();
 				break;
 			case 8:
-				return $this->getCodedo();
+				return $this->getCodpai();
 				break;
 			case 9:
-				return $this->getCodmun();
+				return $this->getCodedo();
 				break;
 			case 10:
-				return $this->getCodpar();
+				return $this->getCodmun();
 				break;
 			case 11:
-				return $this->getCodsec();
+				return $this->getCodpar();
 				break;
 			case 12:
-				return $this->getDirobr();
+				return $this->getCodsec();
 				break;
 			case 13:
-				return $this->getMonobr();
+				return $this->getDirobr();
 				break;
 			case 14:
-				return $this->getStaobr();
+				return $this->getMonobr();
 				break;
 			case 15:
-				return $this->getDespre();
+				return $this->getStaobr();
 				break;
 			case 16:
-				return $this->getSubtot();
+				return $this->getDespre();
 				break;
 			case 17:
-				return $this->getMoniva();
+				return $this->getSubtot();
 				break;
 			case 18:
-				return $this->getIvaobr();
+				return $this->getMoniva();
 				break;
 			case 19:
-				return $this->getCodpreiva();
+				return $this->getIvaobr();
 				break;
 			case 20:
+				return $this->getCodpreiva();
+				break;
+			case 21:
 				return $this->getId();
 				break;
 			default:
@@ -778,24 +841,25 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 			$keys[0] => $this->getCodobr(),
 			$keys[1] => $this->getCodtipobr(),
 			$keys[2] => $this->getDesobr(),
-			$keys[3] => $this->getFecini(),
-			$keys[4] => $this->getFecfin(),
-			$keys[5] => $this->getUnocon(),
-			$keys[6] => $this->getCodpre(),
-			$keys[7] => $this->getCodpai(),
-			$keys[8] => $this->getCodedo(),
-			$keys[9] => $this->getCodmun(),
-			$keys[10] => $this->getCodpar(),
-			$keys[11] => $this->getCodsec(),
-			$keys[12] => $this->getDirobr(),
-			$keys[13] => $this->getMonobr(),
-			$keys[14] => $this->getStaobr(),
-			$keys[15] => $this->getDespre(),
-			$keys[16] => $this->getSubtot(),
-			$keys[17] => $this->getMoniva(),
-			$keys[18] => $this->getIvaobr(),
-			$keys[19] => $this->getCodpreiva(),
-			$keys[20] => $this->getId(),
+			$keys[3] => $this->getFecreg(),
+			$keys[4] => $this->getFecini(),
+			$keys[5] => $this->getFecfin(),
+			$keys[6] => $this->getUnocon(),
+			$keys[7] => $this->getCodpre(),
+			$keys[8] => $this->getCodpai(),
+			$keys[9] => $this->getCodedo(),
+			$keys[10] => $this->getCodmun(),
+			$keys[11] => $this->getCodpar(),
+			$keys[12] => $this->getCodsec(),
+			$keys[13] => $this->getDirobr(),
+			$keys[14] => $this->getMonobr(),
+			$keys[15] => $this->getStaobr(),
+			$keys[16] => $this->getDespre(),
+			$keys[17] => $this->getSubtot(),
+			$keys[18] => $this->getMoniva(),
+			$keys[19] => $this->getIvaobr(),
+			$keys[20] => $this->getCodpreiva(),
+			$keys[21] => $this->getId(),
 		);
 		return $result;
 	}
@@ -821,57 +885,60 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 				$this->setDesobr($value);
 				break;
 			case 3:
-				$this->setFecini($value);
+				$this->setFecreg($value);
 				break;
 			case 4:
-				$this->setFecfin($value);
+				$this->setFecini($value);
 				break;
 			case 5:
-				$this->setUnocon($value);
+				$this->setFecfin($value);
 				break;
 			case 6:
-				$this->setCodpre($value);
+				$this->setUnocon($value);
 				break;
 			case 7:
-				$this->setCodpai($value);
+				$this->setCodpre($value);
 				break;
 			case 8:
-				$this->setCodedo($value);
+				$this->setCodpai($value);
 				break;
 			case 9:
-				$this->setCodmun($value);
+				$this->setCodedo($value);
 				break;
 			case 10:
-				$this->setCodpar($value);
+				$this->setCodmun($value);
 				break;
 			case 11:
-				$this->setCodsec($value);
+				$this->setCodpar($value);
 				break;
 			case 12:
-				$this->setDirobr($value);
+				$this->setCodsec($value);
 				break;
 			case 13:
-				$this->setMonobr($value);
+				$this->setDirobr($value);
 				break;
 			case 14:
-				$this->setStaobr($value);
+				$this->setMonobr($value);
 				break;
 			case 15:
-				$this->setDespre($value);
+				$this->setStaobr($value);
 				break;
 			case 16:
-				$this->setSubtot($value);
+				$this->setDespre($value);
 				break;
 			case 17:
-				$this->setMoniva($value);
+				$this->setSubtot($value);
 				break;
 			case 18:
-				$this->setIvaobr($value);
+				$this->setMoniva($value);
 				break;
 			case 19:
-				$this->setCodpreiva($value);
+				$this->setIvaobr($value);
 				break;
 			case 20:
+				$this->setCodpreiva($value);
+				break;
+			case 21:
 				$this->setId($value);
 				break;
 		} 	}
@@ -884,24 +951,25 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setCodobr($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodtipobr($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setDesobr($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setFecini($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setFecfin($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setUnocon($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setCodpre($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setCodpai($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setCodedo($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setCodmun($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setCodpar($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setCodsec($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setDirobr($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setMonobr($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setStaobr($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setDespre($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setSubtot($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setMoniva($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setIvaobr($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setCodpreiva($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setId($arr[$keys[20]]);
+		if (array_key_exists($keys[3], $arr)) $this->setFecreg($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setFecini($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setFecfin($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setUnocon($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCodpre($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setCodpai($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCodedo($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setCodmun($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setCodpar($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setCodsec($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setDirobr($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setMonobr($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setStaobr($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setDespre($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setSubtot($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setMoniva($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setIvaobr($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setCodpreiva($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setId($arr[$keys[21]]);
 	}
 
 	
@@ -912,6 +980,7 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OcregobrPeer::CODOBR)) $criteria->add(OcregobrPeer::CODOBR, $this->codobr);
 		if ($this->isColumnModified(OcregobrPeer::CODTIPOBR)) $criteria->add(OcregobrPeer::CODTIPOBR, $this->codtipobr);
 		if ($this->isColumnModified(OcregobrPeer::DESOBR)) $criteria->add(OcregobrPeer::DESOBR, $this->desobr);
+		if ($this->isColumnModified(OcregobrPeer::FECREG)) $criteria->add(OcregobrPeer::FECREG, $this->fecreg);
 		if ($this->isColumnModified(OcregobrPeer::FECINI)) $criteria->add(OcregobrPeer::FECINI, $this->fecini);
 		if ($this->isColumnModified(OcregobrPeer::FECFIN)) $criteria->add(OcregobrPeer::FECFIN, $this->fecfin);
 		if ($this->isColumnModified(OcregobrPeer::UNOCON)) $criteria->add(OcregobrPeer::UNOCON, $this->unocon);
@@ -965,6 +1034,8 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 		$copyObj->setCodtipobr($this->codtipobr);
 
 		$copyObj->setDesobr($this->desobr);
+
+		$copyObj->setFecreg($this->fecreg);
 
 		$copyObj->setFecini($this->fecini);
 

@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage almtrainv
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 41414 2010-11-17 16:26:19Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -32,15 +32,16 @@ class almtrainvActions extends autoalmtrainvActions
 	    $c = new Criteria();
 
 	    $c->addSelectColumn(CainvfisPeer::FECINV);
-	    $c->addSelectColumn(CainvfisPeer::CODALM);
+            $c->addSelectColumn(CainvfisPeer::CODALM);
 	    $c->addSelectColumn("0 AS CODART");
 	    $c->addSelectColumn("0 AS EXIACT");
 	    $c->addSelectColumn("0 AS EXIACT2");
-	     $c->addSelectColumn("0 AS CODUBI");
-	    $c->addSelectColumn("0 AS ID");
+            $c->addSelectColumn(CainvfisPeer::CODUBI);
+	    $c->addSelectColumn("MAX(ID) AS ID");
 
 	    $c->addGroupByColumn(CainvfisPeer::FECINV);
 	    $c->addGroupByColumn(CainvfisPeer::CODALM);
+	    $c->addGroupByColumn(CainvfisPeer::CODUBI);
 	    $this->addSortCriteria($c);
 	    $this->addFiltersCriteria($c);
 	    $this->pager->setCriteria($c);
@@ -49,7 +50,7 @@ class almtrainvActions extends autoalmtrainvActions
 
 	  }
 
-	 protected function getCainvfisOrCreate($id = 'id', $codalm = 'codalm')
+/*	 protected function getCainvfisOrCreate($id = 'id', $codalm = 'codalm')
 	  {
 	    if (!$this->getRequestParameter($id))
 	    {
@@ -78,7 +79,7 @@ class almtrainvActions extends autoalmtrainvActions
 	      $this->forward404Unless($cainvfis);
 	    }
 	    return $cainvfis;
-	  }
+	  }*/
 
     public function executeTraspasar()
 	{
@@ -86,7 +87,9 @@ class almtrainvActions extends autoalmtrainvActions
 	   if ($this->getRequestParameter('fecinv'))
 	   {
 		$fecinv= $dateFormat->format($this->getRequestParameter('fecinv'), 'i', $dateFormat->getInputPattern('d'));
-		Almacen::TraspasarInventario($fecinv);
+                $codalm= $this->getRequestParameter('codalm');
+                $codubi= $this->getRequestParameter('codubi');
+		Almacen::TraspasarInventario($fecinv,$codalm,$codubi);
 		$javascript="alert('El traspaso se ha Realizado Satisfactoriamente');";
 	   }
 	   else

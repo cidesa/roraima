@@ -141,6 +141,14 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 
 
 	
+	protected $calesppres;
+
+
+	
+	protected $redondeo = '';
+
+
+	
 	protected $id;
 
 	
@@ -392,6 +400,20 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->diasem,2,',','.');
     else return $this->diasem;
+
+  }
+  
+  public function getCalesppres()
+  {
+
+    return trim($this->calesppres);
+
+  }
+  
+  public function getRedondeo()
+  {
+
+    return trim($this->redondeo);
 
   }
   
@@ -732,6 +754,26 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCalesppres($v)
+	{
+
+    if ($this->calesppres !== $v) {
+        $this->calesppres = $v;
+        $this->modifiedColumns[] = NpdefgenPeer::CALESPPRES;
+      }
+  
+	} 
+	
+	public function setRedondeo($v)
+	{
+
+    if ($this->redondeo !== $v || $v === '') {
+        $this->redondeo = $v;
+        $this->modifiedColumns[] = NpdefgenPeer::REDONDEO;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -812,7 +854,11 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 
       $this->diasem = $rs->getFloat($startcol + 32);
 
-      $this->id = $rs->getInt($startcol + 33);
+      $this->calesppres = $rs->getString($startcol + 33);
+
+      $this->redondeo = $rs->getString($startcol + 34);
+
+      $this->id = $rs->getInt($startcol + 35);
 
       $this->resetModified();
 
@@ -820,7 +866,7 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 34; 
+            return $startcol + 36; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npdefgen object", $e);
     }
@@ -1067,6 +1113,12 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 				return $this->getDiasem();
 				break;
 			case 33:
+				return $this->getCalesppres();
+				break;
+			case 34:
+				return $this->getRedondeo();
+				break;
+			case 35:
 				return $this->getId();
 				break;
 			default:
@@ -1112,7 +1164,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 			$keys[30] => $this->getUnitrib(),
 			$keys[31] => $this->getNumtick(),
 			$keys[32] => $this->getDiasem(),
-			$keys[33] => $this->getId(),
+			$keys[33] => $this->getCalesppres(),
+			$keys[34] => $this->getRedondeo(),
+			$keys[35] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1228,6 +1282,12 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 				$this->setDiasem($value);
 				break;
 			case 33:
+				$this->setCalesppres($value);
+				break;
+			case 34:
+				$this->setRedondeo($value);
+				break;
+			case 35:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1270,7 +1330,9 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[30], $arr)) $this->setUnitrib($arr[$keys[30]]);
 		if (array_key_exists($keys[31], $arr)) $this->setNumtick($arr[$keys[31]]);
 		if (array_key_exists($keys[32], $arr)) $this->setDiasem($arr[$keys[32]]);
-		if (array_key_exists($keys[33], $arr)) $this->setId($arr[$keys[33]]);
+		if (array_key_exists($keys[33], $arr)) $this->setCalesppres($arr[$keys[33]]);
+		if (array_key_exists($keys[34], $arr)) $this->setRedondeo($arr[$keys[34]]);
+		if (array_key_exists($keys[35], $arr)) $this->setId($arr[$keys[35]]);
 	}
 
 	
@@ -1311,6 +1373,8 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpdefgenPeer::UNITRIB)) $criteria->add(NpdefgenPeer::UNITRIB, $this->unitrib);
 		if ($this->isColumnModified(NpdefgenPeer::NUMTICK)) $criteria->add(NpdefgenPeer::NUMTICK, $this->numtick);
 		if ($this->isColumnModified(NpdefgenPeer::DIASEM)) $criteria->add(NpdefgenPeer::DIASEM, $this->diasem);
+		if ($this->isColumnModified(NpdefgenPeer::CALESPPRES)) $criteria->add(NpdefgenPeer::CALESPPRES, $this->calesppres);
+		if ($this->isColumnModified(NpdefgenPeer::REDONDEO)) $criteria->add(NpdefgenPeer::REDONDEO, $this->redondeo);
 		if ($this->isColumnModified(NpdefgenPeer::ID)) $criteria->add(NpdefgenPeer::ID, $this->id);
 
 		return $criteria;
@@ -1407,6 +1471,10 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 		$copyObj->setNumtick($this->numtick);
 
 		$copyObj->setDiasem($this->diasem);
+
+		$copyObj->setCalesppres($this->calesppres);
+
+		$copyObj->setRedondeo($this->redondeo);
 
 
 		$copyObj->setNew(true);

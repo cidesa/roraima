@@ -1,10 +1,11 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
@@ -280,7 +281,6 @@ if (!empty($_POST["var"]) or (!empty($_POST["codigopre"])))
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/fecha.js"></script>
@@ -305,7 +305,7 @@ if (!empty($_POST["var"]) or (!empty($_POST["codigopre"])))
 <table width="584" border="0" align="center">
   <tr>
     <td colspan="2">
-  <form name="form1" method="post" action="">
+  <form name="form1" onsubmit="return false;" method="post" action="">
   <table width="100%" border="0"  class="box">
       <tr>
         <td class="breadcrumb">SIGA  <? echo $modulo; ?>
@@ -363,7 +363,7 @@ if (!empty($_POST["var"]) or (!empty($_POST["codigopre"])))
             </td>
                     <tr>
                       <td>Nombre</td>
-                      <td><input name="nompre" type="text" class="imagenInicio" id="nompre" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? echo $nompre; ?>" size="80" maxlength="255"></td>
+                      <td><input name="nompre" type="text" class="imagenInicio" id="nompre" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? echo $nompre; ?>" size="80" maxlength="500"></td>
                     </tr>
                   </table>
           </fieldset>
@@ -619,7 +619,7 @@ else
       //window.open(pagina,'Catalogo','menubar=no,toolbar=no,scrollbars=yes,width=600,height=450,resizable=yes,left=50,top=50');
 
       var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Pretitpre_Contabb/clase/Contabb/frame/form1/obj1/codcta/obj2/descta/campo1/codcta/campo2/descta';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Pretitpre_Contabb/clase/Contabb/frame/form1/obj1/codcta/obj2/descta/campo1/codcta/campo2/descta';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
 
      }
@@ -655,7 +655,7 @@ else
       //window.open(pagina,"","menubar=no,toolbar=no,scrollbars=yes,width=570,height=500,resizable=yes,left=50,top=50");
 
       var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Cpdeftit_Pretitpre/clase/Cpdeftit/frame/form1/obj1/codigopre/obj2/nompre/campo1/codpre/campo2/nompre/submit/true';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Cpdeftit_Pretitpre/clase/Cpdeftit/frame/form1/obj1/codigopre/obj2/nompre/campo1/codpre/campo2/nompre/submit/true';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
    }
 

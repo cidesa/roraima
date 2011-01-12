@@ -4,14 +4,14 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 40777 2010-09-28 17:01:02Z cramirez $
  */
 // date: 2007/06/29 13:30:33
 ?>
 <?php echo form_tag('nomhojint/save', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
   'onsubmit'  => 'double_list_submit(); return true;'
 )) ?>
@@ -20,7 +20,11 @@
 <?php echo javascript_include_tag('dFilter', 'ajax', 'tools', 'observe') ?>
 <?php use_helper('PopUp', 'tabs', 'DoubleList', 'Javascript') ?>
 <?php echo input_hidden_tag('fecha', '') ?>
-
+<table width="100%">
+  <tr>
+    <th><strong><font color="#CC0000" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <?php echo $nphojint->getEtiqueta() ;?></font></strong></th>
+  </tr>
+</table>
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
   <table>
@@ -31,18 +35,25 @@
     <?php echo form_error('nphojint{codemp}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-
+<?php $maskcodemp = $sf_user->getAttribute('maskcodemp','','nomhojint'); $maskcodemp=='' ? $maskcodemp='################' : ''; ?>
 <? if ($nphojint->getId()=='') { ?>
   <?php $value = object_input_tag($nphojint, 'getCodemp', array (
-  'size' => 16,
-  'maxlength' => 16,
-  'control_name' => 'nphojint[codemp]',
+  'size' => strlen($maskcodemp),
+  'maxlength' =>strlen($maskcodemp),
+  'control_name' =>'nphojint[codemp]',
+  'onKeyPress' => "javascript : return dFilterv2(event,this,'$maskcodemp')",
+  'onBlur'=> remote_function(array(
+  'url'      => 'nomhojint/ajax',
+  'condition' => "$('nphojint_codemp').value != '' && $('id').value == ''",
+  'complete' => 'AjaxJSON(request, json)',
+  'with' => "'ajax=8&cajtexcom=nphojint_codemp&codigo='+this.value",
+  ))
 )); echo $value ? $value : '&nbsp;' ?>
 
 <? }else{ ?>
     <?php $value = object_input_tag($nphojint, 'getCodemp', array (
-  'size' => 16,
-  'maxlength' => 16,
+  'size' => strlen($maskcodemp),
+  'maxlength' =>strlen($maskcodemp),
   'readonly' => true,
   'control_name' => 'nphojint[codemp]',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -79,6 +90,7 @@
 		  <?php $value = object_input_tag($nphojint, 'getPrinom', array (
 		  'size' => 25,
   		  'maxlength' => 25,
+                  'onkeyUp' =>  "javascript: return this.value = this.value.toUpperCase();",
 		  'control_name' => 'nphojint[prinom]',
 		)); echo $value ? $value : '&nbsp;' ?>
 		    </div>
@@ -95,6 +107,7 @@
 		  <?php $value = object_input_tag($nphojint, 'getSegnom', array (
 		  'size' => 25,
   		  'maxlength' => 25,
+                  'onkeyUp' =>  "javascript: return this.value = this.value.toUpperCase();",
 		  'control_name' => 'nphojint[segnom]',
 		)); echo $value ? $value : '&nbsp;' ?>
 		    </div>
@@ -116,6 +129,7 @@
 		  <?php $value = object_input_tag($nphojint, 'getPriape', array (
 		  'size' => 25,
   		  'maxlength' => 25,
+                  'onkeyUp' =>  "javascript: return this.value = this.value.toUpperCase();",
 		  'control_name' => 'nphojint[priape]',
 		)); echo $value ? $value : '&nbsp;' ?>
 		    </div>
@@ -132,6 +146,7 @@
 		  <?php $value = object_input_tag($nphojint, 'getSegape', array (
 		  'size' => 25,
   		  'maxlength' => 25,
+                  'onkeyUp' =>  "javascript: return this.value = this.value.toUpperCase();",
 		  'control_name' => 'nphojint[segape]',
 		)); echo $value ? $value : '&nbsp;' ?>
 		    </div>
@@ -157,13 +172,14 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($nphojint, 'getCedemp', array (
-  'size' => 20,
-  'maxlength' => 10,
+  'size' => strlen($maskcodemp),
+  'maxlength' =>strlen($maskcodemp),
+  'onKeyPress' => "javascript : return dFilterv2(event,this,'$maskcodemp')",
   'control_name' => 'nphojint[cedemp]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>
 
-    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp</th>
 
     <th><?php echo label_for('nphojint[rifemp]', __($labels['nphojint{rifemp}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('nphojint{rifemp}')): ?> form-error<?php endif; ?>">
@@ -171,15 +187,17 @@
     <?php echo form_error('nphojint{rifemp}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
+  <?php $maskrif = $sf_user->getAttribute('maskrif','','nomhojint'); $maskrif=='' ? $maskrif='################' : '' ;?>
   <?php $value = object_input_tag($nphojint, 'getRifemp', array (
-  'size' => 16,
-  'maxlength' => 16,
+  'size' => strlen($maskrif),
+  'maxlength' => strlen($maskrif),
   'control_name' => 'nphojint[rifemp]',
+  'onKeyPress' => "javascript:return validarif(event,this,'$maskrif')",
 )); echo $value ? $value : '&nbsp;' ?>
 
     </div></th>
 
-    <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th>&nbsp;&nbsp;&nbsp;&nbsp</th>
 
     <th><?php echo label_for('nphojint[edociv]', __($labels['nphojint{edociv}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('nphojint{edociv}')): ?> form-error<?php endif; ?>">
@@ -187,7 +205,23 @@
     <?php echo form_error('nphojint{edociv}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php echo select_tag('nphojint[edociv]', options_for_select($listaestadocivil,$nphojint->getEdociv(),'include_custom=Seleccione Uno')) ?>
+  <?php echo select_tag('nphojint[edociv]', options_for_select($listaestadocivil,$nphojint->getEdociv(),'include_custom=Seleccione Uno'),array(
+     'onChange' => "javascript: if(this.value=='C') $('thfecmat').show(); else $('thfecmat').hide() ;"
+
+  )) ?>
+    </div></th>
+
+    <th id='thfecmat'<?php if($nphojint->getEdociv()!='C') echo 'style="display:none"' ?>><?php echo label_for('nphojint[fecmat]', __($labels['nphojint{fecmat}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('nphojint{fecmat}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nphojint{fecmat}')): ?>
+    <?php echo form_error('nphojint{fecmat}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_date_tag($nphojint, 'getFecmat', array (
+  'rich' => true,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'nphojint[fecmat]',
+)); echo $value ? $value : '&nbsp;' ?>
     </div></th>
    </tr>
   </table>
@@ -229,6 +263,22 @@
   <div class="sf_admin_edit_help"><?php echo __('Tamaño de la foto 90x100 (jpg, gif o png)') ?></div>  </div>
 
 
+   </tr>
+   <tr>
+   	  <th>
+   	  	  <?php echo label_for('nphojint[numpuncue]', __($labels['nphojint{numpuncue}']), 'class="required" ') ?>
+		  <div class="content<?php if ($sf_request->hasError('nphojint{numpuncue}')): ?> form-error<?php endif; ?>">
+		  <?php if ($sf_request->hasError('nphojint{numpuncue}')): ?>
+		    <?php echo form_error('nphojint{numpuncue}', array('class' => 'form-error-msg')) ?>
+		  <?php endif; ?>
+		
+		  <?php $value = object_input_tag($nphojint, 'getNumpuncue', array (
+		  'size' => 20,
+		  'maxlength' => 20,
+		  'control_name' => 'nphojint[numpuncue]',
+		)); echo $value ? $value : '&nbsp;' ?>
+    </div>  
+   	  </th>
    </tr>
   </table>
 
@@ -420,14 +470,11 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
 
  <?php $value = object_input_tag($nphojint, 'getUbifis', array (
   'size' => 20,
-  'maxlength' => $lonnivel,
+  'maxlength' => 4,
   'control_name' => 'nphojint[ubifis]',
-  'onKeyPress' => "javascript:cadena=rayaenter(event,this.value);",
-  'onBlur' => "nivel(event,2);",
-  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaranivel')",
-
+  'onBlur' => "nivel(event,2);"
 )); echo $value ? $value : '&nbsp;' ?></div></th>
-   <th>&nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npestorg_Nomhojint/clase/Npestorg/frame/sf_admin_edit_form/obj1/nphojint_ubifis/obj2/nphojint_desniv2/campo1/codniv/campo2/desniv/param1/'.$lonnivel)?></th>
+   <th>&nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npdefubi_Nomhojint/clase/Npdefubi/frame/sf_admin_edit_form/obj1/nphojint_ubifis/obj2/nphojint_desniv2/campo1/codubi/campo2/desubi')?></th>
    <th> <?php $value = object_input_tag($nphojint, 'getDesniv2', array (
   'readonly' => true,
   'size' => 60,
@@ -523,9 +570,11 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
     <?php echo form_error('nphojint{telhab}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
+   <?php $masktel = $sf_user->getAttribute('masktel','nomina','nomhojint'); $masktel=='' ? $masktel='99999999999999999999' : ''?>
   <?php $value = object_input_tag($nphojint, 'getTelhab', array (
-  'size' => 20,
-  'maxlength' => 20,
+  'size' => strlen($masktel),
+  'maxlength' => strlen($masktel),
+  'onKeyPress' => "javascript : return dFilterv2(event,this,'$masktel')",
   'control_name' => 'nphojint[telhab]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>
@@ -537,8 +586,9 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
   <?php endif; ?>
 
   <?php $value = object_input_tag($nphojint, 'getTelotr', array (
-  'size' => 20,
-  'maxlength' => 1000,
+   'size' => strlen($masktel),
+  'maxlength' => strlen($masktel),
+  'onKeyPress' => "javascript : return dFilterv2(event,this,'$masktel')",
   'control_name' => 'nphojint[telotr]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>
@@ -550,8 +600,9 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
   <?php endif; ?>
 
   <?php $value = object_input_tag($nphojint, 'getCelemp', array (
-  'size' => 20,
-  'maxlength' => 20,
+  'size' => strlen($masktel),
+  'maxlength' => strlen($masktel),
+  'onKeyPress' => "javascript : return dFilterv2(event,this,'$masktel')",
   'control_name' => 'nphojint[celemp]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>
@@ -636,8 +687,9 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
   <?php endif; ?>
 
   <?php $value = object_input_tag($nphojint, 'getTelha2', array (
-  'size' => 20,
-  'maxlength' => 20,
+   'size' => strlen($masktel),
+  'maxlength' => strlen($masktel),
+  'onKeyPress' => "javascript : return dFilterv2(event,this,'$masktel')",
   'control_name' => 'nphojint[telha2]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>
@@ -649,8 +701,9 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
   <?php endif; ?>
 
   <?php $value = object_input_tag($nphojint, 'getTelot2', array (
-  'size' => 20,
-  'maxlength' => 100,
+ 'size' => strlen($masktel),
+  'maxlength' => strlen($masktel),
+  'onKeyPress' => "javascript : return dFilterv2(event,this,'$masktel')",
   'control_name' => 'nphojint[telot2]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>
@@ -690,6 +743,7 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
 <?php tabPageOpenClose("tp1", "tabPage3", 'Ingresos');?>
 <fieldset id="sf_fieldset_none" class="">
 <?php echo button_to_popup('Ver Historial de Permisos',cross_app_link_to('nomina','/nomfalperper/edit/codigoemp/'.$nphojint->getCodemp()),'','','','1000','800')?>
+<?php echo button_to_popup('Ver Disfrute de Vacaciones',cross_app_link_to('nomina','/vachistorico/edit/id/'.$nphojint->getId()),'','','','1000','800')?>
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
 <legend><h2><?php echo __('Fechas') ?></h2></legend>
@@ -734,22 +788,6 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
     </div></th>
    </tr>
   </table>
-
-<br>
-
-  <?php echo label_for('nphojint[obsemp]', __($labels['nphojint{obsemp}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{obsemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{obsemp}')): ?>
-    <?php echo form_error('nphojint{obsemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_textarea_tag($nphojint, 'getObsemp', array (
-  'size' => '80x3',
-  'readonly' => true,
-  'maxlength' => 100,
-  'control_name' => 'nphojint[obsemp]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
 
 <br>
 
@@ -809,17 +847,30 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
 
 <br>
 
-  <?php echo label_for('nphojint[obsemp]', __($labels['nphojint{obsemp}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{obsemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{obsemp}')): ?>
-    <?php echo form_error('nphojint{obsemp}', array('class' => 'form-error-msg')) ?>
+<?php echo label_for('nphojint[codmot]', __($labels['nphojint{codmot}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('nphojint{codmot}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nphojint{codmot}')): ?>
+    <?php echo form_error('nphojint{codmot}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_textarea_tag($nphojint, 'getObsemp', array (
-  'size' => '80x3',
-  'maxlength' => 100,
-  'onKeypress' => "javascript:egreso(event,this)",
-  'control_name' => 'nphojint[obsemp]',
+ <?php $value = object_input_tag($nphojint, 'getCodmot', array (
+  'size' => 20,
+  'maxlength' => 4,
+  'control_name' => 'nphojint[codmot]',
+  'onBlur'=> remote_function(array(
+        'url'      => 'nomhojint/ajax', 
+	'condition' => "$('nphojint_codmot').value!='' ",
+        'complete' => 'AjaxJSON(request, json)',
+        'with' => "'ajax=9&cajtexmos=nphojint_desmot&cajtexcom=nphojint_codmot&codigo='+this.value",
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+
+  &nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npmotegr_Nomhojint/clase/Npmotegr/frame/sf_admin_edit_form/obj1/nphojint_codmot/obj2/nphojint_desmot/campo1/codmot/campo2/desmot')?>
+&nbsp;&nbsp;&nbsp;
+ <?php $value = object_input_tag($nphojint, 'getDesmot', array (
+  'readonly' => true,
+  'size' => 60,
+  'control_name' => 'nphojint[desmot]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
@@ -877,7 +928,7 @@ echo grid_tag($obj);
     <?php echo form_error('nphojint{staemp}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php echo select_tag('nphojint[staemp]', options_for_select($listaestatus,$nphojint->getStaemp(),'include_custom=Seleccione Uno')) ?>
+  <?php echo select_tag('nphojint[staemp]', options_for_select($listaestatus,$nphojint->getStaemp(),'include_custom=Seleccione Uno'),array('onChange' => "validaregreso(this.value);")) ?>
     </div>
     <br>
 <?php echo label_for('nphojint[situac]', __($labels['nphojint{situac}']), 'class="required" style="width: 150px"') ?>
@@ -888,6 +939,38 @@ echo grid_tag($obj);
 
   <?php echo select_tag('nphojint[situac]', options_for_select($listasituacion,$nphojint->getSituac(),'include_custom=Seleccione Uno')) ?>
     </div>
+    <br>
+    <?php echo label_for('nphojint[fecinicon]', __($labels['nphojint{fecinicon}']), 'class="required" ') ?>
+      <div class="content<?php if ($sf_request->hasError('nphojint{fecinicon}')): ?> form-error<?php endif; ?>">
+      <?php if ($sf_request->hasError('nphojint{fecinicon}')): ?>
+        <?php echo form_error('nphojint{fecinicon}', array('class' => 'form-error-msg')) ?>
+      <?php endif; ?>
+
+      <?php $value = object_input_date_tag($nphojint, 'getFecinicon', array (
+      'rich' => true,
+      'maxlength' => 10,
+      'calendar_button_img' => '/sf/sf_admin/images/date.png',
+      'control_name' => 'nphojint[fecinicon]',
+      'date_format' => 'dd/MM/yy',
+      'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+    )); echo $value ? $value : '&nbsp;' ?>
+        </div>
+    <br>
+    <?php echo label_for('nphojint[fecfincon]', __($labels['nphojint{fecfincon}']), 'class="required" ') ?>
+      <div class="content<?php if ($sf_request->hasError('nphojint{fecfincon}')): ?> form-error<?php endif; ?>">
+      <?php if ($sf_request->hasError('nphojint{fecfincon}')): ?>
+        <?php echo form_error('nphojint{fecfincon}', array('class' => 'form-error-msg')) ?>
+      <?php endif; ?>
+
+      <?php $value = object_input_date_tag($nphojint, 'getFecfincon', array (
+      'rich' => true,
+      'maxlength' => 10,
+      'calendar_button_img' => '/sf/sf_admin/images/date.png',
+      'control_name' => 'nphojint[fecfincon]',
+      'date_format' => 'dd/MM/yy',
+      'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+    )); echo $value ? $value : '&nbsp;' ?>
+        </div>
 </div>
 </fieldset>
 </div>
@@ -1456,6 +1539,33 @@ echo grid_tag($obj5);
 </div>
 </fieldset>
 
+<?php tabPageOpenClose("tp1", "tabPage12", 'Documentos Consignados');?>
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+<?
+echo grid_tag($obj6);
+?>
+</div>
+</fieldset>
+
+<?php tabPageOpenClose("tp1", "tabPage13", 'Información Embargos de Sueldos y otros');?>
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+ <?php echo label_for('nphojint[obsembret]', __($labels['nphojint{obsembret}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('nphojint{obsembret}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nphojint{obsembret}')): ?>
+    <?php echo form_error('nphojint{obsembret}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($nphojint, 'getObsembret', array (
+  'size' => '80x3',
+  'maxlength' => 1000,
+  'control_name' => 'nphojint[obsembret]',
+  'onkeyup' => "javascript:return ismaxlength(this)",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+</fieldset>
 
 <?php tabInit('tp1','0');?>
 
@@ -1506,6 +1616,7 @@ function reingreso(e,id)
 function nivel(e,numero)
 {
   var longitud='<?php echo $lonnivel?>';
+  var longitud2='<?php echo $lonnivel2?>';
   if (numero==1){
 	  if (($('nphojint_codniv').value.length < longitud) && ($('nphojint_codniv').value!=''))
 	  {
@@ -1518,16 +1629,12 @@ function nivel(e,numero)
 	    new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=4&cajtexmos='+cajamos+'&cajtexcom='+cajacom+'&codigo='+cod})
 	  }
   }else{
-  	if (($('nphojint_ubifis').value.length < longitud) && ($('nphojint_ubifis').value!=''))
-  {
-    $('nphojint_ubifis').value = '';
-    alert('El nivel organizacional no es de ultimo Nivel');
-  }else{
+
     var cod=$('nphojint_ubifis').value;
     var cajamos='nphojint_desniv2';
     var cajacom='nphojint_ubifis';
-    new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=4&cajtexmos='+cajamos+'&cajtexcom='+cajacom+'&codigo='+cod})
-  }
+    new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&cajtexmos='+cajamos+'&cajtexcom='+cajacom+'&codigo='+cod})
+
   }
 }
 
@@ -1627,6 +1734,44 @@ function nivel(e,numero)
       new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=4&cajtexmos='+descrip+'&cajtexcom='+id+'&codigo='+cod})
     }
   }
+  }
+
+  function validaregreso(valor)
+  {
+     var estatusegre='<?php echo $nphojint->getStatusegr(); ?>'; //Estatus que se define en el app que sera de egreso retirado en que se defina en el cliente
+
+      if (valor==estatusegre && $('nphojint_fecret').value=="")
+      {
+          alert('Para cambiar el estatus a Retirado debe introducir la Fecha de Egreso');
+          $('nphojint_staemp').value='';
+      }
+  }
+
+  function validarif(e,t,m)
+  {
+        evt = e ? e : event;
+        tcl = (window.Event) ? evt.which : evt.keyCode;
+
+         if(tcl==8 || tcl==9 || tcl ==13)
+         {
+            return true;
+         }else
+         {
+                if(parseInt(t.value.length)<1)
+                 {
+                     val = String.fromCharCode(tcl);
+                     if(val=='J' || val=='G' || val=='V')
+                     {
+                         return true;
+                     }else
+                      {
+                         return false;
+                      }
+                 }else
+                 {
+                      return   dFilterv2(e,t,m);
+                 }
+         }
   }
 
 </script>

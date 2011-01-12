@@ -15,4 +15,14 @@
  */ 
 class Rhvalniv extends BaseRhvalniv
 {
+	protected $obj_valniv=array();
+	
+	public  function getDesniv()
+	{
+		return H::GetX('Codniv','Rhdefniv','Desniv',$this->codniv);
+	}
+	public  function getDesvalins()
+	{
+		return H::GetX('Codvalins','Rhdefvalins','Desvalins',$this->codvalins);
+	}
 }

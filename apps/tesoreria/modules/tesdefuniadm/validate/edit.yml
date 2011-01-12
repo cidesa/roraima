@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "tsuniadm{coduniadm}"
+   - "tsuniadm{desuniadm}"
+names:
+  tsuniadm{coduniadm}:
+    required:  Yes
+    required_msg: El código de la Unidad Administrativa no puede estar en blanco
+    validators: Validator_coduniadm
+
+  tsuniadm{desuniadm}:
+    required:  Yes
+    required_msg: La descripción de la Unidad Administrativa no puede estar en blanco
+    validators: Validator_desuniadm
+
+Validator_coduniadm:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Tsuniadm
+        column:       coduniadm
+        unique_error: El código de la Unidad Administrativa ya Existe intente con otro.
+
+Validator_desuniadm:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 250 caracteres

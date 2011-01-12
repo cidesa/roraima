@@ -162,4 +162,54 @@ sima_user:
       type: VARCHAR
       size: 1
     id:
-
+  segnivapr:
+    codniv:
+      type: VARCHAR
+      size: 3
+      required: true
+    desniv:
+      type: VARCHAR
+      size: 50
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  segranapr:
+    randes:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    ranhas:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    codniv:
+      type: VARCHAR
+      size: 3
+      required: true
+    id:
+      type: integer
+      required: true
+      primaryKey: true
+      autoincrement: true
+  apernueper:
+    nomtab:
+      type: VARCHAR
+      size: 255
+      required: true
+    orden:
+      type: INTEGER
+      required: true
+    codmod:
+      type: VARCHAR
+      size: 10
+    id:
+      type: integer
+      required: true
+      primaryKey: true
+      autoincrement: true

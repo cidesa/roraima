@@ -13,6 +13,44 @@
  */
 class nomtipcarActions extends autonomtipcarActions
 {
+  public function executeList()
+  {
+    $this->processSort();
+
+    $this->processFilters();
+
+    $this->cambiareticar="";
+    $this->nometicar="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('nomina',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+	     if(array_key_exists('nomtipcar',$varemp['aplicacion']['nomina']['modulos'])){
+	       if(array_key_exists('cambiareticar',$varemp['aplicacion']['nomina']['modulos']['nomtipcar']))
+	       {
+	       	$this->cambiareticar=$varemp['aplicacion']['nomina']['modulos']['nomtipcar']['cambiareticar'];
+	       if(array_key_exists('nometicar',$varemp['aplicacion']['nomina']['modulos']['nomtipcar']))
+	       {
+	       	$this->nometicar=$varemp['aplicacion']['nomina']['modulos']['nomtipcar']['nometicar'];
+	       }
+	       }
+	     }
+
+    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/nptipcar/filters');
+
+     // 15    // pager
+    $this->pager = new sfPropelPager('Nptipcar', 15);
+    $c = new Criteria();
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    $this->pager->setCriteria($c);
+    $this->pager->setPage($this->getRequestParameter('page', 1));
+    $this->pager->init();
+  }
+
+
+
 /**
    * Función principal para el manejo de las acciones create y edit
    * del formulario.
@@ -21,6 +59,23 @@ class nomtipcarActions extends autonomtipcarActions
   public function executeEdit()
   {
     $this->nptipcar = $this->getNptipcarOrCreate();
+    $this->cambiareticar="";
+    $this->nometicar="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('nomina',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+	     if(array_key_exists('nomtipcar',$varemp['aplicacion']['nomina']['modulos'])){
+	       if(array_key_exists('cambiareticar',$varemp['aplicacion']['nomina']['modulos']['nomtipcar']))
+	       {
+	       	$this->cambiareticar=$varemp['aplicacion']['nomina']['modulos']['nomtipcar']['cambiareticar'];
+	       if(array_key_exists('nometicar',$varemp['aplicacion']['nomina']['modulos']['nomtipcar']))
+	       {
+	       	$this->nometicar=$varemp['aplicacion']['nomina']['modulos']['nomtipcar']['nometicar'];
+	       }
+	       }
+	     }
 
     if ($this->nptipcar->getId()!='')
     {
@@ -66,6 +121,23 @@ $this->Bitacora('Guardo');
   protected function updateNptipcarFromRequest()
   {
     $nptipcar = $this->getRequestParameter('nptipcar');
+    $this->cambiareticar="";
+    $this->nometicar="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('nomina',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+	     if(array_key_exists('nomtipcar',$varemp['aplicacion']['nomina']['modulos'])){
+	       if(array_key_exists('cambiareticar',$varemp['aplicacion']['nomina']['modulos']['nomtipcar']))
+	       {
+	       	$this->cambiareticar=$varemp['aplicacion']['nomina']['modulos']['nomtipcar']['cambiareticar'];
+	       if(array_key_exists('nometicar',$varemp['aplicacion']['nomina']['modulos']['nomtipcar']))
+	       {
+	       	$this->nometicar=$varemp['aplicacion']['nomina']['modulos']['nomtipcar']['nometicar'];
+	       }
+	       }
+	     }
 
     if (isset($nptipcar['codtipcar']))
     {

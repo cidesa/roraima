@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage presnomcalintpre
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 40811 2010-09-28 21:19:50Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -370,16 +370,13 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 				$this->configGrid_bueno($this->getRequestParameter('codemp'), $this->getRequestParameter('feccor'), $this->getRequestParameter('capita'), $salario,$anno);
 			    $this->getUser()->setAttribute('obj2', $this->obj2);
 			    $js="toAjaxUpdater('id2',7,getUrlModulo()+'ajax','7');";
-                $output = '[["diaserrn","'.$this->antdias.'",""],["messerrn","'.$this->antmeses.'",""],["anoserrn","'.$this->antannos.'",""],["diaserra","'.$this->antdias2.'",""],["messerra","'.$this->antmeses2.'",""],["anoserra","'.$this->antannos2.'",""],["totcapitalact","'.H::Formatomonto($this->capitalact).'",""],["totintacu","'.H::Formatomonto($this->intacu).'",""],["totcapitalact2","'.H::Formatomonto($this->capitalact2).'",""],["totintacu2","'.H::Formatomonto($this->intacu2).'",""],["javascript","'.$js.'",""]]';
+                $output = '[["diaserrn","'.$this->antdiasrn.'",""],["messerrn","'.$this->antmesesrn.'",""],["anoserrn","'.$this->antannosrn.'",""],["diaserra","'.$this->antdias2.'",""],["messerra","'.$this->antmeses2.'",""],["anoserra","'.$this->antannos2.'",""],["totcapitalact","'.H::Formatomonto($this->capitalact).'",""],["totintacu","'.H::Formatomonto($this->intacu).'",""],["totcapitalact2","'.H::Formatomonto($this->capitalact2).'",""],["totintacu2","'.H::Formatomonto($this->intacu2).'",""],["javascript","'.$js.'",""],["nppresoc_diatra","' . $this->antdias . '",""],["nppresoc_mestra","' . $this->antmeses . '",""],["nppresoc_anotra","' . $this->antannos. '",""] ]';
 
 				$this->getUser()->setAttribute('calculado','SI');
 				$this->getUser()->setAttribute('anno',$anno);
 				$this->getUser()->setAttribute('obj2',$this->obj2);
                 $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
               }
-
-
-
 
       } elseif ($this->getRequestParameter('ajax') == '6') //Autor: Jesus Lobaton
                 {
@@ -410,7 +407,8 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -511,7 +509,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 	  $this->capitalact2=0;
 	  if ($result)
       {
-        //Saco los totales Regimen Nuevo
+        //Saco los totales Regimen anterior
         $this->antannos2  = $result[$this->tfil2-1]['antannos'];
         $this->antmeses2  = $result[$this->tfil2-1]['antmeses'];
         $this->antdias2   = $result[$this->tfil2-1]['antdias'];
@@ -700,13 +698,17 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
   	else
   		$cadena="round((mondia*(dias)),2)";
 
+     $cambiofec = H::getConfApp('cambiofec', 'nomina', 'presnomcalintpre');
+
      $sql = "select ' ' as id, TO_CHAR(fecfin,'MM') as mesactual, antmeses, antdias, antannos, codtipcon, tipo,
-      to_char(fecini,'dd/mm/yyyy') as fecini, fecini as fecini1, to_char(fecfin,'dd/mm/yyyy') as fecfin,
+      case when '$cambiofec'='S' then to_char(fecinireal,'dd/mm/yyyy') else to_char(fecini,'dd/mm/yyyy') end as fecini,case when '$cambiofec'='S' then fecinireal else fecini end  as fecini1,
+      case when '$cambiofec'='S' then to_char(fecfinreal,'dd/mm/yyyy') else to_char(fecfin,'dd/mm/yyyy') end as fecfin,
       round(tasa,2) as tasa, round(mondia,2) as mondia, dias, round(mondiapro,2) as mondiapro,
       round(capital,2) as capital, round(capitalact,2) as capitalact,
       case when dias=5 then round(monpres,2) else $cadena end  as monpres, tasa,
       round(monint,2) as monint, round(intacu,2) as intacu, round(monant,2) as monant,
-      round(monadeint,2) as monadeint, round(monto,2) as monto
+      round(monadeint,2) as monadeint, round(monto,2) as monto,round(aliuti,2) as aliuti,round(alivac,2) as alibono,round(aliadi,2) as aliadi,
+      antannosnuevoreg, antmesesnuevoreg, antdiasnuevoreg, (round(monto,2)+round(aliuti,2)+round(alivac,2)+round(aliadi,2)) as salint
               from calculopres('$codemp','$fecha','$capital','$salario') order by fecini1";
 
     Herramientas :: BuscarDatos($sql, & $result);
@@ -723,6 +725,12 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
         $this->antmeses  = $result[$this->tfil-1]['antmeses'];
         $this->antdias   = $result[$this->tfil-1]['antdias'];
         $this->capitalact= $result[$this->tfil-1]['capitalact'];
+
+        $this->antannosrn  = $result[$this->tfil-1]['antannosnuevoreg'];
+        $this->antmesesrn  = $result[$this->tfil-1]['antmesesnuevoreg'];
+        $this->antdiasrn   = $result[$this->tfil-1]['antdiasnuevoreg'];
+
+
 		foreach($result as $r)
 		{
 			if($r['intacu']!=0)
@@ -777,19 +785,44 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
       $col3->setHTML('type="text" size="10" maxlength="10"  readonly=true');
       $col3->setEsGrabable('true');
 
-      //    $col3 = new Columna('Salario');
-      //    $col3->setTipo(Columna::MONTO);f
-      //    $col3->setAlineacionObjeto(Columna::CENTRO);
-      //    $col3->setAlineacionContenido(Columna::CENTRO);
-      //    $col3->setNombreCampo('monpres'); //salemp
-      //    $col3->setHTML('type="text" size="20" maxlength="20"  readonly=true');
+      $col31 = new Columna('Alicuota Utilidad');
+      $col31->setTipo(Columna :: MONTO);
+      $col31->setAlineacionObjeto(Columna :: CENTRO);
+      $col31->setAlineacionContenido(Columna :: CENTRO);
+      $col31->setNombreCampo('aliuti');
+      $col31->setHTML('type="text" size="10" maxlength="10"  readonly=true');
+      $col31->setEsGrabable('true');
+
+      $col32 = new Columna('Alicuota Vacación');
+      $col32->setTipo(Columna :: MONTO);
+      $col32->setAlineacionObjeto(Columna :: CENTRO);
+      $col32->setAlineacionContenido(Columna :: CENTRO);
+      $col32->setNombreCampo('alibono');
+      $col32->setHTML('type="text" size="10" maxlength="10"  readonly=true');
+      $col32->setEsGrabable('true');
+
+      $col33 = new Columna('Alicuota Adicional');
+      $col33->setTipo(Columna :: MONTO);
+      $col33->setAlineacionObjeto(Columna :: CENTRO);
+      $col33->setAlineacionContenido(Columna :: CENTRO);
+      $col33->setNombreCampo('aliadi');
+      $col33->setHTML('type="text" size="10" maxlength="10"  readonly=true');
+      $col33->setEsGrabable('true');
+
+      $col34 = new Columna('Salario Integral');
+      $col34->setTipo(Columna :: MONTO);
+      $col34->setAlineacionObjeto(Columna :: CENTRO);
+      $col34->setAlineacionContenido(Columna :: CENTRO);
+      $col34->setNombreCampo('salint');
+      $col34->setHTML('type="text" size="10" maxlength="10"  readonly=true');
+      $col34->setEsGrabable('true');
 
       $col4 = new Columna('Dias Art.108');
       $col4->setTipo(Columna :: MONTO);
       $col4->setAlineacionObjeto(Columna :: CENTRO);
       $col4->setAlineacionContenido(Columna :: CENTRO);
       $col4->setNombreCampo('dias');
-      $col4->setHTML('type="text" size="3" maxlength="3"  readonly=true');
+      $col4->setHTML('type="text" size="5" maxlength="5"  readonly=true');
       $col4->setEsGrabable('true');
       $col4->setEsTotal(true, 'totmonpres');
 
@@ -966,6 +999,10 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
       $opciones->addColumna($col1);
       $opciones->addColumna($col2);
       $opciones->addColumna($col3);
+      $opciones->addColumna($col31);
+      $opciones->addColumna($col32);
+      $opciones->addColumna($col33);
+      $opciones->addColumna($col34);
       $opciones->addColumna($col4);
       $opciones->addColumna($col5);
       $opciones->addColumna($col6);
@@ -998,7 +1035,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
    * en las acciones, create, edit y handleError para recargar en todo momento
    * los datos del grid.
    *
-   */
+
   public function configGridConsulta($codigo) {
     /////PARA LA CONSULTA//////
     $c = new Criteria();
@@ -1067,7 +1104,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
       $col4->setAlineacionObjeto(Columna :: CENTRO);
       $col4->setAlineacionContenido(Columna :: CENTRO);
       $col4->setNombreCampo('dias');
-      $col4->setHTML('type="text" size="3" maxlength="3"  readonly=true');
+      $col4->setHTML('type="text" size="5" maxlength="5"  readonly=true');
       $col4->setEsGrabable('true');
       $col4->setEsTotal(true, 'totmonpres');
 
@@ -1261,7 +1298,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
 
     $this->obj = $opciones->getConfig($per);
   }
-
+*/
 
 
   public function executeAutocomplete() {
@@ -1276,6 +1313,8 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
    *
    */
   public function executeEdit() {
+
+    $this->getUser()->setAttribute('cambiofec',H::getConfApp('cambiofec'),'presnomcalintpre');
 
     $this->nppresoc       = $this->getNppresocOrCreate();
     $this->capitalizacion = Constantes :: Capitalizacion();
@@ -1354,12 +1393,19 @@ $this->Bitacora('Guardo');
     $this->tfil = count($per);
 	  $this->intacu=0;
 	  $this->capitalact=0;
-      if ($per)
-      {
+    if ($per)
+    {
+
+      $c = new Criteria();
+      $c->add(NppresocPeer :: CODEMP, $codigo);
+      $nppresoc = NppresocPeer::doSelectOne($c);
+      if($nppresoc){
         //Saco los totales Regimen Nuevo
-        //$this->antannos  = $per[$this->tfil-1]['antannos'];
-        //$this->antmeses  = $per[$this->tfil-1]['antmeses'];
-        //$this->antdias   = $per[$this->tfil-1]['antdias'];
+        $this->diasserv = $nppresoc->getDiatra();
+        $this->mesesserv = $nppresoc->getMestra();
+        $this->anosserv = $nppresoc->getAnotra();
+      }
+
 		$this->capitalact = $per[$this->tfil-1]->getAntacum();
 		foreach($per as $r)
 		{
@@ -1424,12 +1470,26 @@ $this->Bitacora('Guardo');
     $col5->setNombreCampo('aliuti');
     $col5->setHTML('type="text" size="10" maxlength="10"  readonly=true');
 
-    $col6 = new Columna('Alicuota de Bono Vac.');
+    $col6 = new Columna('Alicuota Vacación');
     $col6->setTipo(Columna :: MONTO);
     $col6->setAlineacionObjeto(Columna :: CENTRO);
     $col6->setAlineacionContenido(Columna :: CENTRO);
     $col6->setNombreCampo('alibono');
     $col6->setHTML('type="text" size="10" maxlength="10"  readonly=true');
+
+    $col61 = new Columna('Alicuota Adicional');
+    $col61->setTipo(Columna :: MONTO);
+    $col61->setAlineacionObjeto(Columna :: CENTRO);
+    $col61->setAlineacionContenido(Columna :: CENTRO);
+    $col61->setNombreCampo('aliadi');
+    $col61->setHTML('type="text" size="10" maxlength="10"  readonly=true');
+
+    $col62 = new Columna('Salario Integral');
+    $col62->setTipo(Columna :: MONTO);
+    $col62->setAlineacionObjeto(Columna :: CENTRO);
+    $col62->setAlineacionContenido(Columna :: CENTRO);
+    $col62->setNombreCampo('salint');
+    $col62->setHTML('type="text" size="10" maxlength="10"  readonly=true');
 
     $col7 = new Columna('Total Diario');
     $col7->setTipo(Columna :: MONTO);
@@ -1535,6 +1595,8 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col4);
     $opciones->addColumna($col5);
     $opciones->addColumna($col6);
+    $opciones->addColumna($col61);
+    $opciones->addColumna($col62);
     $opciones->addColumna($col7);
     #$opciones->addColumna($col8);
     $opciones->addColumna($col9);
@@ -1574,11 +1636,18 @@ $this->Bitacora('Guardo');
 	$this->intacu2=0;
     $this->capitalact2=0;
 	if ($per)
-      {
-        //Saco los totales Regimen Nuevo
-        //$this->antannos  = $per[$this->tfil-1]['antannos'];
-        //$this->antmeses  = $per[$this->tfil-1]['antmeses'];
-        //$this->antdias   = $per[$this->tfil-1]['antdias'];
+  {
+
+      $c = new Criteria();
+      $c->add(NppresocantPeer :: CODEMP, $codigo);
+      $nppresocant = NppresocantPeer::doSelectOne($c);
+      if($nppresocant){
+        //Saco los totales Regimen Viejo
+        $this->diasservra  = $nppresocant->getDiatra();
+        $this->mesesservra  = $nppresocant->getMestra();
+        $this->anosservra   = $nppresocant->getAnotra();
+      }
+
 		$this->capitalact2 = $per[$this->tfil2-1]->getAntacum();
 		foreach($per as $r)
 		{
@@ -1854,45 +1923,50 @@ $this->Bitacora('Guardo');
    *
    */
   protected function saveNppresoc($nppresoc) {
-    $coderr = -1;
+    $coderr = array();
     // habilitar la siguiente línea si se usa grid
     $gridrn = Herramientas :: CargarDatosGrid($this, $this->obj);
 	$gridra = Herramientas :: CargarDatosGrid($this, $this->obj2);
 
-    //Copiamos los totales
-	if(count($gridra[0])>0 && count($gridrn[0])<=0)
-	{
-		$grid=$gridra;
-		$grid[2] = array ($this->getRequestParameter('totintacu2'), $this->getRequestParameter('totmonadeint2'), $this->getRequestParameter('totmonpres2'), $this->getRequestParameter('totmonant2'), $this->getRequestParameter('totcapitalact2'));
-		$grid[3][] = $this->grid_1;
-      	$grid[3][] = $this->grid_2;
-		$grid[3][] = array($this->antdias2,$this->antmeses2,$this->antannos2);
-		$grid[4][] = 'V';
-	}else
-	{
-		$grid=$gridrn;
-		$grid[2] = array ($this->getRequestParameter('totintacu'), $this->getRequestParameter('totmonadeint'), $this->getRequestParameter('totmonpres'), $this->getRequestParameter('totmonant'), $this->getRequestParameter('totcapitalact'));
-		$grid[3][] = $this->grid_1;
-      	$grid[3][] = $this->grid_2;
-		$grid[3][] = array($this->antdias,$this->antmeses,$this->antannos);
-		$grid[4][] = 'N';
-	}
+    //try {
 
-    try {
+      //Copiamos los totales
+      if(count($gridra[0])>0)
+      {
+        $grid=$gridra;
+        $grid[2] = array ($this->getRequestParameter('totintacu2'), $this->getRequestParameter('totmonadeint2'), $this->getRequestParameter('totmonpres2'), $this->getRequestParameter('totmonant2'), $this->getRequestParameter('totcapitalact2'));
+        $grid[3][] = $this->grid_1;
+            $grid[3][] = $this->grid_2;
+        $grid[3][] = array($this->antdias2,$this->antmeses2,$this->antannos2);
+        $grid[4][] = 'V';
 
-      // Modificar la siguiente línea para llamar al método
-      // correcto en la clase del negocio, ej:
+        $coderr[] = PrestacionesSociales :: saveNppresoc($nppresoc, $grid);
 
-      $coderr = PrestacionesSociales :: saveNppresoc($nppresoc, $grid);
+      }
+      if(count($gridrn[0])>0)
+      {
+        $grid=$gridrn;
+        $grid[2] = array ($this->getRequestParameter('totintacu'), $this->getRequestParameter('totmonadeint'), $this->getRequestParameter('totmonpres'), $this->getRequestParameter('totmonant'), $this->getRequestParameter('totcapitalact'));
+        $grid[3][] = $this->grid_1;
+            $grid[3][] = $this->grid_2;
+        $grid[3][] = array($this->antdiasrn,$this->antmesesrn,$this->antannosrn);
+        $grid[4][] = 'N';
+
+        $coderr[] = PrestacionesSociales :: saveNppresoc($nppresoc, $grid);
+      }
+
+
 
       // OJO ----> Eliminar esta linea al modificar este método
       //parent :: saveForencpryaccespmet($Forencpryaccespmet);
 
       if (is_array($coderr)) {
         foreach ($coderr as $ERR) {
-          $err = Herramientas :: obtenerMensajeError($ERR);
-          $this->getRequest()->setError('', $err);
-          $this->ActualizarGrid();
+          if ($ERR != -1) {
+            $err = Herramientas :: obtenerMensajeError($ERR);
+            $this->getRequest()->setError('', $err);
+            $this->ActualizarGrid();
+          }
         }
       }
       elseif ($coderr != -1) {
@@ -1901,13 +1975,13 @@ $this->Bitacora('Guardo');
         $this->ActualizarGrid();
       }
 
-    } catch (Exception $ex) {
-
-      $coderr = 0;
-      $err = Herramientas :: obtenerMensajeError($coderr);
-      $this->getRequest()->setError('', $err);
-
-    }
+//    } catch (Exception $ex) {
+//
+//      $coderr = 0;
+//      $err = Herramientas :: obtenerMensajeError($coderr);
+//      $this->getRequest()->setError('', $err);
+//
+//    }
     return $coderr;
 
   }

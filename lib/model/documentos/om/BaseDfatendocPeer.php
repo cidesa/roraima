@@ -13,11 +13,14 @@ abstract class BaseDfatendocPeer {
 	const CLASS_DEFAULT = 'lib.model.documentos.Dfatendoc';
 
 	
-	const NUM_COLUMNS = 13;
+	const NUM_COLUMNS = 15;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
+
+	
+	const NROEXP = 'dfatendoc.NROEXP';
 
 	
 	const CODDOC = 'dfatendoc.CODDOC';
@@ -56,6 +59,9 @@ abstract class BaseDfatendocPeer {
 	const INFDOC4 = 'dfatendoc.INFDOC4';
 
 	
+	const REFDOC = 'dfatendoc.REFDOC';
+
+	
 	const ID = 'dfatendoc.ID';
 
 	
@@ -64,18 +70,18 @@ abstract class BaseDfatendocPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Coddoc', 'Desdoc', 'Mondoc', 'Fecdoc', 'Staate', 'Anuate', 'Estado', 'IdDftabtip', 'Infdoc1', 'Infdoc2', 'Infdoc3', 'Infdoc4', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (DfatendocPeer::CODDOC, DfatendocPeer::DESDOC, DfatendocPeer::MONDOC, DfatendocPeer::FECDOC, DfatendocPeer::STAATE, DfatendocPeer::ANUATE, DfatendocPeer::ESTADO, DfatendocPeer::ID_DFTABTIP, DfatendocPeer::INFDOC1, DfatendocPeer::INFDOC2, DfatendocPeer::INFDOC3, DfatendocPeer::INFDOC4, DfatendocPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('coddoc', 'desdoc', 'mondoc', 'fecdoc', 'staate', 'anuate', 'estado', 'id_dftabtip', 'infdoc1', 'infdoc2', 'infdoc3', 'infdoc4', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Nroexp', 'Coddoc', 'Desdoc', 'Mondoc', 'Fecdoc', 'Staate', 'Anuate', 'Estado', 'IdDftabtip', 'Infdoc1', 'Infdoc2', 'Infdoc3', 'Infdoc4', 'Refdoc', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (DfatendocPeer::NROEXP, DfatendocPeer::CODDOC, DfatendocPeer::DESDOC, DfatendocPeer::MONDOC, DfatendocPeer::FECDOC, DfatendocPeer::STAATE, DfatendocPeer::ANUATE, DfatendocPeer::ESTADO, DfatendocPeer::ID_DFTABTIP, DfatendocPeer::INFDOC1, DfatendocPeer::INFDOC2, DfatendocPeer::INFDOC3, DfatendocPeer::INFDOC4, DfatendocPeer::REFDOC, DfatendocPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('nroexp', 'coddoc', 'desdoc', 'mondoc', 'fecdoc', 'staate', 'anuate', 'estado', 'id_dftabtip', 'infdoc1', 'infdoc2', 'infdoc3', 'infdoc4', 'refdoc', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Coddoc' => 0, 'Desdoc' => 1, 'Mondoc' => 2, 'Fecdoc' => 3, 'Staate' => 4, 'Anuate' => 5, 'Estado' => 6, 'IdDftabtip' => 7, 'Infdoc1' => 8, 'Infdoc2' => 9, 'Infdoc3' => 10, 'Infdoc4' => 11, 'Id' => 12, ),
-		BasePeer::TYPE_COLNAME => array (DfatendocPeer::CODDOC => 0, DfatendocPeer::DESDOC => 1, DfatendocPeer::MONDOC => 2, DfatendocPeer::FECDOC => 3, DfatendocPeer::STAATE => 4, DfatendocPeer::ANUATE => 5, DfatendocPeer::ESTADO => 6, DfatendocPeer::ID_DFTABTIP => 7, DfatendocPeer::INFDOC1 => 8, DfatendocPeer::INFDOC2 => 9, DfatendocPeer::INFDOC3 => 10, DfatendocPeer::INFDOC4 => 11, DfatendocPeer::ID => 12, ),
-		BasePeer::TYPE_FIELDNAME => array ('coddoc' => 0, 'desdoc' => 1, 'mondoc' => 2, 'fecdoc' => 3, 'staate' => 4, 'anuate' => 5, 'estado' => 6, 'id_dftabtip' => 7, 'infdoc1' => 8, 'infdoc2' => 9, 'infdoc3' => 10, 'infdoc4' => 11, 'id' => 12, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Nroexp' => 0, 'Coddoc' => 1, 'Desdoc' => 2, 'Mondoc' => 3, 'Fecdoc' => 4, 'Staate' => 5, 'Anuate' => 6, 'Estado' => 7, 'IdDftabtip' => 8, 'Infdoc1' => 9, 'Infdoc2' => 10, 'Infdoc3' => 11, 'Infdoc4' => 12, 'Refdoc' => 13, 'Id' => 14, ),
+		BasePeer::TYPE_COLNAME => array (DfatendocPeer::NROEXP => 0, DfatendocPeer::CODDOC => 1, DfatendocPeer::DESDOC => 2, DfatendocPeer::MONDOC => 3, DfatendocPeer::FECDOC => 4, DfatendocPeer::STAATE => 5, DfatendocPeer::ANUATE => 6, DfatendocPeer::ESTADO => 7, DfatendocPeer::ID_DFTABTIP => 8, DfatendocPeer::INFDOC1 => 9, DfatendocPeer::INFDOC2 => 10, DfatendocPeer::INFDOC3 => 11, DfatendocPeer::INFDOC4 => 12, DfatendocPeer::REFDOC => 13, DfatendocPeer::ID => 14, ),
+		BasePeer::TYPE_FIELDNAME => array ('nroexp' => 0, 'coddoc' => 1, 'desdoc' => 2, 'mondoc' => 3, 'fecdoc' => 4, 'staate' => 5, 'anuate' => 6, 'estado' => 7, 'id_dftabtip' => 8, 'infdoc1' => 9, 'infdoc2' => 10, 'infdoc3' => 11, 'infdoc4' => 12, 'refdoc' => 13, 'id' => 14, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
@@ -129,6 +135,8 @@ abstract class BaseDfatendocPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
+		$criteria->addSelectColumn(DfatendocPeer::NROEXP);
+
 		$criteria->addSelectColumn(DfatendocPeer::CODDOC);
 
 		$criteria->addSelectColumn(DfatendocPeer::DESDOC);
@@ -152,6 +160,8 @@ abstract class BaseDfatendocPeer {
 		$criteria->addSelectColumn(DfatendocPeer::INFDOC3);
 
 		$criteria->addSelectColumn(DfatendocPeer::INFDOC4);
+
+		$criteria->addSelectColumn(DfatendocPeer::REFDOC);
 
 		$criteria->addSelectColumn(DfatendocPeer::ID);
 

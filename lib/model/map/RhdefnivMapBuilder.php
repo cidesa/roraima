@@ -38,6 +38,16 @@ class RhdefnivMapBuilder {
 
 		$tMap->addColumn('DESNIV', 'Desniv', 'string', CreoleTypes::VARCHAR, false, 250);
 
+		$tMap->addColumn('MINPUN', 'Minpun', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('MAXPUN', 'Maxpun', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('TOTPES', 'Totpes', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('CODRAN', 'Codran', 'string', CreoleTypes::VARCHAR, false, 2);
+
+		$tMap->addColumn('TIPCAL', 'Tipcal', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

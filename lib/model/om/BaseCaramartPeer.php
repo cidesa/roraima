@@ -3,36 +3,36 @@
 
 abstract class BaseCaramartPeer {
 
-	
+
 	const DATABASE_NAME = 'propel';
 
-	
+
 	const TABLE_NAME = 'caramart';
 
-	
+
 	const CLASS_DEFAULT = 'lib.model.Caramart';
 
-	
+
 	const NUM_COLUMNS = 3;
 
-	
+
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
-	
+
 	const RAMART = 'caramart.RAMART';
 
-	
+
 	const NOMRAM = 'caramart.NOMRAM';
 
-	
+
 	const ID = 'caramart.ID';
 
-	
+
 	private static $phpNameMap = null;
 
 
-	
+
 	private static $fieldNames = array (
 		BasePeer::TYPE_PHPNAME => array ('Ramart', 'Nomram', 'Id', ),
 		BasePeer::TYPE_COLNAME => array (CaramartPeer::RAMART, CaramartPeer::NOMRAM, CaramartPeer::ID, ),
@@ -40,7 +40,7 @@ abstract class BaseCaramartPeer {
 		BasePeer::TYPE_NUM => array (0, 1, 2, )
 	);
 
-	
+
 	private static $fieldKeys = array (
 		BasePeer::TYPE_PHPNAME => array ('Ramart' => 0, 'Nomram' => 1, 'Id' => 2, ),
 		BasePeer::TYPE_COLNAME => array (CaramartPeer::RAMART => 0, CaramartPeer::NOMRAM => 1, CaramartPeer::ID => 2, ),
@@ -48,13 +48,13 @@ abstract class BaseCaramartPeer {
 		BasePeer::TYPE_NUM => array (0, 1, 2, )
 	);
 
-	
+
 	public static function getMapBuilder()
 	{
 		include_once 'lib/model/map/CaramartMapBuilder.php';
 		return BasePeer::getMapBuilder('lib.model.map.CaramartMapBuilder');
 	}
-	
+
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
@@ -68,7 +68,7 @@ abstract class BaseCaramartPeer {
 		}
 		return self::$phpNameMap;
 	}
-	
+
 	static public function translateFieldName($name, $fromType, $toType)
 	{
 		$toNames = self::getFieldNames($toType);
@@ -79,7 +79,7 @@ abstract class BaseCaramartPeer {
 		return $toNames[$key];
 	}
 
-	
+
 
 	static public function getFieldNames($type = BasePeer::TYPE_PHPNAME)
 	{
@@ -89,13 +89,13 @@ abstract class BaseCaramartPeer {
 		return self::$fieldNames[$type];
 	}
 
-	
+
 	public static function alias($alias, $column)
 	{
 		return str_replace(CaramartPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
-	
+
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
@@ -110,7 +110,7 @@ abstract class BaseCaramartPeer {
 	const COUNT = 'COUNT(caramart.ID)';
 	const COUNT_DISTINCT = 'COUNT(DISTINCT caramart.ID)';
 
-	
+
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -134,7 +134,7 @@ abstract class BaseCaramartPeer {
 						return 0;
 		}
 	}
-	
+
 	public static function doSelectOne(Criteria $criteria, $con = null)
 	{
 		$critcopy = clone $criteria;
@@ -145,12 +145,12 @@ abstract class BaseCaramartPeer {
 		}
 		return null;
 	}
-	
+
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
 		return CaramartPeer::populateObjects(CaramartPeer::doSelectRS($criteria, $con));
 	}
-	
+
 	public static function doSelectRS(Criteria $criteria, $con = null)
 	{
 		if ($con === null) {
@@ -166,35 +166,35 @@ abstract class BaseCaramartPeer {
 
 						return BasePeer::doSelect($criteria, $con);
 	}
-	
+
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
-	
+
 				$cls = CaramartPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
-		
+
 			$obj = new $cls();
 			$obj->hydrate($rs);
 			$results[] = $obj;
-			
+
 		}
 		return $results;
 	}
-	
+
 	public static function getTableMap()
 	{
 		return Propel::getDatabaseMap(self::DATABASE_NAME)->getTable(self::TABLE_NAME);
 	}
 
-	
+
 	public static function getOMClass()
 	{
 		return CaramartPeer::CLASS_DEFAULT;
 	}
 
-	
+
 	public static function doInsert($values, $con = null)
 	{
 		if ($con === null) {
@@ -205,7 +205,7 @@ abstract class BaseCaramartPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(CaramartPeer::ID); 
+		$criteria->remove(CaramartPeer::ID);
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -221,7 +221,7 @@ abstract class BaseCaramartPeer {
 		return $pk;
 	}
 
-	
+
 	public static function doUpdate($values, $con = null)
 	{
 		if ($con === null) {
@@ -231,7 +231,7 @@ abstract class BaseCaramartPeer {
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
+			$criteria = clone $values;
 			$comparison = $criteria->getComparison(CaramartPeer::ID);
 			$selectCriteria->add(CaramartPeer::ID, $criteria->remove(CaramartPeer::ID), $comparison);
 
@@ -242,7 +242,7 @@ abstract class BaseCaramartPeer {
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
 
-	
+
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
@@ -259,7 +259,7 @@ abstract class BaseCaramartPeer {
 		}
 	}
 
-	
+
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
@@ -277,10 +277,10 @@ abstract class BaseCaramartPeer {
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
-		$affectedRows = 0; 
+		$affectedRows = 0;
 		try {
 									$con->begin();
-			
+
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
 			return $affectedRows;
@@ -290,7 +290,7 @@ abstract class BaseCaramartPeer {
 		}
 	}
 
-	
+
 	public static function doValidate(Caramart $obj, $cols = null)
 	{
 		$columns = array();
@@ -325,7 +325,7 @@ abstract class BaseCaramartPeer {
     return $res;
 	}
 
-	
+
 	public static function retrieveByPK($pk, $con = null)
 	{
 		if ($con === null) {
@@ -342,7 +342,7 @@ abstract class BaseCaramartPeer {
 		return !empty($v) > 0 ? $v[0] : null;
 	}
 
-	
+
 	public static function retrieveByPKs($pks, $con = null)
 	{
 		if ($con === null) {
@@ -360,7 +360,7 @@ abstract class BaseCaramartPeer {
 		return $objs;
 	}
 
-} 
+}
 if (Propel::isInit()) {
 			try {
 		BaseCaramartPeer::getMapBuilder();

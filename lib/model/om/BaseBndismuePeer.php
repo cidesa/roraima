@@ -13,7 +13,7 @@ abstract class BaseBndismuePeer {
 	const CLASS_DEFAULT = 'lib.model.Bndismue';
 
 	
-	const NUM_COLUMNS = 16;
+	const NUM_COLUMNS = 17;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -65,6 +65,9 @@ abstract class BaseBndismuePeer {
 	const VIDUTIL = 'bndismue.VIDUTIL';
 
 	
+	const LOGUSU = 'bndismue.LOGUSU';
+
+
 	const ID = 'bndismue.ID';
 
 	
@@ -73,18 +76,18 @@ abstract class BaseBndismuePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codact', 'Codmue', 'Nrodismue', 'Motdismue', 'Tipdismue', 'Fecdismue', 'Fecdevdis', 'Mondismue', 'Detdismue', 'Codubiori', 'Codubides', 'Obsdismue', 'Stadismue', 'Codmot', 'Vidutil', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (BndismuePeer::CODACT, BndismuePeer::CODMUE, BndismuePeer::NRODISMUE, BndismuePeer::MOTDISMUE, BndismuePeer::TIPDISMUE, BndismuePeer::FECDISMUE, BndismuePeer::FECDEVDIS, BndismuePeer::MONDISMUE, BndismuePeer::DETDISMUE, BndismuePeer::CODUBIORI, BndismuePeer::CODUBIDES, BndismuePeer::OBSDISMUE, BndismuePeer::STADISMUE, BndismuePeer::CODMOT, BndismuePeer::VIDUTIL, BndismuePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codact', 'codmue', 'nrodismue', 'motdismue', 'tipdismue', 'fecdismue', 'fecdevdis', 'mondismue', 'detdismue', 'codubiori', 'codubides', 'obsdismue', 'stadismue', 'codmot', 'vidutil', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Codact', 'Codmue', 'Nrodismue', 'Motdismue', 'Tipdismue', 'Fecdismue', 'Fecdevdis', 'Mondismue', 'Detdismue', 'Codubiori', 'Codubides', 'Obsdismue', 'Stadismue', 'Codmot', 'Vidutil', 'Logusu', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (BndismuePeer::CODACT, BndismuePeer::CODMUE, BndismuePeer::NRODISMUE, BndismuePeer::MOTDISMUE, BndismuePeer::TIPDISMUE, BndismuePeer::FECDISMUE, BndismuePeer::FECDEVDIS, BndismuePeer::MONDISMUE, BndismuePeer::DETDISMUE, BndismuePeer::CODUBIORI, BndismuePeer::CODUBIDES, BndismuePeer::OBSDISMUE, BndismuePeer::STADISMUE, BndismuePeer::CODMOT, BndismuePeer::VIDUTIL, BndismuePeer::LOGUSU, BndismuePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codact', 'codmue', 'nrodismue', 'motdismue', 'tipdismue', 'fecdismue', 'fecdevdis', 'mondismue', 'detdismue', 'codubiori', 'codubides', 'obsdismue', 'stadismue', 'codmot', 'vidutil', 'logusu', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codact' => 0, 'Codmue' => 1, 'Nrodismue' => 2, 'Motdismue' => 3, 'Tipdismue' => 4, 'Fecdismue' => 5, 'Fecdevdis' => 6, 'Mondismue' => 7, 'Detdismue' => 8, 'Codubiori' => 9, 'Codubides' => 10, 'Obsdismue' => 11, 'Stadismue' => 12, 'Codmot' => 13, 'Vidutil' => 14, 'Id' => 15, ),
-		BasePeer::TYPE_COLNAME => array (BndismuePeer::CODACT => 0, BndismuePeer::CODMUE => 1, BndismuePeer::NRODISMUE => 2, BndismuePeer::MOTDISMUE => 3, BndismuePeer::TIPDISMUE => 4, BndismuePeer::FECDISMUE => 5, BndismuePeer::FECDEVDIS => 6, BndismuePeer::MONDISMUE => 7, BndismuePeer::DETDISMUE => 8, BndismuePeer::CODUBIORI => 9, BndismuePeer::CODUBIDES => 10, BndismuePeer::OBSDISMUE => 11, BndismuePeer::STADISMUE => 12, BndismuePeer::CODMOT => 13, BndismuePeer::VIDUTIL => 14, BndismuePeer::ID => 15, ),
-		BasePeer::TYPE_FIELDNAME => array ('codact' => 0, 'codmue' => 1, 'nrodismue' => 2, 'motdismue' => 3, 'tipdismue' => 4, 'fecdismue' => 5, 'fecdevdis' => 6, 'mondismue' => 7, 'detdismue' => 8, 'codubiori' => 9, 'codubides' => 10, 'obsdismue' => 11, 'stadismue' => 12, 'codmot' => 13, 'vidutil' => 14, 'id' => 15, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Codact' => 0, 'Codmue' => 1, 'Nrodismue' => 2, 'Motdismue' => 3, 'Tipdismue' => 4, 'Fecdismue' => 5, 'Fecdevdis' => 6, 'Mondismue' => 7, 'Detdismue' => 8, 'Codubiori' => 9, 'Codubides' => 10, 'Obsdismue' => 11, 'Stadismue' => 12, 'Codmot' => 13, 'Vidutil' => 14, 'Logusu' => 15, 'Id' => 16, ),
+		BasePeer::TYPE_COLNAME => array (BndismuePeer::CODACT => 0, BndismuePeer::CODMUE => 1, BndismuePeer::NRODISMUE => 2, BndismuePeer::MOTDISMUE => 3, BndismuePeer::TIPDISMUE => 4, BndismuePeer::FECDISMUE => 5, BndismuePeer::FECDEVDIS => 6, BndismuePeer::MONDISMUE => 7, BndismuePeer::DETDISMUE => 8, BndismuePeer::CODUBIORI => 9, BndismuePeer::CODUBIDES => 10, BndismuePeer::OBSDISMUE => 11, BndismuePeer::STADISMUE => 12, BndismuePeer::CODMOT => 13, BndismuePeer::VIDUTIL => 14, BndismuePeer::LOGUSU => 15, BndismuePeer::ID => 16, ),
+		BasePeer::TYPE_FIELDNAME => array ('codact' => 0, 'codmue' => 1, 'nrodismue' => 2, 'motdismue' => 3, 'tipdismue' => 4, 'fecdismue' => 5, 'fecdevdis' => 6, 'mondismue' => 7, 'detdismue' => 8, 'codubiori' => 9, 'codubides' => 10, 'obsdismue' => 11, 'stadismue' => 12, 'codmot' => 13, 'vidutil' => 14, 'logusu' => 15, 'id' => 16, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
 	);
 
 	
@@ -167,6 +170,8 @@ abstract class BaseBndismuePeer {
 		$criteria->addSelectColumn(BndismuePeer::CODMOT);
 
 		$criteria->addSelectColumn(BndismuePeer::VIDUTIL);
+
+		$criteria->addSelectColumn(BndismuePeer::LOGUSU);
 
 		$criteria->addSelectColumn(BndismuePeer::ID);
 

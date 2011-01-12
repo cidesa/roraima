@@ -1,0 +1,92 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   forotrcrepre
+  anchogrid:               1000
+  ancho:                   1000
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Partida
+  tipo:                    t
+  nombrecampo:             codparegr
+  html:                    ["size=15 maxlength=16"]
+  esgrabable:              true  
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomparegr
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monpre
+  esnumerico:              true
+  html:                    ["size=10 onBlur='mostrarperiodos(this.id)' readOnly=true"]
+4:       # Columna 4
+  titulo:                  Fuente de Financiamiento
+  tipo:                    t
+  nombrecampo:             codfin
+  html:                    ["size=10 onBlur='mostrarfinanciamientos(this.id)' readonly=true"]
+  esgrabable:              true
+5:       # Columna 5
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomext
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+6:       # Columna 6
+  titulo:                  Tipo de Gasto
+  tipo:                    t
+  nombrecampo:             codtip
+  html:                    ["size=10 maxlength=4 onBlur='toAjax(3,getUrlModuloAjax(),this.value,0,'&cajtxtmos='+$(this.id).up().next(0).descendants()[0].id+'&cajtxtcom='+this.id)'"]
+  esgrabable:              true
+  catalogo:                [fortiptit, sf_admin_edit_form, {Codtip: 6, Destip: 7}, Fortiptit_Forpoa ]
+7:       # Columna 7
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             destip
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+8:       # Columna 8
+  titulo:                  Cod. Org
+  tipo:                    t
+  nombrecampo:             codorg
+  html:                    ["size=10 onBlur='mostrarorganismos(this.id)' readonly=true"]
+  esgrabable:              true
+9:       # Columna 9
+  titulo:                  Nombre Organismo
+  tipo:                    t
+  nombrecampo:             nomorg
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+10:       # Columna 10
+  titulo:                  Observaciones
+  tipo:                    t
+  nombrecampo:             observ
+  html:                    ["size=40 maxlength=250 "]
+  esgrabable:              true
+11:       # Columna 11
+  titulo:                  cadenaperiodos
+  tipo:                    t
+  nombrecampo:             cadenaper
+  html:                    ["size=40"]
+  esgrabable:              true
+  oculta:                  true
+12:       # Columna 12
+  titulo:                  Cadena Fuente Financiamiento
+  tipo:                    t
+  nombrecampo:             cadenafin
+  html:                    ["size=40"]
+  esgrabable:              true
+  oculta:                  true
+13:       # Columna 13
+  titulo:                  Cadena Organismos
+  tipo:                    t
+  nombrecampo:             cadenaorg
+  html:                    ["size=40"]
+  esgrabable:              true
+  oculta:                  true

@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage presnomliquidacion
- * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 33885 2009-10-08 19:18:43Z cramirez $
+ * @author     $Author: efmosquera $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 41701 2010-12-10 16:24:48Z efmosquera $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -31,6 +31,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 	$this->configGridAsigDeduc();
 	$this->arrret = $this->cargar_tiporetiro();
 	$this->params = array('arrret'=>$this->arrret);
+        $this->getUser()->setAttribute('nomsalint',H::getConfAppGen('nomsalint'),'presnomliquidacion');
   }
 
   public function cargar_tiporetiro()
@@ -54,7 +55,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
    * los datos del grid.
    *
    */
-  public function configGridAsigDeduc($codemp="",$codnom="",$categoria="",$fecegr="",$arrclau=array(),$salariointegral="",$estaliquidado=false)
+  public function configGridAsigDeduc($codemp="",$codnom="",$categoria="",$fecegr="",$arrclau=array(),$salariointegral="",$estaliquidado=false,$sp=0,$sn=0,$us=0,$si=0,$codret='')
   {
     $perasig=array();
     $perdeduc=array();
@@ -66,7 +67,31 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 	if(!$estaliquidado)
 	{
     	$sql="
-		select 1 as orden,
+                        SELECT A.* FROM
+                        (select 0 as orden,
+                        0 as DIAS,
+                        A.CAPEMP AS MONTO,
+                        'PRESTACIONES DE ANTIGUEDAD RÉGIMEN ANTIGUO'::TEXT AS DESCRIPCION,
+                        B.CODPAR AS PARTIDA
+                        From NPIMPPRESOCANT A,(SELECT * FROM NPDEFPRELIQ WHERE CODCON='000' AND CODNOM='$codnom' ORDER BY PERHAS DESC LIMIT 1) B
+                        where
+                        A.codemp='$codemp'
+                        ORDER BY FECFIN DESC LIMIT 1) A
+
+                        UNION ALL
+                        SELECT A.* FROM
+                        (select 0 as orden,
+                        0 as DIAS,
+                        (A.ANTACUM-A.CAPEMP)+A.INTACUM AS MONTO,
+                        'INTERESES SOBRE PRESTACIONES DE ANTIGUEDAD RÉGIMEN ANTIGUO'::TEXT AS DESCRIPCION,
+                        B.CODPAR AS PARTIDA
+                        From NPIMPPRESOCANT A,(SELECT * FROM NPDEFPRELIQ WHERE CODCON='001' AND CODNOM='$codnom' ORDER BY PERHAS DESC LIMIT 1) B
+                        where
+                        A.codemp='$codemp'
+                        ORDER BY FECFIN DESC LIMIT 1) A
+
+		        UNION ALL
+                        select 1 as orden,
 			SUM(A.DIAART108) as DIAS,
 			SUM(A.VALART108) AS MONTO,
 			(case when B.PERDES=B.PERDES then 'PRESTACIONES DE ANTIGUEDAD ' else 'PRESTACIONES DE ANTIGUEDAD '||B.PERDES||' - '||B.PERHAS end ) AS DESCRIPCION,
@@ -85,7 +110,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			(case when B.PERDES=B.PERDES then 'PRESTACIONES DE ANTIGUEDAD 'else 'PRESTACIONES DE ANTIGUEDAD '||B.PERDES||' - '||B.PERHAS end),B.CODPAR
 			HAVING
 			SUM(A.VALART108)<>0
-			
+
 			Union All
 			select 1 as orden,
 			SUM(0) as DIAS,
@@ -112,16 +137,17 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			GROUP BY B.CODPAR
 			HAVING
 			SUM(A.VALART108)<>0
-			
+
+
 			Union All
 			select 2 as orden,
 			SUM(A.DIAART108) as DIAS,
 			SUM(A.VALART108) AS MONTO,
-			'DIFERENCIA PRESTACION DE ANTIGUEDAD (ART. 108 L.O.T.) '||' ('||TO_CHAR(SUM(A.DIAART108),'9999')||' DÍAS)' AS DESCRIPCION,
+			'PRESTACION DE ANTIGUEDAD NO DEPOSITADA'||' ('||TO_CHAR(SUM(A.DIAART108),'9999')||' DIAS) SEGUN ART.108 PARAG. PRIMERO LIT. C' AS DESCRIPCION,
 			B.CODPAR AS PARTIDA
 			From NPIMPPRESOC A,NPDEFPRELIQ B
 			where
-			A.TIPO<>'' AND
+			A.TIPO='A' AND
 			A.VALART108>0 AND
 			A.codemp='$codemp' AND
 			B.CODNOM='$codnom' AND
@@ -131,7 +157,26 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			Group By B.CODPAR
 			HAVING
 			SUM(A.VALART108)<>0
-			
+
+			Union All
+			select 2 as orden,
+			SUM(A.DIAART108) as DIAS,
+			SUM(A.VALART108) AS MONTO,
+			'DIAS ADICIONALES NO DEPOSITADOS CORRESPONDIENTES AL ULTIMO AÑO'||' ('||TO_CHAR(SUM(A.DIAART108),'9999')||' DIAS)' AS DESCRIPCION,
+			B.CODPAR AS PARTIDA
+			From NPIMPPRESOC A,NPDEFPRELIQ B
+			where
+			A.TIPO='P' AND
+			A.VALART108>0 AND
+			A.codemp='$codemp' AND
+			B.CODNOM='$codnom' AND
+			B.CODCON='002' AND
+			TO_CHAR(A.FECFIN,'YYYY')>=B.PERDES AND
+			TO_CHAR(A.FECFIN,'YYYY')<=B.PERHAS
+			Group By B.CODPAR
+			HAVING
+			SUM(A.VALART108)<>0
+
 			Union All
 			SELECT 3 as orden,
 			SUM(0) as DIAS,
@@ -148,90 +193,113 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			GROUP BY (case when B.PERDES=B.PERHAS then 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES else 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES||' - '||B.PERHAS end ),B.CODPAR
 			HAVING
 			SUM(A.INTDEV)<>0
-			
+
 			UNION ALL
 			select 4 as orden,
 			A.DIASBONO as DIAS,
 			(A.MONTOINCI/30*A.DIASBONO) AS MONTO,
 			'BONO VACACIONAL FRACCIONADO AÑO '||A.PERINI||'-'||A.PERFIN AS DESCRIPCION,
 			B.CODPAR AS PARTIDA
-			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C
+			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C,NPHOJINT D
 			WHERE
 			A.CODEMP='$codemp' AND
 			A.DIASBONO>0 AND
 			B.CODNOM='$codnom' AND
 			B.CODCON='004' AND
+                        A.CODEMP=D.CODEMP AND
 			A.PERINI>=B.PERDES AND
 			A.PERINI<=B.PERHAS AND
-			A.PERINI=TO_CHAR(C.FECINI,'YYYY') AND             
+			(CASE WHEN TO_DATE(TO_CHAR(D.FECING,'DD/MM/'||A.PERFIN),'DD/MM/YYYY')<=D.FECRET  THEN A.PERINI
+                         ELSE A.PERFIN END)=TO_CHAR(C.FECINI,'YYYY') AND
 			(A.MONTOINCI/30*A.DIASBONO)<>0
-			
-			UNION ALL            
+
+			UNION ALL
 			select 4 as orden,
 			A.DIASBONO as DIAS,
 			(A.MONTOINCI/30*A.DIASBONO) AS MONTO,
 			'BONO VACACIONAL VENCIDO AÑO '||A.PERINI||'-'||A.PERFIN AS DESCRIPCION,
 			B.CODPAR AS PARTIDA
-			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C
+			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C,NPHOJINT D
 			WHERE
 			A.CODEMP='$codemp' AND
 			A.DIASBONO>0 AND
 			B.CODNOM='$codnom' AND
 			B.CODCON='004' AND
+                        A.CODEMP=D.CODEMP AND
 			A.PERINI>=B.PERDES AND
 			A.PERINI<=B.PERHAS AND
-			            A.PERINI<>TO_CHAR(C.FECINI,'YYYY') AND             
-			(A.MONTOINCI/30*A.DIASBONO)<>0            
-			            
-			UNION ALL            
+			(CASE WHEN TO_DATE(TO_CHAR(D.FECING,'DD/MM/'||A.PERFIN),'DD/MM/YYYY')<=D.FECRET  THEN A.PERINI
+                         ELSE A.PERFIN END)<>TO_CHAR(C.FECINI,'YYYY') AND
+			(A.MONTOINCI/30*A.DIASBONO)<>0
+
+			UNION ALL
 			select 5 as orden,
 			A.DIADIS as DIAS,(A.ULTSUE/30*A.DIADIS) AS MONTO,
 			'VACACIONES FRACCIONADAS '||A.PERINI||'-'||A.PERFIN AS DESCRIPCION,
 			B.CODPAR AS PARTIDA
-			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C
+			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C, NPHOJINT D
 			WHERE
 			A.CODEMP='$codemp' AND
 			A.DIADIS<>0 AND
 			B.CODNOM='$codnom' AND
 			B.CODCON='003' AND
+                        A.CODEMP=D.CODEMP AND
 			A.PERINI>=B.PERDES AND
 			A.PERINI<=B.PERHAS AND
-			            A.PERINI=TO_CHAR(C.FECINI,'YYYY') AND 
+			(CASE WHEN TO_DATE(TO_CHAR(D.FECING,'DD/MM/'||A.PERFIN),'DD/MM/YYYY')<=D.FECRET  THEN A.PERINI
+                         ELSE A.PERFIN END)=TO_CHAR(C.FECINI,'YYYY') AND
 			(A.ULTSUE/30*A.DIADIS)<>0
-			
+
 			UNION ALL
 			select 5 as orden,
 			A.DIADIS as DIAS,(A.ULTSUE/30*A.DIADIS) AS MONTO,
 			'VACACIONES VENCIDAS '||A.PERINI||'-'||A.PERFIN AS DESCRIPCION,
 			B.CODPAR AS PARTIDA
-			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C
+			From NPVACLIQUIDACION A,NPDEFPRELIQ B,CONTABA C, NPHOJINT D
 			WHERE
 			A.CODEMP='$codemp' AND
 			A.DIADIS<>0 AND
 			B.CODNOM='$codnom' AND
 			B.CODCON='003' AND
+                        A.CODEMP=D.CODEMP AND
 			A.PERFIN>=B.PERDES AND
 			A.PERFIN<=B.PERHAS AND
-			A.PERINI<>TO_CHAR(C.FECINI,'YYYY') AND 
-			(A.ULTSUE/30*A.DIADIS)<>0      
-			      
+			(CASE WHEN TO_DATE(TO_CHAR(D.FECING,'DD/MM/'||A.PERFIN),'DD/MM/YYYY')<=D.FECRET  THEN A.PERINI
+                         ELSE A.PERFIN END)<>TO_CHAR(C.FECINI,'YYYY') AND
+			(A.ULTSUE/30*A.DIADIS)<>0
+
 			UNION All
 			SELECT 1 as orden,
 			SUM(0) as DIAS,
 			SUM(A.MONANT)*-1 AS MONTO,
 			CASE WHEN SUM(A.MONANT)>0 THEN 'ANTICIPO DE PRESTACIONES SOCIALES EN FECHA ' ELSE 'PAGO RETROACTIVO EN FECHA ' END||TO_CHAR(A.FECANT,'DD/MM/YYYY') AS DESCRIPCION,
 			B.CODPAR AS PARTIDA
-			From NpAntPre A,NPDEFPRELIQ B
+			From NpAntPre A,NPDEFPRELIQ B,NPASINOMCONT C,NPTIPCON D
 			WHERE
 			A.CODEMP='$codemp' AND
 			B.CODNOM='$codnom' AND
 			B.CODCON='000' AND
+                        C.CODNOM=B.CODNOM AND
+			D.CODTIPCON=C.CODTIPCON AND
+			A.FECANT>=D.FECINIREG AND
 			TO_CHAR(A.FECANT,'YYYY')>=B.PERDES AND
 			TO_CHAR(A.FECANT,'YYYY')<=B.PERHAS
 			GROUP BY A.FECANT,B.CODPAR
 			HAVING
 			SUM(A.MONANT)<>0
-			
+                        UNION All
+			SELECT 1 as orden,
+			SUM(0) as DIAS,
+			SUM(A.ANTACU)*-1 AS MONTO,
+			'ANTICIPO DE PRESTACIONES SOCIALES  ' AS DESCRIPCION,
+			B.CODPAR AS PARTIDA
+			From Nphojint A,NPDEFPRELIQ B
+			WHERE
+			A.CODEMP='$codemp' AND
+			B.CODNOM='$codnom' AND
+			B.CODCON='000'
+                        group by b.codpar
+
 			Union All
 			SELECT 2 as orden,
 			SUM(0) as DIAS,
@@ -248,7 +316,55 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 			GROUP BY (case when B.PERDES=B.PERHAS then 'ADELANTO DE INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES else 'INTERESES SOBRE PREST. SOCIALES ART. 108 '||B.PERDES||' - '||B.PERHAS end ),B.CODPAR
 			HAVING
 			SUM(A.ADEPRE)<>0
-			ORDER BY orden,DESCRIPCION DESC;";
+
+                        UNION ALL
+                        select 10 as orden,
+                        (case when a.poranoant='S' or a.pormesant='S' then
+                                (case when a.admpub='S'
+                                 then antpub((case when a.poranoant='S' then 'A'
+                                              when a.pormesant='S' then 'M' end),c.codemp,c.fecret,'S')+
+                                             (case when coalesce(a.apartirmes,0)>0 and
+                                                        antpub('M',c.codemp,c.fecret,'S')>=coalesce(a.apartirmes,0) and
+                                                        antpub('D',c.codemp,c.fecret,'S')>=1 then 1
+                                              else 0 end)
+                                 else antpub((case when a.poranoant='S' then 'A'
+                                              when a.pormesant='S' then 'M' end),c.codemp,c.fecret,'N')+
+                                              (case when coalesce(a.apartirmes,0)>0 and
+                                                        antpub('M',c.codemp,c.fecret,'N')>=coalesce(a.apartirmes,0) and
+                                                        antpub('D',c.codemp,c.fecret,'N')>=1 then 1
+                                               else 0 end) end)*a.numdiaant
+                        else a.numdiaant end) as dias,
+                        (case when a.poranoant='S' or a.pormesant='S' then
+                                (case when a.admpub='S'
+                                 then antpub((case when a.poranoant='S' then 'A'
+                                              when a.pormesant='S' then 'M' end),c.codemp,c.fecret,'S')+
+                                             (case when coalesce(a.apartirmes,0)>0 and
+                                                        antpub('M',c.codemp,c.fecret,'S')>=coalesce(a.apartirmes,0) and
+                                                        antpub('D',c.codemp,c.fecret,'S')>=1 then 1
+                                              else 0 end)
+                                 else antpub((case when a.poranoant='S' then 'A'
+                                              when a.pormesant='S' then 'M' end),c.codemp,c.fecret,'N')+
+                                              (case when coalesce(a.apartirmes,0)>0 and
+                                                        antpub('M',c.codemp,c.fecret,'N')>=coalesce(a.apartirmes,0) and
+                                                        antpub('D',c.codemp,c.fecret,'N')>=1 then 1
+                                               else 0 end) end)*a.numdiaant
+                        else a.numdiaant end)*
+                        ((case when a.tipsaldiaant='UD' then $us
+                          when a.tipsaldiaant='SI' then $si
+                          when a.tipsaldiaant='SN' then $sn
+                          when a.tipsaldiaant='SP' then $sp end)/30) as monto,
+                        a.descripclau as descripcion,
+                        a.codpar as partida
+                        from npdefespclaudet a
+                        left outer join nptipret b on a.codret=b.codret,
+                        nphojint c
+                        where
+                        (a.totret='S' or a.codret='$codret') and a.codnom='$codnom'
+                        and c.codemp='$codemp'
+
+			ORDER BY orden,DESCRIPCION DESC
+
+            ";
 
 	      if (H::BuscarDatos($sql,$arr))
 	      {
@@ -288,28 +404,31 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 				   $i++;
 			  }else
 			  {
-			  	   $perdeduc[$j]['concepto']=$arr[$cont]['descripcion'];
-				   $perdeduc[$j]['monto']=H::FormatoMonto($arr[$cont]['monto']*-1);
-				   $perdeduc[$j]['codpre']=$categoria."-".$arr[$cont]['partida'];
-				   $c = new Criteria();
-				   $c->add(CpdeftitPeer::CODPRE,$categoria."-".$arr[$cont]['partida']);
-				   $rs = CpdeftitPeer::doSelectone($c);
-				   if($rs)
-					   $perdeduc[$j]['descripcion']=$rs->getNompre();
-				   else
-				   	   $perdeduc[$j]['descripcion']='<!titulo presupuestario no existe!>';
-				   $perdeduc[$j]['codcon']='AUT';
-				   $perdeduc[$j]['dias']=$arr[$cont]['dias'];
-				   $perdeduc[$j]['id']=9;
-				   $j++;
+			  	  if(H::FormatoMonto($arr[$cont]['monto']*-1)>0)
+				  {
+				  	   $perdeduc[$j]['concepto']=$arr[$cont]['descripcion'];
+					   $perdeduc[$j]['monto']=H::FormatoMonto($arr[$cont]['monto']*-1);
+					   $perdeduc[$j]['codpre']=$categoria."-".$arr[$cont]['partida'];
+					   $c = new Criteria();
+					   $c->add(CpdeftitPeer::CODPRE,$categoria."-".$arr[$cont]['partida']);
+					   $rs = CpdeftitPeer::doSelectone($c);
+					   if($rs)
+						   $perdeduc[$j]['descripcion']=$rs->getNompre();
+					   else
+					   	   $perdeduc[$j]['descripcion']='<!titulo presupuestario no existe!>';
+					   $perdeduc[$j]['codcon']='AUT';
+					   $perdeduc[$j]['dias']=$arr[$cont]['dias'];
+					   $perdeduc[$j]['id']=9;
+					   $j++;
+				  }
 			  }
 			  $cont++;
 			}
 			#CALCULO DE LA CLAUSULA
-			if($arrclau)
+			/*if($arrclau)
 			{
 				$perasig[$i]=$arrclau;
-			}
+			}*/
 
 		  }
 	}else
@@ -894,7 +1013,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 					$sue311296= 0.00;
 
 				#Sueldo al 30/06/1997
-				$sql =  "select avg(salemp) as sue180697 from (
+				$sql =  "select COALESCE(avg(salemp),0) as sue180697 from (
 							select distinct salemp,fecini from npimppresoc where codemp='$codemp'
 							order by fecini desc limit 12
 							)a";
@@ -931,7 +1050,12 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 					if($per1->getPoranoant()=='S')
 					   $numdia=$per1->getNumdiaant()*$anoefec;
 					else
-					   $numdia=$per1->getNumdiaant();
+                                        {
+                                           if($per1->getPormesant()=='S')
+                                                $numdia=$per1->getNumdiaant()*$mesefec;
+                                           else
+                                                $numdia=$per1->getNumdiaant();
+                                        }
 					$partida = $per1->getCodpar();
 					$descripclau = $per1->getDescripclau();
 				}
@@ -978,7 +1102,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 				if(!$estaliquidado)
 				{
 					# NO TIENE LIQUIDACIONES CALCULADAS
-					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$arrclau,$salarioaguinaldos,$estaliquidado);
+					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$arrclau,$salarioaguinaldos,$estaliquidado,$sue311296,$sue180697,$ultimosueldo,$salariointegral,$tipret);
 					$this->getUser()->setAttribute('objasig',$this->npliquidacion_det->getObjasig());
 					$this->getUser()->setAttribute('objdeduc',$this->npliquidacion_det->getObjdeduc());
 					$js.="toAjaxUpdater('divgridasig',2,getUrlModulo()+'ajax','2');
@@ -999,7 +1123,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 						$delemp=$codemp;
 					}
 
-					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$arrclau,$salarioaguinaldos,$estaliquidado);
+					$this->configGridAsigDeduc($codemp,$codnom,$categoria,$fechae,$arrclau,$salarioaguinaldos,$estaliquidado,$sue311296,$sue180697,$ultimosueldo,$salariointegral,$tipret);
 					$this->getUser()->setAttribute('objasig',$this->npliquidacion_det->getObjasig());
 					$this->getUser()->setAttribute('objdeduc',$this->npliquidacion_det->getObjdeduc());
 					$js.="toAjaxUpdater('divgridasig',2,getUrlModulo()+'ajax','2');
@@ -1102,7 +1226,8 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -1241,6 +1366,7 @@ class presnomliquidacionActions extends autopresnomliquidacionActions
   	$this->configGrid($this->npliquidacion_det->getCodemp());
 	$this->configGridAsigDeduc($this->npliquidacion_det->getCodemp(),$codnom,$categoria,$fecegr,$this->npliquidacion_det->getUltimosueldo(),false);
 	*/
+        $this->getUser()->setAttribute('nomsalint',H::getConfAppGen('nomsalint'),'presliquidacion');
 	$this->arrret = $this->cargar_tiporetiro();
 	$this->params = array('arrret'=>$this->arrret);
 	$this->npliquidacion_det = $this->getNpliquidacionDetOrCreate();

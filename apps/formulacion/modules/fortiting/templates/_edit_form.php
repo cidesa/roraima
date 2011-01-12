@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id:_edit_form.php 32813 2009-09-08 16:19:47Z lhernandez $
  */
 // date: 2007/06/29 11:41:38
 ?>
@@ -21,7 +21,7 @@
 <?php echo object_input_hidden_tag($forparing, 'getId') ?>
 <?php echo input_hidden_tag('escero', '') ?>
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Datos de la Partida de Ingreso')?></legend>
+<h2><?php echo __('Datos de la Partida de Ingreso')?></h2>
 <div class="form-row">
   <?php echo label_for('forparing[codparing]', __($labels['forparing{codparing}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('forparing{codparing}')): ?> form-error<?php endif; ?>">
@@ -75,8 +75,7 @@ where length(a.codparing)=".$lonpar." and a.codparing not in (select b.codparing
   <?php $value = object_input_tag($forparing, array('getMontoing',true), array (
   'size' => 10,
   'control_name' => 'forparing[montoing]',
-  'onblur' => 'distribuirPeriodos()',
-  'onKeypress' => 'entermontootro(event,this.id)',
+  'onblur' => 'distribuirPeriodos(), toFloatVE(this.id)',
 )); echo $value ? $value : '&nbsp;' ?></div> </th>
 <th>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -87,37 +86,6 @@ where length(a.codparing)=".$lonpar." and a.codparing not in (select b.codparing
 
 <br>
 
-<fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('Tipo de Financiamiento')?></legend>
-<div class="form-row">
-  <?php echo label_for('forparing[codtipfin]', __($labels['forparing{codtipfin}']), 'class="required"') ?>
-  <div class="content<?php if ($sf_request->hasError('forparing{codtipfin}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('forparing{codtipfin}')): ?>
-    <?php echo form_error('forparing{codtipfin}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-<?php echo input_auto_complete_tag('forparing[codtipfin]', $forparing->getCodtipfin(),
-    'fortiting/autocomplete?ajax=2',  array('autocomplete' => 'off','size' => 6, 'maxlength' => 4, 'onBlur'=> remote_function(array(
-			  'url'      => 'fortiting/ajax',
-			  'complete' => 'AjaxJSON(request, json)',
-			  'condition' => "$('forparing_codtipfin').value != ''",
-  			  'with' => "'ajax=2&cajtexmos=forparing_desfin&cajtexcom=forparing_codtipfin&codigo='+this.value",
-			  ))),
-     array('use_style' => 'true')
-  )
-?>
-
-<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Fortipfin_Fortiting/clase/Fortipfin/frame/sf_admin_edit_form/obj1/forparing_codtipfin/obj2/forparing_desfin/campo1/codfin/campo2/nomext')?>
-
-  <?php $value = object_input_tag($forparing, 'getDesfin', array (
-  'disabled' => true,
-  'control_name' => 'forparing[desfin]',
-  'maxlength' => 100, 'size' => 60,
-)); echo $value ? $value : '&nbsp;' ?>
-
-    </div>
-
-</div>
 </fieldset>
 
 <br>
@@ -156,6 +124,9 @@ echo grid_tag($objMonto);
 </div>
 
 </div>
+
+<?php echo grid_tag($objFF); ?>
+
 </fieldset>
 
 <script type="text/javascript">

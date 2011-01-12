@@ -441,7 +441,10 @@ abstract class BaseAtparroquias extends BaseObject  implements Persistent {
 		if ($this->aAtmunicipios === null && ($this->atmunicipios_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtmunicipiosPeer.php';
 
-			$this->aAtmunicipios = AtmunicipiosPeer::retrieveByPK($this->atmunicipios_id, $con);
+      $c = new Criteria();
+      $c->add(AtmunicipiosPeer::ID,$this->atmunicipios_id);
+      
+			$this->aAtmunicipios = AtmunicipiosPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -721,6 +724,41 @@ abstract class BaseAtparroquias extends BaseObject  implements Persistent {
 
 			if (!isset($this->lastAtciudadanoCriteria) || !$this->lastAtciudadanoCriteria->equals($criteria)) {
 				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAttipviv($criteria, $con);
+			}
+		}
+		$this->lastAtciudadanoCriteria = $criteria;
+
+		return $this->collAtciudadanos;
+	}
+
+
+	
+	public function getAtciudadanosJoinAtmisiones($criteria = null, $con = null)
+	{
+				include_once 'lib/model/ciudadanos/om/BaseAtciudadanoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtciudadanos === null) {
+			if ($this->isNew()) {
+				$this->collAtciudadanos = array();
+			} else {
+
+				$criteria->add(AtciudadanoPeer::ATPARROQUIAS_ID, $this->getId());
+
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAtmisiones($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtciudadanoPeer::ATPARROQUIAS_ID, $this->getId());
+
+			if (!isset($this->lastAtciudadanoCriteria) || !$this->lastAtciudadanoCriteria->equals($criteria)) {
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAtmisiones($criteria, $con);
 			}
 		}
 		$this->lastAtciudadanoCriteria = $criteria;

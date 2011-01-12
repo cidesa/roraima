@@ -13,7 +13,7 @@ abstract class BaseCadetentPeer {
 	const CLASS_DEFAULT = 'lib.model.Cadetent';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 12;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -41,6 +41,18 @@ abstract class BaseCadetentPeer {
 	const CODUBI = 'cadetent.CODUBI';
 
 	
+	const FECVEN = 'cadetent.FECVEN';
+
+	
+	const NUMJAU = 'cadetent.NUMJAU';
+
+	
+	const TAMMET = 'cadetent.TAMMET';
+
+	
+	const NUMLOT = 'cadetent.NUMLOT';
+
+	
 	const ID = 'cadetent.ID';
 
 	
@@ -49,18 +61,18 @@ abstract class BaseCadetentPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Rcpart', 'Codart', 'Canrec', 'Montot', 'Cosart', 'Codalm', 'Codubi', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CadetentPeer::RCPART, CadetentPeer::CODART, CadetentPeer::CANREC, CadetentPeer::MONTOT, CadetentPeer::COSART, CadetentPeer::CODALM, CadetentPeer::CODUBI, CadetentPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('rcpart', 'codart', 'canrec', 'montot', 'cosart', 'codalm', 'codubi', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Rcpart', 'Codart', 'Canrec', 'Montot', 'Cosart', 'Codalm', 'Codubi', 'Fecven', 'Numjau', 'Tammet', 'Numlot', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CadetentPeer::RCPART, CadetentPeer::CODART, CadetentPeer::CANREC, CadetentPeer::MONTOT, CadetentPeer::COSART, CadetentPeer::CODALM, CadetentPeer::CODUBI, CadetentPeer::FECVEN, CadetentPeer::NUMJAU, CadetentPeer::TAMMET, CadetentPeer::NUMLOT, CadetentPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('rcpart', 'codart', 'canrec', 'montot', 'cosart', 'codalm', 'codubi', 'fecven', 'numjau', 'tammet', 'numlot', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Rcpart' => 0, 'Codart' => 1, 'Canrec' => 2, 'Montot' => 3, 'Cosart' => 4, 'Codalm' => 5, 'Codubi' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (CadetentPeer::RCPART => 0, CadetentPeer::CODART => 1, CadetentPeer::CANREC => 2, CadetentPeer::MONTOT => 3, CadetentPeer::COSART => 4, CadetentPeer::CODALM => 5, CadetentPeer::CODUBI => 6, CadetentPeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('rcpart' => 0, 'codart' => 1, 'canrec' => 2, 'montot' => 3, 'cosart' => 4, 'codalm' => 5, 'codubi' => 6, 'id' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Rcpart' => 0, 'Codart' => 1, 'Canrec' => 2, 'Montot' => 3, 'Cosart' => 4, 'Codalm' => 5, 'Codubi' => 6, 'Fecven' => 7, 'Numjau' => 8, 'Tammet' => 9, 'Numlot' => 10, 'Id' => 11, ),
+		BasePeer::TYPE_COLNAME => array (CadetentPeer::RCPART => 0, CadetentPeer::CODART => 1, CadetentPeer::CANREC => 2, CadetentPeer::MONTOT => 3, CadetentPeer::COSART => 4, CadetentPeer::CODALM => 5, CadetentPeer::CODUBI => 6, CadetentPeer::FECVEN => 7, CadetentPeer::NUMJAU => 8, CadetentPeer::TAMMET => 9, CadetentPeer::NUMLOT => 10, CadetentPeer::ID => 11, ),
+		BasePeer::TYPE_FIELDNAME => array ('rcpart' => 0, 'codart' => 1, 'canrec' => 2, 'montot' => 3, 'cosart' => 4, 'codalm' => 5, 'codubi' => 6, 'fecven' => 7, 'numjau' => 8, 'tammet' => 9, 'numlot' => 10, 'id' => 11, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
@@ -127,6 +139,14 @@ abstract class BaseCadetentPeer {
 		$criteria->addSelectColumn(CadetentPeer::CODALM);
 
 		$criteria->addSelectColumn(CadetentPeer::CODUBI);
+
+		$criteria->addSelectColumn(CadetentPeer::FECVEN);
+
+		$criteria->addSelectColumn(CadetentPeer::NUMJAU);
+
+		$criteria->addSelectColumn(CadetentPeer::TAMMET);
+
+		$criteria->addSelectColumn(CadetentPeer::NUMLOT);
 
 		$criteria->addSelectColumn(CadetentPeer::ID);
 

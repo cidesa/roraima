@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage almdefalm
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 41067 2010-10-20 17:11:44Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -34,12 +34,13 @@ class almdefalmActions extends autoalmdefalmActions
 
 	}
 
-    
-  
-  
+
+
+
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -86,13 +87,23 @@ class almdefalmActions extends autoalmdefalmActions
 	    	$dato=BnubibiePeer::getDesubicacion($this->getRequestParameter('codigo'));
             $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
 	    }
+          if ($this->getRequestParameter('ajax')=='2')
+	    {
+	    	$dato=H::getX('Id', 'Catipalm', 'Nomtip', $this->getRequestParameter('codigo'));
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+          if ($this->getRequestParameter('ajax')=='3')
+	    {
+	    	$dato=H::getX('Codedo', 'Ocestado', 'Nomedo', $this->getRequestParameter('codigo'));
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
 	  $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 	  return sfView::HEADER_ONLY;
 
     }
 
   /**
-   * Función principal para procesar la eliminación de registros 
+   * Función principal para procesar la eliminación de registros
    * en el formulario.
    *
    */

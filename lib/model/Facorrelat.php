@@ -7,8 +7,8 @@
  *
  * @package    Roraima
  * @subpackage lib.model
- * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Facorrelat.php 33699 2009-10-01 22:15:36Z dmartinez $
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Facorrelat.php 38696 2010-06-09 15:15:15Z cramirez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -135,6 +135,14 @@ class Facorrelat extends BaseFacorrelat
 	public function getAsiparrec()
 	{
 	  return Herramientas::getX('CODEMP','Cadefart','Asiparrec','001');
+	}
+
+        public function getProform()
+	{
+          if($this->proform=='S' or $this->proform=='1')
+            return $this->proform;
+          else
+            return null;
 	}
 
 }

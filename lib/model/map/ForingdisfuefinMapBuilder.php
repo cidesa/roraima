@@ -40,6 +40,8 @@ class ForingdisfuefinMapBuilder {
 
 		$tMap->addColumn('MONTOING', 'Montoing', 'double', CreoleTypes::NUMERIC, false, 20);
 
+		$tMap->addColumn('CODCAT', 'Codcat', 'string', CreoleTypes::VARCHAR, false, 20);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

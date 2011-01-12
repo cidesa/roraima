@@ -11,7 +11,7 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             codpre
   esgrabable:              true
-  html:                    [size="20" readonly=true]
+  html:                    [size="50" readonly=true]
 2:       # Columna 2
   titulo:                  Monto
   tipo:                    m
@@ -19,3 +19,10 @@ opciones:                  # Opciones generales
   nombrecampo:             moncau
   esnumerico:              true
   html:                    [size="10" readonly=true]
+3:       # Columna 3
+  titulo:                  Referencia Salida
+  tipo:                    t
+  nombrecampo:             refsal
+  esgrabable:              true
+  html:                    [size="50" readonly=true]
+  oculta:                  true

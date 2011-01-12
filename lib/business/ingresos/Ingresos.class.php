@@ -4,9 +4,9 @@
  *
  * @package    Roraima
  * @subpackage ingresos
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Ingresos.class.php 38785 2010-06-11 19:39:38Z dmartinez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -44,6 +44,9 @@ class Ingresos
 
   //Guarda el detalle del nivel presupuestario
   public static function salvarNiveles($cidefniv, $grid){
+
+  	$t= new Criteria();
+  	CinivelesPeer::doDelete($t);
 
     $x=$grid[0];
       $j=0;
@@ -229,8 +232,9 @@ class Ingresos
   {
       $x = $grid[0];
       $j = 0;
-      $c = new Criteria();
-      CiperejePeer::doDelete($c);
+
+      $sql="delete from cipereje";
+      H::insertarRegistros($sql);
 
       while ($j<count($x))
       {
@@ -318,8 +322,14 @@ class Ingresos
 
   $datos=array();
   $datos='';
-    if($fecha<$fecfinal && $contador<=$numper){
+    //if($fecha<$fecfinal && $contador<=$numper){
 
+
+      $fecha1=$fecha;
+      $fecini=substr($fecha,6,4)."-".substr($fecha,3,2)."-".substr($fecha,0,2);
+      $fecfin=H::dateAdd('d',-1,(H::dateAdd('m',(int)$incmes,$fecini,'+')),'+');
+
+    //}
 
       if ($contador<10){
         $per="0".(string)$contador;
@@ -327,11 +337,7 @@ class Ingresos
       }else{
         $per=(string)$contador;
       }
-      $fecha1=$fecha;
-      $fecini=substr($fecha,6,4)."-".substr($fecha,3,2)."-".substr($fecha,0,2);
-      $fecfin=H::dateAdd('d',-1,(H::dateAdd('m',(int)$incmes,$fecini,'+')),'+');
 
-    }
 
     $datos[0]=$per;
     $datos[1]=$fecha1;
@@ -376,7 +382,9 @@ class Ingresos
     $tsmovlib->setNumcue($cireging->getCtaban());
     $tsmovlib->setReflib($cireging->getNumdep());
     $tsmovlib->setCedrif($cireging->getRifcon());
-    $tsmovlib->setFeclib($cireging->getFecing());
+    if ($cireging->getFecdep()!="")
+      $tsmovlib->setFeclib($cireging->getFecdep());
+    else $tsmovlib->setFeclib($cireging->getFecing());
     $tsmovlib->setFecing($cireging->getFecing());
     $tsmovlib->setTipmov($cireging->getTipmov());
     $tsmovlib->setMonmov($cireging->getMontot());
@@ -388,7 +396,7 @@ class Ingresos
     if ($grabocontabilidad){
       $tsmovlib->setStatus('C');   //Contabilizado
       $tsmovlib->setFeccom($cireging->getFecing());
-      $tsmovlib->setNumcom($cireging->getRefing());
+      $tsmovlib->setNumcom($cireging->getNumcom());
 
     }else{
       $tsmovlib->setStatus('N');
@@ -406,23 +414,22 @@ class Ingresos
     try{
       $c= new Criteria();
       $c->add(TsmovlibPeer::NUMCUE,$cireging->getCtaban());
-      $c->add(TsmovlibPeer::REFLIB,$cireging->getRefing());
+      $c->add(TsmovlibPeer::REFLIB,$cireging->getNumdep());
       $c->add(TsmovlibPeer::TIPMOV,$cireging->getTipmov());
       $datos=TsmovlibPeer::doSelectOne($c);
-
-      //H::printR($datos);exit;
       if ($datos){
           if ($datos->getStacon()!='C'){
 
             $tsmovlibnew= new Tsmovlib();
-
             $tsmovlibnew->setNumcue($datos->getNumcue());
-            $tsmovlibnew->setReflib('A'.$cireging->getRefing());
+            $tsmovlibnew->setReflib('A'.$cireging->getNumdep());
             $tsmovlibnew->setCedrif($cireging->getCedrif());
-            $tsmovlibnew->setFeclib($cireging->getFecing());
+            if ($cireging->getFecdep()!="")
+            $tsmovlibnew->setFeclib($cireging->getFecdep());
+            else $tsmovlibnew->setFeclib($cireging->getFecing());
             $tsmovlibnew->setTipmov("ANUD");
             $tsmovlibnew->setMonmov($datos->getMonmov());
-            $tsmovlibnew->setNumcom($cireging->getRefing());
+            $tsmovlibnew->setNumcom($cireging->getNumcom());
             $tsmovlibnew->setCodcta($datos->getCodcta());
             $tsmovlibnew->setFeccom($cireging->getFecing());
             $tsmovlibnew->setStatus('C');
@@ -452,7 +459,6 @@ class Ingresos
   $c= new Criteria();
   $c->add(TsdefbanPeer::NUMCUE,$cireging->getCtaban());
   $datos=TsdefbanPeer::doSelectOne($c);
-
   if ($debcre=='D'){
 
     if ($accion='A'){
@@ -604,74 +610,71 @@ public static function generar_comprobante($cireging,$arreglo=array()){
 
 public static function buscar_comprobante($cireging,$accion,$fecanu){
 
-  if ($accion='E'){
+  if ($accion=='E'){
 
     $c= new Criteria();
-    $c->add(ContabcPeer::NUMCOM,$cireging->getRefing());
-    $c->add(ContabcPeer::FECCOM,$cireging->getFeccom());
-    $contabc=ContabcPeer::doSelect($c);
-
+    $c->add(ContabcPeer::NUMCOM,$cireging->getNumcom());
+    $contabc=ContabcPeer::doSelectOne($c);
     if ($contabc){
 
       $c1= new Criteria();
-      $c1->add(Contabc1Peer::NUMCOM,$cireging->getRefing());
-      $c1->add(Contabc1Peer::FECCOM,$cireging->getFeccom());
+      $c1->add(Contabc1Peer::NUMCOM,$cireging->getNumcom());
       $contabc1=Contabc1Peer::doSelect($c);
-
       if ($contabc1){
 
         $c1= new Criteria();
-        $c1->add(Contabc1Peer::NUMCOM,$cireging->getRefing());
-        $c1->add(Contabc1Peer::FECCOM,$cireging->getFeccom());
+        $c1->add(Contabc1Peer::NUMCOM,$cireging->getNumcom());
         $asiento=Contabc1Peer::doSelect($c);
 
-        if(count($contabc)==count($contabc1)){
+        if(count($contabc1)==count($asiento)){
           $eliminar = true;
         }else{
           $eliminar = false;
         }
 
         $c1= new Criteria();
-        $c1->add(Contabc1Peer::NUMCOM,$cireging->getRefing());
-        $c1->add(Contabc1Peer::FECCOM,$cireging->getFeccom());
+        $c1->add(Contabc1Peer::NUMCOM,$cireging->getNumcom());
         Contabc1Peer::doDelete($c);
 
         if ($eliminar){
           $c= new Criteria();
-          $c->add(ContabcPeer::NUMCOM,$cireging->getRefing());
-          $c->add(ContabcPeer::FECCOM,$cireging->getFeccom());
+          $c->add(ContabcPeer::NUMCOM,$cireging->getNumcom());
           ContabcPeer::doDelete($c);
         }
 
       }
 
-      }else{ return 'El comprobante Nro. '.$cireging->getRefing().' no fué anulado'; }
+      }else{ return 'El comprobante Nro. '.$cireging->getNumcom().' no fué anulado'; }
 
   }else{
 
     $c= new Criteria();
-    $c->add(ContabcPeer::NUMCOM,$cireging->getRefing());
-    $contabc=ContabcPeer::doSelect($c);
-
+    $c->add(ContabcPeer::NUMCOM,$cireging->getNumcom());
+    $contabc=ContabcPeer::doSelectOne($c);
     if ($contabc){
 
+    	$confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+        if ($confcorcom=='N')
+         $numcom2="A".substr($cireging->getRefing(),1,7);
+        else $numcom2 = Comprobante::Buscar_Correlativo();
       $tcontabc= new Contabc();
 
-      $tcontabc->setNumcom($cireging->getRefing());
+      $tcontabc->setNumcom($numcom2);
       $tcontabc->setFeccom($fecanu);
+      $tcontabc->setReftra($contabc->getReftra());
       $tcontabc->setDescom($contabc->getDescom());
       $tcontabc->setStacom('D');
       $tcontabc->setTipcom('');
       $tcontabc->setMoncom($contabc->getMoncom());
-      $tscontabc->save();
+      $tcontabc->save();
 
       $c= new Criteria();
-      $c->add(Contabc1Peer::NUMCOM,$cireging->getRefing());
+      $c->add(Contabc1Peer::NUMCOM,$cireging->getNumcom());
       $contabc1=Contabc1Peer::doSelect($c);
 
       foreach ($contabc1 as $per){
         $tcontabc1= new Contabc1();
-        $tcontabc1->setNumcom($per->getRefing());
+        $tcontabc1->setNumcom($numcom2);
         $tcontabc1->setFeccom($fecanu);
         $tcontabc1->setCodcta($per->getCodcta());
         $tcontabc1->setNumasi($per->getNumasi());
@@ -686,20 +689,16 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
       }
 
     }else{
-
-      return 'El comprobante Nro. '.$cireging->getRefing().' no fué anulado';
-      ///arreglar
-    //  self::incluir_asiento();
-    //  self::cargar_comprobante();
+      return 'El comprobante Nro. '.$cireging->getNumcom().' no fué anulado';
     }
-
-
   }
+
+  return -1;
 
 }///Fin buscar_comprobante
 
 
-  public static function grabarComprobante($cireging,$grid,&$arrcompro)
+  public static function grabarComprobante($cireging,$grid,&$arrcompro,&$msjuno)
   {
     $mensaje="";
     $numeroorden="";
@@ -707,15 +706,15 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
 
     if ($cireging->getRefing()=='########')
     {
-      if (Herramientas::getVerCorrelativo('cortras','cidefniv',&$r))
+      if (Herramientas::getVerCorrelativo('coring','cidefniv',&$r))
       {
          $encontrado=false;
          while (!$encontrado)
          {
           $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
           $c= new Criteria();
-          $c->add(CitraslaPeer::REFTRA,$numero);
-          $resul= CitraslaPeer::doSelectOne($c);
+          $c->add(CiregingPeer::REFING,$numero);
+          $resul= CiregingPeer::doSelectOne($c);
           if ($resul)
           {
             $r=$r+1;
@@ -732,7 +731,12 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
     }
 
     //$numerocomprob = $numeroorden;
-    $numerocomprob=Comprobante::Buscar_Correlativo();
+    //$numerocomprob=Comprobante::Buscar_Correlativo();
+     $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+    if ($confcorcom=='N')
+    {
+      $numerocomprob= $numorden;
+    }else $numerocomprob= '########';
     $reftra=$numorden;
     $cuentaporpagarrendicion = "";
 
@@ -782,7 +786,7 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
               $tipo='C';
               $des="";
               $monto=$moncau;
-          }else { $msjuno='El Código Presupuestario no tiene asociado Codigo Contable válido'; return true;}
+          }else { $msjuno='La Cuenta Contable asociada a El Código Presupuestario no existe'; return true;}
         }
          if ($j==0)
          {
@@ -802,20 +806,29 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
       }
 
     //Obtener cta asociada al banco
+        $codigo="";
         $codigocuenta2=$cireging->getCtaban();
         $b1= new Criteria();
         $b1->add(TsdefbanPeer::NUMCUE,$codigocuenta2);
         $regis3 = TsdefbanPeer::doSelectOne($b1);
+        if ($regis3) {
           $codigo = $regis3->getCodcta();
+        }
 
         //Obtener la descripcion del codigo de cuenta
         $b2= new Criteria();
         $b2->add(ContabbPeer::CODCTA,$codigo);
         $regis4  = ContabbPeer::doSelectOne($b2);
+        if ($regis4) {
           $nomcta = $regis4->getDescta();
           $tipo2  = 'D';
           $des2   = $regis4->getDescta();
           $monto2 = $cireging->getMontot();
+        }else {
+          	$msjuno='La Cuenta Contable asociada a Cuenta Bancaria no existe';
+          	return true;
+
+        }
 
       $cuentas=$codigo.'_'.$codigocuentas;
       $descr=$des2.'_'.$desc;
@@ -856,7 +869,11 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
     $c->add(CiimpingPeer::CODPRE,$codpre);
     $ingresos = CiimpingPeer::doSelect($c);
 
-  if ($ingresos or $adiciones or $ajustes or $traslados){
+    $c = new Criteria();
+    $c->add(CiasiiniPeer::CODPRE,$codpre);
+    $asignacion = CiasiiniPeer::doSelect($c);
+
+  if ($ingresos or $adiciones or $ajustes or $traslados or $asignacion){
 
     return 1;
   }else{
@@ -1007,6 +1024,11 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
       $ano = substr(date('d/m/YY'),6,4);
       $ciadidis->setAnoadi($ano);
       $ciadidis->setStaadi('A');
+      if ($ciadidis->getRefadi()=='00000000')
+      {
+          $num = H::getNextvalSecuencia('ciadidis_refadi_seq');
+          $ciadidis->setRefadi(str_pad($num,8,'0',STR_PAD_LEFT));
+      }
       $ciadidis->save();
 
       return Ingresos::salvarMovadi($ciadidis, $grid);

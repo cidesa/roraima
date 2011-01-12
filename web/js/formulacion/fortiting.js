@@ -1,3 +1,14 @@
+/**
+ * Librer√≠as Javascript
+ *
+ * @package    Roraima
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ *
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
+
 function distribuirPeriodos()
 {
   str1= $('forparing_montoing').value.toString();
@@ -10,7 +21,6 @@ function distribuirPeriodos()
   str1= str1.replace(',','.');
   var monto=parseFloat(str1);
   var MontoPeriodo = monto / 12;
-
 
   var fil=0;
   while (fil<12)
@@ -171,6 +181,20 @@ function distribuirPeriodos2()
        str2= str2.replace(',','.');
        var monto2=parseFloat(str2);
 
+
+     str3= $(porcen).value.toString();
+     str3= str3.replace('.','') ;
+     str3= str3.replace('.','') ;
+     str3= str3.replace('.','') ;
+     str3= str3.replace('.','') ;
+     str3= str3.replace('.','') ;
+     str3= str3.replace('.','') ;
+     str3= str3.replace(',','.');
+     var montopor=parseFloat(str3);
+
+	   var mm = (monto2 * 100 / montosreal);
+	  $(porcen).value = format(mm.toFixed(2),'.',',','.');
+
   	var fil   = 0;
   	var total = 0;
     while (fil<12)
@@ -189,6 +213,7 @@ function distribuirPeriodos2()
      var montocol=parseFloat(str4);
 
 	 total = total + montocol;
+
      fil++;
     }
 
@@ -217,7 +242,7 @@ function distribuirPeriodos2()
 
      if (!validarnumero(id))
      {
-       alert('Monto Inv·lido');
+       alert('Monto Invalido');
        $(id).value="0,00";
      }
      else
@@ -284,7 +309,7 @@ function distribuirPeriodos2()
    {
    if (monto4 > monto)
    {
-   	 alert('El Monto del PerÌodo no puede exceder el Presupuesto de AÒo');
+   	 alert('El Monto del PerÔøΩodo no puede exceder el Presupuesto de AÒo');
    	 $(id).value="0,00";
    	 $(porcen).value="0,00";
    	 actualizarsaldos();
@@ -328,7 +353,7 @@ function distribuirPeriodos2()
 
      if (!validarnumero(id))
      {
-       alert('Monto Inv·lido');
+       alert('Monto Invalido');
        $(id).value="0,00";
      }
      else
@@ -373,7 +398,7 @@ function distribuirPeriodos2()
        }
        else
        {
-       	alert('los porcentajes se calcularan al final');
+       	alert('Los Porcentajes se Calcularan al Final.');
        }
 
        actualizarsaldos();
@@ -414,7 +439,7 @@ function distribuirPeriodos2()
    {
    if (monto4 > monto)
    {
-   	 alert('El Monto del PerÌodo no puede exceder el Presupuesto de AÒo');
+   	 alert('El Monto del Periodo no puede exceder el Presupuesto de AÒo');
    	 $(id).value="0,00";
    	 $(monto).value="0,00";
    	 actualizarsaldos();
@@ -422,3 +447,76 @@ function distribuirPeriodos2()
    }
   }
 }
+
+
+
+ function Calculo(id)
+ {
+      var aux = id.split("_");
+      var name=aux[0];
+      var fil=aux[1];
+      var col=parseInt(aux[2]);
+
+      var colum=col;
+      var cajatxt=name+"_"+fil+"_"+colum;
+
+      str1= $('forparing_montoing').value.toString();
+       str1= str1.replace('.','') ;
+       str1= str1.replace('.','') ;
+       str1= str1.replace('.','') ;
+       str1= str1.replace('.','') ;
+       str1= str1.replace('.','') ;
+       str1= str1.replace('.','') ;
+       str1= str1.replace(',','.');
+       var montosreal=parseFloat(str1);
+
+       str2= $(id).value.toString();
+       str2= str2.replace('.','') ;
+       str2= str2.replace('.','') ;
+       str2= str2.replace('.','') ;
+       str2= str2.replace('.','') ;
+       str2= str2.replace('.','') ;
+       str2= str2.replace('.','') ;
+       str2= str2.replace(',','.');
+       var monto2=parseFloat(str2);
+
+  	var fil   = 0;
+  	var total = 0;
+	  var cajatxt2="bx"+"_0_3";       //monto
+  	if (monto2 > montosreal){
+  		alert('El Monto del Periodo no puede exceder el Presupuesto de AÒo'); $(id).value="0,00"; $(id).focus();
+
+  	}else{
+	    while ($(cajatxt2))
+	    {
+//	    alert($(cajatxt).value.toString());
+	     str4= $(cajatxt2).value.toString();
+	     str4= str4.replace('.','') ;
+	     str4= str4.replace('.','') ;
+	     str4= str4.replace('.','') ;
+	     str4= str4.replace('.','') ;
+	     str4= str4.replace('.','') ;
+	     str4= str4.replace('.','') ;
+	     str4= str4.replace(',','.');
+	     var montocol=parseFloat(str4);
+
+	     fil = fil + 1;
+	     var cajatxt2="bx"+"_"+fil+"_3";       //monto
+
+		 total = total + montocol;
+
+	    }
+
+	    if (total > montosreal)
+	    {
+	    	alert('El Monto del Periodo no puede exceder el Presupuesto de AÒo');
+		   	$(id).value="0,00";
+	//	   	actualizarsaldos();
+		   	$(id).focus();
+	    }else{
+		    $(cajatxt).value=format(monto2.toFixed(2),'.',',','.');
+	    }
+		}
+ }
+
+

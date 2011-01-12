@@ -30,6 +30,7 @@ class Tsmovban extends BaseTsmovban
 	public function getCuentas()
 	{
 		$c = new Criteria();
+                $c->addAscendingOrderByColumn(TsdefbanPeer::NUMCUE);
 		$obj = TsdefbanPeer::doSelect($c);
 		$objban=array();
 

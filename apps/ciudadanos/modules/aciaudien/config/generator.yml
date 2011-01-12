@@ -1,0 +1,41 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Ataudiencias
+    theme:            cidesaGenerator
+
+    fields:
+      atciudadano_id:
+        name:       Solicitante
+      atunidades_id:
+        name:       Unidad
+        params:     text_method=getDesuni include_custom=Seleccione...
+      motaud:       { name: Motivo, type: textarea_tag, params: cols=60 rows=2 rich=false }
+      persona:      { name: Persona de contacto, params: size=50 }
+      fecha:        { name: Fecha  }
+      telefono:     { name: Telefono/Cedular }
+      fechar:       { name: Fecha Registro, type: plain, params: readonly=true }
+      fechaa:       { name: Fecha Atención, type: plain, params: readonly=true }
+      observacion:  { name: Observación, type: textarea_tag, params: cols=60 rows=2 rich=false readonly=true }
+      status:       { name: Estado }
+      lugar:        { name: Lugar, type: textarea_tag, params: cols=60 rows=2 rich=false readonly=true }
+    list:
+      title:          Peticiones de Audiencias
+      display:        [=cedula, nombre, unidad, status]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [atciudadano_id, atunidades_id]
+      max_per_page:   5
+      sort:           atciudadano_id
+    edit:
+      title:          Edición de Petidiones de Audiencias
+      display:
+        Solicitado por:  [_atciudadano_id]
+        Unidad:       [atunidades_id, persona]
+        Descripción:  [motaud ]
+        Estado:       [_status, lugar, observacion, fechaa, fechar ]
+      actions:
+        _save:        ~
+        _delete:      ~
+        _create:      ~

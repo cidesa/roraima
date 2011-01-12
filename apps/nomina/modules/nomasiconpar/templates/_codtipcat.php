@@ -1,0 +1,1 @@
+ <?php echo select_tag('npasiconpar[codtipcat]', options_for_select(NptipcatPeer::getCategorias(),$npasiconpar->getCodtipcat(),'include_custom=Seleccione una'),array()) ?>

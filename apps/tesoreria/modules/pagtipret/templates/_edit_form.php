@@ -73,14 +73,14 @@
        'update'   => 'divDatos',
        'url'      => 'pagtipret/datos',
        'script'   => true,
-           'with' => "'ajax=S&unitri='+document.getElementById('optipret_unitri').value+'&factor='+document.getElementById('optipret_factor').value+'&porsus='+document.getElementById('optipret_porsus').value+'&basimp='+document.getElementById('optipret_basimp').value+'&basimp1='+document.getElementById('optipret_basimp1').value+'&porret='+document.getElementById('optipret_porret').value"
+           'with' => "'ajax=S&unitri='+document.getElementById('optipret_unitri').value+'&factor='+document.getElementById('optipret_factor').value+'&porsus='+document.getElementById('optipret_porsus').value+'&basimp='+document.getElementById('optipret_basimp').value+'&basimp1='+document.getElementById('optipret_basimp1').value+'&mbasmi='+document.getElementById('optipret_mbasmi').value+'&mbasmi1='+document.getElementById('optipret_mbasmi1').value+'&porret='+document.getElementById('optipret_porret').value"
         )))) ?>
   &nbsp;&nbsp;
   <?php echo "  No" . radiobutton_tag('optipret[consustra]', 'N', !$val, array('onClick'=> remote_function(array(
        'update'   => 'divDatos',
        'url'      => 'pagtipret/datos',
        'script'   => true,
-         'with' => "'ajax=N&unitri='+document.getElementById('optipret_unitri').value+'&factor='+document.getElementById('optipret_factor').value+'&porsus='+document.getElementById('optipret_porsus').value+'&basimp='+document.getElementById('optipret_basimp').value+'&basimp1='+document.getElementById('optipret_basimp1').value+'&porret='+document.getElementById('optipret_porret').value"
+         'with' => "'ajax=N&unitri='+document.getElementById('optipret_unitri').value+'&factor='+document.getElementById('optipret_factor').value+'&porsus='+document.getElementById('optipret_porsus').value+'&basimp='+document.getElementById('optipret_basimp').value+'&basimp1='+document.getElementById('optipret_basimp1').value+'&mbasmi='+document.getElementById('optipret_mbasmi').value+'&mbasmi1='+document.getElementById('optipret_mbasmi1').value+'&porret='+document.getElementById('optipret_porret').value"
         ))))?>
     </div>
 <br>
@@ -117,6 +117,23 @@
 </th>
 <th>
   <?php echo label_for('montot', __('% del Monto Total'),'class="required"') ?>
+</th>
+
+<th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>
+<div id="montoocul" style="display:none">
+   <?php echo label_for('monbasmin', __('Monto Base Mínimo'),'class="required"') ?>
+  <?php $value = object_input_tag($optipret, array('getMbasmi',true), array (
+  'size' => 7,
+  'control_name' => 'optipret[mbasmi]',
+  'onBlur' => "javascript:event.keyCode=13; return entermontootro(event, this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+</th>
+<th>
+<div id="montoocul2" style="display:none">
+  <?php echo label_for('expre', __('expresado en Unidades Tributarias'),'class="required"') ?>
+</div>
 </th>
 </tr>
 </table>
@@ -192,6 +209,23 @@
 <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;'.'% del Monto Total'?>
    </div>
 </th>
+
+<th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>
+<div id="montoocula" style="display:none">
+   <?php echo label_for('monbasmin', __('Monto Base Mínimo'),'class="required"') ?>
+  <?php $value = object_input_tag($optipret, array('getMbasmi',true), array (
+  'size' => 7,
+  'control_name' => 'optipret[mbasmi1]',
+  'onBlur' => "javascript:event.keyCode=13; return entermontootro(event, this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+</th>
+<th>
+<div id="montoocula2" style="display:none">
+  <?php echo label_for('expre', __('expresado en Unidades Tributarias'),'class="required"') ?>
+</div>
+</th>
 </tr>
 </table>
 </div>
@@ -263,4 +297,18 @@ function verificar()
   	$('optipret_descta').value="";
   }
 }
+ var limbast='<?php echo $optipret->getLimbaseret(); ?>';
+ var consus='<?php echo $optipret->getConsustra(); ?>';
+ if (limbast=='S')
+ {
+     if (consus=='S')
+     {
+         $('montoocula').show();
+         $('montoocula2').show();
+     }else {
+         $('montoocul').show();
+         $('montoocul2').show();
+     }
+ }
+
 </script>

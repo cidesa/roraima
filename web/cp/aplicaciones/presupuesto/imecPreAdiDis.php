@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
@@ -6,6 +7,7 @@ require_once($_SESSION["x"].'lib/general/tools.php');
 require_once($_SESSION["x"].'lib/general/funciones.php');
 validar(array(11,15));            //Seguridad  del Sistema
 $codemp=$_SESSION["codemp"];
+$loguse=$_SESSION["loguse"];
 $bd=new basedatosAdo($codemp);
 $z= new tools();
 
@@ -29,7 +31,7 @@ $z= new tools();
     {
       try
       {
-        $bd->startTransaccion();
+        //$bd->startTransaccion();
 
         if ($imec=='I')
         {
@@ -38,17 +40,24 @@ $z= new tools();
           //  GRABAR TRASLADO
 
           $sql="insert into CPAdiDis
-            (RefAdi,FecAdi,AnoAdi,DesAdi,DesAnu,TotAdi,StaAdi,AdiDis)
-            values ('".$codigo."',to_date('".$fecha."','dd/mm/yyyy'),'".$ano."','".$desc."','".$desanu."', ".$totadidis.",'".$stadidis."','".$tipo."')";
+            (RefAdi,FecAdi,AnoAdi,DesAdi,DesAnu,TotAdi,StaAdi,AdiDis,Loguse)
+            values ('".$codigo."',to_date('".$fecha."','dd/mm/yyyy'),'".$ano."','".$desc."','".$desanu."', ".$totadidis.",'".$stadidis."','".$tipo."','".$loguse."')";
 
           $bd->actualizar($sql);
+
+                 $sql= "select * from CPMovAdi where trim(RefAdi)='$codigo'";
+                  if ($tb=$z->buscar_datos($sql))
+                   {
+                    $sql="delete from CPMovAdi Where trim(RefAdi)='".trim($codigo)."'";
+                      $bd->actualizar($sql);
+                   }
+
+
+            // GRABAR DETALLE TRASLADOS CODIGOS PRESUPUESTARIOS -- GRID
           
-          // GRABAR DETALLE TRASLADOS CODIGOS PRESUPUESTARIOS -- GRID
-          $sql="delete from CPMovAdi Where trim(RefAdi)='".trim($codigo)."'";
-          $bd->actualizar($sql);
 
           $i=1;
-          while ($i<=50)
+          while ($i<=500)
           {
             if ((trim($_POST["x".$i."1"])!="") and (number_format($_POST["x".$i."3"],2,'.',',')!= number_format(0,2,'.',',')) )
             {
@@ -60,7 +69,7 @@ $z= new tools();
             }
             else
             {
-              $i=51;
+              $i=501;
             }
           } //while
         } //if ($imec=='I')
@@ -78,13 +87,13 @@ $z= new tools();
 
         // Guardar en Segbitaco
         $sql = "Select id from cpadidis where trim(RefAdi) = '".trim($codigo)."'";
-  
+
         $tb=$bd->select($sql);
         $id = $tb->fields["id"];
         $bd->Log($id, 'pre', 'Cpadidis', 'Preadidis', $imec=='M' ? 'A' : 'G' );
 
 
-        $bd->completeTransaccion();
+        //$bd->completeTransaccion();
 
       }//try
       catch(Exception $e)

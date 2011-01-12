@@ -24,7 +24,8 @@ class almordcomActions extends autoalmordcomActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -39,9 +40,71 @@ class almordcomActions extends autoalmordcomActions
       {
         $grid_detalle=Herramientas::CargarDatosGrid($this,$this->obj,true);//0
         $grid_entregas=Herramientas::CargarDatosGrid($this,$this->obj_entregas,true);//0
+        $grid_formas_entregas=Herramientas::CargarDatosGrid($this,$this->obj_formas);//0
         $grid_detalle_detallado=$grid_detalle[0];
 
         $grid_resumen=Herramientas::CargarDatosGrid($this,$this->obj_resumen,true);//0
+
+        // Validacion del nro de la orden de compra
+        $numord = str_replace('#','0',$this->caordcom->getOrdcom());
+        $numord = str_pad($numord, 8, '0', STR_PAD_LEFT);
+
+        $prefijomixto=H::getConfApp('prefijomixto', 'compras', 'almordcom');
+        if (($this->caordcom->getTipord()=='S') || ($this->caordcom->getTipord()=='M') || ($this->caordcom->getTipord()=='T'))
+        {
+          if ($prefijomixto!="" && $this->caordcom->getTipord()=='M')
+            $numord = $prefijomixto.substr($numord, 2, 6);
+          elseif ($this->caordcom->getTipord()=='T')
+              $numord = 'CO'.substr($numord, 2, 6);
+          else $numord = 'OS'.substr($numord, 2, 6);
+        }else{
+          $numord = 'OC'.substr($numord, 2, 6);
+        }
+
+        if(Herramientas::getX_vacio('ordcom','caordcom','ordcom',$numord)!=''){
+          $this->coderror1 = 102;
+          $this->caordcom->setOrdcom($numord);
+          return false;
+        }
+        if(H::getConfApp2('valresp', 'compras', 'almordcom')=='S'){
+          if ($this->getRequestParameter('caordcom[codemp]')=="")
+          {
+            $this->coderror4 = 209;
+            return false;
+          }
+        }
+
+        if(H::getConfApp2('valunidad', 'compras', 'almordcom')=='S'){
+          if ($this->getRequestParameter('caordcom[coduni]')=="")
+          {
+            $this->coderror4 = 567;
+            return false;
+          }else {
+              $r= new Criteria();
+              $r->add(BnubicaPeer::CODUBI,$this->getRequestParameter('caordcom[coduni]'));
+              $reg= BnubicaPeer::doSelectOne($r);
+              if (!$reg)
+              {
+                $this->coderror4 = 568;
+                return false;
+              }
+          }
+
+          if ($this->getRequestParameter('caordcom[codcen]')=="")
+          {
+            $this->coderror4 = 569;
+            return false;
+          }else {
+              $r= new Criteria();
+              $r->add(CadefcenPeer::CODCEN,$this->getRequestParameter('caordcom[codcen]'));
+              $reg= CadefcenPeer::doSelectOne($r);
+              if (!$reg)
+              {
+                $this->coderror4 = 570;
+                return false;
+              }
+          }
+        }
 
         $this->mannivelapr="";
 	    $varemp = $this->getUser()->getAttribute('configemp');
@@ -255,7 +318,7 @@ class almordcomActions extends autoalmordcomActions
         }
         //si no viene de una referencia y no se carga parcialmente
         else
-          $this->configGrid($this->getRequestParameter('caordcom[ordcom]'),'0');
+          $this->configGrid($this->getRequestParameter('caordcom[ordcom]'),'0','');
 
         /*  if (($this->getRequestParameter('caordcom[refsol]')!="") and ($this->getRequestParameter('parcial')=="S"))
           $this->configGrid_Recargos($this->getRequestParameter('caordcom[refsol]'),$this->getRequestParameter('caordcom[rifpro]'));
@@ -265,6 +328,7 @@ class almordcomActions extends autoalmordcomActions
         $this->configGrid_Resumen($this->getRequestParameter('caordcom[ordcom]'));
         $this->configGrid_ResumenPartidas($this->getRequestParameter('caordcom[ordcom]'));
         $this->configGrid_Entregas($this->getRequestParameter('caordcom[ordcom]'));
+        $this->configGrid_FormasEntrega($this->getRequestParameter('caordcom[ordcom]'));
       }
       else
       {
@@ -293,6 +357,7 @@ class almordcomActions extends autoalmordcomActions
         $this->configGrid_Resumen($caordcom->getOrdcom());
         $this->configGrid_ResumenPartidas($caordcom->getOrdcom());
         $this->configGrid_Entregas($caordcom->getOrdcom());
+        $this->configGrid_FormasEntrega($caordcom->getOrdcom());
         $this->forward404Unless($caordcom);
       }
 
@@ -307,18 +372,20 @@ class almordcomActions extends autoalmordcomActions
   public function executeEdit()
   {
     $this->caordcom = $this->getCaordcomOrCreate();
+    $this->caordcom->setOculsave($this->oculsave);
     $this->imp=$this->getRequestParameter('impche');
     $this->listatipocompra = Constantes::ListaTipoCompra();
     $this->readonly='';
             //$err = Herramientas::obtenerMensajeError($coderror);
 
     if ($this->caordcom->getOrdcom()!='')
-      $this->readonly='readonly';
+      $this->readonly=true;
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
       $this->updateCaordcomFromRequest();
-      if ($this->saveCaordcom($this->caordcom)==-1)
+      $coderr = $this->saveCaordcom($this->caordcom);
+      if ($coderr ==-1)
       {
         $this->caordcom->setId(Herramientas::getX_vacio('ordcom','caordcom','id',$this->caordcom->getOrdcom()));
         $this->setFlash('notice', 'Your modifications have been saved');
@@ -329,14 +396,18 @@ class almordcomActions extends autoalmordcomActions
 	     {
 	       if($resul->getComasopre()=='S' && $resul->getComreqapr()!='S')
 	       {
-	        $totaimp=Orden_compra::totalImputacion($this->caordcom->getOrdcom());
-	        if (H::convnume($this->caordcom->getMonord())!=$totaimp)
-	        {
-	        	$this->setFlash('notice', 'El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud');
-	        }
+	        $tip=H::getX('CODPRO','Caprovee','Tipo',$this->caordcom->getCodpro());
+			 if ($tip=='P'){
+				$totaimp=Orden_compra::totalImputacion($this->caordcom->getOrdcom());
+		        if (H::toFloat($this->caordcom->getMonord())!=$totaimp)
+		        {
+		        	$this->setFlash('notice', 'El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud');
+		        }
+			 }
 	       }
 	     }
 
+       $this->Bitacora('Guardo');
 
         if ($this->getRequestParameter('save_and_add'))
           return $this->redirect('almordcom/create');
@@ -346,8 +417,31 @@ class almordcomActions extends autoalmordcomActions
           return $this->redirect('almordcom/edit?imp=S&id='.$this->caordcom->getId());
 
       }//if ($this->saveCaordcom($this->caordcom)==-1)
+      else if ($coderr==-11){
+
+	        $this->setFlash('notice', 'Se ha guardado solamente la Descripción');
+	        $this->Bitacora('Guardo');
+
+	        if ($this->getRequestParameter('save_and_add'))
+	        {
+	          return $this->redirect('almordcom/create');
+	        }
+	        else if ($this->getRequestParameter('save_and_list'))
+	        {
+	          return $this->redirect('almordcom/list');
+	        }
+	        else
+	        {
+	          return $this->redirect('almordcom/edit?id='.$this->caordcom->getId());
+	        }
+      }
       else
       {
+	      if($coderr!=-1){
+        	$err = Herramientas::obtenerMensajeError($coderr);
+        	$this->getRequest()->setError('',$err);
+      	}
+
            $this->labels = $this->getLabels();
            return sfView::SUCCESS;
       }
@@ -370,14 +464,27 @@ class almordcomActions extends autoalmordcomActions
 
     $this->caordcom = $this->getCaordcomOrCreate();
     $this->updateCaordcomFromRequest();
-    Orden_compra::Grabar_compromiso($this->caordcom);
-    $totaimp=Orden_compra::totalImputacion($this->caordcom->getOrdcom());
-    if (H::convnume($this->caordcom->getMonord())!=$totaimp)
-    {
-    	$msj="El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud";
-    }else{
-        $msj="Se genero el Compromiso satisfactoriamente";
-    }
+	Orden_compra::verificarDispComprometer($this->caordcom,&$error1,&$cod1,&$error2,&$error3);
+      if ($error3==-1) {
+	if ($error1==-1)
+	{
+		if ($error2==-1)
+		{
+           Orden_compra::Grabar_compromiso($this->caordcom);
+		   $totaimp=Orden_compra::totalImputacion($this->caordcom->getOrdcom());
+		    if (H::toFloat($this->caordcom->getMonord())!=$totaimp)
+		    {
+		    	$msj="El Monto de la Imputaciones Generadas no es igual al de la Solicitud, Por favor verificar esta solicitud";
+		    }else{
+		        $msj="Se genero el Compromiso satisfactoriamente";
+		    }	   	
+                    $this->getUser()->getAttributeHolder()->remove('genero_compromiso');
+		}
+		else{
+		  $msj="No hay disponibilidad para los Recargos";
+		}
+	}else $msj="No hay disponibilidad para el siguiente Código presupuestario: ".$cod1;    
+      }else $msj="La Fecha no se encuentra dentro de un Perido Abierto.";
 
     $javascript="alert('".$msj."')";
     $output = '[["javascript","'.$javascript.'",""]]';
@@ -496,19 +603,27 @@ class almordcomActions extends autoalmordcomActions
   else  if ($this->getRequestParameter('ajax')=='3')
   {
   	$tipord = $this->getRequestParameter('tipord');
+    $longitudart=strlen(Herramientas::getMascaraArticulo());
   	//print $tipord;
     $c= new Criteria();
     $c->add(CaregartPeer::CODART,$this->getRequestParameter('codigo'));
-    if($tipord=='S' || $tipord=='A') $c->add(CaregartPeer::TIPO,$this->getRequestParameter('tipord'));
+    if ($tipord=='T') $tipord='S';
+    if($tipord=='S' || $tipord=='A' || $this->getRequestParameter('tipord')=='T') $c->add(CaregartPeer::TIPO,$tipord);
     $reg=CaregartPeer::doSelectOne($c);
     if ($reg)
     {
+      if ($longitudart==strlen($this->getRequestParameter('codigo')))
+      {
       $dato=eregi_replace("[\n|\r|\n\r]", "", $reg->getDesart());
       $dato1=$reg->getUnimed();
       $dato2=number_format($reg->getCosult(),2,',','.');
       $dato3=$reg->getCodpar();
 //    $dato4=NppartidasPeer::getNompar($dato3);
       $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$this->getRequestParameter('unidad').'","'.$dato1.'",""],["'.$this->getRequestParameter('costo').'","'.$dato2.'",""],["'.$this->getRequestParameter('partida').'","'.$dato3.'",""]]';
+      }else {
+        $javascript="alert('El Codigo del Articulo no es de Ultimo Nivel');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('". $this->getRequestParameter('unidad') ."').value='';$('". $this->getRequestParameter('costo') ."').value='0.00';$('". $this->getRequestParameter('partida') ."').value=''";
+        $output = '[["javascript","'.$javascript.'",""]]';
+    }
     }
     else
     {
@@ -638,7 +753,6 @@ class almordcomActions extends autoalmordcomActions
         {
           if ($recargosreg->getCodpre()!="")
           {
-
 	        $desrgo=$recargosreg->getNomrgo();
 	        $montorgotab=$recargosreg->getMonrgo();
 	        $monrgo=number_format($montorgotab,2,',','.');
@@ -671,6 +785,98 @@ class almordcomActions extends autoalmordcomActions
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
       }
+      else  if ($this->getRequestParameter('ajax')=='17')
+      {
+        $q= new Criteria();
+        $q->add(CadefcenPeer::CODCEN,$this->getRequestParameter('codigo'));
+        $reg= CadefcenPeer::doSelectOne($q);
+        if ($reg)
+        {
+           $dato=$reg->getDescen(); $javascript="";
+        }else {
+            $dato="";
+            $javascript="alert('El Centro de Costo no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+        }
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+      }
+      else if ($this->getRequestParameter('ajax')=='18')
+      {
+        $edad=Nomina::obtenerEdad($this->getRequestParameter('codigo'));
+        $output = '[["'.$cajtexmos.'","'.$edad.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+      }
+      else  if ($this->getRequestParameter('ajax')=='19')
+      {
+        $q= new Criteria();
+        $q->add(CadefcenacoPeer::CODCENACO,$this->getRequestParameter('codigo'));
+        $reg= CadefcenacoPeer::doSelectOne($q);
+        if ($reg)
+        {
+           $dato=$reg->getDescenaco(); $javascript="";
+        }else {
+            $dato="";
+            $javascript="alert('El Centro de Acopio no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+        }
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+      }
+      else  if ($this->getRequestParameter('ajax')=='20')
+      {
+        $this->unidades = array ();
+        $javascript = "";        
+        $this->unidades = CaunialartPeer :: getUnidades($this->getRequestParameter('codigo'));
+        $output = '[["javascript","' . $javascript . '",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
+      }
+      else  if ($this->getRequestParameter('ajax')=='21')
+      {
+        $q= new Criteria();
+        $q->add(CadefalmPeer::CODALM,$this->getRequestParameter('codigo'));
+        $reg= CadefalmPeer::doSelectOne($q);
+        if ($reg)
+        {
+           $dato=$reg->getNomalm(); $javascript="";
+        }else {
+            $dato="";
+            $javascript="alert_('El Almac&eacute;n no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+        }
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+      }
+      else  if ($this->getRequestParameter('ajax')=='22')
+      {
+        $longitudart=strlen(Herramientas::getMascaraArticulo());
+        $c= new Criteria();
+        $c->add(CaregartPeer::CODART,$this->getRequestParameter('codigo'));
+        $reg=CaregartPeer::doSelectOne($c);
+        if ($reg)
+        {
+          if ($longitudart==strlen($this->getRequestParameter('codigo')))
+          {
+              $dato=eregi_replace("[\n|\r|\n\r]", "", $reg->getDesart());
+              $javascript="verificardetalle('". $cajtexcom ."');";
+              $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+          }else {
+            $javascript="alert('El Codigo del Articulo no es de Ultimo Nivel'); $('". $cajtexmos ."').value=''; $('". $cajtexcom ."').value=''; $('". $cajtexcom ."').focus();";
+            $output = '[["javascript","'.$javascript.'",""]]';
+          }
+        }
+        else
+        {
+          $javascript="alert('Articulo no existe, o no es un Articulo/Servicio');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value=''; $('". $cajtexcom ."').focus();";
+          $output = '[["javascript","'.$javascript.'",""]]';
+        }
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+      }
   }
 
 
@@ -684,6 +890,7 @@ class almordcomActions extends autoalmordcomActions
   public function configGrid($ordcom='',$referencia='',$tipo='')
   {
     $this->getUser()->getAttributeHolder()->remove('referencia');
+    $refcom="";
     $c = new Criteria();
     if ($referencia==0)
     {
@@ -700,8 +907,12 @@ class almordcomActions extends autoalmordcomActions
       $campo_col14='Unimed';//tabla Caartord
       $campo_col15='Codpre';//tabla Caartord
       $this->getUser()->setAttribute('referencia', '0');
-      if (Herramientas::getX_vacio('ordcom','Caartord','ordcom',$ordcom)!='')
+      if (Herramientas::getX_vacio('ordcom','Caartord','ordcom',$ordcom)!=''){
+        $refcom=H::getX_vacio('REFCOM','Cpcompro','REFCOM',$ordcom);
+        if ($refcom!="")
         $filas_arreglo=0;
+        else $filas_arreglo=150;
+        }
       else
         $filas_arreglo=150;
     }
@@ -718,7 +929,7 @@ class almordcomActions extends autoalmordcomActions
       $campo_col12='Monrgo';//tabla Caartsol
       $campo_col13='Montot';//tabla Caartsol
       $campo_col14='Unimed';//tabla Caartsol
-      $campo_col15='Codpre';//tabla Caartsol
+      $campo_col15='codigopre';//tabla Caartsol
       $this->getUser()->setAttribute('referencia', '1');
       $filas_arreglo=0;
     }
@@ -750,6 +961,7 @@ class almordcomActions extends autoalmordcomActions
     $col1->setNombreCampo('check');
     $col1->setEsGrabable(true);
     $col1->setHTML(' ');
+    if ($tipo=='P') $col1->setOculta(true);
     $col1->setJScript('onClick="desmarcarfila(this.id)"');
 
     $lonart=strlen($this->mascaraarticulo);
@@ -797,7 +1009,13 @@ class almordcomActions extends autoalmordcomActions
     $col5->setEsNumerico(true);
     if ($referencia==0 and $filas_arreglo>0) $col5->setHTML('type="text" size="10"');
     if ($referencia==1 or $filas_arreglo==0) $col5->setHTML('type="text" size="10" readonly=true');
+    $novalgriddis=H::getConfApp2('novalgriddis', 'compras', 'almordcom');
+    if ($novalgriddis=='S'){
+       if ($referencia==0 and $filas_arreglo>0) $col5->setJScript('onKeypress="entermonto(event,this.id); if (verificar_datos(this.id)){actualizar_total_grid_detalle_datos(event,this.id,"N");recalcularecargos(event,this.id);actualizar_grid_dependientes();}"');
+    }else {
     if ($referencia==0 and $filas_arreglo>0) $col5->setJScript('onKeypress="entermonto(event,this.id); if (verificar_datos(this.id)){actualizar_total_grid_detalle_datos(event,this.id,"N");recalcularecargos(event,this.id);actualizar_grid_dependientes();verifica_presupuesto(event,this.id);}"');
+    }
+
 
     $col6 = clone $col5;
     $col6->setTitulo('Cant. Ajustada');
@@ -819,7 +1037,12 @@ class almordcomActions extends autoalmordcomActions
     $col9->setTitulo('Costo');
     $col9->setHTML('type="text" size="10"');
     $col9->setNombreCampo($campo_col9);
+    $novalgriddis=H::getConfApp2('novalgriddis', 'compras', 'almordcom');
+    if ($novalgriddis=='S'){
+      $col9->setJScript('onKeypress="entermonto(event,this.id); actualizar_total_grid_detalle_datos(event,this.id,"N");recalcularecargos(event,this.id);actualizar_grid_dependientes();"');
+    }else {
     $col9->setJScript('onKeypress="entermonto(event,this.id); actualizar_total_grid_detalle_datos(event,this.id,"N");recalcularecargos(event,this.id);actualizar_grid_dependientes();verifica_presupuesto(event,this.id);"');
+    }
 
     $col10 = clone $col6;
     $col10->setTitulo('Cant x Costo');
@@ -856,6 +1079,16 @@ class almordcomActions extends autoalmordcomActions
     $col13->setHTML('type="text" size="10" readonly=true');
     $col13->setEsTotal(true,'caordcom_monord');
 
+    $manunialt=H::getConfApp2('manunialt','compras','almregart');
+    if ($manunialt=='S')
+    {
+    $col14 = new Columna('Unidad Medida');
+    $col14->setTipo(Columna::COMBO);
+    $col14->setEsGrabable(true);
+    $col14->setCombo(CaunialartPeer::getUnidades());
+    $col14->setNombreCampo($campo_col14);
+    $col14->setHTML('');
+    }else {
     $col14 = new Columna('Unidad Medida');
     $col14->setTipo(Columna::TEXTO);
     $col14->setEsGrabable(true);
@@ -863,6 +1096,7 @@ class almordcomActions extends autoalmordcomActions
     $col14->setAlineacionContenido(Columna::CENTRO);
     $col14->setNombreCampo($campo_col14);
     $col14->setHTML('type="text" size="10"');
+    }
 
     $col15 = new Columna('Codigo Presupuestario');
     $col15->setEsGrabable(true);
@@ -964,6 +1198,7 @@ class almordcomActions extends autoalmordcomActions
     $col1 = new Columna('Marque');
     $col1->setTipo(Columna::CHECK);
     $col1->setNombreCampo('check');
+    if ($tipo=='P') $col1->setOculta(true);
     $col1->setEsGrabable(true);
     $col1->setHTML(' ');
 
@@ -1044,6 +1279,16 @@ class almordcomActions extends autoalmordcomActions
     $col13->setJScript('onKeypress="entermonto(event,this.id);actualizar_sumatoria_total_cuando_esta_referida();actualizar_grid_dependientes()"');
     $col13->setEsTotal(true,'caordcom_monord');
 
+    $manunialt=H::getConfApp2('manunialt', 'compras', 'almregart');
+    if ($manunialt=='S')
+    {
+    $col14 = new Columna('Unidad Medida');
+    $col14->setTipo(Columna::COMBO);
+    $col14->setEsGrabable(true);
+    $col14->setCombo(CaunialartPeer::getUnidades());
+    $col14->setNombreCampo($campo_col14);
+    $col14->setHTML('');
+    }else {
     $col14 = new Columna('Unidad Medida');
     $col14->setTipo(Columna::TEXTO);
     $col14->setEsGrabable(true);
@@ -1051,13 +1296,15 @@ class almordcomActions extends autoalmordcomActions
     $col14->setAlineacionContenido(Columna::CENTRO);
     $col14->setNombreCampo('Unimed');
     $col14->setHTML('type="text" size="10"');
+    }
 
     $col15 = new Columna('Codigo Presupuestario');
     $col15->setEsGrabable(true);
     $col15->setTipo(Columna::TEXTO);
     $col15->setAlineacionObjeto(Columna::CENTRO);
     $col15->setAlineacionContenido(Columna::CENTRO);
-    $col15->setNombreCampo('Codpre');
+    if ($refsol!="") $col15->setNombreCampo('codigopre');
+    else $col15->setNombreCampo('codpre');
     $col15->setHTML('type="text" size="32" readonly=true');
 
     $col16 = new Columna('Codigo Partida');
@@ -1129,7 +1376,7 @@ class almordcomActions extends autoalmordcomActions
         $c->add(CadisrgoPeer::REQART,$ordcom);
       $per3 = CadisrgoPeer::doSelect($c);
 
-      $filas_arreglo=10;
+      $filas_arreglo=150;
 
       // Se crea el objeto principal de la clase OpcionesGrid
       $opciones = new OpcionesGrid();
@@ -1493,7 +1740,7 @@ class almordcomActions extends autoalmordcomActions
   	$escodpre='N';
     $sql="select 9 as id, '' as nompar, codpar, sum(totarti) as totart, recargo from (select 9 as id, '' as nompar,  a.codpar as codpar, sum((a.totart-a.rgoart)) as totarti, 'N' as recargo from caartord a
           where a.ordcom='".$ordcom."'  group by  a.codpar,a.totart,a.rgoart
-          union
+          union all
           select 9 as id, '' as nompar, c.codpre as codpar,sum(b.monrgo) as totarti, 'S' as recargo from cargosol b, carecarg c
           where reqart='".$ordcom."' and b.codrgo=c.codrgo group by c.codpre) as nueva group by codpar, recargo";
     $resp = Herramientas::BuscarDatos($sql,&$reg);
@@ -1589,6 +1836,111 @@ class almordcomActions extends autoalmordcomActions
    * los datos del grid.
    *
    */
+  public function configGrid_FormasEntrega($ordcom='')
+  {
+    $c = new Criteria();
+    $c->add(CaentordPeer::ORDCOM,$ordcom);
+    $reg= CaentordPeer::doSelect($c);
+
+    $opciones = new OpcionesGrid();
+    $opciones->setEliminar(true);
+    $opciones->setFilas(150);
+    $opciones->setTabla('Caentord');
+    $opciones->setName('t');
+    $opciones->setAncho(600);
+    $opciones->setAnchoGrid(800);
+    $opciones->setTitulo(' ');
+    $opciones->setHTMLTotalFilas(' ');
+
+     $mascaraarticulo=$this->mascaraarticulo;
+     $lonart=strlen($mascaraarticulo);
+
+    $params= array('param1' => $lonart, 'param2' => "'+$('caordcom_tipord').value+'", 'val2');
+
+    $col1 = new Columna('Código  Artículo');
+    $col1->setTipo(Columna::TEXTO);
+    $col1->setEsGrabable(true);
+    $col1->setAlineacionObjeto(Columna::CENTRO);
+    $col1->setAlineacionContenido(Columna::CENTRO);
+    $col1->setNombreCampo('codart');
+    $col1->setHTML('type="text" size="15"  maxlength="'.chr(39).$lonart.chr(39).'"');
+    $col1->setCatalogo('caregart','sf_admin_edit_form',array('codart' => 1,'desart' => 2), 'Caregart_Almsolegr',$params);
+    $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
+    $col1->setAjax('almordcom',22,2);
+
+    $col2 = new Columna('Descripción');
+    $col2->setTipo(Columna::TEXTAREA);
+    $col2->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col2->setAlineacionContenido(Columna::IZQUIERDA);
+    $col2->setNombreCampo('desart');
+    $col2->setEsGrabable(true);
+    $col2->setHTML('type="text" size="30x1" readonly=true');
+
+    $col3 = new Columna('Código  Almacén');
+    $col3->setTipo(Columna::TEXTO);
+    $col3->setEsGrabable(true);
+    $col3->setAlineacionObjeto(Columna::CENTRO);
+    $col3->setAlineacionContenido(Columna::CENTRO);
+    $col3->setNombreCampo('codalm');
+    $col3->setHTML('type="text" size="10" maxlength="20"');
+    $col3->setCatalogo('Cadefalm','sf_admin_edit_form', array('codalm' => 3,'nomalm' => 4),'Cadefalm_Alminvfis');
+    $col3->setAjax('almordcom',21,4);
+
+    $col4 = new Columna('Descripción');
+    $col4->setTipo(Columna::TEXTO);
+    $col4->setEsGrabable(true);
+    $col4->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col4->setAlineacionContenido(Columna::IZQUIERDA);
+    $col4->setNombreCampo('nomalm');
+    $col4->setHTML('type="text" size="30" readonly="true"');
+
+    $col5 = new Columna('Cant. Entregar');
+    $col5->setTipo(Columna::MONTO);
+    $col5->setEsGrabable(true);
+    $col5->setAlineacionContenido(Columna::DERECHA);
+    $col5->setAlineacionObjeto(Columna::DERECHA);
+    $col5->setNombreCampo('canent');
+    $col5->setEsNumerico(true);
+    $col5->setHTML('type="text" size="10"');
+    $col5->setJScript('onKeyPress="entermonto_t(event,this.id); verificarcantidad(this.id)"');
+
+    $col6 = new Columna('Cant. Recibida');
+    $col6->setTipo(Columna::MONTO);
+    $col6->setEsGrabable(true);
+    $col6->setAlineacionContenido(Columna::DERECHA);
+    $col6->setAlineacionObjeto(Columna::DERECHA);
+    $col6->setNombreCampo('canrec');
+    $col6->setEsNumerico(true);
+    $col6->setHTML('type="text" size="10" readonly="true"');
+
+    $col7 = new Columna('Fecha de Entrega');
+    $col7->setNombreCampo('fecent');
+    $col7->setTipo(Columna::FECHA);
+    $col7->setHTML('');
+    $col7->setEsGrabable(true);
+
+    // Se guardan las columnas en el objetos de opciones
+    $opciones->addColumna($col1);
+    $opciones->addColumna($col2);
+    $opciones->addColumna($col3);
+    $opciones->addColumna($col4);
+    $opciones->addColumna($col5);
+    $opciones->addColumna($col6);
+    $opciones->addColumna($col7);
+
+    // Ee genera el arreglo de opciones necesario para generar el grid
+    $this->obj_formas = $opciones->getConfig($reg);
+
+  }
+
+
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGrid_Entregas($ordcom='')
   {
     /*************************************************************************
@@ -1667,16 +2019,52 @@ class almordcomActions extends autoalmordcomActions
     $this->mascaraarticulo = Herramientas::getMascaraArticulo();
     $this->formatocategoria = Herramientas::getObtener_FormatoCategoria();
     $this->deshabmonrec="";
+    $this->ordcomdesh="";
+    $this->mansolocor="";
+    $this->bloqfec="";
+    $this->oculeli="";
+    $this->oculsave="";
+    $this->fechaanuserv="";
+    $this->etiqtipord="Licitación";
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp)
 	if(array_key_exists('aplicacion',$varemp))
 	 if(array_key_exists('compras',$varemp['aplicacion']))
 	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
-	     if(array_key_exists('almordcom',$varemp['aplicacion']['compras']['modulos']))
+	     if(array_key_exists('almordcom',$varemp['aplicacion']['compras']['modulos'])){
 	       if(array_key_exists('deshabilmonrec',$varemp['aplicacion']['compras']['modulos']['almordcom']))
 	       {
 	       	$this->deshabmonrec=$varemp['aplicacion']['compras']['modulos']['almordcom']['deshabilmonrec'];
 	       }
+               if(array_key_exists('ordcomdesh',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$this->ordcomdesh=$varemp['aplicacion']['compras']['modulos']['almordcom']['ordcomdesh'];
+	       }
+           if(array_key_exists('mansolocor',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$this->mansolocor=$varemp['aplicacion']['compras']['modulos']['almordcom']['mansolocor'];
+	       }
+	       if(array_key_exists('bloqfec',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$this->bloqfec=$varemp['aplicacion']['compras']['modulos']['almordcom']['bloqfec'];
+	       }
+	       if(array_key_exists('oculeli',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$this->oculeli=$varemp['aplicacion']['compras']['modulos']['almordcom']['oculeli'];
+	       }
+	       if(array_key_exists('oculsave',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$this->oculsave=$varemp['aplicacion']['compras']['modulos']['almordcom']['oculsave'];
+	       }
+	     	 if(array_key_exists('fechaanuserv',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$this->fechaanuserv=$varemp['aplicacion']['compras']['modulos']['almordcom']['fechaanuserv'];
+	       }	       
+                if(array_key_exists('etiqtipord',$varemp['aplicacion']['compras']['modulos']['almordcom']))
+	       {
+	       	$this->etiqtipord=$varemp['aplicacion']['compras']['modulos']['almordcom']['etiqtipord'];
+	       }
+         }
 
   }
 
@@ -1724,6 +2112,7 @@ class almordcomActions extends autoalmordcomActions
   //<!-----------------------------Grid Objetos---------------------->
   $grid_detalle_resumen_objetos=Herramientas::CargarDatosGrid($this,$this->obj_resumen);//0
   $grid_detalle_entrega_objetos=Herramientas::CargarDatosGrid($this,$this->obj_entregas);//1
+  $grid_detalle_formas_entrega=Herramientas::CargarDatosGrid($this,$this->obj_formas);//1
   $arreglo_objetos = array($grid_detalle_resumen_objetos,$grid_detalle_entrega_objetos);
 
   //<!-----------------------------campos ocultos---------------------->
@@ -1743,7 +2132,7 @@ class almordcomActions extends autoalmordcomActions
 
 
   //<!-----------------------------funciones clase Orden de Compra---------------------->
-  if (Orden_compra::Salvar($caordcom,$arreglo_arreglo,$arreglo_objetos,$arreglo_campos,&$coderror))
+  if (Orden_compra::Salvar($caordcom,$arreglo_arreglo,$arreglo_objetos,$arreglo_campos,$grid_detalle_formas_entrega,&$coderror))
   {
   //<!-----------------------------guardo comprobante---------------------->
       if ($this->getUser()->getAttribute('grabo',null,$this->getUser()->getAttribute('formulario'))=='S')
@@ -2087,6 +2476,70 @@ class almordcomActions extends autoalmordcomActions
     {
       $this->caordcom->setEti($caordcom['eti']);
     }
+    if (isset($caordcom['codcen']))
+    {
+      $this->caordcom->setCodcen($caordcom['codcen']);
+    }
+    if (isset($caordcom['tipocom']))
+    {
+      $this->caordcom->setTipocom($caordcom['tipocom']);
+    }
+    if (isset($caordcom['ceddon']))
+    {
+      $this->caordcom->setCeddon($caordcom['ceddon']);
+    }
+    if (isset($caordcom['nomdon']))
+    {
+      $this->caordcom->setNomdon($caordcom['nomdon']);
+    }
+    if (isset($caordcom['fecdon']))
+    {
+        if ($caordcom['fecdon'])
+      {
+        try
+        {
+        $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+        if (!is_array($caordcom['fecdon']))
+        {
+        $value = $dateFormat->format($caordcom['fecdon'], 'i', $dateFormat->getInputPattern('d'));
+                  }
+                  else
+                    {
+                    $value_array = $caordcom['fecdon'];
+                    $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+                  }
+                  $this->caordcom->setFecdon($value);
+                  }
+                  catch (sfException $e)
+                    {
+                    // not a date
+                  }
+      }
+      else
+      {
+        $this->caordcom->setFecdon(null);
+      }
+    }
+    if (isset($caordcom['sexdon']))
+    {
+      $this->caordcom->setSexdon($caordcom['sexdon']);
+    }
+    if (isset($caordcom['edadon']))
+    {
+      $this->caordcom->setEdadon($caordcom['edadon']);
+    }
+    if (isset($caordcom['serdon']))
+    {
+      $this->caordcom->setSerdon($caordcom['serdon']);
+    }
+    if (isset($caordcom['manorddon']))
+    {
+      $this->caordcom->setManorddon($caordcom['manorddon']);
+    }
+    if (isset($caordcom['codcenaco']))
+    {
+      $this->caordcom->setCodcenaco($caordcom['codcenaco']);
+    }
 
   }
 
@@ -2159,7 +2612,8 @@ class almordcomActions extends autoalmordcomActions
       else
       {
         //print 'hola';
-        $this->configGrid('0','0','');
+        $tipopro=H::getX('RIFPRO','Caprovee','Tipo',$this->getRequestParameter('rifpro'));
+        $this->configGrid('0','0',$tipopro);
       }
     }
   }
@@ -2174,6 +2628,7 @@ class almordcomActions extends autoalmordcomActions
   $validacion_fec_egresos='0';
   if ($this->getRequestParameter('ajax')=='1')
   {
+  	if ($this->getRequestParameter('ordcom')!=""){
     $c = new Criteria();
     $c->add(CasolartPeer :: REQART,$this->getRequestParameter('ordcom'));
     $c->add(CasolartPeer :: STAREQ, "A");
@@ -2207,19 +2662,30 @@ class almordcomActions extends autoalmordcomActions
                 group by a.refsol, a.codpro, b.priori";
         if (Herramientas::BuscarDatos($sql,&$result)){
           if(count($result)==1){
+          	$codigopro=$result[0]["codpro"];
             $despro   = Herramientas::getX('codpro','Caprovee','nompro',$result[0]["codpro"]);
-            $provee=',["caordcom_rifpro","'.$result[0]["codpro"].'",""],["caordcom_nompro","'.$despro.'",""]';
-          }else $provee='';
-        }else $provee='';
+            $tippro   = Herramientas::getX('codpro','Caprovee','tipo',$result[0]["codpro"]);
+            $rifpro   = Herramientas::getX('codpro','Caprovee','rifpro',$result[0]["codpro"]);
+            $provee=',["caordcom_rifpro","'.$rifpro.'",""],["caordcom_nompro","'.$despro.'",""],["caordcom_tipopro","'.$tippro.'",""],["caordcom_codigoproveedor","'.$codigopro.'",""]';
+          }else { $provee=''; $codigopro=""; $tippro=""; $rifpro="";}
+        }else { $provee=''; $codigopro=""; $tippro=""; $rifpro="";}
 
           $dato   = Herramientas::getX('reqart','Casolart','monreq',trim($this->getRequestParameter('ordcom')));
-          $desreq = Herramientas::getX('reqart','Casolart','desreq',trim($this->getRequestParameter('ordcom')));
+          $desreq = eregi_replace("[\n|\r|\n\r]", "", Herramientas::getX('reqart','Casolart','desreq',trim($this->getRequestParameter('ordcom'))));
           $desfin = Herramientas::getX('codfin','Fortipfin','nomext',$filas[0]->getTipfin());
+          $codcen = Herramientas::getX('reqart','Casolart','codcen',trim($this->getRequestParameter('ordcom')));
+          $descen = Herramientas::getX('codcen','Cadefcen','descen',$codcen);
 
-          $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$filas_orden.'","'.$numero_filas.'",""],["'.$cajita.'","'.$validacion_fec_egresos.'",""],["caordcom_desord","'.$desreq.'",""],["caordcom_tipfin","'.$filas[0]->getTipfin().'",""],["caordcom_nomfin","'.$desfin.'",""]'.$provee.']';
+          $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$filas_orden.'","'.$numero_filas.'",""],["'.$cajita.'","'.$validacion_fec_egresos.'",""],["caordcom_desord","'.$desreq.'",""],["caordcom_tipfin","'.$filas[0]->getTipfin().'",""],["caordcom_nomfin","'.$desfin.'",""],["caordcom_codcen","'.$codcen.'",""],["caordcom_descen","'.$descen.'",""]'.$provee.']';
           $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-          $tipopro=H::getX('RIFPRO','Caprovee','Tipo',$this->getRequestParameter('rifpro'));
+          if ($codigopro!=""){
+          $tipopro=H::getX('CODPRO','Caprovee','Tipo',$codigopro);
           $this->configGrid($this->getRequestParameter('ordcom'),$this->getRequestParameter('referencia'),$tipopro);
+          }else{
+          	$tipopro=H::getX('RIFPRO','Caprovee','Tipo',$this->getRequestParameter('rifpro'));
+          	$this->setVars();
+          	$this->configGrid($this->getRequestParameter('ordcom'),$this->getRequestParameter('referencia'),$tipopro);
+          }
       }
     }else{
 
@@ -2230,6 +2696,11 @@ class almordcomActions extends autoalmordcomActions
         return sfView::HEADER_ONLY;
 
     }
+  	}else {
+  		$this->setVars();
+  		$tipopro=H::getX('RIFPRO','Caprovee','Tipo',$this->getRequestParameter('rifpro'));
+  		$this->configGrid($this->getRequestParameter('caordcom[ordcom]'),'0',$tipopro);
+  	}
   }
     }
 
@@ -2338,12 +2809,19 @@ class almordcomActions extends autoalmordcomActions
     $descripcion=$this->getRequestParameter('valor');//2
     $fecanu=$this->getRequestParameter('fecha');//3
     $fecanuvalidar=$this->getRequestParameter('fecha');//3
+    $fecserv=$this->getRequestParameter('fecserv');
+    $motanu=$this->getRequestParameter('motanu');
 
     $dateFormat = new sfDateFormat('es_VE');
     $fecord = $dateFormat->format($fecord, 'i', $dateFormat->getInputPattern('d'));
     $fecanu = $dateFormat->format($fecanu, 'i', $dateFormat->getInputPattern('d'));
     $this->msgerr="";
     $this->btn="";
+
+    if ($fecserv=='S'){
+     $fecanu=date('Y-m-d');
+     $fecanuvalidar=date('d/m/Y');
+    }    
 
     if (Tesoreria::validaPeriodoCerrado($fecanuvalidar)==true)
     {
@@ -2638,18 +3116,42 @@ class almordcomActions extends autoalmordcomActions
       $nuevo=$this->getRequestParameter('nuevo');
       $refsol=$this->getRequestParameter('refsol');
       $ordcom=$this->getRequestParameter('ordcom');
+      $doccom=$this->getRequestParameter('tipcom');
+      $t= new Criteria();
+      $t->add(CpdoccomPeer::TIPCOM,$doccom);
+      $reg= CpdoccomPeer::doSelectOne($t);
+      if ($reg)
+      {
+      	$refprc=$reg->getRefprc();
+      	$afeprc=$reg->getAfeprc();
+      	$afecom=$reg->getAfecom();
+      	$afedis=$reg->getAfedis();
+      }else {
+      	$refprc="";
+      	$afeprc="";
+      	$afecom="";
+      	$afedis="";
+      }
       $this->setVars();
 
 
       if ($nuevo=='S')
       {
-        if ($refsol!="")
-              $this->configGridRecargoConsulta($refsol,$articulo,$codunidad);
+        if ($refsol!=""){
+	    	if ($refprc=='N' && $afeprc=='S' && $afecom=='S' && $afedis=='R')
+	    	$this->configGridRecargo($ordcom,$articulo,$codunidad);
+	    	else
+	          $this->configGridRecargoConsulta($refsol,$articulo,$codunidad);
+        }
         else
             $this->configGridRecargo($ordcom,$articulo,$codunidad);
       }
       else
       {
+      	$refcom=H::getX_vacio('REFCOM','Cpcompro','REFCOM',$ordcom);
+            if ($refcom=='')
+            $this->configGridRecargo($ordcom,$articulo,$codunidad);
+            else
             $this->configGridRecargoConsulta($ordcom,$articulo,$codunidad);
       }
       $output = '[["","",""]]';

@@ -4,25 +4,25 @@
 
 class NpdefespparpreMapBuilder {
 
-	
+
 	const CLASS_NAME = 'lib.model.nomina.map.NpdefespparpreMapBuilder';
 
-	
+
 	private $dbMap;
 
-	
+
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-	
+
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-	
+
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -58,7 +58,7 @@ class NpdefespparpreMapBuilder {
 
 		$tMap->addColumn('CODRET', 'Codret', 'string', CreoleTypes::VARCHAR, false, 2);
 
-		$tMap->addColumn('NUMDIAANT', 'Numdiaant', 'int', CreoleTypes::INTEGER, false, null);
+		$tMap->addColumn('NUMDIAANT', 'Numdiaant', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('PORANOANT', 'Poranoant', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -72,5 +72,5 @@ class NpdefespparpreMapBuilder {
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	} 
-} 
+	}
+}

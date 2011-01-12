@@ -1,0 +1,17 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Módulo Formulación
+    robots:       Módulo Formulación
+    description:  Módulo Formulación
+    keywords:     Módulo,Formulación
+    language:     en
+
+  stylesheets:    [main]
+
+  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, observe, ajax, dFilter, formulacion/forpreobr]
+
+  has_layout:     on
+  layout:         layout

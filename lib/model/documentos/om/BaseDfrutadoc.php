@@ -597,7 +597,10 @@ abstract class BaseDfrutadoc extends BaseObject  implements Persistent {
 		if ($this->aAcunidad === null && ($this->id_acunidad !== null)) {
 						include_once 'lib/model/om/BaseAcunidadPeer.php';
 
-			$this->aAcunidad = AcunidadPeer::retrieveByPK($this->id_acunidad, $con);
+      $c = new Criteria();
+      $c->add(AcunidadPeer::ID,$this->id_acunidad);
+      
+			$this->aAcunidad = AcunidadPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -626,7 +629,10 @@ abstract class BaseDfrutadoc extends BaseObject  implements Persistent {
 		if ($this->aDftabtip === null && ($this->id_dftabtip !== null)) {
 						include_once 'lib/model/documentos/om/BaseDftabtipPeer.php';
 
-			$this->aDftabtip = DftabtipPeer::retrieveByPK($this->id_dftabtip, $con);
+      $c = new Criteria();
+      $c->add(DftabtipPeer::ID,$this->id_dftabtip);
+      
+			$this->aDftabtip = DftabtipPeer::doSelectOne($c, $con);
 
 			
 		}

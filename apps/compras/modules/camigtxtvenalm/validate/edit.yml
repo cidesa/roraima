@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "camigtxtven{codalm}"
+   - "camigtxtven{fecven}"
+
+names:
+  camigtxtven{codalm}:
+    required:  Yes
+    required_msg: El Código de Almacén no puedo estar en Blanco
+    validators: ExistValidator
+
+  camigtxtven{fecven}:
+    required:  Yes
+    required_msg: La Fecha de Venta no puedo estar en Blanco
+    validators: FechaValidator
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Cadefalm
+        column:       codalm
+        unique_error: El Código de Almacén no existe
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es inválida

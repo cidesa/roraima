@@ -22,6 +22,14 @@ class tesmovtrabanActions extends autotesmovtrabanActions {
   public function executeEdit() {
 	   $this->tsmovtra = $this->getTsmovtraOrCreate();
 	   $this->etiqueta="";
+	   $this->comprobaut="";
+	   $varemp = $this->getUser()->getAttribute('configemp');
+	   if ($varemp)
+		if(array_key_exists('generales',$varemp))
+  	   	  if(array_key_exists('comprobaut',$varemp['generales']))
+		  {
+		  	$this->comprobaut=$varemp['generales']['comprobaut'];
+		  }
 	   if ($this->tsmovtra->getId())
        {
         if ($this->tsmovtra->getStatus()=='N')
@@ -61,6 +69,14 @@ $this->Bitacora('Guardo');
    */
   protected function updateTsmovtraFromRequest() {
 		$tsmovtra = $this->getRequestParameter('tsmovtra');
+	    $this->comprobaut="";
+	    $varemp = $this->getUser()->getAttribute('configemp');
+	    if ($varemp)
+		 if(array_key_exists('generales',$varemp))
+  	   	   if(array_key_exists('comprobaut',$varemp['generales']))
+		   {
+		  	$this->comprobaut=$varemp['generales']['comprobaut'];
+		   }
 
 		if (isset ($tsmovtra['reftra'])) {
 			$this->tsmovtra->setReftra($tsmovtra['reftra']);
@@ -168,7 +184,16 @@ $this->Bitacora('Guardo');
 		$tsmovtra2 = $this->getRequestParameter('tsmovtra');
        if ($modifica=="N")
        {
-		if ($tsmovtra2['tipmovdesd'] and ($tsmovtra2['tipmovhast'])) {
+       	$this->comprobaut="";
+	    $varemp = $this->getUser()->getAttribute('configemp');
+	    if ($varemp)
+		if(array_key_exists('generales',$varemp))
+  	   	  if(array_key_exists('comprobaut',$varemp['generales']))
+		  {
+		  	$this->comprobaut=$varemp['generales']['comprobaut'];
+		  }
+		   if ($this->comprobaut!='S') {
+		   if ($tsmovtra2['tipmovdesd'] and ($tsmovtra2['tipmovhast'])) {
 
 			if ($this->getUser()->getAttribute('grabar', null, $this->getUser()->getAttribute('formulario')) != 'S') {
 				//obtengo las sessiones
@@ -194,9 +219,11 @@ $this->Bitacora('Guardo');
 			}
       $tsmovtra->setNumcom($numcom);
       $tsmovtra->save();
- 			Tesoreria :: Salvartesmovtraban($tsmovtra, $tsmovtra2['tipmovdesd'], $tsmovtra2['tipmovhast']);
+		   }
+		   }
+ 	   Tesoreria :: Salvartesmovtraban($tsmovtra, $tsmovtra2['tipmovdesd'], $tsmovtra2['tipmovhast'],$this->comprobaut);
+           $this->getUser()->getAttributeHolder()->remove('grabo',$this->getUser()->getAttribute('formulario'));
 
-		 }
    }//if ($modifica=="N")
 	}
 
@@ -307,7 +334,8 @@ $this->Bitacora('Guardo');
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -328,6 +356,15 @@ $this->Bitacora('Guardo');
         $this->coderr1=529;
         return false;
   	  }
+	   $this->comprobaut="";
+	   $varemp = $this->getUser()->getAttribute('configemp');
+	   if ($varemp)
+		if(array_key_exists('generales',$varemp))
+  	   	  if(array_key_exists('comprobaut',$varemp['generales']))
+		  {
+		  	$this->comprobaut=$varemp['generales']['comprobaut'];
+		  }
+
 
       if($this->tsmovtra->getCtaori()==$this->tsmovtra->getCtades()) $this->coderr = 194;
       else{
@@ -335,8 +372,10 @@ $this->Bitacora('Guardo');
         $saldo=0;
         if(!Tesoreria::chequear_disponibilidad_financiera($this->tsmovtra->getCtaori(),$this->tsmovtra->getMontra(),$contaba->getFecini(),$this->tsmovtra->getFectra(),$saldo)) $this->coderr = 195;
         else{
+        	if ($this->comprobaut!='S') {
           $numcom = $this->getUser()->getAttribute('contabc[numcom]', null, $this->getUser()->getAttribute('formulario'));
           if (!$this->tsmovtra->getId() and $numcom=="") { $this->coderr = 508; return false;}
+        	}
         }
       }
 

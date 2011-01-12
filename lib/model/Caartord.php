@@ -9,7 +9,7 @@
  * @subpackage lib.model
  * @author     $Author$ <desarrollo@cidesa.com.ve>
  * @version SVN: $Id$
- * 
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -39,7 +39,9 @@ class Caartord extends BaseCaartord
  protected $codubi="";
  protected $nomubi="";
  protected $nomalm="";
+ protected $codigopre="";
  protected $cancost="0,00";
+ protected $numlot="";
 
   public function hydrate(ResultSet $rs, $startcol = 1)
    {
@@ -47,7 +49,7 @@ class Caartord extends BaseCaartord
       $this->canrecgri= self::getCanord() - self::getCanaju() - self::getCanrec();
       $this->canfal=0.0;
       $this->montot = ($this->canrecgri * self::getPreart()) -  self::getDtoart() +  self::getRgoart();
-      $calculo= self::getCanord() * self::getPreart();
+      $calculo= self::getTotart() - self::getRgoart() + self::getDtoart();
       $this->cancost=number_format($calculo,2,',','.');
       $this->datosrecargo="";
       $c= new Criteria();
@@ -59,7 +61,7 @@ class Caartord extends BaseCaartord
 	  {
         foreach ($result as $datos)
         {
-           $this->datosrecargo=$this->datosrecargo . $datos->getCodrgo().'_' . $datos->getNomrgo().'_' . $datos->getMonrgoc() .'_'. $datos->getTiprgo().'_' . $datos->getMonrgo() . '!';
+           $this->datosrecargo=$this->datosrecargo . $datos->getCodrgo().'_' . $datos->getNomrgo().'_' . $datos->getMonrgoc() .'_'. $datos->getTiprgo().'_' . $datos->getMonrgo() .'_' . $datos->getCodpar() . '!';
         }
 	 }
    }

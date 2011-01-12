@@ -17,6 +17,7 @@
 
 <?php use_helper('Javascript','Grid','wait','tabs') ?>
 <?php echo javascript_include_tag('tools','ajax','dFilter','Observe') ?>
+<?php echo input_hidden_tag('tsconcil[ano]', $tsconcil->getAno()) ?>
 
 <?php echo object_input_hidden_tag($tsconcil, 'getId') ?>
 <fieldset id="sf_fieldset_none" class="">
@@ -94,6 +95,19 @@
 
     </div>
 
+<br>
+
+  <?php echo label_for('labeltxt', __('Movimientos TXT'), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('labeltxt')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('labeltxt')): ?>
+    <?php echo form_error('labeltxt', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+      
+  <?php $value = object_checkbox_tag($tsconcil, 'getMovtxt', array (
+  'control_name' => 'tsconcil[movtxt]',
+)); echo $value ? $value : '&nbsp;' ?>
+
+    </div>
 
 <ul  class="sf_admin_actions"  align="center">
 	<input type="button" value="Hacer" onClick="hacer()">
@@ -107,6 +121,8 @@
 </form>
 
 <script type="text/javascript">
+    var ano='<?php echo $tsconcil->getAno() ?>';
+    $('ano').value=ano;
 <!--
 function hacer()
 {

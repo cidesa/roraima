@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage presnomtipcon
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 40836 2010-09-29 16:51:11Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -21,7 +21,8 @@ class presnomtipconActions extends autopresnomtipconActions
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -288,7 +289,7 @@ class presnomtipconActions extends autopresnomtipconActions
 		$col2->setHTML('');
 		$col2->setEsGrabable(true);
 
-		$col3 = new Columna('Rango Desde');
+		$col3 = new Columna('Rango Desde >=');
 		$col3->setTipo(Columna::TEXTO);
 		$col3->setEsGrabable(true);
 		$col3->setAlineacionObjeto(Columna::CENTRO);
@@ -296,7 +297,7 @@ class presnomtipconActions extends autopresnomtipconActions
 		$col3->setNombreCampo('Desde');
 		$col3->setHTML('type="text" size="10"');
 
-		$col4 = new Columna('Rango Hasta');
+		$col4 = new Columna('Rango Hasta <=');
 		$col4->setTipo(Columna::TEXTO);
 		$col4->setEsGrabable(true);
 		$col4->setAlineacionObjeto(Columna::CENTRO);
@@ -321,7 +322,7 @@ class presnomtipconActions extends autopresnomtipconActions
 		$col6->setNombreCampo('Diavac');
 		$col6->setHTML('type="text" size="10"');
 
-		$col7 = new Columna('Dias Productividad');
+		$col7 = new Columna('Dias Bono Adicional');
 		$col7->setTipo(Columna::TEXTO);
 		$col7->setEsGrabable(true);
 		$col7->setAlineacionObjeto(Columna::CENTRO);
@@ -730,6 +731,10 @@ class presnomtipconActions extends autopresnomtipconActions
     {
       $fid = 'S';
       $this->nptipcon->setFid(1);
+    }
+    if (isset($nptipcon['condia']))
+    {
+      $this->nptipcon->setCondia($nptipcon['condia']);
     }
 	if (isset($nptipcon['fecdes']))
     {

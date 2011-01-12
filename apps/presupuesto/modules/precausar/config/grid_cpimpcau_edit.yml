@@ -1,0 +1,51 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   cpimpcau
+  anchogrid:               850
+  ancho:                   1090
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código Presupuestario
+  tipo:                    t
+  nombrecampo:             codpre
+  html:                    [size="30" readonly="true" ]
+  oculta:                  false
+  esgrabable:              false
+2:       # Columna 2
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monimp
+  html:                    [size="10" readonly="true" ]
+  oculta:                  false
+  esgrabable:              false
+  estotal:                 [ true, cpcausad_moncau ]
+3:       # Columna 3
+  titulo:                  Pagado
+  tipo:                    m
+  nombrecampo:             monpag
+  html:                    [size="10" readonly="true" ]
+  esgrabable:              false
+  estotal:                 [ true, cpcausad_totpag ]
+4:       # Columna 4
+  titulo:                  Ajustado
+  tipo:                    m
+  nombrecampo:             monaju
+  html:                    [size="10" readonly="true" ]
+  esgrabable:              false
+  estotal:                 [ true, cpcausad_salaju2 ]
+5:       # Columna 5
+  titulo:                  Referencia
+  tipo:                    m
+  nombrecampo:             refere
+  html:                    [size="10" readonly="true" ]
+  esgrabable:              false
+6:       # Columna 6
+  titulo:                  Saldo para Causar
+  tipo:                    m
+  nombrecampo:
+  html:                    [size="10" readonly="true" ]
+  esgrabable:              false
+

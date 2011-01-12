@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id:_edit_form.php 32813 2009-09-08 16:19:47Z lhernandez $
  */
 // date: 2007/06/18 15:01:26
 ?>
@@ -29,7 +29,7 @@
 <?php //echo button_to_popup('...','generales/catalogo?clase=Caprovee&frame=sf_admin_edit_form&obj1=cacotiza_rifpro&obj2=cacotiza_nompro&obj3=cacotiza_rifpro')?>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('  Proyecto o Acción Centralizada  ') ; ?></legend>
+<h2><?php echo __('  Proyecto o Acción Centralizada  ') ; ?></h2>
 <div class="form-row">
 <table border="0" valign="top">
 <tr valign="top" align="left">
@@ -86,7 +86,7 @@
 <br>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend><?php echo __('  Acción Especificas  ') ; ?></legend>
+<h2><?php echo __('  Acción Especificas  ') ; ?></h2>
 <div class="form-row">
 <table border="0" valign="top">
 <tr valign="top" >

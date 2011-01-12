@@ -1,0 +1,29 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cadefcenaco
+    theme:            cidesaGenerator
+    fields:
+      codcenaco: { name: Código, params: size=10 maxlength=4 }
+      descenaco: { name: Descripción, params: maxlength=250  }
+      codpai: { name: Pais}
+      codedo: { name: Estado}
+      codciu: { name: Ciudad}
+      codmun: { name: Municipio}
+    list:
+      title:          Centros de Acopio
+      filters:        [codcenaco, descenaco, codedo]
+      display:        [=codcenaco, descenaco]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:  8
+      sort: codcenaco
+    edit:
+      title:          Edición de Centro de Acopio
+      display:        [=codcenaco, descenaco, _codpai, _codedo, _codciu, _codmun]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

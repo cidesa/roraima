@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage fordefaccesp
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author:jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id:actions.class.php 34632 2009-11-10 14:32:11Z jlobaton $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -227,7 +227,7 @@ $this->Bitacora('Guardo');
 		$col1->setAlineacionContenido(Columna::CENTRO);
 		$col1->setNombreCampo('Codaccesp');
 		$col1->setHTML('type="text" size="10"');
-		$col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$formatoaccesp.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
+		$col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$formatoaccesp.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" maxlength="('.chr(39).strlen($formatoaccesp).chr(39).'")');
 
 		$col2 = new Columna('Descripción');
 		$col2->setTipo(Columna::TEXTO);

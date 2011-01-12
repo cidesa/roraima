@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id:_filters.php 32813 2009-09-08 16:19:47Z lhernandez $
  */
 // date: 2007/11/07 16:26:44
 ?>
@@ -36,7 +36,7 @@
 
 <br>
 
-      <label for="codequ"><?php echo __('Directriz:') ?></label>
+      <label for="codequ"><?php if ($etiq!="") $et=$etiq; else $et='Directriz'; echo  __($et.':')  ?></label>
     <div class="content">
     <?php echo select_tag('filters[codequ]', objects_for_select(FordefequPeer::doSelect(new Criteria()),'getCodequ','getDesequ',isset($filters['codequ']) ? $filters['codequ'] : null,'include_custom=Seleccione')) ?>
     </div>

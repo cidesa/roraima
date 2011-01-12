@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage nomina
- * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Nomina.class.php 34274 2009-10-26 22:32:03Z dmartinez $
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Nomina.class.php 41881 2011-01-04 21:14:14Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -13,6 +13,17 @@
 class Nomina {
 
   public static function salvarNomdefespcon($concepto) {
+    if ($concepto->getCodcon()=='###')
+    {
+      $t= new Criteria();
+	  $t->add(NpdefcptPeer::OPECON,$concepto->getOpecon());
+	  $t->addDescendingOrderByColumn(NpdefcptPeer::CODCON);
+	  $reg= NpdefcptPeer::doSelectOne($t);
+	  if ($reg)
+	  {
+	    $concepto->setCodcon($reg->getCodcon()+1);
+	  }else $concepto->setCodcon('001');
+    }
     $concepto->save();
 
     $c = new Criteria();
@@ -175,7 +186,7 @@ class Nomina {
     }
   }
 
-  public static function salvarNomhojint($datos, $grid, $grid2, $grid3, $grid4, $grid5, $arreglo) {
+  public static function salvarNomhojint($datos, $grid, $grid2, $grid3, $grid4, $grid5, $arreglo,$grid6) {
     $cadena = "";
     if ($arreglo != "") {
       foreach ($arreglo as $val) {
@@ -185,12 +196,17 @@ class Nomina {
     }
     $datos->setSercon($cadena);
     $datos->save();
+    if (self::agregaBenefi($datos)==true)
+    {
+      self::grabarBenefi($datos);
+    }
     self :: grabarInffam($datos, $grid);
     self :: grabarInfcur($datos, $grid2);
     self :: grabarExplabden($datos, $grid3);
     self :: grabarExplabfue($datos, $grid4);
     self :: grabarIngegr($datos, $grid5);
     self :: grabarIncapa($datos);
+    self :: grabarDocumentos($datos,$grid6);
   }
 
   /**
@@ -227,14 +243,47 @@ class Nomina {
     $codigo = $datos->getCodemp();
     $x = $grid[0];
     $j = 0;
+    $inffamnomdes=H::getConfApp('inffamnomdes', 'nomhojint', 'nomina');
     while ($j < count($x)) {
-      if ($x[$j]->getCedfam() != "" || $x[$j]->getNomfam() != "") {
+      if (($x[$j]->getPrinom() != "" && $x[$j]->getPriape() != "") || $x[$j]->getNomfam() != "") {
+
+       if ($inffamnomdes=='S') {
+        if ($x[$j]->getPrinom()!="" && $x[$j]->getPriape()!="")
+	{
+		$segnom='';
+		$segape='';
+		$nombres='';
+		$apellidos='';
+            if ($x[$j]->getSegnom()!="")
+	    {
+	      $segnom=$x[$j]->getSegnom();
+	    }
+            if ($x[$j]->getSegape()!="")
+	    {
+	      $segape=$x[$j]->getSegape();
+	    }
+            $nombres=implode(' ',array(trim($x[$j]->getPrinom()),trim($segnom)));
+            $apellidos=implode(' ',array(trim($x[$j]->getPriape()),trim($segape)));
+            $x[$j]->setNomfam(implode(', ',array($apellidos,$nombres)));
+	}
+       }
+
+
         $x[$j]->setCodemp($codigo);
-                $x[$j]->setEdafam($x[$j]->getEdafamact());
+        $x[$j]->setEdafam($x[$j]->getEdafamact());
         if ($x[$j]->getSeghcm() == "1") {
           $x[$j]->setSeghcm('S');
         } else {
           $x[$j]->setSeghcm('N');
+        }
+        if ($x[$j]->getFecing()=="")
+        {
+            $x[$j]->setFecing(date('Y-m-d'));
+        }
+        if ($x[$j]->getDocgua() == "1") {
+          $x[$j]->setDocgua('S');
+        } else {
+          $x[$j]->setDocgua('N');
         }
         $x[$j]->save();
       }
@@ -341,7 +390,7 @@ class Nomina {
     }
   }
 
-  public static function actualizarNomhojint($datos, $grid, $grid2, $grid3, $grid4, $grid5, $arreglo, $fecha) {
+  public static function actualizarNomhojint($datos, $grid, $grid2, $grid3, $grid4, $grid5, $arreglo, $fecha,$grid6) {
     $cadena = "";
     if ($arreglo != "") {
       foreach ($arreglo as $val) {
@@ -387,6 +436,7 @@ class Nomina {
     self :: grabarExplabfue($datos, $grid4);
     self :: grabarIngegr($datos, $grid5);
     self :: grabarIncapa($datos);
+    self :: grabarDocumentos($datos, $grid6);
   }
 
   /**************************************************************************************************/
@@ -606,7 +656,13 @@ class Nomina {
             }
           } else {
             while (self :: prioridad(self :: array_peek($operadores, count($operadores) - 1)) >= self :: prioridad($token)) {
-              $cadena = $cadena . array_pop($operadores) . " ";
+              if($operadores)
+                $cadena = $cadena . array_pop($operadores) . " ";
+              else
+              {
+                return $cadena = '';
+              }
+
             }
             if ($token == ',' || $token == ';') {
               $opeant = false;
@@ -693,7 +749,7 @@ class Nomina {
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
   public static function clasificaFuncion(& $token, & $tipo) {
-    $pos = strrpos("SIN COS INT LOG LN SGN SQR RND FINT FFRAC ", $token . " ", 0);
+    $pos = strrpos("SIN COS INT LOG LN SGN SQR RND ROUND FINT FFRAC ", $token . " ", 0);
 
     if ($pos === false)
       $pos = -1;
@@ -821,6 +877,11 @@ class Nomina {
           array_push($pila, strval(round(floatval($valor))));
         }
         break;
+      case "ROUND" :
+        if (!$error) {
+          array_push($pila, strval(round(floatval($valor),2)));
+        }
+        break;
       case "FFRAC" :
         if (!$error) {
           array_push($pila, strval(floatval($valor) - (int) (floatval($valor))));
@@ -858,7 +919,7 @@ class Nomina {
           //$ident[$token]=$valor;
           $vars = $vars . chr(13) . $token . "=" . $valor; // no se que hacen con esto.
         }
-        if ($valor != '') {
+        if ($valor != '' || $valor==0) {
           $error = false;
           array_push($pila, $valor);
         } else {
@@ -985,6 +1046,17 @@ class Nomina {
       $token = "STAB";
     }
 
+  if (Herramientas :: StringPos($token, "SC", 0) != -1) {
+      $parametro = substr($token, 2, strlen($token) - 2);
+      $fecha = substr($parametro, 2, 2) . "/" . substr($parametro, 0, 2) . "/" . substr($parametro, 4, 4);
+      $rfec = strtotime($fecha);
+
+      if (($rfec === -1 || $rfec === false)) {
+        $parametro = "0101" . Date("Y");
+      }
+      $token = "SC";
+    }
+
     if (Herramientas :: StringPos($token, "CTAB", 0) != -1) {
 
       $parametro = substr($token, 4, strlen($token) - 4);
@@ -1027,6 +1099,16 @@ class Nomina {
 	if (Herramientas :: StringPos($token, "INTPRES", 0) != -1) {
       $parametro = substr($token, 7, strlen($token));
       $token = "INTPRES";
+    }
+
+    if (Herramientas :: StringPos($token, "DIAADIPRE", 0) != -1) {
+      $parametro = substr($token, 9, strlen($token));
+      $token = "DIAADIPRE";
+    }
+
+    if (Herramientas :: StringPos($token, "DIAADIFID", 0) != -1) {
+      $parametro = substr($token, 9, strlen($token));
+      $token = "DIAADIFID";
     }
 
     if (Herramientas :: StringPos($token, "SHORAS", 0) != -1) {
@@ -1218,6 +1300,17 @@ class Nomina {
       $token = "STAB";
     }
 
+    if (Herramientas :: StringPos($token, "SC", 0) != -1 && $token!='SCAR') {
+      $parametro = substr($token, 2, strlen($token) - 2);
+      $fecha = substr($parametro, 2, 2) . "/" . substr($parametro, 0, 2) . "/" . substr($parametro, 4, 4);
+      $rfec = strtotime($fecha);
+
+      if (($rfec === -1 || $rfec === false)) {
+        $parametro = "0101" . Date("Y");
+      }
+      $token = "SC";
+    }
+
     if (Herramientas :: StringPos($token, "CTAB", 0) != -1) {
 
       $parametro = substr($token, 4, strlen($token) - 4);
@@ -1270,6 +1363,16 @@ class Nomina {
       $token = "INTPRES";
     }
 
+    if (Herramientas :: StringPos($token, "DIAADIPRE", 0) != -1) {
+      $parametro = substr($token, 9, strlen($token));
+      $token = "DIAADIPRE";
+    }
+
+    if (Herramientas :: StringPos($token, "DIAADIFID", 0) != -1) {
+      $parametro = substr($token, 9, strlen($token));
+      $token = "DIAADIFID";
+    }
+
     if (Herramientas :: StringPos($token, "SDIAS", 0) != -1) {
       $parametro = substr($token, 5, strlen($token));
 
@@ -1301,6 +1404,17 @@ class Nomina {
       $token = "CTAF";
     }
 
+    if (Herramientas :: StringPos($token, "DIFSUECARCOL", 0) != -1) {
+      $parametro = substr($token, 12, strlen($token) - 12);
+      $fecha = substr($parametro, 2, 2) . "/" . substr($parametro, 0, 2) . "/" . substr($parametro, 4, 4);
+      $rfec = strtotime($fecha);
+
+      if (($rfec === -1 || $rfec === false)) {
+        $parametro = "0101" . Date("Y");
+      }
+      $token = "DIFSUECARCOL";
+    }
+
     switch ($token) {
       case "TAF" :
         $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPDEFCPT B where  A.CODCON=B.CODCON AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' AND b.OPECON='A' AND b.IMPCPT='S' " . $cadena;
@@ -1308,24 +1422,62 @@ class Nomina {
           $valor = $tabla[0]["campo"];
         }
         break;
-
+      case "TDED" :
+        $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPDEFCPT B where  A.CODCON=B.CODCON AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' AND b.OPECON='D' AND b.IMPCPT='S' " . $cadena;
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+          $valor = $tabla[0]["campo"];
+        }
+        break;
       case "SIC" :
         $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPCONSALINT B where  A.CODCON=B.CODCON AND  a.CODNOM=B.CODNOM AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' " . $cadena;
-
+		#$criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPCONSALINT B where  A.CODCON=B.CODCON AND  a.CODNOM=B.CODNOM AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' ";
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
           $valor = $tabla[0]["campo"];
         }
         break;
 
       case "SC" :
-        $criterio = "Select coalesce(SUM(MONTO),0) as campo from NPASICONEMP where (CODCON IN (SELECT x.CODCON FROM NPCONSUELDO x) OR CODCON IN (SELECT y.CODCON FROM NPCONCOMP y)) AND codemp='" . $empleado . "' and codcar='" . $cargo . "'";
+        $movconvar = substr($parametro, 0, 2) . "/" . substr($parametro, 2, 2) . "/" . substr($parametro, 4);
+        $sql = "Select * from npasicaremp where Status='V' and CodNom='" . $nomina . "' and codemp='" . $empleado . "'";
+
+        if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+
+		  if($tabla[0]['codtipded']!='' && $tabla[0]['codtipcat']!='')
+		  {
+	          $sql = "Select A.* from NPCOMOCP A, NPCARGOS B  WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR='".$tabla[0]['codtipcat']."' and A.PASCAR='".$tabla[0]['codtipded']."' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+
+	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+	            $valor = $tablaescala[0]["suecar"];
+	          } else {
+	            $valor = 0;
+	          }
+		  }else
+		  {
+	  		if ($token == "SC") {
+	            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR=coalesce('". $tabla[0]["paso"] ."','001') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	          } else {
+	            $sql = "Select ABS(SUM(case when a.pascar=coalesce('". $tabla[0]["paso"] ."','001') then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR=coalesce('". $tabla[0]["paso"] ."','001') ) AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	          }
+
+	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+	            $valor = $tablaescala[0]["suecar"];
+	          } else {
+	            $valor = 0;
+	          }
+		  }
+        } else
+          $valor = 0;
+        break;
+
+      case "SCAR" :
+        $criterio = "Select suecar as campo from npcargos where  codcar='" . $cargo . "'";
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
           $valor = $tabla[0]["campo"];
         }
         break;
 
-      case "SCAR" :
-        $criterio = "Select suecar as campo from npcargos where  codcar='" . $cargo . "'";
+      case "CCAR" :
+        $criterio = "Select comcar as campo from npcargos where  codcar='" . $cargo . "'";
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
           $valor = $tabla[0]["campo"];
         }
@@ -1442,7 +1594,7 @@ class Nomina {
         $fecha2 = Herramientas :: dateAdd('m', 1, $fecha1, '+');
         $fecha2 = Herramientas :: dateAdd('d', 1, $fecha2, '-');
 
-        $criterio = "Select fecrei from nphojint where codemp='" . $empleado . "'";
+        $criterio = "Select coalesce(fecrei,fecing) as fecrei from nphojint where codemp='" . $empleado . "'";
         if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
           if (trim($datosper[0]["fecrei"]) != '') {
             $fechaini = $datosper[0]["fecrei"];
@@ -1460,6 +1612,25 @@ class Nomina {
           $fechaini = $fecha1;
           $salir = true;
         }
+
+        $fechafin="";
+        $criterio = "Select fecret as fecret from nphojint where codemp='" . $empleado . "'";
+        if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
+          if (trim($datosper[0]["fecret"]) != '') {
+            $fechafin = $datosper[0]["fecret"];
+            /*if ( strtotime($datosper[0]["fecret"]) < strtotime($fecha2) )
+            {
+              $fecha2=$datosper[0]["fecret"];
+              $salir=false;
+            }*/
+          }
+        }
+        if($fechafin)
+          if (strtotime($fechafin) < strtotime($fecha2)) {
+	        $salir = false;
+	        $fecha2=$fechafin;
+	      }
+
 
         /*if (Herramientas::dia_semana($fechaini_mod[2],$fechaini_mod[1],$fechaini_mod[0])=='Lunes')
         {
@@ -1720,7 +1891,30 @@ class Nomina {
         }
         break;
       case "DNLAB" :
-        $valor = 0;
+
+        $criterio = "SELECT profec,ultfec FROM NPNOMINA WHERE  codnom='" . $nomina . "'";
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+          $fecha1 = $tabla[0]["ultfec"];
+          $fecha2 = $tabla[0]["profec"];
+        }
+        #$fecha1 = date("Y-m",strtotime($fecnom))."-01";
+        if(strtotime($fecha1)<strtotime($fechaing))
+                $fecha1=$fechaing;
+
+        #$fecha2 =  date("Y-m",strtotime($fecnom))."-30";
+        #$sqld = "select last_day('$fecha1') as ultday";
+        #if (Herramientas :: BuscarDatos($sqld, & $rd))
+        #        $fecha2=$rd[0]['ultday'];
+
+        #Buscamos los permisos para restarlos
+        $diaspermiso = 0;
+        $criterio3 = "Select coalesce(Sum(A.NroDia),0) as Cuantos from NPFalPer A, npmotfal B where A.CodEmp='$empleado' and
+                        A.FecDes>=TO_DATE('$fecha1','YYYY-MM-DD') and A.FecHas<=TO_DATE('$fecha2','YYYY-MM-DD') and
+                        b.causa='I' and a.codmot=b.codmotfal";
+
+        if (Herramientas :: BuscarDatos($criterio3, & $result3))
+            $diaspermiso = $result3[0]['cuantos'];
+        $valor = $diaspermiso;
         break;
       case "AAP" :
         if (strrpos($fecnom, "/")) {
@@ -1747,9 +1941,21 @@ class Nomina {
         }
         break;
 
+
       case "AA" :
         // ????????? año bisiesto ojoooooooooo cambiar
-		$sql="select to_char(age(to_date('$fecnom','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'YY') as ano";
+		$t= new Criteria();
+        $t->add(NphojintPeer::CODEMP,$empleado);
+        $result= NphojintPeer::doSelectOne($t);
+        if ($result)
+        {
+          $fecharein=$result->getFecrei();
+        }else $fecharein="";
+		if ($fecharein!=""){
+		  $sql="select to_char(age(to_date('$fecnom','yyyy-mm-dd'),to_date('$fecharein','yyyy-mm-dd')),'YY') as ano";
+		}else{
+          $sql="select to_char(age(to_date('$fecnom','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'YY') as ano";
+		}
 		if (Herramientas :: BuscarDatos($sql, & $tabla)) {
 			$valor = intval($tabla[0]['ano']);
 		}else
@@ -1774,11 +1980,29 @@ class Nomina {
         break;
 
       case "CATRAB" :
-        $sql = "Select ultfec from NPNomina where CodNom='" . $nomina . "'";
+                $sql = "Select ultfec from NPNomina where CodNom='" . $nomina . "'";
         if (Herramientas :: BuscarDatos($sql, & $tabla)) {
           $fecnom1 = $tabla[0]["ultfec"];
           $valor = 0;
-          if (intval(date('m', strtotime($fechaing))) == intval(date('m', strtotime($fecnom)))) {
+        $t= new Criteria();
+        $t->add(NphojintPeer::CODEMP,$empleado);
+        $result= NphojintPeer::doSelectOne($t);
+        if ($result)
+        {
+          $fecharein=$result->getFecrei();
+        }else $fecharein="";
+
+        if ($fecharein!="")
+        {
+           if (intval(date('m', strtotime($fecharein))) == intval(date('m', strtotime($fecnom)))) {
+            if (intval(date('d', strtotime($fecharein))) >= intval(date('d', strtotime($fecnom1))) && intval(date('d', strtotime($fecharein))) <= intval(date('d', strtotime($fecnom)))) {
+              if (intval(date('Y', strtotime($fecharein))) < intval(date('Y', strtotime($fecnom)))) {
+                $valor = 1;
+              }
+            }
+          }
+        }else{
+           if (intval(date('m', strtotime($fechaing))) == intval(date('m', strtotime($fecnom)))) {
             if (intval(date('d', strtotime($fechaing))) >= intval(date('d', strtotime($fecnom1))) && intval(date('d', strtotime($fechaing))) <= intval(date('d', strtotime($fecnom)))) {
               if (intval(date('Y', strtotime($fechaing))) < intval(date('Y', strtotime($fecnom)))) {
                 $valor = 1;
@@ -1786,12 +2010,21 @@ class Nomina {
             }
           }
         }
+        }
+        return $valor;
         break;
 
       case "CC" :
         $sql = "Select * from npasicaremp where Status='V' and CodNom='" . $nomina . "' and codemp='" . $empleado . "'";
         if (Herramientas :: BuscarDatos($sql, & $tabla)) {
           $valor = count($tabla);
+        }
+        break;
+
+      case "NOEMP" :
+        $sql = "Select codniv from nphojint where codemp='" . $empleado . "'";
+        if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+          $valor = $tabla[0]["codniv"];
         }
         break;
 
@@ -1807,6 +2040,7 @@ class Nomina {
 
       case "CTAB" :
       case "STAB" :
+
         $movconvar = substr($parametro, 0, 2) . "/" . substr($parametro, 2, 2) . "/" . substr($parametro, 4);
         $sql = "Select * from npasicaremp where Status='V' and CodNom='" . $nomina . "' and codemp='" . $empleado . "'";
 
@@ -1815,6 +2049,7 @@ class Nomina {
 		  if($tabla[0]['codtipded']!='' && $tabla[0]['codtipcat']!='')
 		  {
 	          $sql = "Select A.* from NPCOMOCP A, NPCARGOS B  WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR='".$tabla[0]['codtipcat']."' and A.PASCAR='".$tabla[0]['codtipded']."' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+
 	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
 	            $valor = $tablaescala[0]["suecar"];
 	          } else {
@@ -1822,11 +2057,12 @@ class Nomina {
 	          }
 		  }else
 		  {
-	  		if ($token = "STAB") {
+	  		if ($token == "STAB") {
 	            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR='001' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
 	          } else {
-	            $sql = "Select ABS(SUM(case when a.pascar='001' then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR='001' OR A.PASCAR='" . $tabla[0]["paso"] . "') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	            $sql = "Select ABS(SUM(case when a.pascar='001' then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR='001' ) AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
 	          }
+
 	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
 	            $valor = $tablaescala[0]["suecar"];
 	          } else {
@@ -1835,6 +2071,15 @@ class Nomina {
 		  }
         } else
           $valor = 0;
+        #CODIGO QUE REALIZA OPERACIONES SOBRE EL SUELDO SEGUN SU TIEMPO
+        if($tabla[0]['codtie']!='' && $valor!=0)
+        {
+        	$sqlf="select factor from nptiempo where codtie='".$tabla[0]['codtie']."'";
+	       	if (Herramientas :: BuscarDatos($sqlf, & $rsf))
+	       		if($rsf[0]["factor"]!='')
+		            eval('$valor = $valor'.$rsf[0]["factor"].';');
+
+        }
         break;
 
       case "CTAF" :
@@ -1910,6 +2155,17 @@ class Nomina {
         else
         {
           $valor = "";
+        }
+        break;
+
+      case "PORHCM" :
+        $sql="select porcentaje_hcm(codemp,codnom) as porcen from npasicaremp where codemp='".$empleado."' and codnom='".$nomina."';";
+        if (Herramientas :: BuscarDatos($sql, & $result)) {
+          $valor = $result[0]["porcen"];
+        }
+        else
+        {
+          $valor = 0;
         }
         break;
 
@@ -2261,12 +2517,13 @@ class Nomina {
 
         $valor = 0;
         $fecha = date('d/m/Y',strtotime($fecnom));
-        $criterio = "select sum(coalesce(a.diasbonovac,0)) as valor
+        $criterio = "select sum(coalesce(a.diasbonovacpag,0)) as valor
 				from npvacsalidas_det a, npvacsalidas b
 				where
 				b.fecpagbonvac=to_date('$fecha','dd/mm/yyyy')
 				and a.codemp='$empleado'
-				and a.fecvac=b.fecvac ";
+				and a.fecvac=b.fecvac
+				and a.codemp=b.codemp ";
 
         if (Herramientas :: BuscarDatos($criterio, & $rs))
 			if($rs[0]['valor']!='')
@@ -2290,7 +2547,7 @@ class Nomina {
 
         return $valor;
         break;
-		
+
 	  case "D360FA" :
 
         $valor = 0;
@@ -2305,8 +2562,513 @@ class Nomina {
 				$valor = $rs[0]['valor'];
 
         return $valor;
-        break;	
+        break;
+      case "DIAADIPRE" :
+        $valor = 0;
+        $auxfec = split("-",$fecnom);
+        #$fecha = date('d/m/Y',strtotime($fecnom));
+        $fecha = $auxfec[0].'-'.$auxfec[1].'-01';
+        $criterio = "Select * from calculopres('$empleado',to_char(cast('$fecha' as date)-1,'dd/mm/yyyy'),'$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
 
+        if (Herramientas :: BuscarDatos($criterio, & $calpres))
+		{
+			$valor = ($calpres[0]['dias']-5)*$calpres[0]['mondiapro'];
+		}
+
+        return $valor;
+      case "DIAADIFID" :
+        $valor = 0;
+        $auxfec = split("-",$fecnom);
+        #$fecha = date('d/m/Y',strtotime($fecnom));
+        $fecha = $auxfec[0].'-'.$auxfec[1].'-'.$auxfec[2];
+        $criterio = "Select * from calculopres('$empleado',to_char(cast('$fecha' as date),'dd/mm/yyyy'),'$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
+
+        if (Herramientas :: BuscarDatos($criterio, & $calpres))
+		{
+			$valor = ($calpres[0]['dias']-5)*$calpres[0]['mondiapro'];
+		}
+
+        return $valor;
+
+      case "DIAVACCON" :
+        $valor = 0;
+        $criterio = "select ((fechas-fecdes)) as dias from npvacsalidas where codemp='$empleado' and fecsalnom=to_date('$fecnom','yyyy-mm-dd') order by fecvac desc";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+           $valor = $result[0]['dias'];
+        }
+        return $valor;
+      case "DIAVACNOM" :
+        $valor = 0;
+        $fecnomdes=null;
+        $sql = "select ultfec from npnomina where codnom='$nomina'";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $fecnomdes=$res[0]['ultfec'];
+        }
+        #QUERY HECHO POR OSWALDO SE COPIO Y SE PEGO
+        $criterio = "select FECDES,FECHAS,ULTFEC,
+                    (case when a.fechas<c.profec then a.fechas else c.profec end)- --dia inicio
+                    (case when a.fecdes>c.ultfec then a.fecdes else c.ultfec end)-- dia final
+                    + (case when to_char(last_day(c.profec),'dd')='31' and last_day(c.profec)=c.profec  then 0 else 1 end)
+                       as Dias -- si la nomina es la ultima del mes y ese mes tiene 31 dias no le sumo el ultimo dia, deberia hacerse algo similar para febrero  que sume 2 o 3 segun sea el caso
+                    from npvacsalidas a,npasicaremp b, npnomina c
+                    where
+                    a.codemp=b.codemp and
+                    b.status='V' and
+                    c.codnom=b.codnom and
+                    ((C.ULTFEC BETWEEN A.FECDES AND A.FECHAS) OR (C.PROFEC BETWEEN A.FECDES AND A.FECHAS)) AND -- ASI SOLO ME TRAIGO LOS LAPSOS QUE AFECTAN LA NOMINA QUE ESTOY CALCULANDO (Y NO ME TRAIGO VACACIONES VIEJAS)
+                    a.codemp='$empleado' -- ESTE SERIA MI UNICO PARAMETRO";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+           $valor = $result[0]['dias'];
+        }
+        return $valor;
+      case "NSVAC" :
+        $valor = 0;
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$fecnom','yyyy-mm-dd')  order by fecvac desc";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+            $fechades = $result[0]['fecdes'];
+            $fechahas = $result[0]['fechas'];
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Sabado') {
+                $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            $valor = $numerosemanas;
+        }
+        return $valor;
+      case "NDVAC" :
+        $valor = 0;
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$fecnom','yyyy-mm-dd')  order by fecvac desc";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+            $fechades = $result[0]['fecdes'];
+            $fechahas = $result[0]['fechas'];
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Domingo') {
+                $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            $valor = $numerosemanas;
+        }
+        return $valor;
+       case "NFVAC" :
+        $valor = 0;
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$fecnom','yyyy-mm-dd')  order by fecvac desc";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+            $fechades = $result[0]['fecdes'];
+            $fechahas = $result[0]['fechas'];
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              $sql="select * from npvacdiafer where dia='".$auxfechades[2]."' and mes='".$auxfechades[1]."'";
+              if (Herramientas :: BuscarDatos($sql, & $res))
+              {
+                  $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            $valor = $numerosemanas;
+        }
+        return $valor;
+      case "NLVAC" :
+        $valor = 0;
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$fecnom','yyyy-mm-dd')  order by fecvac desc";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+            $fechades = $result[0]['fecdes'];
+            $fechahas = $result[0]['fechas'];
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Lunes') {
+                $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            $valor = $numerosemanas;
+        }
+        return $valor;
+      case "NLENNOM" :
+        $valor = 0;
+        $fecnomdes=null;
+        $sql = "select ultfec from npnomina where codnom='$nomina'";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $fechades = $result[0]['ultfec'];
+            $fechahas = $fecnom;
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Lunes') {
+                $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            $valor = $numerosemanas;
+        }
+        return $valor;
+	  case "MCES" :
+        $valor=0;
+        #Calculamos los dias del mes
+        $criterio = "Select A.* from NPCestaTickets A, NpAsiConEmp B where A.CodNom='".$nomina."' and B.CodCar = '".$cargo."' And
+		B.CodEmp='".$empleado."' And  A.CodCon=B.CodCon";
+		if ( Herramientas :: BuscarDatos($criterio, & $result))
+        {
+          $criterio2 = "Select UniTrib from NPDefGen";
+		  if($result[0]['monpor']=='P')
+		  {
+		  	if (Herramientas :: BuscarDatos($criterio2, & $result2))
+			{
+				$valorut = $result2[0]['unitrib'];
+				$valorticket = $valorut * ($result[0]['valtic']/100);
+				$valorticket = $valorticket * $result[0]['numtic'];
+			}else
+				$valorut = 0;
+		  }else
+		   	$valorticket = $result[0]['valtic'] * $result[0]['numtic'];
+
+			$fecha1 = date("Y-m",strtotime($fecnom))."-01";
+			if(strtotime($fecha1)<strtotime($fechaing))
+				$fecha1=$fechaing;
+
+                        $fecha2 =  date("Y-m",strtotime($fecnom))."-30";
+			$sqld = "select last_day('$fecha1') as ultday";
+			if (Herramientas :: BuscarDatos($sqld, & $rd))
+				$fecha2=$rd[0]['ultday'];
+
+			#Buscamos los permisos para restarlos
+			$diaspermiso = 0;
+			$criterio3 = "Select coalesce(Sum(A.NroDia),0) as Cuantos from NPFalPer A where A.CodEmp='".$empleado."' and A.FecDes>=TO_DATE('".$fecha1."','YYYY-MM-DD') and A.FecHas<=TO_DATE('".$fecha2."','YYYY-MM-DD')";
+			if (Herramientas :: BuscarDatos($criterio3, & $result3))
+				$diaspermiso = $result3[0]['cuantos'];
+
+			#Buscamos los dias Extras
+			$diasextras = 0;
+                        $criterio3 = "Select coalesce(Count(A.CodEmp),0) as Cuantos from NPDiaExt A where A.CodEmp='".$empleado."' and A.Fecha>=TO_DATE('".$fecha1."','YYYY-MM-DD') and A.Fecha<=TO_DATE('".$fecha2."','YYYY-MM-DD') and A.CodNom='".$nomina."'";
+			if (Herramientas :: BuscarDatos($criterio3, & $result3))
+				$diasextras = $result3[0]['cuantos'];
+
+		    #Ahora comparamos el Comportamiento del concepto de Cesta Ticket
+            #Dependiendo si es por "J" - Jornadas Laborales, "V" - Variable ó  "F" - Monto Fijo
+
+            #calculamos tipo J=Jornadas Laborales
+            if($result[0]['tippag']=='J')
+			{
+				$jornada='';
+				$sqlj = "Select IdeJor From  NpEmpJorLab Where CodEmp = '".$empleado."' And CodNom = '".$nomina."'";
+				if (Herramientas :: BuscarDatos($sqlj, & $rj))
+					$jornada = $rj[0]['idejor'];
+
+				if($result[0]['diafer']=='S' || $result[0]['diafer']==1)
+					$diafer="S";
+				else
+				    $diafer='N'	;
+				$diaslabor=0;
+				$sql="select diaslaborados('$nomina','$diafer',to_date('$fecha1','yyyy-mm-dd'),to_date('$fecha2','yyyy-mm-dd'),'$idejor')";
+				if (Herramientas :: BuscarDatos($sql, & $rsql))
+					$diaslabor=$rsql[0]['diaslaborados'];
+
+				$valorcesta = ($diaslabor - $diaspermiso + $diasextras) * $valorticket;
+				$valor = $valorcesta;
+
+				#Actualizando la cantidad
+				#$sql1="Update NpAsiConEmp Set Cantidad = ".$diaslabor - $diaspermiso + $diasextras." Where
+				#CodEmp = '".$empleado."' And CodCon = '".$result[0]['codcon']."' And CodCar = '".$cargo."'";
+				#Herramientas::insertarRegistros($sql1);
+                                $numerodias=$diaslabor;
+				#$sql1="Update NpNOMCAL Set Cantidad = ".$diaslabor - $diaspermiso + $diasextras." Where
+                                #CodEmp = '".$empleado."' And CodCon = '".$result[0]['codcon']."' And CodCar = '".$cargo."'";
+				#Herramientas::insertarRegistros($sql1);
+
+
+
+			#calculamos tipo V=Variable
+			}elseif($result[0]['tippag']=='V')
+			{
+				if($result[0]['diahab']=='S' || $result[0]['diahab']==1)
+					$calculahab=true;
+				else
+					$calculahab=false;
+
+				if($result[0]['sabado']=='S' || $result[0]['sabado']==1)
+					$calculasab=true;
+				else
+					$calculasab=false;
+
+				if($result[0]['doming']=='S' || $result[0]['doming']==1)
+					$calculadom=true;
+				else
+					$calculadom=false;
+
+				if($result[0]['diafer']=='S' || $result[0]['diafer']==1)
+					$calculafer=true;
+				else
+					$calculafer=false;
+
+				if($calculahab || $calculasab || $calculadom || $calculafer)
+				{
+					$criterio4 = "SELECT PROFEC,ULTFEC FROM NPNOMINA WHERE  codnom='".$nomina."'";
+					if (Herramientas :: BuscarDatos($criterio4, & $result4))
+					{
+						$fecha1 = date('Y-m-',strtotime($result4[0]['profec']))."01";
+                                                $fecha2 = date("Y-m",strtotime($result4[0]['profec']))."-30";
+						$sqld = "select last_day('$fecha1') as ultday";
+						if (Herramientas :: BuscarDatos($sqld, & $rd))
+							$fecha2=$rd[0]['ultday'];
+						$fechaini = $fecha1;
+						$numerodias = 0;
+
+						while(strtotime($fechaini) <= strtotime($fecha2))
+						{
+							$fechainid = 0;
+							$fecha2d  = 0;
+							$sqld="select to_char(to_date('$fechaini','yyyy-mm-dd'),'d') as fechainid, to_char(to_date('$fecha2','yyyy-mm-dd'),'d') as fecha2d;";
+							if (Herramientas :: BuscarDatos($sqld, & $rd))
+							{
+								$fechainid = intval($rd[0]['fechainid']);
+								$fecha2d = intval($rd[0]['fecha2d']);
+							}
+							#Si $calculahab=true sumamos los dias habiles
+							if($calculahab)
+							{
+								if($fechainid>=2 && $fechainid<=6)
+								{
+									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
+									if (!(Herramientas :: BuscarDatos($criterio5, & $result5)))
+										$numerodias+=1;
+								}
+							}
+
+							#Si $calculasab=true sumamos los dias sabados
+							if($calculasab)
+							{
+								if($fechainid==7)
+								{
+									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
+									if (!(Herramientas :: BuscarDatos($criterio5, & $result5)))
+										$numerodias+=1;
+								}
+							}
+
+							#Si $calculadom=true sumamos los dias domingos
+							if($calculadom)
+							{
+								if($fechainid==1)
+								{
+									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
+									if (!(Herramientas :: BuscarDatos($criterio5, & $result5)))
+										$numerodias+=1;
+								}
+							}
+
+							#Si $calculafer=true sumamos los dias feriados
+							if($calculafer)
+							{
+								$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(TO_CHAR(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
+								if (Herramientas :: BuscarDatos($criterio5, & $result5))
+									$numerodias+=1;
+							}
+							$sqlini ="select to_date('$fechaini','yyyy-mm-dd')+1 as fechaini";
+							Herramientas :: BuscarDatos($sqlini, & $rini);
+							$fechaini = $rini[0]['fechaini'];
+						}
+					}
+				}else
+					$numerodias =0;
+
+				$valorcesta = ($numerodias - $diaspermiso + $diasextras) * $valorticket;
+				$valor = $valorcesta;
+
+			}else
+			{
+				$numerodias = $result[0]['numdia'];
+				$valorcesta = ($numerodias - $diaspermiso + $diasextras) * $valorticket;
+				$valor = $valorcesta;
+			}
+                        $sql1="Update npasiconemp Set Cantidad = ".($numerodias - $diaspermiso + $diasextras)." Where
+                        CodEmp = '".$empleado."' And CodCon = '".$result[0]['codcon']."' And CodCar = '".$cargo."'";
+                        Herramientas::insertarRegistros($sql1);
+		}
+
+        return $valor;
+      case "NLVACNOM" :
+        $valor = 0;
+        $fecnomdes=null;
+        $sql = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom<=to_date('$fecnom','yyyy-mm-dd') and fecreinom>=to_date('$fecnom','yyyy-mm-dd')  order by fecvac desc";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $fechades = $res[0]['fecdes'];
+            $fechahas = $fecnom;
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Lunes') {
+                $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            if($numerosemanas && $numerosemanas!=0)
+                $valor = $numerosemanas;
+        }
+
+        return $valor;
+      case "DIFSUECARCOL" :
+
+        $codcarcol='';
+        $sqlcarcol = "select * from npasicarcolemp where codemp='$empleado'";
+        if (Herramientas :: BuscarDatos($sqlcarcol, & $rscarcol)) {
+            $codcarcol=$rscarcol[0]['codcar'];
+        }
+
+        if($codcarcol)
+        {
+            $movconvar = substr($parametro, 0, 2) . "/" . substr($parametro, 2, 2) . "/" . substr($parametro, 4);
+            $sql = "Select * from npasicaremp where Status='V' and CodNom='" . $nomina . "' and codemp='" . $empleado . "'";
+
+            if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+
+                  if($tabla[0]['codtipded']!='' && $tabla[0]['codtipcat']!='')
+                  {
+                      $sql = "Select A.* from NPCOMOCP A, NPCARGOS B  WHERE B.CODCAR='" . $codcarcol . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR='".$tabla[0]['codtipcat']."' and A.PASCAR='".$tabla[0]['codtipded']."' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+
+                      if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+                        $valor = $tablaescala[0]["suecar"];
+                       } else {
+                        $valor = 0;
+                       }
+                  }else
+                  {
+                      if ($token == "DIFSUECARCOL") {
+                        $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $codcarcol . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR='001' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+                      } else {
+                        $sql = "Select ABS(SUM(case when a.pascar='001' then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $codcarcol . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR='001' ) AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+                      }
+
+                      if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+                        $valor = $tablaescala[0]["suecar"];
+                      } else {
+                        $valor = 0;
+                      }
+                  }
+            }else
+                $valor=0;
+
+            if($valor>0)
+            {
+                $valor2=$valor;
+                $movconvar = substr($parametro, 0, 2) . "/" . substr($parametro, 2, 2) . "/" . substr($parametro, 4);
+                $sql = "Select * from npasicaremp where Status='V' and CodNom='" . $nomina . "' and codemp='" . $empleado . "'";
+
+                if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+
+                      if($tabla[0]['codtipded']!='' && $tabla[0]['codtipcat']!='')
+                      {
+                         $sql = "Select A.* from NPCOMOCP A, NPCARGOS B  WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR='".$tabla[0]['codtipcat']."' and A.PASCAR='".$tabla[0]['codtipded']."' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+
+                          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+                            $valor = $tablaescala[0]["suecar"];
+                          } else {
+                            $valor = 0;
+                          }
+                      }else
+                      {
+                        if ($token == "DIFSUECARCOL") {
+                            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR='001' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+                          } else {
+                            $sql = "Select ABS(SUM(case when a.pascar='001' then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR='001' ) AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+                          }
+
+                        if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+                        $valor = $tablaescala[0]["suecar"];
+                          } else {
+                            $valor = 0;
+                          }
+                      }
+                      if($valor>0)
+                      {
+                          $valor = floatval($valor2)-floatval($valor);
+                      }
+                }else
+                    $valor=0;
+            }
+
+        }else
+            $valor=0;
+
+
+        break;
+      case "NPARINC":
+            $valor = 0;
+            $fecnomdes=null;
+            $sql = "select ultfec from npnomina where codnom='$nomina'";
+            if (Herramientas :: BuscarDatos($sql, & $res))
+            {
+                $fecnomdes = $res[0]['ultfec'];
+            }
+          $sql="select count(codemp) as canpar from npinffam where fecing>=to_date('$fecnomdes','yyyy-mm-dd') and fecing<=to_date('$fecnom','yyyy-mm-dd') and codemp='$empleado'";
+          if (Herramientas :: BuscarDatos($sql, & $rspar)) {
+                $valor = $rspar[0]['canpar'];
+          }
+        break;
+      case "MATNOM":
+            $valor = 'N';
+            $fecnomdes=null;
+            $sql = "select ultfec from npnomina where codnom='$nomina'";
+            if (Herramientas :: BuscarDatos($sql, & $res))
+            {
+                $fecnomdes = $res[0]['ultfec'];
+            }
+          $sql="select * from nphojint where fecmat>=to_date('$fecnomdes','yyyy-mm-dd') and fecmat<=to_date('$fecnom','yyyy-mm-dd') and codemp='$empleado' ";
+          if (Herramientas :: BuscarDatos($sql, & $rspar)) {
+                $valor = 'S';
+          }
+        break;
+      case "DIFDIASAL" :
+        $valor = 0;
+        $sql = "select fecsalnom-to_date('$fecnom','yyyy-mm-dd') as diadif from npvacsalidas a where codemp='$empleado' and fecsalnom>to_date('$fecnom','yyyy-mm-dd')  order by fecvac desc";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $valor = $res[0]['diadif'];
+        }
+
+        return $valor;
+      case "NLDIFVAC" :
+        $valor = 0;
+        $sql = "select coalesce(sum((case when fecsalnom=profec and fecdes>fecsalnom then numsemanas(profec,fecdes,'lunes') when (fecsalnom<b.profec and c.fecdes>=ultfec and c.fecdes<=profec) then numsemanas(fecdes,profec,'lunes')*-1 end)),0) as cuantas from npasicaremp a, npnomina b,npvacsalidas c where
+                a.codnom=b.codnom
+                and a.codemp=c.codemp
+                and a.codemp='$empleado'
+                and (fecsalnom=b.profec or (fecsalnom<b.profec and c.fecdes>=ultfec and c.fecdes<=profec))";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $valor = $res[0]['cuantas'];
+        }
+
+        return $valor;
+      case "5FIDE" :
+        $valor = 0;
+        $sql = "select (salempdia*5) as cincodias from npimppresoc
+                where
+                codemp='$empleado' and tipo is null and
+                fecini<=to_date('$fecnom','yyyy-mm-dd') and
+                fecfin>=to_date('$fecnom','yyyy-mm-dd')
+                limit 1";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $valor = $res[0]['cincodias'];
+        }
+
+        return $valor;
       default :
         $aux = 0;
 
@@ -2935,6 +3697,17 @@ class Nomina {
       $campo = "STAB";
     }
 
+  if (Herramientas :: StringPos($campo, "SC", 0) != -1 && $campo!='SCAR') {
+      $parametro = substr($campo, 2, strlen($campo) - 2);
+      $fecha = substr($parametro, 2, 2) . "/" . substr($parametro, 0, 2) . "/" . substr($parametro, 4, 4);
+      $rfec = strtotime($fecha);
+
+      if (($rfec === -1 || $rfec === false)) {
+        $parametro = "0101" . Date("Y");
+      }
+      $campo = "SC";
+    }
+
     if (Herramientas :: StringPos($campo, "CTAB", 0) != -1) {
 
       $parametro = substr($campo, 4, strlen($campo) - 4);
@@ -2981,6 +3754,18 @@ class Nomina {
 
       $campo = "INTPRES";
     }
+
+    if (Herramientas :: StringPos($campo, "DIAADIPRE", 0) != -1) {
+      $parametro = substr($campo, 9, strlen($campo));
+
+      $campo = "DIAADIPRE";
+    }
+
+    if (Herramientas :: StringPos($campo, "DIAADIFID", 0) != -1) {
+      $parametro = substr($campo, 9, strlen($campo));
+
+      $campo = "DIAADIFID";
+    }
 //print $parametro;
 //print "--".$campo;
 
@@ -3021,6 +3806,17 @@ class Nomina {
       $campo = "CTAF";
     }
 
+    if (Herramientas :: StringPos($campo, "DIFSUECARCOL", 0) != -1) {
+      $parametro = substr($campo, 12, strlen($campo) - 12);
+      $fecha = substr($parametro, 2, 2) . "/" . substr($parametro, 0, 2) . "/" . substr($parametro, 4, 4);
+      $rfec = strtotime($fecha);
+
+      if (($rfec === -1 || $rfec === false)) {
+        $parametro = "0101" . Date("Y");
+      }
+      $campo = "DIFSUECARCOL";
+    }
+
     switch ($campo) {
       case "SIM" :
         $criterio = "Select coalesce(SUM(Monto),0) as campo from npAsiConEmp A,NPCONSALINT B where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "'";
@@ -3030,15 +3826,39 @@ class Nomina {
         break;
       case "SIC" :
         $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPCONSALINT B where  A.CODCON=B.CODCON AND  a.CODNOM=B.CODNOM AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' ";
+
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
           return $tabla[0]["campo"];
         }
         break;
       case "SC" :
-        $criterio = "Select coalesce(SUM(MONTO),0) as campo from NPASICONEMP where (CODCON IN (SELECT x.CODCON FROM NPCONSUELDO x) OR CODCON IN (SELECT y.CODCON FROM NPCONCOMP y)) AND codemp='" . $empleado . "' and codcar='" . $cargo . "'";
-        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
-          return $tabla[0]["campo"];
-        }
+        $movconvar = substr($parametro, 0, 2) . "/" . substr($parametro, 2, 2) . "/" . substr($parametro, 4);
+        $sql = "Select * from npasicaremp where Status='V' and CodNom='" . $nomina . "' and codemp='" . $empleado . "'";
+
+        if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+          if($tabla[0]['codtipded']!='' && $tabla[0]['codtipcat']!='')
+		  {
+	          $sql = "Select A.* from NPCOMOCP A, NPCARGOS B  WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR='".$tabla[0]['codtipcat']."' and A.PASCAR='".$tabla[0]['codtipded']."' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+	            $valor = $tablaescala[0]["suecar"];
+	          } else {
+	            $valor = 0;
+	          }
+		  }else
+		  {
+		  	if ($campo = "SC") {
+	            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR=coalesce('".$tabla[0]["pascar"]."','001') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	          } else {
+	            $sql = "Select ABS(SUM(case when a.pascar=coalesce('".$tabla[0]["pascar"]."','001') then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR=coalesce('".$tabla[0]["pascar"]."','001') ) AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	          }
+	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+	            $valor = $tablaescala[0]["suecar"];
+	         } else {
+	            $valor = 0;
+	          }
+		  }
+        } else
+          $valor = 0;
         break;
       case "SCAR" :
         $criterio = "Select suecar as campo from npcargos where  codcar='" . $cargo . "'";
@@ -3047,10 +3867,22 @@ class Nomina {
         }
 
         break;
+      case "CCAR" :
+        $criterio = "Select comcar as campo from npcargos where  codcar='" . $cargo . "'";
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+          $valor = $tabla[0]["campo"];
+        }
+        break;
       case "TAF" :
         $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPDEFCPT B where  A.CODCON=B.CODCON AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' AND b.OPECON='A' AND b.IMPCPT='S' ";
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
           return $tabla[0]["campo"];
+        }
+        break;
+      case "TDED" :
+        $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npNomCal A,NPDEFCPT B where  A.CODCON=B.CODCON AND  a.codnom='" . $nomina . "' and a.codemp='" . $empleado . "' and a.codcar='" . $cargo . "' AND b.OPECON='D' AND b.IMPCPT='S' ";
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+          $valor = $tabla[0]["campo"];
         }
         break;
       case "NLP" :
@@ -3157,7 +3989,7 @@ class Nomina {
         $fecha2 = Herramientas :: dateAdd('m', 1, $fecha1, '+');
         $fecha2 = Herramientas :: dateAdd('d', 1, $fecha2, '-');
 
-        $criterio = "Select fecrei from nphojint where codemp='" . $empleado . "'";
+        $criterio = "Select coalesce(fecrei,fecing) as fecrei from nphojint where codemp='" . $empleado . "'";
         if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
           if (trim($datosper[0]["fecrei"]) != '') {
             $fechaini = $datosper[0]["fecrei"];
@@ -3175,6 +4007,26 @@ class Nomina {
           $fechaini = $fecha1;
           $salir = true;
         }
+
+        $fechafin="";
+        $criterio = "Select fecret as fecret from nphojint where codemp='" . $empleado . "'";
+        if (Herramientas :: BuscarDatos($criterio, & $datosper)) {
+          if (trim($datosper[0]["fecret"]) != '') {
+            $fechafin = $datosper[0]["fecret"];
+            /*if ( strtotime($datosper[0]["fecret"]) < strtotime($fecha2) )
+            {
+              $fecha2=$datosper[0]["fecret"];
+              $salir=false;
+            }*/
+          }
+        }
+        if($fechafin)
+	        if (strtotime($fechafin) < strtotime($fecha2)) {
+	          $salir = false;
+	          $fecha2=$fechafin;
+	         }
+
+
         $numerosemanas = 0;
         while (strtotime($fechaini) <= strtotime($fecha2)) {
           $fechaini_mod = split('-', $fechaini);
@@ -3331,6 +4183,33 @@ class Nomina {
 		return $valor;
         #$valor = Herramientas :: dateDiff('m', $fechaing, $fecnom);
         break;
+      case "DNLAB" :
+
+        $criterio = "SELECT profec,ultfec FROM NPNOMINA WHERE  codnom='" . $nomina . "'";
+        if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
+          $fecha1 = $tabla[0]["ultfec"];
+          $fecha2 = $tabla[0]["profec"];
+        }
+
+        #$fecha1 = date("Y-m",strtotime($profec))."-01";
+        if(strtotime($fecha1)<strtotime($fechaing))
+                $fecha1=$fechaing;
+
+        #$fecha2 =  date("Y-m",strtotime($profec))."-30";
+        #$sqld = "select last_day('$fecha1') as ultday";
+        #if (Herramientas :: BuscarDatos($sqld, & $rd))
+        #        $fecha2=$rd[0]['ultday'];
+
+        #Buscamos los permisos para restarlos
+        $diaspermiso = 0;
+        $criterio3 = "Select coalesce(Sum(A.NroDia),0) as Cuantos from NPFalPer A, npmotfal B where A.CodEmp='$empleado' and
+                        A.FecDes>=TO_DATE('$fecha1','YYYY-MM-DD') and A.FecHas<=TO_DATE('$fecha2','YYYY-MM-DD') and
+                        b.causa='I' and a.codmot=b.codmotfal";
+
+        if (Herramientas :: BuscarDatos($criterio3, & $result3))
+            $diaspermiso = $result3[0]['cuantos'];
+        $valor = $diaspermiso;
+        break;
       case "AAP" :
 
         if (strrpos($hasta, "/")) {
@@ -3456,7 +4335,18 @@ class Nomina {
         break;
       case "AA" :
         // ????????? año bisiesto ojoooooooooo cambiar
-		$sql="select to_char(age(to_date('$profec','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'YY') as ano";
+        $t= new Criteria();
+        $t->add(NphojintPeer::CODEMP,$empleado);
+        $result= NphojintPeer::doSelectOne($t);
+        if ($result)
+        {
+          $fecharein=$result->getFecrei();
+        }else $fecharein="";
+		if ($fecharein!=""){
+		  $sql="select to_char(age(to_date('$profec','yyyy-mm-dd'),to_date('$fecharein','yyyy-mm-dd')),'YY') as ano";
+		}else{
+		  $sql="select to_char(age(to_date('$profec','yyyy-mm-dd'),to_date('$fechaing','yyyy-mm-dd')),'YY') as ano";
+		}
 		if (Herramientas :: BuscarDatos($sql, & $tabla)) {
 			$valor = intval($tabla[0]['ano']);
 		}else
@@ -3481,15 +4371,35 @@ class Nomina {
 		return $valor;
         break;
       case "CATRAB" :
-        $valor = 0;
-        $hasta_mod = split('/', $hasta);
-        $desde_mod = split('/', $desde);
-        if (intval(date('m', strtotime($fechaing))) == intval(date('m', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2])))) {
-          if (intval(date('d', strtotime($fechaing))) >= intval(date('d', strtotime($desde_mod[1] . '/' . $desde_mod[0] . '/' . $desde_mod[2]))) && intval(date('d', strtotime($fechaing))) <= intval(date('d', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2])))) {
-            if (intval(date('Y', strtotime($fechaing))) < intval(date('Y', strtotime($hasta_mod[1] . '/' . $hasta_mod[0] . '/' . $hasta_mod[2])))) {
-              $valor = 1;
+        $sql = "Select ultfec from NPNomina where CodNom='" . $nomina . "'";
+        if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+          $fecnom1 = $tabla[0]["ultfec"];
+          $valor = 0;
+        $t= new Criteria();
+        $t->add(NphojintPeer::CODEMP,$empleado);
+        $result= NphojintPeer::doSelectOne($t);
+        if ($result)
+        {
+          $fecharein=$result->getFecrei();
+        }else $fecharein="";
+        if ($fecharein!="")
+        {
+           if (intval(date('m', strtotime($fecharein))) == intval(date('m', strtotime($fecnom)))) {
+            if (intval(date('d', strtotime($fecharein))) >= intval(date('d', strtotime($fecnom1))) && intval(date('d', strtotime($fecharein))) <= intval(date('d', strtotime($fecnom)))) {
+              if (intval(date('Y', strtotime($fecharein))) < intval(date('Y', strtotime($fecnom)))) {
+                $valor = 1;
+              }
             }
           }
+        }else{
+           if (intval(date('m', strtotime($fechaing))) == intval(date('m', strtotime($fecnom)))) {
+            if (intval(date('d', strtotime($fechaing))) >= intval(date('d', strtotime($fecnom1))) && intval(date('d', strtotime($fechaing))) <= intval(date('d', strtotime($fecnom)))) {
+              if (intval(date('Y', strtotime($fechaing))) < intval(date('Y', strtotime($fecnom)))) {
+                $valor = 1;
+              }
+            }
+          }
+        }
         }
         return $valor;
         break;
@@ -3497,6 +4407,12 @@ class Nomina {
         $sql = "Select * from npasicaremp where Status='V' and CodNom='" . $nomina . "' and codemp='" . $empleado . "'";
         if (Herramientas :: BuscarDatos($sql, & $tabla)) {
           return count($tabla);
+        }
+        break;
+      case "NOEMP" :
+        $sql = "Select codniv from nphojint where codemp='" . $empleado . "'";
+        if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+          $valor = $tabla[0]["codniv"];
         }
         break;
       case "ED" :
@@ -3527,7 +4443,7 @@ class Nomina {
 		  	if ($campo = "STAB") {
 	            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR='001' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
 	          } else {
-	            $sql = "Select ABS(SUM(case when a.pascar='001' then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR='001' OR A.PASCAR='" . $tabla[0]["paso"] . "') AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+	            $sql = "Select ABS(SUM(case when a.pascar='001' then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR='001' ) AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
 	          }
 	          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
 	            $valor = $tablaescala[0]["suecar"];
@@ -3537,6 +4453,15 @@ class Nomina {
 		  }
         } else
           $valor = 0;
+        #CODIGO QUE REALIZA OPERACIONES SOBRE EL SUELDO SEGUN SU TIEMPO
+        if($tabla[0]['codtie']!='' && $valor!=0)
+        {
+        	$sqlf="select factor from nptiempo where codtie='".$tabla[0]['codtie']."'";
+	       	if (Herramientas :: BuscarDatos($sqlf, & $rsf))
+	       		if($rsf[0]["factor"]!='')
+		            eval('$valor = $valor'.$rsf[0]["factor"].';');
+
+        }
         break;
 
       case "CTAF" :
@@ -3612,6 +4537,17 @@ class Nomina {
         else
         {
           $valor = "";
+        }
+        break;
+
+      case "PORHCM" :
+        $sql="select porcentaje_hcm(codemp,codnom) as porcen from npasicaremp where codemp='".$empleado."' and codnom='".$nomina."';";
+        if (Herramientas :: BuscarDatos($sql, & $result)) {
+          $valor = $result[0]["porcen"];
+        }
+        else
+        {
+          $valor = 0;
         }
         break;
 
@@ -3950,12 +4886,13 @@ class Nomina {
 
         $valor = 0;
         $fecha = $hasta;
-        $criterio = "select sum(coalesce(a.diasbonovac,0)) as valor
+        $criterio = "select sum(coalesce(a.diasbonovacpag,0)) as valor
 				from npvacsalidas_det a, npvacsalidas b
 				where
 				b.fecpagbonvac=to_date('$fecha','dd/mm/yyyy')
-				and and a.codemp='$empleado'
-				and a.fecvac=b.fecvac ";
+				and a.codemp='$empleado'
+				and a.fecvac=b.fecvac
+				and a.codemp=b.codemp";
 
         if (Herramientas :: BuscarDatos($criterio, & $rs))
 			if($rs[0]['valor']!='')
@@ -3979,7 +4916,7 @@ class Nomina {
 
         return $valor;
         break;
-		
+
 		case "D360FA" :
 
         $valor = 0;
@@ -3996,6 +4933,518 @@ class Nomina {
         return $valor;
         break;
 
+      case "DIAADIPRE" :
+        $valor = 0;
+        $auxfec = split("/",$hasta);
+        #$fecha = $hasta;
+        $fecha = $auxfec[2].'-'.$auxfec[1].'-01';
+        $criterio = "Select * from calculopres('$empleado','to_char(cast('$fecha' as date)-1,'dd/mm/yyyy')','$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
+        if (Herramientas :: BuscarDatos($criterio, & $calpres))
+		{
+			$valor = ($calpres[0]['dias']-5)*$calpres[0]['mondiapro'];
+		}
+
+        return $valor;
+        break;
+      case "DIAADIFID" :
+        $valor = 0;
+        $auxfec = split("/",$hasta);
+        $fecha = $auxfec[2].'-'.$auxfec[1].'-'.$auxfec[0];
+        $criterio = "Select * from calculopres('$empleado','to_char(cast('$fecha' as date),'dd/mm/yyyy')','$parametro','P') where tipo='DEPOSITADOS' order by fecini desc";
+        if (Herramientas :: BuscarDatos($criterio, & $calpres))
+		{
+			$valor = ($calpres[0]['dias']-5)*$calpres[0]['mondiapro'];
+		}
+
+        return $valor;
+	  case "DIAVACCON" :
+        $valor = 0;
+        $criterio = "select ((fechas-fecdes)) as dias from npvacsalidas where codemp='$empleado' and fecsalnom=to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+           $valor = $result[0]['dias'];
+        }
+        return $valor;
+      case "DIAVACNOM" :
+        $valor = 0;
+		$auxfec = split("/",$hasta);
+        $fechanom = $auxfec[2].'-'.$auxfec[1].'-'.$auxfec[0];
+        $fecnomdes=null;
+        $sql = "select ultfec from npnomina where codnom='$nomina'";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $fecnomdes=$res[0]['ultfec'];
+        }
+       $criterio = "select FECDES,FECHAS,ULTFEC,
+                    (case when a.fechas<c.profec then a.fechas else c.profec end)- --dia inicio
+                    (case when a.fecdes>c.ultfec then a.fecdes else c.ultfec end)-- dia final
+                    + (case when to_char(last_day(c.profec),'dd')='31' and last_day(c.profec)=c.profec  then 0 else 1 end)
+                       as Dias -- si la nomina es la ultima del mes y ese mes tiene 31 dias no le sumo el ultimo dia, deberia hacerse algo similar para febrero  que sume 2 o 3 segun sea el caso
+                    from npvacsalidas a,npasicaremp b, npnomina c
+                    where
+                    a.codemp=b.codemp and
+                    b.status='V' and
+                    c.codnom=b.codnom and
+                    ((C.ULTFEC BETWEEN A.FECDES AND A.FECHAS) OR (C.PROFEC BETWEEN A.FECDES AND A.FECHAS)) AND -- ASI SOLO ME TRAIGO LOS LAPSOS QUE AFECTAN LA NOMINA QUE ESTOY CALCULANDO (Y NO ME TRAIGO VACACIONES VIEJAS)
+                    a.codemp='$empleado' -- ESTE SERIA MI UNICO PARAMETRO";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+           $valor = $result[0]['dias'];
+        }
+        return $valor;
+      case "NSVAC" :
+        $valor = 0;
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+            $fechades = $result[0]['fecdes'];
+            $fechahas = $result[0]['fechas'];
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Sabado') {
+                $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            $valor = $numerosemanas;
+        }
+        return $valor;
+      case "NDVAC" :
+        $valor = 0;
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+            $fechades = $result[0]['fecdes'];
+            $fechahas = $result[0]['fechas'];
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Domingo') {
+                $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            $valor = $numerosemanas;
+        }
+        return $valor;
+       case "NFVAC" :
+        $valor = 0;
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+            $fechades = $result[0]['fecdes'];
+            $fechahas = $result[0]['fechas'];
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              $sql="select * from npvacdiafer where dia='".$auxfechades[2]."' and mes='".$auxfechades[1]."'";
+              if (Herramientas :: BuscarDatos($sql, & $res))
+              {
+                  $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            $valor = $numerosemanas;
+        }
+        return $valor;
+      case "NLVAC" :
+        $valor = 0;
+        $criterio = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom=to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
+        if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+            $fechades = $result[0]['fecdes'];
+            $fechahas = $result[0]['fechas'];
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Lunes') {
+                $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            $valor = $numerosemanas;
+        }
+        return $valor;
+      case "NLENNOM" :
+        $valor = 0;
+		$auxfec = split("/",$hasta);
+       	$fechanom = $auxfec[2].'-'.$auxfec[1].'-'.$auxfec[0];
+        $fecnomdes=null;
+        $sql = "select ultfec from npnomina where codnom='$nomina'";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $fechades = $result[0]['ultfec'];
+            $fechahas = $fechanom;
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Lunes') {
+                $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            $valor = $numerosemanas;
+        }
+        return $valor;
+	  case "MCES" :
+        $valor=0;
+		$auxfec = split("/",$hasta);
+       	$fechanom = $auxfec[2].'-'.$auxfec[1].'-'.$auxfec[0];
+        #Calculamos los dias del mes
+        $criterio = "Select A.* from NPCestaTickets A, NpAsiConEmp B where A.CodNom='".$nomina."' and B.CodCar = '".$cargo."' And
+		B.CodEmp='".$empleado."' And  A.CodCon=B.CodCon";
+		if (Herramientas :: BuscarDatos($criterio, & $result))
+        {
+          $criterio2 = "Select UniTrib from NPDefGen";
+		  if($result[0]['monpor']=='P')
+		  {
+		  	if (Herramientas :: BuscarDatos($criterio2, & $result2))
+			{
+				$valorut = $result2[0]['unitrib'];
+				$valorticket = $valorut * ($result[0]['valtic']/100);
+				$valorticket = $valorticket * $result[0]['numtic'];
+			}else
+				$valorut = 0;
+		  }else
+		   	$valorticket = $result[0]['valtic'] * $result[0]['numtic'];
+
+			$fecha1 = date("Y-m",strtotime($fechanom))."-01";
+			if(strtotime($fecha1)<strtotime($fechaing))
+				$fecha1=$fechaing;
+
+                        $fecha2 = date("Y-m",strtotime($fechanom))."-30";
+			$sqld = "select last_day('$fecha1') as ultday";
+			if (Herramientas :: BuscarDatos($sqld, & $rd))
+				$fecha2=$rd[0]['ultday'];
+
+			#Buscamos los permisos para restarlos
+			$diaspermiso = 0;
+			$criterio3 = "Select coalesce(Sum(A.NroDia),0) as Cuantos from NPFalPer A where A.CodEmp='".$empleado."' and A.FecDes>=TO_DATE('".$fecha1."','YYYY-MM-DD') and A.FecHas<=TO_DATE('".$fecha2."','YYYY-MM-DD')";
+			if (Herramientas :: BuscarDatos($criterio3, & $result3))
+				$diaspermiso = $result3[0]['cuantos'];
+
+			#Buscamos los dias Extras
+			$diasextras = 0;
+	        $criterio3 = "Select coalesce(Count(A.CodEmp),0) as Cuantos from NPDiaExt A where A.CodEmp='".$empleado."' and A.Fecha>=TO_DATE('".$fecha1."','YYYY-MM-DD') and A.Fecha<=TO_DATE('".$fecha2."','YYYY-MM-DD') and A.CodNom='".$nomina."'";
+			if (Herramientas :: BuscarDatos($criterio3, & $result3))
+				$diasextras = $result3[0]['cuantos'];
+
+		    #Ahora comparamos el Comportamiento del concepto de Cesta Ticket
+            #Dependiendo si es por "J" - Jornadas Laborales, "V" - Variable ó  "F" - Monto Fijo
+
+            #calculamos tipo J=Jornadas Laborales
+            if($result[0]['tippag']=='J')
+			{
+				$jornada='';
+				$sqlj = "Select IdeJor From  NpEmpJorLab Where CodEmp = '".$empleado."' And CodNom = '".$nomina."'";
+				if (Herramientas :: BuscarDatos($sqlj, & $rj))
+					$jornada = $rj[0]['idejor'];
+
+				if($result[0]['diafer']=='S' || $result[0]['diafer']==1)
+					$diafer="S";
+				else
+				    $diafer='N'	;
+				$diaslabor=0;
+				$sql="select diaslaborados('$nomina','$diafer',to_date('$fecha1','yyyy-mm-dd'),to_date('$fecha2','yyyy-mm-dd'),'$idejor')";
+				if (Herramientas :: BuscarDatos($sql, & $rsql))
+					$diaslabor=$rsql[0]['diaslaborados'];
+
+				$valorcesta = ($diaslabor - $diaspermiso + $diasextras) * $valorticket;
+				$valor = $valorcesta;
+
+				#Actualizando la cantidad
+				$sql1="Update NpAsiConEmp Set Cantidad = ".$diaslabor - $diaspermiso + $diasextras." Where
+				CodEmp = '".$empleado."' And CodCon = '".$result[0]['codcon']."' And CodCar = '".$cargo."'";
+				Herramientas::insertarRegistros($sql1);
+
+				$sql1="Update NpNOMCAL Set Cantidad = ".$diaslabor - $diaspermiso + $diasextras." Where
+                CodEmp = '".$empleado."' And CodCon = '".$result[0]['codcon']."' And CodCar = '".$cargo."'";
+				Herramientas::insertarRegistros($sql1);
+
+
+
+			#calculamos tipo V=Variable
+			}elseif($result[0]['tippag']=='V')
+			{
+				if($result[0]['diahab']=='S' || $result[0]['diahab']==1)
+					$calculahab=true;
+				else
+					$calculahab=false;
+
+				if($result[0]['sabado']=='S' || $result[0]['sabado']==1)
+					$calculasab=true;
+				else
+					$calculasab=false;
+
+				if($result[0]['doming']=='S' || $result[0]['doming']==1)
+					$calculadom=true;
+				else
+					$calculadom=false;
+
+				if($result[0]['diafer']=='S' || $result[0]['diafer']==1)
+					$calculafer=true;
+				else
+					$calculafer=false;
+
+				if($calculahab || $calculasab || $calculadom || $calculafer)
+				{
+					$criterio4 = "SELECT PROFEC,ULTFEC FROM NPNOMINA WHERE  codnom='".$nomina."'";
+					if (Herramientas :: BuscarDatos($criterio4, & $result4))
+					{
+						$fecha1 = date('Y-m-',strtotime($result4[0]['profec']))."01";
+                                                $fecha2 = date("Y-m",strtotime($result4[0]['profec']))."-30";
+						$sqld = "select last_day('$fecha1') as ultday";
+						if (Herramientas :: BuscarDatos($sqld, & $rd))
+							$fecha2=$rd[0]['ultday'];
+						$fechaini = $fecha1;
+						$numerodias = 0;
+
+						while(strtotime($fechaini) <= strtotime($fecha2))
+						{
+							$fechainid = 0;
+							$fecha2d  = 0;
+							$sqld="select to_char(to_date('$fechaini','yyyy-mm-dd'),'d') as fechainid, to_char('$fecha2','d') as fecha2d;";
+							if (Herramientas :: BuscarDatos($sqld, & $rd))
+							{
+								$fechainid = intval($rd[0]['fechainid']);
+								$fecha2d = intval($rd[0]['fecha2d']);
+							}
+							#Si $calculahab=true sumamos los dias habiles
+							if($calculahab)
+							{
+								if($fechainid>=2 && $fechainid<=6)
+								{
+									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(to_char(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(to_char(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
+									if (!(Herramientas :: BuscarDatos($criterio5, & $result5)))
+										$numerodias+=1;
+								}
+							}
+
+							#Si $calculasab=true sumamos los dias sabados
+							if($calculasab)
+							{
+								if($fechainid=7)
+								{
+									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(to_char(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(to_char(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
+									if (!(Herramientas :: BuscarDatos($criterio5, & $result5)))
+										$numerodias+=1;
+								}
+							}
+
+							#Si $calculadom=true sumamos los dias domingos
+							if($calculadom)
+							{
+								if($fechainid=1)
+								{
+									$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(to_char(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(to_char(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
+									if (!(Herramientas :: BuscarDatos($criterio5, & $result5)))
+										$numerodias+=1;
+								}
+							}
+
+							#Si $calculafer=true sumamos los dias feriados
+							if($calculafer)
+							{
+								$criterio5="Select * from NPVacDiaFer where Dia=TO_NUMBER(to_char(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99') and Mes=TO_NUMBER(to_char(to_date('$fechaini','yyyy-mm-dd'),'DD'),'99')";
+								if (Herramientas :: BuscarDatos($criterio5, & $result5))
+									$numerodias+=1;
+							}
+							$sqlini ="select to_date('$fechaini','yyyy-mm-dd')+1 as fechaini";
+							Herramientas :: BuscarDatos($sqlini, & $rini);
+							$fechaini = $rini[0]['fechaini'];
+						}
+					}
+				}else
+					$numerodias =0;
+
+				$valorcesta = ($numerodias - $diaspermiso + $diasextras) * $valorticket;
+				$valor = $valorcesta;
+			}else
+			{
+				$numerodias = $result[0]['numdia'];
+				$valorcesta = ($numerodias - $diaspermiso + $diasextras) * $valorticket;
+				$valor = $valorcesta;
+			}
+		}
+
+        return $valor;
+        break;
+      case "NLVACNOM" :
+        $valor = 0;
+        $fecnomdes=null;
+        $sql = "select fecdes,fechas from npvacsalidas a where codemp='$empleado' and fecsalnom<=to_date('$hasta','dd/mm/yyyy') and fecreinom>=to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $fecnomdes=$res[0]['fecdes'];
+            $auxfec = split("/",$hasta);
+            $fechades = $auxfec[2].'-'.$auxfec[1].'-'.$auxfec[0];
+            $fechahas = $fecnom;
+            $numerosemanas = 0;
+            while (strtotime($fechades) <= strtotime($fechahas)) {
+              $auxfechades = split('-', $fechades);
+              if (Herramientas :: dia_semana($auxfechades[2], $auxfechades[1], $auxfechades[0]) == 'Lunes') {
+                $numerosemanas += 1;
+              }
+              $fechades = Herramientas :: dateAdd('d', 1, $fechades, '+');
+            }
+            if($numerosemanas && $numerosemanas!=0)
+                $valor = $numerosemanas;
+        }
+
+        return $valor;
+
+      case "DIFSUECARCOL" :
+
+        $codcarcol='';
+        $sqlcarcol = "select * from npasicarcolemp where codemp='$empleado'";
+        if (Herramientas :: BuscarDatos($sqlcarcol, & $rscarcol)) {
+            $codcarcol=$rscarcol[0]['codcar'];
+        }
+
+        if($codcarcol)
+        {
+            $movconvar = substr($parametro, 0, 2) . "/" . substr($parametro, 2, 2) . "/" . substr($parametro, 4);
+            $sql = "Select * from npasicaremp where Status='V' and CodNom='" . $nomina . "' and codemp='" . $empleado . "'";
+
+            if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+
+                  if($tabla[0]['codtipded']!='' && $tabla[0]['codtipcat']!='')
+                  {
+                      $sql = "Select A.* from NPCOMOCP A, NPCARGOS B  WHERE B.CODCAR='" . $codcarcol . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR='".$tabla[0]['codtipcat']."' and A.PASCAR='".$tabla[0]['codtipded']."' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+
+                      if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+                        $valor = $tablaescala[0]["suecar"];
+                       } else {
+                        $valor = 0;
+                       }
+                  }else
+                  {
+                      if ($campo == "DIFSUECARCOL") {
+                        $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $codcarcol . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR='001' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+                      } else {
+                        $sql = "Select ABS(SUM(case when a.pascar='001' then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $codcarcol . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR='001' ) AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+                      }
+
+                      if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+                        $valor = $tablaescala[0]["suecar"];
+                      } else {
+                        $valor = 0;
+                      }
+                  }
+            }else
+                $valor=0;
+
+            if($valor>0)
+            {
+                $valor2=$valor;
+                $movconvar = substr($parametro, 0, 2) . "/" . substr($parametro, 2, 2) . "/" . substr($parametro, 4);
+                $sql = "Select * from npasicaremp where Status='V' and CodNom='" . $nomina . "' and codemp='" . $empleado . "'";
+
+                if (Herramientas :: BuscarDatos($sql, & $tabla)) {
+
+                      if($tabla[0]['codtipded']!='' && $tabla[0]['codtipcat']!='')
+                      {
+                         $sql = "Select A.* from NPCOMOCP A, NPCARGOS B  WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR='".$tabla[0]['codtipcat']."' and A.PASCAR='".$tabla[0]['codtipded']."' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+
+                          if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+                            $valor = $tablaescala[0]["suecar"];
+                          } else {
+                            $valor = 0;
+                          }
+                      }else
+                      {
+                        if ($campo == "DIFSUECARCOL") {
+                            $sql = "Select A.* from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND A.PASCAR='001' AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+                          } else {
+                            $sql = "Select ABS(SUM(case when a.pascar='001' then a.suecar else a.suecar*-1)) as suecar from NPCOMOCP A,NPCARGOS B WHERE B.CODCAR='" . $tabla[0]["codcar"] . "' AND A.CODTIPCAR=B.CODTIP AND A.GRACAR=B.GRAOCP AND (A.PASCAR='001' ) AND FECDES<=TO_DATE('" . $movconvar . "','DD/MM/YYYY') ORDER BY FECDES DESC";
+                          }
+
+                        if (Herramientas :: BuscarDatos($sql, & $tablaescala)) {
+                        $valor = $tablaescala[0]["suecar"];
+                          } else {
+                            $valor = 0;
+                          }
+                      }
+                      if($valor>0)
+                      {
+                          $valor = floatval($valor2)-floatval($valor);
+                      }
+                }else
+                    $valor=0;
+            }
+
+        }else
+            $valor=0;
+
+
+        break;
+      case "NPARINC":
+            $valor = 0;
+            $fecnomdes=null;
+            $fecnom=null;
+            $sql = "select ultfec from npnomina where codnom='$nomina'";
+            if (Herramientas :: BuscarDatos($sql, & $res))
+            {
+                $fecnomdes = $res[0]['ultfec'];
+                $fecnom = $res[0]['profec'];
+            }
+          $sql="select count(codemp) as canpar from npinffam where fecing>=to_date('$fecnomdes','yyyy-mm-dd') and fecing<=to_date('$fecnom','yyyy-mm-dd') and codemp='$empleado'";
+          if (Herramientas :: BuscarDatos($sql, & $rspar)) {
+                $valor = $rspar[0]['canpar'];
+          }
+        break;
+      case "MATNOM":
+            $valor = 'N';
+            $fecnomdes=null;
+            $fecnom=null;
+            $sql = "select ultfec from npnomina where codnom='$nomina'";
+            if (Herramientas :: BuscarDatos($sql, & $res))
+            {
+                $fecnomdes = $res[0]['ultfec'];
+                $fecnom = $res[0]['profec'];
+            }
+          $sql="select * from nphojint where fecmat>=to_date('$fecnomdes','yyyy-mm-dd') and fecmat<=to_date('$fecnom','yyyy-mm-dd') and codemp='$empleado' ";
+          if (Herramientas :: BuscarDatos($sql, & $rspar)) {
+                $valor = 'S';
+          }
+        break;
+      case "DIFDIASAL" :
+        $valor = 0;
+        $sql = "select fecsalnom-to_date('$hasta','dd/mm/yyyy') as diadif from npvacsalidas a where codemp='$empleado' and fecsalnom>to_date('$hasta','dd/mm/yyyy')  order by fecvac desc";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $valor = $res[0]['diadif'];
+        }
+
+        return $valor;
+      case "NLDIFVAC" :
+        $valor = 0;
+        $sql = "select coalesce(sum((case when fecsalnom=profec and fecdes>fecsalnom then numsemanas(profec,fecdes,'lunes') when (fecsalnom<b.profec and c.fecdes>=ultfec and c.fecdes<=profec) then numsemanas(fecdes,profec,'lunes')*-1 end)),0) cuantas from npasicaremp a, npnomina b,npvacsalidas c where
+                a.codnom=b.codnom
+                and a.codemp=c.codemp
+                and a.codemp='$empleado'
+                and (fecsalnom=b.profec or (fecsalnom<b.profec and c.fecdes>=ultfec and c.fecdes<=profec))";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $valor = $res[0]['cuantas'];
+        }
+
+        return $valor;
+      case "5FIDE" :
+        $valor = 0;
+        $sql = "select (salempdia*5) as cincodias from npimppresoc
+                where
+                codemp='$empleado' and tipo is null and
+                fecini<=to_date('$hasta','dd/mm/yyyy') and
+                fecfin>=to_date('$hasta','dd/mm/yyyy')
+                limit 1";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $valor = $res[0]['cincodias'];
+        }
+
+        return $valor;
       default :
         /////// FFRAC
 
@@ -4757,6 +6206,26 @@ class Nomina {
     if ($resul) {
       $sueldo = $resul->getSuecar();
       $grado = $resul->getGraocp();
+      if($registro->getId()!='')
+      {
+        $c = new Criteria();
+        $c->add(NphojintPeer::CODEMP,$registro->getCodemp());
+        $r = NphojintPeer::doSelectOne($c);
+        if($r)
+        {
+            if($r->getSexemp()=='M')
+            {
+                $resul->setCanhom(intval($resul->getCanhom())+1);
+                $resul->setCanvhom(intval($resul->getCanvhom())-1);
+            }
+            else
+            {
+                $resul->setCanmuj(intval($resul->getCanmuj())+1);
+                $resul->setCanvmuj(intval($resul->getCanvmuj())-1);
+            }
+            $resul->setCarvan($resul->getCanvmuj()+$resul->getCanvhom());
+        }
+      }
     } else {
       $sueldo = 0;
       $grado = "";
@@ -4779,6 +6248,8 @@ class Nomina {
       $r->setNomcat($registro->getNomcat());
 	  $r->setCodtipded($registro->getCodtipded());
 	  $r->setCodtipcat($registro->getCodtipcat());
+	  $r->setCodtie($registro->getCodtie());
+          $r->setCodcen($registro->getCodcen());
       $r->setUnieje(null);
       $r->setSueldo($sueldo);
       $r->setStatus('V');
@@ -4816,13 +6287,15 @@ class Nomina {
       $npasicaremp->setNomcar($registro->getNomcar());
       $npasicaremp->setNomnom($registro->getNomnom());
       $npasicaremp->setNomcat($registro->getNomcat());
-	  $npasicaremp->setCodtipded($registro->getCodtipded());
-	  $npasicaremp->setCodtipcat($registro->getCodtipcat());
+      $npasicaremp->setCodtipded($registro->getCodtipded());
+      $npasicaremp->setCodtipcat($registro->getCodtipcat());
+      $npasicaremp->setCodtie($registro->getCodtie());
       $npasicaremp->setUnieje(null);
       $npasicaremp->setSueldo($sueldo);
       $npasicaremp->setStatus('V');
       $npasicaremp->setCodtipgas($registro->getCodtipgas());
       $npasicaremp->setCodgrunom($registro->getCodgrunom());
+      $npasicaremp->setCodcen($registro->getCodcen());
       if ($grado != "") {
         $npasicaremp->setGrado($grado);
       }
@@ -4830,6 +6303,25 @@ class Nomina {
         $npasicaremp->setPaso($registro->getPaso());
       }
       $npasicaremp->save();
+
+
+      // Genero la experiencia laboral con el cargo Nuevo
+      $npexplab = new Npexplab();
+      $npexplab->setCodemp($registro->getCodemp());
+      $npexplab->setNomemp($registro->getNomemp());
+      $npexplab->setCodcar($registro->getCodcar());
+      $npexplab->setCodnom($registro->getCodnom());
+      $npexplab->setDescar($registro->getNomcar());
+      $npexplab->setFecini($registro->getFecasi());
+      $npexplab->setFecter(null);
+      $npexplab->setSueobt($sueldo);
+      $npexplab->setStacar('D');
+      $npexplab->setTiporg('Publico');
+      $npexplab->save();
+
+      // Actualizo el cargo vacantes
+      $resul->setCarvan($resul->getCarvan()-1);
+      $resul->save();
 
     }
 
@@ -4968,6 +6460,11 @@ class Nomina {
   //////////////////Registro de Cargos////////////////
 
   public static function salvarNomdefespcar($cargos, $ids, $grid) {
+
+    $carvanreal=$cargos->getCanvhom()+$cargos->getCanvmuj();
+    $cargos->setCarvan($carvanreal);
+
+
     $cargos->save();
     $c = new Criteria();
     $c->add(NpasiconempPeer :: CODCAR, $cargos->getCodcar());
@@ -5049,7 +6546,7 @@ class Nomina {
         $npasiconnom->setActivo(str_replace("'", '', substr($g["conact"], 0, 1)));
         $npasiconnom->save();
 
-		$c = new Criteria();
+		/*$c = new Criteria();
 		$c->add(NpasiconempPeer::CODCON,$g["codcon"]);
 		$npasiconemp = NpasiconempPeer::doSelect($c);
 		if($npasiconemp)
@@ -5059,7 +6556,10 @@ class Nomina {
 				$clase->setFrecon($g["frecon"]);
 				$clase->save();
 			}
-		}
+		}*/
+         $sql="UPDATE npasiconemp SET frecon='".$g["frecon"]."' WHERE codcon ='".$g["codcon"]."'";
+         //Herramientas::insertarRegistros($sql);
+
 
       }
     }
@@ -5083,7 +6583,7 @@ class Nomina {
     foreach ($grid1 as $g) {
       if ($g["check"] == '1') {
         if ($g["frecon"] == "") {
-          return 400;
+          return 4400;
         }
       }
     }
@@ -5092,7 +6592,7 @@ class Nomina {
       if ($g["check"] == '1') {
 
         if ($g["frecon"] == "") {
-          return 401;
+          return 4401;
         }
       }
     }
@@ -5535,6 +7035,10 @@ class Nomina {
 		$objNomesp->setNomintpre('S');
 	else
 		$objNomesp->setNomintpre(null);
+        if($npnomesptipos->getNomdiaadi()==1)
+		$objNomesp->setNomdiaadi('S');
+	else
+		$objNomesp->setNomdiaadi(null);
     $objNomesp->save();
 
   }
@@ -5832,6 +7336,14 @@ class Nomina {
           self :: tiempoServicioTotal($codemp, 0, 0, 0, & $Idia, & $Imes, & $Iano, 'F');
           $antiguedad = $antiguedad + $Iano;
         }
+
+        $sql = "SELECT A.ANTAPVAC,A.DIAVAC FROM NPBONOCONT A, NPASIEMPCONT B WHERE A.CODTIPCON=B.CODTIPCON AND B.CODEMP='" . $codemp . "' AND '" . $anohasta . "' BETWEEN TO_CHAR(ANOVIG,'YYYY') AND TO_CHAR(ANOVIGHAS,'YYYY') and '".$antiguedad."'::numeric between DESDE and HASTA";
+
+        if(Herramientas :: BuscarDatos($sql, & $per2))
+        {
+          $arreglo[$i]["diasbonovac"] = $per2[0]['diavac'];
+        }
+
 
         $c1 = new Criteria();
         $c1->add(NpasicarempPeer :: CODEMP, $codemp);
@@ -7442,8 +8954,6 @@ public static function salvarNpsalintind($npsalint, $grid) {
     return -1;
   }
 
-
-
   public static function validarNomcamnomcar($npasicaremp, $codnom, $codcar, $codcat, $feccam) {
 
     if ($npasicaremp) {
@@ -7462,6 +8972,36 @@ public static function salvarNpsalintind($npsalint, $grid) {
         $npcargos = NpcargosPeer :: doSelectOne($c);
         if (!$npcargos)
           return 444;
+        else
+        {
+          if($npcargos->getCanphom()+$npcargos->getCanpmuj()>0)
+          {
+            $c = new Criteria();
+            $c->add(NphojintPeer::CODEMP,$npasicaremp->getCodemp());
+            $r = NphojintPeer::doSelectOne($c);
+            if($r)
+            {
+                if($r->getSexemp()=='M')
+                {
+                    if($npcargos->getCanvhom()<=0)
+                            $this->coderr='N0003';
+                }else
+                {
+                    if($npcargos->getCanvmuj()<=0)
+                            $this->coderr='N0003';
+                }
+            }
+          }
+        }
+
+        $c = new Criteria();
+        $c->add(NpasicarempPeer :: CODEMP, $npasicaremp->getCodemp());
+        $c->add(NpasicarempPeer :: CODNOM, $codnom);
+        $c->add(NpasicarempPeer :: CODCAR, $codcar);
+        $c->add(NpasicarempPeer :: STATUS, 'V');
+        $objnew = NpasicarempPeer :: doSelectOne($c);
+        if ($objnew)
+          return 498;
       }
       elseif ($codnom != '' && $codcar == '') {
         return 445;
@@ -7510,10 +9050,47 @@ public static function salvarNpsalintind($npsalint, $grid) {
       $c->add(NpnominaPeer::CODNOM, $codnom);
       $npnomina = NpnominaPeer :: doSelectOne($c);
 
-      // Registro del Cargo
+      // Registro del Cargo NUEVO
       $c = new Criteria();
       $c->add(NpcargosPeer::CODCAR, $codcar);
       $npcargos = NpcargosPeer :: doSelectOne($c);
+
+      if($nphojint && $npcargos)
+      {
+        if($nphojint->getSexemp()=='M')
+        {
+            $npcargos->setCanhom(intval($npcargos->getCanhom())+1);
+            $npcargos->setCanvhom(intval($npcargos->getCanvhom())-1);
+        }
+        else
+        {
+            $npcargos->setCanmuj(intval($npcargos->getCanmuj())+1);
+            $npcargos->setCanvmuj(intval($npcargos->getCanvmuj())-1);
+        }
+        $npcargos->setCarvan($npcargos->getCanvmuj()+$npcargos->getCanvhom());
+        $npcargos->save();
+      }
+
+      // Registro del Cargo VIEJO
+      $c = new Criteria();
+      $c->add(NpcargosPeer::CODCAR, $npasicaremp->getCodcar());
+      $npcargos = NpcargosPeer :: doSelectOne($c);
+
+      if($nphojint && $npcargos)
+      {
+        if($nphojint->getSexemp()=='M')
+        {
+            $npcargos->setCanhom(intval($npcargos->getCanhom())-1);
+            $npcargos->setCanvhom(intval($npcargos->getCanvhom())+1);
+        }
+        else
+        {
+            $npcargos->setCanmuj(intval($npcargos->getCanmuj())-1);
+            $npcargos->setCanvmuj(intval($npcargos->getCanvmuj())+1);
+        }
+        $npcargos->setCarvan($npcargos->getCanvmuj()+$npcargos->getCanvhom());
+        $npcargos->save();
+      }
 
       // Registro del Cargo Anterior
       $c = new Criteria();
@@ -7524,6 +9101,10 @@ public static function salvarNpsalintind($npsalint, $grid) {
       $c = new Criteria();
       $c->add(NpcatprePeer :: CODCAT, $codcat);
       $npcatpre = NpcatprePeer :: doSelectOne($c);
+      if ($npcatpre)
+      {
+      	$nomcat=$npcatpre->getNomcat();
+      }else $nomcat="";
 
        /*$c = new Criteria();
       $c->add(NpasicarempPeer::CODEMP, $npasiaremp->getCodemp());
@@ -7540,7 +9121,7 @@ public static function salvarNpsalintind($npsalint, $grid) {
       $npasicarempnew->setCodcat($codcat);
         $npasicarempnew->setNomcar($npcargos->getNomcar());
       $npasicarempnew->setNomnom($npnomina->getNomnom());
-      $npasicarempnew->setNomcat($npcatpre->getNomcat());
+      $npasicarempnew->setNomcat($nomcat);
       $npasicarempnew->setFecasi($npasicaremp->getFecasi());
       $npasicarempnew->setNomemp($npasicaremp->getNomemp());
       $npasicarempnew->setUnieje($npasicaremp->getUnieje());
@@ -7572,20 +9153,29 @@ public static function salvarNpsalintind($npsalint, $grid) {
       $nphisasicaremp->setCodtipgas($npasicaremp->getCodtipgas());
       $nphisasicaremp->save();
 
+      //Actualizo la fecha fin del experiencia laboral anterior
+     $u= new Criteria();
+     $u->add(NpexplabPeer::CODEMP,$npasicaremp->getCodemp());
+     $u->add(NpexplabPeer::STACAR,'D');
+     $u->add(NpexplabPeer::FECTER,null);
+     $result= NpexplabPeer::doSelectOne($u);
+     if ($result)
+     {
+     	$result->setFecter($feccam);
+     	$result->save();
+     }
 
-
-      // Genero la experiencia laboral con el cargo viejo
+      // Genero la experiencia laboral con el cargo Nuevo
       $npexplab = new Npexplab();
       $npexplab->setCodemp($npasicaremp->getCodemp());
       $npexplab->setNomemp($nphojint->getNomemp());
-      $npexplab->setCodcar($npasicaremp->getCodcar());
-      $npexplab->setDescar($npasicaremp->getNomcar());
-      $npexplab->setFecini($npasicaremp->getFecasi());
-      $npexplab->setFecter($feccam);
-      $npexplab->setSueobt($npcargosant->getSuecar());
+      $npexplab->setCodcar($codcar);
+      $npexplab->setCodnom($codnom);
+      $npexplab->setDescar($npcargos->getNomcar());
+      $npexplab->setFecini($feccam);
+      $npexplab->setFecter(null);
+      $npexplab->setSueobt($npasicaremp->getSueldo());
       $npexplab->setStacar('D');
-      //$npexplab->setCompobt();
-      //$npexplab->setDurexp();
       $npexplab->setTiporg('Publico');
       $npexplab->save();
 
@@ -8192,10 +9782,490 @@ exit();
   return true;
   }
 
+  public static function SalvarNomFalPerEmp($clasemodelo,$grid)
+  {
+    try {
+      $x  = $grid[0];
+      $j  = 0;
+
+      while ($j<count($x) and ($x[$j]->getCodmot()!='') and ($x[$j]->getFecret()!=''))
+       {
+         $x[$j]->setCodemp($clasemodelo->getCodemp());
+         $x[$j]->save();
+         $j++;
+       }
+       $z=$grid[1];
+       $j=0;
+       if (!empty($z[$j]))
+       {
+	       while ($j<count($z))
+	       {
+	         $z[$j]->delete();
+	         $j++;
+	       }
+       }
+
+    return -1;
+  }catch (Exception $ex){
+  	h::printR($ex);
+  	exit();
+    return 0;
+  }
+  }
+
+
+  public static function agregaBenefi($datos)
+  {
+    if ($datos->getRifemp()!='')
+    {
+        $variable=$datos->getRifemp();
+    }else $variable=$datos->getCedemp();
+
+    $c= new Criteria();
+    $c->add(OpbenefiPeer::CEDRIF, $variable);
+    $ben= OpbenefiPeer::doSelectOne($c);
+    if ($ben)
+    {return false;}
+    else {return true;}
+  }
+
+  public static function grabarBenefi($datos)
+  {
+    if ($datos->getRifemp()!='')
+    {
+        $variable=$datos->getRifemp();
+    }else $variable=$datos->getCedemp();
+
+    $benefi= new Opbenefi();
+    $benefi->setCedrif($variable);
+    $benefi->setNomben($datos->getNomemp());
+    $benefi->setDirben($datos->getDirhab());
+    $benefi->setTelben($datos->getTelhab());
+    $benefi->setNacionalidad($datos->getNacemp());
+    $benefi->save();
+  }
+
+
+
+
+
+  public static function validarNomfalperemp($clasemodelo,$grid)
+  {
+    /// Valida que en el grid hayan datos ///
+      $x  = $grid[0];
+      $j  = 0;
+      while ($j<count($x) ) //and ($x[$j]->getFecret()!=''))
+       {
+         if (($x[$j]->getFecret()=='') or ($x[$j]->getFecini()=='')){
+			return 546;
+         }
+
+         if ($x[$j]->getFecini() > $x[$j]->getFecret()){
+			return 545;
+         }
+         for($i=$j;$i<count($x)-1;$i++)
+         {
+			$fecha        = $x[$j]->getFecini();
+			$fecha2       = $x[$j]->getFecret();
+			$c = $j+1;
+			if (count($x) > 1){
+				$fechaInicio  = $x[$c]->getFecini();
+				$fechaRetorno = $x[$c]->getFecini();
+		        if (($fecha > $fechaInicio) and  ($fecha > $fechaRetorno)){
+					return 545;
+		        }
+
+		        if ($fecha2 > $fechaInicio and  ($fecha2 > $fechaRetorno)){
+					return 545;
+		        }
+			}
+
+         }
+         $j++;
+       }
+
+    return -1;
+  }
+
+  public static function salvarConceptosSueldosAportes($objNptipaportes,$grid)
+  {
+    $x = $grid[0];
+    $j = 0;
+    while ($j < count($x)) {
+      if ($x[$j]->getCodnom() != '' && $x[$j]->getCodcon() != '') {
+        $x[$j]->setCodtipapo($objNptipaportes->getCodtipapo());
+        $x[$j]->setTipo('A');
+        $x[$j]->save();
+      }
+      $j++;
+    }
+    $z = $grid[1];
+    $j = 0;
+    if (!empty ($z[$j])) {
+      while ($j < count($z)) {
+        $z[$j]->delete();
+        $j++;
+      } //while ($j<count($z))
+    } //if (!empty($z[$j]))
+  }
+
+  public static function salvarConceptosSueldosRetenciones($objNptipaportes,$grid)
+  {
+    $x = $grid[0];
+    $j = 0;
+    while ($j < count($x)) {
+      if ($x[$j]->getCodnom() != '' && $x[$j]->getCodcon() != '') {
+        $x[$j]->setCodtipapo($objNptipaportes->getCodtipapo());
+        $x[$j]->setTipo('R');
+        $x[$j]->save();
+      }
+      $j++;
+    }
+    $z = $grid[1];
+    $j = 0;
+    if (!empty ($z[$j])) {
+      while ($j < count($z)) {
+        $z[$j]->delete();
+        $j++;
+      } //while ($j<count($z))
+    } //if (!empty($z[$j]))
+  }
+
+  public static function eliminarConceptosSueldosAportes($objNptipaportes)
+  {
+      $d= new Criteria();
+      $d->add(NpconsuelaporetPeer::CODTIPAPO,$objNptipaportes->getCodtipapo());
+      $d->add(NpconsuelaporetPeer::TIPO,'A');
+      NpconsuelaporetPeer::doDelete($d);
+  }
+
+  public static function eliminarConceptosSueldosRetenciones($objNptipaportes)
+  {
+      $d= new Criteria();
+      $d->add(NpconsuelaporetPeer::CODTIPAPO,$objNptipaportes->getCodtipapo());
+      $d->add(NpconsuelaporetPeer::TIPO,'R');
+      NpconsuelaporetPeer::doDelete($d);
+  }
+
+  public static function grabarDocumentos($datos, $grid6) {
+    $codigo = $datos->getCodemp();
+    $l = $grid6[0];
+    $j = 0;
+    while ($j < count($l)) {
+      if ($l[$j]->getCoddoc() != "") {
+        $l[$j]->setCodemp($codigo);
+        $l[$j]->save();
+      }
+      $j++;
+    }
+
+    $z = $grid6[1];
+    $j = 0;
+    if (!empty ($z[$j])) {
+      while ($j < count($z)) {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
+  public static function salvarDefHcmNom($clasemodelo,$grid)
+  {
+    $codigonomina = $clasemodelo->getCodnom();
+    $l = $grid[0];
+    $j = 0;
+    while ($j < count($l)) {
+      if ($l[$j]->getTipcar() != "" && $l[$j]->getTippar() != "" && $l[$j]->getPorcub() >0) {
+        $l[$j]->setCodnom($codigonomina);
+        $l[$j]->save();
+      }
+      $j++;
+    }
+
+    $z = $grid[1];
+    $j = 0;
+    if (!empty ($z[$j])) {
+      while ($j < count($z)) {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+  }
+
+  public static function actualizarSueldosporNominaCargosConcepto($npasiconemp,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]["check"]=="1")
+      {
+        $t= new Criteria();
+        $t->add(NpasiconempPeer::CODEMP,$x[$j]["codemp"]);
+        $t->add(NpasiconempPeer::CODCON,$npasiconemp->getCodcon());
+        $t->add(NpasiconempPeer::CODCAR,$x[$j]["codcar"]);
+        $registro= NpasiconempPeer::doSelectOne($t);
+        if ($registro)
+        {
+          $registro->setMonto($x[$j]["monto"]) ;
+          $registro->setCantidad($x[$j]["cantidad"]) ;
+          $registro->save() ;
+
+          $t= new Criteria();
+
+
+          $t->add(NpasicarempPeer::CODEMP,$x[$j]["codemp"]);
+          $t->add(NpasicarempPeer::CODCAR,$x[$j]["codcar"]);
+          $res= NpasicarempPeer::doSelectOne($t);
+
+          if ($res)
+          {
+             $res->setSueldo($x[$j]["monto"]);
+             $res->save();
+          }
+
+
+          //$t->add(NpconsueldoPeer::CODNOM,$npasiconemp->getCodnom());
+          //$t->add(NpconsueldoPeer::CODCON,$npasiconemp->getCodcon());
+          //$res= NpconsueldoPeer::doSelectOne($t);
+
+          //if ($res)
+          //{
+          //   $w= new Criteria();
+          //   $w->add(NpcargosPeer::CODCAR,$x[$j]["codcar"]);
+          //   $reg=NpcargosPeer::doSelectOne($w);
+          //   if ($reg)
+
+          //   {
+          //      if ($npasiconemp->getTipo()=='M') $reg->setSuecar($x[$j]["monto"]);
+          //      else $reg->setSuecar($x[$j]["cantidad"]);
+          //      $reg->save();
+          //   }
+          //}
+        }
+      }
+      $j++;
+    }
+  }
+
+  public static function grabarConceptoPartidas($clasemodelo,$grid)
+  {
+    $cardoc="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+        if(array_key_exists('aplicacion',$varemp))
+         if(array_key_exists('nomina',$varemp['aplicacion']))
+           if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+             if(array_key_exists('nomcomocp',$varemp['aplicacion']['nomina']['modulos'])){
+               if(array_key_exists('codtipcar',$varemp['aplicacion']['nomina']['modulos']['nomcomocp']))
+               {
+                $cardoc=$varemp['aplicacion']['nomina']['modulos']['nomcomocp']['codtipcar'];
+               }}
+
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+        $t= new Criteria();
+        $t->add(NpasiconparPeer::CODTIPCAR,$clasemodelo->getCodtipcar());
+        if ($cardoc!=$clasemodelo->getCodtipcar()) { $t->add(NpasiconparPeer::GRACAR,$clasemodelo->getGracar()); }
+        else  { $t->add(NpasiconparPeer::CODTIP,$clasemodelo->getCodtip());
+        $t->add(NpasiconparPeer::CODTIPCAT,$clasemodelo->getCodtipcat()); }
+        $t->add(NpasiconparPeer::CODTIE,$clasemodelo->getCodtie());
+        $t->add(NpasiconparPeer::CODESTEMP,$clasemodelo->getCodestemp());
+        $t->add(NpasiconparPeer::CODNOM,$clasemodelo->getCodnom());
+        $t->add(NpasiconparPeer::CODCON,$x[$j]["codcon"]);
+        $registro= NpasiconparPeer::doSelectOne($t);
+        if ($registro)
+        {
+          $registro->setCodpar($x[$j]["codpar"]) ;
+          $registro->save() ;
+        }else {
+
+          $regnuevo= new Npasiconpar();
+          $regnuevo->setCodnom($clasemodelo->getCodnom());
+          $regnuevo->setCodtipcar($clasemodelo->getCodtipcar());
+          $regnuevo->setGracar($clasemodelo->getGracar());
+          $regnuevo->setCodtip($clasemodelo->getCodtip());
+          $regnuevo->setCodtipcat($clasemodelo->getCodtipcat());
+          $regnuevo->setCodtie($clasemodelo->getCodtie());
+          $regnuevo->setCodestemp($clasemodelo->getCodestemp());
+          $regnuevo->setCodcon($x[$j]["codcon"]);
+          $regnuevo->setCodpar($x[$j]["codpar"]);
+          $regnuevo->save();
+        }
+
+      $j++;
+    }
+  }
+
+public static function grabarAsignacionConceptosCargos($clasemodelo,$grid)
+{
+    $cargo = $clasemodelo->getCodcar();
+    $l = $grid[0];
+    $j = 0;
+    while ($j < count($l)) {
+      if ($l[$j]->getCodcon() != "") {
+        $l[$j]->setCodcar($cargo);
+        $l[$j]->save();
+      }
+      $j++;
+    }
+
+    $z = $grid[1];
+    $j = 0;
+    if (!empty ($z[$j])) {
+      while ($j < count($z)) {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+}
+
+public static function arregloConceptosCal($codcat,$codnom,$codemp,$codcar,$cadena)
+{
+    $arreglo=array();
+
+    if ($cadena==''){
+        $c = new Criteria();
+        $c->add(NpcatnomempconPeer::CODCAT,$codcat);
+        $c->add(NpcatnomempconPeer::CODNOM,$codnom);
+        $c->add(NpcatnomempconPeer::CODEMP,$codemp);
+        $c->add(NpcatnomempconPeer::CODCAR,$codcar);
+        $result=NpcatnomempconPeer::doSelect($c);
+        if ($result)
+        {
+            $i=0;
+            foreach ($result as $objcon)
+            {
+              $arreglo[$i]["codcon"]=$objcon->getCodcon();
+              $arreglo[$i]["nomcon"]=H::getX('CODCON','Npdefcpt','Nomcon',$objcon->getCodcon());
+              $arreglo[$i]["monto"]=number_format($objcon->getMonto(),2,',','.');
+              $arreglo[$i]["id"]=9;
+              $i++;
+            }
+        }else {
+           $opsi="false";
+            $msem="";
+            $sql="select codnom, nomnom, numsem, ultfec, profec, frecal,
+              to_char(profec,'dd/mm/yyyy') as profec2, to_char(ultfec,'dd/mm/yyyy') as ultfec2
+              from npnomina where codnom='".$codnom."' ";
+            if (Herramientas::BuscarDatos($sql,&$npnomina))
+            {
+              $numsem=$npnomina[0]["numsem"];
+              $desde=$npnomina[0]["ultfec2"];
+              $hasta=$npnomina[0]["profec2"];
+
+              if ($npnomina[0]["frecal"]=='S')
+              {
+                if (!(is_null($numsem)))
+                {
+                  $msem=$numsem;
+                }
+                else
+                {
+                  $msem="__";
+                }
+                $opsi="true";
+              }
+            }
+
+            $i=0;
+            $t= new Criteria();
+            $t->add(NpasiconcarPeer::CODCAR,$codcar);
+            $registros= NpasiconcarPeer::doSelect($t);
+            if ($registros)
+            {
+                foreach ($registros as $objcon)
+                {
+                  $arreglo[$i]["codcon"]=$objcon->getCodcon();
+                  $arreglo[$i]["nomcon"]=H::getX('CODCON','Npdefcpt','Nomcon',$objcon->getCodcon());
+                  $moncon=Formulacion::CalPorEmpleado($codemp,$codnom,$codcar,$objcon->getCodcon(),$desde,$hasta,$opsi,$msem,&$cont);
+                  $arreglo[$i]["monto"]=number_format($moncon,2,',','.');
+                  $arreglo[$i]["id"]=9;
+                  $i++;
+                }
+            }
+        }
+
+    }else {
+          $cadenacon=split('!',$cadena);
+          $r=0;
+          while ($r<(count($cadenacon)-1))
+          {
+            $aux=$cadenacon[$r];
+            $aux2=split('_',$aux);
+            $arreglo[$r]["codcon"]=$aux2[0];
+            $arreglo[$r]["nomcon"]=$aux2[1];
+            $arreglo[$r]["monto"]=$aux2[2];
+            $arreglo[$r]["id"]=9;
+            $r++;
+          }
+    }
+
+    return $arreglo;
+}
+
+public static function grabarFormulacionCargosEmp($clasemodelo,$grid2)
+{
+  $codcat=$clasemodelo->getCodcat();
+  $codnom=$clasemodelo->getCodnom();
+  $x=$grid2[0];
+  $j=0;
+  while ($j<count($x))
+  {
+    if ($x[$j]->getCodemp()!="" && $x[$j]->getCodcar()!="")
+    {
+        $x[$j]->setCodcat($codcat);
+        $x[$j]->setCodnom($codnom);
+        $x[$j]->save();
+    //grabar Conceptos por Empleado y Cargo
+
+     if ($x[$j]->getConceptos()!='')
+     {
+        $c = new Criteria();
+        $c->add(NpcatnomempconPeer::CODCAT,$codcat);
+        $c->add(NpcatnomempconPeer::CODNOM,$codnom);
+        $c->add(NpcatnomempconPeer::CODEMP,$x[$j]->getCodemp());
+        $c->add(NpcatnomempconPeer::CODCAR,$x[$j]->getCodcar());
+        NpcatnomempconPeer::doDelete($c);
+
+          $cadenacon=split('!',$x[$j]->getConceptos());
+          $r=0;
+          while ($r<(count($cadenacon)-1))
+          {
+            $aux=$cadenacon[$r];
+            $aux2=split('_',$aux);
+            if ($aux2[0]!="")
+            {
+              $npcatnomempcon= new Npcatnomempcon();
+              $npcatnomempcon->setCodcat($codcat);
+              $npcatnomempcon->setCodnom($codnom);
+              $npcatnomempcon->setCodemp($x[$j]->getCodemp());
+              $npcatnomempcon->setCodcar($x[$j]->getCodcar());
+              $npcatnomempcon->setCodcon($aux2[0]);
+              $npcatnomempcon->setMonto($aux2[2]);
+              $npcatnomempcon->save();
+            }
+            $r++;
+          }
+      }
+    }
+  $j++;
+  }
+
+
+}
+
+  public static function obtenerAntiguedad($fecha) {
+    $fecha = split('/', $fecha);
+    $fechanueva = $fecha[2] . "-" . $fecha[1] . "-" . $fecha[0];
+
+    $sql = "select  Extract(year from age(now(),'" . $fechanueva . "')) as ano, Extract(month from age(now(),'" . $fechanueva . "')) as mes, Extract(day from age(now(),'" . $fechanueva . "')) as dia";
+    if (Herramientas :: BuscarDatos($sql, & $result)) {
+      return $result[0]['ano']." Años, ".$result[0]['mes']." Meses, ".$result[0]['dia']." Días";
+    }
+  }
 
 } // fin clase
-
-
-
-
 ?>

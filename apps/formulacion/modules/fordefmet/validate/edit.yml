@@ -1,0 +1,47 @@
+methods:
+  post:
+   - "fordefmet{codmet}"
+   - "fordefmet{desmet}"
+   - "fordefmet{nomabr}"
+   - "fordefmet{codemp}"
+
+names:
+  fordefmet{codmet}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir el Código de la Acción
+    validators: UniqueValidator
+
+  fordefmet{desmet}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir la  Descripción de la Acción
+    validators: DescripcionValidator
+
+  fordefmet{nomabr}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir el Nombre Abreviado
+
+  fordefmet{codemp}:
+    required:  No
+    validators: FuncionarioValidator
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Descripción no puede tener menos de 5 caracteres
+        max:       1000
+        max_error: La Descripción no puede tener más de 100 caracteres
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Fordefmet
+        column:   codmet
+        unique_error:   EL Código de la Acción ya existe. Por Favor, Cambiélo por otro.
+
+FuncionarioValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Nphojint
+        column:   codemp
+        unique_error:  El Empleado no Existe.

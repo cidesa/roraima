@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
@@ -27,7 +28,7 @@ function crearLog($valor)
   $tb=$bd->select($sql);
   $id = $tb->fields["id"];
   $bd->Log($id, 'pre', 'Cpsoltrasla', 'Presoltrasla', $valor);
-  
+
 }
 
   // validamos que la fecha este dentro del periodo seleccionado
@@ -72,33 +73,50 @@ function crearLog($valor)
 
 
     $i=1;
-    while ($i<=20)
+    while ($i<=250)
       {
         if (trim($_POST["x".$i."1"])!="")
         {
 
           if ((substr(trim($_POST["x".$i."1"]),0,2)!="--") and (substr(trim($_POST["x".$i."2"]),0,2)!="--"))
             {
-
-            if ((float)str_replace(',','',$_POST["x".$i."3"])!=0)
-            {
-              //$grid1[$i]=$_POST["x".$i."1"];
-              $grid1[$i]=$_POST["x".$i."1"];
-              $grid2[$i]=$_POST["x".$i."2"];
-              $grid3[$i]=(float)(str_replace(',','',$_POST["x".$i."3"]));
-            }else
-            {
-              Mensaje("Existe Monto con valor 0, No se puede Guardar.");
-              Regresar("PreSolTrasla.php");
-              exit;
-            }
+              $cod1=$_POST["x".$i."1"];
+              $cod2=$_POST["x".$i."2"];
+               $sql = "select a.codpre from cpdeftit a, cpasiini b where a.codpre=b.codpre and a.codpre='$cod1'";
+               $sql2 = "select a.codpre from cpdeftit a, cpasiini b where a.codpre=b.codpre and a.codpre='$cod2'";
+               if ($tb=$z->buscar_datos($sql)){
+                if ($tb2=$z->buscar_datos($sql2)){
+                    if ((float)str_replace(',','',$_POST["x".$i."3"])!=0)
+                    {
+                      //$grid1[$i]=$_POST["x".$i."1"];
+                      $grid1[$i]=$_POST["x".$i."1"];
+                      $grid2[$i]=$_POST["x".$i."2"];
+                      $grid3[$i]=(float)(str_replace(',','',$_POST["x".$i."3"]));
+                    }else
+                    {
+                      Mensaje("Existe Monto con valor 0, No se puede Guardar.");
+                      Regresar("PreSolTrasla.php");
+                      exit;
+                    }
+                 }else
+                    {
+                      Mensaje("El Codigo Presupuestario Destino ".$cod2." no Existe o no tiene Asignacion Inicial");
+                      Regresar("PreSolTrasla.php");
+                      exit;
+                    }
+               }else
+                {
+                  Mensaje("El Codigo Presupuestario Origen ".$cod1." no Existe o no tiene Asignacion Inicial");
+                  Regresar("PreSolTrasla.php");
+                  exit;
+                }
             }
           $i = $i + 1;
         }
         else
         {
           $fin = $i-1;
-          $i   =21;
+          $i   =251;
         }
       }
 
@@ -280,6 +298,10 @@ function crearLog($valor)
             $tbDet->MoveNext();
          }
          ///////////////////////////////////////////
+
+        LanzarReporte('presupuesto','presoltransla.php&codtrades='.$codigo.'&codtrahas='.$codigo.'');
+        //LanzarReporte('presupuesto','presoltransla.php&codtrades='.$codigo.'&codtrahas='.$codigo.'&fectra1='.$fecha.'&fectra2='.$fecha.'');
+        Regresar("PreSolTrasla.php");
 
       }//try
       catch(Exception $e)

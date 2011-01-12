@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "forasoactpro{codmet}"
+   - "forasoactpro{codpro}"
+
+names:
+  forasoactpro{codmet}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir la Acción
+    validators: metaValidator
+
+  forasoactpro{codpro}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir la unidad de medida
+    validators: productoValidator
+
+metaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefmet
+        column:   codmet
+        unique_error:  La Acción no Existe.
+
+productoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefpro
+        column:   codpro
+        unique_error:  La Unidad de Medida no Existe.

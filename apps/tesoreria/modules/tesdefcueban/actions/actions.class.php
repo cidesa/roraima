@@ -407,6 +407,14 @@ $this->Bitacora('Guardo');
     {
       $this->tsdefban->setCreban($tsdefban['creban']);
     }
+    if (isset($tsdefban['debbandis']))
+    {
+      $this->tsdefban->setDebbandis($tsdefban['debbandis']);
+    }
+    if (isset($tsdefban['crebandis']))
+    {
+      $this->tsdefban->setCrebandis($tsdefban['crebandis']);
+    }
     if (isset($tsdefban['antlib']))
     {
       $this->tsdefban->setAntlib($tsdefban['antlib']);
@@ -418,6 +426,14 @@ $this->Bitacora('Guardo');
     if (isset($tsdefban['crelib']))
     {
       $this->tsdefban->setCrelib($tsdefban['crelib']);
+    }
+    if (isset($tsdefban['deblibdis']))
+    {
+      $this->tsdefban->setDeblibdis($tsdefban['deblibdis']);
+    }
+    if (isset($tsdefban['crelibdis']))
+    {
+      $this->tsdefban->setCrelibdis($tsdefban['crelibdis']);
     }
     if (isset($tsdefban['valche']))
     {
@@ -447,7 +463,14 @@ $this->Bitacora('Guardo');
     {
       $this->tsdefban->setEndosable($tsdefban['endosable']);
     }
-
+    if (isset($tsdefban['salmin']))
+    {
+      $this->tsdefban->setSalmin($tsdefban['salmin']);
+  }
+    if (isset($tsdefban['nomrep']))
+    {
+      $this->tsdefban->setNomrep($tsdefban['nomrep']);
+    }
   }
    public function setVars()
   {
@@ -535,7 +558,8 @@ $this->Bitacora('Guardo');
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -556,12 +580,16 @@ $this->Bitacora('Guardo');
 
       if (Herramientas::BuscarDatos($sql,&$tabla))
       {
-	      $error= Tesoreria::validarTesdefcueban($grid);
-	      if ($error<>-1)
-	      {
-	        $this->error=$error;
-	        return false;
-	      }
+      	  if(count($grid[0])>1)
+	  	  {
+	  	  	  $error= Tesoreria::validarTesdefcueban($grid);
+		      if ($error<>-1)
+		      {
+		        $this->error=$error;
+		        return false;
+		      }	
+	  	  }
+	      
       }
 
 
@@ -663,9 +691,45 @@ $this->Bitacora('Guardo');
         }
       $j++;
       }
+      $tsdefban->setDeblib($tsdefban->getDeblibdis());
+      $tsdefban->setCrelib($tsdefban->getCrelibdis());
+      $tsdefban->setDebban($tsdefban->getDebbandis());
+      $tsdefban->setCreban($tsdefban->getCrebandis());
       $tsdefban->save();
       Tesoreria::Grabar_Chequeras($tsdefban,$grid);
    }
+
+public function executeDelete()
+  {
+    $this->tsdefban = TsdefbanPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->tsdefban);
+
+    try
+    {
+      $libros=H::getX_vacio('NUMCUE','Tsmovlib','Numcue',$this->tsdefban->getNumcue());
+      $bancos=H::getX_vacio('NUMCUE','Tsmovban','Numcue',$this->tsdefban->getNumcue());
+
+      if ($libros==''){
+        if ($bancos=='') {
+            $this->deleteTsdefban($this->tsdefban);
+            $this->Bitacora('Elimino');
+        }else {
+            $this->getRequest()->setError('delete', 'El Banco No Puede Ser Eliminado, Porque tiene Movimientos en Banco Asociados.');
+            return $this->forward('tesdefcueban', 'list');
+        }
+      }else{
+          $this->getRequest()->setError('delete', 'El Banco No Puede Ser Eliminado, Porque tiene Movimientos en Libro Asociados.');
+          return $this->forward('tesdefcueban', 'list');
+      }
+    }
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'El Banco No Puede Ser Eliminado, Porque tiene Movimientos Asociados.');
+      return $this->forward('tesdefcueban', 'list');
+    }
+
+    return $this->redirect('tesdefcueban/list');
+  }
 
    protected function deleteTsdefban($tsdefban)
    {
@@ -675,44 +739,4 @@ $this->Bitacora('Guardo');
 
      $tsdefban->delete();
    }
-
-    /**
-   * Función principal para procesar la eliminación de registros 
-   * en el formulario.
-   *
-   */
-  public function executeDelete()
-  {
-    $this->tsdefban = TsdefbanPeer::retrieveByPk($this->getRequestParameter('id'));
-    $this->forward404Unless($this->tsdefban);
-
-    $id=$this->getRequestParameter('id');
-    $c= new Criteria();
-    $c->add(TsmovlibPeer::NUMCUE,$this->tsdefban->getNumcue());
-    $dato=TsmovlibPeer::doSelect($c);
-    if (!$dato)
-    {
-      $c= new Criteria();
-      $c->add(TsmovbanPeer::NUMCUE,$this->tsdefban->getNumcue());
-      $dato2=TsmovbanPeer::doSelect($c);
-      if (!$dato2)
-      {
-      	$this->deleteTsdefban($this->tsdefban);
-      	$this->Bitacora('Elimino');
-      }
-      else
-      {
-      	$this->setFlash('notice','El Banco no puede ser eliminado, porque hay Movimientos asociados');
-      return $this->redirect('tesdefcueban/edit?id='.$id);
-      }
-    }
-    else
-    {
-      $this->setFlash('notice','El Banco no puede ser eliminado, porque hay Movimientos asociados');
-      return $this->redirect('tesdefcueban/edit?id='.$id);
-    }
-
-    return $this->redirect('tesdefcueban/list');
-  }
-
 }

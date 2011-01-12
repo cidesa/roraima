@@ -24,7 +24,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('almentalm/edit_messages', array('caentalm' => $caentalm, 'labels' => $labels)) ?>
-<?php include_partial('almentalm/edit_form', array('caentalm' => $caentalm, 'labels' => $labels, 'obj' => $obj, 'mascaraarticulo' => $mascaraarticulo, 'mascaraubi' => $mascaraubi, 'lonubi' => $lonubi)) ?>
+<?php include_partial('almentalm/edit_form', array('caentalm' => $caentalm, 'labels' => $labels, 'obj' => $obj, 'mascaraarticulo' => $mascaraarticulo, 'mascaraubi' => $mascaraubi, 'lonubi' => $lonubi, 'mansolocor' => $mansolocor, 'bloqfec' => $bloqfec, 'oculeli' => $oculeli)) ?>
 </div>
 
 <div id="sf_admin_footer">

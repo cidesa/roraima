@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -8,7 +9,6 @@ session_start();
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -24,7 +24,7 @@ session_start();
 
 <body>
 
-<form name="form1" method="post" action="catalogo3.php">
+<form name="form1" onsubmit="return false;" method="post" action="catalogo3.php">
   <p>
     <?
 //   require_once("../../../lib/genegociocatalogo.php");

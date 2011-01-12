@@ -8,7 +8,7 @@
  * @package    Roraima
  * @subpackage lib.model
  * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Faartfac.php 33699 2009-10-01 22:15:36Z dmartinez $
+ * @version SVN: $Id: Faartfac.php 41205 2010-10-27 17:28:28Z dmartinez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -30,7 +30,7 @@ class Faartfac extends BaseFaartfac
   protected $blanco2="0,00";
   protected $recarg="";
   protected $desc="";
-  protected $precioe="0,00";
+  protected $precioe=0.00;
   protected $canentregar="0,00";
   protected $canajustada="0,00";
   protected $montot="0,00";
@@ -48,6 +48,18 @@ class Faartfac extends BaseFaartfac
   protected $canord="0,00";
   protected $preart="0,00";
   protected $numlot="";
+    protected $preaju="0,00";
+    protected $monaju="0,00";
+    protected $canlotreal="0,00";
+    protected $canpuedaju="0,00";
+    protected $canrealped="0,00";
+    protected $canrealdes="0,00";
+    protected $candistrib="0,00";
+    protected $tipo="0,00";
+    protected $ajupre="0,00";
+    protected $recaju="0,00";
+    protected $fecven="";
+    protected $exist="0,00";
 
    public function hydrate(ResultSet $rs, $startcol = 1)
    {
@@ -111,12 +123,79 @@ class Faartfac extends BaseFaartfac
   {
     if (self::getPrecio()!=0)
     {
-      $this->precioe=self::getPrecio();
+      $this->precioe=number_format(self::getPrecio(), 2, ',', '.');
+    }else {
+        $this->precioe=number_format($this->precioe, 2, ',', '.');
     }
+    if (self::getId())
+    {
+      $this->canent=number_format(self::getCantot(), 2, ',', '.');
+      $this->candesp=number_format(self::getCantot(), 2, ',', '.');
+    }
+
     $this->canord=number_format((self::getCantot() - self::getCanaju()), 2, ',', '.');
-    $this->preart=number_format(self::getPrecio(), 2, ',', '.');
+    $this->preart=number_format(self::getPrecio() - self::getPreaju(), 2, ',', '.');
     $val=self::getPrecio() * self::getCantot();
     $this->montot=number_format($val, 2, ',', '.');
+    $this->preaju=number_format(self::getPrecio(), 2, ',', '.');
+  }
+    public function getCodalm()
+    {
+	  return Herramientas::getX('CODART','Caartalm','Codalm',$this->getCodart());
+    }
+
+    public function getCodubi()
+    {
+          return Herramientas::getX('CODALM','Caalmubi','Codubi',$this->getCodalm());
+}
+
+    public function getNomalm()
+    {
+	  return Herramientas::getX('CODALM','Cadefalm','Nomalm',$this->getCodalm());
+    }
+
+    public function getNomubi()
+    {
+            return Herramientas::getX('CODUBI','Cadefubi','Nomubi',$this->getCodubi());
+    }
+
+  public function getTipo()
+  {
+   return Herramientas::getX('CODART','Caregart','Tipo',self::getCodart());
   }
 
+    public function getNomots()
+    {
+      return Herramientas::getX('CEDRIF','Faregots','Nomots',self::getCedrif());
+    }
+
+    public function getNompro()
+    {
+      return Herramientas::getX('RIFPRO','Caprovee','Nompro',self::getRifpro());
+    }
+
+    public function getDesprod()
+    {
+      return Herramientas::getX('CODPROD','Fadefpro','Desprod',self::getCodprod());
+    }
+
+   public function getPrecioe($va=false)
+  {
+    if (self::getId()!="")
+    {
+     $var = parent::getPrecio($va);
+    }
+    else
+    {
+      if($va) $var = number_format($this->precioe,2,',','.');
+    else $var = $this->precioe;
+    }
+    return $var;
+  }
+
+  public function setPrecioe($val)
+    {
+       //$this->precioe = $val;
+       $this->precioe = Herramientas::toFloat($val);
+    }
 }

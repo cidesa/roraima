@@ -34,9 +34,9 @@ class TsrepretMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('tsrepret_SEQ');
 
-		$tMap->addColumn('CODREP', 'Codrep', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('CODREP', 'Codrep', 'string', CreoleTypes::VARCHAR, true, 50);
 
-		$tMap->addColumn('CODRET', 'Codret', 'string', CreoleTypes::VARCHAR, false, 4);
+		$tMap->addForeignKey('CODRET', 'Codret', 'string', CreoleTypes::VARCHAR, 'optipret', 'CODTIP', true, 4);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

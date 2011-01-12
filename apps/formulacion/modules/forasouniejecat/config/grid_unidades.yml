@@ -1,0 +1,22 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   forasounicat
+  anchogrid:               750
+  ancho:                   600
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código
+  tipo:                    t
+  nombrecampo:             coduni
+  html:                    ["size=15 maxlength=4 onBlur='toAjax(2,getUrlModuloAjax(),this.value,0,'&cajtexmos='+$(this.id).up().next(0).descendants()[0].id+'&cajtexcom='+this.id)'"]
+  esgrabable:              true
+  catalogo:                [fordefunieje, sf_admin_edit_form, {Coduni: 1, Nomuni: 2}, Fordefunieje_Forcatprogra ]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomuni
+  html:                    ["size=60 readonly=true"]
+  esgrabable:              true

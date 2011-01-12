@@ -34,7 +34,7 @@ class TsretivaMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('tsretiva_SEQ');
 
-		$tMap->addColumn('CODRET', 'Codret', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addForeignKey('CODRET', 'Codret', 'string', CreoleTypes::VARCHAR, 'optipret', 'CODTIP', true, 3);
 
 		$tMap->addColumn('CODREC', 'Codrec', 'string', CreoleTypes::VARCHAR, true, 4);
 

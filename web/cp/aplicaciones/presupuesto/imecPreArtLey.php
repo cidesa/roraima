@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
@@ -22,7 +23,8 @@ $z= new tools();
   if (!empty($_POST["nivelIV"]))  $staniv4="S"; else $staniv4="N";
   if (!empty($_POST["nivelV"]))   $staniv5="S"; else $staniv5="N";
   if (!empty($_POST["nivelVI"]))  $staniv6="S"; else $staniv6="N";
-
+  $portra=$_POST["portra"];
+  if ($portra=="0,00" || $portra=="") $portra=0;
     $imec=$_GET["imec"];
 
     ////////////////
@@ -34,8 +36,8 @@ $z= new tools();
     {
       try
       {
-        $sql="insert into cpartley (codart,desart,nomabr,stacon,stagob,stapre,staniv4,staniv5,staniv6)
-            values ('".$codart."','".$nomext."','".$nomabr."','".$stacon."','".$stagob."','".$stapre."','".$staniv4."','".$staniv5."','".$staniv6."')";
+        $sql="insert into cpartley (codart,desart,nomabr,stacon,stagob,stapre,staniv4,staniv5,staniv6,portra)
+            values ('".$codart."','".$nomext."','".$nomabr."','".$stacon."','".$stagob."','".$stapre."','".$staniv4."','".$staniv5."','".$staniv6."',".$portra.")";
             
         $bd->actualizar($sql);
 
@@ -64,8 +66,9 @@ $z= new tools();
                       stapre='".$stapre."',
                       staniv4='".$staniv4."',
                       staniv5='".$staniv5."',
-                      staniv6='".$staniv6."'
-                    where codart='".$codart."' ";
+                      staniv6='".$staniv6."',
+                      portra='".$portra."'
+                      where codart='".$codart."' ";
 
         $bd->actualizar($sql);
         

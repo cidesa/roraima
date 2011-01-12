@@ -5,8 +5,8 @@
  * @package    Roraima
  * @subpackage lib
  * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Constantes.class.php 34271 2009-10-26 21:25:25Z dmartinez $
- *
+ * @version SVN: $Id: Constantes.class.php 41787 2010-12-21 13:26:43Z dmartinez $
+ *ListaOcupacion
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -58,7 +58,7 @@ class Constantes
     {return array('S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL', 'XXXL' => 'XXXL');}
 
     public static function ListaGrupoSanguineo()
-    {return array('ARH+' => 'ARH+', 'ARH-' => 'ARH-', 'BRH+' => 'BRH+', 'BRH-' => 'BRH-', 'ABRH+' => 'ABRH+', 'ABRH-' => 'ABRH-', 'ORH+' => 'ORH+');}
+    {return array('ARH+' => 'ARH+', 'ARH-' => 'ARH-', 'BRH+' => 'BRH+', 'BRH-' => 'BRH-', 'ABRH+' => 'ABRH+', 'ABRH-' => 'ABRH-', 'ORH+' => 'ORH+', 'ORH-' => 'ORH-');}
 
     public static function ListaGrupoLaboral()
     {return array('0001' => 'Fijo', '0002' => 'Contratado', '0003' => 'Pasantia', '0004' => 'Periodo de Prueba');}
@@ -103,7 +103,7 @@ class Constantes
 
  public static function ListaConceptos()
   {
-   return array('000' => 'Prestaciones Sociales', '001' => 'Intereses Sobre Prestaciones Sociales', '002' => 'Días Adicionas', '003' => 'Vacaciones Fraccionadas', '004' => 'Bono Vacacional Fraccionado', '005' => 'Aguinaldo Fracionados', '006' => 'Anticipo de Prestaciones');
+   return array('000' => 'Prestaciones Sociales', '001' => 'Intereses Sobre Prestaciones Sociales', '002' => 'Días Adicionas', '003' => 'Vacaciones Fraccionadas', '004' => 'Bono Vacacional Fraccionado', '005' => 'Aguinaldo Fracionados', '006' => 'Anticipo de Prestaciones', '007' => 'Bono Adicional');
   }
 
 
@@ -120,7 +120,7 @@ public static function PagoDoble()
     {return array('P' => 'Proyecto', 'A' => 'Acción Centralizada');}
 
   public static function ListaTipoReporte()
-  {return array('001' => 'Comprobante de Retención de I.V.A', '002' => 'Comprobante de Retención de I.S.L.R', '003' => 'Comprobante de Retención de Ley de Timbre Fiscal', '004' => 'Comprobante de Retención de Impuesto Municipal');}
+  {return array('001' => 'Comprobante de Retención de I.V.A', '002' => 'Comprobante de Retención de I.S.L.R', '003' => 'Comprobante de Retención de Ley de Timbre Fiscal', '004' => 'Comprobante de Retención de Impuesto Municipal', '005' => 'Comprobante de Retención Social');}
 
   public static function DistribMonto()
   {
@@ -191,15 +191,16 @@ public static function PagoDoble()
   public static function ListaFuncionesCalculoConcepto()
   {
     return array('AAP' => 'AAP   Antiguedad en la Administración Pública', 'DV' => 'DV   Dias de Vacaciones', 'NL' => 'NL   N° Lunes laborados del trabajador en Mes', 'NLP' => 'NLP   N° Lunes laborados del trabajador en periodo', 'NS' => 'NS   N° Lunes que tiene un mes determinado',
-    'SIC' => 'SIC   Salario Integral del Periodo', 'SIM' => 'SIM   Salario Integral por Movimientos','TAF' => 'TAF   Total Asignaciones Final', 'AC' => 'AC   Años de asignación del Cargo', 'DC' => 'DC   Dias de asignación del Cargo', 'ADV' => 'ADV   Ant.  del empleado en dias con Vacaciones',
+    'SIC' => 'SIC   Salario Integral del Periodo', 'SIM' => 'SIM   Salario Integral por Movimientos','TAF' => 'TAF   Total Asignaciones Final', 'TDED' => 'TDED   Total Deducciones Final', 'AC' => 'AC   Años de asignación del Cargo', 'DC' => 'DC   Dias de asignación del Cargo', 'ADV' => 'ADV   Ant.  del empleado en dias con Vacaciones',
     'AD' => 'AD   Antiguedad del empleado en dias', 'ADF' => 'ADF   Antiguedad del empleado en dias a fin de año', 'AM' => 'AM   Antiguedad del empleado en meses', 'AA' => 'AA   Antiguedad del empleado en años', 'ED' => 'ED   Edad del empleado en dias', 'EE' => 'EE   Edad del empleado en meses',
     'CC' => 'CC      Cantidad de Cargos de un Empleado', 'FFRAC' => 'FFRAC Retorna parte decimal de un número', 'FINT' => 'FINT    Retorna parte entera de un número', 'NHGR' => 'NHGR  Nº de Hijos mayores de 5 años', 'FECN' => 'FECN   Fecha de la Nómina', 'DIAF' => 'DIAF    Retorna el Día de una Fecha',
-    'MESF' => 'MESF   Retorna el Mes de una Fecha', 'ANOF' => 'ANOF   Retorna el Año de una Fecha', 'CATRAB' => 'CATRAB   Cumpleaños del Trabajador', 'NHIJ' => 'NHIJ   Nº De Hijos', 'SC' => 'SC   Sueldo + Compensación', 'SCAR' => 'SCAR   Sueldo del Cargo', 'DBV' => 'DBV   Días de Bono Vacacional',
+    'MESF' => 'MESF   Retorna el Mes de una Fecha', 'ANOF' => 'ANOF   Retorna el Año de una Fecha', 'CATRAB' => 'CATRAB   Cumpleaños del Trabajador', 'NHIJ' => 'NHIJ   Nº De Hijos', 'SC' => 'SC   Sueldo + Compensación', 'SCAR' => 'SCAR   Sueldo del Cargo', 'CCAR' => 'CCAR   Compensación del Cargo', 'DBV' => 'DBV   Días de Bono Vacacional',
     'PV' => 'PV   Períodos Vacacionales a Disfrutar', 'PHIJO' => 'PHIJO Monto Prima Hijo', 'NHIJO' => 'NHIJO Hijos Menores a Edad Suministrada', 'PPROF' => 'PPROF Monto Prima Profesionalizacion', 'PROFE' => 'PROFE Profesion activa del Empleado', 'PCARG' => 'PCARG Monto Cargo Colateral', 'CGUAR' => 'CGUAR Monto Por Guardería', 'ACUC' => 'ACUC  Acumulador de Conceptos por Empleado',
     'STAB' => 'STAB   Sueldo según Escala', 'CTAB' => 'CTAB   Compensación según Escala', 'MCES' => 'MCES   Monto de Cesta Tickets', 'ADIC' => 'ADIC   Dias Adicionales Prestacion Antiguedad','DHAB' => 'DHAB   Días Habiles del Período','DHABM' => 'DHABM   Días Habiles del Mes','CARG' => 'CARG   Cargo Actual del Empleado','NHMENEDA' => 'NHMENEDA   Numero de hijos Menores a una edad',
     'NHMAYEDA' => 'NHMAYEDA   Numero de hijos Mayores a una edad','SIMESANT' => 'SIMESANT Salario Integral Mes Anterior','SIPERANT' => 'SIPERANT Salario Integral Período Anterior', 'SIMESDAD' => 'SIMESDAD Salario Integral Mes Dado', 'SIANOANT' => 'SIANOANT   Sum. Conc. Sal. Integral Año Anterior', 'DNLAB' => 'DNLAB   Días No Laborados', 'AAPMESES' => 'AAPMESES   Antiguedad en la Administración en Meses', 'AAPDIAS' => 'AAPDIAS   Antiguedad en la Administración Pública Días',
-    'SDIAS' => 'SDIAS   Sueldo en Días', 'SHORAS' => 'SHORAS   Sueldo en Horas', 'NHIJEST' => 'NHIJEST   Nº De Hijos Estudiantes', 'FECDIAS' => 'FECDIAS   Fecha en Días', 'FECMES' => 'FECMES   Fecha en Meses','FECANNOS' => 'FECANNOS   Fecha en Años', 'CATRABMES' => 'CATRABMES   Cumpleaños del Trabajador en el Mes de la Nomin', 'INTPRES' => 'INTPRES Intereses Sobre Prestaciones', 'DIASBONOVAC' => 'DIASBONOVAC Dias de Bono Vacacional', 'MESFINALANO' => 'MESFINALANO Antiguedad en meses hasta fin de Año', 'AET' => 'AET   Antiguedad de Entrega de Titulo',
-	'D360FA' => 'D360FA Antiguedad en dias a fin de Año en base a 360 dias' );
+    'SDIAS' => 'SDIAS   Sueldo en Días', 'SHORAS' => 'SHORAS   Sueldo en Horas', 'NHIJEST' => 'NHIJEST   Nº De Hijos Estudiantes', 'FECDIAS' => 'FECDIAS   Fecha en Días', 'FECMES' => 'FECMES   Fecha en Meses','FECANNOS' => 'FECANNOS   Fecha en Años', 'CATRABMES' => 'CATRABMES   Cumpleaños del Trabajador en el Mes de la Nomin', 'INTPRES' => 'INTPRES Intereses Sobre Prestaciones', 'DIAADIPRE' => 'DIAADIPRE Monto Dias Adicionales de Prestaciones', 'DIAADIFID' => 'DIAADIFID Monto Dias Adicionales Fideicomiso', 'DIASBONOVAC' => 'DIASBONOVAC Dias de Bono Vacacional', 'MESFINALANO' => 'MESFINALANO Antiguedad en meses hasta fin de Año', 'AET' => 'AET   Antiguedad de Entrega de Titulo',
+    'D360FA' => 'D360FA Antiguedad en dias a fin de Año en base a 360 dias', 'DIAVACCON' => 'DIAVACCON Dias de Vacaciones Continuas', 'DIAVACNOM' => 'DIAVACNOM Dias de Vacaciones en el Lapso de Nomina' , 'NSVAC' => 'NSVAC Número de Sábados en Lapso de Vacaciones', 'NDVAC' => 'NDVAC Número de Domingos en Lapso de Vacaciones', 'NFVAC' => 'NFVAC Dias Feriados en Lapso de Vacaciones' ,'NLVAC' => 'NLVAC Número de Lunes en Lapso de Vacaciones', 'NLENNOM' => 'NLENNOM Número de Lunes en Periodo de Nómina', 'PORHCM' => 'PORHCM Porcentaje HCM', 'NOEMP' => 'Nivel Organizacional del Empleado',
+    'NLVACNOM' => 'NLVACNOM Número de Lunes de Vacaciones en Nómina', 'DIFSUECARCOL' => 'DIFSUECARCOL Diferencia del sueldo Cargo Colateral - Cargo Actual', 'NPARINC' => 'NPARINC Número de Parientes Incluidos en Nomina', 'MATNOM' => 'MATNOM MATRIMONIO EN NOMINA(S ó N)', 'DIFDIASAL' => 'DIFDIASAL Diferencia entre Fecha Salida Vacaciones-Fecha Nomina', 'NLDIFVAC' => 'NLDIFVAC Numero de Lunes adelantados por vacaciones', '5FIDE' => '5FIDE 5 Dias de Fideicomiso');
   }
 
 
@@ -370,7 +371,7 @@ public static function PagoDoble()
 
   public static function TipoMovimiento()
   {
-    return array('P' => 'Precompromiso','C' => 'Compromiso','CA' => 'Causado','PA' => 'Pagado','A' => 'Adicion/Disminucion','T' => 'Solicitud de Traslado','AJ' => 'Ajuste');
+    return array('P' => 'Precompromiso','C' => 'Compromiso','CA' => 'Causado','PA' => 'Pagado','A' => 'Adicion/Disminucion','ST' => 'Solicitud de Traslado', 'T' => 'Traslado','AJ' => 'Ajuste');
   }
 
   public static function Numper_Faccodcatfis()
@@ -494,7 +495,7 @@ public static function PagoDoble()
 
   public static function ListaOcupacion()
   {
-    return array('E' => 'Estudiante', 'T' => 'Trabajador', 'D' => 'Desempleado',);
+    return array('E' => 'Estudiante', 'T' => 'Trabajador', 'D' => 'Desempleado', 'P' => 'Pensionado');
   }
 
   public static function ListadeTipo() //Catastral
@@ -542,5 +543,42 @@ public static function PagoDoble()
   {
   	return array('I' => 'Industria y Comercio', 'V' => 'Vehiculo', 'U' => 'Inmuebles Urbanos', 'P' => 'Propaganda Comercial', 'G' => 'General', 'O' => 'Otros Ingresos');
   }
+
+  public static function ListaTrimestre()
+  {
+  	return array('Primer' => 'Primer', 'Segundo' => 'Segundo', 'Tercer' => 'Tercer', 'Cuarto' => 'Cuarto');
+  }
+
+  public static function Empresa_Ano()
+  {
+    return array('2009' => '2009','2010' => '2010','2011' => '2011','2012' => '2012','2013' => '2013','2014' => '2014','2015' => '2015','2016' => '2016','2017' => '2017','2018' => '2018','2019' => '2019','2020' => '2020','2021' => '2021','2022' => '2022','2023' => '2023','2024' => '2024','2025' => '2025','2026' => '2026','2027' => '2027','2028' => '2028','2029' => '2029');
+  }
+
+  public static function ListaModulos()
+  {
+    return array('cont' => 'Contabilidad','cp' => 'Presupuesto','ci' => 'Presupuesto Ingresos','op' => 'Tesoreria','ts' => 'Bancos','ca' => 'Compras y Almacén', 'for' => 'Formulacion de Presupuesto');
+  }
+
+  public static function TipoDocumento()   //Hacienda
+  {
+    return array('SR' => 'Sin Referencia','IC' => 'Industria y Comercio','V' => 'Vehiculos','I' => 'Inmuebles','PC' => 'Propaganda Comercial','EP' => 'Espectaculos Publicos','AL' => 'Apuestas Licitas');
+  }
+
+  public static function Porciones()   //Hacienda
+  {
+  	return array('1' => '1 Anualidad','2' => '2 Semestral','4' => '4 Trimestre','6' => '6 Bimestre','12' => '12 Mensualidad','24' => '24 Quincenal','52' => '52 Semanal','365' => '365 Diario');
+//    return "1 Anualidad,2 Semestral,3 Cuatrimestre,4 Trimestre,6 Bimestre,12 Mensualidad,24 Quincenal,52 Semanal,365 Diario";
+  }
+
+    public static function ListaEstatusOTS()
+  {
+    return array('A' => 'Activo', 'N' => 'Inactivo');
+}
+
+    public static function ListatipoFianza()
+  {
+    return array('Fiel Cumplimiento' => 'Fiel Cumplimiento', 'Anticipo' => 'Anticipo', 'Laboral' => 'Laboral', 'Garantía' => 'Garantía', 'Sostenimiento de Oferta' => 'Sostenimiento de Oferta');
+  }
+
 
 }

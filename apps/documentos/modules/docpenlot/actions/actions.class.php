@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage docpenlot
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 40264 2010-08-17 16:23:46Z lhernandez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -63,15 +63,15 @@ class docpenlotActions extends autodocpenlotActions
     
     if($this->dfatendoc->getIdDftabtip()!='') $c->add(DfatendocPeer::ID_DFTABTIP ,$this->dfatendoc->getIdDftabtip());
     if($this->dfatendoc->getStaate()!='') $c->add(DfatendocPeer::STAATE ,$this->dfatendoc->getStaate());
-    if($this->dfatendoc->getAnuate()!='') $c->add(DfatendocPeer::ANUATE ,$this->dfatendoc->getAnuate());
+    if($this->dfatendoc->getAnuate(true)!='') $c->add(DfatendocPeer::ANUATE ,$this->dfatendoc->getAnuate());
     
-    if(($this->dfatendoc->getIdDftabtip()=='') && ($this->dfatendoc->getStaate()=='') && ($this->dfatendoc->getAnuate()=='')) {
+    if(($this->dfatendoc->getIdDftabtip()=='') && ($this->dfatendoc->getStaate()=='') && ($this->dfatendoc->getAnuate(true)=='')) {
       $c->add(DfatendocPeer::ID ,0);
     }
 
     $reg = DfAtendocPeer::doSelect($c);
 
-    $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/docpenlot/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_dfatendoc',$reg);
+    $this->obj = Herramientas::getConfigGrid('grid_dfatendoc',$reg);
 
     $this->dfatendoc->setObjitems($this->obj);
 
@@ -104,7 +104,8 @@ class docpenlotActions extends autodocpenlotActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -171,6 +172,7 @@ class docpenlotActions extends autodocpenlotActions
   public function saving($clasemodelo)
   {
     //return parent::saving($clasemodelo);
+    return -1;
   }
 
   /**

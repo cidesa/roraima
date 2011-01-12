@@ -1,10 +1,11 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
@@ -74,8 +75,9 @@ $modulo=$_SESSION["modulo"] . " > Def. Especificas > ".$forma;
   {
     //Datos Cabecera
     $sql="select *, forpre,to_char(fecini,'dd/mm/yyyy') as fecini,to_char(feccie,'dd/mm/yyyy') as feccie,
-      to_char(fecper,'dd/mm/yyyy') as fecper
+      to_char(fecper,'dd/mm/yyyy') as fecper, coalesce(coraep,'0') as coraep
       from cpdefniv where codemp='001'";
+    //print_r($sql);
     if ($tb=$z->buscar_datos($sql))
     {
       $clacat=trim((String)$tb->fields["rupcat"]);
@@ -86,7 +88,7 @@ $modulo=$_SESSION["modulo"] . " > Def. Especificas > ".$forma;
       $fecha2=$tb->fields["feccie"];
       $fecha3=$tb->fields["fecper"];
       $numper=trim((String)$tb->fields["numper"]);
-      $corr=trim($tb->fields["coraep"]);
+      $corr=($tb->fields["coraep"]);
       //$tiptraprc=trim($tb->fields["tiptraprc"]);
       $corprc=$tb->fields["corprc"];
       $asiper=$tb->fields["asiper"];
@@ -190,7 +192,6 @@ $modulo=$_SESSION["modulo"] . " > Def. Especificas > ".$forma;
 
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" TYPE="text/css" MEDIA="screen" href="../../lib/css/tabber.css">
@@ -208,7 +209,7 @@ $modulo=$_SESSION["modulo"] . " > Def. Especificas > ".$forma;
 </head>
 
 <body>
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
 <table width="100%" align="center">
   <tr>
 <td width="100%">
@@ -516,6 +517,10 @@ $modulo=$_SESSION["modulo"] . " > Def. Especificas > ".$forma;
                                         </tr>
                                       </table></td>
                                   </tr>
+                                  <tr style="display:none">
+					                  <td >AEP:</td>
+					                  <td ><input name="corr" type="text" id="corr" value="<? print $corr;?>" size="4" class="imagenInicio" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'"></td>
+					              </tr>
                                 </table></td>
 
                             </tr>
@@ -526,10 +531,7 @@ $modulo=$_SESSION["modulo"] . " > Def. Especificas > ".$forma;
               <h2>Configuracion de Correlativos </h2>
               <table width="100%" cellpadding="0" cellspacing="5" class="bodyline">
 
-                <tr>
-                  <td >AEP:</td>
-                  <td ><input name="corr" type="text" id="corr" value="<? print $corr;?>" size="4" class="imagenInicio" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'"></td>
-                </tr>
+
                 <tr>
                   <td >Precompromiso: </td>
                   <td ><input name="corprc" type="text" id="corprc" value="<? print $corprc;?>" size="4" class="imagenInicio" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'"></td>

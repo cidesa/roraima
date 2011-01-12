@@ -4,6 +4,7 @@ methods:
    - "careqart{desreq}"
    - "careqart{monreq}"
    - "careqart{fecreq}"
+   - "careqart{codcen}"
 names:
   careqart{reqart}:
     required:  Yes
@@ -23,6 +24,10 @@ names:
   careqart{monreq}:
     required:  No
     validators: MontoValidator, MyNumberValidator
+
+  careqart{codcen}:
+    required:  No
+    validators: CentroValidator
 
 
 StringValidator:
@@ -68,3 +73,10 @@ FechaValidator:
         match:      yes
         pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
         match_error: La Fecha introducida es invalida
+
+CentroValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Cadefcen
+        column:   codcen
+        unique_error:   El Centro de Costo no existe.

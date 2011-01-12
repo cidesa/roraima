@@ -7,9 +7,9 @@
  *
  * @package    Roraima
  * @subpackage lib.model
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Ocregobr.php 34312 2009-10-29 13:31:22Z dmartinez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -28,6 +28,8 @@ class Ocregobr extends BaseOcregobr
   protected $porxeje=0.0;
   protected $obrejefis=0.0;
   protected $totobreje=0.0;
+  protected $tipprc="";
+
 
 
   public function getDescon()

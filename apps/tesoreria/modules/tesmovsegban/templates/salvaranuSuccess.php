@@ -2,11 +2,16 @@
 <?php use_helper('Javascript') ?>
 
 <?php $js = "  
-    
+    var msgpercer='".$msgpercer."';
      f=opener.document.sf_admin_edit_form;
+      if (msgpercer==''){
 	 self.close();
 	 f.action=window.opener.document.location;
 	 f.submit();
+      }else{
+        alert(msgpercer);
+        self.close();
+       }
      
 "; ?>
 <?php echo javascript_tag($js); ?>

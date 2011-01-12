@@ -153,11 +153,31 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 
 
 	
+	protected $seguro;
+
+
+	
 	protected $attipproviv_id;
 
 
 	
 	protected $attipviv_id;
+
+
+	
+	protected $sector;
+
+
+	
+	protected $urbanizacion;
+
+
+	
+	protected $zona;
+
+
+	
+	protected $atmisiones_id;
 
 
 	
@@ -183,6 +203,9 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 
 	
 	protected $aAttipviv;
+
+	
+	protected $aAtmisiones;
 
 	
 	protected $collAtestsocecos;
@@ -489,6 +512,13 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 
   }
   
+  public function getSeguro()
+  {
+
+    return trim($this->seguro);
+
+  }
+  
   public function getAttipprovivId()
   {
 
@@ -500,6 +530,34 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
   {
 
     return $this->attipviv_id;
+
+  }
+  
+  public function getSector()
+  {
+
+    return trim($this->sector);
+
+  }
+  
+  public function getUrbanizacion()
+  {
+
+    return trim($this->urbanizacion);
+
+  }
+  
+  public function getZona()
+  {
+
+    return trim($this->zona);
+
+  }
+  
+  public function getAtmisionesId()
+  {
+
+    return $this->atmisiones_id;
 
   }
   
@@ -897,6 +955,16 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setSeguro($v)
+	{
+
+    if ($this->seguro !== $v) {
+        $this->seguro = $v;
+        $this->modifiedColumns[] = AtciudadanoPeer::SEGURO;
+      }
+  
+	} 
+	
 	public function setAttipprovivId($v)
 	{
 
@@ -921,6 +989,50 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
   
 		if ($this->aAttipviv !== null && $this->aAttipviv->getId() !== $v) {
 			$this->aAttipviv = null;
+		}
+
+	} 
+	
+	public function setSector($v)
+	{
+
+    if ($this->sector !== $v) {
+        $this->sector = $v;
+        $this->modifiedColumns[] = AtciudadanoPeer::SECTOR;
+      }
+  
+	} 
+	
+	public function setUrbanizacion($v)
+	{
+
+    if ($this->urbanizacion !== $v) {
+        $this->urbanizacion = $v;
+        $this->modifiedColumns[] = AtciudadanoPeer::URBANIZACION;
+      }
+  
+	} 
+	
+	public function setZona($v)
+	{
+
+    if ($this->zona !== $v) {
+        $this->zona = $v;
+        $this->modifiedColumns[] = AtciudadanoPeer::ZONA;
+      }
+  
+	} 
+	
+	public function setAtmisionesId($v)
+	{
+
+    if ($this->atmisiones_id !== $v) {
+        $this->atmisiones_id = $v;
+        $this->modifiedColumns[] = AtciudadanoPeer::ATMISIONES_ID;
+      }
+  
+		if ($this->aAtmisiones !== null && $this->aAtmisiones->getId() !== $v) {
+			$this->aAtmisiones = null;
 		}
 
 	} 
@@ -1011,11 +1123,21 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 
       $this->segpri = $rs->getBoolean($startcol + 35);
 
-      $this->attipproviv_id = $rs->getInt($startcol + 36);
+      $this->seguro = $rs->getString($startcol + 36);
 
-      $this->attipviv_id = $rs->getInt($startcol + 37);
+      $this->attipproviv_id = $rs->getInt($startcol + 37);
 
-      $this->id = $rs->getInt($startcol + 38);
+      $this->attipviv_id = $rs->getInt($startcol + 38);
+
+      $this->sector = $rs->getString($startcol + 39);
+
+      $this->urbanizacion = $rs->getString($startcol + 40);
+
+      $this->zona = $rs->getString($startcol + 41);
+
+      $this->atmisiones_id = $rs->getInt($startcol + 42);
+
+      $this->id = $rs->getInt($startcol + 43);
 
       $this->resetModified();
 
@@ -1023,7 +1145,7 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 39; 
+            return $startcol + 44; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Atciudadano object", $e);
     }
@@ -1148,6 +1270,13 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 					$affectedRows += $this->aAttipviv->save($con);
 				}
 				$this->setAttipviv($this->aAttipviv);
+			}
+
+			if ($this->aAtmisiones !== null) {
+				if ($this->aAtmisiones->isModified()) {
+					$affectedRows += $this->aAtmisiones->save($con);
+				}
+				$this->setAtmisiones($this->aAtmisiones);
 			}
 
 
@@ -1278,6 +1407,12 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 			if ($this->aAttipviv !== null) {
 				if (!$this->aAttipviv->validate($columns)) {
 					$failureMap = array_merge($failureMap, $this->aAttipviv->getValidationFailures());
+				}
+			}
+
+			if ($this->aAtmisiones !== null) {
+				if (!$this->aAtmisiones->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aAtmisiones->getValidationFailures());
 				}
 			}
 
@@ -1454,12 +1589,27 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 				return $this->getSegpri();
 				break;
 			case 36:
-				return $this->getAttipprovivId();
+				return $this->getSeguro();
 				break;
 			case 37:
-				return $this->getAttipvivId();
+				return $this->getAttipprovivId();
 				break;
 			case 38:
+				return $this->getAttipvivId();
+				break;
+			case 39:
+				return $this->getSector();
+				break;
+			case 40:
+				return $this->getUrbanizacion();
+				break;
+			case 41:
+				return $this->getZona();
+				break;
+			case 42:
+				return $this->getAtmisionesId();
+				break;
+			case 43:
 				return $this->getId();
 				break;
 			default:
@@ -1508,9 +1658,14 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 			$keys[33] => $this->getAyusolant(),
 			$keys[34] => $this->getInsayuant(),
 			$keys[35] => $this->getSegpri(),
-			$keys[36] => $this->getAttipprovivId(),
-			$keys[37] => $this->getAttipvivId(),
-			$keys[38] => $this->getId(),
+			$keys[36] => $this->getSeguro(),
+			$keys[37] => $this->getAttipprovivId(),
+			$keys[38] => $this->getAttipvivId(),
+			$keys[39] => $this->getSector(),
+			$keys[40] => $this->getUrbanizacion(),
+			$keys[41] => $this->getZona(),
+			$keys[42] => $this->getAtmisionesId(),
+			$keys[43] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1635,12 +1790,27 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 				$this->setSegpri($value);
 				break;
 			case 36:
-				$this->setAttipprovivId($value);
+				$this->setSeguro($value);
 				break;
 			case 37:
-				$this->setAttipvivId($value);
+				$this->setAttipprovivId($value);
 				break;
 			case 38:
+				$this->setAttipvivId($value);
+				break;
+			case 39:
+				$this->setSector($value);
+				break;
+			case 40:
+				$this->setUrbanizacion($value);
+				break;
+			case 41:
+				$this->setZona($value);
+				break;
+			case 42:
+				$this->setAtmisionesId($value);
+				break;
+			case 43:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1686,9 +1856,14 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[33], $arr)) $this->setAyusolant($arr[$keys[33]]);
 		if (array_key_exists($keys[34], $arr)) $this->setInsayuant($arr[$keys[34]]);
 		if (array_key_exists($keys[35], $arr)) $this->setSegpri($arr[$keys[35]]);
-		if (array_key_exists($keys[36], $arr)) $this->setAttipprovivId($arr[$keys[36]]);
-		if (array_key_exists($keys[37], $arr)) $this->setAttipvivId($arr[$keys[37]]);
-		if (array_key_exists($keys[38], $arr)) $this->setId($arr[$keys[38]]);
+		if (array_key_exists($keys[36], $arr)) $this->setSeguro($arr[$keys[36]]);
+		if (array_key_exists($keys[37], $arr)) $this->setAttipprovivId($arr[$keys[37]]);
+		if (array_key_exists($keys[38], $arr)) $this->setAttipvivId($arr[$keys[38]]);
+		if (array_key_exists($keys[39], $arr)) $this->setSector($arr[$keys[39]]);
+		if (array_key_exists($keys[40], $arr)) $this->setUrbanizacion($arr[$keys[40]]);
+		if (array_key_exists($keys[41], $arr)) $this->setZona($arr[$keys[41]]);
+		if (array_key_exists($keys[42], $arr)) $this->setAtmisionesId($arr[$keys[42]]);
+		if (array_key_exists($keys[43], $arr)) $this->setId($arr[$keys[43]]);
 	}
 
 	
@@ -1732,8 +1907,13 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(AtciudadanoPeer::AYUSOLANT)) $criteria->add(AtciudadanoPeer::AYUSOLANT, $this->ayusolant);
 		if ($this->isColumnModified(AtciudadanoPeer::INSAYUANT)) $criteria->add(AtciudadanoPeer::INSAYUANT, $this->insayuant);
 		if ($this->isColumnModified(AtciudadanoPeer::SEGPRI)) $criteria->add(AtciudadanoPeer::SEGPRI, $this->segpri);
+		if ($this->isColumnModified(AtciudadanoPeer::SEGURO)) $criteria->add(AtciudadanoPeer::SEGURO, $this->seguro);
 		if ($this->isColumnModified(AtciudadanoPeer::ATTIPPROVIV_ID)) $criteria->add(AtciudadanoPeer::ATTIPPROVIV_ID, $this->attipproviv_id);
 		if ($this->isColumnModified(AtciudadanoPeer::ATTIPVIV_ID)) $criteria->add(AtciudadanoPeer::ATTIPVIV_ID, $this->attipviv_id);
+		if ($this->isColumnModified(AtciudadanoPeer::SECTOR)) $criteria->add(AtciudadanoPeer::SECTOR, $this->sector);
+		if ($this->isColumnModified(AtciudadanoPeer::URBANIZACION)) $criteria->add(AtciudadanoPeer::URBANIZACION, $this->urbanizacion);
+		if ($this->isColumnModified(AtciudadanoPeer::ZONA)) $criteria->add(AtciudadanoPeer::ZONA, $this->zona);
+		if ($this->isColumnModified(AtciudadanoPeer::ATMISIONES_ID)) $criteria->add(AtciudadanoPeer::ATMISIONES_ID, $this->atmisiones_id);
 		if ($this->isColumnModified(AtciudadanoPeer::ID)) $criteria->add(AtciudadanoPeer::ID, $this->id);
 
 		return $criteria;
@@ -1837,9 +2017,19 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 
 		$copyObj->setSegpri($this->segpri);
 
+		$copyObj->setSeguro($this->seguro);
+
 		$copyObj->setAttipprovivId($this->attipproviv_id);
 
 		$copyObj->setAttipvivId($this->attipviv_id);
+
+		$copyObj->setSector($this->sector);
+
+		$copyObj->setUrbanizacion($this->urbanizacion);
+
+		$copyObj->setZona($this->zona);
+
+		$copyObj->setAtmisionesId($this->atmisiones_id);
 
 
 		if ($deepCopy) {
@@ -1912,7 +2102,10 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 		if ($this->aAtestados === null && ($this->atestados_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtestadosPeer.php';
 
-			$this->aAtestados = AtestadosPeer::retrieveByPK($this->atestados_id, $con);
+      $c = new Criteria();
+      $c->add(AtestadosPeer::ID,$this->atestados_id);
+      
+			$this->aAtestados = AtestadosPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -1941,7 +2134,10 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 		if ($this->aAtmunicipios === null && ($this->atmunicipios_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtmunicipiosPeer.php';
 
-			$this->aAtmunicipios = AtmunicipiosPeer::retrieveByPK($this->atmunicipios_id, $con);
+      $c = new Criteria();
+      $c->add(AtmunicipiosPeer::ID,$this->atmunicipios_id);
+      
+			$this->aAtmunicipios = AtmunicipiosPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -1970,7 +2166,10 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 		if ($this->aAtparroquias === null && ($this->atparroquias_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtparroquiasPeer.php';
 
-			$this->aAtparroquias = AtparroquiasPeer::retrieveByPK($this->atparroquias_id, $con);
+      $c = new Criteria();
+      $c->add(AtparroquiasPeer::ID,$this->atparroquias_id);
+      
+			$this->aAtparroquias = AtparroquiasPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -1999,7 +2198,10 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 		if ($this->aAttiping === null && ($this->attiping_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAttipingPeer.php';
 
-			$this->aAttiping = AttipingPeer::retrieveByPK($this->attiping_id, $con);
+      $c = new Criteria();
+      $c->add(AttipingPeer::ID,$this->attiping_id);
+      
+			$this->aAttiping = AttipingPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -2028,7 +2230,10 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 		if ($this->aAtinsrefier === null && ($this->atinsrefier_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtinsrefierPeer.php';
 
-			$this->aAtinsrefier = AtinsrefierPeer::retrieveByPK($this->atinsrefier_id, $con);
+      $c = new Criteria();
+      $c->add(AtinsrefierPeer::ID,$this->atinsrefier_id);
+      
+			$this->aAtinsrefier = AtinsrefierPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -2057,7 +2262,10 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 		if ($this->aAttipproviv === null && ($this->attipproviv_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAttipprovivPeer.php';
 
-			$this->aAttipproviv = AttipprovivPeer::retrieveByPK($this->attipproviv_id, $con);
+      $c = new Criteria();
+      $c->add(AttipprovivPeer::ID,$this->attipproviv_id);
+      
+			$this->aAttipproviv = AttipprovivPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -2086,11 +2294,46 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 		if ($this->aAttipviv === null && ($this->attipviv_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAttipvivPeer.php';
 
-			$this->aAttipviv = AttipvivPeer::retrieveByPK($this->attipviv_id, $con);
+      $c = new Criteria();
+      $c->add(AttipvivPeer::ID,$this->attipviv_id);
+      
+			$this->aAttipviv = AttipvivPeer::doSelectOne($c, $con);
 
 			
 		}
 		return $this->aAttipviv;
+	}
+
+	
+	public function setAtmisiones($v)
+	{
+
+
+		if ($v === null) {
+			$this->setAtmisionesId(NULL);
+		} else {
+			$this->setAtmisionesId($v->getId());
+		}
+
+
+		$this->aAtmisiones = $v;
+	}
+
+
+	
+	public function getAtmisiones($con = null)
+	{
+		if ($this->aAtmisiones === null && ($this->atmisiones_id !== null)) {
+						include_once 'lib/model/ciudadanos/om/BaseAtmisionesPeer.php';
+
+      $c = new Criteria();
+      $c->add(AtmisionesPeer::ID,$this->atmisiones_id);
+      
+			$this->aAtmisiones = AtmisionesPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aAtmisiones;
 	}
 
 	
@@ -2688,6 +2931,41 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 		return $this->collAtayudassRelatedByAtsolici;
 	}
 
+
+	
+	public function getAtayudassRelatedByAtsoliciJoinAtunidades($criteria = null, $con = null)
+	{
+				include_once 'lib/model/ciudadanos/om/BaseAtayudasPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtayudassRelatedByAtsolici === null) {
+			if ($this->isNew()) {
+				$this->collAtayudassRelatedByAtsolici = array();
+			} else {
+
+				$criteria->add(AtayudasPeer::ATSOLICI, $this->getId());
+
+				$this->collAtayudassRelatedByAtsolici = AtayudasPeer::doSelectJoinAtunidades($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtayudasPeer::ATSOLICI, $this->getId());
+
+			if (!isset($this->lastAtayudasRelatedByAtsoliciCriteria) || !$this->lastAtayudasRelatedByAtsoliciCriteria->equals($criteria)) {
+				$this->collAtayudassRelatedByAtsolici = AtayudasPeer::doSelectJoinAtunidades($criteria, $con);
+			}
+		}
+		$this->lastAtayudasRelatedByAtsoliciCriteria = $criteria;
+
+		return $this->collAtayudassRelatedByAtsolici;
+	}
+
 	
 	public function initAtayudassRelatedByAtbenefi()
 	{
@@ -3031,6 +3309,41 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 
 			if (!isset($this->lastAtayudasRelatedByAtbenefiCriteria) || !$this->lastAtayudasRelatedByAtbenefiCriteria->equals($criteria)) {
 				$this->collAtayudassRelatedByAtbenefi = AtayudasPeer::doSelectJoinAtmedico($criteria, $con);
+			}
+		}
+		$this->lastAtayudasRelatedByAtbenefiCriteria = $criteria;
+
+		return $this->collAtayudassRelatedByAtbenefi;
+	}
+
+
+	
+	public function getAtayudassRelatedByAtbenefiJoinAtunidades($criteria = null, $con = null)
+	{
+				include_once 'lib/model/ciudadanos/om/BaseAtayudasPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtayudassRelatedByAtbenefi === null) {
+			if ($this->isNew()) {
+				$this->collAtayudassRelatedByAtbenefi = array();
+			} else {
+
+				$criteria->add(AtayudasPeer::ATBENEFI, $this->getId());
+
+				$this->collAtayudassRelatedByAtbenefi = AtayudasPeer::doSelectJoinAtunidades($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtayudasPeer::ATBENEFI, $this->getId());
+
+			if (!isset($this->lastAtayudasRelatedByAtbenefiCriteria) || !$this->lastAtayudasRelatedByAtbenefiCriteria->equals($criteria)) {
+				$this->collAtayudassRelatedByAtbenefi = AtayudasPeer::doSelectJoinAtunidades($criteria, $con);
 			}
 		}
 		$this->lastAtayudasRelatedByAtbenefiCriteria = $criteria;

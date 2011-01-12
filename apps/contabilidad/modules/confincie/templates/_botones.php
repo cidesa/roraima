@@ -8,23 +8,20 @@
 			   'script'   => true,
 			   'complete' => 'AjaxJSON(request, json)',
 				'submit' => 'sf_admin_edit_form',
-));
-
- ?>
+				 ),array('use_style' => 'true', 'class' => 'sf_admin_action_save',)) ?>
 </ul>
 </td>
 <td>
 <ul class="sf_admin_actions">
-<?php echo submit_to_remote('btnGenerar', 'Generar Comprobantes de Cierre', array(
-			   'url'      => 'confincie/Ajaxcomprobante',
-			   'script'   => true,
-			   'complete' => 'AjaxJSON(request, json)',
-
-			   /*'with'     => "'ajax=1&fecini='+$('contaba_fecini').value+'&feccie='+$('contaba_feccie').value",*/
-));
-
- ?>
+ <?php echo submit_to_remote('btnGenerar', 'Generar Comprobantes de Cierre', array(
+         'url'      => 'confincie/Ajaxcomprobante',
+         'update'   => 'divcompro',
+         'script'   => true,
+         'complete' => 'AjaxJSON(request, json)',
+         'submit' => 'sf_admin_edit_form',
+         ),array('use_style' => 'true', 'class' => 'sf_admin_action_save',)) ?>
 </ul>
 </td>
+<div id="divcompro"></div>
 </tr>
 </table>

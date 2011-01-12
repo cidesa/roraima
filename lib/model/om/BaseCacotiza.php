@@ -81,7 +81,17 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 
 
 	
+	protected $obscot;
+
+
+	
 	protected $id;
+
+	
+	protected $aCaprovee;
+
+	
+	protected $aTsdesmon;
 
 	
 	protected $alreadyInSave = false;
@@ -239,6 +249,13 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 
   }
   
+  public function getObscot()
+  {
+
+    return trim($this->obscot);
+
+  }
+  
   public function getId()
   {
 
@@ -258,6 +275,11 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 	
 	public function setFeccot($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -281,6 +303,10 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = CacotizaPeer::CODPRO;
       }
   
+		if ($this->aCaprovee !== null && $this->aCaprovee->getCodpro() !== $v) {
+			$this->aCaprovee = null;
+		}
+
 	} 
 	
 	public function setDescot($v)
@@ -371,6 +397,10 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = CacotizaPeer::TIPMON;
       }
   
+		if ($this->aTsdesmon !== null && $this->aTsdesmon->getCodmon() !== $v) {
+			$this->aTsdesmon = null;
+		}
+
 	} 
 	
 	public function setValmon($v)
@@ -433,6 +463,16 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setObscot($v)
+	{
+
+    if ($this->obscot !== $v) {
+        $this->obscot = $v;
+        $this->modifiedColumns[] = CacotizaPeer::OBSCOT;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -483,7 +523,9 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 
       $this->porant = $rs->getFloat($startcol + 17);
 
-      $this->id = $rs->getInt($startcol + 18);
+      $this->obscot = $rs->getString($startcol + 18);
+
+      $this->id = $rs->getInt($startcol + 19);
 
       $this->resetModified();
 
@@ -491,7 +533,7 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 19; 
+            return $startcol + 20; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cacotiza object", $e);
     }
@@ -568,6 +610,22 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aCaprovee !== null) {
+				if ($this->aCaprovee->isModified()) {
+					$affectedRows += $this->aCaprovee->save($con);
+				}
+				$this->setCaprovee($this->aCaprovee);
+			}
+
+			if ($this->aTsdesmon !== null) {
+				if ($this->aTsdesmon->isModified()) {
+					$affectedRows += $this->aTsdesmon->save($con);
+				}
+				$this->setTsdesmon($this->aTsdesmon);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CacotizaPeer::doInsert($this, $con);
@@ -613,6 +671,20 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aCaprovee !== null) {
+				if (!$this->aCaprovee->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCaprovee->getValidationFailures());
+				}
+			}
+
+			if ($this->aTsdesmon !== null) {
+				if (!$this->aTsdesmon->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aTsdesmon->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = CacotizaPeer::doValidate($this, $columns)) !== true) {
@@ -693,6 +765,9 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 				return $this->getPorant();
 				break;
 			case 18:
+				return $this->getObscot();
+				break;
+			case 19:
 				return $this->getId();
 				break;
 			default:
@@ -723,7 +798,8 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 			$keys[15] => $this->getCorrel(),
 			$keys[16] => $this->getPorvan(),
 			$keys[17] => $this->getPorant(),
-			$keys[18] => $this->getId(),
+			$keys[18] => $this->getObscot(),
+			$keys[19] => $this->getId(),
 		);
 		return $result;
 	}
@@ -794,6 +870,9 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 				$this->setPorant($value);
 				break;
 			case 18:
+				$this->setObscot($value);
+				break;
+			case 19:
 				$this->setId($value);
 				break;
 		} 	}
@@ -821,7 +900,8 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[15], $arr)) $this->setCorrel($arr[$keys[15]]);
 		if (array_key_exists($keys[16], $arr)) $this->setPorvan($arr[$keys[16]]);
 		if (array_key_exists($keys[17], $arr)) $this->setPorant($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setId($arr[$keys[18]]);
+		if (array_key_exists($keys[18], $arr)) $this->setObscot($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setId($arr[$keys[19]]);
 	}
 
 	
@@ -847,6 +927,7 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CacotizaPeer::CORREL)) $criteria->add(CacotizaPeer::CORREL, $this->correl);
 		if ($this->isColumnModified(CacotizaPeer::PORVAN)) $criteria->add(CacotizaPeer::PORVAN, $this->porvan);
 		if ($this->isColumnModified(CacotizaPeer::PORANT)) $criteria->add(CacotizaPeer::PORANT, $this->porant);
+		if ($this->isColumnModified(CacotizaPeer::OBSCOT)) $criteria->add(CacotizaPeer::OBSCOT, $this->obscot);
 		if ($this->isColumnModified(CacotizaPeer::ID)) $criteria->add(CacotizaPeer::ID, $this->id);
 
 		return $criteria;
@@ -914,6 +995,8 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 
 		$copyObj->setPorant($this->porant);
 
+		$copyObj->setObscot($this->obscot);
+
 
 		$copyObj->setNew(true);
 
@@ -936,6 +1019,64 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 			self::$peer = new CacotizaPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setCaprovee($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodpro(NULL);
+		} else {
+			$this->setCodpro($v->getCodpro());
+		}
+
+
+		$this->aCaprovee = $v;
+	}
+
+
+	
+	public function getCaprovee($con = null)
+	{
+		if ($this->aCaprovee === null && (($this->codpro !== "" && $this->codpro !== null))) {
+						include_once 'lib/model/om/BaseCaproveePeer.php';
+
+			$this->aCaprovee = CaproveePeer::retrieveByPK($this->codpro, $con);
+
+			
+		}
+		return $this->aCaprovee;
+	}
+
+	
+	public function setTsdesmon($v)
+	{
+
+
+		if ($v === null) {
+			$this->setTipmon(NULL);
+		} else {
+			$this->setTipmon($v->getCodmon());
+		}
+
+
+		$this->aTsdesmon = $v;
+	}
+
+
+	
+	public function getTsdesmon($con = null)
+	{
+		if ($this->aTsdesmon === null && (($this->tipmon !== "" && $this->tipmon !== null))) {
+						include_once 'lib/model/om/BaseTsdesmonPeer.php';
+
+			$this->aTsdesmon = TsdesmonPeer::retrieveByPK($this->tipmon, $con);
+
+			
+		}
+		return $this->aTsdesmon;
 	}
 
 } 

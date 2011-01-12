@@ -1,0 +1,36 @@
+methods:
+  post:
+   - "npmotegr{codmot}"
+   - "npmotegr{desmot}"
+
+names:
+  npmotegr{codmot}:
+    required:  Yes
+    required_msg: El CÃ³digo del Motivo no puedo estar en Blanco
+    validators: Validator_codmot, CorrelValidator
+
+  npmotegr{desmot}:
+    required:  Yes
+    required_msg: La DescripciÃ³n del Motivo no puedo estar en Blanco
+    validators: Validator_desmot
+
+Validator_codmot:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npmotegr
+        column:       codmot
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desmot:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La descripciÃ³n no puede tener menos de 5 caracteres
+        max:       250
+        max_error: La descripciÃ³n no puede pasar mas de 250 caracteres
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores nÃºmericos

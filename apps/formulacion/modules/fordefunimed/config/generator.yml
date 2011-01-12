@@ -11,7 +11,7 @@ generator:
     list:
       title:          Unidades de Medidas
       filters:        [codunimed]
-      display:        [=codunimed, nomabrunimed]
+      display:        [=codunimed, desunimed, nomabrunimed]
       object_actions:
         _edit:        ~
         _delete:      ~

@@ -38,7 +38,7 @@ class CaordcomMapBuilder {
 
 		$tMap->addColumn('FECORD', 'Fecord', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, true, 15);
+		$tMap->addForeignKey('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, 'caprovee', 'CODPRO', true, 15);
 
 		$tMap->addColumn('DESORD', 'Desord', 'string', CreoleTypes::VARCHAR, false, 1000);
 
@@ -58,13 +58,13 @@ class CaordcomMapBuilder {
 
 		$tMap->addColumn('AFEPRE', 'Afepre', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('CONPAG', 'Conpag', 'string', CreoleTypes::VARCHAR, false, 1000);
+		$tMap->addForeignKey('CONPAG', 'Conpag', 'string', CreoleTypes::VARCHAR, 'caconpag', 'CODCONPAG', true, 1000);
 
-		$tMap->addColumn('FORENT', 'Forent', 'string', CreoleTypes::VARCHAR, false, 1000);
+		$tMap->addForeignKey('FORENT', 'Forent', 'string', CreoleTypes::VARCHAR, 'caforent', 'CODFORENT', true, 1000);
 
 		$tMap->addColumn('FECANU', 'Fecanu', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('TIPMON', 'Tipmon', 'string', CreoleTypes::VARCHAR, false, 3);
+		$tMap->addForeignKey('TIPMON', 'Tipmon', 'string', CreoleTypes::VARCHAR, 'tsdesmon', 'CODMON', true, 3);
 
 		$tMap->addColumn('VALMON', 'Valmon', 'double', CreoleTypes::NUMERIC, false, 14);
 
@@ -115,6 +115,28 @@ class CaordcomMapBuilder {
 		$tMap->addColumn('FECSIGECOF', 'Fecsigecof', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('EXPSIGECOF', 'Expsigecof', 'string', CreoleTypes::VARCHAR, false, 8);
+
+		$tMap->addColumn('CODCEN', 'Codcen', 'string', CreoleTypes::VARCHAR, false, 4);
+
+		$tMap->addColumn('TIPOCOM', 'Tipocom', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('CEDDON', 'Ceddon', 'string', CreoleTypes::VARCHAR, false, 15);
+
+		$tMap->addColumn('NOMDON', 'Nomdon', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('FECDON', 'Fecdon', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('SEXDON', 'Sexdon', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('EDADON', 'Edadon', 'double', CreoleTypes::NUMERIC, false, 2);
+
+		$tMap->addColumn('SERDON', 'Serdon', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('MOTANU', 'Motanu', 'string', CreoleTypes::VARCHAR, false, 500);
+
+		$tMap->addColumn('USUANU', 'Usuanu', 'string', CreoleTypes::VARCHAR, false, 250);
+
+		$tMap->addColumn('CODCENACO', 'Codcenaco', 'string', CreoleTypes::VARCHAR, false, 4);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

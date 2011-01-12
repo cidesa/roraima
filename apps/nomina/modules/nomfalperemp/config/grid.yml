@@ -1,0 +1,55 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                falso
+  tabla:                   npfalperemp
+  anchogrid:               900
+  ancho:                   850
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Fech.Inicio
+  tipo:                    f
+  nombrecampo:             fecini
+  esgrabable:              true
+  vacia:                   true
+  html:                    [ size=10 maxlength=10]
+2:       # Columna 2
+  titulo:                  Fech.Retorno
+  tipo:                    f
+  nombrecampo:             fecret
+  esgrabable:              true
+  vacia:                   true
+  html:                    [ size=10 maxlength=10]
+3:       # Columna 3
+  titulo:                  Horas
+  tipo:                    t
+  nombrecampo:             horas
+  esgrabable:              true
+  html:                    [ size=3 maxlength=3]
+4:       # Columna 4
+  titulo:                  Motivo
+  tipo:                    c
+  nombrecampo:             codmot
+  esgrabable:              true
+  html:                    [ ]
+5:       # Columna 5
+  titulo:                  Observacion
+  tipo:                    a
+  nombrecampo:             observ
+  esgrabable:              true
+  html:                    [ size=20x2]
+6:       # Columna 6
+  titulo:                  Fech.Consignacion
+  tipo:                    f
+  nombrecampo:             feccon
+  esgrabable:              true
+  vacia:                   true
+  html:                    [ size=10 maxlength=10]
+7:       # Columna 7
+  titulo:                  IVSS
+  tipo:                    k
+  nombrecampo:             ivss
+  esgrabable:              true
+  html:                    [ size=1 maxlength=1]
+

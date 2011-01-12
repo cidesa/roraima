@@ -1,0 +1,23 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atpriayu
+    theme:            cidesaGenerator
+
+    fields:
+      despriayu:      { name: Descripción, params: size=60 }
+    list:
+      title:          Definición de Prioridades (Donaciones/Ayudas)
+      display:        [=despriayu]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [despriayu]
+    edit:
+      title:          Edición de Definiciones de Prioridades (Donaciones/Ayudas)
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+

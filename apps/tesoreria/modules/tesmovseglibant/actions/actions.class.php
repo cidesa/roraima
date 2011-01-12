@@ -21,7 +21,8 @@ class tesmovseglibantActions extends autotesmovseglibantActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -100,6 +101,19 @@ class tesmovseglibantActions extends autotesmovseglibantActions
 
     protected function getTsmovlibOrCreate($id = 'id')
   {
+    $this->bloqfec="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+    if(array_key_exists('aplicacion',$varemp))
+     if(array_key_exists('tesoreria',$varemp['aplicacion']))
+       if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+         if(array_key_exists('tesmovseglibant',$varemp['aplicacion']['tesoreria']['modulos'])){
+           if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglibant']))
+           {
+            $this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglibant']['bloqfec'];
+           }
+         }
+
     if (!$this->getRequestParameter($id))
     {
       $tsmovlib = new Tsmovlib();
@@ -124,6 +138,18 @@ class tesmovseglibantActions extends autotesmovseglibantActions
   protected function updateTsmovlibFromRequest()
   {
     $tsmovlib = $this->getRequestParameter('tsmovlib');
+    $this->bloqfec="";
+    $varemp = $this->getUser()->getAttribute('configemp');
+    if ($varemp)
+    if(array_key_exists('aplicacion',$varemp))
+     if(array_key_exists('tesoreria',$varemp['aplicacion']))
+       if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+         if(array_key_exists('tesmovseglibant',$varemp['aplicacion']['tesoreria']['modulos'])){
+           if(array_key_exists('bloqfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglibant']))
+           {
+            $this->bloqfec=$varemp['aplicacion']['tesoreria']['modulos']['tesmovseglibant']['bloqfec'];
+           }
+         }
 
     if ($this->nuevo=='N')
     {

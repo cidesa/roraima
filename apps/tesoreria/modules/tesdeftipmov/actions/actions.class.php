@@ -22,6 +22,20 @@ class tesdeftipmovActions extends autotesdeftipmovActions
   {
     $this->tstipmov = $this->getTstipmovOrCreate();
     $this->setVars();
+    if ($this->mancorrel=='S'){
+          if (!$this->tstipmov->getId()) {
+
+           $t= new Criteria();
+           $t->setLimit(1);
+           $t->addDescendingOrderByColumn(TstipmovPeer::CODTIP);
+           $reg= TstipmovPeer::doSelectOne($t);
+           if ($reg)
+           {
+               $this->tstipmov->setCodtip(str_pad(($reg->getCodtip()+1),4,'0',STR_PAD_LEFT));
+           }else $this->tstipmov->setCodtip('0001');
+         }
+    }
+
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -32,7 +46,8 @@ class tesdeftipmovActions extends autotesdeftipmovActions
       $this->tstipmov->setId(Herramientas::getX_vacio('codtip','tstipmov','id',$this->tstipmov->getCodtip()));
 
       $this->setFlash('notice', 'Your modifications have been saved');
-$this->Bitacora('Guardo');
+
+      $this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {
@@ -51,44 +66,6 @@ $this->Bitacora('Guardo');
     {
       $this->labels = $this->getLabels();
     }
-  }
-
-  /**
-   * Función principal para procesar la eliminación de registros 
-   * en el formulario.
-   *
-   */
-  public function executeDelete()
-  {
-    $this->tstipmov = TstipmovPeer::retrieveByPk($this->getRequestParameter('id'));
-    $this->forward404Unless($this->tstipmov);
-
-    $id=$this->getRequestParameter('id');
-    $c= new Criteria();
-    $c->add(TsmovlibPeer::TIPMOV,$this->tstipmov->getCodtip());
-    $dato=TsmovlibPeer::doSelect($c);
-    if (!$dato)
-    {
-      $c= new Criteria();
-      $c->add(TsmovbanPeer::TIPMOV,$this->tstipmov->getCodtip());
-      $dato2=TsmovbanPeer::doSelect($c);
-      if (!$dato2)
-      {
-      	$this->deleteTstipmov($this->tstipmov);
-      	$this->Bitacora('Elimino');
-      }
-      else
-      {
-      	$this->setFlash('notice','El Movimiento no puede ser eliminado, porque hay Movimientos de Bancos asociados a este');
-      return $this->redirect('tesdeftipmov/edit?id='.$id);
-      }
-    }
-    else
-    {
-      $this->setFlash('notice','El Movimiento no puede ser eliminado, porque hay Movimientos de Libros asociados a este');
-      return $this->redirect('tesdeftipmov/edit?id='.$id);
-    }
-    return $this->redirect('tesdeftipmov/list');
   }
 
     /**
@@ -129,6 +106,18 @@ $this->Bitacora('Guardo');
 	{
 	  $this->mascaracontabilidad = Herramientas::ObtenerFormato('Contaba','Forcta');
 	  $this->loncta=strlen($this->mascaracontabilidad);
+            $this->mancorrel="";
+            $varemp = $this->getUser()->getAttribute('configemp');
+            if ($varemp)
+            if(array_key_exists('aplicacion',$varemp))
+             if(array_key_exists('tesoreria',$varemp['aplicacion']))
+               if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+                 if(array_key_exists('tesdeftipmov',$varemp['aplicacion']['tesoreria']['modulos'])){
+                   if(array_key_exists('mancorrel',$varemp['aplicacion']['tesoreria']['modulos']['tesdeftipmov']))
+                   {
+                    $this->mancorrel=$varemp['aplicacion']['tesoreria']['modulos']['tesdeftipmov']['mancorrel'];
+                   }
+                 }
 	}
 
 	 protected function updateTstipmovFromRequest()
@@ -158,4 +147,24 @@ $this->Bitacora('Guardo');
       $this->tstipmov->setCodcon($tstipmov['codcon']);
     }
   }
+
+  protected function saveTstipmov($tstipmov)
+  {
+   if (!$tstipmov->getId()){  $tstipmov->save();}
+   else {
+   	if ($tstipmov->getTiedatrel()=='S')
+   	{
+      $c= new Criteria();
+      $c->add(TstipmovPeer::CODTIP,$tstipmov->getCodtip());
+      $reg= TstipmovPeer::doSelectOne($c);
+      if ($reg)
+      {
+      	$reg->setCodcon($tstipmov->getCodcon());
+      	$reg->save();
+      }
+   	}else $tstipmov->save();
+   }
+
+  }
+
 }

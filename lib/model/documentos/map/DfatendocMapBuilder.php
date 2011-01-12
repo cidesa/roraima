@@ -34,6 +34,8 @@ class DfatendocMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('dfatendoc_SEQ');
 
+		$tMap->addColumn('NROEXP', 'Nroexp', 'int', CreoleTypes::INTEGER, true, null);
+
 		$tMap->addColumn('CODDOC', 'Coddoc', 'string', CreoleTypes::VARCHAR, false, 30);
 
 		$tMap->addColumn('DESDOC', 'Desdoc', 'string', CreoleTypes::VARCHAR, false, 250);
@@ -57,6 +59,8 @@ class DfatendocMapBuilder {
 		$tMap->addColumn('INFDOC3', 'Infdoc3', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('INFDOC4', 'Infdoc4', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('REFDOC', 'Refdoc', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

@@ -7,9 +7,9 @@
  *
  * @package    Roraima
  * @subpackage lib.model
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Cainvfis.php 41404 2010-11-17 16:18:23Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -17,6 +17,9 @@ class Cainvfis extends BaseCainvfis
 {
   private $unialter ='';
   protected $ubicacion = '';
+  protected $iniinv = '';
+  protected $totalm="0,00";
+  protected $obj=array();
 
   public function getDesart()
   {
@@ -55,7 +58,7 @@ class Cainvfis extends BaseCainvfis
 
   public function getDesalm()
   {
-  	  return Herramientas::getX('codalm','cadefalm','nomalm',self::getCodalm());
+  	  return Herramientas::getX('codalm','cadefalm','nomalm',$this->codalm);
   }
 
   public function getArtdesde()///
@@ -104,5 +107,29 @@ class Cainvfis extends BaseCainvfis
   public function setUnialter($val)
   {
 	$this->unialter = $val;
+  }
+
+  public function getTotalm()
+  {
+    $e= new Criteria();
+    $e->add(CaartalmPeer::CODALM,self::getCodalm());
+    $e->add(CaartalmPeer::CODART,self::getCodart());
+    $reg= CaartalmPeer::doSelectOne($e);
+    if ($reg)
+    {
+        $totalm=number_format($reg->getExiact(),2,',','.');
+    }else $totalm="0,00";
+
+    return $totalm;
+}
+
+  public function setTotalm(){
+
+    return $this->totalm;
+  }
+
+  public function getDesubi()
+  {
+         return H::getX('Codubi','Cadefubi','Nomubi',$this->codubi);
   }
 }

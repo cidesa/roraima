@@ -397,3 +397,12 @@ div.new_account_welcome span.highlight {
 	background-color: yellow;
 	padding: 3px;
 }
+
+div#copyleft {
+  width: 650px;
+	text-align: center;
+  line-height: 0.4em;
+}
+div#copyleft p {
+  line-height: 0.4em;
+}

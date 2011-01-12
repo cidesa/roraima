@@ -30,7 +30,9 @@ class ForasoprometMapBuilder {
 		$tMap = $this->dbMap->addTable('forasopromet');
 		$tMap->setPhpName('Forasopromet');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('forasopromet_SEQ');
 
 		$tMap->addColumn('CODMET', 'Codmet', 'string', CreoleTypes::VARCHAR, true, 5);
 

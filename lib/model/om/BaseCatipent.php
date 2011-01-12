@@ -20,6 +20,12 @@ abstract class BaseCatipent extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collCaentalms;
+
+	
+	protected $lastCaentalmCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -181,6 +187,14 @@ abstract class BaseCatipent extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collCaentalms !== null) {
+				foreach($this->collCaentalms as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -221,6 +235,14 @@ abstract class BaseCatipent extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collCaentalms !== null) {
+					foreach($this->collCaentalms as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -341,6 +363,15 @@ abstract class BaseCatipent extends BaseObject  implements Persistent {
 		$copyObj->setDestipent($this->destipent);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getCaentalms() as $relObj) {
+				$copyObj->addCaentalm($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -362,6 +393,76 @@ abstract class BaseCatipent extends BaseObject  implements Persistent {
 			self::$peer = new CatipentPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initCaentalms()
+	{
+		if ($this->collCaentalms === null) {
+			$this->collCaentalms = array();
+		}
+	}
+
+	
+	public function getCaentalms($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCaentalmPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCaentalms === null) {
+			if ($this->isNew()) {
+			   $this->collCaentalms = array();
+			} else {
+
+				$criteria->add(CaentalmPeer::TIPMOV, $this->getCodtipent());
+
+				CaentalmPeer::addSelectColumns($criteria);
+				$this->collCaentalms = CaentalmPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CaentalmPeer::TIPMOV, $this->getCodtipent());
+
+				CaentalmPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCaentalmCriteria) || !$this->lastCaentalmCriteria->equals($criteria)) {
+					$this->collCaentalms = CaentalmPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCaentalmCriteria = $criteria;
+		return $this->collCaentalms;
+	}
+
+	
+	public function countCaentalms($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseCaentalmPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CaentalmPeer::TIPMOV, $this->getCodtipent());
+
+		return CaentalmPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCaentalm(Caentalm $l)
+	{
+		$this->collCaentalms[] = $l;
+		$l->setCatipent($this);
 	}
 
 } 

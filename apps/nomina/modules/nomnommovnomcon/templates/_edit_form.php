@@ -21,7 +21,7 @@
 <?php echo object_input_hidden_tag($npasiconemp, 'getId') ?>
 
 <fieldset>
-<legend>Tipo de N&oacute;mina</legend>
+<h2>Tipo de N&oacute;mina</h2>
 <div class="form-row">
 
  <strong>C&oacute;digo</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -29,7 +29,7 @@
   <?php $value = object_input_tag($npasiconemp, 'getCodnom', array (
   'size' => 10,
   'control_name' => 'codigonomina',
-  'maxlength' => '12,',
+  'maxlength' => 3,
   'onBlur'=> remote_function(array(
         'url'      => 'nomnommovnomconcar/ajax',
         'complete' => 'AjaxJSON(request, json)',
@@ -54,7 +54,7 @@
 
 
 <fieldset>
-<legend>Conceptos</legend>
+<h2>Conceptos</h2>
 <div class="form-row">
 
 
@@ -67,7 +67,7 @@
   <?php $value = object_input_tag($npasiconemp, 'getCodcon', array (
   'size' => 10,
   'control_name' => 'npasiconemp[codcon]',
-  'maxlength' => '12,',
+  'maxlength' => 3,
   'onBlur'=> remote_function(array(
         'update'   => 'grid',
         'url'      => 'nomnommovnomcon/ajax',
@@ -94,8 +94,10 @@
 
 <div id="grid" class="form-row">
 <?
-echo grid_tag($obj);
+//echo grid_tag($obj);
+echo grid_tag_v2($npasiconemp->getGrid());
 ?>
+
 </div>
 
 

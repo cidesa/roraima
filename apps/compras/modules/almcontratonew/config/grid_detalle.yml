@@ -1,0 +1,44 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   cadetordc
+  anchogrid:               1000
+  ancho:                   950
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código Presupuestario
+  tipo:                    t
+  nombrecampo:             codpre
+  html:                    ["size=20 onBlur='toAjax(4,getUrlModuloAjax(),this.value,0,'&cajtexcom='+this.id)'"]
+  esgrabable:              true
+  catalogo:                [cpasiini, sf_admin_edit_form, {Codpre: 1}, Cpasiini_Pagemiord ]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    a
+  nombrecampo:             descon
+  html:                    ["size=30x1 maxlength=1000 onkeyup='return ismaxlength(this)'"]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Cantidad
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             cancon
+  esnumerico:              true
+  html:                    ["size=10 onBlur='ValidarMontoGridv2(this); validarDisponibilidad(this.id)'"]
+4:       # Columna 4
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             moncon
+  esnumerico:              true
+  html:                    ["size=10 onBlur='ValidarMontoGridv2(this); validarDisponibilidad(this.id)'"]
+5:       # Columna 5
+  titulo:                  Monto Total
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             montot
+  esnumerico:              true
+  html:                    ["size=10 readonly=true"]
+  estotal:                 [true, caordcon_moncon]

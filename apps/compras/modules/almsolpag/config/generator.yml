@@ -4,7 +4,7 @@ generator:
     model_class:      Casolpag
     theme:            cidesaGenerator
     fields:
-      solpag: { name: Referencia, params: size=10 maxlength=8 onBlur="javascript:event.keyCode=13; enter1(event,this.value);"}
+      solpag: { name: Referencia, params: size=10 maxlength=8 onBlur="javascript: event.keyCode=13; enter1(event,this.value);"}
       fecsol: { name: Fecha, params: date_format='dd/MM/yyyy' maxlength=10}
       dessol: { name: Descripción, type: textarea_tag, params: size=80x5 maxlength=1000 onkeyup="javascript:return ismaxlength(this)"}
       tipcom: { name: Tipo Compromiso, params: maxlength=4}

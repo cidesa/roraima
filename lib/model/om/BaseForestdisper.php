@@ -267,6 +267,7 @@ abstract class BaseForestdisper extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = ForestdisperPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ForestdisperPeer::doUpdate($this, $con);

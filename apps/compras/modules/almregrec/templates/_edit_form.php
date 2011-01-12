@@ -28,11 +28,11 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($carecaud, 'getCodrec', array (
-  'size' => 12,
+  'size' => 10,
   'maxlength' => 10,
   'readonly'  =>  $carecaud->getId()!='' ? true : false ,
   'control_name' => 'carecaud[codrec]',
-  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '0',0);document.getElementById('carecaud_codrec').value=valor;",
+  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(10, '0',0);document.getElementById('carecaud_codrec').value=valor;",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
@@ -143,8 +143,14 @@ if ($carecaud->getLimrec()=='S')	{
 
 <script language="JavaScript" type="text/javascript">
   var idf='<?php echo $carecaud->getId()?>';
+  var mansolocor='<?php echo $mansolocor; ?>';
   if (idf!="")
   {
     $$('.botoncat')[0].disabled=true;
+  }else {
+  	if (mansolocor=='S')
+  	{
+  		$('carecaud_codrec').readOnly=true;
+  	}
   }
 </script>

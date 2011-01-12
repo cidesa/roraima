@@ -1,3 +1,14 @@
+/**
+ * Librer√≠as Javascript
+ *
+ * @package    Roraima
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ *
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
+
  function Cantidad(e,id)
  {
   if (e.keyCode==13 || e.keyCode==9)
@@ -27,9 +38,9 @@
     var num5=toFloat(porcrgo);
 
     if ($(precio).value!="")
-    { var num1=toFloat(precio); }
+    {var num1=toFloat(precio);}
     else
-    { var num1=toFloat(precioe); }
+    {var num1=toFloat(precioe);}
     var num2=toFloat(id);
 
    if (!validarnumero(id))
@@ -631,6 +642,33 @@
 	 j++;
 	}
     $('fafactur_totrec').value=format(mitot.toFixed(2),'.',',','.');
+
+//Ajustar decimas
+      var regart=totalregistros2('ax',3,25);
+      var fil=0;
+      var acum=0;
+      while (fil<regart)
+      {
+        var montotrgo="ax_"+fil+"_12";
+        if ($(montotrgo)){
+        var num1=toFloat(montotrgo);
+          acum=acum+num1;
+          var fila=fil;
+  }
+        fil++;
+      }
+
+      var diferencia=acum-mitot;
+      if (diferencia!=0)
+      {
+          var ultfilrec="ax_"+fila+"_12";
+          var valor=toFloat(ultfilrec);
+
+          var cal=valor-diferencia;
+
+          $(ultfilrec).value=format(cal.toFixed(2),'.',',','.');
+      }
+
   }
 
   function recalcularRecargos()
@@ -702,8 +740,8 @@
 	       var monrecar="cx_"+fila+"_4";
           if ($(precio)){
 	       if ($(precio).value!="")
-	       { var nprecio= toFloat(precio); }
-	       else { var nprecio= toFloat(precioe); }
+	       {var nprecio= toFloat(precio);}
+	       else {var nprecio= toFloat(precioe);}
            var ncant= toFloat(cant);
 
 	       if ($(precio).value!="" || $(precioe).value!="0,00")
@@ -727,8 +765,8 @@
 	                  var cant2="ax_"+i+"_"+colum;
                      if ($(precio2)){
 	                  if ($(precio2).value!="")
-	                  { var nprecio2= toFloat(precio2); }
-	                  else { nprecio2= toFloat(precioe2); }
+	                  {var nprecio2= toFloat(precio2);}
+	                  else {nprecio2= toFloat(precioe2);}
 	                  var ncant2= toFloat(cant2);
 
 	                  new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&articulo='+codart+'&recargo='+codrgo})
@@ -796,8 +834,8 @@
 	                 }
 
                    }
-	             } else { monuni=0;}
-	           }else { monuni=0;}
+	             } else {monuni=0;}
+	           }else {monuni=0;}
 	         }
 	         else
 	         {
@@ -814,8 +852,8 @@
                   var cant2="ax_"+i+"_"+colum;
                   if ($(precio2)){
                   if ($(precio2).value!="")
-                  { var nprecio2= toFloat(precio2); }
-                  else { nprecio2= toFloat(precioe2); }
+                  {var nprecio2= toFloat(precio2);}
+                  else {nprecio2= toFloat(precioe2);}
                   var ncant2= toFloat(cant2);
 
                   new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&articulo='+codart+'&recargo='+codrgo})
@@ -890,8 +928,8 @@
 
          if ($(precio)){
          if ($(precio).value!="")
-         { var nprecio= toFloat(precio); }
-         else { var nprecio= toFloat(precioe); }
+         {var nprecio= toFloat(precio);}
+         else {var nprecio= toFloat(precioe);}
 
          var ncant= toFloat(cant);
 
@@ -923,8 +961,8 @@
 
       if ($(precio)){
        if ($(precio).value!="")
-       { var nprecio= toFloat(precio); }
-       else { var nprecio= toFloat(precioe); }
+       {var nprecio= toFloat(precio);}
+       else {var nprecio= toFloat(precioe);}
 
        var ncant= toFloat(cant);
 
@@ -959,8 +997,8 @@
        var cant="ax_"+fil+"_"+colum;
       if ($(precio)){
        if ($(precio).value!="")
-       { var nprecio= toFloat(precio); }
-       else { var nprecio= toFloat(precioe); }
+       {var nprecio= toFloat(precio);}
+       else {var nprecio= toFloat(precioe);}
 
        var ncant= toFloat(cant);
 
@@ -999,14 +1037,14 @@
 
       if ($(totart).value!="" && (ValidarNumeroV2VE(totart)==true))
       {
-       if (!ValidarNumeroV2VE(cant)) { $(cant).value="0,00";}
-       if (!ValidarNumeroV2VE(precio)) { $(precio).value="0,00";}
-       if (!ValidarNumeroV2VE(precioe)) { $(precioe).value="0,00";}
-       if (!ValidarNumeroV2VE(montrec)) { $(montrec).value="0,00";}
+       if (!ValidarNumeroV2VE(cant)) {$(cant).value="0,00";}
+       if (!ValidarNumeroV2VE(precio)) {$(precio).value="0,00";}
+       if (!ValidarNumeroV2VE(precioe)) {$(precioe).value="0,00";}
+       if (!ValidarNumeroV2VE(montrec)) {$(montrec).value="0,00";}
 
-       if ($(precio).value!="")
-       { var nprecio= toFloat(precio); }
-       else { var nprecio= toFloat(precioe); }
+       if ($(precio).value!="" && $(precio).value!="0,00")
+       {var nprecio= toFloat(precio);}
+       else {var nprecio= toFloat(precioe);}
 
        var ncant= toFloat(cant);
        var nmonrec= toFloat(montrec);
@@ -1045,7 +1083,7 @@
 		  }
       }
       montot= montot - totaldesc;
-    }else { montot=0;}
+    }else {montot=0;}
 
     $('fafactur_monfac').value=format(montot.toFixed(2),'.',',','.');
     var ntotmonrgo=toFloat('fafactur_totmonrgo');
@@ -1053,8 +1091,10 @@
 
     var cal= tottotal - totmonrec
     $('fafactur_monto').value=format(cal.toFixed(2),'.',',','.');
-    $('fafactur_monrgo').value= format(ntotmonrgo.toFixed(2),'.',',','.');
+    $('fafactur_monrgo').value= format(totmonrec.toFixed(2),'.',',','.');
     $('fafactur_monres').value=format(montot.toFixed(2),'.',',','.');
+    $('fafactur_totmonrgo').value= format(totmonrec.toFixed(2),'.',',','.');
+    $('fafactur_tottotart').value=format(montot.toFixed(2),'.',',','.');
   }
 
   function marcados(tipo)
@@ -1063,7 +1103,7 @@
     if (tipo=='R')
     {
       var indice='1';
-    } else { var indice='20';}
+    } else {var indice='20';}
 
     var regart=totalregistros2('ax',3,25);
     var fil=0;
@@ -1116,7 +1156,7 @@
 
       if (($(precio).value!="" || $(precio).value!="0,00") && (ValidarNumeroV2VE(precio)==true || ValidarNumeroV2VE(precioe)==true))
       {
-        if ($(precio).value!="") { var nprecio= toFloat(precio); } else { var nprecio= toFloat(precioe); }
+        if ($(precio).value!="" && $(precio).value!="0,00") {var nprecio= toFloat(precio);} else {var nprecio= toFloat(precioe);}
         if (nprecio>0)
         {
          precios= precios + nprecio;
@@ -1151,7 +1191,7 @@
     $('fafactur_tottotart').value=format(montota.toFixed(2),'.',',','.');
 
     var ntotaldesc= toFloat('fafactur_mondesc');
-    var calcu= montota + ntotaldesc;
+    var calcu= montota - ntotaldesc;
     $('fafactur_monfac').value=format(calcu.toFixed(2),'.',',','.');
 
     var variable1= toFloat('fafactur_totmonrgo');
@@ -1266,7 +1306,7 @@
 	      var cant2="ax_"+i+"_"+colum;
 	      if ($(codart)){
 
-	      if ($(precio2).value!="") { var nprecio2= toFloat(precio2); }else { nprecio2= toFloat(precioe2); }
+	      if ($(precio2).value!="") {var nprecio2= toFloat(precio2);}else {nprecio2= toFloat(precioe2);}
 	      var ncant2= toFloat(cant2);
 
 	      new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&articulo='+codart+'&recargo='+codrgo})
@@ -1299,7 +1339,7 @@
       var cant2="ax_"+i+"_"+colum;
 
      if ($(codart)){
-      if ($(precio2).value!="") { var nprecio2= toFloat(precio2); }else { nprecio2= toFloat(precioe2); }
+      if ($(precio2).value!="") {var nprecio2= toFloat(precio2);}else {nprecio2= toFloat(precioe2);}
       var ncant2= toFloat(cant2);
 
       if ($(check).checked==true)
@@ -1499,7 +1539,7 @@
 	     var cant="ax_"+fil+"_"+colum;
 
        if ($(precio)){
-	     if ($(precio).value!="") { var col9=toFloat(precio); }else { var col9=toFloat(precioe);}
+	     if ($(precio).value!="") {var col9=toFloat(precio);}else {var col9=toFloat(precioe);}
          var colcant=toFloat(cant);
 
          var calculo= colcant * col9;
@@ -1673,7 +1713,7 @@
     if (cuantos>0)
     {
       $('fafactur_totdesc').value=format(miTot.toFixed(2),'.',',','.');
-    }else { $('fafactur_totdesc').value="0,00"; }
+    }else {$('fafactur_totdesc').value="0,00";}
 
 
 
@@ -1705,9 +1745,9 @@
       var precioe2="ax_"+fila+"_11";
      if ($(cant)){
       var ncant= toFloat(cant);
-      if ($(precio).value!="") { var nprecio= toFloat(precio); }else { var nprecio= toFloat(precioe); }
+      if ($(precio).value!="") {var nprecio= toFloat(precio);}else {var nprecio= toFloat(precioe);}
       var ncant2= toFloat(cant2);
-      if ($(precio2).value!="") { var nprecio2= toFloat(precio2); }else { var nprecio2= toFloat(precioe2); }
+      if ($(precio2).value!="") {var nprecio2= toFloat(precio2);}else {var nprecio2= toFloat(precioe2);}
 
       if ($(totart).value!="" && (!ValidarNumeroV2VE(totart)))
       {
@@ -1931,7 +1971,7 @@
       }
       var cuantos=marcados("D");
 
-      if (cuantos==0) { cuantos=1;}
+      if (cuantos==0) {cuantos=1;}
       if ($(tipdesc).value=='M')
       {
         var totfac=totalFactura();
@@ -1981,9 +2021,9 @@
      if ($(totart)){
       if ($(totart).value!="" && (ValidarNumeroV2VE(totart)==true))
       {
-       if (!ValidarNumeroV2VE(cant)) { $(cant).value="0,00";}
+       if (!ValidarNumeroV2VE(cant)) {$(cant).value="0,00";}
 
-       if ($(precio).value!="") { var nprecio= toFloat(precio); }else { var nprecio= toFloat(precioe); }
+       if ($(precio).value!="") {var nprecio= toFloat(precio);}else {var nprecio= toFloat(precioe);}
        var ncant= toFloat(cant);
         montot= montot + (nprecio * cant);
       }
@@ -2179,21 +2219,21 @@
       {
        if (londefart <= lonart)
        {
-        if (!articulo_repetido(id))
-        {
+        //if (!articulo_repetido(id))
+        //{
           new Ajax.Updater('lista',getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=11&cajtexmos='+descripcion+'&cajtexcom='+id+'&canent='+canent+'&docref='+docrefiere+'&ctaprove='+ctaprove+'&blanco2='+blanco2+'&unidad='+unidad+'&cantidad='+cantidad+'&existencia='+existencia+'&montrgo='+montrgo+'&cantot='+cantot+'&total='+total+'&filagrid='+filagrid+'&blanco='+blanco+'&precio='+precio+'&precio2='+precio2+'&codigo='+cod})
           if (docrefiere=='V')
           {
             new Ajax.Updater(precio, getUrlModulo()+'ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=12&id='+$('id').value+'&precio2='+precio2+'&codigo='+cod});
 
           }
-        }
+        /*}
         else
         {
-          alert('CÛdigo del ArtÌculo est· Repetido');
+          alert('CÔøΩdigo del ArtÔøΩculo estÔøΩ Repetido');
           $(id).value="";
+        }*/
         }
-      }
       else
       {
         alert('El Articulo debe ser de Ultimo Nivel');
@@ -2268,7 +2308,7 @@
    }
    else
    {
-     alert('Debe Introducir la C.I Û R.I.F del Cliente');
+     alert('Debe Introducir la C.I ÔøΩ R.I.F del Cliente');
    }
  }
 
@@ -2461,7 +2501,7 @@
    var coltotal=col+6;
    var coldistot=col+7;
    var colexis=col-1;
-   var colblanco=col+13;
+   var colblanco=col+14;
    var colart=col-4;
    var colprec=col+3;
    var colprec2=col+4;
@@ -2479,7 +2519,7 @@
 
    var am=totalregistros2('ax',3,25);
 
-     if ($(precio).value!="") { var num4= toFloat(precio); }else { var num4= toFloat(precioe); }
+     if ($(precio).value!="") {var num4= toFloat(precio);}else {var num4= toFloat(precioe);}
      var num1=toFloat(id);
      var num3=toFloat(distot);
  if (am>0)
@@ -2551,12 +2591,17 @@
 				      var cant="ax_"+fi+"_"+colum;
 
                     if ($(precios)){
-				      if ($(precios).value!="") { var nprecio=toFloat(precios); }else {  var nprecio=toFloat(precios2);}
+				      if ($(precios).value!="" && $(precios).value!='0,00') {var nprecio=toFloat(precios);}else {var nprecio=toFloat(precios2);}
 				      var ncant=toFloat(cant);
 
 				     var sumtot=nprecio*ncant;
                       $(monreg).value="0,00";
                       $(totales).value=format(sumtot.toFixed(2),'.',',','.');
+                      if(($(precios).value!='' && $(precios).value!='0,00') && $(precios2).readOnly==true)
+                         {
+                            var val= toFloat(precios);
+                            $(precios2).value=format(val.toFixed(2),'.',',','.');
+                         }
                       }
 					 fi++;
 					}
@@ -2764,7 +2809,7 @@
 
    var am=totalregistros('ax',3,25);
 
-   if ($(precio).value!="") { var num4=toFloat(precio); }else { var num4=toFloat(precio2);}
+   if ($(precio).value!="") {var num4=toFloat(precio);}else {var num4=toFloat(precio2);}
    var num1=toFloat(id);
    var num0=toFloat(cansol);
    var num3=toFloat(distot);
@@ -2866,7 +2911,7 @@
 				      var cant="ax_"+fi+"_"+colum;
 
                      if ($(precios)){
-				      if ($(precios).value!="") { var nprecio=toFloat(precios); }else{ var nprecio=toFloat(precios2); }
+				      if ($(precios).value!="") {var nprecio=toFloat(precios);}else{var nprecio=toFloat(precios2);}
 				      var ncant=toFloat(cant);
 
 				      var sumtot=nprecio*ncant;
@@ -2884,7 +2929,7 @@
            }
            else
            {
-             alert('No Hay Disponibilidad para el ArtÌculo'+cod);
+             alert('No Hay Disponibilidad para el ArtÔøΩculo'+cod);
              $(id).value="0,00";
            }
 	     }
@@ -2917,7 +2962,7 @@
     var coldistot=col+5;
     var colcanpreart=col+7;
     var colcansol=col-2;
-    var colblanco=col+14;
+    var colblanco=col+12;
     var colart=col-6;
     var colprec=col+2;
     var colprec2=col+3;
@@ -2935,7 +2980,7 @@
     var precio=name+"_"+fil+"_"+colprec;
     var precio2=name+"_"+fil+"_"+colprec2;
 
-   if ($(precio).value!="") { var num4=toFloat(precio); }else { var num4=toFloat(precio2);}
+   if ($(precio).value!="") {var num4=toFloat(precio);}else {var num4=toFloat(precio2);}
    var num1=toFloat(id);
    var num0=toFloat(cansol);
    var num3=toFloat(distot);
@@ -2977,7 +3022,7 @@
 		      var cant="ax_"+fi+"_"+colum;
 
              if ($(precios)){
-              if ($(precios).value!="") { nprecio=toFloat(precios); }else { var nprecio=toFloat(precios2);}
+              if ($(precios).value!="") {nprecio=toFloat(precios);}else {var nprecio=toFloat(precios2);}
 		      var ncant=toFloat(cant);
 
 		     var sumtot=nprecio*ncant;
@@ -3070,13 +3115,18 @@
 		      var cant="ax_"+fi+"_"+colum;
 
              if ($(precio)){
-		      if ($(precio).value!=""){ var nprecio=toFloat(precio); }else { var nprecio=toFloat(precio2);}
+		      if ($(precio).value!="" && $(precio).value!="0,00"){var nprecio=toFloat(precio);}else {var nprecio=toFloat(precio2);}
 		      var ncant=toFloat(cant);
 
 		     var sumtot=nprecio*ncant;
 	         $(monreg).value="0,00";
 	         $(totales).value=format(sumtot.toFixed(2),'.',',','.');
-	         }
+                 if(($(precio).value!='' && $(precio).value!='0,00') && $(precio2).readOnly==true)
+                 {
+                    var val= toFloat(precio);
+                    $(precio2).value=format(val.toFixed(2),'.',',','.');
+                 }
+             }
 			 fi++;
 			}
           }
@@ -3111,34 +3161,34 @@
 	    var colcanpreart=col+7;
 	    var colcansol=col-2;
 	    var colart=col-6;
+            var colprecf=col-2;
 	    var colprec=col-1;
 	    var colprec2=col+1;
 	    var colexis=col-3;
+            var num4=0;
 
 	    var total=name+"_"+fil+"_"+coltotal;
 	    var codart=name+"_"+fil+"_"+colart;
 	    var exist=name+"_"+fil+"_"+colexis;
 	    var cod=$(codart).value;
+            var preciof=name+"_"+fil+"_"+colprecf;
 	    var precio=name+"_"+fil+"_"+colprec;
 	    var precio2=name+"_"+fil+"_"+colprec2;
 
         var colum=determinarReferenciaDoc($('fafactur_tipref').value);
 	    var canti=name+"_"+fil+"_"+colum;
 
-        if ($(precio).value!="") { var num4=toFloat(precio); }else { var num4=toFloat(precio2); }
+        if ($(precio).value!="" && $(precio).value!="0,00") { num4=toFloat(precio);}else { num4=toFloat(preciof);}
         var num1=toFloat(id);
         var num0=toFloat(canti);
 
         if (($(precio).value!="" || $(precio2).value!="0,00") && $(canti).value!="")
         {
-        //cambio de moneda
-          var producto=num0*num4;
-          $(precio).value=format(producto.toFixed(2),'.',',','.');
-          producto=$(id).value;
-          var num2=toFloat(precio);
-          var resta=num2+num1;
-          $(id).value=format(producto.toFixed(2),'.',',','.');
-          $(precio).value=format(resta.toFixed(2),'.',',','.');
+         //cambio de moneda
+          var productot=num0*num4;
+          var resta=num1+productot;
+          $(precio2).value=format(resta.toFixed(2),'.',',','.');
+          $(id).value=format(num1.toFixed(2),'.',',','.');
           montoTotal();
         }
 
@@ -3266,13 +3316,18 @@
 		         var precio2="ax_"+fi+"_11";
 		         var cant="ax_"+fi+"_"+colum;
                  if ($(precio)){
-		         if ($(precio).value!="") { var nprecio=toFloat(precio); }else { var nprecio=toFloat(precio2);}
+		         if ($(precio).value!="" && $(precio).value!="0,00") {var nprecio=toFloat(precio);}else {var nprecio=toFloat(precio2);}
 		         var ncant=toFloat(cant);
 
  		         var sumtot=nprecio*ncant;
 	             $(monreg).value="0,00";
 	             $(totales).value=format(sumtot.toFixed(2),'.',',','.');
-	             }
+                     if(($(precio).value!='' && $(precio).value!='0,00') && $(precio2).readOnly==true)
+                     {
+                        var val= toFloat(precio);
+                        $(precio2).value=format(val.toFixed(2),'.',',','.');
+                     }
+	          }
 			    fi++;
 			   }
             }
@@ -3392,3 +3447,288 @@
       $('fafactur_codtip').focus();
     }
   }
+
+ function marcarTodo()
+  {
+   $('fafactur_marrec').checked=false;
+   var infrecargos="ax"+"_0_12";
+   var distrib=toFloat(infrecargos);
+   var articulo="ax"+"_0_3";
+   var valorarticulo=$(articulo).value;
+   if (valorarticulo!="")
+   {
+    if (distrib>0)
+    {
+        var fil=0;
+        var facart=totalregistros2('ax',3,25);
+        while (fil<facart)
+        {
+	     var codart="ax_"+fil+"_3";
+             var check="ax_"+fil+"_1";
+
+             if ($(codart).value!="")
+             {
+               $(check).checked=true;
+	     }
+	   fil++;
+	}
+        actualizarRecargos();
+        recalcularRecargos();
+        montoTotal();
+	   
+   }// if (distrib!="")
+   else
+   {
+    alert_("No han sido aplicados Recargos al primer Art&iacute;culo del Detalle, C&oacute;digo: "+ valorarticulo+". Deben ser definidos estos Recargos para poder replicarlos al resto de los Art&iacute;culo del Detalle de la Factura ")
+   }
+  }
+  }
+
+  function desmarcarTodo()
+  {
+     $('fafactur_desrec').checked=false;
+     var fil=1;
+     var facart=totalregistros2('ax',3,25);
+     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
+     while (fil<facart)
+     {
+      var codart="ax"+"_"+fil+"_3";
+      if ($(codart).value!="")
+      {
+       var id="ax"+"_"+fil+"_1";
+       var precio="ax_"+fil+"_10";
+       var precioe="ax_"+fil+"_11";
+       var cant="ax_"+fil+"_"+colum;
+       var dest="ax"+"_"+fil+"_18";
+       var recargo="ax_"+fil+"_12";
+       var total="ax"+"_"+fil+"_13";
+
+         if ($(precio)){
+	     if ($(precio).value!="") {var col9=toFloat(precio);}else {var col9=toFloat(precioe);}
+         }
+         var colcant=toFloat(cant);
+
+         var monuni= colcant * col9;
+	 var mondto=toFloat(dest);
+
+	 var monrgotot=0;
+
+         $(recargo).value=format(monrgotot.toFixed(2),'.',',','.');
+         montottot=monuni-mondto;
+	 $(total).value=format(montottot.toFixed(2),'.',',','.');
+	 $(id).checked=false;
+
+      }//if ($(codart).value!="")
+      else
+      {
+       fil=facart;
+      }
+      fil++;
+    }//while (fil<facart)
+    montoTotal();
+
+  }
+  
+
+ function marcarTodo()
+  {
+   $('fafactur_marrec').checked=false;
+   var infrecargos="ax"+"_0_12";
+   var distrib=toFloat(infrecargos);
+   var articulo="ax"+"_0_3";
+   var valorarticulo=$(articulo).value;
+   if (valorarticulo!="")
+   {
+    if (distrib>0)
+    {
+        var fil=0;
+        var facart=totalregistros2('ax',3,25);
+        while (fil<facart)
+        {
+	     var codart="ax_"+fil+"_3";
+             var check="ax_"+fil+"_1";
+
+             if ($(codart).value!="")
+             {
+               $(check).checked=true;
+	     }
+	   fil++;
+	}
+        actualizarRecargos();
+        recalcularRecargos();
+        montoTotal();
+
+   }// if (distrib!="")
+   else
+   {
+    alert_("No han sido aplicados Recargos al primer Art&iacute;culo del Detalle, C&oacute;digo: "+ valorarticulo+". Deben ser definidos estos Recargos para poder replicarlos al resto de los Art&iacute;culo del Detalle de la Factura ")
+   }
+  }
+  }
+
+  function desmarcarTodo()
+  {
+     $('fafactur_desrec').checked=false;
+     var fil=1;
+     var facart=totalregistros2('ax',3,25);
+     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
+     while (fil<facart)
+     {
+      var codart="ax"+"_"+fil+"_3";
+      if ($(codart).value!="")
+      {
+       var id="ax"+"_"+fil+"_1";
+       var precio="ax_"+fil+"_10";
+       var precioe="ax_"+fil+"_11";
+       var cant="ax_"+fil+"_"+colum;
+       var dest="ax"+"_"+fil+"_18";
+       var recargo="ax_"+fil+"_12";
+       var total="ax"+"_"+fil+"_13";
+
+         if ($(precio)){
+	     if ($(precio).value!="") {var col9=toFloat(precio);}else {var col9=toFloat(precioe);}
+         }
+         var colcant=toFloat(cant);
+
+         var monuni= colcant * col9;
+	 var mondto=toFloat(dest);
+
+	 var monrgotot=0;
+
+         $(recargo).value=format(monrgotot.toFixed(2),'.',',','.');
+         montottot=monuni-mondto;
+	 $(total).value=format(montottot.toFixed(2),'.',',','.');
+	 $(id).checked=false;
+
+      }//if ($(codart).value!="")
+      else
+      {
+       fil=facart;
+      }
+      fil++;
+    }//while (fil<facart)
+    montoTotal();
+
+  }
+
+function aplicarBL(id)
+{
+    var aux = id.split("_");
+    var name=aux[0];
+    var fil=aux[1];
+    var col=parseInt(aux[2]);
+
+   if (fil==0) {
+       reg=totalregistros2('ax',3,25);
+        var j=1;
+        while (j<reg)
+        {
+          var billindg="ax_"+j+"_28";
+          $(billindg).value=$(id).value;
+         j++;
+        }
+   }
+  }
+
+  function calculardif(id)
+  {
+    var aux = id.split("_");
+    var name=aux[0];
+    var fil=aux[1];
+    var col=parseInt(aux[2]);
+
+    var num=toFloat(id);
+
+    if (num>0) {
+
+    if (col==45 || col==46)
+    {
+        var ko=name+"_"+fil+"_45";
+        var ke=name+"_"+fil+"_46";
+        var dk=name+"_"+fil+"_47";
+        var to=name+"_"+fil+"_51";
+        var te=name+"_"+fil+"_52";
+        var dt=name+"_"+fil+"_53";
+
+        var num1=toFloat(ko);
+        var num2=toFloat(ke);
+        var resta= num1 - num2;
+        if (col==45)
+        {
+            var cal=num1/1000;
+            $(to).value=format(cal.toFixed(2),'.',',','.');
+        }
+
+        if (col==46)
+        {
+          var cal2=num2/1000;
+            $(te).value=format(cal2.toFixed(2),'.',',','.');
+        }
+
+        var num5=toFloat(to);
+        var num6=toFloat(te);
+        var resta2= num5 - num6;
+
+        $(dt).value=format(resta2.toFixed(2),'.',',','.'); //diferencia Toneladas
+        $(dk).value=format(resta.toFixed(2),'.',',','.'); //diferencia kilogramos
+    }
+
+    if (col==48 || col==49)
+    {
+        var co=name+"_"+fil+"_48";
+        var ce=name+"_"+fil+"_49";
+        var dc=name+"_"+fil+"_50";
+
+        var num3=toFloat(co);
+        var num4=toFloat(ce);
+        var resta1= num3 - num4;
+
+        $(dc).value=format(resta1.toFixed(2),'.',',','.');
+    }
+
+    /*if (col==51 || col==52)
+    {
+        var to=name+"_"+fil+"_51";
+        var te=name+"_"+fil+"_52";
+        var dt=name+"_"+fil+"_53";
+        var ko=name+"_"+fil+"_45";
+        var ke=name+"_"+fil+"_46";
+        var dk=name+"_"+fil+"_47";
+
+        var num5=toFloat(to);
+        var num6=toFloat(te);
+        var resta2= num5 - num6;
+
+        if (col==51)
+        {
+            var cal=num5*1000;
+            $(ko).value=format(cal.toFixed(2),'.',',','.');
+        }
+        if (col==52)
+        {
+            var cal2=num6*1000;
+            $(ke).value=format(cal2.toFixed(2),'.',',','.');
+        }
+
+        var num1=toFloat(ko);
+        var num2=toFloat(ke);
+        var resta= num1 - num2;
+
+        $(dk).value=format(resta.toFixed(2),'.',',','.'); //diferencia kilogramos
+        $(dt).value=format(resta2.toFixed(2),'.',',','.'); //diferencia Toneladas
+    }*/
+  }else {
+      alert("El Valor introducido debe ser mayor a cero");
+      $(id).value="0,00";
+  }
+
+}
+
+function CargarRecDesc()
+{
+    var codigo=$('fafactur_proform').value;
+    new Ajax.Updater('divgrid_fadescart', getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=24&codigo='+codigo});
+    new Ajax.Updater('divgrid_fargoart', getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=25&codigo='+codigo});
+
+
+}

@@ -17,6 +17,9 @@ class Caregart extends BaseCaregart
 {
   protected $ubicacion = '';
   protected $gencorart="";
+  protected $tiedatrel="";
+  protected $oculsave="";
+  protected $totalm="0,00";
 
 public function getNomram($val=false)
 	{
@@ -50,5 +53,68 @@ public function getNompar()
       	$si=$data->getGencorart();
       }else $si=null;
       return $si;
+    }
+
+  public function getTiedatrel()
+  {
+  	$valor="N";
+  	if (self::getId()){
+  	  $d= new Criteria();
+  	  $d->add(CaartsolPeer::CODART,self::getCodart());
+  	  $resul= CaartsolPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  }else {
+  	  $d= new Criteria();
+  	  $d->add(CaartordPeer::CODART,self::getCodart());
+  	  $resul= CaartordPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  }else $valor= 'N';
+  	  }
+  	}
+
+
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
+  }
+
+  public function getOculsave()
+  {
+
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('compras',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
+	     if(array_key_exists('almregart',$varemp['aplicacion']['compras']['modulos'])){
+	       if(array_key_exists('oculsave',$varemp['aplicacion']['compras']['modulos']['almregart']))
+	       {
+	       	$dato=$varemp['aplicacion']['compras']['modulos']['almregart']['oculsave'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setOculsave()
+  {
+  	return $this->oculsave;
+  }
+
+    public function getManunialt()
+    {
+            return H::getConfApp('manunialt', 'compras', 'almregart');
+    }
+
+    public function getManartlot()
+    {
+            return H::getConfApp('manartlot', 'compras', 'almregart');
     }
 }

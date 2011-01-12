@@ -15,6 +15,12 @@
  */ 
 class Tstipmov extends BaseTstipmov
 {
+  protected $tiedatrel="";
+
+  public function __toString()
+  {
+    return array($this->codtip => $this->codtip);
+  }
 
     public function getDesdebcre()
 	  {
@@ -28,6 +34,43 @@ class Tstipmov extends BaseTstipmov
   public function getDescta()
   {
   return Herramientas::getX('CODCTA','Contabb','Descta',self::getCodcon());
+  }
+
+  public function getTiedatrel()
+  {
+  	  $valor="N";
+  	  $d= new Criteria();
+  	  $d->add(TsmovlibPeer::TIPMOV,self::getCodtip());
+  	  $resul= TsmovlibPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  }else {
+  	  $d= new Criteria();
+  	  $d->add(TsmovbanPeer::TIPMOV,self::getCodtip());
+  	  $resul= TsmovbanPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  }else $valor= 'N';
+  	  }
+
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
+  }
+
+  public function getTipmovsal()
+  {
+  	return self::getCodtip();
+  }
+
+  public function getDestipmovsal()
+  {
+  	return self::getDestip();
   }
 
 }

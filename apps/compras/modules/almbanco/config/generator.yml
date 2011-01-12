@@ -4,8 +4,8 @@ generator:
     model_class:      Cabanco
     theme:            cidesaGenerator
     fields:
-      codban:      {name: Codigo, params: size=4 maxlength=4 onBlur="this.value=this.value.pad(4, '0',0);"  }
-      desban:      {name: Descripcion, type: textarea_tag, params: size=40x2 maxlength=50   onKeyUp="javascript:cadena=this.value;cadena=cadena.toUpperCase();this.value=cadena;" }
+      codban:      {name: Código, params: onBlur='this.value=this.value.pad(4, "0",0);' size=4 maxlength=4 }
+      desban:      {name: Descripción, type: textarea_tag, params: size=40x2 maxlength=50    }
 
     list:
       title:   Definicion de Banco

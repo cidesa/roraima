@@ -7,7 +7,7 @@ all:
       database:           SIMA
       username:           postgres
       password:           postgres
-      schema:             SIMA003
+      schema:             SIMA011
   sima_user:
     class:          sfPropelDatabase
     param:
@@ -17,6 +17,4 @@ all:
       username:           cidesa
       password:           cidesa
       schema:             SIMA_USER
-
-
 

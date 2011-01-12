@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
 require_once($_SESSION["x"].'lib/general/tools.php');
@@ -109,7 +110,6 @@ $btn = $z->ConfBotones();
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/funciones.js"></script>
@@ -147,7 +147,7 @@ body {
       global $btn;
 
 ?>
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
  <fieldset>
   <table width="100%"  border="0" align="center">
     <tr bgcolor="#FFFFCC">
@@ -189,7 +189,7 @@ body {
    global $feccom;
     $fecha=date('d/m/Y');
   ?>
-    <form name="form1" method="post" action="">
+    <form name="form1" onsubmit="return false;" method="post" action="">
   <fieldset>
 
     <legend><span class="style3">Anular Compromiso</span></legend>

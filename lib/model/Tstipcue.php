@@ -16,9 +16,28 @@
 class Tstipcue extends BaseTstipcue
 {
   public $destipcta='';
+  protected $tiedatrel="";
 
   public function getDestipcta()
   {
   	return self::getDestip();
+  }
+
+    public function getTiedatrel()
+  {
+  	  $valor="N";
+  	  $d= new Criteria();
+  	  $d->add(TsdefbanPeer::TIPCUE,self::getCodtip());
+  	  $resul= TsdefbanPeer::doSelectOne($d);
+  	  if ($resul)
+  	  {
+  	  	$valor= 'S';
+  	  } else $valor= 'N';
+  	return $valor;
+  }
+
+  public function setTiedatrel()
+  {
+  	return $this->tiedatrel;
   }
 }

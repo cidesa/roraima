@@ -40,6 +40,12 @@ class NpguardeMapBuilder {
 
 		$tMap->addColumn('NOMCON', 'Nomcon', 'string', CreoleTypes::VARCHAR, false, 250);
 
+		$tMap->addColumn('RIFGUA', 'Rifgua', 'string', CreoleTypes::VARCHAR, false, 15);
+
+		$tMap->addColumn('NINSME', 'Ninsme', 'string', CreoleTypes::VARCHAR, false, 30);
+
+		$tMap->addColumn('SOLMEVIG', 'Solmevig', 'boolean', CreoleTypes::BOOLEAN, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

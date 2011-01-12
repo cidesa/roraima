@@ -15,4 +15,15 @@
  */ 
 class Forasometobj extends BaseForasometobj
 {
+    protected $obj=array();
+    
+    public function getDesobj()
+    {
+      return Herramientas::getX('CODOBJ','Fordefobj','Desobj',self::getCodobj());
+    }
+
+    public function getDesmet()
+    {
+      return Herramientas::getX('CODMET','Fordefmet','Desmet',self::getCodmet());
+    }
 }

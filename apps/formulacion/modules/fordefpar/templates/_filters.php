@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id:_filters.php 32813 2009-09-08 16:19:47Z lhernandez $
  */
 // date: 2007/11/14 15:39:51
 ?>
@@ -30,7 +30,7 @@
 ?>
     <?php echo select_tag('filters[codest]', options_for_select($estado,'','include_custom=Seleccione'),array('onChange'=> remote_function(array(
     'update'   => 'divMunicipiosFiltros',
-    'url'      => 'fordefpar/combo?par=1',
+    'url'      => 'fordefpar/combofilter?par=1',
     'complete' => 'AjaxJSON(request, json)',
     'with' => "'estado='+this.value"
   ))));?>

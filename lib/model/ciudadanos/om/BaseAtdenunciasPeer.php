@@ -310,8 +310,8 @@ abstract class BaseAtdenunciasPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(AtdenunciasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
-
+			$criteria->addJoin(AtdenunciasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+	
 		$rs = AtdenunciasPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -333,11 +333,11 @@ abstract class BaseAtdenunciasPeer {
 		AtdenunciasPeer::addSelectColumns($c);
 		$startcol2 = (AtdenunciasPeer::NUM_COLUMNS - AtdenunciasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtunidadesPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtunidadesPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtdenunciasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
-
+			AtunidadesPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtunidadesPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtdenunciasPeer::ATUNIDADES_ID, AtunidadesPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -351,28 +351,28 @@ abstract class BaseAtdenunciasPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = AtunidadesPeer::getOMClass();
+							
+				$omClass = AtunidadesPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtunidades(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtdenuncias($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtunidades(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtdenuncias($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtdenunciass();
-				$obj2->addAtdenuncias($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtdenunciass();
+					$obj2->addAtdenuncias($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

@@ -23,43 +23,43 @@ names:
     validators: ExistValidator1
 
   bndefcon{ctadepcar}:
-    required:  Yes
-    required_msg: La Cuenta a Cargar no puede estar en Blanco.
+    required:  No
+    #required_msg: La Cuenta a Cargar no puede estar en Blanco.
     validators: ExistValidator2
 
   bndefcon{ctadepabo}:
-    required:  Yes
-    required_msg: La Cuenta a Abonar no puede estar en Blanco.
+    required:  No
+    #required_msg: La Cuenta a Abonar no puede estar en Blanco.
     validators: ExistValidator2
 
   bndefcon{ctaajucar}:
-    required:  Yes
-    required_msg: La Cuenta a Cargar no puede estar en Blanco.
+    required:  No
+    #required_msg: La Cuenta a Cargar no puede estar en Blanco.
     validators: ExistValidator2
 
   bndefcon{ctaajuabo}:
-    required:  Yes
-    required_msg: La Cuenta a Abonar no puede estar en Blanco.
+    required:  No
+    #required_msg: La Cuenta a Abonar no puede estar en Blanco.
     validators: ExistValidator2
 
   bndefcon{ctarevcar}:
-    required:  Yes
-    required_msg: La Cuenta a Cargar no puede estar en Blanco.
+    required:  No
+    #required_msg: La Cuenta a Cargar no puede estar en Blanco.
     validators: ExistValidator2
 
   bndefcon{ctarevabo}:
-    required:  Yes
-    required_msg: La Cuenta a Abonar no puede estar en Blanco.
+    required:  No
+    #required_msg: La Cuenta a Abonar no puede estar en Blanco.
     validators: ExistValidator2
 
   bndefcon{ctapercar}:
-    required:  Yes
-    required_msg: La Cuenta a Cargar no puede estar en Blanco.
+    required:  No
+    #required_msg: La Cuenta a Cargar no puede estar en Blanco.
     validators: ExistValidator2
 
   bndefcon{ctaperabo}:
-    required:  Yes
-    required_msg: La Cuenta a Abonar no puede estar en Blanco.
+    required:  No
+    #required_msg: La Cuenta a Abonar no puede estar en Blanco.
     validators: ExistValidator2
 
 

@@ -230,112 +230,131 @@ class Documentos
         $c->addAscendingOrderByColumn(DfrutadocPeer::RUTDOC);
         $dfrutasdocs = DfrutadocPeer::doSelectOne($c);
 
-        if(!$dfrutasdocs) break;
+        if($dfrutasdocs){
 
+           $nomdoc = $tabtip->getTipdoc();
+            $nomdoc = trim($nomdoc);
 
-        $nomdoc = $tabtip->getTipdoc();
-        $nomdoc = trim($nomdoc);
+            $tabla = $tabtip->getNomtab();
+            $tabla = strtoupper($tabla);
 
-        $tabla = $tabtip->getNomtab();
-        $tabla = strtoupper($tabla);
+            $coddoc = $tabtip->getClvprm();
+            $coddoc = strtolower($coddoc);
 
-        $coddoc = $tabtip->getClvprm();
-        $coddoc = strtolower($coddoc);
+            $tipodoc = $tabtip->getClvfrn();
+            $tipodoc = $tipodoc;
 
-        $tipodoc = $tabtip->getClvfrn();
-        $tipodoc = $tipodoc;
+            $mondoc = $tabtip->getMondoc();
+            $mondoc = strtolower($mondoc);
 
-        $mondoc = $tabtip->getMondoc();
-        $mondoc = strtolower($mondoc);
+            $fecdoc = $tabtip->getFecdoc();
+            $fecdoc = strtolower($fecdoc);
 
-        $fecdoc = $tabtip->getFecdoc();
-        $fecdoc = strtolower($fecdoc);
+            $desdoc = $tabtip->getDesdoc();
+            $desdoc = strtolower($desdoc);
 
-        $desdoc = $tabtip->getDesdoc();
-        $desdoc = strtolower($desdoc);
+            $stadoc = $tabtip->getStadoc();
+            $stadoc = strtolower($stadoc);
 
-        $stadoc = $tabtip->getStadoc();
-        $stadoc = strtolower($stadoc);
+            // Tabla Foranea
+            $nomtabfk = $tabtip->getNomtabfk();
+            $nomtabfk = strtoupper($nomtabfk);
 
-        $infdoc1 = $tabtip->getInfdoc1();
-        $infdoc1 = strtolower($infdoc1);
+            $nomcolloc = $tabtip->getNomcolloc();
+            $nomcolloc = strtolower($nomcolloc);
 
-        $infdoc2 = $tabtip->getInfdoc2();
-        $infdoc2 = strtolower($infdoc2);
+            $nomcolfor = $tabtip->getNomcolfor();
+            $nomcolfor = strtolower($nomcolfor);
 
-        $infdoc3 = $tabtip->getInfdoc3();
-        $infdoc3 = strtolower($infdoc3);
+            $infdoc1 = $tabtip->getInfdoc1();
+            $infdoc1 = strtolower($infdoc1);
 
-        $infdoc4 = $tabtip->getInfdoc4();
-        $infdoc4 = strtolower($infdoc4);
+            $infdoc2 = $tabtip->getInfdoc2();
+            $infdoc2 = strtolower($infdoc2);
 
-        $sql = "SELECT rtrim($tabla.$coddoc) AS CODDOC, rtrim($tabla.$tipodoc) as TIPDOC , $tabla.$mondoc AS MONDOC, $tabla.$fecdoc AS FECDOC, rtrim($tabla.$desdoc) AS DESDOC, rtrim($tabla.$stadoc) as STADOC, rtrim(".($infdoc1!='' ? "$tabla.$infdoc1" : "''").") as INFDOC1, rtrim(".($infdoc2!='' ? "$tabla.$infdoc2" : "''").") as INFDOC2, rtrim(".($infdoc3!='' ? "$tabla.$infdoc3" : "''").") as INFDOC3, rtrim(".($infdoc4!='' ? "$tabla.$infdoc4" : "''").") as INFDOC4
-            FROM $tabla left OUTER JOIN DFATENDOC ON
-            rtrim($tabla.$coddoc) = DFATENDOC.coddoc
-            where (DFATENDOC.coddoc is NULL) AND rtrim($tabla.$tipodoc) = '$nomdoc' AND $tabla.$fecdoc > '".$tabtip->getFecini()."' AND $tabla.$stadoc = '".$tabtip->getValact()."'";
-//print $sql;exit;
-        if(Herramientas::BuscarDatos($sql, &$regs)){
-          foreach($regs as $reg){
-            if($tabtip->getTipdoc() == $reg['tipdoc']){
-              $dfatendoc = new Dfatendoc();
-              $dfatendoc->setCoddoc(trim($reg['coddoc']));
-              $dfatendoc->setDesdoc(substr(trim($reg['desdoc']),0,250) );
-              $dfatendoc->setFecdoc(trim($reg['fecdoc']));
-              $dfatendoc->setMondoc(trim($reg['mondoc']));
-              $dfatendoc->setAnuate(self::NUEVO); // Anulado = 2, Atendido = 1, Nuevo = 0
-              $dfatendoc->setStaate(self::NUEVO); // Atendido = 1
-              $dfatendoc->setEstado(trim($reg['stadoc']));
-              $dfatendoc->setIddftabtip($tabtip->getId());
-              $dfatendoc->setInfdoc1(substr(trim($reg['infdoc1']),0,50));
-              $dfatendoc->setInfdoc2(substr(trim($reg['infdoc2']),0,50));
-              $dfatendoc->setInfdoc3(substr(trim($reg['infdoc3']),0,50));
-              $dfatendoc->setInfdoc4(substr(trim($reg['infdoc4']),0,50));
-              $dfatendoc->save();
+            $infdoc3 = $tabtip->getInfdoc3();
+            $infdoc3 = strtolower($infdoc3);
 
-              $c = new Criteria();
-              $c->add(DfatendocPeer::CODDOC, $dfatendoc->getCoddoc());
-              $c->add(DfatendocPeer::MONDOC, $dfatendoc->getMondoc());
-              $dfatendoc = DfatendocPeer::doSelectOne($c);
+            $infdoc4 = $tabtip->getInfdoc4();
+            $infdoc4 = strtolower($infdoc4);
 
-              $dfatendocdet = new Dfatendocdet();
-              $dfatendocdet->setIdDfatendoc($dfatendoc->getId());
-              $dfatendocdet->setIdUsuario((int)$idusuario);
+            $refdoc = $tabtip->getRefdoc();
+            $refdoc = strtolower($refdoc);
 
-              $dfatendocdet->setFecrec($reg['fecdoc']);
+            $sql = "SELECT rtrim($tabla.$coddoc) AS CODDOC, rtrim($tabla.$tipodoc) as TIPDOC , $tabla.$mondoc AS MONDOC, $tabla.$fecdoc AS FECDOC, rtrim($tabla.$desdoc) AS DESDOC, rtrim($tabla.$stadoc) as STADOC, ".($nomtabfk!='' ? ($infdoc1!='' ? "$nomtabfk.$infdoc1" : "''") : "''")." as INFDOC1, ".($nomtabfk!='' ? ($infdoc2!='' ? "$nomtabfk.$infdoc2" : "''") : "''")." as INFDOC2, ".($nomtabfk!='' ? ($infdoc3!='' ? "$nomtabfk.$infdoc3" : "''") : "''")." as INFDOC3, ".($nomtabfk!='' ? ($infdoc4!='' ? "$nomtabfk.$infdoc4" : "''") : "''")." as INFDOC4, ".($refdoc!='' ? "$tabla.$refdoc" : "''")." as REFDOC
+                FROM  ".(($nomtabfk!='') ? "($tabla INNER JOIN $nomtabfk ON $tabla.$nomcolloc = $nomtabfk.$nomcolfor)" : "$tabla")." left OUTER JOIN DFATENDOC ON
+                rtrim($tabla.$coddoc) = DFATENDOC.coddoc
+                where (DFATENDOC.coddoc is NULL) AND rtrim($tabla.$tipodoc) = '$nomdoc' AND $tabla.$fecdoc > '".$tabtip->getFecini()."' AND $tabla.$stadoc = '".$tabtip->getValact()."'";
+//print $sql.'-----------------';
+            if(Herramientas::BuscarDatos($sql, &$regs)){
+              foreach($regs as $reg){
+                if($tabtip->getTipdoc() == $reg['tipdoc']){
+                  $dfatendoc = new Dfatendoc();
+                  $dfatendoc->setCoddoc(trim($reg['coddoc']));
+                  $dfatendoc->setDesdoc(substr(trim($reg['desdoc']),0,250) );
+                  $dfatendoc->setFecdoc(trim($reg['fecdoc']));
+                  $dfatendoc->setMondoc(trim($reg['mondoc']));
+                  $dfatendoc->setAnuate(self::NUEVO); // Anulado = 2, Atendido = 1, Nuevo = 0
+                  $dfatendoc->setStaate(self::NUEVO); // Atendido = 1
+                  $dfatendoc->setEstado(trim($reg['stadoc']));
+                  $dfatendoc->setIddftabtip($tabtip->getId());
+                  $dfatendoc->setInfdoc1(substr(trim($reg['infdoc1']),0,50));
+                  $dfatendoc->setInfdoc2(substr(trim($reg['infdoc2']),0,50));
+                  $dfatendoc->setInfdoc3(substr(trim($reg['infdoc3']),0,50));
+                  $dfatendoc->setInfdoc4(substr(trim($reg['infdoc4']),0,50));
+                  $dfatendoc->setRefdoc(substr(trim($reg['refdoc']),0,50));
+                  $dfatendoc->save();
 
-              $dfatendocdet->setFecate(0);
+                  $c = new Criteria();
+                  $c->add(DfatendocPeer::CODDOC, $dfatendoc->getCoddoc());
+                  $c->add(DfatendocPeer::MONDOC, $dfatendoc->getMondoc());
+                  $dfatendoc = DfatendocPeer::doSelectOne($c);
 
-              $dfatendocdet->setDiaent(0);
-              $dfatendocdet->setIdDfmedtra(0);
+                  $dfatendocdet = new Dfatendocdet();
+                  $dfatendocdet->setIdDfatendoc($dfatendoc->getId());
+                  $dfatendocdet->setIdUsuario((int)$idusuario);
 
-              $dfatendocdet->setIdAcunidadOri(0);
-              $dfatendocdet->setIdAcunidadDes($dfrutasdocs->getIdAcunidad());
-              $dfatendocdet->setIdDfrutadoc($dfrutasdocs->getId());
-              $dfatendocdet->setTotdia(0);
+                  $dfatendocdet->setFecrec($reg['fecdoc']);
 
-              $dfatendocdet->save();
+                  $dfatendocdet->setFecate(0);
 
-            }
-          }
-        }
-        
-        $sql = "SELECT $tabla.$stadoc AS STADOC, DFATENDOC.ID
-            FROM $tabla INNER JOIN DFATENDOC ON rtrim($tabla.$coddoc) = DFATENDOC.coddoc
-            where $tabla.$stadoc <> DFATENDOC.ESTADO ";
-//print $sql;exit;            
-        if(Herramientas::BuscarDatos($sql, &$regs)){
-          foreach($regs as $reg){
-            $id = $reg['id'];
-            $estado = $reg['stadoc'];
-            $dfatendoc = DfatendocPeer::retrieveByPK($id);
-            if($dfatendoc){
-              if($estado == $tabtip->getValanu()){
-                $dfatendoc->setEstado($estado);
-                $dfatendoc->setAnuate(1);
-                $dfatendoc->save();
+                  $dfatendocdet->setDiaent(0);
+                  $dfatendocdet->setIdDfmedtra(0);
+
+                  $dfatendocdet->setIdAcunidadOri(0);
+                  $dfatendocdet->setIdAcunidadDes($dfrutasdocs->getIdAcunidad());
+                  $dfatendocdet->setIdDfrutadoc($dfrutasdocs->getId());
+                  $dfatendocdet->setTotdia(0);
+
+                  $dfatendocdet->save();
+
+                }
               }
             }
-          }
+
+            $sql = "SELECT $tabla.$stadoc AS STADOC, DFATENDOC.ID
+                FROM $tabla INNER JOIN DFATENDOC ON rtrim($tabla.$coddoc) = DFATENDOC.coddoc
+                where $tabla.$stadoc <> DFATENDOC.ESTADO ";
+    //print $sql;exit;
+            if(Herramientas::BuscarDatos($sql, &$regs)){
+              foreach($regs as $reg){
+                $id = $reg['id'];
+                $estado = $reg['stadoc'];
+                $dfatendoc = DfatendocPeer::retrieveByPK($id);
+                if($dfatendoc){
+                  if($estado == $tabtip->getValanu()){
+                    $dfatendoc->setEstado($estado);
+                    $dfatendoc->setAnuate(1);
+                    $dfatendoc->save();
+                  }
+                }
+              }
+            }
+
+            // Actualizar nroexp en base a la referencia
+            $sql = "update dfatendoc a set nroexp = (select nroexp from dfatendoc b where a.refdoc=b.coddoc ) where refdoc in (select coddoc from dfatendoc)";
+            Herramientas::BuscarDatos($sql, &$regs);
+
         }
       }
       return true;
@@ -400,7 +419,7 @@ class Documentos
    */
   public static function salvarDocpen($dfatendoc,$idusuario,$dfatendocdet_in)
   {
-    if($dfatendoc->getAnuate()==0){
+    if(!$dfatendoc->estaAnulado()){
 
       $c = new Criteria();
       $c->add(DfrutadocPeer::ID_DFTABTIP, $dfatendoc->getIdDftabtip());
@@ -435,7 +454,7 @@ class Documentos
 
           // Si ya es el último paso en la ruta
           if((count($dfrutasdocs))==(count($dfatendocdet)) && $dfatendoc->getStaate()!=self::CULMINADO){
-            $dfatendoc->setStaate(2);
+            $dfatendoc->setStaate('2');
             $dfatendoc->save();
           }
           
@@ -470,7 +489,7 @@ class Documentos
           }
 
           if($dfatendoc->getStaate()==self::NUEVO){
-            $dfatendoc->setStaate(1);
+            $dfatendoc->setStaate('1');
             $dfatendoc->save();
           }
 
@@ -591,6 +610,52 @@ class Documentos
 
     }
 
+  }
+
+  public static function validarDocrutv2($dftabtip, $grid)
+  {
+    if(!$dftabtip->getId()) if($dftabtip->getTipdoc()=='') return 1404;
+
+    if($dftabtip->getId()) $tabtip = DftabtipPeer::retrieveByPK($dftabtip->getId());
+    else $tabtip = DftabtipPeer::retrieveByPK($dftabtip->getTipdoc());
+
+    if(!$dftabtip->getId()){
+      if($tabtip){
+        $c = new Criteria();
+        $c->add(DfrutadocPeer::ID_DFTABTIP,$tabtip->getId());
+        $rutadoc = DfrutadocPeer::doSelectOne($c);
+        if($rutadoc) return 1405;
+      }else return 1404;
+    }
+
+    $grid = $grid[0];
+
+    if(count($grid)>0){
+      foreach($grid as $g){
+        if($g->getIdAcunidad()=='' || $g->getDesrut()=='' || $g->getDiadoc()=='' || $g->getDesuni()=='' || $g->getRutdoc()=='') return 1403;
+      }
+    }else return 1406;
+    
+    return -1;
+
+  }
+
+  public static function salvarDocrutv2($dftabtip, $grid)
+  {
+    $grid = $grid[0];
+
+    if($dftabtip->getId()) $tabtip = DftabtipPeer::retrieveByPK($dftabtip->getId());
+    else $tabtip = DftabtipPeer::retrieveByPK($dftabtip->getTipdoc());
+
+    try{
+      foreach($grid as $dfrutadoc){
+        $dfrutadoc->setIdDftabtip($tabtip->getId());
+        $dfrutadoc->save();
+      }
+      return -1;
+    }catch(Exception $ex){
+      return 0;
+    }
   }
 
 

@@ -50,13 +50,13 @@
          'complete' => 'AjaxJSON(request, json)',
          'submit' => 'sf_admin_edit_form',
     )) ?><br><br>
-  <?php echo submit_to_remote('Submit2', 'Crear Proyectos, Acciones Especificas y Unidades Ejecutoras', array(
-		 'url'      => 'formancreproacc/migrar?var=4',
-         'script'   => true,
-         'update'   => 'actualizar',
-         'complete' => 'AjaxJSON(request, json)',
-         'submit' => 'sf_admin_edit_form',
-    )) ?><br><br>
+  <?php //echo submit_to_remote('Submit2', 'Crear Proyectos, Acciones Especificas y Unidades Ejecutoras', array(
+//		 'url'      => 'formancreproacc/migrar?var=4',
+//         'script'   => true,
+//         'update'   => 'actualizar',
+//         'complete' => 'AjaxJSON(request, json)',
+//         'submit' => 'sf_admin_edit_form',
+//    )) ?>
   <?php echo submit_to_remote('Submit2', 'Crear Partidas de Egreso', array(
 		 'url'      => 'formancreproacc/migrar?var=5',
          'script'   => true,

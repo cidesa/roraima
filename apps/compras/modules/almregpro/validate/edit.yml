@@ -9,9 +9,31 @@ methods:
    - "caprovee{fecinscir}"
    - "caprovee{fecreg}"
    - "caprovee{fecven}"
+   - "caprovee{codcta}"
+   - "caprovee{codord}"
+   - "caprovee{codpercon}"
+   - "caprovee{codctasec}"
+   - "caprovee{codordadi}"
+   - "caprovee{codperconadi}"
+   - "caprovee{codordmercon}"
+   - "caprovee{codpermercon}"
+   - "caprovee{codordcontra}"
+   - "caprovee{codpercontra}"
+   - "caprovee{codban}"
+   - "caprovee{codtip}"
    - "caprovee{nitpro}"
 
 names:
+  caprovee{codtip}:
+    required:  No
+    required_msg: El de Tipo de Cuenta no puedo estar en Blanco.
+    validators: Validator_codtip
+
+  caprovee{codban}:
+    required:  No
+    required_msg: El Código Bancario no puedo estar en Blanco.
+    validators: Validator_codban
+
   caprovee{codpro}:
     required:  Yes
     required_msg: El Código no puedo estar en Blanco.
@@ -45,15 +67,72 @@ names:
 
   caprovee{fecinscir}:
     required:  No
-    validators: FechaValidator
+    validators: FechaValidator, FechaValidatorNow2
 
   caprovee{fecreg}:
     required:  No
-    validators: FechaValidator
+    validators: FechaValidator, FechaValidatorNow2
 
   caprovee{fecven}:
     required:  No
     validators: FechaValidator
+
+  caprovee{codcta}:
+    required:  No
+    validators: CuentaValidator
+
+  caprovee{codord}:
+    required:  No
+    validators: CuentaValidator
+
+  caprovee{codpercon}:
+    required:  No
+    validators: CuentaValidator
+
+  caprovee{codctasec}:
+    required:  No
+    validators: CuentaValidator
+
+  caprovee{codordadi}:
+    required:  No
+    validators: CuentaValidator
+
+  caprovee{codperconadi}:
+    required:  No
+    validators: CuentaValidator
+
+  caprovee{codordmercon}:
+    required:  No
+    validators: CuentaValidator
+
+  caprovee{codpermercon}:
+    required:  No
+    validators: CuentaValidator
+
+  caprovee{codordcontra}:
+    required:  No
+    validators: CuentaValidator
+
+  caprovee{codpercontra}:
+    required:  No
+    validators: CuentaValidator
+
+
+
+Validator_codtip:
+    class: CidesaExistValidator
+    param:
+        class:    Tstipcue
+        column:   codtip
+        unique_error:   El Codigo del Tipo de Cuenta no existe
+
+
+Validator_codban:
+    class: CidesaExistValidator
+    param:
+        class:    Cabanco
+        column:   codban
+        unique_error:   El Codigo del Banco no existe
 
 Validator_codpro:
     class: sfPropelUniqueValidator
@@ -61,6 +140,13 @@ Validator_codpro:
         class:        Caprovee
         column:       codpro
         unique_error: El registro ya Existe intente con otro.
+
+CuentaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Contabb
+        column:   codcta
+        unique_error:   La Cuenta Contable no existe
 
 Validator_nompro:
     class: sfStringValidator
@@ -100,3 +186,12 @@ MyNumberValidator:
         min_error:    El valor tiene que ser mayor que cero
         max:          999999999999.99
         max_error:    El valor debe contener maximo 999.999.999.999,99
+
+
+FechaValidatorNow2:
+    class:         CidesaDateNow
+    param:
+        compare: 'now'
+        compare_error: La Fecha no puede ser mayor a la Fecha Actual
+        operator: '<='
+        date_error:  Fecha Inválida

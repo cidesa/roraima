@@ -267,6 +267,7 @@ abstract class BaseFormetperotr extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FormetperotrPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FormetperotrPeer::doUpdate($this, $con);

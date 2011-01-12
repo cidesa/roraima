@@ -15,4 +15,13 @@
  */ 
 class Fordefmet extends BaseFordefmet
 {
+    protected $objpro=array();
+    protected $objper=array();
+    protected $filper="";
+
+  public function getNomemp()
+  {
+    return Herramientas::getX('CODEMP','Nphojint','Nomemp',self::getCodemp());
+  }
+
 }

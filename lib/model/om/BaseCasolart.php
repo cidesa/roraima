@@ -89,9 +89,18 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 
 
 	
-	protected $id;
+	protected $codemp;
+
 
 	
+	protected $codcen;
+
+	
+	protected $aTsdesmon;
+
+	protected $id;
+	
+
 	protected $alreadyInSave = false;
 
 	
@@ -286,6 +295,20 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
   }
 
   
+  public function getCodemp()
+  {
+
+    return trim($this->codemp);
+
+  }
+  
+  public function getCodcen()
+  {
+
+    return trim($this->codcen);
+
+  }
+
   public function getId()
   {
 
@@ -305,6 +328,11 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 	
 	public function setFecreq($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -408,6 +436,10 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = CasolartPeer::TIPMON;
       }
   
+		if ($this->aTsdesmon !== null && $this->aTsdesmon->getCodmon() !== $v) {
+			$this->aTsdesmon = null;
+		}
+
 	} 
 	
 	public function setValmon($v)
@@ -422,6 +454,11 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 	
 	public function setFecanu($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -500,6 +537,11 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 	public function setFecapr($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecapr] from input: " . var_export($v, true));
@@ -514,6 +556,26 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setCodemp($v)
+	{
+
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = CasolartPeer::CODEMP;
+      }
+  
+	} 
+	
+	public function setCodcen($v)
+	{
+
+    if ($this->codcen !== $v) {
+        $this->codcen = $v;
+        $this->modifiedColumns[] = CasolartPeer::CODCEN;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -568,7 +630,11 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 
       $this->fecapr = $rs->getDate($startcol + 19, null);
 
-      $this->id = $rs->getInt($startcol + 20);
+      $this->codemp = $rs->getString($startcol + 20);
+
+      $this->codcen = $rs->getString($startcol + 21);
+
+      $this->id = $rs->getInt($startcol + 22);
 
       $this->resetModified();
 
@@ -576,7 +642,7 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 21; 
+            return $startcol + 23;
     } catch (Exception $e) {
       throw new PropelException("Error populating Casolart object", $e);
     }
@@ -653,6 +719,15 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aTsdesmon !== null) {
+				if ($this->aTsdesmon->isModified()) {
+					$affectedRows += $this->aTsdesmon->save($con);
+				}
+				$this->setTsdesmon($this->aTsdesmon);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CasolartPeer::doInsert($this, $con);
@@ -698,6 +773,14 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aTsdesmon !== null) {
+				if (!$this->aTsdesmon->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aTsdesmon->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = CasolartPeer::doValidate($this, $columns)) !== true) {
@@ -784,6 +867,12 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 				return $this->getFecapr();
 				break;
 			case 20:
+				return $this->getCodemp();
+				break;
+			case 21:
+				return $this->getCodcen();
+				break;
+			case 22:
 				return $this->getId();
 				break;
 			default:
@@ -816,7 +905,9 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 			$keys[17] => $this->getAprreq(),
 			$keys[18] => $this->getUsuapr(),
 			$keys[19] => $this->getFecapr(),
-			$keys[20] => $this->getId(),
+			$keys[20] => $this->getCodemp(),
+			$keys[21] => $this->getCodcen(),
+			$keys[22] => $this->getId(),
 		);
 		return $result;
 	}
@@ -893,6 +984,12 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 				$this->setFecapr($value);
 				break;
 			case 20:
+				$this->setCodemp($value);
+				break;
+			case 21:
+				$this->setCodcen($value);
+				break;
+			case 22:
 				$this->setId($value);
 				break;
 		} 	}
@@ -922,7 +1019,9 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[17], $arr)) $this->setAprreq($arr[$keys[17]]);
 		if (array_key_exists($keys[18], $arr)) $this->setUsuapr($arr[$keys[18]]);
 		if (array_key_exists($keys[19], $arr)) $this->setFecapr($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setId($arr[$keys[20]]);
+		if (array_key_exists($keys[20], $arr)) $this->setCodemp($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setCodcen($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setId($arr[$keys[22]]);
 	}
 
 	
@@ -950,6 +1049,8 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CasolartPeer::APRREQ)) $criteria->add(CasolartPeer::APRREQ, $this->aprreq);
 		if ($this->isColumnModified(CasolartPeer::USUAPR)) $criteria->add(CasolartPeer::USUAPR, $this->usuapr);
 		if ($this->isColumnModified(CasolartPeer::FECAPR)) $criteria->add(CasolartPeer::FECAPR, $this->fecapr);
+		if ($this->isColumnModified(CasolartPeer::CODEMP)) $criteria->add(CasolartPeer::CODEMP, $this->codemp);
+		if ($this->isColumnModified(CasolartPeer::CODCEN)) $criteria->add(CasolartPeer::CODCEN, $this->codcen);
 		if ($this->isColumnModified(CasolartPeer::ID)) $criteria->add(CasolartPeer::ID, $this->id);
 
 		return $criteria;
@@ -1021,6 +1122,10 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 
 		$copyObj->setFecapr($this->fecapr);
 
+		$copyObj->setCodemp($this->codemp);
+
+		$copyObj->setCodcen($this->codcen);
+
 
 		$copyObj->setNew(true);
 
@@ -1043,6 +1148,35 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 			self::$peer = new CasolartPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setTsdesmon($v)
+	{
+
+
+		if ($v === null) {
+			$this->setTipmon(NULL);
+		} else {
+			$this->setTipmon($v->getCodmon());
+		}
+
+
+		$this->aTsdesmon = $v;
+	}
+
+
+	
+	public function getTsdesmon($con = null)
+	{
+		if ($this->aTsdesmon === null && (($this->tipmon !== "" && $this->tipmon !== null))) {
+						include_once 'lib/model/om/BaseTsdesmonPeer.php';
+
+			$this->aTsdesmon = TsdesmonPeer::retrieveByPK($this->tipmon, $con);
+
+			
+		}
+		return $this->aTsdesmon;
 	}
 
 } 

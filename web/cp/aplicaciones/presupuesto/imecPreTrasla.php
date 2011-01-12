@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
@@ -6,6 +7,7 @@ require_once($_SESSION["x"].'lib/general/tools.php');
 require_once($_SESSION["x"].'lib/general/funciones.php');
 validar(array(11,15));            //Seguridad  del Sistema
 $codemp=$_SESSION["codemp"];
+$loguse=$_SESSION["loguse"];
 $bd=new basedatosAdo($codemp);
 $z= new tools();
 
@@ -24,14 +26,14 @@ $z= new tools();
 function crearLog($valor)
 {
   global $bd;
-  global $codigo;
+  global $codigo;  
   // Guardar en Segbitaco
   $sql = "Select id from CPTrasla where trim(reftra) = '".trim($codigo)."'";
 
   $tb=$bd->select($sql);
   $id = $tb->fields["id"];
   $bd->Log($id, 'pre', 'Cptrasla', 'Pretrasla', $valor);
-  
+
 }
   ////////////////
   ////////////////
@@ -61,14 +63,30 @@ function crearLog($valor)
 
         if ($imec=='I')
         {
-          Grabar_Fuentes();
+          //Anula el Precompromiso
+
+          $aux=substr($codigo,2);
+          $codigo_aux='TR'.trim($aux);
+          $sql="update cpprecom set desanu='APROBACION DE LA SOLICITUD DEL TRASLADO', fecanu = to_date('".$fecha."','dd/mm/yyyy'), STAPRC='N'
+                where trim(refprc) = '".$codigo_aux."'";
+
+          $bd->actualizar($sql);
+
+          $sql="update cpimpprc set staimp='N'
+                where trim(refprc) = '".$codigo_aux."'";
+
+          $bd->actualizar($sql);
+          crearLog('N');
+
+
+          //Grabar_Fuentes();
           $sql="delete from CPTrasla Where trim(RefTra)='".trim($codigo)."'";
           $bd->actualizar($sql);
           //	GRABAR TRASLADO
 
           $sql="insert into CPTrasla
-            (RefTra,Fectra,AnoTra,PerTra,DesTra,DesAnu,TotTra,StaTra)
-             values ('".$codigo."',to_date('".$fecha."','dd/mm/yyyy'),'".$ano."','".$periodo."','".$desc."','".$desanu."', ".$tottrasla.",'".$statrasla."')";
+            (RefTra,Fectra,AnoTra,PerTra,DesTra,DesAnu,TotTra,StaTra,Loguse)
+             values ('".$codigo."',to_date('".$fecha."','dd/mm/yyyy'),'".$ano."','".$periodo."','".$desc."','".$desanu."', ".$tottrasla.",'".$statrasla."','".$loguse."')";
 
           $bd->actualizar($sql);
           crearLog('G');
@@ -91,7 +109,7 @@ function crearLog($valor)
         $bd->actualizar($sql);
 
         $i=1;
-        while ($i<=20)
+        while ($i<=250)
         {
           if ((trim($_POST["x".$i."1"])!="")  and (trim($_POST["x".$i."2"])!="") and (number_format($_POST["x".$i."3"],2,'.',',')!= number_format(0,2,'.',',')) )
           {
@@ -104,26 +122,11 @@ function crearLog($valor)
           }
           else
           {
-            $i=21;
+            $i=251;
           }
           } //while
 
-        //Anula el Precompromiso
-        if ($imec=='I')
-        {
-          $aux=substr($codigo,2);
-          $codigo_aux='TR'.trim($aux);
-          $sql="update cpprecom set staprc='N', desanu='APROBACION DE LA SOLICITUD DEL TRASLADO'
-                where trim(refprc) = '".$codigo_aux."'";
 
-          $bd->actualizar($sql);
-
-          $sql="update cpimpprc set staimp='N'
-                where trim(refprc) = '".$codigo_aux."'";
-
-          $bd->actualizar($sql);
-          crearLog('N');
-        }
 
         //$bd->completeTransaccion();
 
@@ -141,7 +144,7 @@ function crearLog($valor)
         //////////Verificar disponibilidad//////////////////////////////////////////////////////////////////////////
         $VerDispon = "S";
         $i         = 1;
-        while ($i<=20)
+        while ($i<=250)
         {
           if ((trim($_POST["x".$i."1"])!="")  and (trim($_POST["x".$i."2"])!="") and (number_format($_POST["x".$i."3"],2,'.',',')!= number_format(0,2,'.',',')) )
           {
@@ -154,21 +157,21 @@ function crearLog($valor)
                 {
                   $VerDispon="N";
                   Mensaje("NO se puede Eliminar o Anular el Traslado. El Monto Disponible de la Partida " . trim($_POST["x".$i."2"]) . " es de " . number_format($MonDis,2,'.',',') .". Al Disminuirla por el Monto del Traslado quedar�a Negativa.");
-                  $i=21;
+                  $i=251;
                 }//if ($MonDis < $_POST["x".$i."3"])
               }	// if ($tb=$z->buscar_datos($sql))
               else
               {
                 $VerDispon="N";
                 Mensaje("La Partida " . trim($_POST["x".$i."2"]) . " no se encuentra en la Base de Datos. Por Favor Verifique");
-                $i=21;
+                $i=251;
               }//else  if ($tb=$z->buscar_datos($sql))
 
               $i=$i+1;
           } //if ((trim($_POST["x".$i."1"])!="")  and (trim($_POST["x".$i."2"])!="") and (number_format($_POST["x".$i."3"],2,'.',',')!= number_format(0,2,'.',',')) )
           else
           {
-            $i=21;
+            $i=251;
           }
         } //while
 
@@ -227,7 +230,7 @@ function crearLog($valor)
        $bd->actualizar($sql);
 
         $i=1;
-        while ($i<=20)
+        while ($i<=250)
         {
           if ((trim($_POST["x".$i."1"])!="")  and (trim($_POST["x".$i."2"])!="") and (number_format($_POST["x".$i."3"],2,'.',',')!= number_format(0,2,'.',',')) )
           {
@@ -323,7 +326,7 @@ function crearLog($valor)
           }
           else
           {
-            $i=21;
+            $i=251;
           }
           } //while
 

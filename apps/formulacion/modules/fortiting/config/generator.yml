@@ -5,7 +5,7 @@ generator:
     theme:            default
     fields:
       codparing: { name: Código}
-      despar: { name: Descripción, params : maxlength=100 }     
+      despar: { name: Descripción, params : maxlength=100 }
       montoing: { name: Monto }
       codtipfin: { name: Código, params : maxlength=4 }
       desfin: { name: Descripción, params : maxlength=50 }
@@ -19,7 +19,7 @@ generator:
       sort:      codparing
     edit:
       title:          Edición Formulación Presupuesto de Ingresos
-      display:      [codparing, despar, montoing, codtipfin, desfin]
+      display:      [codparing, despar, montoing, _grid]
       actions:
         _list:        ~
         _save:        ~

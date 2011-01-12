@@ -8,7 +8,7 @@
  * @package    Roraima
  * @subpackage lib.model
  * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Tscheemi.php 34269 2009-10-26 21:21:50Z dmartinez $
+ * @version SVN: $Id: Tscheemi.php 41689 2010-12-09 22:14:57Z dmartinez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -41,6 +41,14 @@ class Tscheemi extends BaseTscheemi
 	protected $filasord="";
 	protected $firmado="";
 	protected $objeto=array();
+	protected $grid=array();
+	protected $check="";
+	protected $numeroord="";
+	protected $fecord="";
+	protected $filnumordfec="";
+        protected $aprmonche="";
+        protected $nomrep="";
+
 
     public function getNomben()
 	{
@@ -52,7 +60,7 @@ class Tscheemi extends BaseTscheemi
 	{
 		$sql="SELECT A.NUMORD as numord
 				FROM OPORDCHE A,OPORDPAG B
-				WHERE A.NUMCHE='".self::getNumche()."' AND A.NUMORD=B.NUMORD ORDER BY A.NUMORD";
+				WHERE A.NUMCHE='".self::getNumche()."' AND A.CODCTA='".self::getNumcue()."' AND A.TIPMOV='".self::getTipdoc()."' AND A.NUMORD=B.NUMORD ORDER BY A.NUMORD";
 		if (Herramientas::BuscarDatos($sql,&$result))
 		{
 			$numord='';
@@ -82,7 +90,7 @@ class Tscheemi extends BaseTscheemi
 	{
 		$sql="SELECT B.NUMCOM as numcom
 				FROM OPORDCHE A,OPORDPAG B
-				WHERE A.NUMCHE='".self::getNumche()."' AND A.NUMORD=B.NUMORD ORDER BY A.NUMORD";
+				WHERE A.NUMCHE='".self::getNumche()."' AND A.CODCTA='".self::getNumcue()."' AND A.TIPMOV='".self::getTipdoc()."' AND A.NUMORD=B.NUMORD ORDER BY A.NUMORD";
 		if (Herramientas::BuscarDatos($sql,&$result))
 		{
 			$numcom='';
@@ -145,6 +153,10 @@ class Tscheemi extends BaseTscheemi
   	{
   		$estatus='ANULADO';
   	}
+        else if (self::getStatus()=='D')
+  	{
+  		$estatus='DEVUELTO';
+  	}
   	return $estatus;
   }
 
@@ -163,5 +175,71 @@ class Tscheemi extends BaseTscheemi
   	return $fecha;
   }
 
+  public function getFilnumordfec()
+  {
+
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('tesmovemiche',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('filnumordfec',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+	       {
+	       	$dato=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['filnumordfec'];
+}
+         }
+     return $dato;
+  }
+
+  public function setFilnumordfec()
+  {
+  	return $this->filnumordfec;
+  }
+
+  public function getAprmonche()
+  {
+    $dato="";
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('tesmovemiche',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('aprmonche',$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']))
+	       {
+	       	$dato=$varemp['aplicacion']['tesoreria']['modulos']['tesmovemiche']['aprmonche'];
+}
+         }
+     return $dato;
+  }
+
+  public function setAprmonche()
+  {
+  	return $this->aprmonche;
+  }
+
+    public function getMontominche()
+    {
+        $t= new Criteria();
+        $reg= OpdefempPeer::doSelectOne($t);
+        if ($reg)
+        {
+            $montoche=$reg->getMonche();
+        }else $montoche=0;
+
+        return $montoche;
+    }
+
+        public function getNomrep()
+	{
+		return Herramientas::getX_vacio('NUMCUE','Tsdefban','Nomrep',$this->getNumcue());
+	}
+
+  public function setNomrep()
+  {
+  	return $this->nomrep;
+  }
 
 }

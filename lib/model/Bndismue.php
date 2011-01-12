@@ -41,6 +41,11 @@ class Bndismue extends BaseBndismue
     return Herramientas::getX_vacio('reftra','contabc','id',$numerocomprobante);
   }
 
+
+  public function getNomuse()
+  {
+   return Herramientas::getX('loguse','Usuarios','Nomuse',trim(self::getLogusu()));
+  }
 }
 
 

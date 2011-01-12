@@ -130,7 +130,15 @@
     if (id!="")
     {
      $$('.botoncat')[0].disabled=true;
+
    }
+   var i=0;
+     while (i<10)
+     {
+         calen="trigger_ax_"+i+"_5";
+         $(calen).hide();
+         i++;
+     }
 
 function enter(valor)
  {

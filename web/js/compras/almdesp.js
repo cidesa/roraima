@@ -5,6 +5,7 @@
       $('trigger_cadphart_fecdph').hide();
      $$('.botoncat')[0].disabled=true;
   	 $$('.botoncat')[1].disabled=true;
+         $$('.botoncat')[2].disabled=true;
    }
   }
 
@@ -79,7 +80,14 @@ function cantdespachada(e,id)
 	   var codalm=$(colcodalm).value;
 	   var codubi=$(colcodubi).value;
 	   var candes=num2;
-	   new Ajax.Request(getUrlModulo()+'ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json), verificar(); }, parameters:'ajax=5&candes='+candes+'&codalm='+codalm+'&codubi='+codubi+'&codart='+codart})
+           if ($('cadphart_manartlot').value=='S')
+           {
+               var colnumlot=name+"_"+fil+"_17";
+               var numlot=$(colnumlot).value;
+                new Ajax.Request(getUrlModulo()+'ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json), verificar(); }, parameters:'ajax=5&candes='+candes+'&codalm='+codalm+'&codubi='+codubi+'&numlot='+numlot+'&codart='+codart})
+           }
+            else
+                new Ajax.Request(getUrlModulo()+'ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json), verificar(); }, parameters:'ajax=5&candes='+candes+'&codalm='+codalm+'&codubi='+codubi+'&codart='+codart})
 	}//if ($(colcodalm).value!="" || $(colcodubi).value!="" )
   else
   {
@@ -100,14 +108,6 @@ function cantdespachada(e,id)
   }
 }
 
-	 function enter(valor)
-	 {
-	     if (valor!='')
-	     { valor=valor.pad(8, '0',0);}
-	     else
-	     {valor=valor.pad(8, '#',0);}
-	     $('cadphart_dphart').value=valor;
-	 }
 
 
   function ejecutaajax(e,id)

@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require($_SESSION["x"].'lib/bd/basedatosAdo.php');
@@ -62,7 +63,7 @@ $tools=new tools();
             }
             else
             {
-              if (($IncMod=='I') and ($monasi=='0'))
+              if (($imec=='I') and ($monasi==0))
               {
                 Grabar_Asignacion();
               }else {
@@ -83,7 +84,7 @@ $tools=new tools();
 
         // Guardar en Segbitaco
         $sql = "Select id from cpasiini where trim(codpre)='$codigopre' and anopre='$ano' and perpre='00'";
-    
+
         $tb=$bd->select($sql);
         $id = $tb->fields["id"];
         $bd->Log($id, 'pre', 'Cpasiini', 'Preasiini', 'G' );
@@ -99,10 +100,10 @@ $tools=new tools();
     elseif ($imec=='E')    //Eliminar
     {	 //EliminarRegistroDetalle
         $bd->startTransaccion();
-    
+
         // Guardar en Segbitaco
         $sql = "Select id from cpasiini where trim(codpre)='$codigopre' and anopre >= '$anoinicio' and anopre <= '$anocierre'";
-    
+
         $tb=$bd->select($sql);
         $id = $tb->fields["id"];
         $bd->Log($id, 'pre', 'Cpasiini', 'Preasiini', 'E' );
@@ -126,7 +127,7 @@ $tools=new tools();
     global $tools;
     global $codigopre;
     global $monasi;
-return true;
+
       $sql	="select * from cpasiini where perpre='00' and trim(codpre)='$codigopre'";
     if ($tb=$tools->buscar_datos($sql))
      {

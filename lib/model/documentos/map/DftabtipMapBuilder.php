@@ -52,6 +52,12 @@ class DftabtipMapBuilder {
 
 		$tMap->addColumn('STADOC', 'Stadoc', 'string', CreoleTypes::VARCHAR, false, 20);
 
+		$tMap->addColumn('NOMTABFK', 'Nomtabfk', 'string', CreoleTypes::VARCHAR, false, 30);
+
+		$tMap->addColumn('NOMCOLLOC', 'Nomcolloc', 'string', CreoleTypes::VARCHAR, false, 30);
+
+		$tMap->addColumn('NOMCOLFOR', 'Nomcolfor', 'string', CreoleTypes::VARCHAR, false, 30);
+
 		$tMap->addColumn('INFDOC1', 'Infdoc1', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('INFDOC2', 'Infdoc2', 'string', CreoleTypes::VARCHAR, false, 100);
@@ -65,6 +71,8 @@ class DftabtipMapBuilder {
 		$tMap->addColumn('VALANU', 'Valanu', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('REFDOC', 'Refdoc', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

@@ -1,3 +1,14 @@
+/**
+ * Librerías Javascript para el manejo del Ajax
+ *
+ * @package    Roraima
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ *
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
+
   //////////////////////////////////////////////////
   // Cargar una imagen de espera al ejecutar Ajax //
   //////////////////////////////////////////////////
@@ -18,11 +29,11 @@
 
   Ajax.Responders.register({
     onCreate: function() {
-      if($('cargando') && Ajax.activeRequestCount > 0)
-      Effect.Appear('cargando',{duration: 0.25, queue: 'end'});
+      //if($('cargando') && Ajax.activeRequestCount > 0)
+      //Effect.Appear('cargando',{duration: 0.25, queue: 'end'});
     },
     onComplete: function() {
-      OcultarCargando()
+      //OcultarCargando()
     },
 
   });
@@ -69,7 +80,7 @@
       }//if($(json[i][0]))
      } // else if (json[i][0]=="javascript")
     }//for
-    OcultarCargando();
+    //OcultarCargando();
   }
 
   function AjaxJSONv2(request, json)
@@ -81,11 +92,12 @@
         $(json[i][0]).value=json[i][1];
       }
     }
-    OcultarCargando();
+    //OcultarCargando();
   }
 
   function toAjax(indiceAjax,accion,valor,funcion,params)
   {
+    if (valor!=''){
     new Ajax.Request(accion, {
         asynchronous:true,
         evalScripts:true,
@@ -97,17 +109,18 @@
             },
         parameters: 'ajax='+indiceAjax+'&codigo='+valor+params
         });
+    }
   }
 
   function toAjaxUpdater(div,indiceAjax,accion,valor,funcion,params)
   {
-    p='';
-    if (params!='')
+    /*p='';
+    if (params)
     {
 	  	for (key in params){
 	  	  p = p+'&'+key+'='+params[key];
 	  	}
-  	}
+  	}*/
     new Ajax.Updater(div, accion, {
         asynchronous:true,
         evalScripts:true,
@@ -117,7 +130,7 @@
                 try{eval(funcion);}
                 catch(ex){}
             },
-        parameters: 'ajax='+indiceAjax+'&id='+$('id').value+'&codigo='+valor+p
+        parameters: 'ajax='+indiceAjax+'&id='+$('id').value+'&codigo='+valor+params
         });
   }
 

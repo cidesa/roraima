@@ -1,0 +1,29 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Rhdefobj
+    theme:            cidesaGenerator
+    fields:
+      codobj:      { name: Código, params: size=10 maxlength=4 onBlur  = "$(this.id).value=$(this.id).value.pad(4,'0',0)"} 
+      desobj:      { name: Descripción, type: textarea_tag, params: maxlength=250 cols=60 }
+   
+    list:
+      title:              Definicion de Objetivo
+      display:            [=codobj, desobj]
+      filters:            [codobj, desobj]
+      max_pers:           10
+      sort:               codobj
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Edicion de Definicion de Objetivos
+      display:
+        Definción de Valores:   [codobj, desobj]  
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

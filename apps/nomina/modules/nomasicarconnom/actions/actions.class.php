@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomasicarconnom
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 39563 2010-07-21 15:43:43Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -58,7 +58,21 @@ class nomasicarconnomActions extends autonomasicarconnomActions
 
     return $frecuencia;
   }
-  
+
+  public function CargarTiempo()
+  {
+    $c = new Criteria();
+    $lista_tie = NptiempoPeer::doSelect($c);
+
+    $tiempo = array();
+
+    foreach($lista_tie as $obj)
+    {
+      $tiempo += array($obj->getCodtie() => $obj->getDestie());
+    }
+    return $tiempo;
+  }
+
   public function CargarDedicacion()
   {
     $c = new Criteria();
@@ -85,13 +99,14 @@ class nomasicarconnomActions extends autonomasicarconnomActions
     }
     return $catl;
   }
-  
-  
-  
-  
+
+
+
+
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -104,6 +119,34 @@ class nomasicarconnomActions extends autonomasicarconnomActions
     	$this->lonfor=strlen($this->formato);
    		$this->tipos=self::CargarTipoGasto();
         $this->updateNpasicarempFromRequest();
+
+        if($this->npasicaremp->getCodcar() && ($this->npasicaremp->getId()==''))
+        {
+            $c = new Criteria();
+            $c->add(NpcargosPeer::CODCAR,$this->npasicaremp->getCodcar());
+            $p = NpcargosPeer::doSelectOne($c);
+            if($p)
+            {
+                if($p->getCanphom()+$p->getCanpmuj()>0)
+                {
+                    $c = new Criteria();
+                    $c->add(NphojintPeer::CODEMP,$this->npasicaremp->getCodemp());
+                    $r = NphojintPeer::doSelectOne($c);
+                    if($r)
+                    {
+                        if($r->getSexemp()=='M')
+                        {
+                            if($p->getCanvhom()<=0)
+                                    $this->coderr='N0003';
+                        }else
+                        {
+                            if($p->getCanvmuj()<=0)
+                                    $this->coderr='N0003';
+                        }
+                    }
+                }
+            }
+        }
 	    if (!$this->npasicaremp->getId())
 	    {
 			$cc = new Criteria();
@@ -141,7 +184,7 @@ class nomasicarconnomActions extends autonomasicarconnomActions
   {
     $grid=Herramientas::CargarDatosGrid($this,$this->obj,true);
     $arreglo=array($grid);
-	
+
     $this->coderror = Nomina::salvarNomasicarconnom($npasicaremp,$arreglo);
 
     if($this->coderror!=-1)
@@ -164,10 +207,28 @@ class nomasicarconnomActions extends autonomasicarconnomActions
      $cajtexcom=$this->getRequestParameter('cajtexcom');
     if ($this->getRequestParameter('ajax')=='1')
       {
-        $dato=NphojintPeer::getNomemp($this->getRequestParameter('codigo'));
-        $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
-            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-             return sfView::HEADER_ONLY;
+        $l= new Criteria();
+        $l->add(NphojintPeer::CODEMP,$this->getRequestParameter('codigo'));
+        $reg= NphojintPeer::doSelectOne($l);
+        if ($reg)
+        {
+           if ($reg->getStaemp()!='R')
+            {
+               $dato=$reg->getNomemp(); $javascript="";
+            }else {
+              $dato=""; $javascript="alert('El Empleado se encuentra Retirado'); $('npasicaremp_codemp').value=''; $('npasicaremp_codemp').focus();";
+            }
+            $codniv = H::GetX('Codemp','Nphojint','Codniv',$reg->getCodemp());
+            $nomniv = H::GetX('Codniv','Npestorg','Desniv',$codniv);
+            $nivel = $codniv.'  '.$nomniv;
+        }else{
+           $dato=""; $javascript="alert('El Empleado no existe'); $('npasicaremp_codemp').value=''; $('npasicaremp_codemp').focus();";
+        }
+
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""],["npasicaremp_nivel","'.$nivel.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
       }
     else if ($this->getRequestParameter('ajax')=='2')
       { $this->div='';
@@ -182,30 +243,60 @@ class nomasicarconnomActions extends autonomasicarconnomActions
      else if ($this->getRequestParameter('ajax')=='3')
       { $this->div='S';
 	    $js="";
+	    $this->filvac="";
+  	    $varemp = $this->getUser()->getAttribute('configemp');
+	    if(is_array($varemp))
+	     if(array_key_exists('aplicacion',$varemp))
+	  	  if(array_key_exists('nomina',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+		     if(array_key_exists('nomasicarconnom',$varemp['aplicacion']['nomina']['modulos']))
+			 {
+			 	if (array_key_exists('filvac',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
+		        {
+		       	 $this->filvac=$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['filvac'];
+		        }
+
+			 }
         $c = new Criteria();
         $c->add(NpcargosPeer::CODCAR,$this->getRequestParameter('codigo'));
         $c->addJoin(NpcargosPeer::CODCAR,NpasicarnomPeer::CODCAR);
         $npcargos = NpcargosPeer::doSelectOne($c);
         if($npcargos){
+        	if ($this->filvac!="") {
+        	if ($npcargos->getCarvan2()>0){
           $dato=$npcargos->getNomcar();
           $cod = $npcargos->getCodcar();
 		  $codtipcar=$npcargos->getCodtip();
+          $this->configGrid($this->getRequestParameter('codemp'),$this->getRequestParameter('codnom'),$this->getRequestParameter('codigo'),$this->getRequestParameter('frecuen'));
+
+        	}else{
+        		$dato='';//Constantes::REGVACIO;
+                $cod = '';
+		        $codtipcar='';
+                $this->configGrid();
+		        $js="alert('El numero de Vacantes es Igual a cero'); ";
+        	}
+        	}else{
+        	$dato=$npcargos->getNomcar();
+            $cod = $npcargos->getCodcar();
+		    $codtipcar=$npcargos->getCodtip();
+            $this->configGrid($this->getRequestParameter('codemp'),$this->getRequestParameter('codnom'),$this->getRequestParameter('codigo'),$this->getRequestParameter('frecuen'));
+        	}
         }else{
-          $dato=Constantes::REGVACIO;
+          $dato='';//Constantes::REGVACIO;
           $cod = '';
 		  $codtipcar='';
+		  $this->configGrid();
         }
 		if($this->getUser()->getAttribute('codcar','','nomasicarconnom')!='')
 		{
-			if($this->getUser()->getAttribute('codcar','','nomasicarconnom')==$cod)
+			if($this->getUser()->getAttribute('codcar','','nomasicarconnom')==$codtipcar)
 				$js.="$('gridcatded').show()";
 			else
 				$js.="$('gridcatded').hide()";
 		}
-	
 
         $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","'.$cod.'",""],["javascript","'.$js.'",""]]';
-        $this->configGrid($this->getRequestParameter('codemp'),$this->getRequestParameter('codnom'),$this->getRequestParameter('codigo'),$this->getRequestParameter('frecuen'));
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 
       }
@@ -222,6 +313,23 @@ class nomasicarconnomActions extends autonomasicarconnomActions
             $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
             $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
           return sfView::HEADER_ONLY;
+      }
+     else if ($this->getRequestParameter('ajax')=='7')
+      {
+        $q= new Criteria();
+        $q->add(CadefcenPeer::CODCEN,$this->getRequestParameter('codigo'));
+        $reg= CadefcenPeer::doSelectOne($q);
+        if ($reg)
+        {
+           $dato=$reg->getDescen(); $javascript="";
+        }else {
+            $dato="";
+            $javascript="alert('El Centro de Costo no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+        }
+
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
       }
   }
 
@@ -253,7 +361,7 @@ public function executeAutocomplete()
    * los datos del grid.
    *
    */
-  public function configGrid($codemp,$codnom,$codcar,$frecal='')
+  public function configGrid($codemp='',$codnom='',$codcar='',$frecal='')
   {
     $c = new Criteria();
     $c->add(NpasiconempPeer::CODEMP,$codemp);
@@ -409,6 +517,7 @@ public function executeAutocomplete()
   public function executeEdit()
   {
   	$codtipcar='';
+  	$this->filvac="";
   	$varemp = $this->getUser()->getAttribute('configemp');
 	  if(is_array($varemp))
 	    if(array_key_exists('aplicacion',$varemp))
@@ -424,16 +533,25 @@ public function executeAutocomplete()
 					$this->getUser()->setAttribute('codcar',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['codcar'],'nomasicarconnom');
 					$codtipcar=$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['codcar'];
 				}
+				if(array_key_exists('filvac',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
+		        {
+		       	 $this->filvac=$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['filvac'];
+		        }
+			    if(array_key_exists('vartiempo',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
+		        {
+		       	 $this->getUser()->setAttribute('vartiempo',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['vartiempo'],'nomasicarconnom');
+		        }
 
 			 }
 
     $this->npasicaremp = $this->getNpasicarempOrCreate();
 	$this->listadedicacion= $this->cargardedicacion();
+	$this->listatiempo= $this->cargartiempo();
 	$this->listacategoria= $this->cargarcategoria();
     $this->formato= Herramientas::getMascaraCategoria();
     $this->lonfor=strlen($this->formato);
     $this->tipos=self::CargarTipoGasto();
-	if($this->npasicaremp->getCodcar())
+	/*if($this->npasicaremp->getCodcar())
 	  {
 	  	$c = new Criteria();
 		$c->add(NpcargosPeer::CODCAR,$this->npasicaremp->getCodcar());
@@ -447,7 +565,7 @@ public function executeAutocomplete()
 				$this->getUser()->setAttribute('codtipcar','','nomasicarconnom');
 			}
 		}
-	  }
+	  }*/
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -496,7 +614,7 @@ public function executeAutocomplete()
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -506,6 +624,34 @@ public function executeAutocomplete()
     $this->formato= Herramientas::getMascaraCategoria();
     $this->lonfor=strlen($this->formato);
     $this->tipos=self::CargarTipoGasto();
+  	$codtipcar='';
+  	$this->filvac="";
+  	$varemp = $this->getUser()->getAttribute('configemp');
+	  if(is_array($varemp))
+	    if(array_key_exists('aplicacion',$varemp))
+	  	  if(array_key_exists('nomina',$varemp['aplicacion']))
+		   if(array_key_exists('modulos',$varemp['aplicacion']['nomina']))
+		     if(array_key_exists('nomasicarconnom',$varemp['aplicacion']['nomina']['modulos']))
+			 {
+			 	if(array_key_exists('varforma',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
+				   $this->getUser()->setAttribute('varforma',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['varforma'],'nomasicarconnom');
+				if(array_key_exists('codcar',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
+				{
+					#LA VARIABLE QUE SE TRAE DEL YML ES EL CODTICAR
+					$this->getUser()->setAttribute('codcar',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['codcar'],'nomasicarconnom');
+					$codtipcar=$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['codcar'];
+				}
+				if(array_key_exists('filvac',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
+		        {
+		       	 $this->filvac=$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['filvac'];
+		        }
+			    if(array_key_exists('vartiempo',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']))
+		        {
+		       	 $this->getUser()->setAttribute('vartiempo',$varemp['aplicacion']['nomina']['modulos']['nomasicarconnom']['vartiempo'],'nomasicarconnom');
+		        }
+
+			 }
+
 
     if (isset($npasicaremp['codemp']))
     {
@@ -591,6 +737,14 @@ public function executeAutocomplete()
     {
       $this->npasicaremp->setCodtipcat($npasicaremp['codtipcat']);
     }
+    if (isset($npasicaremp['codtie']))
+    {
+      $this->npasicaremp->setCodtie($npasicaremp['codtie']);
+    }
+    if (isset($npasicaremp['codcen']))
+    {
+      $this->npasicaremp->setCodcen($npasicaremp['codcen']);
+    }
   }
 
   public function CargarTipoGasto()
@@ -664,6 +818,7 @@ public function executeAutocomplete()
 	$this->lonfor=strlen($this->formato);
 	$this->tipos=self::CargarTipoGasto();
 	$this->listadedicacion= $this->cargardedicacion();
+	$this->listatiempo= $this->cargartiempo();
 	$this->listacategoria= $this->cargarcategoria();
     $this->updateNpasicarempFromRequest();
     $this->labels = $this->getLabels();

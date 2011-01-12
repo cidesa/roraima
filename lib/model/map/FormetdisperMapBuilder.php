@@ -30,7 +30,9 @@ class FormetdisperMapBuilder {
 		$tMap = $this->dbMap->addTable('formetdisper');
 		$tMap->setPhpName('Formetdisper');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('formetdisper_SEQ');
 
 		$tMap->addColumn('CODMET', 'Codmet', 'string', CreoleTypes::VARCHAR, true, 5);
 

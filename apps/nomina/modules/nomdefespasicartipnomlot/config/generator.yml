@@ -10,14 +10,11 @@ generator:
     list:
       title:          Asignación de Cargos a Nomina
       filters:        [codnom, codcar]
-      display:        [=codnom, codcar, nomnom]
-      object_actions:
-        _edit:        ~
-        _delete:      ~
+      display:        [=codnom, nomnom]
       max_per_page:  8
     edit:
       title:          Asignación de Cargos a Nomina
-      display:        [codnom, codcar, nomnom]
+      display:        [codnom, nomnom]
       actions:
         _list:         ~
         _save:         ~

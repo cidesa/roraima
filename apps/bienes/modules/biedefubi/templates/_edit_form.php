@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author:lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id:_edit_form.php 32813 2009-09-08 16:19:47Z lhernandez $
  */
 // date: 2007/10/29 11:16:35
 ?>
@@ -33,6 +33,12 @@
         'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$forubi')",
         'size'=> 32,
         'readonly' => $bnubibie->getId()!='' ? true : false ,
+        'onBlur'=> remote_function(array(
+          'url'      => 'biedefubi/ajax',
+          'condition' => "$('bnubibie_codubi').value != '' && $('id').value == ''",
+          'complete' => 'AjaxJSON(request, json)',
+          'with' => "'ajax=2&cajtexcom=bnubibie_codubi&codigo='+this.value",
+)),
      )); echo $value ? $value : '&nbsp;' ?>
 
 </div>

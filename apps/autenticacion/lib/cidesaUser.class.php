@@ -5,19 +5,19 @@
  *
  * @package    Roraima
  * @subpackage autenticacion
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: cidesaUser.class.php 41949 2011-01-07 17:50:56Z cramirez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class cidesaUser extends sfBasicSecurityUser
 {
-  public function loginIn($nombre,$passwd,$codemp)
+  public function loginIn($nombre,$passwd,$codemp,$db='')
   {
     if(!$this->isAuthenticated())
     {
-      $credenciales = $this->autenticate_native($nombre,$passwd,$codemp);
+      $credenciales = $this->autenticate_native($nombre,$passwd,$codemp,$db);
       if($credenciales!='') return true;
       else return false;
     }else return false;
@@ -33,7 +33,7 @@ class cidesaUser extends sfBasicSecurityUser
     return true;
   }
 
-  public function autenticate_native($nombre,$passwd,$codemp)
+  public function autenticate_native($nombre,$passwd,$codemp,$db='')
   {
     //$usuarios = ApliUserPeer::doSelectSql('select %s from apli_user limit 3');
     
@@ -75,6 +75,7 @@ class cidesaUser extends sfBasicSecurityUser
 
         // Carga la base de datos segun la empresa
         // Cambia el string de conexion (dns de databases.yml)
+        $db!='' ? $this->setAttribute('database', $db) : '';
         $this->setAttribute('schema', $objemp->getPassemp());
         $this->setAttribute('empresa', $codemp);
         $this->setAttribute('usuario', $objUsuario[0]->getNomuse());

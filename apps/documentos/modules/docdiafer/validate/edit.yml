@@ -6,4 +6,14 @@ names:
   dfdiafer{diafer}:
     required:  Yes
     required_msg: Debe Seleccionar una fecha.
+    validators: UniqueValidator
+
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    dfdiafer
+        column:   diafer
+        unique_error:   La fecha ya existe, intente con otra.
+
 

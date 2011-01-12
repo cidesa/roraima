@@ -36,7 +36,7 @@ class CarecargMapBuilder {
 
 		$tMap->addColumn('CODRGO', 'Codrgo', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('NOMRGO', 'Nomrgo', 'string', CreoleTypes::VARCHAR, false, 100);
+		$tMap->addColumn('NOMRGO', 'Nomrgo', 'string', CreoleTypes::VARCHAR, true, 100);
 
 		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, true, 32);
 

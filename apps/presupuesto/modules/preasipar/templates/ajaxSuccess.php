@@ -5,5 +5,8 @@
 <?php use_helper('Object', 'Validation', 'ObjectAdmin', 'I18N', 'Date', 'Grid') ?>
 
 <?
-// echo grid_tag($obj);
+ if  ($obj){
+ 	echo grid_tag_V2($obj);
+ }
+
 ?>

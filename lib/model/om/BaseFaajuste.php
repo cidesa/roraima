@@ -49,6 +49,10 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 
 
 	
+	protected $nrocon;
+
+
+	
 	protected $id;
 
 	
@@ -144,6 +148,13 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 
   }
   
+  public function getNrocon()
+  {
+
+    return trim($this->nrocon);
+
+  }
+  
   public function getId()
   {
 
@@ -183,6 +194,11 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 	
 	public function setFecaju($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -258,6 +274,16 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNrocon($v)
+	{
+
+    if ($this->nrocon !== $v) {
+        $this->nrocon = $v;
+        $this->modifiedColumns[] = FaajustePeer::NROCON;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -292,7 +318,9 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 
       $this->tipo = $rs->getString($startcol + 9);
 
-      $this->id = $rs->getInt($startcol + 10);
+      $this->nrocon = $rs->getString($startcol + 10);
+
+      $this->id = $rs->getInt($startcol + 11);
 
       $this->resetModified();
 
@@ -300,7 +328,7 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 11; 
+            return $startcol + 12; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Faajuste object", $e);
     }
@@ -478,6 +506,9 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 				return $this->getTipo();
 				break;
 			case 10:
+				return $this->getNrocon();
+				break;
+			case 11:
 				return $this->getId();
 				break;
 			default:
@@ -500,7 +531,8 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 			$keys[7] => $this->getObsaju(),
 			$keys[8] => $this->getStaaju(),
 			$keys[9] => $this->getTipo(),
-			$keys[10] => $this->getId(),
+			$keys[10] => $this->getNrocon(),
+			$keys[11] => $this->getId(),
 		);
 		return $result;
 	}
@@ -547,6 +579,9 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 				$this->setTipo($value);
 				break;
 			case 10:
+				$this->setNrocon($value);
+				break;
+			case 11:
 				$this->setId($value);
 				break;
 		} 	}
@@ -566,7 +601,8 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[7], $arr)) $this->setObsaju($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setStaaju($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setTipo($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
+		if (array_key_exists($keys[10], $arr)) $this->setNrocon($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
 	}
 
 	
@@ -584,6 +620,7 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FaajustePeer::OBSAJU)) $criteria->add(FaajustePeer::OBSAJU, $this->obsaju);
 		if ($this->isColumnModified(FaajustePeer::STAAJU)) $criteria->add(FaajustePeer::STAAJU, $this->staaju);
 		if ($this->isColumnModified(FaajustePeer::TIPO)) $criteria->add(FaajustePeer::TIPO, $this->tipo);
+		if ($this->isColumnModified(FaajustePeer::NROCON)) $criteria->add(FaajustePeer::NROCON, $this->nrocon);
 		if ($this->isColumnModified(FaajustePeer::ID)) $criteria->add(FaajustePeer::ID, $this->id);
 
 		return $criteria;
@@ -634,6 +671,8 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 		$copyObj->setStaaju($this->staaju);
 
 		$copyObj->setTipo($this->tipo);
+
+		$copyObj->setNrocon($this->nrocon);
 
 
 		$copyObj->setNew(true);

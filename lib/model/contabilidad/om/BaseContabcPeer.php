@@ -13,7 +13,7 @@ abstract class BaseContabcPeer {
 	const CLASS_DEFAULT = 'lib.model.contabilidad.Contabc';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 10;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -41,6 +41,12 @@ abstract class BaseContabcPeer {
 	const REFTRA = 'contabc.REFTRA';
 
 	
+	const LOGUSE = 'contabc.LOGUSE';
+
+	
+	const USUANU = 'contabc.USUANU';
+
+	
 	const ID = 'contabc.ID';
 
 	
@@ -49,18 +55,18 @@ abstract class BaseContabcPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcom', 'Feccom', 'Descom', 'Moncom', 'Stacom', 'Tipcom', 'Reftra', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (ContabcPeer::NUMCOM, ContabcPeer::FECCOM, ContabcPeer::DESCOM, ContabcPeer::MONCOM, ContabcPeer::STACOM, ContabcPeer::TIPCOM, ContabcPeer::REFTRA, ContabcPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcom', 'feccom', 'descom', 'moncom', 'stacom', 'tipcom', 'reftra', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Numcom', 'Feccom', 'Descom', 'Moncom', 'Stacom', 'Tipcom', 'Reftra', 'Loguse', 'Usuanu', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (ContabcPeer::NUMCOM, ContabcPeer::FECCOM, ContabcPeer::DESCOM, ContabcPeer::MONCOM, ContabcPeer::STACOM, ContabcPeer::TIPCOM, ContabcPeer::REFTRA, ContabcPeer::LOGUSE, ContabcPeer::USUANU, ContabcPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcom', 'feccom', 'descom', 'moncom', 'stacom', 'tipcom', 'reftra', 'loguse', 'usuanu', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcom' => 0, 'Feccom' => 1, 'Descom' => 2, 'Moncom' => 3, 'Stacom' => 4, 'Tipcom' => 5, 'Reftra' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (ContabcPeer::NUMCOM => 0, ContabcPeer::FECCOM => 1, ContabcPeer::DESCOM => 2, ContabcPeer::MONCOM => 3, ContabcPeer::STACOM => 4, ContabcPeer::TIPCOM => 5, ContabcPeer::REFTRA => 6, ContabcPeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcom' => 0, 'feccom' => 1, 'descom' => 2, 'moncom' => 3, 'stacom' => 4, 'tipcom' => 5, 'reftra' => 6, 'id' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Numcom' => 0, 'Feccom' => 1, 'Descom' => 2, 'Moncom' => 3, 'Stacom' => 4, 'Tipcom' => 5, 'Reftra' => 6, 'Loguse' => 7, 'Usuanu' => 8, 'Id' => 9, ),
+		BasePeer::TYPE_COLNAME => array (ContabcPeer::NUMCOM => 0, ContabcPeer::FECCOM => 1, ContabcPeer::DESCOM => 2, ContabcPeer::MONCOM => 3, ContabcPeer::STACOM => 4, ContabcPeer::TIPCOM => 5, ContabcPeer::REFTRA => 6, ContabcPeer::LOGUSE => 7, ContabcPeer::USUANU => 8, ContabcPeer::ID => 9, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcom' => 0, 'feccom' => 1, 'descom' => 2, 'moncom' => 3, 'stacom' => 4, 'tipcom' => 5, 'reftra' => 6, 'loguse' => 7, 'usuanu' => 8, 'id' => 9, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
@@ -127,6 +133,10 @@ abstract class BaseContabcPeer {
 		$criteria->addSelectColumn(ContabcPeer::TIPCOM);
 
 		$criteria->addSelectColumn(ContabcPeer::REFTRA);
+
+		$criteria->addSelectColumn(ContabcPeer::LOGUSE);
+
+		$criteria->addSelectColumn(ContabcPeer::USUANU);
 
 		$criteria->addSelectColumn(ContabcPeer::ID);
 

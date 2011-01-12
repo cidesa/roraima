@@ -3,121 +3,124 @@
 
 abstract class BaseNpimppresocPeer {
 
-	
+
 	const DATABASE_NAME = 'propel';
 
-	
+
 	const TABLE_NAME = 'npimppresoc';
 
-	
+
 	const CLASS_DEFAULT = 'lib.model.nomina.Npimppresoc';
 
-	
-	const NUM_COLUMNS = 24;
 
-	
+	const NUM_COLUMNS = 25;
+
+
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
-	
+
 	const CODEMP = 'npimppresoc.CODEMP';
 
-	
+
 	const FECCOR = 'npimppresoc.FECCOR';
 
-	
+
 	const FECINI = 'npimppresoc.FECINI';
 
-	
+
 	const FECFIN = 'npimppresoc.FECFIN';
 
-	
+
 	const SALEMP = 'npimppresoc.SALEMP';
 
-	
+
 	const SALEMPDIA = 'npimppresoc.SALEMPDIA';
 
-	
+
 	const ALIUTI = 'npimppresoc.ALIUTI';
 
-	
+
 	const ALIBONO = 'npimppresoc.ALIBONO';
 
-	
+
+	const ALIADI = 'npimppresoc.ALIADI';
+
+
 	const SALTOT = 'npimppresoc.SALTOT';
 
-	
+
 	const DIAART108 = 'npimppresoc.DIAART108';
 
-	
+
 	const CAPEMP = 'npimppresoc.CAPEMP';
 
-	
+
 	const ANTACUM = 'npimppresoc.ANTACUM';
 
-	
+
 	const VALART108 = 'npimppresoc.VALART108';
 
-	
+
 	const TASINT = 'npimppresoc.TASINT';
 
-	
+
 	const DIADIF = 'npimppresoc.DIADIF';
 
-	
+
 	const INTDEV = 'npimppresoc.INTDEV';
 
-	
+
 	const INTACUM = 'npimppresoc.INTACUM';
 
-	
+
 	const ADEANT = 'npimppresoc.ADEANT';
 
-	
+
 	const ADEPRE = 'npimppresoc.ADEPRE';
 
-	
+
 	const REGPRE = 'npimppresoc.REGPRE';
 
-	
+
 	const SALADI = 'npimppresoc.SALADI';
 
-	
+
 	const ANOSER = 'npimppresoc.ANOSER';
 
-	
+
 	const TIPO = 'npimppresoc.TIPO';
 
-	
+
 	const ID = 'npimppresoc.ID';
 
-	
+
 	private static $phpNameMap = null;
 
 
-	
+
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Feccor', 'Fecini', 'Fecfin', 'Salemp', 'Salempdia', 'Aliuti', 'Alibono', 'Saltot', 'Diaart108', 'Capemp', 'Antacum', 'Valart108', 'Tasint', 'Diadif', 'Intdev', 'Intacum', 'Adeant', 'Adepre', 'Regpre', 'Saladi', 'Anoser', 'Tipo', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpimppresocPeer::CODEMP, NpimppresocPeer::FECCOR, NpimppresocPeer::FECINI, NpimppresocPeer::FECFIN, NpimppresocPeer::SALEMP, NpimppresocPeer::SALEMPDIA, NpimppresocPeer::ALIUTI, NpimppresocPeer::ALIBONO, NpimppresocPeer::SALTOT, NpimppresocPeer::DIAART108, NpimppresocPeer::CAPEMP, NpimppresocPeer::ANTACUM, NpimppresocPeer::VALART108, NpimppresocPeer::TASINT, NpimppresocPeer::DIADIF, NpimppresocPeer::INTDEV, NpimppresocPeer::INTACUM, NpimppresocPeer::ADEANT, NpimppresocPeer::ADEPRE, NpimppresocPeer::REGPRE, NpimppresocPeer::SALADI, NpimppresocPeer::ANOSER, NpimppresocPeer::TIPO, NpimppresocPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'feccor', 'fecini', 'fecfin', 'salemp', 'salempdia', 'aliuti', 'alibono', 'saltot', 'diaart108', 'capemp', 'antacum', 'valart108', 'tasint', 'diadif', 'intdev', 'intacum', 'adeant', 'adepre', 'regpre', 'saladi', 'anoser', 'tipo', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Feccor', 'Fecini', 'Fecfin', 'Salemp', 'Salempdia', 'Aliuti', 'Alibono', 'Aliadi', 'Saltot', 'Diaart108', 'Capemp', 'Antacum', 'Valart108', 'Tasint', 'Diadif', 'Intdev', 'Intacum', 'Adeant', 'Adepre', 'Regpre', 'Saladi', 'Anoser', 'Tipo', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpimppresocPeer::CODEMP, NpimppresocPeer::FECCOR, NpimppresocPeer::FECINI, NpimppresocPeer::FECFIN, NpimppresocPeer::SALEMP, NpimppresocPeer::SALEMPDIA, NpimppresocPeer::ALIUTI, NpimppresocPeer::ALIBONO, NpimppresocPeer::ALIADI, NpimppresocPeer::SALTOT, NpimppresocPeer::DIAART108, NpimppresocPeer::CAPEMP, NpimppresocPeer::ANTACUM, NpimppresocPeer::VALART108, NpimppresocPeer::TASINT, NpimppresocPeer::DIADIF, NpimppresocPeer::INTDEV, NpimppresocPeer::INTACUM, NpimppresocPeer::ADEANT, NpimppresocPeer::ADEPRE, NpimppresocPeer::REGPRE, NpimppresocPeer::SALADI, NpimppresocPeer::ANOSER, NpimppresocPeer::TIPO, NpimppresocPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'feccor', 'fecini', 'fecfin', 'salemp', 'salempdia', 'aliuti', 'alibono', 'aliadi', 'saltot', 'diaart108', 'capemp', 'antacum', 'valart108', 'tasint', 'diadif', 'intdev', 'intacum', 'adeant', 'adepre', 'regpre', 'saladi', 'anoser', 'tipo', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, )
 	);
 
-	
+
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Feccor' => 1, 'Fecini' => 2, 'Fecfin' => 3, 'Salemp' => 4, 'Salempdia' => 5, 'Aliuti' => 6, 'Alibono' => 7, 'Saltot' => 8, 'Diaart108' => 9, 'Capemp' => 10, 'Antacum' => 11, 'Valart108' => 12, 'Tasint' => 13, 'Diadif' => 14, 'Intdev' => 15, 'Intacum' => 16, 'Adeant' => 17, 'Adepre' => 18, 'Regpre' => 19, 'Saladi' => 20, 'Anoser' => 21, 'Tipo' => 22, 'Id' => 23, ),
-		BasePeer::TYPE_COLNAME => array (NpimppresocPeer::CODEMP => 0, NpimppresocPeer::FECCOR => 1, NpimppresocPeer::FECINI => 2, NpimppresocPeer::FECFIN => 3, NpimppresocPeer::SALEMP => 4, NpimppresocPeer::SALEMPDIA => 5, NpimppresocPeer::ALIUTI => 6, NpimppresocPeer::ALIBONO => 7, NpimppresocPeer::SALTOT => 8, NpimppresocPeer::DIAART108 => 9, NpimppresocPeer::CAPEMP => 10, NpimppresocPeer::ANTACUM => 11, NpimppresocPeer::VALART108 => 12, NpimppresocPeer::TASINT => 13, NpimppresocPeer::DIADIF => 14, NpimppresocPeer::INTDEV => 15, NpimppresocPeer::INTACUM => 16, NpimppresocPeer::ADEANT => 17, NpimppresocPeer::ADEPRE => 18, NpimppresocPeer::REGPRE => 19, NpimppresocPeer::SALADI => 20, NpimppresocPeer::ANOSER => 21, NpimppresocPeer::TIPO => 22, NpimppresocPeer::ID => 23, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'feccor' => 1, 'fecini' => 2, 'fecfin' => 3, 'salemp' => 4, 'salempdia' => 5, 'aliuti' => 6, 'alibono' => 7, 'saltot' => 8, 'diaart108' => 9, 'capemp' => 10, 'antacum' => 11, 'valart108' => 12, 'tasint' => 13, 'diadif' => 14, 'intdev' => 15, 'intacum' => 16, 'adeant' => 17, 'adepre' => 18, 'regpre' => 19, 'saladi' => 20, 'anoser' => 21, 'tipo' => 22, 'id' => 23, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Feccor' => 1, 'Fecini' => 2, 'Fecfin' => 3, 'Salemp' => 4, 'Salempdia' => 5, 'Aliuti' => 6, 'Alibono' => 7, 'Aliadi' => 8, 'Saltot' => 9, 'Diaart108' => 10, 'Capemp' => 11, 'Antacum' => 12, 'Valart108' => 13, 'Tasint' => 14, 'Diadif' => 15, 'Intdev' => 16, 'Intacum' => 17, 'Adeant' => 18, 'Adepre' => 19, 'Regpre' => 20, 'Saladi' => 21, 'Anoser' => 22, 'Tipo' => 23, 'Id' => 24, ),
+		BasePeer::TYPE_COLNAME => array (NpimppresocPeer::CODEMP => 0, NpimppresocPeer::FECCOR => 1, NpimppresocPeer::FECINI => 2, NpimppresocPeer::FECFIN => 3, NpimppresocPeer::SALEMP => 4, NpimppresocPeer::SALEMPDIA => 5, NpimppresocPeer::ALIUTI => 6, NpimppresocPeer::ALIBONO => 7, NpimppresocPeer::ALIADI => 8, NpimppresocPeer::SALTOT => 9, NpimppresocPeer::DIAART108 => 10, NpimppresocPeer::CAPEMP => 11, NpimppresocPeer::ANTACUM => 12, NpimppresocPeer::VALART108 => 13, NpimppresocPeer::TASINT => 14, NpimppresocPeer::DIADIF => 15, NpimppresocPeer::INTDEV => 16, NpimppresocPeer::INTACUM => 17, NpimppresocPeer::ADEANT => 18, NpimppresocPeer::ADEPRE => 19, NpimppresocPeer::REGPRE => 20, NpimppresocPeer::SALADI => 21, NpimppresocPeer::ANOSER => 22, NpimppresocPeer::TIPO => 23, NpimppresocPeer::ID => 24, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'feccor' => 1, 'fecini' => 2, 'fecfin' => 3, 'salemp' => 4, 'salempdia' => 5, 'aliuti' => 6, 'alibono' => 7, 'aliadi' => 8, 'saltot' => 9, 'diaart108' => 10, 'capemp' => 11, 'antacum' => 12, 'valart108' => 13, 'tasint' => 14, 'diadif' => 15, 'intdev' => 16, 'intacum' => 17, 'adeant' => 18, 'adepre' => 19, 'regpre' => 20, 'saladi' => 21, 'anoser' => 22, 'tipo' => 23, 'id' => 24, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, )
 	);
 
-	
+
 	public static function getMapBuilder()
 	{
 		include_once 'lib/model/nomina/map/NpimppresocMapBuilder.php';
 		return BasePeer::getMapBuilder('lib.model.nomina.map.NpimppresocMapBuilder');
 	}
-	
+
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
@@ -131,7 +134,7 @@ abstract class BaseNpimppresocPeer {
 		}
 		return self::$phpNameMap;
 	}
-	
+
 	static public function translateFieldName($name, $fromType, $toType)
 	{
 		$toNames = self::getFieldNames($toType);
@@ -142,7 +145,7 @@ abstract class BaseNpimppresocPeer {
 		return $toNames[$key];
 	}
 
-	
+
 
 	static public function getFieldNames($type = BasePeer::TYPE_PHPNAME)
 	{
@@ -152,13 +155,13 @@ abstract class BaseNpimppresocPeer {
 		return self::$fieldNames[$type];
 	}
 
-	
+
 	public static function alias($alias, $column)
 	{
 		return str_replace(NpimppresocPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
-	
+
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
@@ -177,6 +180,8 @@ abstract class BaseNpimppresocPeer {
 		$criteria->addSelectColumn(NpimppresocPeer::ALIUTI);
 
 		$criteria->addSelectColumn(NpimppresocPeer::ALIBONO);
+
+		$criteria->addSelectColumn(NpimppresocPeer::ALIADI);
 
 		$criteria->addSelectColumn(NpimppresocPeer::SALTOT);
 
@@ -215,7 +220,7 @@ abstract class BaseNpimppresocPeer {
 	const COUNT = 'COUNT(npimppresoc.ID)';
 	const COUNT_DISTINCT = 'COUNT(DISTINCT npimppresoc.ID)';
 
-	
+
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -239,7 +244,7 @@ abstract class BaseNpimppresocPeer {
 						return 0;
 		}
 	}
-	
+
 	public static function doSelectOne(Criteria $criteria, $con = null)
 	{
 		$critcopy = clone $criteria;
@@ -250,12 +255,12 @@ abstract class BaseNpimppresocPeer {
 		}
 		return null;
 	}
-	
+
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
 		return NpimppresocPeer::populateObjects(NpimppresocPeer::doSelectRS($criteria, $con));
 	}
-	
+
 	public static function doSelectRS(Criteria $criteria, $con = null)
 	{
 		if ($con === null) {
@@ -271,35 +276,35 @@ abstract class BaseNpimppresocPeer {
 
 						return BasePeer::doSelect($criteria, $con);
 	}
-	
+
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
-	
+
 				$cls = NpimppresocPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
-		
+
 			$obj = new $cls();
 			$obj->hydrate($rs);
 			$results[] = $obj;
-			
+
 		}
 		return $results;
 	}
-	
+
 	public static function getTableMap()
 	{
 		return Propel::getDatabaseMap(self::DATABASE_NAME)->getTable(self::TABLE_NAME);
 	}
 
-	
+
 	public static function getOMClass()
 	{
 		return NpimppresocPeer::CLASS_DEFAULT;
 	}
 
-	
+
 	public static function doInsert($values, $con = null)
 	{
 		if ($con === null) {
@@ -310,7 +315,7 @@ abstract class BaseNpimppresocPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(NpimppresocPeer::ID); 
+		$criteria->remove(NpimppresocPeer::ID);
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -326,7 +331,7 @@ abstract class BaseNpimppresocPeer {
 		return $pk;
 	}
 
-	
+
 	public static function doUpdate($values, $con = null)
 	{
 		if ($con === null) {
@@ -336,7 +341,7 @@ abstract class BaseNpimppresocPeer {
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
+			$criteria = clone $values;
 			$comparison = $criteria->getComparison(NpimppresocPeer::ID);
 			$selectCriteria->add(NpimppresocPeer::ID, $criteria->remove(NpimppresocPeer::ID), $comparison);
 
@@ -347,7 +352,7 @@ abstract class BaseNpimppresocPeer {
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
 
-	
+
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
@@ -364,7 +369,7 @@ abstract class BaseNpimppresocPeer {
 		}
 	}
 
-	
+
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
@@ -382,10 +387,10 @@ abstract class BaseNpimppresocPeer {
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
-		$affectedRows = 0; 
+		$affectedRows = 0;
 		try {
 									$con->begin();
-			
+
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
 			return $affectedRows;
@@ -395,7 +400,7 @@ abstract class BaseNpimppresocPeer {
 		}
 	}
 
-	
+
 	public static function doValidate(Npimppresoc $obj, $cols = null)
 	{
 		$columns = array();
@@ -430,7 +435,7 @@ abstract class BaseNpimppresocPeer {
     return $res;
 	}
 
-	
+
 	public static function retrieveByPK($pk, $con = null)
 	{
 		if ($con === null) {
@@ -447,7 +452,7 @@ abstract class BaseNpimppresocPeer {
 		return !empty($v) > 0 ? $v[0] : null;
 	}
 
-	
+
 	public static function retrieveByPKs($pks, $con = null)
 	{
 		if ($con === null) {
@@ -465,7 +470,7 @@ abstract class BaseNpimppresocPeer {
 		return $objs;
 	}
 
-} 
+}
 if (Propel::isInit()) {
 			try {
 		BaseNpimppresocPeer::getMapBuilder();

@@ -71,6 +71,17 @@
 ?></div></fieldset>
 </div>
 
+<br>
+  <?php echo label_for('npmotfal[esremun]', __($labels['npmotfal{esremun}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npmotfal{esremun}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npmotfal{esremun}')): ?>
+    <?php echo form_error('npmotfal{esremun}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_checkbox_tag($npmotfal, 'getEsremun', array (
+  'control_name' => 'npmotfal[esremun]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
 </div>
 </fieldset>
 

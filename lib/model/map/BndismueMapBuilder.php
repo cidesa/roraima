@@ -64,6 +64,8 @@ class BndismueMapBuilder {
 
 		$tMap->addColumn('VIDUTIL', 'Vidutil', 'double', CreoleTypes::NUMERIC, false, 4);
 
+		$tMap->addColumn('LOGUSU', 'Logusu', 'string', CreoleTypes::VARCHAR, false, 50);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

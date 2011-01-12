@@ -13,7 +13,7 @@ abstract class BaseFormetotrcrePeer {
 	const CLASS_DEFAULT = 'lib.model.Formetotrcre';
 
 	
-	const NUM_COLUMNS = 10;
+	const NUM_COLUMNS = 11;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -47,6 +47,9 @@ abstract class BaseFormetotrcrePeer {
 	const OBSERV = 'formetotrcre.OBSERV';
 
 	
+	const CODFIN = 'formetotrcre.CODFIN';
+
+	
 	const ID = 'formetotrcre.ID';
 
 	
@@ -55,18 +58,18 @@ abstract class BaseFormetotrcrePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codmet', 'Codpro', 'Codact', 'Canact', 'Codparegr', 'Monpre', 'Codorg', 'Codtip', 'Observ', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FormetotrcrePeer::CODMET, FormetotrcrePeer::CODPRO, FormetotrcrePeer::CODACT, FormetotrcrePeer::CANACT, FormetotrcrePeer::CODPAREGR, FormetotrcrePeer::MONPRE, FormetotrcrePeer::CODORG, FormetotrcrePeer::CODTIP, FormetotrcrePeer::OBSERV, FormetotrcrePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codmet', 'codpro', 'codact', 'canact', 'codparegr', 'monpre', 'codorg', 'codtip', 'observ', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Codmet', 'Codpro', 'Codact', 'Canact', 'Codparegr', 'Monpre', 'Codorg', 'Codtip', 'Observ', 'Codfin', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FormetotrcrePeer::CODMET, FormetotrcrePeer::CODPRO, FormetotrcrePeer::CODACT, FormetotrcrePeer::CANACT, FormetotrcrePeer::CODPAREGR, FormetotrcrePeer::MONPRE, FormetotrcrePeer::CODORG, FormetotrcrePeer::CODTIP, FormetotrcrePeer::OBSERV, FormetotrcrePeer::CODFIN, FormetotrcrePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codmet', 'codpro', 'codact', 'canact', 'codparegr', 'monpre', 'codorg', 'codtip', 'observ', 'codfin', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codmet' => 0, 'Codpro' => 1, 'Codact' => 2, 'Canact' => 3, 'Codparegr' => 4, 'Monpre' => 5, 'Codorg' => 6, 'Codtip' => 7, 'Observ' => 8, 'Id' => 9, ),
-		BasePeer::TYPE_COLNAME => array (FormetotrcrePeer::CODMET => 0, FormetotrcrePeer::CODPRO => 1, FormetotrcrePeer::CODACT => 2, FormetotrcrePeer::CANACT => 3, FormetotrcrePeer::CODPAREGR => 4, FormetotrcrePeer::MONPRE => 5, FormetotrcrePeer::CODORG => 6, FormetotrcrePeer::CODTIP => 7, FormetotrcrePeer::OBSERV => 8, FormetotrcrePeer::ID => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('codmet' => 0, 'codpro' => 1, 'codact' => 2, 'canact' => 3, 'codparegr' => 4, 'monpre' => 5, 'codorg' => 6, 'codtip' => 7, 'observ' => 8, 'id' => 9, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Codmet' => 0, 'Codpro' => 1, 'Codact' => 2, 'Canact' => 3, 'Codparegr' => 4, 'Monpre' => 5, 'Codorg' => 6, 'Codtip' => 7, 'Observ' => 8, 'Codfin' => 9, 'Id' => 10, ),
+		BasePeer::TYPE_COLNAME => array (FormetotrcrePeer::CODMET => 0, FormetotrcrePeer::CODPRO => 1, FormetotrcrePeer::CODACT => 2, FormetotrcrePeer::CANACT => 3, FormetotrcrePeer::CODPAREGR => 4, FormetotrcrePeer::MONPRE => 5, FormetotrcrePeer::CODORG => 6, FormetotrcrePeer::CODTIP => 7, FormetotrcrePeer::OBSERV => 8, FormetotrcrePeer::CODFIN => 9, FormetotrcrePeer::ID => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('codmet' => 0, 'codpro' => 1, 'codact' => 2, 'canact' => 3, 'codparegr' => 4, 'monpre' => 5, 'codorg' => 6, 'codtip' => 7, 'observ' => 8, 'codfin' => 9, 'id' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
@@ -137,6 +140,8 @@ abstract class BaseFormetotrcrePeer {
 		$criteria->addSelectColumn(FormetotrcrePeer::CODTIP);
 
 		$criteria->addSelectColumn(FormetotrcrePeer::OBSERV);
+
+		$criteria->addSelectColumn(FormetotrcrePeer::CODFIN);
 
 		$criteria->addSelectColumn(FormetotrcrePeer::ID);
 
@@ -240,6 +245,7 @@ abstract class BaseFormetotrcrePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FormetotrcrePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

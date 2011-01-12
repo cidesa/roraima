@@ -9,8 +9,8 @@ presupuesto:
         modulo: autenticacion.php
         modulo_dev: autenticacion_dev.php
       default:
-        modulo: contabilidadpresupuesto/aplicaciones/presupuesto
-        modulo_dev: contabilidadpresupuesto/aplicaciones/presupuesto
+        modulo: cp/aplicaciones/presupuesto
+        modulo_dev: cp/aplicaciones/presupuesto
       Aprobación:
         modulo: presupuesto.php
         modulo_dev: presupuesto_dev.php
@@ -82,22 +82,22 @@ presupuesto:
         Documentos Causado:                                   precatcau.php
         Documentos Pago:                                      precatpag.php
         Documentos Ajuste:                                    precataju.php
-        aaaa:                             precatartley2.php
-        Listado de Tipos de Financiamiento:                              precattipfin.php
-
+        Articulos de Ley:                                     precatartley2.php
+        Listado de Tipos de Financiamiento:                   precattipfin.php
       Formatos:
         PreCompromisos:                                       cprprecompromiso.php
         Compromisos:                                          cprcompromiso.php
         Causado:                                              cprcausado.php
         Pagado:                                               cprpagado.php
       Movimientos:
-        #Certificacion Presupuestaria:                         precerpre.php
+        Certificacion Presupuestaria:                         precerpre.php
         Precompromisos:                                       preprc.php
         Compromisos:                                          precom.php
         Causados:                                             precau.php
         Pagados:                                              prepag.php
         Traslados:                                            pretra2.php
         Ajustes:                                              preaju.php
+        Solicitud de Adiciones y Disminuciones:               prersoladidis.php
         Créditos Adicionales/Disminuciones (Por Aprobación):  preadidispre.php
 
       Ejecución Presupuestaria:

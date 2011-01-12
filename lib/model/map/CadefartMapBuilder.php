@@ -128,6 +128,8 @@ class CadefartMapBuilder {
 
 		$tMap->addColumn('COREXT', 'Corext', 'int', CreoleTypes::INTEGER, false, null);
 
+		$tMap->addColumn('TIPODOC', 'Tipodoc', 'string', CreoleTypes::VARCHAR, false, 4);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

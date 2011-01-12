@@ -4,14 +4,14 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 41824 2010-12-22 21:50:52Z cramirez $
  */
 // date: 2007/06/12 13:02:49
 ?>
 <?php echo form_tag('almpriori/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 <?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
@@ -106,6 +106,21 @@
    <th>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    </th>
+   <th>
+<?php echo label_for('casolart[portimeent]', __($labels['casolart{portimeent}']), 'class="required"  Style="width:150px"') ?>
+	  <div class="content<?php if ($sf_request->hasError('casolart{portimeent}')): ?> form-error<?php endif; ?>">
+	  <?php if ($sf_request->hasError('casolart{portimeent}')): ?>
+	    <?php echo form_error('casolart{portimeent}', array('class' => 'form-error-msg')) ?>
+	  <?php endif; ?>
+
+	<?php $value = object_checkbox_tag($casolart, 'getPortimeent', array (
+	  'control_name' => 'casolart[portimeent]',
+	  'onClick' => 'desmarcar(3)'
+	)); echo $value ? $value : '&nbsp;' ?>
+   </th>
+   <th>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   </th>
       <th>
 	   <?php echo label_for('casolart[actsolegr]', __($labels['casolart{actsolegr}']), 'class="required"  Style="width:150px"') ?>
 	  <div class="content<?php if ($sf_request->hasError('casolart{actsolegr}')): ?> form-error<?php endif; ?>">
@@ -115,11 +130,11 @@
 
 	<?php $value = object_checkbox_tag($casolart, 'getActsolegr', array (
 	  'control_name' => 'casolart[actsolegr]',
-      'onBlur'=> remote_function(array(
+      /*'onBlur'=> remote_function(array(
         'url'      => 'almpriori/ajax',
         'complete' => 'AjaxJSON(request, json)',
         'with' => "'ajax=1&reqart='+$('casolart_reqart').value+'&codigo='+this.value"
-        ))
+        ))*/
 	)); echo $value ? $value : '&nbsp;' ?>
     </div>
    </th>
@@ -127,6 +142,31 @@
     </tr>
   </table>
  </div>
+</fieldset>
+
+<fieldset id="sf_fieldset_none" class="">
+<legend><h2><?php echo _('Asignación por Proveedores') ?></h2></legend>
+<div class="form-row">
+<?php echo label_for('casolart[porprovee]', __($labels['casolart{porprovee}']), 'class="required"  Style="width:150px"') ?>
+	  <div class="content<?php if ($sf_request->hasError('casolart{porprovee}')): ?> form-error<?php endif; ?>">
+	  <?php if ($sf_request->hasError('casolart{porprovee}')): ?>
+	    <?php echo form_error('casolart{porprovee}', array('class' => 'form-error-msg')) ?>
+	  <?php endif; ?>
+
+	<?php $value = object_checkbox_tag($casolart, 'getPorprovee', array (
+	  'control_name' => 'casolart[porprovee]',
+	  'onClick' => remote_function(array(
+		'update'   => 'divGrid2',
+	    'script'   => true,
+		'url'      => 'almpriori/ajax?ajax=2',
+		'with'   => "'reqart='+document.getElementById('casolart_reqart').value"
+	  )))); echo $value ? $value : '&nbsp;' ?>
+
+<br> <br>
+
+<div id="divGrid2">
+</div>
+</div>
 </fieldset>
 
 <fieldset id="sf_fieldset_none" class="">
@@ -183,6 +223,20 @@
 </div>
 </fieldset>
 
+    <br>
+  <?php echo label_for('casolart[observaciones]', __($labels['casolart{observaciones}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('casolart{observaciones}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('casolart{observaciones}')): ?>
+    <?php echo form_error('casolart{observaciones}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($casolart, 'getObservaciones', array (
+  'control_name' => 'casolart[observaciones]',
+  'maxlength' => 5000,
+  'size' => '90x5',
+  'onkeyup' => "javascript:return ismaxlength(this)",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
 </div>
 </fieldset>
 
@@ -201,7 +255,6 @@
   </ul>
 
 <script language="JavaScript" type="text/javascript">
-
  function colocar_prioridad()
  {
 		var filas=obtener_filas_grid('a','3');
@@ -278,9 +331,17 @@
 
   function desmarcar(valor)
   {
-    if (valor==1)
+    if (valor==1){
   	$('casolart_pormoncot').checked=false;
-  	else $('casolart_porcostart').checked=false;
+  	$('casolart_portimeent').checked=false;
+  	}else if (valor==2) {
+  	$('casolart_porcostart').checked=false;
+  	$('casolart_portimeent').checked=false;
+  	}
+  	else {
+  	 $('casolart_pormoncot').checked=false;
+  	 $('casolart_porcostart').checked=false;
+  	 }
   }
 
     function Mostrar_orden_preimpresa()

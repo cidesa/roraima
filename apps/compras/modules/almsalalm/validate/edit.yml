@@ -2,9 +2,10 @@ methods:
   post:
    - "casalalm{codsal}"
    - "casalalm{fecsal}"
-   - "casalalm{rifpro}"
+   - "casalalm{codpro}"
    - "casalalm{dessal}"
    - "casalalm{tipmov}"
+   - "casalalm{codcen}"
 
 names:
   casalalm{codsal}:
@@ -15,10 +16,10 @@ names:
   casalalm{fecsal}:
     required:  Yes
     required_msg: La Fecha no puedo estar en Blanco
-    validators: FechaValidator1, FechaValidator
+    validators: FechaValidator
 
 
-  casalalm{rifpro}:
+  casalalm{codpro}:
     required:  Yes
     validators: ProveedorValidator
     required_msg: CI/RIF de Contratistas de Bienes o Servicio y Cooperativas no puede estar en blanco
@@ -32,6 +33,10 @@ names:
     required:  Yes
     validators: TipoValidator
     required_msg: El Tipo de Movimiento no puede estar en blanco
+
+  casalalm{codcen}:
+    required:  No
+    validators: CentroValidator
 
 FechaValidator1:
     class:         CidesaDateNow
@@ -67,7 +72,7 @@ ProveedorValidator:
     class: CidesaExistValidator
     param:
         class:    Caprovee
-        column:   rifpro
+        column:   codpro
         unique_error:   El Rif de la Contratistas de Bienes o Servicio y Cooperativas no existe.
 
 TipoValidator:
@@ -76,3 +81,10 @@ TipoValidator:
         class:    Catipsal
         column:   codtipsal
         unique_error:   El Código del Tipo de Movimiento no existe.
+
+CentroValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Cadefcen
+        column:   codcen
+        unique_error:   El Centro de Costo no existe.

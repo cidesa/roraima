@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author:jlobaton $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id:_edit_form.php 34632 2009-11-10 14:32:11Z jlobaton $
  */
 // date: 2007/06/19 12:42:22
 ?>
@@ -17,7 +17,7 @@
 
 <?php echo object_input_hidden_tag($fordefpryaccmet, 'getId') ?>
 <?php echo input_hidden_tag('duplicada', '') ?>
-<?php echo javascript_include_tag('dFilter_string', 'ajax', 'tools') ?>
+<?php echo javascript_include_tag('dFilter_string', 'ajax', 'tools','numberformat') ?>
 
 <fieldset id="sf_fieldset_none" class="">
 <legend><?php echo __('Proyecto ó Acción Centralizada') ?></legend>

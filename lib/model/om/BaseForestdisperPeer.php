@@ -225,6 +225,7 @@ abstract class BaseForestdisperPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ForestdisperPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

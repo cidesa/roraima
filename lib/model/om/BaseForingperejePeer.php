@@ -225,6 +225,7 @@ abstract class BaseForingperejePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ForingperejePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

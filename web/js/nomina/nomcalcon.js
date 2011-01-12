@@ -1,4 +1,13 @@
-////
+/**
+ * Librerías Javascript
+ *
+ * @package    Roraima
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id$
+ *
+ * @copyright  Copyright 2007, Cide S.A.
+ * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
+ */
 
     function Inicial()
     {
@@ -197,7 +206,7 @@
 			{
 				var cod1 = $('cajaux').value;
 				var cod2 = $('idlabel').value;
-				if (cod1=="NHMENEDA" || cod1=="NHMAYEDA"|| cod1=="SIMESDAD"|| cod1=='SHORAS' || cod1=='SDIAS' || cod1=='FECDIAS'|| cod1=='FECMES'|| cod1=='FECANNOS'|| cod1=='INTPRES')
+				if (cod1=="NHMENEDA" || cod1=="NHMAYEDA"|| cod1=="SIMESDAD"|| cod1=='SHORAS' || cod1=='SDIAS' || cod1=='FECDIAS'|| cod1=='FECMES'|| cod1=='FECANNOS'|| cod1=='INTPRES'|| cod1=='DIAADIPRE' || cod1=='DIAADIFID')
 				    var cod = cod1+cod2.toUpperCase();
   			    else
 					var cod = cod1+"("+cod2+")";
@@ -224,11 +233,11 @@
 					var cod1 = $('cajaux').value;
 					var fecha = $('idlabel2').value;
 					var cod2 = fecha.substr(0,2)+fecha.substr(3,2)+fecha.substr(6,4);
-					if (cod1=='INTPRES')
+					if (cod1=='INTPRES' || cod1=='DIAADIPRE' || cod1=='DIAADIFID')
 					    var cod = cod1+cod2.toUpperCase();
 	  			    else
 						var cod = cod1+cod2;
-						
+
 					$('textooculto1').hide();
 					$('grid1').show();
 					$('idfunciones').disabled=false;
@@ -257,11 +266,11 @@
 			{
 				var cod1 = $('cajaux').value;
 				var cod2 = $('idlabel').value;
-				if (cod1=='INTPRES')
+				if (cod1=='INTPRES' || cod1=='DIAADIPRE' || cod1=='DIAADIFID')
 				    var cod = cod1+cod2.toUpperCase();
   			    else
 					var cod = cod1+"("+cod2+")";
-				
+
 				$('textooculto1').hide();
 				$('grid1').show();
 				$('idfunciones').disabled=false;
@@ -280,11 +289,11 @@
 					var cod1 = $('cajaux').value;
 					var fecha = $('idlabel2').value;
 					var cod2 = fecha.substr(0,2)+fecha.substr(3,2)+fecha.substr(6,4);
-					if (cod1=='INTPRES')
+					if (cod1=='INTPRES' || cod1=='DIAADIPRE' || cod1=='DIAADIFID')
 					    var cod = cod1+cod2.toUpperCase();
 	  			    else
 						var cod = cod1+cod2;
-					
+
 					$('textooculto1').hide();
 					$('grid1').show();
 					$('idfunciones').disabled=false;
@@ -482,17 +491,21 @@
 
 				dato = 'ACUC';
 			}
-			if (dato=='STAB')
+			if (dato=='STAB' || dato=='SC' || dato=='DIFSUECARCOL')
 			{
-				var param = cod.substr(4,(cod.length) - 4);
+				var param = cod.substr(2,(cod.length) - 2);
 				var parametro = param.substr(2,2)+"/"+param.substr(0,2)+"/"+param.substr(4,4);
 				var fecha = new Date();
 				var ano = fecha.getFullYear();
 
 				if (isDate(parametro))
 				   parametro = "0101"+ano;
-
-				dato = 'STAB';
+				if(dato=='STAB')
+					dato = 'STAB';
+				else if(dato=='SC')
+					dato = 'SC';
+                                else
+                                       dato = 'DIFSUECARCOL';
 			}
 			if (dato=='CTAB')
 			{
@@ -506,7 +519,7 @@
 
 				dato = 'CTAB';
 			}
-			if (dato != "SIC" &&  dato != "SIC" && dato != "SIM" && dato != "SC" && dato != "SCAR" && dato != "TAF" && dato != "NL" && dato != "NLP" && dato != "NS" &&
+			if (dato != "SIC" &&  dato != "SIC" && dato != "SIM" && dato != "SC" && dato != "SCAR" && dato != "CCAR" && dato != "TAF" && dato != "TDED" && dato != "NL" && dato != "NLP" && dato != "NS" &&
 			    dato != "AD" && dato != "DC" && dato != "DV" && dato != "DBV" && dato != "PV" && dato != "ADV" && dato != "ADF" && dato != "AM" && dato != "CATRAB" &&
 			    dato != "AC" && dato != "AA" && dato != "AET" && dato != "AAP" && dato != "CC" && dato != "ED" && dato != "EE"  && dato != "FFRAC" && dato != "FINT" && dato != "ACUC" &&
 			    dato != "MESF"  && dato != "DIAF" && dato != "ANOF" && dato != "NHGR" && dato != "NHIJ" && dato != "PPROF" && dato != "PHIJO" && dato != "MCES" &&
@@ -607,7 +620,7 @@
 					$('cajoculabel').value='';
 					$('cajaux').value=cod;
 					return true;
-		     	}else if (cod=='STAB' || cod=='CTAB')
+		     	}else if (cod=='STAB' || cod=='CTAB' || cod=='SC' || cod=='DIFSUECARCOL')
 		     	{
 		     	    $('grid1').hide();
 					$('idfunciones').disabled=true;
@@ -714,7 +727,7 @@
 					$('idlabel').focus();
 					return true;
 		     	}
-				else if(cod=='INTPRES')
+				else if(cod=='INTPRES' || cod=='DIAADIPRE' || cod=='DIAADIFID')
 		     	{
 		     	    $('grid1').hide();
 					$('idfunciones').disabled=true;
@@ -773,9 +786,14 @@
 
 		     var fil2=0;
 		     var cuentafil=0;
+                 var col=1;
+                 var valcajgrid5=$('cajgrid5').value;
+                 if(valcajgrid5=='3')
+                     col=3;
+
 		     while (fil2<150)
 	         {
-	            var ida="ax"+"_"+fil2+"_1";
+	            var ida="ax"+"_"+fil2+"_"+col;
 	            if ($(ida).value=="")
 	            {
 	               cuentafil=fil2;
@@ -783,7 +801,7 @@
 	            }
 	            fil2++;
 	         }
-	         var caj1="ax"+"_"+cuentafil+"_1";
+	         var caj1="ax"+"_"+cuentafil+"_"+col;
 	         $(caj1).value=cod;
 	}
 
@@ -948,10 +966,11 @@
 
         if ($(idnew).value=='' &&  $(id).value!='')
 		{
+                        $(id).value='';
 			alert('Debe Introducir Primero el Campo');
-			$(id).value='';
 		}
         else
+        if($(id).value!='')
         {
         	if ($(idnew).value=="E03" &&  $(id).value!='')
         	{
@@ -1047,7 +1066,7 @@
 				   alert('Debe introducir un valor numerico');
 				   $(id).value="";
 				}
-        	}else if ($(idnew).value!="E00" && $(idnew).value!="E02")
+        	}else if ($(idnew).value!="E00" && $(idnew).value!="E02" && $(idnew).value!="CARG")
         	{
         		var val = $(id).value.replace(',','.');
 	        	if (!(isNaN(val)))
@@ -1086,3 +1105,18 @@
 		}
 
 	}
+    function Capturarfoco(id)
+    {
+        var aux = id.split("_");
+        var name=aux[0];
+        var fila=aux[1];
+        var col=parseInt(aux[2]);
+
+        if(col==3)
+        {
+            $('cajgrid5').value="3";
+        }else
+        {
+            $('cajgrid5').value="1";
+        }
+    }

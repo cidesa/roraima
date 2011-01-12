@@ -64,7 +64,7 @@
 
 
 
-<?php echo button_to('Salvar', 'Tesmovsegban/salvaranu?refban='.$tsmovban->getRefban().'&fecban='.$tsmovban->getFecban().'&tipmov='.$tsmovban->getTipmov().'&id='.$tsmovban->getId().'&numcue='.$tsmovban->getNumcue()) ?></fieldset>
+<?php echo button_to('Salvar', 'tesmovsegban/salvaranu?refban='.$tsmovban->getRefban().'&fecban='.$tsmovban->getFecban().'&id='.$tsmovban->getId().'&numcue='.$tsmovban->getNumcue()) ?></fieldset>
 </form>
 
 

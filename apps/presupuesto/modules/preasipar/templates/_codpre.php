@@ -6,5 +6,5 @@
         'getsecundario' => 'getNompre',
         'campoprincipal' => 'codpre',
         'camposecundario' => 'nompre',
-        'campobase' => 'id',), 'Preasipar_Cpdeftit', 'cpdeftit',$parametros,'','grid1',0);
+        'campobase' => 'id',), 'Preasipar_Cpdeftit', 'cpdeftit',$parametros,'','divgrid',0);
 ?>

@@ -13,7 +13,7 @@ abstract class BaseCaentalmPeer {
 	const CLASS_DEFAULT = 'lib.model.Caentalm';
 
 	
-	const NUM_COLUMNS = 10;
+	const NUM_COLUMNS = 12;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -47,6 +47,12 @@ abstract class BaseCaentalmPeer {
 	const TIPMOV = 'caentalm.TIPMOV';
 
 	
+	const CODCEN = 'caentalm.CODCEN';
+
+	
+	const DPHART = 'caentalm.DPHART';
+
+	
 	const ID = 'caentalm.ID';
 
 	
@@ -55,18 +61,18 @@ abstract class BaseCaentalmPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Rcpart', 'Fecrcp', 'Desrcp', 'Codpro', 'Monrcp', 'Starcp', 'Codalm', 'Codubi', 'Tipmov', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CaentalmPeer::RCPART, CaentalmPeer::FECRCP, CaentalmPeer::DESRCP, CaentalmPeer::CODPRO, CaentalmPeer::MONRCP, CaentalmPeer::STARCP, CaentalmPeer::CODALM, CaentalmPeer::CODUBI, CaentalmPeer::TIPMOV, CaentalmPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('rcpart', 'fecrcp', 'desrcp', 'codpro', 'monrcp', 'starcp', 'codalm', 'codubi', 'tipmov', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Rcpart', 'Fecrcp', 'Desrcp', 'Codpro', 'Monrcp', 'Starcp', 'Codalm', 'Codubi', 'Tipmov', 'Codcen', 'Dphart', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CaentalmPeer::RCPART, CaentalmPeer::FECRCP, CaentalmPeer::DESRCP, CaentalmPeer::CODPRO, CaentalmPeer::MONRCP, CaentalmPeer::STARCP, CaentalmPeer::CODALM, CaentalmPeer::CODUBI, CaentalmPeer::TIPMOV, CaentalmPeer::CODCEN, CaentalmPeer::DPHART, CaentalmPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('rcpart', 'fecrcp', 'desrcp', 'codpro', 'monrcp', 'starcp', 'codalm', 'codubi', 'tipmov', 'codcen', 'dphart', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Rcpart' => 0, 'Fecrcp' => 1, 'Desrcp' => 2, 'Codpro' => 3, 'Monrcp' => 4, 'Starcp' => 5, 'Codalm' => 6, 'Codubi' => 7, 'Tipmov' => 8, 'Id' => 9, ),
-		BasePeer::TYPE_COLNAME => array (CaentalmPeer::RCPART => 0, CaentalmPeer::FECRCP => 1, CaentalmPeer::DESRCP => 2, CaentalmPeer::CODPRO => 3, CaentalmPeer::MONRCP => 4, CaentalmPeer::STARCP => 5, CaentalmPeer::CODALM => 6, CaentalmPeer::CODUBI => 7, CaentalmPeer::TIPMOV => 8, CaentalmPeer::ID => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('rcpart' => 0, 'fecrcp' => 1, 'desrcp' => 2, 'codpro' => 3, 'monrcp' => 4, 'starcp' => 5, 'codalm' => 6, 'codubi' => 7, 'tipmov' => 8, 'id' => 9, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Rcpart' => 0, 'Fecrcp' => 1, 'Desrcp' => 2, 'Codpro' => 3, 'Monrcp' => 4, 'Starcp' => 5, 'Codalm' => 6, 'Codubi' => 7, 'Tipmov' => 8, 'Codcen' => 9, 'Dphart' => 10, 'Id' => 11, ),
+		BasePeer::TYPE_COLNAME => array (CaentalmPeer::RCPART => 0, CaentalmPeer::FECRCP => 1, CaentalmPeer::DESRCP => 2, CaentalmPeer::CODPRO => 3, CaentalmPeer::MONRCP => 4, CaentalmPeer::STARCP => 5, CaentalmPeer::CODALM => 6, CaentalmPeer::CODUBI => 7, CaentalmPeer::TIPMOV => 8, CaentalmPeer::CODCEN => 9, CaentalmPeer::DPHART => 10, CaentalmPeer::ID => 11, ),
+		BasePeer::TYPE_FIELDNAME => array ('rcpart' => 0, 'fecrcp' => 1, 'desrcp' => 2, 'codpro' => 3, 'monrcp' => 4, 'starcp' => 5, 'codalm' => 6, 'codubi' => 7, 'tipmov' => 8, 'codcen' => 9, 'dphart' => 10, 'id' => 11, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
@@ -137,6 +143,10 @@ abstract class BaseCaentalmPeer {
 		$criteria->addSelectColumn(CaentalmPeer::CODUBI);
 
 		$criteria->addSelectColumn(CaentalmPeer::TIPMOV);
+
+		$criteria->addSelectColumn(CaentalmPeer::CODCEN);
+
+		$criteria->addSelectColumn(CaentalmPeer::DPHART);
 
 		$criteria->addSelectColumn(CaentalmPeer::ID);
 
@@ -217,6 +227,167 @@ abstract class BaseCaentalmPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinCatipent(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CaentalmPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CaentalmPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CaentalmPeer::TIPMOV, CatipentPeer::CODTIPENT);
+
+		$rs = CaentalmPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinCatipent(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CaentalmPeer::addSelectColumns($c);
+		$startcol = (CaentalmPeer::NUM_COLUMNS - CaentalmPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		CatipentPeer::addSelectColumns($c);
+
+		$c->addJoin(CaentalmPeer::TIPMOV, CatipentPeer::CODTIPENT);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CaentalmPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = CatipentPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getCatipent(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCaentalm($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCaentalms();
+				$obj2->addCaentalm($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CaentalmPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CaentalmPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+			$criteria->addJoin(CaentalmPeer::TIPMOV, CatipentPeer::CODTIPENT);
+	
+		$rs = CaentalmPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CaentalmPeer::addSelectColumns($c);
+		$startcol2 = (CaentalmPeer::NUM_COLUMNS - CaentalmPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			CatipentPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CatipentPeer::NUM_COLUMNS;
+	
+			$c->addJoin(CaentalmPeer::TIPMOV, CatipentPeer::CODTIPENT);
+	
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CaentalmPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+							
+				$omClass = CatipentPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getCatipent(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addCaentalm($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initCaentalms();
+					$obj2->addCaentalm($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{

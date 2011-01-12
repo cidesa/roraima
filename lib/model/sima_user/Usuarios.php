@@ -18,7 +18,10 @@ class Usuarios extends BaseUsuarios
   protected $confirm = '';
   protected $password = '';
   protected $repassword = '';
-
+  protected $grid=array();
+  protected $mascaracat = "";
+  protected $loncat = 0;
+  
   public function __toString()
   {
     return $this->nomuse;
@@ -27,6 +30,12 @@ class Usuarios extends BaseUsuarios
   public function getNomuni(){
 
     return Herramientas::getX('id','acunidad','nomuni',self::getNumuni());
+  }
+
+
+  public function getDesniv(){
+
+    return Herramientas::getX('CODNIV','Segnivapr','Desniv',self::getCodniv());
   }
 
 }

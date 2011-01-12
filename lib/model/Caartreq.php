@@ -22,6 +22,8 @@ class Caartreq extends BaseCaartreq
    public $montotdes=0.0;
    protected $codalm="";
    protected $codubi="";
+   protected $nrolot="";
+   protected $numlotxart=array();
 
    public function hydrate(ResultSet $rs, $startcol = 1)
    {
@@ -91,5 +93,33 @@ class Caartreq extends BaseCaartreq
 	{
 		return Herramientas::getX('CODUBI','Cadefubi','Nomubi',$this->getCodubi());
 	}
+
+  public function getNumlotxart()
+  {
+    $c = new Criteria();
+    $c->add(CaartalmubiPeer::CODALM,$this->getCodalm());
+    $c->add(CaartalmubiPeer::CODUBI,$this->getCodubi());
+    $c->add(CaartalmubiPeer::CODART,self::getCodart());
+    $c->add(CaartalmubiPeer::EXIACT,0,Criteria::GREATER_THAN);
+    $c->addAscendingOrderByColumn(CaartalmubiPeer::FECVEN);
+
+    $datos = CaartalmubiPeer::doSelect($c);
+
+    $lotes = array();
+
+    foreach($datos as $obj_datos)
+    {
+     if ($obj_datos->getFecven()!="")
+     {
+        $fecven=date("d/m/Y",strtotime($obj_datos->getFecven()));
+      	$lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot()." - ".$fecven);
+     }
+      else
+      	$lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot());
+    }
+    return $lotes;
+  }
+
+
 
 }

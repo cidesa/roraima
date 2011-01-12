@@ -64,20 +64,38 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>
+<table>
+    <tr>
+        <th>
+            <?php echo label_for('npnomesptipos[nomintpre]', __($labels['npnomesptipos{nomintpre}']), 'class="required"') ?>
+              <div class="content<?php if ($sf_request->hasError('npnomesptipos{nomintpre}')): ?> form-error<?php endif; ?>">
+              <?php if ($sf_request->hasError('npnomesptipos{nomintpre}')): ?>
+                <?php echo form_error('npnomesptipos{nomintpre}', array('class' => 'form-error-msg')) ?>
+              <?php endif; ?>
 
-  <?php echo label_for('npnomesptipos[nomintpre]', __($labels['npnomesptipos{nomintpre}']), 'class="required"') ?>
-  <div class="content<?php if ($sf_request->hasError('npnomesptipos{nomintpre}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npnomesptipos{nomintpre}')): ?>
-    <?php echo form_error('npnomesptipos{nomintpre}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
+              <?php $value = object_checkbox_tag($npnomesptipos, 'getNomintpre', array (
+              'control_name' => 'npnomesptipos[nomintpre]',
+            )); echo $value ? $value : '&nbsp;' ?>
+                </div>
+        </th>
+        <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        <th>
+            <?php echo label_for('npnomesptipos[nomdiaadi]', __($labels['npnomesptipos{nomdiaadi}']), 'class="required"') ?>
+              <div class="content<?php if ($sf_request->hasError('npnomesptipos{nomdiaadi}')): ?> form-error<?php endif; ?>">
+              <?php if ($sf_request->hasError('npnomesptipos{nomdiaadi}')): ?>
+                <?php echo form_error('npnomesptipos{nomdiaadi}', array('class' => 'form-error-msg')) ?>
+              <?php endif; ?>
 
-  <?php $value = object_checkbox_tag($npnomesptipos, 'getNomintpre', array (
-  'control_name' => 'npnomesptipos[nomintpre]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-	
-<br>	
-<br>
+              <?php $value = object_checkbox_tag($npnomesptipos, 'getNomdiaadi', array (
+              'control_name' => 'npnomesptipos[nomdiaadi]',
+            )); echo $value ? $value : '&nbsp;' ?>
+                </div>
+        </th>
+    </tr>
+</table>
+  
+
+
 </div>
 </fieldset>
 
@@ -92,7 +110,7 @@
 <?php if ($sf_request->hasError('npnomesptipos{fecnomdes}')): ?> <?php echo form_error('npnomesptipos{fecnomdes}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?> <?php $value = object_input_date_tag($npnomesptipos, 'getFecnomdes', array (
   'rich' => true,
-  'readonly' => $npnomesptipos->getId()!='' ? true : false ,
+  //'readonly' => $npnomesptipos->getId()!='' ? true : false ,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'npnomesptipos[fecnomdes]',
   'date_format' => 'dd/MM/yy',
@@ -101,7 +119,7 @@
 <strong>Hasta</strong>
 &nbsp; <?php $value = object_input_date_tag($npnomesptipos, 'getFecnomhas', array (
 'rich' => true,
-'readonly' => $npnomesptipos->getId()!='' ? true : false ,
+//'readonly' => $npnomesptipos->getId()!='' ? true : false ,
 'calendar_button_img' => '/sf/sf_admin/images/date.png',
 'control_name' => 'npnomesptipos[fecnomhas]',
 'date_format' => 'dd/MM/yy',
@@ -145,8 +163,8 @@
     var id='<?php echo $npnomesptipos->getId()?>';
     if (id!="")
     {
-      $('trigger_npnomesptipos_fecnomdes').hide();
-      $('trigger_npnomesptipos_fecnomhas').hide();
+      //$('trigger_npnomesptipos_fecnomdes').hide();
+      //$('trigger_npnomesptipos_fecnomhas').hide();
     }
 
  function totalregistros(letra,posicion,filas)

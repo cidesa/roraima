@@ -45,6 +45,10 @@ abstract class BaseCadetcot extends BaseObject  implements Persistent {
 
 
 	
+	protected $observaciones;
+
+
+
 	protected $id;
 
 	
@@ -137,6 +141,13 @@ abstract class BaseCadetcot extends BaseObject  implements Persistent {
 
   }
   
+  public function getObservaciones()
+  {
+
+    return trim($this->observaciones);
+
+  }
+
   public function getId()
   {
 
@@ -197,6 +208,11 @@ abstract class BaseCadetcot extends BaseObject  implements Persistent {
 	public function setFecent($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecent] from input: " . var_export($v, true));
@@ -241,6 +257,16 @@ abstract class BaseCadetcot extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setObservaciones($v)
+	{
+
+    if ($this->observaciones !== $v) {
+        $this->observaciones = $v;
+        $this->modifiedColumns[] = CadetcotPeer::OBSERVACIONES;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -273,7 +299,9 @@ abstract class BaseCadetcot extends BaseObject  implements Persistent {
 
       $this->mondes = $rs->getFloat($startcol + 8);
 
-      $this->id = $rs->getInt($startcol + 9);
+      $this->observaciones = $rs->getString($startcol + 9);
+
+      $this->id = $rs->getInt($startcol + 10);
 
       $this->resetModified();
 
@@ -281,7 +309,7 @@ abstract class BaseCadetcot extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 10; 
+            return $startcol + 11;
     } catch (Exception $e) {
       throw new PropelException("Error populating Cadetcot object", $e);
     }
@@ -456,6 +484,9 @@ abstract class BaseCadetcot extends BaseObject  implements Persistent {
 				return $this->getMondes();
 				break;
 			case 9:
+				return $this->getObservaciones();
+				break;
+			case 10:
 				return $this->getId();
 				break;
 			default:
@@ -477,7 +508,8 @@ abstract class BaseCadetcot extends BaseObject  implements Persistent {
 			$keys[6] => $this->getPriori(),
 			$keys[7] => $this->getJustifica(),
 			$keys[8] => $this->getMondes(),
-			$keys[9] => $this->getId(),
+			$keys[9] => $this->getObservaciones(),
+			$keys[10] => $this->getId(),
 		);
 		return $result;
 	}
@@ -521,6 +553,9 @@ abstract class BaseCadetcot extends BaseObject  implements Persistent {
 				$this->setMondes($value);
 				break;
 			case 9:
+				$this->setObservaciones($value);
+				break;
+			case 10:
 				$this->setId($value);
 				break;
 		} 	}
@@ -539,7 +574,8 @@ abstract class BaseCadetcot extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setPriori($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setJustifica($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setMondes($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
+		if (array_key_exists($keys[9], $arr)) $this->setObservaciones($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
 	}
 
 	
@@ -556,6 +592,7 @@ abstract class BaseCadetcot extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CadetcotPeer::PRIORI)) $criteria->add(CadetcotPeer::PRIORI, $this->priori);
 		if ($this->isColumnModified(CadetcotPeer::JUSTIFICA)) $criteria->add(CadetcotPeer::JUSTIFICA, $this->justifica);
 		if ($this->isColumnModified(CadetcotPeer::MONDES)) $criteria->add(CadetcotPeer::MONDES, $this->mondes);
+		if ($this->isColumnModified(CadetcotPeer::OBSERVACIONES)) $criteria->add(CadetcotPeer::OBSERVACIONES, $this->observaciones);
 		if ($this->isColumnModified(CadetcotPeer::ID)) $criteria->add(CadetcotPeer::ID, $this->id);
 
 		return $criteria;
@@ -604,6 +641,8 @@ abstract class BaseCadetcot extends BaseObject  implements Persistent {
 		$copyObj->setJustifica($this->justifica);
 
 		$copyObj->setMondes($this->mondes);
+
+		$copyObj->setObservaciones($this->observaciones);
 
 
 		$copyObj->setNew(true);

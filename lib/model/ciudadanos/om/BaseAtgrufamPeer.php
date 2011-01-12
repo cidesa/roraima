@@ -305,8 +305,8 @@ abstract class BaseAtgrufamPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(AtgrufamPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
-
+			$criteria->addJoin(AtgrufamPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
+	
 		$rs = AtgrufamPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -328,11 +328,11 @@ abstract class BaseAtgrufamPeer {
 		AtgrufamPeer::addSelectColumns($c);
 		$startcol2 = (AtgrufamPeer::NUM_COLUMNS - AtgrufamPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		AtciudadanoPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + AtciudadanoPeer::NUM_COLUMNS;
-
-		$c->addJoin(AtgrufamPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
-
+			AtciudadanoPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + AtciudadanoPeer::NUM_COLUMNS;
+	
+			$c->addJoin(AtgrufamPeer::ATCIUDADANO_ID, AtciudadanoPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -346,28 +346,28 @@ abstract class BaseAtgrufamPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = AtciudadanoPeer::getOMClass();
+							
+				$omClass = AtciudadanoPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getAtciudadano(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addAtgrufam($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getAtciudadano(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addAtgrufam($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initAtgrufams();
-				$obj2->addAtgrufam($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initAtgrufams();
+					$obj2->addAtgrufam($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

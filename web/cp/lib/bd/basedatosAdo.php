@@ -18,6 +18,7 @@
         $opciones = Yaml::load($sf_config_dir."/databases.yml");
         $opciones = $opciones['all']['propel']['param'];
         $hostname = $opciones['hostspec'];
+        $schema   = $opciones['schema'];
         $user     = $opciones['username'];
         $port     = $opciones['port'];
         $password = $opciones['password'];
@@ -26,21 +27,24 @@
         // Aqui se modifica las direcciones estaticas de conexion con la BD
         $hostname = "localhost";
         $user     = "postgres";
-        $password = "postgres";
+        $password = "Sketch09Web";
+        $schema   = "SIMA010";
         $dbname   = "SIMA";
         $port     = "5432";
       }
-      //$port="5432";
-      $this->codemp = $codemp;
+      if(isset($_SESSION['schema'])) $schema = $_SESSION['schema'];
+      //$this->codemp = $codemp;
 
       $this->conn=$this->bd->conectar($driver,$hostname,$user,$password,$port,$dbname);
-      $this->conn->Execute("SET search_path TO ".chr(34).SIMA."$codemp".chr(34));
+      //$this->conn->Execute("SET search_path TO ".chr(34).SIMA."$codemp".chr(34));
+      $this->conn->Execute("SET search_path TO ".chr(34)."$schema".chr(34));
       $this->conn->Execute('SET CLIENT_ENCODING TO "UNICODE"');
     }
 
     function select($sql)
     {
       $rs=$this->conn->Execute($sql);
+      //if(!$rs) return new ADORecordSet_empty(); else return $rs;
       return $rs;
     }
 
@@ -75,25 +79,25 @@
        $rs=$this->conn->MetaColumns($tabla,$toupper=false);
       return $rs;
     }
-    
+
     function Log($refmov, $codapl, $tabla, $codmod, $tipope)
     {
       $loguse = $_SESSION['loguse'];
 //      print $loguse;
 
       $sql = "SELECT id FROM ".'"SIMA_USER".'."USUARIOS WHERE LOGUSE='$loguse'";
-//print $sql;      
+//print $sql;
       $rs = $this->select($sql);
 
       if($rs) $codintusu= $rs->fields['id'];
       else $codintusu= 'SINUSU';
-      
+
       $sql = "INSERT INTO ".'"SIMA_USER".'."SEGBITACO(refmov, codapl, codintusu, valcla, codmod, tipope, fecope, horope)
       VALUES('$refmov', '$codapl', '$codintusu', '$tabla', '$codmod', '$tipope', CURRENT_DATE, CURRENT_TIMESTAMP );
       ";
 //print $sql;exit;
       $this->conn->Execute($sql);
-      
+
     }
 
   }

@@ -57,7 +57,7 @@ class nomnomcalnomindActions extends autonomnomcalnomindActions
         $datoaux='';
         $datopag='';
         ////LOSTFOCUS
-        if ($codigo!='')
+        /*if ($codigo!='')
         {
         $sql0="Select distinct(A.codnom),B.nomnom from npdefmov A,npnomina B where A.CodNom='".$codigo."' and A.codnom=B.codnom";
         if (Herramientas::BuscarDatos($sql0,&$npresult))
@@ -65,7 +65,9 @@ class nomnomcalnomindActions extends autonomnomcalnomindActions
           $datoaux='valor';
           $consultado=true;
         }
-        }
+        }*/
+        $datoaux='valor';
+          $consultado=true;
         if ($consultado)
       {   /////DATOS NIVELES
           $opsi="false";

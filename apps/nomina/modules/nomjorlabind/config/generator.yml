@@ -8,7 +8,7 @@ generator:
       nomnom:     { name: Nómina }
       idejor:     { name: Jornada }
       codemp:     { name: Cedula }
-      nomemp:     { name: Nombre, params: maxlength=50,size=50}    # Tabla Nphojint
+      nomemp:     { name: Nombre, params: maxlength=50 size=50}    # Tabla Nphojint
       nomcar:     { name: Cargo }	   # Tabla Npasicaremp
       lunes:      { name: Lunes }
       martes:     { name: Martes }

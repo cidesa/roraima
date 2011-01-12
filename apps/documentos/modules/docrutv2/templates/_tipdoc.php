@@ -1,0 +1,1 @@
+  <?php echo select_tag('dftabtip[tipdoc]', options_for_select($params['tablas'],$dftabtip->getId(),'include_custom=Seleccione...'), $dftabtip->getId() ? 'disabled=true' : '') ?>

@@ -13,7 +13,7 @@ abstract class BaseTsdefbanPeer {
 	const CLASS_DEFAULT = 'lib.model.Tsdefban';
 
 	
-	const NUM_COLUMNS = 35;
+	const NUM_COLUMNS = 37;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -122,6 +122,12 @@ abstract class BaseTsdefbanPeer {
 	const ENDOSABLE = 'tsdefban.ENDOSABLE';
 
 	
+	const SALMIN = 'tsdefban.SALMIN';
+
+	
+	const NOMREP = 'tsdefban.NOMREP';
+
+	
 	const ID = 'tsdefban.ID';
 
 	
@@ -130,18 +136,18 @@ abstract class BaseTsdefbanPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcue', 'Nomcue', 'Tipcue', 'Codcta', 'Fecreg', 'Fecven', 'Fecper', 'Renaut', 'Porint', 'Tipint', 'Numche', 'Antban', 'Debban', 'Creban', 'Antlib', 'Deblib', 'Crelib', 'Valche', 'Concil', 'Plazo', 'Fecape', 'Usocue', 'Tipren', 'Desenl', 'Porsalmin', 'Monsalmin', 'Codctaprecoo', 'Codctapreord', 'Trasitoria', 'Salact', 'Fecaper', 'Temnumcue', 'Cantdig', 'Endosable', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (TsdefbanPeer::NUMCUE, TsdefbanPeer::NOMCUE, TsdefbanPeer::TIPCUE, TsdefbanPeer::CODCTA, TsdefbanPeer::FECREG, TsdefbanPeer::FECVEN, TsdefbanPeer::FECPER, TsdefbanPeer::RENAUT, TsdefbanPeer::PORINT, TsdefbanPeer::TIPINT, TsdefbanPeer::NUMCHE, TsdefbanPeer::ANTBAN, TsdefbanPeer::DEBBAN, TsdefbanPeer::CREBAN, TsdefbanPeer::ANTLIB, TsdefbanPeer::DEBLIB, TsdefbanPeer::CRELIB, TsdefbanPeer::VALCHE, TsdefbanPeer::CONCIL, TsdefbanPeer::PLAZO, TsdefbanPeer::FECAPE, TsdefbanPeer::USOCUE, TsdefbanPeer::TIPREN, TsdefbanPeer::DESENL, TsdefbanPeer::PORSALMIN, TsdefbanPeer::MONSALMIN, TsdefbanPeer::CODCTAPRECOO, TsdefbanPeer::CODCTAPREORD, TsdefbanPeer::TRASITORIA, TsdefbanPeer::SALACT, TsdefbanPeer::FECAPER, TsdefbanPeer::TEMNUMCUE, TsdefbanPeer::CANTDIG, TsdefbanPeer::ENDOSABLE, TsdefbanPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcue', 'nomcue', 'tipcue', 'codcta', 'fecreg', 'fecven', 'fecper', 'renaut', 'porint', 'tipint', 'numche', 'antban', 'debban', 'creban', 'antlib', 'deblib', 'crelib', 'valche', 'concil', 'plazo', 'fecape', 'usocue', 'tipren', 'desenl', 'porsalmin', 'monsalmin', 'codctaprecoo', 'codctapreord', 'trasitoria', 'salact', 'fecaper', 'temnumcue', 'cantdig', 'endosable', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, )
+		BasePeer::TYPE_PHPNAME => array ('Numcue', 'Nomcue', 'Tipcue', 'Codcta', 'Fecreg', 'Fecven', 'Fecper', 'Renaut', 'Porint', 'Tipint', 'Numche', 'Antban', 'Debban', 'Creban', 'Antlib', 'Deblib', 'Crelib', 'Valche', 'Concil', 'Plazo', 'Fecape', 'Usocue', 'Tipren', 'Desenl', 'Porsalmin', 'Monsalmin', 'Codctaprecoo', 'Codctapreord', 'Trasitoria', 'Salact', 'Fecaper', 'Temnumcue', 'Cantdig', 'Endosable', 'Salmin', 'Nomrep', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (TsdefbanPeer::NUMCUE, TsdefbanPeer::NOMCUE, TsdefbanPeer::TIPCUE, TsdefbanPeer::CODCTA, TsdefbanPeer::FECREG, TsdefbanPeer::FECVEN, TsdefbanPeer::FECPER, TsdefbanPeer::RENAUT, TsdefbanPeer::PORINT, TsdefbanPeer::TIPINT, TsdefbanPeer::NUMCHE, TsdefbanPeer::ANTBAN, TsdefbanPeer::DEBBAN, TsdefbanPeer::CREBAN, TsdefbanPeer::ANTLIB, TsdefbanPeer::DEBLIB, TsdefbanPeer::CRELIB, TsdefbanPeer::VALCHE, TsdefbanPeer::CONCIL, TsdefbanPeer::PLAZO, TsdefbanPeer::FECAPE, TsdefbanPeer::USOCUE, TsdefbanPeer::TIPREN, TsdefbanPeer::DESENL, TsdefbanPeer::PORSALMIN, TsdefbanPeer::MONSALMIN, TsdefbanPeer::CODCTAPRECOO, TsdefbanPeer::CODCTAPREORD, TsdefbanPeer::TRASITORIA, TsdefbanPeer::SALACT, TsdefbanPeer::FECAPER, TsdefbanPeer::TEMNUMCUE, TsdefbanPeer::CANTDIG, TsdefbanPeer::ENDOSABLE, TsdefbanPeer::SALMIN, TsdefbanPeer::NOMREP, TsdefbanPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcue', 'nomcue', 'tipcue', 'codcta', 'fecreg', 'fecven', 'fecper', 'renaut', 'porint', 'tipint', 'numche', 'antban', 'debban', 'creban', 'antlib', 'deblib', 'crelib', 'valche', 'concil', 'plazo', 'fecape', 'usocue', 'tipren', 'desenl', 'porsalmin', 'monsalmin', 'codctaprecoo', 'codctapreord', 'trasitoria', 'salact', 'fecaper', 'temnumcue', 'cantdig', 'endosable', 'salmin', 'nomrep', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcue' => 0, 'Nomcue' => 1, 'Tipcue' => 2, 'Codcta' => 3, 'Fecreg' => 4, 'Fecven' => 5, 'Fecper' => 6, 'Renaut' => 7, 'Porint' => 8, 'Tipint' => 9, 'Numche' => 10, 'Antban' => 11, 'Debban' => 12, 'Creban' => 13, 'Antlib' => 14, 'Deblib' => 15, 'Crelib' => 16, 'Valche' => 17, 'Concil' => 18, 'Plazo' => 19, 'Fecape' => 20, 'Usocue' => 21, 'Tipren' => 22, 'Desenl' => 23, 'Porsalmin' => 24, 'Monsalmin' => 25, 'Codctaprecoo' => 26, 'Codctapreord' => 27, 'Trasitoria' => 28, 'Salact' => 29, 'Fecaper' => 30, 'Temnumcue' => 31, 'Cantdig' => 32, 'Endosable' => 33, 'Id' => 34, ),
-		BasePeer::TYPE_COLNAME => array (TsdefbanPeer::NUMCUE => 0, TsdefbanPeer::NOMCUE => 1, TsdefbanPeer::TIPCUE => 2, TsdefbanPeer::CODCTA => 3, TsdefbanPeer::FECREG => 4, TsdefbanPeer::FECVEN => 5, TsdefbanPeer::FECPER => 6, TsdefbanPeer::RENAUT => 7, TsdefbanPeer::PORINT => 8, TsdefbanPeer::TIPINT => 9, TsdefbanPeer::NUMCHE => 10, TsdefbanPeer::ANTBAN => 11, TsdefbanPeer::DEBBAN => 12, TsdefbanPeer::CREBAN => 13, TsdefbanPeer::ANTLIB => 14, TsdefbanPeer::DEBLIB => 15, TsdefbanPeer::CRELIB => 16, TsdefbanPeer::VALCHE => 17, TsdefbanPeer::CONCIL => 18, TsdefbanPeer::PLAZO => 19, TsdefbanPeer::FECAPE => 20, TsdefbanPeer::USOCUE => 21, TsdefbanPeer::TIPREN => 22, TsdefbanPeer::DESENL => 23, TsdefbanPeer::PORSALMIN => 24, TsdefbanPeer::MONSALMIN => 25, TsdefbanPeer::CODCTAPRECOO => 26, TsdefbanPeer::CODCTAPREORD => 27, TsdefbanPeer::TRASITORIA => 28, TsdefbanPeer::SALACT => 29, TsdefbanPeer::FECAPER => 30, TsdefbanPeer::TEMNUMCUE => 31, TsdefbanPeer::CANTDIG => 32, TsdefbanPeer::ENDOSABLE => 33, TsdefbanPeer::ID => 34, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcue' => 0, 'nomcue' => 1, 'tipcue' => 2, 'codcta' => 3, 'fecreg' => 4, 'fecven' => 5, 'fecper' => 6, 'renaut' => 7, 'porint' => 8, 'tipint' => 9, 'numche' => 10, 'antban' => 11, 'debban' => 12, 'creban' => 13, 'antlib' => 14, 'deblib' => 15, 'crelib' => 16, 'valche' => 17, 'concil' => 18, 'plazo' => 19, 'fecape' => 20, 'usocue' => 21, 'tipren' => 22, 'desenl' => 23, 'porsalmin' => 24, 'monsalmin' => 25, 'codctaprecoo' => 26, 'codctapreord' => 27, 'trasitoria' => 28, 'salact' => 29, 'fecaper' => 30, 'temnumcue' => 31, 'cantdig' => 32, 'endosable' => 33, 'id' => 34, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, )
+		BasePeer::TYPE_PHPNAME => array ('Numcue' => 0, 'Nomcue' => 1, 'Tipcue' => 2, 'Codcta' => 3, 'Fecreg' => 4, 'Fecven' => 5, 'Fecper' => 6, 'Renaut' => 7, 'Porint' => 8, 'Tipint' => 9, 'Numche' => 10, 'Antban' => 11, 'Debban' => 12, 'Creban' => 13, 'Antlib' => 14, 'Deblib' => 15, 'Crelib' => 16, 'Valche' => 17, 'Concil' => 18, 'Plazo' => 19, 'Fecape' => 20, 'Usocue' => 21, 'Tipren' => 22, 'Desenl' => 23, 'Porsalmin' => 24, 'Monsalmin' => 25, 'Codctaprecoo' => 26, 'Codctapreord' => 27, 'Trasitoria' => 28, 'Salact' => 29, 'Fecaper' => 30, 'Temnumcue' => 31, 'Cantdig' => 32, 'Endosable' => 33, 'Salmin' => 34, 'Nomrep' => 35, 'Id' => 36, ),
+		BasePeer::TYPE_COLNAME => array (TsdefbanPeer::NUMCUE => 0, TsdefbanPeer::NOMCUE => 1, TsdefbanPeer::TIPCUE => 2, TsdefbanPeer::CODCTA => 3, TsdefbanPeer::FECREG => 4, TsdefbanPeer::FECVEN => 5, TsdefbanPeer::FECPER => 6, TsdefbanPeer::RENAUT => 7, TsdefbanPeer::PORINT => 8, TsdefbanPeer::TIPINT => 9, TsdefbanPeer::NUMCHE => 10, TsdefbanPeer::ANTBAN => 11, TsdefbanPeer::DEBBAN => 12, TsdefbanPeer::CREBAN => 13, TsdefbanPeer::ANTLIB => 14, TsdefbanPeer::DEBLIB => 15, TsdefbanPeer::CRELIB => 16, TsdefbanPeer::VALCHE => 17, TsdefbanPeer::CONCIL => 18, TsdefbanPeer::PLAZO => 19, TsdefbanPeer::FECAPE => 20, TsdefbanPeer::USOCUE => 21, TsdefbanPeer::TIPREN => 22, TsdefbanPeer::DESENL => 23, TsdefbanPeer::PORSALMIN => 24, TsdefbanPeer::MONSALMIN => 25, TsdefbanPeer::CODCTAPRECOO => 26, TsdefbanPeer::CODCTAPREORD => 27, TsdefbanPeer::TRASITORIA => 28, TsdefbanPeer::SALACT => 29, TsdefbanPeer::FECAPER => 30, TsdefbanPeer::TEMNUMCUE => 31, TsdefbanPeer::CANTDIG => 32, TsdefbanPeer::ENDOSABLE => 33, TsdefbanPeer::SALMIN => 34, TsdefbanPeer::NOMREP => 35, TsdefbanPeer::ID => 36, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcue' => 0, 'nomcue' => 1, 'tipcue' => 2, 'codcta' => 3, 'fecreg' => 4, 'fecven' => 5, 'fecper' => 6, 'renaut' => 7, 'porint' => 8, 'tipint' => 9, 'numche' => 10, 'antban' => 11, 'debban' => 12, 'creban' => 13, 'antlib' => 14, 'deblib' => 15, 'crelib' => 16, 'valche' => 17, 'concil' => 18, 'plazo' => 19, 'fecape' => 20, 'usocue' => 21, 'tipren' => 22, 'desenl' => 23, 'porsalmin' => 24, 'monsalmin' => 25, 'codctaprecoo' => 26, 'codctapreord' => 27, 'trasitoria' => 28, 'salact' => 29, 'fecaper' => 30, 'temnumcue' => 31, 'cantdig' => 32, 'endosable' => 33, 'salmin' => 34, 'nomrep' => 35, 'id' => 36, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, )
 	);
 
 	
@@ -263,6 +269,10 @@ abstract class BaseTsdefbanPeer {
 
 		$criteria->addSelectColumn(TsdefbanPeer::ENDOSABLE);
 
+		$criteria->addSelectColumn(TsdefbanPeer::SALMIN);
+
+		$criteria->addSelectColumn(TsdefbanPeer::NOMREP);
+
 		$criteria->addSelectColumn(TsdefbanPeer::ID);
 
 	}
@@ -342,6 +352,442 @@ abstract class BaseTsdefbanPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinTstipcue(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(TsdefbanPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(TsdefbanPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(TsdefbanPeer::TIPCUE, TstipcuePeer::CODTIP);
+
+		$rs = TsdefbanPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinTstipren(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(TsdefbanPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(TsdefbanPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(TsdefbanPeer::TIPREN, TstiprenPeer::CODTIP);
+
+		$rs = TsdefbanPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinTstipcue(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsdefbanPeer::addSelectColumns($c);
+		$startcol = (TsdefbanPeer::NUM_COLUMNS - TsdefbanPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		TstipcuePeer::addSelectColumns($c);
+
+		$c->addJoin(TsdefbanPeer::TIPCUE, TstipcuePeer::CODTIP);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsdefbanPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = TstipcuePeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getTstipcue(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addTsdefban($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initTsdefbans();
+				$obj2->addTsdefban($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinTstipren(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsdefbanPeer::addSelectColumns($c);
+		$startcol = (TsdefbanPeer::NUM_COLUMNS - TsdefbanPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		TstiprenPeer::addSelectColumns($c);
+
+		$c->addJoin(TsdefbanPeer::TIPREN, TstiprenPeer::CODTIP);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsdefbanPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = TstiprenPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getTstipren(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addTsdefban($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initTsdefbans();
+				$obj2->addTsdefban($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(TsdefbanPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(TsdefbanPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+			$criteria->addJoin(TsdefbanPeer::TIPCUE, TstipcuePeer::CODTIP);
+	
+			$criteria->addJoin(TsdefbanPeer::TIPREN, TstiprenPeer::CODTIP);
+	
+		$rs = TsdefbanPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsdefbanPeer::addSelectColumns($c);
+		$startcol2 = (TsdefbanPeer::NUM_COLUMNS - TsdefbanPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			TstipcuePeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + TstipcuePeer::NUM_COLUMNS;
+	
+			TstiprenPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + TstiprenPeer::NUM_COLUMNS;
+	
+			$c->addJoin(TsdefbanPeer::TIPCUE, TstipcuePeer::CODTIP);
+	
+			$c->addJoin(TsdefbanPeer::TIPREN, TstiprenPeer::CODTIP);
+	
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsdefbanPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+							
+				$omClass = TstipcuePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getTstipcue(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addTsdefban($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initTsdefbans();
+					$obj2->addTsdefban($obj1);
+				}
+	
+
+							
+				$omClass = TstiprenPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj3 = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getTstipren(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addTsdefban($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initTsdefbans();
+					$obj3->addTsdefban($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+		
+		public static function doCountJoinAllExceptTstipcue(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(TsdefbanPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(TsdefbanPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(TsdefbanPeer::TIPREN, TstiprenPeer::CODTIP);
+		
+			$rs = TsdefbanPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
+		}
+	
+
+		
+		public static function doCountJoinAllExceptTstipren(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(TsdefbanPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(TsdefbanPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(TsdefbanPeer::TIPCUE, TstipcuePeer::CODTIP);
+		
+			$rs = TsdefbanPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
+		}
+	
+
+	
+	public static function doSelectJoinAllExceptTstipcue(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsdefbanPeer::addSelectColumns($c);
+		$startcol2 = (TsdefbanPeer::NUM_COLUMNS - TsdefbanPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			TstiprenPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + TstiprenPeer::NUM_COLUMNS;
+	
+			$c->addJoin(TsdefbanPeer::TIPREN, TstiprenPeer::CODTIP);
+	
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsdefbanPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+				$omClass = TstiprenPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getTstipren(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addTsdefban($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initTsdefbans();
+					$obj2->addTsdefban($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptTstipren(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		TsdefbanPeer::addSelectColumns($c);
+		$startcol2 = (TsdefbanPeer::NUM_COLUMNS - TsdefbanPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			TstipcuePeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + TstipcuePeer::NUM_COLUMNS;
+	
+			$c->addJoin(TsdefbanPeer::TIPCUE, TstipcuePeer::CODTIP);
+	
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = TsdefbanPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+				$omClass = TstipcuePeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getTstipcue(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addTsdefban($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initTsdefbans();
+					$obj2->addTsdefban($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{

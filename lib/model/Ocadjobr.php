@@ -59,4 +59,13 @@ class Ocadjobr extends BaseOcadjobr
     return Herramientas::getX('CODPRO','Caprovee','Nompro',self::getCodprogan());
   }
 
+  public function getCodpre()
+  {
+    return Herramientas::getX('CODOBR','Ocregobr','Codpre',self::getCodobr());
+  }
+
+  public function getNompre()
+  {
+    return Herramientas::getX('CODPRE','Cpdeftit','Nompre',self::getCodpre());
+  }
 }

@@ -45,7 +45,18 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 
 
 	
+	protected $codcen;
+
+
+	
+	protected $dphart;
+
+
+	
 	protected $id;
+
+	
+	protected $aCatipent;
 
 	
 	protected $alreadyInSave = false;
@@ -133,6 +144,20 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 
   }
   
+  public function getCodcen()
+  {
+
+    return trim($this->codcen);
+
+  }
+  
+  public function getDphart()
+  {
+
+    return trim($this->dphart);
+
+  }
+  
   public function getId()
   {
 
@@ -152,6 +177,11 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 	
 	public function setFecrcp($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -235,6 +265,30 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = CaentalmPeer::TIPMOV;
       }
   
+		if ($this->aCatipent !== null && $this->aCatipent->getCodtipent() !== $v) {
+			$this->aCatipent = null;
+		}
+
+	} 
+	
+	public function setCodcen($v)
+	{
+
+    if ($this->codcen !== $v) {
+        $this->codcen = $v;
+        $this->modifiedColumns[] = CaentalmPeer::CODCEN;
+      }
+  
+	} 
+	
+	public function setDphart($v)
+	{
+
+    if ($this->dphart !== $v) {
+        $this->dphart = $v;
+        $this->modifiedColumns[] = CaentalmPeer::DPHART;
+      }
+  
 	} 
 	
 	public function setId($v)
@@ -269,7 +323,11 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 
       $this->tipmov = $rs->getString($startcol + 8);
 
-      $this->id = $rs->getInt($startcol + 9);
+      $this->codcen = $rs->getString($startcol + 9);
+
+      $this->dphart = $rs->getString($startcol + 10);
+
+      $this->id = $rs->getInt($startcol + 11);
 
       $this->resetModified();
 
@@ -277,7 +335,7 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 10; 
+            return $startcol + 12; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Caentalm object", $e);
     }
@@ -354,6 +412,15 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aCatipent !== null) {
+				if ($this->aCatipent->isModified()) {
+					$affectedRows += $this->aCatipent->save($con);
+				}
+				$this->setCatipent($this->aCatipent);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CaentalmPeer::doInsert($this, $con);
@@ -399,6 +466,14 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aCatipent !== null) {
+				if (!$this->aCatipent->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCatipent->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = CaentalmPeer::doValidate($this, $columns)) !== true) {
@@ -452,6 +527,12 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 				return $this->getTipmov();
 				break;
 			case 9:
+				return $this->getCodcen();
+				break;
+			case 10:
+				return $this->getDphart();
+				break;
+			case 11:
 				return $this->getId();
 				break;
 			default:
@@ -473,7 +554,9 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 			$keys[6] => $this->getCodalm(),
 			$keys[7] => $this->getCodubi(),
 			$keys[8] => $this->getTipmov(),
-			$keys[9] => $this->getId(),
+			$keys[9] => $this->getCodcen(),
+			$keys[10] => $this->getDphart(),
+			$keys[11] => $this->getId(),
 		);
 		return $result;
 	}
@@ -517,6 +600,12 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 				$this->setTipmov($value);
 				break;
 			case 9:
+				$this->setCodcen($value);
+				break;
+			case 10:
+				$this->setDphart($value);
+				break;
+			case 11:
 				$this->setId($value);
 				break;
 		} 	}
@@ -535,7 +624,9 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setCodalm($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setCodubi($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setTipmov($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCodcen($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setDphart($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
 	}
 
 	
@@ -552,6 +643,8 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaentalmPeer::CODALM)) $criteria->add(CaentalmPeer::CODALM, $this->codalm);
 		if ($this->isColumnModified(CaentalmPeer::CODUBI)) $criteria->add(CaentalmPeer::CODUBI, $this->codubi);
 		if ($this->isColumnModified(CaentalmPeer::TIPMOV)) $criteria->add(CaentalmPeer::TIPMOV, $this->tipmov);
+		if ($this->isColumnModified(CaentalmPeer::CODCEN)) $criteria->add(CaentalmPeer::CODCEN, $this->codcen);
+		if ($this->isColumnModified(CaentalmPeer::DPHART)) $criteria->add(CaentalmPeer::DPHART, $this->dphart);
 		if ($this->isColumnModified(CaentalmPeer::ID)) $criteria->add(CaentalmPeer::ID, $this->id);
 
 		return $criteria;
@@ -601,6 +694,10 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 
 		$copyObj->setTipmov($this->tipmov);
 
+		$copyObj->setCodcen($this->codcen);
+
+		$copyObj->setDphart($this->dphart);
+
 
 		$copyObj->setNew(true);
 
@@ -623,6 +720,38 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 			self::$peer = new CaentalmPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setCatipent($v)
+	{
+
+
+		if ($v === null) {
+			$this->setTipmov(NULL);
+		} else {
+			$this->setTipmov($v->getCodtipent());
+		}
+
+
+		$this->aCatipent = $v;
+	}
+
+
+	
+	public function getCatipent($con = null)
+	{
+		if ($this->aCatipent === null && (($this->tipmov !== "" && $this->tipmov !== null))) {
+						include_once 'lib/model/om/BaseCatipentPeer.php';
+
+      $c = new Criteria();
+      $c->add(CatipentPeer::CODTIPENT,$this->tipmov);
+      
+			$this->aCatipent = CatipentPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aCatipent;
 	}
 
 } 

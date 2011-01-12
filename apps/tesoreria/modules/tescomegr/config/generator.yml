@@ -5,29 +5,29 @@ generator:
     theme:            cidesaGenerator
     fields:
       mes1:  { name: Mes, params: size=4 maxlength=2 readonly=true}
-      cormes1:  { name: Correlativo, params: size=4 maxlength=8}
+      cormes1:  { name: Correlativo, params: size=4 maxlength=3}
       mes2:  { name: Mes, params: size=4 maxlength=2 readonly=true}
-      cormes2:  { name: Correlativo, params: size=4 maxlength=8}
+      cormes2:  { name: Correlativo, params: size=4 maxlength=3}
       mes3:  { name: Mes, params: size=4 maxlength=2 readonly=true}
-      cormes3:  { name: Correlativo, params: size=4 maxlength=8}
+      cormes3:  { name: Correlativo, params: size=4 maxlength=3}
       mes4:  { name: Mes, params: size=4 maxlength=2 readonly=true}
-      cormes4:  { name: Correlativo, params: size=4 maxlength=8}
+      cormes4:  { name: Correlativo, params: size=4 maxlength=3}
       mes5:  { name: Mes, params: size=4 maxlength=2 readonly=true}
-      cormes5:  { name: Correlativo, params: size=4 maxlength=8}
+      cormes5:  { name: Correlativo, params: size=4 maxlength=3}
       mes6:  { name: Mes, params: size=4 maxlength=2 readonly=true}
-      cormes6:  { name: Correlativo, params: size=4 maxlength=8}
+      cormes6:  { name: Correlativo, params: size=4 maxlength=3}
       mes7:  { name: Mes, params: size=4 maxlength=2 readonly=true}
-      cormes7:  { name: Correlativo, params: size=4 maxlength=8}
+      cormes7:  { name: Correlativo, params: size=4 maxlength=3}
       mes8:  { name: Mes, params: size=4 maxlength=2 readonly=true}
-      cormes8:  { name: Correlativo, params: size=4 maxlength=8}
+      cormes8:  { name: Correlativo, params: size=4 maxlength=3}
       mes9:  { name: Mes, params: size=4 maxlength=2 readonly=true}
-      cormes9:  { name: Correlativo, params: size=4 maxlength=8}
+      cormes9:  { name: Correlativo, params: size=4 maxlength=3}
       mes10:  { name: Mes, params: size=4 maxlength=2 readonly=true}
-      cormes10:  { name: Correlativo, params: size=4 maxlength=8}
+      cormes10:  { name: Correlativo, params: size=4 maxlength=3}
       mes11:  { name: Mes, params: size=4 maxlength=2 readonly=true}
-      cormes11:  { name: Correlativo, params: size=4 maxlength=8}
+      cormes11:  { name: Correlativo, params: size=4 maxlength=3}
       mes12:  { name: Mes, params: size=4 maxlength=2 readonly=true}
-      cormes12:  { name: Correlativo, params: size=4 maxlength=8}
+      cormes12:  { name: Correlativo, params: size=4 maxlength=3}
     edit:
       title: Correlativos de Comprobante de Egreso por Mes
       display:

@@ -22,6 +22,7 @@
 <?php echo input_hidden_tag('haydesp', $haydespacho) ?>
 <?php echo input_hidden_tag('modifi', $modifico) ?>
 <?php echo input_hidden_tag('tiporecarg', $tiporec) ?>
+<?php echo object_input_hidden_tag($casolart, 'getPrecom') ?>
 <table width="100%">
   <tr>
     <th><strong><font color="#CC0000" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <?php echo $casolart->getEtiqueta() ;?></font></strong></th>
@@ -32,7 +33,7 @@
 <?php if ($cambiareti=="") {?>
 <?php echo __('Solicitud de Egreso') ?>
 <?php }else {?>
-<?php echo __('Solicitud de Cotización') ?>
+<?php echo __($nometifor) ?>
 <?php }?>
 </legend>
 <div class="form-row">
@@ -63,6 +64,7 @@
   <?php $value = object_input_date_tag($casolart, 'getFecreq', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'size' => '10',
   'control_name' => 'casolart[fecreq]',
   'date_format' => 'dd/MM/yy',
   'readonly'  =>  $casolart->getId()!='' ? true : false ,
@@ -141,8 +143,11 @@
 </div></th>
 <th>&nbsp;</th>
 <th>
-
-<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npcatpre_Almsolegr/clase/Npcatpre/frame/sf_admin_edit_form/obj1/casolart_unires/obj2/casolart_nomcat/campo1/codcat/campo2/nomcat/param1/'.$loncat)?>
+<?php if ($catbnubica!='S') {?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npcatpre_Almsolegr/clase/Npcatpre/frame/sf_admin_edit_form/obj1/casolart_unires/obj2/casolart_nomcat/campo1/codcat/campo2/nomcat/param1/'.$loncat.'/param2/almsolegr')?>
+<?php } else  {?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnubica_Pagemiord/clase/Bnubica/frame/sf_admin_edit_form/obj1/casolart_unires/obj2/casolart_nomcat/campo1/codubi/campo2/desubi/param1/'.$loncat)?>
+<?php } ?>
 
     </th>
     <th>&nbsp;&nbsp;&nbsp;</th>
@@ -189,17 +194,55 @@
   'disabled' => true,
   'control_name' => 'casolart[nomext]',
 )); echo $value ? $value : '&nbsp;' ?></th>
-<th><?php if ($casolart->getId()!="" && $precompromete=='S' && $autorizaprecom=='S') { ?>
+<th><?php if ($casolart->getId()!="" && $precompromete=='S' && $autorizaprecom=='S' && $casolart->getPrecom()=='N') { ?>
 <?php echo button_to(__('Generar Precompromiso'), 'almsolegr/generarcompromiso?id='.$casolart->getId()) ?>
    <? }?></th>
       <th>&nbsp;&nbsp;&nbsp;</th>
    <th>
      <?php if ($casolart->getId()!='') { ?>
-  <input type="button" name="Submit" class="sf_admin_action_list" value="Forma Pre-Impresa" onclick="javascript:Mostrar_orden_preimpresa();" />
+  <input type="button" name="Submit" class="sf_admin_action_list" value="      Forma Pre-Impresa" onclick="javascript:Mostrar_orden_preimpresa();" />
 <? } ?>
    </th>
    </tr>
   </table>
+
+<br>
+
+<table>
+    <tr>
+   <th> <?php echo label_for('casolart[codcen]', __($labels['casolart{codcen}']), 'class="required" style="width:100px') ?>
+  <div class="content<?php if ($sf_request->hasError('casolart{codcen}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('casolart{codcen}')): ?>
+    <?php echo form_error('casolart{codcen}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($casolart, 'getCodcen', array (
+  'size' => 10,
+  'maxlength' => 4,
+  'control_name' => 'casolart[codcen]',
+  'onBlur'=> remote_function(array(
+        'url'      => 'almsolegr/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+         'condition' => "$('casolart_codcen').value != ''",
+         'script' => true,
+        'with' => "'ajax=10&cajtexmos=casolart_descen&cajtexcom=casolart_codcen&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+  </div></th>
+<th>
+&nbsp;</th>
+<th>
+<?php echo  button_to_popup_('...','/metodo/Cadefcen_Almsolegr/clase/Cadefcen/frame/sf_admin_edit_form/obj1/casolart_codcen/obj2/casolart_descen/campo1/codcen/campo2/descen')?>
+    </th>
+   <th>&nbsp;&nbsp;&nbsp;</th>
+   <th>  <?php $value = object_input_tag($casolart, 'getDescen', array (
+  'size' => 50,
+  'disabled' => true,
+  'control_name' => 'casolart[descen]',
+)); echo $value ? $value : '&nbsp;' ?></th>
+    </tr>
+
+</table>
 
 </div>
 </fieldset>
@@ -349,13 +392,15 @@ echo grid_tag($obj3);
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-right"><?php if ($casolart->getId() && $haydespacho!='S' && $cotiz!='S' && $casolart->getStareq()!='N'): ?>
+      <li class="float-right">
+      <?php if ($oculeli!="S"): ?>
+      <?php if ($casolart->getId() && $haydespacho!='S' && $cotiz!='S' && $casolart->getStareq()!='N'): ?>
 <?php echo button_to(__('delete'), 'almsolegr/delete?id='.$casolart->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
   'class' => 'sf_admin_action_delete',
   'onclick' => 'elimin()',
-)) ?><?php endif; ?>
+)) ?><?php endif; ?> <?php endif; ?>
 </li>
 <li>
 <div id="anul" style="display:none">
@@ -365,12 +410,46 @@ echo grid_tag($obj3);
   </ul>
 
 <script language="JavaScript" type="text/javascript">
-  $('casolart_reqart').focus();
   var ids='<?php echo $casolart->getId()?>';
+  var deshab='<?php echo $bloqfec; ?>';
+  if (deshab=='S')
+  {
+  	$('trigger_casolart_fecreq').hide();
+  	$('casolart_fecreq').readOnly=true;
+  }
+  var correla='<?php echo $mansolocor; ?>';
+  if (correla=='S' && ids=='')
+  {
+  	$('casolart_reqart').value='########';
+  	$('casolart_reqart').readOnly=true;
+  }
+
+
+  $('casolart_reqart').focus();
+
   var estatus='<?php echo $casolart->getStareq()?>';
   if (ids!="" && $('haydesp').value!='S' && estatus!='N')
   {
     $('anul').show();
+  }
+
+
+    function enters(e,valor)
+  {
+   if (e.keyCode==13 || e.keyCode==9)
+   {
+     if (valor!='')
+     { valor=valor.pad(8, '0',0);}
+     else{valor=valor.pad(8, '#',0);}
+
+     $('casolart_reqart').value=valor;
+     var numsoldesh='<?php echo $numsoldesh; ?>';
+     if (numsoldesh=='S')
+     {
+     	$('casolart_reqart').readOnly=true;
+     }
+
+   }
   }
 
   function anular()

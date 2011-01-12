@@ -34,13 +34,13 @@ class OcciudadMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('occiudad_SEQ');
 
+		$tMap->addForeignKey('CODPAI', 'Codpai', 'string', CreoleTypes::VARCHAR, 'ocpais', 'CODPAI', true, 4);
+
+		$tMap->addForeignKey('CODEDO', 'Codedo', 'string', CreoleTypes::VARCHAR, 'ocestado', 'CODEDO', true, 4);
+
 		$tMap->addColumn('CODCIU', 'Codciu', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('CODEDO', 'Codedo', 'string', CreoleTypes::VARCHAR, true, 4);
-
-		$tMap->addColumn('CODPAI', 'Codpai', 'string', CreoleTypes::VARCHAR, true, 4);
-
-		$tMap->addColumn('NOMCIU', 'Nomciu', 'string', CreoleTypes::VARCHAR, true, 30);
+		$tMap->addColumn('NOMCIU', 'Nomciu', 'string', CreoleTypes::VARCHAR, true, 50);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

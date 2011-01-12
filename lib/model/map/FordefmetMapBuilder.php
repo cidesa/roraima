@@ -30,7 +30,9 @@ class FordefmetMapBuilder {
 		$tMap = $this->dbMap->addTable('fordefmet');
 		$tMap->setPhpName('Fordefmet');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fordefmet_SEQ');
 
 		$tMap->addColumn('CODMET', 'Codmet', 'string', CreoleTypes::VARCHAR, true, 5);
 

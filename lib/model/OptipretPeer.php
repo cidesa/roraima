@@ -117,4 +117,14 @@ class OptipretPeer extends BaseOptipretPeer
     }
    }
 
+  public static function getEstairs($cod)
+  {
+    $c = new Criteria();
+    $c->add(TsrepretPeer::CODREP,'005');
+    $c->add(TsrepretPeer::CODRET,$cod);
+    $datos = TsrepretPeer::doSelect($c);
+    if ($datos)
+    { return 'S';} else { return 'N';}
+  }
+
 }

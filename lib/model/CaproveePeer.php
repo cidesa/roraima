@@ -7,8 +7,8 @@
  *
  * @package    Roraima
  * @subpackage lib.model
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: CaproveePeer.php 37203 2010-03-22 15:30:47Z dmartinez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -49,16 +49,17 @@ class CaproveePeer extends BaseCaproveePeer
 
   public static function getNompro($codigo)
 	{
-    	return htmlspecialchars(Herramientas::getX('rifpro','Caprovee','Nompro',$codigo));
+    	return eregi_replace("[\n|\r|\n\r]", "", Herramientas::getXx('Caprovee',array('rifpro','estpro'),array($codigo,'A'),'Nompro'));
 	}
   public static function getNompro_vacio($codigo)
 	{
-    	return htmlspecialchars(Herramientas::getX_vacio('rifpro','Caprovee','Nompro',$codigo));
+    	return eregi_replace("[\n|\r|\n\r]", "", Herramientas::getX_vacio('rifpro','Caprovee','Nompro',$codigo));
 	}
 
   public static function getProvee($codprovee)
 	{
-    	return Herramientas::getX('CODPRO','Caprovee','Nompro',$codprovee);
+    	//return Herramientas::getX('CODPRO','Caprovee','Nompro',$codprovee);
+    	return Herramientas::getXx('Caprovee',array('rifpro','estpro'),array($codprovee,'A'),'Nompro');
 	}
   public static function getCod_provee($codprovee)
 	{

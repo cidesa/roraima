@@ -1,4 +1,5 @@
 <?
+session_name('cidesa');
 session_start();
 require_once($_SESSION["x"].'adodb/adodb-exceptions.inc.php');
 require_once($_SESSION["x"].'lib/bd/basedatosAdo.php');
@@ -10,6 +11,7 @@ $bd=new basedatosAdo($codemp);
 $tool=new tools();
 $z=new tools();
 $btn = $z->ConfBotones();
+$validafecha=$_SESSION["configemp"]["aplicacion"]["presupuesto"]["modulos"]["PreSolTrasla"]["valfec"];
 
   try
   {
@@ -145,7 +147,6 @@ $btn = $z->ConfBotones();
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" TYPE="text/css" MEDIA="screen" href="../../lib/css/tabber.css">
@@ -182,7 +183,7 @@ function Opciones()
 { global $codigo;
   global $btn;
 	?>
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
  <table width="100%" height="100"  border="0" align="center" cellpadding="0" cellspacing="0"  bgcolor="#FFFFCC">
  <tr bgcolor="#FFFFCC">
 <td height="30" colspan="4">
@@ -242,7 +243,7 @@ function Opciones()
     $fecha=date('d/m/Y');
 
   ?>
-    <form name="form1" method="post" action="">
+    <form name="form1" onsubmit="return false;" method="post" action="">
   <fieldset>
 
     <legend><span class="style3">Anular Solicitud Traslado</span></legend>
@@ -257,7 +258,7 @@ function Opciones()
     </tr>
     <tr>
       <td colspan="2"><span class="style14">Fecha de Anulaci&oacute;n : </span></td>
-      <td colspan="3"><input name="fecha" type="text"  class="imagenInicio" id="fecha" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $fecha;?>" size="10" datepicker="true" onKeyUp = "this.value=formateafecha(this.value);" onKeyPress="validar_fecha(event)">
+      <td colspan="3"><input name="fecha" type="text"  class="imagenInicio" id="fecha" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'" value="<? print $fecha;?>" size="10" onKeyUp = "this.value=formateafecha(this.value);" onKeyPress="validar_fecha(event)">
         <input name="codigo" type="hidden" id="codigo" value="<? echo $codigo; ?>"></td>
     </tr>
     <tr>
@@ -284,6 +285,11 @@ function Opciones()
 </body>
 
 <script language="javascript1.2">
+ var deshafec='<?php echo $validafecha;?>';
+  if (deshafec=='S')
+  {
+     document.getElementById('fecha').readOnly=true;
+  }
 function anular()
 {
   f        = document.form1;

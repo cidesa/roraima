@@ -1,4 +1,4 @@
-<? session_start(); ?>
+<? session_name('cidesa'); session_start(); ?>
 <DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -7,7 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <script language="JavaScript"  src="../../lib/general/js/fecha.js"></script>
@@ -559,7 +558,7 @@ MM_reloadPage(true);
 </head>
 
 <body>
-<form name="form1" method="post" action="ConFinCom.php?var=C">
+<form name="form1" onsubmit="return false;" method="post" action="ConFinCom.php?var=C">
 <table width="100%" align="center">
   <tr>
 <td width="100%">

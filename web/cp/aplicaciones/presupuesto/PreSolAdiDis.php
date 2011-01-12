@@ -1,10 +1,11 @@
 <?
+session_name('cidesa');
 session_start();
 if (empty($_SESSION["x"]))
 {
   ?>
   <script language="JavaScript" type="text/javascript">
-      location=("http://"+window.location.host+"/autenticacion_dev.php/login");
+      location=("http://"+window.location.host+"/autenticacion.php/login");
   </script>
   <?
 }
@@ -22,10 +23,12 @@ $tools= new tools();
 $modulo="";
 $forma="Solicitud de Créditos Adiciones/Disminuciones";
 $modulo=$_SESSION["modulo"] . " > Ejecución Presupuestaria > ".$forma;
+$fecha_actual= date('d/m/Y');
+$validafecha=$_SESSION["configemp"]["aplicacion"]["presupuesto"]["modulos"]["PreSolAdiDis"]["valfec"];
 Limpiar();
  //limitar datos  del movimiento
  $i=1;
- while ($i<=50)
+ while ($i<=500)
  {
      $_POST["x".$i."1"]= "";
      $_POST["x".$i."2"]= "";
@@ -140,6 +143,7 @@ Limpiar();
       //////  Busqueda por codigo de Adicion Disminucion  ////////
        $imec='I';
        $block="N";
+       $aprob="N";
       if (!empty($codigo))
       {
        //   $codigo=strtoupper(trim(str_pad($codigo,8,'0',STR_PAD_LEFT)));
@@ -158,6 +162,15 @@ Limpiar();
             $status        = $tb->fields["staadi"];
             $justificacion = $tb->fields["justificacion"];
             $enunciado     = $tb->fields["enunciado"];
+			
+			$stacon1  = $tb->fields["stacon"];
+         	$stagob2  = $tb->fields["stagob"];
+          	$stapre3  = $tb->fields["stapre"];
+          	$staniv44  = $tb->fields["staniv4"];
+         	$staniv55  = $tb->fields["staniv5"];
+          	$staniv66  = $tb->fields["staniv6"];
+			
+			if ($stacon1=='S') $aprob="S";
 
       $status2 = Mostrar_status();
 
@@ -173,6 +186,19 @@ Limpiar();
              $staniv5 = $tb->fields["staniv5"];
              $staniv6 = $tb->fields["staniv6"];
            }
+		   
+		   //Verificar si esta solicitud  ha sido pasada a traslado, para deshabilitar el grid  y todos las cajas de texto
+            $sql="SELECT * FROM CPADIDIS WHERE  trim(refadi) = '".trim($codigo)."' ";
+            $tb=$bd->select($sql);
+            if (!$tb->EOF)
+             {
+              $block="S";  //desabilita los botones de aprobacion entre otras cosas
+
+             }
+             else
+             {
+              $block="N";
+             }
 
             if (strtoupper(trim($status))=="N")
             {
@@ -187,9 +213,9 @@ Limpiar();
             }//if (strtoupper(trim($status))=="N")
 
              //cargar datos movimientos traslados  (grid)
-             $block  = "S";
+//             $block  = "S";
              $pos    = 1;
-             $sqldet = "select * From cpsolmovadi Where trim(refadi)='".trim($codigo)."' ";
+             $sqldet = "select * From cpsolmovadi Where trim(refadi)='".trim($codigo)."' order by codpre";
              $tb2    = $bd->select($sqldet);
              while (!$tb2->EOF)
              {
@@ -206,9 +232,16 @@ Limpiar();
             $imec='M';
             //verificar si se puede eliminar
             //if (Verificar_Disponibilidad()==false) { $Eliminar='N'; };
+            if (Verificar_Dependencias($codigo))
+             {
+                $Eliminar='N';
+             }
 
 
            }//if (!$tb->EOF)
+           else {
+               $fecha= date('d/m/Y');
+           }
         }//si no esta vacio codigo
     }//if ($var=='9'){
 
@@ -311,6 +344,33 @@ Limpiar();
     $nomcodpre="";
     $tipo="";
     }
+    
+    function Verificar_Dependencias($codigo)
+  {
+    global $bd;
+    global $tools;
+    global $Msj;
+
+    $codigo= strtoupper(trim($codigo));
+    try
+      {
+           $sql="SELECT * FROM CPADIDIS WHERE REFADI='".$codigo."' and staadi='A'";
+        if ($tb=$tools->buscar_datos($sql))
+        {
+          $Msj="La Solicitud no puede ser eliminada, ya generó una Adición/Disminución";
+          return true;
+        }
+        else
+        {
+          return false;
+          } //else
+      }  // try
+    catch(Exception $e)
+      {
+          print "Excepcion Obtenida: ".$e->getMessage()."\n";
+          return false;
+      }
+  }
 
 
    function Verificar_Disponibilidad()
@@ -329,7 +389,7 @@ Limpiar();
         if ($tipo=='A')
         {
           $i=1;
-          while ($i<=50)
+          while ($i<=500)
           {
             if ((trim($_POST["x".$i."1"])!="")  and (number_format($_POST["x".$i."2"],2,'.',',')!= number_format(0,2,'.',','))  and (number_format($_POST["x".$i."3"],2,'.',',')!= number_format(0,2,'.',',')) )
             {
@@ -344,21 +404,21 @@ Limpiar();
                   {
                     $VerDispon="N";
                     $Msj="NO se puede Eliminar / Anular la Adición.. El Monto Disponible de la Partida " . trim($_POST["x".$i."1"]) . " es de " . number_format($MonDis,2,'.',',') .". Al Disminuirla por el Monto de la Adición quedaría Negativa.";
-                    $i=51;
+                    $i=501;
                   }//if ($MonDis < $_POST["x".$i."3"])
                 }  // if ($tb=$tool->buscar_datos($sql))
                 else
                 {
                   $VerDispon="N";
                   $Msj="La Partida " . trim($_POST["x".$i."1"]) . " no se encuentra en la Base de Datos. Por Favor Verifique";
-                  $i=51;
+                  $i=501;
                 }//else  if ($tb=$tool->buscar_datos($sql))
 
                 $i=$i+1;
             } //if ((trim($_POST["x".$i."1"])!="")  and (trim($_POST["x".$i."2"])!="") and (number_format($_POST["x".$i."3"],2,'.',',')!= number_format(0,2,'.',',')) )
             else
             {
-              $i=51;
+              $i=501;
             }
           } //while
         }  //if ($tipo=='A')
@@ -388,7 +448,7 @@ Limpiar();
        f=document.form1;
       i=1;
       var acum3=0;
-      while (i<=50)
+      while (i<=500)
       {
         var x3="x"+i+"3";
         str3= document.getElementById(x3).value.toString();
@@ -413,9 +473,13 @@ Limpiar();
         {
           j=parseInt(id.substring(1,2));
         }
+        else if (parseInt(id.length)==4)
+        {
+            j=parseInt(id.substring(1,3));
+        }
         else
         {
-          j=parseInt(id.substring(1,3));
+            j=parseInt(id.substring(1,4));
         }
           var y="x"+j+"4"  //Posicion del Monto Disponible
 
@@ -436,7 +500,6 @@ Limpiar();
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
 <LINK media=all href="../../lib/css/base.css" type=text/css rel=stylesheet>
 <link href="../../lib/css/siga.css" rel="stylesheet" type="text/css">
-<link href="../../lib/css/estilos.css" rel="stylesheet" type="text/css">
 <link rel="STYLESHEET" type="text/css"  href="../../lib/general/toolbar/css/dhtmlXToolbar.css">
 <link  href="../../lib/css/datepickercontrol.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" TYPE="text/css" MEDIA="screen" href="../../lib/css/tabber.css">
@@ -467,7 +530,13 @@ Limpiar();
 </head>
 
 <body>
-<form name="form1" method="post" action="">
+<form name="form1" onsubmit="return false;" method="post" action="">
+                    <input name="trash" type="hidden" id="trash">
+          <input name="cajaactual" type="hidden" id="cajaactual" value="1">
+           <input name="cajafoco" type="hidden" id="cajafoco" value="2">
+           <input name="getf" type="hidden" id="getf" value="S">
+           <input type="hidden" name="var" id="var" />
+           <input type="hidden" name="mod" id="mod" />
 <table width="100%" align="center">
   <tr>
 <td width="100%">
@@ -499,12 +568,36 @@ Limpiar();
           <input type="button" name="Submit4" value="&gt;|" onClick="ultimo()">-->
         </td>
           <td align="left" width="42%">
-            <? if ($stapre=='S'){ ?><input name="AprSolP" type="button" class="important" id="AprSolP" value="<? echo $abrstapre; ?>" onClick="Aprobar_Solicitud('P');" > <? } ?>
-            <? if ($stagob=='S'){ ?><input name="AprSolG" type="button" class="important" id="AprSolG" value="<? echo $abrstagob; ?>" onClick="Aprobar_Solicitud('G');" > <? } ?>
-            <? if ($stacon=='S'){ ?><input name="AprSolC" type="button" class="important" id="AprSolC" value="<? echo $abrstacon; ?>" onClick="Aprobar_Solicitud('C');" > <? } ?>
-            <? if ($staniv4=='S'){ ?><input name="AprSolN4" type="button" class="important" id="AprSolN4" value="<? echo $abrstaniv4; ?>" onClick="Aprobar_Solicitud('N4');" > <? } ?>
-            <? if ($staniv5=='S'){ ?><input name="AprSolN5" type="button" class="important" id="AprSolN5" value="<? echo $abrstaniv5; ?>" onClick="Aprobar_Solicitud('N5');" > <? } ?>
-            <? if ($staniv6=='S'){ ?><input name="AprSolN6" type="button" class="important" id="AprSolN6" value="<? echo $abrstaniv6; ?>" onClick="Aprobar_Solicitud('N6');" > <? } ?>
+            <? if ($staniv6=='S'){ if ($staniv66!='S' && ($stacon1=='S' || $stacon=='N') && ($stagob2=='S' || $stagob=='N') && ($stapre3=='S' || $stapre=='N') && ($staniv44=='S' || $staniv4=='N') && ($staniv55=='S' || $staniv5=='N')) { ?>
+			<input name="AprSolN6" type="button" class="important" id="AprSolN6" value="<? echo $abrstaniv6; ?>" onClick="Aprobar_Solicitud('N6');" > 
+  		    <? }else { ?>
+			<input name="AprSolN6" type="button" class="important" id="AprSolN6" disabled=true value="<? echo $abrstaniv6; ?>" onClick="Aprobar_Solicitud('N6');" > 
+			 <? } }?>				
+            <? if ($staniv5=='S'){ if ($staniv55!='S' && ($stacon1=='S' || $stacon=='N') && ($stagob2=='S' || $stagob=='N') && ($stapre3=='S' || $stapre=='N') && ($staniv44=='S' || $staniv4=='N')) { ?>
+			<input name="AprSolN5" type="button" class="important" id="AprSolN5" value="<? echo $abrstaniv5; ?>" onClick="Aprobar_Solicitud('N5');" > 
+  		    <? }else { ?>
+			<input name="AprSolN5" type="button" class="important" id="AprSolN5" disabled=true value="<? echo $abrstaniv5; ?>" onClick="Aprobar_Solicitud('N5');" > 
+			 <? } }?>	
+            <? if ($staniv4=='S'){ if ($staniv44!='S' && ($stacon1=='S' || $stacon=='N') && ($stagob2=='S' || $stagob=='N') && ($stapre3=='S' || $stapre=='N')) {?>
+			<input name="AprSolN4" type="button" class="important" id="AprSolN4" value="<? echo $abrstaniv4; ?>" onClick="Aprobar_Solicitud('N4');" > 
+  		    <? }else { ?>
+			<input name="AprSolN4" type="button" class="important" id="AprSolN4" disabled=true value="<? echo $abrstaniv4; ?>" onClick="Aprobar_Solicitud('N4');" > 
+			 <? } }?>				
+            <? if ($stacon=='S'){ if ($stacon1!='S') {?> 
+			<input name="AprSolC" type="button" class="important" id="AprSolC" value="<? echo $abrstacon; ?>" onClick="Aprobar_Solicitud('C');" > 
+  		    <? }else { ?>
+			<input name="AprSolC" type="button" class="important" id="AprSolC" disabled=true value="<? echo $abrstacon; ?>" onClick="Aprobar_Solicitud('C');" > 
+			 <? } }?>			
+            <? if ($stagob=='S'){ if ($stagob2!='S' && ($stacon1=='S' || $stacon=='N')) {?>
+			<input name="AprSolG" type="button" class="important" id="AprSolG" value="<? echo $abrstagob; ?>" onClick="Aprobar_Solicitud('G');" > 
+  		    <? }else { ?>
+			<input name="AprSolG" type="button" class="important" id="AprSolG" disabled=true value="<? echo $abrstagob; ?>" onClick="Aprobar_Solicitud('G');" > 
+			 <? } }?>			
+            <? if ($stapre=='S'){ if ($stapre3!='S' && ($stacon1=='S' || $stacon=='N') && ($stagob2=='S' || $stagob=='N')) {?>
+			<input name="AprSolP" type="button" class="important" id="AprSolP" value="<? echo $abrstapre; ?>" onClick="Aprobar_Solicitud('P');" > 
+  		    <? }else { ?>
+			<input name="AprSolP" type="button" class="important" id="AprSolP" disabled=true value="<? echo $abrstapre; ?>" onClick="Aprobar_Solicitud('P');" > 
+			 <? } }?>
          </td>
           <td align="right" width="61%">
           <?  // MENU PRINCIPAL  // ?>
@@ -556,8 +649,12 @@ Limpiar();
                                 <tr>
                                   <td>&nbsp;</td>
                                   <td valign="top">Descripci&oacute;n:</td>
-                                  <td colspan="6"><textarea name="desc"  cols="72" rows="2" wrap="VIRTUAL" class="imagenInicio" id="desc" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'"><? print $desc;?></textarea>
-                                  </td>
+                                  <td colspan="6"><? if ($block=='S' || $aprob=='S') { ?>
+                                  	<textarea name="desc"  cols="72" rows="2" readonly=true wrap="VIRTUAL" class="imagenInicio" id="desc" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'"><? print $desc;?></textarea>
+                                  <? } else { ?>
+                                  	<textarea name="desc"  cols="72" rows="2" wrap="VIRTUAL" class="imagenInicio" id="desc" onMouseOver="this.className='imagenFoco'" onMouseOut="this.className='imagenInicio'"><? print $desc;?></textarea>
+                    <? } ?>
+								  </td>
                                 </tr>
                  <tr>
                                   <td>&nbsp;</td>
@@ -647,7 +744,7 @@ Limpiar();
                       <?
                       ////////   //////////
                      $i=1;
-                  while ($i<=50)
+                  while ($i<=500)
                   {
                      ?>
                         <tr>
@@ -728,12 +825,7 @@ Limpiar();
 
   <tr>
     <td class="breadcrumb"><span class="style13">Registro de <? echo $forma; ?>...</span></td>
-                <input name="trash" type="hidden" id="trash">
-          <input name="cajaactual" type="hidden" id="cajaactual" value="1">
-           <input name="cajafoco" type="hidden" id="cajafoco" value="2">
-           <input name="getf" type="hidden" id="getf" value="S">
-           <input type="hidden" name="var" id="var" />
-           <input type="hidden" name="mod" id="mod" />
+
   </tr>
 </table>
   </tr>
@@ -742,16 +834,26 @@ Limpiar();
  <?
 if  (!empty($codigo))
 {
-   $salvar='S';
+   if ($block=="S" || $aprob=="S")
+   {
+     $salvar='N';
+   }
+   else
+   {
+      $salvar='S';
+    }
 
    if ($ModoConsulta=='S')
    {
-      ?>
+     if ($block!='S')
+     {
+	  ?>
         <script>
           document.form1.desc.focus();
           document.form1.desc.select();
         </script>
       <?
+	 }
    }
    else
    {
@@ -780,9 +882,15 @@ else
     block='<? print $block;?>';
   if (block=="S")
   {
-  bloquearGrip(3,50,0);
+  bloquearGrip(3,500,0);
   }
   actualizarsaldos2();
+  var deshafec='<?php echo $validafecha;?>';
+  if (deshafec=='S')
+  {
+     document.getElementById('fecha').readOnly=true;
+  }
+
 </script>
 <script language="JavaScript">
 
@@ -816,7 +924,7 @@ else
       else
       {
         //alert("Longitud de Fecha inválida");
-        document.getElementById('fecha').value=mostrarfecha();
+        document.getElementById('fecha').value='<? echo $fecha_actual; ?>';;
         document.getElementById('fecha').focus();
       }
     }
@@ -826,7 +934,7 @@ else
       f=document.form1;
       var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
       i=1;
-      while (i<=50)
+      while (i<=500)
       {
         var x="x"+i+1;
         var x4="x"+i+4;
@@ -837,14 +945,14 @@ else
             campo="x1"+1;
             campo3="x1"+4;
             foco="x1"+3;
-            i=50;
+            i=500;
           }
           else
           {
             campo=x;
             campo3=x4;
             foco="x"+i+3;
-            i=50;
+            i=500;
           }
         }
         i=i+1;
@@ -855,7 +963,7 @@ else
      // pagina="catalogo3.php?campo="+campo+"&campo2="+campo2+"&sql="+sql+"&foco="+foco+"&tipo="+tipo+"&campo3="+campo3;
 //      window.open(pagina,"Catalogo","menubar=no,toolbar=no,scrollbars=yes,width=500,height=400,resizable=yes,left=50,top=50");
 
-        pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Cpasiini_Presoladidis/clase/Cpasiini/frame/form1/obj1/'+campo+'/obj2/'+campo3+'/campo1/codpre/campo2/mondis/';
+        pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Cpasiini_Presoladidis/clase/Cpasiini/frame/form1/obj1/'+campo+'/obj2/'+campo3+'/campo1/codpre/campo2/mondis/';
         window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
      }
 
@@ -949,9 +1057,13 @@ else
         {
           j=parseInt(id.substring(1,2));
         }
+        else if (parseInt(id.length)==4)
+        {
+            j=parseInt(id.substring(1,3));
+        }
         else
         {
-          j=parseInt(id.substring(1,3));
+            j=parseInt(id.substring(1,4));
         }
         var x="x"+j+"1"
         var y="x"+j+"2"
@@ -995,7 +1107,7 @@ else
        f=document.form1;
         i=1;
         var acum3=0;
-        while (i<=50)
+        while (i<=500)
         {
           var x3="x"+i+"3";
           str3= document.getElementById(x3).value.toString();
@@ -1023,17 +1135,21 @@ else
       {
         j=parseInt(id.substring(1,2));
       }
-      else
-      {
+    else if (parseInt(id.length)==4)
+    {
         j=parseInt(id.substring(1,3));
-      }
+    }
+    else
+    {
+        j=parseInt(id.substring(1,4));
+    }
       val=document.getElementById(id).value;
       if (val!="")
       {
           if (j!=1)
           {
             i=1;
-             while (i<=50)
+             while (i<=500)
               {
                 var x="x"+i+"1";
                 if (j!=i)
@@ -1092,7 +1208,7 @@ else
           }
       }
       //ultima fila
-      if (i==50)
+      if (i==500)
       {
         for (col=0;col<=c;col++)
         {
@@ -1108,7 +1224,7 @@ else
            }
         }
 
-      }//if (fila==50)
+      }//if (fila==500)
       actualizarsaldos2()
      }
 
@@ -1180,10 +1296,6 @@ else
         }
        }
       }
-      //////////////////////////
-      else if(itemId == '0_print'){
-          print();
-      }
       else if(itemId == '0_new'){
 
       }
@@ -1245,6 +1357,25 @@ else
       else if(itemId == '0_calc'){
         alert("llamando la calculadora");
       }
+      else if(itemId == '0_print'){
+
+        var adi1 = '<? echo $codigo; ?>';
+        var fecha1  = '<? echo $fecha; ?>';
+        var tipo  = '<? echo $tipo; ?>';
+        var status = '<? echo $status; ?>';
+        var idfin='x'+'<?php echo $pos-1?>'+'1';
+        var codpre1= document.getElementById("x11").value;
+        var codpre2= document.getElementById(idfin).value;
+        var filtro='%';
+        var ruta='http://'+window.location.host;
+      //	Nueva estructura de los reportes
+      	pagina=ruta+'/reportes/reportes/presupuesto/r.php=?r=preradidis.php?adi1='+adi1+'&adi2='+adi1+'&fecha1='+fecha1+'&fecha2='+fecha1+'&tipo='+tipo+'&codpre1='+codpre1+'&codpre2='+codpre2+'&filtro='+filtro+'&status='+status;
+
+	  //	Vieja estructura de los reportes
+      	//pagina=ruta+'/reportes/reportes/presupuesto/rpreradidis.php?adi1='+adi1+'&adi2='+adi1+'&fecha1='+fecha1+'&fecha2='+fecha1+'&tipo='+tipo+'&codpre1='+codpre1+'&codpre2='+codpre2+'&filtro='+filtro+'&status='+status;
+      	window.open(pagina,1,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80");
+
+      }
       else if(itemId == '0_calend'){
         alert("LLamando el Calendario");
       }
@@ -1256,7 +1387,7 @@ else
 
     aToolBar=new dhtmlXToolbarObject('toolbar_zone2','100%',16,"");
     aToolBar.setOnClickHandler(onButtonClick);
-    aToolBar.loadXML("../../lib/general/_toolbarV1.xml")
+    aToolBar.loadXML("../../lib/general/_toolbarV6.xml")
     aToolBar.setToolbarCSS("toolbar_zone2","toolbarText3");
     aToolBar.showBar();
 
@@ -1302,7 +1433,7 @@ else
          // window.open(pagina,"","menubar=no,toolbar=no,scrollbars=yes,width=570,height=500,resizable=yes,left=50,top=50");
 
         var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Cpsoladidis_PreSolAdiDis/clase/Cpsoladidis/frame/form1/obj1/codigo/obj2/desc/campo1/refadi/campo2/desadi/submit/true';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Cpsoladidis_PreSolAdiDis/clase/Cpsoladidis/frame/form1/obj1/codigo/obj2/desc/campo1/refadi/campo2/desadi/submit/true';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
      }
 
@@ -1321,7 +1452,7 @@ else
         //window.open(pagina,"Catalogo","menubar=no,toolbar=no,scrollbars=yes,width=580,height=490,resizable=yes,left=50,top=50");
 
       var host = '<? echo $_SERVER["HTTP_HOST"]; ?>';
-          pagina='http://'+host+'/herramientas_dev.php/generales/catalogo/metodo/Cpartley_Preartley/clase/Cpartley/frame/form1/obj1/'+campo+'/obj2/'+campo2+'/campo1/codart/campo2/desart/submit/false';
+          pagina='http://'+host+'/herramientas.php/generales/catalogo/metodo/Cpartley_Preartley/clase/Cpartley/frame/form1/obj1/'+campo+'/obj2/'+campo2+'/campo1/codart/campo2/desart/submit/false';
           window.open(pagina,"true","menubar=no,toolbar=no,scrollbars=yes,width=490,height=490,resizable=yes,left=500,top=80");
 
       }
@@ -1350,6 +1481,11 @@ else
       }
     }
 
+
+	function enterA(e,codart,desart,feccont)
+	{
+
+	}
 
   </script>
 </html>

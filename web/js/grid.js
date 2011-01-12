@@ -46,6 +46,38 @@ function validaMontos(id,obj) {
 
     ActualizarObjetosGrids(grid,max);
 
+    updateTabindex(grid, max)
+
+  }
+
+  function updateTabindex(grid, fila)
+  {
+    codigo = "var filas = inputs_filas_"+grid+";";
+    eval(codigo);
+
+    codigo = "var tabindexstart = tabindexstart_"+grid+";";
+    eval(codigo);
+
+    var json = "";
+    var index = 0;
+
+    for(var i=(filas.size()-1);i>=0;i--){
+      if(filas[i][0].lastIndexOf("x_"+fila+"_")!=-1 || filas[i][0].lastIndexOf("x"+fila+"id")!=-1){
+        index = i;
+        break;
+      }
+    }
+
+    filas[index].each(function(e,index){
+      if($(e).tabIndex!='') {
+        tabindexstart++;
+        $(e).tabIndex = tabindexstart;
+      }
+    })
+
+    codigo = "var tabindexstart_"+grid+" = tabindexstart;";
+    eval(codigo);
+
   }
 
   function ValidarMontoGridv2(id)
@@ -134,25 +166,25 @@ function validaMontos(id,obj) {
     })
 
     // Agregar una nueva fila
-    codigo = "inputs_filas_"+grid+".push(arrayobjs);"
+    codigo = "ret = inputs_filas_"+grid+".push(arrayobjs);"
     eval(codigo);
 
-    return true;
+    return ret;
   }
 
 
   function ActualizarSaldosGrid(grid,totales)
   {
     // Objetos tipo Monto del Grid
-    var codigo = "var objs_montos = objs_montos_"+grid+""
+    var codigo = "var objs_montos = objs_montos_"+grid+"";
     try{eval(codigo);}catch(e){}
 
     // Filas del Grid
-    var codigo = "var objs_filas = inputs_filas_"+grid+""
+    var codigo = "var objs_filas = inputs_filas_"+grid+"";
     try{eval(codigo);}catch(e){}
 
     if(objs_montos!=null && objs_filas!=null){
-
+      try{
       if(objs_montos.size()>0 && objs_filas.size()>0){
 
         // Objetos Tipo Monto por Fila
@@ -186,6 +218,7 @@ function validaMontos(id,obj) {
         });
 
       }
+      }catch(e){}
     }
 
   }
@@ -239,7 +272,7 @@ function validaMontos(id,obj) {
     return result;
   }
 
-  function serializeFila(grid,fila)
+  function serializeFila(grid,fila,col,obj)
   {
     codigo = "var filas = inputs_filas_"+grid+";";
     eval(codigo);
@@ -247,7 +280,7 @@ function validaMontos(id,obj) {
     var json = "";
     var index = 0;
 
-    for(var i=0;i<filas.size();i++){
+    for(var i=(filas.size()-1);i>=0;i--){
       if(filas[i][0].lastIndexOf("x_"+fila+"_")!=-1 || filas[i][0].lastIndexOf("x"+fila+"id")!=-1){
         index = i;
         break;
@@ -257,7 +290,7 @@ function validaMontos(id,obj) {
 
     filas[index].each(function(e,index){
       var serial = "";
-      if($(e).id) {
+      if($(e)) {
         try{
           serial = Form.Element.serialize($(e));
           if(serial!="") {json += "&"; json += serial;}
@@ -266,12 +299,15 @@ function validaMontos(id,obj) {
     })
     json += "&grid="+grid;
     json += "&fila="+fila;
+    json += "&columna="+col;
     json += "&accion=fila";
+    json += "&this[id]="+obj.id;
+    json += "&this[value]="+obj.value;
 
     return json;
   }
 
-  function serializeColumna(grid,col)
+  function serializeColumna(grid,fila,col,obj)
   {
     codigo = "var filas = inputs_filas_"+grid+";";
     eval(codigo);
@@ -302,14 +338,17 @@ function validaMontos(id,obj) {
       }
 
       json += "&grid="+grid;
+      json += "&fila="+fila;
       json += "&columna="+col;
       json += "&accion=columna";
+      json += "&this[id]="+obj.id;
+      json += "&this[value]="+obj.value;
 
       return json;
     }else return '';
   }
 
-  function serializeGrid(grid)
+  function serializeGrid(grid, fila, col, obj)
   {
     codigo = "var objsgrid = inputs_filas_"+grid+";";
     eval(codigo);
@@ -324,29 +363,38 @@ function validaMontos(id,obj) {
       });
     })
     json += "&grid="+grid;
+    json += "&fila="+fila;
+    json += "&columna="+col;
     json += "&accion=grid";
+    if(obj){
+      json += "&this[id]="+obj.id;
+      json += "&this[value]="+obj.value;
+    }
 
     return json;
   }
 
-  function accionRemotaGrid(accion,grid,tipo,indice,adicionales)
+  function accionRemotaGrid(accion,grid,tipo,indice,adicionales,obj)
   {
-    var param = null;
-    if(tipo=="fila") param = serializeFila(grid,indice);
-    else if(tipo=="columna") param = serializeColumna(grid,indice);
-    else if(tipo=="grid") param = serializeGrid(grid);
+    if(obj.value!=''){
+      var param = null;
+      if(tipo=="fila") param = serializeFila(grid,indice,obj.id.split('_')[2],obj);
+      else if(tipo=="columna") param = serializeColumna(grid,obj.id.split('_')[1],indice,obj);
+      else if(tipo=="grid") param = serializeGrid(grid,obj.id.split('_')[1],obj.id.split('_')[2],obj);
 
-    for(i=0;i<adicionales.length;i++) param += '&'+adicionales[0]+'='+$(adicionales[0]).value;
+      for(i=0;i<adicionales.length;i++) param += '&'+adicionales[i]+'='+$(adicionales[i]).value;
 
-    new Ajax.Request(accion, {
-        asynchronous:true,
-        evalScripts:false,
-        onComplete:
-            function(request, json){
-                AjaxJSON(request, json)
-            },
-        parameters:param
-        });
+      new Ajax.Request(accion, {
+          asynchronous:true,
+          evalScripts:false,
+          onComplete:
+              function(request, json){
+                  AjaxJSON(request, json)
+              },
+          parameters:param
+          });
+
+    }
     return true;
   }
 

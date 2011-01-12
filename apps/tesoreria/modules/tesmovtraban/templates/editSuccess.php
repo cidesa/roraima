@@ -24,7 +24,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('tesmovtraban/edit_messages', array('tsmovtra' => $tsmovtra, 'labels' => $labels)) ?>
-<?php include_partial('tesmovtraban/edit_form', array('new' => $new, 'tsmovtra' => $tsmovtra, 'labels' => $labels,  'etiqueta' => $etiqueta)) ?>
+<?php include_partial('tesmovtraban/edit_form', array('new' => $new, 'tsmovtra' => $tsmovtra, 'labels' => $labels,  'etiqueta' => $etiqueta, 'comprobaut' => $comprobaut)) ?>
 </div>
 
 <div id="sf_admin_footer">

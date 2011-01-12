@@ -910,7 +910,10 @@ abstract class BaseAtpresupuesto extends BaseObject  implements Persistent {
 		if ($this->aAtayudas === null && ($this->atayudas_id !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtayudasPeer.php';
 
-			$this->aAtayudas = AtayudasPeer::retrieveByPK($this->atayudas_id, $con);
+      $c = new Criteria();
+      $c->add(AtayudasPeer::ID,$this->atayudas_id);
+      
+			$this->aAtayudas = AtayudasPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -939,7 +942,10 @@ abstract class BaseAtpresupuesto extends BaseObject  implements Persistent {
 		if ($this->aAtproveeRelatedByAtprovee1 === null && ($this->atprovee1 !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtproveePeer.php';
 
-			$this->aAtproveeRelatedByAtprovee1 = AtproveePeer::retrieveByPK($this->atprovee1, $con);
+      $c = new Criteria();
+      $c->add(AtproveePeer::ID,$this->atprovee1);
+      
+			$this->aAtproveeRelatedByAtprovee1 = AtproveePeer::doSelectOne($c, $con);
 
 			
 		}
@@ -968,7 +974,10 @@ abstract class BaseAtpresupuesto extends BaseObject  implements Persistent {
 		if ($this->aAtproveeRelatedByAtprovee2 === null && ($this->atprovee2 !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtproveePeer.php';
 
-			$this->aAtproveeRelatedByAtprovee2 = AtproveePeer::retrieveByPK($this->atprovee2, $con);
+      $c = new Criteria();
+      $c->add(AtproveePeer::ID,$this->atprovee2);
+      
+			$this->aAtproveeRelatedByAtprovee2 = AtproveePeer::doSelectOne($c, $con);
 
 			
 		}
@@ -997,7 +1006,10 @@ abstract class BaseAtpresupuesto extends BaseObject  implements Persistent {
 		if ($this->aAtproveeRelatedByAtprovee3 === null && ($this->atprovee3 !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtproveePeer.php';
 
-			$this->aAtproveeRelatedByAtprovee3 = AtproveePeer::retrieveByPK($this->atprovee3, $con);
+      $c = new Criteria();
+      $c->add(AtproveePeer::ID,$this->atprovee3);
+      
+			$this->aAtproveeRelatedByAtprovee3 = AtproveePeer::doSelectOne($c, $con);
 
 			
 		}
@@ -1026,7 +1038,10 @@ abstract class BaseAtpresupuesto extends BaseObject  implements Persistent {
 		if ($this->aAtproveeRelatedByAtprovee4 === null && ($this->atprovee4 !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtproveePeer.php';
 
-			$this->aAtproveeRelatedByAtprovee4 = AtproveePeer::retrieveByPK($this->atprovee4, $con);
+      $c = new Criteria();
+      $c->add(AtproveePeer::ID,$this->atprovee4);
+      
+			$this->aAtproveeRelatedByAtprovee4 = AtproveePeer::doSelectOne($c, $con);
 
 			
 		}
@@ -1055,7 +1070,10 @@ abstract class BaseAtpresupuesto extends BaseObject  implements Persistent {
 		if ($this->aAtproveeRelatedByAtprovee5 === null && ($this->atprovee5 !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtproveePeer.php';
 
-			$this->aAtproveeRelatedByAtprovee5 = AtproveePeer::retrieveByPK($this->atprovee5, $con);
+      $c = new Criteria();
+      $c->add(AtproveePeer::ID,$this->atprovee5);
+      
+			$this->aAtproveeRelatedByAtprovee5 = AtproveePeer::doSelectOne($c, $con);
 
 			
 		}
@@ -1084,7 +1102,10 @@ abstract class BaseAtpresupuesto extends BaseObject  implements Persistent {
 		if ($this->aAtproveeRelatedByAtprovee6 === null && ($this->atprovee6 !== null)) {
 						include_once 'lib/model/ciudadanos/om/BaseAtproveePeer.php';
 
-			$this->aAtproveeRelatedByAtprovee6 = AtproveePeer::retrieveByPK($this->atprovee6, $con);
+      $c = new Criteria();
+      $c->add(AtproveePeer::ID,$this->atprovee6);
+      
+			$this->aAtproveeRelatedByAtprovee6 = AtproveePeer::doSelectOne($c, $con);
 
 			
 		}

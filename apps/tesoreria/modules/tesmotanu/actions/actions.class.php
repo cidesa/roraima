@@ -27,7 +27,18 @@ class tesmotanuActions extends autotesmotanuActions
    */
   public function editing()
   {
+    if (!$this->tsmotanu->getId())
+    {
+       $t= new Criteria();
+       $t->setLimit(1);
+       $t->addDescendingOrderByColumn(TsmotanuPeer::CODMOTANU);
+       $reg= TsmotanuPeer::doSelectOne($t);
+       if ($reg)
+       {
+           $this->tsmotanu->setCodmotanu(str_pad(($reg->getCodmotanu()+1),4,'0',STR_PAD_LEFT));
+       }else $this->tsmotanu->setCodmotanu('0001');
 
+    }
 
   }
 
@@ -229,7 +240,11 @@ class tesmotanuActions extends autotesmotanuActions
    */
   public function deleting($clasemodelo)
   {
-    return parent::deleting($clasemodelo);
+    $c= new Criteria();
+    $c->add(OpordpagPeer::CODMOTANU,$clasemodelo->getCodmotanu());
+    $reg= OpordpagPeer::doSelectOne($c);
+    if (!$reg) return -1;
+    else return 6;
   }
 
 

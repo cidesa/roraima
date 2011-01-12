@@ -1,0 +1,25 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Foringdefniv
+    theme:            cidesaGenerator
+    fields:
+      nomemp:      { name: Nombre de la Empresa, params: size=50 }
+      ruppar:      { name: Clasificador de Partidas }
+      forpre:      { name: Formato Código Presupuestario, params: size=40,maxlength=32 }
+      asiper:      { name: Asignación Periódica }
+      numper:      { name: Número de Períodos }
+      fecper:      { name: Período }
+      fecini:      { name: Inicio del Ejercicio }
+      feccie:      { name: Fin del Ejercicio}
+      grid:        { name: . }
+      gridper:     { name: . }
+    edit:
+      title:          Definición de Niveles Ingresos
+      display:
+        "NONE":    [nomemp]
+        "Datos del Código Presupuestario":        [ _ruppar, _grid, _forpre]
+        "Fechas":              [_fecini, _feccie,  _fecper]
+        "Otros Datos":           [  _asiper, _numper, _nivobr, _gridper, _periodos]
+      actions:
+        _save:        ~

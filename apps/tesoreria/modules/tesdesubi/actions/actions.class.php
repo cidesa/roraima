@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage tesdesubi
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 41092 2010-10-20 18:45:29Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -54,7 +54,7 @@ $this->Bitacora('Guardo');
   }
 
   /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -71,6 +71,22 @@ $this->Bitacora('Guardo');
     {
       $this->bnubica->setDesubi($bnubica['desubi']);
     }
+    if (isset($bnubica['cedemp']))
+    {
+      $this->bnubica->setCedemp($bnubica['cedemp']);
+    }
+    if (isset($bnubica['nomemp']))
+    {
+      $this->bnubica->setNomemp($bnubica['nomemp']);
+    }
+    if (isset($bnubica['nomcar']))
+    {
+      $this->bnubica->setNomcar($bnubica['nomcar']);
+    }
+    if (isset($bnubica['nomjef']))
+    {
+      $this->bnubica->setNomjef($bnubica['nomjef']);
+    }
 
       $this->bnubica->setStacod('A');
 
@@ -80,7 +96,37 @@ $this->Bitacora('Guardo');
   {
    $this->mascaraubi = Herramientas::ObtenerFormato('Opdefemp','Forubi');
    $this->lonubi=strlen($this->mascaraubi);
+   $respon = H::getConfApp('respon', 'tesoreria', 'tesdesubi');
+   $this->getUser()->setAttribute('respon',$respon,'tesdesubi');
   }
+
+    public function executeDelete()
+  {
+    $this->bnubica = BnubicaPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->bnubica);
+
+    try
+    {
+      $c= new Criteria();
+      $c->add(OpordpagPeer::CODUNI,$this->bnubica->getCodubi());
+      $reg= OpordpagPeer::doSelectOne($c);
+      if (!$reg){
+      $this->deleteBnubica($this->bnubica);
+      $this->Bitacora('Elimino');
+      }else {
+      	$this->getRequest()->setError('delete', 'No se pudo borrar la registro seleccionado. Asegúrese de que no tiene ningún tipo de registros asociados.');
+        return $this->forward('tesdesubi', 'list');
+      }
+    }
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'No se pudo borrar la registro seleccionado. Asegúrese de que no tiene ningún tipo de registros asociados.');
+      return $this->forward('tesdesubi', 'list');
+    }
+
+    return $this->redirect('tesdesubi/list');
+  }
+
 }
 
 

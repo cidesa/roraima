@@ -6,6 +6,8 @@ generator:
     fields:
       codtippre: { name: Codigo Tipo de Prestamo, params: readonly=true }
       destippre: {name: Descripcion, params: readonly=true }
+      codnom: { name: Codigo de la Nómina}
+      nomnom: { name: Descripcion de la Nómina}
       codcon: { name: Codigo del Concepto}
       nomcon: { name: Descripcion del Concepto}
       grid:   {name: ''}
@@ -21,7 +23,7 @@ generator:
     edit:
       title:          Edición de Movimientos de Prestamos
       display:
-        "Tipo de Prestamos":  [_codtippre, _codcon]
+        "Tipo de Prestamos":  [_codtippre, _codcon, _codnom]
         "Empleados":  [_grid]
       actions:
         _list:          ~

@@ -1,0 +1,51 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   caartreq
+  anchogrid:               1000
+  ancho:                   1200
+  filas:                   0
+  titulo:                  'Detalle de la Solicitud'
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Articulo
+  tipo:                    t
+  nombrecampo:             codart
+  html:                    [size="20" disabled=true]
+  esgrabable:              false
+2:       # Columna 2
+  titulo:                  DescripciÃ³n
+  tipo:                    a
+  nombrecampo:             desart
+  html:                    [size="40x2" disabled=true]
+  esgrabable:              false
+3:       # Columna 3
+  titulo:                  Categoria
+  tipo:                    t
+  nombrecampo:             codcat
+  html:                    [size="15" disabled=true]
+  esgrabable:              false
+4:       # Columna 4
+  titulo:                  Cant. Requerida
+  tipo:                    m
+  nombrecampo:             canreq
+  html:                    [size="10" disabled=true]
+  esgrabable:              false
+5:       # Columna 5
+  titulo:                  Cant. Recibida
+  tipo:                    m
+  nombrecampo:             canrec
+  html:                    [size="10" disabled=true]
+  esgrabable:              false
+6:       # Columna 6
+  titulo:                  Costo
+  tipo:                    m
+  nombrecampo:             costo
+  html:                    [size="10" disabled=true]
+  esgrabable:              false
+7:       # Columna 7
+  titulo:                  Total
+  tipo:                    m
+  nombrecampo:             montot
+  html:                    [size="10" disabled=true]
+  esgrabable:              false
