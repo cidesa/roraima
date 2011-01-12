@@ -971,6 +971,22 @@ echo grid_tag($obj);
       'onkeyup' => "javascript: mascara(this,'/',patron,true)",
     )); echo $value ? $value : '&nbsp;' ?>
         </div>
+    <br>
+    <?php echo label_for('nphojint[fecingsso]', __($labels['nphojint{fecingsso}']), 'class="required" ') ?>
+      <div class="content<?php if ($sf_request->hasError('nphojint{fecingsso}')): ?> form-error<?php endif; ?>">
+      <?php if ($sf_request->hasError('nphojint{fecingsso}')): ?>
+        <?php echo form_error('nphojint{fecingsso}', array('class' => 'form-error-msg')) ?>
+      <?php endif; ?>
+
+      <?php $value = object_input_date_tag($nphojint, 'getFecingsso', array (
+      'rich' => true,
+      'maxlength' => 10,
+      'calendar_button_img' => '/sf/sf_admin/images/date.png',
+      'control_name' => 'nphojint[fecingsso]',
+      'date_format' => 'dd/MM/yy',
+      'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+    )); echo $value ? $value : '&nbsp;' ?>
+        </div>
 </div>
 </fieldset>
 </div>

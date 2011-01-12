@@ -1161,6 +1161,34 @@ $this->Bitacora('Guardo');
         $this->nphojint->setFecmat(null);
       }
     }
+    if (isset($nphojint['fecingsso']))
+    {
+      if ($nphojint['fecingsso'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($nphojint['fecingsso']))
+          {
+            $value = $dateFormat->format($nphojint['fecingsso'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $nphojint['fecingsso'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->nphojint->setFecingsso($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->nphojint->setFecingsso(null);
+      }
+    }
   }
 
   protected function getNphojintOrCreate($id = 'id')
@@ -2101,6 +2129,7 @@ $this->Bitacora('Guardo');
             'nphojint{fecfincon}' => 'Fecha Fin del Contrato:',
             'nphojint{obsembret}' => 'Datos:',
             'nphojint{fecmat}' => 'Fecha en que se Caso:',
+            'nphojint{fecingsso}' => 'Fecha Inscrip. SSO:',
 
 
         );
@@ -2194,7 +2223,7 @@ $this->Bitacora('Guardo');
         'nphojint{fecfincon}' => 'Fecha Fin del Contrato:',
         'nphojint{obsembret}' => 'Datos:',
             'nphojint{fecmat}' => 'Fecha en que se Caso:',
-
+            'nphojint{fecingsso}' => 'Fecha Inscrip. SSO:',
 
     );
   }

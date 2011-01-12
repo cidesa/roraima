@@ -3697,6 +3697,8 @@ propel:
       size: 4
     fecmat:
       type: DATE
+    fecingsso:
+      type: DATE
     id:
       type: INTEGER
       required: true

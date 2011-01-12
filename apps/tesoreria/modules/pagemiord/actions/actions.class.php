@@ -2110,8 +2110,13 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
       $c= new Criteria();
       if ($this->filretpro=='S') {
         $codpro=H::getX_vacio('RIFPRO','Caprovee','Codpro',$this->getRequestParameter('codprovee'));
-        $sql="optipret.codtip='".$this->getRequestParameter('codigo')."' and optipret.codtip in (select codret from caproret where codpro='".$codpro."')";
-        $c->add(OptipretPeer::CODTIP,$sql,Criteria::CUSTOM);
+        if ($codpro!="")
+        {
+            $sql="optipret.codtip='".$this->getRequestParameter('codigo')."' and optipret.codtip in (select codret from caproret where codpro='".$codpro."')";
+            $c->add(OptipretPeer::CODTIP,$sql,Criteria::CUSTOM);
+        }else {
+            $c->add(OptipretPeer::CODTIP,$this->getRequestParameter('codigo'));
+        }
       }else {
         $c->add(OptipretPeer::CODTIP,$this->getRequestParameter('codigo'));
       }

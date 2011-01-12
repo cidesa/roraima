@@ -238,6 +238,8 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('FECMAT', 'Fecmat', 'int', CreoleTypes::DATE, false, null);
 
+		$tMap->addColumn('FECINGSSO', 'Fecingsso', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	}
