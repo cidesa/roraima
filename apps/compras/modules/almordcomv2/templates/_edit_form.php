@@ -414,7 +414,8 @@ else
 </div>
 </fieldset>
 
-<?php tabPageOpenClose("tp1", "tabPage3", 'Forma de Entrega');?>
+<?php tabPageOpenClose("tp1", "tabPage2", 'Forma de Entrega');?>
+
 <fieldset>
 <div class="form-row">
 <?php echo label_for('caordcom[codforent]', __($labels['caordcom{codforent}']), 'class="required"') ?>
@@ -490,7 +491,7 @@ else
 </div>
 </fieldset>
 
-<?php tabPageOpenClose("tp1", "tabPage4", 'Resumen');?>
+<?php tabPageOpenClose("tp1", "tabPage3", 'Resumen');?>
 <fieldset>
 <div class="form-row">
   <?php if(!$caordcom->getId() ||  $aprobacion=='S') : ?>
@@ -501,7 +502,7 @@ else
 </div>
 </fieldset>
 
-<?php tabPageOpenClose("tp1", "tabPage5", 'Entregas');?>
+<?php tabPageOpenClose("tp1", "tabPage4", 'Entregas');?>
 <fieldset>
 <div class="form-row">
   <?php if(!$caordcom->getId() ||  $aprobacion=='S') : ?>
@@ -512,7 +513,7 @@ else
 </div>
 </fieldset>
 
-<?php tabPageOpenClose("tp1", "tabPage6", 'Responsables');?>
+<?php tabPageOpenClose("tp1", "tabPage5", 'Responsables');?>
 <fieldset>
 <div class="form-row">
 <?php echo label_for('caordcom[coduni]', __($labels['caordcom{coduni}']), 'class="required"') ?>
@@ -602,7 +603,7 @@ else
 </div>
 </fieldset>
 
-<?php tabPageOpenClose("tp1", "tabPage8", 'Nota');?>
+<?php tabPageOpenClose("tp1", "tabPage6", 'Nota');?>
 <fieldset>
 <div class="form-row">
 <?php echo label_for('caordcom[notord]', __($labels['caordcom{notord}']), 'class="required"') ?>
@@ -753,7 +754,7 @@ else
 
 </div>
 </fieldset>
-<?php tabPageOpenClose("tp1", "tabPage9", 'SIGECOF');?>
+<?php tabPageOpenClose("tp1", "tabPage8", 'SIGECOF');?>
 <fieldset>
 <div class="form-row">
 <?php echo label_for('caordcom[numsigecof]', __($labels['caordcom{numsigecof}']), 'class="required"') ?>
@@ -806,6 +807,15 @@ else
 
 </fieldset>
 
+
+
+<?php tabPageOpenClose("tp1", "tabPage9", 'Forma de Entrega o Despacho de la Orden');?>
+<fieldset>
+<div class="form-row">
+  <?php echo include_partial('despachos', array('obj_formas' => $obj_formas)); ?>
+</div>
+</fieldset>
+
 <?php tabPageOpenClose("tp1", "tabPage10", 'Resumen por Partida Presupuestaria');?>
 <fieldset>
 <div class="form-row">
@@ -817,14 +827,7 @@ else
 </div>
 </fieldset>
 
-<?php tabPageOpenClose("tp1", "tabPage11", 'Forma de Entrega o Despacho de la Orden');?>
-<fieldset>
-<div class="form-row">
-  <?php echo include_partial('despachos', array('obj_formas' => $obj_formas)); ?>
-</div>
-</fieldset>
-
-<?php if ($caordcom->getManorddon()=='S') tabPageOpenClose("tp1", "tabPage12", 'Datos del Beneficiario de la Donación');?>
+<?php if ($caordcom->getManorddon()=='S') tabPageOpenClose("tp1", "tabPage11", 'Datos del Beneficiario de la Donación');?>
 <div id="datbendon" style="display:none">
 <fieldset>
 <div class="form-row">
