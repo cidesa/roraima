@@ -8,7 +8,7 @@
   'campoprincipal' => 'unieje',
   'camposecundario' => 'desunieje',
   'campobase' => 'id',
-  ), 'Bnubica_Almordcom', 'Cadefcen', '', ''); ?>
+  ), 'Bnubica_Almordcom2', 'Cadefcen', '', ''); ?>
 <?php } else {	?>
 <?php echo Catalogo($tsdeffonant,1,array(
   'getprincipal' => 'getUnieje',
@@ -16,6 +16,6 @@
   'campoprincipal' => 'unieje',
   'camposecundario' => 'desunieje',
   'campobase' => 'id',
-  ), 'Bnubica_Almordcom', 'Bnubica', '', ''); ?>
+  ), 'Bnubica_Almordcom2', 'Bnubica', '', ''); ?>
 
 <?php } ?>

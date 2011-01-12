@@ -1938,26 +1938,17 @@ class CatalogoWeb extends BaseCatalogoWeb {
     );
   }
 
-  public function Bnubica_Almordcom() {
-    $camcatejeadm=H::getConfApp2('camcatejeadm', 'tesoreria', 'tesdeffonant');
+	public function Bnubica_Almordcom() {
 
 		$this->c = new Criteria();
-
-                if ($camcatejeadm=='S')
-                {
-                  $this->columnas = array (
-                    CadefcenPeer :: CODCEN => 'Código',
-                    CadefcenPeer :: DESCEN => 'Descripción'
-                    );
-                }else {
                     $this->c->addAscendingOrderByColumn(BnubicaPeer :: CODUBI);
 
                     $this->columnas = array (
                             BnubicaPeer :: CODUBI => 'Código',
                             BnubicaPeer :: DESUBI => 'Descripción',
                     );
-                }
-  }
+
+	}
 
   public function Nphojint_Almordcom() {
     $this->c = new Criteria();
@@ -6656,6 +6647,28 @@ public function Catdefcatman_Cattramo($params = '') {
 
 
         );
+	}
+
+public function Bnubica_Almordcom2() {
+
+            $camcatejeadm=H::getConfApp2('camcatejeadm', 'tesoreria', 'tesdeffonant');
+
+		$this->c = new Criteria();
+
+                if ($camcatejeadm=='S')
+                {
+                  $this->columnas = array (
+                    CadefcenPeer :: CODCEN => 'Código',
+                    CadefcenPeer :: DESCEN => 'Descripción'
+                    );
+                }else {
+                    $this->c->addAscendingOrderByColumn(BnubicaPeer :: CODUBI);
+
+                    $this->columnas = array (
+                            BnubicaPeer :: CODUBI => 'Código',
+                            BnubicaPeer :: DESUBI => 'Descripción',
+                    );
+                }
 	}
 }
 ?>
