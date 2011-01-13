@@ -6,7 +6,7 @@
  * @package    siga
  * @subpackage vacsalidas
  * @author     Your name here
- * @version    SVN: $Id: actions.class.php 39275 2010-06-30 21:00:48Z cramirez $
+ * @version    SVN: $Id: actions.class.php 42024 2011-01-13 20:21:41Z cramirez $
  */
 class vacsalidasActions extends autovacsalidasActions
 {
@@ -258,7 +258,9 @@ class vacsalidasActions extends autovacsalidasActions
 							$per[$i]['diasbonovacpag']=$per0->getDiasbonovacpag();
 						}else
 						{
-              $sqldef = "SELECT A.ANTAPVAC,A.DIAVAC FROM NPBONOCONT A, NPASIEMPCONT B WHERE A.CODTIPCON=B.CODTIPCON AND B.CODEMP='" . $codemp . "' AND (" . $antiguedad . "  BETWEEN DESDE AND HASTA ) AND '" . $anohasta . "' BETWEEN TO_CHAR(ANOVIG,'YYYY') AND TO_CHAR(ANOVIGHAS,'YYYY')";
+
+							$sqldef = "SELECT A.ANTAPVAC,A.DIAVAC FROM NPBONOCONT A, NPASIEMPCONT B WHERE A.CODTIPCON=B.CODTIPCON AND B.CODEMP='" . $codemp . "' AND (" . $antiguedad . "  BETWEEN DESDE AND HASTA )  AND '" . $anohasta . "' BETWEEN TO_CHAR(ANOVIG,'YYYY') AND TO_CHAR(ANOVIGHAS,'YYYY')";
+
 							if(Herramientas :: BuscarDatos($sqldef, & $perdef))
 								$per[$i]['diasbonovac']=$perdef[0]['diavac'];
 							else
@@ -267,7 +269,9 @@ class vacsalidasActions extends autovacsalidasActions
 						}
 					}else
 					{
-            $sqldef = "SELECT A.ANTAPVAC,A.DIAVAC FROM NPBONOCONT A, NPASIEMPCONT B WHERE A.CODTIPCON=B.CODTIPCON AND B.CODEMP='" . $codemp . "' AND (" . $antiguedad . "  BETWEEN DESDE AND HASTA ) AND '" . $anohasta . "' BETWEEN TO_CHAR(ANOVIG,'YYYY') AND TO_CHAR(ANOVIGHAS,'YYYY')";
+
+						$sqldef = "SELECT A.ANTAPVAC,A.DIAVAC FROM NPBONOCONT A, NPASIEMPCONT B WHERE A.CODTIPCON=B.CODTIPCON AND B.CODEMP='" . $codemp . "' AND (" . $antiguedad . "  BETWEEN DESDE AND HASTA )  AND '" . $anohasta . "' BETWEEN TO_CHAR(ANOVIG,'YYYY') AND TO_CHAR(ANOVIGHAS,'YYYY')";
+
 						if(Herramientas :: BuscarDatos($sqldef, & $perdef))
 							$per[$i]['diasbonovac']=$perdef[0]['diavac'];
 						else
