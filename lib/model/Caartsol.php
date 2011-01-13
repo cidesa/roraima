@@ -15,7 +15,7 @@
  */
 class Caartsol extends BaseCaartsol
 {
-  private $codpre = '';
+  protected $codpre = "";
   private $canaju = 0.00;
   private $check = '';
   private $fecent = '';
@@ -54,6 +54,8 @@ class Caartsol extends BaseCaartsol
            $this->datosrecargo=$this->datosrecargo . $datos->getCodrgo().'_' . $datos->getNomrgo().'_' . $monrgoc .'_'. $datos->getTiprgo().'_' . $monrgo .'_'. $datos->getCodpar(). '!';
         }
 	 }
+
+      $this->codpre=self::getCodpar();
 
    }
 
@@ -122,12 +124,12 @@ class Caartsol extends BaseCaartsol
 
 
 
-  public function getCodPre()
+  /*public function getCodPre()
   {
      $var=self::getCodpar();
 
     return $var;
-  }
+  }*/
 
 
   public function getCodPre_()
@@ -136,10 +138,10 @@ class Caartsol extends BaseCaartsol
   }
 
 
-    public function setCodPre($val)
+    /*public function setCodPre($val)
     {
        $this->codpre = $val;
-    }
+    }*/
 
   public function getMontot2($va=false)
   {

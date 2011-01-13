@@ -1016,15 +1016,18 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
       $col15->setAjaxadicionales(array('caordcom_fecord'));
     }
 
+    $paramsq = array('param1' => "'+$(this.id).up().previous(13).descendants()[0].value+'");
 
     $col16 = new Columna('Codigo Partida');
     $col16->setTipo(Columna::TEXTO);
     $col16->setEsGrabable(true);
-    $col16->setOculta(true);
+    //$col16->setOculta(true);
     $col16->setAlineacionObjeto(Columna::CENTRO);
     $col16->setAlineacionContenido(Columna::CENTRO);
     $col16->setNombreCampo('Codpar');
-    $col16->setHTML('type="text" size="20"');
+    $col16->setHTML('type="text" size="20" readOnly="true"');
+    $col16->setCatalogo('caartpar','sf_admin_edit_form',array('codpar' => 16),'Nppartidas_Caregart',$paramsq);
+    $col16->setAjaxfila(true);
 
     $col17 = new Columna('Recargos');
     $col17->setTipo(Columna::TEXTO);
@@ -3043,10 +3046,10 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
     $g = $grid[$fila];
 
     // Se verifica en base a la columna que ejecuto el ajax que se debe validar
-    if ($columna == '2' || $columna == '4') {
+    if ($columna == '2' || $columna == '4' || $columna == '16') {
 
       // Verificación del codigo del artículo  (Ajax 3)
-      if ($g[1] != '') {
+      if ($g[1] != '' && $columna!='16') {
         $tipord = $this->getRequestParameter('caordcom_tipord');
         $longitudart = strlen(Herramientas::getMascaraArticulo());
         //print $tipord;

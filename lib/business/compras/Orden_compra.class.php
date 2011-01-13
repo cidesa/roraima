@@ -1947,7 +1947,7 @@ class Orden_compra
           $caartord_new->setTotart(str_replace("'","",$grid_detalle[$i][$campo_col12]));
           $caartord_new->setDesart(Herramientas::getX_vacio('codart','caregart','desart',$grid_detalle[$i]['codart']));
           $caartord_new->setUnimed(str_replace("'","",$grid_detalle[$i][$campo_col13]));
-          $caartord_new->setCodpar(Herramientas::getX_vacio('codart','CARegArt','codpar',$grid_detalle[$i]['codart']));
+          $caartord_new->setCodpar($grid_detalle[$i]['codpar']);//Herramientas::getX_vacio('codart','CARegArt','codpar',$grid_detalle[$i]['codart']));
           $caartord_new->setPartida($vacio);
           $caartord_new->save();
           if ($caordcom->getRefprc()=='S')
