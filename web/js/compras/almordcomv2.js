@@ -1250,7 +1250,7 @@ function desmarcarfila(id)
       $(recargo).value=format(monrgotot.toFixed(2),'.',',','.');
       montottot=monuni-mondto;
       $(total).value=format(montottot.toFixed(2),'.',',','.');
-      ActualizarSaldosGrid('a', ArrTotales_a)
+      ActualizarSaldosGrid('a', ArrTotales_a);
     }//if ($(codart).value!="")
   }else
   {

@@ -428,6 +428,10 @@
   <span>Cargando Detalle.....</span>
 </div>
 
+<?php
+echo grid_tag($obj2);
+?>
+
 <div id="divGridUni" style="display:none">
 
 <?php

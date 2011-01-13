@@ -322,7 +322,11 @@ class ingregingActions extends autoingregingActions
            }
            $j++;
         }
+        if (self::validarGeneraComprobante())
+        {
+          $this->coderr=508;
 
+        }
       if($this->coderr!=-1){
         return false;
       } else return true;
@@ -731,5 +735,15 @@ class ingregingActions extends autoingregingActions
    }
    return $arreglo;
   }
+
+  public function validarGeneraComprobante()
+  {
+    $form="sf_admin/ingreging/confincomgen";
+    $grabo=$this->getUser()->getAttribute('grabo',null,$form.'0');
+
+    if ($grabo=='')
+    { return true;}
+    else { return false;}
+}
 
 }

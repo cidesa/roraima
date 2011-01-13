@@ -25,7 +25,7 @@ class Articulos
    * @param $grid Array de Objects Almacen.
    * @return void
    */
-    public static function Grabar_Articulo($articulo,$grid,$grid2)
+    public static function Grabar_Articulo($articulo,$grid,$grid2,$grid3)
     {
       // si el articulo es nuevo se iguala distot a exitot
       if($articulo->getId()=='')
@@ -66,6 +66,7 @@ class Articulos
       }
       // Se graban los almacenes del articulo
       self::Grabar_ArticulosAlmacen($articulo,$grid);
+      self::Grabar_Partidas_Articulos($articulo,$grid3);
       self::Grabar_Unidades_Articulos($articulo,$grid2);
     }
 
@@ -167,8 +168,8 @@ class Articulos
    * @param $grid Array de Objects Almacen.
    * @return void
    */
-    public static function salvarAlmregart($articulo,$grid,$grid2){
-      self::Grabar_Articulo($articulo,$grid,$grid2);
+    public static function salvarAlmregart($articulo,$grid,$grid2,$grid3){
+      self::Grabar_Articulo($articulo,$grid,$grid2,$grid3);
     }
 
 
@@ -1434,6 +1435,38 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
         $j++;
       }
     }
+  }
+
+     /**
+   * Función para registrar las partidas por artículos
+   *
+   * @static
+   * @param $articulo Object Artículo a guardar
+   * @param $grid Array de Objects Almacen.
+   * @return void
+   */
+  public static function Grabar_Partidas_Articulos($articulo,$grid)
+  {
+      $codart=$articulo->getCodart();
+      $x=$grid[0];
+      $j=0;
+      while ($j<count($x))
+      {
+        if ($x[$j]->getCodpar()!="")
+        {
+            $x[$j]->setCodart($codart);
+            $x[$j]->save();
+        }
+      $j++;
+      }
+
+       $z=$grid[1];
+       $j=0;
+       while ($j<count($z))
+       {
+            $z[$j]->delete();
+            $j++;
+       }
   }
 
 
