@@ -110,11 +110,11 @@ public function getNompar()
 
     public function getManunialt()
     {
-            return H::getConfApp('manunialt', 'compras', 'almregart');
+            return H::getConfApp2('manunialt', 'compras', 'almregart');
     }
 
     public function getManartlot()
     {
-            return H::getConfApp('manartlot', 'compras', 'almregart');
+            return H::getConfApp2('manartlot', 'compras', 'almregart');
     }
 }
