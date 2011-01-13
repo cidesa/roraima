@@ -60,7 +60,7 @@ class almentdesActions extends autoalmentdesActions
     $this->columnas[1][0]->setCatalogo('caregart','sf_admin_edit_form',$obj,'Caregart_Almentalm');
     
     $objubi= array ('codubi' => '8','nomubi' =>'9');
-    $params = array("'+$(this.id).up().previous(1).descendants()[0].value+'",'val2');
+    $params = array('param1' => "'+$(this.id).up().previous(1).descendants()[0].value+'");
     $mascaraubi=Herramientas::ObtenerFormato('Cadefart','Forubi');
     $lonubi=strlen($mascaraubi);
     $this->columnas[1][7]->setHTML('type="text" size="10" maxlength="'.chr(39).$lonubi.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubi.chr(39).')" onBlur="toAjax(\'7\',getUrlModulo()+\'ajax\',this.value,\'\',\'&cajtexmos=\'+$(this.id).up().next(0).descendants()[0].id+\'&codart=\'+$(this.id).up().previous(6).descendants()[0].value+\'&codalm=\'+$(this.id).up().previous(1).descendants()[0].value+\'&numlot=\'+$(this.id).up().next(3).descendants()[0].id+\'&cajtexcom=\'+this.id)"');
