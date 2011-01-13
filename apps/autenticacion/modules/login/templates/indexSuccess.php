@@ -15,12 +15,12 @@
         <tbody>
           <tr>
             <td class="nuevo style14" width="174">&nbsp;<?php echo label_for('labelnombre', 'Nombre de Usuario') ?></td>
-            <td width="103"><?php echo input_tag('textnombre','CIDESA') ?><br>
+            <td width="103"><?php echo input_tag('textnombre','') ?><br>
             </td>
           </tr>
           <tr>
             <td class="form_label_01 Order tiny style16">&nbsp;<?php echo label_for('labelpasswd', 'Contraseña') ?></td>
-            <td><span style="font-family: &quot;Sans&quot;;"><?php echo input_password_tag('textpasswd','CIDESA') ?></span><br>
+            <td><span style="font-family: &quot;Sans&quot;;"><?php echo input_password_tag('textpasswd','') ?></span><br>
             </td>
           </tr>
           <tr>
