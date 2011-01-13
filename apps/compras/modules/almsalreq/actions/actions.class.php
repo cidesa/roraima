@@ -63,7 +63,7 @@ class almsalreqActions extends autoalmsalreqActions
 
     
     $objubi= array ('codubi' => '8','nomubi' =>'9');
-    $params = array("'+$(this.id).up().previous(1).descendants()[0].value+'",'val2');
+    $params = array('param1' => "'+$(this.id).up().previous(1).descendants()[0].value+'");
     $mascaraubi=Herramientas::ObtenerFormato('Cadefart','Forubi');
     $lonubi=strlen($mascaraubi);
     if ($manartlot=='S')                                                                                                                                                                         
