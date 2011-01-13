@@ -873,14 +873,20 @@ class almsolegrActions extends autoalmsolegrActions
        $col12->setNombreCampo('montot');
        $col12->setEsTotal(true,'casolart_monreq');
 
+       $paramsq = array('param1' => "'+$(this.id).up().previous(10).descendants()[0].value+'");
+       $mascarapartida = Herramientas::getMascaraPartida();
+       $longpar=strlen($mascarapartida);
+
        $col13 = new Columna('Codigo Partida');
        $col13->setTipo(Columna::TEXTO);
-       $col13->setEsGrabable(false);
-       $col13->setOculta(true);
+       $col13->setEsGrabable(true);
+       //$col13->setOculta(true);
        $col13->setAlineacionObjeto(Columna::CENTRO);
        $col13->setAlineacionContenido(Columna::CENTRO);
        $col13->setNombreCampo('codpre');
-       $col13->setHTML('type="text" size="20"');
+       $col13->setHTML('type="text" size="20" maxlength="'.chr(39).$longpar.chr(39).'" readOnly="true"');
+       $col13->setCatalogo('caartpar','sf_admin_edit_form',array('codpar' => 13),'Nppartidas_Caregart',$paramsq);
+       $col13->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascarapartida.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena; perderfocus(event,this.id,15);}" onBlur="javascript:event.keyCode=13; actualizo_cod_presupuestario(event,this.id);"');
 
        $col14 = clone $col11;
        $col14->setTitulo('Total');
