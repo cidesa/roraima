@@ -2704,7 +2704,7 @@ $this->c= new Criteria();
     );
   }
 
-  public function Cadefubi_Almdes($params) {
+  public function Cadefubi_Almdes($params=array()) {
     $this->c = new Criteria();
     $this->c->addJoin(CadefubiPeer :: CODUBI, CaalmubiPeer :: CODUBI);
     $this->c->add(CaalmubiPeer :: CODALM, $params[0]);
