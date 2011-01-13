@@ -275,7 +275,7 @@ $this->Bitacora('Guardo');
 
       $sql = "Select distinct a.id, a.codalm, b.nomalm, a.eximin, a.eximax, a.ptoreo, a.exiact, '' as anadir, '' as ubicacion
               from caartalm a inner join cadefalm b on a.codalm=b.codalm
-              where a.codart = '".$codart."' ";
+              where a.codart = '".$codart."' order by a.codalm";
 
       H::BuscarDatos($sql, $per);
 
