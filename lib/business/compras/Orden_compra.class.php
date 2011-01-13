@@ -2635,6 +2635,14 @@ class Orden_compra
      }//if ($x[$j]->getDatosrecargo()!="")
     }//else//if ($caordcom->getRefsol()!="")
    }// if ($marcado=="1")
+   else {
+        $c= new Criteria();
+        $c->add(CadisrgoPeer::REQART,$caordcom->getOrdcom());
+        $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
+        $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
+        $c->add(CadisrgoPeer::TIPDOC,$caordcom->getDoccom());
+        CadisrgoPeer::doDelete($c);
+   }
    $j++;
   }// while ($j<count($x))
   }
