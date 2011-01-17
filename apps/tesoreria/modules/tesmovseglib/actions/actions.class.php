@@ -1231,7 +1231,7 @@ $this->Bitacora('Guardo');
     $this->id=$idmovseglib;
     $this->msg='';
 
-    $anoactual=date('Y');
+    $anoactual=substr(H::getX_vacio('CODEMP', 'Contaba', 'Feccie', '001'),0,4);//date('Y');
     $anofeclib=substr($feclib_m,0,4);
    if ($fecanu_m>date('Y-m-d'))
    {
