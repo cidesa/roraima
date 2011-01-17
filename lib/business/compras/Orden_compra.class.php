@@ -870,6 +870,8 @@ class Orden_compra
                 {
                     $chequear_disponibilidad_recargo = true;
                     $sobregiro_recargo = false;
+                }else {
+                    break;
                 }
                 $j++;
             }
