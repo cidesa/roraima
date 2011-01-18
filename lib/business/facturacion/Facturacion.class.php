@@ -959,9 +959,24 @@ class Facturacion {
   	 $reg=FacorrelatPeer::doSelectOne($c);
   	 if ($reg)
   	 {
+                $numero=str_pad($reg->getCorped(), 8, '0', STR_PAD_LEFT);
   		$reg->setCorped($reg->getCorped()+1);
   		$reg->save();
+         }else {
+           $numero=str_pad(1, 8, '0', STR_PAD_LEFT);
+           $facorrelat= new Facorrelat();
+           $facorrelat->setCorped(2);
+           $facorrelat->save();
   	 }
+
+  	 $fapedido->setNroped($numero);
+  	 /*$c= new Criteria();
+  	 $reg=FacorrelatPeer::doSelectOne($c);
+  	 if ($reg)
+  	 {
+  		$reg->setCorped($reg->getCorped()+1);
+  		$reg->save();
+  	 }*/
    	}
   	else $nuevo=false;
   	$fapedido->setStatus('A');

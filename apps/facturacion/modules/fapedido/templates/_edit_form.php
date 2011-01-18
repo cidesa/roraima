@@ -355,6 +355,10 @@ if (neww)
    {
      if (valor!='')
      { valor=valor.pad(8, '0',0);}
+     else {
+         valor=valor.pad(8, '#',0);
+     }
+
 
      $('fapedido_nroped').value=valor;
    }
