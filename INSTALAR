@@ -1,6 +1,6 @@
 ----- INSTALACIÓN DE RORAIMA 1.0.1 -------------
 
-Roraima 1.0.1 es un sistema administrativo para entes gubernamentales
+Roraima 1.0.2 es un sistema administrativo para entes gubernamentales
 basado en las premisas del software libre, amparado en la licencia GPL v2
 
 Este proyecto fue creado por CIDE S.A. (www.cidesa.com.ve) una empresa 
@@ -38,22 +38,20 @@ Para cambiarte a root:
 
    Se modifican las siguientes líneas:
 
-   Memory_limit = 512M ; o 1/3 de la memoria de la maquina si el resultado es mayor a 512M ej. Si tengo 2GB 1/3 = 600M > 512
-   max_input_time = 120 ; 
+   memory_limit = 512M ; o 1/3 de la memoria de la maquina si el resultado es mayor a 512M ej. Si tengo 2GB 1/3 = 600M > 512
    max_execution_time = 500 ;
-   session.name = cidesa
 
-3- Copiar el código (archivo roraima_v1.0.1.tar.gz) en la carpeta /var/www:
+3- Copiar el código (archivo roraima_v1.0.2.tar.gz) en la carpeta /var/www:
 
-   # cp DIRECCION_DESCARGA/roraima_v1.0.1.tar.gz /var/www
+   # cp DIRECCION_DESCARGA/roraima_v1.0.2.tar.gz /var/www
 
 4- Movernos a la carpeta /var/www
 
    # cd /var/www
 
-5- Descomprimir roraima_v1.0.1.tar.gz:
+5- Descomprimir roraima_v1.0.2.tar.gz:
 
-   # tar zxvf roraima_v1.0.1.tar.gz
+   # tar zxvf roraima_v1.0.2.tar.gz
 
 6- Cambiar el dueño de la carpeta:
 
@@ -79,52 +77,22 @@ carpeta site-available de apache2:
 
    # /etc/init.d/apache2 restart
 
-10- Instalar PostgreSQL 8.1 u 8.2
+10- Instalar PostgreSQL 8.X
 
-   Verificamos la version de PostgreSQL instalable
-   # apt-cache -n search postgresql-8
+   NOTA: Si ya sabes usar postgresql y/o tienes configurado tu servidor postgresql, y no quieres cambiarlo
+   puedes saltarte esta sección (ve al punto 12), pero debes tener en cuenta que Roraima necesita
+   dos (2) usuarios distintos para trabajar. Por defecto estos usuarios se llaman "postgres" y "cidesa", y sus
+   password son iguales que sus login.
 
-   Para 8.1:
-   # apt-get install postgresql-8.1
-
-   Para 8.2:
-   # apt-get install postgresql-8.2
-
-NOTA: si tu distribución no contiene postgresql 8.1 u 8.2 (si no que tiene la 8.3), puedes 
-usar el repositorio de debian etch para instalar la version 8.1 de la siguiente manera:
-
-   * Agregar el repositorio de debian etch en el sources.list
-
-      # nano /etc/apt/sources.list
-
-      La siguiente línea:
-
-      deb http://ftp.de.debian.org/debian/ etch main contrib non-free
-
-      NOTA: Deshabilitar las demás líneas del sources.list mientras se instala el postgresql
-
-    * Actualizar el repositorio local:
-
-      # apt-get update
-
-    * Instalar postgresql 8.1
-
-      # apt-get install postgresql-8.1
-
-    * Remover o comentar la línea del repositorio de debian etch, y habilitar de nuevo
-      las lineas que originalmente trae el sources.list
-
-      # nano /etc/apt/sources.list
+   # apt-get install postgresql
 
 11- Configurar PostgreSQL:
 
     * Modificar la interfaz por la cual escuchará postgresql
 
-      Si instalaste postgresql 8.1
-      # nano /etc/postgresql/8.1/main/postgresql.conf
+      NOTA: RECUERDA CAMBIAR LA "X" POR LA VERSION DEL POSTGRESQL
 
-      Si instalaste postgresql 8.2
-      # nano /etc/postgresql/8.2/main/postgresql.conf
+      # nano /etc/postgresql/8.X/main/postgresql.conf
 
       Se debe _descomentar_ la linea con el valor "listen_addresses", y colocarlo de la 
       siguiente manera:
@@ -132,15 +100,13 @@ usar el repositorio de debian etch para instalar la version 8.1 de la siguiente 
       listen_addresses = '*'
 
       Esto le indica a postgresql que escuche la conexion de clientes conectados a 
-      cualquier interfaz que tenga el equipo.
+      cualquier interfaz que tenga el equipo. Por supuesto que si no te interesa cambiar
 
     * Modificar las ip que procesará el servidor:
 
-      Si instalaste postgresql 8.1
-      # nano /etc/postgresql/8.1/main/pg_hba.conf
+      NOTA: RECUERDA CAMBIAR LA "X" POR LA VERSION DEL POSTGRESQL
 
-      Si instalaste postgresql 8.2
-      # nano /etc/postgresql/8.2/main/pg_hba.conf
+      # nano /etc/postgresql/8.X/main/pg_hba.conf
 
       Se debe configurar las conexiones locales de la siguiente forma:
 
@@ -194,11 +160,7 @@ usar el repositorio de debian etch para instalar la version 8.1 de la siguiente 
 
     * Reinciamos el postgresql
 
-      Si instalaste postgresql 8.1
-      # /etc/init.d/postgresql-8.1 restart
-
-      Si instalaste postgresql 8.2
-      # /etc/init.d/postgresql-8.2 restart
+      # /etc/init.d/postgresql-8.X restart
 
 12- Importar la base de datos:
 
@@ -209,7 +171,8 @@ usar el repositorio de debian etch para instalar la version 8.1 de la siguiente 
    # pg_restore -i -h localhost -p 5432 -U postgres -d "SIMA" -v "/var/www/cidesa/roraima/data/roraima.backup"
 
    NOTA: la contraseña que te va a pedir es la contraseña del usuario postgres que es "postgres"
-   como se configuro en el paso 11.
+   como se configuro en el paso 11. Si tienes PGADMIN3 instalado puedes usar este cliente para importar la
+   base de datos.
 
 13- Verificamos la instalación:
 
@@ -232,9 +195,6 @@ usar el repositorio de debian etch para instalar la version 8.1 de la siguiente 
 
 
 Gracias por usar Roraima.... esperamos tus comentarios a través del correo desarrollo@cidesa.com.ve
-
-
-
 
 
 

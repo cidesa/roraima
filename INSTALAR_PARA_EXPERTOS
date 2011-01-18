@@ -44,10 +44,7 @@ carpeta site-available de apache2:
 
    # /etc/init.d/apache2 restart
 
-8- Instalar PostgreSQL 8.1 u 8.2
-
-   NOTA: Algunas Funciones no trabajan en PostgresSQL 8.3, no se
-   recomienda su uso.
+8- Instalar PostgreSQL 8.X
 
 9- Crear los siguientes usuarios en el servidor postgresql
 
@@ -89,11 +86,6 @@ carpeta site-available de apache2:
    http://localhost/autenticacion_dev.php/login
    Al llamar a este formulario te debe aparecer la descripción del error ocurrido y en base a este 
    debes verificar y solventar cualquier problema que se presente.
-
-
-
-
-
 
 
 
