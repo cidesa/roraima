@@ -1421,7 +1421,7 @@ function adodb_strtotime($fecha,$hr=0,$min=0,$sec=0,$is_gmt=false)
 		$fecha = substr($fecha,0,10);
 		if (strpos($fecha,'/'))
 		{
-				$aux = split('/',$fecha);
+				$aux = explde('/',$fecha);
 
 				if (count($aux)==3)
 			{
@@ -1433,7 +1433,7 @@ function adodb_strtotime($fecha,$hr=0,$min=0,$sec=0,$is_gmt=false)
 		}
 		else if (strpos($fecha,'-'))
 		{
-			 $aux = split('-',$fecha);
+			 $aux = explode('-',$fecha);
 
 			 if (count($aux)==3)
 			{

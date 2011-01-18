@@ -1,0 +1,141 @@
+propel:
+  _attributes:
+    package: lib.model.cestudio
+  alumnos:
+    _attributes:
+      idMethod: native
+    cedula:
+      type: INTEGER
+      required: true
+    nombre:
+      type: VARCHAR
+      size: 100
+      required: true
+    apellido:
+      type: VARCHAR
+      size: 100
+      required: true
+    fechan:
+      type: DATE
+      required: true
+    sexo:
+      type: CHAR
+      size: 1
+      required: true
+    direccion:
+      type: VARCHAR
+      size: 100
+      required: true
+    telefono:
+      type: VARCHAR
+      size: 100
+    correo:
+      type: VARCHAR
+      size: 100
+    especialidad:
+      type: VARCHAR
+      size: 100
+      required: true
+    lugarnaci:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+  inscripciones:
+    _attributes:
+      idMethod: native
+    secciones_id:
+    alumnos_id:
+    id:
+    _indexes:
+      inscripciones_FI_1:
+        - secciones_id
+      inscripciones_FI_2:
+        - alumnos_id
+  materias:
+    _attributes:
+      idMethod: native
+    codigo:
+      type: VARCHAR
+      size: 10
+      required: true
+    nombre:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+  profesores:
+    _attributes:
+      idMethod: native
+    cedula:
+      type: INTEGER
+      required: true
+    nombre:
+      type: VARCHAR
+      size: 100
+      required: true
+    apellido:
+      type: VARCHAR
+      size: 100
+      required: true
+    fechan:
+      type: DATE
+      required: true
+    id:
+  secciones:
+    _attributes:
+      idMethod: native
+    codigo:
+      type: VARCHAR
+      size: 100
+      required: true
+    nombre:
+      type: VARCHAR
+      size: 100
+      required: true
+    profesores_id:
+    materias_id:
+    id:
+    _indexes:
+      secciones_FI_1:
+        - profesores_id
+      secciones_FI_2:
+        - materias_id
+  estados:
+    _attributes:
+      idMethod: native
+    nombre:
+      type: VARCHAR
+      size: 100
+    id:
+  municipios:
+    _attributes:
+      idMethod: native
+    nombre:
+      type: VARCHAR
+      size: 100
+    estados_id:
+    id:
+  parroquias:
+    _attributes:
+      idMethod: native
+    nombre:
+      type: VARCHAR
+      size: 100
+    municipios_id:
+    id:
+  usuarios:
+    _attributes:
+      idMethod: native
+      phpName: UsuariosCestudio
+    login:
+      type: VARCHAR
+      size: 100
+    nombre:
+      type: VARCHAR
+      size: 100
+    password:
+      type: VARCHAR
+      size: 100
+    parroquias_id:
+    id:

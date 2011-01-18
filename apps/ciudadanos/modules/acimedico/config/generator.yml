@@ -27,6 +27,9 @@ generator:
           params: size=18
       max_per_page:   5
     edit:
+      save: true
+      report:
+        url: ciudadanos/r.php?r=xxx.php
       title:          Edición de Médico Tratante
       display:
         Datos Personales: [cedrifmed, nombremed, apellimed, nrocolmed]

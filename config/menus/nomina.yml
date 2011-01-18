@@ -19,7 +19,6 @@ nomina:
       default: OperatorClass.png
   menu:
     Definiciones Específicas:
-      Prueba:                                                        nomdeftablaemp
       Incapacidades:                                                 Nominc
       Institución:                                                   NomDefEspGen
       Tipos Nóminas:                                                 NomDefEspTipNom

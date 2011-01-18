@@ -536,17 +536,17 @@ $this->Bitacora('Guardo');
     {*/
      $grid=Herramientas::CargarDatosGrid($this,$this->obj);
      $gridunid=Herramientas::CargarDatosGridv2($this,$this->obj5);
-      /*try
-      {*/
+      try
+      {
        Articulos::salvarAlmregart($caregart,$grid,$gridunid);
-     /* }
+      }
        catch (Exception $ex)
-      {*/
+      {
         $coderr = 0;
         $err = Herramientas::obtenerMensajeError($coderr);
         $this->getRequest()->setError('',$err);
         return $coderr;
-     // }
+      }
    //}
   }
 

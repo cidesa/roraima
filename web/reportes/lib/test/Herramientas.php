@@ -1,23 +1,20 @@
 <?php
 
-	class Herramientas{
+class Herramientas {
 
-	function recorrerArreglo($carmodulo=array(),&$mod)
-  	{
+  function recorrerArreglo($carmodulo=array(), &$mod) {
 
-    foreach($carmodulo as $objmod ){
+    foreach ($carmodulo as $objmod) {
 
 
-         if (is_array($objmod))
-         {
-        self::recorrerArreglo($objmod,&$mod);
-         }
-         else
-       {
-         $mod[]=$objmod;
-       }
-        }
-  	}
+      if (is_array($objmod)) {
+        self::recorrerArreglo($objmod, &$mod);
+      } else {
+        $mod[] = $objmod;
+      }
+    }
+  }
 
-	}
+}
+
 ?>

@@ -122,7 +122,7 @@ class lime_test
   {
     if (!$result = $this->ok(preg_match($regex, $exp), $message))
     {
-      $this->output->diag(sprintf("                    '%s'", $exp), sprintf("      doesn't match '%s'", $regex));
+      //$this->output->diag(sprintf("                    '%s'", $exp), sprintf("      doesn't match '%s'", $regex));
     }
 
     return $result;
@@ -132,7 +132,7 @@ class lime_test
   {
     if (!$result = $this->ok(!preg_match($regex, $exp), $message))
     {
-      $this->output->diag(sprintf("               '%s'", $exp), sprintf("      matches '%s'", $regex));
+      //$this->output->diag(sprintf("               '%s'", $exp), sprintf("      matches '%s'", $regex));
     }
 
     return $result;

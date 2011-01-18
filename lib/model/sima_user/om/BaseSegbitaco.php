@@ -110,7 +110,7 @@ abstract class BaseSegbitaco extends BaseObject  implements Persistent {
     if ($this->horope === null || $this->horope === '') {
       return null;
     } elseif (!is_int($this->horope)) {
-            $ts = strtotime($this->horope);
+            $ts = adodb_strtotime($this->horope);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [horope] as date/time value: " . var_export($this->horope, true));
       }
     } else {
@@ -119,9 +119,9 @@ abstract class BaseSegbitaco extends BaseObject  implements Persistent {
     if ($format === null) {
       return $ts;
     } elseif (strpos($format, '%') !== false) {
-      return strftime($format, $ts);
+      return adodb_strftime($format, $ts);
     } else {
-      return date($format, $ts);
+      return @adodb_date($format, $ts);
     }
   }
 
@@ -197,11 +197,6 @@ abstract class BaseSegbitaco extends BaseObject  implements Persistent {
 	public function setFecope($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecope] from input: " . var_export($v, true));
@@ -219,13 +214,8 @@ abstract class BaseSegbitaco extends BaseObject  implements Persistent {
 	public function setHorope($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
     if ($v !== null && !is_int($v)) {
-      $ts = strtotime($v);
+      $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [horope] from input: " . var_export($v, true));
       }
     } else {

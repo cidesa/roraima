@@ -5,16 +5,18 @@ require_once('simpletest/reporter.php');
 
 class cidesaBrowser extends WebTestCase {
 
-    private $ruta ="http://localhost/reportes/reportes/";
+    private $ruta ="/reportes/reportes/";
     private $page;
     private $minombre;
     private $mimodulo;
     private $contadorbuenos;
     private $contadormalos;
+    private $hostname;
 
-  function cidesaBrowser($modulo,$nombre){
+  function cidesaBrowser($modulo,$nombre, $hostname='localhost'){
     $this->minombre = $nombre;
     $this->mimodulo = $modulo;
+    $this->hostname = $hostname;
   }
 
   function setRuta($r)
@@ -29,7 +31,7 @@ class cidesaBrowser extends WebTestCase {
 
   function testContact() {
 
-    $this->page=$this->ruta.$this->mimodulo.'/'.$this->minombre;
+    $this->page='http://'.$this->hostname.'/'.$this->ruta.$this->mimodulo.'/'.$this->minombre;
 
     $this->get($this->page);
 

@@ -1912,7 +1912,7 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
     public static function getCampoModelo($val)
   {
     $x = array();
-    $x=split('_',$val);
+    $x=explode('_',$val);
     $i=0;
     $field="";
     while ($i<count($x)){

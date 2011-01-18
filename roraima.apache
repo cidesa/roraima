@@ -1,5 +1,4 @@
 NameVirtualHost *
-ServerName localhost
 
 CheckSpelling on
 
@@ -11,7 +10,6 @@ CheckSpelling on
   DirectoryIndex auntenticacion.php/login
 
   <Directory "/var/www/cidesa/roraima/web/">
-    Options FollowSymLinks
     AllowOverride All
     Allow from All
   </Directory>

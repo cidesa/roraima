@@ -27,6 +27,8 @@ class Articulos
    */
     public static function Grabar_Articulo($articulo,$grid,$grid2)
     {
+      $con = Propel::getConnection('propel');
+      $con->begin();
       // si el articulo es nuevo se iguala distot a exitot
       if($articulo->getId()=='')
       {
@@ -67,6 +69,7 @@ class Articulos
       // Se graban los almacenes del articulo
       self::Grabar_ArticulosAlmacen($articulo,$grid);
       self::Grabar_Unidades_Articulos($articulo,$grid2);
+      $con->commit();
     }
 
      /**
