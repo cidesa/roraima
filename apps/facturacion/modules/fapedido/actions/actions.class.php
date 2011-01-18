@@ -35,7 +35,7 @@ class fapedidoActions extends autofapedidoActions
    */
   public function editing()
   {
-  	if ($this->fapedido->getId()=="")
+  	/*if ($this->fapedido->getId()=="")
   	{$c= new Criteria();
   	$reg=FacorrelatPeer::doSelectOne($c);
   	if ($reg)
@@ -44,7 +44,7 @@ class fapedidoActions extends autofapedidoActions
   	}else { $numero="";}
 
   	$this->fapedido->setNroped($numero);
-  	}
+  	}*/
   	$entrega=Facturacion::entregas($this->fapedido->getNroped());
   	$this->fapedido->setEntrega($entrega);
   	if ($this->fapedido->getId()!="")
@@ -364,7 +364,8 @@ class fapedidoActions extends autofapedidoActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
