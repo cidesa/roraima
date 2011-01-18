@@ -14,6 +14,7 @@ names:
   cireging{refing}:
     required:  Yes
     required_msg: La Referencia no puede estar en Blanco
+    validators: Validator_refing
 
   cireging{fecing}:
     required:  Yes
@@ -67,3 +68,10 @@ FechaValidator:
         min_error:    La Fecha Especificada no puede ser Menor a la Fecha de Inicio del Período
         max_error:    La Fecha Especificada no puede ser Mayor a la Fecha de Fin del Período
         date_error:   Fecha Inválida
+
+Validator_refing:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Cireging
+        column:       refing
+        unique_error: El registro ya Existe intente con otro.
