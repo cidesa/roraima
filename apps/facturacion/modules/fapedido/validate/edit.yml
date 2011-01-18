@@ -8,7 +8,7 @@ names:
   fapedido{nroped}:
     required:  Yes
     required_msg: El Número de Pedido no puedo estar en Blanco
-    validators: Validator_nroped, CorrelValidator
+    validators: Validator_nroped
 
   fapedido{tipref}:
     required:  Yes
