@@ -398,6 +398,9 @@
 echo grid_tag($obj);
 ?>
 
+<?php
+echo grid_tag($obj2);
+?>
 <div id="divGridUni" style="display:none">
 
 <?php

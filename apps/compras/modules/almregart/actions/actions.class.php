@@ -81,6 +81,7 @@ private static $coderror=-1;
       $this->caregart = $this->getCaregartOrCreate();
       $this->setVars();
       $this->configGrid();
+      $this->configGrid2();
       $this->configGridUnidades();
 
 
@@ -151,6 +152,7 @@ $this->Bitacora('Guardo');
     $caregart = $this->getRequestParameter('caregart');
     $this->setVars();
     $this->configGrid();
+    $this->configGrid2();
     $this->configGridUnidades();
 
     if (isset($caregart['codart']))
@@ -536,9 +538,10 @@ $this->Bitacora('Guardo');
     {*/
      $grid=Herramientas::CargarDatosGrid($this,$this->obj);
      $gridunid=Herramientas::CargarDatosGridv2($this,$this->obj5);
+     $gridpar=Herramientas::CargarDatosGrid($this,$this->obj2);
       /*try
       {*/
-       Articulos::salvarAlmregart($caregart,$grid,$gridunid);
+       Articulos::salvarAlmregart($caregart,$grid,$gridunid,$gridpar);
      /* }
        catch (Exception $ex)
       {*/
