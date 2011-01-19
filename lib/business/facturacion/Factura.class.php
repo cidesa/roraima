@@ -2242,10 +2242,20 @@ class Factura {
         $fafaclib->setValfob($fafactur->getMonfac());
       $fafaclib->setVenexec($monto);
       $fafaclib->setBasimp($acum);
-      $fafaclib->setCrefis($fafactur->getMondesc());
+      $conac=H::getConfApp2('conac', 'Facturacion', 'fafactur');
+      if ($conac=='S')
+          $fafaclib->setCrefis($acum*0.12);
+      else
+        $fafaclib->setCrefis($fafactur->getMondesc());
       if ($valrec!="") {
       $fafaclib->setPoriva(H::getX('Codrgo','Farecarg','Monrgo',$valrec));
-      $fafaclib->setMoniva($acumrec);      
+          if ($conac=='S') {
+              $poriva=H::getX_vacio('CODPRO', 'Facliente', 'Poriva', $fafactur->getCodcli());
+              if ($poriva=="") $poriva=75;
+              $fafaclib->setMoniva(($acum*0.12)*$poriva);
+          }
+          else
+              $fafaclib->setMoniva($acumrec);      
       }
       $fafaclib->save();
   }

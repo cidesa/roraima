@@ -1447,6 +1447,10 @@ propel:
     codedo:
       type: VARCHAR
       size: 4
+    poriva:
+      type: NUMERIC
+      size: 14
+      scale: 2
     fatipcte_id:
     id:
       type: integer
