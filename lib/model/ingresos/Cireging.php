@@ -131,4 +131,9 @@ class Cireging extends BaseCireging
   	return $this->oculeli;
   }
 
+  public function getMansolcor()
+  {
+    return H::getConfApp2('mansolcor', 'ingresos', 'ingreging');
+}
+
 }
