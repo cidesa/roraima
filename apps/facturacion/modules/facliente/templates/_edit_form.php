@@ -420,6 +420,16 @@
    'date_format' => 'dd/MM/yy',
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
 )); echo $value ? $value : '&nbsp;' ?></div>
+
+<br>
+ <br>
+  <?php echo label_for('facliente[poriva]', __($labels['facliente{poriva}']), 'class="required" ') ?>
+<div
+  class="content<?php if ($sf_request->hasError('facliente{poriva}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('facliente{poriva}')): ?> <?php echo form_error('facliente{poriva}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+ <?php echo select_tag('facliente[poriva]', options_for_select(array(0.75 => '75 %', 100 => '100 %'),$facliente->getPoriva(),'include_custom= Seleccione uno...'),array(
+  )) ?></div>
 </div>
 </fieldset>
 

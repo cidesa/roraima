@@ -536,6 +536,10 @@ $this->Bitacora('Guardo');
       $this->facliente->setTipper($facliente['tipper']);
     }
     $this->facliente->setEscontrib(isset($facliente['escontrib']) ? $facliente['escontrib'] : 0);
+    if (isset($facliente['poriva']))
+    {
+      $this->facliente->setPoriva($facliente['poriva']);
+    }
   }
 
   /**
