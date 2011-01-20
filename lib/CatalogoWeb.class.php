@@ -6652,6 +6652,15 @@ public function Catdefcatman_Cattramo($params = '') {
         );
 	}
 
+	public function Nppartidas_Caregart($params=array()) {
+		$this->c = new Criteria();
+		$this->c->add(CaartparPeer :: CODART, $params[0]);
+
+                $this->columnas = array (
+			CaartparPeer :: CODPAR => 'Partida',
+		);
+	}
+
 public function Bnubica_Almordcom2() {
 
             $camcatejeadm=H::getConfApp2('camcatejeadm', 'tesoreria', 'tesdeffonant');
