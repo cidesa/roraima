@@ -3105,8 +3105,8 @@ class almordcomv2Actions extends autoalmordcomv2Actions {
           $jsonextra = ',["javascript","' . $javascript . '",""]';
         }
       }
-      $g[4] = H::FormatoMonto($g[4]);
-      $g[8] = H::FormatoMonto($g[8]);
+      $g[4] = H::FormatoMonto(H::toFloat($g[4]));
+      $g[8] = H::FormatoMonto(H::toFloat($g[8]));
     }
 
     if ($columna == '15') {
