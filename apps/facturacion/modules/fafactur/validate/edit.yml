@@ -10,7 +10,7 @@ names:
   fafactur{reffac}:
     required:  Yes
     required_msg: El Número de la Factura no puedo estar en Blanco
-    validators: Validator_reffac, CorrelValidator
+    validators: Validator_reffac
 
   fafactur{fecfac}:
     required:  Yes
