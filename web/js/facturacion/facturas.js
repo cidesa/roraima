@@ -2547,7 +2547,7 @@
 	   {
 	    $(exist).value=$(distot).value;
 	    var num2=toFloat(exist);
-        if ($(blanco).value=='S' || num1<=num2)
+        if ($(blanco).value=='S' || num1<=num2 || $('fafactur_tipref').value=='V')
         {
           var canent=cantidadEntregarArt(fil,cod);
           if (num1<=(num3-canent))
