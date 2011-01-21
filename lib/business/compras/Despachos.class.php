@@ -243,6 +243,7 @@ class Despachos
           $detalle->setPreart($x[$j]->getPreart());
           $detalle->setCodalm($x[$j]->getCodalm());
           $detalle->setCodubi($x[$j]->getCodubi());
+          $detalle->setNumlot($x[$j]->getNumlot());
       	  $detalle->save();
 	     }//if ($x[$j]->getCandes()>0)
         $j++;
@@ -688,6 +689,7 @@ class Despachos
     {
 
        $msj="";
+       $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
        $x=$grid[0];
        $j=0;
        while ($j<count($x))
@@ -697,6 +699,8 @@ class Despachos
         $cantd=$x[$j]->getCandesp();
         $calmacen=$x[$j]->getCodalm();
         $cubicacion=$x[$j]->getCodubi();
+         if ($manartlot=='S')
+            $numlot=$x[$j]->getNumlot();
          if (($codarti!="") and ($cantd>0))
          {
            $c = new Criteria();
@@ -716,6 +720,8 @@ class Despachos
                  $c->add(CaartalmubiPeer::CODART,$codarti);
                  $c->add(CaartalmubiPeer::CODALM,$calmacen);
                  $c->add(CaartalmubiPeer::CODUBI,$cubicacion);
+                 if ($manartlot=='S')
+                     $c->add(CaartalmubiPeer::NUMLOT,$numlot);
                  $alm = CaartalmubiPeer::doSelectOne($c);
                  if ($alm)
                  {

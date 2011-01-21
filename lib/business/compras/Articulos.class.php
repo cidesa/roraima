@@ -905,7 +905,8 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
         {
          $grid_arreglo[$i]['codart'] = $x[$i]->getCodart();
          $grid_arreglo[$i]['canart'] = $x[$i]->getCanart();
-         $grid_arreglo[$i]['numlot'] = $x[$i]->getNumlot();
+         $grid_arreglo[$i]['numlotori'] = $x[$i]->getNumlotori();
+         $grid_arreglo[$i]['numlotdes'] = $x[$i]->getNumlotdes();
          $i++;
         }
      }
@@ -933,8 +934,10 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
                     $cadettra_new->setCodtra($catraalm->getCodtra());
                     $cadettra_new->setCodart($grid_arreglo[$i]['codart']);
                     $cadettra_new->setCanart($grid_arreglo[$i]['canart']);
-                    if ($manartlot=='S')
-                        $cadettra_new->setNumlot($grid_arreglo[$i]['numlot']);
+                    if ($manartlot=='S') {
+                        $cadettra_new->setNumlotori($grid_arreglo[$i]['numlotori']);
+                        $cadettra_new->setNumlotdes($grid_arreglo[$i]['numlotdes']);
+                    }
                     $cadettra_new->save();
             }
             $i++;
@@ -992,12 +995,28 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
     {
         if ($grid_arreglo[$i]['codart']!='')
         {
+          if ($manartlot=='S') {
+              if ($accion=='Salvar')
+             {
+                if ($bandera=='D')
+                {
+                    $numlot=$grid_arreglo[$i]['numlotori'];
+                }else $numlot=$grid_arreglo[$i]['numlotdes'];
+             }else {
+                 if ($bandera=='D')
+                {
+                    $numlot=$grid_arreglo[$i]['numlotdes'];
+                }else $numlot=$grid_arreglo[$i]['numlotori'];
+             }
+          }
+
+
             $c= new Criteria();
           $c->add(CaartalmubiPeer::CODALM,$almacen);
           $c->add(CaartalmubiPeer::CODUBI,$ubicacion);
           $c->add(CaartalmubiPeer::CODART,$grid_arreglo[$i]['codart']);
           if ($manartlot=='S')
-              $c->add(CaartalmubiPeer::NUMLOT,$grid_arreglo[$i]['numlot']);
+              $c->add(CaartalmubiPeer::NUMLOT,$numlot);
           $caartalm_up = CaartalmubiPeer::doSelectOne($c);
           if ($caartalm_up)
           {
@@ -1031,7 +1050,7 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
               $c->add(CaartalmubiPeer::CODUBI,$otrubicacion);
               $c->add(CaartalmubiPeer::CODART,$grid_arreglo[$i]['codart']);
               if ($manartlot=='S')
-                  $c->add(CaartalmubiPeer::NUMLOT,$grid_arreglo[$i]['numlot']);
+                  $c->add(CaartalmubiPeer::NUMLOT,$numlot);
               $caartalm = CaartalmubiPeer::doSelectOne($c);
               if ($caartalm)
               {
@@ -1041,7 +1060,7 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
                     $caartalm_new->setCodubi($ubicacion);
                     $caartalm_new->setExiact($grid_arreglo[$i]['canart']);
                     if ($manartlot=='S')
-                       $caartalm_new->setNumlot($grid_arreglo[$i]['numlot']);
+                       $caartalm_new->setNumlot($numlot);
                     $caartalm_new->save();
                   }
             }//if ($bandera=='S')
@@ -1057,6 +1076,8 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
           $c= new Criteria();
           $c->add(CaartalmubiPeer::CODALM,$almacen);
           $c->add(CaartalmubiPeer::CODART,$grid_arreglo[$i]['codart']);
+          if ($manartlot=='S')
+                  $c->add(CaartalmubiPeer::NUMLOT,$numlot);
           $caartalmubi2 = CaartalmubiPeer::doSelect($c);
           foreach($caartalmubi2 as $rs)
           {
@@ -1146,7 +1167,10 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
         $grid_arreglo[$i]['codart'] = $arreglo->getCodart();
         $grid_arreglo[$i]['canart'] = $arreglo->getCanart();
         if ($manartlot=='S')
-            $grid_arreglo[$i]['numlot'] = $arreglo->getNumlot();
+        {
+            $grid_arreglo[$i]['numlotori'] = $arreglo->getNumlotori();
+            $grid_arreglo[$i]['numlotdes'] = $arreglo->getNumlotdes();
+        }
         $i++;
       }
 
