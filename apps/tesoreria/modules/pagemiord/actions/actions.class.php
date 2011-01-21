@@ -1775,7 +1775,9 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $opciones->setTabla('opretord');
     $opciones->setAnchoGrid(900);
     $opciones->setTitulo(' ');
-    $opciones->setFilas(300);
+    $numfilret=H::getConfApp2('numfilret', 'tesoreria', 'pagemiord');
+    if ($numfilret!="") $opciones->setFilas($numfilret);
+    else $opciones->setFilas(300);
     $opciones->setName('f');
     $opciones->setHTMLTotalFilas(' ');
 
