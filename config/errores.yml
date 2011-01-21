@@ -567,6 +567,9 @@
 583:
   cod: 583
   msj:  La Unidad Administrativa del Fondo en Anticipo no Existe.
+584:
+  cod: 584
+  msj:  La Unidad Solictante y El Prefijo ya se encuentran registrados.
 3:
   cod: 3
   msj: La contraseña es diferente.

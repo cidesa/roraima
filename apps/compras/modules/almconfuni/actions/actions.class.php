@@ -122,7 +122,8 @@ class almconfuniActions extends autoalmconfuniActions
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -136,22 +137,22 @@ class almconfuniActions extends autoalmconfuniActions
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
 
-      // $this->configGrid();
-      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+        $this->caunifor = $this->getCauniforOrCreate();
+        $this->updateCauniforFromRequest();
 
-      // Aqui van los llamados a los métodos de las clases del
-      // negocio para validar los datos.
-      // Los resultados de cada llamado deben ser analizados por ejemplo:
+        if (!$this->caunifor->getId())
+        {
+            $c= new Criteria();
+            $c->add(CauniforPeer::CODCAT,$this->caunifor->getCodcat());
+            $c->add(CauniforPeer::PREFIJ,$this->caunifor->getPrefij());
+            $resul= CauniforPeer::doSelectOne($c);
+            if ($resul)
+            {
+                $this->coderr=584;
+            }
 
-      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
 
-       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
-
-      // al final $resp es analizada en base al código que retorna
-      // Todas las funciones de validación y procesos del negocio
-      // deben retornar códigos >= -1. Estos código serám buscados en
-      // el archivo errors.yml en la función handleErrorEdit()
-
+        }
       if($this->coderr!=-1){
         return false;
       } else return true;
