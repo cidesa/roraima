@@ -34,6 +34,7 @@ class Faartfac extends BaseFaartfac
   protected $canentregar="0,00";
   protected $canajustada="0,00";
   protected $montot="0,00";
+  protected $numlotxart=array();
 
   public $codfal = '';
   public $costo=0.0;
@@ -198,4 +199,30 @@ class Faartfac extends BaseFaartfac
        //$this->precioe = $val;
        $this->precioe = Herramientas::toFloat($val);
     }
+
+  public function getNumlotxart()
+  {
+    $c = new Criteria();
+    $c->add(CaartalmubiPeer::CODALM,$this->getCodalm());
+    $c->add(CaartalmubiPeer::CODUBI,$this->getCodubi());
+    $c->add(CaartalmubiPeer::CODART,self::getCodart());
+    $c->add(CaartalmubiPeer::EXIACT,0,Criteria::GREATER_THAN);
+    $c->addAscendingOrderByColumn(CaartalmubiPeer::FECVEN);
+
+    $datos = CaartalmubiPeer::doSelect($c);
+
+    $lotes = array();
+
+    foreach($datos as $obj_datos)
+    {
+     if ($obj_datos->getFecven()!="")
+     {
+        $fecven=date("d/m/Y",strtotime($obj_datos->getFecven()));
+      	$lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot()." - ".$fecven);
+     }
+      else
+      	$lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot());
+    }
+    return $lotes;
+  }
 }

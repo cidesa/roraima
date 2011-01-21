@@ -73,6 +73,7 @@ private $coderror =-1;
 
 
 		   $grid=Herramientas::CargarDatosGrid($this,$this->obj);
+                   $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 	       if ($this->ValidarDatosVaciosenGrid($grid,&$error))
 	           {
 	              $this->coderror=$error;
@@ -101,6 +102,7 @@ private $coderror =-1;
 			        $c->add(CaartalmubiPeer::CODALM,$x[$j]->getCodalm());
 			        $c->add(CaartalmubiPeer::CODUBI,$x[$j]->getCodubi());
 			        $c->add(CaartalmubiPeer::CODART,$x[$j]->getCodart());
+                                if ($manartlot=='S') $c->add(CaartalmubiPeer::NUMLOT,$x[$j]->getNumlot());
 			        $reg= CaartalmubiPeer::doSelectOne($c);
 					if ($reg){
 						if ($x[$j]->getCandesp() > 0){
@@ -641,6 +643,8 @@ private $coderror =-1;
         $opciones->setFilas(30);
         $opciones->setHTMLTotalFilas(' ');
 
+        $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
+
 	    $objalm= array ('codalm' => '1','nomalm' =>'2');
 		$col1 = new Columna('Cod. Almacén');
 	    $col1->setTipo(Columna::TEXTO);
@@ -658,7 +662,10 @@ private $coderror =-1;
 		    $col1->setCatalogo('Cadefalm','sf_admin_edit_form',$objalm,'Cadelfalm_Almordrec');
 	        $signo="-";
 	    	$signomas="+";
-		    $col1->setJScript('onBlur="toAjax(1,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,4,'.chr(39).$signomas.chr(39).')).value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,4,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
+                if ($manartlot=='S')
+                   $col1->setJScript('onBlur="toAjaxUpdater(obtenerColumna(this.id,4,'.chr(39).$signomas.chr(39).'),1,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,5,'.chr(39).$signomas.chr(39).')).value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
+                else
+		    $col1->setJScript('onBlur="toAjax(1,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,5,'.chr(39).$signomas.chr(39).')).value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
 	    }
 
 	    $col2 = new Columna('Nombre Almacén');
@@ -686,7 +693,10 @@ private $coderror =-1;
 	    	$signomas="+";
 		    $col3->setHTML('type="text" size="8" maxlength="'.chr(39).$this->lonubialm.chr(39).'"');
 		    $col3->setCatalogo('Cadefubi','sf_admin_edit_form',$objubi,'Cadefubi_Almdes',$params);
-		    $col3->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$this->mascaraubicacionalm.chr(39).')"  onBlur="toAjax(5,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,2,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,2,'.chr(39).$signomas.chr(39).')).value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,2,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
+                    if ($manartlot=='S')
+                      $col3->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$this->mascaraubicacionalm.chr(39).')"  onBlur="toAjaxUpdater(obtenerColumna(this.id,2,'.chr(39).$signomas.chr(39).'),5,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,2,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,3,'.chr(39).$signomas.chr(39).')).value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,3,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
+                    else
+		      $col3->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$this->mascaraubicacionalm.chr(39).')"  onBlur="toAjax(5,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,2,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,3,'.chr(39).$signomas.chr(39).')).value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,3,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
 	    }
 
 	    $col4 = new Columna('Nombre Ubicación');
@@ -697,58 +707,69 @@ private $coderror =-1;
 		$col4->setAlineacionContenido(Columna::CENTRO);
 	    $col4->setHTML('type="text" size="8x1" readonly=true');
 
-        // Se generan las columnas
-        $col5 = new Columna('Cod. Artículo');
-        $col5->setTipo(Columna::TEXTO);
+            $col5 = new Columna('Nro. de Lote');
+	    $col5->setTipo(Columna::COMBOCLASE);
         $col5->setEsGrabable(true);
-        $col5->setAlineacionObjeto(Columna::CENTRO);
-        $col5->setAlineacionContenido(Columna::CENTRO);
-        $col5->setNombreCampo('codart');
-        $col5->setHTML('type="text" size="10" readonly=true');
+	    $col5->setNombreCampo('numlot');
+	    $col5->setCombosclase('Numlotxart');
+	    $col5->setHTML(' ');
+            if ($manartlot!='S')
+                $col5->setOculta(true);
 
-        $col6 = new Columna('Descripción');
-        $col6->setTipo(Columna::TEXTAREA);
-        $col6->setAlineacionObjeto(Columna::IZQUIERDA);
-        $col6->setAlineacionContenido(Columna::IZQUIERDA);
-        $col6->setNombreCampo('desart');
-        $col6->setHTML('type="text" size="30x1" readonly=true');
 
-        if ($this->despnotent=="") $col7 = new Columna('Cant. Despachar');
-        else $col7 = new Columna('Cant. Entregar');
-        $col7->setTipo(Columna::MONTO);
-        $col7->setEsGrabable(true);
-        $col7->setAlineacionContenido(Columna::IZQUIERDA);
+
+        // Se generan las columnas
+        $col6 = new Columna('Cod. Artículo');
+        $col6->setTipo(Columna::TEXTO);
+        $col6->setEsGrabable(true);
+        $col6->setAlineacionObjeto(Columna::CENTRO);
+        $col6->setAlineacionContenido(Columna::CENTRO);
+        $col6->setNombreCampo('codart');
+        $col6->setHTML('type="text" size="10" readonly=true');
+
+        $col7 = new Columna('Descripción');
+        $col7->setTipo(Columna::TEXTAREA);
         $col7->setAlineacionObjeto(Columna::IZQUIERDA);
-        $col7->setNombreCampo('candesp');
-        $col7->setEsNumerico(true);
-        $col7->setHTML('type="text" size="10"');
-        $col7->setJScript('onBlur="Cantidad(this.id)"');
+        $col7->setAlineacionContenido(Columna::IZQUIERDA);
+        $col7->setNombreCampo('desart');
+        $col7->setHTML('type="text" size="30x1" readonly=true');
 
-        $col8 = clone $col7;
-        if ($this->despnotent=="") $col8->setTitulo('Cant. No Despachada');
-        else $col8->setTitulo('Cant. No Entregada');
-		$col8->setNombreCampo('cannodes');
-        $col8->setHTML('type="text" size="10" readonly=true');
-        $col8->setJScript('');
+        if ($this->despnotent=="") $col8 = new Columna('Cant. Despachar');
+        else $col8 = new Columna('Cant. Entregar');
+        $col8->setTipo(Columna::MONTO);
+        $col8->setEsGrabable(true);
+        $col8->setAlineacionContenido(Columna::IZQUIERDA);
+        $col8->setAlineacionObjeto(Columna::IZQUIERDA);
+        $col8->setNombreCampo('candesp');
+        $col8->setEsNumerico(true);
+        $col8->setHTML('type="text" size="10"');
+        $col8->setJScript('onBlur="Cantidad(this.id)"');
 
-        $col9 = new Columna('Costo Por articulo');
-        $col9->setTipo(Columna::MONTO);
-        $col9->setNombreCampo('preart');
-        $col9->setEsNumerico(true);
+        $col9 = clone $col8;
+        if ($this->despnotent=="") $col9->setTitulo('Cant. No Despachada');
+        else $col9->setTitulo('Cant. No Entregada');
+		$col9->setNombreCampo('cannodes');
         $col9->setHTML('type="text" size="10" readonly=true');
+        $col9->setJScript('');
 
-        $col10 = clone $col7;
-        $col10->setTitulo('Costo Total');
-        $col10->setNombreCampo('montotdes');
+        $col10 = new Columna('Costo Por articulo');
+        $col10->setTipo(Columna::MONTO);
+        $col10->setNombreCampo('preart');
+        $col10->setEsNumerico(true);
         $col10->setHTML('type="text" size="10" readonly=true');
-        $col10->setJScript('');
-        $col10->setEsTotal(true,'cadphart_mondph');
 
-        $col11 = clone $col7;
-        $col11->setTitulo('Cant. No Despachada');
-		$col11->setNombreCampo('cannodesaux');
+        $col11 = clone $col8;
+        $col11->setTitulo('Costo Total');
+        $col11->setNombreCampo('montotdes');
         $col11->setHTML('type="text" size="10" readonly=true');
-        $col11->setOculta(true);
+        $col11->setJScript('');
+        $col11->setEsTotal(true,'cadphart_mondph');
+
+        $col12 = clone $col8;
+        $col12->setTitulo('Cant. No Despachada');
+		$col12->setNombreCampo('cannodesaux');
+        $col12->setHTML('type="text" size="10" readonly=true');
+        $col12->setOculta(true);
 
         // Se guardan las columnas en el objetos de opciones
         $opciones->addColumna($col1);
@@ -762,6 +783,7 @@ private $coderror =-1;
         $opciones->addColumna($col9);
         $opciones->addColumna($col10);
         $opciones->addColumna($col11);
+        $opciones->addColumna($col12);
 
 	    // Ee genera el arreglo de opciones necesario para generar el grid
         $this->obj = $opciones->getConfig($per);
@@ -773,6 +795,7 @@ private $coderror =-1;
 	{
 	 $cajtexmos=$this->getRequestParameter('cajtexmos');
      $cajtexcom=$this->getRequestParameter('cajtexcom');
+     $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
 	  if ($this->getRequestParameter('ajax')=='1')
 	    {
 
@@ -809,6 +832,8 @@ private $coderror =-1;
 		           {
 		             	$codubi=$alm->getCodubi();
 		             	$nomubi=CadefubiPeer::getDesubicacion($codubi);
+                                if ($manartlot=='S')
+                                    $numlot=$alm->getNumlot();
 		             	$output = '[["'.$cajtexcom.'","6","c"],["'.$cajcodubi.'","'.$codubi.'",""],["'.$cajnomubi.'","'.$nomubi.'",""]]';
 		           }
 		           else//el almacen seleccionado no existe para el articulo introducido por el usuario
@@ -827,16 +852,29 @@ private $coderror =-1;
 
 		  	}
 
+                if ($manartlot=='S')
+                {
+                    $this->numlot=$numlot;
+                    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+                    $this->lotes=$this->ObtenerNumlotxart($codart,$codalm,$codubi);
+                }else {
+                    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+                    return sfView::HEADER_ONLY;
+	    }
 	    }
 		else  if ($this->getRequestParameter('ajax')=='3')
 	    {
 	  	    $dato=BnubibiePeer::getDesubicacion($this->getRequestParameter('codigo'));
             $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+              	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	    return sfView::HEADER_ONLY;
 	    }
 	    else  if ($this->getRequestParameter('ajax')=='4')
 	    {
 	  		$dato=CamotfalPeer::getMotivo($this->getRequestParameter('codigo'));
             $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","3","c"]]';
+              	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	    return sfView::HEADER_ONLY;
 	    }
 	  else if ($this->getRequestParameter('ajax')=='5')
 		{
@@ -848,6 +886,8 @@ private $coderror =-1;
 		  	$codalm=$datos[1];
 		  	$codart=$datos[2];
 		  	$cajtexmos=$datos[3];
+                        if ($manartlot=='S')
+                            $numlot="";
 		  	$output = '[["","",""]]';
 		  	if ($codart!="")
 		  	{
@@ -866,6 +906,8 @@ private $coderror =-1;
 	           	   if ($alm)
 	           	   {
 	           	   		$dato=CadefubiPeer::getDesubicacion($codubi);
+                                        if ($manartlot=='S')
+                                            $numlot=$alm->getNumlot();
 	           	   		$javascript="";
 	           	   }
 	              else
@@ -886,8 +928,15 @@ private $coderror =-1;
 
 		  	}
 
+	  	if ($manartlot=='S')
+                {
+                   $this->numlot=$numlot;
 	  		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+                    $this->lotes=$this->ObtenerNumlotxart($codart,$codalm,$codubi);
+                }else {
+                    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 	        return sfView::HEADER_ONLY;
+	   }
 	   }
 
 	    /*
@@ -932,8 +981,7 @@ private $coderror =-1;
             $output = '[["'.$cajtexmos.'","'.$dato.'",""],["existeubicacion","'.$existe.'",""]]';
 	    }
 	    */
-  	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-	    return sfView::HEADER_ONLY;
+
 	}
 
   public function executeAutocomplete()
@@ -1091,41 +1139,52 @@ private $coderror =-1;
 		$col4->setAlineacionContenido(Columna::CENTRO);
 	    $col4->setHTML('type="text" size="8x1" readonly=true');
 
-        $col5 = new Columna('Código del Artículo');
+            $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
+
+            $col5 = new Columna('Nro. de Lote');
         $col5->setTipo(Columna::TEXTO);
         $col5->setEsGrabable(true);
         $col5->setAlineacionObjeto(Columna::CENTRO);
         $col5->setAlineacionContenido(Columna::CENTRO);
-        $col5->setNombreCampo('codart');
-        $col5->setHTML('type="text" size="20" readonly=true');
+            $col5->setNombreCampo('numlot');
+            $col5->setHTML('type="text" size="15" readonly=true');
+            if ($manartlot!='S') $col5->setOculta(true);
 
-        $col6 = new Columna('Descripción');
+        $col6 = new Columna('Código del Artículo');
         $col6->setTipo(Columna::TEXTO);
-        $col6->setAlineacionObjeto(Columna::IZQUIERDA);
-        $col6->setAlineacionContenido(Columna::IZQUIERDA);
-        $col6->setNombreCampo('desart');
-        $col6->setHTML('type="text" size="30" disabled=true');
+        $col6->setEsGrabable(true);
+        $col6->setAlineacionObjeto(Columna::CENTRO);
+        $col6->setAlineacionContenido(Columna::CENTRO);
+        $col6->setNombreCampo('codart');
+        $col6->setHTML('type="text" size="20" readonly=true');
 
-        $col7 = new Columna('Cant. Desp');
-        $col7->setTipo(Columna::MONTO);
-        $col7->setEsGrabable(true);
-        $col7->setAlineacionContenido(Columna::IZQUIERDA);
+        $col7 = new Columna('Descripción');
+        $col7->setTipo(Columna::TEXTO);
         $col7->setAlineacionObjeto(Columna::IZQUIERDA);
-        $col7->setNombreCampo('candph');
-        $col7->setEsNumerico(true);
-        $col7->setHTML('type="text" size="10" readonly=true');
+        $col7->setAlineacionContenido(Columna::IZQUIERDA);
+        $col7->setNombreCampo('desart');
+        $col7->setHTML('type="text" size="30" disabled=true');
 
-        $col8 = clone $col7;
-        $col8->setTitulo('Cant. No Desp');
-        $col8->setNombreCampo('cannodes');
+        $col8 = new Columna('Cant. Desp');
+        $col8->setTipo(Columna::MONTO);
+        $col8->setEsGrabable(true);
+        $col8->setAlineacionContenido(Columna::IZQUIERDA);
+        $col8->setAlineacionObjeto(Columna::IZQUIERDA);
+        $col8->setNombreCampo('candph');
+        $col8->setEsNumerico(true);
+        $col8->setHTML('type="text" size="10" readonly=true');
 
-		$col9 = clone $col7;
-        $col9 = new Columna('Costo Por articulo');
-        $col9->setNombreCampo('preart');
+        $col9 = clone $col8;
+        $col9->setTitulo('Cant. No Desp');
+        $col9->setNombreCampo('cannodes');
 
-        $col10 = clone $col7;
-        $col10->setTitulo('Costo Total');
-        $col10->setNombreCampo('montotdes');
+		$col10 = clone $col8;
+        $col10 = new Columna('Costo Por articulo');
+        $col10->setNombreCampo('preart');
+
+        $col11 = clone $col8;
+        $col11->setTitulo('Costo Total');
+        $col11->setNombreCampo('montotdes');
 
 
         // Se guardan las columnas en el objetos de opciones
@@ -1139,6 +1198,7 @@ private $coderror =-1;
         $opciones->addColumna($col8);
         $opciones->addColumna($col9);
         $opciones->addColumna($col10);
+        $opciones->addColumna($col11);
 
 	    // Ee genera el arreglo de opciones necesario para generar el grid
         $this->obj = $opciones->getConfig($per);
@@ -1167,6 +1227,33 @@ private $coderror =-1;
 	       }
     $this->orddesveh = H::getConfApp('orddesveh','facturacion','fadesp');
     $this->getUser()->setAttribute('orddesveh',$this->orddesveh,'fadesp');
+  }
+
+   public function ObtenerNumlotxart($codart="",$codalm="",$codubi="")
+  {
+    $c = new Criteria();
+    $c->add(CaartalmubiPeer::CODALM,$codalm);
+    $c->add(CaartalmubiPeer::CODUBI,$codubi);
+    $c->add(CaartalmubiPeer::CODART,$codart);
+    $c->add(CaartalmubiPeer::EXIACT,0,Criteria::GREATER_THAN);
+    $c->addAscendingOrderByColumn(CaartalmubiPeer::FECVEN);
+
+    $datos = CaartalmubiPeer::doSelect($c);
+
+    $lotes = array();
+
+    foreach($datos as $obj_datos)
+    {
+     if ($obj_datos->getFecven()!="")
+     {
+        $fecven=date("d/m/Y",strtotime($obj_datos->getFecven()));
+      	$lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot()." - ".$fecven);
+}
+      else
+      	$lotes += array($obj_datos->getNumlot() => $obj_datos->getNumlot());
+
+    }
+    return $lotes;
   }
 
 }

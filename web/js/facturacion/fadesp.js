@@ -44,8 +44,8 @@
    var colcannodesaux=col+4;
    var colprecio=col+2;
    var coltotal=col+3;
-   var colcodalm=col-6;
-   var colcodubi=col-4;
+   var colcodalm=col-7;
+   var colcodubi=col-5;
    var colcodart=col-2;
 
    var cantto=name+"_"+fil+"_"+colcandes;

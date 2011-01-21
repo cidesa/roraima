@@ -351,6 +351,7 @@ class Almacen
          $c->add(CaartalmubiPeer::CODART,$codart);
          $c->add(CaartalmubiPeer::CODALM,$codalm);
          $c->add(CaartalmubiPeer::CODUBI,$codubi);
+         if ($manartlot=='S') $c->add(CaartalmubiPeer::NUMLOT,$numlot);
          $alm = CaartalmubiPeer::doSelectOne($c);
          if ($alm)
          {

@@ -147,7 +147,7 @@ $this->Bitacora('Guardo');
   	   $col1->setHTML('type="text" size="15"  readonly=true');
 	if (!$this->catraalm->getId()) $col1->setCatalogo('caregart','sf_admin_edit_form', array('codart' => 1, 'desart' => 2, 'unimed' => 3),'Caregart_Almtraalm',$params);
   	if ($manartlot=='S') {
-           if (!$this->catraalm->getId()) $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="toAjaxUpdater(obtenerColumna(this.id,5,'.chr(39).$signomas.chr(39).'),3,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$F("catraalm_codubiori")+'.chr(39).'!'.chr(39).'+$F("catraalm_almori")+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
+           if (!$this->catraalm->getId()) $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="toAjaxUpdater(obtenerColumna(this.id,5,'.chr(39).$signomas.chr(39).'),3,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$F("catraalm_codubiori")+'.chr(39).'!'.chr(39).'+$F("catraalm_almori")+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).')+'.chr(39).'!'.chr(39).'+$F("catraalm_codubides")+'.chr(39).'!'.chr(39).'+$F("catraalm_almdes"),devuelveParVacios(),devuelveParVacios()); toAjaxUpdater(obtenerColumna(this.id,6,'.chr(39).$signomas.chr(39).'),3,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$F("catraalm_codubides")+'.chr(39).'!'.chr(39).'+$F("catraalm_almdes")+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
         }
         else {
   	if (!$this->catraalm->getId()) $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="javascript:event.keyCode=13; ajaxdetalle(event,this.id);"');
@@ -193,41 +193,60 @@ $this->Bitacora('Guardo');
   	    $col5->setHTML('type="text" size="15" readonly=true');
     if (!$this->catraalm->getId()) $col5->setJScript('onKeypress="validarcantidad(event,this.id)"');
 
-    if ($manartlot=='S')
-    {
+
         if ($this->catraalm->getId())
         {
-           $col6= new Columna('Número de Lote');
+           $col6= new Columna('Número de Lote Origen');
            $col6->setTipo(Columna::TEXTO);
            $col6->setEsGrabable(true);
            $col6->setAlineacionObjeto(Columna::CENTRO);
            $col6->setAlineacionContenido(Columna::CENTRO);
-           $col6->setNombreCampo('numlot');
+           $col6->setNombreCampo('numlotori');
            $col6->setHTML('type="text" size="15" readonly=true');
+          if ($manartlot!='S') $col6->setOculta(true);
+
+
+           $col7= new Columna('Número de Lote Destino');
+           $col7->setTipo(Columna::TEXTO);
+           $col7->setEsGrabable(true);
+           $col7->setAlineacionObjeto(Columna::CENTRO);
+           $col7->setAlineacionContenido(Columna::CENTRO);
+           $col7->setNombreCampo('numlotdes');
+           $col7->setHTML('type="text" size="15" readonly=true');
+           if ($manartlot!='S') $col7->setOculta(true);
          }
          else
           {
-                $col6= new Columna('Nro. de Lote');
+                $col6= new Columna('Nro. de Lote Origen');
                 $col6->setTipo(Columna::COMBOCLASE);
                 $col6->setEsGrabable(true);
-                $col6->setNombreCampo('numlot');
+                $col6->setNombreCampo('numlotori');
                 $col6->setCombosclase('Numlotxart');
-                $col6->setHTML(' ');
+                $col6->setHTML('onChange="toAjax(5,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$(obtenerColumna(this.id,5,'.chr(39).$signo.chr(39).')).value+'.chr(39).'!'.chr(39).'+$F("catraalm_codubiori")+'.chr(39).'!'.chr(39).'+$F("catraalm_almori")+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
+                if ($manartlot!='S') $col6->setOculta(true);
+
+                $col7= new Columna('Nro. de Lote Destino');
+                $col7->setTipo(Columna::COMBOCLASE);
+	   $col7->setEsGrabable(true);
+                $col7->setNombreCampo('numlotdes');
+                $col7->setCombosclase('Numlotxart');
+                $col7->setHTML(' ');
+                if ($manartlot!='S') $col7->setOculta(true);
           }
 
-           $col7= new Columna('codalm');
-	   $col7->setTipo(Columna::TEXTO);
-	   $col7->setEsGrabable(true);
-	   $col7->setNombreCampo('codalm');
-	   $col7->setOculta(true);
-
-
-           $col8= new Columna('codubi');
+           $col8= new Columna('codalm');
 	   $col8->setTipo(Columna::TEXTO);
 	   $col8->setEsGrabable(true);
-	   $col8->setNombreCampo('codubi');
+	   $col8->setNombreCampo('codalm');
 	   $col8->setOculta(true);
-    }
+
+
+           $col9= new Columna('codubi');
+	   $col9->setTipo(Columna::TEXTO);
+	   $col9->setEsGrabable(true);
+	   $col9->setNombreCampo('codubi');
+	   $col9->setOculta(true);
+
 
 
   	// Se guardan las columnas en el objetos de opciones
@@ -236,12 +255,11 @@ $this->Bitacora('Guardo');
   	$opciones->addColumna($col3);
   	$opciones->addColumna($col4);
   	$opciones->addColumna($col5);
-        if ($manartlot=='S')
-        {
             $opciones->addColumna($col6);
             $opciones->addColumna($col7);
             $opciones->addColumna($col8);
-        }
+        $opciones->addColumna($col9);
+
 
 
   	// Ee genera el arreglo de opciones necesario para generar el grid
@@ -283,7 +301,7 @@ $this->Bitacora('Guardo');
                 $encontro=true;
                 if ($manartlot=='S')
                 {
-                    if ($x[$j]->getNumlot()=="")
+                    if ($x[$j]->getNumlotori()=="" || $x[$j]->getNumlotdes()=="")
                      {
                              $this->coderror=577;
                              return $this->coderror;
@@ -467,6 +485,31 @@ $this->Bitacora('Guardo');
                         {
                             if ($reg)
                             {
+                                /*$exiact=0;
+                                if (Almacen::ExistenciayObtenerDisponibilidadAlmArt($codart,$codalm,$codubi,&$exiact,&$numlot))
+                                {
+                                    $desart=htmlspecialchars($reg->getDesart());
+                                    $unimed=$reg->getUnimed();
+                                    $disponibilidad=$exiact;
+                                    $output = '[["'.$cajtexmos.'","'.$desart.'",""],["'.$cajunidad.'","'.$unimed.'",""],["'.$cajdispon.'","'.$disponibilidad.'",""],["'.$cajcodalm.'","'.$codalm.'",""],["'.$cajcodubi.'","'.$codubi.'",""]]';
+                                }//if (Despachos::verificaexisydisp($x[$j]->getCodart(),$cadphart['codalm'],$cadphart['codubi'],$x[$j]->getCandes(),&$msg)
+                                else
+                                {
+                                    $mensaje="El Artículo ".$codart." no esta definido en el Almacen ".$codalm." para la Ubicacion ".$codubi;
+                                    $javascript="alert('".$mensaje."');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('". $cajunidad ."').value='';$('". $cajdispon ."').value='0.00';$('". $cajcantra ."').value='0.00'";
+                                    $output = '[["javascript","'.$javascript.'",""]]';
+                                }*/
+                                 $c = new Criteria();
+                                 $c->add(CaartalmubiPeer::CODART,$codart);
+                                 $c->add(CaartalmubiPeer::CODALM,$codalm);
+                                 $c->add(CaartalmubiPeer::CODUBI,$codubi);
+                                 $alm = CaartalmubiPeer::doSelectOne($c);
+                                 if ($alm)
+                                 {
+                                       $numlot=$alm->getNumlot();
+                                 }
+                                 if ($numlot!="")
+                                 {
                                 $exiact=0;
                                 if (Almacen::ExistenciayObtenerDisponibilidadAlmArt($codart,$codalm,$codubi,&$exiact,&$numlot))
                                 {
@@ -481,6 +524,7 @@ $this->Bitacora('Guardo');
                                     $javascript="alert('".$mensaje."');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('". $cajunidad ."').value='';$('". $cajdispon ."').value='0.00';$('". $cajcantra ."').value='0.00'";
                                     $output = '[["javascript","'.$javascript.'",""]]';
                                 }
+                            }
                             }
                             else
                             {
@@ -536,7 +580,129 @@ $this->Bitacora('Guardo');
 	    return sfView::HEADER_ONLY;
 	}
 	    }//else  if ($this->getRequestParameter('ajax')=='3')
+            else  if ($this->getRequestParameter('ajax')=='4')
+	    {
+                    $datos=split('!',$this->getRequestParameter('codigo'));
+                    $codart=$datos[0];
+                    $codubi=$datos[1];
+                    $codalm=$datos[2];
+                    $cajtexmos=$datos[3];
+                    $aux = split('_',$cajtexmos);
+                    $name=$aux[0];
+                    $fil=$aux[1];
+                    $cajtexcom=$name."_".$fil."_1";
+                    $cajunidad=$name."_".$fil."_3";
+                    $cajdispon=$name."_".$fil."_4";
+                    $cajcantra=$name."_".$fil."_5";
+                    $cajcodalm=$name."_".$fil."_7";
+                    $cajcodubi=$name."_".$fil."_8";
+                    $numlot="";
+                    $output = '[["","",""]]';
+                    if ($codart!="")
+                    {
+                        $c= new Criteria();
+                        $c->add(CaregartPeer::CODART,$codart);
+                        $reg=CaregartPeer::doSelectOne($c);
+                        if ($codalm!="" and $codubi!="")
+                        {
+                            if ($reg)
+                            {
+                                /*$exiact=0;
+                                if (Almacen::ExistenciayObtenerDisponibilidadAlmArt($codart,$codalm,$codubi,&$exiact,&$numlot))
+                                {
+                                    $desart=htmlspecialchars($reg->getDesart());
+                                    $unimed=$reg->getUnimed();
+                                    $disponibilidad=$exiact;
+                                    $output = '[["'.$cajtexmos.'","'.$desart.'",""],["'.$cajunidad.'","'.$unimed.'",""],["'.$cajdispon.'","'.$disponibilidad.'",""],["'.$cajcodalm.'","'.$codalm.'",""],["'.$cajcodubi.'","'.$codubi.'",""]]';
+                                }//if (Despachos::verificaexisydisp($x[$j]->getCodart(),$cadphart['codalm'],$cadphart['codubi'],$x[$j]->getCandes(),&$msg)
+                                else
+                                {
+                                    $mensaje="El Artículo ".$codart." no esta definido en el Almacen ".$codalm." para la Ubicacion ".$codubi;
+                                    $javascript="alert('".$mensaje."');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('". $cajunidad ."').value='';$('". $cajdispon ."').value='0.00';$('". $cajcantra ."').value='0.00'";
+                                    $output = '[["javascript","'.$javascript.'",""]]';
+                                }*/
+                                $c = new Criteria();
+                                 $c->add(CaartalmubiPeer::CODART,$codart);
+                                 $c->add(CaartalmubiPeer::CODALM,$codalm);
+                                 $c->add(CaartalmubiPeer::CODUBI,$codubi);
+                                 $alm = CaartalmubiPeer::doSelectOne($c);
+                                 if ($alm)
+                                 {
+                                       $numlot=$alm->getNumlot();
+                                 }
+                            }
+                            else
+                            {
+                                 $javascript="alert('Articulo no existe');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('". $cajunidad ."').value='';$('". $cajdispon ."').value='0.00';$('". $cajcantra ."').value='0.00'";
+                                 $output = '[["javascript","'.$javascript.'",""]]';
+                            }
+                        }//if ($this->getRequestParameter('almori')!="")
+                        else
+                        {
+                          $javascript="alert('Debe seleccionar el Almacén y la Ubicación Origen antes de incluir los artículos a transferir...');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('".$cajunidad ."').value='';$('".$cajdispon ."').value='0.00';$('". $cajcantra ."').value='0.00'";
+                          $output = '[["javascript","'.$javascript.'",""]]';
+                        }
+                    }//if ($codart!="")
+                  $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+                  $this->numlot=$numlot;
+                  $this->lotes=$this->ObtenerNumlotxart($codart,$codalm,$codubi);
+                }
+                else  if ($this->getRequestParameter('ajax')=='5')
+	    {
+                    $datos=split('!',$this->getRequestParameter('codigo'));
+                    $numlot=$datos[0];
+                    $codart=$datos[1];
+                    $codubi=$datos[2];
+                    $codalm=$datos[3];
+                    $cajtexmos=$datos[4];
+                    $aux = split('_',$cajtexmos);
+                    $name=$aux[0];
+                    $fil=$aux[1];
+                    $cajtexcom=$name."_".$fil."_1";
+                    $cajunidad=$name."_".$fil."_3";
+                    $cajdispon=$name."_".$fil."_4";
+                    $cajcantra=$name."_".$fil."_5";
+                    $cajcodalm=$name."_".$fil."_7";
+                    $cajcodubi=$name."_".$fil."_8";
 
+                    $output = '[["","",""]]';
+                    if ($codart!="")
+                    {
+                        $c= new Criteria();
+                        $c->add(CaregartPeer::CODART,$codart);
+                        $reg=CaregartPeer::doSelectOne($c);
+                        if ($codalm!="" and $codubi!="")
+                        {
+                            if ($reg)
+                            {
+                                $exiact=0;
+                                if (Almacen::ExistenciayObtenerDisponibilidadAlmArt($codart,$codalm,$codubi,&$exiact,&$numlot))
+                                {
+                                    $disponibilidad=$exiact;
+                                    $output = '[["'.$cajdispon.'","'.$disponibilidad.'",""]]';
+                                }//if (Despachos::verificaexisydisp($x[$j]->getCodart(),$cadphart['codalm'],$cadphart['codubi'],$x[$j]->getCandes(),&$msg)
+                                else
+                                {
+                                    $mensaje="El Artículo ".$codart." no esta definido en el Almacen ".$codalm." para la Ubicacion ".$codubi;
+                                    $javascript="alert('".$mensaje."');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('". $cajunidad ."').value='';$('". $cajdispon ."').value='0.00';$('". $cajcantra ."').value='0.00'";
+                                    $output = '[["javascript","'.$javascript.'",""]]';
+	}
+                            }
+                            else
+                            {
+                                 $javascript="alert('Articulo no existe');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('". $cajunidad ."').value='';$('". $cajdispon ."').value='0.00';$('". $cajcantra ."').value='0.00'";
+                                 $output = '[["javascript","'.$javascript.'",""]]';
+                            }
+                        }//if ($this->getRequestParameter('almori')!="")
+                        else
+                        {
+                          $javascript="alert('Debe seleccionar el Almacén y la Ubicación Origen antes de incluir los artículos a transferir...');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';$('".$cajunidad ."').value='';$('".$cajdispon ."').value='0.00';$('". $cajcantra ."').value='0.00'";
+                          $output = '[["javascript","'.$javascript.'",""]]';
+                        }
+                    }//if ($codart!="")
+                  $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+                  return sfView::HEADER_ONLY;
+                }
 	}
 
        public function ObtenerNumlotxart($codart="",$codalm="",$codubi="")
