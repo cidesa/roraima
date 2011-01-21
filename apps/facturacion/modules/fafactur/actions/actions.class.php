@@ -27,7 +27,7 @@ class fafacturActions extends autofafacturActions {
 		if ($this->getUser()->getAttribute('clavecaja', null, 'fafactur') != "") {
 			if($this->fafactur->getId()=='')
 	        {
-			$c = new Criteria();
+			/*$c = new Criteria();
 			$c->add(FadefcajPeer :: ID, $this->getUser()->getAttribute('clavecaja', null, 'fafactur'));
 			$reg = FadefcajPeer :: doSelectOne($c);
 			if ($reg) {
@@ -45,11 +45,12 @@ class fafacturActions extends autofafacturActions {
                                     }else $enc=true;
                                 }
                                 $reg->setCorcaj($r+1);
-                                //$reg->save();
+                                $reg->save();
 				$this->fafactur->setReffac($correl);
+			}*/
+                           $this->fafactur->setReffac('########');
 			}
 	        }
-		}
 		if($this->fafactur->getId())
 	    {
     	  if ($this->fafactur->getStatus()=='N')
@@ -567,7 +568,7 @@ class fafacturActions extends autofafacturActions {
 				break;
 			case '5' :
 				$javascript = "$('CajaPrinc').hide();";
-				$c = new Criteria();
+				/*$c = new Criteria();
 				$c->add(FadefcajPeer :: ID, $this->getRequestParameter('codigocaja'));
 				$reg = FadefcajPeer :: doSelectOne($c);
 				if ($reg) {					
@@ -585,11 +586,12 @@ class fafacturActions extends autofafacturActions {
                                             }else $enc=true;
                                         }
                                         $reg->setCorcaj($r+1);
-                                        //$reg->save();
+                                        $reg->save();
 				} else {
 					$tipo = "";
 					$correl = "";
-				}
+				}*/
+                                $correl = "########";
 				$this->getUser()->setAttribute('clavecaja', $this->getRequestParameter('codigocaja'), 'fafactur');
 				$javascript = $javascript . "$('FormaPrinc').show(); $$('.sf_admin_action_list')[0].show(); $$('.sf_admin_action_save')[6].show(); $$('.sf_admin_action_create')[0].show();";
 				$output = '[["javascript","' . $javascript . '",""],["fafactur_reffac","' . $correl . '",""]]';

@@ -26,6 +26,29 @@ class Factura {
       $facliente->setTipper($fafactur->getTipper());
       $facliente->save();
     }
+    $r=0;
+    if ($nuevo=="")
+    {
+        $c = new Criteria();
+        $c->add(FadefcajPeer :: ID, sfContext::getInstance()->getUser()->getAttribute('clavecaja', null, 'fafactur')); //$this->getUser()->getAttribute('clavecaja', null, 'fafactur'));
+        $reg = FadefcajPeer :: doSelectOne($c);
+        if ($reg) {
+                $r = $reg->getCorcaj();
+                $enc=false;
+                while (!$enc)
+                {
+                    $correl = str_pad($r, 8, '0', STR_PAD_LEFT);
+                    $t= new Criteria();
+                    $t->add(FafacturPeer::REFFAC,$correl);
+                    $res=FafacturPeer::doSelectOne($t);
+                    if ($res)
+                    {
+                      $r=$r+1;
+                    }else $enc=true;
+                }
+                $fafactur->setReffac($correl);
+        }
+    }
 
     if (!self::grabarComprobanteOrden(&$fafactur,$grid1,&$msj))
     {
@@ -74,6 +97,17 @@ class Factura {
 
     $fafactur->save();
     
+    if ($nuevo=="")
+    {
+        $c = new Criteria();
+        $c->add(FadefcajPeer :: ID, sfContext::getInstance()->getUser()->getAttribute('clavecaja', null, 'fafactur')); //$this->getUser()->getAttribute('clavecaja', null, 'fafactur'));
+        $reg = FadefcajPeer :: doSelectOne($c);
+        if ($reg) {
+        $reg->setCorcaj($r+1);
+        $reg->save();
+        }
+    }
+
     return true;
 
   }
