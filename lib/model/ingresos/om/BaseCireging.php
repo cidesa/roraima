@@ -4,126 +4,147 @@
 abstract class BaseCireging extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $refing;
 
 
-	
+
 	protected $fecing;
 
 
-	
+
 	protected $desing;
 
 
-	
+
 	protected $codtip;
 
 
-	
+
 	protected $rifcon;
 
 
-	
+
 	protected $moning;
 
 
-	
+
 	protected $monrec;
 
 
-	
+
 	protected $mondes;
 
 
-	
+
 	protected $montot;
 
 
-	
+
 	protected $desanu;
 
 
-	
+
 	protected $fecanu;
 
 
-	
+
 	protected $staing;
 
 
-	
+
 	protected $ctaban;
 
 
-	
+
 	protected $tipmov;
 
 
-	
+
 	protected $previs;
 
 
-	
+
 	protected $anoing;
 
 
-	
+
 	protected $numdep;
 
 
-	
+
 	protected $numofi;
 
 
-	
+
 	protected $numcom;
 
 
-	
+
 	protected $reflib;
 
 
-	
+
 	protected $staliq;
 
 
-	
+
 	protected $fecliq;
 
 
-	
+
 	protected $refliq;
 
 
-	
+
 	protected $desliq;
+
 
 
 	protected $fecdep;
 
 
-		
+
+	protected $codtipper;
+
+
+
+	protected $banco;
+
+
+
+	protected $cheque;
+
+
+
+	protected $agencia;
+
+
+
+	protected $fecha;
+
+
+
 	protected $id;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getRefing()
   {
 
     return trim($this->refing);
 
   }
-  
+
   public function getFecing($format = 'Y-m-d')
   {
 
@@ -145,28 +166,28 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
     }
   }
 
-  
+
   public function getDesing()
   {
 
     return trim($this->desing);
 
   }
-  
+
   public function getCodtip()
   {
 
     return trim($this->codtip);
 
   }
-  
+
   public function getRifcon()
   {
 
     return trim($this->rifcon);
 
   }
-  
+
   public function getMoning($val=false)
   {
 
@@ -174,7 +195,7 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
     else return $this->moning;
 
   }
-  
+
   public function getMonrec($val=false)
   {
 
@@ -182,7 +203,7 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
     else return $this->monrec;
 
   }
-  
+
   public function getMondes($val=false)
   {
 
@@ -190,7 +211,7 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
     else return $this->mondes;
 
   }
-  
+
   public function getMontot($val=false)
   {
 
@@ -198,14 +219,14 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
     else return $this->montot;
 
   }
-  
+
   public function getDesanu()
   {
 
     return trim($this->desanu);
 
   }
-  
+
   public function getFecanu($format = 'Y-m-d')
   {
 
@@ -227,77 +248,77 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
     }
   }
 
-  
+
   public function getStaing()
   {
 
     return trim($this->staing);
 
   }
-  
+
   public function getCtaban()
   {
 
     return trim($this->ctaban);
 
   }
-  
+
   public function getTipmov()
   {
 
     return trim($this->tipmov);
 
   }
-  
+
   public function getPrevis()
   {
 
     return trim($this->previs);
 
   }
-  
+
   public function getAnoing()
   {
 
     return trim($this->anoing);
 
   }
-  
+
   public function getNumdep()
   {
 
     return trim($this->numdep);
 
   }
-  
+
   public function getNumofi()
   {
 
     return trim($this->numofi);
 
   }
-  
+
   public function getNumcom()
   {
 
     return trim($this->numcom);
 
   }
-  
+
   public function getReflib()
   {
 
     return trim($this->reflib);
 
   }
-  
+
   public function getStaliq()
   {
 
     return trim($this->staliq);
 
   }
-  
+
   public function getFecliq($format = 'Y-m-d')
   {
 
@@ -319,20 +340,21 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
     }
   }
 
-  
+
   public function getRefliq()
   {
 
     return trim($this->refliq);
 
   }
-  
+
   public function getDesliq()
   {
 
     return trim($this->desliq);
 
   }
+
   public function getFecdep($format = 'Y-m-d')
   {
 
@@ -354,15 +376,64 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
     }
   }
 
-  
-  
+
+  public function getCodtipper()
+  {
+
+    return trim($this->codtipper);
+
+  }
+
+  public function getBanco()
+  {
+
+    return trim($this->banco);
+
+  }
+
+  public function getCheque()
+  {
+
+    return trim($this->cheque);
+
+  }
+
+  public function getAgencia()
+  {
+
+    return trim($this->agencia);
+
+  }
+
+  public function getFecha($format = 'Y-m-d')
+  {
+
+    if ($this->fecha === null || $this->fecha === '') {
+      return null;
+    } elseif (!is_int($this->fecha)) {
+            $ts = adodb_strtotime($this->fecha);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecha] as date/time value: " . var_export($this->fecha, true));
+      }
+    } else {
+      $ts = $this->fecha;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setRefing($v)
 	{
 
@@ -370,9 +441,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->refing = $v;
         $this->modifiedColumns[] = CiregingPeer::REFING;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFecing($v)
 	{
 
@@ -393,8 +464,8 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = CiregingPeer::FECING;
     }
 
-	} 
-	
+	}
+
 	public function setDesing($v)
 	{
 
@@ -402,9 +473,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->desing = $v;
         $this->modifiedColumns[] = CiregingPeer::DESING;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodtip($v)
 	{
 
@@ -412,9 +483,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->codtip = $v;
         $this->modifiedColumns[] = CiregingPeer::CODTIP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setRifcon($v)
 	{
 
@@ -422,9 +493,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->rifcon = $v;
         $this->modifiedColumns[] = CiregingPeer::RIFCON;
       }
-  
-	} 
-	
+
+	}
+
 	public function setMoning($v)
 	{
 
@@ -432,9 +503,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->moning = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CiregingPeer::MONING;
       }
-  
-	} 
-	
+
+	}
+
 	public function setMonrec($v)
 	{
 
@@ -442,9 +513,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->monrec = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CiregingPeer::MONREC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setMondes($v)
 	{
 
@@ -452,9 +523,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->mondes = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CiregingPeer::MONDES;
       }
-  
-	} 
-	
+
+	}
+
 	public function setMontot($v)
 	{
 
@@ -462,9 +533,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->montot = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CiregingPeer::MONTOT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDesanu($v)
 	{
 
@@ -472,9 +543,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->desanu = $v;
         $this->modifiedColumns[] = CiregingPeer::DESANU;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFecanu($v)
 	{
 
@@ -495,8 +566,8 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = CiregingPeer::FECANU;
     }
 
-	} 
-	
+	}
+
 	public function setStaing($v)
 	{
 
@@ -504,9 +575,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->staing = $v;
         $this->modifiedColumns[] = CiregingPeer::STAING;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCtaban($v)
 	{
 
@@ -514,9 +585,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->ctaban = $v;
         $this->modifiedColumns[] = CiregingPeer::CTABAN;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTipmov($v)
 	{
 
@@ -524,9 +595,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->tipmov = $v;
         $this->modifiedColumns[] = CiregingPeer::TIPMOV;
       }
-  
-	} 
-	
+
+	}
+
 	public function setPrevis($v)
 	{
 
@@ -534,9 +605,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->previs = $v;
         $this->modifiedColumns[] = CiregingPeer::PREVIS;
       }
-  
-	} 
-	
+
+	}
+
 	public function setAnoing($v)
 	{
 
@@ -544,9 +615,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->anoing = $v;
         $this->modifiedColumns[] = CiregingPeer::ANOING;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNumdep($v)
 	{
 
@@ -554,9 +625,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->numdep = $v;
         $this->modifiedColumns[] = CiregingPeer::NUMDEP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNumofi($v)
 	{
 
@@ -564,9 +635,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->numofi = $v;
         $this->modifiedColumns[] = CiregingPeer::NUMOFI;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNumcom($v)
 	{
 
@@ -574,9 +645,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->numcom = $v;
         $this->modifiedColumns[] = CiregingPeer::NUMCOM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setReflib($v)
 	{
 
@@ -584,9 +655,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->reflib = $v;
         $this->modifiedColumns[] = CiregingPeer::REFLIB;
       }
-  
-	} 
-	
+
+	}
+
 	public function setStaliq($v)
 	{
 
@@ -594,9 +665,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->staliq = $v;
         $this->modifiedColumns[] = CiregingPeer::STALIQ;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFecliq($v)
 	{
 
@@ -617,8 +688,8 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = CiregingPeer::FECLIQ;
     }
 
-	} 
-	
+	}
+
 	public function setRefliq($v)
 	{
 
@@ -626,9 +697,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->refliq = $v;
         $this->modifiedColumns[] = CiregingPeer::REFLIQ;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDesliq($v)
 	{
 
@@ -636,8 +707,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->desliq = $v;
         $this->modifiedColumns[] = CiregingPeer::DESLIQ;
       }
-  
-	} 
+
+	}
+
 	public function setFecdep($v)
 	{
 
@@ -658,8 +730,70 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = CiregingPeer::FECDEP;
     }
 
-	} 
-	
+	}
+
+	public function setCodtipper($v)
+	{
+
+    if ($this->codtipper !== $v) {
+        $this->codtipper = $v;
+        $this->modifiedColumns[] = CiregingPeer::CODTIPPER;
+      }
+
+	}
+
+	public function setBanco($v)
+	{
+
+    if ($this->banco !== $v) {
+        $this->banco = $v;
+        $this->modifiedColumns[] = CiregingPeer::BANCO;
+      }
+
+	}
+
+	public function setCheque($v)
+	{
+
+    if ($this->cheque !== $v) {
+        $this->cheque = $v;
+        $this->modifiedColumns[] = CiregingPeer::CHEQUE;
+      }
+
+	}
+
+	public function setAgencia($v)
+	{
+
+    if ($this->agencia !== $v) {
+        $this->agencia = $v;
+        $this->modifiedColumns[] = CiregingPeer::AGENCIA;
+      }
+
+	}
+
+	public function setFecha($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecha] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecha !== $ts) {
+      $this->fecha = $ts;
+      $this->modifiedColumns[] = CiregingPeer::FECHA;
+    }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -667,9 +801,9 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = CiregingPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -724,8 +858,17 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 
       $this->fecdep = $rs->getDate($startcol + 24, null);
 
-      $this->id = $rs->getInt($startcol + 25);
-      
+      $this->codtipper = $rs->getString($startcol + 25);
+
+      $this->banco = $rs->getString($startcol + 26);
+
+      $this->cheque = $rs->getString($startcol + 27);
+
+      $this->agencia = $rs->getString($startcol + 28);
+
+      $this->fecha = $rs->getDate($startcol + 29, null);
+
+      $this->id = $rs->getInt($startcol + 30);
 
       $this->resetModified();
 
@@ -733,7 +876,7 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 26; 
+            return $startcol + 31;
     } catch (Exception $e) {
       throw new PropelException("Error populating Cireging object", $e);
     }
@@ -744,8 +887,8 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -759,7 +902,7 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -781,7 +924,7 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -803,7 +946,7 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -813,8 +956,8 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CiregingPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += CiregingPeer::doUpdate($this, $con);
@@ -824,17 +967,17 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -847,7 +990,7 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -869,14 +1012,14 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = CiregingPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -955,7 +1098,22 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 			case 24:
 				return $this->getFecdep();
 				break;
-			case 25:			
+			case 25:
+				return $this->getCodtipper();
+				break;
+			case 26:
+				return $this->getBanco();
+				break;
+			case 27:
+				return $this->getCheque();
+				break;
+			case 28:
+				return $this->getAgencia();
+				break;
+			case 29:
+				return $this->getFecha();
+				break;
+			case 30:
 				return $this->getId();
 				break;
 			default:
@@ -963,7 +1121,7 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = CiregingPeer::getFieldNames($keyType);
@@ -993,19 +1151,24 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 			$keys[22] => $this->getRefliq(),
 			$keys[23] => $this->getDesliq(),
 			$keys[24] => $this->getFecdep(),
-			$keys[25] => $this->getId(),
+			$keys[25] => $this->getCodtipper(),
+			$keys[26] => $this->getBanco(),
+			$keys[27] => $this->getCheque(),
+			$keys[28] => $this->getAgencia(),
+			$keys[29] => $this->getFecha(),
+			$keys[30] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = CiregingPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -1084,12 +1247,27 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 			case 24:
 				$this->setFecdep($value);
 				break;
-			case 25:			
+			case 25:
+				$this->setCodtipper($value);
+				break;
+			case 26:
+				$this->setBanco($value);
+				break;
+			case 27:
+				$this->setCheque($value);
+				break;
+			case 28:
+				$this->setAgencia($value);
+				break;
+			case 29:
+				$this->setFecha($value);
+				break;
+			case 30:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = CiregingPeer::getFieldNames($keyType);
@@ -1119,10 +1297,15 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[22], $arr)) $this->setRefliq($arr[$keys[22]]);
 		if (array_key_exists($keys[23], $arr)) $this->setDesliq($arr[$keys[23]]);
 		if (array_key_exists($keys[24], $arr)) $this->setFecdep($arr[$keys[24]]);
-		if (array_key_exists($keys[25], $arr)) $this->setId($arr[$keys[25]]);
+		if (array_key_exists($keys[25], $arr)) $this->setCodtipper($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setBanco($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setCheque($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setAgencia($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setFecha($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setId($arr[$keys[30]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(CiregingPeer::DATABASE_NAME);
@@ -1151,13 +1334,18 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CiregingPeer::FECLIQ)) $criteria->add(CiregingPeer::FECLIQ, $this->fecliq);
 		if ($this->isColumnModified(CiregingPeer::REFLIQ)) $criteria->add(CiregingPeer::REFLIQ, $this->refliq);
 		if ($this->isColumnModified(CiregingPeer::DESLIQ)) $criteria->add(CiregingPeer::DESLIQ, $this->desliq);
-		if ($this->isColumnModified(CiregingPeer::FECDEP)) $criteria->add(CiregingPeer::FECDEP, $this->fecdep);		
+		if ($this->isColumnModified(CiregingPeer::FECDEP)) $criteria->add(CiregingPeer::FECDEP, $this->fecdep);
+		if ($this->isColumnModified(CiregingPeer::CODTIPPER)) $criteria->add(CiregingPeer::CODTIPPER, $this->codtipper);
+		if ($this->isColumnModified(CiregingPeer::BANCO)) $criteria->add(CiregingPeer::BANCO, $this->banco);
+		if ($this->isColumnModified(CiregingPeer::CHEQUE)) $criteria->add(CiregingPeer::CHEQUE, $this->cheque);
+		if ($this->isColumnModified(CiregingPeer::AGENCIA)) $criteria->add(CiregingPeer::AGENCIA, $this->agencia);
+		if ($this->isColumnModified(CiregingPeer::FECHA)) $criteria->add(CiregingPeer::FECHA, $this->fecha);
 		if ($this->isColumnModified(CiregingPeer::ID)) $criteria->add(CiregingPeer::ID, $this->id);
 
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(CiregingPeer::DATABASE_NAME);
@@ -1167,19 +1355,19 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -1231,14 +1419,25 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 
 		$copyObj->setDesliq($this->desliq);
 
-		$copyObj->setFecdep($this->fecdep);		
+		$copyObj->setFecdep($this->fecdep);
+
+		$copyObj->setCodtipper($this->codtipper);
+
+		$copyObj->setBanco($this->banco);
+
+		$copyObj->setCheque($this->cheque);
+
+		$copyObj->setAgencia($this->agencia);
+
+		$copyObj->setFecha($this->fecha);
+
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -1247,7 +1446,7 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -1256,4 +1455,4 @@ abstract class BaseCireging extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-} 
+}

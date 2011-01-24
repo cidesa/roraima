@@ -24,7 +24,10 @@ generator:
       #comprobante: { name: Generar Comprobante }
       numcom:        { name: numero del comprobante }
       fecdep:      { name: Fecha del Deposito}
-
+      banco:      { name: Banco, params: size=60  maxlength=50  }
+      cheque:      { name: Cheque, params: size=60  maxlength=50  }
+      agencia:      { name: Agencia, params: size=60  maxlength=50  }
+      fecha:  { name: Fecha, params: date_format='dd/MM/yyyy' size=10 maxlength=10}
     list:
       title:          Ingresos
       display:        [ =refing, desing ]
@@ -42,6 +45,7 @@ generator:
       display:
         Datos del Ingreso:   [ _estatus, _refing, _fecing, desing, _codtip, _rifcon, _ctaban, _tipmov, numdep, fecdep, numofi, _previs ]
         Detalles del Ingreso: [ _grid, _moning, _monrec, _mondes, _montot, _comprobante ]
+        Otros Datos:   [banco, cheque, agencia, fecha]
       hide:  [ idrefer, staing, idrefer, blocfec, mansolocor, oculeli ]
       report:
         url:         ingresos/r.php?m=ingresos&r=inrplaliq.php

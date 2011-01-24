@@ -643,7 +643,21 @@ propel:
       type: VARCHAR
       size: 250
     fecdep:                   #fecha del Deposito
-      type: DATE      
+      type: DATE
+    codtipper:
+      type: VARCHAR
+      size: 3
+    banco:
+      type: VARCHAR
+      size: 50
+    cheque:
+      type: VARCHAR
+      size: 50
+    agencia:
+      type: VARCHAR
+      size: 50
+    fecha:
+      type: DATE
     id:
       type: INTEGER
       required: true
