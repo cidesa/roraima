@@ -84,6 +84,16 @@ class CiregingMapBuilder {
 
 		$tMap->addColumn('FECDEP', 'Fecdep', 'int', CreoleTypes::DATE, false, null);
 
+		$tMap->addColumn('CODTIPPER', 'Codtipper', 'string', CreoleTypes::VARCHAR, false, 3);
+
+		$tMap->addColumn('BANCO', 'Banco', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('CHEQUE', 'Cheque', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('AGENCIA', 'Agencia', 'string', CreoleTypes::VARCHAR, false, 50);
+
+		$tMap->addColumn('FECHA', 'Fecha', 'int', CreoleTypes::DATE, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

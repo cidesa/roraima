@@ -159,6 +159,50 @@ class ingregingActions extends autoingregingActions
         $this->cireging->setFecdep(null);
       }
     }
+    if (isset($cireging['codtipper']))
+    {
+      $this->cireging->setCodtipper($cireging['codtipper']);
+    }
+    if (isset($cireging['banco']))
+    {
+      $this->cireging->setBanco($cireging['banco']);
+    }
+    if (isset($cireging['cheque']))
+    {
+      $this->cireging->setCheque($cireging['cheque']);
+    }
+    if (isset($cireging['agencia']))
+    {
+      $this->cireging->setAgencia($cireging['agencia']);
+    }
+    if (isset($cireging['fecha']))
+    {
+      if ($cireging['fecha'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($cireging['fecha']))
+          {
+            $value = $dateFormat->format($cireging['fecha'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $cireging['fecha'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->cireging->setFecha($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->cireging->setFecha(null);
+      }
+    }
 
   }
 
@@ -322,11 +366,23 @@ class ingregingActions extends autoingregingActions
            }
            $j++;
         }
+
+        if (!$this->cireging->getId())
+        {
+            if ($this->cireging->getFecdep()>$this->cireging->getFecing())
+            {
+                $this->coderr=1512;
+            }
+
         if (self::validarGeneraComprobante())
         {
           $this->coderr=508;
 
         }
+        }
+
+
+
       if($this->coderr!=-1){
         return false;
       } else return true;
@@ -636,68 +692,23 @@ class ingregingActions extends autoingregingActions
   protected function getLabels()
   {
    $cameti=H::getConfApp2('cametiq', 'ingresos', 'ingreging');
-   if ($cameti!="")
-   {
-    $arreglo=array(
-                  'cireging{estatus}' => '.:',
-              'cireging{refing}' => 'Referencia:',
-              'cireging{fecing}' => 'Fecha:',
-              'cireging{desing}' => 'DescripciÃ³n:',
-              'cireging{codtip}' => 'Tipo:',
-              'cireging{rifcon}' => 'C.I/R.I.F Contribuyente:',
-              'cireging{ctaban}' => 'Cuenta Bancaria Nro.:',
-              'cireging{tipmov}' => 'Tipo de Movimiento:',
-              'cireging{numdep}' => 'NÃºmero de DepÃ³sito:',
-              'cireging{fecdep}' => 'Fecha del Deposito:',
-              'cireging{numofi}' => 'NÃºmero de Oficio:',
-              'cireging{previs}' => 'Previsto:',
-                      'cireging{grid}' => '.:',
-              'cireging{moning}' => 'Ingreso:',
-              'cireging{monrec}' => 'Recargo:',
-              'cireging{mondes}' => 'Descuento:',
-              'cireging{montot}' => 'Neto:',
-              'cireging{comprobante}' => 'Comprobante:',
-                          'cireging{refing}' => 'Referencia:',
-              'cireging{fecing}' => 'Fecha:',
-              'cireging{desing}' => 'DescripciÃ³n:',
-              'cireging{codtip}' => 'Tipo:',
-              'cireging{rifcon}' => $cameti.':',
-              'cireging{moning}' => 'Ingreso:',
-              'cireging{monrec}' => 'Recargo:',
-              'cireging{mondes}' => 'Descuento:',
-              'cireging{montot}' => 'Neto:',
-              'cireging{desanu}' => 'Desanu:',
-              'cireging{fecanu}' => 'Fecanu:',
-              'cireging{staing}' => 'Status del Ingreso:',
-              'cireging{ctaban}' => 'Cuenta Bancaria Nro.:',
-              'cireging{tipmov}' => 'Tipo de Movimiento:',
-              'cireging{previs}' => 'Previsto:',
-              'cireging{anoing}' => 'Anoing:',
-              'cireging{numdep}' => 'NÃºmero de DepÃ³sito:',
-              'cireging{numofi}' => 'NÃºmero de Oficio:',
-              'cireging{numcom}' => 'numero del comprobante:',
-              'cireging{reflib}' => 'Reflib:',
-              'cireging{staliq}' => 'Staliq:',
-              'cireging{fecliq}' => 'Fecliq:',
-              'cireging{refliq}' => 'Refliq:',
-              'cireging{desliq}' => 'Desliq:',
-              'cireging{fecdep}' => 'Fecha del Deposito:',
-              'cireging{id}' => 'Id:',
-            );
-   }else {
+   if ($cameti=="") $cameti='C.I/R.I.F Contribuyente';
+   $cametino=H::getConfApp2('cametiqno', 'ingresos', 'ingreging');
+   if ($cametino=="") $cametino='Número de Oficio';
 
     $arreglo=array(
                   'cireging{estatus}' => '.:',
               'cireging{refing}' => 'Referencia:',
               'cireging{fecing}' => 'Fecha:',
-              'cireging{desing}' => 'DescripciÃ³n:',
+              'cireging{desing}' => 'Descripción:',
               'cireging{codtip}' => 'Tipo:',
               'cireging{rifcon}' => 'C.I/R.I.F Contribuyente:',
               'cireging{ctaban}' => 'Cuenta Bancaria Nro.:',
               'cireging{tipmov}' => 'Tipo de Movimiento:',
-              'cireging{numdep}' => 'NÃºmero de DepÃ³sito:',
+              'cireging{numdep}' => 'Número de Depósito:',
               'cireging{fecdep}' => 'Fecha del Deposito:',
-              'cireging{numofi}' => 'NÃºmero de Oficio:',
+              'cireging{codtipper}' => 'Tipo de Persona a Depositar:',
+              'cireging{numofi}' => $cametino.':',
               'cireging{previs}' => 'Previsto:',
                       'cireging{grid}' => '.:',
               'cireging{moning}' => 'Ingreso:',
@@ -705,34 +716,20 @@ class ingregingActions extends autoingregingActions
               'cireging{mondes}' => 'Descuento:',
               'cireging{montot}' => 'Neto:',
               'cireging{comprobante}' => 'Comprobante:',
-                          'cireging{refing}' => 'Referencia:',
-              'cireging{fecing}' => 'Fecha:',
-              'cireging{desing}' => 'DescripciÃ³n:',
-              'cireging{codtip}' => 'Tipo:',
-              'cireging{rifcon}' => 'C.I/R.I.F Contribuyente:',
-              'cireging{moning}' => 'Ingreso:',
-              'cireging{monrec}' => 'Recargo:',
-              'cireging{mondes}' => 'Descuento:',
-              'cireging{montot}' => 'Neto:',
-              'cireging{desanu}' => 'Desanu:',
-              'cireging{fecanu}' => 'Fecanu:',
-              'cireging{staing}' => 'Status del Ingreso:',
-              'cireging{ctaban}' => 'Cuenta Bancaria Nro.:',
-              'cireging{tipmov}' => 'Tipo de Movimiento:',
-              'cireging{previs}' => 'Previsto:',
-              'cireging{anoing}' => 'Anoing:',
-              'cireging{numdep}' => 'NÃºmero de DepÃ³sito:',
-              'cireging{numofi}' => 'NÃºmero de Oficio:',
-              'cireging{numcom}' => 'numero del comprobante:',
               'cireging{reflib}' => 'Reflib:',
               'cireging{staliq}' => 'Staliq:',
               'cireging{fecliq}' => 'Fecliq:',
               'cireging{refliq}' => 'Refliq:',
               'cireging{desliq}' => 'Desliq:',
               'cireging{fecdep}' => 'Fecha del Deposito:',
+               'cireging{banco}' => 'Banco:',
+               'cireging{cheque}' => 'Cheque:',
+               'cireging{agencia}' => 'Agencia:',
+               'cireging{fecha}' => 'Fecha:',
               'cireging{id}' => 'Id:',
             );
-   }
+
+
    return $arreglo;
   }
 
