@@ -677,10 +677,10 @@ propel:
       scale: 2
     numlotori:
       type: VARCHAR
-      syze: 100
+      size: 100
     numlotdes:
       type: VARCHAR
-      syze: 100
+      size: 100
     id:
       type: INTEGER
       required: true
