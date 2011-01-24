@@ -906,7 +906,9 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
          $grid_arreglo[$i]['codart'] = $x[$i]->getCodart();
          $grid_arreglo[$i]['canart'] = $x[$i]->getCanart();
          $grid_arreglo[$i]['numlotori'] = $x[$i]->getNumlotori();
-         $grid_arreglo[$i]['numlotdes'] = $x[$i]->getNumlotdes();
+         if ($x[$i]->getNumlotdes()=="")
+             $grid_arreglo[$i]['numlotdes'] = $x[$i]->getNumlotori();
+         else $grid_arreglo[$i]['numlotdes'] = $x[$i]->getNumlotdes();
          $i++;
         }
      }
