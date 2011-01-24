@@ -301,7 +301,7 @@ $this->Bitacora('Guardo');
                 $encontro=true;
                 if ($manartlot=='S')
                 {
-                    if ($x[$j]->getNumlotori()=="" || $x[$j]->getNumlotdes()=="")
+                    if ($x[$j]->getNumlotori()=="")
                      {
                              $this->coderror=577;
                              return $this->coderror;
