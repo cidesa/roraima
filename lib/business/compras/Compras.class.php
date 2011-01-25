@@ -3453,4 +3453,40 @@ class Compras {
 
   }
 
+  public static function ValidarDisponibilidadContrato($clasemodelo,$grid)
+  {
+    $notiene=false;
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x) && $notiene==false)
+    {
+      if ($x[$j]->getCodpre()!='')
+      {
+      	  $c= new Criteria();
+          $c->add(CpasiiniPeer::PERPRE,'00');
+          $c->add(CpasiiniPeer::CODPRE,$x[$j]->getCodpre());
+          $data3= CpasiiniPeer::doSelectOne($c);
+          if ($data3)
+          {
+             $mondis=SolicituddeEgresos::montoDisponible($x[$j]->getCodpre());
+             if (H::toFloat($x[$j]->getMontot()) > $mondis)
+             {
+               $notiene=true;
+}
+             else
+             {
+               $notiene=false;
+             }
+          }
+          else
+          {
+            $notiene=true;
+          }
+      }
+      $j++;
+    }
+
+    return $notiene;
+  }
+
 }
