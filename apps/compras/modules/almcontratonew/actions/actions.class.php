@@ -288,11 +288,16 @@ class almcontratonewActions extends autoalmcontratonewActions
     $grid3 = Herramientas::CargarDatosGridv2($this,$this->obj3);
     $grid4 = Herramientas::CargarDatosGridv2($this,$this->obj4);
 
+    if (!Compras::ValidarDisponibilidadContrato($clasemodelo,$grid))
+    {
     Compras::grabarContrato($clasemodelo,$grid,$grid2,$grid3,$grid4);
 
     Compras::GenerarCompromisov2($clasemodelo,$clasemodelo->getMoncon(),&$refcom);
+    }else {
+        return 585;
+    }
 
-    return parent::saving($clasemodelo);
+    return -1;
   }
 
   /*public function deleting($clasemodelo)

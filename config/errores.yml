@@ -569,7 +569,10 @@
   msj:  La Unidad Administrativa del Fondo en Anticipo no Existe.
 584:
   cod: 584
-  msj:  La Unidad Solictante y El Prefijo ya se encuentran registrados.
+  msj:  La Unidad Solicitante y El Prefijo ya se encuentran registrados.
+585:
+  cod: 585
+  msj:  Existe un Código Presupuestario en el Contrato que no tiene Disponibilidad.
 3:
   cod: 3
   msj: La contraseña es diferente.
