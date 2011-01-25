@@ -21,7 +21,8 @@ class almcotizaActions extends autoalmcotizaActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -575,6 +576,8 @@ $this->Bitacora('Guardo');
     $col5->setNombreCampo('Mondes');
     $col5->setJScript('onKeypress="entermonto(event,this.id), calculadescuento(event,this.id)"');
     $col5->setEsTotal(true,'cacotiza_mondes');
+    $oculdes=H::getConfApp2('oculdes', 'compras', 'almcotiza');
+    if ($oculdes=='S') $col5->setOculta(true);
 
     $col6= clone $col4;
     $col6->setTitulo('Total');
