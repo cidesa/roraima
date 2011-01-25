@@ -367,7 +367,8 @@ class Factura {
   public static function generarAsientos(&$fafactur,$grid1,$grid2,$grid3,$grid4,&$arrasientos,&$pos,&$msj3)
   {
   	$msj3=-1;
-  	$salactual=H::toFloat($fafactur->getTottotart()) - H::toFloat($fafactur->getMondesc());
+  	//$salactual=H::toFloat($fafactur->getTottotart()) - H::toFloat($fafactur->getMondesc());
+        $salactual=H::toFloat($fafactur->getTottotart());
   	$numcomord="FA".substr($fafactur->getReffac(),2,6);
   	//$correl=OrdendePago::Buscar_Correlativo();
   	//$fafactur->setNumcom($correl);
