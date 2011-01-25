@@ -147,7 +147,7 @@ $this->Bitacora('Guardo');
   	   $col1->setHTML('type="text" size="15"  readonly=true');
 	if (!$this->catraalm->getId()) $col1->setCatalogo('caregart','sf_admin_edit_form', array('codart' => 1, 'desart' => 2, 'unimed' => 3),'Caregart_Almtraalm',$params);
   	if ($manartlot=='S') {
-           if (!$this->catraalm->getId()) $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="toAjaxUpdater(obtenerColumna(this.id,5,'.chr(39).$signomas.chr(39).'),3,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$F("catraalm_codubiori")+'.chr(39).'!'.chr(39).'+$F("catraalm_almori")+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).')+'.chr(39).'!'.chr(39).'+$F("catraalm_codubides")+'.chr(39).'!'.chr(39).'+$F("catraalm_almdes"),devuelveParVacios(),devuelveParVacios()); toAjaxUpdater(obtenerColumna(this.id,6,'.chr(39).$signomas.chr(39).'),3,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$F("catraalm_codubides")+'.chr(39).'!'.chr(39).'+$F("catraalm_almdes")+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
+           if (!$this->catraalm->getId()) $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="toAjaxUpdater(obtenerColumna(this.id,5,'.chr(39).$signomas.chr(39).'),3,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$F("catraalm_codubiori")+'.chr(39).'!'.chr(39).'+$F("catraalm_almori")+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).')+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,4,'.chr(39).$signomas.chr(39).')+'.chr(39).'!'.chr(39).'+$F("catraalm_codubides")+'.chr(39).'!'.chr(39).'+$F("catraalm_almdes"),devuelveParVacios(),devuelveParVacios()); toAjaxUpdater(obtenerColumna(this.id,6,'.chr(39).$signomas.chr(39).'),3,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+$F("catraalm_codubides")+'.chr(39).'!'.chr(39).'+$F("catraalm_almdes")+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signomas.chr(39).')+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,5,'.chr(39).$signomas.chr(39).'),devuelveParVacios(),devuelveParVacios());"');
         }
         else {
   	if (!$this->catraalm->getId()) $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="javascript:event.keyCode=13; ajaxdetalle(event,this.id);"');
@@ -465,6 +465,9 @@ $this->Bitacora('Guardo');
                     $codubi=$datos[1];
                     $codalm=$datos[2];
                     $cajtexmos=$datos[3];
+                    $cajmod=$datos[4];
+                    $aux2 = split('_',$cajmod);
+                    $colum=$aux2[2];
                     $aux = split('_',$cajtexmos);
                     $name=$aux[0];
                     $fil=$aux[1];
@@ -508,7 +511,7 @@ $this->Bitacora('Guardo');
                                  {
                                        $numlot=$alm->getNumlot();
                                  }
-                                 if ($numlot!="")
+                                 if ($numlot!="" && $colum==5)
                                  {
                                 $exiact=0;
                                 if (Almacen::ExistenciayObtenerDisponibilidadAlmArt($codart,$codalm,$codubi,&$exiact,&$numlot))
