@@ -305,10 +305,17 @@ class Almacen
    {
     if ($x[$j]['check']=="1")
     {
-     $caalmubi= new Caalmubi();
-     $caalmubi->setCodalm($x[$j]['codalm']);
-     $caalmubi->setCodubi($cadefubi->getCodubi());
-     $caalmubi->save();
+     $c = new Criteria();
+     $c->add(CaalmubiPeer::CODUBI,$cadefubi->getCodubi());
+     $c->add(CaalmubiPeer::CODALM,$x[$j]['codalm']);
+     $reg=CaalmubiPeer::doSelectOne($c);
+     if (!$reg)
+     {
+         $caalmubi= new Caalmubi();
+         $caalmubi->setCodalm($x[$j]['codalm']);
+         $caalmubi->setCodubi($cadefubi->getCodubi());
+         $caalmubi->save();
+     }
     }//if
     $j++;
    }//while
