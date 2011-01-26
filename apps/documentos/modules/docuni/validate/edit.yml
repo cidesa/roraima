@@ -33,8 +33,8 @@ MyStringValidator_1_30:
     param:
         min:       1
         min_error: La Descripción no puede tener menos de 1 caracteres
-        max:       30
-        max_error: La Descripción no puede pasar mas de 30 caracteres
+        max:       250
+        max_error: La Descripción no puede pasar mas de 250 caracteres
 
 MyStringValidator_1_4:
     class: sfStringValidator

@@ -31,7 +31,7 @@ propel:
       ##primaryKey: true
     nomuni:
       type: VARCHAR
-      size: 30
+      size: 250
       required: true
     desuni:
       type: VARCHAR
