@@ -128,7 +128,7 @@
 
   <?php $value = object_textarea_tag($cacotiza, 'getDescot', array (
   'size' => '90x3',
-  'maxlength'=>250,
+  'maxlength'=>1000,
   'control_name' => 'cacotiza[descot]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
