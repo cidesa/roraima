@@ -110,8 +110,8 @@ DescripcionValidator:
     param:
         min:       2
         min_error: La descripción no puede tener menos de 2 caracteres
-        max:       254
-        max_error: La descripción no puede pasar mas de 254 caracteres
+        max:       1000
+        max_error: La descripción no puede pasar mas de 1000 caracteres
 
 CorrelValidator:
     class: CidesaStringValidator
