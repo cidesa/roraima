@@ -11,7 +11,14 @@ if(count($args)<5) {
 }
 
 //////NECESITA LA VARIABLE DEL CON EL NOMBRE DE LA APP///////////////
-$menu = sfYaml::load(SF_ROOT_DIR.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'menus'.DIRECTORY_SEPARATOR.$app.'.yml');
+if(defined('CIDESA_CONFIG')){
+  if(file_exists(CIDESA_CONFIG))
+    $menu = sfYaml::load(CIDESA_CONFIG.DIRECTORY_SEPARATOR.'menus'.DIRECTORY_SEPARATOR.$app.'.yml');
+  else
+    $menu = sfYaml::load(SF_ROOT_DIR.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'menus'.DIRECTORY_SEPARATOR.$app.'.yml');
+}else{
+  $menu = sfYaml::load(SF_ROOT_DIR.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'menus'.DIRECTORY_SEPARATOR.$app.'.yml');
+}
 
 $reportes_root = SF_ROOT_DIR.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'menus'.DIRECTORY_SEPARATOR;
 
