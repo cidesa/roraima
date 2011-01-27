@@ -40,7 +40,7 @@ class CacotizaMapBuilder {
 
 		$tMap->addForeignKey('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, 'caprovee', 'CODPRO', true, 15);
 
-		$tMap->addColumn('DESCOT', 'Descot', 'string', CreoleTypes::VARCHAR, false, 255);
+		$tMap->addColumn('DESCOT', 'Descot', 'string', CreoleTypes::VARCHAR, false, 1000);
 
 		$tMap->addColumn('REFSOL', 'Refsol', 'string', CreoleTypes::VARCHAR, true, 8);
 
