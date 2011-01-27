@@ -25,6 +25,7 @@
 <input id="fechacom" name="fechacom" type="hidden" value="<? print $tsmovlib->getFeccom(); ?>">
 <input id="numcom" name="numcom" type="hidden" value="<? print $tsmovlib->getNumcom(); ?>">
 <input id="bloqfec" name="bloqfec" type="hidden" value="<? print $bloqfec; ?>">
+<input id="reflibmay8" name="reflibmay8" type="hidden" value="<? print $tsmovlib->getReflibmay8(); ?>">
 
   <div class="form-row">
     <?php echo label_for('tsmovlib[reflib]', __('Referencia'), 'class="required" ') ?>
@@ -131,7 +132,10 @@ function salvar()
 }
 
 valor2=document.getElementById('tsmovlib_reflib').value;
-mas2=valor2.substr(1,7);
+if ($('reflibmay8').value=='S')
+    mas2=valor2.substr(1,parseInt(document.getElementById('tsmovlib_reflib').value.length));
+else
+    mas2=valor2.substr(1,7);
 document.getElementById('tsmovlib_reflib').value="A"+mas2;
 document.getElementById('tsmovlib_numcom').value="########";
 
