@@ -6,7 +6,7 @@ names:
   viacalrub{codrub}:
     required:  Yes
     required_msg: Este campo no puede estar en Blanco
-    validators: Validator_codrub, Validator_codrub2
+    validators: Validator_codrub
 
 Validator_codrub:
     class: CidesaExistValidator
