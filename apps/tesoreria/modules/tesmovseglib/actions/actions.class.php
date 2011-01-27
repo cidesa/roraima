@@ -490,7 +490,7 @@ $this->Bitacora('Guardo');
           if($numcom=='********') $numcom='########';
           if ($numcom=='')
           {$valida=false;}
-
+          $reflibmay8=H::getConfApp2('reflibmay8', 'tesoreria', 'tesmovseglib');
           if($valida){
           	 //////// SI ES TIPO EJECUTIVO
           	if ($this->esTipoEjecutivo($this->getRequestParameter('tipo')))
@@ -549,7 +549,7 @@ $this->Bitacora('Guardo');
         {
             $this->getUser()->getAttributeHolder()->remove('formulario');
             $grabar=$this->getRequestParameter('grabar');
-            $reftra=$this->getRequestParameter('reftra');
+            $reftra=substr($this->getRequestParameter('reftra'),0,8);
             //$numcom=$this->getRequestParameter('numcom');
             $fectra=$this->getRequestParameter('fectra');
             $destra= str_replace('*','%',$this->getRequestParameter('destra'));

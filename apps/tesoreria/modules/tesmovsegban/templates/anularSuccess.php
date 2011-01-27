@@ -30,7 +30,7 @@
 <div class="form-row"><?php $value = object_input_tag($tsmovban, 'getRefban', array (
 'size' => 20,
 'control_name' => 'tsmovban[refban]',
-'maxlength' => 8,
+'maxlength' => $tsmovban->getRefbanmay8()=='S' ? 20 : 8 ,
 'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '0',0);document.getElementById('tsmovban_refban').value=valor",
 )); echo $value ? $value : '&nbsp;' ?></div>
 

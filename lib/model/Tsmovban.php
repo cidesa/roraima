@@ -44,5 +44,9 @@ class Tsmovban extends BaseTsmovban
 
 	}
 
+    public function getRefbanmay8()
+    {
+            return H::getConfApp2('refbanmay8', 'tesoreria', 'tesmovsegban');
+    }
 
 }

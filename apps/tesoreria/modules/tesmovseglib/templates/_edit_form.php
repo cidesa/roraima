@@ -90,8 +90,8 @@
       <?php endif; ?>
 
       <?php $value = object_input_tag($tsmovlib, 'getReflib', array (
-      'size' => 12,
-      'maxlength' => 8,
+      'size' => 20,
+      'maxlength' => $tsmovlib->getReflibmay8()=='S' ? 20 : 8 ,
       'readonly'  =>  $tsmovlib->getId()!='' ? true : false ,
       'control_name' => 'tsmovlib[reflib]',
       'onBlur'  => "javascript: reflib(this.value);",

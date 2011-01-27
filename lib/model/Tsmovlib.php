@@ -119,5 +119,10 @@ class Tsmovlib extends BaseTsmovlib
     return "Hola Mundo";
   }
 
+      public function getReflibmay8()
+    {
+            return H::getConfApp2('reflibmay8', 'tesoreria', 'tesmovseglib');
+    }
+
 
 }
