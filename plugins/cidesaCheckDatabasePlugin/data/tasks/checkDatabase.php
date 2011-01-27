@@ -257,8 +257,8 @@ function run_propel_check_database($task, $args)
   $finder = pakeFinder::type('file')->ignore_version_control()->name('schema.*');
   pake_remove($finder, 'config');
   
-  $tablasschemas = convert_yml_schema(false, 'generated-');
-  
+  $tablasschemas = convert_yml_schema(false);
+
   checkDropTables();
 
   pake_echo_action('check_database', 'Tablas Schema '.count($tablasschemas));
@@ -336,7 +336,8 @@ function checkDropTables()
   
       if($tablaname!='_attributes'){
         if(!array_key_exists($tablaname, $locales)){
-          $sql .= "-- DROP TABLE \"$tablaname\" CASCADE; DROP SEQUENCE ".$tablaname."_seq;
+          $sql .= "-- DROP TABLE \"$tablaname\" CASCADE;
+-- DROP SEQUENCE ".$tablaname."_seq;
     ";
         }
         
