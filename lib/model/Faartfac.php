@@ -139,8 +139,14 @@ class Faartfac extends BaseFaartfac
     $val=self::getPrecio() * self::getCantot();
     $this->montot=number_format($val, 2, ',', '.');
     $this->preaju=number_format(self::getPrecio(), 2, ',', '.');
+     $indicalm=H::getConfApp2('indicalm', 'facturacion', 'fadesp');
+        if ($indicalm!='S')
+        {
+            $this->codalm=Herramientas::getX('CODART','Caartalm','Codalm',$this->getCodart());
+            $this->codubi=Herramientas::getX('CODALM','Caalmubi','Codubi',$this->getCodalm());
+        }
   }
-    public function getCodalm()
+/*    public function getCodalm()
     {
 	  return Herramientas::getX('CODART','Caartalm','Codalm',$this->getCodart());
     }
@@ -148,7 +154,7 @@ class Faartfac extends BaseFaartfac
     public function getCodubi()
     {
           return Herramientas::getX('CODALM','Caalmubi','Codubi',$this->getCodalm());
-}
+    }*/
 
     public function getNomalm()
     {

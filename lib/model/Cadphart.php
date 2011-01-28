@@ -77,5 +77,10 @@ class Cadphart extends BaseCadphart
     {
             return H::getConfApp2('manartlot', 'compras', 'almregart');
     }
+
+    public function getIndicalm()
+    {
+            return H::getConfApp2('indicalm', 'facturacion', 'fadesp');
+    }
 }
 

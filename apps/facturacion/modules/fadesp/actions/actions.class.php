@@ -938,6 +938,23 @@ private $coderror =-1;
 	        return sfView::HEADER_ONLY;
 	   }
 	   }
+           else  if ($this->getRequestParameter('ajax')=='6')
+	    {
+	       $e= new Criteria();
+               $e->add(CadefalmPeer::CODALM,$this->getRequestParameter('codigo'));
+               $reg= CadefalmPeer::doSelectOne($e);
+               if ($reg)
+               {
+                   $dato=$reg->getNomalm();
+                   $js="distribuiralmacen();";
+               }else {
+                   $dato="";
+                   $js="alert_('El C&oacute;digo de Almac&eacute;n no existe'); $('cadphart_codalm').value=''; $('cadphart_codalm').focus();";
+               }
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$js.'",""]]';
+            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	    return sfView::HEADER_ONLY;
+	    }
 
 	    /*
 		else  if ($this->getRequestParameter('ajax')=='5')
