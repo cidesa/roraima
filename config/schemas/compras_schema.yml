@@ -1917,6 +1917,9 @@ propel:
     codcenaco:
       type: VARCHAR
       size: 4
+    numproc:
+      type: VARCHAR
+      size: 30
     id:
       type: INTEGER
       required: true
@@ -2320,6 +2323,9 @@ propel:
       type: VARCHAR
       size: 4
       description: Se usa para definir el tipo de OC de Donación
+    codconpag:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true

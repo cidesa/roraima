@@ -290,6 +290,13 @@ class almordcomActions extends autoalmordcomActions
       {
         $caordcom = new Caordcom();
         $caordcom->setCodemp(Herramientas::getCodempFromCedemp());
+
+        $conpagfij=H::getConfApp2('conpagfij', 'compras', 'almordcom');
+        if ($conpagfij=='S')
+        {
+            $caordcom->setCodconpag(H::getX_vacio('Codemp', 'Cadefart', 'Codconpag', '001'));
+            $caordcom->setDesconpag(H::getX_vacio('Codconpag', 'Caconpag', 'Desconpag', H::getX_vacio('Codemp', 'Cadefart', 'Codconpag', '001')));
+        }
         $this->aprobacion='N';
         $c= new Criteria();
         $cadefart_search = CadefartPeer::doSelectOne($c);
@@ -891,10 +898,12 @@ class almordcomActions extends autoalmordcomActions
   {
     $this->getUser()->getAttributeHolder()->remove('referencia');
     $refcom="";
+    $detsinord=H::getConfApp2('detsinord', 'compras', 'almordcom');
     $c = new Criteria();
     if ($referencia==0)
     {
       $c->add(CaartordPeer::ORDCOM,$ordcom);
+      if ($detsinord!='S')
       $c->addAscendingOrderByColumn(CaartordPeer::CODART);
       $per = CaartordPeer::doSelect($c);
       $campo_col5='Canord';//tabla Caartord
@@ -1016,11 +1025,13 @@ class almordcomActions extends autoalmordcomActions
     if ($referencia==0 and $filas_arreglo>0) $col5->setJScript('onKeypress="entermonto(event,this.id); if (verificar_datos(this.id)){actualizar_total_grid_detalle_datos(event,this.id,"N");recalcularecargos(event,this.id);actualizar_grid_dependientes();verifica_presupuesto(event,this.id);}"');
     }
 
+    $oculfilas=H::getConfApp2('oculfilas', 'compras', 'almordcom');
 
     $col6 = clone $col5;
     $col6->setTitulo('Cant. Ajustada');
     $col6->setNombreCampo($campo_col6);
     if ($referencia==0) $col6->setHTML('type="text" size="10" readonly=true');
+    if ($oculfilas=='S') $col6->setOculta(true);
 
 
     $col7 = clone $col6;
@@ -1043,12 +1054,14 @@ class almordcomActions extends autoalmordcomActions
     }else {
     $col9->setJScript('onKeypress="entermonto(event,this.id); actualizar_total_grid_detalle_datos(event,this.id,"N");recalcularecargos(event,this.id);actualizar_grid_dependientes();verifica_presupuesto(event,this.id);"');
     }
+    if ($oculfilas=='S') $col9->setOculta(false);
 
     $col10 = clone $col6;
     $col10->setTitulo('Cant x Costo');
     $col10->setNombreCampo('cancost');
     $col10->setHTML('type="text" size="10" readonly=true');
     $col10->setEsTotal(true,'caordcom_totorden');
+    if ($oculfilas=='S') $col10->setOculta(false);
 
     $col11 = clone $col6;
     $col11->setTitulo('Descuento');
@@ -1057,6 +1070,7 @@ class almordcomActions extends autoalmordcomActions
     if ($referencia==0 and $filas_arreglo>0) $col11->setJScript('onKeypress="entermonto(event,this.id); actualizar_total_grid_detalle_datos(event,this.id,"S");actualizar_grid_dependientes();verifica_presupuesto(event,this.id);"');
     if ($referencia==1) $col11->setJScript('onKeypress="entermonto(event,this.id);actualizar_sumatoria_total_cuando_esta_referida();actualizar_grid_dependientes()"');
     $col11->setEsTotal(true,'sumatoria_descuentos');
+    if ($oculfilas=='S') $col11->setOculta(true);
 
     $col12 = clone $col6;
     $col12->setTitulo('Monto Recargo');
@@ -1072,12 +1086,14 @@ class almordcomActions extends autoalmordcomActions
       }
     }
     $col12->setEsTotal(true,'caordcom_totrecargo');
+    if ($oculfilas=='S') $col12->setOculta(false);
 
     $col13 = clone $col6;
     $col13->setTitulo('Total');
     $col13->setNombreCampo($campo_col13);
     $col13->setHTML('type="text" size="10" readonly=true');
     $col13->setEsTotal(true,'caordcom_monord');
+    if ($oculfilas=='S') $col13->setOculta(false);
 
     $manunialt=H::getConfApp2('manunialt','compras','almregart');
     if ($manunialt=='S')
@@ -1236,10 +1252,12 @@ class almordcomActions extends autoalmordcomActions
     $col5->setEsNumerico(true);
     $col5->setHTML('type="text" size="10" readonly=true');
 
+    $oculfilas=H::getConfApp2('oculfilas', 'compras', 'almordcom');
 
     $col6 = clone $col5;
     $col6->setTitulo('Cant. Ajustada');
     $col6->setNombreCampo('Canaju');
+    if ($oculfilas=='S') $col6->setOculta(true);
 
 
     $col7 = clone $col6;
@@ -1254,12 +1272,14 @@ class almordcomActions extends autoalmordcomActions
     $col9->setTitulo('Costo');
     $col9->setHTML('type="text" size="10"');
     $col9->setNombreCampo('Costo');
+    if ($oculfilas=='S') $col9->setOculta(false);
 
     $col10 = clone $col6;
     $col10->setTitulo('Cant x Costo');
     $col10->setNombreCampo('cancost');
     $col10->setHTML('type="text" size="10" readonly=true');
     $col10->setEsTotal(true,'caordcom_totorden');
+    if ($oculfilas=='S') $col10->setOculta(false);
 
     $col11 = clone $col6;
     $col11->setTitulo('Descuento');
@@ -1272,12 +1292,14 @@ class almordcomActions extends autoalmordcomActions
     $col12->setNombreCampo('Monrgo');
     if ($tipo=='P') $col12->setOculta(true);
     $col12->setEsTotal(true,'caordcom_totrecargo');
+    if ($oculfilas=='S') $col12->setOculta(false);
 
     $col13 = clone $col6;
     $col13->setTitulo('Total');
     $col13->setNombreCampo('Montot');
     $col13->setJScript('onKeypress="entermonto(event,this.id);actualizar_sumatoria_total_cuando_esta_referida();actualizar_grid_dependientes()"');
     $col13->setEsTotal(true,'caordcom_monord');
+    if ($oculfilas=='S') $col13->setOculta(false);
 
     $manunialt=H::getConfApp2('manunialt', 'compras', 'almregart');
     if ($manunialt=='S')
@@ -2540,6 +2562,10 @@ class almordcomActions extends autoalmordcomActions
     {
       $this->caordcom->setCodcenaco($caordcom['codcenaco']);
     }
+    if (isset($caordcom['numproc']))
+    {
+      $this->caordcom->setNumproc($caordcom['numproc']);
+    }
 
   }
 
@@ -2758,14 +2784,24 @@ class almordcomActions extends autoalmordcomActions
           $numero_filas=count($filas);
 
         $result=array();
-        //se elimino el campo   b.estpro='A' x q esta en desarrollo y no deberia estar aqui 29-07-09
-//      $sql = "select a.refcot as refcot,a.conpag as conpag,a.forent as forent from cacotiza a,caprovee b where b.estpro='A' and refsol='".$refsol."' and b.rifpro='".$rif_encontrado."' and a.codpro=b.codpro";
-      $sql = "select a.refcot as refcot,a.conpag as conpag,a.forent as forent from cacotiza a,caprovee b where refsol='".$refsol."' and b.rifpro='".$rif_encontrado."' and a.codpro=b.codpro";
+        $conpagfij=H::getConfApp2('conpagfij', 'compras', 'almordcom');
+		//en produccion	se elimino el campo   b.estpro='A' x q esta en desarrollo   y no se ha probado.. 29-07-09
+      $sql = "select a.refcot as refcot,a.conpag as conpag,a.forent as forent from cacotiza a,caprovee b where b.estpro='A' and refsol='".$refsol."' and b.rifpro='".$rif_encontrado."' and a.codpro=b.codpro";
       if (Herramientas::BuscarDatos($sql,&$result))
       {
+
+        if ($conpagfij=='S')
+        {
+            $codconpag_result=H::getX_vacio('Codemp', 'Cadefart', 'Codconpag', '001');
+        }else {
         $codconpag_result=$result[0]['conpag'];
+        }
         $codforent_result=$result[0]['forent'];
+
       }
+      if ($conpagfij=='S')
+          $codconpag_des_result=H::getX_vacio('Codconpag', 'Caconpag', 'Desconpag', H::getX_vacio('Codemp', 'Cadefart', 'Codconpag', '001'));
+      else
       $codconpag_des_result=CaconpagPeer::getDesconpag(trim($codconpag_result));
       $codforent_des_result=CaforentPeer::getDesforent(trim($codforent_result));
       $output = '[["'.$cajtexcom.'","'.$rif_encontrado.'",""],["'.$cajtexmos.'","'.$dato.'",""],["'.$codigo_provee.'","'.$dato1.'",""],["'.$mostrar_msg.'","'.$mensaje.'",""],["'.$codconpag.'","'.$codconpag_result.'",""],["'.$codforent.'","'.$codforent_result.'",""],["'.$codconpag_des.'","'.$codconpag_des_result.'",""],["'.$codforent_des.'","'.$codforent_des_result.'",""],["'.$numfilas.'","'.$numero_filas.'",""],["'.$codconpag_codigo.'","'.$codconpag_result.'",""],["'.$codforent_codigo.'","'.$codforent_result.'",""],["'.$cancotpril_caja.'","'.$cancotpril.'",""],["caordcom_tipopro","'.$dato2.'",""]]';

@@ -140,4 +140,14 @@ class Cadefart extends BaseCadefart
   	 return Herramientas::getX('TIPCOM','Cpdoccom','Nomext',self::getTipodoc());
   }
 
+  public function getDesconpag()
+  {
+  	 return Herramientas::getX('Codconpag','Caconpag','Desconpag',self::getCodconpag());
+  }
+
+    public function getConpagfij()
+  {
+  	 return H::getConfApp2('conpagfij', 'compras', 'almordcom');
+  }
+
 }

@@ -600,6 +600,21 @@ if ($cadefart->getAsiparrec()=='P')  {
                </div>
           </th>
       </tr>
+      <tr>
+          <th>
+              <div id="divcodconpag" style="display:none">
+               <?php echo label_for('cadefart[codconpag]', __($labels['cadefart{codconpag}']), 'class="" Style="width:200px"') ?>
+		  <?php echo Catalogo($cadefart,3,array(
+		  'getprincipal' => 'getCodconpag',
+		  'getsecundario' => 'getDesconpag',
+		  'campoprincipal' => 'codconpag',
+		  'camposecundario' => 'desconpag',
+		  'tamanoprincipal' => '4',
+		  'campobase' => 'id_ipcodconpag',
+		  ), 'Caconpag_Almordcom', 'Caconpag', ''); ?>
+               </div>
+          </th>
+      </tr>
 
       </table>
     </div>
@@ -656,6 +671,11 @@ if ($cadefart->getAsiparrec()=='P')  {
   var manorddon='<?php echo $cadefart->getManorddon();?>';
   if (manorddon=='S')
       $('divdoccom').show();
+
+  var conpagfij='<?php echo $cadefart->getConpagfij();?>';
+  if (conpagfij=='S')
+      $('divcodconpag').show();
+  
 
 
   function colocar(e,id)
