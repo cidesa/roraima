@@ -2342,7 +2342,7 @@ propel:
       foreignReference: codpro
     descot:
       type: VARCHAR
-      size: 255
+      size: 1000
     refsol:
       type: VARCHAR
       size: 8
