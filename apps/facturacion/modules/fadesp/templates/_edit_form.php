@@ -253,7 +253,7 @@
 <table>
 	<tr>
 		<th>
-		  <?php echo label_for('cadphart[mondph]', __($labels['cadphart{mondph}']), 'class="required" style="width: 150px"') ?>
+		  <?php echo label_for('cadphart[mondph]', __($labels['cadphart{mondph}']), 'class="required" ') ?>
 		  <div class="content<?php if ($sf_request->hasError('cadphart{mondph}')): ?> form-error<?php endif; ?>">
 		  <?php if ($sf_request->hasError('cadphart{mondph}')): ?>
 		    <?php echo form_error('cadphart{mondph}', array('class' => 'form-error-msg')) ?>
@@ -267,6 +267,41 @@
 		    </div>
 		</th>
 	</tr>
+<?php if ($cadphart->getIndicalm()=='S' && $cadphart->getId()=='') { ?>
+        <tr>
+           <th>
+
+             <?php echo label_for('cadphart[codalm]', __($labels['cadphart{codalm}']), 'class="required"') ?>
+              <div class="content<?php if ($sf_request->hasError('cadphart{codalm}')): ?> form-error<?php endif; ?>">
+              <?php if ($sf_request->hasError('cadphart{codalm}')): ?>
+                <?php echo form_error('cadphart{codalm}', array('class' => 'form-error-msg')) ?>
+              <?php endif; ?>
+
+              <?php $value = object_input_tag($cadphart, 'getCodalm', array (
+              'size' => 10,
+              'maxlength' => 6,
+              'control_name' => 'cadphart[codalm]',
+              'onBlur'=> remote_function(array(
+                   'url'      => 'fadesp/ajax',
+                   'script'   => true,
+                   'condition' => "$('cadphart_codalm').value != '' && $('id').value == ''",
+                   'complete' => 'AjaxJSON(request, json)',
+                   'with' => "'ajax=6&cajtexmos=cadphart_nomalm&codigo='+this.value"
+                    ))
+              )); echo $value ? $value : '&nbsp;' ?>
+             &nbsp;
+            <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefalm_Almtraalm/clase/Cadefalm/frame/sf_admin_edit_form/obj1/cadphart_codalm/obj2/cadphart_nomalm/campo1/codalm/campo2/nomalm','','','botoncat')?>
+
+              <?php $value = object_input_tag($cadphart, 'getNomalm', array (
+              'disabled' => true,
+               'size' => 60,
+              'control_name' => 'cadphart[nomalm]',
+            )); echo $value ? $value : '&nbsp;' ?>
+            </div>
+
+           </th>
+        </tr>
+<?php }  ?>
 </table>
 
 </div>

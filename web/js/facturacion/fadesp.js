@@ -139,3 +139,22 @@
      {valor=valor.pad(8, '#',0);}
      $('cadphart_dphart').value=valor;
  }
+
+  function distribuiralmacen()
+  {
+    var fil=totalregistros('ax',6,30);
+    var i=0;
+    while (i<fil)
+    {
+        var id1="ax"+"_"+i+"_1";
+        var id2="ax"+"_"+i+"_2";
+        if ($(id1))
+        {
+            $(id1).value=$('cadphart_codalm').value;
+            $(id2).value=$('cadphart_nomalm').value;
+        }
+     i++;
+    }
+    $('cadphart_codalm').value='';
+    $('cadphart_nomalm').value='';
+  }

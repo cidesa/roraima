@@ -116,6 +116,13 @@ class Faartped extends BaseFaartped
 		}
 	    $this->porrgo=number_format($porcrgo,2,',','.');
 
+     $indicalm=H::getConfApp2('indicalm', 'facturacion', 'fadesp');
+        if ($indicalm!='S')
+        {
+            $this->codalm=Herramientas::getX('CODART','Caartalm','Codalm',$this->getCodart());
+            $this->codubi=Herramientas::getX('CODALM','Caalmubi','Codubi',$this->getCodalm());
+        }
+
    }
 
   public function getPrecio()
@@ -133,7 +140,7 @@ class Faartped extends BaseFaartped
   	$val=self::getCanord();
     return $val;
   }
-  public function getCodalm()
+/*  public function getCodalm()
     {
 	  return Herramientas::getX('CODART','Caartalm','Codalm',$this->getCodart());
     }
@@ -141,7 +148,7 @@ class Faartped extends BaseFaartped
     public function getCodubi()
     {
           return Herramientas::getX('CODALM','Caalmubi','Codubi',$this->getCodalm());
-}
+    }*/
 
     public function getNomalm()
     {
