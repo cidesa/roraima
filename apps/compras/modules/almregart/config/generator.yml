@@ -24,6 +24,9 @@ generator:
       ctavta: { name: Cuenta Venta Contado}
       ctacos: { name: Cuenta Costo}
       ctapro: { name: Cuenta Ingresos por Venta}      
+      ctatra: { name: Cuenta Transitoria}
+      ctadef: { name: Cuenta Gastos}
+      perbienes: { name: Pertenece a Bienes}
       cosunipri: { name: Unidad Primaria}
     list:
       title:          Artículos y Servicios
@@ -38,7 +41,7 @@ generator:
       sort:  codart
     edit:
       title:         Registro de Artículos ó Servicios
-      display:        [=codart, tipo, codcta, desart, ramart, nomram, codpar, unimed, unialt, relart, exitot, fecult, cosult, cospro, invini, codartsnc, dessnc, ctavta, ctacos, ctapro, cosunipri]
+      display:        [=codart, tipo, codcta, desart, ramart, nomram, codpar, unimed, unialt, relart, exitot, fecult, cosult, cospro, invini, codartsnc, dessnc, ctavta, ctacos, ctapro, ctatra, ctadef, perbienes, cosunipri]
       fields:
         fecult: { params: date_format='dd/MM/yy' }
         ramart: { help: Máximo 6 caracteres}

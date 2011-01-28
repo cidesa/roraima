@@ -14,6 +14,9 @@ methods:
    - "caregart{fecult}"
    - "caregart{codartsnc}"
    - "caregart{codpar}"
+   - "caregart{codtra}"
+   - "caregart{coddef}"
+
 names:
   caregart{codart}:
     required:  Yes
@@ -72,6 +75,14 @@ names:
   caregart{codpar}:
     required:  No
     validators: PartidaValidator
+
+  caregart{codtra}:
+    required:  No
+    validators: CuentaValidator
+
+  caregart{coddef}:
+    required:  No
+    validators: CuentaValidator
 
 DescripcionValidator:
     class: sfStringValidator

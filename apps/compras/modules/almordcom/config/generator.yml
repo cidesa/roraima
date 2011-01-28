@@ -59,7 +59,7 @@ generator:
       codcenaco: { name : Centro de Acopio}
 
     list:
-      title:          Ordenes de Compra
+      title:          Ordenes de Compra y/o Servicio
       display:        [=ordcom, fecord, desord, codpro, nompro, monord]
       fields:
         codpro:      { name : Código de la Contratistas}

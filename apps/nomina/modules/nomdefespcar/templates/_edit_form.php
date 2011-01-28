@@ -32,7 +32,7 @@
 
 
   <?php $value = object_input_tag($npcargos, 'getCodcar', array (
-  'size' => 8,
+  'size' => $lonmascar+3,
   'control_name' => 'npcargos[codcar]',
   'maxlength' =>  $lonmascar,
   'readonly'  =>  $npcargos->getId()!='' ? true : false ,

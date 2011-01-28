@@ -41,17 +41,13 @@ class fordefgenActions extends autofordefgenActions
   {
     $this->fordefegrgen = $this->getFordefegrgenOrCreate();
     $this->forpre = Herramientas::ObtenerFormato('Fordefniv','forpre');
-	$this->codpariva = Herramientas::ObtenerFormato('Fordefegrgen','codpariva');
+    $this->codpariva = strlen(Herramientas::getObtener_FormatoPartida_Formulacion());//Herramientas::ObtenerFormato('Fordefegrgen','codpariva');
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
       $this->updateFordefegrgenFromRequest();
 
       $this->saveFordefegrgen($this->fordefegrgen);
-
-	    if ($this->coderr!=-1){
-	    	$this->labels = $this->getLabels();
-	    }else{
 
 	      $this->setFlash('notice', 'Your modifications have been saved');
 $this->Bitacora('Guardo');
@@ -68,8 +64,8 @@ $this->Bitacora('Guardo');
 	      {
 	        return $this->redirect('fordefgen/edit?id='.$this->fordefegrgen->getId());
 	      }
+
 	    }
-    }
     else
     {
       $this->labels = $this->getLabels();
@@ -78,105 +74,10 @@ $this->Bitacora('Guardo');
 
 
 
-
-  /**
-   * Función para manejar el salvado del formulario.
-   * cabe destacar que en las versiones nuevas del formulario (cidesaPropel)
-   * llama internamente a la función $this->saving
-   * Esta función saving siempre debe retornar un valor >=-1.
-   * En esta funcción se debe realizar el proceso de guardado de informacion
-   * del negocio en la base de datos. Este proceso debe ser realizado llamado
-   * a funciones de las clases del negocio que se encuentran en lib/bussines
-   * todos los procesos de guardado deben estar en la clases del negocio (lib/bussines/"modulo")
-   *
-   */
-  public function saveFordefegrgen22($Fordefegrgen)
-  {
-    $coderr = -1;
-
-    // habilitar la siguiente línea si se usa grid
-    //$grid=Herramientas::CargarDatosGrid($this,$this->obj);
-
-    try {
- 		$this->forpre = Herramientas::ObtenerFormato('Fordefniv','forpre');
- 		$this->codpariva = Herramientas::ObtenerFormato('Fordefegrgen','codpariva');
-      // Modificar la siguiente línea para llamar al método
-      // correcto en la clase del negocio
-      // $coderr = Formulacion::salvarFordefgen($Fordefegrgen);
-       //echo $coderr;
- 	   parent::saveFordefegrgen($Fordefegrgen);
-
-      if(is_array($coderr)){
-        foreach ($coderr as $ERR){
-          $err = Herramientas::obtenerMensajeError($ERR);
-          $this->getRequest()->setError('',$err);
-
-        }
-      }elseif($coderr!=-1){
-
-        $err = Herramientas::obtenerMensajeError($coderr);
-        $this->getRequest()->setError('',$err);
-
-      }
-
-    } catch (Exception $ex) {
-
-      $coderr = 0;
-      $err = Herramientas::obtenerMensajeError($coderr);
-      $this->getRequest()->setError('',$err);
-
-    }
-
-
-  }
-
-
-  public function deleteFordefegrgen($Fordefegrgen)
-  {
-
-    $coderr = -1;
-
-    // habilitar la siguiente línea si se usa grid
-    //$grid=Herramientas::CargarDatosGrid($this,$this->obj);
-
-    try {
-
-      // Modificar la siguiente línea para llamar al método
-      // correcto en la clase del negocio, ej:
-      // $coderr = Compras::EliminarAlmaujoc($caajuoc,$grid);
-
-      // OJO ----> Eliminar esta linea al modificar este método
-      parent::deleteFordefegrgen($Fordefegrgen);
-
-      if(is_array($coderr)){
-        foreach ($coderr as $ERR){
-          $err = Herramientas::obtenerMensajeError($ERR);
-          $this->getRequest()->setError('',$err);
-          $this->ActualizarGrid();
-        }
-      }elseif($coderr!=-1){
-        $err = Herramientas::obtenerMensajeError($coderr);
-        $this->getRequest()->setError('',$err);
-        $this->ActualizarGrid();
-      }
-
-
-    } catch (Exception $ex) {
-
-      $coderr = 0;
-      $err = Herramientas::obtenerMensajeError($coderr);
-      $this->getRequest()->setError('',$err);
-
-    }
-
-  }
-
-  
-  
-  
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -185,7 +86,7 @@ $this->Bitacora('Guardo');
     $resp=-1;
 
  		$this->forpre = Herramientas::ObtenerFormato('Fordefniv','forpre');
- 		$this->codpariva = Herramientas::ObtenerFormato('Fordefegrgen','codpariva');
+    $this->codpariva = strlen(Herramientas::getObtener_FormatoPartida_Formulacion());//Herramientas::ObtenerFormato('Fordefegrgen','codpariva');
  		 $this->fordefegrgen = $this->getFordefegrgenOrCreate();
         $this->updateFordefegrgenFromRequest();
     if($this->getRequest()->getMethod() == sfRequest::POST){
@@ -250,7 +151,7 @@ $this->Bitacora('Guardo');
     $this->fordefegrgen= $this->getFordefegrgenOrCreate();
     $this->updateFordefegrgenFromRequest();
  	$this->forpre = Herramientas::ObtenerFormato('Fordefniv','forpre');
- 	$this->codpariva = Herramientas::ObtenerFormato('Fordefegrgen','codpariva');
+ 	$this->codpariva = strlen(Herramientas::getObtener_FormatoPartida_Formulacion());//Herramientas::ObtenerFormato('Fordefegrgen','codpariva');
 //print 'error'.$this->coderr; exit;
 
     if($this->getRequest()->getMethod() == sfRequest::POST)
@@ -287,7 +188,7 @@ $this->Bitacora('Guardo');
   {
     $fordefegrgen = $this->getRequestParameter('fordefegrgen');
  	$this->forpre = Herramientas::ObtenerFormato('Fordefniv','forpre');
- 	$this->codpariva = Herramientas::ObtenerFormato('Fordefegrgen','codpariva');
+ 	$this->codpariva = strlen(Herramientas::getObtener_FormatoPartida_Formulacion());//Herramientas::ObtenerFormato('Fordefegrgen','codpariva');
 
  	$this->fordefegrgen->setCodemp('001');
 
@@ -375,7 +276,7 @@ $this->Bitacora('Guardo');
     {
       $this->fordefegrgen->setForuae($fordefegrgen['foruae']);
     }
-/*  no se guarda por que es de consulta estos campos
+
     if (isset($fordefegrgen['corest']))
     {
       $this->fordefegrgen->setCorest($fordefegrgen['corest']);
@@ -388,7 +289,7 @@ $this->Bitacora('Guardo');
     {
       $this->fordefegrgen->setCorequ($fordefegrgen['corequ']);
     }
-*/
+
     if (isset($fordefegrgen['despar']))
     {
       $this->fordefegrgen->setDespar($fordefegrgen['despar']);
@@ -406,9 +307,22 @@ $this->Bitacora('Guardo');
       $this->fordefegrgen->setForpar($fordefegrgen['forpar']);
     }
   // IVA
-    $this->fordefegrgen->setCodpariva($fordefegrgen['codpariva']);
+    /*$this->fordefegrgen->setCodpariva($fordefegrgen['codpariva']);
     $this->fordefegrgen->setManivafor($this->getRequestParameter('radio'));
-    $this->fordefegrgen->setPorivafor($this->getRequestParameter('moniva'));
+    $this->fordefegrgen->setPorivafor($this->getRequestParameter('moniva'));*/
+
+    if (isset($fordefegrgen['codpariva']))
+    {
+      $this->fordefegrgen->setCodpariva($fordefegrgen['codpariva']);
+  }
+    if (isset($fordefegrgen['manivafor']))
+    {
+      $this->fordefegrgen->setManivafor($fordefegrgen['manivafor']);
+    }
+    if (isset($fordefegrgen['porivafor']))
+    {
+      $this->fordefegrgen->setPorivafor($fordefegrgen['porivafor']);
+    }
 
   }
 

@@ -196,3 +196,42 @@ function Generarmatriz()
 	      document.getElementById(codpre).value=obj5;
 		}
   }
+
+function totalfinanciamiento()
+{
+  var filas=parseInt($('forotrcrepre_totfil').value);
+  var l=0;
+  var acum=0;
+  while (l<filas)
+  {
+      var monfin="cx_"+l+"_3";
+
+      var num1=toFloat(monfin);
+      acum=acum+ num1;
+      l++;
+  }
+
+  return acum;
+}
+
+
+function validarDisponibilidad(id)
+{
+   var aux = id.split("_");
+   var name=aux[0];
+   var fil=parseInt(aux[1]);
+   var col=parseInt(aux[2]);
+
+   var idcodfin=name+"_"+fil+"_1";
+   var idmonfin=name+"_"+fil+"_3";
+
+   var filafin=$('forotrcrepre_filfin').value;
+   var montopre=toFloat("ax_"+filafin+"_3");
+   var totfin=totalfinanciamiento();
+   var monfin=toFloat(idmonfin);
+   var codfin=$(idcodfin).value;
+   var categoria=$('forotrcrepre_codcat').value;
+
+   new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=7&montopre='+montopre+'&totfin='+totfin+'&monfin='+monfin+'&codfin='+codfin+'&categoria='+categoria+'&codigo='+id})
+
+}

@@ -20,11 +20,21 @@ class Cireging extends BaseCireging
    protected $numcue="";
    protected $destip="";
    protected $nomcue="";
-   protected $tipmov="";
    protected $refere="";
    protected $blocfec="";
    protected $mansolocor="";
    protected $oculeli="";
+   protected $nomcon="";
+
+     public function afterHydrate()
+  {
+     if (self::getId())
+     {
+        $this->nomcon=Herramientas::getX('RIFCON','Ciconrep','Nomcon',self::getRifcon());
+
+        $this->numcue=self::getCtaban();
+     }
+  }
 
 
 
@@ -33,21 +43,37 @@ class Cireging extends BaseCireging
 	  	return Herramientas::getX('CODTIP','Citiping','Destip',self::getCodtip());
 	  }
 
-	public function getNomcon()
+	/*public function getNomcon()
 	  {
+            if (self::getId()) 
 	  	return Herramientas::getX('RIFCON','Ciconrep','Nomcon',self::getRifcon());
+            else
+               return $this->nomcon;
 	  }
+
+          public function setNomcon()
+          {
+                $this->nomcon;
+          }*/
 
 	public function getNomcue()
 	  {
 	  	return Herramientas::getX('NUMCUE','Tsdefban','Nomcue',self::getCtaban());
 	  }
 
-	public function getNumcue()
+	/*public function getNumcue()
 	  {
+            if (self::getId())
 	  	return Herramientas::getX('REFING','Cireging','Ctaban',self::getRefing());
+            else
+                return $this->numcue;
 
 	  }
+
+          public function setNumcue()
+          {
+                $this->numcue;
+          }*/
 
 	public function getDestipmov()
 	  {

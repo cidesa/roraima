@@ -550,7 +550,6 @@ class Tesoreria {
 	    }
     }*/
 
-
   }
 
   public static function actualizar_Status($nro, $refere, $status,$tipmov) {
@@ -3032,7 +3031,7 @@ public static function reversarMovSegLib($clasemodelo)
         $j++;
       }
     }
-  }
+                   }
 
   public static function Genera_MovLibF($tscheemi,$Descrip,$Monto,$Comprobante,$numche,$refpago='')
   {
@@ -3416,5 +3415,246 @@ public static function grabarOrdenF($opordpag,$numerocomp)
       }
       $j++;
     }
+  }
+
+  public static function validarPeriodo($fecha,$tabla,&$error)
+  {
+     $validaperiodo=true;
+     $error=-1;
+
+     $sql="select fecini, feccie from ".$tabla;
+     if (Herramientas::BuscarDatos($sql,&$result))
+     {
+         if ($fecha>=$result[0]["fecini"] && $fecha<=$result[0]["feccie"])
+         {
+             if (strtoupper($tabla)=='CPDEFNIV')
+             {
+                $c = new Criteria();
+                $c->add(CpperejePeer::FECDES,$fecha,Criteria::LESS_EQUAL);
+                $c->add(CpperejePeer::FECHAS,$fecha,Criteria::GREATER_EQUAL);
+                $result= CpperejePeer::doSelectOne($c);
+                if ($result)
+                {
+                   if ($result->getEstper()!='C')
+                   {
+                       $validaperiodo=true;
+                   }else {
+                       $validaperiodo=false;
+                       $error=1334;
+}
+                }else {
+                    $validaperiodo=false;
+                    $error=629;
+                }
+             }else {
+                $c= new Criteria();
+                $c->add(Contaba1Peer::FECDES,$fecha,Criteria::LESS_EQUAL);
+                $c->add(Contaba1Peer::FECHAS,$fecha,Criteria::GREATER_EQUAL);
+                $conta1=Contaba1Peer::doSelectOne($c);
+                if ($conta1)
+                {
+                  if ($conta1->getStatus()=='A')
+                  {
+                     $validaperiodo=true;
+                  }else {
+                    $validaperiodo=false;
+                    $error=630;
+                  }
+                }else {
+                    $validaperiodo=false;
+                    $error=629;
+                }
+             }
+         }else {
+           $validaperiodo=false;
+           $error=543;
+         }
+     }else {
+         $validaperiodo=false;
+         $error=631;
+     }
+
+     return $validaperiodo;
+  }
+
+  public static function generarOrdenPagoHistorico($clasemodelo)
+  {
+    if (self::validarPeriodo($clasemodelo->getUltfec(),'CPDEFNIV',&$error))
+    {
+         if (strlen($clasemodelo->getCodcon())==0)
+         {
+           $c= new Criteria();
+           $c->add(NpcienomPeer::CODNOM,$clasemodelo->getCodnom());
+           $c->add(NpcienomPeer::FECNOM,$clasemodelo->getUltfec());
+           $resul= NpcienomPeer::doSelect($c);
+           if ($resul)
+           {
+                 foreach ($resul as $update)
+                 {
+                   $update->delete();
+                 }
+           }
+
+           if ($clasemodelo->getEspecial()=='S')
+           {
+             $c= new Criteria();
+             $c->add(NphisconPeer::CODNOM,$clasemodelo->getCodnom());
+             $c->add(NphisconPeer::FECNOM,$clasemodelo->getUltfec());
+             $c->add(NphisconPeer::MONTO,0,Criteria::NOT_EQUAL);
+             $c->add(NphisconPeer::ESPECIAL,'S');
+             $resultado= NphisconPeer::doSelect($c);
+           }else {
+             $c= new Criteria();
+             $c->add(NphisconPeer::CODNOM,$clasemodelo->getCodnom());
+             $c->add(NphisconPeer::FECNOM,$clasemodelo->getUltfec());
+             $c->add(NphisconPeer::MONTO,0,Criteria::NOT_EQUAL);
+             $c->add(NphisconPeer::ESPECIAL,'N');
+             $resultado= NphisconPeer::doSelect($c);
+           }
+         }else {
+           $c= new Criteria();
+           $c->add(NpcienomPeer::CODNOM,$clasemodelo->getCodnom());
+           $c->add(NpcienomPeer::FECNOM,$clasemodelo->getUltfec());
+           $c->add(NpcienomPeer::CODCON,$clasemodelo->getCodcon());
+           $resul= NpcienomPeer::doSelect($c);
+           if ($resul)
+           {
+                 foreach ($resul as $update)
+                 {
+                   $update->delete();
+                 }
+           }
+
+           if ($clasemodelo->getEspecial()=='S')
+           {
+             $c= new Criteria();
+             $c->add(NphisconPeer::CODNOM,$clasemodelo->getCodnom());
+             $c->add(NphisconPeer::FECNOM,$clasemodelo->getUltfec());
+             $c->add(NphisconPeer::CODCON,$clasemodelo->getCodcon());
+             $c->add(NphisconPeer::MONTO,0,Criteria::NOT_EQUAL);
+             $c->add(NphisconPeer::ESPECIAL,'S');
+             $resultado= NphisconPeer::doSelect($c);
+           }else {
+             $c= new Criteria();
+             $c->add(NphisconPeer::CODNOM,$clasemodelo->getCodnom());
+             $c->add(NphisconPeer::FECNOM,$clasemodelo->getUltfec());
+             $c->add(NphisconPeer::CODCON,$clasemodelo->getCodcon());
+             $c->add(NphisconPeer::MONTO,0,Criteria::NOT_EQUAL);
+             $c->add(NphisconPeer::ESPECIAL,'N');
+             $resultado= NphisconPeer::doSelect($c);
+           }
+         }
+
+         if ($resultado)
+         {
+             foreach ($resultado as $obj)
+             {
+                 $sql="Select a.CodCat as codcat, a.CodTipGas as codtipgas,b.CodBan as codban,b.NumCue as numcue From NPAsiCarEmp a, NPHojInt b Where a.CodNom = '".$obj->getCodnom(). "' And a.CodCar = '".$obj->getCodcar()."' And a.codemp=b.codemp and a.CodEmp = '".$obj->getCodemp()."' And a.Status = 'V'";
+
+                 //$sql="Select b.CodBan,b.NumCue From NPHojInt b Where B.CodEmp = '".$obj->getCodemp()."'";
+                 if (Herramientas::BuscarDatos($sql,&$result))
+                 {
+                     if (is_null($result[0]["numcue"]) || $result[0]["numcue"]=="" || is_null($result[0]["codban"]) || $result[0]["codban"]=="")
+                     {
+                         $codban=$obj->getCodemp();
+                     }else {
+                         $codban=$result[0]["codban"];
+                     }
+
+                     if ($obj->getCodtipgas()=="")
+                     {
+                        $codtipgas=$result[0]["codtipgas"];
+                     }else {
+                         $codtipgas=$obj->getCodtipgas();
+                     }
+                     //$codban=$result[0]["codban"];
+                     //$codtipgas='0001';
+
+                     $t= new Criteria();
+                     $t->add(NpdefcptPeer::CODCON,$obj->getCodcon());
+                     $reg= NpdefcptPeer::doSelectOne($t);
+                     if ($reg)
+                     {
+                         $r= new Criteria();
+                         $r->add(NpasiparconPeer::CODNOM,$obj->getCodnom());
+                         $r->add(NpasiparconPeer::CODCAR,$obj->getCodcar());
+                         $r->add(NpasiparconPeer::CODCON,$obj->getCodcon());
+                         $registro = NpasiparconPeer::doSelectOne($r);
+                         if ($registro)
+                         {
+                             $partida=$registro->getCodpar();
+                         }else $partida=$obj->getCodpar();
+
+                         //$partida=$obj->getCodpar();
+
+                         $w= new Criteria();
+                         $w->add(NpconceptoscategoriaPeer::CODCON,$obj->getCodcon());
+                         $rew= NpconceptoscategoriaPeer::doSelectOne($w);
+                         if ($rew)
+                         {
+                           $categoria=$rew->getCodcat();
+                         }else $categoria=$obj->getCodcat();
+
+                         //$categoria=$obj->getCodcat();
+
+                         $codpre=$categoria."-".$partida;
+
+                         if (($reg->getOrdpag()== "S" && $reg->getImpcpt()== "S" && ($reg->getOpecon()== "A" || $reg->getOpecon()== "D")) || ($reg->getOrdpag()== "S" && $reg->getOpecon()== "P"))
+                         {
+                             $q= new Criteria();
+                             $q->add(CpdeftitPeer::CODPRE,$codpre);
+                             $regi2= CpdeftitPeer::doSelectOne($q);
+                             if ($regi2)
+                             {
+                                 $t= new Criteria();
+                                 $t->add(NpcienomPeer::CODBAN,$codban);
+                                 $t->add(NpcienomPeer::CODTIPGAS,$codtipgas);
+                                 $t->add(NpcienomPeer::CODPRE,$codpre);
+                                 $t->add(NpcienomPeer::CODCON,$obj->getCodcon());
+                                 $t->add(NpcienomPeer::CODNOM,$obj->getCodnom());
+                                 $t->add(NpcienomPeer::ASIDED,$reg->getOpecon());
+                                 $t->add(NpcienomPeer::FECNOM,$obj->getFecnom());
+                                 $resultado2=NpcienomPeer::doSelectOne($t);
+                                 if (count($resultado2)>0)
+                                 {
+                                   $resultado2->setMonto($resultado2->getMonto() + $obj->getSaldo());
+                                   $resultado2->save();
+                                 }
+                                 else
+                                 {
+                                    $npcienom = new Npcienom();
+                                    $npcienom->setCodnom($obj->getCodnom());
+                                    $npcienom->setCodcon($obj->getCodcon());
+                                    $npcienom->setFecnom($obj->getFecnom());
+                                    $npcienom->setCodpre($codpre);
+                                    $npcienom->setCodcta($regi2->getCodcta());
+                                    $npcienom->setMonto($obj->getMonto());
+                                    $npcienom->setAsided($reg->getOpecon());
+                                    $npcienom->setCodtipgas($codtipgas);
+                                    $npcienom->setCodban($codban);
+                                    $npcienom->setEspecial($obj->getEspecial());
+                                    $npcienom->setCantidad($obj->getCantidad());
+                                    $npcienom->save();
+                                 }
+                             }else {
+                                $msj="El Código".$codpre."No Esta Definido. Los Datos de la Orden se generarán en forma errónea.";
+                             }
+                         }else {
+                          $msj="El Código de Concepto ".$reg->getCodcon()." con Imputación Presupuestaria ".$codpre." No Esta Definido, los datos de la Orden se generaran de Forma errónea.";
+                         }
+                     }
+                 }
+             }
+         }else {
+             $error=632;
+         }
+
+
+
+      return $error;
+    }else {
+        return $error;
+    }
+
   }
 }

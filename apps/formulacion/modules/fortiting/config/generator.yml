@@ -9,6 +9,7 @@ generator:
       montoing: { name: Monto }
       codtipfin: { name: Código, params : maxlength=4 }
       desfin: { name: Descripción, params : maxlength=50 }
+      asiper: { name: Asignación Periódica }
     list:
       title:          Formulación Presupuesto de Ingresos
       filters:        [codparing]
@@ -19,7 +20,7 @@ generator:
       sort:      codparing
     edit:
       title:          Edición Formulación Presupuesto de Ingresos
-      display:      [codparing, despar, montoing, _grid]
+      display:      [codparing, despar, asiper, montoing, _grid]
       actions:
         _list:        ~
         _save:        ~

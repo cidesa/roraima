@@ -11,7 +11,7 @@
 <script language="JavaScript">
 	function validarmonto(e,id)
 	{
-	  if ((e.keyCode==13) && (document.getElementById(id).value!=''))
+	  if ((e.keyCode==13 || e.keyCode==9) && (document.getElementById(id).value!=''))
 	  {
 	  	var aux  = id.split("_");
 	  	var name = aux[0];
@@ -75,12 +75,12 @@ alert(montodisp);*/
 		  while(j<numero_reg)
 		  {
 		  //	alert(j);
-		    var id=name+"_"+j+"_"+'4';
-		    var id1=name+"_"+j+"_"+'1';
+		    var id2="cx_"+j+"_"+'4';
+		    var id1="cx_"+j+"_"+'1';
 
 		    //valor=parseFloat(monfin[j]);
 
-			variable=variable + QuitarComa(document.getElementById(id).value)+"_";
+			variable=variable + QuitarComa(document.getElementById(id2).value)+"_";
 			cod=cod + document.getElementById(id1).value+"_";
 
 			j++;
@@ -98,7 +98,7 @@ alert(montodisp);*/
 	function cuantos(numero_reg)
 	{
 	  f=document.form1;
-  	  var aux = 'ax_0_4'.split("_");
+  	  var aux = 'cx_0_4'.split("_");
 	  var name=aux[0];
 	  var fil=aux[1];
 	  var col=parseInt(aux[2]);
@@ -149,15 +149,20 @@ alert(montodisp);*/
 		  var j=0;
 		  //var cuantos=0;
 		 // alert(numero_reg);
+                 if (monfin!="")
+                 {
 		  while(j<numero_reg)
 		  {
 		  //	alert(j);
 		    var id=name+"_"+j+"_"+'4';
 		    valor=parseFloat(monfin[j]);
+
 			document.getElementById(id).value=format(valor.toFixed(2),'.',',','.');
+
 
 			j++;
 		  }
+                 }
 		    /*var idc=name+"_"+j+"_"+'1';
 		    if (QuitarComa(document.getElementById(id).value) > 0)
 		    {

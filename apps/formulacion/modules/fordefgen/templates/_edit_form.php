@@ -373,7 +373,7 @@
   )
   ?>
 
-    <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Fordefparegr_Fordefgen/clase/Fordefparegr/frame/sf_admin_edit_form/obj1/fordefegrgen_codpariva/obj2/fordefegrgen_nomparegr/campo1/CODPAREGR/campo2/NOMPAREGR/param1/'.$codpariva)?>
+    <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Fordefparegr_Codparegr/clase/Fordefparegr/frame/sf_admin_edit_form/obj1/fordefegrgen_codpariva/obj2/fordefegrgen_nomparegr/campo1/CODPAREGR/campo2/NOMPAREGR/param1/'.$codpariva)?>
 
     <?php //echo input_tag('despar',$fordefegrgen->getDespar(),'size=50,disabled=true'); ?>
 
@@ -408,7 +408,12 @@
     <?php echo form_error('fordefegrgen{porivafor}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-<?php echo input_tag('fordefegrgen_moniva',$fordefegrgen->getPorivafor(),'size=3 maxlength=7'); ?> &nbsp;&nbsp;%</div></th>
+  <?php $value = object_input_tag($fordefegrgen, 'getPorivafor', array (
+  'size' => 3,
+  'size' => 7,
+  'control_name' => 'fordefegrgen[porivafor]',
+)); echo $value ? $value : '&nbsp;' ?>
+      &nbsp;&nbsp;%</div></th>
 
    </tr>
   </table>
@@ -430,7 +435,7 @@
       'size' => 7,
       'control_name' => 'fordefegrgen[corest]',
       'maxlength' => 2,
-      'disabled' => 'true',
+      'readonly'  =>  $fordefegrgen->getId()!='' ? true : false ,
     )); echo $value ? $value : '&nbsp;' ?>
         </div></th>
   <th>&nbsp;&nbsp;&nbsp;</th>
@@ -444,7 +449,7 @@
       'size' => 7,
       'control_name' => 'fordefegrgen[corequ]',
       'maxlength' => 2,
-      'disabled' => 'true',
+      'readonly'  =>  $fordefegrgen->getId()!='' ? true : false ,
     )); echo $value ? $value : '&nbsp;' ?>
         </div></th>
   <th>&nbsp;&nbsp;&nbsp;</th>
@@ -458,7 +463,7 @@
       'size' => 7,
       'control_name' => 'fordefegrgen[corsec]',
       'maxlength' => 2,
-      'disabled' => 'true',
+      'readonly'  =>  $fordefegrgen->getId()!='' ? true : false ,
     )); echo $value ? $value : '&nbsp;' ?>
         </div></th>
  </tr>

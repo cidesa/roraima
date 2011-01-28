@@ -664,26 +664,6 @@ class Formulacion
 	if (self::GrabarDisFueFinPryAccMet($forencpryaccespmet,$grid)!=-1) { return 302; }  	      //Montos de Financiamientos
 
 	if (self::Actualiza_Fuentes_de_Financiamiento_Real($forencpryaccespmet,$grid)!=-1) { exit('4'); return 302; }  	      //Montos de Financiamientos
-//exit('777777777');
-/*
-	self::Grabar_ForEncPryAccEspMet($forencpryaccespmet,$grid);
-  	//self::Grabardismonper($forencpryaccespmet,$grid);
-	self::Grabar_ForDetPryAccEspMet($forencpryaccespmet,$grid);  	  //Graba Detalle de la Formulacion por Metas
-	exit();
-	self::GrabarDisFueFinPryAccMet($forencpryaccespmet,$grid);  	 // Montos de Financiamientos
-
-	//if (self::GrabarDisFueFinPryAccMet($forencpryaccespmet,$grid)!=-1){ return 302; }
-	self::Actualiza_Fuentes_de_Financiamiento_Real($forencpryaccespmet,$grid);  // Actualiza de Forma Real las Fuentes de Financiamiento
-*/
-
-//self::Actualiza_Fuentes_de_Financiamiento_Real($forencpryaccespmet,$grid);  // Actualiza de Forma Real las Fuentes de Financiamiento
-
-//sql = "Select * from ForDisFueFinPryAccMet where  "'  and CodPre = '" + CodPre + "'"
-
-      // esto no va //
-       //self::Grabar_fordetpryaccespmet($forencpryaccespmet,$grid); //Detalles
-       //self::GrabarDisActPerPryAccMet '  Metas para el CIEPE antes Actividades por  Periodo /
-
       return -1;
 
   } catch (Exception $ex){
@@ -867,12 +847,7 @@ class Formulacion
   public static function Grabar_ForEncPryAccEspMet($forencpryaccespmet,$grid)
   {
   $registro=$grid[0];
- // echo "<pre>";
-  //print_r($registro[0])."  555";
- // echo "</pre>";
-  //if (($registro[0]->getId()!='') or !empty($registro[0]))
-
-	try {
+try {
 	  if (!empty($registro[0]))
 	   {
 	    $c = new Criteria();
@@ -3796,6 +3771,23 @@ public static function salvarforpoa_uae($forencpryaccespmet,$grid)
   } catch (Exception $ex){
      return 0;
 }
+  }
+
+public static function salvarforpoa_uae($forencpryaccespmet,$grid)
+  {
+  try{
+	//self::Grabar_ForEncPryAccEspMet($forencpryaccespmet,$grid);
+  	if (self::Grabar_ForEncPryAccEspMet($forencpryaccespmet,$grid)!=-1){ return 302; }
+  	if (self::Grabardismonper($forencpryaccespmet,$grid)!=-1){ return 0; }
+	if (self::Grabar_ForDetPryAccEspMet($forencpryaccespmet,$grid)!=-1){ return 0; }  	  //Graba Detalle de la Formulacion por Metas
+	if (self::GrabarDisFueFinPryAccMet($forencpryaccespmet,$grid)!=-1) { return 302; }  	      //Montos de Financiamientos
+
+	if (self::Actualiza_Fuentes_de_Financiamiento_Real($forencpryaccespmet,$grid)!=-1) { exit('4'); return 302; }  	      //Montos de Financiamientos
+      return -1;
+
+  } catch (Exception $ex){
+     return 0;
+  }
   }
 
 }

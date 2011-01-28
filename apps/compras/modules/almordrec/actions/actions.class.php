@@ -14,6 +14,7 @@
 class almordrecActions extends autoalmordrecActions
 {
 	public $msgeli="";
+        private $coderror =-1;
 
   	/**
    * Función para procesar _todas_ las funciones Ajax del formulario
@@ -39,7 +40,7 @@ class almordrecActions extends autoalmordrecActions
 		$aux = split('_',$cajtexmos);
 		$name=$aux[0];
 		$fil=$aux[1];
-		$cajtexcom=$name."_".$fil."_20";
+		$cajtexcom=$name."_".$fil."_19";
 		$cajcodubi=$name."_".$fil."_21";
 		$cajnomubi=$name."_".$fil."_22";
                 if ($manartlot=='S')
@@ -65,13 +66,13 @@ class almordrecActions extends autoalmordrecActions
                             $numlot=$alm->getNumlot();
 
                         if ($manartlot=='S')
-	             	   $output = '[["'.$cajtexmos.'","'.$nomalm.'",""],["'.$cajtexcom.'","6","c"],["'.$cajcodubi.'","'.$codubi.'",""],["'.$cajnomubi.'","'.$nomubi.'",""],["'.$cajnumlot.'","'.$numlot.'",""]]';
+	             	   $output = '[["'.$cajtexmos.'","'.$nomalm.'",""],["'.$cajcodubi.'","'.$codubi.'",""],["'.$cajnomubi.'","'.$nomubi.'",""],["'.$cajnumlot.'","'.$numlot.'",""]]';
                         else
 	             	$output = '[["'.$cajtexmos.'","'.$nomalm.'",""],["'.$cajtexcom.'","6","c"],["'.$cajcodubi.'","'.$codubi.'",""],["'.$cajnomubi.'","'.$nomubi.'",""]]';
 	           }
 	           else//el almacen seleccionado no existe para el articulo introducido por el usuario
 	           {
-		    	$javascript="alert('El articulo : ".$codart.", no existe en el Almacen seleccionado: ".$codalm." ');$('".$cajtexmos."').focus()";
+		    	$javascript="alert('El articulo : ".$codart.", no existe en el Almacen seleccionado: ".$codalm." '); $('".$cajtexcom."').value=''; $('".$cajtexcom."').focus();";
 		    	if ($manartlot=='S')
                             $output = '[["'.$cajtexmos.'","",""],["'.$cajcodubi.'","",""],["'.$cajnomubi.'","",""],["'.$cajtexcom.'","",""],["'.$cajnumlot.'","",""],["javascript","'.$javascript.'",""]]';
                         else
@@ -83,7 +84,7 @@ class almordrecActions extends autoalmordrecActions
 		else
 		{
 		    	$nomalm="";
-		    	$javascript="alert('Codigo del Almacen no existe...')";
+		    	$javascript="alert('Codigo del Almacen no existe...'); $('".$cajtexcom."').value=''; $('".$cajtexcom."').focus();";
                         if ($manartlot=='S')
                             $output = '[["'.$cajtexmos.'","",""],["'.$cajcodubi.'","",""],["'.$cajnomubi.'","",""],["'.$cajtexcom.'","",""],["'.$cajnumlot.'","",""],["javascript","'.$javascript.'",""]]';
                         else
@@ -575,8 +576,8 @@ class almordrecActions extends autoalmordrecActions
     $col22->setHTML('type="text" size="30x1" readonly=true');
 
    $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
-   if ($manartlot=='S')
-    {
+
+
       $col23 = new Columna('Número de Lote');
       $col23->setTipo(Columna::TEXTO);
       $col23->setEsGrabable(true);
@@ -584,7 +585,34 @@ class almordrecActions extends autoalmordrecActions
       $col23->setAlineacionContenido(Columna::CENTRO);
       $col23->setNombreCampo('numlot');
       $col23->setHTML('type="text" size="15" maxlength="100"');
-    }
+      if ($manartlot!='S') $col23->setOculta(true);
+
+      $col24 = new Columna('Serial');
+      $col24->setTipo(Columna::TEXTO);
+      $col24->setEsGrabable(true);
+      $col24->setAlineacionObjeto(Columna::CENTRO);
+      $col24->setAlineacionContenido(Columna::CENTRO);
+      $col24->setNombreCampo('serial');
+      $col24->setHTML('type="text" size="15" maxlength="20"');
+
+
+      $col25 = new Columna('Marca');
+      $col25->setTipo(Columna::TEXTO);
+      $col25->setEsGrabable(true);
+      $col25->setAlineacionObjeto(Columna::CENTRO);
+      $col25->setAlineacionContenido(Columna::CENTRO);
+      $col25->setNombreCampo('marca');
+      $col25->setHTML('type="text" size="15" maxlength="20"');
+
+      $col26 = new Columna('Modelo');
+      $col26->setTipo(Columna::TEXTO);
+      $col26->setEsGrabable(true);
+      $col26->setAlineacionObjeto(Columna::CENTRO);
+      $col26->setAlineacionContenido(Columna::CENTRO);
+      $col26->setNombreCampo('modelo');
+      $col26->setHTML('type="text" size="15" maxlength="20"');
+
+
 
 	// Se guardan las columnas en el objetos de opciones
 	$opciones->addColumna($col1);
@@ -609,8 +637,10 @@ class almordrecActions extends autoalmordrecActions
 	$opciones->addColumna($col20);
     $opciones->addColumna($col21);
 	$opciones->addColumna($col22);
-        if ($manartlot=='S')
             $opciones->addColumna($col23);
+        $opciones->addColumna($col24);
+        $opciones->addColumna($col25);
+        $opciones->addColumna($col26);
 
 	// Se genera el arreglo de opciones necesario para generar el grid
 	$this->grid = $opciones->getConfig($per);
@@ -764,8 +794,7 @@ class almordrecActions extends autoalmordrecActions
     $col17->setHTML('type="text" size="30x1" readonly=true');
 
      $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
-    if ($manartlot=='S')
-    {
+
           $col18 = new Columna('Número de Lote');
 	  $col18->setTipo(Columna::TEXTO);
 	  $col18->setEsGrabable(true);
@@ -773,8 +802,32 @@ class almordrecActions extends autoalmordrecActions
 	  $col18->setAlineacionContenido(Columna::CENTRO);
 	  $col18->setNombreCampo('numlot');
 	  $col18->setHTML('type="text" size="15" readonly=true');
+      if ($manartlot!='S') $col18->setOculta(true);
 
-    }
+      $col19 = new Columna('Serial');
+      $col19->setTipo(Columna::TEXTO);
+      $col19->setEsGrabable(true);
+      $col19->setAlineacionObjeto(Columna::CENTRO);
+      $col19->setAlineacionContenido(Columna::CENTRO);
+      $col19->setNombreCampo('serial');
+      $col19->setHTML('type="text" size="15" maxlength="20"');
+
+
+      $col20 = new Columna('Marca');
+      $col20->setTipo(Columna::TEXTO);
+      $col20->setEsGrabable(true);
+      $col20->setAlineacionObjeto(Columna::CENTRO);
+      $col20->setAlineacionContenido(Columna::CENTRO);
+      $col20->setNombreCampo('marca');
+      $col20->setHTML('type="text" size="15" maxlength="20"');
+
+      $col21 = new Columna('Modelo');
+      $col21->setTipo(Columna::TEXTO);
+      $col21->setEsGrabable(true);
+      $col21->setAlineacionObjeto(Columna::CENTRO);
+      $col21->setAlineacionContenido(Columna::CENTRO);
+      $col21->setNombreCampo('modelo');
+      $col21->setHTML('type="text" size="15" maxlength="20"');
 
 
 	// Se guardan las columnas en el objetos de opciones
@@ -795,8 +848,10 @@ class almordrecActions extends autoalmordrecActions
 	$opciones->addColumna($col15);
 	$opciones->addColumna($col16);
 	$opciones->addColumna($col17);
-        if ($manartlot=='S')
             $opciones->addColumna($col18);
+        $opciones->addColumna($col19);
+        $opciones->addColumna($col20);
+        $opciones->addColumna($col21);
 	// Ee genera el arreglo de opciones necesario para generar el grid
 	$this->grid = $opciones->getConfig($per);
 	}
@@ -815,7 +870,7 @@ class almordrecActions extends autoalmordrecActions
     {
       $this->updateCarcpartFromRequest();
 
-      $this->saveCarcpart($this->carcpart);
+      if($this->saveCarcpart($this->carcpart)==-1){
 
       $this->setFlash('notice', 'Your modifications have been saved');
 $this->Bitacora('Guardo');
@@ -833,6 +888,17 @@ $this->Bitacora('Guardo');
       {
         return $this->redirect('almordrec/edit?id='.$this->carcpart->getId());
       }
+    }
+    else
+    {
+      $this->labels = $this->getLabels();
+       	  if($this->coderror!=-1)
+	      {
+	       $err = Herramientas::obtenerMensajeError($this->coderror);
+	       $this->getRequest()->setError('',$err);
+    }
+          return sfView::SUCCESS;
+        }
     }
     else
     {
@@ -979,6 +1045,7 @@ $this->Bitacora('Guardo');
    */
   protected function saveCarcpart($carcpart)
   {
+    $this->coderror=-1;
     if ($carcpart->getId())
      {
 	 $carcpart->save();
@@ -986,8 +1053,10 @@ $this->Bitacora('Guardo');
     else //nuevo
     {
 		$grid2=Herramientas::CargarDatosGrid($this,$this->grid);
-		Recepcion::salvarAlmrec($carcpart,$grid2);
+		$this->coderror=Recepcion::salvarAlmrec($carcpart,$grid2);
 	}
+
+     return $this->coderror;
   }
 
   protected function deleteCarcpart($carcpart)

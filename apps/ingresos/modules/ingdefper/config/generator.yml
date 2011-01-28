@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Citipper
+    theme:            cidesaGenerator
+    fields:
+      codtipper:      { name: CÃ³digo, params: size=3 maxlength=3 readOnly=true  }
+      destipper:      { name: DescripciÃ³n , params: size=80  maxlength=250}
+    list:
+      title:          Tipos de Persona
+      fields:
+        destipper:      { name: DescripciÃ³n , params: size=15  }
+      display:        [ =codtipper, destipper ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [ codtipper, destipper ]
+      max_per_page:   10
+      sort: codtipper
+    edit:
+      title:          EdiciÃ³n de Tipos de Personas
+      display:        [ codtipper, destipper ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

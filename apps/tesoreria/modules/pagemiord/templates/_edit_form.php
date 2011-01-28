@@ -410,6 +410,9 @@
 <? } else if ($opordpag->getId()!='') { ?>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="Comprobante" type="button" value="Comprobantes" onClick="consultarComp()">
   <input type="button" name="Submit" value="Forma Pre-Impresa" onclick="javascript:Mostrar_orden_preimpresa();" />
+  <?php if ($opordpag->getNumche()!="") { ?>
+  <input type="button" name="Submit" value="Cheque" onclick="javascript:Mostrar_cheque_preimpreso();" />
+  <?php } ?>
 <?php } ?>
 
 
@@ -692,6 +695,18 @@ if ( ($opordpag->getId()!='')) //ES CONSULTA
 <?php endif; ?>
 </li>
 </ul>
+<?
+  $pdfparform="n";
+
+  $dirrepconfig = $sf_user->getAttribute('reportes').'reportes/config.yml';
+
+  $configyml = sfYaml::load($dirrepconfig);
+
+  if(is_array($configyml)){
+    if(array_key_exists('tesoreria',$configyml)) $pdfparform = $configyml["tesoreria"]["tsrvoucher"]["parameterform"];
+  }
+
+?>
 <script type="text/javascript">
 var nuevo='<?php echo $opordpag->getId()?>';
     if (nuevo=='')
@@ -1004,5 +1019,24 @@ function num(e) {
           pagina=ruta+"/<? echo $sf_user->getAttribute('reportes_web');?>/tesoreria/r.php?r=oprordpre.php&ordpagdes="+ordpagdes+"&ordpaghas="+ordpaghas;
           window.open(pagina,1,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80")
       }
+  }
+
+
+  function Mostrar_cheque_preimpreso()
+  {
+      var  numches='<? echo $opordpag->getNumche();?>';
+      var  numcues='<? echo $opordpag->getCtaban();?>';
+      var  mosparform='<? echo $pdfparform;?>';
+      var  ruta='http://'+'<?echo $this->getContext()->getRequest()->getHost();?>';
+        if (mosparform=='S')
+        {
+                pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/tsrvoucher.php?numchedes="+numches+"&numchehas="+numches+"&numcuedes="+numcues+"&numcuehas="+numcues;
+        }else
+        {
+                pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/r.php?r=tsrvoucher.php&numchedes="+numches+"&numchehas="+numches+"&numchehas="+numches+"&numcuedes="+numcues+"&numcuehas="+numcues;
+        }
+        window.open(pagina,numches,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80");
+
+      
   }
  </script>

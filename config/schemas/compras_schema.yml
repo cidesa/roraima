@@ -2685,6 +2685,15 @@ propel:
     numlot:
       type: VARCHAR
       size: 100
+    serial:
+      type: VARCHAR
+      size: 20
+    marca:
+      type: VARCHAR
+      size: 20
+    modelo:
+      type: VARCHAR
+      size: 20
     id:
       type: INTEGER
       required: true

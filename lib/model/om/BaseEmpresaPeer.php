@@ -13,7 +13,7 @@ abstract class BaseEmpresaPeer {
 	const CLASS_DEFAULT = 'lib.model.Empresa';
 
 	
-	const NUM_COLUMNS = 43;
+	const NUM_COLUMNS = 47;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -146,6 +146,18 @@ abstract class BaseEmpresaPeer {
 	const CODCAT = 'empresa.CODCAT';
 
 	
+	const NOMREC = 'empresa.NOMREC';
+
+	
+	const NOMVICRECACA = 'empresa.NOMVICRECACA';
+
+	
+	const NOMVICRECADM = 'empresa.NOMVICRECADM';
+
+	
+	const NOMSEC = 'empresa.NOMSEC';
+
+	
 	const ID = 'empresa.ID';
 
 	
@@ -154,18 +166,18 @@ abstract class BaseEmpresaPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nomemp', 'Diremp', 'Tlfemp', 'Ciuemp', 'Urlemp', 'Faxemp', 'Codpos', 'Gobedo', 'Conedo', 'Cleedo', 'Coopla', 'Dirpre', 'Munemp', 'Cieedo', 'Codctagas', 'Codctaban', 'Codctaret', 'Codctaben', 'Codctaart', 'Codctagashas', 'Codctabanhas', 'Codctarethas', 'Codctabenhas', 'Codctaarthas', 'Codctapageje', 'Codctaingdevn', 'Codctaingdev', 'Diradm', 'Dirfin', 'Dirper', 'Dirgen', 'Anapre', 'Anaper', 'Anaadm', 'Edoemp', 'Encabezado', 'Cooeje', 'Partidaiva', 'Codempfonava', 'Numlot', 'Codcat', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (EmpresaPeer::CODEMP, EmpresaPeer::NOMEMP, EmpresaPeer::DIREMP, EmpresaPeer::TLFEMP, EmpresaPeer::CIUEMP, EmpresaPeer::URLEMP, EmpresaPeer::FAXEMP, EmpresaPeer::CODPOS, EmpresaPeer::GOBEDO, EmpresaPeer::CONEDO, EmpresaPeer::CLEEDO, EmpresaPeer::COOPLA, EmpresaPeer::DIRPRE, EmpresaPeer::MUNEMP, EmpresaPeer::CIEEDO, EmpresaPeer::CODCTAGAS, EmpresaPeer::CODCTABAN, EmpresaPeer::CODCTARET, EmpresaPeer::CODCTABEN, EmpresaPeer::CODCTAART, EmpresaPeer::CODCTAGASHAS, EmpresaPeer::CODCTABANHAS, EmpresaPeer::CODCTARETHAS, EmpresaPeer::CODCTABENHAS, EmpresaPeer::CODCTAARTHAS, EmpresaPeer::CODCTAPAGEJE, EmpresaPeer::CODCTAINGDEVN, EmpresaPeer::CODCTAINGDEV, EmpresaPeer::DIRADM, EmpresaPeer::DIRFIN, EmpresaPeer::DIRPER, EmpresaPeer::DIRGEN, EmpresaPeer::ANAPRE, EmpresaPeer::ANAPER, EmpresaPeer::ANAADM, EmpresaPeer::EDOEMP, EmpresaPeer::ENCABEZADO, EmpresaPeer::COOEJE, EmpresaPeer::PARTIDAIVA, EmpresaPeer::CODEMPFONAVA, EmpresaPeer::NUMLOT, EmpresaPeer::CODCAT, EmpresaPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nomemp', 'diremp', 'tlfemp', 'ciuemp', 'urlemp', 'faxemp', 'codpos', 'gobedo', 'conedo', 'cleedo', 'coopla', 'dirpre', 'munemp', 'cieedo', 'codctagas', 'codctaban', 'codctaret', 'codctaben', 'codctaart', 'codctagashas', 'codctabanhas', 'codctarethas', 'codctabenhas', 'codctaarthas', 'codctapageje', 'codctaingdevn', 'codctaingdev', 'diradm', 'dirfin', 'dirper', 'dirgen', 'anapre', 'anaper', 'anaadm', 'edoemp', 'encabezado', 'cooeje', 'partidaiva', 'codempfonava', 'numlot', 'codcat', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nomemp', 'Diremp', 'Tlfemp', 'Ciuemp', 'Urlemp', 'Faxemp', 'Codpos', 'Gobedo', 'Conedo', 'Cleedo', 'Coopla', 'Dirpre', 'Munemp', 'Cieedo', 'Codctagas', 'Codctaban', 'Codctaret', 'Codctaben', 'Codctaart', 'Codctagashas', 'Codctabanhas', 'Codctarethas', 'Codctabenhas', 'Codctaarthas', 'Codctapageje', 'Codctaingdevn', 'Codctaingdev', 'Diradm', 'Dirfin', 'Dirper', 'Dirgen', 'Anapre', 'Anaper', 'Anaadm', 'Edoemp', 'Encabezado', 'Cooeje', 'Partidaiva', 'Codempfonava', 'Numlot', 'Codcat', 'Nomrec', 'Nomvicrecaca', 'Nomvicrecadm', 'Nomsec', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (EmpresaPeer::CODEMP, EmpresaPeer::NOMEMP, EmpresaPeer::DIREMP, EmpresaPeer::TLFEMP, EmpresaPeer::CIUEMP, EmpresaPeer::URLEMP, EmpresaPeer::FAXEMP, EmpresaPeer::CODPOS, EmpresaPeer::GOBEDO, EmpresaPeer::CONEDO, EmpresaPeer::CLEEDO, EmpresaPeer::COOPLA, EmpresaPeer::DIRPRE, EmpresaPeer::MUNEMP, EmpresaPeer::CIEEDO, EmpresaPeer::CODCTAGAS, EmpresaPeer::CODCTABAN, EmpresaPeer::CODCTARET, EmpresaPeer::CODCTABEN, EmpresaPeer::CODCTAART, EmpresaPeer::CODCTAGASHAS, EmpresaPeer::CODCTABANHAS, EmpresaPeer::CODCTARETHAS, EmpresaPeer::CODCTABENHAS, EmpresaPeer::CODCTAARTHAS, EmpresaPeer::CODCTAPAGEJE, EmpresaPeer::CODCTAINGDEVN, EmpresaPeer::CODCTAINGDEV, EmpresaPeer::DIRADM, EmpresaPeer::DIRFIN, EmpresaPeer::DIRPER, EmpresaPeer::DIRGEN, EmpresaPeer::ANAPRE, EmpresaPeer::ANAPER, EmpresaPeer::ANAADM, EmpresaPeer::EDOEMP, EmpresaPeer::ENCABEZADO, EmpresaPeer::COOEJE, EmpresaPeer::PARTIDAIVA, EmpresaPeer::CODEMPFONAVA, EmpresaPeer::NUMLOT, EmpresaPeer::CODCAT, EmpresaPeer::NOMREC, EmpresaPeer::NOMVICRECACA, EmpresaPeer::NOMVICRECADM, EmpresaPeer::NOMSEC, EmpresaPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nomemp', 'diremp', 'tlfemp', 'ciuemp', 'urlemp', 'faxemp', 'codpos', 'gobedo', 'conedo', 'cleedo', 'coopla', 'dirpre', 'munemp', 'cieedo', 'codctagas', 'codctaban', 'codctaret', 'codctaben', 'codctaart', 'codctagashas', 'codctabanhas', 'codctarethas', 'codctabenhas', 'codctaarthas', 'codctapageje', 'codctaingdevn', 'codctaingdev', 'diradm', 'dirfin', 'dirper', 'dirgen', 'anapre', 'anaper', 'anaadm', 'edoemp', 'encabezado', 'cooeje', 'partidaiva', 'codempfonava', 'numlot', 'codcat', 'nomrec', 'nomvicrecaca', 'nomvicrecadm', 'nomsec', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nomemp' => 1, 'Diremp' => 2, 'Tlfemp' => 3, 'Ciuemp' => 4, 'Urlemp' => 5, 'Faxemp' => 6, 'Codpos' => 7, 'Gobedo' => 8, 'Conedo' => 9, 'Cleedo' => 10, 'Coopla' => 11, 'Dirpre' => 12, 'Munemp' => 13, 'Cieedo' => 14, 'Codctagas' => 15, 'Codctaban' => 16, 'Codctaret' => 17, 'Codctaben' => 18, 'Codctaart' => 19, 'Codctagashas' => 20, 'Codctabanhas' => 21, 'Codctarethas' => 22, 'Codctabenhas' => 23, 'Codctaarthas' => 24, 'Codctapageje' => 25, 'Codctaingdevn' => 26, 'Codctaingdev' => 27, 'Diradm' => 28, 'Dirfin' => 29, 'Dirper' => 30, 'Dirgen' => 31, 'Anapre' => 32, 'Anaper' => 33, 'Anaadm' => 34, 'Edoemp' => 35, 'Encabezado' => 36, 'Cooeje' => 37, 'Partidaiva' => 38, 'Codempfonava' => 39, 'Numlot' => 40, 'Codcat' => 41, 'Id' => 42, ),
-		BasePeer::TYPE_COLNAME => array (EmpresaPeer::CODEMP => 0, EmpresaPeer::NOMEMP => 1, EmpresaPeer::DIREMP => 2, EmpresaPeer::TLFEMP => 3, EmpresaPeer::CIUEMP => 4, EmpresaPeer::URLEMP => 5, EmpresaPeer::FAXEMP => 6, EmpresaPeer::CODPOS => 7, EmpresaPeer::GOBEDO => 8, EmpresaPeer::CONEDO => 9, EmpresaPeer::CLEEDO => 10, EmpresaPeer::COOPLA => 11, EmpresaPeer::DIRPRE => 12, EmpresaPeer::MUNEMP => 13, EmpresaPeer::CIEEDO => 14, EmpresaPeer::CODCTAGAS => 15, EmpresaPeer::CODCTABAN => 16, EmpresaPeer::CODCTARET => 17, EmpresaPeer::CODCTABEN => 18, EmpresaPeer::CODCTAART => 19, EmpresaPeer::CODCTAGASHAS => 20, EmpresaPeer::CODCTABANHAS => 21, EmpresaPeer::CODCTARETHAS => 22, EmpresaPeer::CODCTABENHAS => 23, EmpresaPeer::CODCTAARTHAS => 24, EmpresaPeer::CODCTAPAGEJE => 25, EmpresaPeer::CODCTAINGDEVN => 26, EmpresaPeer::CODCTAINGDEV => 27, EmpresaPeer::DIRADM => 28, EmpresaPeer::DIRFIN => 29, EmpresaPeer::DIRPER => 30, EmpresaPeer::DIRGEN => 31, EmpresaPeer::ANAPRE => 32, EmpresaPeer::ANAPER => 33, EmpresaPeer::ANAADM => 34, EmpresaPeer::EDOEMP => 35, EmpresaPeer::ENCABEZADO => 36, EmpresaPeer::COOEJE => 37, EmpresaPeer::PARTIDAIVA => 38, EmpresaPeer::CODEMPFONAVA => 39, EmpresaPeer::NUMLOT => 40, EmpresaPeer::CODCAT => 41, EmpresaPeer::ID => 42, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nomemp' => 1, 'diremp' => 2, 'tlfemp' => 3, 'ciuemp' => 4, 'urlemp' => 5, 'faxemp' => 6, 'codpos' => 7, 'gobedo' => 8, 'conedo' => 9, 'cleedo' => 10, 'coopla' => 11, 'dirpre' => 12, 'munemp' => 13, 'cieedo' => 14, 'codctagas' => 15, 'codctaban' => 16, 'codctaret' => 17, 'codctaben' => 18, 'codctaart' => 19, 'codctagashas' => 20, 'codctabanhas' => 21, 'codctarethas' => 22, 'codctabenhas' => 23, 'codctaarthas' => 24, 'codctapageje' => 25, 'codctaingdevn' => 26, 'codctaingdev' => 27, 'diradm' => 28, 'dirfin' => 29, 'dirper' => 30, 'dirgen' => 31, 'anapre' => 32, 'anaper' => 33, 'anaadm' => 34, 'edoemp' => 35, 'encabezado' => 36, 'cooeje' => 37, 'partidaiva' => 38, 'codempfonava' => 39, 'numlot' => 40, 'codcat' => 41, 'id' => 42, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nomemp' => 1, 'Diremp' => 2, 'Tlfemp' => 3, 'Ciuemp' => 4, 'Urlemp' => 5, 'Faxemp' => 6, 'Codpos' => 7, 'Gobedo' => 8, 'Conedo' => 9, 'Cleedo' => 10, 'Coopla' => 11, 'Dirpre' => 12, 'Munemp' => 13, 'Cieedo' => 14, 'Codctagas' => 15, 'Codctaban' => 16, 'Codctaret' => 17, 'Codctaben' => 18, 'Codctaart' => 19, 'Codctagashas' => 20, 'Codctabanhas' => 21, 'Codctarethas' => 22, 'Codctabenhas' => 23, 'Codctaarthas' => 24, 'Codctapageje' => 25, 'Codctaingdevn' => 26, 'Codctaingdev' => 27, 'Diradm' => 28, 'Dirfin' => 29, 'Dirper' => 30, 'Dirgen' => 31, 'Anapre' => 32, 'Anaper' => 33, 'Anaadm' => 34, 'Edoemp' => 35, 'Encabezado' => 36, 'Cooeje' => 37, 'Partidaiva' => 38, 'Codempfonava' => 39, 'Numlot' => 40, 'Codcat' => 41, 'Nomrec' => 42, 'Nomvicrecaca' => 43, 'Nomvicrecadm' => 44, 'Nomsec' => 45, 'Id' => 46, ),
+		BasePeer::TYPE_COLNAME => array (EmpresaPeer::CODEMP => 0, EmpresaPeer::NOMEMP => 1, EmpresaPeer::DIREMP => 2, EmpresaPeer::TLFEMP => 3, EmpresaPeer::CIUEMP => 4, EmpresaPeer::URLEMP => 5, EmpresaPeer::FAXEMP => 6, EmpresaPeer::CODPOS => 7, EmpresaPeer::GOBEDO => 8, EmpresaPeer::CONEDO => 9, EmpresaPeer::CLEEDO => 10, EmpresaPeer::COOPLA => 11, EmpresaPeer::DIRPRE => 12, EmpresaPeer::MUNEMP => 13, EmpresaPeer::CIEEDO => 14, EmpresaPeer::CODCTAGAS => 15, EmpresaPeer::CODCTABAN => 16, EmpresaPeer::CODCTARET => 17, EmpresaPeer::CODCTABEN => 18, EmpresaPeer::CODCTAART => 19, EmpresaPeer::CODCTAGASHAS => 20, EmpresaPeer::CODCTABANHAS => 21, EmpresaPeer::CODCTARETHAS => 22, EmpresaPeer::CODCTABENHAS => 23, EmpresaPeer::CODCTAARTHAS => 24, EmpresaPeer::CODCTAPAGEJE => 25, EmpresaPeer::CODCTAINGDEVN => 26, EmpresaPeer::CODCTAINGDEV => 27, EmpresaPeer::DIRADM => 28, EmpresaPeer::DIRFIN => 29, EmpresaPeer::DIRPER => 30, EmpresaPeer::DIRGEN => 31, EmpresaPeer::ANAPRE => 32, EmpresaPeer::ANAPER => 33, EmpresaPeer::ANAADM => 34, EmpresaPeer::EDOEMP => 35, EmpresaPeer::ENCABEZADO => 36, EmpresaPeer::COOEJE => 37, EmpresaPeer::PARTIDAIVA => 38, EmpresaPeer::CODEMPFONAVA => 39, EmpresaPeer::NUMLOT => 40, EmpresaPeer::CODCAT => 41, EmpresaPeer::NOMREC => 42, EmpresaPeer::NOMVICRECACA => 43, EmpresaPeer::NOMVICRECADM => 44, EmpresaPeer::NOMSEC => 45, EmpresaPeer::ID => 46, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nomemp' => 1, 'diremp' => 2, 'tlfemp' => 3, 'ciuemp' => 4, 'urlemp' => 5, 'faxemp' => 6, 'codpos' => 7, 'gobedo' => 8, 'conedo' => 9, 'cleedo' => 10, 'coopla' => 11, 'dirpre' => 12, 'munemp' => 13, 'cieedo' => 14, 'codctagas' => 15, 'codctaban' => 16, 'codctaret' => 17, 'codctaben' => 18, 'codctaart' => 19, 'codctagashas' => 20, 'codctabanhas' => 21, 'codctarethas' => 22, 'codctabenhas' => 23, 'codctaarthas' => 24, 'codctapageje' => 25, 'codctaingdevn' => 26, 'codctaingdev' => 27, 'diradm' => 28, 'dirfin' => 29, 'dirper' => 30, 'dirgen' => 31, 'anapre' => 32, 'anaper' => 33, 'anaadm' => 34, 'edoemp' => 35, 'encabezado' => 36, 'cooeje' => 37, 'partidaiva' => 38, 'codempfonava' => 39, 'numlot' => 40, 'codcat' => 41, 'nomrec' => 42, 'nomvicrecaca' => 43, 'nomvicrecadm' => 44, 'nomsec' => 45, 'id' => 46, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, )
 	);
 
 	
@@ -302,6 +314,14 @@ abstract class BaseEmpresaPeer {
 		$criteria->addSelectColumn(EmpresaPeer::NUMLOT);
 
 		$criteria->addSelectColumn(EmpresaPeer::CODCAT);
+
+		$criteria->addSelectColumn(EmpresaPeer::NOMREC);
+
+		$criteria->addSelectColumn(EmpresaPeer::NOMVICRECACA);
+
+		$criteria->addSelectColumn(EmpresaPeer::NOMVICRECADM);
+
+		$criteria->addSelectColumn(EmpresaPeer::NOMSEC);
 
 		$criteria->addSelectColumn(EmpresaPeer::ID);
 

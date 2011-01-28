@@ -112,7 +112,7 @@ function actualizo_cod_presupuestario(e,id)
 
    if (!validarnumero(id))
    {
-    alert('Monto Inválido');
+    alert('Monto Invï¿½lido');
     $(id).value="0,00";
    }
 
@@ -182,7 +182,7 @@ function Totalmenosdescuento(e,id)
 
    if (!validarnumero(id))
    {
-      alert('Monto Inválido');
+      alert('Monto Invï¿½lido');
       $(id).value="0,00";
    }
 
@@ -584,6 +584,7 @@ function Totalrecargo(e,id)
     var costo=name+"_"+fil+"_"+colcos;
     var partida=name+"_"+fil+"_"+colpar;
     var unires=name+"_"+fil+"_"+colunres;
+    var catunires="popup_a_"+fil+"_"+colunres;
     var unidadres=$('casolart_unires').value;
     var cod=$(id).value;
 
@@ -591,7 +592,7 @@ function Totalrecargo(e,id)
     {
       if ($(id).value!="")
       {
-    new Ajax.Request(getUrlModulo()+'ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&cajtexmos='+descripcion+'&cajtexcom='+id+'&unidad='+unidad+'&costo='+costo+'&unires='+unires+'&valuni='+unidadres+'&partida='+partida+'&codigo='+cod})
+    new Ajax.Request(getUrlModulo()+'ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&cajtexmos='+descripcion+'&cajtexcom='+id+'&unidad='+unidad+'&costo='+costo+'&unires='+unires+'&valuni='+unidadres+'&partida='+partida+'&catunires='+catunires+'&codigo='+cod})
     }
     }
  }

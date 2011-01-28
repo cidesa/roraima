@@ -786,12 +786,20 @@ $this->Bitacora('Guardo');
         $col5->setHTML('type="text" size=12 readonly=true');
         $col5->setNombreCampo('Monord');
 
+        $col6 = new Columna('Compromisos Asociados');
+        $col6->setTipo(Columna::TEXTO);
+        $col6->setAlineacionObjeto(Columna::CENTRO);
+        $col6->setAlineacionContenido(Columna::CENTRO);
+        $col6->setNombreCampo('comaso');
+        $col6->setHTML('type="text" size="25" readonly=true');
+
         // Se guardan las columnas en el objetos de opciones
         $opciones->addColumna($col1);
         $opciones->addColumna($col2);
         $opciones->addColumna($col3);
         $opciones->addColumna($col4);
         $opciones->addColumna($col5);
+        $opciones->addColumna($col6);
       // Ee genera el arreglo de opciones necesario para generar el grid
         $this->obj = $opciones->getConfig($obj);
 

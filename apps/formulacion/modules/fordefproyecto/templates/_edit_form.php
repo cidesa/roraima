@@ -956,7 +956,7 @@
 </fieldset>
 
 <fieldset>
-<legend><? echo __('Agencia del Decisor')?></legend>
+<legend><? echo __('Agenda del Decisor')?></legend>
 <div class="form-row">
 
 <table>

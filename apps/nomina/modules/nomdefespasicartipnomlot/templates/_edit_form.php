@@ -80,6 +80,8 @@ function verificar_codigo_repetido(e,id)
      var col=parseInt(i[2]);
      i=i[1];
 
+     if ($(id).value!="")
+     {
     var coldes=col+1;
     var nombre=name+"_"+fil+"_"+coldes;
      contador_repetido=0;
@@ -108,5 +110,6 @@ function verificar_codigo_repetido(e,id)
        i=0;
        f=0;
   	 }
+     }
 }
 </script>

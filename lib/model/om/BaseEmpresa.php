@@ -177,6 +177,22 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 
 
 	
+	protected $nomrec;
+
+
+	
+	protected $nomvicrecaca;
+
+
+	
+	protected $nomvicrecadm;
+
+
+	
+	protected $nomsec;
+
+
+	
 	protected $id;
 
 	
@@ -477,6 +493,34 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
   {
 
     return trim($this->codcat);
+
+  }
+  
+  public function getNomrec()
+  {
+
+    return trim($this->nomrec);
+
+  }
+  
+  public function getNomvicrecaca()
+  {
+
+    return trim($this->nomvicrecaca);
+
+  }
+  
+  public function getNomvicrecadm()
+  {
+
+    return trim($this->nomvicrecadm);
+
+  }
+  
+  public function getNomsec()
+  {
+
+    return trim($this->nomsec);
 
   }
   
@@ -907,6 +951,46 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNomrec($v)
+	{
+
+    if ($this->nomrec !== $v) {
+        $this->nomrec = $v;
+        $this->modifiedColumns[] = EmpresaPeer::NOMREC;
+      }
+  
+	} 
+	
+	public function setNomvicrecaca($v)
+	{
+
+    if ($this->nomvicrecaca !== $v) {
+        $this->nomvicrecaca = $v;
+        $this->modifiedColumns[] = EmpresaPeer::NOMVICRECACA;
+      }
+  
+	} 
+	
+	public function setNomvicrecadm($v)
+	{
+
+    if ($this->nomvicrecadm !== $v) {
+        $this->nomvicrecadm = $v;
+        $this->modifiedColumns[] = EmpresaPeer::NOMVICRECADM;
+      }
+  
+	} 
+	
+	public function setNomsec($v)
+	{
+
+    if ($this->nomsec !== $v) {
+        $this->nomsec = $v;
+        $this->modifiedColumns[] = EmpresaPeer::NOMSEC;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1005,7 +1089,15 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 
       $this->codcat = $rs->getString($startcol + 41);
 
-      $this->id = $rs->getInt($startcol + 42);
+      $this->nomrec = $rs->getString($startcol + 42);
+
+      $this->nomvicrecaca = $rs->getString($startcol + 43);
+
+      $this->nomvicrecadm = $rs->getString($startcol + 44);
+
+      $this->nomsec = $rs->getString($startcol + 45);
+
+      $this->id = $rs->getInt($startcol + 46);
 
       $this->resetModified();
 
@@ -1013,7 +1105,7 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 43; 
+            return $startcol + 47; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Empresa object", $e);
     }
@@ -1287,6 +1379,18 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 				return $this->getCodcat();
 				break;
 			case 42:
+				return $this->getNomrec();
+				break;
+			case 43:
+				return $this->getNomvicrecaca();
+				break;
+			case 44:
+				return $this->getNomvicrecadm();
+				break;
+			case 45:
+				return $this->getNomsec();
+				break;
+			case 46:
 				return $this->getId();
 				break;
 			default:
@@ -1341,7 +1445,11 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 			$keys[39] => $this->getCodempfonava(),
 			$keys[40] => $this->getNumlot(),
 			$keys[41] => $this->getCodcat(),
-			$keys[42] => $this->getId(),
+			$keys[42] => $this->getNomrec(),
+			$keys[43] => $this->getNomvicrecaca(),
+			$keys[44] => $this->getNomvicrecadm(),
+			$keys[45] => $this->getNomsec(),
+			$keys[46] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1484,6 +1592,18 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 				$this->setCodcat($value);
 				break;
 			case 42:
+				$this->setNomrec($value);
+				break;
+			case 43:
+				$this->setNomvicrecaca($value);
+				break;
+			case 44:
+				$this->setNomvicrecadm($value);
+				break;
+			case 45:
+				$this->setNomsec($value);
+				break;
+			case 46:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1535,7 +1655,11 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[39], $arr)) $this->setCodempfonava($arr[$keys[39]]);
 		if (array_key_exists($keys[40], $arr)) $this->setNumlot($arr[$keys[40]]);
 		if (array_key_exists($keys[41], $arr)) $this->setCodcat($arr[$keys[41]]);
-		if (array_key_exists($keys[42], $arr)) $this->setId($arr[$keys[42]]);
+		if (array_key_exists($keys[42], $arr)) $this->setNomrec($arr[$keys[42]]);
+		if (array_key_exists($keys[43], $arr)) $this->setNomvicrecaca($arr[$keys[43]]);
+		if (array_key_exists($keys[44], $arr)) $this->setNomvicrecadm($arr[$keys[44]]);
+		if (array_key_exists($keys[45], $arr)) $this->setNomsec($arr[$keys[45]]);
+		if (array_key_exists($keys[46], $arr)) $this->setId($arr[$keys[46]]);
 	}
 
 	
@@ -1585,6 +1709,10 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(EmpresaPeer::CODEMPFONAVA)) $criteria->add(EmpresaPeer::CODEMPFONAVA, $this->codempfonava);
 		if ($this->isColumnModified(EmpresaPeer::NUMLOT)) $criteria->add(EmpresaPeer::NUMLOT, $this->numlot);
 		if ($this->isColumnModified(EmpresaPeer::CODCAT)) $criteria->add(EmpresaPeer::CODCAT, $this->codcat);
+		if ($this->isColumnModified(EmpresaPeer::NOMREC)) $criteria->add(EmpresaPeer::NOMREC, $this->nomrec);
+		if ($this->isColumnModified(EmpresaPeer::NOMVICRECACA)) $criteria->add(EmpresaPeer::NOMVICRECACA, $this->nomvicrecaca);
+		if ($this->isColumnModified(EmpresaPeer::NOMVICRECADM)) $criteria->add(EmpresaPeer::NOMVICRECADM, $this->nomvicrecadm);
+		if ($this->isColumnModified(EmpresaPeer::NOMSEC)) $criteria->add(EmpresaPeer::NOMSEC, $this->nomsec);
 		if ($this->isColumnModified(EmpresaPeer::ID)) $criteria->add(EmpresaPeer::ID, $this->id);
 
 		return $criteria;
@@ -1699,6 +1827,14 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 		$copyObj->setNumlot($this->numlot);
 
 		$copyObj->setCodcat($this->codcat);
+
+		$copyObj->setNomrec($this->nomrec);
+
+		$copyObj->setNomvicrecaca($this->nomvicrecaca);
+
+		$copyObj->setNomvicrecadm($this->nomvicrecadm);
+
+		$copyObj->setNomsec($this->nomsec);
 
 
 		$copyObj->setNew(true);

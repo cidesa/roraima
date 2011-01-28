@@ -504,6 +504,7 @@ class almdespActions extends autoalmdespActions
    */
   protected function saveCadphart($cadphart)
   {
+    $this->coderror=-1;
     if ($cadphart->getId())
     {
       $cadphart->save();
@@ -512,9 +513,9 @@ class almdespActions extends autoalmdespActions
     else //nuevo
     {
   	  $grid2=Herramientas::CargarDatosGrid($this,$this->obj);
-	  Despachos::salvarAlmdesp($cadphart,$grid2);
+	  $this->coderror=Despachos::salvarAlmdesp($cadphart,$grid2);
     }
-    return -1;
+    return $this->coderror;
   }
 
   protected function deleteCadphart($cadphart)

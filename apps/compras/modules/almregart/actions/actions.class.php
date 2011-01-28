@@ -251,10 +251,19 @@ $this->Bitacora('Guardo');
     {
       $this->caregart->setCtapro($caregart['ctapro']);
     }
+    if (isset($caregart['ctatra']))
+    {
+      $this->caregart->setCtatra($caregart['ctatra']);
+    }
+    if (isset($caregart['ctadef']))
+    {
+      $this->caregart->setCtadef($caregart['ctadef']);
+    }
     if (isset($caregart['cosunipri']))
     {
       $this->caregart->setCosunipri($caregart['cosunipri']);
     }
+    $this->caregart->setPerbienes(isset($caregart['perbienes']) ? $caregart['perbienes'] : 0);
     }
 
     /**

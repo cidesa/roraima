@@ -16,6 +16,8 @@ opciones:                  # Opciones generales
 2:       # Columna 2
   titulo:                  Saldo Actual
   tipo:                    m
+  esnumerico:              true
   nombrecampo:             monasi
-  html:                    [readOnly=true size=12]
-  esgrabable:              true
+  html:                    ["readOnly=true size=12"]
+  esgrabable:              true  
+  estotal:                 [true, cpasiini_monasi]

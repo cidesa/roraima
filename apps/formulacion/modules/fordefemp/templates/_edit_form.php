@@ -138,15 +138,12 @@
   </th>
   </tr>
  </table>
- 
-
 
 <br>
 
+<?php $nomuniver=H::getConfApp2('nomuniver', 'formulacion', 'fordefemp');?>
 
-
-<br>
-
+<div id="mostraruno" style="display:none">
   <?php echo label_for('empresa[cleedo]', __($labels['empresa{cleedo}']), 'class="required" style="width: 190px"') ?>
   <div class="content<?php if ($sf_request->hasError('empresa{cleedo}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('empresa{cleedo}')): ?>
@@ -176,6 +173,62 @@
     </div>
 </div>
 
+<div id="mostrardos" style="display:none">
+
+  <?php echo label_for('empresa[nomrec]', __($labels['empresa{nomrec}']), 'class="required" style="width: 190px"') ?>
+  <div class="content<?php if ($sf_request->hasError('empresa{nomrec}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('empresa{nomrec}')): ?>
+    <?php echo form_error('empresa{nomrec}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($empresa, 'getNomrec', array (
+  'size' => 80,
+  'control_name' => 'empresa[nomrec]',
+  'maxlength' => 100,
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+    <br>
+  <?php echo label_for('empresa[nomvicrecaca]', __($labels['empresa{nomvicrecaca}']), 'class="required" style="width: 190px"') ?>
+  <div class="content<?php if ($sf_request->hasError('empresa{nomvicrecaca}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('empresa{nomvicrecaca}')): ?>
+    <?php echo form_error('empresa{nomvicrecaca}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($empresa, 'getNomvicrecaca', array (
+  'size' => 80,
+  'control_name' => 'empresa[nomvicrecaca]',
+  'maxlength' => 100,
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+    <br>
+  <?php echo label_for('empresa[nomvicrecadm]', __($labels['empresa{nomvicrecadm}']), 'class="required" style="width: 190px"') ?>
+  <div class="content<?php if ($sf_request->hasError('empresa{nomvicrecadm}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('empresa{nomvicrecadm}')): ?>
+    <?php echo form_error('empresa{nomvicrecadm}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($empresa, 'getNomvicrecadm', array (
+  'size' => 80,
+  'control_name' => 'empresa[nomvicrecadm]',
+  'maxlength' => 100,
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+    <br>
+  <?php echo label_for('empresa[nomsec]', __($labels['empresa{nomsec}']), 'class="required" style="width: 190px"') ?>
+  <div class="content<?php if ($sf_request->hasError('empresa{nomsec}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('empresa{nomsec}')): ?>
+    <?php echo form_error('empresa{nomsec}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($empresa, 'getNomsec', array (
+  'size' => 80,
+  'control_name' => 'empresa[nomsec]',
+  'maxlength' => 100,
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+</div>
 </fieldset>
 
 <?php include_partial('edit_actions', array('empresa' => $empresa)) ?>
@@ -185,3 +238,11 @@
 <ul class="sf_admin_actions">
 
   </ul>
+
+<script language="JavaScript" type="text/javascript">
+    var nomautori='<?php echo $nomuniver;?>';
+    if (nomautori!='S')
+      $('mostraruno').show();
+    else
+        $('mostrardos').show();
+</script>
