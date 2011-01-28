@@ -23,9 +23,10 @@
                   <td colspan="2"  width="100%" valign="top" background=" /images/borrar_03.jpg" align="right"><img src="/images/borrar_04.jpg" width="341" height="89" /></td>
                 </tr>
                 <tr>
-                  <td rowspan="3" valign="bottom" background="/images/borrar_05.jpg"><span class="Quote Order">Usuario: <?php echo $sf_user->getAttribute('usuario','Sin Autenticar') ?> | Empresa: <?php echo $_SESSION["nomemp"] ?>  <br>
+                  <td rowspan="3" valign="bottom" background="/images/borrar_05.jpg"><span class="Quote Order">Usuario: <?php echo $sf_user->getAttribute('usuario','Sin Autenticar') ?> | Empresa: <?php if(isset($_SESSION["nomemp"])) echo $_SESSION["nomemp"] ?>  <br>
                     M&oacute;dulo: <?php echo $sf_context->getModuleName() ?></span></td>
-          <td colspan="2" valign="middle" background=" /images/borrar_06.jpg" height="22" align="right">
+          <td colspan="2" valign="middle" background=" /images/borrar_06.jpg" height="22" align="right">
+
             <a href="<?php if (SF_ENVIRONMENT=='dev') echo "/".sfConfig::get('app_autenticacion')."_dev.php/principal"; else echo "/".sfConfig::get('app_autenticacion').".php/principal" ?>">[ Men&uacute; Principal ]</a>&nbsp;
 
             <a href= "javascript: var w = window.open('<?php if (SF_ENVIRONMENT=='dev') echo "/".sfConfig::get('app_autenticacion')."_dev.php/ayudas?m=".sfConfig::get('app_this'); else echo "/".sfConfig::get('app_autenticacion').".php/ayudas?m=".sfConfig::get('app_this'); ?>')">[ Ayuda en L&iacute;nea ]</a>&nbsp;
