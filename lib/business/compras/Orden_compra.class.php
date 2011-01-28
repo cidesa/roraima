@@ -1643,6 +1643,7 @@ class Orden_compra
               $caordcom_new->setCoduni($caordcom->getCoduni());
               $caordcom_new->setCodmedcom($caordcom->getCodmedcom());
               $caordcom_new->setCodprocom($caordcom->getCodprocom());
+              $caordcom_new->setNumproc($caordcom->getNumproc());
               $caordcom_new->setCodpai($caordcom->getCodpai());
               $caordcom_new->setCodedo($caordcom->getCodedo());
               $caordcom_new->setCodmun($caordcom->getCodmun());
@@ -1705,6 +1706,7 @@ class Orden_compra
 
 		  $caordcom_mod->setCodmedcom($caordcom->getCodmedcom());
 		  $caordcom_mod->setCodprocom($caordcom->getCodprocom());
+                  $caordcom_mod->setNumproc($caordcom->getNumproc());
 		  $caordcom_mod->setCodpai($caordcom->getCodpai());
 		  $caordcom_mod->setCodedo($caordcom->getCodedo());
 		  $caordcom_mod->setCodmun($caordcom->getCodmun());

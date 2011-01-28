@@ -14,6 +14,7 @@ methods:
    - "cadefart{corsol}"
    - "cadefart{corcot2}"
    - "cadefart{tipodoc}"
+   - "cadefart{codconpag}"
 
 names:
 
@@ -75,6 +76,10 @@ names:
     required:  No
     validators: TipodocValidator
 
+  cadefart{codconpag}:
+    required:  No
+    validators: codconpagValidator
+
 
 StringValidator_forart:
     class: sfStringValidator
@@ -120,3 +125,10 @@ TipodocValidator:
         class:        Cpdoccom
         column:       tipcom
         unique_error: El Tipo de OC Donación debe Existir.
+
+codconpagValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Caconpag
+        column:       codconpag
+        unique_error: La Condición de Pago debe Existir.

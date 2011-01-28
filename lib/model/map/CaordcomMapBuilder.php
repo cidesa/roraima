@@ -138,6 +138,8 @@ class CaordcomMapBuilder {
 
 		$tMap->addColumn('CODCENACO', 'Codcenaco', 'string', CreoleTypes::VARCHAR, false, 4);
 
+		$tMap->addColumn('NUMPROC', 'Numproc', 'string', CreoleTypes::VARCHAR, false, 30);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

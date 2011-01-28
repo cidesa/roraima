@@ -30,6 +30,7 @@ class Caordcom extends BaseCaordcom
     protected $oculsave="";
     protected $manorddon="";
     protected $traemot="";
+    protected $desconpag="";
 
 
     public function getReptipcom()

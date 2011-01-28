@@ -260,6 +260,10 @@ $this->Bitacora('Guardo');
     {
       $this->cadefart->setTipodoc($cadefart['tipodoc']);
     }
+    if (isset($cadefart['codconpag']))
+    {
+      $this->cadefart->setCodconpag($cadefart['codconpag']);
+    }
 
   }
 
@@ -367,6 +371,32 @@ $this->Bitacora('Guardo');
 	      $output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","'.$dato.'",""]]';
   }
 }
+
+     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+     return sfView::HEADER_ONLY;
+   }
+   else    if ($this->getRequestParameter('ajax')=='3')
+   {
+    $output = '[["","",""]';
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $codigo=$this->getRequestParameter('codigo');
+    if ($codigo!="")
+    {
+	    $c= new Criteria();
+	    $c->add(CaconpagPeer::CODCONPAG,$codigo);
+	    $result=CaconpagPeer::doSelectOne($c);
+	    if ($result)
+	    {
+	      $dato=$result->getDesconpag();
+	      $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+	    else
+	    {
+	      $javascript="alert('La CondiciÃ³n de Pago no existe'); $('cadefart_codconpag').value=''; $('cadefart_codconpag').focus();";
+	      $dato="";
+	      $output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+    }
 
      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
      return sfView::HEADER_ONLY;

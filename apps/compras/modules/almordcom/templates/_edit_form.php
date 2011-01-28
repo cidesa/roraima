@@ -766,6 +766,20 @@ echo grid_tag($obj_recargos);
    </th>
   </tr>
  </table>
+<br>
+
+
+<?php echo label_for('caordcom[numproc]', __($labels['caordcom{numproc}']), 'class="required"') ?>
+<div class="content<?php if ($sf_request->hasError('caordcom{numproc}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('caordcom{numproc}')): ?> <?php echo form_error('caordcom{numproc}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+<?php $value = object_input_tag($caordcom, 'getNumproc', array (
+'size' => 30,
+'maxlength'  =>  30,
+'control_name' => 'caordcom[numproc]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
 
 <br>
 

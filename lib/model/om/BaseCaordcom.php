@@ -217,6 +217,10 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 
 
 	
+	protected $numproc;
+
+
+	
 	protected $id;
 
 	
@@ -663,6 +667,13 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
   {
 
     return trim($this->codcenaco);
+
+  }
+  
+  public function getNumproc()
+  {
+
+    return trim($this->numproc);
 
   }
   
@@ -1257,6 +1268,16 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNumproc($v)
+	{
+
+    if ($this->numproc !== $v) {
+        $this->numproc = $v;
+        $this->modifiedColumns[] = CaordcomPeer::NUMPROC;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -1375,7 +1396,9 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 
       $this->codcenaco = $rs->getString($startcol + 51);
 
-      $this->id = $rs->getInt($startcol + 52);
+      $this->numproc = $rs->getString($startcol + 52);
+
+      $this->id = $rs->getInt($startcol + 53);
 
       $this->resetModified();
 
@@ -1383,7 +1406,7 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 53; 
+            return $startcol + 54; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Caordcom object", $e);
     }
@@ -1743,6 +1766,9 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 				return $this->getCodcenaco();
 				break;
 			case 52:
+				return $this->getNumproc();
+				break;
+			case 53:
 				return $this->getId();
 				break;
 			default:
@@ -1807,7 +1833,8 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 			$keys[49] => $this->getMotanu(),
 			$keys[50] => $this->getUsuanu(),
 			$keys[51] => $this->getCodcenaco(),
-			$keys[52] => $this->getId(),
+			$keys[52] => $this->getNumproc(),
+			$keys[53] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1980,6 +2007,9 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 				$this->setCodcenaco($value);
 				break;
 			case 52:
+				$this->setNumproc($value);
+				break;
+			case 53:
 				$this->setId($value);
 				break;
 		} 	}
@@ -2041,7 +2071,8 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[49], $arr)) $this->setMotanu($arr[$keys[49]]);
 		if (array_key_exists($keys[50], $arr)) $this->setUsuanu($arr[$keys[50]]);
 		if (array_key_exists($keys[51], $arr)) $this->setCodcenaco($arr[$keys[51]]);
-		if (array_key_exists($keys[52], $arr)) $this->setId($arr[$keys[52]]);
+		if (array_key_exists($keys[52], $arr)) $this->setNumproc($arr[$keys[52]]);
+		if (array_key_exists($keys[53], $arr)) $this->setId($arr[$keys[53]]);
 	}
 
 	
@@ -2101,6 +2132,7 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaordcomPeer::MOTANU)) $criteria->add(CaordcomPeer::MOTANU, $this->motanu);
 		if ($this->isColumnModified(CaordcomPeer::USUANU)) $criteria->add(CaordcomPeer::USUANU, $this->usuanu);
 		if ($this->isColumnModified(CaordcomPeer::CODCENACO)) $criteria->add(CaordcomPeer::CODCENACO, $this->codcenaco);
+		if ($this->isColumnModified(CaordcomPeer::NUMPROC)) $criteria->add(CaordcomPeer::NUMPROC, $this->numproc);
 		if ($this->isColumnModified(CaordcomPeer::ID)) $criteria->add(CaordcomPeer::ID, $this->id);
 
 		return $criteria;
@@ -2235,6 +2267,8 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 		$copyObj->setUsuanu($this->usuanu);
 
 		$copyObj->setCodcenaco($this->codcenaco);
+
+		$copyObj->setNumproc($this->numproc);
 
 
 		$copyObj->setNew(true);

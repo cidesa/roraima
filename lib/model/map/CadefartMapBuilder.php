@@ -76,7 +76,7 @@ class CadefartMapBuilder {
 
 		$tMap->addColumn('ARTSER', 'Artser', 'string', CreoleTypes::VARCHAR, false, 20);
 
-		$tMap->addColumn('CODALMVEN', 'Codalmven', 'string', CreoleTypes::VARCHAR, false, 6);
+		$tMap->addColumn('CODALMVEN', 'Codalmven', 'string', CreoleTypes::VARCHAR, false, 20);
 
 		$tMap->addColumn('RECART', 'Recart', 'double', CreoleTypes::NUMERIC, false, 8);
 
@@ -129,6 +129,8 @@ class CadefartMapBuilder {
 		$tMap->addColumn('COREXT', 'Corext', 'int', CreoleTypes::INTEGER, false, null);
 
 		$tMap->addColumn('TIPODOC', 'Tipodoc', 'string', CreoleTypes::VARCHAR, false, 4);
+
+		$tMap->addColumn('CODCONPAG', 'Codconpag', 'string', CreoleTypes::VARCHAR, false, 4);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
