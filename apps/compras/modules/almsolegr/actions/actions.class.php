@@ -56,6 +56,15 @@ class almsolegrActions extends autoalmsolegrActions
 			}
 		}
 
+               $valmonmay0= H::getConfApp2('valmonmay0', 'compras', 'almsolegr');
+               if ($valmonmay0=='S')
+               {
+                  if (H::toFloat($this->casolart->getMonreq())==0)
+                  {
+                   $this->codeerror=826;
+                   return false;
+                  }
+               }
 		      $this->configGridDetalle();
 		      $this->configGridRecargo($this->casolart->getReqart());
 		      $this->configGridRazon();
