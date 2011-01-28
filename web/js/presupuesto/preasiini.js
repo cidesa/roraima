@@ -3,15 +3,17 @@ function activaSaldoActual() {
 	var seleccion =  $('cpasiini_asiper').value;
 	i=1;
 
-	if (seleccion=='S') {
+	if (seleccion=='N') {
+                $('cpasiini_monasi').value="0,00";
 		$('cpasiini_monasi').readOnly=true;
 		while ($(idActual)) {
+                        $(idActual).value="0,00";
 			$(idActual).readOnly=false;
 			idActual = "ax_"+i+"_"+'2';
 			i++;
 		}
 	} else {
-		if (seleccion=='N') {
+		if (seleccion=='S') {
 			$('cpasiini_monasi').readOnly=false;
 			while ($(idActual)) {
 				$(idActual).readOnly=true;

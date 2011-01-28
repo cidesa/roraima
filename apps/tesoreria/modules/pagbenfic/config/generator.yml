@@ -26,7 +26,7 @@ generator:
 
     list:
       title:          Beneficiarios
-      display:        [=cedrif, nomben, dirben, telben, tipobene, tipper, nacionalidad]
+      display:        [=cedrif, nomben, dirben, telben, tipobene, tipper, nacionalidad, codcta]
       filters:        [cedrif, nomben]
       sort:           cedrif
       max_per_page:   10

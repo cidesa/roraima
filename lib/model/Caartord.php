@@ -42,6 +42,9 @@ class Caartord extends BaseCaartord
  protected $codigopre="";
  protected $cancost="0,00";
  protected $numlot="";
+ protected $serial="";
+ protected $marca="";
+ protected $modelo="";
 
   public function hydrate(ResultSet $rs, $startcol = 1)
    {

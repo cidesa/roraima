@@ -47,8 +47,8 @@ names:
     required_msg: El Número de Deposito no puede estar en blanco
 
   cireging{numofi}:
-    required:  Yes
-    required_msg: El Número de Oficio no puede estar en blanco
+    required:  NO
+    #required_msg: El Número de Oficio no puede estar en blanco
 
 
 Validator_desing:

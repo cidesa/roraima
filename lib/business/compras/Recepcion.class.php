@@ -24,7 +24,24 @@ class Recepcion
 	 * @return void
 	 */
     public static function salvarAlmrec($recepcion,$grid){
-      self::Grabar_Recepcion($recepcion,$grid);
+     $msj=-1;
+      
+      $gencom=H::getConfApp2('gencom', 'compras', 'almordrec');
+      if ($gencom=='S' && (!$recepcion->getId()))
+      {
+        if (!self::generarasientos($recepcion,$grid,&$arrasientos,&$acumdeb,&$pos,&$msj3))
+           {
+               return $msj3;
+           }else {  
+                self::Grabar_Recepcion($recepcion,$grid);
+                self::Generar_Comprobante_Contable(&$recepcion,$arrasientos,$acumdeb,$pos);
+           }
+      }
+      else {
+          self::Grabar_Recepcion($recepcion,$grid);
+      }        
+
+      return $msj;
     }
 
 /**
@@ -111,6 +128,9 @@ class Recepcion
                                       $detalle->setNumlot($x[$j]->getNumlot());
 				  if (trim($x[$j]->getFecest())!='') $detalle->setFecest($x[$j]->getFecest());
 			  	  if (trim($x[$j]->getCodfal())!='') $detalle->setCodfal($x[$j]->getCodfal());
+                                  if (trim($x[$j]->getSerial())!='') $detalle->setSerial($x[$j]->getSerial());
+                                  if (trim($x[$j]->getMarca())!='') $detalle->setMarca($x[$j]->getMarca());
+                                  if (trim($x[$j]->getModelo())!='') $detalle->setModelo($x[$j]->getModelo());
 				  $detalle->save();
               }
 
@@ -340,7 +360,15 @@ class Recepcion
 		 self::devolverArticulos($recepcion);
 	     self::devolverArticulosOrCom($recepcion);
 	     self::eliminarRecepcionArticulos($recepcion);
+             $gencom=H::getConfApp2('gencom', 'compras', 'almordrec');
+             if ($gencom=='S')
+             {
+                 Herramientas::EliminarRegistro('Contabc1','Numcom',$recepcion->getNumcom());
+                 Herramientas::EliminarRegistro('Contabc','Numcom',$recepcion->getNumcom());
+             }
+
 	     $recepcion->delete();
+
 	     return true;
    	}
    	else
@@ -519,6 +547,148 @@ class Recepcion
              {
              	return true;
              }
+    }
+
+   public static function generarasientos($recepcion,$grid,&$arrasientos,&$acumdeb,&$pos,&$msj3)
+   {
+
+       $arrasientos=array();
+        $pos=0;
+        $msj3=-1;
+
+        $x=$grid[0];
+        $j=0;
+        while ($j<count($x))
+        {
+          $c= new Criteria();
+          $c->add(CaregartPeer::CODART,$x[$j]->getCodart());
+          $regis = CaregartPeer::doSelectOne($c);
+          if ($regis)
+          {
+            if($regis->getCodcta()!='')
+            {
+              $cuenta=$regis->getCodcta();
+            }else {$cuenta='';}
+
+            $b= new Criteria();
+            $b->add(ContabbPeer::CODCTA,$cuenta);
+            $regis2 = ContabbPeer::doSelectOne($b);
+            if ($regis2)
+            {
+                if (!Factura::buscarAsientos($cuenta,'D',$x[$j]->getMontot(),&$arrasientos,&$pos))
+                {
+                  Factura::guardarAsientos($cuenta,$regis2->getDescta(),'D',$x[$j]->getMontot(),&$arrasientos,&$pos);
+                }
+            }
+            else{
+            	$msj3=210;
+      	        return false;
+            }
+
+            if($regis->getCtatra()!='')
+            {
+              $cuenta2=$regis->getCtatra();
+            }else {$cuenta2='';}
+
+            $b= new Criteria();
+            $b->add(ContabbPeer::CODCTA,$cuenta2);
+            $regis2 = ContabbPeer::doSelectOne($b);
+            if ($regis2)
+            {
+                if (!Factura::buscarAsientos($cuenta2,'C',$x[$j]->getMontot(),&$arrasientos,&$pos))
+                {
+                  Factura::guardarAsientos($cuenta2,$regis2->getDescta(),'C',$x[$j]->getMontot(),&$arrasientos,&$pos);
+                }
+            }
+            else{
+            	$msj3=211;
+      	        return false;
+            }
+          }
+          $j++;
+        }
+
+        $i=0;
+          $acumdeb=0;
+          $acumcre=0;
+          while ($i<=($pos-1))
+          {
+                if ($arrasientos[$i]["2"]!="")
+                {
+                  if ($arrasientos[$i]["2"]=='D')
+                  {
+                      $acumdeb= $acumdeb + $arrasientos[$i]["3"];
+                  }
+                  else
+                  {
+                        $acumcre= $acumcre + $arrasientos[$i]["3"];
+                  }
+                }
+                $i++;
+          }
+          if (H::toFloat($acumdeb)!=H::toFloat($acumcre))
+          {
+             $msj3=519;
+              return false;
+          }
+          
+       return true;
+   }
+
+    public static function Generar_Comprobante_Contable(&$recepcion,$arrasientos,$acumdeb,$pos)
+    {
+        $reftra="R".substr($recepcion->getRcpart(),2,7);
+        $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+        if ($confcorcom=='N')
+        {
+          $numerocomprob= $reftra;
+        }else $numerocomprob= OrdendePago::Buscar_Correlativo();
+
+
+        $contabc = new Contabc();
+        $contabc->setNumcom($numerocomprob);
+        $contabc->setReftra($reftra);
+        $contabc->setFeccom($recepcion->getFecrcp());
+        $contabc->setDescom("RECEP. S/FACT. ".$recepcion->getDesrcp());
+        $contabc->setStacom('D');
+        $contabc->setTipcom('ART');
+        $contabc->setMoncom($recepcion->getMonrcp());
+        $contabc->save();
+        
+        if ($pos!=0)
+        {
+          $i=0;
+          while ($i<=($pos-1))
+          {
+                if ($arrasientos[$i]["2"]!="")
+                {
+                  $contabc1= new Contabc1();
+                  $contabc1->setNumcom($numerocomprob);
+                  $contabc1->setFeccom($recepcion->getFecrcp());
+                  $contabc1->setCodcta($arrasientos[$i]["0"]);
+                  $numasi= $i +1;
+                  $contabc1->setNumasi($numasi);
+                  $contabc1->setRefasi($reftra);
+                  $contabc1->setDesasi($arrasientos[$i]["1"]);
+                  if ($arrasientos[$i]["2"]=='D')
+                  {
+                        $contabc1->setDebcre('D');
+                        $contabc1->setMonasi($arrasientos[$i]["3"]);
+                  }
+                  else
+                  {
+                        $contabc1->setDebcre('C');
+                        $contabc1->setMonasi($arrasientos[$i]["3"]);
+                  }
+                  $contabc1->save();
+                }
+                $i++;
+          }
+          
+          $recepcion->setNumcom($numerocomprob);  //actualizo el numero de comprobante en la recepcion
+          $recepcion->save();
+        }
+    return true;
     }
 }
 ?>

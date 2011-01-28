@@ -1934,6 +1934,23 @@ class Orden_compra
           $caartord_new->setCantot(str_replace("'","",$grid_detalle[$i][$campo_col8]));
           $caartord_new->setPreart(str_replace("'","",$grid_detalle[$i][$campo_col9]));
           $result=array();
+          $actcosart=H::getConfApp2('actcosart', 'compras', 'almordcom');
+        if ($actcosart=='S')
+        {
+          $c = new Criteria();
+          $c->add(CaregartPeer::CODART,$grid_detalle[$i]['codart']);
+          $arti = CaregartPeer::doSelectOne($c);
+          if ($arti)
+          {
+              $precio=H::toFloat(str_replace("'","",$grid_detalle[$i][$campo_col9]));
+              if ($arti->getCosult()<$precio)
+              {
+                  $arti->setCosult($precio);
+                  $arti->save();
+              }
+           }
+        }else {
+
           $sql = "select preart from caregart where codart='".str_replace("'","",$grid_detalle[$i]['codart'])."'";
           if (Herramientas::BuscarDatos($sql,&$result))
           {
@@ -1943,6 +1960,7 @@ class Orden_compra
                   Herramientas::insertarRegistros($sql);
             }
           }
+        }
           $caartord_new->setDtoart(str_replace("'","",$grid_detalle[$i][$campo_col10]));
           $caartord_new->setRgoart(str_replace("'","",$grid_detalle[$i][$campo_col11]));
           $caartord_new->setCodrgo($codrgo);
@@ -1966,6 +1984,7 @@ class Orden_compra
               $caartsol2->save();
             }
         }
+
         $i++;
     }
       if ($codconpag!='')
@@ -3470,8 +3489,6 @@ class Orden_compra
 
 
   }
-
-
 
 
 }// fin

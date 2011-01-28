@@ -14,20 +14,23 @@
 	  for(i=0;i<totfil;i++)
 	  {
             if ($('ax_'+i+'_4').checked==true) {
-                celda = $('ax_'+i+'_3').value;
-		celda = celda.replace('.','');
-		celda = celda.replace(',','.');
+                var celda = toFloat('ax_'+i+'_3');
+		//celda = celda.replace('.','');
+		//celda = celda.replace(',','.');
         
 		if(h==1)
 		{
-			val = val.replace('.','');
-			val = val.replace(',','.');	
-			$('ax_'+i+'_3').value=number_format(parseFloat(celda) + parseFloat(val),2,',','.');	
+			//val = val.replace('.','');
+			//val = val.replace(',','.');
+                        var calculo= celda + toFloat2(val);
+			$('ax_'+i+'_3').value=number_format(calculo,2,',','.');
 		}else
 		{
 			if(parseInt(val))
 			{
-				$('ax_'+i+'_3').value=number_format(parseFloat(celda)+((parseFloat(celda)*parseFloat(val))/100),2,',','.');
+                            var valor=toFloat2(val);
+                            var calculo= celda + ((celda*valor)/100);
+				$('ax_'+i+'_3').value=number_format(calculo,2,',','.');
 			}				
 			else
 			    break;	

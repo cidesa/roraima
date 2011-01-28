@@ -111,6 +111,22 @@ $this->Bitacora('Guardo');
     {
       $this->empresa->setDirpre($empresa['dirpre']);
     }
+    if (isset($empresa['nomrec']))
+    {
+      $this->empresa->setNomrec($empresa['nomrec']);
+    }
+    if (isset($empresa['nomvicrecaca']))
+    {
+      $this->empresa->setNomvicrecaca($empresa['nomvicrecaca']);
+    }
+    if (isset($empresa['nomvicrecadm']))
+    {
+      $this->empresa->setNomvicrecadm($empresa['nomvicrecadm']);
+    }
+    if (isset($empresa['nomsec']))
+    {
+      $this->empresa->setNomsec($empresa['nomsec']);
+    }
   }
 	
 }

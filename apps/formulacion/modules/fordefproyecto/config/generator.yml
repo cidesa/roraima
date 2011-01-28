@@ -42,7 +42,7 @@ generator:
       codobjnvaeta:   { name: Objetivo Estratégico Nueva Etapa}
       codsec:      { name: Sector }
       codsub:      { name: Sub Sector}
-      indsitact:   { name: Indicacodor de la Gestión}
+      indsitact:   { name: Indicador de la Situación Actual}
       fecultdat:  { name: Fecha Ultima Data}
       sitobjdes:  { name: Situacíon Objetivo Deseada}
       forind:     { name: Fórmula del Indicador}

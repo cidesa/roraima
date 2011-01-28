@@ -455,6 +455,24 @@ class Opordpag extends BaseOpordpag
   	return $this->limbaseret;
   }
 
+        public function getComaso()
+	{
+	  $referencias="";
+	  $sql="select distinct(refere) as refere from cpimpcau where refcau='".self::getNumord()."'";
+	  if (Herramientas::BuscarDatos($sql,&$result))
+	  {
+            $i=0;
+            foreach ($result as $ref)
+            {
+             if ($i==0)
+                 $referencias=$ref["refere"];
+             else
+                 $referencias=$referencias.'_'.$ref["refere"];
+             $i++;
+            }
+	  }
+      return $referencias;
+	}
 
   public function getNumfilas()
   {

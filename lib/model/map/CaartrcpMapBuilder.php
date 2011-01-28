@@ -60,13 +60,17 @@ class CaartrcpMapBuilder {
 
 		$tMap->addColumn('FECEST', 'Fecest', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('SERIAL', 'Serial', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('SERIAL', 'Serial', 'string', CreoleTypes::VARCHAR, false, 20);
 
 		$tMap->addColumn('CODALM', 'Codalm', 'string', CreoleTypes::VARCHAR, false, 20);
 
 		$tMap->addColumn('CODUBI', 'Codubi', 'string', CreoleTypes::VARCHAR, false, 20);
 
 		$tMap->addColumn('NUMLOT', 'Numlot', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('MARCA', 'Marca', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('MODELO', 'Modelo', 'string', CreoleTypes::VARCHAR, false, 20);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

@@ -1003,6 +1003,17 @@ public static function buscar_comprobante($cireging,$accion,$fecanu){
     $cireging->setStaing(H::iif(($cireging->getStaing()==''),'A',$cireging->getStaing()));
     $previsto = true;
     $graboing = self::salvarImping($cireging, $grid, $previsto);   //Graba el Grid
+    $esta=H::getX_vacio('rifcon','ciconrep','nomcom',$cireging->getRifcon());
+    if ($esta=='')
+    {
+        $ciconrep= new Ciconrep();
+        $ciconrep->setRifcon($cireging->getRifcon());
+        $ciconrep->setNomcon($cireging->getNomcon());
+        $ciconrep->setNaccon('V');
+        $ciconrep->setTipcon('J');
+        $ciconrep->setRepcon('C');
+        $ciconrep->save();
+    }
 
     if (!$cireging->getId()){ //Nuevo
       if (!$previsto)   //Si es falso

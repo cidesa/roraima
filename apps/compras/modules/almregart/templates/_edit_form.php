@@ -379,6 +379,55 @@
 </div></fieldset></th>
    </tr>
   </table>
+
+<br>
+
+<?php echo label_for('caregart[ctatra]', __($labels['caregart{ctatra}']), 'class="required" Style="width:110px"') ?>
+  <div class="content<?php if ($sf_request->hasError('caregart{ctatra}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caregart{ctatra}')): ?>
+    <?php echo form_error('caregart{ctatra}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+<?php $value = object_input_tag($caregart, 'getCtatra', array (
+  'size' => 32,
+  'maxlength' => $longcont,
+  'control_name' => 'caregart[ctatra]',
+  'onBlur' => "javascript:cadena=rayitas(this.value);document.getElementById('caregart_ctatra').value=cadena; var aux=$('caregart_ctatra').value; aux2=aux.split('-'); if (aux2[0]=='' || $('caregart_ctatra').value=='undefined'){ $('caregart_ctatra').value='';}",
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaracontabilidad')",
+)); echo $value ? $value : '&nbsp;' ?>
+
+  <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_Almregart/clase/Contabb/frame/sf_admin_edit_form/campo1/codcta/obj1/caregart_ctatra','','','botoncat')?>
+    </div>
+
+<br>
+  <?php echo label_for('caregart[ctadef]', __($labels['caregart{ctadef}']), 'class="required" Style="width:110px"') ?>
+  <div class="content<?php if ($sf_request->hasError('caregart{ctadef}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caregart{ctadef}')): ?>
+    <?php echo form_error('caregart{ctadef}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+<?php $value = object_input_tag($caregart, 'getCtadef', array (
+  'size' => 32,
+  'maxlength' => $longcont,
+  'control_name' => 'caregart[ctadef]',
+  'onBlur' => "javascript:cadena=rayitas(this.value);document.getElementById('caregart_ctadef').value=cadena; var aux=$('caregart_ctadef').value; aux2=aux.split('-'); if (aux2[0]=='' || $('caregart_ctadef').value=='undefined'){ $('caregart_ctadef').value='';}",
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaracontabilidad')",
+)); echo $value ? $value : '&nbsp;' ?>
+
+  <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_Almregart/clase/Contabb/frame/sf_admin_edit_form/campo1/codcta/obj1/caregart_ctadef','','','botoncat')?>
+    </div>
+
+    <br>
+  <?php echo label_for('caregart[perbienes]', __($labels['caregart{perbienes}']), 'class="required" Style="width:110px"') ?>
+  <div class="content<?php if ($sf_request->hasError('caregart{perbienes}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caregart{perbienes}')): ?>
+    <?php echo form_error('caregart{perbienes}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_checkbox_tag($caregart, 'getPerbienes', array (
+  'control_name' => 'caregart[perbienes]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
     </div>
 </fieldset>
 

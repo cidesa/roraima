@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "citipper{codtipper}"
+   - "citipper{destipper}"
+
+names:
+  citipper{codtipper}:
+    required:  Yes
+    required_msg: El cÃ³digo no puede estar en Blanco
+    validators: Validator_codtipper
+
+  citipper{destipper}:
+    required:  Yes
+    required_msg: La descripciÃ³n no puede estar en Blanco
+    validators: Validator_destipper
+
+Validator_codtipper:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Citipper
+        column:       codtipper
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_destipper:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripciÃ³n no puede tener menos de 2 caracteres
+        max:       250
+        min_error: La descripciÃ³n no puede tener mas de 250 caracteres

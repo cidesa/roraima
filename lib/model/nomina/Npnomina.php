@@ -18,6 +18,19 @@ class Npnomina extends BaseNpnomina
   protected $objcalculo=array();
   protected $objconceptos=array();
   protected $obj=array();
+  protected $especial="";
+  protected $codcon="";
+
+  public function afterHydrate()
+  {
+        $c = new Criteria();
+        $c->add(NpcestaticketsPeer::CODNOM,self::getCodnom());
+        $c->addJoin(NpdefcptPeer::CODCON,NpcestaticketsPeer::CODCON);
+        $codcon = NpdefcptPeer::doSelectone($c);
+        if ($codcon) {
+          $this->codcon=$codcon->getCodcon();
+        }
+  }
 
 
   public function getProfec_()
@@ -99,7 +112,7 @@ class Npnomina extends BaseNpnomina
 
   }
 
-    public function getCodcon()
+    /*public function getCodcon()
     {
   	    $c = new Criteria();
   	    $c->add(NpcestaticketsPeer::CODNOM,self::getCodnom());
@@ -109,7 +122,7 @@ class Npnomina extends BaseNpnomina
 	  	  return $codcon->getCodcon();
 	    else
 	      return ' ';
-    }
+    }*/
 
     public function getNomcon()
     {

@@ -24,4 +24,5 @@ generator:
       actions:
         _list:        ~
         _save:        ~
+        _create:        ~
         _delete:      ~

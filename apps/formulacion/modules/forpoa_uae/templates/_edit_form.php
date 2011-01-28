@@ -101,7 +101,7 @@
      array('use_style' => 'true')
   )
   ?>
-  <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Fordefaccesp_forpoa_uae/clase/fordefaccesp/frame/sf_admin_edit_form/obj1/forencpryaccespmet_codaccesp/obj2/forencpryaccespmet_desaccesp/campo1/codaccesp/campo2/desaccesp/param1/'+$('forencpryaccespmet_codpro').value+'")?></th>
+  <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Fordefaccesp_Forpoa/clase/fordefaccesp/frame/sf_admin_edit_form/obj1/forencpryaccespmet_codaccesp/obj2/forencpryaccespmet_desaccesp/campo1/codaccesp/campo2/desaccesp/param1/'+$('forencpryaccespmet_codpro').value+'")?></th>
     </div>
 
 </th>
@@ -125,7 +125,7 @@
 
  <?php echo input_auto_complete_tag('forencpryaccespmet[codmet]', $forencpryaccespmet->getCodmet(),
     'forpoa_uae/autocomplete?ajax=3', array('autocomplete' => 'off', 'onBlur'=> remote_function(array(
-      'update' => 'grid',
+      //'update' => 'grid',
       'script'   => true,
       'url'      => 'forpoa_uae/ajax',
       'complete' => 'AjaxJSON(request, json)',
@@ -156,7 +156,7 @@
         )),
   */
   ?>
-  <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Fordefpryaccmet_forpoa_uae/clase/fordefpryaccmet/frame/sf_admin_edit_form/obj1/forencpryaccespmet_codmet/obj2/forencpryaccespmet_desmet/campo1/codmet/campo2/desmet/param1/'+$('forencpryaccespmet_codpro').value+'/param2/'+$('forencpryaccespmet_codaccesp').value+'")?>
+  <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Fordefpryaccmet_Forpoa/clase/fordefpryaccmet/frame/sf_admin_edit_form/obj1/forencpryaccespmet_codmet/obj2/forencpryaccespmet_desmet/campo1/codmet/campo2/desmet/param1/'+$('forencpryaccespmet_codpro').value+'/param2/'+$('forencpryaccespmet_codaccesp').value+'")?>
   </th>
     </div>
 </th>

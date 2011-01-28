@@ -261,6 +261,12 @@ class almsolegrActions extends autoalmsolegrActions
       }
     }
 
+  /**
+   * Función para manejar la captura de errores del negocio, tanto que se
+   * produzcan por algún validator y por un valor false retornado por el validateEdit
+   * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
+   *
+   */
   public function handleErrorEdit()
     {
       $this->preExecute();
@@ -338,6 +344,17 @@ class almsolegrActions extends autoalmsolegrActions
       return sfView::SUCCESS;
     }
 
+    /**
+   * Función para manejar el salvado del formulario.
+   * cabe destacar que en las versiones nuevas del formulario (cidesaPropel)
+   * llama internamente a la función $this->saving
+   * Esta función saving siempre debe retornar un valor >=-1.
+   * En esta funcción se debe realizar el proceso de guardado de informacion
+   * del negocio en la base de datos. Este proceso debe ser realizado llamado
+   * a funciones de las clases del negocio que se encuentran en lib/bussines
+   * todos los procesos de guardado deben estar en la clases del negocio (lib/bussines/"modulo")
+   *
+   */
     protected function saveCasolart($casolart)
     {
       if (($casolart->getId() && $this->getRequestParameter('modifi')=='N'))
@@ -387,6 +404,11 @@ class almsolegrActions extends autoalmsolegrActions
        SolicituddeEgresos::eliminarAlmsolegr($casolart);
     }
 
+    /**
+   * Función principal para procesar la eliminación de registros
+   * en el formulario.
+   *
+   */
     public function executeDelete()
   {
     $this->casolart = CasolartPeer::retrieveByPk($this->getRequestParameter('id'));
@@ -406,6 +428,11 @@ class almsolegrActions extends autoalmsolegrActions
     return $this->redirect('almsolegr/list');
   }
 
+  /**
+   * Actualiza la informacion que viene de la vista
+   * luego de un get/post en el objeto principal del modelo base del formulario.
+   *
+   */
   protected function updateCasolartFromRequest()
     {
       $casolart = $this->getRequestParameter('casolart');
@@ -529,6 +556,12 @@ class almsolegrActions extends autoalmsolegrActions
 
     }
 
+    /**
+   * Función para procesar _todas_ las funciones Ajax del formulario
+   * Cada función esta identificada con el valor de la vista "ajax"
+   * el cual traerá el indice de lo que se quiere procesar.
+   *
+   */
     public function executeAjax()
    {
      $cajtexmos=$this->getRequestParameter('cajtexmos');
@@ -613,7 +646,14 @@ class almsolegrActions extends autoalmsolegrActions
 	        else $valuni=$this->getRequestParameter('valuni');
 
 	        $unires=$this->getRequestParameter('unires');
+                    $catunires=$this->getRequestParameter('catunires');
 	        $costo=$this->getRequestParameter('costo');
+                    $manunicuni=H::getConfApp2('manunicuni', 'compras', 'almsolegr');
+                    if ($manunicuni=='S')
+                    {
+                       $javascript="$('$catunires').hide(); $('$unires').readOnly=true; $('$unires').focus(); $('$costo').focus();";
+                    }
+                    else
 	        $javascript="$('$unires').focus(); $('$costo').focus();";
 	        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$this->getRequestParameter('unidad').'","'.$dato1.'",""],["'.$this->getRequestParameter('costo').'","'.$dato2.'",""],["'.$this->getRequestParameter('partida').'","'.$dato3.'",""],["'.$this->getRequestParameter('unires').'","'.$valuni.'",""],["javascript","'.$javascript.'",""]]';
                   }else {
@@ -760,6 +800,13 @@ class almsolegrActions extends autoalmsolegrActions
       }
     }
 
+    /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
     public function configGridDetalle()
     {
        $c = new Criteria();
@@ -784,6 +831,8 @@ class almsolegrActions extends autoalmsolegrActions
        $opciones->setTitulo('');
        $opciones->setHTMLTotalFilas(' ');
 
+       $naplrecdes=H::getConfApp2('naplrecdes', 'compras', 'almsolegr');
+
        $col1 = new Columna('Marque');
        $col1->setTipo(Columna::CHECK);
        $col1->setNombreCampo('check');
@@ -791,6 +840,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col1->setHTML(' ');
        if ($precom=='' && $this->oculrecnoprc=='S') $col1->setOculta(true);
        $col1->setJScript('onClick="totalmarcadas(this.id)"');
+       if ($naplrecdes=='S') $col1->setOculta(true);
 
        $obj= array('codart' => 2, 'desart' => 3, 'unimed' => 4, 'cosult' => 9, 'codpar' => 13);
        $params= array('param1' => $lonart, 'param2' => "'+$('casolart_tipreq').value+'", 'val2');
@@ -870,16 +920,19 @@ class almsolegrActions extends autoalmsolegrActions
        $col10->setNombreCampo('mondes');
        $col10->setHTML('type="text" size="10"');
        $col10->setJScript('onKeypress="Totalmenosdescuento(event,this.id);"');
+       if ($naplrecdes=='S')  $col10->setOculta(true);
 
        $col11 = clone $col7;
        $col11->setTitulo('Recargo');
        $col11->setNombreCampo('monrgo');
        $col11->setHTML('type="text" size="10" readonly=true');
        if ($precom=='' && $this->oculrecnoprc=='S') $col11->setOculta(true);
+       if ($naplrecdes=='S')  $col11->setOculta(true);
 
-       $col12 = clone $col11;
+       $col12 = clone $col7;
        $col12->setTitulo('Total');
        $col12->setNombreCampo('montot');
+       $col12->setHTML('type="text" size="10" readonly=true');
        $col12->setEsTotal(true,'casolart_monreq');
 
        $paramsq = array('param1' => "'+$(this.id).up().previous(10).descendants()[0].value+'");
@@ -917,6 +970,7 @@ class almsolegrActions extends autoalmsolegrActions
 	   $col16->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
 	   $col16->setJScript('onClick="mostrargridrecargos(this.id)"');
 	   if ($precom=='' && $this->oculrecnoprc=='S') $col16->setOculta(true);
+           if ($naplrecdes=='S')  $col16->setOculta(true);
 
 
 	  $col17 = new Columna('cadena_datos_recargo');
@@ -949,6 +1003,13 @@ class almsolegrActions extends autoalmsolegrActions
 
   }
 
+      /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
       public function configGridDetalleConsulta()
    {
        $c = new Criteria();
@@ -973,6 +1034,8 @@ class almsolegrActions extends autoalmsolegrActions
        $opciones->setTitulo('');
        $opciones->setHTMLTotalFilas(' ');
 
+       $naplrecdes=H::getConfApp2('naplrecdes', 'compras', 'almsolegr');
+
        $col1 = new Columna('Marque');
        $col1->setTipo(Columna::CHECK);
        $col1->setNombreCampo('check');
@@ -980,6 +1043,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col1->setHTML(' ');
 	   if ($precom=='' && $this->oculrecnoprc=='S') $col1->setOculta(true);
        $col1->setJScript('onClick="totalmarcadas(this.id)"');
+       if ($naplrecdes=='S') $col1->setOculta(true);
 
        $col2 = new Columna('Cód. Artículo');
        $col2->setTipo(Columna::TEXTO);
@@ -1049,16 +1113,21 @@ class almsolegrActions extends autoalmsolegrActions
        $col10->setNombreCampo('mondes');
        $col10->setHTML('type="text" size="10" readonly="true"');
        $col10->setJScript('onKeypress="Totalmenosdescuento(event,this.id); recalcularecargos(event,this.id);"');
+       if ($naplrecdes=='S') $col10->setOculta(true);
 
        $col11 = clone $col7;
        $col11->setTitulo('Recargo');
        $col11->setNombreCampo('monrgo');
        $col11->setHTML('type="text" size="10" readonly=true');
        if ($precom=='' && $this->oculrecnoprc=='S') $col11->setOculta(true);
-       $col12 = clone $col11;
+       if ($naplrecdes=='S') $col11->setOculta(true);
+
+       $col12 = clone $col7;
        $col12->setTitulo('Total');
        $col12->setNombreCampo('montot');
+       $col12->setHTML('type="text" size="10" readonly=true');
        $col12->setEsTotal(true,'casolart_monreq');
+
 
        $col13 = new Columna('Codigo Partida');
        $col13->setTipo(Columna::TEXTO);
@@ -1089,6 +1158,7 @@ class almsolegrActions extends autoalmsolegrActions
 	   $col16->setHTML('type="text" size="1" style="border:none" class="imagenalmacen"');
 	   $col16->setJScript('onClick="mostrargridrecargos(this.id)"');
 	   if ($precom=='' && $this->oculrecnoprc=='S') $col16->setOculta(true);
+           if ($naplrecdes=='S') $col16->setOculta(true);
 
 	   $col17 = new Columna('cadena_datos_recargo');
        $col17->setTipo(Columna::TEXTO);
@@ -1120,6 +1190,13 @@ class almsolegrActions extends autoalmsolegrActions
 
   }
 
+    /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
     public function configGridRecargo($reqart="",$codart="",$coduni="")
    {
 	   $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
@@ -1195,6 +1272,13 @@ class almsolegrActions extends autoalmsolegrActions
 
   }
 
+   /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
    public function configGridRecargoConsulta($reqart="",$codart="",$coduni="")
    {
        $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
@@ -1269,6 +1353,13 @@ class almsolegrActions extends autoalmsolegrActions
 
   }
 
+    /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
     public function configGridRazon()
    {
        $c = new Criteria();
@@ -1313,6 +1404,13 @@ class almsolegrActions extends autoalmsolegrActions
   }
 
 
+  /**
+   * Esta función permite definir la configuración del grid de datos
+   * que contiene el formulario. Esta función debe ser llamada
+   * en las acciones, create, edit y handleError para recargar en todo momento
+   * los datos del grid.
+   *
+   */
   public function configGridRazonConsulta()
    {
        $c = new Criteria();

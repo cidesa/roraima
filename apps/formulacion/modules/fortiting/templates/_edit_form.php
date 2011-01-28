@@ -63,6 +63,17 @@ where length(a.codparing)=".$lonpar." and a.codparing not in (select b.codparing
     </div>
 
 <br>
+<?php echo label_for('forparing[asiper]', __($labels['forparing{asiper}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('forparing{asiper}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('forparing{asiper}')): ?>
+    <?php echo form_error('forparing{asiper}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+      
+<?php echo select_tag('forparing[asiper]', options_for_select(Array(''=>'Seleccione..','S'=>'Si','N'=>'No'),$forparing->getAsiper()),array(
+      'onchange' => "javascript: activaSaldoActual()",
+      'onclick' => "javascript: activaSaldoActual()")); ?>
+  </div>
+<br>
 
 <table>
   <tr>
@@ -134,6 +145,45 @@ var id='<?php echo $forparing->getId()?>';
 if (id!="")
 {
   actualizarsaldos();
+}
+
+function activaSaldoActual() {
+	var idActual = 'ax_0_2';
+        var idActual2 = 'ax_0_3';
+	var seleccion =  $('forparing_asiper').value;
+	i=1;
+
+	if (seleccion=='N') {
+                $('forparing_montoing').value="0,00";
+		$('forparing_montoing').readOnly=true;
+		while ($(idActual)) {
+                        $(idActual).value="0,00";
+                        $(idActual2).value="0,00";
+			$(idActual).readOnly=false;
+			idActual = "ax_"+i+"_"+'2';
+                        idActual2 = "ax_"+i+"_"+'3';
+			i++;
+		}
+                distribuirPeriodos();
+	} else {
+		if (seleccion=='S') {
+			$('forparing_montoing').readOnly=false;
+			while ($(idActual)) {
+				$(idActual).readOnly=true;
+				idActual = "ax_"+i+"_"+'2';
+				i++;
+			}
+		} else {
+			if (seleccion=='') {
+				$('forparing_montoing').readOnly=true;
+				while ($(idActual)) {
+					$(idActual).readOnly=true;
+					idActual = "ax_"+i+"_"+'2';
+					i++;
+				}
+			}
+		}
+	}
 }
 </script>
 

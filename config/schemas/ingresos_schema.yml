@@ -786,3 +786,18 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+  citipper:
+    codtipper:
+      type: VARCHAR
+      size: 3
+      required: true
+    destipper:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro

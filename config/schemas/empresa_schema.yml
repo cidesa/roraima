@@ -133,7 +133,25 @@ propel:
       type: VARCHAR
       size: 50
       required: true
+    nomrec:
+      type: VARCHAR
+      size: 100
+      description: Nombre del Rector
+    nomvicrecaca:
+      type: VARCHAR
+      size: 100
+      description: Nombre del Vice-Rector Academico
+    nomvicrecadm:
+      type: VARCHAR
+      size: 100
+      description: Nombre del Vice-Rector Administrativo
+    nomsec:
+      type: VARCHAR
+      size: 100
+      description: Nombre de la Secretaria Encargada
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Ãnico del registro

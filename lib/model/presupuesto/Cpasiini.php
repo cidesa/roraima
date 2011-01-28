@@ -15,10 +15,10 @@
  */
 class Cpasiini extends BaseCpasiini
 {
-	protected $obj = array();
-	protected $monmov = '';
-	protected $nommov= '';
-	protected $pormov= '';
+    protected $obj = array();
+    protected $monmov = '';
+    protected $nommov= '';
+    protected $pormov= '';
     protected $asiper="";
     protected $numper=1;
     protected $mascarapre="";
@@ -26,14 +26,17 @@ class Cpasiini extends BaseCpasiini
     protected $etadef="";
 
     public function AfterHydrate() {
-
+         $cpdefniv=CpdefnivPeer::doSelectOne(new Criteria());
+    	if ($cpdefniv){
+            $this->asiper=$cpdefniv->getAsiper();
+        }
     }
 
     public function getNompre() {
     	return Herramientas::getX('codpre','cpdeftit','nompre',self::getCodpre());
     }
 
-    public function getAsiper() {
+  /*  public function getAsiper() {
     	$cpdefniv=CpdefnivPeer::doSelectOne(new Criteria());
     	if ($cpdefniv){
 		if ($cpdefniv->getAsiper()=='S') {
@@ -45,7 +48,7 @@ class Cpasiini extends BaseCpasiini
     public function setAsiper()
     {
         return $this->asiper;
-    }
+    }*/
 
     public function getNumper() {
     	$cpdefniv=CpdefnivPeer::doSelectOne(new Criteria());

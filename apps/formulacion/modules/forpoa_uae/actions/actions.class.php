@@ -166,9 +166,9 @@ $this->Bitacora('Guardo');
 					$output = '[["' . $cajtexmos . '","'.$dato.'",""],["forencpryaccespmet_canmet","'.$dato2.'",""]]';
 
 				$this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
-				//return sfView :: HEADER_ONLY;
+				return sfView :: HEADER_ONLY;
 
-					if (!empty($dato2))
+					/*if (!empty($dato2))
 					{
 						$valor=Herramientas::getX_vacio(array('CODPRO','CODACCESP','CODMET'),'Forencpryaccespmet','CODPRO',array($this->getRequestParameter('codigo2'),$this->getRequestParameter('codigo3'),$this->getRequestParameter('codigo')));
 						//print $valor;
@@ -181,6 +181,10 @@ $this->Bitacora('Guardo');
 							$this->configGrid();
 						}
 					}
+                                        else{
+							//Nuevo
+							$this->configGrid();
+						}*/
 
 				} else
 					if ($this->getRequestParameter('ajax') == '4') {
@@ -237,8 +241,8 @@ $this->Bitacora('Guardo');
     $c->addAscendingOrderByColumn(FordetpryaccespmetPeer::CODPRE);
     $per = FordetpryaccespmetPeer::doSelect($c);
 
-    $formatouae1=$this->formatouae;
-    $formatouae= str_replace('#','@',$formatouae1);
+    $formatouae1=strlen($this->formatouae);
+    $formatouae= $formatouae1;
 
     $longitudpartidas=$this->longitudpartidas;
     //$longitudpartidas= str_replace('#','@',$longitudpartidas1);
@@ -266,7 +270,7 @@ $this->Bitacora('Guardo');
     $col1->setHTML('type="text" size="15"');
     //$col1->setCatalogo('Fordefcatpre','sf_admin_edit_form','2');
     //columna->setCatalogo($clase,$form,$objs,$metodo,$param);
-    $col1->setCatalogo('Fordefcatpre','sf_admin_edit_form', array('codcat' => 1,'nomcat' => 2), 'Fordefcatpre_forpoa_uae', array('param1' =>$formatouae, 'param2' => $codaccesp));
+    $col1->setCatalogo('Fordefcatpre','sf_admin_edit_form', array('codcat' => 1,'nomcat' => 2), 'Fordefcatpre_forpoa_uae', array('param1' => $formatouae, 'param2' => $codaccesp));
     $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$formatouae1.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
    // $col1->setAjax('forpoa_uae',4,2);
 
@@ -284,7 +288,7 @@ $this->Bitacora('Guardo');
     $col3->setEsGrabable(true);
     $col3->setNombreCampo('Codpar');
     //$col3->setCatalogo('Fordefparegr','sf_admin_edit_form','4');
-    $col3->setCatalogo('Fordefparegr','sf_admin_edit_form', array('CODPAREGR' => 3,'NOMPAREGR' => 4), 'Fordefparegr_forpoa_uae', array('param1' =>$longitudpartidas));
+    $col3->setCatalogo('Fordefparegr','sf_admin_edit_form', array('CODPAREGR' => 3,'NOMPAREGR' => 4), 'Fordefparegr_Forpoa', array('param1' =>$longitudpartidas));
     $col3->setJScript('onBlur="javascript:actualizar_codigo(this.id);" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$formatopartidas.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
    // $col3->setAjax('forpoa_uae',5,4);
 
@@ -346,7 +350,7 @@ $this->Bitacora('Guardo');
     $col9->setAlineacionContenido(Columna::IZQUIERDA);
     $col9->setNombreCampo('Codtip');
     $col9->setHTML('type="text" size="4" maxlength="4" ');
-    $col9->setCatalogo('Fortiptit','sf_admin_edit_form', array('CODTIP' => 9,'DESTIP' => 10), 'Fortiptit_forpoa_uae');
+    $col9->setCatalogo('Fortiptit','sf_admin_edit_form', array('CODTIP' => 9,'DESTIP' => 10), 'Fortiptit_forpoa');
 
 
     $col10 = clone $col7;
@@ -598,6 +602,7 @@ $this->Bitacora('Guardo');
    	    $opciones->setEliminar(false);
 		$opciones->setTabla('Fordisfuefinpryaccmet');
 		$opciones->setFilas(0);
+                $opciones->setName('c');
 		$opciones->setAnchoGrid(850);
 		$opciones->setTitulo('Fuente de Financiamiento');
 		$opciones->setHTMLTotalFilas(' ');
@@ -637,9 +642,8 @@ $this->Bitacora('Guardo');
 		$col4->setEsGrabable(true);
 		$col4->setEsNumerico(true);
 		$col4->setHTML('type="text" size="15"');
-		$col4->setJScript('onKeypress="entermonto(event,this.id),validarmonto(event,this.id)"');
+		$col4->setJScript('onKeypress="entermontootro(event,this.id); validarmonto(event,this.id);"');
 		$col4->setEsTotal(true,'sumatoria');
-		$col4->setHTML('type="text" size="25"');
 
 		// Se guardan las columnas en el objetos de opciones
 		$opciones->addColumna($col1);
@@ -747,7 +751,8 @@ $this->Bitacora('Guardo');
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -854,9 +859,9 @@ $this->Bitacora('Guardo');
 				//public static function autocompleteAjax($fieldjoin, $join, $result, $data, $filtros='', $variables='')
 				//$codacces=trim($this->getRequestParameter('forencpryaccespmet[codaccesp]'));
 				//$codpro=trim($this->getRequestParameter('forencpryaccespmet[codpro]'));
-			} else
+			}
 				if ($this->getRequestParameter('ajax') == '3') {
-					$this->tags = Herramientas :: autocompleteAjax('REQART', 'Fordefpryaccmet', 'reqart', trim($this->getRequestParameter('cacotiza[refsol]')));
+					$this->tags = Herramientas :: autocompleteAjax('CODMET', 'Fordefpryaccmet', 'CODMET', trim($this->getRequestParameter('forencpryaccespmet[codmet]')));
 				}
 	}
 

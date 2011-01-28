@@ -91,7 +91,15 @@ class preasiiniActions extends autopreasiiniActions
                   $reg= CpdeftitPeer::doSelectOne($c);
                   if ($reg)
                   {
+                      $cq= new Criteria();
+                      $cq->add(CpasiiniPeer::CODPRE,$codigo);
+                      $regq= CpasiiniPeer::doSelectOne($cq);
+                      if (!$regq)
+                      {
                   	$dato=$reg->getNompre();
+                      }else {
+                          $javascript="alert_('El C&oacute;digo Presupuestario ya tiene Asignaci&oacute;n Inicial'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
+                      }
                   }else{
                   	$javascript="alert_('El C&oacute;digo Presupuestario no existe'); $('$cajtexcom').value=''; $('$cajtexcom').focus();";
                   }
@@ -108,6 +116,7 @@ class preasiiniActions extends autopreasiiniActions
         }
 
     	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
     }
 
 

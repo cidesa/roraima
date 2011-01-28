@@ -73,4 +73,14 @@ class Tstipmov extends BaseTstipmov
   	return self::getDestip();
   }
 
+  public function getTipmov()
+  {
+  	return self::getCodtip();
+  }
+
+  public function getDestipmov()
+  {
+  	return self::getDestip();
+  }
+
 }

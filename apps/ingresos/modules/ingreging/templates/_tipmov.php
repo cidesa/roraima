@@ -19,8 +19,8 @@ if ($cireging->getId()){
 
 }else{
   echo Catalogo($cireging,1,array(
-  'getprincipal' => 'getCodtip',
-  'getsecundario' => 'getDestip',
+  'getprincipal' => 'getTipmov',
+  'getsecundario' => 'getDestipmov',
   'campoprincipal' => 'tipmov',
   'camposecundario' => 'destipmov',
   'campobase' => 'tstipmov_id'

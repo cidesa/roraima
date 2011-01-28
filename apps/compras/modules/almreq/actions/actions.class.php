@@ -38,6 +38,16 @@ class almreqActions extends autoalmreqActions
 
        $this->configGrid();
        $grid=Herramientas::CargarDatosGrid($this,$this->obj);
+        $gencom=H::getConfApp2('gencom', 'compras', 'almdesp');
+        if ($gencom=='S' && $this->careqart->getId()=="")
+        {
+          if ($this->careqart->getMonreq()==0)
+          {
+            $this->coderror=213;
+            return false;
+          }
+        }
+
   	   if ($this->ValidarDatosVaciosenGrid($grid,&$error))
            {
               $this->coderror=$error;

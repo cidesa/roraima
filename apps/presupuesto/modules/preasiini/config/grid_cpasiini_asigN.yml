@@ -11,12 +11,13 @@ opciones:                  # Opciones generales
   titulo:                  Período
   tipo:                    t
   nombrecampo:             perpre
-  html:                    [readOnly=true size=5]
+  html:                    ["readOnly=true size=5"]
   esgrabable:              true
 2:       # Columna 2
   titulo:                  Saldo Actual
   tipo:                    m
+  esnumerico:              true
   nombrecampo:             monasi
-  html:                    [size=12 ]
+  html:                    ["size=12 onBlur='ValidarMontoGridv2(this)'"]
   esgrabable:              true
   estotal:                 [true, cpasiini_monasi]

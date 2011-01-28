@@ -121,12 +121,27 @@ class Despachos
    */
     public static function salvarAlmdesp($despacho,$grid)
     {
-        self::grabarDespacho($despacho,$grid);
-	    self::grabarDespachoArticulos($despacho,$grid);
-	    if (self::actualizarArticulos($despacho,$grid,&$msj))
-	    {
-	      	self::actualizarArticulosRequision($despacho,$grid);
-	    }
+       $msj=-1;
+        $gencom=H::getConfApp2('gencom', 'compras', 'almdesp');
+        if ($gencom=='S' && (!$despacho->getId()))
+        {
+           if (!self::generarasientos($despacho,$grid,&$arrasientos,&$acumdeb,&$pos,&$msj3))
+           {
+               return $msj3;
+           }else {
+             self::grabarDespacho($despacho,$grid);
+             self::Generar_Comprobante_Contable(&$despacho,$arrasientos,$acumdeb,$pos);
+           }
+        }else {
+            self::grabarDespacho($despacho,$grid);
+        }        
+        self::grabarDespachoArticulos($despacho,$grid);
+        if (self::actualizarArticulos($despacho,$grid,&$msj))
+        {
+            self::actualizarArticulosRequision($despacho,$grid);
+        }         
+
+        return $msj;
     }
 
 /**
@@ -261,7 +276,7 @@ class Despachos
     public static function actualizarArticulos($despacho,$grid,&$msj)
     {
 
-       $msj="";
+       $msj=-1;
        $x=$grid[0];
        $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
        $j=0;
@@ -426,6 +441,12 @@ class Despachos
 		self::devolverArticulos($despacho);
 		self::devolverArticulosRequision($despacho);
 		self::eliminarDespachoArticulos($despacho);
+                $gencom=H::getConfApp2('gencom', 'compras', 'almdesp');
+                if ($gencom=='S')
+                {
+                    Herramientas::EliminarRegistro('Contabc1','Numcom',$despacho->getNumcom());
+                    Herramientas::EliminarRegistro('Contabc','Numcom',$despacho->getNumcom());
+                }
 		$despacho->delete();
    }
 
@@ -753,6 +774,164 @@ class Despachos
      return true;
    }
 
+   public static function generarasientos($despacho,$grid,&$arrasientos,&$acumdeb,&$pos,&$msj3)
+   {
+        $arrasientos=array();
+        $pos=0;
+        $msj3=-1;
+
+        $x=$grid[0];
+        $j=0;
+        while ($j<count($x))
+        {
+
+          $c= new Criteria();
+          $c->add(CaregartPeer::CODART,$x[$j]->getCodart());
+          $regis = CaregartPeer::doSelectOne($c);
+          if ($regis)
+          {
+            $y= new Criteria();
+            $y->add(CaartreqPeer::REQART,$despacho->getReqart());
+            $y->add(CaartreqPeer::CODART,$x[$j]->getCodart());
+            $resi= CaartreqPeer::doSelectOne($y);
+            if ($resi)
+            {
+                $costo=$resi->getMontot()/$resi->getCanreq();
+            }
+            if (!$regis->getPerbienes())
+            {
+                if($regis->getCtadef()!='')
+                {
+                  $cuenta=$regis->getCtadef();
+                }else {$cuenta='';}
+
+                $b= new Criteria();
+                $b->add(ContabbPeer::CODCTA,$cuenta);
+                $regis2 = ContabbPeer::doSelectOne($b);
+                if ($regis2)
+                {                    
+                    $montodes= $x[$j]->getCandes()*$costo;
+                    if (!Factura::buscarAsientos($cuenta,'D',$montodes,&$arrasientos,&$pos))
+                    {
+                      Factura::guardarAsientos($cuenta,$regis2->getDescta(),'D',$montodes,&$arrasientos,&$pos);
+                    }
+                }
+                else{
+                    $msj3=212;
+                    return false;
+                }
+
+                if($regis->getCodcta()!='')
+                {
+                  $cuenta2=$regis->getCodcta();
+                }else {$cuenta2='';}
+
+                $b= new Criteria();
+                $b->add(ContabbPeer::CODCTA,$cuenta2);
+                $regis2 = ContabbPeer::doSelectOne($b);
+                if ($regis2)
+                {
+                    $montodes= $x[$j]->getCandes()*$costo;
+                    if (!Factura::buscarAsientos($cuenta2,'C',$montodes,&$arrasientos,&$pos))
+                    {
+                      Factura::guardarAsientos($cuenta2,$regis2->getDescta(),'C',$montodes,&$arrasientos,&$pos);
+                    }
+                }
+                else{
+                    $msj3=210;
+                    return false;
+                }
+            }
+          }
+          $j++;
+        }
+
+        $i=0;
+          $acumdeb=0;
+          $acumcre=0;
+          while ($i<=($pos-1))
+          {
+                if ($arrasientos[$i]["2"]!="")
+                {
+                  if ($arrasientos[$i]["2"]=='D')
+                  {
+                      $acumdeb= $acumdeb + $arrasientos[$i]["3"];
+                  }
+                  else
+                  {
+                        $acumcre= $acumcre + $arrasientos[$i]["3"];
+                  }
+                }
+                $i++;
+          }
+          if (H::toFloat($acumdeb)!=H::toFloat($acumcre))
+          {
+             $msj3=519;
+              return false;
+          }
+
+      return true;
+   }
+
+    public static function Generar_Comprobante_Contable(&$despacho,$arrasientos,$acumdeb,$pos)
+    {
+       if (count($arrasientos)>0)
+       {
+        $reftra="D".substr($despacho->getDphart(),2,7);
+        $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
+        if ($confcorcom=='N')
+        {
+          $numerocomprob= $reftra;
+        }else $numerocomprob= OrdendePago::Buscar_Correlativo();
+
+            $contabc = new Contabc();
+            $contabc->setNumcom($numerocomprob);
+            $contabc->setReftra($reftra);
+            $contabc->setFeccom($despacho->getFecdph());
+            $contabc->setDescom($despacho->getDesdph());
+            $contabc->setStacom('D');
+            $contabc->setTipcom('ART');
+            $contabc->setMoncom($acumdeb);
+            $contabc->save();
+
+       if ($pos!=0)
+        {
+          $i=0;
+          $acumdeb=0;
+          while ($i<=($pos-1))
+          {
+                if ($arrasientos[$i]["2"]!="")
+                {
+                  $contabc1= new Contabc1();
+                  $contabc1->setNumcom($numerocomprob);
+                  $contabc1->setFeccom($despacho->getFecdph());
+                  $contabc1->setCodcta($arrasientos[$i]["0"]);
+                  $numasi= $i +1;
+                  $contabc1->setNumasi($numasi);
+                  $contabc1->setRefasi($reftra);
+                  $contabc1->setDesasi($arrasientos[$i]["1"]);
+                  if ($arrasientos[$i]["2"]=='D')
+                  {
+                        $contabc1->setDebcre('D');
+                        $contabc1->setMonasi($arrasientos[$i]["3"]);                        
+
+                  }
+                  else
+                  {
+                        $contabc1->setDebcre('C');
+                        $contabc1->setMonasi($arrasientos[$i]["3"]);
+                  }
+                  $contabc1->save();
+                }
+                $i++;
+          }            
+          $despacho->setNumcom($numerocomprob);  //actualizo el numero de comprobante en el despacho
+          $despacho->save();
+        }
+       }
+
+    return true;
+    }
 }
 
 ?>

@@ -91,9 +91,17 @@ class ingregingActions extends autoingregingActions
     {
       $this->cireging->setRifcon($cireging['rifcon']);
     }
+    if (isset($cireging['nomcon']))
+    {
+      $this->cireging->setNomcon($cireging['nomcon']);
+    }
     if (isset($cireging['numcue']))
     {
       $this->cireging->setCtaban($cireging['numcue']);
+    }
+    if (isset($cireging['numcue']))
+    {
+      $this->cireging->setNumcue($cireging['numcue']);
     }
     if (isset($cireging['tipmov']))
     {
@@ -235,8 +243,8 @@ class ingregingActions extends autoingregingActions
     $this->columnas[1][1]->setHTML('size="10" onBlur="event.keyCode=13;return formatoDecimal(event,this.id),valcod(event,this.id)"');
     $this->columnas[1][1]->setEsTotal(true,'cireging_moning');
     $this->columnas[1][3]->setHTML('size="10" onBlur="event.keyCode=13;return formatoDecimal(event,this.id),calculardcto(),calcularneto()"');
-    $this->columnas[1][3]->setEsTotal(true,'cireging_monrec');
-    $this->columnas[1][4]->setEsTotal(true,'cireging_mondes');
+    $this->columnas[1][2]->setEsTotal(true,'cireging_monrec');
+    $this->columnas[1][3]->setEsTotal(true,'cireging_mondes');
     $this->columnas[1][5]->setCatalogo('Citiprub','sf_admin_edit_form',array('destiprub'=>'7','codtiprub'=>'6'),'Ingreging_citiprub');
     $this->columnas[1][5]->setAjax('ingreging',3,7);
 
@@ -307,7 +315,23 @@ class ingregingActions extends autoingregingActions
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
         break;
-
+      case '4':
+        $dato=""; $js="";
+        $c= new Criteria();
+        $c->add(CiconrepPeer::RIFCON,$codigo);
+        $reg= CiconrepPeer::doSelectOne($c);
+        if ($reg)
+        {
+          $dato=$reg->getNomcon();
+        }else {
+            $js="
+             if(confirm('El Contribuyente no esta registrado Desea Registrarlo ?'))
+             {
+               $('cireging_nomcon').readOnly=false;
+             }";
+        }
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$js.'",""]]';
+        break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
     }
@@ -342,6 +366,7 @@ class ingregingActions extends autoingregingActions
     if($this->getRequest()->getMethod() == sfRequest::POST){
 
        $this->cireging  =  $this->getCiregingOrCreate();
+       $this->updateCiregingFromRequest();
        $this->editing();
        $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
 
@@ -686,7 +711,7 @@ class ingregingActions extends autoingregingActions
   }
 
   /**
-   * FunciÃ³n para retornar las etiquetas del formulario
+   * Función para retornar las etiquetas del formulario
    *
    */
   protected function getLabels()

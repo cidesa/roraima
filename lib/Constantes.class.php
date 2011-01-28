@@ -217,7 +217,7 @@ public static function PagoDoble()
   }
 
   public static function ListaGrupo()
-            {return array('D' => 'Disponibilidad Operativa', 'C' => 'Convenios', 'F' => 'Fondos Congelados', 'O' => 'Otros Conceptos');}
+            {return array('D' => 'Disponibilidad Operativa', 'C' => 'Convenios', 'F' => 'Fondos Congelados', 'I' => 'Ingresos', 'O' => 'Otros Conceptos');}
 
   public static function OperacionesBasica()
   {

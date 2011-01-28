@@ -5943,6 +5943,39 @@ public function Catdefcatman_Cattramo($params = '') {
 
 	}
 
+	public function Facotringreg_Rifcon() {
+		$this->c = new Criteria();
+		$this->c->add(FcconrepPeer :: REPCON, 'C');
+		$this->columnas = array (
+			FcconrepPeer :: RIFCON => 'Código',
+			FcconrepPeer :: NOMCON => 'Descripción',
+		);
+	}
+
+	public function Facotringreg_Rifrep() {
+		$this->c = new Criteria();
+		$this->c->add(FcconrepPeer :: REPCON, 'R');
+		$this->columnas = array (
+			FcconrepPeer :: RIFCON => 'Código',
+			FcconrepPeer :: NOMCON => 'Descripción',
+		);
+	}
+
+	public function Facotringreg_Numref($params=array()) {
+		$this->c = new Criteria();
+		$this->c->add(FcsollicPeer :: STALIC, 'V');
+		$this->c->add(FcsollicPeer::NUMLIC,null, Criteria :: ISNOTNULL);
+		$this->c->add(FcsollicPeer :: RIFCON, $params[0]);
+		$this->c->addAscendingOrderByColumn(FcsollicPeer::NOMNEG);
+
+		$this->columnas = array (
+		    FcsollicPeer :: NOMNEG => 'Nombre',
+            FcsollicPeer :: NUMLIC => 'Licencia',
+		    FcsollicPeer :: RIFCON => 'Rif',
+			FcsollicPeer :: DIRPRI => 'Direccion'
+		);
+	}
+
 	public function Fordefcatpre_Codcat($params=array()) {
 		$this->c = new Criteria();
 		$this->sql="length(codcat)='".$params[0]."'";

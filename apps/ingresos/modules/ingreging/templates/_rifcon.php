@@ -3,7 +3,7 @@
 <?php
 if ($cireging->getId()=='')
 {
- echo Catalogo($cireging,0,array(
+ echo Catalogo($cireging,4,array(
   'getprincipal' => 'getRifcon',
   'getsecundario' => 'getNomcon',
   'campoprincipal' => 'rifcon',

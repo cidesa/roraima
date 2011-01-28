@@ -77,6 +77,14 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 
 
 	
+	protected $marca;
+
+
+	
+	protected $modelo;
+
+
+	
 	protected $id;
 
 	
@@ -227,6 +235,20 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
   {
 
     return trim($this->numlot);
+
+  }
+  
+  public function getMarca()
+  {
+
+    return trim($this->marca);
+
+  }
+  
+  public function getModelo()
+  {
+
+    return trim($this->modelo);
 
   }
   
@@ -423,6 +445,26 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setMarca($v)
+	{
+
+    if ($this->marca !== $v) {
+        $this->marca = $v;
+        $this->modifiedColumns[] = CaartrcpPeer::MARCA;
+      }
+  
+	} 
+	
+	public function setModelo($v)
+	{
+
+    if ($this->modelo !== $v) {
+        $this->modelo = $v;
+        $this->modifiedColumns[] = CaartrcpPeer::MODELO;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -471,7 +513,11 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 
       $this->numlot = $rs->getString($startcol + 16);
 
-      $this->id = $rs->getInt($startcol + 17);
+      $this->marca = $rs->getString($startcol + 17);
+
+      $this->modelo = $rs->getString($startcol + 18);
+
+      $this->id = $rs->getInt($startcol + 19);
 
       $this->resetModified();
 
@@ -479,7 +525,7 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 18; 
+            return $startcol + 20; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Caartrcp object", $e);
     }
@@ -695,6 +741,12 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 				return $this->getNumlot();
 				break;
 			case 17:
+				return $this->getMarca();
+				break;
+			case 18:
+				return $this->getModelo();
+				break;
+			case 19:
 				return $this->getId();
 				break;
 			default:
@@ -724,7 +776,9 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 			$keys[14] => $this->getCodalm(),
 			$keys[15] => $this->getCodubi(),
 			$keys[16] => $this->getNumlot(),
-			$keys[17] => $this->getId(),
+			$keys[17] => $this->getMarca(),
+			$keys[18] => $this->getModelo(),
+			$keys[19] => $this->getId(),
 		);
 		return $result;
 	}
@@ -792,6 +846,12 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 				$this->setNumlot($value);
 				break;
 			case 17:
+				$this->setMarca($value);
+				break;
+			case 18:
+				$this->setModelo($value);
+				break;
+			case 19:
 				$this->setId($value);
 				break;
 		} 	}
@@ -818,7 +878,9 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[14], $arr)) $this->setCodalm($arr[$keys[14]]);
 		if (array_key_exists($keys[15], $arr)) $this->setCodubi($arr[$keys[15]]);
 		if (array_key_exists($keys[16], $arr)) $this->setNumlot($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setId($arr[$keys[17]]);
+		if (array_key_exists($keys[17], $arr)) $this->setMarca($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setModelo($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setId($arr[$keys[19]]);
 	}
 
 	
@@ -843,6 +905,8 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaartrcpPeer::CODALM)) $criteria->add(CaartrcpPeer::CODALM, $this->codalm);
 		if ($this->isColumnModified(CaartrcpPeer::CODUBI)) $criteria->add(CaartrcpPeer::CODUBI, $this->codubi);
 		if ($this->isColumnModified(CaartrcpPeer::NUMLOT)) $criteria->add(CaartrcpPeer::NUMLOT, $this->numlot);
+		if ($this->isColumnModified(CaartrcpPeer::MARCA)) $criteria->add(CaartrcpPeer::MARCA, $this->marca);
+		if ($this->isColumnModified(CaartrcpPeer::MODELO)) $criteria->add(CaartrcpPeer::MODELO, $this->modelo);
 		if ($this->isColumnModified(CaartrcpPeer::ID)) $criteria->add(CaartrcpPeer::ID, $this->id);
 
 		return $criteria;
@@ -907,6 +971,10 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 		$copyObj->setCodubi($this->codubi);
 
 		$copyObj->setNumlot($this->numlot);
+
+		$copyObj->setMarca($this->marca);
+
+		$copyObj->setModelo($this->modelo);
 
 
 		$copyObj->setNew(true);

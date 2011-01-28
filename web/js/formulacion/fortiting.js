@@ -29,9 +29,12 @@ function distribuirPeriodos()
     var montocol   = "ax"+"_"+fil+"_2";  //Monto
     var porcentaje = "ax"+"_"+fil+"_3";  //Porcentaje
 
+    if ($('forparing_asiper').value=='S')
+    {
     $(montocol).value = format(MontoPeriodo.toFixed(2),'.',',','.');
     var calculo       = ((MontoPeriodo*100)/monto);
 	$(porcentaje).value=format(calculo.toFixed(2),'.',',','.');
+    }
 
     if (fil < 9){
 	    $(periodo).value= "0"+(fil +1);
@@ -161,6 +164,11 @@ function distribuirPeriodos2()
       var colum=col+1;
       var porcen=name+"_"+fil+"_"+colum;
 
+     if ($('forparing_asiper').value!='S')
+     {
+       $('forparing_montoing').value=$('suma').value;
+     }
+
       str1= $('forparing_montoing').value.toString();
        str1= str1.replace('.','') ;
        str1= str1.replace('.','') ;
@@ -192,6 +200,8 @@ function distribuirPeriodos2()
      str3= str3.replace(',','.');
      var montopor=parseFloat(str3);
 
+
+
 	   var mm = (monto2 * 100 / montosreal);
 	  $(porcen).value = format(mm.toFixed(2),'.',',','.');
 
@@ -219,12 +229,18 @@ function distribuirPeriodos2()
 
     if (total > montosreal)
     {
-    	alert('El Monto del Periodo no puede exceder el Presupuesto de Año');
+    	alert('El Monto del Periodo no puede exceder el Presupuesto de AÃ±o');
 	   	$(porcen).value="0,00";
 	   	$(id).value="0,00";
 	   	actualizarsaldos();
 	   	$(id).focus();
     }
+
+    if ($('forparing_asiper').value!='S')
+    {
+        recalcularporcentaje();
+ }
+
  }
 
 
@@ -309,7 +325,7 @@ function distribuirPeriodos2()
    {
    if (monto4 > monto)
    {
-   	 alert('El Monto del Perï¿½odo no puede exceder el Presupuesto de Año');
+   	 alert('El Monto del Perï¿½odo no puede exceder el Presupuesto de Aï¿½o');
    	 $(id).value="0,00";
    	 $(porcen).value="0,00";
    	 actualizarsaldos();
@@ -439,7 +455,7 @@ function distribuirPeriodos2()
    {
    if (monto4 > monto)
    {
-   	 alert('El Monto del Periodo no puede exceder el Presupuesto de Año');
+   	 alert('El Monto del Periodo no puede exceder el Presupuesto de AÃ±o');
    	 $(id).value="0,00";
    	 $(monto).value="0,00";
    	 actualizarsaldos();
@@ -484,7 +500,7 @@ function distribuirPeriodos2()
   	var total = 0;
 	  var cajatxt2="bx"+"_0_3";       //monto
   	if (monto2 > montosreal){
-  		alert('El Monto del Periodo no puede exceder el Presupuesto de Año'); $(id).value="0,00"; $(id).focus();
+  		alert('El Monto del Periodo no puede exceder el Presupuesto de Aï¿½o'); $(id).value="0,00"; $(id).focus();
 
   	}else{
 	    while ($(cajatxt2))
@@ -509,7 +525,7 @@ function distribuirPeriodos2()
 
 	    if (total > montosreal)
 	    {
-	    	alert('El Monto del Periodo no puede exceder el Presupuesto de Año');
+	    	alert('El Monto del Periodo no puede exceder el Presupuesto de Aï¿½o');
 		   	$(id).value="0,00";
 	//	   	actualizarsaldos();
 		   	$(id).focus();
@@ -519,4 +535,51 @@ function distribuirPeriodos2()
 		}
  }
 
+function recalcularporcentaje()
+{
+  str1= $('forparing_montoing').value.toString();
+  str1= str1.replace('.','');
+  str1= str1.replace('.','');
+  str1= str1.replace('.','');
+  str1= str1.replace('.','');
+  str1= str1.replace('.','');
+  str1= str1.replace('.','');
+  str1= str1.replace(',','.');
+  var monto=parseFloat(str1);
+  //var MontoPeriodo = monto / 12;
+
+  var fil=0;
+  var con=0;
+  while (fil<12)
+  {
+    var montocol   = "ax"+"_"+fil+"_2";  //Monto
+    var porcentaje = "ax"+"_"+fil+"_3";  //Porcentaje
+
+    var num1=toFloat(montocol);
+    if (num1>0)
+    {
+      var mm = (num1 * 100 / monto);
+      $(porcentaje).value = format(mm.toFixed(2),'.',',','.');
+    }
+    fil++;
+  }
+
+
+
+  /*var j=0;
+  while (j<12)
+  {
+    var montocol1   = "ax"+"_"+j+"_2";  //Monto
+
+
+    var num2=toFloat(montocol1);
+    if (num2>0)
+    {
+        var calculo       = ((MontoPeriodo*100)/monto);
+        $(porcentaje).value=format(calculo.toFixed(2),'.',',','.');
+    }
+
+    j++;
+  }*/
+}
 

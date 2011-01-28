@@ -339,6 +339,10 @@ $this->Bitacora('Guardo');
     {
       $this->forparing->setDesfin($forparing['desfin']);
     }
+    if (isset($forparing['asiper']))
+    {
+      $this->forparing->setAsiper($forparing['asiper']);
+    }  
   }
 
     /**
