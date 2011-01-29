@@ -767,7 +767,7 @@ class fafacturActions extends autofafacturActions {
 
 						if ($dato6 != "") {
 							if ($this->getRequestParameter('totaltotarti') != "") {
-								if ($dato6 > $this->getRequestParameter('totaltotarti')) {
+								if (H::Formatonum($dato6) > $this->getRequestParameter('totaltotarti')) {
 									$dato6 = '0,00';
 									$dato7 = $this->getRequestParameter('totaldesc') - H :: tofloat($dato6);
 								} else {
