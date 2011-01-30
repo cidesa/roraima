@@ -120,7 +120,7 @@
     var i=0;
     while (i<fil)
     {
-        var id1="ax"+"_"+i+"_10";
+        var id1="ax"+"_"+i+"_11";
 	      if ($(id1).value!="" && validarnumero(id1))
 	      {
 	         tot=toFloat(id1);
