@@ -1030,7 +1030,7 @@ private $coderror =-1;
 			{
 				if ($tipref == 'P'){
 
-					$codigo=str_pad($this->getRequestParameter('codigo'), 8 , '0','STR_PAD_LEFT');
+					$codigo=str_pad($this->getRequestParameter('codigo'), 8 , '0',STR_PAD_LEFT);
 					$this->configGridDetalle('',$codigo, $tipref);
 
 		            $c = new Criteria();
@@ -1065,7 +1065,7 @@ private $coderror =-1;
 				}
 				else if ($tipref == 'F'){
 
-					$codigo=str_pad($this->getRequestParameter('codigo'), 8 , '0','STR_PAD_LEFT');
+					$codigo=str_pad($this->getRequestParameter('codigo'), 8 , '0',STR_PAD_LEFT);
 					$this->configGridDetalle('',$codigo, $tipref);
 
 		            $c = new Criteria();
