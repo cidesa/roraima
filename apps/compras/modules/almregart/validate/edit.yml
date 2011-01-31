@@ -54,19 +54,19 @@ names:
 
   caregart{exitot}:
     required:  No
-    validators: MontoValidator, MyNumberValidator
+    validators: MontoValidator
 
   caregart{cosult}:
     required:  No
-    validators: MontoValidator, MyNumberValidator
+    validators: MontoValidator
 
   caregart{cospro}:
     required:  No
-    validators: MontoValidator, MyNumberValidator
+    validators: MontoValidator
 
   caregart{invini}:
     required:  No
-    validators: MontoValidator, MyNumberValidator
+    validators: MontoValidator
 
   caregart{fecult}:
     required:  No
