@@ -498,6 +498,7 @@
   function montoMarcados()
   {
     var monto_marcados=0;
+    var totaldesc=0;
     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
 
     var colart=totalregistros2('ax',3,25);
@@ -507,6 +508,7 @@
       var check="ax_"+fil+"_1";
       var precio="ax_"+fil+"_10";
       var precioe="ax_"+fil+"_11";
+      var mondesc="ax_"+fil+"_18";
       var cant="ax_"+fil+"_"+colum;
       if ($(precio)){
       if ($(precio).value!="")
@@ -518,11 +520,13 @@
         var nprecio=toFloat(precioe);
       }
          ncant=toFloat(cant);
+         nmondesc=toFloat(mondesc);
       if ($(check).checked==true)
       {
         if ($(cant).value!="")
         {
           monto_marcados=monto_marcados + (nprecio*ncant);
+          totaldesc=totaldesc +nmondesc;
         }
       }
       }
@@ -531,10 +535,10 @@
 
 	if (monto_marcados>0)
 	{
-	  var totaldesc=0;
-/*	  coddesc="bx_0_1";
+	  /*var totaldesc=0;
+	  coddesc="bx_0_1";
 	  if ($(coddesc).value!="")
-	  {*/
+	  {
 	    var regdesc=totalregistros2('bx',1,10);
 	    if (regdesc>0){
 		var i=0;
@@ -548,7 +552,7 @@
 		  }
 		 i++;
 		}
-	  }
+	  }*/
 
 	  if ($('fafactur_esretencion').value=='N')
 	  {
