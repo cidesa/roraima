@@ -1,0 +1,33 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npjuzgados
+    theme:            cidesaGenerator
+    fields:
+      codjuz:                 { name: Código, params: maxlength=4 size=10 onFocus="if($('id').value!='')$(this.id).readOnly=true" }
+      desjuz:                 { name: Descripción, readonly : true, params: maxlength=100 size=60 }
+      perconjuz:              { name: Persona Contacto, params: maxlength=100 size=60 }
+      carperjuz:              { name: Cargo Persona Contacto, params: maxlength=100 size=60}
+      dirjuz:                 { name: Dirección, type: textarea_tag, params: maxlength=200 cols=58 row=2}
+      teljuz:                 { name: Telefono, params: maxlength=100 size=60}
+    
+    list:
+      title:              Definicion de juzgados
+      display:            [=codjuz, desjuz, perconjuz, teljuz]
+      filters:            [codjuz, desjuz]
+      max_pers:           10
+      sort:               codjuz
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Edicion de Definicion de juzgados
+      display:
+        Datos Juzgados:   [=codjuz, desjuz, perconjuz, carperjuz, dirjuz, teljuz]  
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

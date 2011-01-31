@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fortiptit
+    theme:            default
+    fields:
+      codtip : { name: Código}
+      destip : { name: Nombre}
+    list:
+      title:          Tipos de Créditos Presupuestarios(Funcionamiento - Inversión)
+      filters:        [codtip, destip]
+      display:        [=codtip, destip]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:  codtip
+    edit:
+      title:        Edición de Créditos Presupuestarios(Funcionamiento - Inversión)
+      display:      [=codtip, destip]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,44 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atreclamos
+    theme:            cidesaGenerator
+    fields:
+      atsolici:
+        name:       Nombre
+        params:     size=40
+      atunidades_id:
+        name:       Unidad
+        params:     text_method=getDesuni include_custom=Seleccione... include_blank=false
+      desrec:       { name: Descipción, type: textarea_tag, params: cols=60 rows=2 rich=false }
+      persona:      { name: Dirigido a, params:     size=60 }
+      telefono:     { name: Nro. Contacto, params:     size=40 }
+      _status:      { name: Estado, validate: Vstring_1_50, msj_error: Seleccione un estado del reclamo }
+      respuesta:    { name: Respuesta, type: textarea_tag, params: readonly=true cols=60 rows=2 rich=false, validate: Vstring_1_100, msj_error: Debe insertar la respuesta al reclamo }
+      fechar:       { name: Fecha Registro, type: plain, params: readonly=true }
+      fechaa:       { name: Fecha Atención, type: plain, params: readonly=true }
+
+    list:
+      fields:
+        atsolici:
+          name:       Nombre
+          params:     size=10
+      title:          Reclamos
+      display:        [=atsolici, unidad, status]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [atsolici, atunidades_id]
+      max_per_page:   5
+      sort:           atsolici
+    edit:
+      title:          Edición de Reclamos
+      display:
+        Realizado por:  [atsolici, telefono]
+        Detalle Reclamo: [atunidades_id, persona, desrec ]
+        Estado:          [_status, respuesta, fechar, fechaa ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

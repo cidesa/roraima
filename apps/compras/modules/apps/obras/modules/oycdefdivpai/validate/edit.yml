@@ -1,0 +1,34 @@
+methods:
+  post:
+   - "ocpais{codpai}"
+   - "ocpais{nompai}"
+names:
+  ocpais{codpai}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codpai
+
+  ocpais{nompai}:
+    required:  Yes
+    required_msg: La descripción no puedo estar en Blanco
+    validators: Validator_nompai
+
+Validator_codpai:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Ocpais
+        column:       codpai
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_nompai:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 250 caracteres
+
+
+
+
+

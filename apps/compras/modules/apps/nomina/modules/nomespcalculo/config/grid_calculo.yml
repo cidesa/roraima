@@ -1,0 +1,21 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   npnomina
+  anchogrid:               600
+  ancho:                   550
+  filas:                   0
+  titulo:                  'LAS SIGUIENTES NOMINAS SE ESTAN EJECUTANDO'
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Nómina
+  tipo:                    t
+  nombrecampo:             codnom
+  html:                    [size="7" maxlength="35" readonly=true]
+  esgrabable:              false
+2:       # Columna 2
+  titulo:                  Condición
+  tipo:                    t
+  nombrecampo:             condicion
+  html:                    [size=40 maxlength="35" readonly=true]
+  esgrabable:              false

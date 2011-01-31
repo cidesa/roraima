@@ -1,0 +1,12 @@
+methods:
+  post:
+   - "forcfgrepins{nrofor}"
+   - "forcfgrepins{descripcion}"
+names:
+  forcfgrepins{nrofor}:
+    required:  Yes
+    required_msg: El Código del Reporte no puede estar en Blanco
+
+  forcfgrepins{descripcion}:
+    required:  Yes
+    required_msg: El Nombre del Reporte no puede estar en Blanco

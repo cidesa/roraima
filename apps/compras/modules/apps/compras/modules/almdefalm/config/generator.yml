@@ -1,0 +1,37 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Cadefalm
+    theme:            default
+
+    fields:
+      codalm:      { name : Código }
+      nomalm:      { name : Descripción }
+      codcat:      { name : Cod. Unidad Asociada }
+      codtip:      { name : Tipo }
+      codedo:      { name : Estado }
+      diralm:      { name : Direccion de Localidad }
+      nomcat:      { name : Unidad Asociada }
+      esptoven:    { name : ¿Es Punto de Venta?}
+      codtippv:    { name : Tipo de Punto de Venta}
+
+    list:
+      title:          Almacenes
+      display:        [=codalm, nomalm, codcat, nomcat]
+      filters:		  [codalm, nomalm, codcat]
+      max_per_page:	  10
+      sort:           codalm
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:          Edición de Almacen
+      display:        [codalm, nomalm, codcat, codtip, diralm, codedo, esptoven, codtippv]
+      fields:
+        codalm:       { params : maxlength=6}
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

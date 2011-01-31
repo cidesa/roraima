@@ -1,0 +1,21 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Bnregsem
+    theme:            default
+
+    fields:
+      codact: { name: Código del Activo}
+      dessem: { name: Descripción}     
+      
+    list:
+      title:          Registro de Activos Semovientes
+      filters:        [codact, dessem]
+      display:        [=codact, dessem]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+    edit:
+      title:          Edición Registro de Activos Semovientes
+    

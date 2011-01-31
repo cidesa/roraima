@@ -1,0 +1,39 @@
+opciones:                  # Opciones generales
+  name:                    g
+  eliminar:                true
+  tabla:                   viaregdetgassolvia
+  anchogrid:               450
+  ancho:                   350
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Servicios
+  tipo:                    c
+  nombrecampo:             viaregtipserid
+  esgrabable:              true
+  html:                    [ ]
+#  $this->columnas[1][12]->setHTML('onChange=toAjaxUpdater(obtenerColumnaSiguiente(this.id),3,getUrlModulo()+"ajax",this.value,"",{"objid" : ""+obtenerColumnaSiguiente(this.id) })');
+2:       # Columna 2
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             detgasmon
+  esgrabable:              true
+  html:                    [ ]
+#  estotal:                 [true, 'viaregsolvia_monto']
+
+#  html:                    [ onChange=toAjaxUpdater(obtenerColumnaSiguiente(this.id),3,getUrlModulo()+"ajax",this.value,"",{"moneda" : ""+obtenerColumnaSiguiente(this.id) }) 	]
+       [size="15", readonly=true ]
+#3:       # Columna 3
+#  titulo:                  Total
+#  tipo:                    m
+#  nombrecampo:             detgastot
+#  esgrabable:              true
+#  html:                    [size="15", readonly=true ]
+3:       # Columna 3
+  titulo:                  FilaAfectada
+  tipo:                    t
+  nombrecampo:             filafectada
+  esgrabable:              false
+  oculta:                  true
+  html:                    [ ]

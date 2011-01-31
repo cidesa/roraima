@@ -1,0 +1,53 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Catregper
+    theme:            cidesaGenerator
+    fields:
+      cedrif:         { name: C.I/R.I.F., params: maxlength=15 size= 15, help: Coloque la Cedula o el RIF }
+      fecper:         { name: Fecha Nac/Constitucion, params: date_format='dd/MM/yyyy' size=10 maxlength=10, validate: Vfecha, msj_error: La fecha del Registro, help: Coloque la Fecha de Nacimiento o Constitucion, validate: Vfecha, msj_error: La fecha de aprobación es necesaria }
+      relemp:         { name: Relacion/Instituto, help: Coloque la Relacion con el Instituto}
+      tipper:         { name: Persona, help: Coloque el Tipo de Persona }
+      nacper:         { name: Nacionalidad, help: Coloque la Nacionalidad}
+      prinom:         { name: Primer Nombre, params: maxlength=20 size=20 , help: Coloque Primer Nombre }
+      segnom:         { name: Segundo Nombre, params: maxlength=20 size= 20, help: Coloque Segundo Nombre }
+      priape:         { name: Primer Apellido, params: maxlength=20 size= 20, help: Coloque Primer Apellido}
+      segape:         { name: Segundo Apellido, params: maxlength=20 size= 20, help: Coloque Segundo Apellido}
+      nomper:         { name: Razon Social, params: maxlength=80 size= 20, help: Coloque la Razon Social}
+      #catciu_id:      { name: Localidad, params: include_custom= "Seleccione", help: Coloque la Localidad}
+      catdivgeo_id:    { name: Localidad, params: size=32}
+      catbarurb_id:      { name: Urb/Barrio, help: Coloque la Urbanizacion/Barrio}
+      cattramofro_id:      { name: Av./Call./Vrd., help: Coloque la Av./Call./Vrd.}
+      cattramolat_id:      { name: Av./Call./Vrd. Entre, help: Coloque la Av./Call./Vrd.}
+      cattramolat2_id:     { name: y Av./Call./Vrd., help: Coloque la Av./Call./Vrd.}
+      edicas:              { name: Edif/Casa, params: maxlength=10 size= 10, help: Coloque el Nombre del Edificio Casa o Residencia}
+      pishab:              { name: Piso, params: maxlength=10 size= 3, help: Coloque el Numero de Piso de Edificio Casa o Residencia}
+      numhab:              { name: Numero, params: maxlength=10 size= 3, help: Coloque el Numero del Edificio Casa o Residencia}
+      telper:              { name: Telefono(s), params: maxlength=15 size=15,  help: Coloque el Numero de Telefono}
+      faxper:              { name: Telefono(s), params: maxlength=15 size=15,  help: Coloque el Numero de Telefono}
+      apaposper:           { name: Apartado Postal, params: maxlength=10 size=10,  help: Coloque el Apartado Postal}
+      emaper:              { name: Correo Electrónico, params: maxlength=50 size=15,  help: Coloque el Correo Electrónico}
+      dirper:              { name: Dirección, type: textarea_tag, params: size=70x3 maxlength=254 , help: Dirección de la Persona}
+
+    list:
+      title:          Registro de Personas
+      display:        [=cedrif, fecper]
+      filters:        [cedrif, fecper]
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title: Edicion Registro de Personas
+      display:
+        "Datos Generales":  [ cedrif, fecper, _relemp, _tipper, _nacper, prinom, segnom, priape, segape, nomper]
+        "Direccion de la Persona":  [ _catdivgeo_id, catbarurb_id, cattramofro_id, cattramolat_id, cattramolat2_id, edicas, pishab, numhab]
+        "Otros Datos":              [ telper, faxper, apaposper, emaper]
+        "Otros Datos":              [ dirper]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+

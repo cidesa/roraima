@@ -1,0 +1,29 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Ocoferpre
+    theme:            cidesaGenerator
+    fields:
+      codpro: { name: Código del Contratista, params: size=20 maxlength=15}
+      nompro: { name: Nombre, params: size=60}
+      codobr: { name: Código de la Obra, params: size=20 maxlength=32}
+      desobr: { name: Descripción, params: size=60}
+    list:
+      title: Presupuestos de Obras
+      display: [=codobr, desobr, codpro, nompro]
+      filters: [codpro, codobr]
+      max_per_page:   10
+      sort: [codobr, asc]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title: Edición de Presupuesto
+      display:
+        "NONE": [_codpro, _codobr, _partidas]
+      actions:
+        _list:        ~
+        _save:
+          only_for:  create
+        _create:      ~
+        _delete:      ~

@@ -1,0 +1,31 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      NpempleadosBanco
+    theme:            default
+    fields:
+      codemp:       { name: Código Empleado, params: maxlength=10,size=10  }
+      nomemp:       { name: Nombre empleado }
+      codban:       { name: Código Banco, params: size=20  }
+      nomban:       { name: Nombre del Banco, params: size=100  }
+      cuenta_banco: { name: Cuenta Banco, params: size=20  }
+      codnom:       { name: Código Nómina, params: size=20  }
+      desnom:       { name: Descripción, params: size=20  }
+
+    list:
+      title:          Cuentas Bancarias por Nómina
+      display:        [=codnom, desnom]
+      filters:		  [codnom]
+      max_per_page:	  10
+      sort:           codnom
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:          Cuentas Bancarias por Nómina
+      display:        [codemp, nomemp, codban, nomban, codempant, cuenta_banco, codnom, desnom]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~

@@ -1,0 +1,28 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   cimovaju
+  ancho:                   580
+  anchogrid:               680
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código Presupuestario
+  tipo:                    t
+  nombrecampo:             codpre
+  esgrabable:			   true
+  html:                    [ size="32" ]
+2:       # Columna 2
+  titulo:                  Monto Ajuste
+  tipo:                    m
+  esnumerico:              true
+  nombrecampo:             monaju
+  esgrabable:			   true
+  html:                    [ size="10"]
+3:       # Columna 3
+  titulo:                  Monto
+  nombrecampo:             montot
+  tipo:                    m
+  esnumerico:              true
+  html:                    [ size="10" readonly="true" ]

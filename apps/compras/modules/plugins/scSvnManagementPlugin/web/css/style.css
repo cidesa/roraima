@@ -1,0 +1,304 @@
+* {
+	font-family: verdana;
+	font-size: 12px;	
+}
+
+h1, h2, h3, h4 {
+	margin: 15px 0px 10px;
+	clear: right;
+}
+
+table {
+	border-bottom: 2px solid darkgray;	
+	border-right: 2px solid darkgray;
+	background: #f4f4f4;
+}
+table tr {
+	border: 1px solid silver;	
+}
+table th,
+table td {
+	padding: 5px;	
+	border: 1px solid white;
+}
+table .row_0 {
+  background: #efefef;
+}
+table .row_1 {
+	background: #f4f4f4;
+}
+table .head {
+	background: #d9d9d9;
+	color: black; 
+	font-weight: bold
+}
+table .foot,
+table .msg {
+	background: #d9d9d9;
+}
+table .actual_revision
+{
+	background: #d0f0d0;
+}
+
+.svn_headline {
+	display: block;
+	height: 40px;
+	font-size: 2.4em;
+	text-width: bold;
+	margin-left: 20px;
+	padding-left: 125px;
+	padding-top: 75px;
+	padding-bottom: 15px;
+	/*border: 1px solid green;*/
+	background: url(../images/icon.png) no-repeat;
+}
+
+#svn_left_frame {
+	width: 160px;
+	margin-left: 15px;
+	border: 1px solid #a8bfff;
+	background: #e5ecff;
+	color: black;
+	float: left;
+	padding: 20px;	
+}
+
+#svn_content {
+	margin-left: 230px;
+	padding: 10px;
+	border: 1px solid #a8bfff;
+	background: #e5ecff;
+	color: black;
+	min-width: 650px;
+}
+
+#svn_left_frame h2 {
+	font-size: 1.4em;
+}
+
+#svn_left_frame ul {
+	margin: 0px;
+	padding: 0px;
+	padding-left: 15px;	
+}
+#svn_left_frame ul li {
+	margin: 2px;	
+	list-style: square;
+}
+#svn_left_frame ul li a{
+	text-decoration: none;	
+	color: #3370c9;
+	font-weight: bold;
+}
+
+#svn_content h2 {
+	font-size: 1.8em;
+}
+
+
+.svn_ft_indent {
+	font-family: monospace;
+	font-size: 0.9em;
+	color: #666;
+}
+.svn_ft_folder,
+.svn_ft_file,
+.svn_ft_open_dir {
+	font-size: 0.9em;
+	color: black;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	padding: 2px;
+	padding-left: 20px;
+}
+.svn_ft_folder{
+  background-image: url(../images/folder.png);
+}
+.svn_ft_file{
+  background-image: url(../images/file.png);
+}
+.svn_ft_open_dir{
+  background-image: url(../images/folder-open.png);
+}
+.svn_ft_root_dir{
+  font-size: 0.8em;
+  font-width: normal;
+  color: #666;
+}
+.svn_file_link {
+  font-size: 1.0em;
+  color: blue;
+  text-decoration: none;
+}
+.svn_file_link:hover {
+	color: black;
+	text-decoration: underline;
+}
+
+.log_message {
+	white-space: pre-wrap;
+	font-family: Monospace;	
+}
+
+.svn_log_file
+{
+  white-space: pre-wrap;
+  font-family: Monospace;
+  border: 1px solid white;
+  background: black;
+  color: silver;
+  font-weight: bold;
+  padding: 10px;  
+}
+
+.svn_icon {
+	position: relative;
+	width: 18px;
+	height: 18px;
+	padding: 0px;
+	margin: 0px;
+	display: block;
+  background-repeat: no-repeat;
+  background-image: url(../images/info.png);
+}
+.svn_icon span {
+	position: absolute;	
+	font-size: 1.0em;
+  color: blue;
+  display: none;
+  background: #ddd;
+  border: 1px solid blue;
+  left: -42px;
+  top: 30px;
+  padding: 3px;
+  margin: 0px;
+  text-indent: 0px;
+  width: 100px;
+  z-index: 10;
+  text-align: center;
+}
+.svn_icon:hover span {
+	display: block;
+	
+}
+.svn_add
+{
+  background-image: url(../images/add.png);
+}
+.svn_modified,
+.svn_mod {
+  background-image: url(../images/mod.png);
+}
+.svn_del {
+  background-image: url(../images/del.png);
+}
+.svn_lock {
+  background-image: url(../images/lock.png);
+}
+.svn_conflict,
+.svn_conflicted {
+  background-image: url(../images/conflict.png);
+}
+.svn_unversioned {
+  background-image: url(../images/unversioned.png);
+}
+.svn_ok,
+.svn_yes {
+	background-image: url(../images/yes.png);
+}
+.svn_nomod {
+  background-image: url(../images/nomod.png);
+}
+.svn_up2date,
+.svn_outofdate {
+	background-image: url(../images/ok.png);
+}
+.svn_outofdate {
+	background-image: url(../images/warn.png);
+}
+.svn_nolock {
+  display: none;
+}
+
+.svn_up_to a,
+.svn_down_to a,
+.svn_current a {
+	display: block;
+	padding-top: 33px;
+	font-size: 0.8em;
+	text-decoration: none;
+	color: black;
+}
+.svn_up_to a {
+	background: transparent url(../images/up.png) scroll no-repeat center top;
+}
+.svn_down_to a {
+	background: transparent url(../images/down.png) scroll no-repeat center top;
+}
+.svn_current a {
+	background: transparent url(../images/current.png) scroll no-repeat center top;
+	cursor:default;
+}
+
+.svn_info_message,
+.svn_error_message,
+.svn_success_message {
+	width: 80%;
+  margin: 30px auto;
+  padding: 20px;
+  border: 1px solid blue;
+  background: #f4f4ff;
+  color: #000066;
+  font-size: 1.2em;
+}
+.svn_error_message {
+	border: 1px solid red;
+	background: #ffcccc;
+  color: darkred;
+}
+
+.svn_success_message {
+  border: 1px solid green;
+  background: #ccffcc;
+  color: darkgreen;
+}
+
+.svn_revison_number {
+	font-size: 3.0em;
+	margin: 5px;
+	padding: 0px;
+	font-weight: bold;
+	color: #999;
+	cursor: normal;
+}
+
+.svn_overview .info span
+{
+	font-weight: bold;
+	text-align: right;
+	width: 60px;
+	display: block;
+	float: left;
+	margin-right: 6px;
+}
+.svn_overview .info br
+{
+  /*clear: left;*/
+}
+
+.info_frame,
+.log_message_frame  {
+	float: left;
+	background: #f4f4ff;
+	padding: 10px;
+	margin: 0px;
+	border: 1px solid white;
+	width: 30%;
+	min-width: 200px;
+}
+.log_message_frame  {
+  width: 60%;
+  float: right;
+  min-width: 300px;
+}

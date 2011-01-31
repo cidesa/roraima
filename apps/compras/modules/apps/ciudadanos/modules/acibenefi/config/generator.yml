@@ -1,0 +1,91 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atbenefi
+    theme:            cidesaGenerator
+
+    fields:
+      cedben:      { name: Cédula, params: size=10 }
+      nomben:      { name: Nombre, params: size=60 }
+      apeben:      { name: Nombre, params: size=60 }
+      _tipo:       { name: Pertenece a, params: size=60 } # Cooperativa, Particular, Consejo Comunal, Empresa, Organismo del Estado
+      _sexo:       { name: Teléfono, params: size=20 }
+
+      fecnac:      { name: Fecha Nacimiento }
+      pais:        { name: Pais Nacimiento }
+      conext:      { name: Con Ext }
+      lugnac:      { name: Lugar de Nacimiento }
+      nacben:      { name: Nacionalidad } # nacionalidad
+      dirnac:      { name: Dirección de Nacimiento } # dirreccion de nacimiento
+      estciv:      { name: Estado Civil }
+      telhab:      { name: Telefono Habitación }
+      teladihab:   { name: Telefono Adicional }
+      proben:      { name: Profesión } # Profesion Beneficiario
+      atestados_id:     { name: Estado }
+      atmunicipios_id:  { name: Municipio }
+      atparroquias_id:  { name: Parroquia }
+      ciudad:      { name: Ciudad }
+      caserio:     { name: Cacerío }
+      dirhab:      { name: Dirección Habitación }
+      dirtra:      { name: Dirección Trabajo }
+      concomben:   { name: Consejo Comunal }
+      carconcomben:     { name: Cargo en el CC }
+      nota:        { name: Inf. Adicional }
+      grains:      { name: Grado de Instrucción }
+      traben:      { name: ¿Tiene Trabajo? }
+      nomemp:      { name: Empresa }
+      diremp:      { name: Dirección Empresa }
+      telemp:      { name: Telefono Empresa }
+      tiping:      { name: Tipo Ingreso } # Mensual, semanal, quincenal
+      moning:      { name: Monto Ingreso }
+      tipviv:      { name: Tipo de Vivienda }
+      tenviv:      { name: TenViv }
+      carvivsal:   { name: Sala  }  # Caract. Viv. Sala
+      carvivcom:   { name: Comedor  }  # Caract. Viv. Comedor
+      carvivhab:   { name: Habitaciones  } # Caract. Viv. Habitaciones
+      carvivcoc:   { name: Cocina  } # Caract. Viv. Cocina
+      carvivban:   { name: Baños  } # Caract. Viv. Baños
+      carvivpat:   { name: Patio  } # Caract. Viv. Patio
+      carvivarever: { name: Areas Verdes  }  # Caract. Viv. Areas Verdes
+      carvivpis:   { name: Pisos  } # Caract. Viv. Piso
+      carvivpar:   { name: Paredes  } # Caract. Viv. Paredes
+      carvivtec:   { name: Techo  } # Caract. Viv. Techo
+
+      estados:  { name: Estado }
+      municipios:  { name: Municipio }
+      parroquias:  { name: Parroquia }
+
+      grufam:  { name: Grupo Familiar }
+
+    list:
+      title:          Registro de Benefiario
+      fields:
+        consejoc:    { name: Consejo Comunal }
+      display:        [=cedben, nomben, apeben]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [cedben, nomben, apeben]
+      max_per_page:   5
+    edit:
+      title:          Edición de Beneficiario
+      display:
+        Datos Personales: [cedben, nomben, apeben, _sexo, _estciv, telhab, proben]
+        Datos Nacimiento: [fecnac, pais, conext, lugnac, nacben, dirnac ]
+        Dirección Habitacion:        [_atestados_id, _atmunicipios_id, _atparroquias_id, ciudad, caserio]
+        Información de Contacto: [dirhab, telhab, teladihab ]
+        Participación Comunal: [concomben, carconcomben ]
+        Información Profesional: [traben, grains, proben, nomemp, diremp, dirtra, telemp, _tiping, moning ]
+        Procedencia:      [_tipo]
+        Estado de Vivienda: [_tipviv, _tenviv ]
+        Características de la Vivienda: [carvivsal, carvivcom, carvivhab, carvivcoc, carvivban, carvivpat, carvivarever, carvivpis, carvivpar, carvivtec]
+        Informacion Familiar:  [_grufam]
+        Informacion Adicional: [otros]
+        
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+
+

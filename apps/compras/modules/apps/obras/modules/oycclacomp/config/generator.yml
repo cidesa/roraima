@@ -1,0 +1,24 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Occlacomp
+    theme:            cidesaGenerator
+    fields:
+      codclacomp:      { name: Código, params: maxlenght=5}
+      desclacomp:      { name: Descripción, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+    list:
+      title:          Clasificación de Compras
+      filters:		  [codclacomp, desclacomp]
+      display:        [=codclacomp, desclacomp]
+      max_per_page:	  5
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edición de Clasificación de Compras
+      display:        [codclacomp, desclacomp]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

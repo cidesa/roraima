@@ -1,0 +1,31 @@
+methods:
+  post:
+   - "octipact{codtipact}"
+   - "octipact{destipact}"
+
+names:
+  octipact{codtipact}:
+    required:  Yes
+    required_msg: El Codigo  no puedo estar en Blanco
+    validators: Validator_codtipact
+
+  octipact{destipact}:
+    required:  Yes
+    required_msg: La Descripción no puedo estar en Blanco
+    validators: Validator_destipact
+
+
+Validator_codtipact:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Octipact
+        column:   codtipact
+        unique_error:   El Código ya existe. Por Favor, Intente con otro.
+
+Validator_destipact:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: Las Descripciones  no puede tener menos de 5 caracteres
+        max:       250
+        max_error: Las Descripciones  no puede tener mas de 250 caracteres

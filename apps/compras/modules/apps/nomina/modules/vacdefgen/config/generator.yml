@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npvacdefgen
+    theme:            default
+    fields:
+      codnomvac: { name: Codigo de nomina}
+      codconvac: { name: Concepto de vacaciones}
+      codconuti: { name: Concepto de utilidades}
+      pagoad: { name: Pago adicional}
+      
+    list:
+      title:          Parámetros para el Registro y Control de Vacaciones
+      filters:        [codnomvac]
+      display:        [codnomvac, nomnom, codconvac, nomcon1, codconuti, nomcon2]
+      fields:
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5   
+    edit:
+      title:          Parámetros para el Registro y Control de Vacaciones
+      display:        [codnomvac, nomnom, codconvac, nomcon1, codconuti, nomcon2]
+      actions:
+        _save:         ~

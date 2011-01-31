@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "ingruprub{codgruprub}"
+   - "ingruprub{desgruprub}"
+names:
+  ingruprub{codgruprub}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codgruprub
+
+  ingruprub{desgruprub}:
+    required:  Yes
+    required_msg: La descripcion no puede estar en Blanco
+    validators: Validator_desgruprub
+
+Validator_codgruprub:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Ingruprub
+        column:       codgruprub
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desgruprub:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripcion no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripcion no puede pasar mas de 250 caracteres

@@ -1,0 +1,42 @@
+methods:
+  post:
+   - "fcvalinm{codzon}"
+   - "fcvalinm{deszon}"
+   - "fcvalinm{anovig}"
+   - "fcvalinm{valmtr}"
+   - "fcvalinm{porvalfis}"
+   - "fcvalinm{valfis}"
+
+names:
+  fcvalinm{codzon}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+    validators: Validator_codzon
+
+  fcvalinm{anovig}:
+    required:  Yes
+    required_msg: Año es un campo requerido
+
+  fcvalinm{valmtr}:
+    required:  Yes
+    required_msg: Valor del Mt2 es un campo requerido
+
+  fcvalinm{porvalfis}:
+    required:  Yes
+    required_msg: % Valor Fiscal es un campo requerido
+
+  fcvalinm{valfis}:
+    required:  Yes
+    required_msg: % Valor Fiscal Mt2 es un campo requerido
+
+  fcvalinm{deszon}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido
+
+
+Validator_codzon:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fcvalinm
+        column:       codzon
+        unique_error: El registro ya Existe intente con otro.

@@ -1,0 +1,112 @@
+methods:
+  post:
+   - "caajuoc{ajuoc}"
+   - "caajuoc{ordcom}"
+   - "caajuoc{fecaju}"
+   - "caajuoc{desaju}"
+   - "caajuoc{monaju}"
+
+names:
+  caajuoc{ajuoc}:
+    required:  Yes
+    required_msg: El Código del ajuste de la orden de compra no puedo estar en Blanco
+    validators: MyStringValidator1, CorrelValidator, UniqueValidator
+
+  caajuoc{ordcom}:
+    required:  Yes
+    required_msg: El código de la orden compra no puede estar vacío
+    validators: MyCidesaExistValidator
+
+  caajuoc{desaju}:
+    required:  Yes
+    required_msg: La descripción del ajuste de la orden compra no puede estar vacío
+    validators: MyStringValidator3
+
+  caajuoc{monaju}:
+    required:  Yes
+    required_msg: El monto de la orden no puede estar vacío
+    validators: MyNumberValidator
+
+  caajuoc{fecaju}:
+    required: yes
+    validators: FechaValidator, MyCidesaDateValidator
+
+MyStringValidator1:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El código no puede tener menos de 2 caracteres
+        max:       8
+        max_error: El código no puede pasar mas de 8 caracteres
+
+MyStringValidator2:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripción no puede tener menos de 2 caracteres
+        max:       8
+        max_error: La Descripción no puede pasar mas de 8 caracteres
+
+MyStringValidator3:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La Descripción no puede pasar mas de 8 caracteres
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          0000000000.00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          9999999999.99
+        max_error:    El valor debe contener maximo 9999999999.99
+
+MyCidesaMaskValidator:
+    class:            CidesaMaskValidator
+    param:
+        class:        cpdefniv
+        columnmask:   forpre
+        columndiv:    rupcat
+
+MyCidesaExistValidator:
+    class:            CidesaExistValidator
+    param:
+        class:        caordcom
+        column:       ordcom
+        unique_error: La orden de compra insertada no existe
+
+MyCidesaDateValidator:
+    class:            CidesaDateValidator
+    param:
+    param:
+        class:        Cpdefniv
+        columnmin:    fecini
+        columnmax:    feccie
+        min_error:    La Fecha Especificada no puede ser Menor a la Fecha de Inicio del Período
+        max_error:    La Fecha Especificada no puede ser Mayor a la Fecha de Fin del Período
+        date_error:   Fecha Inválida
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha introducida es invalida
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Caajuoc
+        column:   ajuoc
+        unique_error:   El Código de ajuste ya existe. Por Favor, Cambiélo por otro.

@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Ingruprec
+    theme:            cidesaGenerator
+    fields:
+      codgrup:       { name: Código }
+      desgrup:       { name: Descripción }
+
+    list:
+      title:          Definición de Grupos de Recaudos
+      filters:        [codgrup]
+      display:        [=codgrup, desgrup]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codgrup
+
+    edit:
+      title:          Edición de Grupos de Recaudos
+      display:        [_codgrup, desgrup]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

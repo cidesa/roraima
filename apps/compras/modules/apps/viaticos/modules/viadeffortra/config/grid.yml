@@ -1,0 +1,29 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   viadeffortra
+  anchogrid:               600
+  ancho:                   550
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 2
+  titulo:                  Seleccionar
+  tipo:                    k
+  nombrecampo:             opt
+  esgrabable:              true
+  valida:                  true  
+  html:                    [ ]
+2:       # Columna 2
+  titulo:                  Tipo Traslado
+  tipo:                    t
+  nombrecampo:             codtiptra
+  esgrabable:              true
+  valida:                  true  
+  html:                    [ size=5 ]
+3:       # Columna 3
+  titulo:                  Descripcion
+  tipo:                    t
+  nombrecampo:             destiptra
+  esgrabable:              false
+  html:                    [ size=50 readonly=true]

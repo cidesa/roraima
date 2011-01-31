@@ -1,0 +1,64 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npmaeemb
+    theme:            cidesaGenerator    
+    fields:
+      display:          [codcon, nomcon, nomemp, desjuz]
+      codemb:         { name: Código , params:  maxlength=4 size=10}
+      desemb:         { name: Descripción, params: maxlength=200 size=68}
+      codjuz:
+        name: Juzgado
+        msj_error: Código de juzgado es necesario
+        catalogo:  
+          catalogoweb: npjuzgados_codjuz
+          clase: Npjuzgados 
+          ajax: 0
+          parametros: getprincipal="getCodjuz" getsecundario="getDesjuz" campoprincipal="codjuz" camposecundario="desjuz" campobase = "id"           
+      fecregemb:         { name: Fecha de Registro, params: value="<?php echo date('d/m/Y')?>"}
+      codemp:
+        name: Empleado
+        msj_error: Código de empleado es necesario
+        catalogo:  
+          catalogoweb: Nphispre_Presnomcalintpre
+          clase: Nphojint 
+          ajax: 0
+          parametros: getprincipal="getCodemp" getsecundario="getNomemp" campoprincipal="codemp" camposecundario="nomemp" campobase = "id"                 
+      codconemb:
+        name: Concepto Asociado
+        msj_error: Código de concepto es necesario
+        catalogo:  
+          catalogoweb: Npdefcpt_embargos
+          clase: Npdefcpt 
+          ajax: 0
+          parametros: getprincipal="getCodcon" getsecundario="getNomcon" campoprincipal="codcon" camposecundario="nomcon" campobase = "id"                     
+      tipcalcu:              { name: Tipo de Cálculo}
+      tipdistr:              { name: Tipo de Distribución}
+      gridcon:               { name: .}
+      gridben:               { name: .}
+      montotemb:             { name: Monto Embargo, params: size=20 }
+      nomemp:                { name: Nombre}
+      desjuz:                { name: Descripción}
+      
+    list:
+      title:              Registro de embargos
+      display:            [=codemb, desemb, codjuz, desjuz, codemp, nomemp, fecregemb]      
+      fields:
+        fecregemb:        { params: date_format='dd/MM/yy' }
+      filters:            [codemb, codjuz, fecregemb]
+      max_pers:           10
+      sort:               codemb
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~  
+
+    edit:
+      title:              Edicion de Registros de Embargos
+      display:
+        Datos Generales Embargos:   [codemb, desemb, codjuz, fecregemb, codemp, codconemb, _tipcalcu, montotemb, _gridcon, _tipdistr, _gridben]  
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

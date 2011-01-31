@@ -1,0 +1,112 @@
+methods:
+  post:
+   - "caprovee{codpro}"
+   - "caprovee{nompro}"
+   - "caprovee{rifpro}"
+   - "caprovee{limcre}"
+   - "caprovee{capsus}"
+   - "caprovee{cappag}"
+   - "caprovee{fecreg}"
+   - "caprovee{codram}"
+   - "caprovee{codcta}"
+   - "caprovee{codtiprec}"
+
+names:
+  caprovee{codpro}:
+    required:  Yes
+    required_msg: El Código no puedo estar en Blanco.
+    validators: Validator_codpro
+
+  caprovee{nompro}:
+    required:  Yes
+    required_msg: El Nombre no puedo estar en Blanco.
+    validators: Validator_nompro
+
+  caprovee{rifpro}:
+    required:  Yes
+    required_msg: El Rif/CI Proveedor no puedo estar en Blanco.
+    validators: Validator_rifpro
+
+  caprovee{limcre}:
+    required:  No
+    validators: MontoValidator
+
+  caprovee{capsus}:
+    required:  No
+    validators: MontoValidator
+
+  caprovee{cappag}:
+    required:  No
+    validators: MontoValidator
+
+  caprovee{fecreg}:
+    required:  No
+    validators: FechaValidator
+
+  caprovee{codram}:
+    required:  No
+    validators: Validator_codram
+
+  caprovee{codcta}:
+    required:  No
+    validators: Validator_codcta
+
+  caprovee{codtiprec}:
+    required:  No
+    validators: Validator_codtiprec
+
+Validator_codpro:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Caprovee
+        column:       codpro
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_nompro:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre del Proveedor no puede tener menos de 2 caracteres
+        max:       254
+        max_error: El nombre del Proveedor no puede pasar mas de 254 caracteres
+
+Validator_rifpro:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Caprovee
+        column:       rifpro
+        unique_error: El Rif/CI ya Existe intente con otro.
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+MontoValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El valor introducido no cumple con el formato para montos
+
+Validator_codram:
+    class: CidesaExistValidator
+    param:
+        class:    Caramart
+        column:   ramart
+        unique_error: El Código del Ramo no existe.
+
+Validator_codcta:
+    class: CidesaExistValidator
+    param:
+        class:    Contabb
+        column:   codcta
+        unique_error: El Código del Cuenta Contable no existe.
+
+Validator_codtiprec:
+    class: CidesaExistValidator
+    param:
+        class:    Catiprec
+        column:   codtiprec
+        unique_error: El Código del Grupo de Recaudo no existe.

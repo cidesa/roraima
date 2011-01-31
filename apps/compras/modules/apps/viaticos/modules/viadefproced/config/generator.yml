@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viadefproced
+    theme:            cidesaGenerator
+    fields:
+      codproced:         { name: Código Procedencia, params: maxlegth=2 size=5 onBlur="$(this.id).value=$(this.id).value.pad(2,'0',0)"}
+      desproced:         { name: Descripción, params: maxlegth=250}
+      aprobacion:        { name: Necesita Aprobación}
+      paprobacion:       { name: .}
+      
+    list:
+      title: Listado de Procedencias
+      display: [=codproced, desproced]
+      filters: [codproced, desproced]
+      sort:    codproced
+      objects_actions:
+        _edit:        ~
+        _delete:        ~
+    edit:
+      title: Edición de Procedencias
+      display:
+        Datos Generales de la Procedencias: [codproced, desproced, _paprobacion]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

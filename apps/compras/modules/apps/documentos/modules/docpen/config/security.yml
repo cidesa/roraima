@@ -1,0 +1,3 @@
+all:
+  is_secure:  on
+  credentials: [[ admin, docpen_15, docpen_9, docpen_11, docpen/pendientes_15, docpen/pendientes_11, docpen/pendientes_9 ]]

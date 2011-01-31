@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "citiprub{codtiprub}"
+   - "citiprub{destiprub}"
+
+names:
+  citiprub{codtiprub}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco
+    validators: Validator_codtiprub
+
+  citiprub{destiprub}:
+    required:  Yes
+    required_msg: La Descripción no puede estar en Blanco
+    validators: Validator_destiprub
+
+Validator_codtiprub:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Citiprub
+        column:       codtiprub
+        unique_error: El Registro ya Existe intente con otro.
+
+Validator_destiprub:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción no puede tener menos de 2 caracteres
+        max:       250
+        min_error: La Descripción no puede tener mas de 250 caracteres

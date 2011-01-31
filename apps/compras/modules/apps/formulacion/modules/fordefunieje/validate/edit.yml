@@ -1,0 +1,48 @@
+methods:
+  post:
+   - "fordefunieje{coduni}"
+   - "fordefunieje{nomuni}"
+   - "fordefunieje{codemp}"
+
+names:
+  fordefunieje{coduni}:
+    required:  Yes
+    required_msg: El Código de la Unidad Ejecutora no puede estar en Blanco
+    validators: CorrelValidator, Validator_coduni
+
+  fordefunieje{nomuni}:
+    required:  Yes
+    required_msg: El Nombre de la Unidad Ejecutora no puede estar en Blanco
+    validators: Validator_nomuni
+
+  fordefunieje{codemp}:
+    required:  No
+    validators: Validator_codemp
+
+Validator_coduni:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fordefunieje
+        column:       coduni
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_nomuni:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: El Nombre de la Unidad Ejecutora no puede tener menos de 5 caracteres
+        max:       250
+        max_error: El Nombre de la Unidad Ejecutora no puede pasar más de 250 caracteres
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos
+
+Validator_codemp:
+    class: CidesaExistValidator
+    param:
+        class:    Nphojint
+        column:   codemp
+        unique_error:   El Código del Funcionario no existe

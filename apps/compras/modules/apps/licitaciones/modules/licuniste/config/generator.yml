@@ -1,0 +1,43 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Lidatste
+    theme:            cidesaGenerator
+
+    fields:
+      coduniste:    { name: Código}
+      desuniste:    { name: Nombre}
+      litipste_id:    { name: Tipo Unidad Solicitante}
+      dirste:    { name: Dirección}
+      telste:    { name: Teléfono(s)}
+      faxste:    { name: Fax}
+      emaste:    { name: E-Mail}
+      codemp:    { name: Código}
+      codpai:    { name: País}
+      codedo:    { name: Estado}
+      codmun:    { name: Municipio}
+      codpar:    { name: Parroquia}
+      codsec:    { name: Sector}
+      cedemp:    { name: C.I., params: readonly=true}
+      diremp: 	{ name: Dirección, type: textarea_tag, params: size=70x3 readonly=true  }
+      telemp:    { name: Telefono Hab., params: readonly=true}
+    list:
+      title:          Unidad Solicitante
+      filters:        [coduniste, desuniste]
+      display:        [=coduniste, desuniste]
+      sort:   coduniste
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+    edit:
+      title:          Edición de la Unidad Solicitante
+      display:
+        Datos Principales:     [coduniste, desuniste, litipste_id, dirste, telste, faxste, emaste]
+        Ubicación:  [codpai, codedo, codmun, codpar, codsec]
+        Datos del Responsable: [_codemp, cedemp, diremp, telemp]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "npconpri{codnom}"   
+   - "npconpri{codcon}"
+   
+names: 
+  npconpri{codnom}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: CodNomValidator 
+    
+  npconpri{codcon}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: CodConValidator 
+        
+CodNomValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Npnomina
+        column:   codnom
+        unique_error:   El Código no existe.  
+
+CodConValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Npdefcpt
+        column:   codcon
+        unique_error:   El Código no existe. 

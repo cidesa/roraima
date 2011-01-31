@@ -1,0 +1,47 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viaregsolvia
+    theme:            cidesaGenerator
+
+    fields:
+      id:        { name: Codigo, params: size=10 }
+      codpre:    { name: Partida Presupuestaria, params: size=32 }
+      tipcom:    { name: Tipo Documento, params: size=4 maxlength=4 }
+      fecha:     { name: Fecha, params: date_format='dd/MM/yyyy' size=10 maxlength=10, validate: Vfecha, msj_error: La fecha del Registro }
+      descr:      { name: Descripcion, type: textarea_tag, params: size=70x3 maxlength=254}
+      viaregtiptab_id:   { name: Aplicar Tabulador de, params: size=1 }
+      cedemp:    { name: Cedula, params: size=15 maxlength=20}
+      desniv:    { name: Unidad, params: size=30 }
+      descar:    { name: Cargo, params: size=30 }
+      emaemp:    { name: Correo Electronico, params: size=20 }
+      telhab:    { name: Telefono, params: size=20 }
+      gripplantrabajo:    { name: .}
+      gripgastos:   { name: .}
+      //fecha_sal:    { name: F/Salida, params: date_format='dd/mm/yyyy' size=10 maxlength=10, validate: Vfecha, msj_error: La fecha del Registro }
+      //fecha_reg:    { name: F/Regreso, params: date_format='dd/mm/yyyy' size=10 maxlength=10, validate: Vfecha, msj_error: La fecha del Registro }
+      nacente:    { name: Nacionalidad}
+      monto:      { name: Monto Total}
+
+    list:
+      title:     Definicion de Solicitud de Viaticos
+      display:   [ =id, cedemp, fecha, descr ]
+      sort:      cedemp
+      filters:   [ id, cedemp, nacente, fecha ]
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title: Edicion de Solicitud de Viaticos
+      display:
+        Informacion Personal:   [ _cedemp, desniv, descar, emaemp, telhab]
+        Generales:  [ fecha, viaregtiptab_id, _codpre, _tipcom, descr, monto]
+        Gastos Globales:  [ _gripgastos]
+        Plan de Trabajo:  [ _gripplantrabajo]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

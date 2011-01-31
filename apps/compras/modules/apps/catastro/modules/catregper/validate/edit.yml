@@ -1,0 +1,31 @@
+methods:
+  post:
+   - "catregper{cedrif}"
+   - "catregper{fecper}"
+   - "catregper{prinom}"
+   - "catregper{priape}"
+
+names:
+  catregper{cedrif}:
+    required:  Yes
+    required_msg: La Cedula no puedo estar en Blanco
+    validators: [String1aValidator ]
+
+  catregper{fecper}:
+    required:  Yes
+    required_msg: La Fecha no puedo estar en Blanco
+
+  catregper{prinom}:
+    required:  Yes
+    required_msg: El Primer Nombre no puedo estar en Blanco
+
+  catregper{priape}:
+    required:  Yes
+    required_msg: El Primer Apellido no puedo estar en Blanco
+
+String1aValidator:
+  class: sfStringValidator
+  param:
+    min:       1
+    min_error: La Cedula no puede tener menos de 1 caracteres
+

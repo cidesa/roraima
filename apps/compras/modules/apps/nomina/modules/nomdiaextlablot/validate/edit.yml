@@ -1,0 +1,15 @@
+methods:
+  post:
+   - "npdiaext{codnom}"
+names:
+  npdiaext{codnom}:
+    required:  Yes
+    required_msg: El código Nomina no puede estar en Blanco
+    validators: Validator_codnom
+
+Validator_codnom:
+    class: CidesaExistValidator
+    param:
+        class:        Npnomina
+        column:       codnom
+        unique_error: El Código de la Nomina debe Existir.

@@ -1,0 +1,15 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Opordpag
+    theme:            cidesaGenerator
+    fields:
+      grid: { name: . }
+      comprobante: { name: . }
+    edit:
+      title:          Recepción de Órdenes Aprobadas
+      display:
+        "Órdenes de Pago": [_grid, _comprobante]
+      hide:  [filasord, totalcomprobantes]
+      actions:
+        _save:        ~

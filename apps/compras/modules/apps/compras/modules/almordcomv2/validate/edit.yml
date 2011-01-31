@@ -1,0 +1,205 @@
+methods:
+  post:
+   - "caordcom{ordcom}"
+   - "caordcom{fecord}"
+   - "caordcom{tipmon}"
+   - "caordcom{rifpro}"
+   - "caordcom{desord}"
+   - "caordcom{doccom}"
+   - "caordcom{tipo}"
+   - "caordcom{codconpag}"
+   - "caordcom{tippro}"
+   - "caordcom{codforent}"
+   - "caordcom{tipfin}"
+#   - "caordcom{coduni}"
+#   - "caordcom{codemp}"
+   - "caordcom{fecord}"
+   - "caordcom{tipord}"
+
+names:
+  caordcom{ordcom}:
+    required:  Yes
+    required_msg: El Código no puedo estar en Blanco
+    validators: Validator_ordcom
+
+  caordcom{fecord}:
+    required:  Yes
+    required_msg: La Fecha no puedo estar en Blanco
+    validators: FechaValidator, FechaValidator1, FechaValidator_fecord
+
+  caordcom{tipmon}:
+    required:  Yes
+    required_msg: El Monto no puedo estar en Blanco
+    validators: MyNumberValidator_tipmon
+
+  caordcom{rifpro}:
+    required:  Yes
+    required_msg: El Código de la Contratistas de Bienes o Servicio y Cooperativas no puedo estar en Blanco
+    validators: ExistValidator_rifpro
+
+  caordcom{desord}:
+    required:  Yes
+    required_msg: La descripción de la Orden no puedo estar en Blanco
+    validators: Validator_desord
+
+  caordcom{doccom}:
+    required:  Yes
+    required_msg: El Tipo de Compromiso de la Orden no puedo estar en Blanco
+    validators: ExistValidator_doccom
+
+  caordcom{tipo}:
+    required:  Yes
+    required_msg: El Tipo de la Orden no puedo estar en Blanco
+    validators: Validator_tipo
+
+  caordcom{codconpag}:
+    required:  Yes
+    required_msg: El Código Pago de la Orden no puedo estar en Blanco
+    validators: Validator_codconpag
+
+  caordcom{tippro}:
+    required:  No
+
+  caordcom{codforent}:
+    required:  Yes
+    required_msg: El Tipo de Forma de Entrega no puedo estar en Blanco
+    validators: ExistValidator_codforent
+
+  caordcom{tipfin}:
+    required:  Yes
+    required_msg: El Tipo de Financiamiento no puedo estar en Blanco
+    validators: ExistValidator_tipfin
+
+#  caordcom{coduni}:
+#    required:  Yes
+#    required_msg: El Tipo de Unidad no puedo estar en Blanco
+#    validators: ExistValidator_coduni
+
+#  caordcom{codemp}:
+#    required:  Yes
+#    required_msg: Cédula del empleado no puedo estar en Blanco
+#    #validators: ExistValidator_codemp
+
+  caordcom{fecord}:
+    required:  No
+    validators: FechaValidator
+
+  caordcom{tipord}:
+    required:  Yes
+    required_msg: El Tipo de Orden de Compra no puede estar vacio
+
+Validator_ordcom:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Caordcom
+        column:       ordcom
+        unique_error: El registro ya Existe intente con otro.
+
+FechaValidator_fecord:
+    class: CidesaDateValidator
+    param:
+        class:        Cpdefniv
+        columnmin:    fecini
+        columnmax:    feccie
+        min_error:    La Fecha Especificada no puede ser Menor a la Fecha de Inicio del Período
+        max_error:    La Fecha Especificada no puede ser Mayor a la Fecha de Fin del Período
+        date_error:   Fecha Inválida
+
+ExistValidator_rifpro:
+    class: CidesaExistValidator
+    param:
+        class:        Caprovee
+        column:       rifpro
+        unique_error: El Código de la Contratistas de Bienes o Servicio y Cooperativas debe Existir.
+
+Validator_desord:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       1000
+        max_error: La descripción no puede pasar mas de 1000 caracteres
+
+ExistValidator_doccom:
+    class: CidesaExistValidator
+    param:
+        class:        Cpdoccom
+        column:       tipcom
+        unique_error: El Código del Tipo de Compromiso debe Existir.
+
+Validator_tipo:
+    class: sfStringValidator
+    param:
+        min:       0
+        min_error: La descripción no puede tener menos de 1 caracteres
+        max:       1
+        max_error: La descripción no puede pasar mas de 1 caracteres
+
+Validator_codconpag:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       4
+        max_error: La descripción no puede pasar mas de 4 caracteres
+
+ExistValidator_tippro:
+    class: CidesaExistValidator
+    param:
+        class:        Catippro
+        column:       codpro
+        unique_error: El Código del Proyecto debe Existir.
+
+ExistValidator_codforent:
+    class: CidesaExistValidator
+    param:
+        class:        Caforent
+        column:       codforent
+        unique_error: El Código de la Forma de Entrega debe Existir.
+
+ExistValidator_tipfin:
+    class: CidesaExistValidator
+    param:
+        class:        Fortipfin
+        column:       codfin
+        unique_error: El Tipo de Financiamiento debe Existir.
+
+ExistValidator_coduni:
+    class: CidesaExistValidator
+    param:
+        class:        Bnubica
+        column:       codubi
+        unique_error: El Tipo de Unidad debe Existir.
+
+ExistValidator_codemp:
+    class: CidesaExistValidator
+    param:
+        class:        Nphojint
+        column:       codemp
+        unique_error: Cédula del empleado debe Existir.
+
+MyNumberValidator_tipmon:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          0.0
+        min_error:    El valor tiene que ser mayor que cero
+        max:          500.0
+        max_error:    El valor debe contener maximo 9999999999.99
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+FechaValidator1:
+    class:         CidesaDateNow
+    param:
+        compare: 'now'
+        compare_error: La Fecha no puede ser mayor a la Fecha Actual
+        operator: '<='
+        date_error:  Fecha Inválida

@@ -1,0 +1,45 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocperval
+    theme:            default
+    fields:
+      codcon: { name: Nro. Contrato}
+      descon: { name: Descripción}
+      codobr: { name: Obra}
+      desobr: { name: Nombre}
+      codpro: { name: Contratista}
+      nompro: { name: Nombre}
+      moncon: { name: Monto}
+      codtipval: { name: Tipo Valuación}
+      destipval: { name: Descripción}
+      numval: { name: Nro de Valuación}
+      fecreg: { name: Fecha}
+      monval: { name: Monto}
+      obsval: { name: Observaciones}
+      cedins: { name: Ing. Inspector}
+      nomins: { name: Nombre}
+      cedtec: { name: Jefe de Division}
+      nomtec: { name: Nombre}
+      cedfis: { name: Director Instituto}
+      nomdir: { name: Nombre}
+      cedres: { name: Ing. Residente}
+      nomper: { name: Nombre}
+      cedtop: { name: Rep. Legal Empresa}
+      nomtop: { name: Nombre}
+    list:
+      title:          Valuaciones
+      filters:        [codcon, cedins]
+      display:        [codcon, codobr, desobr, codpro, nompro]
+      sort:  codcon
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+    edit:
+      title:          Edición de Valuaciones
+      display:        [codcon, descon, codobr, desobr, codpro, nompro, moncon, codtipval , destipval, numval, fecreg, monval, obsval, cedins, nomins, cedtec, nomtec, cedfis, nomdir, cedres, nomper, cedtop, nomtop]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

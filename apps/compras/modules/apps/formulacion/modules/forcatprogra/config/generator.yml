@@ -1,0 +1,42 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fordefcatpre
+    theme:            cidesaGenerator
+    fields:
+      codcat:
+        name: Código
+        params: size=20  onkeyDown=dFilter(event.keyCode, this,$('fordefcatpre_mascara').value) onFocus="$(this.id).maxLength=$('fordefcatpre_longitud').value; if($('id').value!='') $(this.id).readOnly=true ;"
+      nomcat: { name: Nombre, params : size=80 maxlength=250 }
+      descat: { name: Objetivo General, type: textarea_tag, params : size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      objsec: { name: Objetivos Específicos, type: textarea_tag, params : size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      mision: { name: Misión, type: textarea_tag, params : size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      vision: { name: Visión, type: textarea_tag, params : size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      coduni:
+        name: Código
+        params: maxlength=3
+        catalogo:
+          catalogoweb: Fordefunieje_Forcatprogra
+          clase: Fordefunieje
+          ajax: 1
+          parametros: getprincipal="getCoduni" getsecundario="getNomuni" campoprincipal="coduni" camposecundario="nomuni" campobase = "id"
+    list:
+      title:          Categorias Programáticas
+      filters:        [codcat, coduni]
+      display:        [=codcat, nomcat]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:      codcat
+    edit:
+      title:          Edición  de Categoría Programática
+      display:
+        "Categoria Programática":   [codcat, nomcat, descat, objsec, mision, vision]
+        "Unidad Ejecutora":   [coduni]
+      hide:  [longitud, mascara]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

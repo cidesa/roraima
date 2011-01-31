@@ -1,0 +1,41 @@
+methods:
+  post:
+   - "fordefniv{rupcat}"
+   - "fordefniv{ruppar}"
+   - "fordefniv{nivdis}"
+   - "fordefniv{forpre}"
+   - "fordefniv{fecini}"
+   - "fordefniv{feccie}"
+   - "fordefniv{fecper}"
+
+names:
+  fordefniv{rupcat}:
+    required:  Yes
+    required_msg: Debe Seleccionar la Cantidad de CategorÃ­as
+
+  fordefniv{ruppar}:
+    required:  Yes
+    required_msg: Debe Seleccionar la Cantidad de Partidas
+
+  fordefniv{nivdis}:
+    required:  Yes
+    required_msg: Debe Seleccionar el Nivel de Disponibilidad
+
+  fordefniv{forpre}:
+    required:  Yes
+    required_msg: No puede salvar sin tener un formato de CÃ³digo Presupuestario
+
+  fordefniv{fecini}:
+    required:  Yes
+    required_msg: No puede salvar sin introducir la Fecha de Inicio del Ejercicio
+
+  fordefniv{feccie}:
+    required:  Yes
+    required_msg: No puede salvar sin introducir la Fecha de Fin del Ejercicio
+
+  fordefniv{fecper}:
+    required:  Yes
+    required_msg: No puede salvar sin introducir la Fecha del PerÃ­odo
+
+
+

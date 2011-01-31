@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fafordes
+    theme:            cidesaGenerator
+
+    fields:
+      nomdes:    { name: Nombre, validate: Vstring_1_20, msj_error: Debe insertar el nombre de la forma de despacho }
+
+    list:
+      title:          Formas de Despacho
+      display:        [nomdes]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [nomdes]
+      max_per_page:   10
+
+    edit:
+      title:          Edición de Forma de Despacho
+      display:        [nomdes]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

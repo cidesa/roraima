@@ -1,0 +1,17 @@
+methods:
+  post:
+   - "faartpvp{codart}"
+
+names:
+
+ faartpvp{codart}:
+    required:  Yes
+    required_msg: Debe seleccionar el código del artículo
+    validators: UniqueValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Faartpvp
+        column:   codart
+        unique_error:   El Código del artículo ya existe. Por Favor, Cambiélo por otro.

@@ -1,0 +1,28 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefsubobj
+    theme:            default
+
+    fields:
+      codequ:    { name: Directriz}
+      codsubobj: { name: Código}
+      dessubobj: { name: Descripción}         
+      desequ:    { name: Directriz}  
+              
+    list:
+      title:          Defincición de Estrategias
+      filters:        [codsubobj, dessubobj, codequ]
+      display:        [=desequ, codsubobj, dessubobj]
+      object_actions:
+        _edit:        ~    
+      max_per_page:   10
+      sort:     codsubobj
+    edit:
+      title:          Edición de Estrategias
+      display:       [codsubobj, dessubobj, codequ]            
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

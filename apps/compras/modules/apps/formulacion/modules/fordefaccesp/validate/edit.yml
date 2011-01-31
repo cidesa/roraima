@@ -1,0 +1,17 @@
+methods:
+  post:
+   - "fordefaccesp{codpro}"
+
+names:
+  fordefaccesp{codpro}:
+    required:  Yes
+    required_msg: No puede salvar sin introducir el Código del Proyecto
+    validators: ExistValidatorCodPro
+
+
+ExistValidatorCodPro:
+    class: CidesaExistValidator
+    param:
+        class:        Fordefpry
+        column:       codpro
+        unique_error: Este proyecto no ha sido definido...

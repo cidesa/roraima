@@ -1,0 +1,10 @@
+methods:
+  post:
+   - "litipsol{dessol}"
+
+names:
+  litipsol{dessol}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido
+
+

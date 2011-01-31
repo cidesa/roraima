@@ -1,0 +1,145 @@
+compras:
+  1:
+    Name: Cómo utilizar la Ayuda
+    URL:  Como_utilizar_ayuda.htm
+    1.1:
+      Name: Buscar un Tema de Ayuda
+      URL:  'Como_utilizar_ayuda.htm#BuscarTema'
+    1.2:
+      Name: Copiar un Tema de Ayuda
+      URL:  'Como_utilizar_ayuda.htm#CopiarTema'
+    1.3:
+      Name: Imprimir un Tema de Ayuda
+      URL:  'Como_utilizar_ayuda.htm#ImprimirTema'
+    1.4:
+      Name: Moverse por los Temas de Ayuda
+      URL:  'Como_utilizar_ayuda.htm#Moverse'
+    1.5:
+      Name: Cambiar el Tamaño de la Ventana de Ayuda
+      URL:  'Como_utilizar_ayuda.htm#CambiarTamaño'
+    1.6:
+      Name: Ocultar y Mostrar el Contenido
+      URL:  'Como_utilizar_ayuda.htm#OcultaryMostrar'
+  2:
+    Name: Descripción General del Subsistema
+    URL:  Descripcion_General_Sistema.htm
+    2.1:
+      Name: Objetivos Generales
+      URL:  'Descripcion_General_Sistema.htm#Objetivos'
+    2.2:
+      Name: Requerimientos del Sub-Sistema
+      URL:  'Descripcion_General_Sistema.htm#Requerimientos'
+      2.2.1:
+        Name: Hardware
+        URL:  'Descripcion_General_Sistema.htm#Hardware'
+      2.2.2:
+        Name: Software
+        URL:  'Descripcion_General_Sistema.htm#Software'
+    2.3:
+      Name: Instalación del Sub-Sistema
+      URL:  'Descripcion_General_Sistema.htm#Instalacion'
+  3:
+    Name: Módulos del Sub-Sistema de Compras y Almacén
+    URL:  'Modulos_Sistema.htm'
+  4:
+    Name: Definiciones Especificas
+    URL:  'Definiciones_Especificas.htm'
+    4.1:
+      Name: Proveedores
+      URL:  'Definiciones_Peoveedores.htm'
+      4.1.1:
+        Name: Definición de Grupo de Recaudos
+        URL:  'Proveedores_Definicion_Grupos_REcau.htm'
+      4.1.2:
+        Name: Definición de Recaudos
+        URL:  'Proveedores_DefRecaudos.htm'
+      4.1.3:
+        Name: Registro de Proveedores
+        URL:  'Proveedores_RegistroProvee.htm'
+      4.1.4:
+        Name: Definición de Condiciones de Pago
+        URL:  'Proveedores_FormasEntrega.htm'
+      4.1.5:
+        Name: Definición de Formas de Entrega
+        URL:  'Proveedores_DefCondPago.htm'
+      4.1.6:
+        Name: Definición de Razones de Compra
+        URL:  'Proveedores_DefRazones_Compra.htm'
+      4.1.7:
+        Name: Definición de Motivos Faltantes
+        URL:  'Proveedores_DefMotv_Faltante.htm.htm'
+      4.1.8:
+        Name: Definicion de Rangos de Cotizaciones
+        URL:  'Proveedores_DefRango_Cotizaciones.htm'
+    4.2:
+      Name: Artículos 
+      URL:  'Definiciones_Articulos.htm'
+      4.2.1:
+        Name: Definición de Artículos
+        URL:  'Articulos_DefinicionArticulo.htm'
+      4.2.2:
+        Name: Definición de Ubicaciones
+        URL:  'Articulos_DefinicionUbicacion.htm'
+      4.2.3:
+        Name: Ramos de Artículos
+        URL:  'Articulos_RamosArticulos.htm'
+      4.2.4:
+        Name: Registro de Artículos
+        URL:  'Articulos_RegistroArticulo.htm'
+      4.2.5:
+        Name: Registro de Recargos
+        URL:  'Articulos_RegistroRecargos.htm' 
+    4.3:
+      Name: Compras 
+      URL:  'Definiciones_Compra.html'
+      4.3.1:
+        Name: Ordenes de Compra
+        URL:  'Compras_OrdenesCompra.htm'
+      4.3.2:
+        Name: Ordenes de Servicio
+        URL:  'Compras_Ordenes_Servicio.htm'
+      4.3.3:
+        Name: Registro de Contratos
+        URL:  'Compras_Registro_Contrato.htm'
+      4.3.4:
+        Name: Ajuste a Ordenes de Compra
+        URL:  'Compras_Ajustes.htm'
+      4.3.5:
+        Name: Cotizaciones
+        URL:  'Compras_Cotizaciones.htm' 
+      4.3.6:
+        Name: Asignación de Prioridad a Cotizaciones
+        URL:  'Compras_Asignar_Cotizaciones.htm'
+    4.4:
+      Name: Almacén 
+      URL:  'Definiciones_Almac.html'
+      4.4.1:
+        Name: Definiciones Generales
+        URL:  'Almacen_DefGenerales.htm'
+      4.4.2:
+        Name: Requisición
+        URL:  'Almacen_Requisiciones.htm'
+      4.4.3:
+        Name: Recepción de Ordenes de Compra
+        URL:  'Almacen_Recepcion_Compra.htm'
+      4.4.4:
+        Name: Despachos
+        URL:  'Almacen_Despachos.htm'
+      4.4.5:
+        Name: Prestación de Servicios
+        URL:  'Almacen_Prestacion_Servicios.htm' 
+      4.4.6:
+        Name: Requisiciones por Departamento
+        URL:  'Almacen_Requisiciones_por_Departamento.htm' 
+      4.4.7:
+        Name: Inventario Físico
+        URL:  'Almacen_InventarioFisico.htm' 
+      4.4.8:
+        Name: Traspaso de Artículos
+        URL:  'Almacen_TraspasoArticulos.htm'
+    4.5:
+      Name: Reportes 
+      URL:  'Reportes.htm'
+    4.6:
+      Name: Mantenimiento
+      URL:  'Mantenimiento.htm'

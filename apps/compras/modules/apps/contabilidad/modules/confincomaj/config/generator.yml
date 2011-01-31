@@ -1,0 +1,41 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Contabc
+    theme:            cidesaGenerator
+    fields:
+      numcom:  {name: NÃºmero, params: onblur=rellenar() onFocus=readonly(this.id) size=10 maxlength=6 }
+      feccom:  {name: Fecha, params: date_format='dd/MM/yyyy' onFocus=readonly(this.id)}
+      descom:  {name: DescripciÃ³n, type: textarea_tag }
+      stacom:  {name: Estatus}
+      reftra:  {name: Referencia, params: readOnly=true}
+      totdeb:  {name: DÃ©bitos, params: disabled=false readOnly=true}
+      totcre:  {name: CrÃ©ditos , params: disabled=false readOnly=true}
+      totdif:  {name: Diferencia , params: disabled=false readOnly=true}
+      mensaje: {name: .}
+      grid:    {name: .}
+      btnactualizar: { name: .}
+    list:
+      title:                    CatÃ¡logo de Comprobantes
+      display:                  [=numcom, descom, feccom, stacom, reftra]
+      filters:                  [numcom, descom, feccom, stacom, reftra]
+    edit:
+      title:                    Comprobantes
+      display:
+        Datos del comprobante:  [_mensaje, _btnactualizar, numcom, _feccom, descom, reftra]
+        Asientos:               [_grid]
+        Totales:                [totdeb, totcre, _totdif]
+      fields:
+        numcom:                 { help: NÃºmero del comprobante }
+        descom:                 { help: DescripciÃ³n del comprobante, params: size=80x3}
+      report:
+        url:         contabilidad/rCOMPROBANTES.php?m=m
+        params:      { com1: numcom, com2: numcom }
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _eliminar:
+          name: Eliminar
+          only_for: edit
+          params: class="sf_admin_action_delete" onClick="toAjax(1,getUrlModulo()+'ajax',$('contabc_numcom').value,'','&feccom='+$('contabc_feccom').value+'&status='+$('status').value)"

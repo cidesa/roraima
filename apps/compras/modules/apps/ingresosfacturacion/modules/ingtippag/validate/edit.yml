@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "intippag{codtippag}"
+   - "intippag{destippag}"
+names:
+  intippag{codtippag}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codtippag
+
+  intippag{destippag}:
+    required:  Yes
+    required_msg: La descripcion no puede estar en Blanco
+    validators: Validator_destippag
+
+Validator_codtippag:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Intippag
+        column:       codtippag
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_destippag:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripcion no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripcion no puede pasar mas de 250 caracteres

@@ -1,0 +1,27 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefsubsec
+    theme:            default
+    fields:
+      codsec : { name: Sector}
+      nomsec : { name: Sector}
+      codsubsec : { name: Código}
+      nomsubsec : { name: Descripción}      
+    list:
+      title:          Subsectores
+      filters:        [codsec, codsubsec, nomsubsec]
+      display:        [=nomsec, codsubsec, nomsubsec]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:  codsubsec
+    edit:
+      title:        Edición de Subsectores
+      display:      [=codsec, codsubsec, nomsubsec]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

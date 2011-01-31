@@ -1,0 +1,45 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefegrgen
+    theme:            default
+    fields:
+      nivproacc: { name: Nivel de los Proyectos y Acciones Centralizadas }
+      desproacc: { name: Desde }
+      hasproacc: { name: Hasta }
+      lonproacc: { name: Longitud }
+      forproacc: { name: Formato }
+      nivaccesp: { name: Nivel de las Acciones Especificas }
+      desaccesp: { name: Desde }
+      hasaccesp: { name: Hasta }
+      lonaccesp: { name: Longitud }
+      foraccesp: { name: Formato }
+      nivsubaccesp: { name: Niveles de las Actividades o Sub Acciones Específicas}
+      dessubaccesp: { name: Desde }
+      hassubaccesp: { name: Hasta }
+      lonsubaccesp: { name: Longitud }
+      forsubaccesp: { name: Formato }
+      nivuae: { name: Nivel de las Unidades Ejecutoras o Administrativas }
+      desuae: { name: Desde }
+      hasuae: { name: Hasta }
+      lonuae: { name: Longitud}
+      foruae: { name: Formato }
+
+      despar: { name: Desde }
+      haspar: { name: Hasta }
+      lonpar: { name: Longitud }
+      forpar: { name: Formato }
+      codpariva: { name: Partida Presupuestaria del IVA }
+      nomparegr: { name: Descripcion }
+      manivafor: { name: Maneja IVA por Formulación }
+      porivafor: { name: Valor del IVA }
+
+      corest: { name: Estados }
+      corsec: { name: Directrices }
+      corequ: { name: Sectores }
+
+    edit:
+      title:          Definiciones Generales
+      display:        [nivproacc, desproacc, hasproacc, hasproacc, lonproacc, forproacc, nivaccesp, desaccesp, hasaccesp, lonaccesp, foraccesp, nivsubaccesp, dessubaccesp, hassubaccesp, lonsubaccesp, forsubaccesp, nivuae, desuae, hasuae, lonuae, foruae, corest, corsec, corequ, despar, haspar, lonpar, forpar, codpariva, manivafor, porivafor]
+      actions:
+        _save:         -

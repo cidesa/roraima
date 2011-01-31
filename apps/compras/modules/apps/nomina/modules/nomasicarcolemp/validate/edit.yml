@@ -1,0 +1,39 @@
+methods:
+  post:
+   - "npasicarcolemp{codemp}"
+   - "npasicarcolemp{codcar}"
+   - "npasicarcolemp{fecdes}"
+   - "npasicarcolemp{fechas}"
+   
+names:
+  npasicarcolemp{codemp}:
+    required:  Yes
+    required_msg: El cÃ³digo no puede estar en Blanco
+    validators: Validator_codemp
+
+  npasicarcolemp{codcar}:
+    required:  Yes
+    required_msg: El Codigo no puede estar en Blanco
+    validators: Validator_codcar
+
+  npasicarcolemp{fecdes}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+
+  npasicarcolemp{fechas}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+
+Validator_codemp:
+    class: CidesaExistValidator
+    param:
+        class:    Nphojint
+        column:   codemp
+        unique_error:   El CÃ³digo de Empleado no existe
+        
+Validator_codcar:
+    class: CidesaExistValidator
+    param:
+        class:    Npcargos
+        column:   codcar
+        unique_error:   El Codigo del Cargo no existe

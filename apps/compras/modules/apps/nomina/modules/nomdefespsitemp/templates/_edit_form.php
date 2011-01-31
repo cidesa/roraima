@@ -1,0 +1,85 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ */
+// date: 2007/10/30 16:04:05
+?>
+<?php echo form_tag('nomdefespsitemp/save', array(
+  'id'        => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form',
+  'multipart' => true,
+)) ?>
+
+<?php echo object_input_hidden_tag($npsitemp, 'getId') ?>
+<?php echo javascript_include_tag('tools','observe') ?>
+
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Datos de la Situación del Empleado') ?></legend>
+<div class="form-row">
+  <?php echo label_for('npsitemp[codsitemp]', __($labels['npsitemp{codsitemp}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npsitemp{codsitemp}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npsitemp{codsitemp}')): ?>
+    <?php echo form_error('npsitemp{codsitemp}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npsitemp, 'getCodsitemp', array (
+  'size' => 2,
+  'readonly'  =>  $npsitemp->getId()!='' ? true : false ,
+  'maxlength' => 1,
+  'onBlur' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('npsitemp_codsitemp').value=cadena",
+  'control_name' => 'npsitemp[codsitemp]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
+  <?php echo label_for('npsitemp[dessitemp]', __($labels['npsitemp{dessitemp}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npsitemp{dessitemp}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npsitemp{dessitemp}')): ?>
+    <?php echo form_error('npsitemp{dessitemp}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npsitemp, 'getDessitemp', array (
+  'size' => 50,
+  'maxlength' => 250,
+  'control_name' => 'npsitemp[dessitemp]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
+  <?php echo label_for('npsitemp[calnom]', __($labels['npsitemp{calnom}']), 'class="required" Style="width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('npsitemp{calnom}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npsitemp{calnom}')): ?>
+    <?php echo form_error('npsitemp{calnom}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+<? if ($npsitemp->getCalnom()=='S')  $var=true; else $var=false; ?>
+<?php echo checkbox_tag('npsitemp[calnom]', 'S', $var) ?>
+    </div>
+<div class="form-row" backgroundcolor="yellow">
+    <p align=justify><strong><?php echo __('NOTA:'); ?></strong> <font color="#0000FF"> <?php echo __('Los códigos "A", "E", "P", "R", "V" y "-" están reservados y NO pueden Modificarse o Eliminarse. Si utiliza estos códigos para definir otro tipo de Situación del Empleado, el Sistema NO realizará el Cálculo de Nómina correctamente.') ?>
+    </p>
+    </div>
+
+</div>
+</fieldset>
+
+<?php include_partial('edit_actions', array('npsitemp' => $npsitemp)) ?>
+
+</form>
+
+<ul class="sf_admin_actions">
+      <li class="float-rigth"><?php if ($npsitemp->getId()): ?>
+<?php echo button_to(__('delete'), 'nomdefespsitemp/delete?id='.$npsitemp->getId(), array (
+  'post' => true,
+  'confirm' => __('Are you sure?'),
+  'class' => 'sf_admin_action_delete',
+)) ?><?php endif; ?>
+</li>
+  </ul>

@@ -1,0 +1,14 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Opordpag
+    theme:            cidesaGenerator
+    fields:
+      grid: { name: . }
+    edit:
+      title:          Aprobación de Órdenes de Pago
+      display:
+        "Órdenes de Pago": [_grid]
+      hide:  [filasord]
+      actions:
+        _save:        ~

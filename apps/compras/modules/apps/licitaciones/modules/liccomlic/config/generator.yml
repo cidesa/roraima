@@ -1,0 +1,31 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Licomlic
+    theme:            cidesaGenerator
+    fields:
+      codcom:         { name: Código, params: size=10 maxlength=4 onBlur="this.value=this.value.pad(4, '0',0);"  }
+      descom: 	      { name: Descripción, type: textarea_tag, params: size=70x3 maxlength=500  }
+      fecnom:         { name: Fecha Nombramiento }
+      decret:         { name: Decreto, type: textarea_tag, params: size=70x4 maxlength=1000 }
+    list:
+      title:          Registro de Comisión de Licitación
+      filters:		  [codcom, descom]
+      fields:
+        dessol:
+          params: size=18
+      display:        [=codcom, descom]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edición de Comisión de Licitación
+      display:
+        Datos Principales:  [codcom, descom, fecnom, decret]
+        Miembros:       [_empleados]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

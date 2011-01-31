@@ -1,0 +1,16 @@
+methods:
+  post:
+   - "forasounicat{codcat}"
+
+names:
+  forasounicat{codcat}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir el Categoría Programática
+    validators: categoriaValidator
+
+categoriaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefcatpre
+        column:   codcat
+        unique_error:  La Categoría Programática no Existe.

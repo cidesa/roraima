@@ -1,0 +1,31 @@
+methods:
+  post:
+   - "npcargoscol{codcarcol}"
+   - "npcargoscol{descarcol}"
+   
+names:
+  npcargoscol{codcarcol}:
+    required:  Yes
+    required_msg: El código del Cargo no puede estar en Blanco
+    validators: Validator_codcarcol
+
+  npcargoscol{descarcol}:
+    required:  Yes
+    required_msg: La descripcion no puede estar en Blanco
+    validators: Validator_MyString
+
+Validator_codcarcol:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npcargoscol
+        column:       codcarcol
+        unique_error: El registro ya Existe intente con otro.
+
+
+Validator_MyString:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripcion puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripcion  no puede pasar mas de 100 caracteres

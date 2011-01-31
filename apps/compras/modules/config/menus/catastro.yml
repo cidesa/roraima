@@ -1,0 +1,63 @@
+catastro:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Catastro
+    imagen: catastro.gif
+    nombre: Catastro
+    urls:
+      default:
+        modulo: catastro.php
+        modulo_dev: catastro_dev.php
+      Reportes:
+        absoluta: reportes/reportes/catastro
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones Especificas:
+      Niveles Catastral:                          catdefniv
+      Vialidad:
+        Direccion de la Vialidad:                 catdefdirvia
+        Sentido de la Vialidad:                   catdefsenvia
+        Tipo de Vialidad:                         catdeftipvia
+      Division Territorial:
+        #Pais:                                     catdefdivpai
+        Definicion:                                catdefdivgeo
+        Barrio/Urbanizaciones:                     catdefdivbarurb
+        Tramo:                                     catdeftramo
+        Manzana:                                   catdefman
+      Inmuebles:
+        Condicion del Inmueble:                 catdefconinm
+        #Caracteristicas del Inmueble:           catcarinm
+        Caracteristicas de la Construccion:     catcarcon
+        Caracteristicas del Terreno:            catcarter
+        Condicion Socio-Economica:              catconsoc
+        Codigo Postal:                          catdefcodpos
+        Tipo de Vivienda:                       catdeftipviv
+        Uso Especifico:                         catdefusoesp
+        Propiedad del Terreno:                  catdefproter
+    Registro:
+      Personas/Propietarios:                               catregper
+      Cedula Catastral:                         catreginm
+      Generar Cédulas Catastral en Lotes:       catlotinm
+      Costos por Avalúo:                        catcosavaluo
+      Avalúos:                                   catdefaval
+
+#      Avaluo y Revision del Croquis:            dddd
+#      Entrevista:
+#        Condicion de la Entrevista:               catconent
+    Reportes:
+      Definiciones Específicas:
+      Listado de Sentidos de Vialidad:                      catdefsenvia.php
+      Listado de Tipos de Vialidad:                         catdeftipvia.php
+      Listado de Condiciones de Inmuebles:                  catdefconinm.php
+      Listado de Vialidad:                                  catdefdirvia.php
+      Division Territorial:                                 catdefdivgeo.php
+      Listado de Codigos postales:                          catdefcodpos.php
+      Listado de Condicion Socio-Economica:                 catdefconsoc.php
+      Listado de Propiedad del Terreno:                     catdefproter.php
+      Listado de Tipos de Viviendas:                        catdeftipviv.php
+      Listado de Uso Especifico:                            catdefusoesp.php
+      Listado de Personas:                                  catdefconsoc.php
+      Listado Detallado de Personas:                        catlstdetper.php
+      Caracteristica de la Construccion:                    catdefcarcon.php
+      Caracteristica del Terreno:                           catdefcarter.php

@@ -1,0 +1,70 @@
+methods:
+  post:
+   - "fadevolu{nrodev}"
+   - "fadevolu{fecdev}"
+   - "fadevolu{codalm}"
+   - "fadevolu{refdes}"
+   - "fadevolu{fatipdev_id}"
+
+names:
+  fadevolu{nrodev}:
+    required:  Yes
+    required_msg: El Número no puede estar en Blanco.
+    #validators: UniqueValidator
+
+  fadevolu{fecdev}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    validators: FechaValidator
+
+  fadevolu{codalm}:
+    required:  Yes
+    required_msg: Seleccione el Código de Almacén
+    validators: CodalmExistValidator
+
+  fadevolu{fatipdev_id}:
+    required:  Yes
+    required_msg: Seleccione el Tipo de Devolución
+
+  fadevolu{refdes}:
+    required:  Yes
+    required_msg: El número de Despacho no puede estar en Blanco.
+
+CodalmExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Cadefalm
+        column:       codalm
+        unique_error: El Código de Almacén debe Existir.
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        fadevolu
+        column:       dphart
+        unique_error: El Número de Despacho ya existe. Por Favor, Cambiélo por otro.
+
+
+#FechaValidator:
+#    class:         CidesaDateNow
+#    param:
+#        compare: 'now'
+#        compare_error: La Fecha no puede ser menor a la Fecha Actual
+#        operator: '>='
+#        date_error:  Fecha Inválida
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripción no puede pasar mas de 100 caracteres
+

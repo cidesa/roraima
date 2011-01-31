@@ -1,0 +1,32 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Rhtitcur
+    theme:            cidesaGenerator
+    fields:
+      codtit:                 { name: Código, params: maxlength=4 size=10 onFocus="if($('id').value!='')$(this.id).readOnly=true" }
+      nomtit:                 { name: Nombre, readonly : true, params: maxlength=250 size=60 }
+
+    list:
+      title:              Definición  Título del Curso
+      display:            [=codtit, nomtit]
+      filters:            [codtit, nomtit]
+      max_pers:           10
+      sort:               codtit
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Edición de Definición Título del Curso
+      display:
+        Datos Area del Curso:   [codtit, nomtit]  
+      fields:
+        codtit:
+          params:     maxlength=4,size=5 onBlur  = "$(this.id).value=$(this.id).value.pad(4,'0',0)"  
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

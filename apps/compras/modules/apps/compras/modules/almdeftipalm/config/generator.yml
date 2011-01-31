@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Catipalm
+    theme:            cidesaGenerator
+    fields:
+      nomtip:         { name: Nombre Tipo}
+
+    list:
+      title:          Listado de Tipos
+      display:        [ =nomtip]
+      filters:        [nomtip]
+      sort:           nomtip
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:   Edición de Tipos
+      display:
+        Datos Generales: [nomtip]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:        ~
+        _delete:      ~

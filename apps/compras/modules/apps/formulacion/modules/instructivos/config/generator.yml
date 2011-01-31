@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Forcfgrepins
+    theme:            cidesaGenerator
+    fields:
+      nrofor:           {name:  Codigo Reporte, params: size=20 maxlength=20 onfocus=readonlytool(this.id)}
+      descripcion:      {name:  Nombre Reporte, params: onfocus=readonlytool(this.id)}
+      cuentas:          {name:  .}
+
+    list:
+      title:           Listado de Reportes
+      display:         [=nrofor, descripcion]
+      object_actions:
+        _edit:        ~
+        _delete:        ~
+      max_per_page:   5
+      sort:  nrofor
+
+    edit:
+      display:
+        Datos del Reporte: [nrofor, descripcion]
+        Datos del las Cuentas: [_cuentas]
+      title:           Configuracion de Reportes
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

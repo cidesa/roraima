@@ -1,0 +1,32 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Nphojint
+    theme:            cidesaGenerator
+    fields:
+      codemp: { name: Empleado, params: maxlength=16 size=16 ReadOnly="true" }
+      nomemp: { name: Apellido(s) y Nombre(s), params: ReadOnly="true" }
+      codnom2: { name: Cod.Nomina, params: size=8}
+      nomnom: { name: Nomina, params: size=60}
+      codcar: { name: Cod.Cargo, params: size=8}
+      nomcar: { name: Cargo, params: size=60}
+
+      grip:   { name: .}
+
+    list:
+      title:          Registro de Faltas y Permisos por Empleado
+      filters:        [codemp ]
+      display:        [=codemp, nomemp ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:  10
+    edit:
+      title:          Registro de Faltas y Permisos por Empleado
+      display:
+        NONE:        [codemp, nomemp, codnom2, nomnom, codcar, nomcar ]
+        Faltas y/o Permisos:        [_grip ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      NONE

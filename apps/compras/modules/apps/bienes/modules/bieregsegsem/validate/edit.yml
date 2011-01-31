@@ -1,0 +1,88 @@
+methods:
+  post:
+   - "bnsegsem{codact}"
+   - "bnsegsem{codsem}"
+   - "bnsegsem{nrosegsem}"
+   - "bnsegsem{fecsegsem}"
+   - "bnsegsem{nomsegsem}"
+   - "bnsegsem{cobsegsem}"
+   - "bnsegsem{monsegsem}"
+   - "bnsegsem{fecsegven}"
+   - "bnsegsem{prosegsem}"
+
+names:
+  bnsegsem{codact}:
+    required:  Yes
+    required_msg: El Código de Nivel no puede estar en Blanco.
+    #validators: UniqueValidator
+
+  bnsegsem{codsem}:
+    required:  Yes
+    required_msg: El Código del Activo no puede estar en Blanco.
+    #validators: UniqueValidator
+
+  bnsegsem{nrosegsem}:
+    required:  Yes
+    required_msg: El número de la Poliza no puede estar en Blanco.
+    ##validators: ExistValidator2
+
+  bnsegsem{fecsegsem}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    ##validators: FechaValidator
+
+  bnsegsem{nomsegsem}:
+    required:  Yes
+    required_msg: La Compañia Aseguradora no puede estar en Blanco.
+    #validators: DescripcionValidator
+
+  bnsegsem{cobsegsem}:
+    required:  Yes
+    required_msg: La Cobertura no puede estar en Blanco.
+    #validators: ExistValidator
+
+  bnsegsem{monsegsem}:
+    required:  Yes
+    required_msg: El Monto no puede estar en Blanco.
+
+  bnsegsem{fecsegven}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    ##validators: FechaValidator
+
+
+  bnsegsem{prosegsem}:
+    required:  Yes
+    required_msg: El promotor no puede estar en Blanco.
+    #validators: DescripcionValidator2
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Bncobseg
+        column:       Codcob
+        unique_error: La Cobertura debe Existir.
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Cacotiza
+        column:       refcot
+        unique_error: El Código de Nivel ya existe. Por Favor, Cambiélo por otro.
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Compañia Aseguradora no puede tener menos de 2 caracteres
+        max:       254
+        max_error: La Compañia Aseguradora no puede pasar mas de 254 caracteres
+
+DescripcionValidator2:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Promotor no puede tener menos de 2 caracteres
+        max:       254
+        max_error: El Promotor no puede pasar mas de 254 caracteres
+

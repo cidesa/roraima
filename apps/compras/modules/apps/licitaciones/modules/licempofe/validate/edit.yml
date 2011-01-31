@@ -1,0 +1,16 @@
+methods:
+  post:
+   - "liempofe{lireglic_id}"
+
+names:
+  liempofe{lireglic_id}:
+    required:  Yes
+    required_msg: El Código de la Licitación no puede estar en Blanco
+    validators: Validator_numsol
+
+Validator_numsol:
+    class: CidesaExistValidator
+    param:
+        class:    Lireglic
+        column:   id
+        unique_error: El Código de la Licitación no existe.

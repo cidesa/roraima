@@ -1,0 +1,21 @@
+methods:
+  post:
+   - "fatipdev{nomtidev}"
+
+
+names:
+
+  fatipdev{nomtidev}:
+    required:  Yes
+    required_msg: Debe insertar el nombre del tipo de devolución
+    validators: Vstring_1_255_0
+
+
+
+Vstring_1_255_0:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no puede tener menos de 1 caracteres
+        max:       255
+        max_error: La descripción no puede tener más de 255 caracteres

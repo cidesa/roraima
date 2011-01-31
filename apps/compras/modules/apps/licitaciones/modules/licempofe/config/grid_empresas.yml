@@ -1,0 +1,50 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   liempofe
+  ancho:				   950
+  anchogrid:               900
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Oferente
+  tipo:                    k
+  nombrecampo:             oferente
+  html:                    [size="10" ]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Código Empresa
+  tipo:                    t
+  nombrecampo:             codpro
+  esgrabable:			   true
+  html:                    [size='12']
+3:       # Columna 3
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nompro
+  html:                    [readonly=true size=25]
+4:       # Columna 4
+  titulo:                  Fecha
+  tipo:                    f
+  nombrecampo:             fecins
+  esgrabable:			   true
+  html:                    [ ]
+5:       # Columna 5
+  titulo:                  Precalifica
+  tipo:                    k
+  nombrecampo:             precal
+  esgrabable:			   true
+  html:                    [ ]
+6:       # Columna 6
+  titulo:                  Monto Total
+  tipo:                    m
+  nombrecampo:             montot
+  esgrabable:			   true
+  html:                    [size=10]
+7:       # Columna 7
+  titulo:                  Observaciones
+  tipo:                    t
+  nombrecampo:             observaciones
+  html:                    [size="30" maxlength=1000]
+  esgrabable:              true

@@ -1,0 +1,46 @@
+methods:
+  post:
+   - "carecaud{codrec}"
+   - "carecaud{desrec}"
+   - "carecaud{codtiprec}"
+
+
+names:
+  carecaud{codrec}:
+    required:  Yes
+    required_msg: El Codigo de la Retención no puedo estar en Blanco
+    validators: Validator_codrec
+
+  carecaud{desrec}:
+    required:  Yes
+    required_msg: La Descripción no puedo estar en Blanco
+    validators: Validator_desrec
+
+  carecaud{codtiprec}:
+    required:  Yes
+    required_msg: El Codigo Contable no puedo estar en Blanco
+    validators: ExistValidator_codtiprec
+
+
+Validator_codrec:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Carecaud
+        column:   codrec
+        unique_error:   El Código del Recaudo ya existe. Por Favor, Intente con otro.
+
+Validator_desrec:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción del Recaudo no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La Descripción del Recaudo no puede tener más de 100 caracteres
+
+
+ExistValidator_codtiprec:
+    class: CidesaExistValidator
+    param:
+        class:        Catiprec
+        column:       codtiprec
+        unique_error: El Código del Grupo debe Existir.

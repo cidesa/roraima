@@ -1,0 +1,40 @@
+bienes:
+  1:
+    Name: Cómo utilizar la Ayuda
+    URL:  Como_utilizar_ayuda.htm
+    1.1:
+      Name: Buscar un Tema de Ayuda
+      URL:  'Como_utilizar_ayuda.htm#BuscarTema'
+    1.2:
+      Name: Copiar un Tema de Ayuda
+      URL:  'Como_utilizar_ayuda.htm#CopiarTema'
+    1.3:
+      Name: Imprimir un Tema de Ayuda
+      URL:  'Como_utilizar_ayuda.htm#ImprimirTema'
+    1.4:
+      Name: Moverse por los Temas de Ayuda
+      URL:  'Como_utilizar_ayuda.htm#Moverse'
+    1.5:
+      Name: Cambiar el Tamaño de la Ventana de Ayuda
+      URL:  'Como_utilizar_ayuda.htm#CambiarTamaño'
+    1.6:
+      Name: Ocultar y Mostrar el Contenido
+      URL:  'Como_utilizar_ayuda.htm#OcultaryMostrar'
+  2:
+    Name: Descripción General del Subsistema
+    URL:  Descripcion_General_Sistema.htm
+    2.1:
+      Name: Objetivos Generales
+      URL:  'Descripcion_General_Sistema.htm#Objetivos'
+    2.2:
+      Name: Requerimientos del Sub-Sistema
+      URL:  'Descripcion_General_Sistema.htm#Requerimientos'
+    2.3:
+      Name: Hardware
+      URL:  'Descripcion_General_Sistema.htm#Hardware'
+    2.4:
+      Name: Software
+      URL:  'Descripcion_General_Sistema.htm#Software'
+    2.5:
+      Name: Instalación del Sub-Sistema
+      URL:  'Descripcion_General_Sistema.htm#Instalacion'

@@ -1,0 +1,143 @@
+methods:
+  post:
+   - "tsdefcajchi{codcaj}"
+   - "tsdefcajchi{descaj}"
+   - "tsdefcajchi{cedrif}"
+   - "tsdefcajchi{codcat}"
+   - "tsdefcajchi{numcue}"
+   - "tsdefcajchi{codtip}"
+   - "tsdefcajchi{tipcau}"
+   - "tsdefcajchi{monape}"
+   - "tsdefcajchi{porrep}"
+   - "tsdefcajchi{numini}"
+   
+
+names:
+  tsdefcajchi{codcaj}:
+    required:  Yes
+    required_msg: El Código de Caja Chica no puedo estar en Blanco
+    validators: Validator_codcaj, CodigoValidator
+
+  tsdefcajchi{descaj}:
+    required:  Yes
+    required_msg: La Descripción de Caja Chica no puedo estar en Blanco
+    validators: Validator_descaj
+
+  tsdefcajchi{cedrif}:
+    required:  Yes
+    required_msg: El Beneficiario de Caja Chica no puedo estar en Blanco
+    validators: ExistValidator_cedrif
+
+  tsdefcajchi{codcat}:
+    required:  Yes
+    required_msg: La Categoria de Caja Chica no puedo estar en Blanco
+    validators: ExistValidator_codcat
+
+  tsdefcajchi{numcue}:
+    required:  Yes
+    required_msg: La Cuenta Bancaria de Caja Chica no puedo estar en Blanco
+    validators: ExistValidator_numcue
+
+  tsdefcajchi{codtip}:
+    required:  Yes
+    required_msg: El Moviento de Salida de Caja Chica no puedo estar en Blanco
+    validators: ExistValidator_codtip
+
+  tsdefcajchi{tipcau}:
+    required:  Yes
+    required_msg: El Moviento de Rendición de Caja Chica no puedo estar en Blanco
+    validators: ExistValidator_tipcau
+
+  tsdefcajchi{monape}:
+    required:  No
+    validators: MontoValidator
+
+  tsdefcajchi{porrep}:
+    required:  No
+    validators: Num3Validator, Porcen1Validator
+
+  tsdefcajchi{numini}:
+    required:  No
+    validators: InicialCajChiValidator
+
+
+Validator_codcaj:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Tsdefcajchi
+        column:       codcaj
+        unique_error: El registro ya Existe intente con otro.
+
+
+ExistValidator_numcue:
+    class: CidesaExistValidator
+    param:
+        class:        Tsdefban
+        column:       numcue
+        unique_error: La cuenta Bancaria de Caja Chica no Existe.
+
+ExistValidator_codtip:
+    class: CidesaExistValidator
+    param:
+        class:        Tstipmov
+        column:       codtip
+        unique_error: El Movimiento de Salida de Caja Chica no Existe.
+
+ExistValidator_tipcau:
+    class: CidesaExistValidator
+    param:
+        class:        Cpdoccau
+        column:       tipcau
+        unique_error: El Movimiento de Rendición de Caja Chica no Existe.
+
+ExistValidator_cedrif:
+    class: CidesaExistValidator
+    param:
+        class:        Opbenefi
+        column:       cedrif
+        unique_error: El Beneficiario de Caja Chica no Existe.
+
+ExistValidator_codcat:
+    class: CidesaExistValidator
+    param:
+        class:        Npcatpre
+        column:       codcat
+        unique_error: La Categoría de Caja Chica no Existe.
+
+CodigoValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: El Código de Caja Chica solo puede contener valores númericos
+
+InicialCajChiValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: El Número Inicial de Caja Chica solo puede contener valores númericos
+
+MontoValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El valor introducido no cumple con el formato para montos
+
+Num3Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El Porcentaje de Reposición de Caja Chica solo puede contener valores númericos
+
+Porcen1Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^(0*100{1,1}\,?((?<=\,)0*)?%?$)|(^0*\d{0,2}\,?((?<=\,)\d*)?%?)$/' ]
+        values_error: El Porcentaje de Reposición de Caja Chica debe estar entre 0-100
+
+Validator_descaj:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 250 caracteres

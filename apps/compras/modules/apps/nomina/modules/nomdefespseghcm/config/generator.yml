@@ -1,0 +1,54 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npseghcm
+    theme:            cidesaGenerator
+    fields:    
+      codnom:
+        name: Nómina
+        msj_error: Código de Nómina es necesario
+        catalogo:  
+          catalogoweb: Npnomina_nomdefespvar
+          clase: Npnomina 
+          ajax: 0
+          parametros: getprincipal="getCodnom" getsecundario="getNomnom" campoprincipal="codnom" camposecundario="nomnom" campobase = "id"                 
+      codcon:
+        name: Concepto Dedución
+        msj_error: Código de concepto es necesario
+        catalogo:  
+          catalogoweb: Npdefcpt_Vacdefgen
+          clase: Npdefcpt 
+          ajax: 0
+          parametros: getprincipal="getCodcon" getsecundario="getNomcon" campoprincipal="codcon" camposecundario="nomcon" campobase = "id"                     
+          catalogoparams: /param1/'."'+$('npseghcm_codnom').value+'".'
+      conceptoaporte:
+        name:.
+      codconapo:
+        name:   Concepto Aporte  
+      nomnom:    {name: Descripción}  
+      nomcon:    {name: Descripción}
+      nomconapo: {name: Descripción}
+      gridparientes:
+        name:.   
+    
+    list:
+      title:              Listado de Conceptos de Seguro HCM
+      display:            [=codnom, nomnom, codcon, nomcon, codconapo, nomconapo]            
+      filters:            [codnom, codcon, codconapo]
+      max_pers:           10
+      sort:               codnom
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~   
+      
+    edit:
+      title:              Edicion de Conceptos de Seguro HCM
+      display:
+        Datos Nómina y Conceptos:   [codnom, codcon, _conceptoaporte]  
+        Detalle para el Cálculo del Seguro H.C.M: [_gridparientes]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

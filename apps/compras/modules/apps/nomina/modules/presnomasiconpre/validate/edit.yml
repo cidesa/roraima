@@ -1,0 +1,17 @@
+methods:
+  post:
+   - "npasipre{codcon}"
+   - "npasipre{codasi}"
+   - "npasipre{desasi}"
+names:
+  npasipre{codcon}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+
+  npasipre{codasi}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+
+  npasipre{desasi}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco

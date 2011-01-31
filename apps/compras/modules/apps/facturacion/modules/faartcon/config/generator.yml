@@ -1,0 +1,32 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Caconmer
+    theme:            cidesaGenerator
+
+    fields:
+      conmer: { name: Consignación de Mercancía }
+      feccon: { name: Fecha de la Consignación }
+      descon: { name: Descripción de la Consignación }
+      codpro: { name: Código del Producto }
+      numdoc: { name: Número del Documento }
+      moncon: { name: Monto de la Consignación }
+      stacon: { name: Status de la Consignación }
+      codalm: { name: Código del Almacen }
+      numcom: { name: Número de Compra }
+      desart: { name: Descripción del Artículo }
+      codart: { name: Código del Artículo }
+      codpro: { name: Código del Proveedor }
+      rifpro: { name: Rif del Proveedor }
+      nompro: { name: Nombre del Proveedor }
+      nomalm: { name: Nombre del Almacén }
+      codalm: { name: Código del Almacén }
+
+    edit:
+      title: Condiciones de Pago
+      display:
+        "NONE": [numdoc, codalm, codpro, feccon, moncon]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

@@ -1,0 +1,31 @@
+methods:
+  post:
+   - "lioferpre{lireglic_id}"
+   - "lioferpre{codpro}"
+
+names:
+  lioferpre{lireglic_id}:
+    required:  Yes
+    required_msg: El Código de la Licitación no puede estar en Blanco
+    validators: Validator_numsol
+
+  lioferpre{codpro}:
+    required:  Yes
+    required_msg: El Código de la Empresa Oferente no puede estar en Blanco
+    validators: Validator_codpro
+
+
+Validator_numsol:
+    class: CidesaExistValidator
+    param:
+        class:    Lireglic
+        column:   id
+        unique_error: El Código de la Licitación no existe.
+
+Validator_codpro:
+    class: CidesaExistValidator
+    param:
+        class:    Caprovee
+        column:   codpro
+        unique_error: El Código de la Empresa no existe.
+

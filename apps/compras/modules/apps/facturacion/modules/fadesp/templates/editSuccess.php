@@ -1,0 +1,38 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ */
+// date: 2007/03/16 11:39:26
+?>
+<?php use_helper('Object', 'Validation', 'ObjectAdmin', 'I18N', 'Date', 'Grid', 'SubmitClick', 'tabs', 'Javascript', 'PopUp') ?>
+
+<?php use_stylesheet('/sf/sf_admin/css/main') ?>
+
+<div id="sf_admin_container">
+<?php if ($despnotent=="") {?>
+<h1><?php echo __('Edición de Despachos',
+array()) ?></h1>
+<?php }else {?>
+<h1><?php echo __('Edición de Nota de Entrega',
+array()) ?></h1>
+<?php }?>
+
+<div id="sf_admin_header">
+<?php include_partial('fadesp/edit_header', array('cadphart' => $cadphart)) ?>
+</div>
+
+<div id="sf_admin_content">
+<?php include_partial('fadesp/edit_messages', array('cadphart' => $cadphart, 'labels' => $labels)) ?>
+<?php include_partial('fadesp/edit_form', array('cadphart' => $cadphart, 'obj' => $obj, 'mascarapartida' => $mascarapartida, 'forubi' => $forubi, 'lonubi'=>$lonubi, 'mascaraubicacionalm'=>$mascaraubicacionalm, 'lonubialm'=>$lonubialm, 'labels' => $labels, 'numreg' => $numreg, 'despnotent' => $despnotent)) ?>
+</div>
+
+<div id="sf_admin_footer">
+<?php include_partial('fadesp/edit_footer', array('cadphart' => $cadphart)) ?>
+</div>
+
+</div>

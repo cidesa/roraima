@@ -1,0 +1,18 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Módulo Nómina
+    robots:       index, follow
+    description:  Módulo Nómina
+    keywords:     Módulo Nómina
+    language:     en
+
+  stylesheets:    [main]
+
+  javascripts:    [%SF_PROTOTYPE_WEB_DIR%/js/prototype, tools, observe, ajax, nomina/nomperhispre]
+
+
+  has_layout:     on
+  layout:         layout

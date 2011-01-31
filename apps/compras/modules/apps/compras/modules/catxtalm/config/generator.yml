@@ -1,0 +1,51 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cacontxtalm
+    theme:            cidesaGenerator
+    fields:
+      codalm:
+        name: Código de Almacén
+        params: maxlength=20
+        catalogo:
+          catalogoweb: Cadefalm_Alminvfis
+          clase: Cadefalm
+          ajax: 0
+          parametros: getprincipal="getCodalm" getsecundario="getNomalm" campoprincipal="codalm" camposecundario="nomalm" campobase = "id"
+      nomalm: { name: Descripción }
+      iniart: { name: Posición Inicial}
+      finart: { name: Cantidad Caracteres}
+      inides: { name: Posición Inicial}
+      findes: { name: Cantidad Caracteres}
+      inican: { name: Posición Inicial}
+      fincan: { name: Cantidad Caracteres}
+      inisub: { name: Posición Inicial}
+      finsub: { name: Cantidad Caracteres}
+      iniiva: { name: Posición Inicial}
+      finiva: { name: Cantidad Caracteres}
+      inipre: { name: Posición Inicial}
+      finpre: { name: Cantidad Caracteres}
+    list:
+      title: Configuración para Archivos TXT de Ventas
+      display: [=codalm, nomalm]
+      filters: [codalm]
+      object_actions:
+       _edit:        ~
+       _delete:      ~
+      max_per_page:	  10
+      sort:    codalm
+    edit:
+      title:          Edición de Configuración para Archivos TXT de Ventas
+      display:
+        "Almacén":  [codalm]
+        "Articulo": [iniart, finart]
+        "Descripción Art.": [inides, findes]
+        "Cantidad": [inican, fincan]
+        "Sub-Total": [inisub, finsub]
+        "IVA": [iniiva, finiva]
+        "Precio": [inipre, finpre]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

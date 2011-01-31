@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+   <xliff version="1.0">
+       <file orginal="global" source-language="en" datatype="plaintext">
+         <body>
+         <trans-unit id="1">
+           <source>create</source>
+           <target>Nuevo</target>
+         </trans-unit>
+         <trans-unit id="2">
+           <source>filter</source>
+           <target>Filtrar</target>
+         </trans-unit>
+         <trans-unit id="3">
+           <source>reset</source>
+           <target>Limpiar</target>
+         </trans-unit>
+         <trans-unit id="4">
+           <source>results</source>
+           <target>Resultados</target>
+         </trans-unit>
+         <trans-unit id="5">
+           <source>Actions</source>
+           <target>Acciones</target>
+         </trans-unit>
+         <trans-unit id="6">
+           <source>filters</source>
+           <target>Filtro</target>
+         </trans-unit>
+         <trans-unit id="7">
+           <source>delete</source>
+           <target>Eliminar</target>
+         </trans-unit>
+         <trans-unit id="8">
+           <source>edit</source>
+           <target>Editar</target>
+         </trans-unit>
+         <trans-unit id="9">
+           <source>list</source>
+           <target>Lista</target>
+         </trans-unit>
+         <trans-unit id="10">
+           <source>save</source>
+           <target>Guardar</target>
+         </trans-unit>
+         <trans-unit id="11">
+           <source>save and add</source>
+           <target>Guardar y Nuevo</target>
+         </trans-unit>
+         <trans-unit id="12">
+           <source>Are you sure?</source>
+           <target>¿Esta seguro de eliminar?</target>
+         </trans-unit>
+         <trans-unit id="13">
+           <source>Your modifications have been saved</source>
+           <target>Tus modificaciones han sido guardadas</target>
+         </trans-unit>
+         <trans-unit id="14">
+           <source>no result</source>
+           <target>Sin Resultados</target>
+         </trans-unit>
+         <trans-unit id="15">
+           <source>result</source>
+           <target>Resultado</target>
+         </trans-unit>
+         <trans-unit id="16">
+           <source>results</source>
+           <target>Resultados</target>
+         </trans-unit>
+         <trans-unit id="17">
+           <source>There are some errors that prevent the form to validate</source>
+           <target>Hay algunos Errores en el Formulario</target>
+         </trans-unit>
+         <trans-unit id="18">
+           <source>Could not delete the selected Catiprec</source>
+           <target>No puede eliminar el registro seleccionado</target>
+         </trans-unit>
+         <trans-unit id="19">
+           <source>Could not delete the selected Catiprec. Make sure it does not have any associated items.</source>
+           <target>Tiene Registros Asociados</target>
+         </trans-unit>
+         <trans-unit id="20">
+           <source>Could not delete the selected</source>
+           <target>Non se puede eliminar el registro de</target>
+         </trans-unit>
+       </body>
+    </file>
+</xliff>
+

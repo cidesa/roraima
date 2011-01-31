@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "cpdeftit{codpre}"
+   - "cpdeftit{nompre}"
+
+
+names:
+
+  cpdeftit{codpre}:
+    required:  Yes
+    required_msg: Debe colocar el código del título presupuestario
+    validators: Vunico_0
+
+
+  cpdeftit{nompre}:
+    required:  Yes
+    required_msg: Debe colocar la descripción del título presupuestario
+
+
+
+Vunico_0:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Cpdeftit
+        column:       codpre
+        unique_error: El registro ya Existe intente con otro.
+
+
+
+

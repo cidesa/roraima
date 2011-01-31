@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npasicatconemp
+    theme:            default
+    fields:
+      codcon:       { name: Codigo Del Concepto, params: maxlength=10,size=10  }
+      nomcon:       { name: Descripcion Del Concepto, params: size=20  }         
+      
+    list:
+      title:          Asignación de Categorias por Empleados
+      display:        [=codcon, nomcon]
+      filters:		  [codcon]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+        _delete:      ~           
+      sort:  codcat        
+        
+    edit:
+      title:          Asignación de Categorias por Empleados
+      display:        [codcon, nomcon]
+      actions:  
+        _list:        ~      
+        _save:        ~
+        _create:      ~

@@ -1,0 +1,38 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tsmovtra
+    theme:            default
+    fields:
+      reftra: { name: Referencia, params: maxlength=20}
+      fectra: { name: Fecha, params: date_format='dd/MM/yyyy'}
+      destra: { name: Descripción}
+      ctaori: { name: Cód. Desde, params: maxlength=20}
+      nombancodesde: { name: Nombre Banco, params: maxlength=20}
+      ctades: { name: Cód. Hasta, params: maxlength=20}
+      nombancohasta: { name: Nombre Banco, params: maxlength=20}
+      tipmovdesd: { name: Mov. Débito, params: maxlength=20}
+      destipmovdeb: { name: Descrip. Débito, params: maxlength=20}
+      tipmovhast: { name: Mov. Crédito, params: maxlength=20}
+      destipmovcre: { name: Descrip. Crédito, params: maxlength=20}
+      montra: { name: Monto, params: size=25}
+      numcom: { name: Número}
+      desnumcom: { name: Descripción}
+      fectracon: { name: Fecha}
+    list:
+      title:          Transferencias Bancarias
+      filters:        [reftra, destra, fectra]
+      display:        [=reftra, destra, fectra, montra]
+      sort:           reftra
+      max_per_page:	  8
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edición Transferencias Bancarias
+      display:        [reftra, fectra, fectra, destra, ctaori, nombancodesde, ctades, nombancohasta, tipmovdesd, destipmovdeb, tipmovhast, destipmovcre, montra, numcom, desnumcom, fectracon, idrefer]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

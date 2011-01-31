@@ -1,0 +1,33 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Ocdefpar
+    theme:            cidesaGenerator
+    fields:
+      codpar: { name: Código, params: size=20 maxlength=32}
+      despar: { name: Descripción, type: textarea_tag, params: size=60x5 maxlength=250 onkeyup="ismaxlength(this)"}
+      codtippar: { name: Tipo}
+      renpar: { name: Rendimiento, params: size=20 maxlength=16}
+      coduni: { name: Unidad, params: size=15 maxlength=4}
+      desuni: { name: Descripción}
+      cosuni: { name: Costo Unitario}
+      coscoling: { name: Costo Colegio de Ingenieros}
+      cosconstruc: { name: Costo Construcción}
+    list:
+      title:  Partidas
+      display: [=codpar, despar]
+      filters: [codpar, despar]
+      max_per_page:   10
+      sort: codpar
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title: Edición de Partidas
+      display:
+        "NONE": [codpar, despar, _codtippar, renpar, _coduni, cosuni, coscoling, cosconstruc]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

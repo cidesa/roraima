@@ -1,0 +1,38 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fccatfis
+    theme:            cidesaGenerator
+
+    fields:
+      codcatfis:  { name: Código, params: size=33 maxlength=30}
+      nomcatfis:  { name: Descripcion, type: textarea_tag, params: size=30x2 maxlength=254}
+      linnor:  { name: Norte, type: textarea_tag, params: size=30x2 maxlength=254}
+      linsur:  { name: Sur, type: textarea_tag, params: size=30x2 maxlength=254}
+      linest:  { name: Este, type: textarea_tag, params: size=30x2 maxlength=254}
+      linoes:  { name: Oeste, type: textarea_tag, params: size=30x2 maxlength=254}
+    list:
+      title:     Definición Catastro con Fines Fiscales
+      display:   [=codcatfis, nomcatfis]
+      sort:      nomcatfis
+      filters:   [codcatfis, nomcatfis]
+      fields:
+        codcatfis:
+          params: size=18
+        nomcatfis:
+          params: size=18
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:  codcatfis
+    edit:
+      title:          Edición Catastro con Fines Fiscales
+      display:
+        "Datos Generales":   [ _codcatfis, nomcatfis ]
+        "Linderos":   [ linnor, linsur, linest, linoes ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

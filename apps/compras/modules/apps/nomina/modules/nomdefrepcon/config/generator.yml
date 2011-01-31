@@ -1,0 +1,30 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npdefrepcon
+    theme:            cidesaGenerator
+    fields:
+      codrep:         { name: Codigo Reporte, params: size=5 maxlength=3}
+      desrep:         { name: DescripciÃ³n}
+      grid:           { name: .}
+
+    list:
+       title:         Listado Conceptos-Reportes
+       display:       [=codrep, desrep]
+       filters:       [codrep, desrep]
+       sort:          codrep
+       objects_actions:
+         _delete:     ~
+         _edit:       ~
+       actions:
+         _create:     ~
+    edit:
+      title:          EdiciÃ³n de Conceptos-Reportes
+      display:
+        ConfiguraciÃ³n de las Columnas del Reporte:   [codrep, desrep, _grid]
+      fields:
+        desrep:       {params: size=80 maxlenght=1000}
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

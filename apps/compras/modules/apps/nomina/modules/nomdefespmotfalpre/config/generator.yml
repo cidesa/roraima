@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npmotfal
+    theme:            default
+
+    fields:
+      codmotfal :    { name: Código, params: maxlength=4,size=5}
+      desmotfal :    { name: Descripción, params: size=20}
+      causa		:    { name: Causa }
+      esremun:    { name: Es Remunerado }
+
+    list:
+      title:          Motivos de Faltas y/o Permisos
+      display:        [=codmotfal, desmotfal, causa]
+      filters:		  [codmotfal, desmotfal]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort: codmotfal
+    edit:
+      title:          Edición de los Motivos de Faltas y/o Permisos
+      display:        [codmotfal, desmotfal, causa, esremun]
+      actions:
+        _list:     ~
+        _save:     ~
+        _delete:   ~
+        _create:   ~

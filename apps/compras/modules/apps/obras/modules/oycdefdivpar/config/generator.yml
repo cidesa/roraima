@@ -1,0 +1,32 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocparroq
+    theme:            default
+    fields:
+      codpai:       { name: Paìs }
+      codedo:       { name: Estado }
+      codmun:       { name: Municipio }
+      codpar:       { name: Código }
+      nompar:       { name: Nombre }
+      nompai:       { name: País}
+      nomedo:       { name: Estado}
+      nommun:       { name: Municipio}
+
+    list:
+      title:          Parroquias
+      filters:        [codpar]
+      display:        [=codpar, nompar, nomedo, nompai, nommun]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+
+    edit:
+      title:          Edición de Parroquias
+      display:        [codpai, codedo, codmun, codpar, nompar]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

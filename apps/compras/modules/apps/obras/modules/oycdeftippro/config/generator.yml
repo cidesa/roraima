@@ -1,0 +1,27 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Octipprl
+    theme:            default
+
+    fields:
+      codtippro:      { name: Código}
+      destippro:      { name: Descripción}
+
+    list:
+      title:          Tipos de Profesional
+      filters:		  [codtippro, destippro]
+      display:        [=codtippro, destippro]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:           codtippro
+
+    edit:
+      title:          Edición Tipos de Profesional
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

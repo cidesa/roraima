@@ -1,0 +1,51 @@
+SVN Manager Plugin
+==================
+
+Provides an Web-Interface for your SVN-Repository, allow you to view, update and revert your repositorys directly via Web-Browser.
+This Plugin is Version 0.1 alpha and in very early stage of development and should not be used in production envirements.
+
+If you encounter any problems please report the bugs. We would also appreciate patches.
+
+
+Notice: Testet only with svn version 1.4.4
+
+
+Installation
+------------
+
+1. Install plugin
+   `$ symfony plugin:install scSvnManagementPlugin`
+2. If necessary enable plugin
+   `$this->enablePlugins(array('scSvnManagementPlugin')); `
+3. enable module in *settings.yml*
+   `enabled_modules:   [default, scSvnManagementUI]`
+4. change *plugins/scSvnManagementPlugin/config/svn.yml*
+   - workingCopyPath: path to your SVN working copy. Default it's set to your symfony-project root
+   - logPath: path to store log-files. Default it's set to *plugins/scSvnManagementPlugin/log*
+     Be sure you have **write permisson** to this directory
+   - username: name of SVN user
+   - password: password of SVN user
+5. clear symfony cache
+   `$ symfony cc`
+6. make sure you prevent apache from exporting .svn directories. Add this to your *httpd.conf*:
+   `<DirectoryMatch "^/.*/\.svn/">
+    Order deny,allow
+    Deny from all
+</DirectoryMatch>`  
+   
+
+Copyright
+---------
+
+Copyright 2009 by [Schwarz Computer Systeme GmbH](http://schwarz.de)
+
+Developers
+----------
+
+[Stefan Englmann](mailto://stefan.englmann@schwarz.de)
+
+[Matthias Krauser](mailto://matthias.krauser@schwarz.de)
+
+
+
+

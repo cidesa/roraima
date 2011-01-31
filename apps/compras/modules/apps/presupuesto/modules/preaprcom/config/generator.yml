@@ -1,0 +1,16 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpcompro
+    theme:            cidesaGenerator
+
+    fields:
+      grip:   { name: .}
+
+    edit:
+      title:          Aprobación del Compromiso para su Causado por Lotes
+      display:
+        "Compromisos":   [_grip ]
+      #display:        [stacon, abrstacon, stagob, abrstagob, stapre, abrstapre]
+      actions:
+        _save:        ~

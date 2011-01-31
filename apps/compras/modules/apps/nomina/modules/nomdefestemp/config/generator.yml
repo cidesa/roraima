@@ -1,0 +1,29 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npestemp
+    theme:            cidesaGenerator
+    fields:
+      codestemp:      { name: Código, params: size=10 maxlength=1 onBlur  = "$(this.id).value=$(this.id).value.toUpperCase()"} 
+      desestemp:      { name: Descripción, params: maxlength=100 }
+   
+    list:
+      title:              Definicion de Estatus del Empleado
+      display:            [=codestemp, desestemp]
+      filters:            [codestemp, desestemp]
+      max_pers:           10
+      sort:               codestemp
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Edicion de Definicion de Estatus del Empleado
+      display:
+        Definción de Valores:   [codestemp, desestemp]  
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

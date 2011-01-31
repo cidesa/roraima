@@ -1,0 +1,18 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Módulo de Licitaciones
+    robots:       index, follow
+    description:  Módulo de Licitaciones
+    keywords:     Módulo de Licitaciones
+    language:     en
+
+  stylesheets:    [main]
+
+  javascripts:    [%SF_PROTOTYPE_WEB_DIR%/js/prototype]
+
+  has_layout:     on
+  layout:         layout_generales
+

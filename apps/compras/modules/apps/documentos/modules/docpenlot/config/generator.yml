@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Dfatendoc
+    theme:            cidesaGenerator
+    fields:
+      coddoc:         { name : Código }
+      desdoc:         { name : Descripción, type: textarea_tag, params: size=80x3 }
+      staate:         { name : Estatus }
+      anuate:         { name : Estado Atencion }
+      estado:         { name : Documento }
+      id_dftabtip:    { name : Tipo Documento, params: include_custom=Seleccione... }
+      desate:         { name : Descripción de la Atención }
+      infdoc1:        { name : Inf. Adicional 1 }
+#      destra:         { name : Descripción del medio de transporte }
+#      desate:         { name : Descripción de la Atención/Observación }
+#      diaent:         { name : Dias de Entregas }
+#      id_dfmedtra:    { name : Medio de Transporte }
+      grid:           { name : . }
+
+    edit:
+      title:          Atención de Documentos
+      display:        
+        Filtro:      [ id_dftabtip, _staate, _anuate, _filtro, desdoc ]
+        Documentos:  [ _marcar, _grid ]
+      actions:
+        _save:        ~

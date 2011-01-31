@@ -1,0 +1,22 @@
+methods:
+  post:
+   - "fcfuepre{codfue}"
+   - "fcfuepre{nomfue}"
+
+names:
+  fcfuepre{codfue}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+    validators: Validator_codfue
+
+  fcfuepre{nomfue}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido
+
+
+Validator_codfue:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fcfuepre
+        column:       codfue
+        unique_error: El registro ya Existe intente con otro.

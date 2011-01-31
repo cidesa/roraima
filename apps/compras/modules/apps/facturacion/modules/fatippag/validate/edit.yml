@@ -1,0 +1,21 @@
+methods:
+  post:
+   - "fatippag{destippag}"
+
+
+names:
+
+  fatippag{destippag}:
+    required:  Yes
+    required_msg: Debe insertar el nombre del tipo de pago
+    validators: Vstring_1_30_0
+
+
+
+Vstring_1_30_0:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El nombre no puede tener menos de 1 caracteres
+        max:       30
+        max_error: El nombre no puede tener más de 30 caracteres

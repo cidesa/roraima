@@ -1,0 +1,19 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Apernueper
+    theme:            cidesaGenerator
+    fields:
+      nomtab:      {name: Tablas}
+      info:      {name: Información}
+      modulo:    {name: Módulo}
+      concatenado:{ name: .}
+    edit:
+      title:          Tablas a Limpiar
+      display:
+        "Datos":      [_info, _modulo, _nomtab, concatenado]
+      fields:
+        concatenado:  { params: style="display: none" disabled=false size=100}
+      actions:
+        _save:
+          name: Aceptar

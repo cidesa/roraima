@@ -1,0 +1,15 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Tsrelasiord
+    theme:            cidesaGenerator
+    fields:
+      ctagasxpag: { name: Cuenta de Gastos x Pagar}
+      ctaordxpag: { name: Cuenta de Orden x Pagar}
+      grid: { name: . }
+    edit:
+      title:          Relación de Cuentas para Asientos de Ordenes Aprobadas
+      display:
+        "Cuentas Contables": [_grid]
+      actions:
+        _save:        ~

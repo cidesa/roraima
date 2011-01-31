@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Bdcriterio
+    theme:            cidesaGenerator
+    fields:
+      numero: { name: Código, params: size=5 maxlength=2}
+      criterio: { name: Descripción, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      sql: { name: SQL, type: textarea_tag, params: size=80x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      temporal: { name: Tabla Temporal, params: size=20 maxlength=20}
+      
+    list:
+      title:          Lista de Criterios para Chequear BD      
+      display:        [=numero, criterio, temporal]
+      filters:        [numero, criterio]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:  numero
+    edit:
+      title:          Edición de Criterios para Chequear BD
+      display:       [numero, criterio, sql, temporal]
+      actions:
+        _list:       ~
+        _save:       ~
+        _delete:     ~
+        _create:     ~

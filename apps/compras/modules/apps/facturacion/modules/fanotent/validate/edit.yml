@@ -1,0 +1,75 @@
+methods:
+  post:
+   - "fanotent{nronot}"
+   - "fanotent{fecnot}"
+   - "fanotent{desnot}"
+   - "fanotent{rifent}"
+   - "fanotent{obsnot}"
+   - "fanotent{codref}"
+
+names:
+  fanotent{nronot}:
+    required:  Yes
+    required_msg: El Número no puede estar en Blanco.
+    #validators: UniqueValidator
+
+  fanotent{fecnot}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    validators: FechaValidator
+
+  fanotent{desnot}:
+    required:  Yes
+    required_msg: La Descripción no puede estar en Blanco.
+    validators: DescripcionValidator
+
+  fanotent{rifent}:
+    required:  Yes
+    required_msg: CI/Rif Receptor no puede estar en Blanco.
+
+  fanotent{obsnot}:
+    required:  No
+    validators: ObservacionValidator
+
+  fanotent{codref}:
+    required:  Yes
+    required_msg: La Referencia no puede estar en Blanco.
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        fanotent
+        column:       nronot
+        unique_error: El Número de Nota de Entrega ya existe. Por Favor, Cambiélo por otro.
+
+
+#FechaValidator:
+#    class:         CidesaDateNow
+#    param:
+#        compare: 'now'
+#        compare_error: La Fecha no puede ser menor a la Fecha Actual
+#        operator: '>='
+#        date_error:  Fecha Inválida
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede tener más de 250 caracteres
+
+ObservacionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La observación no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La observación no puede tener más de 250 caracteres

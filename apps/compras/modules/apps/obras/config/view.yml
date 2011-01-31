@@ -1,0 +1,19 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Módulo de Obras y Contratos
+    robots:       index, follow
+    description:  Módulo de Obras y Contratos
+    keywords:     Módulo de Obras y Contratos
+    language:     en
+
+  stylesheets:    [main]
+
+  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, observe, ajax ]
+#  javascripts:    [%SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, ext/adapter/ext/ext-base, ext/adapter/prototype/ext-prototype-adapter, ext/ext-all, gridext.js]
+
+#ext/adapter/ext/ext-base, ext/adapter/prototype/ext-prototype-adapter, ext/ext-all
+  has_layout:     on
+  layout:         layout

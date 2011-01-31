@@ -1,0 +1,27 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tsentislr
+    theme:            default
+    fields:
+      numdep: { name: Deposito Nro., params: maxlength=20}
+      feclib: { name: Fecha}
+      fecha:  { name: Fecha, params: date_format='dd/MM/yyyy'}
+      banco:  { name: Banco}
+      numord: { name: Cheque Nro., params: maxlength=8}
+    list:
+      title:          Enterar Retenciones ISLR
+      filters:        [numord, numdep]
+      display:        [=numord, numdep, fecha]
+      sort:           numord
+      max_per_page:	  5
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edición Enterar Retenciones ISLR
+      display:        [=numord, feclib, numdep, fecha, banco]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~

@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Indefban
+    theme:            cidesaGenerator
+    fields:
+      codban:       { name: Código, parameters: size=4}
+      desban:       { name: Descripción}
+
+    list:
+      title:          Definición de Banco
+      filters:        [codban]
+      display:        [=codban, desban]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codban
+
+    edit:
+      title:          Edición de Banco
+      display:        [_codban, desban]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

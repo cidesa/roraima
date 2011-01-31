@@ -1,0 +1,27 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   cpasiini
+  anchogrid:               750
+  ancho:                   700
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Movimiento
+  tipo:                    t
+  nombrecampo:             nommov
+  html:                    [readOnly=true]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Montos
+  tipo:                    m
+  nombrecampo:             monmov
+  html:                    [readOnly=true]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Porcentaje
+  tipo:                    m
+  nombrecampo:             pormov
+  html:                    [readOnly=true]
+  esgrabable:              true

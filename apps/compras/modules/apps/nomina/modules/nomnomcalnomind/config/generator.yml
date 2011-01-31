@@ -1,0 +1,16 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npnomina
+    theme:            default
+    fields:
+      codnom: { name: Código}
+      numsem: { name: Este mes tiene}
+      ultfec: { name: Desde, params: date_format='dd/MM/yyyy' }
+      profec: { name: Hasta, params: date_format='dd/MM/yyyy'}
+
+    edit:
+      title:         Cálculo de Nómina
+      display:
+        NONE:         []
+        Editable:     [codnom, numsem, ultfec, profec]

@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "npperfil{codperfil}"
+   - "npperfil{desperfil}"  
+names: 
+  npperfil{codperfil}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codperfil
+    
+  npperfil{desperfil}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_desperfil
+    
+Validator_codperfil:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npperfil
+        column:       codperfil
+        unique_error: El registro ya Existe intente con otro.
+    
+Validator_desperfil:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       255
+        max_error: La descripción no puede pasar mas de 255 caracteres

@@ -1,0 +1,20 @@
+methods:
+  post:
+   - "fcusoveh{coduso}"
+   - "fcusoveh{desuso}"
+   - "fcusoveh{anovig}"
+
+names:
+  fcusoveh{coduso}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+
+  fcusoveh{desuso}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido
+
+  fcusoveh{anovig}:
+    required:  Yes
+    required_msg: Año es un campo requerido
+
+

@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tsdefrengas
+    theme:            default
+    fields:
+      pagrepcaj: { name: Tipo de Causado}
+      nomext: { name: Descripción}
+      ctarepcaj: { name: Cuenta por Pagar Transitoria}
+      descta: { name: Descripción}
+      ctacheant: { name: Cuenta de Fondos sujetos a Retención}
+      descta2: { name: Descripción}
+      movreicaj: { name: Tipo de Movimiento}
+      destip: { name: Descripción}
+
+    list:
+      title:          Definición de Cuentas Contables para Rendición de Gastos
+      display:        [=pagrepcaj, nomext, ctarepcaj, descta, ctacheant, descta2, movreicaj, destip]
+      sort:           pagrepcaj
+      object_actions:
+        _edit:        ~
+
+    edit:
+      title:          Edición de Cuentas Contables para Rendición de Gastos
+      display:        [=pagrepcaj, nomext, ctarepcaj, descta, ctacheant, descta2, movreicaj, destip]
+      actions:
+        _save:        ~
+        _list:        ~
+        _delete:      ~

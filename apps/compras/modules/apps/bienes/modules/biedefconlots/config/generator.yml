@@ -1,0 +1,43 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Bndefcons
+    theme:            default
+
+    fields:
+      codact:      { name : Código Nivel }
+      desmue:      { name : Descripción }
+      codact1:     { name : Código Nivel }
+      desmue1:      { name : Descripción }      
+      
+      ctadepcar:   { name : Cuenta a Cargar }
+      descta:      { name : Descripción Cuenta a Cargar }  
+      ctadepabo:   { name : Cuenta a Abonar }  
+      desctaabo:   { name : Descripción Cuenta a Abonar } 
+      
+      ctaajucar:   { name : Cuenta a Cargar }
+      desctaajucar:{ name : Descripción Cuenta a Cargar }
+      ctaajuabo:   { name : Cuenta a Abonar }  
+      desctaajuabo:{ name : Descripción Cuenta a Abonar } 
+      
+      ctarevcar:   { name : Cuenta a Cargar }
+      desctarevcar:{ name : Descripción Cuenta a Cargar }
+      ctarevabo:   { name : Cuenta a Abonar }  
+      desctarevabo:{ name : Descripción Cuenta a Abonar }
+      
+      ctapercar:   { name : Cuenta a Cargar } 
+      desctapercar:{ name : Descripción Cuenta a Cargar }
+      ctaperabo:   { name : Cuenta a Abonar }        
+      desctaperabo:{ name : Descripción Cuenta a Abonar } 
+
+    list:
+      title:          Definición Contable de Semovientes por Lotes
+      display:        [=codact, desmue]
+      filters:        [codact, desmue]
+      object_actions:
+        _edit:        ~
+        _delete:      ~              
+      max_per_page:   5    
+    edit:
+      title:          Definición Contable de Semovientes por Lotes
+      display:        [codact, codsem, codact1, desmue, desmue1, ctadepcar, descta, ctadepabo, desctaabo, ctaajucar, desctaajucar, ctaajuabo, desctaajuabo, ctarevcar, desctarevcar, ctarevabo, desctarevabo, ctapercar, desctapercar, ctaperabo, desctaperabo]

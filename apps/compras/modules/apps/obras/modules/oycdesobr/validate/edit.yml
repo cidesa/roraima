@@ -1,0 +1,81 @@
+methods:
+  post:
+   - "ocregobr{codobr}"
+   - "ocregobr{desobr}"
+   - "ocregobr{codtipobr}"
+   - "ocregobr{fecini}"
+   - "ocregobr{fecfin}"
+   - "ocregobr{codpre}"
+   - "ocregobr{codpreiva}"
+
+names:
+  ocregobr{codobr}:
+    required:  Yes
+    required_msg: El Codigo no puede estar en Blanco.
+    validators: UniqueValidator
+
+  ocregobr{desobr}:
+    required:  Yes
+    required_msg: La Descripcion no puede estar en Blanco.
+    validators: DescripcionValidator
+
+  ocregobr{codtipobr}:
+    required:  Yes
+    required_msg: El Tipo de la Obra no puede estar en Blanco.
+    validators: TipobrValidator
+
+  ocregobr{fecini}:
+    required:  Yes
+    required_msg: La Fecha de Inicio de la Obra no puede estar en Blanco.
+    validators: Fecha2Validator
+
+  ocregobr{fecfin}:
+    required:  Yes
+    required_msg: La Fecha de Finalización de la Obra no puede estar en Blanco.
+    validators: Fecha2Validator
+
+  ocregobr{codpre}:
+    required:  Yes
+    required_msg: El Código Presupuestario de la Obra no puede estar en Blanco.
+    validators: CodpreValidator
+
+  ocregobr{codpreiva}:
+    required:  Yes
+    required_msg: El Código Presupuestario para IVA de la Obra no puede estar en Blanco.
+    validators: CodpreValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Ocregobr
+        column:       codobr
+        unique_error: El Codigo ya existe. Por Favor, Cambiélo por otro.
+
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripcion no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La Descripcion no puede pasar mas de 250 caracteres
+
+TipobrValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Octipobr
+        column:   codtipobr
+        unique_error:   El Tipo de Obra no existe.
+CodpreValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Cpdeftit
+        column:   codpre
+        unique_error:   El Código Presupuestario no existe.
+
+Fecha2Validator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es inválida

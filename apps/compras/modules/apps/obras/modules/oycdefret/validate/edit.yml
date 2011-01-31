@@ -1,0 +1,127 @@
+methods:
+  post:
+   - "octipret{codtip}"
+   - "octipret{destip}"
+   - "octipret{codcon}"
+   - "octipret{basimp}"
+   - "octipret{porret}"
+   - "octipret{porsus}"
+   - "octipret{unitri}"
+   - "octipret{factor}"
+names:
+  octipret{codtip}:
+    required:  Yes
+    required_msg: El código de la Retención no puedo estar en Blanco
+    validators: Validator_codtip, CorrelValidator
+
+  octipret{destip}:
+    required:  Yes
+    required_msg: La descripción de la Retención no puedo estar en Blanco
+    validators: Validator_destip
+
+  octipret{codcon}:
+    required:  Yes
+    required_msg: El código contable no puedo estar en Blanco
+    validators: ExistValidator
+
+  octipret{basimp}:
+    required:  No
+    validators: Num1Validator, Porcen1Validator
+
+  octipret{porret}:
+    required:  No
+    validators: Num2Validator, Porcen2Validator
+
+  octipret{porsus}:
+    required:  No
+    validators: Num3Validator, Porcen3Validator
+
+  octipret{unitri}:
+    required:  No
+    validators: Num4Validator
+
+  octipret{factor}:
+    required:  No
+    validators: Num5Validator
+
+Validator_codtip:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Octipret
+        column:       codtip
+        unique_error: El código de la Retención ya Existe intente con otro.
+
+Validator_destip:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 250 caracteres
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Contabb
+        column:       codcta
+        unique_error: El código contable no existe
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: El código de la Retención solo puede contener valores númericos
+
+Num1Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: La Base Imponible solo puede contener valores númericos
+
+Num2Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El Porcentaje a Retener solo puede contener valores númericos
+
+Num3Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El Porcentaje a Sustraer solo puede contener valores númericos
+
+Num4Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: La unidad Tributaria solo puede contener valores númerico
+
+Num5Validator:
+    class: CidesaStringValidator
+    param:
+        values:   [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El Factor solo puede contener valores númerico
+
+Porcen1Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^(0*100{1,1}\,?((?<=\,)0*)?%?$)|(^0*\d{0,2}\,?((?<=\,)\d*)?%?)$/' ]
+        values_error: El Porcentaje de la Base Imponible debe estar entre 0-100
+
+Porcen2Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^(0*100{1,1}\,?((?<=\,)0*)?%?$)|(^0*\d{0,2}\,?((?<=\,)\d*)?%?)$/' ]
+        values_error: El Porcentaje a Retener debe estar entre 0-100
+
+Porcen3Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^(0*100{1,1}\,?((?<=\,)0*)?%?$)|(^0*\d{0,2}\,?((?<=\,)\d*)?%?)$/' ]
+        values_error: El Porcentaje a Sustraer debe estar entre 0-100
+
+Porcen4Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^(0*100{1,1}\,?((?<=\,)0*)?%?$)|(^0*\d{0,2}\,?((?<=\,)\d*)?%?)$/' ]
+        values_error: El Factor debe estar entre 0-100

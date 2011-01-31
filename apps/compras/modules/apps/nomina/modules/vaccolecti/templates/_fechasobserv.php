@@ -1,0 +1,121 @@
+<?php use_helper('Object', 'ObjectAdmin', 'I18N', 'Grid') ?>
+<?php $date=date('d/m/yyyy');?>
+<table>
+<tr>
+<th>
+  <?php echo label_for('npvacdisfrute[fecvac]', __($labels['npvacdisfrute{fecvac}']), 'class="required" Style="width:120px"') ?>
+  <div class="content<?php if ($sf_request->hasError('npvacdisfrute{fecvac}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npvacdisfrute{fecvac}')): ?>
+    <?php echo form_error('npvacdisfrute{fecvac}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_date_tag($npvacdisfrute, 'getFecvac', array (
+  'rich' => true,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'npvacdisfrute[fecvac]',
+  'date_format' => 'dd/MM/yyyy',
+  'maxlength' => 10,
+  'size' => 10,
+  'onkeyup' => "javascript: mascara(this,'/',patron,true);",/*,
+  'onchange'=> remote_function(array(
+  'update'   => 'grid',
+  'url'      => 'vacsalidas/ajax',
+  'condition' => "$('npvacdisfrute_codemp').value != '' && $('id').value == ''",
+  'complete' => 'AjaxJSON(request, json)',
+  'with' => "'ajax=2&cajtexdiasvac=npvacdisfrute_diasdisfrutar&cajtexfecdesde=npvacdisfrute_fecdes&cajtexfechasta=npvacdisfrute_fechas&cajtexfecobserva=npvacdisfrute_observa&cajtexdiaspend=diaspend&fecing='+$('npvacdisfrute_fecing').value+'&codemp='+$('npvacdisfrute_codemp').value+'&fecha='+this.value",
+        )),*/
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+</tr>
+<tr>
+<th>
+<?php echo label_for('npvacdisfrute[fecdes]', __($labels['npvacdisfrute{fecdes}']), 'class="required" Style="width:120px"') ?>
+<div class="content<?php if ($sf_request->hasError('npvacdisfrute{fecvac}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npvacdisfrute{fecvac}')): ?>
+    <?php echo form_error('npvacdisfrute{fecvac}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+<?php $value = object_input_date_tag($npvacdisfrute, 'getFecdes', array (
+  'rich' => true,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'npvacdisfrute[fecdes]',
+  'maxlength' => 10,
+  'size' => 10,
+  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+  'date_format' => 'dd/MM/yyyy',
+  'onBlur'=> remote_function(array(
+  'url'      => 'vaccolecti/ajax',
+  'condition' => "$(this.id).value!='' &&  $('npvacdisfrute_codnom').value != '' && $('npvacdisfrute_diasdisfrutar').value != '0' && obtener_filas_grid('a',2)>0",
+  'complete' => 'AjaxJSON(request, json)',
+  'with' => "'ajax=3&cajtexfechas=npvacdisfrute_fechas&diasdisfrutar='+$('npvacdisfrute_diasdisfrutar').value+'&nomina='+$('npvacdisfrute_codnom').value+'&fecha='+this.value",
+        )),
+)); echo $value ? $value : '&nbsp;' ?>
+<div class="sf_admin_edit_help"><?php echo __('Primer Día de Vacaciones') ?></div>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+<?php echo label_for('npvacdisfrute[fechas]', __($labels['npvacdisfrute{fechas}']), 'class="required" Style="width:120px"') ?>
+<div class="content<?php if ($sf_request->hasError('npvacdisfrute{fecvac}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npvacdisfrute{fecvac}')): ?>
+    <?php echo form_error('npvacdisfrute{fecvac}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+ <?php $value = object_input_date_tag($npvacdisfrute, 'getFechas', array (
+  'readonly' => true,
+  'rich' => true,
+  'size' => 10,
+  'maxlength' => 10,
+  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'npvacdisfrute[fechas]',
+  'date_format' => 'dd/MM/yyyy',
+)); echo $value ? $value : '&nbsp;' ?>
+</th>
+<tr>
+<th>
+  <?php echo label_for('npvacdisfrute[diasdisfrutar]', __($labels['npvacdisfrute{diasdisfrutar}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npvacdisfrute{diasdisfrutar}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npvacdisfrute{diasdisfrutar}')): ?>
+    <?php echo form_error('npvacdisfrute{diasdisfrutar}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npvacdisfrute, 'getDiasdisfrutar', array (
+  'size' => 7,
+  'readonly' => $npvacdisfrute->getId() ? true : false,
+  'control_name' => 'npvacdisfrute[diasdisfrutar]',
+  'onBlur'=> remote_function(array(
+  'update'   => 'gridvacaciones',
+  'url'      => 'vaccolecti/ajax',
+  'condition' => "$(this.id).value!='' && $(this.id).value!='0' &&  $('npvacdisfrute_codnom').value != '' && obtener_filas_grid('a',2)>0",
+  'complete' => 'AjaxJSON(request, json)',
+  'with' => "'ajax=2&cajtexfechas=npvacdisfrute_fechas&fechades='+$('npvacdisfrute_fecdes').value+'&nomina='+$('npvacdisfrute_codnom').value+'&perini='+$('npvacdisfrute_perini').value+'&diasdisfrutar='+this.value",
+        )),
+)); echo $value ? $value : '&nbsp;' ?>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+</tr>
+</table>
+ <?php echo label_for('npvacdisfrute[observa]', __($labels['npvacdisfrute{observa}']), 'class="required" Style="width:125px"') ?>
+  <div class="content<?php if ($sf_request->hasError('npvacdisfrute{observa}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npvacdisfrute{observa}')): ?>
+    <?php echo form_error('npvacdisfrute{observa}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+  
+  <?php $value = object_textarea_tag($npvacdisfrute, 'getObserva', array (
+  'size' => '80x4',
+  'control_name' => 'npvacdisfrute[observa]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+

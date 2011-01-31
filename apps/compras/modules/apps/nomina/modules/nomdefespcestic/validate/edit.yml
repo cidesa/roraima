@@ -1,0 +1,73 @@
+methods:
+  post:
+   - "npcestatickets{codnom}"
+   - "npcestatickets{codcon}"
+   - "npcestatickets{valtic}"
+   - "npcestatickets{numtic}"
+
+names:
+  npcestatickets{codnom}:
+    required:  Yes
+    required_msg: El Código de la Nomina no puede estar en Blanco
+    validators: Validator_string, Validator_codnom
+
+  npcestatickets{codcon}:
+    required:  Yes
+    required_msg: El Código del Concepto no puede estar en Blanco
+    validators: Validator_string, Validator_codcon
+
+
+  npcestatickets{valtic}:
+    required:  Yes
+    required_msg: El Valor no puede estar en Blanco
+    validators: MontoValidator
+
+
+  npcestatickets{numtic}:
+    required:  Yes
+    required_msg: El numero de Tickets no puede estar en Blanco
+    validators: Validator_numerico
+
+
+
+Validator_string:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El campo no puede tener menos de 2 caracteres
+        max:       32
+        max_error: El campo no puede pasar mas de 32 caracteres
+
+
+Validator_codnom:
+    class: CidesaExistValidator
+    param:
+        class:        Npnomina
+        column:       codnom
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_codcon:
+    class: CidesaExistValidator
+    param:
+        class:        Npdefcpt
+        column:       codcon
+        unique_error: El registro ya Existe intente con otro.
+
+
+MyNumberValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El Valor solo puede contener valores númericos
+
+Validator_numerico:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Números de Tickets solo puede contener valores númericos (días)
+
+MontoValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El valor introducido no cumple con el formato para montos

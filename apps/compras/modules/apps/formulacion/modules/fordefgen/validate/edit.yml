@@ -1,0 +1,112 @@
+methods:
+  post:
+   - "fordefegrgen{desproacc}"
+   - "fordefegrgen{hasproacc}"
+   - "fordefegrgen{desaccesp}"
+   - "fordefegrgen{hasaccesp}"
+   - "fordefegrgen{dessubaccesp}"
+   - "fordefegrgen{hassubaccesp}"
+   - "fordefegrgen{desuae}"
+   - "fordefegrgen{hasuae}"
+   - "fordefegrgen{despar}"
+   - "fordefegrgen{haspar}"
+
+#   - "fordefegrgen{corest}"
+#   - "fordefegrgen{corsec}"
+#   - "fordefegrgen{corequ}"
+
+#   - "fordefegrgen{codpariva}"
+#   - "fordefegrgen{moniva}"
+
+names:
+  fordefegrgen{desproacc}:
+    required:  Yes
+    required_msg: El campo no puede estar en blanco
+    validators: Number1a50Validator
+  fordefegrgen{hasproacc}:
+    required:  Yes
+    required_msg: El campo no puede estar en blanco
+    validators: Number1a50Validator
+  fordefegrgen{desaccesp}:
+    required:  Yes
+    required_msg: El campo no puede estar en blanco
+    validators: Number1a50Validator
+  fordefegrgen{hasaccesp}:
+    required:  Yes
+    required_msg: El campo no puede estar en blanco
+    validators: Number1a50Validator
+  fordefegrgen{dessubaccesp}:
+    required:  Yes
+    required_msg: El campo no puede estar en blanco
+    validators: Number1a50Validator
+  fordefegrgen{hassubaccesp}:
+    required:  Yes
+    required_msg: El campo no puede estar en blanco
+    validators: Number1a50Validator
+  fordefegrgen{desuae}:
+    required:  Yes
+    required_msg: El campo no puede estar en blanco
+    validators: Number1a50Validator
+  fordefegrgen{hasuae}:
+    required:  Yes
+    required_msg: El campo no puede estar en blanco
+    validators: Number1a50Validator
+  fordefegrgen{despar}:
+    required:  Yes
+    required_msg: El campo no puede estar en blanco
+    validators: Number1a50Validator
+  fordefegrgen{haspar}:
+    required:  Yes
+    required_msg: El campo no puede estar en blanco
+    validators: Number1a50Validator
+
+
+
+#  fordefegrgen{corest}:
+#    required:  Yes
+#    required_msg: El campo no puede estar en blanco
+#    validators: Number1a50Validator
+#  fordefegrgen{corsec}:
+#    required:  Yes
+#    required_msg: El campo no puede estar en blanco
+#    validators: Number1a50Validator
+#  fordefegrgen{corequ}:
+#    required:  Yes
+#    required_msg: El campo no puede estar en blanco
+#    validators: Number1a50Validator
+
+
+#  fordefegrgen{codpariva}:
+#    required:  Yes
+#    required_msg: El campo no puede estar en blanco
+#    validators: CidesaUniqueValidator
+
+#  fordefegrgen{moniva}:
+#    required:  Yes
+#    required_msg: El campo no puede estar en blanco
+#    validators: Number1a999999Validator
+
+
+Number1a50Validator:
+    class: sfNumberValidator
+    param:
+        min:       0
+        min_error: La cantidad introducida no puede ser menor a 0
+        max:       50
+        max_error: La cantidad introducida no puede ser mayor a 50
+
+Number1a999999Validator:
+    class: sfNumberValidator
+    param:
+        min:       0
+        min_error: La cantidad introducida no puede ser menor a 0
+        max:       999999
+        max_error: La cantidad introducida no puede ser mayor a 999.999
+
+CidesaUniqueValidator:
+    class: CidesaExistValidator
+    param:
+        class:     fordefparegr
+        column:    codparegr
+        unique_error: El código de la partida no existe
+

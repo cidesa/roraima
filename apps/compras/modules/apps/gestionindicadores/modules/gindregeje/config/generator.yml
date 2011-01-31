@@ -1,0 +1,35 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Giproanu
+    theme:            cidesaGenerator
+    fields:
+      anoindg:      { name: Año}
+      revanoindg:   { name: Revisión, params: size=7}
+      numtrim:      { name: Trimestre, params: size=7}
+      numindg:      { name: Indicador}
+      nomindg:      { name: Nombre Indicador}
+      pnumtri:      { name: .}
+      gridindicador:{ name: .}
+      unidades:     { name: Unidades}
+        
+    list:
+      title:          Listado de Años ,Revision y Trimestres 
+      filters:        [anoindg, revanoindg, numtrim ]    
+      display:        [=anoindg, revanoindg, numtrim ]
+      max_pers:           10
+      sort:               numtrim
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          none
+
+
+    edit:
+      title:           Registro de Ejecución
+      display:
+        Datos Indicador:  [anoindg, revanoindg, numtrim, _unidades, _gridindicador ]
+      actions:
+        _list:        ~
+        _save:        ~

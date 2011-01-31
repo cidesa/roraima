@@ -1,0 +1,27 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npconsueldo
+    theme:            default
+    fields:
+      codnom: { name: Tipo Nomina }
+      nomnom: { name: Descripción }
+      codcon: { name: Concepto }
+      nomcon: { name: Descripción}
+    list:
+      title:          Conceptos para Sueldo
+      filters:        [codnom, codcon ]
+      display:        [=codnom, nomnom, codcon, nomcon ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:     codnom
+    edit:
+      title:         Edición de Conceptos para Sueldo
+      display:       [codnom, nomnom, codcon, nomcon]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

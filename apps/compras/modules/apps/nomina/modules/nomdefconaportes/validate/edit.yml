@@ -1,0 +1,16 @@
+methods:
+  post:
+   - "npcontipaporet{codtipapo}"
+
+names:
+  npcontipaporet{codtipapo}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: CodTipValidator
+
+CodTipValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Nptipaportes
+        column:   codtipapo
+        unique_error:   El Código del Tipo de Aporte/Retención no existe.

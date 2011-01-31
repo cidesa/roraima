@@ -1,0 +1,34 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ */
+// date: 2007/04/02 15:41:17
+?>
+<?php use_helper('Object', 'Validation', 'ObjectAdmin', 'I18N', 'Date') ?>
+
+<?php use_stylesheet('/sf/sf_admin/css/main') ?>
+
+<div id="sf_admin_container">
+
+<h1><?php echo __('Movimientos por Empleados',
+array()) ?></h1>
+
+<div id="sf_admin_header">
+<?php include_partial('nomnommovnomemp/edit_header', array('npasicaremp' => $npasicaremp)) ?>
+</div>
+
+<div id="sf_admin_content">
+<?php include_partial('nomnommovnomemp/edit_messages', array('npasicaremp' => $npasicaremp, 'labels' => $labels)) ?>
+<?php include_partial('nomnommovnomemp/edit_form', array('npasicaremp' => $npasicaremp, 'labels' => $labels, 'rs' => $rs, 'obj' => $obj)) ?>
+</div>
+
+<div id="sf_admin_footer">
+<?php include_partial('nomnommovnomemp/edit_footer', array('npasicaremp' => $npasicaremp)) ?>
+</div>
+
+</div>

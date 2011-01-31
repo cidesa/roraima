@@ -1,0 +1,30 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Inciudad
+    theme:            default
+    fields:
+      codpai:       { name: Código Paìs }
+      codedo:       { name: Código Estado }
+      codciu:       { name: Código Ciudad}
+      nomciu:       { name: Nombre Ciudad}
+      nompai:       { name: País}
+      nomedo:       { name: Estado}
+
+    list:
+      title:          Ciudades
+      filters:        [codciu]
+      display:        [=codciu, nomciu, nomedo, nompai]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codciu
+    edit:
+      title:          Edición de Ciudad
+      display:        [codpai, codedo, codciu, nomciu]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

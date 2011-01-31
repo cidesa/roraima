@@ -1,0 +1,37 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fadescom
+    theme:            cidesaGenerator
+    fields:
+      coddesc: { name: Código del Descuento}
+      desdesc: { name: Descripción del Descuento}
+      tipdesc: { name: Tipo de Descuento}
+      moncom: { name: Monto}
+      codart: { name: Código del Artículo}
+      desart: { name: Descripción del Artículo}
+      grid: { name: Artículos Asociados}
+    list:
+      title:          Descuentos Tipo Combo
+      display:        [=coddesc, desdesc]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [coddesc, desdesc]
+      max_per_page:   10
+      sort:           coddesc
+
+    edit:
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~    edit:
+      title:          Descuentos Tipo Combo
+      display:
+        "Datos del Combo": [_coddesc, tipdesc, moncom]
+        "Artículos Asociados": [_grid]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

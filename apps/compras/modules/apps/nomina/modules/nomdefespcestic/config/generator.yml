@@ -1,0 +1,44 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npcestatickets
+    theme:            cidesaGenerator
+
+    fields:
+      codnom:    { name: Codigo Nomina}
+      nomnom:    { name: Descripcion}
+      codcon:    { name: Codigo Concepto}
+      nomcon:    { name: Descripcion}
+      valtic:    { name: Valor, params: size=10 maxlength=32, help: Valor del Ticket (Puede ser en Monto o en Porcentaje de U.T)}
+      monpor:    { name: Monto Fijo}
+      numtic:    { name: Números de Tickets (días), params: size=5 maxlength=5 }
+      tippag:     { name: Tipo de Pago de Tickets, help: Días (F)ijos del Mes. Días (V)ariables. Días por (J)ornadas Laboral}
+      numdia:    { name: Dias Fijos del Mes, help: Número de Días a tomar en cuenta del Mes (Cuando es Fijo)}
+      diahab:    { name: Dias Habiles, help: (S) si cálcula días hábiles. (N) lo contrario (Cuando es variable)}
+      sabado:    { name: Sabado, help: (S) si cálcula sabados. (N) lo contrario (Cuando es variable)}
+      doming:    { name: Domingo, help: (S) si cálcula  domingos. (N) lo contrario (Cuando es variable)}
+      diafer:    { name: (S) si cálcula días Feriados. (N) lo contrario (Cuando es variable)}
+      opciones:  { name: Dias a Tomar en Cuenta}
+
+    list:
+      title:          Definicion del Concepto de Cesta Ticket
+      display:        [ =codnom, nomnom, codcon, nomcon ]
+      filters:        [codnom, codcon ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+      max_per_page:   10
+      sort: codnom
+
+    edit:
+      title:          Edicion del Concepto de Cesta Ticket
+      display:
+        "Datos Generales":     [_codnom, _codcon]
+        "Valor del Ticket":    [_monpor, valtic, _numtic]
+        "Datos de Calculo":    [_tippag, _numdia, _opciones]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

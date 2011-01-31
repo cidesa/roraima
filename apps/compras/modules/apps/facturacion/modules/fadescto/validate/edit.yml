@@ -1,0 +1,52 @@
+methods:
+  post:
+   - "fadescto{coddesc}"
+   - "fadescto{desdesc}"
+   - "fadescto{mondesc}"
+
+names:
+  fadescto{coddesc}:
+    required:  Yes
+    required_msg: El Código del Descuento no puedo estar en Blanco
+    validators: UniqueValidator, CorrelValidator
+
+  fadescto{desdesc}:
+    required:  Yes
+    required_msg: La Descripción del Descuento no puede estar en Blanco
+    validators: StringValidator
+
+  fadescto{mondesc}:
+    required:  No
+    validators: MyNumberValidator
+
+
+StringValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Descripción del Descuento no puede tener menos de 5 caracteres
+        max:       100
+        max_error: La Descripción del Descuento no puede pasar mas de 100 caracteres
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Fadescto
+        column:   coddesc
+        unique_error:   El Código del Descuento ya existe. Por Favor, Cambiélo por otro.
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          0000000000,00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          9999999999,99
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos

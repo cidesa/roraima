@@ -1,0 +1,39 @@
+opciones:                  # Opciones generales
+  name:                    c
+  eliminar:                false
+  tabla:                   fcrecdespag
+  ancho:                   600
+  anchogrid:               650
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código
+  tipo:                    t
+  nombrecampo:             codrede
+  esgrabable:			   true
+  html:                    [size="10"]
+  catalogo:                [fcdefdesc, sf_admin_edit_form, {coddes: 1, nomdes: 2, tipo: 3}, Facrecpag_Fcdefdesc]
+  ajaxfila:                true
+
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomdes
+  html:                    [size="30" ]
+3:       # Columna 3
+  titulo:                  Tipo
+  tipo:                    t
+  nombrecampo:             numcuo
+  esgrabable:			   true
+  html:                    [size="10" ]
+4:       # Columna 4
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monto
+  esgrabable:			   true
+  html:                    [size="10" ]
+  jscript:                 'validarmonto(this)'
+#  estotal:                 [true, 'fcpagos_monrec']
+  estotal:                 [true, 'fcpagos_descuento']
+

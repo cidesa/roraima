@@ -1,0 +1,31 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npnomina
+    theme:            cidesaGenerator
+    fields:
+      codnom:
+        name: Nómina
+        params: size=5 maxlength=5  
+        catalogo:
+          catalogoweb: Npnomina_nomdefespvar
+          clase: Npnomina
+          ajax: 1
+          parametros: getprincipal="getCodnom" getsecundario="getNomnom" campoprincipal="codnom" camposecundario="nomnom" campobase = "id"
+      ultfec: { name: Fecha, params: date_format=dd/MM/yyyy}
+      codcon:
+        name: Concepto
+        params: size=5 maxlength=5
+        catalogo:
+          catalogoweb: Npdefcpt_nomdefespguarde
+          clase: Npdefcpt
+          ajax: 2
+          parametros: getprincipal="getCodcon" getsecundario="getNomcon" campoprincipal="codcon" camposecundario="nomcon" campobase = "id"
+      especial: { name: Especial}
+    edit:
+      title:          Generar Orden de Pago desde Histórico
+      display:
+        "Datos para Generar la Orden de Pago":   [codnom, ultfec, codcon, _especial]
+      actions:
+        _save:
+          name:  Generar Orden de Pago

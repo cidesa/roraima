@@ -1,0 +1,16 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Casolart
+    theme:            cidesaGenerator
+
+    fields:
+      grip:   { name: Listado }
+
+    edit:
+      title:          Aprobación de la Solicitud de Egreso por Lotes
+      display:
+        "Solicitud de Egreso":   [_grip]
+
+      actions:
+        _save:        ~

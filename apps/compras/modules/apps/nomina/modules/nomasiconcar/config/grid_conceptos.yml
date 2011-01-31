@@ -1,0 +1,22 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   npasiconcar
+  anchogrid:               700
+  ancho:                   600
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Concepto
+  tipo:                    t
+  nombrecampo:             codcon
+  html:                    ["size=10 maxlength=3 onBlur='toAjax(2,getUrlModuloAjax(),this.value,0,'&cajtxtmos='+$(this.id).up().next(0).descendants()[0].id+'&cajtxtcom='+this.id)'"]
+  esgrabable:              true
+  catalogo:                [npdefcpt, sf_admin_edit_form, {Codcon: 1, Nomcon: 2}, Npdefcpt_asignarcategoriaxemp ]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomcon
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true

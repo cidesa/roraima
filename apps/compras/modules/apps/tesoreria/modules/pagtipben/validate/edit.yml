@@ -1,0 +1,36 @@
+methods:
+  post:
+   - "optipben{codtipben}"
+   - "optipben{destipben}"
+
+names:
+  optipben{codtipben}:
+    required:  Yes
+    required_msg: El Código del Beneficiario no puedo estar en Blanco
+    validators: UniqueValidator, CorrelValidator
+
+  optipben{destipben}:
+    required:  Yes
+    required_msg: La Descripción del Beneficiario no puedo estar en Blanco    
+    validators: DescripcionValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Optipben
+        column:   codtipben
+        unique_error:   El Código del Beneficiario ya existe. Por Favor, Cambiélo por otro.
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: El Código del Beneficiario solo puede contener valores númericos
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Descripción del Beneficiario no puede tener menos de 5 caracteres
+        max:       50
+        max_error: La Descripción del Beneficiario no puede tener más de 50 caracteres

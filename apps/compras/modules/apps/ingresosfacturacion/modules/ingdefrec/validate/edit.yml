@@ -1,0 +1,34 @@
+methods:
+  post:
+   - "inrecaud{codrec}"
+   - "inrecaud{desrec}"
+   - "inrecaud{codgrup}"
+names:
+  inrecaud{codrec}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codrec
+
+  inrecaud{desrec}:
+    required:  Yes
+    required_msg: La descripcion no puede estar en Blanco
+    validators: Validator_desrec
+
+  inrecaud{codgrup}:
+    required:  Yes
+    required_msg: Debe seleccionar un grupo de recaudo
+
+Validator_codrec:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Inrecaud
+        column:       codrec
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desrec:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripcion no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripcion no puede pasar mas de 250 caracteres

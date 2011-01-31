@@ -1,0 +1,102 @@
+opciones:                  # Opciones generales
+  eliminar:                true
+  name:                    h
+  tabla:                   Fafaclib
+  anchogrid:               750
+  ancho:                   600
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Fecha
+  tipo:                    f
+  esgrabable:              true
+  nombrecampo:             fecfac
+  vacia:                   true
+  html:                    [size="10", readonly=true ]
+2:       # Columna 2
+  titulo:                  N° Factura
+  tipo:                    t
+  nombrecampo:             numfac
+  esgrabable:              true
+  html:                    [size="15" maxlength="50"]
+3:       # Columna 3
+  titulo:                  N° Control
+  tipo:                    t
+  nombrecampo:             numctr
+  esgrabable:              true
+  html:                    [size="15" maxlength="50"]
+4:       # Columna 4
+  titulo:                  N° de RIF
+  tipo:                    t
+  nombrecampo:             rifpro
+  html:                    ["size=10 maxlength=15 onBlur='toAjax(20,getUrlModuloAjax(),this.value,0,'&cajtexmos='+$(this.id).up().next(0).descendants()[0].id+'&cajtexcom='+this.id)'"]
+  esgrabable:              true
+  catalogo:                [facliente, sf_admin_edit_form, {Rifpro: 4, Nompro: 5}, Rifcli_Fapedido ]
+5:       # Columna 5
+  titulo:                  Nombre o Razón Social
+  tipo:                    t
+  nombrecampo:             nompro
+  html:                    [size="30", readonly=true ]
+6:       # Columna 6
+  titulo:                  Total Ventas (con IVA)
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             totfac
+  esnumerico:              true
+  html:                    [size="10"]
+7:       # Columna 7
+  titulo:                  Valor FOB Ventas Exportación
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             valfob
+  esnumerico:              true
+  html:                    [size="10"]
+8:       # Columna 8
+  titulo:                  Ventas Exentas
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             venexec
+  esnumerico:              true
+  html:                    [size="10"]
+9:       # Columna 9
+  titulo:                  Ventas Exoneradas o No Sujetas
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             venexon
+  esnumerico:              true
+  html:                    [size="10"]
+10:       # Columna 10
+  titulo:                  Base Imponible
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             basimp
+  esnumerico:              true
+  html:                    [size="10"]
+11:       # Columna 11
+  titulo:                  Alícuota General
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             poriva
+  esnumerico:              true
+  html:                    [size="10"]
+12:       # Columna 12
+  titulo:                  Crédito Fiscal
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             crefis
+  esnumerico:              true
+  html:                    [size="10"]
+13:       # Columna 13
+  titulo:                  IVA Retenido
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             moniva
+  esnumerico:              true
+  html:                    [size="10"]
+14:       # Columna 14
+  titulo:                  N° Comprobante
+  tipo:                    t
+  nombrecampo:             numcom
+  esgrabable:              true
+  html:                    ["size=15 maxlength=8"]

@@ -1,0 +1,31 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Tsmovlib
+    theme:            cidesaGenerator
+    fields:
+      numcue:
+        name: Número de Cuenta
+        params: size=20 maxlength=20
+        catalogo:
+          catalogoweb: Opdefemp_tsdefban
+          clase: Tsdefban
+          ajax: 1
+          parametros: getprincipal="getNumcue" getsecundario="getNomcue" campoprincipal="numcue" camposecundario="nomcue" campobase = "id"
+      reflib: { name: Referencia, params: size=10 maxlength=8}
+      codtip:
+        name: Tipo de Movimiento
+        params: size=10 maxlength=4
+        catalogo:
+          catalogoweb: Opdefemp_pagdefemp3
+          clase: Tstipmov
+          ajax: 2
+          parametros: getprincipal="getCodtip" getsecundario="getDestip" campoprincipal="codtip" camposecundario="destip" campobase = "id"
+    edit:
+      title:          Reversar Movimiento según Libro Anulado
+      display:
+        "Datos del Movimiento":         [numcue, reflib, codtip]
+      actions:
+        _save:
+          name: Reversar
+

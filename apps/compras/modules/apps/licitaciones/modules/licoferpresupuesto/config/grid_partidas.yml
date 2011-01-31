@@ -1,0 +1,51 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   lioferpre
+  ancho:				   950
+  anchogrid:               700
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código de la Partida
+  tipo:                    t
+  nombrecampo:             codpar
+  esgrabable:			   true
+  html:                    [size='10']
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             despar
+  esgrabable:			   true
+  html:                    [readonly=true size=25]
+3:       # Columna 3
+  titulo:                  Cantidad
+  tipo:                    m
+  nombrecampo:             cant
+  esgrabable:			   true
+  html:                    [size=10 onKeyPress="cantidadofer(event,this.id);"]
+4:       # Columna 4
+  titulo:                  Precio
+  tipo:                    m
+  nombrecampo:             precio
+  esgrabable:			   true
+  html:                    [size=10 onKeyPress="preciofer(event,this.id);"]
+5:       # Columna 5
+  titulo:                  Total Sin  IVA
+  tipo:                    m
+  nombrecampo:             monsiniva
+  esgrabable:			   true
+  html:                    [readonly=true size=10]
+6:       # Columna 6
+  titulo:                  Monto IVA
+  tipo:                    m
+  nombrecampo:             iva
+  esgrabable:			   true
+  html:                    [size=10 onKeyPress="moniva(event,this.id);"]
+7:       # Columna 7
+  titulo:                  Total
+  tipo:                    m
+  nombrecampo:             montot
+  esgrabable:			   true
+  html:                    [readonly=true size=10]

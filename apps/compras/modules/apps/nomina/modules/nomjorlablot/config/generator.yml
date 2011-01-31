@@ -1,0 +1,20 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npdefjorlab
+    theme:            default
+    fields:
+      codnom: { name: Código Nómina }
+      nomnom: { name: Descripcion Nómina }
+      idejor: { name: Código Jornada }
+      dias:   { name: Jornada }
+    list:
+      title:          Definción de Jornadas Laborales
+      filters:        [codnom, idejor ]
+      display:        [=codnom, nomnom, idejor, dias ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edición Jornadas Laborales

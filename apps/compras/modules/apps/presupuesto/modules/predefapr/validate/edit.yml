@@ -1,0 +1,33 @@
+methods:
+  post:
+   - "cpdefapr{stacon}"
+   - "cpdefapr{abrstacon}"
+   - "cpdefapr{stagob}"
+   - "cpdefapr{abrstagob}"
+   - "cpdefapr{stapre}"
+   - "cpdefapr{abrstapre}"
+
+names:
+  cpdefapr{stacon}:
+    required:  Yes
+    required_msg: El nivel 1 no puedo estar en Blanco
+
+  cpdefapr{abrstacon}:
+    required:  Yes
+    required_msg: El nombre Abreviado no puedo estar en Blanco
+
+  cpdefapr{stagob}:
+    required:  Yes
+    required_msg: El nivel 2 no puedo estar en Blanco
+
+  cpdefapr{abrstagob}:
+    required:  Yes
+    required_msg: El nombre Abreviado no puedo estar en Blanco
+
+  cpdefapr{stapre}:
+    required:  Yes
+    required_msg: El nivel 3 no puedo estar en Blanco
+
+  cpdefapr{abrstapre}:
+    required:  Yes
+    required_msg: El nombre Abreviado no puedo estar en Blanco

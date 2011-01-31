@@ -1,0 +1,36 @@
+propel:
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  unidades:
+    #_attributes:
+      #idMethod: native
+    codubi:
+      type: VARCHAR
+      size: 30
+      required: true
+    desubi:
+      type: VARCHAR
+      size: 250
+    stacod:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  unidades2:
+    #_attributes:
+      #idMethod: native
+    codubi:
+      type: VARCHAR
+      size: 30
+      required: true
+    desubi:
+      type: VARCHAR
+      size: 250
+    stacod:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true

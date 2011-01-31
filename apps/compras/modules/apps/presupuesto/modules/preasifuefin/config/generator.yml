@@ -1,0 +1,36 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpasiini
+    theme:            cidesaGenerator
+    fields:
+      codpre:    { name: Codigo Presupuestario, type: input_tag, params: maxlength=32  readOnly=true}
+      nompre:    { name: Descripcion, type: textarea_tag, params: size=30x3 maxlength=254 readOnly=true}
+      anopre:    { name: Ano, params: maxlength=4 size=4 readonly=true}
+      monmov:    { name: Total Asignacion , params: size=20  disabled=false readonly=true}
+      monasi:    { name: Monto Asignado , params: size=20  disabled=false readonly=true}
+      gripfuefin:    { name: . }
+
+    list:
+      title:          Asignación Fuente de Financiamiento
+      display:        [=codpre, nompre]
+      fields:
+        codpre:    { name: Codigo Presupuestario, type: input_tag, params: maxlength=32}
+      filters:        [=codpre, nompre]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+      actions:
+        _save:        NONE
+
+    edit:
+      title:          Edición Asignación Fuente de Financiamiento
+      display:
+        NONE:                          [ codpre, nompre, anopre, monasi, monmov]
+        Fuente de Financiamiento:      [ _gripfuefin]
+      fields:
+        codpre:    { params: maxlength=32  readonly=true}
+        nompre:    { type: textarea_tag, params: size=30x3 maxlength=254 readonly=true}
+      actions:
+        _list:        ~
+        _save:        ~

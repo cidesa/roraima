@@ -1,0 +1,35 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Faartpro
+    theme:            cidesaGenerator
+    fields:
+      codpro: { name: Cod. Cliente}
+      rifpro: { name: RIF del Cliente, params: maxlength=15}
+      nompro: { name: Nombre}
+      codalm: { name: Cod. Almacén}
+      nomalm: { name: Nombre }
+      codart: { name: Cod. Artículo}
+      desart: { name: Descripción}
+      comisi: { name: Comisión}
+      codcta: { name: Cod. Cta. Descuento}
+      descta: { name: Nombre Cta. Descuento}
+      #grid: { name: Artículos a Consignación}
+    list:
+      title:          Consignación
+      display:        [=codpro, nompro, codalm, nomalm]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [codpro, nompro]
+      max_per_page:   10
+      sort:           codpro
+    edit:
+      title:          Consignación
+      display:
+        "Datos del Cliente": [rifpro, nompro, codalm, nomalm, codcta, descta]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

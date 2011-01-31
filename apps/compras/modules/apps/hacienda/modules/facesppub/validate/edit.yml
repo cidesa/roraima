@@ -1,0 +1,37 @@
+methods:
+  post:
+   - "fcesplic{nrocon}"
+   - "fcesplic{fecreg}"
+   - "fcesplic{tipesp}"
+
+names:
+  fcesplic{nrocon}:
+    required:  Yes
+    required_msg: La Placa es un campo requerido
+    validators: Validator_nrocon
+
+  fcesplic{tipesp}:
+    required:  Yes
+    required_msg: El Codigo del Uso es un campo requerido
+    validators: Validator_tipesp
+
+  fcesplic{fecreg}:
+    required:  Yes
+    required_msg: La Fecha del Registro es un campo requerido
+
+
+
+Validator_nrocon:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fcesplic
+        column:       nrocon
+        unique_error: El Numero de Control ya Existe intente con otro.
+
+
+Validator_tipesp:
+    class: CidesaExistValidator
+    param:
+        class:        Fctipesp
+        column:       tipesp
+        unique_error: El Codigo de Tipo de Espectaculo Publico ya Existe intente con otro.

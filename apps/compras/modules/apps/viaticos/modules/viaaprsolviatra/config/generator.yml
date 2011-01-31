@@ -1,0 +1,16 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viasolviatra
+    theme:            cidesaGenerator
+    fields:
+      grid:           { name: .}
+
+    edit:
+      title:          Aprobación de Solicitud de Viáticos
+      display:
+        Lista de Solicitudes por Aprobar:  [_grid]
+      actions:
+        _list:        none
+        _save:        ~
+        _delete:      none

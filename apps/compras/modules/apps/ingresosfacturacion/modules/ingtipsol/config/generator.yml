@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Intipsol
+    theme:            cidesaGenerator
+    fields:
+      codtipsol:       { name: Código, params: maxlength=4 readonly=true }
+      destipsol:       { name: Descripción, params: maxlength=250 }
+
+    list:
+      title:          Definición de Tipo de Solicitud
+      filters:        [codtipsol]
+      display:        [=codtipsol, destipsol]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codtipsol
+
+    edit:
+      title:          Edición de Tipo de Solicitud
+      display:        [codtipsol, destipsol]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

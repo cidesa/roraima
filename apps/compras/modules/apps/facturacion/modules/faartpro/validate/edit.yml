@@ -1,0 +1,15 @@
+methods:
+  post:
+   - "faartpro{rifpro}"
+   - "faartpro{codalm}"
+
+names:
+
+ faartpro{rifpro}:
+    required:  Yes
+    required_msg: Debe seleccionar el cliente
+
+ faartpro{codalm}:
+    required:  Yes
+    required_msg: Debe seleccionar el almacén
+

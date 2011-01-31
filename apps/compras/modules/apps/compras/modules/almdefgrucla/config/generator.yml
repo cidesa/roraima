@@ -1,0 +1,25 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cagrucla
+    theme:            cidesaGenerator
+    fields:
+      codgru: { name: Código, params: size=10 maxlength=4 onFocus=readonly(this.id) onBlur="this.value=this.value.pad(4, '0',0);"}
+      desgru: { name: Descripción, params: size=80 maxlength=100  }
+    list:
+      title:          Grupos de Claúsulas
+      filters:        [codgru, desgru ]
+      display:        [=codgru, desgru]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:  8
+      sort: codgru
+    edit:
+      title:          Edición de Grupos de Claúsulas
+      display:        [codgru, desgru]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

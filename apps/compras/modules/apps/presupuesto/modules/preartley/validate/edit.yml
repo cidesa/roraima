@@ -1,0 +1,44 @@
+methods:
+  post:
+   - "cpartley{codart}"
+   - "cpartley{desart}"
+   - "cpartley{nomabr}"
+
+names:
+  cpartley{codart}:
+    required:  Yes
+    required_msg: El código presupuestario no puede estar en blanco
+    validators: Validator_existencia
+
+  cpartley{desart}:
+    required:  Yes
+    required_msg: La descripción no puede estar en blanco
+    validators: Validator_MyString
+
+  cpartley{nomabr}:
+    required:  Yes
+    required_msg: El nombre abreviado no puede estar en blanco
+    validators: Validator_MyString_Abr
+
+Validator_existencia:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Cpartley
+        column:       codart
+        unique_error: El código ya Existe intente con otro
+
+Validator_MyString:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no puede tener menos de 1 caracter
+        max:       1000
+        max_error: La descripción no puede tener mas de 1000 caracteres
+
+Validator_MyString_Abr:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El nombre abreviado no puede tener menos de 1 caracter
+        max:       4
+        max_error: El nombre abreviado no puede tener mas de 4 caracteres

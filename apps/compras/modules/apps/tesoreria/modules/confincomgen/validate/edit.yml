@@ -1,0 +1,34 @@
+methods:
+  post:
+   - "contabc{numcom}"
+   - "contabc{feccom}"
+
+names:
+  contabc{numcom}:
+    required:  Yes
+    required_msg: El Comprobante no puedo estar en Blanco
+    validators: UniqueValidator_numcom
+
+  contabc{feccom}:
+    required:  Yes
+    required_msg: La Fecha no puedo estar en Blanco
+    validators: FechaValidator
+
+UniqueValidator_numcom:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Contabc1
+        column:   numcom
+        unique_error:   El Comprobante ya existe. Por Favor, Cambiélo por otro.
+        max:       8
+        max_error: El numero de comprobante no puede pasar mas de 8 caracteres
+
+FechaValidator:
+    class: CidesaDateValidator
+    param:
+        class:        Cpdefniv
+        columnmin:    fecini
+        columnmax:    feccie
+        min_error:    La Fecha Especificada no puede ser Menor a la Fecha de Inicio del Período
+        max_error:    La Fecha Especificada no puede ser Mayor a la Fecha de Fin del Período
+        date_error:   Fecha Inválida

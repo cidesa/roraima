@@ -1,0 +1,38 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viaregente
+    theme:            cidesaGenerator
+
+    fields:
+      cedrif:    { name: C.I./R.I.F., params: size=15 maxlength=20}
+      desente:   { name: Nombre/Ente, params: size=50 maxlength=100}
+      nacent:    { name: Nacionalidad}
+      tipent:    { name: Tipo de Ente}
+      actpro:    { name: Activdad Profesional}
+      dirente:   { name: Dirección, type: textarea_tag, params: size=50x3 maxlength=254}
+      telente:   { name: Telefono, params: size=20 maxlength=50}
+      corente:   { name: Correo, params: size=50 maxlength=50}
+      actecoente:   { name: Actividad Economica, type: textarea_tag, params: size=50x3 maxlength=254}
+      gripciudades:  { name: .}
+
+    list:
+      title:     Definicion de Entes
+      display:   [ =cedrif, desente, tipent ]
+      sort:      cedrif
+      filters:   [ cedrif, desente]
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title: Edicion de Entes
+      display:
+        Informacion Ente:      [ =cedrif, desente, _nacent, _tipent, telente, corente, dirente, actecoente]
+        Asociacion Ciudades:   [ _gripciudades]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

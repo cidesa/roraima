@@ -1,0 +1,30 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Inmunicipio
+    theme:            cidesaGenerator
+
+    fields:
+      codmun:        { name: Código }
+      nommun:         { name: Nombre }
+      inestado_id:   { name: Estado }
+      nomedo:        {name: Estado }
+    list:
+      title:          Municipios
+      fields:
+        inestado_nomedo: { name: Estado }
+      display:        [=codmun, nommun, nomedo]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [codmun, desmun]
+      max_per_page:   5
+      sort: codmun
+    edit:
+      title:          Edición de Municipios
+      display:        [inestado_id, _codmun, nommun ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

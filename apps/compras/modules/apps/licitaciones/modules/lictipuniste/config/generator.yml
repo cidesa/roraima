@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Litipste
+    theme:            cidesaGenerator
+
+    fields:
+       desste:    { name: Descripción, params: size=80 maxlength=100 }
+    list:
+      title:          Tipo Unidad Solicitante
+      display:        [=desste]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [desste]
+      fields:
+        desste:
+          params: size=18
+      max_per_page:   5
+    edit:
+      title:          Edición de Tipo Unidad Solicitante
+      display:        [desste]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

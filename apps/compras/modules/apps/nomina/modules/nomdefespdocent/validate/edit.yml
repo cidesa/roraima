@@ -1,0 +1,31 @@
+methods:
+  post:
+   - "npdocent{coddoc}"
+   - "npdocent{desdoc}"
+
+names:
+  npdocent{coddoc}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_coddoc
+
+  npdocent{desdoc}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_desdoc
+
+
+Validator_coddoc:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npdocent
+        column:       coddoc
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desdoc:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 1000 caracteres        

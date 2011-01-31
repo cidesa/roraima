@@ -1,0 +1,44 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Bndissem
+    theme:            default
+    fields:
+      codact: { name: Código Nivel}
+      codsem: { name: Código Activo}
+      dessem: { name: Descripción}
+      nrodissem: { name: Número de Orden}
+      tipdissem: { name: Tipo}
+      motdissem: { name: Motivo}      
+      fecdissem: { name: Fecha}
+      fecdevdis: { name: Fecha Devolución}
+      mondissem: { name: Monto}
+      detdissem: { name: Detalles}
+      codubiori: { name: Origen}
+      desubiori: { name: Descripción}
+      codubides: { name: Ubicación}
+      desubides: { name: Descripción}
+      obsdissem: { name: Observación}   
+      stadissem: { name: Estatus}      
+    list:
+      title:          Disposición de Semoviente
+      filters:        [codact]
+      display:        [=codact, codsem, dessem, stadissem]
+      fields:
+        fecdissem: { params: date_format='dd/MM/yy' }
+        fecdevdis: { params: date_format='dd/MM/yy' } 
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort:  codact
+    edit:
+      title:          Edición de Disposición de Semoviente
+      display:       [=codact, codsem, dessem, nrodissem, tipdissem, motdissem, fecdissem, fecdevdis, mondissem, detdissem, codubiori, desubiori, codubides, desubides, obsdissem, stadissem]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+      fields:
+        fecdissem: { params: date_format='dd/MM/yy' }
+        fecdevdis: { params: date_format='dd/MM/yy' } 

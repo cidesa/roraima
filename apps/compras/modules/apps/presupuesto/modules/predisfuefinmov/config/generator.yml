@@ -1,0 +1,29 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpmovfuefin
+    theme:            cidesaGenerator
+
+    fields:
+      tipmov:       { name: Tipo de Movimiento}
+      refmov:       { name: Movimiento}
+      monmov:       { name: Total Financiamiento}
+      montot:       { name: Monto Dcto-Financ, params: size=7}
+      gripfuefin:   { name: .}
+
+    list:
+      title:          Distribución por Fuente de Financiamiento de los Movimientos
+      display:        [=correl, tipmov, fecmov, stamov]
+      filters:        [correl, tipmov, fecmov, stamov]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+
+    edit:
+      title:          Edición Distribución por Fuente de Financiamiento de los Movimientos
+      display:
+        NONE:                          [ _tipmov, _refmov, monmov, montot]
+        Fuente de Financiamiento:      [ _gripfuefin]
+      actions:
+        _save:        ~
+        _create:        ~

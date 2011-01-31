@@ -1,0 +1,35 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Forpreobr
+    theme:            cidesaGenerator
+    fields:
+      codcat:
+        name: Código
+        params: maxlength='."'+$('forpreobr_longitud').value".' onkeyDown=dFilter(event.keyCode, this,'."'+$('forpreobr_mascara').value".')
+        catalogo:
+          catalogoweb: Fordefcatpre_Forotrcrepre
+          clase: Fordefcatpre
+          ajax: 1
+          parametros: getprincipal="getCodcat" getsecundario="getNomcat" campoprincipal="codcat" camposecundario="nomcat" campobase = "id"
+          catalogoparams: /param1/'."'+$('forpreobr_longitud').value+'".'
+          ajaxparams: +'."'".'&longitud='."'+$('forpreobr_longitud').value".'
+          divupdate: divgridobr
+      gridobr:   { name: .}
+      gridper:   { name: .}
+      gridorg:   { name: .}
+      gridfue:   { name: .}
+    edit:
+      title:          Formulación de Obras
+      display:
+        "Categoria ProgramÃ¡tica":         [codcat]
+        "Partidas Presupuestarias":    [_gridobr, _gridper, _gridfue, _gridorg]
+      hide:             [mascara, longitud, filper, filfin, filorg, totfil]
+      actions:
+        _list:          NONE
+        _save:          ~
+        _delete:        ~
+        _create:        NONE
+        _anular:
+          name: Eliminar
+          params: id=elimi class="sf_admin_action_delete" onClick="eliminar()"

@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Catipent
+    theme:            default
+    fields:
+      codtipent:  {  name: Código, params: maxlength=3}
+      destipent:  {  name: Descripción, params: maxlength=50}
+    list:
+      title:          Definición de Tipos de Entrada
+      display:        [=codtipent, destipent]
+      filters:        [codtipent, destipent]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort:           codtipent
+    edit:
+      title:          Definición de Tipos de Entrada
+      display:		  [codtipent, destipent]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

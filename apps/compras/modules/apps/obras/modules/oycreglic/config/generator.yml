@@ -1,0 +1,62 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Ocreglic
+    theme:            cidesaGenerator
+    fields:
+      codlic: { name: Número, params: size=20 maxlength=32}
+      codtiplic: { name: Tipo}
+      ente: { name: Ente, params: size=60 maxlength=1000}
+      fecreg: { name: Fecha de Registro, params: onkeyup= "mascara(this,'/',patron,true)"}
+      fecedi: { name: Fecha de Edición, params: onkeyup= "mascara(this,'/',patron,true)"}
+      sitact: { name: Situación Actual, params: size=60 maxlength=1000}
+      deslic: { name: Descripción, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      decretos: { name: Decretos, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      codobr: { name: Código de la Obra, params: size=20 maxlength=32}
+      desobr: { name: Descripción, params: size=60}
+      fecdisdes:  { name: Fecha de Desde, params: onkeyup= "mascara(this,'/',patron,true)"}
+      fecdishas:  { name: Fecha de Hasta, params: onkeyup= "mascara(this,'/',patron,true)"}
+      costo: { name: Costo}
+      forpag: { name: Forma de Pago, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      horaret:{ name: Horario de Retiro, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      dirret: { name: Dirección de Retiro, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      percontac: { name: Persona Contacto-Telefónos, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      periodico: { name: Periódico, params: size=20 maxlength=50}
+      fecpub: { name: Fecha, params: onkeyup= "mascara(this,'/',patron,true)"}
+      pagina: { name: Página, params: size=20 maxlength=3}
+      cuerpo: { name: Cuerpo, params: size=20 maxlength=50}
+      mes: { name: Mes}
+      codpaiefec: { name: Entidad donde se efectúo el Proceso}
+      codpairecep: { name: Entidad Receptora del Bien-Obra-Servicio}
+      codfin: { name: Fuente de Financimiento, params: size=15 maxlength=4}
+      nomext: { name: Descripción}
+      fecofer: { name: Fecha Presentación, params: onkeyup= "mascara(this,'/',patron,true)"}
+      horaofer: { name: Hora Presentación, params: size=30 maxlength=100}
+      dirofer: { name: Dirección, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      percontacofer: { name: Persona Contacto-Telefónos, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      codclacomp: { name: Clasificación, params: size=15 maxlength=5}
+      descalcomp: { name: Descripción}
+      observaciones: { name: Observaciones, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+    list:
+      title: Licitaciones
+      display: [=codlic, deslic, codobr, desobr]
+      filters: [codlic, codtiplic, codobr]
+      max_per_page:   10
+      sort: codlic
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title: Registro de Licitaciones
+      display:
+        "Datos de Licitación": [_codlic, _codtiplic, ente, fecreg, fecedi, sitact, deslic, decretos, _codobr]
+        "Disponibilidad de Pliegos": [fecdisdes, fecdishas, costo, forpag, horaret, dirret, percontac]
+        "Datos de la Pubicación": [periodico, fecpub, pagina, cuerpo, _mes, _historial]
+        "Datos de la Oferta": [_codpaiefec, _codpairecep, _codfin, fecofer, horaofer, dirofer, percontacofer]
+        "Actividades según Catálogo de Clasificación de Compras del Estado": [_codclacomp]
+        "NONE": [observaciones]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

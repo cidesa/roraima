@@ -1,0 +1,33 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpdefapr
+    theme:            cidesaGenerator
+
+    fields:
+      stacon:    { name: Nivel 1, params: maxlength=50, help: Campo-> stacon}
+      abrstacon: { name: Abreviatura, params: size=2 maxlength=5, help: Esta abreviatura es para mostrarlo en los botones de Solicitud Ajuste y Creditos}
+      stagob:    { name: Nivel 2, params: maxlength=50, help: Campo-> stagob}
+      abrstagob: { name: Abreviatura, params: size=2 maxlength=5, help: Esta abreviatura es para mostrarlo en los botones de Solicitud Ajuste y Creditos}
+      stapre:    { name: Nivel 3, params: maxlength=50, help: Campo-> stapre}
+      abrstapre: { name: Abreviatura, params: size=2 maxlength=5, help: Esta abreviatura es para mostrarlo en los botones de Solicitud Ajuste y Creditos}
+      staniv4:    { name: Nivel 4, params: maxlength=50, help: Campo-> staniv4}
+      abrstaniv4: { name: Abreviatura, params: size=2 maxlength=5, help: Esta abreviatura es para mostrarlo en los botones de Solicitud Ajuste y Creditos}
+      staniv5:    { name: Nivel 5, params: maxlength=50, help: Campo-> staniv5}
+      abrstaniv5: { name: Abreviatura, params: size=2 maxlength=5, help: Esta abreviatura es para mostrarlo en los botones de Solicitud Ajuste y Creditos}
+      staniv6:    { name: Nivel 6, params: maxlength=50, help: Campo-> staniv6}
+      abrstaniv6: { name: Abreviatura, params: size=2 maxlength=5, help: Esta abreviatura es para mostrarlo en los botones de Solicitud Ajuste y Creditos}
+
+    list:
+      title:          Definición de Aprobación
+      display:        [=stacon, stagob, stapre]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+
+    edit:
+      title:          Edición de Aprobación
+      #display:        [stacon, abrstacon, stagob, abrstagob, stapre, abrstapre]
+      actions:
+        _list:        ~
+        _save:        ~

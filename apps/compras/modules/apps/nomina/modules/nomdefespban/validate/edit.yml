@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "npbancos{codban}"
+   - "npbancos{nomban}"
+   
+names: 
+  npbancos{codban}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codban
+    
+  npbancos{nomban}:
+    required:  Yes
+    required_msg: El Nombre no puede estar en Blanco
+    validators: Validator_MyString     
+
+Validator_codban:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npbancos
+        column:       codban
+        unique_error: El registro ya Existe intente con otro.
+        
+Validator_MyString:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción no puede tener menos de 2 caracteres
+        max:       30
+        max_error: La Descripcióon no puede pasar mas de 30 caracteres

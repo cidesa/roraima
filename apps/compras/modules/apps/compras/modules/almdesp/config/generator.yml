@@ -1,0 +1,73 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Cadphart
+    theme:            default
+    fields:
+      dphart: { name: Número}
+      fecdph: { name: Fecha}
+      codalm: { name: Código de Almacén}
+      nomalm: { name: Nombre Almacén}
+      reqart: { name: Refiere a Solicitud de Materiales}
+      desreq: { name: Descripción}
+      fecreq: { name: Fecha de Requisión}
+      desdph: { name: Descripción}
+      codori: { name: Unidad de Origen}
+      nomcat: { name: Descripción}
+      mondph: { name: Monto Total}
+      stadph: { name: Estatus}
+      numcom: { name: Numerocom}
+      refpag: { name: refpago}
+      tipdph: { name: Tipodesp}
+      codcli: { name: codigo}
+      obsdph: { name: Observacion}
+      fordesp: { name: fordes}
+      reapor: { name: reapor}
+      fecanu: { name: fechaanu}
+      codubi: { name: Código de la Ubicación}
+      nomubi: { name: Nombre Ubicación}
+      codcen: { name : Centro de Costo}
+      fecemiov: { name: Fecha Emisión}
+      feccarov: { name: Fecha de Carga}
+      locori:   { name: Localidad Despachadora de la Mercancia en Origen }
+      direccion: { name: Dirección}
+      rubro:     { name: Rubro}
+      cankg:     { name: Cantidad Total en KG/UNID}
+      totpasreal: { name: Totales Paso Real 397RL.}
+      locrec:    { name: Localidad Receptora de la Mercancia en Destino}
+      emptra:    { name: Empresa Transportista}
+      nomrep:    { name: Nombre del Representante}
+      telemp:    { name: Telefonos}
+      choveh:    { name: Chofer del Vehículo}
+      cedcho:    { name: C.I}
+      telcho:    { name: Telefono}
+      nomconfordes: { name: Apellidos  y Nombres}
+      cedconfordes: { name: C.I}
+      horsalconfordes: { name: Hora Salida}
+      nomconforrec: { name: Apellidos y Nombres}
+      cedconforrec: { name: C.I}
+      horlleconforrec: { name: Hora Llegada}
+    list:
+      title:          Despachos
+      filters:        [dphart, codcen]
+      display:        [=dphart, desdph, fecdph]
+      fields:
+        fecdph: { params: date_format='dd/MM/yy' }
+      object_actions:
+        _edit:        ~
+        _delete:      NONE
+      max_per_page:   10
+      sort:    dphart
+    edit:
+      title:          Edicion de Despachos
+      display:
+        NONE:           [=dphart, fecdph, reqart, desreq, fecreq, desdph, codori, nomcat, mondph, stadph, numcom, refpag, tipdph, codcli, obsdph, fordesp, reapor, fecanu, codubi, nomubi, codcen]
+        Datos Orden de Despacho Vehicular: [fecemiov, feccarov, locori, direccion, rubro, cankg, totpasreal, locrec, emptra, nomrep, telemp, choveh, cedcho, telcho, nomconfordes, cedconfordes, horsalconfordes, nomconforrec, cedconforrec, horlleconforrec]
+
+      fields:
+        fecdph: { params: date_format='dd/MM/yy' }
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

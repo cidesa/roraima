@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "fordefprg{codprg}"
+   - "fordefprg{desprg}"
+names:
+  fordefprg{codprg}:
+    required:  Yes
+    required_msg: El código del organismo no puedo estar en Blanco
+    validators: Validator_codprg
+
+  fordefprg{desprg}:
+    required:  Yes
+    required_msg: El nombre del organismo no puedo estar en Blanco
+    validators: Validator_desprg
+
+Validator_codprg:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fordefprg
+        column:       codprg
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desprg:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre no puede tener menos de 2 caracteres
+        max:       100
+        max_error: El nombre no puede pasar mas de 100 caracteres

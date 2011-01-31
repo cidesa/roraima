@@ -1,0 +1,62 @@
+methods:
+  post:
+   - "carecaud{codrec}"
+   - "carecaud{desrec}"
+   - "carecaud{codtiprec}"
+   - "carecaud{observ}"
+
+names:
+  carecaud{codrec}:
+    required:  Yes
+    required_msg: El Código del Recaudo no puedo estar en Blanco
+    validators: UniqueValidator, CorrelValidator
+
+  carecaud{desrec}:
+    required:  Yes
+    required_msg: El Descripción del Recaudo no puedo estar en Blanco
+    validators: StringValidator
+
+  carecaud{codtiprec}:
+    required:  Yes
+    required_msg: El Grupo del Recaudo no puedo estar en Blanco
+    validators: TipoValidator
+
+  carecaud{observ}:
+    required:  No
+    validators: String2Validator
+
+StringValidator:
+    class: sfStringValidator
+    param:
+        min:       3
+        min_error: La Descripción del Recaudo no puede tener menos de 3 caracteres
+        max:       100
+        max_error: La Descripción del Recaudo no puede pasar mas de 100 caracteres
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Carecaud
+        column:   codrec
+        unique_error:   El Código del Recaudo ya existe. Por Favor, Cambiélo por otro.
+
+String2Validator:
+    class: sfStringValidator
+    param:
+        min:       3
+        min_error: La Descripción del Recaudo no puede tener menos de 3 caracteres
+        max:       100
+        max_error: La Descripción del Recaudo no puede pasar mas de 100 caracteres
+
+TipoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Catiprec
+        column:   codtiprec
+        unique_error:   El Código del Grupo del Recaudo no existe.
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos

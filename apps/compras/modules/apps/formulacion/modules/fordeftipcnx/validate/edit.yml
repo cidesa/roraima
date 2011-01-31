@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "fordeftipcnx{codtipcnx}"
+   - "fordeftipcnx{destipcnx}"   
+names: 
+  fordeftipcnx{codtipcnx}:
+    required:  Yes
+    required_msg: El código del Tipo de Contribución Conexión no puedo estar en Blanco
+    validators: Validator_codtipcnx
+    
+  fordeftipcnx{destipcnx}:
+    required:  Yes
+    required_msg: La Descripción del Tipo de Contribución Conexión no puedo estar en Blanco
+    validators: Validator_destipcnx       
+
+Validator_codtipcnx:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fordeftipcnx
+        column:       codtipcnx
+        unique_error: El registro ya Existe intente con otro.
+    
+Validator_destipcnx:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción del Tipo de Contribución Conexión no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La Descripción del Tipo de Contribución Conexión no puede pasar mas de 100 caracteres

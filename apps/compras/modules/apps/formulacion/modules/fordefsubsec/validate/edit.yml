@@ -1,0 +1,41 @@
+methods:
+  post:
+   - "fordefsubsec{codsec}"
+   - "fordefsubsec{codsubsec}"
+   - "fordefsubsec{nomsubsec}"   
+
+
+names: 
+  fordefsubsec{codsec}:
+    required:  Yes
+    required_msg: El Código del Sector no puedo estar en Blanco
+
+  fordefsubsec{codsubsec}:
+    required:  Yes
+    required_msg: El Código del Subsector no puedo estar en Blanco
+    validators: Validator_codsubsec
+    
+  fordefsubsec{nomsubsec}:
+    required:  Yes
+    required_msg: La descripción del Subsector no puedo estar en Blanco
+    validators: Validator_nomsubsec       
+
+Validator_codsubsec:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fordefsubsec
+        column:       codsubsec
+        unique_error: El registro ya Existe intente con otro.
+    
+Validator_nomsubsec:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 250 caracteres
+
+     
+        
+
+

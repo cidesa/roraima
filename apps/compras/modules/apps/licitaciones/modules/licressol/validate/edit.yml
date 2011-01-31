@@ -1,0 +1,40 @@
+methods:
+  post:
+   - "liressol{liregsol_id}"
+   - "liressol{numcor}"
+   - "liressol{fecres}"
+   - "liressol{codempemi}"
+
+names:
+  liressol{numcor}:
+    required:  Yes
+    required_msg: El Nro. de Corresponden. no puede estar en blanco
+    validators: Validator_numcor
+
+  liressol{liregsol_id}:
+    required:  Yes
+    required_msg: Debe seleccionar el Nro. de la Solicitud
+    validators: Validator_numsol
+
+  liressol{fecres}:
+    required:  Yes
+    required_msg: Debe seleccionar la Fecha de Emisión de Respuesta
+
+  liressol{codempemi}:
+    required:  Yes
+    required_msg: Campo no puede estar vacio
+
+
+Validator_numcor:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Liressol
+        column:       numcor
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_numsol:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Liressol
+        column:       liregsol_id
+        unique_error: La solicitud ya ha sido respondida

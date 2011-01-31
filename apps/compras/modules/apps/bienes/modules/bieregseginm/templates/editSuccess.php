@@ -1,0 +1,34 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ */
+// date: 2007/12/19 09:57:25
+?>
+<?php use_helper('Object', 'Validation', 'ObjectAdmin', 'I18N', 'Date') ?>
+
+<?php use_stylesheet('/sf/sf_admin/css/main') ?>
+
+<div id="sf_admin_container">
+
+<h1><?php echo __('Edición de Seguro [Inmuebles]',
+array()) ?></h1>
+
+<div id="sf_admin_header">
+<?php include_partial('bieregseginm/edit_header', array('bnseginm' => $bnseginm)) ?>
+</div>
+
+<div id="sf_admin_content">
+<?php include_partial('bieregseginm/edit_messages', array('bnseginm' => $bnseginm, 'labels' => $labels)) ?>
+<?php include_partial('bieregseginm/edit_form', array('bnseginm' => $bnseginm, 'labels' => $labels, 'mascaracatalogo' => $mascaracatalogo, 'mascaraformatoubi' => $mascaraformatoubi, 'mascaralonformato' => $mascaralonformato, 'mascaralonubicacion' => $mascaralonubicacion, 'obj' => $obj)) ?>
+</div>
+
+<div id="sf_admin_footer">
+<?php include_partial('bieregseginm/edit_footer', array('bnseginm' => $bnseginm)) ?>
+</div>
+
+</div>

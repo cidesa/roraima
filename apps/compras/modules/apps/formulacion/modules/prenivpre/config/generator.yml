@@ -1,0 +1,46 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefniv
+    theme:            default
+    fields:
+      codemp: { name: Código}
+      nomemp: { name: Nombre Empresa}
+      loncod: { name: Longitud}
+      rupcat: { name: Clasificador de Categorias}
+      ruppar: { name: Clasificador de Partidas}
+      nivdis: { name: Nivel de Disponibilidad}
+      forpre: { name: Formato Presupuestario}
+      fecini: { name: Inicio de Ejercicio}
+      feccie: { name: Fin de Ejercicio}
+      fecper: { name: Período}
+      asiper: { name: Asignación Periódica}
+      numper: { name: Número de Períodos}
+      peract: { name: Periodo Activo}
+      etadef: { name: def}
+      staprc: { name: estatus}
+      coraep: { name: cora}
+      nivobr: { name: nivel de obra}
+      caraep: { name: cara}
+
+    list:
+      title:          Niveles Presupuestarios
+      filters:        [codemp]
+      display:        [=codemp]
+      sort            codemp
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:           Niveles Presupuestarios
+      display:       [=codemp, nomemp, loncod, rupcat, ruppar, nivdis, forpre, fecini, feccie, fecper, asiper, numper, peract, etadef, staprc, coraep, nivobr, caraep]
+      fields:
+        fecini: { params: date_format='dd/MM/yy'}
+        feccie: { params: date_format='dd/MM/yy'}
+        fecper: { params: date_format='dd/MM/yy'}
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

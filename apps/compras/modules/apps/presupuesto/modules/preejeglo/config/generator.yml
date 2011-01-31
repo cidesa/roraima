@@ -1,0 +1,24 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpdeftit
+    theme:            cidesaGenerator
+    fields:
+      codpre: {name: Código}
+      nompre: {name: Nombre}
+      perpre: {name: Período}
+      dismon: {name: Montos, params: readonly=true}
+      dispor: {name: Porcentaje, params: readonly=true}
+      grid:   {name: .}
+    list:
+      title:   Ejecución Global
+      display: [=codpre, nompre]
+      filters: [codpre, nompre]
+    edit:
+      title:                                 Ejecución Global
+      display:
+        Datos del Código Presupuestario:     [_codpre, _perpre]
+        NONE:                                [_grid]
+        Disponibilidad:                      [dismon, dispor]
+      actions:
+        _create:      ~

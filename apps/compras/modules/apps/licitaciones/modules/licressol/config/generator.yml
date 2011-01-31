@@ -1,0 +1,39 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Liressol
+    theme:            cidesaGenerator
+    fields:
+      numsol:    { name: Número}
+      dessol:    { name: Descripcion}
+      coduniste:    { name: Unidad Solicitante, params: readonly=true}
+      desuniste:    { name: Nombre Unidad Sol., params: size=70 readonly=true}
+      numcor:    { name: Nro.Correspond.}
+      ubiarc:    { name: Ubicacion Archivo, params: size=80 maxlength=250 }
+      fecres:    { name: Fecha Emision de Respuesta, params: date_format='dd/MM/yyyy'}
+      fecfir:    { name: Fecha Firma}
+      liregsol_id:    { name: Número}
+      codempemi:    { name: Emitida por}
+      codempfir:    { name: Firmada por}
+
+    list:
+      title:          Solicitudes Respondidas
+      filters:        [numsol, fecres]
+      display:        [=numsol, dessol, fecres ]
+      sort:  numsol
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:           numsol
+
+    edit:
+      title:          Edición de Respuesta a Solicitudes
+      display:
+        Datos de la Solicitud:  [_liregsol_id, _coduniste ]
+        Datos de la Respuesta:  [_numcor, _codempemi, fecres, _codempfir, fecfir, ubiarc]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

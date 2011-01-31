@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "codefcencos{codcencos}"
+   - "codefcencos{descencos}"
+
+names:
+  codefcencos{codcencos}:
+    required:  Yes
+    required_msg: El Código del Centro de Costo no puedo estar en Blanco
+    validators: UniqueValidator
+
+  codefcencos{descencos}:
+    required:  Yes
+    required_msg: La Descripción del Centro de Costo no puedo estar en Blanco
+    validators: DescripcionValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Codefcencos
+        column:   codcencos
+        unique_error:   El Código del Centro de Costo ya existe. Por Favor, Cambiélo por otro.
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Descripción del Centro de Costo no puede tener menos de 5 caracteres
+        max:       500
+        max_error: La Descripción del Centro de Costo no puede tener más de 500 caracteres

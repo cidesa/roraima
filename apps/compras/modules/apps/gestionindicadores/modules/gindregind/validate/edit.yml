@@ -1,0 +1,26 @@
+methods:
+  post:
+   - "giregind{numuni}"     
+   - "giregind{numindg}"
+   - "giregind{nomindg}"   
+
+names:
+  giregind{numuni}:
+    required:  Yes
+    required_msg: Debe Seleccionar una Unidad
+
+  giregind{numindg}:
+    required:  Yes
+    required_msg: Debe introducir un Número de Indicador de Gestión
+    validators: Validator_numindg
+
+  giregind{nomindg}:
+    required:  Yes
+    required_msg: Debe introducir un Nombre para el Indicador
+
+Validator_numindg:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Giregind
+        column:       numindg
+        unique_error: El registro ya Existe intente con otro.

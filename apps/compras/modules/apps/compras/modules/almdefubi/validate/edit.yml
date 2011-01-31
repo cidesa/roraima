@@ -1,0 +1,38 @@
+methods:
+  post:
+   - "cadefubi{codubi}"
+   - "cadefubi{nomubi}"
+
+names:
+  cadefubi{codubi}:
+    required:  Yes
+    required_msg: El Código de la Ubicación no puedo estar en Blanco
+    validators: UniqueValidator, MyCidesaMaskValidator
+
+  cadefubi{nomubi}:
+    required:  Yes
+    required_msg: La Descripción no puedo estar en Blanco
+    validators: MyStringValidator
+
+MyStringValidator:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La Descripción no puede pasar mas de 250 caracteres
+
+MyCidesaMaskValidator:
+    class:            CidesaMaskValidator
+    param:
+        class:        cadefart
+        columnmask:   forubi
+        columndiv:    rupart
+        div:          1
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Cadefubi
+        column:   codubi
+        unique_error:   El Código de Ubicación ya existe. Por Favor, Cambiélo por otro.

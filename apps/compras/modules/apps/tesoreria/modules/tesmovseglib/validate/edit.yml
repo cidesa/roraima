@@ -1,0 +1,113 @@
+methods:
+  post:
+   - "tsmovlib{numcue}"
+   - "tsmovlib{reflib}"
+   - "tsmovlib{tipmov}"
+   - "tsmovlib{deslib}"
+   - "tsmovlib{feclib}"
+   - "tsmovlib{fecing}"
+   - "tsmovlib{feccom}"
+   - "tsmovlib{monmov}"
+names:
+  tsmovlib{numcue}:
+    required: Yes
+    required_msg: El número de cuenta del banco no puede estar en Blanco
+    validators: Validar3a
+
+  tsmovlib{reflib}:
+    required: Yes
+    required_msg: El número de la referencia no puede estar en Blanco
+    validators: Validar3b
+
+  tsmovlib{tipmov}:
+    required: Yes
+    required_msg: El número del tipo de movimiento no puede estar en Blanco
+    validators: Validar3c
+
+  tsmovlib{deslib}:
+    required: Yes
+    required_msg: La Descripción del Movimiento según libros no puede estar en Blanco
+    validators: DescripcionValidator
+
+  tsmovlib{monmov}:
+    required: Yes
+    required_msg: El Monto del Movimiento según libros no puede estar en Blanco
+    validators: MontoValidator, MyNumberValidator
+
+  tsmovlib{feclib}:
+    required: Yes
+    required_msg: La Fecha del Movimiento según libros no puede estar en Blanco
+    validators: Fecha2Validator
+
+  tsmovlib{fecing}:
+    required: No
+    validators: Fecha2Validator
+
+  tsmovlib{feccom}:
+    required: No
+    validators: Fecha2Validator
+
+Validar3a:
+    class: UniqueValidator3
+    param:
+        class:        Tsmovlib
+        column:       numcue
+        column2:      reflib
+        column3:      tipmov
+        value2:       'tsmovlib[reflib]'
+        value3:       'tsmovlib[tipmov]'
+        unique_error: Cta Banco + Referencia + Tipo de Movimiento, ya Existen.
+
+Validar3b:
+    class: UniqueValidator3
+    param:
+        class:        Tsmovlib
+        column:       reflib
+        column2:      numcue
+        column3:      tipmov
+        value2:       'tsmovlib[numcue]'
+        value3:       'tsmovlib[tipmov]'
+        unique_error: Cta Banco + Referencia + Tipo de Movimiento, ya Existen.
+
+Validar3c:
+    class: UniqueValidator3
+    param:
+        class:        Tsmovlib
+        column:       tipmov
+        column2:      numcue
+        column3:      reflib
+        value2:       'tsmovlib[numcue]'
+        value3:       'tsmovlib[reflib]'
+        unique_error: Cta Banco + Referencia + Tipo de Movimiento, ya Existen.
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: El Concepto no puede tener menos de 5 caracteres
+        max:       4000
+        max_error: El Concepto no puede tener más de 4000 caracteres
+
+Fecha2Validator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+MontoValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El valor introducido no cumple con el formato para montos
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          000000000000.00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          999999999999.99
+        max_error:    El valor debe contener maximo 999.999.999.999,99

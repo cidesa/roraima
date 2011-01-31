@@ -1,0 +1,72 @@
+methods:
+  post:
+   - "tsdesmon{codmon}"
+   - "tsdesmon{nommon}"
+   - "tsdesmon{fecmon}"
+   - "tsdesmon{valmon}"
+
+names:
+  tsdesmon{codmon}:
+    required:  Yes
+    required_msg: El código de la Moneda no puede estar en Blanco
+    validators: Validator_codmon, CorrelValidator
+
+  tsdesmon{nommon}:
+    required:  Yes
+    required_msg: La descripción de la Moneda no puede estar en Blanco
+    validators: Validator_nommon
+
+  tsdesmon{fecmon}:
+    required:  Yes
+    required_msg: La Fecha de la Moneda no puede estar en Blanco
+    validators: FechaValidator
+    
+  tsdesmon{valmon}:
+    required:  Yes
+    required_msg: El Monto de la Moneda no puede ser menor a Cero
+    validators: MontoValidator, MyNumberValidator
+
+Validator_codmon:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Tsdesmon
+        column:       codmon
+        unique_error: El código de la Moneda ya Existe intente con otro.
+
+Validator_nommon:
+  class: sfStringValidator
+  param:
+    min:       2
+    min_error: La descripción no puede tener menos de 2 caracteres
+    max:       40
+    max_error: La descripción no puede pasar mas de 40 caracteres
+
+MontoValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El valor introducido no cumple con el formato para montos
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          000000000000000000.00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          999999999999999999.99
+        max_error:    El valor debe contener maximo 999999999999999999.99
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: El código de la Moneda solo puede contener valores númericos

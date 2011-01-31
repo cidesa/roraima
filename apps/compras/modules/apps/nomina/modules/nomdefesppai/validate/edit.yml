@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "nppais{codpai}"
+   - "nppais{nompai}"
+
+names:
+  nppais{codpai}:
+    required:  Yes
+    required_msg: El código de Estado no puede estar en Blanco
+    validators: Validator_codpai
+
+  nppais{nompai}:
+    required:  Yes
+    required_msg: El nombre no puede estar en Blanco
+    validators: Validator_MyString
+
+Validator_codpai:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Nppais
+        column:       codpai
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_MyString:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Nombre no puede tener menos de 2 caracteres
+        max:       20
+        max_error: El Nombre no puede pasar mas de 20 caracteres

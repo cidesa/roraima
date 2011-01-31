@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "indefcaj{codcaj}"
+   - "indefcaj{descaj}"
+names:
+  indefcaj{codcaj}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codcaj
+
+  indefcaj{descaj}:
+    required:  Yes
+    required_msg: La descripcion no puede estar en Blanco
+    validators: Validator_descaj
+
+Validator_codcaj:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Indefcaj
+        column:       codcaj
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_descaj:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripcion no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripcion no puede pasar mas de 250 caracteres

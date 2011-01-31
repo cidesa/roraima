@@ -1,0 +1,34 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npdefcpt
+    theme:            cidesaGenerator
+    fields:
+      codcon: { name: Código del Concepto, params: size=8}
+      nomcon: { name: Descripción, params: size=60}
+      nominas: { name: . }
+      codcar2: { name: Cargo, params: size=10 disabled=false}
+      codpar2: { name: Partida a Asignar,  size=10 params: size=60}
+
+    list:
+      title: Asignar Partidas a Concepto Segun Cargo
+      display: [=codcon, nomcon]
+      fields:
+        nomcon:  { params: size=20}
+      filters: [codcon, nomcon]
+      max_per_page:   10
+      sort: codcon
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title: Asignar Partidas a Concepto Segun Cargo
+      display:
+        "Concepto": [_codcon ]
+        "Actualizacion por Lotes (Opcional)": [codcar2, _codpar2 ]
+        "Detalles":  [_nominas]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      NONE
+        _create:      ~

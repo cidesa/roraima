@@ -1,0 +1,33 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Liasplegcrieva
+    theme:            cidesaGenerator
+    fields:
+      codpro: { name: Código Empresa}
+      nompro: { name: Nombre Empresa}
+      codlic: { name: Código Licitación}
+      deslic: { name: Descripción, size=60 params: size=60}
+      lireglic_id: { name: Código Licitación}
+      destiplic: { name: Tipo, params: readonly=true}
+      fecreglic: { name: Fecha de Registro, params: readonly=true"}
+      recaudos: { name: . }
+    list:
+      title: Análisis Aspecto Legal. Recaudos
+      display: [=codlic, deslic, codpro, nompro]
+      filters: [codlic, codpro]
+      max_per_page:   10
+      sort: codlic
+      object_actions:
+        _edit:        ~
+    edit:
+      title: Análisis Aspecto Legal. Recaudos
+      display:
+        "Datos de la Licitación": [_lireglic_id, destiplic, fecreglic ]
+        "Datos de la Empresa Oferente": [_codpro ]
+        "Recaudos": [_recaudos]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,40 @@
+methods:
+  post:
+   - "npciudad{codpai}"
+   - "npciudad{codedo}"
+   - "npciudad{codciu}"
+   - "npciudad{nomciu}"
+
+names:
+  npciudad{codpai}:
+    required:  Yes
+    required_msg: El código del Estado no puede estar en Blanco
+    validators: CodpaiValidator
+
+  npciudad{codedo}:
+    required:  Yes
+    required_msg: El código del Municipio no puede estar en Blanco
+
+  npciudad{codciu}:
+    required:  Yes
+    required_msg: El código de la Parroquia no puede estar en Blanco
+
+  npciudad{nomciu}:
+    required:  Yes
+    required_msg: El nombre de la Parraquia no puede estar en Blanco
+    validators: Validator_MyString
+
+CodpaiValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Nppais
+        column:   codpai
+        unique_error:   El Código del Estado no existe.
+
+Validator_MyString:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Nombre de la Parroquia no puede tener menos de 2 caracteres
+        max:       100
+        max_error: El Nombre de la Parroquia no puede pasar mas de 100 caracteres

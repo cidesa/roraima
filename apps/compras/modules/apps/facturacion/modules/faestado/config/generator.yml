@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Faestado
+    theme:            cidesaGenerator
+
+    fields:
+      nomedo:    { name: Estado, validate: Vstring_1_30, msj_error: Debe insertar el nombre del estado }
+      fapais_id: { name: País, validate: Vstring_1_30, msj_error: Debe seleccionar el nombre del país }
+      nompai:    { name: Paises }
+    list:
+      fields:
+        fapais_nompai: { name: País }
+      title:          Estados
+      display:        [=nomedo, nompai]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [nomedo]
+      max_per_page:   10
+    edit:
+      title:          Edición de Estado
+      display:        [fapais_id, nomedo ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

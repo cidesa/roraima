@@ -1,0 +1,55 @@
+methods:
+  post:
+   - "cadefcen{codcen}"
+   - "cadefcen{descen}"
+   - "cadefcen{dircen}"
+   - "cadefcen{codpai}"
+
+names:
+  cadefcen{codcen}:
+    required:  Yes
+    required_msg: El Código del Centro de Costo no puedo estar en Blanco
+    validators: UniqueValidator
+
+  cadefcen{descen}:
+    required:  Yes
+    required_msg: La Descripción del Centro de Costo no puedo estar en Blanco
+    validators: DescripcionValidator
+
+  cadefcen{dircen}:
+    required:  No
+    validators: DireccionValidator
+
+  cadefcen{codpai}:
+    required:  No
+    validators: EstadoValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Cadefcen
+        column:   codcen
+        unique_error:   El Código del Centro de Costo ya existe. Por Favor, Cambiélo por otro.
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Descripción del Centro de Costo no puede tener menos de 5 caracteres
+        max:       250
+        max_error: La Descripción del Centro de Costo no puede tener más de 250 caracteres
+
+DireccionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Dirección asociada al Centro de Costo no puede tener menos de 5 caracteres
+        max:       500
+        max_error: La Dirección asociada al Centro de Costo no puede tener más de 500 caracteres
+
+EstadoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Nppais
+        column:   codpai
+        unique_error:   El Estado no existe.

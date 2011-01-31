@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Faartpvp
+    theme:            cidesaGenerator
+    fields:
+      codart: { name: Código}
+      desart: { name: Descripción}
+      pvpart: { name: PVP}
+      despvp: { name: Descripción del Precio}
+    list:
+      title:          Precios
+      display:        [=codart, desart]
+      object_actions:obj
+        _edit:        ~
+        _delete:      ~
+      filters:        [codart]
+      max_per_page:   10
+      sort:           codart
+    edit:
+      title:          Edición de Precios
+      display:
+        "Datos del Artículo": [codart, desart]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

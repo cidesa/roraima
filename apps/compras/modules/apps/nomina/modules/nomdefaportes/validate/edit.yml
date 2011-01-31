@@ -1,0 +1,76 @@
+methods:
+  post:
+   - "nptipaportes{codtipapo}"
+   - "nptipaportes{destipapo}"
+   - "nptipaportes{porret}"
+   - "nptipaportes{porapo}"
+
+names:
+  nptipaportes{codtipapo}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codtipapo, Validator_MyString2
+
+  nptipaportes{destipapo}:
+    required:  Yes
+    required_msg: La descripcion no puede estar en Blanco
+    validators: Validator_MyString
+
+  nptipaportes{porret}:
+    required:  Yes
+    required_msg: Este Campo no puede estar en Blanco
+    validators: Num1Validator, Porcen1Validator
+
+  nptipaportes{porapo}:
+    required:  Yes
+    required_msg: Este Campo no puede estar en Blanco
+    validators: Num2Validator, Porcen2Validator
+
+Validator_codtipapo:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Nptipaportes
+        column:       codtipapo
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_MyString2:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*[0-9]+$/' ]
+        values_error: El Codigo no puedo contener letras
+        min:       1
+        min_error: La descripcion no puede tener menos de 2 caracteres
+        max:       4
+        max_error: La descripcion no puede pasar mas de 40 caracteres
+
+Validator_MyString:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripcion no puede tener menos de 2 caracteres
+        max:       40
+        max_error: La descripcion no puede pasar mas de 40 caracteres
+
+Porcen1Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^(0*100{1,1}\,?((?<=\,)0*)?%?$)|(^0*\d{0,2}\,?((?<=\,)\d*)?%?)$/' ]
+        values_error: El Porcentaje de la Retención debe estar entre 0-100
+
+Num1Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El Porcentaje Retención solo puede contener valores númericos
+
+Porcen2Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^(0*100{1,1}\,?((?<=\,)0*)?%?$)|(^0*\d{0,2}\,?((?<=\,)\d*)?%?)$/' ]
+        values_error: El Porcentaje Aporte Patronal debe estar entre 0-100
+
+Num2Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El Porcentaje Aporte Patronal solo puede contener valores númericos

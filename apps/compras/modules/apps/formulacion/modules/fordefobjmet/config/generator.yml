@@ -1,0 +1,37 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Forasometobj
+    theme:            cidesaGenerator
+    fields:
+      codobj:
+        name: Código
+        params: size=5 maxlength=5  onFocus=readonly(this.id) onBlur="this.value=this.value.pad(5, '0',0);"
+        catalogo:
+          catalogoweb: Fordefobj_Forasoproobj
+          clase: Fordefobj
+          ajax: 1
+          parametros: getprincipal="getCodobj" getsecundario="getDesobj" campoprincipal="codobj" camposecundario="desobj" campobase = "id"
+      grid:  { name: .}
+    list:
+      title:          Asociación de Acciones a Objetivos
+      filters:        [codobj]
+      fields:
+        codobj:  { name: Objetivo}
+        desobj:  { name: Descripción}
+      display:        [=codobj, desobj]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:      codobj
+    edit:
+      title:          Asociación de Acciones a Objetivos
+      display:
+        "Objetivo":   [codobj]
+        "Acciones":   [_grid]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

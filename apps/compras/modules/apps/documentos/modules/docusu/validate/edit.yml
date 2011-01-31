@@ -1,0 +1,8 @@
+methods:
+  post:
+   - "usuarios{numuni}"
+
+names:
+  usuarios{numuni}:
+    required:  Yes
+    required_msg: Debe seleccionar una unidad

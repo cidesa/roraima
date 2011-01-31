@@ -1,0 +1,17 @@
+methods:
+  post:
+   - "fctasban{tasano}"
+
+
+names:
+  fctasban{tasano}:
+    required:  Yes
+    required_msg: El año no puede estar en Blanco
+    validators: Validator_tasano
+
+Validator_tasano:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fctasban
+        column:       tasano
+        unique_error: El registro ya Existe intente con otro.

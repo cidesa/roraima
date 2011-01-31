@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "npvacdisfrute{codnom}"
+   - "npvacdisfrute{fecvac}"
+   - "npvacdisfrute{fecdes}"
+   - "npvacdisfrute{fechas}"
+   - "npvacdisfrute{diasdisfrutar}"
+
+
+names:
+  npvacdisfrute{codnom}:
+    required:  Yes
+    required_msg: Debe seleccionar una nomina
+    
+  npvacdisfrute{fecvac}:
+    required:  Yes
+    required_msg: Se requiere la fecha de Solicitud
+    
+  npvacdisfrute{fecdes}:
+    required:  Yes
+    required_msg: Se requiere la fecha de Salida
+    
+  npvacdisfrute{fechas}:
+    required:  Yes
+    required_msg: Se requiere la fecha de Regreso   
+    
+  npvacdisfrute{diasdisfrutar}:
+    required:  Yes
+    required_msg: Se requieren los dias de Vacaciones
+

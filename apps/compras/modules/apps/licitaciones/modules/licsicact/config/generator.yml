@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Lisicact
+    theme:            cidesaGenerator
+
+    fields:
+       dessicact:    { name: Descripción, params: size=80 maxlength=100 }
+    list:
+      title:          Situaciones Posibles de la Licitación
+      display:        [=dessicact]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [dessicact]
+      fields:
+        dessicact:
+          params: size=18
+      max_per_page:   5
+    edit:
+      title:          Edición de Situaciones Posibles de la Licitación
+      display:        [dessicact]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

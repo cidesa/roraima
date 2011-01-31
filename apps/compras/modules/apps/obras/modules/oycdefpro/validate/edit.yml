@@ -1,0 +1,33 @@
+methods:
+  post:
+   - "octippro{codtippro}"
+   - "octippro{destippro}"
+
+
+names:
+  octippro{codtippro}:
+    required:  Yes
+    required_msg: El Codigo de la Profesión no puedo estar en Blanco
+    validators: Validator_codtippro
+
+  octippro{destippro}:
+    required:  Yes
+    required_msg: La Descripción no puedo estar en Blanco
+    validators: Validator_destippro
+
+
+Validator_codtippro:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Octippro
+        column:   codtippro
+        unique_error:   El Código de la Profesión ya existe. Por Favor, Intente con otro.
+
+Validator_destippro:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Descripción de la Profesión no puede tener menos de 5 caracteres
+        max:       100
+        max_error: La Descripción de la Profesión no puede tener menos de 5 caracteres
+

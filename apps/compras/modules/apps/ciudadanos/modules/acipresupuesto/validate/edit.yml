@@ -1,0 +1,23 @@
+methods:
+  post:
+   - "atpresupuesto{atayudas_id}"
+
+names:
+  atpresupuesto{atayudas_id}:
+    required:  Yes
+    required_msg: Debe seleccionar una solicitud/expediente
+    validators: ExistValidator, UniqueValidator
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:    atayudas
+        column:   id
+        unique_error:   El nro de solicitud/expediente no existe
+        
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    atpresupuesto
+        column:   atayudas_id
+        unique_error:   Ya existe un presupuesto para este expediente.

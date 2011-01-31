@@ -1,0 +1,31 @@
+methods:
+  post:
+   - "bncobseg{codcob}"
+   - "bncobseg{descob}"
+   
+names: 
+  bncobseg{codcob}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco.
+    validators: UniqueValidator  
+    
+  bncobseg{descob}:
+    required:  Yes
+    required_msg: El Nombre de la Ubicación no puede estar en Blanco.
+    validators: NombreValidator     
+
+    
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Bncobseg
+        column:   codcob
+        unique_error:   El Código ya existe. Por Favor, Cambiélo por otro.     
+        
+NombreValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Nombre no puede tener menos de 2 carácteres
+        max:       250
+        max_error: El Nombre no puede tener más de 250 carácteres

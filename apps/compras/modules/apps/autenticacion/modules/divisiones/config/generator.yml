@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Division
+    theme:            default
+    fields:
+      coddiv: {name: Código, params: maxlength=3}
+      desdiv: {name: Descripción, params: maxlength=250}
+    list:
+      title:          Divisiones
+      filters:        [coddiv, desdiv]
+      display:        [=coddiv, desdiv]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort: coddiv
+    edit:
+      title:          Edición de Divisiones
+      display:        [coddiv, desdiv]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

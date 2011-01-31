@@ -1,0 +1,38 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fcconpag
+    theme:            default
+    fields:
+      refcon: { name: Número de Control}
+      feccon: { name: Fecha del Registro}
+      rifcon: { name: C.I. / RIF}
+      nomcon: { name: Nombre}
+      dircon: { name: Dirección}
+      naccon: { name: Nacimiento}
+      tipcon: { name: Tipo}
+      obscon: { name: Descripción}
+      moncon: { name: Monto del Impuesto a Pagar}
+      funrec: { name: Funcionario Receptor}
+      fecrec: { name: Fecha}  
+      numcuo: { name: Numero}
+      monini: { name: Monto Inicial}
+      estcon: { name: Estatus} 
+              
+    list:
+      title:          Convenios de Pagos  
+      filters:        [refcon, feccon]
+      display:        [=refcon, obscon]
+      fields:
+        feccon: { params: date_format='dd/MM/yy' }
+        fecrec: { params: date_format='dd/MM/yy' }           
+      object_actions:
+        _edit:        ~     
+        _delete:      ~ 
+      max_per_page:   5    
+    edit:
+      title:          Registro de Convenios de Pagos
+      display:       [=refcon, feccon, rifcon, nomcon, dircon, naccon, tipcon, obscon, moncon, funrec, fecrec, numcuo, monini, estcon]
+      fields:
+        feccon: { params: date_format='dd/MM/yy' }
+        fecrec: { params: date_format='dd/MM/yy' }        

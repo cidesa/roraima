@@ -1,0 +1,69 @@
+opciones:                  # Opciones generales
+  eliminar:                true
+  tabla:                   fadetpre
+  anchogrid:               900
+  ancho:                   1400
+  filas:                   30
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Cod. Artículo
+  tipo:                    t
+  nombrecampo:             codart
+  html:                    [size="20", readonly=true ]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desart
+  html:                    [size="40", readonly=true ]
+  esgrabable:              true
+3:
+  titulo:                  Cant. Solicitada
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             cansol
+  esnumerico:              true
+  html:                    [size="10", readonly=false  ]
+4:
+  titulo:                  Precio
+  tipo:                    c
+  esgrabable:              true
+  nombrecampo:             precio
+  html:                    [ ]
+5:
+  titulo:                  Recargo
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monrgo
+  esnumerico:              true
+  html:                    [size="20", readonly=true  ]
+6:
+  titulo:                  Descuento
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             mondesc
+  esnumerico:              true
+  html:                    [size="20"]
+7:
+  titulo:                  Total
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             totart
+  esnumerico:              true
+  html:                    [size="20", readonly=true  ]
+8:
+  titulo:                  Fecha Entrega
+  tipo:                    f
+  esgrabable:              true
+  nombrecampo:             fecent
+  vacia:                   false
+  html:                    [size="10"]
+9:
+  titulo:                  Porc. Recargo
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             porcrgo
+  esnumerico:              true
+  html:                    [size="10", readonly=true  ]
+  oculta:                  true

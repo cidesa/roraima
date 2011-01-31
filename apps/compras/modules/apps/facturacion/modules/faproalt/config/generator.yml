@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Faproalt
+    theme:            cidesaGenerator
+    fields:
+      codart: { name: Código}
+      desart: { name: Descripción}
+    list:
+      title:          Productos Alternos
+      display:        [=codart, desart]
+      object_actions:obj
+        _edit:        ~
+        _delete:      ~
+      filters:        [codart]
+      max_per_page:   10
+      sort:           codart
+
+    edit:
+      title:          Edición de Productos Alternos
+      display:
+        "Datos del Artículo": [codart]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

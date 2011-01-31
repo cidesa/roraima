@@ -1,0 +1,35 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fcdprinm
+    theme:            cidesaGenerator
+
+    fields:
+      anovig:  { name: Año de Vigencia, params: size=4}
+      antinm:  { name: Antigüedad del Inmueble, params: size=10 }
+      codestinm:  { name: Código del Estado del Inmueble, params: size=8 maxlength=6 }
+      mondpr:  { name: Monto de la Depreciación, params: size=10 }
+      grid:  { name: . , params: size=10 }
+
+    list:
+      title:     Definición de Tabla de Depreciación
+      display:   [=anovig, antinm]
+      sort:      antinm
+      filters:   [anovig, antinm]
+      fields:
+        antinm:
+          params: size=18
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:  anovig
+    edit:
+      title:          Edición de Tabla de Depreciación
+      display:
+        "Datos Generales":   [ _anovig, _grid ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

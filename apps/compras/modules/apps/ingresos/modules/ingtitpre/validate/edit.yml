@@ -1,0 +1,32 @@
+methods:
+  post:
+   - "cideftit{codpre}"
+   - "cideftit{nompre}"
+
+names:
+
+  cideftit{codpre}:
+    required:  Yes
+    required_msg: El código presupuestario no puede estar en Blanco
+    validators: Validator_codpre
+
+  cideftit{nompre}:
+    required:  Yes
+    required_msg: El nombre no puede estar en Blanco
+    validators: Validator_nompre
+
+
+Validator_codpre:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Cideftit
+        column:       codpre
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_nompre:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre no puede tener menos de 2 caracteres
+        max:       250
+        min_error: El nombre no puede tener mas de 250 caracteres

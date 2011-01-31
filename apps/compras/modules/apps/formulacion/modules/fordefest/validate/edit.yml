@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "fordefest{codest}"
+   - "fordefest{desest}"
+
+names:
+  fordefest{codest}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codest
+
+  fordefest{desest}:
+    required:  Yes
+    required_msg: El nombre no puede estar en Blanco
+    validators: Validator_MyString
+
+Validator_codest:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fordefest
+        column:       codest
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_MyString:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripcion no puede tener menos de 2 caracteres
+        max:       80
+        max_error: La descripcion no puede pasar mas de 80 caracteres

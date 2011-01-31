@@ -1,0 +1,55 @@
+methods:
+  post:
+   - "fordefcatpre{codcat}"
+   - "fordefcatpre{nomcat}"
+   - "fordefcatpre{objsec}"
+   - "fordefcatpre{codemp}"
+
+names:
+  fordefcatpre{codcat}:
+    required:  Yes
+    required_msg: El Código de la Unidad Ejecutora no puedo estar en Blanco.
+    validators: UniqueValidator
+
+  fordefcatpre{nomcat}:
+    required:  Yes
+    required_msg: El Nombre de la Unidad Ejecutora no puedo estar en Blanco.
+    validators: NombreValidator
+
+  fordefcatpre{objsec}:
+    required:  No
+    validators: ObjetivoValidator
+
+  fordefcatpre{codemp}:
+    required:  No
+    validators: ResponsableValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Fordefcatpre
+        column:   codcat
+        unique_error:   El Código de la Unidad Ejecutora ya existe. Por Favor, Cambiélo por otro.
+
+NombreValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Nombre de la Unidad Ejecutora no puede tener menos de 2 carácteres
+        max:       250
+        max_error: El Nombre de la Unidad Ejecutora no puede tener más de 250 carácteres
+
+ObjetivoValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Objetivo de la Unidad no puede tener menos de 2 carácteres
+        max:       100
+        max_error: El Objetivo de la Unidad no puede tener más de 100 carácteres
+
+ResponsableValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Nphojint
+        column:   codemp
+        unique_error:   El Código del Empleado Responsable no existe.

@@ -1,0 +1,27 @@
+# default rules
+homepage:
+#  url:   /
+#  param: { module: default, action: index }
+
+catalogobuscar:
+  url:   /generales/catalogobuscar
+
+catalogobuscarcheck:
+  url:   /generales/catalogobuscarcheck
+
+catalogo:
+  url:   /generales/catalogo
+
+autocomplete:
+  url:   /generales/autocomplete
+
+default_symfony:
+  url:   /symfony/:action/*
+  param: { module: default }
+
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

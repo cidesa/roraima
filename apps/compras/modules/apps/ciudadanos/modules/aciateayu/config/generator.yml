@@ -1,0 +1,93 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atayudas
+    theme:            cidesaGenerator
+
+    fields:
+      expediente:          { name: Nro. de Expediente, params: disabled=true size=6 }
+      atsolici:
+        name: Solicitante
+      atbenefi:
+        name: Paciente
+      attipayu_id:
+        name: Grupo de Rubros
+        params:     text_method=getDesayu onchange=toAjaxUpdater('divrubros',5,getUrlModulo()+'ajax',this.value,'','');
+      atrubros_id: { name: Rubro }
+      atprovee_id:
+        name: Proveedor Aprobado
+        
+      attrasoc_id: { name: Trabajador Social }
+      atestayu_id: { name: Estado de la Ayuda, params: style="font-size:18px;" }
+      proayu:      { name: Procedencia }
+      codpre:      { name: Código Presupuestario }
+      nroofi:      { name: Nro. de Oficio, params: size=6 }
+      cedula:      { name: Cedula }
+      desayu:      { name: Observación, type: textarea_tag, params: cols=60 rows=2 rich=false }
+      motayu:      { name: Motivo, type: textarea_tag, params: cols=60 rows=2 rich=false }
+      detalleayudas: {name: .}
+      detallerecaudos: {name: .}
+      nroexp:      { name: Expediente }
+      nomsol:      { name: Solicitante }
+      nomben:      { name: Paciente }
+      estsoceco:   { name: Editar }
+      detayu:      { name: Detalle}
+      caprovee_id: { name: Datos }
+      id:      { name: Expediente }
+      atmedico_id:      { name: Médico Tratante }
+      respat:   { name: Resumen de la Patología, type: textarea_tag, params: size=70x3 maxlength=5000 }
+      infmed:   { name: Informe Médico, type: textarea_tag, params: size=70x3 maxlength=5000 }
+      obsmed:   { name: Observación, type: textarea_tag, params: size=70x3 maxlength=5000 }
+      fecdiasoc:     { name: Fecha }
+      usudiasoc:     { name: Elaborado Por, params: size=100 maxlength=100 }
+      resdiasoc:    { name: Resumen, type: textarea_tag, params: size=70x3 maxlength=5000 }
+      fecvisdoc:     { name: Fecha }
+      usuvisdoc:     { name: Elaborado Por, params: size=100 maxlength=100 }
+      resvisdoc:   { name: Resumen, type: textarea_tag, params: size=70x3 maxlength=5000 }
+      monayu:    { name: Monto en Bolívares (Bs.)}
+      monapr:    { name: Monto Aprobado en Bolívares (Bs.) }
+      fecsol:     { name: Fecha }
+      refdoc:     { name: Orden de Compra }
+      priayu:     { name: Prioridad de Atención }
+      atpriayu_id:     { name: Prioridad de Atención, params: include_blank=false }
+      atdetest:       {name: Detalle de Estados }
+      atbenefifilter: {name: Cedula Beneficiario }
+      atsolicifilter: {name: Cedula Solicitante }
+    list:
+      title:          Atencion de Donaciones
+      display:        [=nroexp, =nomsol, =nomben, desayu]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [nroexp, _atbenefifilter, _atsolicifilter, attipayu_id ]
+      max_per_page:   5
+      sort:           [nroexp, desc]
+    edit:
+      title:          Edición de Atención de Donaciones
+      display:
+        Expediente:   [ _expediente, fecsol ]
+        Estatus:      [atestayu_id, _atdetest]
+        Solicitante:  [_atsolici, _atbenefi, _parentesco]
+        Prioridad:    [atpriayu_id]
+        Procedencia:  [proayu, nroofi ]
+        Proveedor:    [_caprovee_id]
+   #     Inf. Presupuestaria: [_codpre]
+        Trabajador Social: [attrasoc_id]
+        Estudio Socio-Economico: [_estsoceco]
+        Ayuda:        [attipayu_id, _atrubros_id, desayu]
+        Detalle de Recaudos: [_detallerecaudos]
+        Diagnostico del Caso: [_atmedico_id, respat, infmed, obsmed]
+        Diagnostico Social: [fecdiasoc, usudiasoc, resdiasoc]
+        Informe de Visita Domiciliaria: [fecvisdoc, usuvisdoc, resvisdoc]
+        Detalle de Ayuda: [_detalleayudas]
+    #    Detalle de Ayuda: [_detayu]
+        Monto Total solicitado: [monayu]
+        Monto Total aprobado: [monapr]        
+        Información del Gasto: [_refdoc]
+      report:
+        url:         ciudadanos/r.php?m=ciudadanos&r=atfichareg.php
+        params:      { numexpdes: nroexp, numexphas: nroexp }
+      actions:
+        _list:        ~
+        _save:        ~
+

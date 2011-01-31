@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npnomesptipos
+    theme:            cidesaGenerator
+    fields:
+      codnomesp:   { name: Código Especial}
+      codnom:   { name: Código Nomina}
+      ultfec:   { name: Desde, params: date_format='dd/MM/yyyy' size=10}
+      profec:   { name: Hasta, params: date_format='dd/MM/yyyy' size=10}
+      boton:    { name: .}
+      pago:     { name: ., params: size='15' readonly='true'}
+      mensaje:  { name: .}
+      #numsem:   { name: Numero de Semana, params: hidden='true'}
+
+
+    edit:
+      title:         Cierre de Nómina Especiales
+      display:
+        "Tipo de Nomina Especial":         [_codnomesp, _codnom, pago]
+        "Ultima Fecha de Procesamiento":         [ultfec, profec]
+#        NONE:         [_opciones]
+        NONE:         [_mensaje]
+#        NONE:         [_boton]
+        #Editable:     [codnom, ultfec, profec]
+      actions:
+        _save:        none

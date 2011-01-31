@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "viadeffortra{codfortra}"
+   - "viadeffortra{desfortra}"   
+   
+names:
+  viadeffortra{codfortra}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codfortra
+
+  viadeffortra{desfortra}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_desfortra
+  
+Validator_codfortra:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Viadeffortra
+        column:       codfortra
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desfortra:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 100 caracteres

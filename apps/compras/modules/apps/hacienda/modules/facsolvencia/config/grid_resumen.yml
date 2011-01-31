@@ -1,0 +1,52 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                false
+  tabla:                   fcsoldet
+  ancho:                   250
+  anchogrid:               400
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+
+1:       # Columna 1
+  titulo:                  Código
+  tipo:                    t
+  nombrecampo:             fueing
+  esgrabable:              true
+  html:                    [size="3", readonly=true]
+2:       # Columna 2
+  titulo:                  Ramo de Renta
+  tipo:                    a
+  nombrecampo:             nomfue
+  esgrabable:			         true
+  html:                    [size="25x2"]
+3:       # Columna 3
+  titulo:                  Objetivo Imponible
+  tipo:                    a
+  nombrecampo:             objeto
+  esgrabable:              true
+  html:                    [size="25x2"]
+4:       # Columna 4
+  titulo:                  Fecha Venc.
+  tipo:                    f
+  nombrecampo:             fecven
+  esgrabable:			   true
+  html:                    [size="10"]
+5:       # Columna 5
+  titulo:                  Estado
+  tipo:                    t
+  nombrecampo:             edodec
+  esgrabable:			   true
+  html:                    [size="8"]
+6:       # Columna 6
+  titulo:                  Conv.
+  tipo:                    t
+  nombrecampo:             conpag
+  esgrabable:			   true
+  html:                    [size="2"]
+7:       # Columna 7
+  titulo:                  Ultimo
+  tipo:                    f
+  nombrecampo:             fecultpag
+  esgrabable:			   true
+  html:                    [size="10"]

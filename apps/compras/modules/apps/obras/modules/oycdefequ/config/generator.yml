@@ -1,0 +1,28 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocdefequ
+    theme:            default
+    fields:
+      codequ:       { name: Código }
+      desequ:       { name: Descripción}
+      codtipequ:    { name: Tipo}
+      destipequ:    { name: Descripción}
+
+    list:
+      title:          Equipos
+      filters:        [codequ, desequ, codtipequ]
+      display:        [=codequ, desequ]
+      sort:  codequ
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+    edit:
+      title:          Edición de Equipos
+      display:        [codequ, desequ, codtipequ, destipequ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

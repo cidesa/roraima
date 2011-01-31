@@ -1,0 +1,25 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Inestado
+    theme:            cidesaGenerator
+    fields:
+      codedo:       { name: Código, params: maxlength=4 readonly=true}
+      nomedo:       { name: Nombre, params: maxlength=250}
+
+    list:
+      title:          Estados
+      filters:        [codedo]
+      display:        [=codedo, nomedo]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edición de Estado
+      display:        [codedo, nomedo]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

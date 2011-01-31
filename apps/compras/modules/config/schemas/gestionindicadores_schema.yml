@@ -1,0 +1,64 @@
+---
+propel:
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model.gestionindicadores }
+  giregind:
+    numuni:
+      type: VARCHAR
+      size: 4
+      required: true
+    numindg:
+      type: VARCHAR
+      size: 4
+      required: true
+    nomindg:
+      type: VARCHAR
+      size: 100
+      required: true
+    estindg:
+      type: VARCHAR
+      size: 1
+      required: true    
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  giproanu:
+    numindg:
+      type: VARCHAR
+      size: 4
+      required: true
+    anoindg:
+      type: integer
+      required: true
+    revanoindg:
+      type: VARCHAR
+      size: 2
+      required: true      
+    numtrim:
+      type: VARCHAR
+      size: 3
+      required: true  
+    progtrim:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    ejectrim:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    esttrim:
+      type: VARCHAR
+      size: 1
+      required: true    
+    estprog:
+      type: VARCHAR
+      size: 1
+      required: true  
+    feccierre:
+      type: DATE
+    feccietri:
+      type: DATE  
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true

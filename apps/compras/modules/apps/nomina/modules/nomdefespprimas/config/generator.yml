@@ -1,0 +1,21 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npprimashijos
+    theme:            cidesaGenerator    
+    fields:
+      primahijos:
+        name:.
+      primaprofe:
+        name:.  
+      primacarcol:
+        name:.  
+
+    edit:
+      title:                            Parametros Especiales para el Calculo de las Primas
+      display:
+        Primas por Hijos:               [_primahijos]
+        Prima Profesionalizacion:       [_primaprofe]
+        Prima Cargo Colateral:          [_primacarcol]
+      actions:
+        _save:        ~

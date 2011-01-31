@@ -1,0 +1,36 @@
+methods:
+  post:
+   - "opconpag{codconcepto}"
+   - "opconpag{nomconcepto}"
+
+names:
+  opconpag{codconcepto}:
+    required:  Yes
+    required_msg: El código del Concepto no puedo estar en Blanco
+    validators: Validator_codconcepto, CorrelValidator
+
+  opconpag{nomconcepto}:
+    required:  Yes
+    required_msg: La descripción del Concepto no puedo estar en Blanco
+    validators: Validator_destip
+
+Validator_codconcepto:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Opconpag
+        column:       codconcepto
+        unique_error: El código del Concepto ya Existe intente con otro.
+
+Validator_destip:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 250 caracteres
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: El código del Concepto solo puede contener valores númericos

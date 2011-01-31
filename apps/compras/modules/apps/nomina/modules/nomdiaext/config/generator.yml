@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npdiaext
+    theme:            default
+    fields:
+      codnom: { name: Codigo}
+      nomnom: {name: Descripcion}
+      fecha: { name: Fecha}
+      codemp: { name: Cedula}
+
+    list:
+      title:          Registro de Dias Extras
+      filters:        [codnom]
+      display:        [=codnom, nomnom, fecha]
+      fields:
+        fecha: { params: date_format='dd/MM/yy' }
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edicion Dias Extras
+      display:       [=codnom, nomnom, fecha, codemp]
+      fields:
+        fecha: { params: date_format='dd/MM/yy' }

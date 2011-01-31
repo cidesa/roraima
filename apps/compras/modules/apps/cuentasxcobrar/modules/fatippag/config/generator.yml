@@ -1,0 +1,29 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fatippag
+    theme:            cidesaGenerator
+
+    fields:
+      destippag: { name: Descripción, params: size=30 maxlength=30  }
+      genmov: { name: Generar Mov. según Libros }
+      gening: { name: Generar Ingreso }
+
+    list:
+      title: Tipos de Pago
+      display: [=destippag]
+      filters: [destippag]
+      object_actions:
+       _edit:        ~
+       _delete:        ~
+      max_per_page:	  10
+      sort:    destippag
+
+    edit:
+      title: Definición de Tipo de Pago
+      display:
+        "NONE": [destippag, _gening, _genmov]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

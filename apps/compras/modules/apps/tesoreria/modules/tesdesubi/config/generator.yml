@@ -1,0 +1,32 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Bnubica
+    theme:            cidesaGenerator
+    fields:
+      codubi: { name: Código}
+      desubi: { name: Descripción}
+      stacod: { name: Estatus}
+      cedemp: { name: Cédula del Responsable}
+      nomemp: { name: Responsable}
+      nomcar: { name: Cargo}
+      nomjef: { name: Jefe Compras}
+
+    list:
+      title:          Lista de Ubicación
+      filters:        [codubi, desubi]
+      display:        [=codubi, desubi]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codubi
+    edit:
+      title:          Edición de Ubicación
+      display:
+        Editable:     [codubi, desubi, stacod, cedemp, nomemp, nomcar, nomjef]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

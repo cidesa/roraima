@@ -1,0 +1,35 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Forotrcrepre
+    theme:            cidesaGenerator
+    fields:
+      codcat:
+        name: Código
+        params: maxlength='."'+$('forotrcrepre_longitud').value".' onkeyDown=dFilter(event.keyCode, this,'."'+$('forotrcrepre_mascara').value".')
+        catalogo:
+          catalogoweb: Fordefcatpre_Forotrcrepre
+          clase: Fordefcatpre
+          ajax: 1
+          parametros: getprincipal="getCodcat" getsecundario="getNomcat" campoprincipal="codcat" camposecundario="nomcat" campobase = "id"
+          catalogoparams: /param1/'."'+$('forotrcrepre_longitud').value+'".'
+          ajaxparams: +'."'".'&longitud='."'+$('forotrcrepre_longitud').value".'
+          divupdate: divgridpar
+      gridpar:   { name: .}
+      gridper:   { name: .}
+      gridorg:   { name: .}
+      gridfue:   { name: .}
+    edit:
+      title:          Formulación Directa de Otros Créditos Presupuestarios
+      display:
+        "Categoria Programática":         [codcat]
+        "Partidas Presupuestarias":    [_gridpar, _gridper, _gridfue, _gridorg]
+      hide:             [mascara, longitud, mascarapar, filper, filfin, filorg, totfil]
+      actions:
+        _list:          NONE
+        _save:          ~
+        _delete:        ~
+        _create:        NONE
+        _anular:
+          name: Eliminar
+          params: id=elimi class="sf_admin_action_delete" onClick="eliminar()"

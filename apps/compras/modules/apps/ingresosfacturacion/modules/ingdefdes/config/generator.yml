@@ -1,0 +1,32 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Indefdes
+    theme:            cidesaGenerator
+    fields:
+      coddes:       { name: Código, params: size=4 }
+      desdes:       { name: Descripción }
+      _tipdes:       { name: Tipo de Descuento }
+      valdes:       { name: Valor }
+      diades:       { name: Días para su aplicación }
+      tipret:       { name: Tipo de Retención }
+      cuecon:       { name: Nro. Cuenta Contable Asociada }
+
+    list:
+      title:          Definición de Descuentos
+      filters:        [coddes]
+      display:        [=coddes, desdes]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: coddes
+
+    edit:
+      title:          Edición de Descuento
+      display:        [_coddes, desdes, _tipdes, valdes, diades, tipret, cuecon]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

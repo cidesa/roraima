@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "viaestado{codest}"
+   - "viaestado{nomest}"
+   
+names:
+  viaestado{codest}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codest
+
+  viaestado{nomest}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_nomest
+  
+Validator_codest:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Viaestado
+        column:       codest
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_nomest:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripciÃ³n no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripciÃ³n no puede pasar mas de 100 caracteres

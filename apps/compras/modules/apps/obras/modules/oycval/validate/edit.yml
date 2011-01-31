@@ -1,0 +1,32 @@
+methods:
+  post:
+   - "ocregval{codcon}"
+   - "ocregval{codtipval}"
+   - "ocregval{numval}"
+   - "ocregval{aumobr}"
+   - "ocregval{disobr}"
+   - "ocregval{obrext}"
+names:
+  ocregval{codcon}:
+    required:  Yes
+    required_msg: El Código del Contrato no puede estar en blanco.
+
+  ocregval{codtipval}:
+    required:  Yes
+    required_msg: Debe seleccionar el Tipo de Valuación.
+
+  ocregval{numval}:
+    required:  Yes
+    required_msg: El número de la Valuación no puede estar en blanco.
+
+  ocregval{aumobr}:
+    required:  Yes
+    required_msg: El monto de Aumento de Obras no puede estar en blanco.
+
+  ocregval{disobr}:
+    required:  Yes
+    required_msg: El monto de Disminución de Obras no puede estar en blanco.
+
+  ocregval{obrext}:
+    required:  Yes
+    required_msg: El monto de Obras Extras  no puede estar en blanco.

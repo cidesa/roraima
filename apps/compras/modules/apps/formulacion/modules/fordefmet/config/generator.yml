@@ -1,0 +1,41 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fordefmet
+    theme:            cidesaGenerator
+    fields:
+      codmet: { name: Código, params : size=5 maxlength=5  onFocus=readonly(this.id) onBlur="this.value=this.value.pad(5, '0',0);" }
+      desmet: { name: Descripción, type: textarea_tag, params : size=40x5 maxlength=1000 onkeyup="ismaxlength(this)" }
+      nomabr: { name: Nombre Abreviado, params : size=40 maxlength=50}
+      codemp:
+        name: Código del Empleado
+        params: maxlength=16
+        catalogo:
+          catalogoweb: Nphojint_Nomfalperper
+          clase: Nphojint
+          ajax: 1
+          parametros: getprincipal="getCodemp" getsecundario="getNomemp" campoprincipal="codemp" camposecundario="nomemp" campobase = "id"
+      indpro: { name: Indicadores de Progreso, params : size=80 maxlength=250}
+      invfun: { name: .}
+      gridpro: { name: .}
+      gridper: { name: .}
+    list:
+      title:          Definición de Acciones
+      filters:        [codmet, codemp]
+      display:        [=codmet, desmet]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:      codmet
+    edit:
+      title:          Edición  de Acciones
+      display:
+        "Definición de Acción":   [codmet, desmet, nomabr, codemp, indpro, _invfun]
+        "Unidad de Medida":   [ _gridper, _gridpro]
+      hide:     [filper]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

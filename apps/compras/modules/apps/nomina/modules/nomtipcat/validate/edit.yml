@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "nptipcat{codtipcat}"
+   - "nptipcat{destipcat}"  
+names: 
+  nptipcat{codtipcat}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codtipcat
+    
+  nptipcat{destipcat}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_destipcat
+    
+Validator_codtipcat:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Nptipcat
+        column:       codtipcat
+        unique_error: El registro ya Existe intente con otro.
+    
+Validator_destipcat:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripción no puede pasar mas de 100 caracteres

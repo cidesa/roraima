@@ -1,0 +1,78 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fcdefnca
+    theme:            cidesaGenerator
+    fields:
+      empresa:  { name: Nombre de la Institución , params: size=40 }
+      codpar:  { name: Código de Parroquia, params: size=10 maxlength=4}
+      codmun:  { name: Código de Municipio, params: size=10 maxlength=4}
+      codedo:  { name: Código de Estado, params: size=10 maxlength=4}
+      codpai:  { name: Códig de País, params: size=10 maxlength=4}
+      numniv:  { name: Número de Niveles, params: size=10 }
+      nomext1:  { name: Nombre Extendido, params: size=40 maxlength=210}
+      nomabr1:  { name: Nombre Abreviado, params: size=10 maxlength=9}
+      tamano1:  { name: Tamaño, params: size=2 maxlength=1}
+      nomext2:  { name: Nombre Extendido, params: size=40 maxlength=210 }
+      nomabr2:  { name: Nombre Abreviado, params: size=10 maxlength=9 }
+      tamano2:  { name: Tamaño, params: size=2 maxlength=1 }
+      nomext3:  { name: Nombre Extendido, params: size=40 maxlength=210 }
+      nomabr3:  { name: Nombre Abreviado, params: size=10 maxlength=9 }
+      tamano3:  { name: Tamaño, params: size=2 maxlength=1}
+      nomext4:  { name: Nombre Extendido, params: size=40 maxlength=210 }
+      nomabr4:  { name: Nombre Abreviado, params: size=10 maxlength=9 }
+      tamano4:  { name: Tamaño, params: size=2 maxlength=1}
+      nomext5:  { name: Nombre Extendido, params: size=40 maxlength=210 }
+      nomabr5:  { name: Nombre Abreviado, params: size=10 maxlength=9 }
+      tamano5:  { name: Tamaño, params: size=2 maxlength=1}
+      nomext6:  { name: Nombre Extendido, params: size=40 maxlength=210 }
+      nomabr6:  { name: Nombre Abreviado, params: size=10 maxlength=9 }
+      tamano6:  { name: Tamaño, params: size=2 maxlength=1}
+      nomext7:  { name: Nombre Extendido, params: size=40 maxlength=210 }
+      nomabr7:  { name: Nombre Abreviado, params: size=10 maxlength=9 }
+      tamano7:  { name: Tamaño, params: size=2 maxlength=1}
+      nomext8:  { name: Nombre Extendido, params: size=40 maxlength=210 }
+      nomabr8:  { name: Nombre Abreviado, params: size=10 maxlength=9 }
+      tamano8:  { name: Tamaño, params: size=2 maxlength=1}
+      nomext9:  { name: Nombre Extendido, params: size=40 maxlength=210 }
+      nomabr9:  { name: Nombre Abreviado, params: size=10 maxlength=9 }
+      tamano9:  { name: Tamaño, params: size=2 maxlength=1}
+      nomext10:  { name: Nombre Extendido, params: size=40 maxlength=210 }
+      nomabr10:  { name: Nombre Abreviado, params: size=10 maxlength=9 }
+      tamano10:  { name: Tamaño, params: size=2 maxlength=1}
+      nivinm:  { name: Nivel del Inmueble, params: size=4 maxlength=2 }
+      numper:  { name: Número de Periodos por Año , params: size=4 maxlength=3 }
+      denumper:  { name: Descripción, params: size=30 maxlength=20}
+      codpar1:  { name: Parroquia}
+    list:
+      title:     Definición de Código Catastral Fiscal
+      display:   [=codpar, numper, denumper]
+      sort:      codmun
+      filters:   [codpar, numper, denumper]
+      fields:
+        codmun:
+          params: size=10
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:  codpar
+    edit:
+      title:          Edición de Código Catastral Fiscal
+      display:
+        "Datos Generales":   [ empresa, _codpar1, _numper, _denumper, _numniv, _nivinm ]
+        "Nivel 1":   [ nomext1, nomabr1, _tamano1 ]
+        "Nivel 2":   [ nomext2, nomabr2, _tamano2 ]
+        "Nivel 3":   [ nomext3, nomabr3, _tamano3 ]
+        "Nivel 4":   [ nomext4, nomabr4, _tamano4 ]
+        "Nivel 5":   [ nomext5, nomabr5, _tamano5 ]
+        "Nivel 6":   [ nomext6, nomabr6, _tamano6 ]
+        "Nivel 7":   [ nomext7, nomabr7, _tamano7 ]
+        "Nivel 8":   [ nomext8, nomabr8, _tamano8 ]
+        "Nivel 9":   [ nomext9, nomabr9, _tamano9 ]
+        "Nivel 10":   [ nomext10, nomabr10, _tamano10 ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

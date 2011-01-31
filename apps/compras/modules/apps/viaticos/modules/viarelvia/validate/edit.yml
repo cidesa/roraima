@@ -1,0 +1,56 @@
+methods:
+  post:
+   - "viarelvia{numrel}"
+   - "viarelvia{fecrel}"
+   - "viarelvia{tipcom}"
+   - "viarelvia{desrel}"
+  
+names:
+  viarelvia{numrel}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_numrel
+
+  viarelvia{fecrel}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: FechaValidator
+
+  viarelvia{tipcom}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_tipcom
+
+  viarelvia{desrel}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: DescripcionValidator
+  
+Validator_numrel:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Viarelvia
+        column:   numrel
+        unique_error:   El Numero de Calculo ya existe
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+Validator_tipcom:
+    class: CidesaExistValidator
+    param:
+        class:    Cpdoccom
+        column:   tipcom
+        unique_error:   El Compromiso no existe
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripcion debe tener minimo 2 caracteres
+        max:       250
+        max_error: La Descripcion debe tener maximo 250 caracteres

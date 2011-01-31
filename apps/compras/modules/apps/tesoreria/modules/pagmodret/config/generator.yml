@@ -1,0 +1,34 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Opordpag
+    theme:            default
+    fields:
+      numord: { name: Referencia}
+      fecemi: { name: Fecha}
+      desord: { name: Descripcion}
+      tipcau: { name: Tipo de Orden}
+      nomext: { name: Descripción}
+      cedrif: { name: Beneficiario}
+      nomben: { name: Nombre del Beneficiario}
+      monret: { name: Total}
+      numcom: { name: Comprobante}
+
+    list:
+      title:          Monto de Retenciones por Orden
+      filters:        [numord, fecemi]
+      display:        [=numord, desord]
+      sort:           numord
+      max_per_page:   5
+      object_actions:
+        _edit:        ~
+      fields:
+        fecemi: { params: date_format='dd/MM/yy' }
+    edit:
+      title:          Actualización de Monto de Retenciones por Orden
+      display:        [=numord, fecemi, desord, tipcau, nomext, cedrif, nomben, monret, numcom]
+      fields:
+        fecemi: { params: date_format='dd/MM/yy' }
+      actions:
+        _list:        ~
+        _save:        ~

@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npcomocp
+    theme:            default
+    fields:
+      pascar:    { name: Nro. Pasos, params: maxlength=3 }
+      gracar:    { name: Grado, params: maxlength=3 }
+      suecar:    { name: Paso 1 }
+      codtipcar: { name: Cod. Tipo Cargo, params: maxlength=3 }
+      fecdes:    { name: Vigencia, params: date_format='dd/MM/yyyy'}
+    list:
+      title:          Compensación de cargos OCP
+      filters:        [codnom, codcar]
+      display:        [=codtipcar, gracar]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:  8
+    edit:
+      title:          Compensación de cargos OCP
+      display:        [codtipcar, pascar, fecdes, ]
+      actions:
+        _list:         ~
+        _save:         ~

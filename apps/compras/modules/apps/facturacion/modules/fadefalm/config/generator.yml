@@ -1,0 +1,31 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cadefalm
+    theme:            cidesaGenerator
+    fields:
+      catipalm_id: { name : Tipo, validate: Vstring_1_50, msj_error: Debe seleccionar el tipo}
+      codalm:      { name : Código }
+      nomalm:      { name : Descripción }
+      codcat:      { name : Cod. Unidad Asociada }
+      nomcat:      { name : Unidad Asociada }
+    list:
+      title:          Almacenes
+      display:        [=codalm, nomalm, codcat, nomcat]
+      filters:		  [codalm, nomalm, codcat]
+      max_per_page:	  10
+      sort:           codalm
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:          Edición de Almacén
+      display:        [codalm, nomalm, catipalm_id, codcat]
+      fields:
+        codalm:       { params : maxlength=6}
+        nomalm: { params: size=30}
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

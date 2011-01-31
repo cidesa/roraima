@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefcatpre
+    theme:            default
+    fields:
+      codcat: { name: Codigo}
+      nomcat: { name: Nombre}
+      descat: { name: Objetivo General}         
+      objesp: { name: Objetivo Especifico}
+      mision: { name: Mision}         
+      vision: { name: Vision}
+      coduni: { name: Codigo}   
+        
+    list:
+      title:          Categorias Presupuestarias para Formular Cargos
+      filters:        [codcat]
+      display:        [=codcat, nomcat]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edicion de Categorias Presupuestarias
+      display:       [=codcat, nomcat, descat, objesp, mision, vision, coduni]

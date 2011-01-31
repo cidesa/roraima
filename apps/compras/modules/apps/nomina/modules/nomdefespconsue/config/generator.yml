@@ -1,0 +1,24 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npasiconsue
+    theme:            cidesaGenerator
+    fields:
+      tippres: { name: Tipo de Préstamo}
+      sueldocompensacion: { name: .}
+      salariointegral: { name: .}
+      sueldoreportes: { name: .}
+      arc: { name: .}
+      casep: { name: .}
+      constancia: { name: .}
+    edit:
+      title:          Conceptos para Reportes
+      display:
+        "Sueldo y Compensación": [_sueldocompensacion]
+        "Salario Integral": [_salariointegral]
+        "Sueldo para Reportes": [_sueldoreportes]
+        "ARC": [_arc]
+        "CASEP": [_tippres, _casep]
+        "Constancia de Trabajo": [_constancia]
+      actions:
+        _save:        ~

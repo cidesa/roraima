@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Indefcaj
+    theme:            cidesaGenerator
+    fields:
+      codcaj:       { name: Código }
+      descaj:       { name: Descripción}
+
+    list:
+      title:          Definición de Caja
+      filters:        [codcaj]
+      display:        [=codcaj, descaj]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codcaj
+
+    edit:
+      title:          Edición de Caja
+      display:        [codcaj, descaj]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

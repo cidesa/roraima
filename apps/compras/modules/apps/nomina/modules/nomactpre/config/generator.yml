@@ -1,0 +1,22 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Nphispre
+    theme:            default
+    fields:
+      codtippre: { name: Codigo del Prestamo}
+      deshispre: {name: Descripcion del Prestamo}
+      codemp: { name: Codigo del Empleado}
+      nomemp: { name: Nombre del Empleado}      
+      monpre: { name: Monto de Prestamo} 
+      fechispre: { name: Fecha de Actualizacion}
+      saldo: { name: Saldo Actual} 
+            
+    list:
+      title:          Historico de Actualizaciones de Saldos de Prestamos
+      display:        [=codtippre, deshispre, fechispre, codemp, nomemp, monpre, saldo]
+      fields:
+        fechispre: { params: date_format='dd/MM/yy' }
+      max_per_page:   5
+    edit:
+      title:         Actualizar Saldos de Prestamos

@@ -1,0 +1,25 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npdefubi
+    theme:            cidesaGenerator
+    fields:
+      codubi: { name: Código, params: size=5 maxlength=4 }
+      desubi: { name: Descripción, params: maxlength=250  }
+    list:
+      title:          Ubicaciones Físicas
+      filters:        [codubi, desubi ]
+      display:        [=codubi, desubi]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:  8
+      sort: codubi
+    edit:
+      title:          Edición de Ubicación Física
+      display:        [=codubi, desubi]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

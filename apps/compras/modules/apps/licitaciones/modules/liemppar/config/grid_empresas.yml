@@ -1,0 +1,32 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   liemppar
+  ancho:				   750
+  anchogrid:               700
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código Empresa
+  tipo:                    t
+  nombrecampo:             codpro
+  esgrabable:			   true
+  html:                    [size='12']
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nompro
+  html:                    [readonly=true size=20]
+3:       # Columna 3
+  titulo:                  Fecha
+  tipo:                    f
+  nombrecampo:             fecins
+  esgrabable:			   true
+  html:                    [ ]
+4:       # Columna 4
+  titulo:                  Observaciones
+  tipo:                    t
+  nombrecampo:             observaciones
+  html:                    [size="30" maxlength=1000]
+  esgrabable:              true

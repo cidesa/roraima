@@ -1,0 +1,42 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocressol
+    theme:            default
+    fields:
+      numsol:    { name: Numero}
+      dessol:    { name: Descripcion}
+      cedulaste:    { name: Solicitante}
+      nombreste:    { name: Descripcion}
+      numcor:    { name: Nro.Correspond.}
+      cedemi:    { name: Emitida Por}
+      nomemp:    { name: Descripcion}
+      cedfir:    { name: Firmada Por}
+      nomemp3:    { name: Nombre Empleado}
+      cedulate:    { name: Recibido Por}
+      nomemp2:    { name: Descripcion}
+      ubiarc:    { name: Ubicacion Archivo}
+      fecres:    { name: Fecha Emision}
+      fecfir:    { name: Fecha Firma}
+      fechasol:  { name: Fecha Recepcion, params: date_format='dd/MM/yyyy' }
+
+
+    list:
+      title:          Solicitudes Respondidas
+      filters:        [numsol, fecres]
+      display:        [=numsol, fecres, dessol]
+      sort:  numsol
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:           numsol
+
+    edit:
+      title:          Edición de Respuesta a Solicitudes
+      display:        [numsol, dessol, cedulaste, nombreste, numcor, cedemi, nomemp, cedfir, nomemp3, cedulate, nomemp2, ubiarc, fecres, fecfir, fechasol]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

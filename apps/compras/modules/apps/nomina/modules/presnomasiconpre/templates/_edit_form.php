@@ -1,0 +1,159 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ */
+// date: 2007/03/22 10:07:52
+?>
+ <?php echo javascript_include_tag('ajax') ?>
+ <?php echo form_tag('presnomasiconpre/edit', array(
+  'id'        => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form',
+  'multipart' => true,
+)) ?>
+
+<?php echo object_input_hidden_tag($npasipre, 'getId') ?>
+<?php use_helper('Object', 'Validation', 'ObjectAdmin', 'I18N', 'Date', 'tabs', 'Javascript', 'PopUp', 'Grid') ?>
+
+<fieldset id="sf_fieldset_none" class="">
+<legend>Definiciones Generales</legend>
+<div class="form-row">
+  <?php echo label_for('npasipre[codcon]', __($labels['npasipre{codcon}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npasipre{codcon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npasipre{codcon}')): ?>
+    <?php echo form_error('npasipre{codcon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+<?php echo input_tag('npasipre[codcon]', $npasipre->getCodcon(),
+      array('maxlength' => 3,
+        'readonly' => $npasipre->getId() ? true : false,
+        'style' => $npasipre->getId() ? "border-style:none;" : "",
+        'onBlur'=> remote_function(array(
+        'url'      => 'presnomasiconpre/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('npasipre_codcon').value != '' && $('id').value == ''",
+          'with' => "'ajax=1&cajtexmos=npasipre_nomcon&codigo='+this.value"
+        )))
+  )
+?>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<?php echo $npasipre->getId() ? '&nbsp;' : button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Presnomasicompre_nptipcon/clase/Nptipcon/frame/sf_admin_edit_form/obj1/npasipre_codcon/obj2/npasipre_nomcon/campo1/codtipcon/campo2/destipcon")?>
+
+  <?php $value = object_input_tag($npasipre, 'getNomcon', array (
+  'size' => 50,
+  'style' => $npasipre->getId() ? "border-style:none;" : "",
+  'disabled' => true,
+  'control_name' => 'npasipre[nomcon]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+<br>
+  <?php echo label_for('npasipre[codasi]', __($labels['npasipre{codasi}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npasipre{codasi}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npasipre{codasi}')): ?>
+    <?php echo form_error('npasipre{codasi}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+   <?php
+
+    echo input_tag('npasipre[codasi]', $npasipre->getCodasi(),
+      array('maxlength' => 3,
+        'readonly' => $npasipre->getId() ? true : false,
+        'style' => $npasipre->getId() ? "border-style:none;" : "",
+        'onBlur'=> remote_function(array(
+        'update'   => 'grid',
+        'url'      => 'presnomasiconpre/ajax',
+        'condition' => "$('npasipre_codasi').value != '' && $('id').value == ''",
+        'complete' => 'AjaxJSON(request, json)',
+          'with' => "'ajax=2&cajtexmos1=npasipre_desasi&codigoasi='+this.value+'&codcont='+$('npasipre_codcon').value"
+        )))
+  )
+    ?>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<?php echo  $npasipre->getId() ? '&nbsp;' : button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Presnomasicompre_npasipre/clase/Npasipre/frame/sf_admin_edit_form/obj1/npasipre_codasi/obj2/npasipre_desasi/campo1/codasi/campo2/desasi/param1/'+$('npasipre_codcon').value+'",'','','botoncat')?> &nbsp;
+  </div>
+<br>
+  <?php echo label_for('npasipre[desasi]', __($labels['npasipre{desasi}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npasipre{desasi}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npasipre{desasi}')): ?>
+    <?php echo form_error('npasipre{desasi}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php
+         $value = object_input_tag($npasipre, 'getDesasi', array (
+         'size' => 50,
+         'readonly' => $npasipre->getId() ? true : false,
+         'style' => $npasipre->getId() ? "border-style:none;" : "",
+         'control_name' => 'npasipre[desasi]',
+
+)); echo $value ? $value : '&nbsp;'
+
+?>
+    </div>
+	
+  <?php echo label_for('npasipre[tipasi]', __($labels['npasipre{tipasi}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npasipre{tipasi}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npasipre{tipasi}')): ?>
+    <?php echo form_error('npasipre{tipasi}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+  
+  <?php echo select_tag('npasipre[tipasi]', options_for_select($arrtipasi,$npasipre->getTipasi()),array(
+	    ));?> 	
+    </div>	
+<br>
+<table>
+	<tr>
+		<th>
+			<?php echo label_for('npasipre[afealibv]', __($labels['npasipre{afealibv}']), 'class="required"') ?>
+			  <div class="content<?php if ($sf_request->hasError('npasipre{afealibv}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npasipre{afealibv}')): ?>
+			    <?php echo form_error('npasipre{afealibv}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+			
+			  <?php  $value = object_checkbox_tag($npasipre, 'getAfealibv', array (
+			    'control_name' => 'npasipre[afealibv]'
+				)).""; echo $value ? $value : '&nbsp;' ?>
+			    </div>			
+		</th>
+		<th>&nbsp;&nbsp;&nbsp;</th>
+		<th>
+			<?php echo label_for('npasipre[afealibf]', __($labels['npasipre{afealibf}']), 'class="required"') ?>
+			  <div class="content<?php if ($sf_request->hasError('npasipre{afealibf}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npasipre{afealibf}')): ?>
+			    <?php echo form_error('npasipre{afealibf}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+			
+			  <?php  $value = object_checkbox_tag($npasipre, 'getAfealibf', array (
+			    'control_name' => 'npasipre[afealibf]'
+				)).""; echo $value ? $value : '&nbsp;' ?>
+			    </div>				
+		</th>
+	</tr>
+</table>	
+
+</div>
+</fieldset>
+
+<div class="form-row" id="grid">
+<?
+echo grid_tag($obj);
+?>
+</div>
+
+
+<?php include_partial('edit_actions', array('npasipre' => $npasipre)) ?>
+
+</form>
+
+<ul class="sf_admin_actions">
+      <li class="float-left"><?php if ($npasipre->getId()): ?>
+<?php echo button_to(__('delete'), 'presnomasiconpre/delete?id='.$npasipre->getId(), array (
+  'post' => true,
+  'confirm' => __('Are you sure?'),
+  'class' => 'sf_admin_action_delete',
+)) ?><?php endif; ?>
+</li>
+  </ul>

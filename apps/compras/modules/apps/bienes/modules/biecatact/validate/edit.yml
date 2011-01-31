@@ -1,0 +1,48 @@
+methods:
+  post:
+   - "bndefact{codact}"
+   - "bndefact{desact}"
+   - "bndefact{canact}"
+
+names:
+  bndefact{codact}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco.
+    validators: UniqueValidator
+
+  bndefact{desact}:
+    required:  Yes
+    required_msg: La Descripción no puede estar en Blanco.
+    validators: NombreValidator
+
+  bndefact{canact}:
+    required:  Yes
+    required_msg: La Cantidad de Activos no puede estar en Blanco.
+    validators: CantidadValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Bndefact
+        column:   codact
+        unique_error:   El Código ya existe. Por Favor, Cambiélo por otro.
+
+NombreValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción no puede tener menos de 2 carácteres
+        max:       250
+        max_error: La Descripción no puede tener más de 250 carácteres
+
+CantidadValidator:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Cantidad de Activos no puede tener menos de 1 carácteres
+        max:       20
+        max_error: La Cantidad de Activos no puede tener más de 20 carácteres
+ValidarNumero:
+    class: sfNumberValidator
+    params:
+        unique_error: Debe introducir solo Numeros

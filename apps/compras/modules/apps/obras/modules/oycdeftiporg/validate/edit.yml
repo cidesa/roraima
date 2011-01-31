@@ -1,0 +1,31 @@
+methods:
+  post:
+   - "octiporg{codtiporg}"
+   - "octiporg{destiporg}"
+
+names:
+  octiporg{codtiporg}:
+    required:  Yes
+    required_msg: El Codigo de la Retención no puedo estar en Blanco
+    validators: Validator_codtiporg
+
+  octiporg{destiporg}:
+    required:  Yes
+    required_msg: La Descripción no puedo estar en Blanco
+    validators: Validator_destiporg
+
+
+Validator_codtiporg:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Octiporg
+        column:   codtiporg
+        unique_error:   El Código del Acta ya existe. Por Favor, Intente con otro.
+
+Validator_destiporg:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: Las Descripciones de Cargos no puede tener menos de 5 caracteres
+        max:       250
+        max_error: Las Descripciones de Cargos no puede tener mas de 250 caracteres

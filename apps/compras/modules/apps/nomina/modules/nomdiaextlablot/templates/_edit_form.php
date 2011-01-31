@@ -1,0 +1,94 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ */
+// date: 2007/03/21 13:48:36
+?>
+<?php echo form_tag('nomdiaextlablot/edit', array(
+  'id'        => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form',
+  'multipart' => true,
+)) ?>
+<?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
+<?php echo javascript_include_tag('dFilter','ajax','tools') ?>
+<?php echo object_input_hidden_tag($npdiaext, 'getId') ?>
+
+<fieldset id="sf_fieldset_none" class="">
+<legend>Nomina</legend>
+
+<div class="form-row">
+  <?php echo label_for('npdiaext[fecha]', __($labels['npdiaext{fecha}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npdiaext{fecha}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npdiaext{fecha}')): ?>
+    <?php echo form_error('npdiaext{fecha}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_date_tag($npdiaext, 'getFecha', array (
+  'rich' => true,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'npdiaext[fecha]',
+  'date_format' => 'dd/MM/yy',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
+  <?php echo label_for('npdiaext[codnom]', __($labels['npdiaext{codnom}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npdiaext{codnom}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npdiaext{codnom}')): ?>
+    <?php echo form_error('npdiaext{codnom}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npdiaext, 'getCodnom', array (
+  'size' => 5,
+  'control_name' => 'npdiaext[codnom]',
+  'maxlength' => 4,
+  'onBlur'=> remote_function(array(
+        'update'   => 'ajaxgrid',
+        'url'      => 'nomdiaextlablot/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=1&cajtexcom=npdiaext_codnom&cajtexmos=npdiaext_nomnom&fecha='+$('npdiaext_fecha').value+'&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
+
+
+&nbsp;
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npnomina_nomdiaextlablot/clase/Npnomina/frame/sf_admin_edit_form/obj1/npdiaext_codnom/obj2/npdiaext_nomnom/campo1/codnom/campo2/nomnom/param1/')?>
+
+
+
+  <?php $value = object_input_tag($npdiaext, 'getNomnom', array (
+  'size' => 100,
+  'disabled' => true,
+  'control_name' => 'npdiaext[nomnom]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+
+<div id="ajaxgrid" class="form-row">
+<?
+echo grid_tag($obj);
+?>
+</div>
+</fieldset>
+<?php include_partial('edit_actions', array('npdiaext' => $npdiaext)) ?>
+
+</form>
+
+<ul class="sf_admin_actions">
+      <li class="float-left"><?php if ($npdiaext->getId()): ?>
+<?php echo button_to(__('delete'), 'nomdiaextlablot/delete?id='.$npdiaext->getId().'&codnom='.$npdiaext->getCodnom().'&fecha='.$npdiaext->getFecha(), array (
+  'post' => true,
+  'confirm' => __('Are you sure?'),
+  'class' => 'sf_admin_action_delete',
+)) ?><?php endif; ?>
+</li>
+  </ul>

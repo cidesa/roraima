@@ -1,0 +1,16 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viacalviatra
+    theme:            cidesaGenerator
+    fields:
+      grid:           { name: .}
+
+    edit:
+      title:          Aprobación de Calculo de Viáticos
+      display:
+        Lista de Solicitudes por Aprobar:  [_grid]
+      actions:
+        _list:        none
+        _save:        ~
+        _delete:      none

@@ -1,0 +1,21 @@
+opciones:                  # Opciones generales
+  eliminar:                false
+  tabla:                   nppais
+  anchogrid:               1150
+  filas:                   0
+  titulo:                  Nombre Estados
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Codigo Estado
+  tipo:                    t
+  alineacionobjeto:        center # left o right
+  alineacioncontenido:     center
+  nombrecampo:             codpai
+  html:                    [size="10", disabled=true ]    
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  alineacionobjeto:        left # left o right
+  alineacioncontenido:     left
+  nombrecampo:             nompai
+  html:                    [size="25", disabled=true ]

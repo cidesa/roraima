@@ -1,0 +1,54 @@
+methods:
+  post:
+   - "viaregente{cedrif}"
+   - "viaregente{desente}"
+   - "viaregente{dirente}"
+   - "viaregente{actecoente}"
+
+names:
+  viaregente{cedrif}:
+    required:  Yes
+    required_msg: C.I o R.I.F no puedo estar en Blanco
+    validators: [Validator_cedrif ]
+
+  viaregente{desente}:
+    required:  Yes
+    required_msg: El Nombre del Ente no puedo estar en Blanco
+    validators: [String1a3Validator ]
+
+  viaregente{dirente}:
+    required:  Yes
+    required_msg: La Direccion no puede estar en Blanco
+    validators: [String1aValidator ]
+
+  viaregente{actecoente}:
+    required:  Yes
+    required_msg: La Actividad Economica no puede estar en Blanco
+    validators: [String1aValidator ]
+
+Validator_cedrif:
+  class: sfPropelUniqueValidator
+  param:
+    class:        Viaregente
+    column:       cedrif
+    unique_error: El registro C.I o R.I.F ya Existe intente con otro
+    min:       1
+    min_error: El registro C.I o R.I.F no puede tener menos de 1 caracteres
+    max:       15
+    max_error: El registro C.I o R.I.F no puede pasar mas de 15 caracteres
+
+String1a3Validator:
+  class: sfStringValidator
+  param:
+    min:       1
+    min_error: El Nombre del Ente no puede tener menos de 1 caracteres
+    max:       100
+    max_error: El Nombre del Ente no puede tener menos de 100 caracteres
+
+String1aValidator:
+  class: sfStringValidator
+  param:
+    min:       1
+    min_error: Este Campo no puede tener menos de 1 caracteres
+    max:       254
+    max_error: El Nombre del Ente no puede tener menos de 254 caracteres

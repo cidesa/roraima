@@ -1,0 +1,3 @@
+default:
+  is_secure: on
+  credentials: [[caordcom_15, compras_15, admin, pagemiord_15, pagemiord_15, tesoreria_15]]

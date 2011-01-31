@@ -1,0 +1,40 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Rhtipcur
+    theme:            cidesaGenerator
+    fields:
+      codtipcur:                 { name: Código, params: maxlength=4 size=10 onFocus="if($('id').value!='')$(this.id).readOnly=true" }
+      destipcur:                 { name: Descripción, readonly : true, params: maxlength=250 size=60 }
+      codarecur:
+        name: Areal del Curso
+        msj_error: Código del Area del Curso es necesario
+        catalogo:  
+          catalogoweb: rharecur_codarecur
+          clase: Rharecur
+          ajax: 0
+          parametros: getprincipal="getCodarecur" getsecundario="getDesarecur" campoprincipal="codarecur" camposecundario="desarecur" campobase = "id"           
+
+    list:
+      title:              Definición  Tipo de Curso
+      display:            [=codtipcur, destipcur, codarecur, desarecur]
+      filters:            [codtipcur, destipcur, codarecur]
+      max_pers:           10
+      sort:               codtipcur
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Edición de Definición Tipo de Curso
+      display:
+        Datos Tipo de Curso:   [codtipcur, destipcur, codarecur]  
+      fields:
+        codtipcur:
+          params:     maxlength=4,size=5 onBlur  = "$(this.id).value=$(this.id).value.pad(4,'0',0)"  
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

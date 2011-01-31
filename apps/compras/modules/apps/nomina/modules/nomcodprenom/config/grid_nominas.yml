@@ -1,0 +1,33 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   npasicodpre
+  ancho:				   930
+  anchogrid:               950
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código Nomina
+  tipo:                    t
+  nombrecampo:             codnom
+  esgrabable:			   true
+  html:                    [size='8']
+2:       # Columna 2
+  titulo:                  Nombre
+  tipo:                    t
+  nombrecampo:             nomnom
+  esgrabable:			   true
+  html:                    [readonly=true size=25]
+3:       # Columna 3
+  titulo:                  Código Partida Presupuestaria
+  tipo:                    t
+  nombrecampo:             codpre
+  esgrabable:			   true
+  html:                    [size='15']
+4:       # Columna 4
+  titulo:                  Nombre Partida
+  tipo:                    t
+  nombrecampo:             nompar
+  esgrabable:			   true
+  html:                    [readonly=true size=70]

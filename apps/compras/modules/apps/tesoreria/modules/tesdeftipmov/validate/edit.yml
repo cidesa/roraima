@@ -1,0 +1,41 @@
+methods:
+  post:
+   - "tstipmov{codtip}"
+   - "tstipmov{destip}"
+   - "tstipmov{codcon}"
+names:
+  tstipmov{codtip}:
+    required:  Yes
+    required_msg: El código del tipo de movimiento no puede estar en blanco
+    validators: Validator_codtip
+    
+  tstipmov{destip}:
+    required:  Yes
+    required_msg: La descripción del tipo de movimiento no puede estar en blanco
+    validators: Validator_destip
+
+  tstipmov{codcon}:
+    required:  No
+    validators: ExistValidator
+
+Validator_codtip:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Tstipmov
+        column:       codtip
+        unique_error: El código del tipo de movimiento ya Existe intente con otro.
+
+Validator_destip:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre no puede tener menos de 2 caracteres
+        max:       40
+        max_error: El nombre no puede pasar mas de 40 caracteres
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Contabb
+        column:       codcta
+        unique_error: El código contable no existe

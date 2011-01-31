@@ -1,0 +1,37 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atdefemp
+    theme:            cidesaGenerator
+    fields:
+      codemp:    { name: Código, params: size=15 maxlength=15}
+      nomemp:    { name: Nombre, params: size=80 maxlength=100}
+      diremp:    { name: Dirección, params: size=80 maxlength=100}
+      telemp:    { name: Telefono, params: size=20 maxlength=30}
+      faxemp:    { name: Fax, params: size=20 maxlength=15}
+      emaemp:    { name: Email, params: size=40 maxlength=100}
+      repleg:    { name: Representante Legal, params: size=80 maxlength=100}
+      percon:    { name: Persona Contacto, params: size=80 maxlength=100}
+      preasi:    { name: Monto en Bolívares (Bs.)}
+      monlimben:    { name: Monto en Bolívares (Bs.)}
+
+    list:
+      title:          Empresa
+      display:        [=codemp, nomemp, diremp]
+      filters:        [codemp]
+      sort            codemp
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:    codemp
+    edit:
+      title:          Empresa
+      display:
+        Datos Principales:   [nomemp, diremp, telemp, faxemp, emaemp, repleg, percon]
+        Presupuesto Asignado para la Ayuda: [preasi]
+        Monto Limite de Donación por Paciente: [monlimben]
+      actions:
+        _save:        ~
+
+

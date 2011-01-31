@@ -1,0 +1,35 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Ciasiini
+    theme:            cidesaGenerator
+    fields:
+      codpre:      { name: Código, params: size=32}
+      nompre:      { name: Nombre }
+      anopre:      { name: Año, params: size=4 maxlenght= 4 readonly=true }
+      perpre:      { name: Período }
+      monasi:      { name: Monto a Estimar, params: size=20 }
+      grid:        { name: . }
+
+    list:
+      title:          Estimación de Ingresos
+      fields:
+        monasi:      { name: Monto }
+      display:        [ =codpre, nompre, monasi ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [ codpre, nompre ]
+      max_per_page:   10
+      sort: codpre
+    edit:
+      title:          Edición de Estimación de Ingresos
+      display:
+        Datos del Código Presupuestario: [ _codpre ]
+        Datos de la Estimación:          [ anopre, _monasi ]
+        Estimación Periódica:            [ _grid ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

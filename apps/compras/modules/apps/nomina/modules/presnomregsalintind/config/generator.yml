@@ -1,0 +1,30 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npsalint
+    theme:            cidesaGenerator
+    fields:
+      codcon:       { name: Tipo de Contrato}
+      codnom:       { name: Tipo de Nómina}
+      destipcon:    { name: Descripción}
+      nomnom:       { name: Nombre Nómina}
+      codemp:       { name: Empleado}
+      destipcon:    { name: Descripción}
+      feccal:       { name: Fecha de Calculo}
+      nomemp:       { name: Nombre}
+    list:
+      title:          Salario Integral Por Contrato Individual
+      filters:        [codcon, codemp]
+      display:        [=codcon, destipcon, codnom, nomnom, codemp, nomemp]
+      object_actions:
+        _edit:        ~
+        _create:      none
+      max_per_page:   5
+
+    edit:
+      title:          Salario Integral Por Contrato Individual
+      display:        [codcon, destipcon, codnom, nomnom, codemp , feccal]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

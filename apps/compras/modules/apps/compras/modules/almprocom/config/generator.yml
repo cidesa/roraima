@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Caprocom
+    theme:            default
+
+    fields:
+      codprocom:        { name: Código }
+      desprocom:        { name: Descripción }
+    list:
+      title:         Medios Tipo de Procedimiento
+      display:       [=codprocom, desprocom]
+      filters:       [codprocom, desprocom]
+      max_per_page:  10
+      sort:          codprocom
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:         Edición Tipo de Procedimiento
+      display:       [codprocom, desprocom]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

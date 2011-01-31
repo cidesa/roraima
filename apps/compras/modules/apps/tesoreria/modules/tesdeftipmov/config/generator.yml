@@ -1,0 +1,31 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tstipmov
+    theme:            default
+    fields:
+      codtip:      { name: Código, params: maxlength=4}
+      destip:      { name: Descripción, params: maxlength=40 }
+      debcre:      { name: Tipo }
+      desdebcre:   { name: Afecta }
+      escheque:    { name: ¿Es Cheque? }
+      codcon:    { name: Cuenta Contable}
+      descta:    { name: Descripción}
+    list:
+      title:          Definición de Tipos de Movimientos Bancarios
+      display:        [=codtip, destip, desdebcre]
+      filters:        [codtip, destip, debcre]
+      sort:           codtip
+      max_per_page:   10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:  codtip
+    edit:
+      title:          Edición de Tipos de Movimientos Bancarios
+      display:        [codtip, destip, debcre, desdebcre, escheque, codcon, descta]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

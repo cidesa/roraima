@@ -1,0 +1,48 @@
+methods:
+  post:
+   - "cainvfis{fecinv}"
+   - "cainvfis{artdesde}"
+   - "cainvfis{arthasta}"
+   - "cainvfis{codalm}"
+
+names:
+  cainvfis{fecinv}:
+    required:  Yes
+    required_msg: La Fecha no puedo estar en Blanco
+    validators: FechaValidator
+
+  cainvfis{artdesde}:
+    required:  Yes
+    required_msg: El Codigo del Articulo no puedo estar en Blanco
+    validators: ExistValidator
+
+  cainvfis{arthasta}:
+    required:  Yes
+    required_msg: El Codigo del Articulo no puedo estar en Blanco
+    validators: ExistValidator
+
+  cainvfis{codalm}:
+    required:  Yes
+    required_msg: El Codigo del Almacen no puedo estar en Blanco
+    validators: ExistValidator1
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        caregart
+        column:       codart
+        unique_error: El Codigo del Articulo debe existir.
+
+ExistValidator1:
+    class: CidesaExistValidator
+    param:
+        class:        cadefalm
+        column:       codalm
+        unique_error: El Codigo del Almacen debe existir.
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha introducida es invalida

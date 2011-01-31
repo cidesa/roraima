@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Lirecaud
+    theme:            cidesaGenerator
+    fields:
+      codrec:      { name: Código }
+      desrec:      { name: Descripción, params: size=80 maxlength=100 }
+    list:
+      title:          Definición de Recaudos. Documentación Legal
+      display:        [=codrec, desrec]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [codrec, desrec]
+      fields:
+        dessrec:
+          params: size=18
+      max_per_page:   5
+      sort:  codrec
+    edit:
+      title:          Edición de Recaudos. Documentación Legal
+      display:        [_codrec, desrec]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

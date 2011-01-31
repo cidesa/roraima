@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordeftipcnx
+    theme:            default
+    fields:
+      codtipcnx:      { name : Codigo, params: maxlength=3}
+      destipcnx:      { name : Descripción, params: maxlength=100 }         
+
+    list:
+      title:          Definición de Tipo de Contribución Conexión
+      display:        [=codtipcnx, destipcnx]
+      filters:        [codtipcnx, destipcnx]
+      object_actions:
+        _edit:        ~
+        _delete:      ~              
+      max_per_page:   5    
+      sort:       codtipcnx
+    edit:
+      title:          Edición de Tipo de Contribución Conexión
+      display:       [codtipcnx, destipcnx]  
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

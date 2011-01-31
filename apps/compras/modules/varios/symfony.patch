@@ -1,0 +1,1098 @@
+Sólo en old/symfony: action
+Sólo en old/symfony/addon: bridge
+Sólo en old/symfony/addon: creole
+Sólo en old/symfony/addon/propel: builder
+diff -urp old/symfony/addon/propel/database/sfPropelDatabase.class.php new/symfony/addon/propel/database/sfPropelDatabase.class.php
+--- old/symfony/addon/propel/database/sfPropelDatabase.class.php	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/addon/propel/database/sfPropelDatabase.class.php	2008-05-22 13:20:43.000000000 -0430
+@@ -24,7 +24,7 @@
+  * @subpackage database
+  *
+  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
+- * @version    SVN: $Id: sfPropelDatabase.class.php 8699 2008-04-30 16:40:41Z FabianLange $
++ * @version    SVN: $Id: sfPropelDatabase.class.php 3201 2007-01-09 17:46:40Z fabien $
+  */
+ class sfPropelDatabase extends sfCreoleDatabase
+ {
+@@ -68,14 +68,18 @@ class sfPropelDatabase extends sfCreoleD
+       require_once('creole/Creole.php');
+       $params = Creole::parseDSN($dsn);
+ 
+-      $options = array('phptype', 'hostspec', 'database', 'username', 'password', 'port', 'protocol', 'encoding', 'persistent', 'socket','compat_assoc_lower','compat_rtrim_string');
++
++      $options = array('phptype', 'hostspec', 'database', 'username', 'password', 'port', 'protocol', 'encoding', 'persistent', 'schema');
+       foreach ($options as $option)
+       {
+-        if (!$this->getParameter($option) && isset($params[$option]))
++	        
++	if (!$this->getParameter($option) && isset($params[$option]))
+         {
+           $this->setParameter($option, $params[$option]);
+         }
+       }
++
++	//$this->setParameter('schema',isset($params['schema'])?$params['schema']:null);
+     }
+ 
+     self::$config['propel']['datasources'][$this->getParameter('datasource')] =
+@@ -92,9 +96,7 @@ class sfPropelDatabase extends sfCreoleD
+           'encoding'   => $this->getParameter('encoding'),
+           'persistent' => $this->getParameter('persistent'),
+           'protocol'   => $this->getParameter('protocol'),
+-          'socket'     => $this->getParameter('socket'),
+-          'compat_assoc_lower' => $this->getParameter('compat_assoc_lower'),
+-          'compat_rtrim_string' => $this->getParameter('compat_rtrim_string'),
++	  'schema'     => $this->getParameter('schema'),
+         ),
+       );
+   }
+@@ -114,4 +116,30 @@ class sfPropelDatabase extends sfCreoleD
+     self::$config['propel']['datasources'][$this->getParameter('datasource')]['connection'][$key] = $value;
+     $this->setParameter($key, $value);
+   }
++
++  public function retrieveObjects($class, $peerMethod = null)
++  {
++    if (!$classPath = sfCore::getClassPath($class.'Peer'))
++    {
++      throw new sfException(sprintf('Unable to find path for class "%s".', $class.'Peer'));
++    }
++
++    require_once($classPath);
++
++    if (!$peerMethod)
++    {
++      $peerMethod = 'doSelect';
++    }
++
++    $classPeer = $class.'Peer';
++
++    if (!is_callable(array($classPeer, $peerMethod)))
++    {
++      throw new sfException(sprintf('Peer method "%s" not found for class "%s"', $peerMethod, $classPeer));
++    }
++
++    $objects = call_user_func(array($classPeer, $peerMethod), new Criteria());
++
++    return $objects;
++  }
+ }
+Sólo en old/symfony/addon/propel/database: sfPropelDataRetriever.class.php
+diff -urp old/symfony/addon/propel/database/.svn/entries new/symfony/addon/propel/database/.svn/entries
+--- old/symfony/addon/propel/database/.svn/entries	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/addon/propel/database/.svn/entries	2008-05-22 13:20:43.000000000 -0430
+@@ -1,7 +1,7 @@
+ 8
+ 
+ dir
+-9625
++13041
+ http://cidesa.svn:8080/repositorio/web/php/siga/trunk/varios/symfony/addon/propel/database
+ http://cidesa.svn:8080/repositorio
+ 
+Sólo en old/symfony/addon/propel: generator
+Sólo en old/symfony/addon/propel: sfPropelAutoload.php
+Sólo en old/symfony/addon/propel: sfPropelBehavior.class.php
+Sólo en old/symfony/addon/propel: sfPropelDatabaseSchema.class.php
+diff -urp old/symfony/addon/propel/sfPropelData.class.php new/symfony/addon/propel/sfPropelData.class.php
+--- old/symfony/addon/propel/sfPropelData.class.php	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/addon/propel/sfPropelData.class.php	2008-05-22 13:20:43.000000000 -0430
+@@ -15,7 +15,7 @@
+  * @package    symfony
+  * @subpackage addon
+  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
+- * @version    SVN: $Id: sfPropelData.class.php 8288 2008-04-04 13:55:10Z noel $
++ * @version    SVN: $Id: sfPropelData.class.php 6019 2007-11-14 11:28:24Z fabien $
+  */
+ class sfPropelData extends sfData
+ {
+@@ -266,7 +266,7 @@ class sfPropelData extends sfData
+     if ('all' === $tables || is_null($tables))
+     {
+       // load all map builder classes
+-      $files = sfFinder::type('file')->ignore_version_control()->name('*MapBuilder.php')->in(sfLoader::getModelDirs());
++      $files = sfFinder::type('file')->name('*MapBuilder.php')->in(sfLoader::getModelDirs());
+       foreach ($files as $file)
+       {
+         $mapBuilderClass = basename($file, '.php');
+@@ -329,61 +329,80 @@ class sfPropelData extends sfData
+       $resultsSets = array();
+       if ($hasParent)
+       {
+-        $resultsSets = $this->fixOrderingOfForeignKeyDataInSameTable($resultsSets, $tableName, $fixColumn);
++        try{
++          $resultsSets = $this->fixOrderingOfForeignKeyDataInSameTable($resultsSets, $tableName, $fixColumn);
++        }catch(Exception $ex){
++          continue;
++        }
+       }
+       else
+       {
+-        $resultsSets[] = $this->con->executeQuery('SELECT * FROM '.constant($tableName.'Peer::TABLE_NAME'));
++        try{
++          $resultsSets[] = $this->con->executeQuery('SELECT * FROM '.constant($tableName.'Peer::TABLE_NAME'));
++        }catch(Exception $ex){
++          continue;
++        }
+       }
+ 
++
+       foreach ($resultsSets as $rs)
+       {
++
+         if($rs->getRecordCount() > 0 && !isset($dumpData[$tableName])){
+           $dumpData[$tableName] = array();
+         }
+ 
+         while ($rs->next())
+         {
++//print_r($rs);
+           $pk = $tableName;
+           $values = array();
+           $primaryKeys = array();
+           $foreignKeys = array();
+ 
++
+           foreach ($tableMap->getColumns() as $column)
+           {
+-            $col = strtolower($column->getColumnName());
+-            $isPrimaryKey = $column->isPrimaryKey();
+-
+-            if (is_null($rs->get($col)))
+-            {
+-              continue;
+-            }
+-
+-            if ($isPrimaryKey)
+-            {
+-              $value = $rs->get($col);
+-              $pk .= '_'.$value;
+-              $primaryKeys[$col] = $value;
+-            }
++	    try{
++		    $col = strtolower($column->getColumnName());
++		    $isPrimaryKey = $column->isPrimaryKey();
++
++		    if (is_null($rs->get($col)))
++		    {
++		      continue;
++		    }
++
++		    if ($isPrimaryKey)
++		    {
++		      $value = $rs->get($col);
++		      $pk .= '_'.$value;
++		      $primaryKeys[$col] = $value;
++		    }
++
++		    if ($column->isForeignKey())
++		    {
++		      $relatedTable = $this->maps[$tableName]->getDatabaseMap()->getTable($column->getRelatedTableName());
++		      if ($isPrimaryKey)
++		      {
++		        $foreignKeys[$col] = $rs->get($col);
++		        $primaryKeys[$col] = $relatedTable->getPhpName().'_'.$rs->get($col);
++		      }
++		      else
++		      {
++		        $values[$col] = $relatedTable->getPhpName().'_'.$rs->get($col);
++		      }
++		    }
++		    elseif (!$isPrimaryKey || ($isPrimaryKey && !$tableMap->isUseIdGenerator()))
++		    {
++		      // We did not want auto incremented primary keys
++		      $values[$col] = $rs->get($col);
++		    }
++
++	    }
++	    catch(Exception $ex){
++		continue;
++	    }
+ 
+-            if ($column->isForeignKey())
+-            {
+-              $relatedTable = $this->maps[$tableName]->getDatabaseMap()->getTable($column->getRelatedTableName());
+-              if ($isPrimaryKey)
+-              {
+-                $foreignKeys[$col] = $rs->get($col);
+-                $primaryKeys[$col] = $relatedTable->getPhpName().'_'.$rs->get($col);
+-              }
+-              else
+-              {
+-                $values[$col] = $relatedTable->getPhpName().'_'.$rs->get($col);
+-              }
+-            }
+-            elseif (!$isPrimaryKey || ($isPrimaryKey && !$tableMap->isUseIdGenerator()))
+-            {
+-              // We did not want auto incremented primary keys
+-              $values[$col] = $rs->get($col);
+-            }
+           }
+ 
+           if (count($primaryKeys) > 1 || (count($primaryKeys) > 0 && count($foreignKeys) > 0))
+@@ -396,6 +415,8 @@ class sfPropelData extends sfData
+       }
+     }
+ 
++
++
+     // save to file(s)
+     if ($sameFile)
+     {
+@@ -455,7 +476,7 @@ class sfPropelData extends sfData
+ 
+     return $classes;
+   }
+-
++  
+   protected function fixOrderingOfForeignKeyDataInSameTable($resultsSets, $tableName, $column, $in = null)
+   {
+     $rs = $this->con->executeQuery(sprintf('SELECT * FROM %s WHERE %s %s',
+Sólo en old/symfony/addon/propel: sfPropelData.class.php~
+Sólo en old/symfony/addon/propel: sfPropelManyToMany.class.php
+Sólo en old/symfony/addon/propel: sfPropelPager.class.php
+diff -urp old/symfony/addon/propel/.svn/all-wcprops new/symfony/addon/propel/.svn/all-wcprops
+--- old/symfony/addon/propel/.svn/all-wcprops	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/addon/propel/.svn/all-wcprops	2008-05-22 13:20:43.000000000 -0430
+@@ -3,3 +3,9 @@ svn:wc:ra_dav:version-url
+ V 71
+ /repositorio/!svn/ver/28/web/php/siga/trunk/varios/symfony/addon/propel
+ END
++sfPropelData.class.php
++K 25
++svn:wc:ra_dav:version-url
++V 97
++/repositorio/!svn/ver/13077/web/php/siga/trunk/varios/symfony/addon/propel/sfPropelData.class.php
++END
+diff -urp old/symfony/addon/propel/.svn/entries new/symfony/addon/propel/.svn/entries
+--- old/symfony/addon/propel/.svn/entries	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/addon/propel/.svn/entries	2008-05-22 13:20:43.000000000 -0430
+@@ -1,7 +1,7 @@
+ 8
+ 
+ dir
+-9625
++13041
+ http://cidesa.svn:8080/repositorio/web/php/siga/trunk/varios/symfony/addon/propel
+ http://cidesa.svn:8080/repositorio
+ 
+@@ -29,3 +29,15 @@ bd7ca8a6-7b2b-0410-91d3-d9bcf4a077a3
+ database
+ dir
+ 
++sfPropelData.class.php
++file
++13077
++
++
++
++2008-05-21T23:39:11.000000Z
++a40429649e52d68c526989a0fd6818ab
++2008-05-22T15:06:49.542616Z
++13077
++desarrollo
++
+Sólo en new/symfony/addon/propel/.svn/text-base: sfPropelData.class.php.svn-base
+Sólo en old/symfony/addon/propel: validator
+Sólo en old/symfony/addon: sfData.class.php
+Sólo en old/symfony/addon: sfMail.class.php
+Sólo en old/symfony/addon: sfPager.class.php
+diff -urp old/symfony/addon/.svn/entries new/symfony/addon/.svn/entries
+--- old/symfony/addon/.svn/entries	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/addon/.svn/entries	2008-05-22 13:20:43.000000000 -0430
+@@ -1,7 +1,7 @@
+ 8
+ 
+ dir
+-9625
++13041
+ http://cidesa.svn:8080/repositorio/web/php/siga/trunk/varios/symfony/addon
+ http://cidesa.svn:8080/repositorio
+ 
+Sólo en old/symfony: cache
+Sólo en old/symfony: config
+Sólo en old/symfony: controller
+Sólo en old/symfony: database
+Sólo en old/symfony: debug
+Sólo en old/symfony: exception
+Sólo en old/symfony: filter
+Sólo en old/symfony: generator
+Sólo en old/symfony: helper
+Sólo en old/symfony/i18n: Gettext
+Sólo en old/symfony/i18n: sfChoiceFormat.class.php
+Sólo en old/symfony/i18n: sfCultureInfo.class.php
+diff -urp old/symfony/i18n/sfDateFormat.class.php new/symfony/i18n/sfDateFormat.class.php
+--- old/symfony/i18n/sfDateFormat.class.php	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/i18n/sfDateFormat.class.php	2008-05-22 13:20:43.000000000 -0430
+@@ -12,7 +12,7 @@
+  * {@link http://prado.sourceforge.net/}
+  *
+  * @author     Wei Zhuo <weizhuo[at]gmail[dot]com>
+- * @version    $Id: sfDateFormat.class.php 6806 2007-12-29 07:53:10Z fabien $
++ * @version    $Id: sfDateFormat.class.php 4340 2007-06-23 06:47:05Z fabien $
+  * @package    symfony
+  * @subpackage i18n
+  */
+@@ -39,8 +39,7 @@ require_once(dirname(__FILE__).'/util.ph
+  *
+  * @author Xiang Wei Zhuo <weizhuo[at]gmail[dot]com>
+  * @version v1.0, last update on Sat Dec 04 14:10:49 EST 2004
+- * @package    symfony
+- * @subpackage i18n
++ * @package System.I18N.core
+  */
+ class sfDateFormat
+ {
+@@ -177,7 +176,7 @@ class sfDateFormat
+     {
+       if ($isString)
+       {
+-        $numericalTime = @strtotime($time);
++        $numericalTime = @adodb_strtotime($time);
+         if ($numericalTime === false)
+         {
+           throw new sfException(sprintf('Impossible to parse date "%s" with format "%s".', $time, $pattern));
+@@ -187,7 +186,7 @@ class sfDateFormat
+       {
+         $numericalTime = $time;
+       }
+-      $date = @getdate($numericalTime);
++      $date = @adodb_getdate($numericalTime);
+     }
+ 
+     // we set default values for the time
+Sólo en old/symfony/i18n: sfDateTimeFormatInfo.class.php
+Sólo en old/symfony/i18n: sfI18N.class.php
+Sólo en old/symfony/i18n: sfIMessageSource.class.php
+Sólo en old/symfony/i18n: sfMessageCache.class.php
+Sólo en old/symfony/i18n: sfMessageFormat.class.php
+Sólo en old/symfony/i18n: sfMessageSource.class.php
+Sólo en old/symfony/i18n: sfMessageSource_gettext.class.php
+Sólo en old/symfony/i18n: sfMessageSource_MySQL.class.php
+Sólo en old/symfony/i18n: sfMessageSource_SQLite.class.php
+Sólo en old/symfony/i18n: sfMessageSource_XLIFF.class.php
+Sólo en old/symfony/i18n: sfNumberFormat.class.php
+Sólo en old/symfony/i18n: sfNumberFormatInfo.class.php
+diff -urp old/symfony/i18n/.svn/entries new/symfony/i18n/.svn/entries
+--- old/symfony/i18n/.svn/entries	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/i18n/.svn/entries	2008-05-22 13:20:43.000000000 -0430
+@@ -1,7 +1,7 @@
+ 8
+ 
+ dir
+-9625
++13041
+ http://cidesa.svn:8080/repositorio/web/php/siga/trunk/varios/symfony/i18n
+ http://cidesa.svn:8080/repositorio
+ 
+Sólo en old/symfony/i18n: util.php
+Sólo en old/symfony: log
+Sólo en old/symfony: request
+Sólo en old/symfony: response
+Sólo en old/symfony: storage
+diff -urp old/symfony/.svn/all-wcprops new/symfony/.svn/all-wcprops
+--- old/symfony/.svn/all-wcprops	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/.svn/all-wcprops	2008-05-22 13:20:43.000000000 -0430
+@@ -1,5 +1,5 @@
+ K 25
+ svn:wc:ra_dav:version-url
+-V 60
+-/repositorio/!svn/ver/8915/web/php/siga/trunk/varios/symfony
++V 61
++/repositorio/!svn/ver/12728/web/php/siga/trunk/varios/symfony
+ END
+diff -urp old/symfony/.svn/entries new/symfony/.svn/entries
+--- old/symfony/.svn/entries	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/.svn/entries	2008-05-22 13:20:43.000000000 -0430
+@@ -1,14 +1,14 @@
+ 8
+ 
+ dir
+-9625
++13041
+ http://cidesa.svn:8080/repositorio/web/php/siga/trunk/varios/symfony
+ http://cidesa.svn:8080/repositorio
+ 
+ 
+ 
+-2008-02-12T19:48:48.474696Z
+-8915
++2008-05-14T18:08:48.074803Z
++12728
+ desarrollo
+ 
+ 
+@@ -29,12 +29,57 @@ bd7ca8a6-7b2b-0410-91d3-d9bcf4a077a3
+ addon
+ dir
+ 
+-generator
++config
+ dir
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++deleted
+ 
+ i18n
+ dir
+ 
++test
++dir
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++deleted
++
+ validator
+ dir
+ 
+Sólo en old/symfony/.svn: entries~
+Sólo en old/symfony: symfony.php
+Sólo en old/symfony: test
+Sólo en old/symfony: user
+Sólo en old/symfony: util
+Sólo en old/symfony/validator: sfCallbackValidator.class.php
+Sólo en old/symfony/validator: sfCompareValidator.class.php
+Sólo en old/symfony/validator: sfDateValidator.class.php
+Sólo en old/symfony/validator: sfEmailValidator.class.php
+Sólo en old/symfony/validator: sfFileValidator.class.php
+Sólo en old/symfony/validator: sfHtmlValidator.class.php
+diff -urp old/symfony/validator/sfNumberValidator.class.php new/symfony/validator/sfNumberValidator.class.php
+--- old/symfony/validator/sfNumberValidator.class.php	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/validator/sfNumberValidator.class.php	2008-05-22 13:20:43.000000000 -0430
+@@ -3,7 +3,7 @@
+ /*
+  * This file is part of the symfony package.
+  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
+- * (c) 2004-2006 Sean Kerr <sean@code-box.org>
++ * (c) 2004-2006 Sean Kerr.
+  * 
+  * For the full copyright and license information, please view the LICENSE
+  * file that was distributed with this source code.
+@@ -30,11 +30,23 @@
+  * @package    symfony
+  * @subpackage validator
+  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
+- * @author     Sean Kerr <sean@code-box.org>
+- * @version    SVN: $Id: sfNumberValidator.class.php 8052 2008-03-23 02:30:30Z Carl.Vondrick $
++ * @author     Sean Kerr <skerr@mojavi.org>
++ * @version    SVN: $Id: sfNumberValidator.class.php 3233 2007-01-11 21:01:08Z fabien $
+  */
+ class sfNumberValidator extends sfValidator
+ {
++
++  function my_is_numeric_comma($value)
++  {
++   return (preg_match ("/^(-){0,1}([0-9]+)((.)[0-9][0-9][0-9])*((,)[0-9]){0,1}([0-9]*)$/",$value) == 1);
++  }
++  function my_is_numeric_dot($value)
++  {
++   return (preg_match ("/^(-){0,1}([0-9]+)((,)[0-9][0-9][0-9])*((.)[0-9]){0,1}([0-9]*)$/",$value) == 1);
++  }
++
++
++
+   /**
+    * Executes this validator.
+    *
+@@ -45,7 +57,7 @@ class sfNumberValidator extends sfValida
+    */
+   public function execute(&$value, &$error)
+   {
+-    if (!preg_match('/^-?\d+(\.\d+)?$/', $value))
++    if ($this->my_is_numeric_comma($value)==false && $this->my_is_numeric_dot($value)==false)
+     {
+       // it's NaN, what nerve!
+       $error = $this->getParameterHolder()->get('nan_error');
+@@ -58,6 +70,27 @@ class sfNumberValidator extends sfValida
+     switch ($type)
+     {
+       case "decimal":
++      {
++        if ($this->my_is_numeric_comma($value))
++	{
++	  $value = str_replace('.', '', $value);
++	  $value = str_replace(',', '.', $value);
++	}elseif($this->my_is_numeric_dot($value))
++	{
++	  $value = str_replace(',', '', $value);
++	}
++	else
++        {
++          // value isn't a decimal, shazbot!
++          $error = $this->getParameterHolder()->get('type_error');
++          return false;
++        }
++
++        // cast our value to a float
++        $value = (float) $value;
++
++        break;
++      }
+       case "float":
+       {
+         if (substr_count($value, '.') != 1)
+@@ -156,4 +189,5 @@ class sfNumberValidator extends sfValida
+ 
+     return true;
+   }
++
+ }
+Sólo en old/symfony/validator: sfRegexValidator.class.php
+Sólo en old/symfony/validator: sfStringValidator.class.php
+Sólo en old/symfony/validator: sfUrlValidator.class.php
+Sólo en old/symfony/validator: sfValidator.class.php
+Sólo en old/symfony/validator: sfValidatorManager.class.php
+diff -urp old/symfony/validator/.svn/entries new/symfony/validator/.svn/entries
+--- old/symfony/validator/.svn/entries	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/validator/.svn/entries	2008-05-22 13:20:43.000000000 -0430
+@@ -1,7 +1,7 @@
+ 8
+ 
+ dir
+-9625
++13041
+ http://cidesa.svn:8080/repositorio/web/php/siga/trunk/varios/symfony/validator
+ http://cidesa.svn:8080/repositorio
+ 
+Sólo en old/symfony/vendor/creole: CallableStatement.php
+Sólo en old/symfony/vendor/creole/common: ConnectionCommon.php
+diff -urp old/symfony/vendor/creole/common/PreparedStatementCommon.php new/symfony/vendor/creole/common/PreparedStatementCommon.php
+--- old/symfony/vendor/creole/common/PreparedStatementCommon.php	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/vendor/creole/common/PreparedStatementCommon.php	2008-05-22 13:20:43.000000000 -0430
+@@ -487,13 +487,13 @@ abstract class PreparedStatementCommon {
+      * @return void
+      */
+     function setDate($paramIndex, $value) 
+-    {
++    {	
+ 	    $this->sql_cache_valid = false;
+         if ($value === null) {
+             $this->setNull($paramIndex);
+-        } else {
+-            if (is_numeric($value)) $value = date("Y-m-d", $value);
+-            elseif (is_object($value)) $value = date("Y-m-d", $value->getTime());        
++        } else {		
++            if (is_numeric($value)) $value = @adodb_date("Y-m-d", $value);
++            elseif (is_object($value)) $value = @adodb_date("Y-m-d", $value->getTime());        
+             $this->boundInVars[$paramIndex] = "'" . $this->escape($value) . "'";
+         }
+     } 
+diff -urp old/symfony/vendor/creole/common/ResultSetCommon.php new/symfony/vendor/creole/common/ResultSetCommon.php
+--- old/symfony/vendor/creole/common/ResultSetCommon.php	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/vendor/creole/common/ResultSetCommon.php	2008-05-22 13:20:43.000000000 -0430
+@@ -350,18 +350,18 @@ abstract class ResultSetCommon {        
+     {
+         $idx = (is_int($column) ? $column - 1 : $column);
+         if (!array_key_exists($idx, $this->fields)) { throw new SQLException("Invalid resultset column: " . $column); }
+-        if ($this->fields[$idx] === null) { return null; }
+-        $ts = strtotime($this->fields[$idx]);        
++        if ($this->fields[$idx] === null) { return null; }        
++	$ts = adodb_strtotime($this->fields[$idx]);        
+         if ($ts === -1 || $ts === false) { // in PHP 5.1 return value changes to FALSE
+             throw new SQLException("Unable to convert value at column " . $column . " to timestamp: " . $this->fields[$idx]);
+         }
+-        if ($format === null) {
++        if ($format === null) {            
+             return $ts;
+         }
+-        if (strpos($format, '%') !== false) {
+-            return strftime($format, $ts);
+-        } else {
+-            return date($format, $ts);
++        if (strpos($format, '%') !== false) {            
++	    return adodb_strftime($format, $ts);
++        } else {            
++            return adodb_date($format, $ts);
+         }
+     }    
+ 
+@@ -444,4 +444,4 @@ abstract class ResultSetCommon {        
+             return date($format, $ts);
+         }        
+     }  
+-}
++}
+\ No hay ningún carácter de nueva línea al final del fichero
+Sólo en old/symfony/vendor/creole/common: StatementCommon.php
+diff -urp old/symfony/vendor/creole/common/.svn/entries new/symfony/vendor/creole/common/.svn/entries
+--- old/symfony/vendor/creole/common/.svn/entries	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/vendor/creole/common/.svn/entries	2008-05-22 13:20:43.000000000 -0430
+@@ -1,7 +1,7 @@
+ 8
+ 
+ dir
+-9625
++13041
+ http://cidesa.svn:8080/repositorio/web/php/siga/trunk/varios/symfony/vendor/creole/common
+ http://cidesa.svn:8080/repositorio
+ 
+Sólo en old/symfony/vendor/creole: Connection.php
+Sólo en old/symfony/vendor/creole: contrib
+Sólo en old/symfony/vendor/creole: Creole.php
+Sólo en old/symfony/vendor/creole: Creole.php~
+Sólo en old/symfony/vendor/creole: CreoleTypes.php
+Sólo en old/symfony/vendor/creole/drivers: mssql
+Sólo en old/symfony/vendor/creole/drivers: mysql
+Sólo en old/symfony/vendor/creole/drivers: mysqli
+Sólo en old/symfony/vendor/creole/drivers: odbc
+Sólo en old/symfony/vendor/creole/drivers: oracle
+diff -urp old/symfony/vendor/creole/drivers/pgsql/metadata/PgSQLDatabaseInfo.php new/symfony/vendor/creole/drivers/pgsql/metadata/PgSQLDatabaseInfo.php
+--- old/symfony/vendor/creole/drivers/pgsql/metadata/PgSQLDatabaseInfo.php	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/vendor/creole/drivers/pgsql/metadata/PgSQLDatabaseInfo.php	2008-05-22 13:20:43.000000000 -0430
+@@ -30,12 +30,22 @@ require_once 'creole/metadata/DatabaseIn
+  */
+ class PgSQLDatabaseInfo extends DatabaseInfo {
+ 
++/** Database schema selection */
++    protected $dbschemas = null;
++    public function __construct(Connection $conn, $vendorInfo = array())
++    {
++      parent::__construct($conn,$vendorInfo);
++      $dsn = $this->conn->getDSN();
++      $this->dbschemas = $dsn['schema'];
++    }
++
+     /**
+      * @throws SQLException
+      * @return void
+      */
+     protected function initTables()
+     {
++
+         include_once 'creole/drivers/pgsql/metadata/PgSQLTableInfo.php';
+         
+         // Get Database Version
+@@ -55,14 +65,25 @@ class PgSQLDatabaseInfo extends Database
+         pg_free_result ($result);
+         $result = null;
+ 
+-        $result = pg_query($this->conn->getResource(), "SELECT c.oid, 
+-														case when n.nspname='public' then c.relname else n.nspname||'.'||c.relname end as relname 
+-														FROM pg_class c join pg_namespace n on (c.relnamespace=n.oid)
+-														WHERE c.relkind = 'r'
+-														  AND n.nspname NOT IN ('information_schema','pg_catalog')
+-														  AND n.nspname NOT LIKE 'pg_temp%'
+-														  AND n.nspname NOT LIKE 'pg_toast%'
+-														ORDER BY relname");
++/*
++        $result = pg_query($this->conn->getResource(), "SELECT oid, relname FROM pg_class
++										WHERE relkind = 'r' AND relnamespace = (SELECT oid
++										FROM pg_namespace
++										WHERE
++										     nspname NOT IN ('information_schema','pg_catalog')
++										     AND nspname NOT LIKE 'pg_temp%'
++										     AND nspname NOT LIKE 'pg_toast%'
++										LIMIT 1)
++										ORDER BY relname");
++*/
++
++        $result = pg_query($this->conn->getResource(),"SELECT oid, relname FROM pg_class WHERE relkind = 'r' 
++          AND relnamespace in (SELECT oid FROM pg_namespace WHERE 
++          nspname NOT IN ('information_schema','pg_catalog') 
++          AND nspname NOT LIKE 'pg_temp%".(isset($this->dbschemas)?"' 
++          AND nspname IN ('".$this->dbschemas."')":"")." AND nspname 
++          NOT LIKE 'pg_toast%') ORDER BY relname");
++
+ 
+         if (!$result) {
+             throw new SQLException("Could not list tables", pg_last_error($this->dblink));
+@@ -86,15 +107,16 @@ class PgSQLDatabaseInfo extends Database
+      
+ 	 	$this->sequences = array();
+ 		   
+-        $result = pg_query($this->conn->getResource(), "SELECT c.oid, 
+-														case when n.nspname='public' then c.relname else n.nspname||'.'||c.relname end as relname 
+-														FROM pg_class c join pg_namespace n on (c.relnamespace=n.oid)
+-														WHERE c.relkind = 'S'
+-														  AND n.nspname NOT IN ('information_schema','pg_catalog')
+-														  AND n.nspname NOT LIKE 'pg_temp%'
+-														  AND n.nspname NOT LIKE 'pg_toast%'
+-														ORDER BY relname");
+-														
++        $result = pg_query($this->conn->getResource(), "SELECT oid, relname FROM pg_class
++										WHERE relkind = 'S' AND relnamespace = (SELECT oid
++										FROM pg_namespace
++										WHERE
++										     nspname NOT IN ('information_schema','pg_catalog')
++										     AND nspname NOT LIKE 'pg_temp%'
++										     AND nspname NOT LIKE 'pg_toast%'
++										LIMIT 1)
++										ORDER BY relname");
++
+         if (!$result) {
+             throw new SQLException("Could not list sequences", pg_last_error($this->dblink));
+         }
+Sólo en old/symfony/vendor/creole/drivers/pgsql/metadata: PgSQLTableInfo.php
+diff -urp old/symfony/vendor/creole/drivers/pgsql/metadata/.svn/entries new/symfony/vendor/creole/drivers/pgsql/metadata/.svn/entries
+--- old/symfony/vendor/creole/drivers/pgsql/metadata/.svn/entries	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/vendor/creole/drivers/pgsql/metadata/.svn/entries	2008-05-22 13:20:43.000000000 -0430
+@@ -1,7 +1,7 @@
+ 8
+ 
+ dir
+-9625
++13041
+ http://cidesa.svn:8080/repositorio/web/php/siga/trunk/varios/symfony/vendor/creole/drivers/pgsql/metadata
+ http://cidesa.svn:8080/repositorio
+ 
+diff -urp old/symfony/vendor/creole/drivers/pgsql/PgSQLConnection.php new/symfony/vendor/creole/drivers/pgsql/PgSQLConnection.php
+--- old/symfony/vendor/creole/drivers/pgsql/PgSQLConnection.php	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/vendor/creole/drivers/pgsql/PgSQLConnection.php	2008-05-22 13:20:43.000000000 -0430
+@@ -54,7 +54,6 @@ class PgSQLConnection extends Connection
+      */
+     function connect($dsninfo, $flags = 0)
+     {    
+-print 'Hola pgsql Mundo';
+         global $php_errormsg;
+                 
+         if (!extension_loaded('pgsql')) {
+@@ -62,6 +61,7 @@ print 'Hola pgsql Mundo';
+         }
+ 
+         $this->dsn = $dsninfo;
++
+         $this->flags = $flags;
+         
+         $persistent = ($flags & Creole::PERSISTENT === Creole::PERSISTENT);
+@@ -93,6 +93,7 @@ print 'Hola pgsql Mundo';
+         if (!empty($dsninfo['tty'])) {
+             $connstr .= ' tty=' . $dsninfo['tty'];
+         }
++
+         
+         if ($persistent) {
+             $conn = @pg_pconnect($connstr);
+@@ -105,8 +106,17 @@ print 'Hola pgsql Mundo';
+ 			$cleanconnstr = preg_replace('/password=\'.*?\'($|\s)/', 'password=\'*********\'', $connstr);
+             throw new SQLException('Could not connect', $php_errormsg, $cleanconnstr);
+         }
+-        
++
+         $this->dblink = $conn;        
++
++	// Incluido por lhernandez 05/03/07-17:55:00 
++	// Para solventar el problema de los schemas en pgsql
++	//-------------------------------------------------------
++	if(!empty($dsninfo['schema']))
++          $result = @pg_query($this->dblink,'SET search_path TO '.chr(34).$dsninfo['schema'].chr(34).';');
++//          $result = @pg_query($this->dblink,'SET search_path TO '.chr(34).'SIMA_USER'.chr(34).';');
++	//-------------------------------------------------------
++       
+     }
+     
+     /**
+@@ -138,7 +148,9 @@ print 'Hola pgsql Mundo';
+      */
+     function executeQuery($sql, $fetchmode = null)
+     {
++	//$result = @pg_query($this->dblink,'SET search_path TO SIMA_USER;');
+         $result = @pg_query($this->dblink, $sql);
++	//print("Resultado Query =".$result);
+         if (!$result) {
+             throw new SQLException('Could not execute query', pg_last_error($this->dblink), $sql);
+         }
+Sólo en old/symfony/vendor/creole/drivers/pgsql: PgSQLConnection.php~
+Sólo en old/symfony/vendor/creole/drivers/pgsql: PgSQLIdGenerator.php
+diff -urp old/symfony/vendor/creole/drivers/pgsql/PgSQLPreparedStatement.php new/symfony/vendor/creole/drivers/pgsql/PgSQLPreparedStatement.php
+--- old/symfony/vendor/creole/drivers/pgsql/PgSQLPreparedStatement.php	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/vendor/creole/drivers/pgsql/PgSQLPreparedStatement.php	2008-05-22 13:20:43.000000000 -0430
+@@ -18,19 +18,19 @@
+  * and is licensed under the LGPL. For more information please see
+  * <http://creole.phpdb.org>.
+  */
+- 
++
+ require_once 'creole/PreparedStatement.php';
+ require_once 'creole/common/PreparedStatementCommon.php';
+ 
+ /**
+  * PgSQL subclass for prepared statements.
+- * 
++ *
+  * @author Hans Lellelid <hans@xmpl.org>
+  * @version $Revision: 1.14 $
+  * @package creole.drivers.pgsql
+  */
+ class PgSQLPreparedStatement extends PreparedStatementCommon implements PreparedStatement {
+-    
++
+     /**
+      * Quotes string using native pgsql function (pg_escape_string).
+      * @param string $str
+@@ -40,7 +40,7 @@ class PgSQLPreparedStatement extends Pre
+     {
+         return pg_escape_string($str);
+     }
+-    
++
+     /**
+      * Recursive function to turn multi-dim array into str representation.
+      * @param array $arr
+@@ -57,12 +57,12 @@ class PgSQLPreparedStatement extends Pre
+                     $parts[] = '"' . $this->escape($el) . '"';
+                 } else {
+                     $parts[] = $el;
+-                }                
++                }
+             }
+-        }        
++        }
+         return '{' . implode(',', $parts) . '}';
+     }
+-    
++
+     /**
+      * Sets an array.
+      * Unless a driver-specific method is used, this means simply serializing
+@@ -72,7 +72,7 @@ class PgSQLPreparedStatement extends Pre
+      * @return void
+      * @see PreparedStatement::setArray()
+      */
+-    function setArray($paramIndex, $value) 
++    function setArray($paramIndex, $value)
+     {
+         if( $paramIndex > $this->positionsCount || $paramIndex < 1) {
+             throw new SQLException('Cannot bind to invalid param index: '.$paramIndex);
+@@ -80,7 +80,7 @@ class PgSQLPreparedStatement extends Pre
+         if ($value === null)
+             $this->setNull($paramIndex);
+         else
+-            $this->boundInVars[$paramIndex] = "'" . $this->arrayToStr($value) . "'";        
++            $this->boundInVars[$paramIndex] = "'" . $this->arrayToStr($value) . "'";
+     }
+ 
+     /**
+@@ -89,11 +89,11 @@ class PgSQLPreparedStatement extends Pre
+      * @param boolean $value
+      * @return void
+      */
+-    function setBoolean($paramIndex, $value) 
++    function setBoolean($paramIndex, $value)
+     {
+         if( $paramIndex > $this->positionsCount || $paramIndex < 1) {
+             throw new SQLException('Cannot bind to invalid param index: '.$paramIndex);
+-        }        
++        }
+         if ($value === null)
+             $this->setNull($paramIndex);
+         else
+@@ -106,27 +106,27 @@ class PgSQLPreparedStatement extends Pre
+      * @param mixed $blob Blob object or string containing data.
+      * @return void
+      */
+-    function setBlob($paramIndex, $blob) 
+-    {    
++    function setBlob($paramIndex, $blob)
++    {
+         if ($blob === null) {
+             $this->setNull($paramIndex);
+         } else {
+             // they took magic __toString() out of PHP5.0.0; this sucks
+             if (is_object($blob)) {
+                 $blob = $blob->__toString();
+-            }            
++            }
+             $this->boundInVars[$paramIndex] = "'" . pg_escape_bytea( $blob ) . "'";
+-        }    
+-        
++        }
++
+     }
+-	
++
+ 	/**
+      * @param int $paramIndex
+      * @param string $value
+      * @return void
+      */
+-    function setTime($paramIndex, $value) 
+-    {        
++    function setTime($paramIndex, $value)
++    {
+         if ($value === null) {
+             $this->setNull($paramIndex);
+         } else {
+@@ -138,14 +138,14 @@ class PgSQLPreparedStatement extends Pre
+             $this->boundInVars [ $paramIndex ] = "'" . $this->escape ( $value ) . "'";
+         }
+     }
+-    
++
+     /**
+      * @param int $paramIndex
+      * @param string $value
+      * @return void
+      */
+-    function setTimestamp($paramIndex, $value) 
+-    {        
++    function setTimestamp($paramIndex, $value)
++    {
+         if ($value === null) {
+             $this->setNull($paramIndex);
+         } else {
+@@ -154,4 +154,32 @@ class PgSQLPreparedStatement extends Pre
+             $this->boundInVars[$paramIndex] = "'".$this->escape($value)."'";
+         }
+     }
++
++
++  function my_is_numeric_comma($value)
++  {
++   return (preg_match ("/^(-){0,1}([0-9]+)((.)[0-9][0-9][0-9])*((,)[0-9]){0,1}([0-9]*)$/",$value) == 1);
++  }
++  function my_is_numeric_dot($value)
++  {
++   return (preg_match ("/^(-){0,1}([0-9]+)((,)[0-9][0-9][0-9])*((.)[0-9]){0,1}([0-9]*)$/",$value) == 1);
++  }
++
++    /**
++     * @param int $paramIndex
++     * @param float $value
++     * @return void
++     */
++    function setFloat($paramIndex, $value)
++    {
++	    $this->sql_cache_valid = false;
++        if ($value === null) {
++            $this->setNull($paramIndex);
++        } else {
++            $this->boundInVars[$paramIndex] = (float) $value;
++        }
++    }
++
++
++
+ }
+Sólo en old/symfony/vendor/creole/drivers/pgsql: PgSQLResultSetIterator.php
+Sólo en old/symfony/vendor/creole/drivers/pgsql: PgSQLResultSet.php
+Sólo en old/symfony/vendor/creole/drivers/pgsql: PgSQLStatement.php
+Sólo en old/symfony/vendor/creole/drivers/pgsql: PgSQLTypes.php
+diff -urp old/symfony/vendor/creole/drivers/pgsql/.svn/entries new/symfony/vendor/creole/drivers/pgsql/.svn/entries
+--- old/symfony/vendor/creole/drivers/pgsql/.svn/entries	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/vendor/creole/drivers/pgsql/.svn/entries	2008-05-22 13:20:43.000000000 -0430
+@@ -1,7 +1,7 @@
+ 8
+ 
+ dir
+-9625
++13041
+ http://cidesa.svn:8080/repositorio/web/php/siga/trunk/varios/symfony/vendor/creole/drivers/pgsql
+ http://cidesa.svn:8080/repositorio
+ 
+Sólo en old/symfony/vendor/creole/drivers: sqlite
+diff -urp old/symfony/vendor/creole/drivers/.svn/entries new/symfony/vendor/creole/drivers/.svn/entries
+--- old/symfony/vendor/creole/drivers/.svn/entries	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/vendor/creole/drivers/.svn/entries	2008-05-22 13:20:43.000000000 -0430
+@@ -1,7 +1,7 @@
+ 8
+ 
+ dir
+-9625
++13041
+ http://cidesa.svn:8080/repositorio/web/php/siga/trunk/varios/symfony/vendor/creole/drivers
+ http://cidesa.svn:8080/repositorio
+ 
+Sólo en old/symfony/vendor/creole: IdGenerator.php
+Sólo en old/symfony/vendor/creole: metadata
+Sólo en old/symfony/vendor/creole: PreparedStatement.php
+Sólo en old/symfony/vendor/creole: ResultSetIterator.php
+Sólo en old/symfony/vendor/creole: ResultSet.php
+Sólo en old/symfony/vendor/creole: SQLException.php
+Sólo en old/symfony/vendor/creole: Statement.php
+diff -urp old/symfony/vendor/creole/.svn/entries new/symfony/vendor/creole/.svn/entries
+--- old/symfony/vendor/creole/.svn/entries	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/vendor/creole/.svn/entries	2008-05-22 13:20:43.000000000 -0430
+@@ -1,7 +1,7 @@
+ 8
+ 
+ dir
+-9625
++13041
+ http://cidesa.svn:8080/repositorio/web/php/siga/trunk/varios/symfony/vendor/creole
+ http://cidesa.svn:8080/repositorio
+ 
+Sólo en old/symfony/vendor/creole: util
+Sólo en old/symfony/vendor: lime
+Sólo en old/symfony/vendor: pake
+Sólo en old/symfony/vendor: patch
+Sólo en old/symfony/vendor: phing
+Sólo en old/symfony/vendor: phpmailer
+Sólo en old/symfony/vendor: propel
+Sólo en old/symfony/vendor: propel-generator
+diff -urp old/symfony/vendor/.svn/all-wcprops new/symfony/vendor/.svn/all-wcprops
+--- old/symfony/vendor/.svn/all-wcprops	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/vendor/.svn/all-wcprops	2008-05-22 13:20:43.000000000 -0430
+@@ -1,5 +1,5 @@
+ K 25
+ svn:wc:ra_dav:version-url
+-V 67
+-/repositorio/!svn/ver/8915/web/php/siga/trunk/varios/symfony/vendor
++V 68
++/repositorio/!svn/ver/10495/web/php/siga/trunk/varios/symfony/vendor
+ END
+diff -urp old/symfony/vendor/.svn/entries new/symfony/vendor/.svn/entries
+--- old/symfony/vendor/.svn/entries	2008-05-22 13:19:55.000000000 -0430
++++ new/symfony/vendor/.svn/entries	2008-05-22 13:20:43.000000000 -0430
+@@ -1,14 +1,14 @@
+ 8
+ 
+ dir
+-9625
++13041
+ http://cidesa.svn:8080/repositorio/web/php/siga/trunk/varios/symfony/vendor
+ http://cidesa.svn:8080/repositorio
+ 
+ 
+ 
+-2008-02-12T19:48:48.474696Z
+-8915
++2008-03-26T01:07:14.625802Z
++10495
+ desarrollo
+ 
+ 
+@@ -29,6 +29,3 @@ bd7ca8a6-7b2b-0410-91d3-d9bcf4a077a3
+ creole
+ dir
+ 
+-propel-generator
+-dir
+-
+Sólo en old/symfony: VERSION
+Sólo en old/symfony: view

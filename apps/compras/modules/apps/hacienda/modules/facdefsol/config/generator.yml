@@ -1,0 +1,42 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fctipsol
+    theme:            cidesaGenerator
+
+    fields:
+      codtip:  { name: Código, params: size=4 maxlength=2 }
+      destip:  { name: Nombre, params: size=40 maxlength=99 }
+      monsol:  { name: Valor, params: size=10 }
+      valsol:  { name: Validez , params: size=10 }
+      privdeu: { name: La Existencia de Deudas Priva la Emisión , params: size=4 maxlength=1}
+      privmsg: { name: Mensaje, type: textarea_tag, params: size=60x5 maxlength=1000 }
+      anocom:  { name: Válido por todo el Año (S/N), params: size=4 maxlength=1}
+      fueing:  { name: Fuente, params: size=3 maxlength=2 }
+      gendeu:  { name: . , params: size=2 maxlength=1 }
+      grid:    { name: . }
+
+    list:
+      title:     Definición de Tipos de Solvencias
+      display:   [=codtip, destip]
+      sort:      destip
+      filters:   [codtip, destip]
+      fields:
+        destip:
+          params: size=10
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:  codtip
+    edit:
+      title:          Edición de Tipos de Solvencias
+      display:
+        "Datos Generales":   [ _codtip, destip, _fueing, monsol, valsol, _privdeu, _anocom, privmsg ]
+        "Genera Deuda":   [ _gendeu ]
+        "Verificación de Deuda":   [ _grid ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

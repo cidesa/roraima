@@ -1,0 +1,18 @@
+methods:
+  post:
+   - "catipalm{nomtip}"
+
+names:
+  catipalm{nomtip}:
+    required:  Yes
+    required_msg: El Nombre no puedo estar en Blanco
+    validators: NombreValidator
+
+
+NombreValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Nombre no puede tener menos de 2 caracteres
+        max:       100
+        max_error: El Nombre no puede tener más de 100 caracteres

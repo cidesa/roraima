@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "viaasoproniv{codproced}"
+   - "viaasoproniv{codnivapr}"
+
+names:
+  viaasoproniv{codproced}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codproced
+  
+  viaasoproniv{codnivapr}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codnivapr
+
+Validator_codproced:
+    class: CidesaExistValidator
+    param:
+        class:    Viadefproced
+        column:   codproced
+        unique_error:   El Código de la Procedencia no existe
+
+Validator_codnivapr:
+    class: CidesaExistValidator
+    param:
+        class:    Viadefnivapr
+        column:   codnivapr
+        unique_error:   El Código del Nivel de Aprobación no existe

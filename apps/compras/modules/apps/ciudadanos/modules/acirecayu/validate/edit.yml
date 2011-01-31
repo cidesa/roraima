@@ -1,0 +1,31 @@
+methods:
+  post:
+   - "atrecayu{attipayu_id}"
+   - "atrecayu{atrecaud_id}"
+
+names:
+  atrecayu{attipayu_id}:
+    required:  Yes
+    required_msg: Se debe colocar el código del tipo de ayuda
+    validators: MyStringValidator1
+
+  atrecayu{atrecaud_id}:
+    required:  Yes
+    required_msg: Se debe colocar la descripción del tipo de ayuda
+    validators: MyStringValidator2
+
+MyStringValidator1:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: Debe seleccionar un tipo de ayuda
+        max:       100
+        max_error: Debe seleccionar un tipo de ayuda
+
+MyStringValidator2:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: Debe seleccionar un recaudo
+        max:       100
+        max_error: Debe seleccionar un recaudo

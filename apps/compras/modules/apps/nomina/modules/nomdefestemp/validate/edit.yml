@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "npestemp{codestemp}"
+   - "npestemp{desestemp}"
+
+names:
+  npestemp{codestemp}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codestemp
+
+  npestemp{desestemp}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_desestemp
+
+Validator_codestemp:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npestemp
+        column:       codestemp
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desestemp:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripción no puede pasar mas de 100 caracteres

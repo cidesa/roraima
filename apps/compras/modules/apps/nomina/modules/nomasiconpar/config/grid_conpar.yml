@@ -1,0 +1,33 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   npasiconpar
+  anchogrid:               750
+  ancho:                   750
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Concepto
+  tipo:                    t
+  nombrecampo:             codcon
+  esgrabable:              true
+  html:                    ["size=10 readOnly=true"]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomcon
+  html:                    ["size=40 readOnly=true"]
+3:       # Columna 3
+  titulo:                  Partida
+  tipo:                    t
+  nombrecampo:             codpar
+  html:                    ["size=15 maxlength=16 onBlur='toAjax(4,getUrlModuloAjax(),this.value,0,'&cajtxtmos='+$(this.id).up().next(0).descendants()[0].id+'&cajtxtcom='+this.id)'"]
+  esgrabable:              true
+  catalogo:                [nppartidas, sf_admin_edit_form, {Codpar: 3, Nompar: 4}, Nppartidas_Biedefpar ]
+4:       # Columna 4
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nompar
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true

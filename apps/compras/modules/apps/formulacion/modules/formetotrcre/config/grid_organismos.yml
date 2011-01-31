@@ -1,0 +1,29 @@
+opciones:                  # Opciones generales
+  name:                    d
+  eliminar:                true
+  tabla:                   formetdistra
+  anchogrid:               750
+  ancho:                   600
+  filas:                   1
+  titulo:                  ' Distribución de Montos a Organismos'
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código
+  tipo:                    t
+  nombrecampo:             codorg
+  html:                    ["size=15 maxlength=4 onBlur='toAjax(5,getUrlModuloAjax(),this.value,0,'&cajtexmos='+$(this.id).up().next(0).descendants()[0].id+'&cajtexcom='+this.id)'"]
+  esgrabable:              true
+  catalogo:                [fordeforgpub, sf_admin_edit_form, {Codorg: 1, Nomorg: 2}, Fordeforgpub_Forotrcrepre ]
+2:       # Columna 2
+  titulo:                  Organismo
+  tipo:                    t
+  nombrecampo:             nomorg
+  html:                    ["size=40 readonly=true"]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monto
+  esnumerico:              true
+  html:                    ["size=10 "]

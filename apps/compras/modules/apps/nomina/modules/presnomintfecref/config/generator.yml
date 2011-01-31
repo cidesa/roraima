@@ -1,0 +1,28 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npintfecref
+    theme:            default
+    fields:
+      feciniref:    { name: Fecha Inicio, params: date_format='dd/MM/yyyy'}
+      fecfinref:    { name: Fecha Fin, params: date_format='dd/MM/yyyy'}
+      tasint:       { name: Tasa de Interes}
+      tasintpro:    { name: Tasa de Interes Promedio}
+      tasintpas:    { name: Tasa de Interes Pasiva}
+      tasintact:    { name: Tasa de Interes Activa}
+
+    list:
+      title:          Tasa de Interes Periodicas
+      filters:        [feciniref, fecfinref]
+      display:        [=feciniref, fecfinref, tasintact, tasintpas, tasintpro]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Tasa de Interes Periodicas
+      display:        [feciniref, fecfinref, tasintact, tasintpas, tasintpro]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~

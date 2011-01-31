@@ -1,0 +1,33 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atdocayu
+    theme:            cidesaGenerator
+
+    fields:
+      atayudas_id:         { name: Nro. Expediente, validate: Ventero, msj_error: Debe Seleccionar el Nro. de Expediente }
+      image:               { name: Documento, msj_error: Debe cargar un Archivo }
+      desimg:              { name: Descripción, params: size=10, validate: Vstring_1_50, msj_error: Debe colocar una descripción }
+    list:
+      title:          Carga de Archivos
+      display:        [=atayudas_id, desimg]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [atayudas_id, desimg]
+      max_per_page:   5
+    edit:
+      fields:
+        image:
+          name:       Archivos
+          help:       Debe buscar el archivo a guardar
+          type:       admin_input_file_tag
+          upload_dir: docs/files
+          params:     include_link=docs/files include_remove=true
+      title:          Carga de Archivos
+      display:        [atayudas_id, image, desimg]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

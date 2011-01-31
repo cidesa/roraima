@@ -1,0 +1,53 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npparamsalint
+    theme:            cidesaGenerator
+    fields:
+      display: [codnom, nomnom, codcon, nomcon, afecta]
+      codnom:
+        name: Código Nómina
+        msj_error: El Código de la Nómina es necesario
+        catalogo:
+          catalogoweb:  Npnomina_nomdefespvar
+          clase: Npnomina
+          ajax: 0
+          parametros: getprincipal="getCodnom" getsecundario="getNomnom" campoprincipal="codnom" camposecundario="nomnom" campobase = "id"           
+          #catalogoparams:
+          #ajaxparams:  
+          #divupdate: divgridvaca     
+          #id:
+      nomnom: { name: Nómina}    
+      nomcon: { name: Conceptos} 
+      codcon:
+        name: Código Concepto
+        msj_error: El Código del Concepto es necesario
+        catalogo:
+          catalogoweb:  Npdefcpt_Vacdefgen
+          clase: Npdefcpt
+          ajax: 0
+          parametros: getprincipal="getCodcon" getsecundario="getNomcon" campoprincipal="codcon" camposecundario="nomcon" campobase = "id"           
+          catalogoparams: /param1/'."'+$('npparamsalint_codnom').value+'".'
+          #ajaxparams:  
+          #divupdate: divgridvaca     
+          #id:
+      afectap:
+        name:.
+    
+    list:
+      title:           Listado de Parametros para el Salario Integral      
+      display:         [=codnom, nomnom, codcon, nomcon]
+      filters:         [codnom, codcon]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:           Edición de Parametros para el Salario Integral
+      display:
+        Parametros:    [codnom, codcon, _afectap] 
+      actions:        
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

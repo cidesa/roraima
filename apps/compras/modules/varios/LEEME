@@ -1,0 +1,11 @@
+Creado Por Ing. Luis Hernández
+13 Mar 2007
+
+* La carpeta "symfony" contiene los archivos necesarios para
+	eliminar el problema que tiene las clases de Postgres
+	para conectarse a SCHEMAS especificos. Se debe reemplazar
+	la carpeta principal de Simfony
+		- Para windows
+			.....\PEAR\symfony
+		- Para Linux
+			/usr/share/php/symfony/

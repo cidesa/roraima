@@ -1,0 +1,25 @@
+methods:
+  post:
+   - "usuarios{pasuse}"
+   - "usuarios{password}"
+   - "usuarios{repassword}"
+
+names:
+  usuarios{pasuse}:
+    required:          true
+    required_msg:      Por favor, Introduce la Contraseña Actual
+
+  usuarios{password}:
+    required:          true
+    required_msg:      Por favor, Introduce la nueva contraseña
+
+  usuarios{repassword}:
+    required:   true
+    required_msg:      Por favor, vuelve a introducir la contraseña nueva
+    validators:      Comparador
+
+Comparador:
+  class:    sfCompareValidator
+  param:
+      check:    usuarios[password]
+      compare_error: Las 2 contraseñas son diferentes

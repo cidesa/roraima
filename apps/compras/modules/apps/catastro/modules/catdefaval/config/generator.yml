@@ -1,0 +1,38 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Catdefaval
+    theme:            cidesaGenerator
+    fields:
+      coddivgeo: { name: Ubicacion Geografica, params: size=30 maxlength=30}
+      desdivgeo: { name: Descripción }
+      nrocas: { name: N° Catastral }
+      fecaval:  { name: Fecha de Avalúo, params: date_format='dd/MM/yyyy' size=10 maxlength=10}
+      nomcom:   { name: Propietario, params: size=60 readonly=true}
+      tipo: { name: Tipo }
+      catusoesp_id: { name: Uso Inmueble}
+      cant: { name: Cantidad }
+      costo: { name: Costo en Mt2 }
+      montot:{ name: Total General }
+      status: { name: Estatus }
+      grid: { name: .}
+
+    list:
+      title: Avalúos
+      display: [=coddivgeo, desdivgeo, nrocas]
+      filters: [coddivgeo]
+      object_actions:
+       _edit:        ~
+       _delete:      ~
+      max_per_page:	  10
+      sort:    coddivgeo
+
+    edit:
+      title: Edición de Avalúo
+      display:
+        "Datos": [_coddivgeo, _nrocas, nomcom, fecaval, _status, _grid]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

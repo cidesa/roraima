@@ -1,0 +1,31 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npantpre
+    theme:            cidesaGenerator
+
+    fields:
+      codemp:    { name: Código Empleado }
+      nomemp:    { name: Nombre del Empleado }
+      fecant:    { name: Fecha del Anticipo, params: date_format='dd/MM/yyyy' }
+      observacion: { name: Observacion}
+      monant:    { name: Monto del Anticipo }
+      fecsolant: { name: Fecha Solicitud Anticipo}
+
+    list:
+      title:          Registro Histórico de Anticipos Otorgados
+      filters:        [codemp, fecant]
+      display:        [=codemp, nomemp, fecant, monant]
+      sort:           codemp
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      actions:
+        _create:      ~
+
+    edit:
+      title:          Registro Histórico de Anticipos Otorgados
+      display:        [codemp, nomemp, fecsolant, fecant, monant, observacion]
+      actions:
+        _list:         ~

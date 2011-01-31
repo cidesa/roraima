@@ -1,0 +1,39 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atfacturas
+    theme:            cidesaGenerator
+
+    fields:
+      atayudas_id:  { name: Expediente }
+      nroexp:      { name: Expediente }
+      expediente:  { name: Nro. }
+      numfac:      { name: Nro. Factura, params: size=14 }
+      basimp:      { name: Base Imponible, params: onBlur="javascript: obj=this; ValidarMontoGridv2(obj);" }
+      iva:         { name: IVA, params: onBlur="javascript: obj=this; ValidarMontoGridv2(obj);" }
+      exentos:     { name: Exentos, params: onBlur="javascript: obj=this; ValidarMontoGridv2(obj);" }
+      total:       { name: Total, params: onBlur="javascript: obj=this; ValidarMontoGridv2(obj);" }
+      nrospd:      { name: Nro. Solicitud de Pago directo, params: size=10 }
+
+    list:
+      fields:
+        atayudas_id:  { name: Expediente, type: input_tag }
+      title:          Registro de Facturas de Expedientes
+      display:        [=nroexp, numfac]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [_atayudas_id]
+      max_per_page:   5
+    edit:
+      title:          Edición de Facturas de Expedientes
+      display:
+        Expediente:   [_expediente]
+        Factura:      [numfac, basimp, iva, exentos, total]
+        Pago:         [nrospd]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+

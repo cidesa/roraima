@@ -1,0 +1,18 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Tspararc
+    theme:            cidesaGenerator
+    fields:
+      numcue: { name: Número de Cuenta, params: size20 maxlength=20}
+      nomcue: { name: Descripción }
+      archivo: { name: Archivo, type: admin_input_file_tag }
+    edit:
+      title:          Migración de Movimientos Bancarios
+      display:  [_numcue, archivo]
+      actions:
+        _list:        NONE
+        _save:
+          name:  Migrar Movimientos Bancarios
+        _create:      NONE
+        _delete:      NONE

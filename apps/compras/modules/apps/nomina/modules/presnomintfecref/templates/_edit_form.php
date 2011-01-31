@@ -1,0 +1,110 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ */
+// date: 2007/03/23 08:45:49
+?>
+<?php echo javascript_include_tag('ajax') ?>
+<?php echo form_tag('presnomintfecref/edit', array(
+  'id'        => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form',
+  'multipart' => true,
+)) ?>
+ <?php echo javascript_include_tag('ajax') ?>
+<?php echo object_input_hidden_tag($npintfecref, 'getId') ?>
+
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Fechas De Referencias')?></legend>
+<div class="form-row">
+  <?php echo label_for('npintfecref[feciniref]', __($labels['npintfecref{feciniref}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npintfecref{feciniref}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npintfecref{feciniref}')): ?>
+    <?php echo form_error('npintfecref{feciniref}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_date_tag($npintfecref, 'getFeciniref', array (
+  'rich' => true,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'npintfecref[feciniref]',
+  'date_format' => 'dd/MM/yyyy',
+  )); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <?php echo label_for('npintfecref[fecfinref]', __($labels['npintfecref{fecfinref}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npintfecref{fecfinref}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npintfecref{fecfinref}')): ?>
+    <?php echo form_error('npintfecref{fecfinref}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_date_tag($npintfecref, 'getFecfinref', array (
+  'rich' => true,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'npintfecref[fecfinref]',
+  'date_format' => 'dd/MM/yyyy',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+</fieldset>
+
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+  <?php echo label_for('npintfecref[tasintact]', __($labels['npintfecref{tasintact}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npintfecref{tasintact}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npintfecref{tasintact}')): ?>
+    <?php echo form_error('npintfecref{tasintact}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npintfecref, array('getTasintact',true), array (
+  'size' => 7,
+  'maxlength' => 7,
+  'control_name' => 'npintfecref[tasintact]',
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+<br><br>
+
+
+  <?php echo label_for('npintfecref[tasintpas]', __($labels['npintfecref{tasintpas}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npintfecref{tasintpas}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npintfecref{tasintpas}')): ?>
+    <?php echo form_error('npintfecref{tasintpas}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npintfecref, array('getTasintpas',true), array (
+  'size' => 7,
+  'maxlength' => 7,
+  'control_name' => 'npintfecref[tasintpas]',
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+<br><br>
+  <?php echo label_for('npintfecref[tasintpro]', __($labels['npintfecref{tasintpro}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npintfecref{tasintpro}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npintfecref{tasintpro}')): ?>
+    <?php echo form_error('npintfecref{tasintpro}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npintfecref, array('getTasintpro',true), array (
+  'size' => 7,
+  'maxlength' => 7,
+  'control_name' => 'npintfecref[tasintpro]',
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
+
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+    <br><br>
+</div>
+
+</fieldset>
+
+<?php include_partial('edit_actions', array('npintfecref' => $npintfecref)) ?>
+
+</form>

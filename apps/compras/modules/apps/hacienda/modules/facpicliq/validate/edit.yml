@@ -1,0 +1,43 @@
+methods:
+  post:
+   - "fcdeclar{numdec}"
+   - "fcdeclar{fecdec}"
+   - "fcdeclar{numref}"
+
+names:
+  fcdeclar{numdec}:
+    required:  Yes
+    required_msg: El Número de la Declaracion no puede estar en Blanco
+    validators: NumdecExistValidator
+
+  fcdeclar{fecdec}:
+    required:  Yes
+    required_msg: La Fecha de la Declaracion no puede estar en Blanco
+    validators: Fecha2Validator, FechaValidator1
+
+  fcdeclar{numref}:
+    required:  Yes
+    required_msg: El Número de la Licencia no puede estar en Blanco
+
+NumdecExistValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fcdeclar
+        column:       numdec
+        unique_error: El Número de la Declaracion no Existe.
+
+Fecha2Validator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+FechaValidator1:
+    class:         CidesaDateNow
+    param:
+        compare: 'now'
+        compare_error: Esta Fecha no puede ser mayor a la Fecha Actual
+        operator: '<='
+        date_error:  Fecha Inválida
+

@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "fortiptit{codtip}"
+   - "fortiptit{destip}"   
+names: 
+  fortiptit{codtip}:
+    required:  Yes
+    required_msg: El código del Tipo de Crédito Presupuestario no puedo estar en Blanco
+    validators: Validator_codtip
+    
+  fortiptit{destip}:
+    required:  Yes
+    required_msg: El Nombre del Tipo de Crédito Presupuestario no puedo estar en Blanco
+    validators: Validator_destip       
+
+Validator_codtip:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fortiptit
+        column:       codtip
+        unique_error: El registro ya Existe intente con otro.
+    
+Validator_destip:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Nombre no puede tener menos de 2 caracteres
+        max:       100
+        max_error: El Nombre no puede pasar mas de 100 caracteres

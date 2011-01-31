@@ -1,0 +1,50 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Inempresa
+    theme:            cidesaGenerator
+    fields:
+      rifemp:      { name: R.I.F, params: size=10 }
+      razsoc:      { name: Razón Social, params: size=60 }
+      intipemp_id: { name: Tipo, params: size=60 }
+      diremp:      { name: Dirección }
+      codpost:     { name: Código Postal }
+      telemp:      { name: Teléfono , help: Ej 01234567891 }
+      email:    { name: Email, help: Ej usuario@dominio.com }
+      venextrepleg: { name: Nacionalidad }
+      cedrepleg: { name: Cédula , params: size=10 }
+      nomrepleg:      { name: Nombre, params: size=60 }
+      aperepleg:      { name: Apellido, params: size=60 }
+      sexo:       { name: Sexo, params: size=20 }
+      fecnac:      { name: Fecha Nacimiento }
+      estciv:     { name: Estado Civil }
+      telhab:      { name: Teléfono Habitación, help: Ej 01234567891 }
+      telcel:   { name: Teléfono Celular, help: Ej 01234567891 }
+      emailrepleg:    { name: Email, help: Ej usuario@dominio.com }
+      inestado_id:     { name: Estado }
+      inmunicipio_id:  { name: Municipio }
+      inparroquia_id:  { name: Parroquia }
+      dirhab:      { name: Dirección}
+
+
+
+    list:
+      title:          Registro de Empresas
+      display:        [=rifemp, razsoc]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [rifemp, razsoc]
+      max_per_page:   5
+      sort: rifemp
+    edit:
+      title:          Edición de Empresas
+      display:
+        Datos de la Empresa: [rifemp, razsoc, _intipemp_id]
+        Dirección Fiscal: [_inestado_id, _inmunicipio_id, _inparroquia_id, diremp, telemp, codpost]
+        Representante Legal: [_venextrepleg, cedrepleg, nomrepleg, aperepleg, _sexo, fecnac, _estciv, telhab, telcel, emailrepleg]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

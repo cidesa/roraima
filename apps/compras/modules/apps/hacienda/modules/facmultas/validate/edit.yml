@@ -1,0 +1,22 @@
+methods:
+  post:
+   - "fcmultas{codmul}"
+   - "fcmultas{nommul}"
+
+names:
+  fcmultas{codmul}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+    validators: Validator_codmul
+
+  fcmultas{nommul}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido
+
+
+Validator_codmul:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fcmultas
+        column:       codmul
+        unique_error: El registro ya Existe intente con otro.

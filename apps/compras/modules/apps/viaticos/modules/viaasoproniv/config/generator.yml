@@ -1,0 +1,47 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viaasoproniv
+    theme:            cidesaGenerator
+    fields:
+      prioriapr:      {name: Prioridad}
+      codproced:
+        name: Procedencia
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Viadefproced_codproced_apr
+          clase: Viadefproced
+          ajax: 0
+          parametros: getprincipal="getCodproced" getsecundario="getDesproced" campoprincipal="codproced" camposecundario="desproced" campobase = "id"
+      codnivapr:
+        name: Nivel de Aprobación
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Viadefnivapr_codnivapr
+          clase: Viadefnivapr
+          ajax: 0
+          parametros: getprincipal="getCodnivapr" getsecundario="getDesnivapr" campoprincipal="codnivapr" camposecundario="desnivapr" campobase = "id"
+      
+
+    list:
+      title:          Listado de Asociaciones
+      display:        [=codproced, desproced, codnivapr, desnivapr, prioriapr]
+      fields:
+        desnivapr:
+          name:       Descripcion
+        desproced:
+          name:       Descripcion
+      filters:        [codproced, codnivapr, prioriapr]
+      sort:           codproced
+      object_actions:
+        _edit:          ~
+        _delete:        ~
+        
+    edit:
+      title:          Edición de Procedencias
+      display:
+        Datos Generales de la Procedencias: [codproced, codnivapr, prioriapr]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

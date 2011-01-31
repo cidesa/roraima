@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Ingruprub
+    theme:            cidesaGenerator
+    fields:
+      codgruprub:       { name: Código }
+      desgruprub:       { name: Descripción }
+
+    list:
+      title:          Definición de Grupos de Rubros
+      filters:        [codgruprub]
+      display:        [=codgruprub, desgruprub]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codgruprub
+
+    edit:
+      title:          Edición de Grupos de Rubros
+      display:        [codgruprub, desgruprub]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

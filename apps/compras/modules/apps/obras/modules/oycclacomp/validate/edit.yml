@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "occlacomp{codclacomp}"
+   - "occlacomp{desclacomp}"
+
+names:
+  occlacomp{codclacomp}:
+    required:  Yes
+    required_msg: El Codigo de la Clasificación de Compras no puedo estar en Blanco
+    validators: Validator_codclacomp
+
+  occlacomp{desclacomp}:
+    required:  Yes
+    required_msg: La Descripción de la Clasificación de Compras no puedo estar en Blanco
+    validators: Validator_desclacomp
+
+Validator_codclacomp:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Occlacomp
+        column:   codclacomp
+        unique_error:   El Código de la Clasificación de Compras ya existe. Por Favor, Intente con otro.
+
+Validator_desclacomp:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Descripción de la Clasificación de Compras no puede tener menos de 5 caracteres
+        max:       1000
+        max_error: La sDescripción de la Clasificación de Compras no puede tener mas de 1000 caracteres

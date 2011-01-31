@@ -1,0 +1,35 @@
+methods:
+  post:
+   - "careqartser{reqart}"
+   - "careqartser{fecreq}"
+   - "careqartser{desreq}"
+names:
+  careqartser{reqart}:
+    required:  Yes
+    required_msg: No puede salvar sin introducir el Código de la Requisición
+
+  careqartser{fecreq}:
+    required:  Yes
+    required_msg: La Fecha no puedo estar en Blanco
+    validators: FechaValidator
+
+  careqartser{desreq}:
+    required:  Yes
+    required_msg: No puede salvar sin introducir la Descripcion de la Requisición
+
+#FechaValidator:
+#    class: CidesaDateValidator1
+#    param:
+#       class:        Cpdefniv
+#        columnmin:    fecini
+#        columnmax:    feccie
+#        min_error:    La Fecha Especificada no puede ser Menor a la Fecha de Inicio del Período
+#        max_error:    La Fecha Especificada no puede ser Mayor a la Fecha de Inicio del Período
+#        date_error:   Fecha Inválida
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida

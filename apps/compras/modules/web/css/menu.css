@@ -1,0 +1,288 @@
+html, body { height: 100%; }
+
+* {	font-family: Verdana, sans-serif; }
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/*contenedor de todo el documento*/
+#contenedor-principal {
+  width:750px;
+  height:auto;
+  min-height:96%;
+  margin:0px auto;
+  /*background-color: #FFF;*/
+  background-color: #EEE;
+  padding: 0px;
+  border: solid #000;
+  border-width: 1px 1px 1px 1px;
+}
+
+.modulos {
+  background-color: #FFF !important;
+}
+
+/*Hack para IE, para que el div main-wraper adopte 100%*/
+* html #contenedor-principal { height:96%; }
+
+/*Encabezado y pie de página*/
+#encabezado {
+  position: relative;
+  height: 70px;
+  background-color: #F90308;
+  background: url("../images/pixel.jpg") repeat-x left top;
+}
+
+#links {
+  position: relative;
+  height: 30px;
+  background-color: #FFF;
+  background: url("../images/menu.jpg") center no-repeat;
+}
+
+#links ul li a {
+  /*float: right;*/
+  padding-right: 5px;
+}
+
+#links li {
+  font-size: 11px;
+  border: 0;
+  margin-top: 8px;
+  float: right;
+  margin-right: 3px;
+}
+
+#links ul {
+  list-style: none;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+#links a:link, #links a:visited {
+  text-decoration: none;
+  color: #FFFFFF;
+  background-color: transparent;
+}
+
+#pie-pagina {
+  position: relative;
+  margin: 0px auto;
+  height: 38px;
+  width: 750px;
+  border: solid #000 1px;
+  border-top: 0px;
+}
+
+#footer-logo {
+  background: center no-repeat;
+}
+
+#encabezado-logo {
+  left: 10px;
+  top: 7px;
+  height: 55px;
+  background-repeat: no-repeat;
+  position: absolute;
+  background-image: url("../images/psuv.jpg");
+  width: 115px;
+}
+
+#encabezado span {
+  float: right;
+  font-weight: bold;
+  margin-top: 50px;
+  margin-right: 10px;
+  font-size: 12px;
+  color: #FFF;
+  font-family: Verdana, sans-serif;
+}
+
+#footer-logo {
+  background-image: url("../images/footer_logo_1.gif");
+  float: left;
+  width: 59px;
+  padding: 3px 6px;
+  margin: 0 3px 2px 0;
+}
+
+
+
+#menu {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  border: solid #000 1px;
+  border-width: 1px 0 0px 0;
+  background-color: #EEE;
+  height: 350px;
+}
+
+.panel-menu {
+  border: solid;
+  border-width: 0 0 0 0px;
+  border-left-color:  #777;
+  border-right-color: #777;
+  height: 100%;
+}
+
+#contenedor {
+  width:100%;
+  height:auto;
+  min-height:96%;
+  margin:0px auto;
+  /*background-color: #FFF;*/
+  background-color: #EEE;
+  padding: 0px;
+  border: solid #000;
+  border-width: 1px 1px 1px 1px;
+}
+
+.lista-central {
+  float: left;
+  height: 400%;
+  text-align: left;
+  padding: 5px;
+  font-family: Verdana;
+  width: 238px;
+}
+
+.panel-inicial {
+  float: left;
+  width: 33%;
+  padding: 5px;
+  font-family: Verdana;
+  height: 100%;
+  text-align: left;
+}
+
+.panel-central {
+  float: left;
+  width: 33%;
+  padding: 5px;
+  font-family: Verdana;
+  height: 100%;
+  text-align: left;
+}
+
+.panel-central ul li {
+  text-align: left;
+  width: 238px;
+  height: 200px;
+  margin: 5px;
+  padding: 1px;
+  text-align: center;
+  font-weight: normal;
+  font-size: 15px;
+  text-decoration: none;
+  list-style: none;
+}
+
+.panel-final {
+  float: left
+  width: 33%;
+  padding: 5px;
+  font-family: Verdana;
+  height: 100%;
+  text-align: left;
+}
+
+
+.lista-menu {
+  float: left;
+  height: 400%;
+  text-align: left;
+  padding: 5px;
+  font-family: Verdana;
+  width: 238px;
+}
+
+.primer-panel {
+  border-left: 0;
+  width: 100%;
+}
+
+.ultimo-panel {
+  border-right: 0;
+  width: 239px;
+}
+
+/*Opciones del menu*/
+.lista-menu ul, .lista-menu li {
+  margin: 5px;
+  padding: 1px;
+  text-align: center;
+  font-weight: normal;
+  font-size: 15px;
+  text-decoration: none;
+  list-style: none;
+}
+
+.lista-menu ul li {
+  padding-left: 4px;
+}
+
+.lista-menu h1 {
+  text-align: center;
+  padding-left: 27px;
+  margin: 15px;
+
+  background-position: left;
+  background-repeat: no-repeat;
+
+  font-weight: bold;
+  font-size: 20px;
+  /*color: #FFF;*/
+  color: #778899;
+  line-height: 22px;
+}
+
+.lista-menu a {
+  color: #002;
+  text-decoration: none;
+  line-height: 18px;
+  padding-left: 21px;
+  margin-left: 10px;
+  text-indent: 0px;
+
+  background-image: url("../images/vineta.png");
+  background-position: left 2px;
+  background-repeat: no-repeat;
+}
+
+.lista-menu a:hover {
+  color: #778899;
+  margin-left: 12px;
+  padding-left: 19px;
+}
+
+#contenido {
+  padding: 5px;
+  background-color: #FFF;
+}
+
+/*Iconos*/
+.engrane { background-image: url("../images/engrane.png"); }
+.casa { background-image: url("../images/casa.png"); }
+.seguridad { background-image: url("../images/seguridad.png"); }
+.impresora { background-image: url("../images/impresora.png"); }
+.militante { background-image: url("../images/militante.png"); }
+.definiciones { background-image: url("../images/definiciones.png"); }
+
+.nomina { background-image: url("../images/UserGroup.png"); }
+.presupuesto { background-image: url("../images/casa.png"); }
+.compras { background-image: url("../images/seguridad.png"); }
+.bienes { background-image: url("../images/impresora.png"); }
+.formulacion { background-image: url("../images/militante.png"); }
+.contabilidad { background-image: url("../images/definiciones.png"); }
+.tesoreria { background-image: url("../images/definiciones.png"); }
+.ingresos { background-image: url("../images/definiciones.png"); }
+
+
+/*Limpiadores*/
+.left-cleaner { clear: left; }
+
+

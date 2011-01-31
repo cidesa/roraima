@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Intipcli
+    theme:            cidesaGenerator
+    fields:
+      codtipcli:       { name: Código }
+      destipcli:       { name: Descripción }
+
+    list:
+      title:          Definición de Tipo de Cliente
+      filters:        [codtipcli]
+      display:        [=codtipcli, destipcli]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codtipcli
+
+    edit:
+      title:          Edición de Tipo de Cliente
+      display:        [codtipcli, destipcli]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "insancion{codsan}"
+   - "insancion{dessan}"
+names:
+  insancion{codsan}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codsan
+
+  insancion{dessan}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_dessan
+
+Validator_codsan:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Insancion
+        column:       codsan
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_dessan:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre no puede tener menos de 2 caracteres
+        max:       250
+        max_error: El nombre no puede pasar mas de 30 caracteres

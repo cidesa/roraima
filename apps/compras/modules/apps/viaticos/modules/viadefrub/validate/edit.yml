@@ -1,0 +1,43 @@
+methods:
+  post:
+   - "viadefrub{codrub}"
+   - "viadefrub{desrub}"
+   - "viadefrub{codpar}"
+   
+names:
+  viadefrub{codrub}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codrub
+
+  viadefrub{desrub}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_desrub
+  
+  viadefrub{codpar}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codpar
+
+Validator_codrub:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Viadefrub
+        column:       codrub
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desrub:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 100 caracteres
+
+Validator_codpar:
+    class: CidesaExistValidator
+    param:
+        class:    Nppartidas
+        column:   codpar
+        unique_error:   El Código de la Partida no existe

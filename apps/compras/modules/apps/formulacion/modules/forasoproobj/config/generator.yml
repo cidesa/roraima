@@ -1,0 +1,58 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Forasoproobj
+    theme:            cidesaGenerator
+    fields:
+      codpro:
+        name: Código
+        params: size=10  onFocus=readonly(this.id) onBlur="this.value=this.value.pad(4, '0',0);"
+        catalogo:
+          catalogoweb: Fordefproble_Forasoproobj
+          clase: Fordefproble
+          ajax: 1
+          parametros: getprincipal="getCodpro" getsecundario="getNompro" campoprincipal="codpro" camposecundario="nompro" campobase = "id"
+      codcat:
+        name: Código
+        params: size=20  onkeyDown=dFilter(event.keyCode, this,$('forasoproobj_mascara').value) onFocus="$(this.id).maxLength=$('forasoproobj_longitud').value; if($('id').value!='') $(this.id).readOnly=true ;"
+        catalogo:
+          catalogoweb: Fordefcatpre_Forotrcrepre
+          clase: Fordefcatpre
+          ajax: 2
+          parametros: getprincipal="getCodcat" getsecundario="getNomcat" campoprincipal="codcat" camposecundario="nomcat" campobase = "id"
+          catalogoparams: /param1/'."'+$('forasoproobj_longitud').value+'".'
+          ajaxparams: +'."'".'&longitud='."'+$('forasoproobj_longitud').value".'
+      codobj:
+        name: Código
+        params: size=10  onFocus=readonly(this.id) onBlur="this.value=this.value.pad(5, '0',0);"
+        catalogo:
+          catalogoweb: Fordefobj_Forasoproobj
+          clase: Fordefobj
+          ajax: 3
+          parametros: getprincipal="getCodobj" getsecundario="getDesobj" campoprincipal="codobj" camposecundario="desobj" campobase = "id"
+      nompro: {name: Descripción}
+    list:
+      title:          Asociación de Programas a Objetivos
+      fields:
+        codpro: {name: Programa}
+        codcat: {name: Categoria}
+        codobj: {name: Objetivo}
+      filters:        [codpro, codcat, codobj]
+      display:        [=codpro, nompro]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:      codpro
+    edit:
+      title:          Asociación de Programas a Objetivos
+      display:
+        "Programa":   [codpro]
+        "Categoria Programática":   [codcat]
+        "Objetivo":   [codobj]
+      hide:  [longitud, mascara]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

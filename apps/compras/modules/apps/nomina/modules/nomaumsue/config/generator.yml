@@ -1,0 +1,61 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npasiconemp
+    theme:            cidesaGenerator
+    fields:
+      codnom:
+        name: Nómina
+        params: maxlength=3
+        catalogo:
+          catalogoweb: Npnomina_nomdefespvar
+          clase: Npnomina
+          ajax: 1
+          parametros: getprincipal="getCodnom" getsecundario="getNomnom" campoprincipal="codnom" camposecundario="nomnom" campobase = "id"
+      codcar:
+        name: Cargo Desde
+        params: maxlength=16
+        catalogo:
+          catalogoweb: Nomasicarconnom_Npasicarnom
+          clase: Npcargos
+          ajax: 2
+          parametros: getprincipal="getCodcar" getsecundario="getNomcar" campoprincipal="codcar" camposecundario="nomcar" campobase = "id"
+          catalogoparams: /param1/'."'+$('npasiconemp_codnom').value+'".'
+          ajaxparams: +'."'".'&nomina='."'+$('npasiconemp_codnom').value".'
+      codcarnew:
+        name: Cargo Hasta
+        params: maxlength=16
+        catalogo:
+          catalogoweb: Nomasicarconnom_Npasicarnom
+          clase: Npcargos
+          ajax: 3
+          parametros: getprincipal="getCodcarnew" getsecundario="getNomcarnew" campoprincipal="codcarnew" camposecundario="nomcarmew" campobase = "id"
+          catalogoparams: /param1/'."'+$('npasiconemp_codnom').value+'".'
+          ajaxparams: +'."'".'&nomina='."'+$('npasiconemp_codnom').value".'
+      codcon:
+        name: Concepto
+        params: maxlength=3
+        catalogo:
+          catalogoweb: Npdefcpt_Npasiconemp
+          clase: Npdefcpt
+          ajax: 4
+          parametros: getprincipal="getCodcon" getsecundario="getNomcon" campoprincipal="codcon" camposecundario="nomcon" campobase = "id"
+          catalogoparams: /param1/'."'+$('npasiconemp_codnom').value+'".'
+          divupdate: divgrid
+          ajaxparams: +'."'".'&nomina='."'+$('npasiconemp_codnom').value+'".'&cargodes='."'+$('npasiconemp_codcar').value+'".'&cargohas='."'+$('npasiconemp_codcarnew').value".'
+      tipo:   { name: Tipo}
+      aumento:   { name: Aumento}
+      monto:   { name: Valor}
+      grid:   { name: .}
+      btncalcular:  { name: .}
+    edit:
+      title:          Aumentos de Sueldos por Nómina, Cargo y Concepto
+      display:
+        "NONE":         [codnom, codcar, codcarnew, codcon, _tipo, _aumento, monto]
+        "Empleados":    [_grid, _btncalcular]
+      hide:             [filas]
+      actions:
+        _list:          NONE
+        _save:          ~
+        _delete:        NONE
+        _create:        NONE

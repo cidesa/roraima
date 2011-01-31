@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "fordefpryaccmet{codpro}"
+   - "fordefpryaccmet{codaccesp}"        
+
+names: 
+  fordefpryaccmet{codpro}:
+    required:  Yes
+    required_msg: El Código del Proyecto ó Acción Centralizada no puedo estar en Blanco
+    validators: ProyectoValidator 
+
+  fordefpryaccmet{codaccesp}:
+    required:  Yes
+    required_msg: El Código de la Acción Específica no puedo estar en Blanco
+    validators: AccionValidator 
+        
+ProyectoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefpry
+        column:   codpro
+        unique_error:   El Código del Proyecto no existe.               
+        
+AccionValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefaccesp
+        column:   codaccesp
+        unique_error:   El Código de la Acción Específica no existe.                              

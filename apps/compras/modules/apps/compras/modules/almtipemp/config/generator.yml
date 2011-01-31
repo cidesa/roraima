@@ -1,0 +1,27 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Catipempsnc
+    theme:            default
+    fields:
+      codtip:      { name : Código }
+      destip:      { name : Descripción }
+    list:
+      title:          Tipos de Empresas Proveedoras
+      display:        [=codtip, destip]
+      filters:		  [codtip, destip]
+      max_per_page:	  10
+      sort:           codtip
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edición de Tipos de Empresas Proveedoras
+      display:        [codtip, destip]
+      fields:
+        codtip:       { params : maxlength=4}
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

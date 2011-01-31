@@ -1,0 +1,33 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npbenefiemb
+    theme:            cidesaGenerator
+    fields:
+      cedrif:         { name: Cédula/Rif , params: maxlength=16 size=20 onFocus="if($('id').value!='')$(this.id).readOnly=true"}
+      nomben:         { name: Nombre     , params: maxlength=100 size=60 }
+      fecnacben:      { name: Fecha de Nacimiento}
+      fecreg:         { name: Fecha de Registro, params: value="<?php echo date('d/m/Y')?>"}
+      dirben:         { name: Dirección , type: textarea_tag  , params: maxlength=100 cols=68 row=2 }
+      telben:         { name: Teléfonos     , params: maxlength=100 size=60 }
+      
+    list:
+      title:              Definición de Beneficiarios de Embargos
+      display:            [=cedrif, nomben, fecnacben, telben]
+      filters:            [cedrif, nomben, fecnacben]
+      max_pers:           10
+      sort:               cedrif
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Edicion de Definición de Beneficiarios de Embargos
+      display:
+        Datos Beneficiario:   [cedrif, nomben, fecnacben, fecreg, dirben, telben]  
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

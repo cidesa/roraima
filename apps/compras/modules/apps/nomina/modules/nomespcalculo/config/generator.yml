@@ -1,0 +1,24 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npnomina
+    theme:            cidesaGenerator
+    fields:
+      codnomesp:   { name: Código Especial}
+      codnom:   { name: Código Nomina}
+      numsem:   { name: Este mes tiene}
+      ultfec:   { name: Desde, params: date_format='dd/MM/yyyy'}
+      profec:   { name: Hasta, params: date_format='dd/MM/yyyy'}
+      boton:    { name: .}
+
+    edit:
+      title:         Cálculo de Nómina Especiales
+      display:
+        "Tipo de Nomina Especial":         [_codnomesp, _codnom, _numsem]
+        "Fecha de Procesamiento":         [ultfec, profec]
+#        NONE:         [_opciones]
+        NONE:         [_boton, _estatus]
+#        NONE:         [_boton]
+        #Editable:     [codnom, numsem, ultfec, profec]
+      actions:
+        _save:        none

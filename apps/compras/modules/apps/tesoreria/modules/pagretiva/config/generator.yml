@@ -1,0 +1,28 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tsretiva
+    theme:            default
+    fields:
+      codret: { name: Retención}
+      destip: { name: Descripción}
+      codrec: { name: Recargo}
+      nomrgo: { name: Descripción}
+      codpar: { name: Partida}
+
+    list:
+      title:          Definición del Iva para Agentes de Retención
+      filters:        [codret, codrec]
+      display:        [=codret, destip, codrec, nomrgo]
+      sort:           codcon
+      max_per_page:   5
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Definición del Iva para Agentes de Retención
+      display:        [=codret, destip, codrec, nomrgo, codpar]
+      actions:
+        _save:        ~
+        _list:        ~
+        _delete:      ~

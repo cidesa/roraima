@@ -1,0 +1,76 @@
+methods:
+  post:
+   - "rhdefniv{codniv}"
+   - "rhdefniv{desniv}"
+   - "rhdefniv{minpun}"
+   - "rhdefniv{maxpun}"
+   - "rhdefniv{totpes}"
+   - "rhdefniv{codran}"
+   - "rhdefniv{tipcal}"
+
+names:
+  rhdefniv{codniv}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codniv
+
+  rhdefniv{desniv}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_desniv
+    
+  rhdefniv{minpun}:
+    required:  Yes
+    required_msg: Debe definir una Puntuacion Mínima
+    validators: MyNumberValidator    
+
+  rhdefniv{maxpun}:
+    required:  Yes
+    required_msg: Debe definir una Puntuacion Máxima
+    validators: MyNumberValidator
+    
+  rhdefniv{totpes}:
+    required:  Yes
+    required_msg: El Total Peso no puede estar en Blanco
+    validators: MyNumberValidator
+
+  rhdefniv{codran}:
+    required:  Yes
+    required_msg: El Rango no puede estar en Blanco
+    validators: Validator_codran
+      
+  rhdefniv{tipcal}:
+    required:  Yes
+    required_msg: Debe Seleccionar un Tipo de calculo
+
+Validator_codniv:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Rhdefniv
+        column:       codniv
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desniv:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 100 caracteres
+        
+Validator_codran:
+    class: CidesaExistValidator
+    param:
+        class:    Rhdefran
+        column:   codran
+        unique_error:   El Código del Rango no existe
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         integer
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          0000000000
+        min_error:    El valor tiene que ser mayor que cero
+        max:          9999999999

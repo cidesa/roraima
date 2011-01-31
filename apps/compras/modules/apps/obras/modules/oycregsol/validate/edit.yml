@@ -1,0 +1,126 @@
+methods:
+  post:
+   - "ocregsol{numsol}"
+   - "ocregsol{cedste}"
+   - "ocregsol{dessol}"
+   - "ocregsol{codsol}"
+   - "ocregsol{codorg}"
+   - "ocregsol{fecsol}"
+   - "ocregsol{fecres}"
+   - "ocregsol{obssol}"
+   - "ocregsol{codemp}"
+
+names:
+  ocregsol{numsol}:
+    required:  Yes
+    required_msg: El numero no puede estar en Blanco.
+    validators: UniqueValidator
+
+  ocregsol{cedste}:
+    required:  Yes
+    required_msg: El Solicitante no puede estar en Blanco
+    validators: ExistValidator
+
+  ocregsol{dessol}:
+    required:  Yes
+    required_msg: La Descripcion no puede estar en Blanco.
+    validators: DescripcionValidator
+
+  ocregsol{codsol}:
+    required:  Yes
+    required_msg: El Tipo de Solicitud no puede estar en Blanco.
+    validators: ExistValidator2
+
+  ocregsol{codorg}:
+    required:  Yes
+    required_msg: El Codigo del Organismo no puede estar en Blanco.
+    validators: ExistValidator3
+
+  ocregsol{fecsol}:
+    required:  Yes
+    required_msg: Fecha de Solicitud no puede estar en Blanco.
+    validators: FechaValidator
+
+  ocregsol{fecres}:
+    required:  Yes
+    required_msg: Fecha de Respuesta no puede estar en Blanco.
+    validators: FechaValidator2
+
+  ocregsol{obssol}:
+    required:  Yes
+    required_msg: La Observacion no puede estar en Blanco.
+    validators: DescripcionValidator2
+
+  ocregsol{codemp}:
+    required:  Yes
+    required_msg: Atendido no puede estar en Blanco.
+    validators: ExistValidator4
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Ocregsol
+        column:       numsol
+        unique_error: El Numero ya existe. Por Favor, Cambiélo por otro.
+
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha introducida es invalida
+
+FechaValidator2:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha introducida es invalida
+
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripcion no puede tener menos de 2 caracteres
+        max:       254
+        max_error: La Descripcion no puede pasar mas de 254 caracteres
+
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Ocdatste
+        column:       cedste
+        unique_error: El Solicitante debe Existir.
+
+ExistValidator2:
+    class: CidesaExistValidator
+    param:
+        class:        Octipsol
+        column:       codsol
+        unique_error: El Tipo de Solicitante debe Existir.
+
+DescripcionValidator2:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Observacion no puede tener menos de 2 caracteres
+        max:       254
+        max_error: La Observacion no puede pasar mas de 254 caracteres
+
+ExistValidator3:
+    class: CidesaExistValidator
+    param:
+        class:        Ocdeforg
+        column:       codorg
+        unique_error: El Organismo debe Existir.
+
+
+ExistValidator4:
+    class: CidesaExistValidator
+    param:
+        class:        Nphojint
+        column:       codemp
+        unique_error: Codigo del Empleado debe Existir.

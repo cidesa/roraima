@@ -1,0 +1,41 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Rhdefniv
+    theme:            cidesaGenerator
+    fields:
+      codniv:         { name: Código, params: size = 10 maxlength = 4 }
+      desniv:         { name: Descripción, type: textarea_tag, params: maxlength = 250 cols=65}
+      minpun:         { name: Mínima Puntuación, params: maxlength = 4}
+      maxpun:         { name: Máxima Puntuación, params: maxlength = 4}
+      totpes:         { name: Total Peso, params: maxlength = 4}
+      codran:
+        name: Rango
+        msj_error: El Rango es necesario
+        catalogo:  
+          catalogoweb: rhdefran_codran
+          clase: Rhdefran
+          ajax: 0
+          parametros: getprincipal="getCodran" getsecundario="getDesran" campoprincipal="codran" camposecundario="desran" campobase = "id"           
+      ptipcal:        { name: .}   
+
+    list:
+      title:              Definición de Niveles
+      display:            [=codniv, desniv, minpun, maxpun, codran, desran]
+      filters:            [codran, desran, minpun, maxpun, codran]
+      max_pers:           10
+      sort:               codniv
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Edición de Definición de Niveles
+      display:
+        Datos Niveles:       [codniv, desniv, minpun, maxpun, totpes, codran, _ptipcal]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

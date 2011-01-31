@@ -1,0 +1,28 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npconcomp
+    theme:            default
+    fields:
+      codnom: { name: Tipo de Nomina}
+      nomnom: { name: Descripcion}
+      codcon: { name: Codigo del Concepto}
+      nomcon: { name: Descripcion}
+
+    list:
+      title:          Conceptos de Compensacion por Nomina
+      filters:        [codnom]
+      display:        [=codnom, nomnom, codcon, nomcon]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:  10
+      sort:  codnom
+    edit:
+      title:          Edición de Compensacion por Nomina
+      display:       [codnom, nomnon, codcon, nomcon]
+      actions:
+        _list:       ~
+        _save:       ~
+        _create:     ~
+        _delete:     ~

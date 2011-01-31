@@ -1,0 +1,24 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Nptippar
+    theme:            default
+    fields:
+      tippar: { name: Código, params: maxlength=3}
+      despar: { name: Descripción}
+    list:
+      title:          Tipos de Parientes
+      filters:        [tippar, despar]
+      display:        [=tippar, despar]
+      max_per_page:	  6
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:  tippar
+    edit:
+      title:          Edición de Tipos de Parientes
+      actions:
+        _list:         ~
+        _save:         ~
+        _create:       ~
+        _delete:       ~

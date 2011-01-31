@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Segranapr
+    theme:            cidesaGenerator
+    fields:
+      randes:  {  name: Desde[UT]}
+      ranhas:  {  name: Hasta[UT]}
+      codniv:  {  name: Nivel de Aprobación, params: maxlength=3}
+      desniv:  {  name: Nivel de Aprobación}
+    list:
+      title:          Rangos por Nivel de Aprobación
+      display:        [=randes, ranhas, desniv]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [randes, ranhas, codniv]
+      max_per_page:   10
+      sort:           randes
+    edit:
+      title:          Edición de Rango por Nivel de Aprobación
+      display:        [randes, ranhas, _codniv]
+      actions:
+        _list:         ~
+        _save:         ~
+        _delete:       ~
+        _create:       ~

@@ -1,0 +1,38 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npvacdisfrute
+    theme:            cidesaGenerator
+    fields: 
+      display: [codnom, perini, perfin, fecvac, fecdes, fechas, observa, diasdisfrutar]     
+      diasdisfrutar:
+        name: Dias a Disfrutar
+      fecvac:
+        name: Fecha Solicitud
+      fecdes:
+        name: Fecha Salida
+      fechas:
+        name: Fecha Regreso
+      observa:
+        name: Observacion
+      perini:
+        name: Periodo Desde
+      perfin:
+        name: Periodo Hasta
+      codnom:
+        name: Nomina
+      periodonomina:
+        name: .  
+      fechasobserv:
+        name: .  
+      gridvacaciones:
+        name: .  
+
+    edit:
+      title: Registro de Vacaciones Colectivas
+      display:
+        Periodos y Nomina:        [_periodonomina]
+        Fechas de Solicitud, Salidas e Incorporacion: [_fechasobserv]
+        Dias de Vacaciones:       [_gridvacaciones]
+      actions:        
+        _save:        ~

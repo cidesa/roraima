@@ -1,0 +1,38 @@
+methods:
+  post:
+   - "lirecaud{codrec}"
+   - "lirecaud{desrec}"
+
+names:
+  lirecaud{codrec}:
+    required:  Yes
+    required_msg: Debe introducir el Código del Recaudo
+    validators: MyStringValidator1, Validator_codlic
+
+  lirecaud{desrec}:
+    required:  Yes
+    required_msg: Debe introducir la descripción del recaudo
+    validators: MyStringValidator2
+
+MyStringValidator1:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El código del Recaudo  debe tener mas de 1 caracter
+        max:       4
+        max_error: El código del Recaudo debe tener menos de 4 caracteres
+
+MyStringValidator2:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción del Recaudo debe tener mas de 1 caracter
+        max:       100
+        max_error: La descripción del Recaudo debe tener menos de 100 Caracteres
+
+Validator_codlic:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Lirecaud
+        column:   codrec
+        unique_error:   El código del recaudo ya existe. Por Favor, Intente con otro.

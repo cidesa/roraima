@@ -1,0 +1,21 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fcpreing
+    theme:            default
+    fields:
+      codpar:  {name: Código}
+      nompar:  {name: Descripción} 
+      estima:  {name: Estimación de Ingresos ?}     
+    list:
+      title:          Plan Unico de Cuentas (Recursos)
+      display:        [=codpar, nompar]     
+      object_actions:
+        _edit:        ~
+        _delete:      ~      
+      filters:        [codpar, nompar] 
+      max_per_page:   5
+    edit:
+      title:          Plan Unico de Cuentas (Recursos)
+ 
+    

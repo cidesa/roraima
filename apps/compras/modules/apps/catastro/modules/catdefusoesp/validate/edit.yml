@@ -1,0 +1,8 @@
+methods:
+  post:
+   - "catusoesp{desuso}"
+
+names:
+  catusoesp{desuso}:
+    required:  Yes
+    required_msg: La Descripcion no puede estar en Blanco

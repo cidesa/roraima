@@ -1,0 +1,147 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viasolviatra
+    theme:            cidesaGenerator
+    fields:
+      numsol:         { name: Nro Solicitud, params: maxlength=10 size=10 onBlur="rellenar(this.id)"}
+      fecsol:         { name: Fecha Solicitud}
+      tipvia:         { name: Tipo Viatico}
+      ptipvia:        { name: .}
+      js:        { name: .}
+      codemp:
+        name: Empleado
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Nphojint
+          clase: Nphojint
+          ajax: 1
+          parametros: getprincipal="getCodemp" getsecundario="getNomemp" campoprincipal="codemp" camposecundario="nomemp" campobase = "id"
+      codcat:
+        name: Categoria
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: NconceptosCat_Asignar
+          clase: Npcatpre
+          ajax: 0
+          parametros: getprincipal="getCodcat" getsecundario="getNomcat" campoprincipal="codcat" camposecundario="nomcat" campobase = "id"
+      codniv:
+        name: Nivel del Trabajador
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: viadefniv_codniv
+          clase: Viadefniv
+          ajax: 0
+          parametros: getprincipal="getCodniv" getsecundario="getDesniv" campoprincipal="codniv" camposecundario="desniv" campobase = "id"
+      codempaco:
+        name: Empleado Acompañante
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Nphojint
+          clase: Nphojint
+          ajax: 2
+          parametros: getprincipal="getCodempaco" getsecundario="getNomempaco" campoprincipal="codempaco" camposecundario="nomempaco" campobase = "id"
+      codnivaco:
+        name: Nivel del Empleado Acompañante
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: viadefniv_codniv
+          clase: Viadefniv
+          ajax: 3
+          parametros: getprincipal="getCodnivaco" getsecundario="getDesnivaco" campoprincipal="codnivaco" camposecundario="desnivaco" campobase = "id"
+      dessol:      {name: Descripción, type: textarea_tag, params: cols=65 maxlength=1000 }
+      codproced:
+        name: Procedencia
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: viadefproced_codproced
+          clase: Viadefproced
+          ajax: 0
+          parametros: getprincipal="getCodproced" getsecundario="getDesproced" campoprincipal="codproced" camposecundario="desproced" campobase = "id"
+      fecdes:         { name: Fecha Desde, params: onchange="CalculaDias(this.id)"}
+      fechas:         { name: Fecha Hasta, params: onchange="CalculaDias(this.id)"}
+      numdia:         { name: Número Dias, params: readOnly=true}
+      codfortra:
+        name: Forma de Traslado
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: viadeffortra_codfortra
+          clase: Viadeffortra
+          ajax: 0
+          parametros: getprincipal="getCodfortra" getsecundario="getDesfortra" campoprincipal="codfortra" camposecundario="desfortra" campobase = "id"
+      codempaut:
+        name: Empleado que Autoriza
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Nphojint
+          clase: Nphojint
+          ajax: 5
+          parametros: getprincipal="getCodempaut" getsecundario="getNomempaut" campoprincipal="codempaut" camposecundario="nomempaut" campobase = "id"
+      cedemp:           { name: Cedula, params: style="border:none"}
+      cargo:            { name: Cargo, params: style="border:none" size=80}
+      nivel:            { name: Nivel Organizacional, params: style="border:none" size=80}
+      cedempaco:           { name: Cedula, params: style="border:none"}
+      cargoaco:            { name: Cargo, params: style="border:none" size=80}
+      nivelaco:            { name: Nivel Organizacional, params: style="border:none" size=80}
+      cedempaut:           { name: Cedula, params: style="border:none"}
+      nivelaut:            { name: Nivel Organizacional, params: style="border:none" size=80}
+      codpai:
+        name: Pais
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: viaestado_codpai
+          clase: Viapais
+          ajax: 7
+          parametros: getprincipal="getCodpai" getsecundario="getNompai" campoprincipal="codpai" camposecundario="nompai" campobase = "id"
+      codest:
+        name: Estado
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: viaestado_codest
+          clase: Viaestado
+          ajax: 6
+          parametros: getprincipal="getCodest" getsecundario="getNomest" campoprincipal="codest" camposecundario="nomest" campobase = "id"
+          catalogoparams: /param1/'."'+$('viasolviatra_codpai').value+'".'
+      codciu:
+        name: Ciudad
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: viaciudad_codciu
+          clase: Viaciudad
+          ajax: 0
+          parametros: getprincipal="getCodciu" getsecundario="getNomciu" campoprincipal="codciu" camposecundario="nomciu" campobase = "id"
+          catalogoparams: /param1/'."'+$('viasolviatra_codest').value+'".'/param2/'."'+$('viasolviatra_codpai').value+'".'
+      status2:   { name: Status}
+      tipvia2:   { name: Tipo}
+      codubi:
+        name: Unidad Solicitante
+        catalogo:
+          catalogoweb: Bnubica_Almordcom
+          clase: Bnubica
+          ajax: 8
+          parametros: getprincipal="getCodubi" getsecundario="getDesubi" campoprincipal="codubi" camposecundario="desubi" campobase = "id"
+      codcen:
+        name: Unidad Ejecutora
+        catalogo:
+          catalogoweb: Cadefcen_Almsolegr
+          clase: Cadefcen
+          ajax: 9
+          parametros: getprincipal="getCodcen" getsecundario="getDescen" campoprincipal="codcen" camposecundario="descen" campobase = "id"
+    list:
+      title:        Listado de Solicitudes de Viaticos
+      display:      [=numsol, fecsol, codemp, nomemp, nivel, status2, tipvia2]
+      filters:      [numsol, fecsol, codemp, codniv]
+      sort:         numsol
+
+    edit:
+      title:        Edición de Solicitudes de Viaticos
+      display:
+        Datos Generales de la Solicitud:      [numsol, fecsol, _ptipvia, dessol]
+        Datos Empleado Solicitante:           [codemp, cedemp, cargo, nivel, codcat, codniv, codempaco, cedempaco, cargoaco, nivelaco, codnivaco]
+        Detalle de la Solicitd:               [codpai, codest, codciu, codproced, fecdes, fechas, numdia, codfortra, codubi, codcen, codempaut, cedempaut, nivelaut, _js]
+      hide:  [nomempe]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:        ~
+        _delete:      ~

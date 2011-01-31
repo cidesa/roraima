@@ -1,0 +1,30 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npestado
+    theme:            default
+    javascripts:       [ajax]
+    fields:
+      codpai:           { name: Código}
+      nompai:           { name: Nombre}
+      codedo:           { name: Código}
+      nomedo:           { name: Nombre}
+
+    list:
+      title:                     Municipios
+      display:                   [=codpai, nompai, codedo, nomedo]
+      filters:                   [codpai, codedo]
+      fields:
+      max_per_page:	            10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort: codpai
+    edit:
+      title:                     Edición de Municipios
+      display:                   [codpai, nompai, codedo, nomedo]#, _grid, _popup]
+      actions:
+        _list:                 ~
+        _save:                 ~
+        _delete:               ~
+        _create:               ~

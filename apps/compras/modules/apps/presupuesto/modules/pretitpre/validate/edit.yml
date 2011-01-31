@@ -1,0 +1,41 @@
+methods:
+  post:
+   - "cpdeftit{codpre}"
+   - "cpdeftit{nompre}"
+names:
+  cpdeftit{codpre}:
+    required:  Yes
+    required_msg: Debe llenar el codigo Presupuestario
+    validators: Validator_codpre
+
+  cpdeftit{nompre}:
+    required:  Yes
+    required_msg: Debe llenar la descripcion de codigo presupuestario
+    validators: Validator_MyString2
+
+Validator_MyString2:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripcón debe tener al menos un caracter
+        max:       100
+        max_error: La Descripcón no puede tener mas de 100 caracteres
+
+Validator_existe:
+    class: CidesaExistValidator
+    param:
+        class:        Contabb
+        column:       codcta
+        unique_error: La cuenta no existe.
+
+Validator_codpre:
+  class: sfPropelUniqueValidator
+  param:
+    class:        Cpdeftit
+    column:       codpre
+    unique_error: El Codigo ya Existe intente con otro
+    min:       1
+    min_error: El Codigo no puede tener menos de 1 caracteres
+    max:       40
+    max_error: El Codigo no puede tener mas de 15 caracteres
+

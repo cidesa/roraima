@@ -1,0 +1,10 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tsmovban
+    theme:            default
+
+    edit:
+      title:          Actualizacion en Lotes de los Bancos
+      display:
+        Bancos:       [numcue]

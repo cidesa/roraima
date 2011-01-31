@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Camotfal
+    theme:            default
+
+    fields:
+      codfal:       { name : Código, params: maxlength=4}}
+      desfal:       { name : Descripción}
+      tipfal:       { name : Tipo de Faltante}
+      desitipfal:   { name : Tipo de Faltante}
+
+    list:
+      title:          Motivo de Faltante
+      display:        [=codfal, desfal, desitipfal]
+      filters:		  [codfal, desfal]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:	  10
+      sort:    codfal
+    edit:
+      title:          Edición de Motivo Faltante
+      display:        [codfal, desfal, tipfal]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

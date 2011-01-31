@@ -1,0 +1,30 @@
+Code I: To Print The Content in a Text Field
+<form action="processscript.php" method="post">
+<textarea rows="25" cols="80" name="content">
+<?
+$fn = "relative/or/abs/path/to/file.ext";
+print htmlspecialchars(implode("",file($fn)));
+?> 
+</textarea><br>
+<input type="submit" value="Change!"> 
+</form>
+
+This PHP code uses three functions:
+
+file(): This function returns the contents of the file (file name is passed as parameter) as an array.
+
+implode(): This function combines the array elements into one huge variable and returns it. The first parameter specifies the divide character which should be used to separate the array elements. In our example we have given the string null character. The second parameter takes the array name.
+
+htmlspecialchars(): This function converts all HTML special characters like & to &amp; etc. This is necessary for displaying the file contents in the <textarea>.
+
+Note: 'file.ext' should be writable. Give 'chmod 666' command to this file if you are using a UNIX/Linux server.
+
+Code II: To Insert the Changed Text
+<?
+$fn = "relative/or/abs/path/to/file.ext";
+$content = stripslashes($_POST['content']);
+$fp = fopen($fn,"w") or die ("Error opening file in write mode!");
+fputs($fp,$content);
+fclose($fp) or die ("Error closing file!");
+?>
+

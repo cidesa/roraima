@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fordefpro
+    theme:            cidesaGenerator
+    fields:
+      codpro: { name: Código}
+      despro: { name: Descripción}
+      desabr: { name: Nombre Abreviado}
+
+    list:
+      title:          Unidades de Medidas
+      filters:        [codpro]
+      display:        [=codpro, despro, desabr]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort:    codpro
+    edit:
+      title:          Edición de Unidad de Medida
+      display:       [=codpro, despro, desabr]
+      actions:
+       _list:        ~
+       _save:        ~
+       _delete:      ~
+       _create:      ~

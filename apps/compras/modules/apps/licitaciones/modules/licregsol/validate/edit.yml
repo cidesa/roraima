@@ -1,0 +1,46 @@
+methods:
+  post:
+   - "liregsol{numsol}"
+   - "liregsol{dessol}"
+   - "liregsol{litipsol_id}"
+   - "liregsol{lidatste_id}"
+   - "liregsol{fecsol}"
+
+names:
+  liregsol{numsol}:
+    required:  Yes
+    required_msg: El Código no puedo estar en Blanco
+    validators: Validator_numsol
+
+  liregsol{dessol}:
+    required:  Yes
+    required_msg: La descripción no puedo estar en Blanco
+    validators: Validator_dessol
+
+  liregsol{litipsol_id}:
+    required:  Yes
+    required_msg: Debe seleccionar un Tipo de SolicitudS
+
+  liregsol{lidatste_id}:
+    required:  Yes
+    required_msg: Debe seleccionar la Unidad Solicitante
+
+  liregsol{fecsol}:
+    required:  Yes
+    required_msg: Debe seleccionar la Fecha de la Solicitud
+
+Validator_numsol:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Liregsol
+        column:       numsol
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_dessol:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripción no puede pasar mas de 100 caracteres
+

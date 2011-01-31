@@ -1,0 +1,26 @@
+methods:
+  post:
+   - "catdefaval{coddivgeo}"
+   - "catdefaval{nrocas}"
+   - "catdefaval{status}"
+
+names:
+  catdefaval{coddivgeo}:
+    required:  Yes
+    required_msg: El Código de Ubicacción no puede estar en Blanco.
+    validators: Ubicacion_Validator
+
+  catdefaval{nrocas}:
+    required:  Yes
+    required_msg: El N° Catastral no puede estar en blanco.
+
+  catdefaval{status}:
+    required:  Yes
+    required_msg: Seleccione el Estatus
+
+Ubicacion_Validator:
+    class: CidesaExistValidator
+    param:
+        class:    Catdivgeo
+        column:   coddivgeo
+        unique_error:  El Código de Ubicación no Existe.

@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viaregact
+    theme:            cidesaGenerator
+
+    fields:
+      desact:   { name: Descripcion, params: size=50 maxlength=100}
+
+    list:
+      title:     Definicion de Actividad Economica
+      display:   [ =desact ]
+      sort:      desact
+      filters:   [ desact]
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title: Edicion de Actividad Economica
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

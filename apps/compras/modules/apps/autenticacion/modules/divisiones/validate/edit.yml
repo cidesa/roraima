@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "division{coddiv}"
+   - "division{desdiv}"
+
+names:
+  division{coddiv}:
+    required:  Yes
+    required_msg: El Código de la División no puede estar en Blanco.
+    validators: UniqueValidator
+
+  division{desdiv}:
+    required:  Yes
+    required_msg: El Nombre de la División no puede estar en Blanco.
+    validators: NombreValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Division
+        column:   coddiv
+        unique_error:   El Código de la División ya existe. Por Favor, Cambiélo por otro.
+
+NombreValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Descripción de la División no puede tener menos de 5 carácteres
+        max:       250
+        max_error: La Descripción de la División no puede tener más de 250 carácteres

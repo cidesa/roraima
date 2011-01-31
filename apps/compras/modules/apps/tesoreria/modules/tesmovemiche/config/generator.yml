@@ -1,0 +1,39 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tscheemi
+    theme:            default
+    fields:
+      numche: { name: Nro Cheque / Referencia, params: maxlength=8}
+      numcue: { name: Cuenta Bancaria, params: maxlength=20}
+      cedrif: { name: C.I. o Rif Beneficiario, params: maxlength=15}
+      nomben: { name: Beneficiario}
+      fecemi: { name: Fecha de Emision, params: date_format='dd/MM/yyyy'}
+      monche: { name: Monto del Cheque}
+      status: { name: Estatus}
+      codemi: { name: Código Usuario que Emite, params: maxlength=50}
+      fecent: { name: Fecha de la Observación, params: date_format='dd/MM/yyyy'}
+      codent: { name: Código Usuario que Entrega, params: maxlength=50}
+      obsent: { name: Observaciones del Cheque, params: maxlength=100}
+      fecanu: { name: Fecha de Anulación, params: date_format='dd/MM/yyyy'}
+      cedrec: { name: Cédula quien Recibe, params: maxlength=15}
+      nomrec: { name: Nombre quien recibe, params: maxlength=50}
+      tipdoc: { name: Tipo de Documento, params: maxlength=4}
+      fecing: { name: Fecha de Emision, params: date_format='dd/MM/yyyy'}
+      anopre: { name: Año, params: maxlength=4}
+      nombensus: { name: Cesionario Autorizado}
+    list:
+      title:          Emisión de Pagos
+      filters:        [numche, numcue, cedrif]
+      display:        [=numche, numcue, cedrif, nomben, fecemi]
+      sort:           numche
+      max_per_page:	  8
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Emisión de Pagos
+      display:        [tipdoc, destip, numche, numcue, nomcue, cedrif, nomben, fecemi, monche, tippagordpag, descriordpag, montotordpag, montotcompro, montotprecom, conceppagnap, montotpagnap, mondtopagnap, condtopagnap, totnetpagnap, conceppagdir, totnetpagdir, mondtopagdir, condtopagdir, operacion, bloqueado, nombensus]
+      actions:
+        _save:         ~
+        _create:       ~

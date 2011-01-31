@@ -1,0 +1,30 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Carazcom
+    theme:            default
+
+    fields:
+      codrazcom:      { name : Código, params: maxlength=4}
+      desrazcom:      { name : Descripción }
+
+    list:
+      title:          Razón de Compra
+      display:        [=codrazcom, desrazcom]
+      fields:
+        codforent: { params: maxlength=4}
+        desforent:
+      filters:		  [codrazcom, desrazcom]
+      max_per_page:	  10
+      sort:           codrazcom
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:          Edición de Razón de Compra
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

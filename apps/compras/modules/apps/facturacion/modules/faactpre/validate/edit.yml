@@ -1,0 +1,39 @@
+methods:
+  post:
+   - "faartpvp{monaum}"
+   - "faartpvp{artdesde}"
+   - "faartpvp{arthasta}"
+
+names:
+
+ faartpvp{monaum}:
+    required:  Yes
+    required_msg: Introduzca valor
+    validators: MyNumberValidator
+
+ faartpvp{artdesde}:
+    required:  Yes
+    required_msg: Selecccione el artículo Desde
+    validators: ExistValidator
+
+ faartpvp{arthasta}:
+    required:  Yes
+    required_msg: Seleccione el artículo Hasta
+    validators: ExistValidator
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          0000000000,00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          9999999999,99
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        caregart
+        column:       codart
+        unique_error: El Codigo del Articulo debe existir.

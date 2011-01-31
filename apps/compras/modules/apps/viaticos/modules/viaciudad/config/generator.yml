@@ -1,0 +1,31 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viaciudad
+    theme:            cidesaGenerator
+    fields:
+      codciu:         { name: Código Ciudad, params: maxlegth=4 size=5 onBlur="$(this.id).value=$(this.id).value.pad(4,'0',0)"}
+      nomciu:         { name: Descripción, params: maxlegth=100 }
+      codest:         { name: Código Estado}
+      nomest:         { name: Descripción}
+      estado:         { name: .}
+      codpai:         { name: Código País}
+      nompai:         { name: Descripción}
+      pais:           { name: .}
+
+    list:
+      title: Listado de Ciudades
+      display: [=codciu, nomciu, codest, nomest, codpai, nompai]
+      filters: [codciu, nomciu]
+      sort:    codciu
+      objects_actions:
+        _edit:        ~
+        _delete:        ~
+    edit:
+      title: Edición de Ciudades
+      display:
+        Registro Ciudades: [_pais, _estado, codciu, nomciu]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

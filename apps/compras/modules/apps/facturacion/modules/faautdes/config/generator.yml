@@ -1,0 +1,37 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fanotent
+    theme:            cidesaGenerator
+    fields:
+      monnot: { name: Monto Total, params: readonly=true}
+      rifent: { name: RIF, params: readonly=true}
+      noment: { name: Nombre, params: readonly=true}
+      nronot: { name: Número, params: readonly=true}
+      fecnot: { name: Fecha, params: date_format='dd/MM/yyyy' }
+    list:
+      title:          Autorización de Notas de Entrega
+      display:        [=nronot, fecnot, codcli]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [nronot, fecnot, codcli]
+      max_per_page:   10
+      sort:           nronot
+
+    edit:
+      title:          Autorización de Notas de Entrega
+      display:
+        "NONE": [nronot, rifent, noment, fecnot, monnot]
+      hide: [autpor, autori, fecaut]
+      fields:
+        noment:
+          params: size = 30, readonly = true
+        monnot:
+          params: size = 10, readonly = true
+        fecnot:
+          params: readonly = true
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~

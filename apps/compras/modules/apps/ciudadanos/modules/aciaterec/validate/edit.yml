@@ -1,0 +1,55 @@
+methods:
+  post:
+   - "atreclamos{atsolici}"
+   - "atreclamos{atunidades_id}"
+   - "atreclamos{persona}"
+   - "atreclamos{desden}"
+   - "atreclamos{respuesta}"
+
+
+names:
+
+  atreclamos{atsolici}:
+    required:  No
+    required_msg: Modificar Mensaje de Error!!!!!!!
+
+
+  atreclamos{atunidades_id}:
+    required:  No
+    required_msg: Modificar Mensaje de Error!!!!!!!
+
+
+  atreclamos{persona}:
+    required:  No
+    required_msg: Modificar Mensaje de Error!!!!!!!
+
+
+  atreclamos{desden}:
+    required:  No
+    required_msg: Modificar Mensaje de Error!!!!!!!
+
+
+  atreclamos{respuesta}:
+    required:  Yes
+    required_msg: Debe insertar la respuesta al reclamo
+    validators: Vstring_1_100_4
+
+
+
+
+
+
+
+
+
+
+
+Vstring_1_100_4:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no puede tener menos de 1 caracteres
+        max:       100
+        max_error: La descripción no puede pasar mas de 100 caracteres
+
+

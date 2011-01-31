@@ -1,0 +1,38 @@
+methods:
+  post:
+   - "inmunicipio{inestado_id}"
+   - "inmunicipio{codmun}"
+   - "inmunicipio{nommun}"
+
+
+names:
+
+  inmunicipio{inestado_id}:
+    required:  Yes
+    required_msg: Debe seleccionar un Estado
+
+  inmunicipio{codmun}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codmun
+
+  inmunicipio{nommun}:
+    required:  Yes
+    required_msg: El nombre no puede estar en Blanco
+    validators: Validator_nommun
+
+
+Validator_codmun:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Inmunicipio
+        column:       codmun
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_nommun:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre no puede tener menos de 2 caracteres
+        max:       30
+        max_error: El nombre no puede pasar mas de 30 caracteres

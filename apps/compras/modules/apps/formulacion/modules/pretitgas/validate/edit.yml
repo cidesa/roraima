@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "fordefparegr{codparegr}"
+   - "fordefparegr{nomparegr}"
+
+names:
+  fordefparegr{codparegr}:
+    required:  Yes
+    required_msg: El Código de la Partida no puedo estar en Blanco.
+    validators: UniqueValidator
+
+  fordefparegr{nomparegr}:
+    required:  Yes
+    required_msg: El Nombre de la Partida no puede estar en Blanco
+    validators: NombreValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Fordefparegr
+        column:   codparegr
+        unique_error:   El Código de la Partida ya existe. Por Favor, Cambiélo por otro.
+
+NombreValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Nombre de la Partida no puede tener menos de 2 carácteres
+        max:       250
+        max_error: El Nombre de la Partida no puede tener más de 250 carácteres

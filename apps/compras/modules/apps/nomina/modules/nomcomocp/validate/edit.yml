@@ -1,0 +1,35 @@
+methods:
+  post:
+   - "npcomocp{codtipcar}"
+   - "npcomocp{fecdes}"
+names:
+
+  npcomocp{codtipcar}:
+    required:  Yes
+    required_msg: El Código no puedo estar en Blanco
+    validators: Validator_codtipcar
+
+  npcomocp{fecdes}:
+    required:  Yes
+    required_msg: La Fecha no puedo estar en Blanco
+    validators: FechaValidator_fecdes
+
+
+
+Validator_codtipcar:
+    class: CidesaExistValidator
+    param:
+        class:        Nptipcar
+        column:       codtipcar
+        unique_error: El Código del Cargo debe Existir.
+
+
+FechaValidator_fecdes:
+    class: CidesaDateValidator
+    param:
+        class:        Cppereje
+        columnmin:    fecini
+        columnmax:    feccie
+        min_error:    La Fecha Especificada no puede ser Menor a la Fecha de Inicio del Período
+        max_error:    La Fecha Especificada no puede ser Mayor a la Fecha de Fin del Período
+        date_error:   Fecha Inválida

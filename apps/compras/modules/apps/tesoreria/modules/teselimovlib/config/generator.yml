@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tsmovlib
+    theme:            default
+
+    fields:
+      numcue:     { name: Numero de Cuenta }
+      reflib:     { name: Referencia }
+      feclib:     { name: Fecha, params: date_format=dd/MM/yyyy }
+      tipmov:     { name: Tipo }
+      monmov:     { name: Monto }
+      deslib:     { name: Descripcion }
+
+    list:
+      title:          Eliminar Movimientos Anulados
+      display:        [numcue, reflib, feclib, tipmov, monmov, deslib]
+      sort:           numcue
+      max_per_page:   10
+      object_actions:
+        _delete:      ~
+      actions:
+        _save:        ~
+        _list:        ~
+        _delete:      ~

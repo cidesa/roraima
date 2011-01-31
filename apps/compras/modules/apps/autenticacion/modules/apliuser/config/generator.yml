@@ -1,0 +1,33 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      ApliUser
+    theme:            default
+    fields:
+      codapl:     { name : Módulo}
+      loguse:     { name : Usuario }
+      codemp:     { name : Código Empresa }
+      nomopc:     { name : Módulo }
+      priuse:     { name : Privilegios }
+      cedemp:     { name : C.I }
+      nomuse:     { name : Nombre }
+      diremp:     { name : Dirección }
+      telemp:     { name : Teléfono }
+      pasuse:     { name : Contraseña }
+      administrador: { name: Privilegio de Administrador}
+    list:
+      title:          Perfiles por Usuarios
+      display:        [=loguse, nomuse]
+      filters:        [loguse, codapl, nomopc, priuse]
+      max_per_page:   10
+      sort:           loguse
+      object_actions:
+        _edit:        ~
+    edit:
+      title:          Asignación de Perfiles por Usuarios
+      display:        [cedemp, nomuse, diremp, telemp, loguse, pasuse, codapl, codemp, nomopc, priuse, administrador]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+

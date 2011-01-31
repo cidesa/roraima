@@ -1,0 +1,123 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   fcdeclar
+  ancho:                   800
+  anchogrid:               800
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Check
+  tipo:                    k
+  nombrecampo:             check
+  esgrabable:			   true
+  html:                    [size="2" ]
+
+2:       # Columna 3
+  titulo:                  Nro
+  tipo:                    t
+  nombrecampo:             numero
+  esgrabable:			   true
+  html:                    [size="3" readOnly="true"]
+3:       # Columna 3
+  titulo:                  Concepto
+  tipo:                    t
+  nombrecampo:             fueing
+  esgrabable:              true
+  html:                    [size="10", readonly=true ]
+4:       # Columna 4
+  titulo:                  Nro. Declaración
+  tipo:                    t
+  nombrecampo:             numdec
+  esgrabable:			   true
+  html:                    [size="10", readonly=true ]
+5:       # Columna 5
+  titulo:                  Referencia
+  tipo:                    t
+  nombrecampo:             numref
+  esgrabable:			   true
+  html:                    [size="10", readonly=true ]
+6:       # Columna 6
+  titulo:                  Nombre
+  tipo:                    a
+  nombrecampo:             nombre
+  esgrabable:			   true
+  html:                    [size="20x2", readonly=true ]
+7:       # Columna 7
+  titulo:                  Vencimiento
+  tipo:                    f
+  nombrecampo:             fecven
+  esgrabable:			   true
+  html:                    [size="10", readonly=true ]
+8:       # Columna 8
+  titulo:                  Frecuencia
+  tipo:                    t
+  nombrecampo:             tipo
+  esgrabable:			   true
+  html:                    [size="10", readonly=true ]
+
+
+9:       # Columna 9
+  titulo:                  Monto de la Deuda(A)
+  tipo:                    m
+  nombrecampo:             mondec
+  esgrabable:			   true
+  html:                    [size="10", readonly=true ]
+  estotal:                 [true, 'fcpagos_montodeuda2']
+
+10:       # Columna 10
+  titulo:                  Monto Auto-Liquidacion
+  tipo:                    m
+  nombrecampo:             autliq
+  esgrabable:			   true
+  html:                    [size="10", readonly=true ]
+  estotal:                 [true, 'fcpagos_montoautliq']
+
+11:       # Columna 11
+  titulo:                  Monto de Mora(C)
+  tipo:                    m
+  nombrecampo:             mora
+  esgrabable:			   true
+  html:                    [size="10", readonly=true ]
+  estotal:                 [true, 'fcpagos_montomora']
+
+12:       # Columna 12
+  titulo:                  Descuento Pronto Pago(D)
+  tipo:                    m
+  nombrecampo:             prontopg
+  esgrabable:			   true
+  html:                    [size="10", readonly=true ]
+  estotal:                 [true, 'fcpagos_montodscprntopago']
+
+
+13:       # Columna 13
+  titulo:                  Monto a Pagar(A+C-D)
+  tipo:                    m
+  nombrecampo:             montopag
+  esgrabable:			   true
+  html:                    [size="10", readonly=true ]
+
+14:       # Columna 14
+  titulo:                  Monto Pagado Contribuyente (E)
+  tipo:                    m
+  nombrecampo:             montopagcon
+  esgrabable:			   true
+  html:                    [size="10" ]
+  estotal:                 [true, 'fcpagos_pagcon']
+
+15:       # Columna 15
+  titulo:                  Saldo (A+C-D)-E
+  tipo:                    m
+  nombrecampo:             saldo
+  esgrabable:			   true
+  html:                    [size="10", readonly=true ]
+#  estotal:                 [true, 'fcpagos_montopagcon']
+
+16:       # Columna 16
+  titulo:                  Fuente de Financiamiento
+  tipo:                    t
+  nombrecampo:             fuefing
+  esgrabable:			   true
+  oculta:            true
+  html:                    [size="10", readonly=true ]

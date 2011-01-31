@@ -1,0 +1,56 @@
+methods:
+  post:
+   - "npdefgen{forcar}"
+   - "npdefgen{foremp}"
+   - "npdefgen{fororg}"
+   - "npdefgen{foruni}"
+   - "npdefgen{unitrib}"
+   - "npdefgen{numrec}"
+
+names:
+  npdefgen{forcar}:
+    required:  Yes
+    required_msg: EL formato del Código del Cargo no puede estar en Blanco
+    validators: Validator_string
+
+  npdefgen{foremp}:
+    required:  Yes
+    required_msg: EL formato del Código del Empleado  no puede estar en Blanco
+    validators: Validator_string
+
+  npdefgen{fororg}:
+    required:  Yes
+    required_msg: EL formato del Código del Nivel Organizacional  no puede estar en Blanco
+    validators: Validator_string
+
+  npdefgen{foruni}:
+    required:  Yes
+    required_msg: EL formato del Código de la Unidad Ejecutora no puede estar en Blanco
+    validators: Validator_string
+
+  npdefgen{unitrib}:
+    required:  Yes
+    required_msg: La unidad tributaria no puede estar en Blanco
+    validators: MyNumberValidator
+
+  npdefgen{numrec}:
+   required:  No
+   validators: ReciboValidator
+
+Validator_string:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El campo no puede tener menos de 2 caracteres
+        max:       16
+        max_error: El campo no puede pasar mas de 20 caracteres
+MyNumberValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: La Unidad Tributaria solo puede contener valores númericos
+ReciboValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos

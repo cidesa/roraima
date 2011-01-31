@@ -1,0 +1,40 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npcatnomemp
+    theme:            cidesaGenerator
+    fields:
+      codcat:
+        name: Código
+        params: maxlength='."'+$('npcatnomemp_longitud').value".' onkeyDown=dFilter(event.keyCode, this,'."'+$('npcatnomemp_mascara').value".')
+        catalogo:
+          catalogoweb: Fordefcatpre_Forotrcrepre
+          clase: Fordefcatpre
+          ajax: 1
+          parametros: getprincipal="getCodcat" getsecundario="getNomcat" campoprincipal="codcat" camposecundario="nomcat" campobase = "id"
+          catalogoparams: /param1/'."'+$('npcatnomemp_longitud').value+'".'
+          ajaxparams: +'."'".'&longitud='."'+$('npcatnomemp_longitud').value".'
+      codnom:
+        name: Nómina
+        params: maxlength=3 size=15
+        catalogo:
+          catalogoweb: Npnomina_nomdefespvar
+          clase: Npnomina
+          ajax: 2
+          parametros: getprincipal="getCodnom" getsecundario="getNomnom" campoprincipal="codnom" camposecundario="nomnom" campobase = "id"
+          divupdate: divgrid2
+          ajaxparams: +'."'".'&categoria='."'+$('npcatnomemp_codcat').value".'
+      grid1:   { name: .}
+      grid2:   { name: .}
+      js:   { name: .}
+    edit:
+      title:          Formulación de Cargos por Empleado
+      display:
+        "Datos Generales":         [codcat, codnom]
+        "Empleados":    [_grid1, _grid2, _js]
+      hide:    [mascara, longitud, fila]
+      actions:
+        _list:          NONE
+        _save:          ~
+        _delete:        NONE
+        _create:        NONE

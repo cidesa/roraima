@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npempjorlab
+    theme:            default
+    fields:
+      codnom:     { name: Nómina }
+      idejor:     { name: Jornada }
+      codemp:     { name: Cedula }    
+      nomemp:     { name: Nombre, params: maxlength=50,size=50}    # Tabla Nphojint
+      nomcar:     { name: Cargo }	   # Tabla Npasicaremp
+      lunes:      { name: Lunes }
+      martes:     { name: Martes }
+      miercoles:  { name: Miercoles }
+      jueves:     { name: Jueves }
+      viernes:    { name: Viernes }
+      sabado:     { name: Sabado }
+      domingo:    { name: Domingo }
+    list:
+      title:          Definición de Jornadas Laborales por Empleado
+      filters:        [codnom, idejor, codemp]
+      display:        [=codnom, idejor, codemp, nomemp]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edición Jornadas Laborales del empleado
+      display:       [codemp, nomemp, nomcar, codnom, idejor]

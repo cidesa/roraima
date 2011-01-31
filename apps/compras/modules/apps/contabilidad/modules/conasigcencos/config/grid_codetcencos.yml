@@ -1,0 +1,47 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   codetcencos
+  anchogrid:               1000
+  ancho:                   900
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Cuenta Contable
+  tipo:                    t
+  nombrecampo:             codcta
+  html:                    [size="15" readOnly=true]
+  esgrabable:              true  
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             descta
+  html:                    [size="30" readOnly=true]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monasi
+  html:                    [size="10" readOnly=true]
+  esgrabable:              true
+4:       # Columna 4
+  titulo:                  Centro de Costo
+  tipo:                    t
+  nombrecampo:             codcencos
+  html:                    ["size=10 maxlength=32 onBlur='toAjax(1,getUrlModuloAjax(),this.value,0,'&cajtxtmos='+$(this.id).up().next(0).descendants()[0].id+'&cuenta='+$(this.id).up().previous(1).descendants()[0].value+'&ides='+this.id)'"]
+  esgrabable:              true
+  catalogo:                [ codefcencos, sf_admin_edit_form, { codcencos : 4 , descencos : 5 }, Codefcencos_Conasigcencos ]
+5:       # Columna 5
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             descencos
+  html:                    [size="30" readOnly=true]
+  esgrabable:              true
+6:       # Columna 6
+  titulo:                  Monto CC
+  tipo:                    m
+  nombrecampo:             moncencos
+  html:                    [size="10"]
+  esgrabable:              true
+

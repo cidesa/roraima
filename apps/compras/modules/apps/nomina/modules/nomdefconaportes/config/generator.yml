@@ -1,0 +1,30 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npcontipaporet
+    theme:            default
+    fields:
+      codtipapo: { name: Código}
+      destipapo: { name: Retencion}
+      codnom:    { name: Cod. de Nomina}
+      codcon:    { name: Cod. de Concepto}
+      nomina:    { name: Nomina, params: size=20  }
+      concepto:  { name: Concepto, params: size=20  }
+
+    list:
+      title:          Conceptos para Aportes
+      filters:        [codtipapo, codcon]
+      display:        [=codtipapo, destipapo]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codtipapo
+    edit:
+      title:          Edición de Conceptos para Aportes
+      display:       [codtipapo, destipapo, codnom, nomina, codcon, concepto]
+      actions:
+        _list:                 ~
+        _save:                 ~
+        _create:               ~
+        _delete:               ~

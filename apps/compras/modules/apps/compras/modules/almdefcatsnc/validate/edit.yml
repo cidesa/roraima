@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "cacatsnc{codsnc}"
+   - "cacatsnc{dessnc}"
+
+names:
+  cacatsnc{codsnc}:
+    required:  Yes
+    required_msg: El Codigo no puede estar en Blanco.
+    validators: UniqueValidator
+
+  cacatsnc{dessnc}:
+    required:  Yes
+    required_msg: La Descripción no puede estar en Blanco.
+    validators: DescripcionValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Cacatsnc
+        column:       codsnc
+        unique_error: El Codigo ya existe. Por Favor, Cambiélo por otro.
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       254
+        max_error: La descripción no puede pasar mas de 254 caracteres

@@ -1,0 +1,35 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atunidades
+    theme:            cidesaGenerator
+
+    fields:
+      coduni:      { name: Código, params: size=10 }
+      desuni:      { name: Descripción, params: size=60 }
+      diruni:      { name: Dirección, params: size=60 }
+      telfuni:     { name: Teléfono, params: size=20 }
+      percon:      { name: Nombre }
+      telpercon:   { name: Teléfono }
+      mailpercon:  { name: eMail }
+      horario:     { name: Horario Atención }
+    list:
+      title:          Definición de Unidades de la Organización
+      display:        [=coduni, desuni, telfuni, percon]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [coduni, desuni, percon]
+      max_per_page:   5
+      sort:  coduni
+    edit:
+      title:          Edición de Unidad
+      display:
+        Unidad:       [coduni, desuni]
+        Ubicación:    [diruni, telfuni]
+        Persona Contacto: [percon, telpercon, mailpercon, horario]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

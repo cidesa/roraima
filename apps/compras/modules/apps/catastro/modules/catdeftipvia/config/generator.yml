@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cattipvia
+    theme:            cidesaGenerator
+
+    fields:
+      desvia:    { name: Descripcion, params: size=40}
+
+    list:
+      title:     Definicion de Tipo de Vialidad
+      display:   [ =desvia]
+      fields:
+        desvia:    { name: Descripcion, params: size=15}
+      sort:      desvia
+      filters:   [ desvia]
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title: Edicion de Tipo de Vialidad
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

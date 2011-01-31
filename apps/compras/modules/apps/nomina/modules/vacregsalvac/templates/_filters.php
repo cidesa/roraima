@@ -1,0 +1,95 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ */
+// date: 2007/03/26 20:32:18
+?>
+<?php use_helper('Object') ?>
+
+<div class="sf_admin_filters">
+<?php echo form_tag('vacregsalvac/list', array('method' => 'get')) ?>
+
+  <fieldset>
+    <h2><?php echo __('filters') ?></h2>
+    <div class="form-row">
+    <label for="codemp"><?php echo __('Cédula:') ?></label>
+    <div class="content">
+    <?php echo input_tag('filters[codemp]', isset($filters['codemp']) ? $filters['codemp'] : null, array (
+  'size' => 15,
+)) ?>
+    </div>
+    </div>
+
+        <div class="form-row">
+    <label for="nomemp"><?php echo __('Nombre:') ?></label>
+    <div class="content">
+    <?php echo input_tag('filters[nomemp]', isset($filters['nomemp']) ? $filters['nomemp'] : null, array (
+  'size' => 15,
+)) ?>
+    </div>
+    </div>
+
+        <div class="form-row">
+    <label for="fecing"><?php echo __('Fecha Ingreso:') ?></label>
+    <div class="content">
+    <?php echo input_date_range_tag('filters[fecing]', isset($filters['fecing']) ? $filters['fecing'] : null, array (
+  'rich' => true,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+)) ?>
+    </div>
+    </div>
+
+        <div class="form-row">
+    <label for="codcar"><?php echo __('Código Cargo:') ?></label>
+    <div class="content">
+    <?php echo input_tag('filters[codcar]', isset($filters['codcar']) ? $filters['codcar'] : null, array (
+//  'disabled' => true,
+	'size' => 15,
+)) ?>
+    </div>
+    </div>
+
+        <div class="form-row">
+    <label for="nomcar"><?php echo __('Cargo:') ?></label>
+    <div class="content">
+    <?php echo input_tag('filters[nomcar]', isset($filters['nomcar']) ? $filters['nomcar'] : null, array (
+//  'disabled' => true,
+	'size' => 15,
+)) ?>
+    </div>
+    </div>
+
+        <div class="form-row">
+    <label for="codnom"><?php echo __('Código Nómina:') ?></label>
+    <div class="content">
+    <?php echo input_tag('filters[codnom]', isset($filters['codnom']) ? $filters['codnom'] : null, array (
+//  'disabled' => true,
+	'size' => 15,
+)) ?>
+    </div>
+    </div>
+
+        <div class="form-row">
+    <label for="nomnom"><?php echo __('Descripción Nómina:') ?></label>
+    <div class="content">
+    <?php echo input_tag('filters[nomnom]', isset($filters['nomnom']) ? $filters['nomnom'] : null, array (
+//  'disabled' => true,
+	'size' => 15,
+)) ?>
+    </div>
+    </div>
+
+      </fieldset>
+
+  <ul class="sf_admin_actions">
+    <li><?php echo button_to(__('reset'), 'vacregsalvac/list?filter=filter', 'class=sf_admin_action_reset_filter') ?></li>
+    <li><?php echo submit_tag(__('filter'), 'name=filter class=sf_admin_action_filter') ?></li>
+  </ul>
+
+</form>
+</div>

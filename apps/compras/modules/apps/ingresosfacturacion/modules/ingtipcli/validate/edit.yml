@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "intipcli{codtipcli}"
+   - "intipcli{destipcli}"
+names:
+  intipcli{codtipcli}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codtipcli
+
+  intipcli{destipcli}:
+    required:  Yes
+    required_msg: La descripcion no puede estar en Blanco
+    validators: Validator_destipcli
+
+Validator_codtipcli:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Intipcli
+        column:       codtipcli
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_destipcli:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripcion no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripcion no puede pasar mas de 250 caracteres

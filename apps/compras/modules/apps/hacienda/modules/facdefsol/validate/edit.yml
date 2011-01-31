@@ -1,0 +1,35 @@
+methods:
+  post:
+   - "fctipsol{codtip}"
+   - "fctipsol{destip}"
+   - "fctipsol{fueing}"
+
+names:
+  fctipsol{codtip}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+    validators: Validator_codtip
+
+  fctipsol{destip}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido
+
+  fctipsol{fueing}:
+    required:  Yes
+    required_msg: El Código del Proveedor no puedo estar en Blanco
+    validators: ExistValidator_fueing
+
+
+Validator_codtip:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fctipsol
+        column:       codtip
+        unique_error: El registro ya Existe intente con otro.
+
+ExistValidator_fueing:
+    class: CidesaExistValidator
+    param:
+        class:        Fcfuepre
+        column:       codfue
+        unique_error: El Código de la Fuente debe Existir.

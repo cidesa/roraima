@@ -1,0 +1,25 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Segnivapr
+    theme:            cidesaGenerator
+    fields:
+      codniv:      {name: Código, params: maxlength=3 }
+      desniv:      {name: Descripción, params: maxlength=50 }
+    list:
+      title:          Niveles de Aprobación
+      display:        [=codniv, desniv]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [codniv, desniv]
+      max_per_page:   5
+      sort:  codniv
+    edit:
+      title:          Edición de Niveles de Aprobación
+      display:        [codniv, desniv]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

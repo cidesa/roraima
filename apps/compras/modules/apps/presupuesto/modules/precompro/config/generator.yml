@@ -1,0 +1,64 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpcompro
+    theme:            cidesaGenerator
+
+    fields:
+      refcom:  {name: Referencia}
+      mensaje: {name: .}
+      feccom:  {name: Fecha, params: date_format='dd/MM/yy'}
+      descom:  {name: Descripción, type: textarea_tag, params: size=80x5}
+      moncom:  {name: Total Imputado}
+      salaju:  {name: Ajustado, params: readonly=true}
+      salcau:  {name: Causado, params: readonly=true}
+      salpag:  {name: Pagado, params: readonly=true}
+      salcom:  {name: Comprometido, params: readonly=true}
+      aprobar: {name: .}
+      cedrif:
+        name: Cedula/Rif
+        catalogo:
+          catalogoweb: Preprecom_Opbenefi
+          clase: Opbenefi
+          ajax: 0
+          parametros: getprincipal="getCedrif" getsecundario="getNomben" campoprincipal="cedrif" camposecundario="nomben" campobase = "id"
+      tipcom:
+        name: Tipo Compromiso
+        catalogo:
+          catalogoweb: Precompro_Cpdoccom
+          clase: Cpdoccom
+          ajax: 0
+          parametros: getprincipal="getTipcom" getsecundario="getNomext" campoprincipal="tipcom" camposecundario="nomext" campobase = "id"
+      refprc:
+        name: Ref. Precompromiso
+        catalogo:
+          catalogoweb: Cpprecom_Precompro
+          clase: Cpprecom
+          ajax: 0
+          parametros: getprincipal="getRefprc" getsecundario="getDesprc" campoprincipal="refprc" camposecundario="desprc" campobase = "id"
+          catalogoparams: param1/'."'+$('cpcompro_feccom').value+'".'/param2/'."'+$('cpcompro_tipcom').value.replace('/','?')+'".'
+
+      grid:      {name: .}
+
+    list:
+      title:    Compromisos
+      display:  [=refcom, descom, feccom]
+      filters:  [refcom, feccom, descom]
+
+    edit:
+      title:  Edición de Compromisos
+      display:
+        Datos del documento:          [_aprobar, _mensaje, _refcom, feccom, descom]
+        Datos del Compromiso:         [tipcom, refprc]
+        Datos del Beneficiario:       [cedrif]
+        Imputaciones Presupuestarias: [_grid]
+        Saldos:                       [salaju, _salcom, salcau, salpag, moncom]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _anular:
+          name: Anular
+          only_for: edit
+          params: class="sf_admin_action_delete" onClick="anular()"
+        _delete:      ~

@@ -1,0 +1,41 @@
+viaticos:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Viaticos
+    imagen: viaticos.gif
+    nombre: Viaticos
+    urls:
+      Cambiar Contraseña:
+        modulo: autenticacion.php
+        modulo_dev: autenticacion_dev.php
+      default:
+        modulo: viaticos.php
+        modulo_dev: viaticos_dev.php
+      Definicion de Proveedores:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Ubicaciones:
+        modulo: obras.php
+        modulo_dev: obras_dev.php
+      Reportes:
+        absoluta: reportes/reportes/viaticos
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones:
+#      Definicion de Proveedores:                          AlmRegPro
+      Definicion de Entes:                                ViaRegEnte
+      Definicion de Actividades:                          ViaRegAct
+      Definicion Tipo de Tabulador:                       ViaRegTipTab
+      Asignacion de Servicio:                             ViaRegTipSer
+      Asignacion de Cargos a Tabulador:                   ViaDetTabCar
+      Ubicaciones:
+          Pais:                                           oycdefdivpai
+          Estado:                                         oycdefdivest
+          Ciudad:                                         oycdefdivciu
+    Movimientos:
+      Solicitud de Viaticos:                              ViaRegSolVia
+      #Relacion de Viaticos:
+    Reportes:
+    Mantenimiento:
+      Cambiar Contraseña:                                     cambiopasswd

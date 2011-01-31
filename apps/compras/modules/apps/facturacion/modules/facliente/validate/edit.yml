@@ -1,0 +1,102 @@
+methods:
+  post:
+   - "facliente{codpro}"
+   - "facliente{nompro}"
+   - "facliente{rifpro}"
+   - "facliente{limcre}"
+   - "facliente{capsus}"
+   - "facliente{cappag}"
+   - "facliente{fecinscir}"
+   - "facliente{fecreg}"
+   - "facliente{fecven}"
+   - "facliente{fatipcte_id}"
+
+names:
+  facliente{codpro}:
+    required:  Yes
+    required_msg: El Código no puedo estar en Blanco.
+    validators: Validator_codpro
+
+  facliente{nompro}:
+    required:  Yes
+    required_msg: El Nombre no puedo estar en Blanco.
+    validators: Validator_nompro
+
+  facliente{rifpro}:
+    required:  Yes
+    required_msg: El Rif/CI Proveedor no puedo estar en Blanco.
+    validators: Validator_rifpro
+
+  facliente{limcre}:
+    required:  No
+    validators: MyNumberValidator, MontoValidator
+
+  facliente{capsus}:
+    required:  No
+    validators: MyNumberValidator, MontoValidator
+
+  facliente{cappag}:
+    required:  No
+    validators: MyNumberValidator, MontoValidator
+
+  facliente{fecinscir}:
+    required:  No
+    validators: FechaValidator
+
+  facliente{fecreg}:
+    required:  No
+    validators: FechaValidator
+
+  facliente{fecven}:
+    required:  No
+    validators: FechaValidator
+
+  facliente{fatipcte_id}:
+    required:  Yes
+    required_msg: Debe seleccionar el tipo de cliente
+
+Validator_codpro:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Facliente
+        column:       codpro
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_nompro:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre del Proveedor no puede tener menos de 2 caracteres
+        max:       254
+        max_error: El nombre del Proveedor no puede pasar mas de 254 caracteres
+
+Validator_rifpro:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Facliente
+        column:       rifpro
+        unique_error: El Rif/CI ya Existe intente con otro.
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+MontoValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El valor introducido no cumple con el formato para montos
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          000000000000.00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          999999999999.99
+        max_error:    El valor debe contener maximo 999.999.999.999,99

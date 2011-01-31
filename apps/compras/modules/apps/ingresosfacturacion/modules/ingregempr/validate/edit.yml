@@ -1,0 +1,131 @@
+methods:
+  post:
+   - "inempresa{rifemp}"
+   - "inempresa{razsoc}"
+   - "inempresa{intipemp_id}"
+   - "inempresa{inestado_id}"
+   - "inempresa{inmunicipio_id}"
+   - "inempresa{inparroquia_id}"
+   - "inempresa{diremp}"
+   - "inempresa{telemp}"
+   - "inempresa{cedrepleg}"
+   - "inempresa{nomrepleg}"
+   - "inempresa{aperepleg}"
+   - "inempresa{fecnac}"
+   - "inempresa{telhab}"
+
+names:
+  inempresa{rifemp}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: UniqueValidator, Validator_cedrif
+
+  inempresa{razsoc}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: Validator_razsoc
+
+
+  inempresa{intipemp_id}:
+    required:  Yes
+    required_msg: Este campo es requerido
+
+  inempresa{fecnac}:
+    required:  Yes
+    required_msg: Debe insertar la fecha de nacimiento
+    validators: Validator_fecnac
+
+  inempresa{inestado_id}:
+    required:  Yes
+    required_msg: Este campo es requerido
+
+  inempresa{inmunicipio_id}:
+    required:  Yes
+    required_msg: Este campo es requerido
+
+  inempresa{inparroquia_id}:
+    required:  Yes
+    required_msg: Este campo es requerido
+
+  inempresa{diremp}:
+    required:  Yes
+    required_msg: Este campo es requerido
+
+  inempresa{telemp}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: Validator_tlf
+
+  inempresa{cedrepleg}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: Validator_cedrif
+
+  inempresa{nomrepleg}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: Validator_nomape
+
+  inempresa{aperepleg}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: Validator_nomape
+
+  inempresa{telhab}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: Validator_tlf
+
+
+Validator_cedrif:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       12
+        max_error: El campo debe tener menos de 12 caracteres
+
+Validator_razsoc:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       50
+        max_error: El campo debe tener menos de 50 caracteres
+
+Validator_nomape:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       50
+        max_error: El campo debe tener menos de 50 caracteres
+
+Validator_sexo:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       1
+        max_error: El campo debe tener menos de 1 caracter
+
+
+Validator_fecnac:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+Validator_tlf:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Elteléfono debe ser sólo números
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Inprofes
+        column:       cedprof
+        unique_error: La cédula del Ciudadano ya existe. Por Favor verifique la información.

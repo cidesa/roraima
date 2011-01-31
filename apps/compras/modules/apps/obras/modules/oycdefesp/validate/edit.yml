@@ -1,0 +1,34 @@
+methods:
+  post:
+   - "octipesp{codtipesp}"
+   - "octipesp{destipesp}"
+
+names:
+  octipesp{codtipesp}:
+    required:  Yes
+    required_msg: El Codigo no puede estar en Blanco.
+    validators: UniqueValidator
+
+  octipesp{destipesp}:
+    required:  Yes
+    required_msg: La Descripcion no puede estar en Blanco.
+    validators: DescripcionValidator
+
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Octipesp
+        column:       codtipesp
+        unique_error: El Codigo ya existe. Por Favor, Cambiélo por otro.
+
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripcion no puede tener menos de 2 caracteres
+        max:       254
+        max_error: La Descripcion no puede pasar mas de 254 caracteres
+
+

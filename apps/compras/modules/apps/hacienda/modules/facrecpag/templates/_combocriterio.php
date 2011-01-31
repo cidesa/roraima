@@ -1,0 +1,1 @@
+ <?php echo select_tag('fcpagos[criterio]', options_for_select(Constantes::ListadeCriterioConstribuyente(),$fcpagos->getCriterio()),array()) ?>

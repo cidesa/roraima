@@ -1,0 +1,38 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Tsdefban
+    theme:            cidesaGenerator
+
+    fields:
+      numcue:    { name: Nro de Cuenta, params: size=20 }
+      nomcue:    { name: Nombre/Banco, params: size=40 }
+      fechades:  { name: Fecha Desde, params: date_format='dd/mm/yyyy' size=10 maxlength=10 }
+      fechahas:  { name: Fecha Hasta, params: date_format='dd/mm/yyyy' size=10 maxlength=10 }
+      gripmovimiento:    { name: . }
+      fechas:    { name: . }
+
+    list:
+      title:          Conciliar Movimientos en Bancos
+      fields:
+        nomcue:    { params: size=20  }
+      filters:        [numcue, nomcue]
+      display:        [=numcue, nomcue]
+      max_per_page:	  10
+      sort: numcue
+      object_actions:
+        _edit:        ~
+
+    edit:
+      fields:
+        numcue:    { params: size=20 readonly=true }
+        nomcue:    { params: size=40 readonly=true }
+
+      title:          Conciliar Movimientos en Bancos
+      display:
+        Busqueda:   [numcue, nomcue, _fechas]
+        Movimientos:       [_gripmovimiento]
+
+      actions:
+        _list:        ~
+        _save:        ~

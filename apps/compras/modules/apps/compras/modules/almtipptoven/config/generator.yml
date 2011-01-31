@@ -1,0 +1,30 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Catipalmpv
+    theme:            cidesaGenerator
+    fields:
+      codtippv:         { name: CÃ³digo}
+      nomtippv:         { name: Nombre }
+      metdes:         { name: Metros Desde}
+      methas:         { name: Metros Hasta}
+
+
+    list:
+      title:          Tipos de Punto de Venta
+      display:        [ =codtippv, nomtippv]
+      filters:        [codtippv, nomtippv]
+      sort:           codtippv
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:   EdiciÃ³n de Tipos Punto de Venta
+      display:
+        Datos: [codtippv, nomtippv, metdes, methas]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:        ~
+        _delete:      ~

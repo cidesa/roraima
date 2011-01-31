@@ -1,0 +1,30 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npciudad
+    theme:            default
+    fields:
+      codpai:           { name: Código}
+      nompai:           { name: Nombre}
+      codedo:           { name: Código}
+      nomedo:           { name: Nombre}
+      codciu:           { name: Código}
+      nomciu:           { name: Nombre}
+    list:
+      title:                     Parroquias
+      display:                   [=codpai, nompai, codedo, nomedo, codciu, nomciu]
+      filters:                   [codpai, codedo, codciu, nomciu]
+      fields:
+      max_per_page:	            10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort: codpai
+    edit:
+      title:                     Edición de Parroquias
+      display:                   [codpai, nompai, codedo, nomedo, codciu, nomciu]
+      actions:
+        _list:                 ~
+        _save:                 ~
+        _delete:               ~
+        _create:               ~

@@ -1,0 +1,31 @@
+methods:
+  post:
+   - "caramart{ramart}"
+   - "caramart{nomram}"
+
+
+names:
+  caramart{ramart}:
+    required:  Yes
+    required_msg: El Código no puedo estar en Blanco
+    validators: Validator_ramart
+
+  caramart{nomram}:
+    required:  Yes
+    required_msg: La descripción no puedo estar en Blanco
+    validators: Validator_nomram
+
+Validator_ramart:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Caramart
+        column:       ramart
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_nomram:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       99
+        max_error: La descripción no puede pasar mas de 100 caracteres

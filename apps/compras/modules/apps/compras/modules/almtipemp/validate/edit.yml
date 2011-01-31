@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "catipempsnc{codtip}"
+   - "catipempsnc{destip}"
+
+names:
+  catipempsnc{codtip}:
+    required:  Yes
+    required_msg: El Código del Tipo de Empresa Proveedora no puedo estar en Blanco
+    validators: Validator_codtip
+
+  catipempsnc{destip}:
+    required:  Yes
+    required_msg: La Descripción del Tipo de Empresa Proveedora no puedo estar en Blanco
+    validators: MyStringValidator2
+
+Validator_codtip:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Catipempsnc
+        column:       codtip
+        unique_error: El Código del Tipo de Empresa Proveedora ya Existe intente con otro.
+
+MyStringValidator2:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción del Tipo de Empresa Proveedorano puede tener menos de 2 caracteres
+        max:       100
+        max_error: La Descripción del Tipo de Empresa Proveedora no puede pasar mas de 100 caracteres

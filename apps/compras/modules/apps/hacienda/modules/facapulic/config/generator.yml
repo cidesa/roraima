@@ -1,0 +1,61 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fcapulic
+    theme:            cidesaGenerator
+
+    fields:
+      nrocon:         {name: Número de Control, params: size=8 maxlength=8 }
+      fecreg:         {name: Fecha de Registro, params: date_format='dd/MM/yyyy' size=10  maxlength=10}
+      rifcon:  { name: C.I. / RIF., params: size=14 maxlength=14 }
+      dircon:  { name: Dirección, params: size=60 maxlength=255 }
+      nacconcon:  { name: Nacionalidad,  params: size=80 maxlength=255 readonly=false }
+      tipconcon:  { name: Tipo de Persona, params: size=80 maxlength=255 readonly=false }
+      rifrep:  { name: C.I. / RIF., params: size=14 maxlength=14 }
+      nacconrep:  { name: Nacionalidad,  params: size=80 maxlength=255 readonly=false }
+      tipconrep:  { name: Tipo de Persona, params: size=80 maxlength=255 readonly=false }
+      dirconrep:  { name: Dirección, params: size=60 maxlength=255 }
+      tipapu:  { name: Codigo, params: size=4 maxlength=4 }
+      grid:  { name: . , params: size=17 maxlength=15 }
+
+      desapu:  { name: Descripcion , type: textarea_tag, params: size=35x2 maxlength=250 }
+      dirapu:  { name: Direccion, type: textarea_tag, params: size=35x2 maxlength=250 }
+      fecapu:  { name: Fecha del Sorteo, params: date_format='dd/MM/yyyy' size=10  maxlength=10}
+      horaapu: { name: Hora del Sorteo, params: size=10 }
+
+      serapui: { name: Seriales Desde, params: size=10 maxlength=10 }
+      serapuf: { name: Seriales Hasta, params: size=10 maxlength=10 }
+
+      exoapu: { name: Exonerable, params: size=10 maxlength=10 }
+      texexo:  { name: Texto Exonerado, type: textarea_tag, params: size=35x2 maxlength=250 }
+
+      funrec:   { name: Funcionario, params: readOnly='true' }
+      fecrec:  { name: Fecha, params: date_format='dd/MM/yyyy' size=10  maxlength=10 readOnly='true'}
+
+
+    list:
+      title:     Definición de Registro de Apuestas Lícitas
+      display:   [=nrocon, fecreg, rifcon]
+      filters:   [nrocon, fecreg]
+      sort:      nrocon
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title: Registro de Apuestas Lícitas
+      display:
+        NONE:                       [ _nrocon, _fecreg]
+        "Datos Contribuyentes":  [ _rifcon, dircon, _nacconcon, _tipconcon ]
+        "Datos del Representante Legal":  [ _rifrep, dirconrep, _nacconrep, _tipconrep ]
+        "Tipo de Apuestas Lícitas": [_tipapu, _grid]
+        "Datos de la Apuesta Lícita": [desapu, dirapu, fecapu, _horaapu, serapui, serapuf, _exoapu, texexo]
+        #"Datos de Espectaculo Publico":  [ desesp, diresp, _fecesp, _horespi, _horespf, nroent, monent, _exoesp, texexo]
+        "Datos de Recepcion":  [ funrec, _fecrec ]
+
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

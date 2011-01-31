@@ -1,0 +1,81 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   cpdisfuefin
+  anchogrid:               750
+  ancho:                   950
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Codigo Presupuestario
+  tipo:                    t
+  nombrecampo:             codpre
+  esgrabable:              true
+  html:                    [ size="32", readonly=true ]
+#  $this->columnas[1][12]->setHTML('onChange=toAjaxUpdater(obtenerColumnaSiguiente(this.id),3,getUrlModulo()+"ajax",this.value,"",{"objid" : ""+obtenerColumnaSiguiente(this.id) })');
+2:       # Columna 2
+  titulo:                  Origen Fuente
+  tipo:                    t
+  nombrecampo:             origen
+  esgrabable:              true
+  html:                    [ size="6", readonly=true ]
+3:       # Columna 3
+  titulo:                  F/Financiamiento
+  tipo:                    t
+  nombrecampo:             nomext
+  esgrabable:              true
+  html:                    [size="25", readonly=true ]
+4:       # Columna 4
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monto
+  html:                    [size="11"]
+7:       # Columna 7
+  titulo:                  Asignado
+  tipo:                    m
+  nombrecampo:             monasi
+  esgrabable:              true
+  html:                    [size="15", readonly=true ]
+8:       # Columna 8
+  titulo:                  Ejecutado
+  tipo:                    m
+  nombrecampo:             moneje
+  esgrabable:              true
+  html:                    [size="15", readonly=true ]
+9:       # Columna 9
+  titulo:                  Disponible
+  tipo:                    m
+  nombrecampo:             mondis
+  esgrabable:              true
+  html:                    [size="15", readonly=true ]
+10:       # Columna 10
+  titulo:                  TipoMovimiento
+  tipo:                    t
+  nombrecampo:             tipmov
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="15", readonly=true ]
+11:       # Columna 11
+  titulo:                  RefMovimiento
+  tipo:                    t
+  nombrecampo:             refmov
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="15", readonly=true ]
+12:       # Columna 12
+  titulo:                  FueFin
+  tipo:                    t
+  nombrecampo:             fuefin
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="15", readonly=true ]
+#13:       # Columna 13
+#  titulo:                  codori
+#  tipo:                    t
+#  nombrecampo:             codori
+#  esgrabable:              true
+#  oculta:                  false
+#  html:                    [size="15", readonly=true ]
+

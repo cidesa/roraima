@@ -1,0 +1,33 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefpryaccmet
+    theme:            default
+    fields:
+      codpro: { name: Código}
+      nompro: { name: Proyecto ó Acción Centralizada}
+      tippro: { name: Tipo}
+      codaccesp: { name: Código}
+      desaccesp: { name: Acción Específica}
+      codmet: { name: Código}
+      desmet: { name: Meta}
+      codunimed: { name: Código}
+      desunimed: { name: Unidad de Medida}
+
+    list:
+      title:          Metas Asociadas a Proyectos y Acciones Específicas
+      filters:        [codpro, codaccesp]
+      display:        [=codpro, nompro, codaccesp, desaccesp]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   2
+      sort:   codpro
+    edit:
+      title:          Edición de Metas Asociadas a Proyectos y Acciones Específicas
+      display:       [=codpro, nompro, tippro, codaccesp, desaccesp, codmet, desmet, desunimed, codunimed]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,58 @@
+methods:
+  post:
+   - "npjuzgados{codjuz}"
+   - "npjuzgados{desjuz}"
+   - "npjuzgados{perconjuz}"
+   - "npjuzgados{carperjuz}"
+   - "npjuzgados{dirjuz}"
+
+names:
+  npjuzgados{codjuz}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codjuz
+
+  npjuzgados{desjuz}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_desjuz
+
+  npjuzgados{perconjuz}:
+    required:  Yes
+    required_msg: Debe ingresar a la persona contacto del Juzgado
+    validators: Validator_desjuz
+
+  npjuzgados{carperjuz}:
+    required:  Yes
+    required_msg: Debe ingresar el cargo de la persona contacto del Juzgado
+    validators: Validator_desjuz
+
+  npjuzgados{dirjuz}:
+    required:  Yes
+    required_msg: Debe ingresar la descripción del Juzgado
+    validators: Validator_dirjuz
+
+
+
+Validator_codjuz:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npjuzgados
+        column:       codjuz
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desjuz:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripción no puede pasar mas de 100 caracteres
+        
+Validator_dirjuz:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Dirección no puede tener menos de 2 caracteres
+        max:       200
+        max_error: La Dirección no puede pasar mas de 200 caracteres

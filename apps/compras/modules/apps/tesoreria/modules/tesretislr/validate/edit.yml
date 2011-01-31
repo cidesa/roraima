@@ -1,0 +1,52 @@
+methods:
+  post:
+   - "tsentislr{numord}"        
+   - "tsentislr{numdep}"
+   - "tsentislr{fecha}"        
+   - "tsentislr{banco}"               
+
+names: 
+  tsentislr{numord}:
+    required:  Yes
+    required_msg: El Número de Cheque no puedo estar en Blanco
+    validators: ChequeValidator 
+
+  tsentislr{fecha}:
+    required:  No
+    validators: FechaValidator   
+    
+  tsentislr{numdep}:
+    required:  Yes
+    required_msg: La Número de Depósito no puedo estar en Blanco                    
+    validators: UniqueValidator   
+    
+  tsentislr{banco}:
+    required:  No
+    validators: BancoValidator           
+ 
+FechaValidator:
+    class:         CidesaValidaDate
+    param:
+        invalid_date: Por Favor, Introduzca una Fecha Valida.
+
+BancoValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: El Nombre del Banco no puede tener menos de 5 caracteres
+        max:       100
+        max_error: El Nombre del Banco no puede tener más de 100 caracteres
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Tsentislr
+        column:   numdep
+        unique_error:   El Número de Deposito ya existe. Por Favor, Cambiélo por otro.       
+        
+ChequeValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Tsmovlib
+        column:   reflib
+        unique_error:   El Número de Cheque no existe. 

@@ -1,0 +1,30 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Rhdefvalins
+    theme:            cidesaGenerator
+    fields:
+      codvalins:      { name: Código, params: size=10 maxlength=4 onBlur  = "$(this.id).value=$(this.id).value.pad(4,'0',0)"} 
+      desvalins:      { name: Descripción, type: textarea_tag, params: maxlength=250 cols=60 }
+      obsvalins:      { name: Observación, type: textarea_tag, params: maxlength=250 cols=60 }
+   
+    list:
+      title:              Definicion de Valores
+      display:            [=codvalins, desvalins, obsvalins]
+      filters:            [codvalins, desvalins]
+      max_pers:           10
+      sort:               codvalins
+      objects_actions:
+        _edit:            ~
+        _delete:          ~
+      actions:
+        _create:          ~           
+
+    edit:
+      title:              Edicion de Definicion de Valores
+      display:
+        Definción de Valores:   [codvalins, desvalins, obsvalins]  
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

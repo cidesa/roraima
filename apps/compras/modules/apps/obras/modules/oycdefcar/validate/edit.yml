@@ -1,0 +1,31 @@
+methods:
+  post:
+   - "octipcar{codtipcar}"
+   - "octipcar{destipcar}"
+
+names:
+  octipcar{codtipcar}:
+    required:  Yes
+    required_msg: El Codigo  no puedo estar en Blanco
+    validators: Validator_codtipcar
+
+  octipcar{destipcar}:
+    required:  Yes
+    required_msg: La Descripción no puedo estar en Blanco
+    validators: Validator_destipcar
+
+
+Validator_codtipcar:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Octipcar
+        column:   codtipcar
+        unique_error:   El Código del Cargo ya existe. Por Favor, Intente con otro.
+
+Validator_destipcar:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: Las Descripciones del Cargo no puede tener menos de 5 caracteres
+        max:       100
+        max_error: Las Descripciones del Cargo no puede tener mas de 100 caracteres

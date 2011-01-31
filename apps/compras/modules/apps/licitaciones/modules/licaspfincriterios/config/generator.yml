@@ -1,0 +1,29 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Liaspfincrieva
+    theme:            cidesaGenerator
+    fields:
+      codcri:      { name: Código, params: size=10 maxlength=4 onBlur="this.value=this.value.pad(4, '0',0);"  }
+      descri:      { name: Descripción, params: size=80 maxlength=100 }
+      puntaje:     { name: Puntaje }
+    list:
+      title:          Aspecto Financiero. Criterios de Evaluación
+      display:        [=codcri, descri]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [codcri, descri]
+      fields:
+        descri:
+          params: size=18
+      max_per_page:   5
+      sort:  codcri
+    edit:
+      title:          Aspecto Financiero. Criterios de Evaluación
+      display:        [codcri, descri, puntaje]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,29 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Iningprof
+    theme:            cidesaGenerator
+    fields:
+      intipsol_id:      { name: Tipo de Solicitud }
+      codingprof:       { name: Código }
+      desingprof:       { name: Descripción }
+      unitri:           { name: Unidades Tributarias }
+
+    list:
+      title:          Definición de Ingresos Profesionales
+      filters:        [codingprof]
+      display:        [=codingprof, intipsol_id]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codingprof
+
+    edit:
+      title:          Edición de Ingresos Profesionales
+      display:        [_intipsol_id, codingprof, desingprof, unitri]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

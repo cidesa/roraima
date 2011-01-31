@@ -1,0 +1,23 @@
+methods:
+  post:
+   - "tsdefrengas{pagrepcaj}"
+   - "tsdefrengas{ctarepcaj}"
+   - "tsdefrengas{ctacheant}"
+   - "tsdefrengas{movreicaj}"
+
+names:
+  tsdefrengas{pagrepcaj}:
+    required:  Yes
+    required_msg: El tipo de causado no puede estar en Blanco
+
+  tsdefrengas{ctarepcaj}:
+    required:  Yes
+    required_msg: La cuenta por pagar no puede estar en Blanco
+
+  tsdefrengas{ctacheant}:
+    required:  Yes
+    required_msg: La cuenta de fondos no puede estar en Blanco
+
+  tsdefrengas{movreicaj}:
+    required:  Yes
+    required_msg: El tipo de movimiento no puedo estar en Blanco

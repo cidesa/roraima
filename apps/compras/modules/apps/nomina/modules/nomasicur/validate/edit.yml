@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "rhasicur{codcur}"
+   - "rhasicur{numcla}"   
+   
+names:
+  rhasicur{codcur}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codcur
+
+  rhasicur{numcla}:
+    required:  Yes
+    required_msg: La Clase no puede estar en Blanco
+    validators: Validator_numcla
+
+Validator_codcur:
+    class: CidesaExistValidator
+    param:
+        class:    Rhdefcur
+        column:   codcur
+        unique_error:   El Código del Curso no existe  
+        
+Validator_numcla:
+    class: CidesaExistValidator
+    param:
+        class:    Rhclacur
+        column:   numcla
+        unique_error:   El numero de Clase del Curso no existe  

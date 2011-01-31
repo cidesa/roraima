@@ -1,0 +1,71 @@
+opciones:                  # Opciones generales
+  eliminar:                false
+  tabla:                   caartaoc
+  anchogrid:               1250
+  filas:                   0
+  titulo:                  Existencia por Almacenes
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Cod. Artículo
+  tipo:                    t
+  nombrecampo:             codart
+  html:                    [size="10", readonly=true ]
+#  catalogo:                [caregart, sf_admin_edit_form, {desart: 2} ]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desart
+  html:                    [size="20", readonly=true ]
+3:       # Columna 3
+  titulo:                  Categoría
+  tipo:                    t
+  nombrecampo:             codcat
+  html:                    [size="10", readonly=true ]
+4:       # Columna 4
+  titulo:                  Cant. Ajustada
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             canaju
+  esnumerico:              true
+  html:                    [size="10", ]
+  jscript:                 'onBlur ="ValidarMontoGrid(this.id),validarRango(this.id)"'
+  ajaxfila:                true
+  ajaxadicionales:         {0: caajuoc_ordcom}
+5:
+  titulo:                  Cant. Ordenada
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             canord
+  esnumerico:              true
+  html:                    [size="10", readonly=true  ]
+6:
+  titulo:                  Unidad de Medida
+  tipo:                    t
+  nombrecampo:             unimed
+  html:                    [size="10", readonly=true ]
+7:
+  titulo:                  Costo
+  tipo:                    m
+  nombrecampo:             cosart
+  esnumerico:              true
+  html:                    [size="10", readonly=true  ]
+8:
+  titulo:                  Monto Ajuste
+  tipo:                    m
+  nombrecampo:             monaju
+  esnumerico:              true
+  html:                    [size="10", readonly=true  ]
+9:
+  titulo:                  Monto Recargo
+  tipo:                    m
+  nombrecampo:             monrec
+  esnumerico:              true
+  html:                    [size="10", readonly=true  ]
+10:
+  titulo:                  Monto Total
+  tipo:                    m
+  nombrecampo:             montot
+  esnumerico:              true
+  html:                    [type="text", size="10", readonly=true  ]
+  estotal:                 [true, caajuoc_monaju]
+

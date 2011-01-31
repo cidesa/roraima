@@ -1,0 +1,15 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Dfatendocobs
+    theme:            cidesaGenerator
+
+    fields:
+      desobs:      { name : Descripción }
+      id_usuario:      { name : Usuario }
+      fecobs:      { name : fecha }
+      nomunid:     { name : Unidad }
+    list:
+      title:          Observaciones al Documentos
+      display:        [fecobs, nomuse, nomunid, desobs]
+      max_per_page:   30

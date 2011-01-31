@@ -1,0 +1,24 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Nppais
+    theme:            default
+    fields:
+      codpai: { name: Código, params: maxlength=4}
+      nompai: { name: Nombre}
+    list:
+      title:          Estados
+      filters:        [codpai, nompai]
+      display:        [=codpai, nompai]
+      max_per_page:	  6
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort: codpai
+    edit:
+      title:          Edición de Estados
+      actions:
+        _list:                 ~
+        _save:                 ~
+        _delete:               ~
+        _create:               ~

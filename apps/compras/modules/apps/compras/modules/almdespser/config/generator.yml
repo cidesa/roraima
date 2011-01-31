@@ -1,0 +1,33 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Cadphartser
+    theme:            default
+
+    fields:
+      dphart: { name: Número, params : maxlength=8 }
+      reqart: { name: Refiere a Requisición, params : maxlength=8 }
+      fecdph: { name: Fecha, params: date_format='dd/MM/yy' }
+      desdph: { name: Descripcion, params : maxlength=255 }
+      codori: { name: Unidad Origen, params : maxlength=16 }
+      nomcat: { name: Descripción}
+      desreqart: { name: Descripción}
+
+    list:
+      title:          Prestación de Servicio
+      display:        [=dphart, desdph, reqart, fecdph]
+      filters:		  [dphart, fecdph]
+      max_per_page:	  10
+      sort:    dphart
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:          Prestación de Servicio
+      display:        [dphart, desdph, reqart, fecdph, codori, nomcat, desreqart]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

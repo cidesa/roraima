@@ -1,0 +1,167 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author$ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id$
+ */
+// date: 2007/03/22 21:28:59
+?>
+<?php echo form_tag('nomdefespislr/edit', array(
+  'id'        => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form',
+  'multipart' => true,
+)) ?>
+
+<?php echo object_input_hidden_tag($npislr, 'getId') ?>
+<?php echo javascript_include_tag('ajax','dFilter','tools','observe') ?>
+
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Datos del Tipo de Nómina') ?></legend>
+<div class="form-row">
+<table>
+<tr>
+<th>
+<?php echo label_for('npislr[codnom]', __($labels['npislr{codnom}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npislr{codnom}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npislr{codnom}')): ?>
+    <?php echo form_error('npislr{codnom}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+
+  <?php echo input_auto_complete_tag('npislr[codnom]', $npislr->getCodnom(),
+    'nomdefespislr/autocomplete?ajax=1',  array('autocomplete' => 'off','maxlength' => 3,
+	'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('npislr_codnom').value=cadena",
+ 	'onBlur'=> remote_function(array(
+              'url'      => 'nomdefespislr/ajax',
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=1&cajtexmos=npislr_nomnom&cajtexcom=npislr_codnom&codigo='+this.value"
+			  ))),
+     array('use_style' => 'true')
+  )
+    ?>
+ </div>
+</th>
+<th>
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npnomina_Nomdefespasicartipnomlot/clase/Npnomina/frame/sf_admin_edit_form/obj1/npislr_codnom/obj2/npislr_nomnom/campo1/codnom/campo2/nomnom')?>
+  </th>
+<th>
+<?php $value = object_input_tag($npislr, 'getNomnom', array (
+  'disabled' => true,
+  'size'=> 60,
+  'control_name' => 'npislr[nomnom]',
+)); echo $value ? $value : '&nbsp;' ?>
+</th>
+</tr>
+</table>
+</div>
+</fieldset>
+
+<br>
+
+<fieldset>
+<legend><?php echo __('Datos del I.S.L.R.') ?></legend>
+<div class="form-row">
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Código del Concepto para el') ?></legend>
+<div class="form-row">
+<table>
+<tr>
+<th>
+<?php echo label_for('npislr[codconpor]', __($labels['npislr{codconpor}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npislr{codconpor}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npislr{codconpor}')): ?>
+    <?php echo form_error('npislr{codconpor}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+
+  <?php echo input_auto_complete_tag('npislr[codconpor]', $npislr->getCodconpor(),
+    'nomdefespislr/autocomplete?ajax=2',  array('autocomplete' => 'off','maxlength' => 3,
+	'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('npislr_codconpor').value=cadena",
+ 	'onBlur'=> remote_function(array(
+              'url'      => 'nomdefespislr/ajax',
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=2&cajtexmos=npislr_nomconpor&cajtexcom=npislr_codconpor&codigo='+this.value"
+			  ))),
+     array('use_style' => 'true')
+  )
+    ?>
+ </div>
+</th>
+<th>
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npdefcpt_nomdefespguarde/clase/Npdefcpt/frame/sf_admin_edit_form/obj1/npislr_codconpor/obj2/npislr_nomconpor/campo1/codcon/campo2/nomcon')?>
+  </th>
+<th>
+<?php $value = object_input_tag($npislr, 'getNomconpor', array (
+  'disabled' => true,
+  'size'=> 60,
+  'control_name' => 'npislr[nomconpor]',
+)); echo $value ? $value : '&nbsp;' ?>
+</th>
+</tr>
+</table>
+</div>
+</fieldset>
+
+<br>
+
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Código del Concepto para el') ?></legend>
+<div class="form-row">
+<table>
+<tr>
+<th>
+<?php echo label_for('npislr[codconimp]', __($labels['npislr{codconimp}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npislr{codconimp}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npislr{codconimp}')): ?>
+    <?php echo form_error('npislr{codconimp}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+
+  <?php echo input_auto_complete_tag('npislr[codconimp]', $npislr->getCodconimp(),
+    'nomdefespislr/autocomplete?ajax=3',  array('autocomplete' => 'off','maxlength' => 3,
+	'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('npislr_codconimp').value=cadena",
+ 	'onBlur'=> remote_function(array(
+              'url'      => 'nomdefespislr/ajax',
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=2&cajtexmos=npislr_nomconimp&cajtexcom=npislr_codconimp&codigo='+this.value"
+			  ))),
+     array('use_style' => 'true')
+  )
+    ?>
+ </div>
+</th>
+<th>
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npdefcpt_nomdefespguarde/clase/Npdefcpt/frame/sf_admin_edit_form/obj1/npislr_codconimp/obj2/npislr_nomconimp/campo1/codcon/campo2/nomcon')?>
+</th>
+<th>
+<?php $value = object_input_tag($npislr, 'getNomconimp', array (
+  'disabled' => true,
+  'size'=> 60,
+  'control_name' => 'npislr[nomconimp]',
+)); echo $value ? $value : '&nbsp;' ?>
+</th>
+</tr>
+</table>
+</div>
+</fieldset>
+</div>
+</fieldset>
+
+<?php include_partial('edit_actions', array('npislr' => $npislr)) ?>
+
+</form>
+
+<ul class="sf_admin_actions">
+      <li class="float-rigth"><?php if ($npislr->getId()): ?>
+<?php echo button_to(__('delete'), 'nomdefespislr/delete?id='.$npislr->getId(), array (
+  'post' => true,
+  'confirm' => __('Are you sure?'),
+  'class' => 'sf_admin_action_delete',
+)) ?><?php endif; ?>
+</li>
+  </ul>

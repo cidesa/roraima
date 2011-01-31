@@ -1,0 +1,15 @@
+methods:
+  post:
+   - "npdiaadicnom{codnom}"
+names: 
+  npdiaadicnom{codnom}:
+    required:  Yes
+    required_msg: El código Nomina no puede estar en Blanco
+    validators: Validator_codnom
+ 
+Validator_codnom:
+   class: sfPropelUniqueValidator
+   param:
+        class:        Npdiaadicnom
+        column:       codnom
+        unique_error: El registro ya Existe intente con otro.

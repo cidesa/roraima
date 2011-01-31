@@ -1,0 +1,38 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atdenuncias
+    theme:            cidesaGenerator
+    fields:
+      atsolici:
+        name:       Nombre
+      atunidades_id:
+        name:       Unidad
+        params:     text_method=getDesuni include_custom=Seleccione...
+      desden:       { name: Descipción, type: textarea_tag, params: cols=60 rows=2 rich=false }
+      respuesta:    { name: Respuesta, type: textarea_tag, params: cols=60 rows=2 rich=false readonly=true }
+      persona:      { name: Dirigido a }
+      telefono:     { name: Telefono/Celular }
+      status:       { name: Estado }
+      fechar:       { name: Fecha Registro, type: plain, params: readonly=true }
+      fechaa:       { name: Fecha Atención, type: plain, params: readonly=true }
+    list:
+      title:          Denuncias
+      display:        [=atsolici, unidad, status]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [atsolici, atunidades_id]
+      max_per_page:   5
+      #sort:           atsolici
+    edit:
+      title:          Edición de Denuncias
+      display:
+        Realizado por:  [atsolici, telefono]
+        Detalle Reclamo: [atunidades_id, persona, desden ]
+        Estado:          [_status, respuesta, fechar, fechaa ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

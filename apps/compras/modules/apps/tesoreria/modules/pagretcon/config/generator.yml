@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Opretcon
+    theme:            default
+    fields:
+      codcon: { name: Código, params : maxlength=3 }
+      descon: { name: Descripción, params : maxlength=100 }
+      codtip: { name: Código, params : maxlength=3 }
+      destip: { name: Descripción, params : maxlength=100 }
+      codnom: { name: Código, params : maxlength=3 }
+      desnom: { name: Descripción, params : maxlength=100 }
+    list:
+      title:          Asociación de Retenciones / Conceptos Nómina
+      filters:        [codnom, codcon, codtip]
+      display:        [=codnom, desnom, codcon, descon, codtip, destip]
+      sort:           codnom
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+    edit:
+      title:          Edición Asociación de Retenciones / Conceptos Nómina
+      display:        [codcon, descon, codtip, destip, codnom, desnom]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

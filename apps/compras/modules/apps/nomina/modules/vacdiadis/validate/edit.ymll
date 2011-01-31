@@ -1,0 +1,40 @@
+methods:
+  post:
+   - "npvacdiadis{codnom}"
+   - "npvacdiadis{rangodesde}"
+   - "npvacdiadis{rangohasta}"
+   - "npvacdiadis{diadis}"
+
+names:
+  npvacdiadis{codnom}:
+    required:  Yes
+    required_msg: El Codigo de la Nomina no puede estar en Blanco.
+    validators: ExistValidator
+
+  npvacdiadis{rangodesde}:
+    required:  Yes
+    required_msg: El Rango de años desde no puede estar en Blanco.
+    validators: CorrelValidator
+
+  npvacdiadis{rangohasta}:
+    required:  Yes
+    required_msg: El Rango de años hasta no puede estar en Blanco.
+    validators: CorrelValidator
+
+  npvacdiadis{diadis}:
+    required:  Yes
+    required_msg: Los dias de disfrute no puede estar en Blanco.
+    validators: CorrelValidator
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Npnomina
+        column:       codnom
+        unique_error: El Código de la Nómina debe Existir.
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Este campo solo puede contener valores númericos

@@ -1,0 +1,50 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   ciimping
+  ancho:                   1220
+  anchogrid:               1000
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código Presupuestario
+  tipo:                    t
+  nombrecampo:             codpre
+  esgrabable:			   true
+  html:                    []
+2:       # Columna 2
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             moning
+  esgrabable:			   true
+  html:                    []
+3:       # Columna 3
+  titulo:                  Recargos
+  tipo:                    m
+  nombrecampo:             monrec
+  esgrabable:			   true
+  html:
+4:       # Columna 4
+  titulo:                  Descuentos
+  tipo:                    m
+  nombrecampo:             mondes
+  esgrabable:			   true
+  html:
+5:       # Columna 5
+  titulo:                  Neto
+  tipo:                    m
+  nombrecampo:             montot
+  esgrabable:			   true
+  html:                    [size=10 readonly=true]
+6:       # Columna 6
+  titulo:                  Rubro
+  tipo:                    t
+  nombrecampo:             codtiprub
+  esgrabable:			   true
+7:       # Columna 7
+  titulo:                  Descripcion
+  tipo:                    t
+  nombrecampo:             destiprub
+  esgrabable:			   false
+  html:                    [size=20 readonly=true]

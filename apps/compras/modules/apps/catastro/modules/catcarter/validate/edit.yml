@@ -1,0 +1,13 @@
+methods:
+  post:
+   - "catcarter{tertip}"
+   - "catcarter{dester}"
+
+names:
+  catcarter{dester}:
+    required:  Yes
+    required_msg: La Descripcion no puede estar en Blanco
+
+  catcarter{tertip}:
+    required:  Yes
+    required_msg: El Tipo no puede estar en Blanco

@@ -1,0 +1,1 @@
+<?php echo ($dfatendocdet->getFecent() !== null && $dfatendocdet->getFecent() !== '') ? format_date($dfatendocdet->getFecent(), "f") : '' ?>

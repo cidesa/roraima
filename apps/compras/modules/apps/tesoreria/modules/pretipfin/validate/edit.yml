@@ -1,0 +1,48 @@
+methods:
+  post:
+   - "fortipfin{codfin}"
+   - "fortipfin{nomext}"
+   - "fortipfin{nomabr}"
+
+names:
+  fortipfin{codfin}:
+    required:  Yes
+    required_msg: El Código de Financiamiento no puedo estar en Blanco
+    validators: UniqueValidator, CorrelValidator
+
+  fortipfin{nomext}:
+    required:  Yes
+    required_msg: El Nombre Extendido no puedo estar en Blanco
+    validators: ExtendidoValidator
+
+  fortipfin{nomabr}:
+    required:  Yes
+    required_msg: El Nombre Abreviado no puedo estar en Blanco
+    validators: AbreviadoValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Fortipfin
+        column:   codfin
+        unique_error:   El Código de Financiamiento ya existe. Por Favor, Cambiélo por otro.
+
+ExtendidoValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: El Nombre Extendido no puede tener menos de 5 caracteres
+        max:       100
+        max_error: El Nombre Extendido no puede tener más de 100 caracteres
+
+AbreviadoValidator:
+    class: sfStringValidator
+    param:
+        max:       10
+        max_error: El Nombre Abreviado no puede tener más de 10 caracteres
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: El Código de Financiamiento solo puede contener valores númericos

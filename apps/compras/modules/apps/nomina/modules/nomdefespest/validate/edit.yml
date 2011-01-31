@@ -1,0 +1,35 @@
+methods:
+  post:
+   - "npestado{codpai}"
+   - "npestado{codedo}"
+   - "npestado{nomedo}"
+
+names:
+  npestado{codpai}:
+    required:  Yes
+    required_msg: El código del Estado no puede estar en Blanco
+    validators: CodpaiValidator
+
+  npestado{codedo}:
+    required:  Yes
+    required_msg: El código del Municipio no puede estar en Blanco
+
+  npestado{nomedo}:
+    required:  Yes
+    required_msg: El nombre del Municipio no puede estar en Blanco
+    validators: Validator_MyString
+
+CodpaiValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Nppais
+        column:   codpai
+        unique_error:   El Código del Estado no existe.
+
+Validator_MyString:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Nombre del Municipio no puede tener menos de 2 caracteres
+        max:       100
+        max_error: El Nombre del Municipio no puede pasar mas de 100 caracteres

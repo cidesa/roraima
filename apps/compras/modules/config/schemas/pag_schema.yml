@@ -1,0 +1,156 @@
+propel:
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  pagdocume:
+    #_attributes:
+      #idMethod: native
+    refdoc:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    codpro:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    codmov:
+      type: VARCHAR
+      size: 3
+      required: true
+    fecemi:
+      type: DATE
+      required: true
+    fecven:
+      type: DATE
+    oridoc:
+      type: VARCHAR
+      size: 3
+    desdoc:
+      type: VARCHAR
+      size: 100
+    mondoc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    recdoc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    dscdoc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    abodoc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    saldoc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecanu:
+      type: DATE
+    desanu:
+      type: VARCHAR
+      size: 100
+    stadoc:
+      type: VARCHAR
+      size: 1
+    numcom:
+      type: VARCHAR
+      size: 8
+    feccom:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes:
+      iipagdocume:
+        - refdoc
+        - codpro
+        - codmov
+        - fecemi
+  pagforpag:
+    #_attributes:
+      #idMethod: native
+    codfor:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    desfor:
+      type: VARCHAR
+      size: 50
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  pagtransa:
+    #_attributes:
+      #idMethod: native
+    numtra:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    fectra:
+      type: DATE
+      required: true
+    codpro:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    codmov:
+      type: VARCHAR
+      size: 3
+      required: true
+    destra:
+      type: VARCHAR
+      size: 100
+    montra:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    totdsc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    totrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    tottra:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    numche:
+      type: VARCHAR
+      size: 10
+    desanu:
+      type: VARCHAR
+      size: 100
+    fecanu:
+      type: DATE
+    rifpro:
+      type: VARCHAR
+      size: 15
+    numcom:
+      type: VARCHAR
+      size: 8
+    feccom:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes:
+      iipagtransa:
+        - numtra
+        - codpro
+        - codmov
+        - fectra
