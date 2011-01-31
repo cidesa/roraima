@@ -447,6 +447,7 @@ class viacalviatraActions extends autoviacalviatraActions
             $js.="$('divtotviadol').show();";
         }
         $this->configGrid(array('1'));
+        $dessol=eregi_replace("[\n|\r|\n\r]", ' ',$dessol);
         if($sw)
             $output = '[["javascript","'.$js.'",""],["viacalviatra_fecsol","'.$fecsol.'",""],["viacalviatra_tipvia","'.$tipvia.'",""],["viacalviatra_dessol","'.$dessol.'",""],
                        ["viacalviatra_empleado","'.$cedemp.'  -  '.$nomemp.'",""],["viacalviatra_nivel","'.$per->getCodniv().'  -  '.$desniv.'",""],
