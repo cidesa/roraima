@@ -421,6 +421,14 @@ $this->Bitacora('Guardo');
     if (!$this->getRequestParameter($id)) // Nuevo
     {
       $cacotiza = new Cacotiza();
+      $conpagfij=H::getConfApp2('conpagfij', 'compras', 'almordcom');
+      if ($conpagfij=='S')
+      {
+          $cacotiza->setConpag(H::getX_vacio('Codemp', 'Cadefart', 'Codconpag', '001'));
+          $cacotiza->setDesconpag(H::getX_vacio('Codconpag', 'Caconpag', 'Desconpag', H::getX_vacio('Codemp', 'Cadefart', 'Codconpag', '001')));
+          $cacotiza->setForent(H::getX_vacio('Codemp', 'Cadefart', 'Codforent', '001'));
+          $cacotiza->setDesforent(H::getX_vacio('Codforent', 'Caforent', 'Desforent', H::getX_vacio('Codemp', 'Cadefart', 'Codforent', '001')));
+      }
       if ($this->getRequestParameter('cacotiza[refsol]')!='')
       {;
       	$this->configGrid($this->getRequestParameter('cacotiza[refsol]'),2);
@@ -482,10 +490,10 @@ $this->Bitacora('Guardo');
 
 	  $param='Caartsol';
 
-      $sql="Select 9 as id, a.codart, b.desart, a.costo, sum(a.canreq) as canreq,  sum(a.mondes) as mondes, sum(a.canreq * a.costo ) as totdet, " .
+      $sql="Select 9 as id, a.codart, a.desart, a.costo, sum(a.canreq) as canreq,  sum(a.mondes) as mondes, sum(a.canreq * a.costo ) as totdet, " .
       		"now() as fecentreg, (select sum(monrgo) from cadisrgo c where c.reqart='".$codigo."' and c.codart=a.codart) as recargo " .
 	  		"from Caartsol a, Caregart b  " .
-	  		"where a.codart=b.codart and reqart='".$codigo."' group by a.codart,b.desart,a.costo";
+	  		"where a.codart=b.codart and reqart='".$codigo."' group by a.codart,a.desart,a.costo";
 	  $resp = Herramientas::BuscarDatos($sql,&$per);
 
     }else{
@@ -510,8 +518,8 @@ $this->Bitacora('Guardo');
     { $opciones->setFilas(50);}
     else { $opciones->setFilas(0);}
 
-    $opciones->setAnchoGrid(1200);
-    $opciones->setAncho(1200);
+    $opciones->setAnchoGrid(1500);
+    $opciones->setAncho(880);
     $opciones->setTitulo('Detalle de la Cotización');
     $opciones->setHTMLTotalFilas(' ');
 
@@ -584,7 +592,7 @@ $this->Bitacora('Guardo');
     $col6->setEsGrabable(true);
     $col6->setNombreCampo('Totdet');
     $col6->setJScript(' ');
-    $col6->setHTML('type="text" size=15 readonly=true');
+    $col6->setHTML('type="text" size="12" readonly=true');
     $col6->setEsTotal(true,'totales');
 
     $col7 = new Columna('Fecha Entrega');
@@ -601,7 +609,7 @@ $this->Bitacora('Guardo');
     $col8->setEsGrabable(true);
     $col8->setNombreCampo('recargo');
     $col8->setJScript(' ');
-    $col8->setHTML('type="text" size=15');
+    $col8->setHTML('type="text" size="12"');
     $col8->setOculta(true);
     $col8->setEsTotal(true,'cacotiza_monrec');
 

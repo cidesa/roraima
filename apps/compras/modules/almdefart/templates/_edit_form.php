@@ -615,7 +615,21 @@ if ($cadefart->getAsiparrec()=='P')  {
                </div>
           </th>
       </tr>
-
+      <tr>
+          <th>
+              <div id="divcodforent" style="display:none">
+               <?php echo label_for('cadefart[codforent]', __($labels['cadefart{codforent}']), 'class="" Style="width:200px"') ?>
+		  <?php echo Catalogo($cadefart,4,array(
+		  'getprincipal' => 'getCodforent',
+		  'getsecundario' => 'getDesforent',
+		  'campoprincipal' => 'codforent',
+		  'camposecundario' => 'desforent',
+		  'tamanoprincipal' => '4',
+		  'campobase' => 'id_ipcodforent',
+		  ), 'Caforent_Almordcom', 'Caforent', ''); ?>
+               </div>
+          </th>
+      </tr>
       </table>
     </div>
     </fieldset>
@@ -673,8 +687,11 @@ if ($cadefart->getAsiparrec()=='P')  {
       $('divdoccom').show();
 
   var conpagfij='<?php echo $cadefart->getConpagfij();?>';
-  if (conpagfij=='S')
+  if (conpagfij=='S') {
       $('divcodconpag').show();
+      $('divcodforent').show();
+  }
+      
   
 
 

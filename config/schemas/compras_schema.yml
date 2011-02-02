@@ -2326,6 +2326,9 @@ propel:
     codconpag:
       type: VARCHAR
       size: 4
+    codforent:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true

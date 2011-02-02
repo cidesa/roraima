@@ -382,7 +382,7 @@ class Orden_compra
     $tipopro=H::getX('RIFPRO','Caprovee','Tipo',trim($rifpro));
     if (Orden_compra::Verificar_proveedor(trim($refsol),trim($rifpro),&$rifpro,&$msg,&$cancotpril,&$strrifpro,&$srtrefcot))
     {
-      $sql = "Select reqart,codart,codcat,canreq,canrec,montot,costo,monrgo,canord,mondes,relart,unimed,codpar From CaArtSol Where ReqArt='".$refsol."' order By CodArt";
+      $sql = "Select reqart,codart,codcat,canreq,canrec,montot,costo,monrgo,canord,mondes,relart,unimed,codpar,desart From CaArtSol Where ReqArt='".$refsol."' order By CodArt";
       if (Herramientas::BuscarDatos($sql,&$result))
       {
         $i=0;
@@ -407,7 +407,7 @@ class Orden_compra
                     else
                       $grid['check'] = '0';
                   $grid['codart']=$result2[0]['codart'];
-                  $grid['desart'] = $result2[0]['desart'];
+                  $grid['desart'] = $result[$i]['desart'];
                   $grid['unimed'] = $result2[0]['unimed'];
                   $partidaregart = $result2[0]['codpar'];
                     //BUSCAMOS LOS TIPOS De ARTICULOS (ARTICULOS O SERVICIOS)

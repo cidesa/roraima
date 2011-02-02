@@ -296,6 +296,8 @@ class almordcomActions extends autoalmordcomActions
         {
             $caordcom->setCodconpag(H::getX_vacio('Codemp', 'Cadefart', 'Codconpag', '001'));
             $caordcom->setDesconpag(H::getX_vacio('Codconpag', 'Caconpag', 'Desconpag', H::getX_vacio('Codemp', 'Cadefart', 'Codconpag', '001')));
+            $caordcom->setCodforent(H::getX_vacio('Codemp', 'Cadefart', 'Codforent', '001'));
+            $caordcom->setDesforent(H::getX_vacio('Codforent', 'Caforent', 'Desforent', H::getX_vacio('Codemp', 'Cadefart', 'Codforent', '001')));
         }
         $this->aprobacion='N';
         $c= new Criteria();
@@ -2793,15 +2795,14 @@ class almordcomActions extends autoalmordcomActions
         if ($conpagfij=='S')
         {
             $codconpag_result=H::getX_vacio('Codemp', 'Cadefart', 'Codconpag', '001');
+            $codforent_result=H::getX_vacio('Codemp', 'Cadefart', 'Codforent', '001');
         }else {
         $codconpag_result=$result[0]['conpag'];
+            $codforent_result=$result[0]['forent'];
         }
-        $codforent_result=$result[0]['forent'];
+        
 
       }
-      if ($conpagfij=='S')
-          $codconpag_des_result=H::getX_vacio('Codconpag', 'Caconpag', 'Desconpag', H::getX_vacio('Codemp', 'Cadefart', 'Codconpag', '001'));
-      else
       $codconpag_des_result=CaconpagPeer::getDesconpag(trim($codconpag_result));
       $codforent_des_result=CaforentPeer::getDesforent(trim($codforent_result));
       $output = '[["'.$cajtexcom.'","'.$rif_encontrado.'",""],["'.$cajtexmos.'","'.$dato.'",""],["'.$codigo_provee.'","'.$dato1.'",""],["'.$mostrar_msg.'","'.$mensaje.'",""],["'.$codconpag.'","'.$codconpag_result.'",""],["'.$codforent.'","'.$codforent_result.'",""],["'.$codconpag_des.'","'.$codconpag_des_result.'",""],["'.$codforent_des.'","'.$codforent_des_result.'",""],["'.$numfilas.'","'.$numero_filas.'",""],["'.$codconpag_codigo.'","'.$codconpag_result.'",""],["'.$codforent_codigo.'","'.$codforent_result.'",""],["'.$cancotpril_caja.'","'.$cancotpril.'",""],["caordcom_tipopro","'.$dato2.'",""]]';

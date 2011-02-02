@@ -15,6 +15,7 @@ methods:
    - "cadefart{corcot2}"
    - "cadefart{tipodoc}"
    - "cadefart{codconpag}"
+   - "cadefart{codforent}"
 
 names:
 
@@ -80,6 +81,10 @@ names:
     required:  No
     validators: codconpagValidator
 
+  cadefart{codforent}:
+    required:  No
+    validators: codforentValidator
+
 
 StringValidator_forart:
     class: sfStringValidator
@@ -132,3 +137,10 @@ codconpagValidator:
         class:        Caconpag
         column:       codconpag
         unique_error: La Condición de Pago debe Existir.
+
+codforentValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Caforent
+        column:       codforent
+        unique_error: La Forma de Entrega debe Existir.
