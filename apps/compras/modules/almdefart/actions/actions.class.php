@@ -264,6 +264,10 @@ $this->Bitacora('Guardo');
     {
       $this->cadefart->setCodconpag($cadefart['codconpag']);
     }
+    if (isset($cadefart['codforent']))
+    {
+      $this->cadefart->setCodforent($cadefart['codforent']);
+    }
 
   }
 
@@ -393,6 +397,32 @@ $this->Bitacora('Guardo');
 	    else
 	    {
 	      $javascript="alert('La CondiciÃ³n de Pago no existe'); $('cadefart_codconpag').value=''; $('cadefart_codconpag').focus();";
+	      $dato="";
+	      $output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+    }
+
+     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+     return sfView::HEADER_ONLY;
+   }
+   else    if ($this->getRequestParameter('ajax')=='4')
+   {
+    $output = '[["","",""]';
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $codigo=$this->getRequestParameter('codigo');
+    if ($codigo!="")
+    {
+	    $c= new Criteria();
+	    $c->add(CaforentPeer::CODFORENT,$codigo);
+	    $result=CaforentPeer::doSelectOne($c);
+	    if ($result)
+	    {
+	      $dato=$result->getDesforent();
+	      $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+	    else
+	    {
+	      $javascript="alert('La Forma de Entrega no existe'); $('cadefart_codforent').value=''; $('cadefart_codforent').focus();";
 	      $dato="";
 	      $output = '[["javascript","'.$javascript.'",""],["'.$cajtexmos.'","'.$dato.'",""]]';
 	    }

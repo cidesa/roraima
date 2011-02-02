@@ -150,4 +150,9 @@ class Cadefart extends BaseCadefart
   	 return H::getConfApp2('conpagfij', 'compras', 'almordcom');
   }
 
+  public function getDesforent()
+  {
+  	 return Herramientas::getX('Codforent','Caforent','Desforent',self::getCodforent());
+  }
+
 }

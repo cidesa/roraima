@@ -132,6 +132,8 @@ class CadefartMapBuilder {
 
 		$tMap->addColumn('CODCONPAG', 'Codconpag', 'string', CreoleTypes::VARCHAR, false, 4);
 
+		$tMap->addColumn('CODFORENT', 'Codforent', 'string', CreoleTypes::VARCHAR, false, 4);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
