@@ -771,6 +771,7 @@ class SolicituddeEgresos
        }
        else
        {
+         $chequeardisponibilidadrecargo=true;
          self::acumularUnidad($elmonto,$grid,&$gridunidad);
          $l=0;
          while ($l<count($gridunidad) && $chequeardisponibilidadrecargo==true)
@@ -1507,6 +1508,7 @@ class SolicituddeEgresos
        }
        else
        {
+         $chequeardisponibilidadrecargo=true;
          self::acumularUnidad($elmonto,$grid,&$gridunidad);
          $l=0;
          while ($l<count($gridunidad) && $chequeardisponibilidadrecargo==true)
@@ -1818,6 +1820,7 @@ class SolicituddeEgresos
        }
        else
        {
+        $chequeardisponibilidadrecargo=true;
          self::acumularUnidad3($elmonto,$objetos,&$gridunidad);
          $l=0;
          while ($l<count($gridunidad) && $chequeardisponibilidadrecargo==true)
