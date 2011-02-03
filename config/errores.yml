@@ -1875,7 +1875,7 @@
   msj: Debe cargar Datos en el Grid Objetivos Planificados
 826:
   cod: 826
-  msj: El Monto de la Solicitud debe ser mayor a cero.
+  msj: No puede Salvar debido a que existe un Artículo con cantidad igual a cero.
 9000:
   cod: 9000
   msj: Debe cargar informacion en el grid

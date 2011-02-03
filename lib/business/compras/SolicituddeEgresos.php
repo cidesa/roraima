@@ -773,7 +773,7 @@ class SolicituddeEgresos
        {
          self::acumularUnidad($elmonto,$grid,&$gridunidad);
          $l=0;
-         while ($l<count($gridunidad))
+         while ($l<count($gridunidad) && $chequeardisponibilidadrecargo==true)
          {
           $codigopresupuestario=$gridunidad[$l][0].'-'.$data->getCodpre();
           $mitotal=$gridunidad[$l][1];
@@ -1509,7 +1509,7 @@ class SolicituddeEgresos
        {
          self::acumularUnidad($elmonto,$grid,&$gridunidad);
          $l=0;
-         while ($l<count($gridunidad))
+         while ($l<count($gridunidad) && $chequeardisponibilidadrecargo==true)
          {
           $codigopresupuestario=$gridunidad[$l][0].'-'.$data->getCodpre();
           $mitotal=$gridunidad[$l][1];
@@ -1820,7 +1820,7 @@ class SolicituddeEgresos
        {
          self::acumularUnidad3($elmonto,$objetos,&$gridunidad);
          $l=0;
-         while ($l<count($gridunidad))
+         while ($l<count($gridunidad) && $chequeardisponibilidadrecargo==true)
          {
           $codigopresupuestario=$gridunidad[$l][0].'-'.$data->getCodpre();
           $mitotal=$gridunidad[$l][1];
