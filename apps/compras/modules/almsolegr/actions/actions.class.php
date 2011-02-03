@@ -57,14 +57,7 @@ class almsolegrActions extends autoalmsolegrActions
 		}
 
                $valmonmay0= H::getConfApp2('valmonmay0', 'compras', 'almsolegr');
-               if ($valmonmay0=='S')
-               {
-                  if (H::toFloat($this->casolart->getMonreq())==0)
-                  {
-                   $this->codeerror=826;
-                   return false;
-                  }
-               }
+
 		      $this->configGridDetalle();
 		      $this->configGridRecargo($this->casolart->getReqart());
 		      $this->configGridRazon();
@@ -125,6 +118,23 @@ class almsolegrActions extends autoalmsolegrActions
 		      	$this->salvarrecar=138;
 		      	return false;
 		      }*/
+
+                       if ($valmonmay0=='S')
+                       {
+                          $x=$grid[0];
+                            $j=0;
+
+                            while ($j<count($x))
+                            {
+                              if ($x[$j]->getCodart()!='' && $x[$j]->getCanreq()==0)
+                              {
+                                $this->codeerror=826;
+                               return false;
+                              }
+                              $j++;
+                            }
+                       }
+
 		   $t= new Criteria();
 		   $result= CadefartPeer::doSelectOne($t);
 		   if ($result) {
