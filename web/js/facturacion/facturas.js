@@ -654,11 +654,15 @@
       while (fil<regart)
       {
         var montotrgo="ax_"+fil+"_12";
-        if ($(montotrgo)){
-        var num1=toFloat(montotrgo);
-          acum=acum+num1;
-          var fila=fil;
-  }
+        var check="ax_"+fil+"_1";
+        if ($(check)){
+          if ($(check).checked==true)
+          {
+            var num1=toFloat(montotrgo);
+              acum=acum+num1;
+              var fila=fil;
+          }
+         }
         fil++;
       }
 
