@@ -819,8 +819,11 @@ class almsolegrActions extends autoalmsolegrActions
    */
     public function configGridDetalle()
     {
+       $detsinord=H::getConfApp2('detsinord', 'compras', 'almsolegr');
+
        $c = new Criteria();
        $c->add(CaartsolPeer::REQART,$this->casolart->getReqart());
+       if ($detsinord!="S")
        $c->addAscendingOrderByColumn(CaartsolPeer::CODART);
        $reg = CaartsolPeer::doSelect($c);
 
@@ -1022,8 +1025,10 @@ class almsolegrActions extends autoalmsolegrActions
    */
       public function configGridDetalleConsulta()
    {
+      $detsinord=H::getConfApp2('detsinord', 'compras', 'almsolegr');
        $c = new Criteria();
        $c->add(CaartsolPeer::REQART,$this->casolart->getReqart());
+       if ($detsinord!="S")
        $c->addAscendingOrderByColumn(CaartsolPeer::CODART);
        $reg = CaartsolPeer::doSelect($c);
 
