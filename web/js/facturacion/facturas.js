@@ -648,7 +648,7 @@
     $('fafactur_totrec').value=format(mitot.toFixed(2),'.',',','.');
 
 //Ajustar decimas
-      var regart=totalregistros2('ax',3,25);
+/*      var regart=totalregistros2('ax',3,25);
       var fil=0;
       var acum=0;
       while (fil<regart)
@@ -675,7 +675,7 @@
           var cal=valor-diferencia;
 
           $(ultfilrec).value=format(cal.toFixed(2),'.',',','.');
-      }
+      }*/
 
   }
 
@@ -723,7 +723,7 @@
 /*    var codrgo="cx_0_1";
     var monuni=0;
     if ($(codrgo)){
-    if ($(codrgo).value!="")*/
+    if ($(codrgo).value!="")*/      
     if (totregrgo>0)
     {
       var monTot= montoMarcados();
@@ -764,13 +764,16 @@
                    {
                      var encontro=false;
                      var i=0;
+                     var totaldesc=0;
        	             while (i<regart)
 	                 {
 	                  var codart="ax_"+i+"_3";
 	                  var check2="ax_"+i+"_1";
 	                  var precio2="ax_"+i+"_10";
 	                  var precioe2="ax_"+i+"_11";
+                          var check2="ax_"+i+"_1";
 	                  var cant2="ax_"+i+"_"+colum;
+                         var mondesc="ax_"+i+"_18";
                      if ($(precio2)){
 	                  if ($(precio2).value!="")
 	                  {var nprecio2= toFloat(precio2);}
@@ -792,6 +795,10 @@
                	          }
                	        }
                	      }
+                          if ($(check2).checked==true)
+                         {
+                            totaldesc= totaldesc + toFloat(mondesc);
+                         }
                	      }
 	                  i++;
 	                 }
@@ -799,13 +806,14 @@
 	                 {
 	                   if ($('fafactur_mondesc').value!="")
 	                   {
-                        var totaldesc=0;
+                        //var totaldesc=0;
   	                   /* var  coddesc="bx_0_1";
 	                    if ($(coddesc).value!="")
 	                    {*/
 	                      var regdesc=totalregistros2('bx',1,10);
 	                      if (regdesc>0){
-						  var z=0;
+
+						/*  var z=0;
 						  while (z<regdesc)
 						  {
 						    var mondesc="bx_"+z+"_3";
@@ -815,7 +823,7 @@
 						    totaldesc= totaldesc + ndesc;
 						    }
 						   z++;
-						  }
+						  }*/
 						}
 						if ($('fafactur_esretencion').value=="N")
 						{
