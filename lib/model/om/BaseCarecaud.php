@@ -4,82 +4,86 @@
 abstract class BaseCarecaud extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $codrec;
 
 
-	
+
 	protected $desrec;
 
 
-	
+
 	protected $limrec;
 
 
-	
+
 	protected $fecemi;
 
 
-	
+
 	protected $fecven;
 
 
-	
+
 	protected $canutr;
 
 
-	
+
 	protected $codtiprec;
 
 
-	
+
 	protected $observ;
 
 
-	
+
+	protected $puntua;
+
+
+
 	protected $id;
 
-	
+
 	protected $aCatiprec;
 
-	
+
 	protected $collCarecpros;
 
-	
+
 	protected $lastCarecproCriteria = null;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getCodrec()
   {
 
     return trim($this->codrec);
 
   }
-  
+
   public function getDesrec()
   {
 
     return trim($this->desrec);
 
   }
-  
+
   public function getLimrec()
   {
 
     return trim($this->limrec);
 
   }
-  
+
   public function getFecemi($format = 'Y-m-d')
   {
 
@@ -101,7 +105,7 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
     }
   }
 
-  
+
   public function getFecven($format = 'Y-m-d')
   {
 
@@ -123,7 +127,7 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
     }
   }
 
-  
+
   public function getCanutr($val=false)
   {
 
@@ -131,28 +135,36 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
     else return $this->canutr;
 
   }
-  
+
   public function getCodtiprec()
   {
 
     return trim($this->codtiprec);
 
   }
-  
+
   public function getObserv()
   {
 
     return trim($this->observ);
 
   }
-  
+
+  public function getPuntua($val=false)
+  {
+
+    if($val) return number_format($this->puntua,2,',','.');
+    else return $this->puntua;
+
+  }
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setCodrec($v)
 	{
 
@@ -160,9 +172,9 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
         $this->codrec = $v;
         $this->modifiedColumns[] = CarecaudPeer::CODREC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDesrec($v)
 	{
 
@@ -170,9 +182,9 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
         $this->desrec = $v;
         $this->modifiedColumns[] = CarecaudPeer::DESREC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setLimrec($v)
 	{
 
@@ -180,9 +192,9 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
         $this->limrec = $v;
         $this->modifiedColumns[] = CarecaudPeer::LIMREC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFecemi($v)
 	{
 
@@ -203,8 +215,8 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = CarecaudPeer::FECEMI;
     }
 
-	} 
-	
+	}
+
 	public function setFecven($v)
 	{
 
@@ -225,8 +237,8 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = CarecaudPeer::FECVEN;
     }
 
-	} 
-	
+	}
+
 	public function setCanutr($v)
 	{
 
@@ -234,9 +246,9 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
         $this->canutr = Herramientas::toFloat($v);
         $this->modifiedColumns[] = CarecaudPeer::CANUTR;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodtiprec($v)
 	{
 
@@ -244,13 +256,13 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
         $this->codtiprec = $v;
         $this->modifiedColumns[] = CarecaudPeer::CODTIPREC;
       }
-  
+
 		if ($this->aCatiprec !== null && $this->aCatiprec->getCodtiprec() !== $v) {
 			$this->aCatiprec = null;
 		}
 
-	} 
-	
+	}
+
 	public function setObserv($v)
 	{
 
@@ -258,9 +270,19 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
         $this->observ = $v;
         $this->modifiedColumns[] = CarecaudPeer::OBSERV;
       }
-  
-	} 
-	
+
+	}
+
+	public function setPuntua($v)
+	{
+
+    if ($this->puntua !== $v) {
+        $this->puntua = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CarecaudPeer::PUNTUA;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -268,9 +290,9 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = CarecaudPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -291,7 +313,9 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 
       $this->observ = $rs->getString($startcol + 7);
 
-      $this->id = $rs->getInt($startcol + 8);
+      $this->puntua = $rs->getFloat($startcol + 8);
+
+      $this->id = $rs->getInt($startcol + 9);
 
       $this->resetModified();
 
@@ -299,7 +323,7 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 9; 
+            return $startcol + 10;
     } catch (Exception $e) {
       throw new PropelException("Error populating Carecaud object", $e);
     }
@@ -310,8 +334,8 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -325,7 +349,7 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -347,7 +371,7 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -369,14 +393,14 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-												
+
 			if ($this->aCatiprec !== null) {
 				if ($this->aCatiprec->isModified()) {
 					$affectedRows += $this->aCatiprec->save($con);
@@ -388,8 +412,8 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CarecaudPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += CarecaudPeer::doUpdate($this, $con);
@@ -407,17 +431,17 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -430,7 +454,7 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -440,7 +464,7 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-												
+
 			if ($this->aCatiprec !== null) {
 				if (!$this->aCatiprec->validate($columns)) {
 					$failureMap = array_merge($failureMap, $this->aCatiprec->getValidationFailures());
@@ -468,14 +492,14 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = CarecaudPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -504,6 +528,9 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 				return $this->getObserv();
 				break;
 			case 8:
+				return $this->getPuntua();
+				break;
+			case 9:
 				return $this->getId();
 				break;
 			default:
@@ -511,7 +538,7 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = CarecaudPeer::getFieldNames($keyType);
@@ -524,19 +551,20 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 			$keys[5] => $this->getCanutr(),
 			$keys[6] => $this->getCodtiprec(),
 			$keys[7] => $this->getObserv(),
-			$keys[8] => $this->getId(),
+			$keys[8] => $this->getPuntua(),
+			$keys[9] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = CarecaudPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -565,11 +593,14 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 				$this->setObserv($value);
 				break;
 			case 8:
+				$this->setPuntua($value);
+				break;
+			case 9:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = CarecaudPeer::getFieldNames($keyType);
@@ -582,10 +613,11 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[5], $arr)) $this->setCanutr($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setCodtiprec($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setObserv($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
+		if (array_key_exists($keys[8], $arr)) $this->setPuntua($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(CarecaudPeer::DATABASE_NAME);
@@ -598,12 +630,13 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CarecaudPeer::CANUTR)) $criteria->add(CarecaudPeer::CANUTR, $this->canutr);
 		if ($this->isColumnModified(CarecaudPeer::CODTIPREC)) $criteria->add(CarecaudPeer::CODTIPREC, $this->codtiprec);
 		if ($this->isColumnModified(CarecaudPeer::OBSERV)) $criteria->add(CarecaudPeer::OBSERV, $this->observ);
+		if ($this->isColumnModified(CarecaudPeer::PUNTUA)) $criteria->add(CarecaudPeer::PUNTUA, $this->puntua);
 		if ($this->isColumnModified(CarecaudPeer::ID)) $criteria->add(CarecaudPeer::ID, $this->id);
 
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(CarecaudPeer::DATABASE_NAME);
@@ -613,19 +646,19 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -645,6 +678,8 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 
 		$copyObj->setObserv($this->observ);
 
+		$copyObj->setPuntua($this->puntua);
+
 
 		if ($deepCopy) {
 									$copyObj->setNew(false);
@@ -653,14 +688,14 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 				$copyObj->addCarecpro($relObj->copy($deepCopy));
 			}
 
-		} 
+		}
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -669,7 +704,7 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -678,7 +713,7 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-	
+
 	public function setCatiprec($v)
 	{
 
@@ -694,20 +729,23 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 	}
 
 
-	
+
 	public function getCatiprec($con = null)
 	{
 		if ($this->aCatiprec === null && (($this->codtiprec !== "" && $this->codtiprec !== null))) {
 						include_once 'lib/model/om/BaseCatiprecPeer.php';
 
-			$this->aCatiprec = CatiprecPeer::retrieveByPK($this->codtiprec, $con);
+      $c = new Criteria();
+      $c->add(CatiprecPeer::CODTIPREC,$this->codtiprec);
 
-			
+			$this->aCatiprec = CatiprecPeer::doSelectOne($c, $con);
+
+
 		}
 		return $this->aCatiprec;
 	}
 
-	
+
 	public function initCarecpros()
 	{
 		if ($this->collCarecpros === null) {
@@ -715,7 +753,7 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function getCarecpros($criteria = null, $con = null)
 	{
 				include_once 'lib/model/om/BaseCarecproPeer.php';
@@ -739,7 +777,7 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 			}
 		} else {
 						if (!$this->isNew()) {
-												
+
 
 				$criteria->add(CarecproPeer::CODREC, $this->getCodrec());
 
@@ -753,7 +791,7 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 		return $this->collCarecpros;
 	}
 
-	
+
 	public function countCarecpros($criteria = null, $distinct = false, $con = null)
 	{
 				include_once 'lib/model/om/BaseCarecproPeer.php';
@@ -770,7 +808,7 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 		return CarecproPeer::doCount($criteria, $distinct, $con);
 	}
 
-	
+
 	public function addCarecpro(Carecpro $l)
 	{
 		$this->collCarecpros[] = $l;
@@ -778,7 +816,7 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 	}
 
 
-	
+
 	public function getCarecprosJoinCaprovee($criteria = null, $con = null)
 	{
 				include_once 'lib/model/om/BaseCarecproPeer.php';
@@ -800,7 +838,7 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 				$this->collCarecpros = CarecproPeer::doSelectJoinCaprovee($criteria, $con);
 			}
 		} else {
-									
+
 			$criteria->add(CarecproPeer::CODREC, $this->getCodrec());
 
 			if (!isset($this->lastCarecproCriteria) || !$this->lastCarecproCriteria->equals($criteria)) {
@@ -812,4 +850,4 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 		return $this->collCarecpros;
 	}
 
-} 
+}

@@ -1,0 +1,19 @@
+<?php
+/**
+ * Funciones de la vista.
+ *
+ * @package    Roraima
+ * @subpackage vistas
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _list_messages.php 32813 2009-09-08 16:19:47Z lhernandez $
+ */
+// date: 2007/09/07 09:56:29
+?>
+<?php if ($sf_request->getError('delete')): ?>
+<div class="form-errors">
+  <h2><?php echo __('No puede eliminar el registro seleccionado')?></h2>
+  <ul>
+    &nbsp;&nbsp;&nbsp; <?php echo $sf_request->getError('delete') ?>
+  </ul>
+</div>
+<?php endif; ?>

@@ -8,7 +8,7 @@ generator:
       destiporg:    { name: Descripción}
 
     list:
-      title:          Tipos de Organismos
+      title:          Tipos de Organismos Participantes
       filters:        [codtiporg]
       display:        [=codtiporg, destiporg]
       sort:  codtiporg
@@ -17,7 +17,7 @@ generator:
         _delete:      ~
       max_per_page:   5
     edit:
-      title:          Tipos de Organismos
+      title:          Tipos de Organismos Participantes
       display:        [codtiporg, destiporg]
       actions:
         _list:        ~

@@ -3,76 +3,79 @@
 
 abstract class BaseCarecaudPeer {
 
-	
+
 	const DATABASE_NAME = 'propel';
 
-	
+
 	const TABLE_NAME = 'carecaud';
 
-	
+
 	const CLASS_DEFAULT = 'lib.model.Carecaud';
 
-	
-	const NUM_COLUMNS = 9;
 
-	
+	const NUM_COLUMNS = 10;
+
+
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
-	
+
 	const CODREC = 'carecaud.CODREC';
 
-	
+
 	const DESREC = 'carecaud.DESREC';
 
-	
+
 	const LIMREC = 'carecaud.LIMREC';
 
-	
+
 	const FECEMI = 'carecaud.FECEMI';
 
-	
+
 	const FECVEN = 'carecaud.FECVEN';
 
-	
+
 	const CANUTR = 'carecaud.CANUTR';
 
-	
+
 	const CODTIPREC = 'carecaud.CODTIPREC';
 
-	
+
 	const OBSERV = 'carecaud.OBSERV';
 
-	
+
+	const PUNTUA = 'carecaud.PUNTUA';
+
+
 	const ID = 'carecaud.ID';
 
-	
+
 	private static $phpNameMap = null;
 
 
-	
+
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codrec', 'Desrec', 'Limrec', 'Fecemi', 'Fecven', 'Canutr', 'Codtiprec', 'Observ', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CarecaudPeer::CODREC, CarecaudPeer::DESREC, CarecaudPeer::LIMREC, CarecaudPeer::FECEMI, CarecaudPeer::FECVEN, CarecaudPeer::CANUTR, CarecaudPeer::CODTIPREC, CarecaudPeer::OBSERV, CarecaudPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codrec', 'desrec', 'limrec', 'fecemi', 'fecven', 'canutr', 'codtiprec', 'observ', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Codrec', 'Desrec', 'Limrec', 'Fecemi', 'Fecven', 'Canutr', 'Codtiprec', 'Observ', 'Puntua', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CarecaudPeer::CODREC, CarecaudPeer::DESREC, CarecaudPeer::LIMREC, CarecaudPeer::FECEMI, CarecaudPeer::FECVEN, CarecaudPeer::CANUTR, CarecaudPeer::CODTIPREC, CarecaudPeer::OBSERV, CarecaudPeer::PUNTUA, CarecaudPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codrec', 'desrec', 'limrec', 'fecemi', 'fecven', 'canutr', 'codtiprec', 'observ', 'puntua', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
-	
+
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codrec' => 0, 'Desrec' => 1, 'Limrec' => 2, 'Fecemi' => 3, 'Fecven' => 4, 'Canutr' => 5, 'Codtiprec' => 6, 'Observ' => 7, 'Id' => 8, ),
-		BasePeer::TYPE_COLNAME => array (CarecaudPeer::CODREC => 0, CarecaudPeer::DESREC => 1, CarecaudPeer::LIMREC => 2, CarecaudPeer::FECEMI => 3, CarecaudPeer::FECVEN => 4, CarecaudPeer::CANUTR => 5, CarecaudPeer::CODTIPREC => 6, CarecaudPeer::OBSERV => 7, CarecaudPeer::ID => 8, ),
-		BasePeer::TYPE_FIELDNAME => array ('codrec' => 0, 'desrec' => 1, 'limrec' => 2, 'fecemi' => 3, 'fecven' => 4, 'canutr' => 5, 'codtiprec' => 6, 'observ' => 7, 'id' => 8, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Codrec' => 0, 'Desrec' => 1, 'Limrec' => 2, 'Fecemi' => 3, 'Fecven' => 4, 'Canutr' => 5, 'Codtiprec' => 6, 'Observ' => 7, 'Puntua' => 8, 'Id' => 9, ),
+		BasePeer::TYPE_COLNAME => array (CarecaudPeer::CODREC => 0, CarecaudPeer::DESREC => 1, CarecaudPeer::LIMREC => 2, CarecaudPeer::FECEMI => 3, CarecaudPeer::FECVEN => 4, CarecaudPeer::CANUTR => 5, CarecaudPeer::CODTIPREC => 6, CarecaudPeer::OBSERV => 7, CarecaudPeer::PUNTUA => 8, CarecaudPeer::ID => 9, ),
+		BasePeer::TYPE_FIELDNAME => array ('codrec' => 0, 'desrec' => 1, 'limrec' => 2, 'fecemi' => 3, 'fecven' => 4, 'canutr' => 5, 'codtiprec' => 6, 'observ' => 7, 'puntua' => 8, 'id' => 9, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
-	
+
 	public static function getMapBuilder()
 	{
 		include_once 'lib/model/map/CarecaudMapBuilder.php';
 		return BasePeer::getMapBuilder('lib.model.map.CarecaudMapBuilder');
 	}
-	
+
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
@@ -86,7 +89,7 @@ abstract class BaseCarecaudPeer {
 		}
 		return self::$phpNameMap;
 	}
-	
+
 	static public function translateFieldName($name, $fromType, $toType)
 	{
 		$toNames = self::getFieldNames($toType);
@@ -97,7 +100,7 @@ abstract class BaseCarecaudPeer {
 		return $toNames[$key];
 	}
 
-	
+
 
 	static public function getFieldNames($type = BasePeer::TYPE_PHPNAME)
 	{
@@ -107,13 +110,13 @@ abstract class BaseCarecaudPeer {
 		return self::$fieldNames[$type];
 	}
 
-	
+
 	public static function alias($alias, $column)
 	{
 		return str_replace(CarecaudPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
-	
+
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
@@ -133,6 +136,8 @@ abstract class BaseCarecaudPeer {
 
 		$criteria->addSelectColumn(CarecaudPeer::OBSERV);
 
+		$criteria->addSelectColumn(CarecaudPeer::PUNTUA);
+
 		$criteria->addSelectColumn(CarecaudPeer::ID);
 
 	}
@@ -140,7 +145,7 @@ abstract class BaseCarecaudPeer {
 	const COUNT = 'COUNT(carecaud.ID)';
 	const COUNT_DISTINCT = 'COUNT(DISTINCT carecaud.ID)';
 
-	
+
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -164,7 +169,7 @@ abstract class BaseCarecaudPeer {
 						return 0;
 		}
 	}
-	
+
 	public static function doSelectOne(Criteria $criteria, $con = null)
 	{
 		$critcopy = clone $criteria;
@@ -175,12 +180,12 @@ abstract class BaseCarecaudPeer {
 		}
 		return null;
 	}
-	
+
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
 		return CarecaudPeer::populateObjects(CarecaudPeer::doSelectRS($criteria, $con));
 	}
-	
+
 	public static function doSelectRS(Criteria $criteria, $con = null)
 	{
 		if ($con === null) {
@@ -196,24 +201,24 @@ abstract class BaseCarecaudPeer {
 
 						return BasePeer::doSelect($criteria, $con);
 	}
-	
+
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
-	
+
 				$cls = CarecaudPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
-		
+
 			$obj = new $cls();
 			$obj->hydrate($rs);
 			$results[] = $obj;
-			
+
 		}
 		return $results;
 	}
 
-	
+
 	public static function doCountJoinCatiprec(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -241,7 +246,7 @@ abstract class BaseCarecaudPeer {
 	}
 
 
-	
+
 	public static function doSelectJoinCatiprec(Criteria $c, $con = null)
 	{
 		$c = clone $c;
@@ -288,7 +293,7 @@ abstract class BaseCarecaudPeer {
 	}
 
 
-	
+
 	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
 	{
 		$criteria = clone $criteria;
@@ -305,7 +310,7 @@ abstract class BaseCarecaudPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(CarecaudPeer::CODTIPREC, CatiprecPeer::CODTIPREC);
+			$criteria->addJoin(CarecaudPeer::CODTIPREC, CatiprecPeer::CODTIPREC);
 
 		$rs = CarecaudPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
@@ -316,7 +321,7 @@ abstract class BaseCarecaudPeer {
 	}
 
 
-	
+
 	public static function doSelectJoinAll(Criteria $c, $con = null)
 	{
 		$c = clone $c;
@@ -328,10 +333,10 @@ abstract class BaseCarecaudPeer {
 		CarecaudPeer::addSelectColumns($c);
 		$startcol2 = (CarecaudPeer::NUM_COLUMNS - CarecaudPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		CatiprecPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + CatiprecPeer::NUM_COLUMNS;
+			CatiprecPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + CatiprecPeer::NUM_COLUMNS;
 
-		$c->addJoin(CarecaudPeer::CODTIPREC, CatiprecPeer::CODTIPREC);
+			$c->addJoin(CarecaudPeer::CODTIPREC, CatiprecPeer::CODTIPREC);
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -346,46 +351,46 @@ abstract class BaseCarecaudPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = CatiprecPeer::getOMClass();
+
+				$omClass = CatiprecPeer::getOMClass();
 
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getCatiprec(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addCarecaud($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getCatiprec(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addCarecaud($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initCarecauds();
-				$obj2->addCarecaud($obj1);
-			}
+				if ($newObject) {
+					$obj2->initCarecauds();
+					$obj2->addCarecaud($obj1);
+				}
 
 			$results[] = $obj1;
 		}
 		return $results;
 	}
 
-	
+
 	public static function getTableMap()
 	{
 		return Propel::getDatabaseMap(self::DATABASE_NAME)->getTable(self::TABLE_NAME);
 	}
 
-	
+
 	public static function getOMClass()
 	{
 		return CarecaudPeer::CLASS_DEFAULT;
 	}
 
-	
+
 	public static function doInsert($values, $con = null)
 	{
 		if ($con === null) {
@@ -396,7 +401,7 @@ abstract class BaseCarecaudPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(CarecaudPeer::ID); 
+		$criteria->remove(CarecaudPeer::ID);
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -412,7 +417,7 @@ abstract class BaseCarecaudPeer {
 		return $pk;
 	}
 
-	
+
 	public static function doUpdate($values, $con = null)
 	{
 		if ($con === null) {
@@ -422,7 +427,7 @@ abstract class BaseCarecaudPeer {
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
+			$criteria = clone $values;
 			$comparison = $criteria->getComparison(CarecaudPeer::ID);
 			$selectCriteria->add(CarecaudPeer::ID, $criteria->remove(CarecaudPeer::ID), $comparison);
 
@@ -433,7 +438,7 @@ abstract class BaseCarecaudPeer {
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
 
-	
+
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
@@ -450,7 +455,7 @@ abstract class BaseCarecaudPeer {
 		}
 	}
 
-	
+
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
@@ -468,10 +473,10 @@ abstract class BaseCarecaudPeer {
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
-		$affectedRows = 0; 
+		$affectedRows = 0;
 		try {
 									$con->begin();
-			
+
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
 			return $affectedRows;
@@ -481,7 +486,7 @@ abstract class BaseCarecaudPeer {
 		}
 	}
 
-	
+
 	public static function doValidate(Carecaud $obj, $cols = null)
 	{
 		$columns = array();
@@ -516,7 +521,7 @@ abstract class BaseCarecaudPeer {
     return $res;
 	}
 
-	
+
 	public static function retrieveByPK($pk, $con = null)
 	{
 		if ($con === null) {
@@ -533,7 +538,7 @@ abstract class BaseCarecaudPeer {
 		return !empty($v) > 0 ? $v[0] : null;
 	}
 
-	
+
 	public static function retrieveByPKs($pks, $con = null)
 	{
 		if ($con === null) {
@@ -551,7 +556,7 @@ abstract class BaseCarecaudPeer {
 		return $objs;
 	}
 
-} 
+}
 if (Propel::isInit()) {
 			try {
 		BaseCarecaudPeer::getMapBuilder();

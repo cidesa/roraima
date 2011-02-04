@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Edición de la Unidad Solicitante',
+<h1><?php echo __('Edición de la Unidad Ejecutora',
 array()) ?></h1>
 
 

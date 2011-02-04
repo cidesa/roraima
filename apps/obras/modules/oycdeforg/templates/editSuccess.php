@@ -4,8 +4,8 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: editSuccess.php 42356 2011-02-04 19:13:05Z cramirez $
  */
 // date: 2008/06/28 00:13:55
 ?>
@@ -15,7 +15,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Edición de Organismos',
+<h1><?php echo __('Edición de Organismos Participantes',
 array()) ?></h1>
 
 <div id="sf_admin_header">

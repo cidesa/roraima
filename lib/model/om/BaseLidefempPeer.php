@@ -3,73 +3,82 @@
 
 abstract class BaseLidefempPeer {
 
-	
+
 	const DATABASE_NAME = 'propel';
 
-	
+
 	const TABLE_NAME = 'lidefemp';
 
-	
+
 	const CLASS_DEFAULT = 'lib.model.Lidefemp';
 
-	
-	const NUM_COLUMNS = 8;
 
-	
+	const NUM_COLUMNS = 11;
+
+
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
-	
+
 	const CODEMP = 'lidefemp.CODEMP';
 
-	
+
 	const NOMEMP = 'lidefemp.NOMEMP';
 
-	
+
 	const DIREMP = 'lidefemp.DIREMP';
 
-	
+
 	const TELEMP = 'lidefemp.TELEMP';
 
-	
+
 	const FAXEMP = 'lidefemp.FAXEMP';
 
-	
+
 	const EMAEMP = 'lidefemp.EMAEMP';
 
-	
+
 	const UNITRI = 'lidefemp.UNITRI';
 
-	
+
+	const PTOCTA = 'lidefemp.PTOCTA';
+
+
+	const PREBAS = 'lidefemp.PREBAS';
+
+
+	const EXPDIE = 'lidefemp.EXPDIE';
+
+
 	const ID = 'lidefemp.ID';
 
-	
+
 	private static $phpNameMap = null;
 
 
-	
+
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nomemp', 'Diremp', 'Telemp', 'Faxemp', 'Emaemp', 'Unitri', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (LidefempPeer::CODEMP, LidefempPeer::NOMEMP, LidefempPeer::DIREMP, LidefempPeer::TELEMP, LidefempPeer::FAXEMP, LidefempPeer::EMAEMP, LidefempPeer::UNITRI, LidefempPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nomemp', 'diremp', 'telemp', 'faxemp', 'emaemp', 'unitri', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nomemp', 'Diremp', 'Telemp', 'Faxemp', 'Emaemp', 'Unitri', 'Ptocta', 'Prebas', 'Expdie', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (LidefempPeer::CODEMP, LidefempPeer::NOMEMP, LidefempPeer::DIREMP, LidefempPeer::TELEMP, LidefempPeer::FAXEMP, LidefempPeer::EMAEMP, LidefempPeer::UNITRI, LidefempPeer::PTOCTA, LidefempPeer::PREBAS, LidefempPeer::EXPDIE, LidefempPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nomemp', 'diremp', 'telemp', 'faxemp', 'emaemp', 'unitri', 'ptocta', 'prebas', 'expdie', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
-	
+
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nomemp' => 1, 'Diremp' => 2, 'Telemp' => 3, 'Faxemp' => 4, 'Emaemp' => 5, 'Unitri' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (LidefempPeer::CODEMP => 0, LidefempPeer::NOMEMP => 1, LidefempPeer::DIREMP => 2, LidefempPeer::TELEMP => 3, LidefempPeer::FAXEMP => 4, LidefempPeer::EMAEMP => 5, LidefempPeer::UNITRI => 6, LidefempPeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nomemp' => 1, 'diremp' => 2, 'telemp' => 3, 'faxemp' => 4, 'emaemp' => 5, 'unitri' => 6, 'id' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nomemp' => 1, 'Diremp' => 2, 'Telemp' => 3, 'Faxemp' => 4, 'Emaemp' => 5, 'Unitri' => 6, 'Ptocta' => 7, 'Prebas' => 8, 'Expdie' => 9, 'Id' => 10, ),
+		BasePeer::TYPE_COLNAME => array (LidefempPeer::CODEMP => 0, LidefempPeer::NOMEMP => 1, LidefempPeer::DIREMP => 2, LidefempPeer::TELEMP => 3, LidefempPeer::FAXEMP => 4, LidefempPeer::EMAEMP => 5, LidefempPeer::UNITRI => 6, LidefempPeer::PTOCTA => 7, LidefempPeer::PREBAS => 8, LidefempPeer::EXPDIE => 9, LidefempPeer::ID => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nomemp' => 1, 'diremp' => 2, 'telemp' => 3, 'faxemp' => 4, 'emaemp' => 5, 'unitri' => 6, 'ptocta' => 7, 'prebas' => 8, 'expdie' => 9, 'id' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
-	
+
 	public static function getMapBuilder()
 	{
 		include_once 'lib/model/map/LidefempMapBuilder.php';
 		return BasePeer::getMapBuilder('lib.model.map.LidefempMapBuilder');
 	}
-	
+
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
@@ -83,7 +92,7 @@ abstract class BaseLidefempPeer {
 		}
 		return self::$phpNameMap;
 	}
-	
+
 	static public function translateFieldName($name, $fromType, $toType)
 	{
 		$toNames = self::getFieldNames($toType);
@@ -94,7 +103,7 @@ abstract class BaseLidefempPeer {
 		return $toNames[$key];
 	}
 
-	
+
 
 	static public function getFieldNames($type = BasePeer::TYPE_PHPNAME)
 	{
@@ -104,13 +113,13 @@ abstract class BaseLidefempPeer {
 		return self::$fieldNames[$type];
 	}
 
-	
+
 	public static function alias($alias, $column)
 	{
 		return str_replace(LidefempPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
-	
+
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
@@ -128,6 +137,12 @@ abstract class BaseLidefempPeer {
 
 		$criteria->addSelectColumn(LidefempPeer::UNITRI);
 
+		$criteria->addSelectColumn(LidefempPeer::PTOCTA);
+
+		$criteria->addSelectColumn(LidefempPeer::PREBAS);
+
+		$criteria->addSelectColumn(LidefempPeer::EXPDIE);
+
 		$criteria->addSelectColumn(LidefempPeer::ID);
 
 	}
@@ -135,7 +150,7 @@ abstract class BaseLidefempPeer {
 	const COUNT = 'COUNT(lidefemp.ID)';
 	const COUNT_DISTINCT = 'COUNT(DISTINCT lidefemp.ID)';
 
-	
+
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -159,7 +174,7 @@ abstract class BaseLidefempPeer {
 						return 0;
 		}
 	}
-	
+
 	public static function doSelectOne(Criteria $criteria, $con = null)
 	{
 		$critcopy = clone $criteria;
@@ -170,12 +185,12 @@ abstract class BaseLidefempPeer {
 		}
 		return null;
 	}
-	
+
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
 		return LidefempPeer::populateObjects(LidefempPeer::doSelectRS($criteria, $con));
 	}
-	
+
 	public static function doSelectRS(Criteria $criteria, $con = null)
 	{
 		if ($con === null) {
@@ -191,35 +206,35 @@ abstract class BaseLidefempPeer {
 
 						return BasePeer::doSelect($criteria, $con);
 	}
-	
+
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
-	
+
 				$cls = LidefempPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
-		
+
 			$obj = new $cls();
 			$obj->hydrate($rs);
 			$results[] = $obj;
-			
+
 		}
 		return $results;
 	}
-	
+
 	public static function getTableMap()
 	{
 		return Propel::getDatabaseMap(self::DATABASE_NAME)->getTable(self::TABLE_NAME);
 	}
 
-	
+
 	public static function getOMClass()
 	{
 		return LidefempPeer::CLASS_DEFAULT;
 	}
 
-	
+
 	public static function doInsert($values, $con = null)
 	{
 		if ($con === null) {
@@ -230,7 +245,7 @@ abstract class BaseLidefempPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(LidefempPeer::ID); 
+		$criteria->remove(LidefempPeer::ID);
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -246,7 +261,7 @@ abstract class BaseLidefempPeer {
 		return $pk;
 	}
 
-	
+
 	public static function doUpdate($values, $con = null)
 	{
 		if ($con === null) {
@@ -256,7 +271,7 @@ abstract class BaseLidefempPeer {
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
+			$criteria = clone $values;
 			$comparison = $criteria->getComparison(LidefempPeer::ID);
 			$selectCriteria->add(LidefempPeer::ID, $criteria->remove(LidefempPeer::ID), $comparison);
 
@@ -267,7 +282,7 @@ abstract class BaseLidefempPeer {
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
 
-	
+
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
@@ -284,7 +299,7 @@ abstract class BaseLidefempPeer {
 		}
 	}
 
-	
+
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
@@ -302,10 +317,10 @@ abstract class BaseLidefempPeer {
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
-		$affectedRows = 0; 
+		$affectedRows = 0;
 		try {
 									$con->begin();
-			
+
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
 			return $affectedRows;
@@ -315,7 +330,7 @@ abstract class BaseLidefempPeer {
 		}
 	}
 
-	
+
 	public static function doValidate(Lidefemp $obj, $cols = null)
 	{
 		$columns = array();
@@ -350,7 +365,7 @@ abstract class BaseLidefempPeer {
     return $res;
 	}
 
-	
+
 	public static function retrieveByPK($pk, $con = null)
 	{
 		if ($con === null) {
@@ -367,7 +382,7 @@ abstract class BaseLidefempPeer {
 		return !empty($v) > 0 ? $v[0] : null;
 	}
 
-	
+
 	public static function retrieveByPKs($pks, $con = null)
 	{
 		if ($con === null) {
@@ -385,7 +400,7 @@ abstract class BaseLidefempPeer {
 		return $objs;
 	}
 
-} 
+}
 if (Propel::isInit()) {
 			try {
 		BaseLidefempPeer::getMapBuilder();

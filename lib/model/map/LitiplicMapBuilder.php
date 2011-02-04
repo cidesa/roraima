@@ -4,25 +4,25 @@
 
 class LitiplicMapBuilder {
 
-	
+
 	const CLASS_NAME = 'lib.model.map.LitiplicMapBuilder';
 
-	
+
 	private $dbMap;
 
-	
+
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-	
+
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-	
+
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -40,7 +40,11 @@ class LitiplicMapBuilder {
 
 		$tMap->addColumn('ARTLEY', 'Artley', 'string', CreoleTypes::VARCHAR, false, 1000);
 
+		$tMap->addColumn('CANUNITRIBIE', 'Canunitribie', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('CANUNITRIOBR', 'Canunitriobr', 'double', CreoleTypes::NUMERIC, false, 14);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	} 
-} 
+	}
+}
