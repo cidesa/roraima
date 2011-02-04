@@ -744,6 +744,7 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
 <fieldset id="sf_fieldset_none" class="">
 <?php echo button_to_popup('Ver Historial de Permisos',cross_app_link_to('nomina','/nomfalperper/edit/codigoemp/'.$nphojint->getCodemp()),'','','','1000','800')?>
 <?php echo button_to_popup('Ver Disfrute de Vacaciones',cross_app_link_to('nomina','/vachistorico/edit/id/'.$nphojint->getId()),'','','','1000','800')?>
+<?php echo button_to_popup('Ver Histórico de Anticipo de Prestaciones',cross_app_link_to('nomina','/presnomreghisantpre/edit/id/'.H::getX_vacio('Codemp', 'Npantpre', 'Id', $nphojint->getCodemp())),'','','','1000','800')?>
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
 <legend><h2><?php echo __('Fechas') ?></h2></legend>
