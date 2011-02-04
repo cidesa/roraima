@@ -40,7 +40,7 @@ class Constantes
   {return array('C' => 'Compra', 'S' => 'Servicio', 'M' => 'Mixto', 'T' => 'Contratación');}
 
     public static function ListaEstadoCivil()
-  {return array('S' => 'Soltero(a)', 'C' => 'Casado(a)', 'D' => 'Divorciado(a)', 'V' => 'Viudo(a)');}
+  {return array('S' => 'Soltero(a)', 'C' => 'Casado(a)', 'D' => 'Divorciado(a)', 'V' => 'Viudo(a)', 'B' => 'Concubino(a)');}
 
     public static function ListaEstatus()
     {return array('A' => 'Activo', 'P' => 'Permiso Remunerado', 'R' => 'Retirado', 'V' => 'Vacaciones', '-' => 'Permiso No Remunerado');}
