@@ -648,7 +648,7 @@
     $('fafactur_totrec').value=format(mitot.toFixed(2),'.',',','.');
 
 //Ajustar decimas
-/*      var regart=totalregistros2('ax',3,25);
+      var regart=totalregistros2('ax',3,25);
       var fil=0;
       var acum=0;
       while (fil<regart)
@@ -675,7 +675,7 @@
           var cal=valor-diferencia;
 
           $(ultfilrec).value=format(cal.toFixed(2),'.',',','.');
-      }*/
+      }
 
   }
 
