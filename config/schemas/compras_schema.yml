@@ -1230,6 +1230,10 @@ propel:
     observ:
       type: VARCHAR
       size: 100
+    puntua:
+      type: NUMERIC
+      size: 14
+      scale: 2
     id:
       type: INTEGER
       required: true

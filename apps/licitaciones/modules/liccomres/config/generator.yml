@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Liccomres
+    theme:            cidesaGenerator
+    fields:
+      codcomres:      { name: Código, params: maxlength=2 size=5 onBlur="$(this.id).value=$(this.id).value.pad(2,'0',0)"}
+      descomres:      { name: Descripción, params: size=80 maxlength=100}
+      porcentaje:     { name: Porcentaje, params: size=5 maxlength=5}
+
+    list:
+      title:          Compromiso de Responsabilidad Social
+      display:        [=codcomres, descomres]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [codcomres, descomres]
+      max_per_page:   5
+    edit:
+      title:          Compromiso de Responsabilidad Social
+      display:
+        Datos Concurso:  [codcomres, descomres, porcentaje]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

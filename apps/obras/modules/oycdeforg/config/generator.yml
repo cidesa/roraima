@@ -21,7 +21,7 @@ generator:
       emaorg:       { name: E-Mail}
 
     list:
-      title:          Organismos
+      title:          Organismos Participantes
       filters:        [codorg]
       display:        [=codorg, desorg]
       sort:  codorg
@@ -30,7 +30,7 @@ generator:
         _delete:      ~
       max_per_page:   5
     edit:
-      title:          Edición de Organismos
+      title:          Organismos Participantes
       display:        [codorg, desorg, codtiporg, destiporg, entorg, dirorg, codpai, nompai, codedo, nomedo, codciu, nomciu, telorg, faxorg, emaorg]
       actions:
         _list:        ~

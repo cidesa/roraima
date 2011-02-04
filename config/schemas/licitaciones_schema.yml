@@ -1,8 +1,6 @@
 propel:
   _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
   lidefemp:
-    #_attributes:
-      #idMethod: native
     codemp:
       type: VARCHAR
       size: 15
@@ -29,13 +27,19 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    ptocta:
+      type: INTEGER
+    prebas:
+      type: INTEGER
+    expdie:
+      type: INTEGER
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   lisicact:
-    #_attributes:
-      #idMethod: native
     dessicact:
       type: VARCHAR
       size: 100
@@ -43,10 +47,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   litipste:
-    #_attributes:
-      #idMethod: native
     desste:
       type: VARCHAR
       size: 100
@@ -54,10 +58,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   lidatste:
-    #_attributes:
-      #idMethod: native
     coduniste:
       type: VARCHAR
       size: 4
@@ -106,10 +110,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   litipsol:
-    #_attributes:
-      #idMethod: native
     dessol:
       type: VARCHAR
       size: 100
@@ -126,10 +130,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   licomlic:            #comision de licitacion
-    #_attributes:
-      #idMethod: native
     codcom:
       type: VARCHAR
       size: 4
@@ -146,10 +150,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   lidetcom:                 #Detalle de la comision, empleados q pertenecen a ella
-    #_attributes:
-      #idMethod: native
     licomlic_id:
       type: INTEGER
       required: true
@@ -163,10 +167,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   liregsol:
-    #_attributes:
-      #idMethod: native
     numsol:
       type: VARCHAR
       size: 8
@@ -209,10 +213,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   liressol:
-    #_attributes:
-      #idMethod: native
     liregsol_id:
       type: INTEGER
       required: true
@@ -246,10 +250,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   litiplic:
-    #_attributes:
-      #idMethod: native
     destiplic:
       type: VARCHAR
       size: 500
@@ -261,13 +265,21 @@ propel:
     artley:
       type: VARCHAR
       size: 1000
+    canunitribie:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    canunitriobr:
+      type: NUMERIC
+      size: 14
+      scale: 2
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   lireglic:
-    #_attributes:
-      #idMethod: native
     codlic:
       type: VARCHAR
       size: 32
@@ -376,10 +388,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   lilichis:
-    #_attributes:
-      #idMethod: native
     codlic:
       type: VARCHAR
       size: 32
@@ -401,10 +413,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   liemppar:
-    #_attributes:
-      #idMethod: native
     lireglic_id:
       type: INTEGER
       required: true
@@ -428,10 +440,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   liempofe:
-    #_attributes:
-      #idMethod: native
     lireglic_id:
       type: INTEGER
       required: true
@@ -463,10 +475,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   lioferpre:
-    #_attributes:
-      #idMethod: native
     lireglic_id:
       type: INTEGER
       required: true
@@ -513,7 +525,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   lirecaud:                        # Recaudos
     codrec:
       type: VARCHAR
@@ -529,10 +543,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   liasplegcrieva:
-    #_attributes:
-      #idMethod: native
     lireglic_id:
       type: INTEGER
       required: true
@@ -563,7 +577,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   liaspteccrieva:                        # Aspecto Técnico Criterios de Evaluacion
     codcri:
       type: VARCHAR
@@ -581,7 +597,9 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   liaspfincrieva:                        # Aspecto Técnico Criterios de Evaluacion
     codcri:
       type: VARCHAR
@@ -599,10 +617,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   liasptecanalis:
-    #_attributes:
-      #idMethod: native
     lireglic_id:
       type: INTEGER
       required: true
@@ -633,10 +651,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   liaspfinanalis:
-    #_attributes:
-      #idMethod: native
     lireglic_id:
       type: INTEGER
       required: true
@@ -667,10 +685,10 @@ propel:
     id:
       type: INTEGER
       required: true
+      primaryKey: true
       autoIncrement: true
+      description: Identificador Único del registro
   licalvan:
-    #_attributes:
-      #idMethod: native
     lireglic_id:
       type: INTEGER
       required: true
@@ -718,3 +736,37 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  licconcurso:
+    codcon:
+      type: VARCHAR
+      size: 2
+      required: true
+    descon:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  liccomres:
+    codcomres:
+      type: VARCHAR
+      size: 2
+      required: true
+    descomres:
+      type: VARCHAR
+      size: 100
+      required: true
+    porcentaje:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro

@@ -17,7 +17,7 @@ generator:
         _edit:        ~
         _delete:      ~
     edit:
-      title:          Edición de Unidades de Medidas
+      title:          Unidades de Medidas
       display:        [coduni, desuni, abruni]
       actions:
         _list:        ~

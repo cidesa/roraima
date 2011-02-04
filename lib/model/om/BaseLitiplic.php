@@ -4,45 +4,53 @@
 abstract class BaseLitiplic extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $destiplic;
 
 
-	
+
 	protected $maxunitri;
 
 
-	
+
 	protected $artley;
 
 
-	
+
+	protected $canunitribie;
+
+
+
+	protected $canunitriobr;
+
+
+
 	protected $id;
 
-	
+
 	protected $collLireglics;
 
-	
+
 	protected $lastLireglicCriteria = null;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getDestiplic()
   {
 
     return trim($this->destiplic);
 
   }
-  
+
   public function getMaxunitri($val=false)
   {
 
@@ -50,21 +58,37 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
     else return $this->maxunitri;
 
   }
-  
+
   public function getArtley()
   {
 
     return trim($this->artley);
 
   }
-  
+
+  public function getCanunitribie($val=false)
+  {
+
+    if($val) return number_format($this->canunitribie,2,',','.');
+    else return $this->canunitribie;
+
+  }
+
+  public function getCanunitriobr($val=false)
+  {
+
+    if($val) return number_format($this->canunitriobr,2,',','.');
+    else return $this->canunitriobr;
+
+  }
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setDestiplic($v)
 	{
 
@@ -72,9 +96,9 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
         $this->destiplic = $v;
         $this->modifiedColumns[] = LitiplicPeer::DESTIPLIC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setMaxunitri($v)
 	{
 
@@ -82,9 +106,9 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
         $this->maxunitri = Herramientas::toFloat($v);
         $this->modifiedColumns[] = LitiplicPeer::MAXUNITRI;
       }
-  
-	} 
-	
+
+	}
+
 	public function setArtley($v)
 	{
 
@@ -92,9 +116,29 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
         $this->artley = $v;
         $this->modifiedColumns[] = LitiplicPeer::ARTLEY;
       }
-  
-	} 
-	
+
+	}
+
+	public function setCanunitribie($v)
+	{
+
+    if ($this->canunitribie !== $v) {
+        $this->canunitribie = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = LitiplicPeer::CANUNITRIBIE;
+      }
+
+	}
+
+	public function setCanunitriobr($v)
+	{
+
+    if ($this->canunitriobr !== $v) {
+        $this->canunitriobr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = LitiplicPeer::CANUNITRIOBR;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -102,9 +146,9 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = LitiplicPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -115,7 +159,11 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 
       $this->artley = $rs->getString($startcol + 2);
 
-      $this->id = $rs->getInt($startcol + 3);
+      $this->canunitribie = $rs->getFloat($startcol + 3);
+
+      $this->canunitriobr = $rs->getFloat($startcol + 4);
+
+      $this->id = $rs->getInt($startcol + 5);
 
       $this->resetModified();
 
@@ -123,7 +171,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 4; 
+            return $startcol + 6;
     } catch (Exception $e) {
       throw new PropelException("Error populating Litiplic object", $e);
     }
@@ -134,8 +182,8 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -149,7 +197,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -171,7 +219,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -193,7 +241,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -203,8 +251,8 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = LitiplicPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += LitiplicPeer::doUpdate($this, $con);
@@ -222,17 +270,17 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -245,7 +293,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -275,14 +323,14 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = LitiplicPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -296,6 +344,12 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 				return $this->getArtley();
 				break;
 			case 3:
+				return $this->getCanunitribie();
+				break;
+			case 4:
+				return $this->getCanunitriobr();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -303,7 +357,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = LitiplicPeer::getFieldNames($keyType);
@@ -311,19 +365,21 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 			$keys[0] => $this->getDestiplic(),
 			$keys[1] => $this->getMaxunitri(),
 			$keys[2] => $this->getArtley(),
-			$keys[3] => $this->getId(),
+			$keys[3] => $this->getCanunitribie(),
+			$keys[4] => $this->getCanunitriobr(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = LitiplicPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -337,11 +393,17 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 				$this->setArtley($value);
 				break;
 			case 3:
+				$this->setCanunitribie($value);
+				break;
+			case 4:
+				$this->setCanunitriobr($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = LitiplicPeer::getFieldNames($keyType);
@@ -349,10 +411,12 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setDestiplic($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setMaxunitri($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setArtley($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
+		if (array_key_exists($keys[3], $arr)) $this->setCanunitribie($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCanunitriobr($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(LitiplicPeer::DATABASE_NAME);
@@ -360,12 +424,14 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(LitiplicPeer::DESTIPLIC)) $criteria->add(LitiplicPeer::DESTIPLIC, $this->destiplic);
 		if ($this->isColumnModified(LitiplicPeer::MAXUNITRI)) $criteria->add(LitiplicPeer::MAXUNITRI, $this->maxunitri);
 		if ($this->isColumnModified(LitiplicPeer::ARTLEY)) $criteria->add(LitiplicPeer::ARTLEY, $this->artley);
+		if ($this->isColumnModified(LitiplicPeer::CANUNITRIBIE)) $criteria->add(LitiplicPeer::CANUNITRIBIE, $this->canunitribie);
+		if ($this->isColumnModified(LitiplicPeer::CANUNITRIOBR)) $criteria->add(LitiplicPeer::CANUNITRIOBR, $this->canunitriobr);
 		if ($this->isColumnModified(LitiplicPeer::ID)) $criteria->add(LitiplicPeer::ID, $this->id);
 
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(LitiplicPeer::DATABASE_NAME);
@@ -375,19 +441,19 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -397,6 +463,10 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 
 		$copyObj->setArtley($this->artley);
 
+		$copyObj->setCanunitribie($this->canunitribie);
+
+		$copyObj->setCanunitriobr($this->canunitriobr);
+
 
 		if ($deepCopy) {
 									$copyObj->setNew(false);
@@ -405,14 +475,14 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 				$copyObj->addLireglic($relObj->copy($deepCopy));
 			}
 
-		} 
+		}
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -421,7 +491,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -430,7 +500,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-	
+
 	public function initLireglics()
 	{
 		if ($this->collLireglics === null) {
@@ -438,7 +508,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function getLireglics($criteria = null, $con = null)
 	{
 				include_once 'lib/model/om/BaseLireglicPeer.php';
@@ -462,7 +532,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 			}
 		} else {
 						if (!$this->isNew()) {
-												
+
 
 				$criteria->add(LireglicPeer::LITIPLIC_ID, $this->getId());
 
@@ -476,7 +546,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 		return $this->collLireglics;
 	}
 
-	
+
 	public function countLireglics($criteria = null, $distinct = false, $con = null)
 	{
 				include_once 'lib/model/om/BaseLireglicPeer.php';
@@ -493,7 +563,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 		return LireglicPeer::doCount($criteria, $distinct, $con);
 	}
 
-	
+
 	public function addLireglic(Lireglic $l)
 	{
 		$this->collLireglics[] = $l;
@@ -501,7 +571,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 	}
 
 
-	
+
 	public function getLireglicsJoinLisicact($criteria = null, $con = null)
 	{
 				include_once 'lib/model/om/BaseLireglicPeer.php';
@@ -523,7 +593,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 				$this->collLireglics = LireglicPeer::doSelectJoinLisicact($criteria, $con);
 			}
 		} else {
-									
+
 			$criteria->add(LireglicPeer::LITIPLIC_ID, $this->getId());
 
 			if (!isset($this->lastLireglicCriteria) || !$this->lastLireglicCriteria->equals($criteria)) {
@@ -536,7 +606,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 	}
 
 
-	
+
 	public function getLireglicsJoinLiregsol($criteria = null, $con = null)
 	{
 				include_once 'lib/model/om/BaseLireglicPeer.php';
@@ -558,7 +628,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 				$this->collLireglics = LireglicPeer::doSelectJoinLiregsol($criteria, $con);
 			}
 		} else {
-									
+
 			$criteria->add(LireglicPeer::LITIPLIC_ID, $this->getId());
 
 			if (!isset($this->lastLireglicCriteria) || !$this->lastLireglicCriteria->equals($criteria)) {
@@ -570,4 +640,4 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 		return $this->collLireglics;
 	}
 
-} 
+}

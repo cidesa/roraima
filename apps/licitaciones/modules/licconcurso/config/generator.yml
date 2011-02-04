@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Licconcurso
+    theme:            cidesaGenerator
+    fields:
+      codcon:      { name: Código, params: maxlength=2 size=5 onBlur="$(this.id).value=$(this.id).value.pad(2,'0',0)"}
+      descon:      { name: Descripción, params: size=80 maxlength=100}
+      
+    list:
+      title:          Concurso
+      display:        [=codcon, descon]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [codcon, descon]
+      max_per_page:   5
+    edit:
+      title:          Concurso
+      display:
+        Datos Concurso:  [codcon, descon]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -11,19 +11,23 @@ generator:
       faxemp:    { name: Fax, params: size=20 maxlength=30}
       emaemp:    { name: Email, params: size=80 maxlength=100}
       unitri:    { name: Monto en Bolívares (Bs.)}
+      ptocta:    { name: Punto de Cuenta}
+      prebas:    { name: Presupuesto Base}
+      expdie:    { name: Expediente}
     list:
       title:          Registro Información del Sistema
       display:        [=codemp, nomemp, diremp]
       filters:        [codemp]
-      sort            codemp
+      sort:            codemp
       object_actions:
         _edit:        ~
       max_per_page:   10
       sort:    codemp
     edit:
-      title:          Institución
+      title:          Ente Contratante
       display:
         Datos Principales:   [nomemp, diremp, telemp, faxemp, emaemp]
         Valor Actual Unidad Tributaria: [unitri]
+        Correlativos: [ptocta, prebas, expdie]
       actions:
         _save:        ~

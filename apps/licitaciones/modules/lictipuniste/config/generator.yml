@@ -7,7 +7,7 @@ generator:
     fields:
        desste:    { name: Descripción, params: size=80 maxlength=100 }
     list:
-      title:          Tipo Unidad Solicitante
+      title:          Tipo Unidad Ejecutora
       display:        [=desste]
       object_actions:
         _edit:        ~
@@ -18,7 +18,7 @@ generator:
           params: size=18
       max_per_page:   5
     edit:
-      title:          Edición de Tipo Unidad Solicitante
+      title:          Tipo Unidad Ejecutora
       display:        [desste]
       actions:
         _list:        ~

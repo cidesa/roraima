@@ -3,61 +3,67 @@
 
 abstract class BaseLitiplicPeer {
 
-	
+
 	const DATABASE_NAME = 'propel';
 
-	
+
 	const TABLE_NAME = 'litiplic';
 
-	
+
 	const CLASS_DEFAULT = 'lib.model.Litiplic';
 
-	
-	const NUM_COLUMNS = 4;
 
-	
+	const NUM_COLUMNS = 6;
+
+
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
-	
+
 	const DESTIPLIC = 'litiplic.DESTIPLIC';
 
-	
+
 	const MAXUNITRI = 'litiplic.MAXUNITRI';
 
-	
+
 	const ARTLEY = 'litiplic.ARTLEY';
 
-	
+
+	const CANUNITRIBIE = 'litiplic.CANUNITRIBIE';
+
+
+	const CANUNITRIOBR = 'litiplic.CANUNITRIOBR';
+
+
 	const ID = 'litiplic.ID';
 
-	
+
 	private static $phpNameMap = null;
 
 
-	
+
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Destiplic', 'Maxunitri', 'Artley', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (LitiplicPeer::DESTIPLIC, LitiplicPeer::MAXUNITRI, LitiplicPeer::ARTLEY, LitiplicPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('destiplic', 'maxunitri', 'artley', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Destiplic', 'Maxunitri', 'Artley', 'Canunitribie', 'Canunitriobr', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (LitiplicPeer::DESTIPLIC, LitiplicPeer::MAXUNITRI, LitiplicPeer::ARTLEY, LitiplicPeer::CANUNITRIBIE, LitiplicPeer::CANUNITRIOBR, LitiplicPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('destiplic', 'maxunitri', 'artley', 'canunitribie', 'canunitriobr', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
-	
+
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Destiplic' => 0, 'Maxunitri' => 1, 'Artley' => 2, 'Id' => 3, ),
-		BasePeer::TYPE_COLNAME => array (LitiplicPeer::DESTIPLIC => 0, LitiplicPeer::MAXUNITRI => 1, LitiplicPeer::ARTLEY => 2, LitiplicPeer::ID => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('destiplic' => 0, 'maxunitri' => 1, 'artley' => 2, 'id' => 3, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Destiplic' => 0, 'Maxunitri' => 1, 'Artley' => 2, 'Canunitribie' => 3, 'Canunitriobr' => 4, 'Id' => 5, ),
+		BasePeer::TYPE_COLNAME => array (LitiplicPeer::DESTIPLIC => 0, LitiplicPeer::MAXUNITRI => 1, LitiplicPeer::ARTLEY => 2, LitiplicPeer::CANUNITRIBIE => 3, LitiplicPeer::CANUNITRIOBR => 4, LitiplicPeer::ID => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('destiplic' => 0, 'maxunitri' => 1, 'artley' => 2, 'canunitribie' => 3, 'canunitriobr' => 4, 'id' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
-	
+
 	public static function getMapBuilder()
 	{
 		include_once 'lib/model/map/LitiplicMapBuilder.php';
 		return BasePeer::getMapBuilder('lib.model.map.LitiplicMapBuilder');
 	}
-	
+
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
@@ -71,7 +77,7 @@ abstract class BaseLitiplicPeer {
 		}
 		return self::$phpNameMap;
 	}
-	
+
 	static public function translateFieldName($name, $fromType, $toType)
 	{
 		$toNames = self::getFieldNames($toType);
@@ -82,7 +88,7 @@ abstract class BaseLitiplicPeer {
 		return $toNames[$key];
 	}
 
-	
+
 
 	static public function getFieldNames($type = BasePeer::TYPE_PHPNAME)
 	{
@@ -92,13 +98,13 @@ abstract class BaseLitiplicPeer {
 		return self::$fieldNames[$type];
 	}
 
-	
+
 	public static function alias($alias, $column)
 	{
 		return str_replace(LitiplicPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
-	
+
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
@@ -108,6 +114,10 @@ abstract class BaseLitiplicPeer {
 
 		$criteria->addSelectColumn(LitiplicPeer::ARTLEY);
 
+		$criteria->addSelectColumn(LitiplicPeer::CANUNITRIBIE);
+
+		$criteria->addSelectColumn(LitiplicPeer::CANUNITRIOBR);
+
 		$criteria->addSelectColumn(LitiplicPeer::ID);
 
 	}
@@ -115,7 +125,7 @@ abstract class BaseLitiplicPeer {
 	const COUNT = 'COUNT(litiplic.ID)';
 	const COUNT_DISTINCT = 'COUNT(DISTINCT litiplic.ID)';
 
-	
+
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -139,7 +149,7 @@ abstract class BaseLitiplicPeer {
 						return 0;
 		}
 	}
-	
+
 	public static function doSelectOne(Criteria $criteria, $con = null)
 	{
 		$critcopy = clone $criteria;
@@ -150,12 +160,12 @@ abstract class BaseLitiplicPeer {
 		}
 		return null;
 	}
-	
+
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
 		return LitiplicPeer::populateObjects(LitiplicPeer::doSelectRS($criteria, $con));
 	}
-	
+
 	public static function doSelectRS(Criteria $criteria, $con = null)
 	{
 		if ($con === null) {
@@ -171,35 +181,35 @@ abstract class BaseLitiplicPeer {
 
 						return BasePeer::doSelect($criteria, $con);
 	}
-	
+
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
-	
+
 				$cls = LitiplicPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
-		
+
 			$obj = new $cls();
 			$obj->hydrate($rs);
 			$results[] = $obj;
-			
+
 		}
 		return $results;
 	}
-	
+
 	public static function getTableMap()
 	{
 		return Propel::getDatabaseMap(self::DATABASE_NAME)->getTable(self::TABLE_NAME);
 	}
 
-	
+
 	public static function getOMClass()
 	{
 		return LitiplicPeer::CLASS_DEFAULT;
 	}
 
-	
+
 	public static function doInsert($values, $con = null)
 	{
 		if ($con === null) {
@@ -210,7 +220,7 @@ abstract class BaseLitiplicPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(LitiplicPeer::ID); 
+		$criteria->remove(LitiplicPeer::ID);
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -226,7 +236,7 @@ abstract class BaseLitiplicPeer {
 		return $pk;
 	}
 
-	
+
 	public static function doUpdate($values, $con = null)
 	{
 		if ($con === null) {
@@ -236,7 +246,7 @@ abstract class BaseLitiplicPeer {
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
+			$criteria = clone $values;
 			$comparison = $criteria->getComparison(LitiplicPeer::ID);
 			$selectCriteria->add(LitiplicPeer::ID, $criteria->remove(LitiplicPeer::ID), $comparison);
 
@@ -247,7 +257,7 @@ abstract class BaseLitiplicPeer {
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
 
-	
+
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
@@ -264,7 +274,7 @@ abstract class BaseLitiplicPeer {
 		}
 	}
 
-	
+
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
@@ -282,10 +292,10 @@ abstract class BaseLitiplicPeer {
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
-		$affectedRows = 0; 
+		$affectedRows = 0;
 		try {
 									$con->begin();
-			
+
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
 			return $affectedRows;
@@ -295,7 +305,7 @@ abstract class BaseLitiplicPeer {
 		}
 	}
 
-	
+
 	public static function doValidate(Litiplic $obj, $cols = null)
 	{
 		$columns = array();
@@ -330,7 +340,7 @@ abstract class BaseLitiplicPeer {
     return $res;
 	}
 
-	
+
 	public static function retrieveByPK($pk, $con = null)
 	{
 		if ($con === null) {
@@ -347,7 +357,7 @@ abstract class BaseLitiplicPeer {
 		return !empty($v) > 0 ? $v[0] : null;
 	}
 
-	
+
 	public static function retrieveByPKs($pks, $con = null)
 	{
 		if ($con === null) {
@@ -365,7 +375,7 @@ abstract class BaseLitiplicPeer {
 		return $objs;
 	}
 
-} 
+}
 if (Propel::isInit()) {
 			try {
 		BaseLitiplicPeer::getMapBuilder();

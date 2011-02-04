@@ -4,90 +4,102 @@
 abstract class BaseLidefemp extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $codemp;
 
 
-	
+
 	protected $nomemp;
 
 
-	
+
 	protected $diremp;
 
 
-	
+
 	protected $telemp;
 
 
-	
+
 	protected $faxemp;
 
 
-	
+
 	protected $emaemp;
 
 
-	
+
 	protected $unitri;
 
 
-	
+
+	protected $ptocta;
+
+
+
+	protected $prebas;
+
+
+
+	protected $expdie;
+
+
+
 	protected $id;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getCodemp()
   {
 
     return trim($this->codemp);
 
   }
-  
+
   public function getNomemp()
   {
 
     return trim($this->nomemp);
 
   }
-  
+
   public function getDiremp()
   {
 
     return trim($this->diremp);
 
   }
-  
+
   public function getTelemp()
   {
 
     return trim($this->telemp);
 
   }
-  
+
   public function getFaxemp()
   {
 
     return trim($this->faxemp);
 
   }
-  
+
   public function getEmaemp()
   {
 
     return trim($this->emaemp);
 
   }
-  
+
   public function getUnitri($val=false)
   {
 
@@ -95,14 +107,35 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
     else return $this->unitri;
 
   }
-  
+
+  public function getPtocta()
+  {
+
+    return $this->ptocta;
+
+  }
+
+  public function getPrebas()
+  {
+
+    return $this->prebas;
+
+  }
+
+  public function getExpdie()
+  {
+
+    return $this->expdie;
+
+  }
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setCodemp($v)
 	{
 
@@ -110,9 +143,9 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
         $this->codemp = $v;
         $this->modifiedColumns[] = LidefempPeer::CODEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNomemp($v)
 	{
 
@@ -120,9 +153,9 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
         $this->nomemp = $v;
         $this->modifiedColumns[] = LidefempPeer::NOMEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDiremp($v)
 	{
 
@@ -130,9 +163,9 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
         $this->diremp = $v;
         $this->modifiedColumns[] = LidefempPeer::DIREMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTelemp($v)
 	{
 
@@ -140,9 +173,9 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
         $this->telemp = $v;
         $this->modifiedColumns[] = LidefempPeer::TELEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFaxemp($v)
 	{
 
@@ -150,9 +183,9 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
         $this->faxemp = $v;
         $this->modifiedColumns[] = LidefempPeer::FAXEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setEmaemp($v)
 	{
 
@@ -160,9 +193,9 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
         $this->emaemp = $v;
         $this->modifiedColumns[] = LidefempPeer::EMAEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setUnitri($v)
 	{
 
@@ -170,9 +203,39 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
         $this->unitri = Herramientas::toFloat($v);
         $this->modifiedColumns[] = LidefempPeer::UNITRI;
       }
-  
-	} 
-	
+
+	}
+
+	public function setPtocta($v)
+	{
+
+    if ($this->ptocta !== $v) {
+        $this->ptocta = $v;
+        $this->modifiedColumns[] = LidefempPeer::PTOCTA;
+      }
+
+	}
+
+	public function setPrebas($v)
+	{
+
+    if ($this->prebas !== $v) {
+        $this->prebas = $v;
+        $this->modifiedColumns[] = LidefempPeer::PREBAS;
+      }
+
+	}
+
+	public function setExpdie($v)
+	{
+
+    if ($this->expdie !== $v) {
+        $this->expdie = $v;
+        $this->modifiedColumns[] = LidefempPeer::EXPDIE;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -180,9 +243,9 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = LidefempPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -201,7 +264,13 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 
       $this->unitri = $rs->getFloat($startcol + 6);
 
-      $this->id = $rs->getInt($startcol + 7);
+      $this->ptocta = $rs->getInt($startcol + 7);
+
+      $this->prebas = $rs->getInt($startcol + 8);
+
+      $this->expdie = $rs->getInt($startcol + 9);
+
+      $this->id = $rs->getInt($startcol + 10);
 
       $this->resetModified();
 
@@ -209,7 +278,7 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 8; 
+            return $startcol + 11;
     } catch (Exception $e) {
       throw new PropelException("Error populating Lidefemp object", $e);
     }
@@ -220,8 +289,8 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -235,7 +304,7 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -257,7 +326,7 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -279,7 +348,7 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -289,8 +358,8 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = LidefempPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += LidefempPeer::doUpdate($this, $con);
@@ -300,17 +369,17 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -323,7 +392,7 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -345,14 +414,14 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = LidefempPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -378,6 +447,15 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 				return $this->getUnitri();
 				break;
 			case 7:
+				return $this->getPtocta();
+				break;
+			case 8:
+				return $this->getPrebas();
+				break;
+			case 9:
+				return $this->getExpdie();
+				break;
+			case 10:
 				return $this->getId();
 				break;
 			default:
@@ -385,7 +463,7 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = LidefempPeer::getFieldNames($keyType);
@@ -397,19 +475,22 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 			$keys[4] => $this->getFaxemp(),
 			$keys[5] => $this->getEmaemp(),
 			$keys[6] => $this->getUnitri(),
-			$keys[7] => $this->getId(),
+			$keys[7] => $this->getPtocta(),
+			$keys[8] => $this->getPrebas(),
+			$keys[9] => $this->getExpdie(),
+			$keys[10] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = LidefempPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -435,11 +516,20 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 				$this->setUnitri($value);
 				break;
 			case 7:
+				$this->setPtocta($value);
+				break;
+			case 8:
+				$this->setPrebas($value);
+				break;
+			case 9:
+				$this->setExpdie($value);
+				break;
+			case 10:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = LidefempPeer::getFieldNames($keyType);
@@ -451,10 +541,13 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setFaxemp($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setEmaemp($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setUnitri($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setPtocta($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setPrebas($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setExpdie($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(LidefempPeer::DATABASE_NAME);
@@ -466,12 +559,15 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(LidefempPeer::FAXEMP)) $criteria->add(LidefempPeer::FAXEMP, $this->faxemp);
 		if ($this->isColumnModified(LidefempPeer::EMAEMP)) $criteria->add(LidefempPeer::EMAEMP, $this->emaemp);
 		if ($this->isColumnModified(LidefempPeer::UNITRI)) $criteria->add(LidefempPeer::UNITRI, $this->unitri);
+		if ($this->isColumnModified(LidefempPeer::PTOCTA)) $criteria->add(LidefempPeer::PTOCTA, $this->ptocta);
+		if ($this->isColumnModified(LidefempPeer::PREBAS)) $criteria->add(LidefempPeer::PREBAS, $this->prebas);
+		if ($this->isColumnModified(LidefempPeer::EXPDIE)) $criteria->add(LidefempPeer::EXPDIE, $this->expdie);
 		if ($this->isColumnModified(LidefempPeer::ID)) $criteria->add(LidefempPeer::ID, $this->id);
 
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(LidefempPeer::DATABASE_NAME);
@@ -481,19 +577,19 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -511,13 +607,19 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 
 		$copyObj->setUnitri($this->unitri);
 
+		$copyObj->setPtocta($this->ptocta);
+
+		$copyObj->setPrebas($this->prebas);
+
+		$copyObj->setExpdie($this->expdie);
+
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -526,7 +628,7 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -535,4 +637,4 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-} 
+}

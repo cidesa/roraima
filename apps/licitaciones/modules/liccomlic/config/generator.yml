@@ -9,7 +9,7 @@ generator:
       fecnom:         { name: Fecha Nombramiento }
       decret:         { name: Decreto, type: textarea_tag, params: size=70x4 maxlength=1000 }
     list:
-      title:          Registro de Comisión de Licitación
+      title:          Integración Comisión de Contratación
       filters:		  [codcom, descom]
       fields:
         dessol:
@@ -20,7 +20,7 @@ generator:
         _edit:        ~
         _delete:      ~
     edit:
-      title:          Edición de Comisión de Licitación
+      title:          Integración Comisión de Contratación
       display:
         Datos Principales:  [codcom, descom, fecnom, decret]
         Miembros:       [_empleados]

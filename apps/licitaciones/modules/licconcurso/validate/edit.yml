@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "licconcurso{codcon}"
+   - "licconcurso{descon}"
+
+names:
+  licconcurso{codcon}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codcon
+
+  licconcurso{descon}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_descon
+
+Validator_codcon:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Licconcurso
+        column:       codcon
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_descon:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripción no puede pasar mas de 100 caracteres

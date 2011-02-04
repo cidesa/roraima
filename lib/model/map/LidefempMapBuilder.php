@@ -4,25 +4,25 @@
 
 class LidefempMapBuilder {
 
-	
+
 	const CLASS_NAME = 'lib.model.map.LidefempMapBuilder';
 
-	
+
 	private $dbMap;
 
-	
+
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-	
+
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-	
+
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -48,7 +48,13 @@ class LidefempMapBuilder {
 
 		$tMap->addColumn('UNITRI', 'Unitri', 'double', CreoleTypes::NUMERIC, false, 14);
 
+		$tMap->addColumn('PTOCTA', 'Ptocta', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('PREBAS', 'Prebas', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('EXPDIE', 'Expdie', 'int', CreoleTypes::INTEGER, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	} 
-} 
+	}
+}

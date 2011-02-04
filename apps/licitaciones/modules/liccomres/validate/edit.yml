@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "liccomres{codcomres}"
+   - "liccomres{descomres}"
+
+names:
+  liccomres{codcomres}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codcomres
+
+  liccomres{descomres}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_descomres
+
+Validator_codcomres:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Liccomres
+        column:       codcomres
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_descomres:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripción no puede pasar mas de 100 caracteres
