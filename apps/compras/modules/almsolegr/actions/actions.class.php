@@ -135,6 +135,26 @@ class almsolegrActions extends autoalmsolegrActions
                             }
                        }
 
+                       $valpartidaiguales=H::getConfApp2('valparigua', 'compras', 'almsolegr');
+                       if ($valpartidaiguales=='S')
+                       {
+                           $x=$grid[0];
+                           $j=0;
+                           if (count($x))
+                           {
+                             $partida=$x[0]->getCodpre();
+                                while ($j<count($x))
+                                {
+                                  if ($x[$j]->getCodpre()!=$partida)
+                                  {
+                                    $this->codeerror=827;
+                                   return false;
+                                  }
+                                  $j++;
+                                }
+                           }
+                       }
+
 		   $t= new Criteria();
 		   $result= CadefartPeer::doSelectOne($t);
 		   if ($result) {
