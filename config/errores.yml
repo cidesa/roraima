@@ -1876,6 +1876,9 @@
 826:
   cod: 826
   msj: No puede Salvar debido a que existe un Artículo con cantidad igual a cero.
+827:
+  cod: 827
+  msj: No se puede Salvar debido a que existe un artículo con partida diferente a los demás.
 9000:
   cod: 9000
   msj: Debe cargar informacion en el grid
