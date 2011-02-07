@@ -30,7 +30,8 @@ function costocacotiza(e,id)
 	{
 	  var reqart=$('cacotiza_refsol').value;
 	  var codart=$(colcodart).value;
-      new Ajax.Request(getUrlModulo()+'ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json), actualizarsaldos(); var num4=toFloat('cacotiza_monrec'); var num5=toFloat('totales'); var montot=num5+num4; $('cacotiza_moncot').value=format(montot.toFixed(2),'.',',','.');}, parameters:'ajax=7&codart='+codart+'&reqart='+reqart+'&colrecart='+colrecart+'&cosact='+num2})
+          var rifpro=$('cacotiza_rifpro').value;
+      new Ajax.Request(getUrlModulo()+'ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json), actualizarsaldos(); var num4=toFloat('cacotiza_monrec'); var num5=toFloat('totales'); var montot=num5+num4; $('cacotiza_moncot').value=format(montot.toFixed(2),'.',',','.');}, parameters:'ajax=7&codart='+codart+'&reqart='+reqart+'&rifpro='+rifpro+'&colrecart='+colrecart+'&cosact='+num2})
 	}
 	else
 	{

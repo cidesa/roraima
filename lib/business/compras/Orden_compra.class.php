@@ -382,7 +382,13 @@ class Orden_compra
     $tipopro=H::getX('RIFPRO','Caprovee','Tipo',trim($rifpro));
     if (Orden_compra::Verificar_proveedor(trim($refsol),trim($rifpro),&$rifpro,&$msg,&$cancotpril,&$strrifpro,&$srtrefcot))
     {
-      $sql = "Select reqart,codart,codcat,canreq,canrec,montot,costo,monrgo,canord,mondes,relart,unimed,codpar,desart From CaArtSol Where ReqArt='".$refsol."' order By CodArt";
+      $detsinord=H::getConfApp2('detsinord', 'compras', 'almordcom');
+      if ($detsinord=='S')
+          $campo="id";
+      else
+          $campo="codart";
+
+      $sql = "Select reqart,codart,codcat,canreq,canrec,montot,costo,monrgo,canord,mondes,relart,unimed,codpar,desart From CaArtSol Where ReqArt='".$refsol."' order By ".$campo;
       if (Herramientas::BuscarDatos($sql,&$result))
       {
         $i=0;
