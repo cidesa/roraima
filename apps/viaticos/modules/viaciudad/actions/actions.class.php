@@ -26,6 +26,7 @@ class viaciudadActions extends autoviaciudadActions
     if($this->viaciudad->getId()!='')
         $c->add(ViaestadoPeer::CODPAI,$this->viaciudad->getCodpai());
     else
+      if(count($per)>0)
         $c->add(ViaestadoPeer::CODPAI,$per[0]->getCodpai());
     $per = ViaestadoPeer::doSelect($c);
     $estado=array();
