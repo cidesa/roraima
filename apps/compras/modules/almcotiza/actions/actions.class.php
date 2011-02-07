@@ -366,8 +366,12 @@ $this->Bitacora('Guardo');
        $codart=$this->getRequestParameter('codart');
        $reqart=$this->getRequestParameter('reqart');
        $cosact=$this->getRequestParameter('cosact');
+       $rifpro=$this->getRequestParameter('rifpro');
 
        $monrecargo=0;
+       $tippro=H::getX_vacio('RIFPRO', 'Caprovee', 'Tipo', $rifpro);
+       if ($tippro!='P')
+       {
 	   $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
 
        $cri = new Criteria();
@@ -405,6 +409,7 @@ $this->Bitacora('Guardo');
 		        }// foreach ($result as $datos)
 			 }//if ($result)
 	   }//	 foreach ($reg as $solegr)
+       } //if ($tippro!='P')
        $monrecargoformat=number_format($monrecargo,2,',','.');
       // $colmonrec="cacotiza_monrec";
        $colmonrec=$this->getRequestParameter('colrecart');

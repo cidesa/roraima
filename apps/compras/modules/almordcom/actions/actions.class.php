@@ -907,6 +907,8 @@ class almordcomActions extends autoalmordcomActions
       $c->add(CaartordPeer::ORDCOM,$ordcom);
       if ($detsinord!='S')
       $c->addAscendingOrderByColumn(CaartordPeer::CODART);
+      else
+           $c->addAscendingOrderByColumn(CaartordPeer::ID);
       $per = CaartordPeer::doSelect($c);
       $campo_col5='Canord';//tabla Caartord
       $campo_col6='Canaju';//tabla Caartord
@@ -931,6 +933,8 @@ class almordcomActions extends autoalmordcomActions
     {
     $c = new Criteria();
     $c->add(CaartsolPeer::REQART,$ordcom);
+     if ($detsinord=='S')
+      $c->addAscendingOrderByColumn(CaartsolPeer::ID);
       $per = CaartsolPeer::doSelect($c);
       $campo_col5='Canreq';//tabla Caartsol
       $campo_col6='Canaju';//tabla Caartsol

@@ -481,6 +481,9 @@ class Compras {
       $result = CadetcotPeer :: doSelect($c);
       if ($result) {
         foreach ($result as $datos) {
+          $rifpro=H::getX_vacio('REFCOT', 'Cacotiza', 'Rifpro', $datos->getRefcot());
+          $tippro=H::getX_vacio('RIFPRO', 'Caprovee', 'Tipo', $rifpro);
+
           $c = new Criteria();
           $c->add(CaartsolPeer :: REQART, $reqart);
           $c->add(CaartsolPeer :: CODART, $datos->getCodart());
@@ -499,8 +502,12 @@ class Compras {
             }
             $monuni = ($gridnuevo[$indice -1][2] * $gridnuevo[$indice -1][1]);
             $gridnuevo[$indice -1][3] = $datos->getMondes();
+            if ($tippro!='P')
             $gridnuevo[$indice -1][4] = $resul2->getMonrgo();
+            else
+                $gridnuevo[$indice -1][4] = 0;
             $gridnuevo[$indice -1][5] = $monuni -$gridnuevo[$indice -1][3]+$gridnuevo[$indice -1][4];
+            if ($tippro!='P') {
             $c=new Criteria();
             $c->add(CadisrgoPeer::REQART,$reqart);
             $reg= CadisrgoPeer::doSelect($c);
@@ -509,9 +516,14 @@ class Compras {
             } else {
               $gridnuevo[$indice -1][6] = 0;
             }
+            }
+            else $gridnuevo[$indice -1][6] = 0;
             $gridnuevo[$indice -1][7] = $resul2->getMontot();//$monuni -$gridnuevo[$indice -1][3];
             $gridnuevo[$indice -1][8] = $resul2->getCodcat().'-'.$resul2->getCodpre();
+            if ($tippro!='P')
             $gridnuevo[$indice -1][9] = $resul2->getMonrgo();
+            else
+                $gridnuevo[$indice -1][9] = 0;
             $gridnuevo[$indice -1][10] = $resul2->getCodcat();
             $gridnuevo[$indice -1][11] = $resul2->getCosto(); //Costo viejo
           	}
@@ -520,7 +532,10 @@ class Compras {
       }
 
       $c = new Criteria();
+      if ($tippro!='P')
       $c->add(CadisrgoPeer :: REQART, $reqart);
+      else
+          $c->add(CadisrgoPeer :: REQART, '');
       $dat = CadisrgoPeer :: doSelect($c);
       if ($dat) {
         foreach ($dat as $resultado) {
@@ -591,7 +606,7 @@ class Compras {
       }
 
       if ($nopuedeaumentar!=true) {
-        self :: actualizarSolicitud($reqart, $gridnuevo, $gridnuevo2,&$gridnuevorec);
+        self :: actualizarSolicitud($reqart, $gridnuevo, $gridnuevo2,&$gridnuevorec,$tippro);
       } else {
         $c = new Criteria();
         $c->addJoin(CacotizaPeer :: REFCOT, CadetcotPeer :: REFCOT);
@@ -611,7 +626,7 @@ class Compras {
     return true;
   }
 
-  public static function actualizarSolicitud($reqart, $gridnuevo, $gridnuevo2, &$gridnuevorec) {
+  public static function actualizarSolicitud($reqart, $gridnuevo, $gridnuevo2, &$gridnuevorec,$tippro) {
     $c = new Criteria(); //Maestro
     $c->add(CasolartPeer :: REQART, $reqart);
     $resul = CasolartPeer :: doSelectOne($c);
@@ -729,6 +744,13 @@ class Compras {
       }
       $l++;
     }*/
+
+    if ($tippro=='P')
+    {
+            $c = new Criteria();
+            $c->add(CadisrgoPeer :: REQART, $reqart);
+            CadisrgoPeer :: doDelete($c);
+    }
 
     $l = 0;
     while ($l < count($gridnuevorec)) //Distribucion de Recargos

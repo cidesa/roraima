@@ -845,6 +845,8 @@ class almsolegrActions extends autoalmsolegrActions
        $c->add(CaartsolPeer::REQART,$this->casolart->getReqart());
        if ($detsinord!="S")
        $c->addAscendingOrderByColumn(CaartsolPeer::CODART);
+       else
+           $c->addAscendingOrderByColumn(CaartsolPeer::ID);
        $reg = CaartsolPeer::doSelect($c);
 
        $mascaraarticulo=$this->mascaraarticulo;
@@ -1050,6 +1052,8 @@ class almsolegrActions extends autoalmsolegrActions
        $c->add(CaartsolPeer::REQART,$this->casolart->getReqart());
        if ($detsinord!="S")
        $c->addAscendingOrderByColumn(CaartsolPeer::CODART);
+       else
+           $c->addAscendingOrderByColumn(CaartsolPeer::ID);
        $reg = CaartsolPeer::doSelect($c);
 
        $mascaraarticulo=$this->mascaraarticulo;
