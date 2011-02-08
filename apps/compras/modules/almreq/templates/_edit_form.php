@@ -93,8 +93,12 @@
         ))
 )); echo $value ? $value : '&nbsp;' ?>
   &nbsp;
+  <?php $catubibnu=H::getConfApp2('catubibnu', 'compras', 'almreq');
+   if ($catubibnu=='S') { ?>
    <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Bnubica_Pagemiord/clase/Bnubica/frame/sf_admin_edit_form/obj1/careqart_codcatreq/obj2/careqart_desubi/campo1/codubi/campo2/desubi/param1/".$lonubi,'','','botoncat')?></th>
-
+<?php }else {?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnubibie_Almreq/clase/Bnubibie/frame/sf_admin_edit_form/obj1/careqart_codcatreq/obj2/careqart_desubi/campo1/codubi/campo2/desubi','','','botoncat')?></th>
+<?php }?>
 <?php $value = object_input_tag($careqart, 'getDesubi', array (
 'disabled' => true,
 'size' => 65,
