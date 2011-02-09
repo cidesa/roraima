@@ -429,7 +429,7 @@
   <?php $value = object_input_tag($opordpag, 'getNumforpre', array (
   'size' => 20,
   'control_name' => 'opordpag[numforpre]',
-  'maxlength' => 8,
+  'maxlength' => 15,
 )); echo $value ? $value : '&nbsp;' ?>
    </th>
    </tr>
