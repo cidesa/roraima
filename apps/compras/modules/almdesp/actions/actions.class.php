@@ -821,7 +821,11 @@ class almdespActions extends autoalmdespActions
    }
 		else  if ($this->getRequestParameter('ajax')=='3')
 	    {
+                  $catubibnu=H::getConfApp2('catubibnu', 'compras', 'almdesp');
+                  if ($catubibnu=='S')
 	  	    $dato=BnubicaPeer::getDesubi($this->getRequestParameter('codigo'));
+                  else
+                    $dato=BnubibiePeer::getDesubicacion($this->getRequestParameter('codigo'));
             $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
             $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
    			return sfView::HEADER_ONLY;
@@ -1175,8 +1179,14 @@ class almdespActions extends autoalmdespActions
   {
 	$this->mascaraarticulo = Herramientas::ObtenerFormato('Cadefart','Forart');
 	$this->mascarapartida = Herramientas::getMascaraPartida();
+        $catubibnu=H::getConfApp2('catubibnu', 'compras', 'almdesp');
+        if ($catubibnu=='S') {
 	$this->forubi = Herramientas::ObtenerFormato('Opdefemp','Forubi');//Herramientas::ObtenerFormato('Bndefins','forubi');
     $this->lonubi= strlen($this->forubi);//Herramientas::ObtenerFormato('Bndefins','lonubi');
+        }else {
+            $this->forubi = Herramientas::ObtenerFormato('Bndefins','forubi');
+            $this->lonubi= strlen($this->forubi);
+        }
     $this->mascaraubicacionalm = Herramientas::ObtenerFormato('Cadefart','Forubi');
     $this->lonubialm=strlen($this->mascaraubicacionalm);
     $this->dphdesh="";

@@ -44,8 +44,11 @@ class Cadphart extends BaseCadphart
 
    public function getNomcat()
 	{
-		//return Herramientas::getX('CODCAT','Npcatpre','Nomcat',self::getCodori());
+        $catubibnu=H::getConfApp2('catubibnu', 'compras', 'almdesp');
+        if ($catubibnu=='S')
 	    return Herramientas::getX('CODUBI','Bnubica','Desubi',self::getCodori());
+        else
+            return Herramientas::getX('CODUBI','Bnubibie','Desubi',self::getCodori());
 	}
 
 	public function getNomalm()
