@@ -374,7 +374,7 @@
      var colum=determinarReferenciaDoc($('fafactur_tipref').value);
      var mon_art=0;
 
-     var colart=totalregistros2('ax',3,25);
+     var colart=totalregistros2('ax',3,150);
      var fil=0;
 	 while (fil<colart)
 	 {
@@ -478,7 +478,7 @@
 
   function marcarArtRep(fila,valor)
   {
-    var facart=totalregistros2('ax',3,25);
+    var facart=totalregistros2('ax',3,150);
     var fil=0;
     var fila1="ax_"+fila+"_3";
 	while (fil<facart)
@@ -501,7 +501,7 @@
     var totaldesc=0;
     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
 
-    var colart=totalregistros2('ax',3,25);
+    var colart=totalregistros2('ax',3,150);
     var fil=0;
 	while (fil<colart)
 	{
@@ -568,7 +568,7 @@
     var montoArt= montoMarcados();
 
     var regrgo=totalregistros2('cx',1,10);
-    var regart=totalregistros2('ax',3,25);
+    var regart=totalregistros2('ax',3,150);
 	var j=0;
 	while (j<regrgo)
 	{
@@ -648,7 +648,7 @@
     $('fafactur_totrec').value=format(mitot.toFixed(2),'.',',','.');
 
 //Ajustar decimas
-      var regart=totalregistros2('ax',3,25);
+      var regart=totalregistros2('ax',3,150);
       var fil=0;
       var acum=0;
       while (fil<regart)
@@ -686,7 +686,7 @@
    if ($(monrgo)){*/
     if (regrgo>0)
     {
-      var regart=totalregistros2('ax',3,25);
+      var regart=totalregistros2('ax',3,150);
       var fil=0;
       while (fil<regart)
       {
@@ -732,7 +732,7 @@
 
       if (monTot>0 || monTot2>0)
       {
-	     var regart=totalregistros2('ax',3,25);
+	     var regart=totalregistros2('ax',3,150);
 	     var fil=0;
 	     while (fil<regart)
 	     {
@@ -931,7 +931,7 @@
     }
     else
     {
-       var regart=totalregistros2('ax',3,25);
+       var regart=totalregistros2('ax',3,150);
        var colum=determinarReferenciaDoc($('fafactur_tipref').value);
        var j=0;
 	   while (j<regart)
@@ -967,7 +967,7 @@
     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
     var calcularmonto=0;
 
-     var regart=totalregistros2('ax',3,25);
+     var regart=totalregistros2('ax',3,150);
      var fil=0;
      while (fil<regart)
      {
@@ -1003,7 +1003,7 @@
     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
     var monmarsindesc=0;
 
-    var regart=totalregistros2('ax',3,25);
+    var regart=totalregistros2('ax',3,150);
      var fil=0;
      while (fil<regart)
      {
@@ -1035,7 +1035,7 @@
   function montoTotal()
   {
     var montot=0;
-    var regart=totalregistros2('ax',3,25);
+    var regart=totalregistros2('ax',3,150);
     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
     var fil=0;
     var totmonrec=0;
@@ -1121,7 +1121,7 @@
       var indice='1';
     } else {var indice='20';}
 
-    var regart=totalregistros2('ax',3,25);
+    var regart=totalregistros2('ax',3,150);
     var fil=0;
     while (fil<regart)
     {
@@ -1149,7 +1149,7 @@
     var precios=0;
     var montota=0;
 
-    var regart=totalregistros2('ax',3,25);
+    var regart=totalregistros2('ax',3,150);
     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
     var fil=0;
     while (fil<regart)
@@ -1312,7 +1312,7 @@
         var colum=determinarReferenciaDoc($('fafactur_tipref').value);
     if (monTot!=0)
     {
-	    var regart=totalregistros2('ax',3,25);
+	    var regart=totalregistros2('ax',3,150);
 	    var i=0;
 	    while (i<regart)
 	    {
@@ -1344,7 +1344,7 @@
  {
     var monTot=montoMarcados();
     var colum=determinarReferenciaDoc($('fafactur_tipref').value);
-    var regart=totalregistros2('ax',3,25);
+    var regart=totalregistros2('ax',3,150);
     var i=0;
     while (i<regart)
     {
@@ -1544,7 +1544,7 @@
       if ($('recarg').visible() && $('id').value=='')
       {
         var fil=0;
-        var facart=totalregistros2('ax',3,25);
+        var facart=totalregistros2('ax',3,150);
 	    while (fil<facart)
 	    {
 	     var recargo="ax_"+fil+"_12";
@@ -1639,7 +1639,7 @@
   {
     var miTot=0;
 
-    var regart=totalregistros2('ax',3,25);
+    var regart=totalregistros2('ax',3,150);
     var fil=0;
     while (fil<regart)
     {
@@ -1747,7 +1747,7 @@
   function Proporcion(fila)
   {
     var montot=0;
-    var regart=totalregistros2('ax',3,25);
+    var regart=totalregistros2('ax',3,150);
     var fil=0;
     while (fil<regart)
     {
@@ -1789,7 +1789,7 @@
   {
     var acumulador=0;
     var diferencia=0
-    var regart=totalregistros2('ax',3,25);
+    var regart=totalregistros2('ax',3,150);
     var fil=0;
     while (fil<regart)
     {
@@ -1820,7 +1820,7 @@
 
   function ultimoMarcado()
   {
-    var regart=totalregistros2('ax',3,25);
+    var regart=totalregistros2('ax',3,150);
     var fil=0;
     var ultimo=-1;
     while (fil<regart)
@@ -1885,7 +1885,7 @@
      {
        if ($(tipret).value!='S')
        {
-         var regart=totalregistros2('ax',3,25);
+         var regart=totalregistros2('ax',3,150);
 		 var fil=0;
 		 while (fil<regart)
 		 {
@@ -1913,7 +1913,7 @@
        }
        else
        {
-         var regart=totalregistros2('ax',3,25);
+         var regart=totalregistros2('ax',3,150);
 		 var fil=0;
 		 while (fil<regart)
 		 {
@@ -2026,7 +2026,7 @@
   {
     var montot=0;
 
-    var regart=totalregistros2('ax',3,25);
+    var regart=totalregistros2('ax',3,150);
     var fil=0;
     while (fil<regart)
     {
@@ -2164,7 +2164,7 @@
    var articulo=$(id).value;
 
    var articulorepetido=false;
-   var am=totalregistros2('ax',3,25);
+   var am=totalregistros2('ax',3,150);
    var i=0;
    while (i<am)
    {
@@ -2262,7 +2262,7 @@
  function cantidadEntregarArt(fil,codart)
  {
    var cant_entreg=0;
-   var am=totalregistros2('ax',3,25);
+   var am=totalregistros2('ax',3,150);
    var i=0;
    while (i<am)
    {
@@ -2299,7 +2299,7 @@
    $(ctaprove).value=aux[0];
    $(blanco2).value=aux[2];
    $('listArt').hide();
-   var am=totalregistros2('ax',3,25);
+   var am=totalregistros2('ax',3,150);
    if ($('id').value=='' && $('fafactur_tipref').value!='V')
    {
      if (fila< am)
@@ -2348,7 +2348,7 @@
 	    {
 	     var codigoref= $(codref).value;
 	     $('fafactur_desfac').value=$('fafactur_desfac').value+$(desref).value+", ";
-	     var bc=totalregistros2('ax',3,25);
+	     var bc=totalregistros2('ax',3,150);
 	     var codart="ax_0_3";
 	     if (bc>=1 &&  $(codart).value!="")
 	     {
@@ -2386,7 +2386,7 @@
   function referencia_repetida(codrefe,fila)
  {
    var referenciarepetida=false;
-   var am=totalregistros2('ax',3,25);
+   var am=totalregistros2('ax',3,150);
    var i=0;
    while (i<am)
    {
@@ -2446,7 +2446,7 @@
 
  function colocarArticulos(arreglo)
  {
-   var filastot=totalregistros('ax',3,25);
+   var filastot=totalregistros('ax',3,150);
    var aux=arreglo.split('!');
    var i=0;
    while (i< (aux.length-1))
@@ -2533,7 +2533,7 @@
    var precio=name+"_"+fil+"_"+colprec;
    var precioe=name+"_"+fil+"_"+colprec2;
 
-   var am=totalregistros2('ax',3,25);
+   var am=totalregistros2('ax',3,150);
 
      if ($(precio).value!="") {var num4= toFloat(precio);}else {var num4= toFloat(precioe);}
      var num1=toFloat(id);
@@ -2596,7 +2596,7 @@
                {
                   var colum=determinarReferenciaDoc($('fafactur_tipref').value);
 
-				    var colart=totalregistros2('ax',3,25);
+				    var colart=totalregistros2('ax',3,150);
 				    var fi=0;
 					while (fi<colart)
 					{
@@ -2770,7 +2770,7 @@
 
  function distribuirexistencia(fila,dato)
  {
-   var colart=totalregistros2('ax',3,25);
+   var colart=totalregistros2('ax',3,150);
    var exis2="ax_"+fila+"_6";
     var fi=0;
 	while (fi<colart)
@@ -2823,7 +2823,7 @@
    var precio=name+"_"+fil+"_"+colprec;
    var precio2=name+"_"+fil+"_"+colprec2;
 
-   var am=totalregistros('ax',3,25);
+   var am=totalregistros('ax',3,150);
 
    if ($(precio).value!="") {var num4=toFloat(precio);}else {var num4=toFloat(precio2);}
    var num1=toFloat(id);
@@ -2916,7 +2916,7 @@
                {
                   var colum=determinarReferenciaDoc($('fafactur_tipref').value);
 
-				    var colart=totalregistros2('ax',3,25);
+				    var colart=totalregistros2('ax',3,150);
 				    var fi=0;
 					while (fi<colart)
 					{
@@ -3001,7 +3001,7 @@
    var num0=toFloat(cansol);
    var num3=toFloat(distot);
 
-    var am=totalregistros('ax',3,25);
+    var am=totalregistros('ax',3,150);
     if (am>0 && $(id).value!="")
     {
       if ($(precio).value!="")
@@ -3027,7 +3027,7 @@
           {
             var colum=determinarReferenciaDoc($('fafactur_tipref').value);
 
-		    var colart=totalregistros2('ax',3,25);
+		    var colart=totalregistros2('ax',3,150);
 		    var fi=0;
 			while (fi<colart)
 			{
@@ -3120,7 +3120,7 @@
           var calmontot=calcularMontTot();
           if (calmontot>0)
           {
-		    var colart=totalregistros2('ax',3,25);
+		    var colart=totalregistros2('ax',3,150);
 		    var fi=0;
 			while (fi<colart)
 			{
@@ -3322,7 +3322,7 @@
             var calmontot=calcularMontTot();
             if (calmontot>0)
             {
-		       var colart=totalregistros2('ax',3,25);
+		       var colart=totalregistros2('ax',3,150);
 		       var fi=0;
 			   while (fi<colart)
 			   {
@@ -3476,7 +3476,7 @@
     if (distrib>0)
     {
         var fil=0;
-        var facart=totalregistros2('ax',3,25);
+        var facart=totalregistros2('ax',3,150);
         while (fil<facart)
         {
 	     var codart="ax_"+fil+"_3";
@@ -3504,7 +3504,7 @@
   {
      $('fafactur_desrec').checked=false;
      var fil=1;
-     var facart=totalregistros2('ax',3,25);
+     var facart=totalregistros2('ax',3,150);
      var colum=determinarReferenciaDoc($('fafactur_tipref').value);
      while (fil<facart)
      {
@@ -3635,7 +3635,7 @@ function aplicarBL(id)
     var col=parseInt(aux[2]);
 
    if (fil==0) {
-       reg=totalregistros2('ax',3,25);
+       reg=totalregistros2('ax',3,150);
         var j=1;
         while (j<reg)
         {
