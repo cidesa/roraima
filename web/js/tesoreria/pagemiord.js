@@ -70,7 +70,7 @@
      var monto5=toFloat('opordpag_monret');
      var monto6=toFloat('opordpag_mondes');
 
-     var calculos=(monto4 - ((monto5 +diferencia)+ monto6));
+     var calculos=(monto4 - ((monto5)+ monto6));
      $('opordpag_neto').value=format(calculos.toFixed(2),'.',',','.');
    }
  }
