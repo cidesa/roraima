@@ -23,8 +23,19 @@ class Cadetcot extends BaseCadetcot
    public function hydrate(ResultSet $rs, $startcol = 1)
    {
        parent::hydrate($rs, $startcol);
-       $this->desart= Herramientas::getX('CODART','Caregart','Desart',self::getCodart());;
-       $reqart= Herramientas::getX('REFCOT','Cacotiza','Refsol',self::getRefcot());;
+
+       $reqart= Herramientas::getX('REFCOT','Cacotiza','Refsol',self::getRefcot());
+       $t= new Criteria();
+       $t->add(CaartsolPeer::REQART,$reqart);
+       $t->add(CaartsolPeer::CODART,self::getCodart());
+       $reg= CaartsolPeer::doSelectOne($t);
+       if ($reg)
+       {
+           $this->desart= $reg->getDesart();
+       }else {
+            $this->desart= Herramientas::getX('CODART','Caregart','Desart',self::getCodart());
+       }
+
 	   $monrecargo=0;
 	   $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
        $cri = new Criteria();
