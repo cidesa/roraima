@@ -1720,7 +1720,7 @@ public static function entregas($nroped)
         while ($j<count($x))
         {
           $monto_ingreso=$x[$j]->getMonaju();
-          $cta_vta=H::getX('Codart','Caregart','Codcta',$x[$j]->getCodart());
+          $cta_vta=H::getX('Codart','Caregart','Ctavta',$x[$j]->getCodart());
           if ($cta_vta!="")
           {
             if (!Factura::buscarAsientos($cta_vta,'C',$monto_ingreso,&$arrasientos,&$pos))
@@ -1760,7 +1760,7 @@ public static function entregas($nroped)
         while ($j<count($x))
         {
           $monto_ingreso=$x[$j]->getMonaju();
-          $cta_vta=H::getX('Codart','Caregart','Codcta',$x[$j]->getCodart());
+          $cta_vta=H::getX('Codart','Caregart','Ctavta',$x[$j]->getCodart());
           if ($cta_vta!="")
           {
             if (!Factura::buscarAsientos($cta_vta,'D',$monto_ingreso,&$arrasientos,&$pos))
