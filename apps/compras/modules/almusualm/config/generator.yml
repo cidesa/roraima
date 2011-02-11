@@ -1,0 +1,41 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Causualm
+    theme:            cidesaGenerator
+    fields:
+      display:        [codest]
+      cedemp:
+        name: Usuario        
+        catalogo:
+          catalogoweb: Usuarios_Apliuser
+          clase: Usuarios
+          ajax: 1
+          parametros: getprincipal="getCedemp" getsecundario="getNomuse" campoprincipal="cedemp" camposecundario="nomuse" campobase = "id"
+      codalm:   {name: Almacén}
+      ubica:    {name: .}
+      grid:     {name: .}
+      codest:   {name: Estados}
+      todos:    {name: Marcar Todos, type: checkbox_tag, params: onclick="MarcarTodos(this.id)"}
+
+    list:
+      title:          Almacenes por Usuarios
+      display:        [=cedemp, nomuse, codalm, nomalm]
+      filters:        [cedemp, codalm]
+      fields:
+        nomuse:       {name: Usuarios}
+        nomalm:       {name: Almacén}
+      max_per_page:	  10
+      sort:           cedemp
+      object_actions:
+        _edit:        ~
+        _delete:        ~     
+    edit:
+      title:          Almacenes por Usuarios
+      display:
+        Datos Generales:  [cedemp]
+        Datos Almacen:    [_ubica, todos, _grid]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
