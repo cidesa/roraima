@@ -23,7 +23,7 @@ class almusualmActions extends autoalmusualmActions
         $per = OcestadoPeer::doSelect($c);
         $est=array('' => 'Todos los Estados...');
         foreach($per as $r)
-          $est[$r->getCodedo()]=$r->getNomedo();        
+          $est[$r->getCodedo()]=$r->getNomedo();
         
         if($this->causualm->getCedemp()!='')
         {
@@ -182,6 +182,8 @@ class almusualmActions extends autoalmusualmActions
       // Todas las funciones de validación y procesos del negocio
       // deben retornar códigos >= -1. Estos código serám buscados en
       // el archivo errors.yml en la función handleErrorEdit()
+        $this->causualm = $this->getCausualmOrCreate();
+        $this->configGrid();
 
       if($this->coderr!=-1){
         return false;
@@ -200,9 +202,17 @@ class almusualmActions extends autoalmusualmActions
    */
   public function updateError()
   {
+    $c = new Criteria();
+    $c->add(OcestadoPeer::CODPAI,'0001');
+    $c->addAscendingOrderByColumn(OcestadoPeer::NOMEDO);
+    $per = OcestadoPeer::doSelect($c);
+    $est=array('' => 'Todos los Estados...');
+    foreach($per as $r)
+      $est[$r->getCodedo()]=$r->getNomedo();
     $this->configGrid();
-    $grid = Herramientas::CargarDatosGridv2($this,$this->obj);
+    $grid = Herramientas::CargarDatosGridv2($this,$this->obj,true);
 
+    $this->params=array('estado'=>$est,'codedo'=>'');
     //$this->configGrid($grid[0],$grid[1]);
 
   }
