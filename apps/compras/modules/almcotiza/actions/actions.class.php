@@ -494,11 +494,20 @@ $this->Bitacora('Guardo');
     }elseif ($referencia==2){//solicitud de egreso
 
 	  $param='Caartsol';
+        $sinagrupar=H::getConfApp2('sinagrupar', 'compras', 'almcotiza');
+        if ($sinagrupar=='S')
+        {
+          $sql="Select 9 as id, a.codart, a.desart, a.costo, a.canreq as canreq,  a.mondes as mondes, (a.canreq * a.costo ) as totdet,
+                now() as fecentreg, (select sum(monrgo) from cadisrgo c where c.reqart='".$codigo."' and c.codart=a.codart) as recargo
+                from Caartsol a, Caregart b
+                where a.codart=b.codart and reqart='".$codigo."' order by a.id;";
+        }else  {
 
       $sql="Select 9 as id, a.codart, a.desart, a.costo, sum(a.canreq) as canreq,  sum(a.mondes) as mondes, sum(a.canreq * a.costo ) as totdet, " .
       		"now() as fecentreg, (select sum(monrgo) from cadisrgo c where c.reqart='".$codigo."' and c.codart=a.codart) as recargo " .
 	  		"from Caartsol a, Caregart b  " .
 	  		"where a.codart=b.codart and reqart='".$codigo."' group by a.codart,a.desart,a.costo";
+        }
 	  $resp = Herramientas::BuscarDatos($sql,&$per);
 
     }else{
