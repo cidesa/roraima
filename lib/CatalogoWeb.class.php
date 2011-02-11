@@ -6715,5 +6715,101 @@ public function Bnubica_Almordcom2() {
                     );
                 }
 	}
+
+        public function Cadefalm_Almtraalm()
+        {
+
+            $c = new Criteria();
+            $per = CausualmPeer::doselectOne($c);
+
+            if($per)
+            {
+                $dato = H::GetX('Loguse','Usuarios','Cedemp',sfContext::getInstance()->getUser()->getAttribute('loguse'));
+
+                $this->c = new Criteria();
+                $this->c->add(CausualmPeer::CEDEMP,$dato);
+                $this->c->addJoin(CadefalmPeer::CODALM,CausualmPeer::CODALM);
+                $this->c->addAscendingOrderByColumn(CadefalmPeer :: CODALM);
+                $this->columnas = array (
+                                CadefalmPeer :: CODALM => 'Código',
+                                CadefalmPeer :: NOMALM => 'Descripción',
+                        );
+            }else
+            {
+                $this->c = new Criteria();
+                $this->c->addAscendingOrderByColumn(CadefalmPeer :: CODALM);
+                $this->columnas = array (
+                                CadefalmPeer :: CODALM => 'Código',
+                                CadefalmPeer :: NOMALM => 'Descripción',
+                        );
+
+            }
+
+
+        }
+
+        public function Cadelfalm_Almordrec()
+        {
+
+            $c = new Criteria();
+            $per = CausualmPeer::doselectOne($c);
+
+            if($per)
+            {
+                $dato = H::GetX('Loguse','Usuarios','Cedemp',sfContext::getInstance()->getUser()->getAttribute('loguse'));
+
+                $this->c = new Criteria();
+                $this->c->add(CausualmPeer::CEDEMP,$dato);
+                $this->c->addJoin(CadefalmPeer::CODALM,CausualmPeer::CODALM);
+                $this->c->addAscendingOrderByColumn(CadefalmPeer :: CODALM);
+                $this->columnas = array (
+                                CadefalmPeer :: CODALM => 'Código',
+                                CadefalmPeer :: NOMALM => 'Descripción',
+                        );
+            }else
+            {
+                $this->c = new Criteria();
+                $this->c->addAscendingOrderByColumn(CadefalmPeer :: CODALM);
+                $this->columnas = array (
+                                CadefalmPeer :: CODALM => 'Código',
+                                CadefalmPeer :: NOMALM => 'Descripción',
+                        );
+
+            }
+
+
+        }
+
+        public function Cadefalm_Almentalm()
+        {
+
+            $c = new Criteria();
+            $per = CausualmPeer::doselectOne($c);
+
+            if($per)
+            {
+                $dato = H::GetX('Loguse','Usuarios','Cedemp',sfContext::getInstance()->getUser()->getAttribute('loguse'));
+
+                $this->c = new Criteria();
+                $this->c->add(CausualmPeer::CEDEMP,$dato);
+                $this->c->addJoin(CadefalmPeer::CODALM,CausualmPeer::CODALM);
+                $this->c->addAscendingOrderByColumn(CadefalmPeer :: CODALM);
+                $this->columnas = array (
+                                CadefalmPeer :: CODALM => 'Código',
+                                CadefalmPeer :: NOMALM => 'Descripción',
+                        );
+            }else
+            {
+                $this->c = new Criteria();
+                $this->c->addAscendingOrderByColumn(CadefalmPeer :: CODALM);
+                $this->columnas = array (
+                                CadefalmPeer :: CODALM => 'Código',
+                                CadefalmPeer :: NOMALM => 'Descripción',
+                        );
+
+            }
+
+
+        }
 }
 ?>
