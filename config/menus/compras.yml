@@ -11,6 +11,9 @@ compras:
       default:
         modulo: compras.php
         modulo_dev: compras_dev.php
+      División Territorial:
+        modulo: obras.php
+        modulo_dev: obras_dev.php
       Reportes:
         absoluta: reportes/reportes/compras
     imagenes:
@@ -124,6 +127,7 @@ compras:
       Migrar Inventario Fisico :                              almmiginvfis
       Configuración para Archivos TXT de Ventas:              catxtalm
       Migración de Ventas:                                    camigtxtvenalm
+      Asociar Almacenes por Usuarios:                         almusualm
       #Importar Productos:                                    ImportarProductos.php
       #Actualizar Precios y Existencias:                      ActualizarProductos.php
       #Cambiar Password de Usuario:                           PreCamPwd.php

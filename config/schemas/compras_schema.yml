@@ -3494,3 +3494,18 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+  causualm:
+    cedemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    codalm:
+      type: VARCHAR
+      size: 20
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro

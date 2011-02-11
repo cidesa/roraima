@@ -1,0 +1,16 @@
+methods:
+  post:
+   - "causualm{cedemp}"
+
+names:
+  causualm{cedemp}:
+    required:  Yes
+    required_msg: La Cédula del Empleado no puede estar en Blanco
+    validators: Validator_cedemp
+
+Validator_cedemp:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Causualm
+        column:       cedemp
+        unique_error: El registro ya Existe intente con otro.

@@ -2186,6 +2186,7 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
 	
 	public static function Guardar_Grid($objgrid,$arrget,$clase)
 	{
+            try{
 		$objupdate = $objgrid[0];
 	    $j = 0;
 		foreach($objupdate as $x)
@@ -2211,7 +2212,12 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
 		{
 			$z->delete();
 		}
-		return '-1';	  
+                $coderr = '-1';
+            }catch (PropelException $e)
+            {
+                $coderr = 490;
+	}
+		return $coderr;
 	}
 
 
