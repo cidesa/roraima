@@ -260,6 +260,19 @@ class apliuserActions extends autoapliuserActions
         $modulos = $modulos[$n[0]]['menu'];
       }
     }
+
+    $dir_reportes = $this->getUser()->getAttribute('reportes', '').'reportes/reportes.yml';
+    if(cidesaTools::exitsfile($dir_reportes)) {
+      $reportes = sfYaml::load($dir_reportes);
+
+      $modname = substr(strtolower($yml),  0, -4);
+      if(isset ($reportes[$modname])){
+        $modulos['Reportes'] = $reportes[$modname]; 
+      }
+
+    }
+
+
     $c = new Criteria();
     $c->add(ApliUserPeer::CODAPL,$cod);
     $c->add(ApliUserPeer::LOGUSE,$loguse);
