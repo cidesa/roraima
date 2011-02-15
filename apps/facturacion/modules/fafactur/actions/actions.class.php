@@ -211,6 +211,7 @@ class fafacturActions extends autofafacturActions {
 
 		$this->columnas = Herramientas :: getConfigGrid(sfConfig :: get('sf_app_module_dir') . '/fafactur/' . sfConfig :: get('sf_app_module_config_dir_name') . '/grid_faartfacv2');
 
+                $this->columnas[0]->setFilas($this->fafactur->getNumfilas());
 		if ($tipref!="" && ($tipref=='P'))
 		{
 		  $this->columnas[0]->setAncho(1400);

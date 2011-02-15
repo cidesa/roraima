@@ -3,7 +3,7 @@ opciones:                  # Opciones generales
   tabla:                   faartfac
   anchogrid:               750
   ancho:                   1400
-  filas:                   150
+  filas:                   50
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1

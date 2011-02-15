@@ -39,6 +39,7 @@ echo form_tag('fafactur/save', array (
 <?php echo object_input_hidden_tag($fafactur, 'getCtasociada', array('id' => 'fafactur_ctasociada', 'name' => 'fafactur[ctasociada]')) ?>
 <?php echo object_input_hidden_tag($fafactur, 'getFilgenmov', array('id' => 'fafactur_filgenmov', 'name' => 'fafactur[filgenmov]')) ?>
 <?php echo object_input_hidden_tag($fafactur, 'getMancatdes', array('id' => 'fafactur_mancatdes', 'name' => 'fafactur[mancatdes]')) ?>
+<?php echo object_input_hidden_tag($fafactur, 'getNumfilas', array('id' => 'fafactur_numfilas', 'name' => 'fafactur[numfilas]')) ?>
 
 
 <div id="CajaPrinc" style="display:none">

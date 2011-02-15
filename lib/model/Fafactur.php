@@ -67,8 +67,9 @@ class Fafactur extends BaseFafactur
         protected $gridfaclib="";
         protected $mancatdes="";
         protected $notacredito="";
+        protected $numfilas=50;
 
-  public function getRifpro()
+        public function getRifpro()
   {
    return Herramientas::getX('CODPRO','Facliente','Rifpro',self::getCodcli());
   }
@@ -205,6 +206,29 @@ public function getMancatdes()
   public function getDescenaco()
   {
    return Herramientas::getX('Codcenaco','Cadefcenaco','Descenaco',self::getCodcenaco());
+  }
+
+public function getNumfilas()
+  {
+
+    $dato=50;
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('facturacion',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['facturacion']))
+	     if(array_key_exists('fafactur',$varemp['aplicacion']['facturacion']['modulos'])){
+	       if(array_key_exists('numfilas',$varemp['aplicacion']['facturacion']['modulos']['fafactur']))
+	       {
+	       	$dato=$varemp['aplicacion']['facturacion']['modulos']['fafactur']['numfilas'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setNumfilas()
+  {
+  	return $this->numfilas;
   }
 
 }
