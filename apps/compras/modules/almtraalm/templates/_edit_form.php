@@ -134,7 +134,7 @@
     array('use_style' => 'true')
     )
     ?> &nbsp;
- <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefalm_Almtraalm/clase/Cadefalm/frame/sf_admin_edit_form/obj1/catraalm_almdes/obj2/catraalm_almades/campo1/codalm/campo2/nomalm','','','botoncat')?>
+ <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Cadefalm_Almtraalm2/clase/Cadefalm/frame/sf_admin_edit_form/obj1/catraalm_almdes/obj2/catraalm_almades/campo1/codalm/campo2/nomalm','','','botoncat')?>
 
  <?php $value = object_input_tag($catraalm, 'getAlmades', array (
   'size' => 60,
