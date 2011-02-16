@@ -147,6 +147,9 @@ propel:
     decret:
       type: VARCHAR
       size: 1000
+    respon:
+      type: VARCHAR
+      size: 1000
     id:
       type: INTEGER
       required: true
@@ -306,13 +309,9 @@ propel:
       required: true
     fecedi:
       type: DATE
-    liregsol_id:
-      type: INTEGER
-      required: true
-      foreignTable: liregsol
-      foreignReference: id
-      onDelete:
-      onUpdate:
+    numemo:
+      type: VARCHAR
+      size: 8
     plamodifi:
       type: INTEGER
     plaaclara:
@@ -385,6 +384,9 @@ propel:
     observaciones:
       type: VARCHAR
       size: 1000
+    archivopli:
+      type: VARCHAR
+      size: 100
     id:
       type: INTEGER
       required: true
@@ -764,6 +766,319 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  liprebas:
+    reqart:
+      type: VARCHAR
+      size: 8
+      required: true
+    fecreq:
+      type: DATE
+      required: true
+    desreq:
+      type: VARCHAR
+      size: 1000
+    monreq:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stareq:
+      type: VARCHAR
+      size: 1
+    motreq:
+      type: VARCHAR
+      size: 1000
+    benreq:
+      type: VARCHAR
+      size: 1000
+    mondes:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    obsreq:
+      type: VARCHAR
+      size: 5000
+    unires:
+      type: VARCHAR
+      size: 32
+    tipmon:
+      type: VARCHAR
+      size: 3
+      required: true
+      foreignTable: tsdesmon
+      foreignReference: codmon
+    valmon:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecanu:
+      type: DATE
+    codpro:
+      type: VARCHAR
+      size: 15
+    reqcom:
+      type: VARCHAR
+      size: 8
+    tipfin:
+      type: VARCHAR
+      size: 4
+    tipreq:
+      type: CHAR
+      size: 1
+    aprreq:
+      type: CHAR
+      size: 1
+    usuapr:
+      type: CHAR
+      size: 1
+    fecapr:
+      type: DATE
+    codemp:
+      type: VARCHAR
+      size: 16
+    codcen:
+      type: VARCHAR
+      size: 4
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  liprebasdet:
+    reqart:
+      type: VARCHAR
+      size: 8
+      required: true
+    codart:
+      type: VARCHAR
+      size: 20
+      required: true
+    desart:
+      type: VARCHAR
+      size: 2000
+    codcat:
+      type: VARCHAR
+      size: 32
+      required: true
+    canreq:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    canrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    montot:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    costo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monrgo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    canord:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    mondes:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    relart:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    unimed:
+      type: VARCHAR
+      size: 50
+    codpar:
+      type: VARCHAR
+      size: 32
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+    _indexes:
+      i_liprebasdet:
+        - codart
+  liprebasraz:
+    numsol:
+      type: VARCHAR
+      size: 8
+      required: true
+    codrazcom:
+      type: VARCHAR
+      size: 4
+      required: true
+      foreignTable: carazcom
+      foreignReference: codrazcom
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  limemoran:
+    numexp:
+      type: VARCHAR
+      size: 8
+      required: true
+    numemo:
+      type: VARCHAR
+      size: 8
+      required: true
+    nompro:
+      type: VARCHAR
+      size: 250
+      required: true
+    fecha:
+      type: DATE
+      required: true
+    codfin:
+      type: VARCHAR
+      size: 4
+    codcom:
+      type: VARCHAR
+      size: 4
+    coduniste:
+      type: VARCHAR
+      size: 4
+    codclacomp:
+      type: VARCHAR
+      size: 5
+    tipcom:
+      type: VARCHAR
+      size: 1
+    detmemo:
+      type: VARCHAR
+      size: 5000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  lileycon:
+    archivocon:
+      type: VARCHAR
+      size: 100
+    archivoreg:
+      type: VARCHAR
+      size: 100
+    descripcion:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  linorcov:
+    archinorcov:
+      type: VARCHAR
+      size: 100
+    descripcion:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  licomint:
+    numcomint:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    feccomint:
+      type: DATE
+    codcom:
+      type: VARCHAR
+      size: 4
+    status:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  lidetcomint:
+    numcomint:
+      type: VARCHAR
+      size: 8
+    feccomint:
+      type: DATE
+    codart:
+      type: VARCHAR
+      size: 20
+    reqart:
+      type: VARCHAR
+      size: 8
+    fecreq  :
+      type: DATE
+    unires:
+      type: VARCHAR
+      size: 32
+    canreq:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    costo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    montot:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  lirecomen:
+    fecrec:
+      type: DATE
+    codlic:
+      type: VARCHAR
+      size: 32
+    rif:
+      type: VARCHAR
+      size: 32
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  liptocue:
+    numptocue:
+      type: VARCHAR
+      size: 8
+    fecrec:
+      type: DATE
+    codlic:
+      type: VARCHAR
+      size: 32
     id:
       type: INTEGER
       required: true
