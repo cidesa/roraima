@@ -889,7 +889,7 @@ class almsolegrActions extends autoalmsolegrActions
     public function configGridDetalle()
     {
        $detsinord=H::getConfApp2('detsinord', 'compras', 'almsolegr');
-
+       $oculcol=H::getConfApp2('oculcol', 'compras', 'almsolegr');
        $c = new Criteria();
        $c->add(CaartsolPeer::REQART,$this->casolart->getReqart());
        if ($detsinord!="S")
@@ -967,6 +967,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col5->setHTML('type="text" size="17" maxlength="'.chr(39).$loncat.chr(39).'"');
        $col5->setCatalogo('npcatpre','sf_admin_edit_form',$obj2,'Npcatpre_Almsolegr',$params2);
        $col5->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaracategoria.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena; perderfocus(event,this.id,15);}" onBlur="javascript:event.keyCode=13; actualizo_cod_presupuestario(event,this.id);"');
+       if ($oculcol=='S') $col5->setOculta(true);
 
        $col6 = new Columna('Cód. Presupuestario');
        $col6->setTipo(Columna::TEXTO);
@@ -976,6 +977,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col6->setAlineacionContenido(Columna::CENTRO);
        $col6->setHTML('type="text" size="55" maxlength="'.chr(39).$lonpre.chr(39).'"');
        $col6->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascarapresupuesto.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
+       if ($oculcol=='S') $col6->setOculta(true);
 
        $col7 = new Columna('Cant. Requerida');
        $col7->setEsGrabable(true);
@@ -1005,6 +1007,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col10->setHTML('type="text" size="10"');
        $col10->setJScript('onKeypress="Totalmenosdescuento(event,this.id);"');
        if ($naplrecdes=='S')  $col10->setOculta(true);
+       if ($oculcol=='S') $col10->setOculta(true);
 
        $col11 = clone $col7;
        $col11->setTitulo('Recargo');
@@ -1097,6 +1100,7 @@ class almsolegrActions extends autoalmsolegrActions
       public function configGridDetalleConsulta()
    {
       $detsinord=H::getConfApp2('detsinord', 'compras', 'almsolegr');
+      $oculcol=H::getConfApp2('oculcol', 'compras', 'almsolegr');
        $c = new Criteria();
        $c->add(CaartsolPeer::REQART,$this->casolart->getReqart());
        if ($detsinord!="S")
@@ -1165,6 +1169,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col5->setNombreCampo('codcat');
        $col5->setHTML('type="text" size="17" maxlength="'.chr(39).$loncat.chr(39).'" readonly="true"');
        $col5->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaracategoria.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);actualizo_cod_presupuestario(this.id);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
+       if ($oculcol=='S') $col5->setOculta(true);
 
        $col6 = new Columna('Cód. Presupuestario');
        $col6->setTipo(Columna::TEXTO);
@@ -1174,6 +1179,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col6->setAlineacionContenido(Columna::CENTRO);
        $col6->setHTML('type="text" size="55" maxlength="'.chr(39).$lonpre.chr(39).'" readonly="true"');
        $col6->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascarapresupuesto.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
+       if ($oculcol=='S') $col6->setOculta(true);
 
        $col7 = new Columna('Cant. Requerida');
        $col7->setEsGrabable(true);
@@ -1202,6 +1208,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col10->setHTML('type="text" size="10" readonly="true"');
        $col10->setJScript('onKeypress="Totalmenosdescuento(event,this.id); recalcularecargos(event,this.id);"');
        if ($naplrecdes=='S') $col10->setOculta(true);
+       if ($oculcol=='S') $col10->setOculta(true);
 
        $col11 = clone $col7;
        $col11->setTitulo('Recargo');
