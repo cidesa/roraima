@@ -85,7 +85,8 @@ function verificar_codigo_repetido(e,id)
     var coldes=col+1;
     var nombre=name+"_"+fil+"_"+coldes;
      contador_repetido=0;
-     while (f<10)
+     var am=totalregistros('ax',1,400);
+     while (f<am)
       {
              var col_fila_codigo_car = "ax_"+f+"_1";
              var col_fila_codigo_car_com = "ax_"+i+"_1";
