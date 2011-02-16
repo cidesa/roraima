@@ -46,7 +46,7 @@ class LireglicMapBuilder {
 
 		$tMap->addColumn('FECEDI', 'Fecedi', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addForeignKey('LIREGSOL_ID', 'LiregsolId', 'int', CreoleTypes::INTEGER, 'liregsol', 'ID', true, null);
+		$tMap->addColumn('NUMEMO', 'Numemo', 'string', CreoleTypes::VARCHAR, false, 8);
 
 		$tMap->addColumn('PLAMODIFI', 'Plamodifi', 'int', CreoleTypes::INTEGER, false, null);
 
@@ -97,6 +97,8 @@ class LireglicMapBuilder {
 		$tMap->addColumn('CODCLACOMP', 'Codclacomp', 'string', CreoleTypes::VARCHAR, false, 5);
 
 		$tMap->addColumn('OBSERVACIONES', 'Observaciones', 'string', CreoleTypes::VARCHAR, false, 1000);
+
+		$tMap->addColumn('ARCHIVOPLI', 'Archivopli', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

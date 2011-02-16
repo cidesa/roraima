@@ -653,7 +653,10 @@ abstract class BaseLioferpre extends BaseObject  implements Persistent {
 		if ($this->aLireglic === null && ($this->lireglic_id !== null)) {
 						include_once 'lib/model/om/BaseLireglicPeer.php';
 
-			$this->aLireglic = LireglicPeer::retrieveByPK($this->lireglic_id, $con);
+      $c = new Criteria();
+      $c->add(LireglicPeer::ID,$this->lireglic_id);
+      
+			$this->aLireglic = LireglicPeer::doSelectOne($c, $con);
 
 			
 		}

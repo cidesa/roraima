@@ -63,12 +63,6 @@ abstract class BaseLiregsol extends BaseObject  implements Persistent {
 	protected $lastLiressolCriteria = null;
 
 	
-	protected $collLireglics;
-
-	
-	protected $lastLireglicCriteria = null;
-
-	
 	protected $alreadyInSave = false;
 
 	
@@ -226,6 +220,11 @@ abstract class BaseLiregsol extends BaseObject  implements Persistent {
 	public function setFecsol($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecsol] from input: " . var_export($v, true));
@@ -242,6 +241,11 @@ abstract class BaseLiregsol extends BaseObject  implements Persistent {
 	
 	public function setFecres($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -450,14 +454,6 @@ abstract class BaseLiregsol extends BaseObject  implements Persistent {
 				}
 			}
 
-			if ($this->collLireglics !== null) {
-				foreach($this->collLireglics as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -521,14 +517,6 @@ abstract class BaseLiregsol extends BaseObject  implements Persistent {
 
 				if ($this->collLiressols !== null) {
 					foreach($this->collLiressols as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
-
-				if ($this->collLireglics !== null) {
-					foreach($this->collLireglics as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -738,10 +726,6 @@ abstract class BaseLiregsol extends BaseObject  implements Persistent {
 				$copyObj->addLiressol($relObj->copy($deepCopy));
 			}
 
-			foreach($this->getLireglics() as $relObj) {
-				$copyObj->addLireglic($relObj->copy($deepCopy));
-			}
-
 		} 
 
 		$copyObj->setNew(true);
@@ -789,7 +773,10 @@ abstract class BaseLiregsol extends BaseObject  implements Persistent {
 		if ($this->aLidatste === null && ($this->lidatste_id !== null)) {
 						include_once 'lib/model/om/BaseLidatstePeer.php';
 
-			$this->aLidatste = LidatstePeer::retrieveByPK($this->lidatste_id, $con);
+      $c = new Criteria();
+      $c->add(LidatstePeer::ID,$this->lidatste_id);
+      
+			$this->aLidatste = LidatstePeer::doSelectOne($c, $con);
 
 			
 		}
@@ -818,7 +805,10 @@ abstract class BaseLiregsol extends BaseObject  implements Persistent {
 		if ($this->aLitipsol === null && ($this->litipsol_id !== null)) {
 						include_once 'lib/model/om/BaseLitipsolPeer.php';
 
-			$this->aLitipsol = LitipsolPeer::retrieveByPK($this->litipsol_id, $con);
+      $c = new Criteria();
+      $c->add(LitipsolPeer::ID,$this->litipsol_id);
+      
+			$this->aLitipsol = LitipsolPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -847,7 +837,10 @@ abstract class BaseLiregsol extends BaseObject  implements Persistent {
 		if ($this->aLicomlic === null && ($this->licomlic_id !== null)) {
 						include_once 'lib/model/om/BaseLicomlicPeer.php';
 
-			$this->aLicomlic = LicomlicPeer::retrieveByPK($this->licomlic_id, $con);
+      $c = new Criteria();
+      $c->add(LicomlicPeer::ID,$this->licomlic_id);
+      
+			$this->aLicomlic = LicomlicPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -922,146 +915,6 @@ abstract class BaseLiregsol extends BaseObject  implements Persistent {
 	{
 		$this->collLiressols[] = $l;
 		$l->setLiregsol($this);
-	}
-
-	
-	public function initLireglics()
-	{
-		if ($this->collLireglics === null) {
-			$this->collLireglics = array();
-		}
-	}
-
-	
-	public function getLireglics($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseLireglicPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collLireglics === null) {
-			if ($this->isNew()) {
-			   $this->collLireglics = array();
-			} else {
-
-				$criteria->add(LireglicPeer::LIREGSOL_ID, $this->getId());
-
-				LireglicPeer::addSelectColumns($criteria);
-				$this->collLireglics = LireglicPeer::doSelect($criteria, $con);
-			}
-		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(LireglicPeer::LIREGSOL_ID, $this->getId());
-
-				LireglicPeer::addSelectColumns($criteria);
-				if (!isset($this->lastLireglicCriteria) || !$this->lastLireglicCriteria->equals($criteria)) {
-					$this->collLireglics = LireglicPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastLireglicCriteria = $criteria;
-		return $this->collLireglics;
-	}
-
-	
-	public function countLireglics($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/om/BaseLireglicPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(LireglicPeer::LIREGSOL_ID, $this->getId());
-
-		return LireglicPeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addLireglic(Lireglic $l)
-	{
-		$this->collLireglics[] = $l;
-		$l->setLiregsol($this);
-	}
-
-
-	
-	public function getLireglicsJoinLitiplic($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseLireglicPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collLireglics === null) {
-			if ($this->isNew()) {
-				$this->collLireglics = array();
-			} else {
-
-				$criteria->add(LireglicPeer::LIREGSOL_ID, $this->getId());
-
-				$this->collLireglics = LireglicPeer::doSelectJoinLitiplic($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(LireglicPeer::LIREGSOL_ID, $this->getId());
-
-			if (!isset($this->lastLireglicCriteria) || !$this->lastLireglicCriteria->equals($criteria)) {
-				$this->collLireglics = LireglicPeer::doSelectJoinLitiplic($criteria, $con);
-			}
-		}
-		$this->lastLireglicCriteria = $criteria;
-
-		return $this->collLireglics;
-	}
-
-
-	
-	public function getLireglicsJoinLisicact($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseLireglicPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collLireglics === null) {
-			if ($this->isNew()) {
-				$this->collLireglics = array();
-			} else {
-
-				$criteria->add(LireglicPeer::LIREGSOL_ID, $this->getId());
-
-				$this->collLireglics = LireglicPeer::doSelectJoinLisicact($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(LireglicPeer::LIREGSOL_ID, $this->getId());
-
-			if (!isset($this->lastLireglicCriteria) || !$this->lastLireglicCriteria->equals($criteria)) {
-				$this->collLireglics = LireglicPeer::doSelectJoinLisicact($criteria, $con);
-			}
-		}
-		$this->lastLireglicCriteria = $criteria;
-
-		return $this->collLireglics;
 	}
 
 } 

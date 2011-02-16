@@ -4,25 +4,25 @@
 
 class LidefempMapBuilder {
 
-
+	
 	const CLASS_NAME = 'lib.model.map.LidefempMapBuilder';
 
-
+	
 	private $dbMap;
 
-
+	
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-
+	
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-
+	
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -56,5 +56,5 @@ class LidefempMapBuilder {
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	}
-}
+	} 
+} 

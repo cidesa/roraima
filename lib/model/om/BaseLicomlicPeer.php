@@ -13,7 +13,7 @@ abstract class BaseLicomlicPeer {
 	const CLASS_DEFAULT = 'lib.model.Licomlic';
 
 	
-	const NUM_COLUMNS = 5;
+	const NUM_COLUMNS = 6;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -32,6 +32,9 @@ abstract class BaseLicomlicPeer {
 	const DECRET = 'licomlic.DECRET';
 
 	
+	const RESPON = 'licomlic.RESPON';
+
+	
 	const ID = 'licomlic.ID';
 
 	
@@ -40,18 +43,18 @@ abstract class BaseLicomlicPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcom', 'Descom', 'Fecnom', 'Decret', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (LicomlicPeer::CODCOM, LicomlicPeer::DESCOM, LicomlicPeer::FECNOM, LicomlicPeer::DECRET, LicomlicPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcom', 'descom', 'fecnom', 'decret', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codcom', 'Descom', 'Fecnom', 'Decret', 'Respon', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (LicomlicPeer::CODCOM, LicomlicPeer::DESCOM, LicomlicPeer::FECNOM, LicomlicPeer::DECRET, LicomlicPeer::RESPON, LicomlicPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcom', 'descom', 'fecnom', 'decret', 'respon', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcom' => 0, 'Descom' => 1, 'Fecnom' => 2, 'Decret' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (LicomlicPeer::CODCOM => 0, LicomlicPeer::DESCOM => 1, LicomlicPeer::FECNOM => 2, LicomlicPeer::DECRET => 3, LicomlicPeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcom' => 0, 'descom' => 1, 'fecnom' => 2, 'decret' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codcom' => 0, 'Descom' => 1, 'Fecnom' => 2, 'Decret' => 3, 'Respon' => 4, 'Id' => 5, ),
+		BasePeer::TYPE_COLNAME => array (LicomlicPeer::CODCOM => 0, LicomlicPeer::DESCOM => 1, LicomlicPeer::FECNOM => 2, LicomlicPeer::DECRET => 3, LicomlicPeer::RESPON => 4, LicomlicPeer::ID => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcom' => 0, 'descom' => 1, 'fecnom' => 2, 'decret' => 3, 'respon' => 4, 'id' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
@@ -112,6 +115,8 @@ abstract class BaseLicomlicPeer {
 		$criteria->addSelectColumn(LicomlicPeer::FECNOM);
 
 		$criteria->addSelectColumn(LicomlicPeer::DECRET);
+
+		$criteria->addSelectColumn(LicomlicPeer::RESPON);
 
 		$criteria->addSelectColumn(LicomlicPeer::ID);
 

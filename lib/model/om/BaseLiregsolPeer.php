@@ -460,12 +460,12 @@ abstract class BaseLiregsolPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(LiregsolPeer::LIDATSTE_ID, LidatstePeer::ID);
-
-		$criteria->addJoin(LiregsolPeer::LITIPSOL_ID, LitipsolPeer::ID);
-
-		$criteria->addJoin(LiregsolPeer::LICOMLIC_ID, LicomlicPeer::ID);
-
+			$criteria->addJoin(LiregsolPeer::LIDATSTE_ID, LidatstePeer::ID);
+	
+			$criteria->addJoin(LiregsolPeer::LITIPSOL_ID, LitipsolPeer::ID);
+	
+			$criteria->addJoin(LiregsolPeer::LICOMLIC_ID, LicomlicPeer::ID);
+	
 		$rs = LiregsolPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -487,21 +487,21 @@ abstract class BaseLiregsolPeer {
 		LiregsolPeer::addSelectColumns($c);
 		$startcol2 = (LiregsolPeer::NUM_COLUMNS - LiregsolPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		LidatstePeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + LidatstePeer::NUM_COLUMNS;
-
-		LitipsolPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + LitipsolPeer::NUM_COLUMNS;
-
-		LicomlicPeer::addSelectColumns($c);
-		$startcol5 = $startcol4 + LicomlicPeer::NUM_COLUMNS;
-
-		$c->addJoin(LiregsolPeer::LIDATSTE_ID, LidatstePeer::ID);
-
-		$c->addJoin(LiregsolPeer::LITIPSOL_ID, LitipsolPeer::ID);
-
-		$c->addJoin(LiregsolPeer::LICOMLIC_ID, LicomlicPeer::ID);
-
+			LidatstePeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + LidatstePeer::NUM_COLUMNS;
+	
+			LitipsolPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + LitipsolPeer::NUM_COLUMNS;
+	
+			LicomlicPeer::addSelectColumns($c);
+			$startcol5 = $startcol4 + LicomlicPeer::NUM_COLUMNS;
+	
+			$c->addJoin(LiregsolPeer::LIDATSTE_ID, LidatstePeer::ID);
+	
+			$c->addJoin(LiregsolPeer::LITIPSOL_ID, LitipsolPeer::ID);
+	
+			$c->addJoin(LiregsolPeer::LICOMLIC_ID, LicomlicPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -515,169 +515,169 @@ abstract class BaseLiregsolPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = LidatstePeer::getOMClass();
+							
+				$omClass = LidatstePeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getLidatste(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addLiregsol($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getLidatste(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addLiregsol($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initLiregsols();
-				$obj2->addLiregsol($obj1);
-			}
-
-
-					
-			$omClass = LitipsolPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3 = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getLitipsol(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addLiregsol($obj1); 					break;
+				if ($newObject) {
+					$obj2->initLiregsols();
+					$obj2->addLiregsol($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj3->initLiregsols();
-				$obj3->addLiregsol($obj1);
-			}
+							
+				$omClass = LitipsolPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj3 = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
-					
-			$omClass = LicomlicPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj4 = new $cls();
-			$obj4->hydrate($rs, $startcol4);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj4 = $temp_obj1->getLicomlic(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj4->addLiregsol($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getLitipsol(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addLiregsol($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj4->initLiregsols();
-				$obj4->addLiregsol($obj1);
-			}
+				if ($newObject) {
+					$obj3->initLiregsols();
+					$obj3->addLiregsol($obj1);
+				}
+	
 
+							
+				$omClass = LicomlicPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj4 = new $cls();
+				$obj4->hydrate($rs, $startcol4);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj4 = $temp_obj1->getLicomlic(); 					if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj4->addLiregsol($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj4->initLiregsols();
+					$obj4->addLiregsol($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
 	}
 
 
-	
-	public static function doCountJoinAllExceptLidatste(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(LiregsolPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(LiregsolPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptLidatste(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(LiregsolPeer::LITIPSOL_ID, LitipsolPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(LiregsolPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(LiregsolPeer::COUNT);
+			}
 
-		$criteria->addJoin(LiregsolPeer::LICOMLIC_ID, LicomlicPeer::ID);
-
-		$rs = LiregsolPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptLitipsol(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(LiregsolPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(LiregsolPeer::COUNT);
+				$criteria->addJoin(LiregsolPeer::LITIPSOL_ID, LitipsolPeer::ID);
+		
+				$criteria->addJoin(LiregsolPeer::LICOMLIC_ID, LicomlicPeer::ID);
+		
+			$rs = LiregsolPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-		$criteria->addJoin(LiregsolPeer::LIDATSTE_ID, LidatstePeer::ID);
-
-		$criteria->addJoin(LiregsolPeer::LICOMLIC_ID, LicomlicPeer::ID);
-
-		$rs = LiregsolPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
 	
-	public static function doCountJoinAllExceptLicomlic(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
 
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(LiregsolPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(LiregsolPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptLitipsol(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(LiregsolPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(LiregsolPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(LiregsolPeer::LIDATSTE_ID, LidatstePeer::ID);
+		
+				$criteria->addJoin(LiregsolPeer::LICOMLIC_ID, LicomlicPeer::ID);
+		
+			$rs = LiregsolPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
+	
 
-		$criteria->addJoin(LiregsolPeer::LIDATSTE_ID, LidatstePeer::ID);
+		
+		public static function doCountJoinAllExceptLicomlic(Criteria $criteria, $distinct = false, $con = null)
+		{
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(LiregsolPeer::LITIPSOL_ID, LitipsolPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(LiregsolPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(LiregsolPeer::COUNT);
+			}
 
-		$rs = LiregsolPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(LiregsolPeer::LIDATSTE_ID, LidatstePeer::ID);
+		
+				$criteria->addJoin(LiregsolPeer::LITIPSOL_ID, LitipsolPeer::ID);
+		
+			$rs = LiregsolPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-	}
-
+	
 
 	
 	public static function doSelectJoinAllExceptLidatste(Criteria $c, $con = null)
@@ -691,16 +691,16 @@ abstract class BaseLiregsolPeer {
 		LiregsolPeer::addSelectColumns($c);
 		$startcol2 = (LiregsolPeer::NUM_COLUMNS - LiregsolPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		LitipsolPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + LitipsolPeer::NUM_COLUMNS;
-
-		LicomlicPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + LicomlicPeer::NUM_COLUMNS;
-
-		$c->addJoin(LiregsolPeer::LITIPSOL_ID, LitipsolPeer::ID);
-
-		$c->addJoin(LiregsolPeer::LICOMLIC_ID, LicomlicPeer::ID);
-
+			LitipsolPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + LitipsolPeer::NUM_COLUMNS;
+	
+			LicomlicPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + LicomlicPeer::NUM_COLUMNS;
+	
+			$c->addJoin(LiregsolPeer::LITIPSOL_ID, LitipsolPeer::ID);
+	
+			$c->addJoin(LiregsolPeer::LICOMLIC_ID, LicomlicPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -713,50 +713,50 @@ abstract class BaseLiregsolPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = LitipsolPeer::getOMClass();
+				$omClass = LitipsolPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getLitipsol(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addLiregsol($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getLitipsol(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addLiregsol($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initLiregsols();
-				$obj2->addLiregsol($obj1);
-			}
-
-			$omClass = LicomlicPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getLicomlic(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addLiregsol($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initLiregsols();
+					$obj2->addLiregsol($obj1);
 				}
-			}
+	
+				$omClass = LicomlicPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initLiregsols();
-				$obj3->addLiregsol($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getLicomlic(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addLiregsol($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initLiregsols();
+					$obj3->addLiregsol($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -775,16 +775,16 @@ abstract class BaseLiregsolPeer {
 		LiregsolPeer::addSelectColumns($c);
 		$startcol2 = (LiregsolPeer::NUM_COLUMNS - LiregsolPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		LidatstePeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + LidatstePeer::NUM_COLUMNS;
-
-		LicomlicPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + LicomlicPeer::NUM_COLUMNS;
-
-		$c->addJoin(LiregsolPeer::LIDATSTE_ID, LidatstePeer::ID);
-
-		$c->addJoin(LiregsolPeer::LICOMLIC_ID, LicomlicPeer::ID);
-
+			LidatstePeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + LidatstePeer::NUM_COLUMNS;
+	
+			LicomlicPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + LicomlicPeer::NUM_COLUMNS;
+	
+			$c->addJoin(LiregsolPeer::LIDATSTE_ID, LidatstePeer::ID);
+	
+			$c->addJoin(LiregsolPeer::LICOMLIC_ID, LicomlicPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -797,50 +797,50 @@ abstract class BaseLiregsolPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = LidatstePeer::getOMClass();
+				$omClass = LidatstePeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getLidatste(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addLiregsol($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getLidatste(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addLiregsol($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initLiregsols();
-				$obj2->addLiregsol($obj1);
-			}
-
-			$omClass = LicomlicPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getLicomlic(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addLiregsol($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initLiregsols();
+					$obj2->addLiregsol($obj1);
 				}
-			}
+	
+				$omClass = LicomlicPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initLiregsols();
-				$obj3->addLiregsol($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getLicomlic(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addLiregsol($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initLiregsols();
+					$obj3->addLiregsol($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -859,16 +859,16 @@ abstract class BaseLiregsolPeer {
 		LiregsolPeer::addSelectColumns($c);
 		$startcol2 = (LiregsolPeer::NUM_COLUMNS - LiregsolPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		LidatstePeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + LidatstePeer::NUM_COLUMNS;
-
-		LitipsolPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + LitipsolPeer::NUM_COLUMNS;
-
-		$c->addJoin(LiregsolPeer::LIDATSTE_ID, LidatstePeer::ID);
-
-		$c->addJoin(LiregsolPeer::LITIPSOL_ID, LitipsolPeer::ID);
-
+			LidatstePeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + LidatstePeer::NUM_COLUMNS;
+	
+			LitipsolPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + LitipsolPeer::NUM_COLUMNS;
+	
+			$c->addJoin(LiregsolPeer::LIDATSTE_ID, LidatstePeer::ID);
+	
+			$c->addJoin(LiregsolPeer::LITIPSOL_ID, LitipsolPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -881,50 +881,50 @@ abstract class BaseLiregsolPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = LidatstePeer::getOMClass();
+				$omClass = LidatstePeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getLidatste(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addLiregsol($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getLidatste(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addLiregsol($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initLiregsols();
-				$obj2->addLiregsol($obj1);
-			}
-
-			$omClass = LitipsolPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3  = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getLitipsol(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addLiregsol($obj1);
-					break;
+				if ($newObject) {
+					$obj2->initLiregsols();
+					$obj2->addLiregsol($obj1);
 				}
-			}
+	
+				$omClass = LitipsolPeer::getOMClass();
+	
 
-			if ($newObject) {
-				$obj3->initLiregsols();
-				$obj3->addLiregsol($obj1);
-			}
+				$cls = Propel::import($omClass);
+				$obj3  = new $cls();
+				$obj3->hydrate($rs, $startcol3);
 
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getLitipsol(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addLiregsol($obj1);
+						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initLiregsols();
+					$obj3->addLiregsol($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

@@ -33,7 +33,7 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 
 
 	
-	protected $liregsol_id;
+	protected $numemo;
 
 
 	
@@ -137,6 +137,10 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 
 
 	
+	protected $archivopli;
+
+
+	
 	protected $id;
 
 	
@@ -144,9 +148,6 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 
 	
 	protected $aLisicact;
-
-	
-	protected $aLiregsol;
 
 	
 	protected $collLiemppars;
@@ -269,10 +270,10 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
   }
 
   
-  public function getLiregsolId()
+  public function getNumemo()
   {
 
-    return $this->liregsol_id;
+    return trim($this->numemo);
 
   }
   
@@ -512,6 +513,13 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 
   }
   
+  public function getArchivopli()
+  {
+
+    return trim($this->archivopli);
+
+  }
+  
   public function getId()
   {
 
@@ -570,6 +578,11 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 	public function setFecreg($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
@@ -587,6 +600,11 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 	public function setFecedi($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecedi] from input: " . var_export($v, true));
@@ -601,18 +619,14 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 
 	} 
 	
-	public function setLiregsolId($v)
+	public function setNumemo($v)
 	{
 
-    if ($this->liregsol_id !== $v) {
-        $this->liregsol_id = $v;
-        $this->modifiedColumns[] = LireglicPeer::LIREGSOL_ID;
+    if ($this->numemo !== $v) {
+        $this->numemo = $v;
+        $this->modifiedColumns[] = LireglicPeer::NUMEMO;
       }
   
-		if ($this->aLiregsol !== null && $this->aLiregsol->getId() !== $v) {
-			$this->aLiregsol = null;
-		}
-
 	} 
 	
 	public function setPlamodifi($v)
@@ -648,6 +662,11 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 	public function setFecdisdes($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdisdes] from input: " . var_export($v, true));
@@ -664,6 +683,11 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 	
 	public function setFecdishas($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -752,6 +776,11 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 	public function setFecpub($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecpub] from input: " . var_export($v, true));
@@ -829,6 +858,11 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 	public function setFecofer($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecofer] from input: " . var_export($v, true));
@@ -893,6 +927,16 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setArchivopli($v)
+	{
+
+    if ($this->archivopli !== $v) {
+        $this->archivopli = $v;
+        $this->modifiedColumns[] = LireglicPeer::ARCHIVOPLI;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -919,7 +963,7 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 
       $this->fecedi = $rs->getDate($startcol + 5, null);
 
-      $this->liregsol_id = $rs->getInt($startcol + 6);
+      $this->numemo = $rs->getString($startcol + 6);
 
       $this->plamodifi = $rs->getInt($startcol + 7);
 
@@ -971,7 +1015,9 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 
       $this->observaciones = $rs->getString($startcol + 31);
 
-      $this->id = $rs->getInt($startcol + 32);
+      $this->archivopli = $rs->getString($startcol + 32);
+
+      $this->id = $rs->getInt($startcol + 33);
 
       $this->resetModified();
 
@@ -979,7 +1025,7 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 33; 
+            return $startcol + 34; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Lireglic object", $e);
     }
@@ -1069,13 +1115,6 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 					$affectedRows += $this->aLisicact->save($con);
 				}
 				$this->setLisicact($this->aLisicact);
-			}
-
-			if ($this->aLiregsol !== null) {
-				if ($this->aLiregsol->isModified()) {
-					$affectedRows += $this->aLiregsol->save($con);
-				}
-				$this->setLiregsol($this->aLiregsol);
 			}
 
 
@@ -1195,12 +1234,6 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 				}
 			}
 
-			if ($this->aLiregsol !== null) {
-				if (!$this->aLiregsol->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aLiregsol->getValidationFailures());
-				}
-			}
-
 
 			if (($retval = LireglicPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
@@ -1300,7 +1333,7 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 				return $this->getFecedi();
 				break;
 			case 6:
-				return $this->getLiregsolId();
+				return $this->getNumemo();
 				break;
 			case 7:
 				return $this->getPlamodifi();
@@ -1378,6 +1411,9 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 				return $this->getObservaciones();
 				break;
 			case 32:
+				return $this->getArchivopli();
+				break;
+			case 33:
 				return $this->getId();
 				break;
 			default:
@@ -1396,7 +1432,7 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 			$keys[3] => $this->getLisicactId(),
 			$keys[4] => $this->getFecreg(),
 			$keys[5] => $this->getFecedi(),
-			$keys[6] => $this->getLiregsolId(),
+			$keys[6] => $this->getNumemo(),
 			$keys[7] => $this->getPlamodifi(),
 			$keys[8] => $this->getPlaaclara(),
 			$keys[9] => $this->getPlaprorro(),
@@ -1422,7 +1458,8 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 			$keys[29] => $this->getPercontacofer(),
 			$keys[30] => $this->getCodclacomp(),
 			$keys[31] => $this->getObservaciones(),
-			$keys[32] => $this->getId(),
+			$keys[32] => $this->getArchivopli(),
+			$keys[33] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1457,7 +1494,7 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 				$this->setFecedi($value);
 				break;
 			case 6:
-				$this->setLiregsolId($value);
+				$this->setNumemo($value);
 				break;
 			case 7:
 				$this->setPlamodifi($value);
@@ -1535,6 +1572,9 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 				$this->setObservaciones($value);
 				break;
 			case 32:
+				$this->setArchivopli($value);
+				break;
+			case 33:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1550,7 +1590,7 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setLisicactId($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setFecreg($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setFecedi($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setLiregsolId($arr[$keys[6]]);
+		if (array_key_exists($keys[6], $arr)) $this->setNumemo($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setPlamodifi($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setPlaaclara($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setPlaprorro($arr[$keys[9]]);
@@ -1576,7 +1616,8 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[29], $arr)) $this->setPercontacofer($arr[$keys[29]]);
 		if (array_key_exists($keys[30], $arr)) $this->setCodclacomp($arr[$keys[30]]);
 		if (array_key_exists($keys[31], $arr)) $this->setObservaciones($arr[$keys[31]]);
-		if (array_key_exists($keys[32], $arr)) $this->setId($arr[$keys[32]]);
+		if (array_key_exists($keys[32], $arr)) $this->setArchivopli($arr[$keys[32]]);
+		if (array_key_exists($keys[33], $arr)) $this->setId($arr[$keys[33]]);
 	}
 
 	
@@ -1590,7 +1631,7 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(LireglicPeer::LISICACT_ID)) $criteria->add(LireglicPeer::LISICACT_ID, $this->lisicact_id);
 		if ($this->isColumnModified(LireglicPeer::FECREG)) $criteria->add(LireglicPeer::FECREG, $this->fecreg);
 		if ($this->isColumnModified(LireglicPeer::FECEDI)) $criteria->add(LireglicPeer::FECEDI, $this->fecedi);
-		if ($this->isColumnModified(LireglicPeer::LIREGSOL_ID)) $criteria->add(LireglicPeer::LIREGSOL_ID, $this->liregsol_id);
+		if ($this->isColumnModified(LireglicPeer::NUMEMO)) $criteria->add(LireglicPeer::NUMEMO, $this->numemo);
 		if ($this->isColumnModified(LireglicPeer::PLAMODIFI)) $criteria->add(LireglicPeer::PLAMODIFI, $this->plamodifi);
 		if ($this->isColumnModified(LireglicPeer::PLAACLARA)) $criteria->add(LireglicPeer::PLAACLARA, $this->plaaclara);
 		if ($this->isColumnModified(LireglicPeer::PLAPRORRO)) $criteria->add(LireglicPeer::PLAPRORRO, $this->plaprorro);
@@ -1616,6 +1657,7 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(LireglicPeer::PERCONTACOFER)) $criteria->add(LireglicPeer::PERCONTACOFER, $this->percontacofer);
 		if ($this->isColumnModified(LireglicPeer::CODCLACOMP)) $criteria->add(LireglicPeer::CODCLACOMP, $this->codclacomp);
 		if ($this->isColumnModified(LireglicPeer::OBSERVACIONES)) $criteria->add(LireglicPeer::OBSERVACIONES, $this->observaciones);
+		if ($this->isColumnModified(LireglicPeer::ARCHIVOPLI)) $criteria->add(LireglicPeer::ARCHIVOPLI, $this->archivopli);
 		if ($this->isColumnModified(LireglicPeer::ID)) $criteria->add(LireglicPeer::ID, $this->id);
 
 		return $criteria;
@@ -1659,7 +1701,7 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 
 		$copyObj->setFecedi($this->fecedi);
 
-		$copyObj->setLiregsolId($this->liregsol_id);
+		$copyObj->setNumemo($this->numemo);
 
 		$copyObj->setPlamodifi($this->plamodifi);
 
@@ -1710,6 +1752,8 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 		$copyObj->setCodclacomp($this->codclacomp);
 
 		$copyObj->setObservaciones($this->observaciones);
+
+		$copyObj->setArchivopli($this->archivopli);
 
 
 		if ($deepCopy) {
@@ -1790,7 +1834,10 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 		if ($this->aLitiplic === null && ($this->litiplic_id !== null)) {
 						include_once 'lib/model/om/BaseLitiplicPeer.php';
 
-			$this->aLitiplic = LitiplicPeer::retrieveByPK($this->litiplic_id, $con);
+      $c = new Criteria();
+      $c->add(LitiplicPeer::ID,$this->litiplic_id);
+      
+			$this->aLitiplic = LitiplicPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -1819,40 +1866,14 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 		if ($this->aLisicact === null && ($this->lisicact_id !== null)) {
 						include_once 'lib/model/om/BaseLisicactPeer.php';
 
-			$this->aLisicact = LisicactPeer::retrieveByPK($this->lisicact_id, $con);
+      $c = new Criteria();
+      $c->add(LisicactPeer::ID,$this->lisicact_id);
+      
+			$this->aLisicact = LisicactPeer::doSelectOne($c, $con);
 
 			
 		}
 		return $this->aLisicact;
-	}
-
-	
-	public function setLiregsol($v)
-	{
-
-
-		if ($v === null) {
-			$this->setLiregsolId(NULL);
-		} else {
-			$this->setLiregsolId($v->getId());
-		}
-
-
-		$this->aLiregsol = $v;
-	}
-
-
-	
-	public function getLiregsol($con = null)
-	{
-		if ($this->aLiregsol === null && ($this->liregsol_id !== null)) {
-						include_once 'lib/model/om/BaseLiregsolPeer.php';
-
-			$this->aLiregsol = LiregsolPeer::retrieveByPK($this->liregsol_id, $con);
-
-			
-		}
-		return $this->aLiregsol;
 	}
 
 	

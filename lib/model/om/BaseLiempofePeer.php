@@ -300,8 +300,8 @@ abstract class BaseLiempofePeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(LiempofePeer::LIREGLIC_ID, LireglicPeer::ID);
-
+			$criteria->addJoin(LiempofePeer::LIREGLIC_ID, LireglicPeer::ID);
+	
 		$rs = LiempofePeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -323,11 +323,11 @@ abstract class BaseLiempofePeer {
 		LiempofePeer::addSelectColumns($c);
 		$startcol2 = (LiempofePeer::NUM_COLUMNS - LiempofePeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		LireglicPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + LireglicPeer::NUM_COLUMNS;
-
-		$c->addJoin(LiempofePeer::LIREGLIC_ID, LireglicPeer::ID);
-
+			LireglicPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + LireglicPeer::NUM_COLUMNS;
+	
+			$c->addJoin(LiempofePeer::LIREGLIC_ID, LireglicPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -341,28 +341,28 @@ abstract class BaseLiempofePeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = LireglicPeer::getOMClass();
+							
+				$omClass = LireglicPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getLireglic(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addLiempofe($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getLireglic(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addLiempofe($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initLiempofes();
-				$obj2->addLiempofe($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initLiempofes();
+					$obj2->addLiempofe($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

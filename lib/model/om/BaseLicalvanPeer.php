@@ -315,8 +315,8 @@ abstract class BaseLicalvanPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(LicalvanPeer::LIREGLIC_ID, LireglicPeer::ID);
-
+			$criteria->addJoin(LicalvanPeer::LIREGLIC_ID, LireglicPeer::ID);
+	
 		$rs = LicalvanPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -338,11 +338,11 @@ abstract class BaseLicalvanPeer {
 		LicalvanPeer::addSelectColumns($c);
 		$startcol2 = (LicalvanPeer::NUM_COLUMNS - LicalvanPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		LireglicPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + LireglicPeer::NUM_COLUMNS;
-
-		$c->addJoin(LicalvanPeer::LIREGLIC_ID, LireglicPeer::ID);
-
+			LireglicPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + LireglicPeer::NUM_COLUMNS;
+	
+			$c->addJoin(LicalvanPeer::LIREGLIC_ID, LireglicPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -356,28 +356,28 @@ abstract class BaseLicalvanPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = LireglicPeer::getOMClass();
+							
+				$omClass = LireglicPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getLireglic(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addLicalvan($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getLireglic(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addLicalvan($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initLicalvans();
-				$obj2->addLicalvan($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initLicalvans();
+					$obj2->addLicalvan($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
