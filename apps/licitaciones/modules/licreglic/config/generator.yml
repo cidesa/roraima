@@ -4,17 +4,18 @@ generator:
     model_class:      Lireglic
     theme:            cidesaGenerator
     fields:
+      display:        [_codlic, litiplic_id, fecreg, fecedi, lisicact_id, deslic, decretos, _liregsol_id, _coduniste, plamodifi, plaaclara, plaprorro, fecdisdes, fecdishas, costo, forpag, horaret, dirret, perconta, archivopli, _historial, _codpaiefec, _codpairecep, _codfin, fecofer, horaofer, dirofer, percontacofer, _codclacomp, observaciones, numemo, nompro, coduniste, desuniste ]
       codlic: { name: Número, params: size=20 maxlength=32}
-      litiplic_id: { name: Tipo}
+      litiplic_id: { name: Modalidad de Contratación}
       fecreg: { name: Fecha de Registro, params: onkeyup= "mascara(this,'/',patron,true)"}
       fecedi: { name: Fecha de Edición, params: onkeyup= "mascara(this,'/',patron,true)"}
-      lisicact_id: { name: Situación Actual}
+      lisicact_id: { name: Declaratoria de Modalidad de Contratación}
       deslic: { name: Descripción, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
       decretos: { name: Decretos, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
-      liregsol_id:    { name: Número Solicitud}
-      coduniste:    { name: Unidad Solicitante}
-      numsol:    { name: Número Solicitud}
-      dessol:    { name: Descripción Solicitud}
+      liregsol_id:    { name: Número Memorando}
+      coduniste:    { name: Unidad Ejecutora}
+      nummemo:    { name: Numeo Memorando}
+      nompro:    { name: Nombre Proyecto}
       plamodifi: { name: Plazo Modificaciones, params: size=10 maxlength=3}
       plaaclara: { name: Plazo Aclaratorias, params: size=10 maxlength=3}
       plaprorro: { name: Plazo Prorroga, params: size=10 maxlength=3}
@@ -22,7 +23,7 @@ generator:
       fecdishas:  { name: Fecha de Hasta, params: onkeyup= "mascara(this,'/',patron,true)"}
       costo: { name: Costo}
       forpag: { name: Forma de Pago, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
-      horaret:{ name: Horario de Retiro, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      horaret: { name: Horario de Retiro, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
       dirret: { name: Dirección de Retiro, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
       percontac: { name: Persona Contacto-Telefónos, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
       periodico: { name: Prensa, params: size=20 maxlength=50}
@@ -38,13 +39,19 @@ generator:
       horaofer: { name: Hora Presentación, params: size=30 maxlength=100}
       dirofer: { name: Dirección, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
       percontacofer: { name: Persona Contacto-Telefónos, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
-      codclacomp: { name: Clasificación, params: size=15 maxlength=5}
+      codclacomp: { name: Servicio/Bien u Obra, params: size=15 maxlength=5}
       descalcomp: { name: Descripción}
       observaciones: { name: Observaciones, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)"}
       historial: { name: . }
+      archivopli:
+        name:  Seleccione el archivo del Pliego a adjuntar
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Pliego de Condiciones*********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extensiones (pdf,doc,ppt)
     list:
-      title: Licitaciones
-      display: [=codlic, deslic, numsol, dessol]
+      title: Contrataciones
+      display: [=codlic, deslic, numemo, nompro]
       filters: [codlic, litiplic_id]
       fields:
         litiplic_id:
@@ -55,16 +62,16 @@ generator:
         _edit:        ~
         _delete:      ~
     edit:
-      title: Registro de Licitaciones
+      title: Registro de Contrataciones
       display:
         "Datos Generales": [_codlic, litiplic_id, fecreg, fecedi, lisicact_id, deslic, decretos]
-        "Solicitud Servicios/Obras/Bienes":  [_liregsol_id, _coduniste ]
+        "Memorando":  [_liregsol_id, _coduniste ]
         "Datos Plazos/Limites de Días":  [plamodifi, plaaclara, plaprorro ]
-        "Disponibilidad de Pliegos": [fecdisdes, fecdishas, costo, forpag, horaret, dirret, percontac]
+        "Disponibilidad de Pliegos": [fecdisdes, fecdishas, costo, forpag, horaret, dirret, perconta, archivopli]
         #"Datos de la Pubicación": [periodico, fecpub, pagina, cuerpo, _mes, _historial]
         "Datos de la Pubicación": [_historial]
         "Datos de la Oferta": [_codpaiefec, _codpairecep, _codfin, fecofer, horaofer, dirofer, percontacofer]
-        "Actividades según Catálogo de Clasificación de Compras del Estado": [_codclacomp]
+        "Actividades según Catálogo Servicio/Bien u Obra": [_codclacomp]
         "NONE": [observaciones]
       actions:
         _list:        ~

@@ -4,7 +4,7 @@ methods:
    - "lireglic{deslic}"
    - "lireglic{codfin}"
    - "lireglic{codclacomp}"
-   - "lireglic{liregsol_id}"
+   - "lireglic{numemo}"
    - "lireglic{fecdisdes}"
    - "lireglic{fecdishas}"
    - "lireglic{costo}"
@@ -29,7 +29,7 @@ names:
     required:  No
     validators: Clacomp_Validator
 
-  lireglic{liregsol_id}:
+  lireglic{numemo}:
     required:  Yes
     required_msg: El Código de la Solicitud no puede estar en Blanco
     validators: Validator_Obra, Obra_Validator
@@ -78,13 +78,13 @@ Fuente_Validator:
 Obra_Validator:
     class: CidesaExistValidator
     param:
-        class:    Liregsol
-        column:   id
-        unique_error: El Código de la Solicitud no existe.
+        class:    Limemoran
+        column:   numemo
+        unique_error: El Nro del Memorandon no existe.
 
 Validator_Obra:
     class: sfPropelUniqueValidator
     param:
         class:    Lireglic
-        column:   liregsol_id
-        unique_error:   La solicitud ya tiene una Licitación asociada. Por Favor, Intente con otro.
+        column:   numemo
+        unique_error:   El memorandon ya tiene una Contratacion  asociada. Por Favor, Intente con otro.

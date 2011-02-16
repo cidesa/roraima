@@ -8,6 +8,7 @@ generator:
       descom: 	      { name: Descripción, type: textarea_tag, params: size=70x3 maxlength=500  }
       fecnom:         { name: Fecha Nombramiento }
       decret:         { name: Decreto, type: textarea_tag, params: size=70x4 maxlength=1000 }
+      respon:         { name: Responsable, params:  maxlength=1000 }
     list:
       title:          Integración Comisión de Contratación
       filters:		  [codcom, descom]
@@ -22,7 +23,7 @@ generator:
     edit:
       title:          Integración Comisión de Contratación
       display:
-        Datos Principales:  [codcom, descom, fecnom, decret]
+        Datos Principales:  [codcom, descom, fecnom, decret, respon]
         Miembros:       [_empleados]
       actions:
         _list:        ~

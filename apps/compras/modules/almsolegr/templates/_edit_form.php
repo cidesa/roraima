@@ -6,14 +6,14 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 42548 2011-02-16 08:45:40Z cramirez $
  */
 // date: 2007/03/16 17:37:55
 ?>
 <?php echo form_tag('almsolegr/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 <?php echo object_input_hidden_tag($casolart, 'getId') ?>
@@ -29,13 +29,13 @@
   </tr>
 </table>
 <fieldset id="sf_fieldset_none" class="">
-<legend>
+<h2>
 <?php if ($cambiareti=="") {?>
 <?php echo __('Solicitud de Egreso') ?>
 <?php }else {?>
 <?php echo __($nometifor) ?>
 <?php }?>
-</legend>
+</h2>
 <div class="form-row">
   <table>
    <tr>
@@ -91,6 +91,44 @@
    </tr>
   </table>
 
+    <table >
+        <tr style="display:<?php if($casolart->getId()=='' && $sf_user->getAttribute('prebas')=='S') echo ''; else echo 'none';?>">
+  <th>
+      <?php echo label_for('casolart[refpre]', __($labels['casolart{refpre}']), 'class="required" style="width: 150px"') ?>
+      <div class="content<?php if ($sf_request->hasError('casolart{refpre}')): ?> form-error<?php endif; ?>">
+      <?php if ($sf_request->hasError('casolart{refpre}')): ?>
+        <?php echo form_error('casolart{refpre}', array('class' => 'form-error-msg')) ?>
+      <?php endif; ?>
+
+      <?php $value = object_checkbox_tag($casolart, 'getRefpre', array (
+      'control_name' => 'casolart[refpre]',
+        'onClick' => 'MostratCatalogo(this.id)',
+    )); echo $value ? $value : '&nbsp;' ?>
+        </div>
+  </th>
+  <th id="divprebas" style="display:none">
+      <?php echo label_for('casolart[prebas]', __($labels['casolart{prebas}']), 'class="required" style="width: 150px"') ?>
+      <div class="content<?php if ($sf_request->hasError('casolart{prebas}')): ?> form-error<?php endif; ?>">
+      <?php if ($sf_request->hasError('casolart{prebas}')): ?>
+        <?php echo form_error('casolart{prebas}', array('class' => 'form-error-msg')) ?>
+      <?php endif; ?>
+
+      <?php $value = object_input_tag($casolart, 'getPrebas', array (
+      'control_name' => 'casolart[prebas]',
+       'onBlur'=> remote_function(array(
+        'update'  =>  'gridreq',
+        'url'      => 'almsolegr/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('casolart_fecreq').value != '' && $('id').value == ''",
+        'with' => "'ajax=11&codigo='+this.value"))
+    )); echo $value ? $value : '&nbsp;' ?>
+        <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/liprebas_reqart/clase/liprebas/frame/sf_admin_edit_form/obj1/casolart_prebas/campo1/reqart/campo2/fecreq','','','buttoncat')?>
+        </div>
+
+  </th>
+  </tr>
+
+    </table>
 <br>
 
   <?php echo label_for('casolart[desreq]', __($labels['casolart{desreq}']), 'class="required"') ?>
@@ -315,9 +353,11 @@ else
 <div align="left" id="botonesmarcar">
 </div>
 	<?php } ?>
+<div id="gridreq">
 <?
 echo grid_tag($obj);
 ?>
+</div>
 <?php echo input_hidden_tag('totmarcadas', '0,00') ?>
 
 </div>
@@ -647,4 +687,11 @@ echo grid_tag($obj3);
 
   }
 
+  function MostratCatalogo(id)
+  {
+      if($(id).checked==true)
+        $('divprebas').show();
+      else
+        $('divprebas').hide();
+  }
 </script>

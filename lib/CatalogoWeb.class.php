@@ -6811,5 +6811,45 @@ public function Bnubica_Almordcom2() {
 
 
         }
+
+        public function Fortipfin_licprebas()
+        {
+                $this->c = new Criteria();
+                $this->c->addAscendingOrderByColumn(FortipfinPeer :: CODFIN);
+                $this->columnas = array (
+                                FortipfinPeer :: CODFIN => 'Código',
+                                FortipfinPeer :: NOMEXT => 'Descripción',
+                        );
+        }
+
+        public function Cadefcen_licprebas()
+        {
+                $this->c = new Criteria();
+                $this->c->addAscendingOrderByColumn(CadefcenPeer :: CODCEN);
+                $this->columnas = array (
+                                CadefcenPeer :: CODCEN=> 'Código',
+                                CadefcenPeer :: DESCEN => 'Descripción',
+                        );
+        }
+
+        public function liprebas_reqart()
+        {
+                $this->c = new Criteria();
+                $this->c->addAscendingOrderByColumn(LiprebasPeer :: REQART);
+                $this->columnas = array (
+                                LiprebasPeer :: REQART=> 'Código',
+                                LiprebasPeer :: FECREQ => 'Fecha',
+                        );
+        }
+
+        public function Limemoran_numemo()
+        {
+                $this->c = new Criteria();
+                $this->c->addAscendingOrderByColumn(LimemoranPeer :: NUMEMO);
+                $this->columnas = array (
+                                LimemoranPeer :: NUMEMO=> 'Nro',
+                                LimemoranPeer :: NOMPRO => 'Proyecto',
+                        );
+        }
 }
 ?>

@@ -3,10 +3,10 @@ default:
     content-type: text/html
 
   metas:
-    title:        Módulo de Licitaciones
+    title:        Módulo de Contrataciones Públicas
     robots:       index, follow
-    description:  Módulo de Licitaciones
-    keywords:     Módulo de Licitaciones
+    description:  Módulo de Contrataciones Públicas
+    keywords:     Módulo de Contrataciones Públicas
     language:     en
 
   stylesheets:    [main]

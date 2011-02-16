@@ -1930,3 +1930,6 @@ N0003:
 FR001:
   cod: FR001
   msj: El Grid de Conceptos no puede estar Vacio
+LI001:
+  cod: LI001
+  msj: No se puede guardar la Compra Integral ya fue aprobada
