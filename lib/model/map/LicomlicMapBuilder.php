@@ -42,6 +42,8 @@ class LicomlicMapBuilder {
 
 		$tMap->addColumn('DECRET', 'Decret', 'string', CreoleTypes::VARCHAR, false, 1000);
 
+		$tMap->addColumn('RESPON', 'Respon', 'string', CreoleTypes::VARCHAR, false, 1000);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

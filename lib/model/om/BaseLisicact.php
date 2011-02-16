@@ -466,39 +466,4 @@ abstract class BaseLisicact extends BaseObject  implements Persistent {
 		return $this->collLireglics;
 	}
 
-
-	
-	public function getLireglicsJoinLiregsol($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseLireglicPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collLireglics === null) {
-			if ($this->isNew()) {
-				$this->collLireglics = array();
-			} else {
-
-				$criteria->add(LireglicPeer::LISICACT_ID, $this->getId());
-
-				$this->collLireglics = LireglicPeer::doSelectJoinLiregsol($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(LireglicPeer::LISICACT_ID, $this->getId());
-
-			if (!isset($this->lastLireglicCriteria) || !$this->lastLireglicCriteria->equals($criteria)) {
-				$this->collLireglics = LireglicPeer::doSelectJoinLiregsol($criteria, $con);
-			}
-		}
-		$this->lastLireglicCriteria = $criteria;
-
-		return $this->collLireglics;
-	}
-
 } 

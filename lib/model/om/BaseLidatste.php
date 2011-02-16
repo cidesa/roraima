@@ -815,7 +815,10 @@ abstract class BaseLidatste extends BaseObject  implements Persistent {
 		if ($this->aLitipste === null && ($this->litipste_id !== null)) {
 						include_once 'lib/model/om/BaseLitipstePeer.php';
 
-			$this->aLitipste = LitipstePeer::retrieveByPK($this->litipste_id, $con);
+      $c = new Criteria();
+      $c->add(LitipstePeer::ID,$this->litipste_id);
+      
+			$this->aLitipste = LitipstePeer::doSelectOne($c, $con);
 
 			
 		}

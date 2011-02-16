@@ -533,7 +533,10 @@ abstract class BaseLiasptecanalis extends BaseObject  implements Persistent {
 		if ($this->aLireglic === null && ($this->lireglic_id !== null)) {
 						include_once 'lib/model/om/BaseLireglicPeer.php';
 
-			$this->aLireglic = LireglicPeer::retrieveByPK($this->lireglic_id, $con);
+      $c = new Criteria();
+      $c->add(LireglicPeer::ID,$this->lireglic_id);
+      
+			$this->aLireglic = LireglicPeer::doSelectOne($c, $con);
 
 			
 		}
@@ -562,7 +565,10 @@ abstract class BaseLiasptecanalis extends BaseObject  implements Persistent {
 		if ($this->aLiaspteccrieva === null && ($this->liaspteccrieva_id !== null)) {
 						include_once 'lib/model/om/BaseLiaspteccrievaPeer.php';
 
-			$this->aLiaspteccrieva = LiaspteccrievaPeer::retrieveByPK($this->liaspteccrieva_id, $con);
+      $c = new Criteria();
+      $c->add(LiaspteccrievaPeer::ID,$this->liaspteccrieva_id);
+      
+			$this->aLiaspteccrieva = LiaspteccrievaPeer::doSelectOne($c, $con);
 
 			
 		}

@@ -158,6 +158,11 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 	public function setFecins($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecins] from input: " . var_export($v, true));
@@ -603,7 +608,10 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 		if ($this->aLireglic === null && ($this->lireglic_id !== null)) {
 						include_once 'lib/model/om/BaseLireglicPeer.php';
 
-			$this->aLireglic = LireglicPeer::retrieveByPK($this->lireglic_id, $con);
+      $c = new Criteria();
+      $c->add(LireglicPeer::ID,$this->lireglic_id);
+      
+			$this->aLireglic = LireglicPeer::doSelectOne($c, $con);
 
 			
 		}

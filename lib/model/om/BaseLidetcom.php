@@ -410,7 +410,10 @@ abstract class BaseLidetcom extends BaseObject  implements Persistent {
 		if ($this->aLicomlic === null && ($this->licomlic_id !== null)) {
 						include_once 'lib/model/om/BaseLicomlicPeer.php';
 
-			$this->aLicomlic = LicomlicPeer::retrieveByPK($this->licomlic_id, $con);
+      $c = new Criteria();
+      $c->add(LicomlicPeer::ID,$this->licomlic_id);
+      
+			$this->aLicomlic = LicomlicPeer::doSelectOne($c, $con);
 
 			
 		}

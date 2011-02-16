@@ -25,6 +25,10 @@ abstract class BaseLicomlic extends BaseObject  implements Persistent {
 
 
 	
+	protected $respon;
+
+
+	
 	protected $id;
 
 	
@@ -89,6 +93,13 @@ abstract class BaseLicomlic extends BaseObject  implements Persistent {
 
   }
   
+  public function getRespon()
+  {
+
+    return trim($this->respon);
+
+  }
+  
   public function getId()
   {
 
@@ -119,6 +130,11 @@ abstract class BaseLicomlic extends BaseObject  implements Persistent {
 	public function setFecnom($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecnom] from input: " . var_export($v, true));
@@ -139,6 +155,16 @@ abstract class BaseLicomlic extends BaseObject  implements Persistent {
     if ($this->decret !== $v) {
         $this->decret = $v;
         $this->modifiedColumns[] = LicomlicPeer::DECRET;
+      }
+  
+	} 
+	
+	public function setRespon($v)
+	{
+
+    if ($this->respon !== $v) {
+        $this->respon = $v;
+        $this->modifiedColumns[] = LicomlicPeer::RESPON;
       }
   
 	} 
@@ -165,7 +191,9 @@ abstract class BaseLicomlic extends BaseObject  implements Persistent {
 
       $this->decret = $rs->getString($startcol + 3);
 
-      $this->id = $rs->getInt($startcol + 4);
+      $this->respon = $rs->getString($startcol + 4);
+
+      $this->id = $rs->getInt($startcol + 5);
 
       $this->resetModified();
 
@@ -173,7 +201,7 @@ abstract class BaseLicomlic extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 5; 
+            return $startcol + 6; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Licomlic object", $e);
     }
@@ -365,6 +393,9 @@ abstract class BaseLicomlic extends BaseObject  implements Persistent {
 				return $this->getDecret();
 				break;
 			case 4:
+				return $this->getRespon();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -381,7 +412,8 @@ abstract class BaseLicomlic extends BaseObject  implements Persistent {
 			$keys[1] => $this->getDescom(),
 			$keys[2] => $this->getFecnom(),
 			$keys[3] => $this->getDecret(),
-			$keys[4] => $this->getId(),
+			$keys[4] => $this->getRespon(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
@@ -410,6 +442,9 @@ abstract class BaseLicomlic extends BaseObject  implements Persistent {
 				$this->setDecret($value);
 				break;
 			case 4:
+				$this->setRespon($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
@@ -423,7 +458,8 @@ abstract class BaseLicomlic extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setDescom($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setFecnom($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setDecret($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[4], $arr)) $this->setRespon($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
 	
@@ -435,6 +471,7 @@ abstract class BaseLicomlic extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(LicomlicPeer::DESCOM)) $criteria->add(LicomlicPeer::DESCOM, $this->descom);
 		if ($this->isColumnModified(LicomlicPeer::FECNOM)) $criteria->add(LicomlicPeer::FECNOM, $this->fecnom);
 		if ($this->isColumnModified(LicomlicPeer::DECRET)) $criteria->add(LicomlicPeer::DECRET, $this->decret);
+		if ($this->isColumnModified(LicomlicPeer::RESPON)) $criteria->add(LicomlicPeer::RESPON, $this->respon);
 		if ($this->isColumnModified(LicomlicPeer::ID)) $criteria->add(LicomlicPeer::ID, $this->id);
 
 		return $criteria;
@@ -473,6 +510,8 @@ abstract class BaseLicomlic extends BaseObject  implements Persistent {
 		$copyObj->setFecnom($this->fecnom);
 
 		$copyObj->setDecret($this->decret);
+
+		$copyObj->setRespon($this->respon);
 
 
 		if ($deepCopy) {

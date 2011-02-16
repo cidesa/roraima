@@ -213,6 +213,11 @@ abstract class BaseLiressol extends BaseObject  implements Persistent {
 	public function setFecres($v)
 	{
 
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
       if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecres] from input: " . var_export($v, true));
@@ -229,6 +234,11 @@ abstract class BaseLiressol extends BaseObject  implements Persistent {
 	
 	public function setFecfir($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -658,7 +668,10 @@ abstract class BaseLiressol extends BaseObject  implements Persistent {
 		if ($this->aLiregsol === null && ($this->liregsol_id !== null)) {
 						include_once 'lib/model/om/BaseLiregsolPeer.php';
 
-			$this->aLiregsol = LiregsolPeer::retrieveByPK($this->liregsol_id, $con);
+      $c = new Criteria();
+      $c->add(LiregsolPeer::ID,$this->liregsol_id);
+      
+			$this->aLiregsol = LiregsolPeer::doSelectOne($c, $con);
 
 			
 		}

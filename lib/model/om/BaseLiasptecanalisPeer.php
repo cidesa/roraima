@@ -365,10 +365,10 @@ abstract class BaseLiasptecanalisPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(LiasptecanalisPeer::LIREGLIC_ID, LireglicPeer::ID);
-
-		$criteria->addJoin(LiasptecanalisPeer::LIASPTECCRIEVA_ID, LiaspteccrievaPeer::ID);
-
+			$criteria->addJoin(LiasptecanalisPeer::LIREGLIC_ID, LireglicPeer::ID);
+	
+			$criteria->addJoin(LiasptecanalisPeer::LIASPTECCRIEVA_ID, LiaspteccrievaPeer::ID);
+	
 		$rs = LiasptecanalisPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -390,16 +390,16 @@ abstract class BaseLiasptecanalisPeer {
 		LiasptecanalisPeer::addSelectColumns($c);
 		$startcol2 = (LiasptecanalisPeer::NUM_COLUMNS - LiasptecanalisPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		LireglicPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + LireglicPeer::NUM_COLUMNS;
-
-		LiaspteccrievaPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + LiaspteccrievaPeer::NUM_COLUMNS;
-
-		$c->addJoin(LiasptecanalisPeer::LIREGLIC_ID, LireglicPeer::ID);
-
-		$c->addJoin(LiasptecanalisPeer::LIASPTECCRIEVA_ID, LiaspteccrievaPeer::ID);
-
+			LireglicPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + LireglicPeer::NUM_COLUMNS;
+	
+			LiaspteccrievaPeer::addSelectColumns($c);
+			$startcol4 = $startcol3 + LiaspteccrievaPeer::NUM_COLUMNS;
+	
+			$c->addJoin(LiasptecanalisPeer::LIREGLIC_ID, LireglicPeer::ID);
+	
+			$c->addJoin(LiasptecanalisPeer::LIASPTECCRIEVA_ID, LiaspteccrievaPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -413,112 +413,112 @@ abstract class BaseLiasptecanalisPeer {
 			$obj1->hydrate($rs);
 
 
-					
-			$omClass = LireglicPeer::getOMClass();
+							
+				$omClass = LireglicPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getLireglic(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addLiasptecanalis($obj1); 					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getLireglic(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addLiasptecanalis($obj1); 						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initLiasptecanaliss();
-				$obj2->addLiasptecanalis($obj1);
-			}
-
-
-					
-			$omClass = LiaspteccrievaPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj3 = new $cls();
-			$obj3->hydrate($rs, $startcol3);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getLiaspteccrieva(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj3->addLiasptecanalis($obj1); 					break;
+				if ($newObject) {
+					$obj2->initLiasptecanaliss();
+					$obj2->addLiasptecanalis($obj1);
 				}
-			}
+	
 
-			if ($newObject) {
-				$obj3->initLiasptecanaliss();
-				$obj3->addLiasptecanalis($obj1);
-			}
+							
+				$omClass = LiaspteccrievaPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj3 = new $cls();
+				$obj3->hydrate($rs, $startcol3);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj3 = $temp_obj1->getLiaspteccrieva(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj3->addLiasptecanalis($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj3->initLiasptecanaliss();
+					$obj3->addLiasptecanalis($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
 	}
 
 
-	
-	public static function doCountJoinAllExceptLireglic(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(LiasptecanalisPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(LiasptecanalisPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptLireglic(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
-		}
+						$criteria = clone $criteria;
 
-		$criteria->addJoin(LiasptecanalisPeer::LIASPTECCRIEVA_ID, LiaspteccrievaPeer::ID);
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(LiasptecanalisPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(LiasptecanalisPeer::COUNT);
+			}
 
-		$rs = LiasptecanalisPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
 	
-	public static function doCountJoinAllExceptLiaspteccrieva(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(LiasptecanalisPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(LiasptecanalisPeer::COUNT);
+				$criteria->addJoin(LiasptecanalisPeer::LIASPTECCRIEVA_ID, LiaspteccrievaPeer::ID);
+		
+			$rs = LiasptecanalisPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
+	
 
-				foreach($criteria->getGroupByColumns() as $column)
+		
+		public static function doCountJoinAllExceptLiaspteccrieva(Criteria $criteria, $distinct = false, $con = null)
 		{
-			$criteria->addSelectColumn($column);
+						$criteria = clone $criteria;
+
+						$criteria->clearSelectColumns()->clearOrderByColumns();
+			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+				$criteria->addSelectColumn(LiasptecanalisPeer::COUNT_DISTINCT);
+			} else {
+				$criteria->addSelectColumn(LiasptecanalisPeer::COUNT);
+			}
+
+						foreach($criteria->getGroupByColumns() as $column)
+			{
+				$criteria->addSelectColumn($column);
+			}
+	
+				$criteria->addJoin(LiasptecanalisPeer::LIREGLIC_ID, LireglicPeer::ID);
+		
+			$rs = LiasptecanalisPeer::doSelectRS($criteria, $con);
+			if ($rs->next()) {
+				return $rs->getInt(1);
+			} else {
+								return 0;
+			}
 		}
-
-		$criteria->addJoin(LiasptecanalisPeer::LIREGLIC_ID, LireglicPeer::ID);
-
-		$rs = LiasptecanalisPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
+	
 
 	
 	public static function doSelectJoinAllExceptLireglic(Criteria $c, $con = null)
@@ -532,11 +532,11 @@ abstract class BaseLiasptecanalisPeer {
 		LiasptecanalisPeer::addSelectColumns($c);
 		$startcol2 = (LiasptecanalisPeer::NUM_COLUMNS - LiasptecanalisPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		LiaspteccrievaPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + LiaspteccrievaPeer::NUM_COLUMNS;
-
-		$c->addJoin(LiasptecanalisPeer::LIASPTECCRIEVA_ID, LiaspteccrievaPeer::ID);
-
+			LiaspteccrievaPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + LiaspteccrievaPeer::NUM_COLUMNS;
+	
+			$c->addJoin(LiasptecanalisPeer::LIASPTECCRIEVA_ID, LiaspteccrievaPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -549,28 +549,28 @@ abstract class BaseLiasptecanalisPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = LiaspteccrievaPeer::getOMClass();
+				$omClass = LiaspteccrievaPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getLiaspteccrieva(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addLiasptecanalis($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getLiaspteccrieva(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addLiasptecanalis($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initLiasptecanaliss();
-				$obj2->addLiasptecanalis($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initLiasptecanaliss();
+					$obj2->addLiasptecanalis($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
@@ -589,11 +589,11 @@ abstract class BaseLiasptecanalisPeer {
 		LiasptecanalisPeer::addSelectColumns($c);
 		$startcol2 = (LiasptecanalisPeer::NUM_COLUMNS - LiasptecanalisPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		LireglicPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + LireglicPeer::NUM_COLUMNS;
-
-		$c->addJoin(LiasptecanalisPeer::LIREGLIC_ID, LireglicPeer::ID);
-
+			LireglicPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + LireglicPeer::NUM_COLUMNS;
+	
+			$c->addJoin(LiasptecanalisPeer::LIREGLIC_ID, LireglicPeer::ID);
+	
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -606,28 +606,28 @@ abstract class BaseLiasptecanalisPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = LireglicPeer::getOMClass();
+				$omClass = LireglicPeer::getOMClass();
+	
 
+				$cls = Propel::import($omClass);
+				$obj2  = new $cls();
+				$obj2->hydrate($rs, $startcol2);
 
-			$cls = Propel::import($omClass);
-			$obj2  = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getLireglic(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addLiasptecanalis($obj1);
-					break;
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getLireglic(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addLiasptecanalis($obj1);
+						break;
+					}
 				}
-			}
 
-			if ($newObject) {
-				$obj2->initLiasptecanaliss();
-				$obj2->addLiasptecanalis($obj1);
-			}
-
+				if ($newObject) {
+					$obj2->initLiasptecanaliss();
+					$obj2->addLiasptecanalis($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;
