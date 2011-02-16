@@ -1,0 +1,39 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   licomint
+  anchogrid:               900
+  ancho:                   700
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Seleccionar
+  tipo:                    k
+  nombrecampo:             check
+  html:                    ["size=3 "]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Nro Compra Integral
+  tipo:                    t
+  nombrecampo:             numcomint
+  html:                    [size="10" ]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Nro Expediente
+  tipo:                    t
+  nombrecampo:             numexp
+  html:                    [size="10" ]
+  esgrabable:              false
+4:       # Columna 4
+  titulo:                  Fecha
+  tipo:                    t
+  nombrecampo:             feccomint
+  html:                    [size="10" ]
+  esgrabable:              true
+5:       # Columna 5
+  titulo:                  Comision de Contratación
+  tipo:                    t
+  nombrecampo:             descom
+  html:                    [size="60"]
+  esgrabable:              true

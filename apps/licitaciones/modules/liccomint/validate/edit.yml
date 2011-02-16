@@ -1,0 +1,49 @@
+methods:
+  post:
+   - "licomint{numcomint}"
+   - "licomint{numexp}"
+   - "licomint{feccomint}"
+   - "licomint{codcom}"
+
+
+names:
+  licomint{numcomint}:
+    required:  Yes
+    required_msg: El Número no puedo estar en Blanco
+    validators: Validator_numcomint
+
+  licomint{numexp}:
+    required:  Yes
+    required_msg: El Expediente no puedo estar en Blanco
+
+  licomint{feccomint}:
+    required:  Yes
+    required_msg: La Fecha no puedo estar en Blanco
+    validators: FechaValidator
+
+  licomint{codcom}:
+    required:  Yes
+    required_msg: El Código no puedo estar en Blanco
+    validators: Validator_codcom
+
+Validator_numcomint:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Licomint
+        column:       numcomint
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_codcom:
+    class: CidesaExistValidator
+    param:
+        class:    Licomlic
+        column:   codcom
+        unique_error:   El Código de  Comisíon no existe
+
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
