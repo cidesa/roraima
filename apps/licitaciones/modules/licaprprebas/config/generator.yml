@@ -1,0 +1,16 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Liprebas
+    theme:            cidesaGenerator
+
+    fields:
+      grip:   { name: Listado }
+
+    edit:
+      title:          Aprobación de Presupuesto Base
+      display:
+        "Datos":   [_grip]
+
+      actions:
+        _save:        ~

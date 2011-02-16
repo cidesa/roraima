@@ -1,0 +1,41 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Lileycon
+    theme:            cidesaGenerator
+    fields:
+      archivocon:
+        name:  Seleccione el archivo "Contenido de la Ley" a adjuntar
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Contenido Ley************" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      archivoreg:
+        name:  Seleccione el archivo "Reglamentos de la Ley" a adjuntar
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Reglamento Ley***********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      descripcion:   {name: Observacion}
+
+    list:
+      title:           Carga de Documentos Ley de Contrataciones Públicas
+      display:         [=archivocon, =archivoreg, descripcion]
+      object_actions:
+        _edit:        ~
+        _delete:        ~
+      max_per_page:   10
+      sort:  descripcion
+
+    edit:
+      title:           Carga de Documentos Ley de Contrataciones Públicas
+      display:
+        Contenido Ley de Contrataciones Públicas:   [archivocon]
+        Reglamentos Ley de Contrataciones Públicas: [archivoreg]
+        Observacion:                                [descripcion]
+      fields:
+        descripcion:    {type: textarea_tag, params: maxlength=1000 size=80x5}
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

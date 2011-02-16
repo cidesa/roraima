@@ -1,0 +1,65 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   caartsol
+  anchogrid:               900
+  ancho:                   850
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Marcar
+  tipo:                    k
+  nombrecampo:             check
+  html:                    ["size=3 "]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Unidad Ejecutora
+  tipo:                    t
+  nombrecampo:             unires
+  html:                    [size="5" ]
+  esgrabable:              true
+  oculta:                  true
+3:       # Columna 3
+  titulo:                  Unidad Ejecutora
+  tipo:                    t
+  nombrecampo:             desubi
+  html:                    [size="30" ]
+  esgrabable:              false
+4:       # Columna 4
+  titulo:                  Nro Requisición
+  tipo:                    t
+  nombrecampo:             reqart
+  html:                    [size="10" ]
+  esgrabable:              true
+5:       # Columna 5
+  titulo:                  Fecha
+  tipo:                    t
+  nombrecampo:             fecreq
+  html:                    [size="8"]
+  esgrabable:              true
+6:       # Columna 6
+  titulo:                  Cantidad
+  tipo:                    m
+  nombrecampo:             canreq
+  html:                    [size="5"]
+  esgrabable:              true
+7:       # Columna 7
+  titulo:                  Precio Unitario
+  tipo:                    m
+  nombrecampo:             costo
+  html:                    [size="15"]
+  esgrabable:              true
+8:       # Columna 8
+  titulo:                  SubTotal
+  tipo:                    m
+  nombrecampo:             montot
+  html:                    [size="15"]
+  esgrabable:              true
+9:       # Columna 9
+  titulo:                  Codart
+  tipo:                    t
+  nombrecampo:             codart
+  html:                    [size="10"]
+  esgrabable:              true
+  oculta:                  true

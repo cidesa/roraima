@@ -1,0 +1,42 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Licomint
+    theme:            cidesaGenerator
+    fields:
+      numcomint:                      {name: Nro. Compra Integral, params: size=10 maxlength=8}
+      numexp:                         {name: Nro. Expediente, params: size=10 maxlength=8}
+      feccomint:                      {name: Fecha}
+      codcom:
+        name: Comision de Contratación
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Licomlic_licregsol
+          clase: Licomlic
+          ajax: 1
+          parametros: getprincipal="getCodcom" getsecundario="getDescom" campoprincipal="codcom" camposecundario="descom" campobase = "id"
+      respon:         {name: Responsable, params:  size="80"}
+      gridreq:        {name: .}
+      gridart:        {name: .}
+
+    list:
+      title:         Compra Integral
+      display:       [=numcomint, numexp, feccomint, codcom, descom, respon]
+      filters:       [numcomint, numexp, feccomint, codcom]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:	  10
+      sort:          numcomint
+      fields:
+        descom:      {name: Descripción}
+
+    edit:
+      title:          Compra Integral
+      display:
+        Datos Generales:              [numcomint, numexp, feccomint, codcom, respon]
+        Requisiciones de Articulos:   [_gridart, _gridreq]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

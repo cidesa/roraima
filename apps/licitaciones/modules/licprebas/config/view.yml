@@ -1,0 +1,17 @@
+anularSuccess:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Módulo Compras
+    robots:       index, follow
+    description:  Módulo Compras
+    keywords:     Módulo Compras
+    language:     en
+
+  stylesheets:    [main]
+
+  javascripts:    [%SF_PROTOTYPE_WEB_DIR%/js/prototype]
+
+  has_layout:     on
+  layout:         layout_generales

@@ -1,0 +1,67 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Limemoran
+    theme:            cidesaGenerator
+    fields:
+      display:       [numemo, numexp, fecha, nompro, codfin, codcom, coduniste, respon, codclacomp, tipcom, detmemo]
+      numemo:        {name: Memorando No}
+      numexp:        {name: Expediente No}
+      fecha:         {name: Fecha}
+      nompro:        {name: Proyecto, type: textarea_tag, params:  size="80x3"}
+      codfin:
+        name: Fuente Financiamiento
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Fortipfin_Pagemiord
+          clase: Fortipfin
+          ajax: 0
+          parametros: getprincipal="getCodfin" getsecundario="getNomext" campoprincipal="codfin" camposecundario="nomext" campobase = "id"
+      codcom:
+        name: Para (Comision de Contratación)
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Licomlic_licregsol
+          clase: Licomlic
+          ajax: 0
+          parametros: getprincipal="getCodcom" getsecundario="getDescom" campoprincipal="codcom" camposecundario="descom" campobase = "id"
+      coduniste:
+        name: De (Unidad ejecutora Local)
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_licregsol
+          clase: Lidatste
+          ajax: 0
+          parametros: getprincipal="getCoduniste" getsecundario="getDesuniste" campoprincipal="coduniste" camposecundario="desuniste" campobase = "id"
+      respon:         {name: Responsable, params:  size="80"}
+      codclacomp:
+        name: Tipo de Solicitud
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Clacomp_Ocreglic
+          clase: Occlacomp
+          ajax: 0
+          parametros: getprincipal="getCodclacomp" getsecundario="getDesclacomp" campoprincipal="codclacomp" camposecundario="desclacomp" campobase = "id"
+      tipcom:        {name: Compra}
+      ptipcom:       {name: .}
+      detmemo:       {name: Detalle, type: textarea_tag, params:  size="80x20"}
+
+    list:
+      title:         Memorando
+      display:       [=numemo, numexp, fecha, nompro]
+      filters:       [numero, numexp, fecha, nompro]
+      object_actions:
+        _edit:        ~
+        _delete:        ~
+      max_per_page:   10
+      sort:  numemo
+
+    edit:
+      title:         Memorando
+      display:
+        Datos Memorando:      [numemo, numexp, fecha, nompro, codfin, codcom, coduniste, respon, codclacomp, _ptipcom]
+        Detalle:              [detmemo]      
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

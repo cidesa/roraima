@@ -1,0 +1,51 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   lirecomen
+  anchogrid:               900
+  ancho:                   850
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+2:       # Columna 2
+  titulo:                  Empresa
+  tipo:                    t
+  nombrecampo:             nompro
+  html:                    [size="50" ]
+  esgrabable:              true  
+3:       # Columna 3
+  titulo:                  Rif
+  tipo:                    t
+  nombrecampo:             codpro
+  html:                    [size="30" ]
+  esgrabable:              true
+4:       # Columna 4
+  titulo:                  Legal
+  tipo:                    m
+  nombrecampo:             legal
+  html:                    [size="10" ]
+  esgrabable:              true
+5:       # Columna 5
+  titulo:                  Tecnico
+  tipo:                    m
+  nombrecampo:             tecnico
+  html:                    [size="10"]
+  esgrabable:              true
+6:       # Columna 6
+  titulo:                  Financiero
+  tipo:                    m
+  nombrecampo:             financiero
+  html:                    [size="10"]
+  esgrabable:              true
+7:       # Columna 7
+  titulo:                  Total
+  tipo:                    m
+  nombrecampo:             total
+  html:                    [size="15"]
+  esgrabable:              true
+10:       # Columna 10
+  titulo:                  Recomendación
+  tipo:                    k
+  nombrecampo:             check
+  html:                    ["size=3 "]
+  esgrabable:              true

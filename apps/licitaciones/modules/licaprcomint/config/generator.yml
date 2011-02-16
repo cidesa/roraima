@@ -1,0 +1,14 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Licomint
+    theme:            cidesaGenerator
+    fields:
+      gridapr:        {name: .}
+
+    edit:
+      title:          Aprobacíon de Compra Integral
+      display:
+        Lista de Compras Integrales:   [_gridapr]
+      actions:
+        _save:        ~
