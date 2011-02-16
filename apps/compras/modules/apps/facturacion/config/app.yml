@@ -1,7 +1,0 @@
-all:
-   .apps:
-     autenticacion:    autenticacion
-     max_per_page:     15
-     facturacion:      facturacion
-     this:             facturacion      #cambiar en cada app
-     ayuda:            ayudas

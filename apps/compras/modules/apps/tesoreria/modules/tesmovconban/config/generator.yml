@@ -1,7 +1,0 @@
-generator:
-  class:              sfPropelAdminGenerator
-  param:
-    model_class:      Tsconcil
-    theme:            default
-    edit:
-      title:          Conciliación Bancaria

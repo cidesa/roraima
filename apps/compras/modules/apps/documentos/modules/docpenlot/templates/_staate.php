@@ -1,1 +1,0 @@
-<?php echo select_tag('dfatendoc[staate]', options_for_select(Constantes::listaAtencion(), $dfatendoc->getStaate(),'include_custom=Seleccione...')) ?>

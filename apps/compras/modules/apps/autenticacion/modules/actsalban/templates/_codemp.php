@@ -1,1 +1,0 @@
- <?php echo select_tag('empresa[codemp]', options_for_select(EmpresaPeer::getEmpresas(),$empresa->getCodemp()),array()) ?>

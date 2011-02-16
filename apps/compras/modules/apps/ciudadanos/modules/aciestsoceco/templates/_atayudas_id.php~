@@ -1,3 +1,0 @@
-
-<?php echo input_tag('filters[nroexp]', isset($filters['state']) ? $filters['state'] : '','size=5') ?>
-

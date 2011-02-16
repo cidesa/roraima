@@ -1,8 +1,0 @@
-methods:
-  post:
-   - "catcodpos{despos}"
-
-names:
-  catcodpos{despos}:
-    required:  Yes
-    required_msg: La Descripcion no puede estar en Blanco

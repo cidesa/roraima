@@ -1,3 +1,0 @@
-all:
-  is_secure: on
-  credentials: [[admin, tesmovsegban_15, tesmovsegban_11, tesmovsegban_9]]

@@ -1,1 +1,0 @@
- <?php echo select_tag('npasiconpar[codtip]', options_for_select(NptipdedPeer::getDedicaciones(),$npasiconpar->getCodtip(),'include_custom=Seleccione una'),array()) ?>

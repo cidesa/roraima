@@ -1,3 +1,0 @@
-all:
-  stylesheets: [-*]
-  javascripts: [%SF_PROTOTYPE_WEB_DIR%/js/prototype]
