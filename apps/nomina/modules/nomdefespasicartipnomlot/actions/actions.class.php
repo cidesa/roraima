@@ -126,7 +126,7 @@ $this->Bitacora('Guardo');
     $c = new Criteria();
     $c->add(NpasicarnomPeer::CODNOM,$codigo);
     $per = NpasicarnomPeer::doSelect($c);
-    $filas_arreglo=300;
+    $filas_arreglo=400;
     //print $codigo;
 
   	$filvac="";
