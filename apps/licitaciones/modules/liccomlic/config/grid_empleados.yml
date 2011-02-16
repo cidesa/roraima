@@ -27,8 +27,8 @@ opciones:                  # Opciones generales
   esgrabable:			   true
   html:                    [readonly=true size=20]
 4:       # Columna 4
-  titulo:                  Dirección
+  titulo:                  Cargo
   tipo:                    t
-  nombrecampo:             dirhab
+  nombrecampo:             nomcar
   html:                    [readonly=true size="30" maxlength=1000]
   esgrabable:              true

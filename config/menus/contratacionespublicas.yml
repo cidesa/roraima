@@ -4,14 +4,14 @@ contratacionespublicas:
     descripcion: Módulo de Contrataciones Públicas
     imagen: licitaciones.gif
     nombre: Contrataciones Públicas
-    urls:      
+    urls:
       default:
         modulo: licitaciones.php
         modulo_dev: licitaciones_dev.php
       Presupuesto ONAPRE:
         modulo: presupuesto.php
         modulo_dev: presupuesto_dev.php
-      Propios de la Institución  para Contratación de Obras:
+      Propios de la Institución  para Contratación de Obras(Partidas de Obras):
         modulo: obras.php
         modulo_dev: obras_dev.php
       Artículos SNC:
@@ -32,13 +32,28 @@ contratacionespublicas:
       División Territorial:
         modulo: obras.php
         modulo_dev: obras_dev.php
-      Requisición:
-        modulo: compras.php
-        modulo_dev: compras_dev.php
-      Compra Integral:
+      Pedidos:
         modulo: compras.php
         modulo_dev: compras_dev.php
       Orden de Compra/Servicio:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Aprobación de Pedidos:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Registro de Contratos:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Registro de Obras:
+        modulo: obras.php
+        modulo_dev: obras_dev.php
+      Bien/Servicio u Obra:
+        modulo: obras.php
+        modulo_dev: obras_dev.php
+      Recepción de Ordenes de Compra:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Registro de Ofertas:
         modulo: compras.php
         modulo_dev: compras_dev.php
       Cambiar Contraseña:
@@ -51,11 +66,9 @@ contratacionespublicas:
   menu:
     Definiciones Generales:
       Ente Contratante:                                         licdefemp
-      Ley de Contrataciones Públicas:
-        Contenido(*):                                           licdefemp
-        Reglamento(*):                                          licdefemp
+      Ley de Contrataciones Públicas:                           licleycon
       Catálogos Requeridos:
-        Normas COVENIN(*):                                      licdefemp
+        Normas COVENIN:                                         licnorcov
         Propios de la Institución  para Contratación de Obras(Partidas de Obras):  oycdefpar
         Presupuesto ONAPRE:                                     pretitpre
         Artículos SNC:                                          almdefcatsnc
@@ -70,7 +83,7 @@ contratacionespublicas:
         Registro:                                               oycdeforg
       Unidad Ejecutora:
         Tipo:                                                   lictipuniste
-        Registro:                                               licuniste        
+        Registro:                                               licuniste
       #Concurso:                                                 licconcurso
       Integración Comisión de Contratación:                     liccomlic
       Tipos de Financiamiento:                                  pretitfin
@@ -81,36 +94,42 @@ contratacionespublicas:
         Municipio:                                              oycdefdivmun
         Parroquia:                                              oycdefdivpar
         Sector:                                                 oycdefdivsec
-      Compromiso de Responsabilidad Social:                     liccomres      
+      Compromiso de Responsabilidad Social:                     liccomres
       Criterios de Evaluación Técnico:                          licaspteccriterios
       Criterios de Evaluación Financieros:                      licaspfincriterios
     Procesos:
       Solicitud de Suministro:
-        Presupuesto Base(*):                                    licdefemp
-        Requisición:                                            almsolegr
-        Compra Integral:                                        almOrdComv2
-        Aprobación(*):                                          licdefemp
-        Punto de Cuenta(*):                                     licdefemp
+        Presupuesto Base:                                       licprebas
+        Memorando:                                              licmemoran
+        Aprobación de Presupuesto Base:                         licaprprebas
+        Pedidos:                                                almsolegr
+        Aprobación de Pedidos:                                  AlmAprSolEgr
+        Compra Integral:                                        liccomint
+        Aprobación de Compra Integral:                          licaprcomint
+        Punto de Cuenta Inicial:                                licptocue
       Contrataciones:
-        Pliego de Condiciones(*):                               licdefemp
-        Publicación(*):                                         licdefemp
+        Registro de Contrataciones:                             licreglic
         Participantes:                                          liemppar
         Oferentes:                                              licempofe
-        Registro de Ofertas(*):                                 licempofe
+        Registro de Ofertas:                                    AlmCotiza
         Análisis de Ofertas:
           Aspecto Legal(Análisis):                              licasplegcriterios
           Aspecto Técnico(Análisis):                            licasptecanalisis
-          Aspecto Financiero:            
+          Aspecto Financiero:
             Análisis:                                           licaspfinanalisis
             Presupuesto:                                        licoferpresupuesto
           Cálculo del V.A.N.:                                   liccalculovan
-        Recomendación(*):                                       licdefemp
-        Punto de Cuenta(*):                                     licdefemp
-        Notificación(*):                                        licdefemp
-      Contratacion:
-        Contrato(*):                                            licdefemp
+        Recomendación:                                          licrecomen
+        Punto de Cuenta Final:                                  licptocue
+        #Notificación(*):                                        licdefemp
+      Adjudicación:
+        Registro de Contratos:                                  almcontratonew
+        Registro de Obras:                                      oycdesobr
         Orden de Compra/Servicio:                               almOrdComv2
-      Reportes:
-        Definiciones:
+      Recepción del bien:
+        #Control Perceptivo(*):                                  licdefemp
+        Recepción de Ordenes de Compra:                         AlmOrdRec
+    Reportes:
+      Definiciones:                                             lic
     Mantenimiento:
       Cambiar Contraseña:                                       cambiopasswd

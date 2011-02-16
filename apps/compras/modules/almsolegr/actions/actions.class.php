@@ -594,6 +594,7 @@ class almsolegrActions extends autoalmsolegrActions
    */
     public function executeAjax()
    {
+     $sw=true;
      $cajtexmos=$this->getRequestParameter('cajtexmos');
      $cajtexcom=$this->getRequestParameter('cajtexcom');
      $output=array();
@@ -798,8 +799,56 @@ class almsolegrActions extends autoalmsolegrActions
 
         $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
       }
+    else  if ($this->getRequestParameter('ajax')=='11')
+      {
+        $sw=false;
+        $q= new Criteria();
+        $q->add(LiprebasPeer::REQART,$this->getRequestParameter('codigo'));
+        $reg= LiprebasPeer::doSelectOne($q);
+        if ($reg)
+        {
+           $javascript="";
+           $dato=$reg->getDesreq();
+           $dato1=$reg->getMonreq();
+           $dato2=$reg->getUnires();
+           $dato3=H::GetX('Codubi','Bnubica','Desubi',$dato2);
+           $dato4=$reg->getTipmon();
+           $dato5=$reg->getTipfin();
+           $dato6=H::GetX('Codfin','Fortipfin','Nomext',$dato5);
+           $dato7=$reg->getCodcen();
+           $dato8=H::GetX('Codcen','Cadefcen','Descen',$dato7);
+           $dato9=$reg->getMotreq();
+           $dato10=$reg->getBenreq();
+           $dato11=$reg->getObsreq();
+
+        }else {
+            $dato="";
+            $dato1="";
+            $dato2="";
+            $dato3="";
+            $dato4="";
+            $dato5="";
+            $dato6="";
+            $dato7="";
+            $dato8="";
+            $dato9="";
+            $dato10="";
+            $dato11="";
+            $javascript="alert('El Presupuesto Base no existe');";
+        }
+        $this->casolart = $this->getCasolartOrCreate();
+        $this->updateCasolartFromRequest();
+        $this->configGridDetalle();
+        $output = '[["casolart_desreq","'.$dato.'",""],["casolart_monreq","'.$dato1.'",""],["casolart_unires","'.$dato2.'",""],
+                    ["casolart_nomcat","'.$dato3.'",""],["casolart_tipmon","'.$dato4.'",""],["casolart_tipfin","'.$dato5.'",""],
+                    ["casolart_nomext","'.$dato6.'",""],["casolart_codcen","'.$dato7.'",""],["casolart_descen","'.$dato8.'",""],
+                    ["casolart_motreq","'.$dato9.'",""],["casolart_benreq","'.$dato10.'",""],["casolart_obsreq","'.$dato11.'",""],
+                    ["javascript","'.$javascript.'",""]]';
+      }
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        if($sw)
         return sfView::HEADER_ONLY;
+
     }
 
 
@@ -1690,6 +1739,8 @@ class almsolegrActions extends autoalmsolegrActions
         'casolart{valmon}' => 'Valor',
         'casolart{stareq}' => 'estatus',
         'casolart{codcen}' => 'Centro de Costo',
+         'casolart{refpre}' => 'Referencia Presupuesto Base',
+         'casolart{prebas}' => 'Presupuesto Base',
       );
     }
 
