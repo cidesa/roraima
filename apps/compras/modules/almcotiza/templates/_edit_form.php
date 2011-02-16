@@ -202,7 +202,7 @@
 
   <?php $value = object_input_tag($cacotiza, array('getMoncot',true), array (
   'size' => 20,
-  'readonly' => true,
+  'readonly' => $cacotiza->getHabmon()=='S' ? false : true ,
   'control_name' => 'cacotiza[moncot]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>

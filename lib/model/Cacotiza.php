@@ -56,4 +56,9 @@ class Cacotiza extends BaseCacotiza
     {  		
 		return $this->rifpro;
     }
+
+    public function getHabmon()
+    {
+        return H::getConfApp2('habmon', 'compras', 'almcotiza');
+}
 }
