@@ -244,7 +244,7 @@ class SolicituddeEgresos
         $longcat=strlen($x[$j]->getCodcat()) +1;
         $x[$j]->setReqart($requisicion);
         $x[$j]->setDesart($x[$j]->getDesartsol());
-        $x[$j]->setCodpar(substr($x[$j]->getCodigopre(),$longcat,strlen($x[$j]->getCodigopre())));
+        $x[$j]->setCodpar($x[$j]->getCodpre());
         $x[$j]->save();
       }
     $j++;
