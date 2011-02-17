@@ -1644,7 +1644,7 @@
        $(facafect).disabled=true;
        new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=99&cajtexmos='+facafect+'&codigo='+id})
      }else{
-      alert_('El N&uacute;mero de Factura esta Repetido');
+      alert_('El N&uacute;mero de Factura esta Repetido para ese mismo Proveedor');
       $(id).value="";
       $(id).focus();
      }
@@ -1658,7 +1658,9 @@
    var fila=aux[1];
    var col=parseInt(aux[2]);
 
-   var numfac=$(id).value;
+   var rifalt=name+"_"+fila+"_23";
+
+   var numfac=$(id).value+"-"+$(rifalt).value;
 
    var numfacrepetido=false;
    var am=totalregistros('bx',2,150);
@@ -1666,8 +1668,9 @@
    while (i<am)
    {
     var codigo="bx"+"_"+i+"_2";
+    var rifalt2="bx"+"_"+i+"_23";
 
-    var numfac2=$(codigo).value;
+    var numfac2=$(codigo).value+"-"+$(rifalt2).value;
 
     if (i!=fila)
     {
