@@ -100,6 +100,8 @@ class pagemiordActions extends autopagemiordActions {
         $this->configGridFactura();
         $factura=Herramientas::CargarDatosGrid($this,$this->obj2,true);
         $cedrif=$this->getRequestParameter('opordpag[cedrif]');
+        $valnumfac=H::getConfApp2('valnumfac', 'compras', 'pagemiord');
+      if ($valnumfac!='N') {
         $l= new Criteria();
         $l->add(OpordpagPeer::CEDRIF,$cedrif);
         $benefi= OpordpagPeer::doSelect($l);
@@ -124,6 +126,7 @@ class pagemiordActions extends autopagemiordActions {
             }
           }
         }
+      }
 
         if ($this->getRequestParameter('opordpag[afectapre]')==1) {
           $this->configGrid();
@@ -165,7 +168,8 @@ class pagemiordActions extends autopagemiordActions {
         $this->configGridFactura();
         $factura=Herramientas::CargarDatosGrid($this,$this->obj2,true);
         $cedrif=$this->opordpag->getCedrif();
-
+      $valnumfac=H::getConfApp2('valnumfac', 'compras', 'pagemiord');
+      if ($valnumfac!='N') {
         $l= new Criteria();
         $l->add(OpordpagPeer::CEDRIF,$cedrif);
         $benefi= OpordpagPeer::doSelect($l);
@@ -190,6 +194,7 @@ class pagemiordActions extends autopagemiordActions {
             }
           }
         }
+      }
 
       }
       return true;
