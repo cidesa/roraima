@@ -1,4 +1,4 @@
------ INSTALACIÓN DE RORAIMA 1.0.1 -------------
+----- INSTALACIÓN DE RORAIMA COMUNAL 1.0.2 -------------
 
 1- Instalar los paquetes necesario (menos el manejador de base de datos):
 
@@ -15,10 +15,10 @@
    max_execution_time = 500 ;
    session.name = cidesa
 
-3- Descomprimir roraima_v1.0.1.tar.gz en /var/www:
+3- Descomprimir roraima_v1.0.2.tar.gz en /var/www:
 
    # cd /var/www
-   # tar zxvf CARPETA_DESCARGA/roraima_v1.0.1.tar.gz
+   # tar zxvf CARPETA_DESCARGA/roraima_v1.0.2.tar.gz
 
 4- Cambiar el dueño de la carpeta cidesa:
 
@@ -39,6 +39,12 @@ carpeta site-available de apache2:
 
    Deshabilitamos la configuración por defecto
    # a2dissite default
+
+   Editamos el archivo /etc/Hosts para agregar el host roraima.local
+   # nano /etc/hosts
+
+   Y agregamos al final del archivo..
+   127.0.0.1  roraima.local
 
 7- Reiniciar Apache2:
 
@@ -76,14 +82,14 @@ carpeta site-available de apache2:
    LISTO ...... Verificamos la instalación:
 
    En el mozilla firefox >=3.0:
-   http://localhost/
+   http://roraima.local/
 
    Si todo esta correcto te debe cargar el formulario de inicio de sesion.
 
    Si te muestra el mensaje "Ha ocurrido una vicisitud", debes entrar en el entorno de desarrollo
    de la siguiente manera:
 
-   http://localhost/autenticacion_dev.php/login
+   http://roraia.local/autenticacion_dev.php/login
    Al llamar a este formulario te debe aparecer la descripción del error ocurrido y en base a este 
    debes verificar y solventar cualquier problema que se presente.
 

@@ -20,7 +20,7 @@
           <ul class="list">
             <li class="menu-on"><?php echo link_to($sf_context->getModuleName(),$sf_context->getModuleName().'/list') ?></li>
             <li><a href="javascript:self.close()">Cerrar Ventana</a></li>
-            <li><a href= "javascript: var w = window.open('/ayuda/doku.php/')">Ayuda en linea</a></li>
+            <li><a href= "javascript: var w = window.open('http://ayuda.roraima.cidesa.com.ve')">Ayuda en linea</a></li>
             <li><a href="javascript: var w = window.open('http://comunidad.roraima.cidesa.com.ve')">Comunidad</a></li>
             <li><a href="<?php if (SF_ENVIRONMENT=='dev') echo "/".sfConfig::get('app_autenticacion')."_dev.php/login/logout"; else echo "/".sfConfig::get('app_autenticacion').".php/login/logout"; ?>">Cerrar Sesion</a></li>
           </ul>
@@ -40,7 +40,7 @@
       </div>
       <div id="roraimafooter">
         <div class="info-footer">
-        	<span>Copyleft CIDESA 2007. Distribuido bajo la licencia GNU/GPL V2.0</span>
+        	<span>Copyleft CIDESA 2011. Distribuido bajo la licencia GNU/GPL V2.0</span>
 					<span>Venezuela - Lara - Barquisimeto</span>
         </div>
 				<div class="logo-footer">

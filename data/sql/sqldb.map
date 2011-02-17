@@ -1,0 +1,7 @@
+# Sqlfile -> Database map
+lib.model.nomina.schema.sql=propel
+lib.model.documentos.schema.sql=propel
+lib.model.schema.sql=propel
+lib.model.contabilidad.schema.sql=propel
+lib.model.presupuesto.schema.sql=propel
+lib.model.ciudadanos.schema.sql=propel

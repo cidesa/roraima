@@ -8,7 +8,7 @@ $b = new cidesaTestBrowser();   //Crea el obejto del navegador
 $b->initialize();   //Inicializa el explorador de pruebas!!
 
 ///////////////CARGA DE LOS MODULOS////////////////////////////
-$app='documentos';
+$app='viaticos';
 
 include(dirname(__FILE__).'/../../obtenermenu.php');
 

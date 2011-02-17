@@ -1,4 +1,4 @@
------ INSTALACIÓN DE RORAIMA 1.0.1 -------------
+----- INSTALACIÓN DE RORAIMA 1.0.2 -------------
 
 Roraima 1.0.2 es un sistema administrativo para entes gubernamentales
 basado en las premisas del software libre, amparado en la licencia GPL v2
@@ -8,12 +8,12 @@ venezolana comprometida con el software libre y el desarrollo venezolano
 
 Para instalar _Roraima_ necesitas los siguientes paquetes:
 
-* PHP5 (php5)
+* PHP5 (php5 < 5.3.2)
 * Apache2 (apache2)
 * Modulo de PHP5 para Apache2 (libapache2-mod-php5)
 * Modulo de Postgres para PHP5 (php5-pgsql)
 * Modulo de XSL para PHP5 (php5-xsl)
-* PostgreSQL 8.1 u 8.2 (postgresql-8.1 u postgresql-8.2) (no es compatible todavia con el 8.3)
+* PostgreSQL 8.X
 
 El proceso de instalación sería el siguiente:
 
@@ -69,9 +69,6 @@ carpeta site-available de apache2:
 
    Habilitamos el modulo speling para el case sensitive
    # a2enmod speling
-
-   Deshabilitamos la configuración por defecto
-   # a2dissite default
 
 9- Reiniciar Apache2:
 
@@ -177,24 +174,24 @@ carpeta site-available de apache2:
 13- Verificamos la instalación:
 
    En el mozilla firefox:
-   http://localhost/
+   http://localhost:8899/
 
    Si todo esta correcto te debe cargar el formulario de inicio de sesion.
 
    Si te muestra el mensaje "Ha ocurrido una vicisitud", debes entrar en el entorno de desarrollo
    de la siguiente manera:
 
-   http://localhost/autenticacion_dev.php/login
+   http://localhost:8899/autenticacion_dev.php/login
    Al llamar a este formulario te debe aparecer la descripción del error ocurrido y en base a este 
    debes verificar y solventar cualquier problema que se presente.
 
 14- Obtener ayuda:
 
-   Siempre puedes contactarnos por el correo desarrollo@cidesa.com.ve y gustosamente te atenderemos 
+   Siempre puedes contactarnos por el correo roraima@cidesa.com.ve y gustosamente te atenderemos 
    a la brevedad posible
 
 
-Gracias por usar Roraima.... esperamos tus comentarios a través del correo desarrollo@cidesa.com.ve
+Gracias por usar Roraima.... esperamos tus comentarios a través del correo roraima@cidesa.com.ve
 
 
 

@@ -1,13 +1,14 @@
-NameVirtualHost *
+NameVirtualHost *:8899
+Listen 8899
 
 CheckSpelling on
 
-<VirtualHost * >
+<VirtualHost *:8899 >
 
   ServerName localhost
 
   DocumentRoot "/var/www/cidesa/roraima/web"
-  DirectoryIndex auntenticacion.php/login
+  DirectoryIndex index.php
 
   <Directory "/var/www/cidesa/roraima/web/">
     AllowOverride All
@@ -15,4 +16,3 @@ CheckSpelling on
   </Directory>
 
 </VirtualHost>
-

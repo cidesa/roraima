@@ -11,27 +11,36 @@ if(count($args)<5) {
 }
 
 //////NECESITA LA VARIABLE DEL CON EL NOMBRE DE LA APP///////////////
-$menu = sfYaml::load(SF_ROOT_DIR.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'menus'.DIRECTORY_SEPARATOR.$app.'.yml');
+if(defined('CIDESA_CONFIG')){
+  if(file_exists(CIDESA_CONFIG))
+    $menu = sfYaml::load(CIDESA_CONFIG.DIRECTORY_SEPARATOR.'menus'.DIRECTORY_SEPARATOR.$app.'.yml');
+  else
+    $menu = sfYaml::load(SF_ROOT_DIR.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'menus'.DIRECTORY_SEPARATOR.$app.'.yml');
+}else{
+  $menu = sfYaml::load(SF_ROOT_DIR.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'menus'.DIRECTORY_SEPARATOR.$app.'.yml');
+}
 
 $reportes_root = SF_ROOT_DIR.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'menus'.DIRECTORY_SEPARATOR;
-
-
 
 $urls = $menu[$app]['opciones']['urls'] ;
 $menu = $menu[$app]['menu'] ;
 
 if(defined('CIDESA_CONFIG')) {
   if(file_exists(CIDESA_CONFIG))
-    $reportes_root = CIDESA_CONFIG.'/';
+
+    $app_yml = sfYaml::load(CIDESA_CONFIG.DIRECTORY_SEPARATOR.'app.yml');
+
   else{
 
     $app_yml = sfYaml::load(SF_ROOT_DIR.DIRECTORY_SEPARATOR.'apps/autenticacion/config/app.yml');
-
-    $reportes_root = $app_yml['all']['.apps']['reportes'];
-
-    if(!file_exists($reportes_root)) $reportes_root = $_SERVER['PWD'].DIRECTORY_SEPARATOR.'web'.DIRECTORY_SEPARATOR.$reportes_root;
     
   }
+
+  $reportes_root = $app_yml['all']['.apps']['reportes'];
+
+  if(!file_exists($reportes_root)) $reportes_root = $_SERVER['PWD'].DIRECTORY_SEPARATOR.'web'.DIRECTORY_SEPARATOR.$reportes_root;
+
+//print $reportes_root;exit;
 
   $reportes = sfYaml::load($reportes_root.'reportes/reportes.yml');
 

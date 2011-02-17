@@ -12,7 +12,7 @@ if(!strstr($modulo,'.php') && ($solo=='formularios' || $solo=='all')){
   isRequestParameter('action', 'index');
   if ($b->Redirect()) $b->followRedirect();
 
-  $b->check('/'.$modulo.'/'.$b->getRequest()->getParameter('action'),'Copyleft CIDESA 2007. Distribuido bajo la licencia GNU/GPL V2.0');
+  $b->check('/'.$modulo.'/'.$b->getRequest()->getParameter('action'),'Copyleft CIDESA 2011. Distribuido bajo la licencia GNU/GPL V2.0');
   $b->uncheck('/'.$modulo.'/'.$b->getRequest()->getParameter('action'),'Notice');
   $b->uncheck('/'.$modulo.'/'.$b->getRequest()->getParameter('action'),'Warning');
 
@@ -24,7 +24,7 @@ if(!strstr($modulo,'.php') && ($solo=='formularios' || $solo=='all')){
   isRequestParameter('action', 'list');
   if ($b->Redirect()) $b->followRedirect();
 
-  $b->check('/'.$modulo.'/'.$b->getRequest()->getParameter('action'),'Copyleft CIDESA 2007. Distribuido bajo la licencia GNU/GPL V2.0');
+  $b->check('/'.$modulo.'/'.$b->getRequest()->getParameter('action'),'Copyleft CIDESA 2011. Distribuido bajo la licencia GNU/GPL V2.0');
   $b->uncheck('/'.$modulo.'/'.$b->getRequest()->getParameter('action'),'Notice');
   $b->uncheck('/'.$modulo.'/'.$b->getRequest()->getParameter('action'),'Warning');
 
@@ -36,7 +36,7 @@ if(!strstr($modulo,'.php') && ($solo=='formularios' || $solo=='all')){
   isRequestParameter('action', 'create');
   if ($b->Redirect()) $b->followRedirect();
 
-  $b->check('/'.$modulo.'/'.$b->getRequest()->getParameter('action'),'Copyleft CIDESA 2007. Distribuido bajo la licencia GNU/GPL V2.0');
+  $b->check('/'.$modulo.'/'.$b->getRequest()->getParameter('action'),'Copyleft CIDESA 2011. Distribuido bajo la licencia GNU/GPL V2.0');
   $b->uncheck('/'.$modulo.'/'.$b->getRequest()->getParameter('action'),'Notice');
   $b->uncheck('/'.$modulo.'/'.$b->getRequest()->getParameter('action'),'Warning');
 
@@ -49,7 +49,7 @@ if(!strstr($modulo,'.php') && ($solo=='formularios' || $solo=='all')){
   isRequestParameter('action', 'edit');
   if ($b->Redirect()) $b->followRedirect();
 
-  $b->check('/'.$modulo.'/edit','Copyleft CIDESA 2007. Distribuido bajo la licencia GNU/GPL V2.0');
+  $b->check('/'.$modulo.'/edit','Copyleft CIDESA 2011. Distribuido bajo la licencia GNU/GPL V2.0');
   $b->uncheck('/'.$modulo.'/edit','Notice');
   $b->uncheck('/'.$modulo.'/edit','Warning');
 
