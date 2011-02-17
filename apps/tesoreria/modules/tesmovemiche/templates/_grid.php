@@ -35,6 +35,7 @@ if ( $sf_user->getAttribute('tschemi_operacion','vacio')=='ordpag' )
             'update'   => 'divGrid',
 	        'url'      => 'tesmovemiche/ajax',
 	        'complete' => 'AjaxJSON(request, json)',
+                'before'   => 'var numeroord=document.getElementById("tscheemi_numeroord").value;numeroord=numeroord.pad(8, "0",0);document.getElementById("tscheemi_numeroord").value=numeroord;',
 	        'script'   => true,
 	        'condition' => "$('tscheemi_numeroord').value != ''",
 	        'with' => "'ajax=7&cajtexmos=tscheemi_numeroord&mostrardato=S&operacion='+document.getElementById('tscheemi_operacion').value+'&numord='+$('tscheemi_numeroord').value+'&tipdoc='+$('tscheemi_tipdoc').value+'&numcue='+document.getElementById('tscheemi_numcue').value+'&fecord='+$('tscheemi_fecord').value"
