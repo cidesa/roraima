@@ -524,7 +524,19 @@ class tesmovemicheActions extends autotesmovemicheActions
 	  {
          $dato=$this->getRequestParameter('cedrif');
          $valormayuscula=$this->getRequestParameter('cedrif');
-         $jstscheemi = ',["tscheemi_numeroord","'.$this->getRequestParameter('numord').'",""],["tscheemi_fecord","'.$this->getRequestParameter('fecord').'",""]';
+         $t= new Criteria();
+         $t->add(OpordpagPeer::NUMORD,$this->getRequestParameter('numord'));
+         $reg= OpordpagPeer::doSelectOne($t);
+         if ($reg)
+         {
+             $crif=$reg->getCedrif();
+             $drif=H::getX_vacio('CEDRIF', 'Opbenefi', 'Nomben', $crif);
+         }else {
+            $crif='';
+            $drif='';
+	  }
+
+         $jstscheemi = ',["tscheemi_numeroord","'.$this->getRequestParameter('numord').'",""],["tscheemi_fecord","'.$this->getRequestParameter('fecord').'",""],["tscheemi_cedrif","'.$crif.'",""],["tscheemi_nomben","'.$drif.'",""]';
 	  }
 
 
