@@ -577,7 +577,8 @@
        var aux6="ax"+"_"+i+"_4";
        //var aux7="ex"+"_"+fil+"_1";
 
-       var tot=totalregistros('fx',1,300);
+       nret=parseInt($('opordpag_numfilret').value);
+       var tot=totalregistros('fx',1,nret);
 
       var retenc=toFloat(aux6);
       var causado=toFloat(aux5);
@@ -602,7 +603,8 @@
        else {posenc=posicionretencion($(aux7).value,$(aux8).value,-1,ref[i+1],tot);}
        if (posenc==0)
        {
-         var filaret=totalregistros('fx',1,300);
+         nret=parseInt($('opordpag_numfilret').value);
+         var filaret=totalregistros('fx',1,nret);
          posenc=filaret;
        }
        var aux9="fx"+"_"+posenc+"_1";
@@ -686,7 +688,8 @@
         var retenc=toFloat(aux6);
         var causado=toFloat(aux5);
 
-        var tot=totalregistros('fx',1,300);
+        nret=parseInt($('opordpag_numfilret').value);
+        var tot=totalregistros('fx',1,nret);
 
         var Montobase= ((causado*porcbase)/100);
         var retencion=((porsus/100)*(basimp/100)*Montobase);
@@ -703,7 +706,8 @@
         else { posenc=posicionretencion($(aux7).value,$(aux8).value,-1,ref[i+1],tot);}
         if (posenc==0)
         {
-         var filaret=totalregistros('fx',1,300);
+            nret=parseInt($('opordpag_numfilret').value);
+         var filaret=totalregistros('fx',1,nret);
          posenc=filaret;
         }
         var aux9="fx"+"_"+posenc+"_1";
@@ -907,7 +911,8 @@
 
  function distribuyeretenciones()
  {
-   var tot2=totalregistros('fx',1,300);
+   nret=parseInt($('opordpag_numfilret').value);
+   var tot2=totalregistros('fx',1,nret);
    var g=0;
    while (g<tot2)
    {
@@ -1006,7 +1011,8 @@
       var id4="ax"+"_"+l+"_2";
       var id5="ax"+"_"+l+"_3";
 
-      var total=totalregistros('fx',1,300);
+      nret=parseInt($('opordpag_numfilret').value);
+      var total=totalregistros('fx',1,nret);
       var causado=toFloat(id5);
 
       var enc=false;
@@ -1031,7 +1037,8 @@
 
         if (posenc==0)
           {
-           var filaret=totalregistros('fx',1,300);
+           nret=parseInt($('opordpag_numfilret').value);
+           var filaret=totalregistros('fx',1,nret);
            posenc=filaret;
           }
 
@@ -1080,7 +1087,8 @@
     {
       var id4="ax"+"_"+fi+"_2";
       var id3="ax"+"_"+fi+"_3";
-      var total=totalregistros('fx',1,300);
+      nret=parseInt($('opordpag_numfilret').value);
+      var total=totalregistros('fx',1,nret);
 
       var montcau=toFloat(id3);
 
@@ -1146,7 +1154,8 @@
 
       if (posenc==0)
         {
-         var filaret=totalregistros('fx',1,300);
+         nret=parseInt($('opordpag_numfilret').value);
+         var filaret=totalregistros('fx',1,nret);
          posenc=filaret;
         }
 
@@ -1192,7 +1201,8 @@
     var id1="ax"+"_"+fi+"_1";
     var id4="ax"+"_"+fi+"_2";
     var id3="ax"+"_"+fi+"_3";
-    var total=totalregistros('fx',1,300);
+    nret=parseInt($('opordpag_numfilret').value);
+    var total=totalregistros('fx',1,nret);
 
     var montcau=toFloat(id3);
 
@@ -1206,7 +1216,8 @@
 
       if (posenc==0)
         {
-         var filaret=totalregistros('fx',1,300);
+         nret=parseInt($('opordpag_numfilret').value);
+         var filaret=totalregistros('fx',1,nret);
          posenc=filaret;
         }
         var aux9="fx"+"_"+posenc+"_1";
@@ -1277,8 +1288,8 @@
   ind++;
   }
 
-
-  var zz=totalregistros('fx',1,300);
+  nret=parseInt($('opordpag_numfilret').value);
+  var zz=totalregistros('fx',1,nret);
   var inc=0;
   var p=0;
   var fildondesta=0;
@@ -1329,7 +1340,8 @@
   new Ajax.Request('/tesoreria_dev.php/pagemiord/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=17&formulario='+formulario})
 
   $('opordpag_presiono').value='S';
-  var tot1=totalregistros('fx',1,300);
+  nret=parseInt($('opordpag_numfilret').value);
+  var tot1=totalregistros('fx',1,nret);
   var fi=0;
    while (fi<tot1)
    {
@@ -2944,7 +2956,8 @@ function ajaxretenciones(e,id)
 function monto1XMILN()
  {
    montounomil=0;
-   total=totalregistros('fx',2,300);
+   nret=parseInt($('opordpag_numfilret').value);
+   total=totalregistros('fx',2,nret);
    j=0;
    while (j<total)
    {
