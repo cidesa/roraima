@@ -865,7 +865,7 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
 
    public static function Grabar_Transferencia($catraalm,$grid,$grid_arreglo,&$error,&$codigo_art)
    {
-    $correl=false;
+  /*  $correl=false;
   if (Herramientas::getVerCorrelativo('almcorre','cadefart',&$r))
     {
         if ($catraalm->getCodtra()=='########')
@@ -894,6 +894,7 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
       }
 
      }//if (Herramientas::getVerCorrelativo('almcorre','cadefart',&$r))
+   */
 
      $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
      if ($manartlot=='S')
@@ -916,6 +917,36 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
     if (self::Actualizar_Artículos($catraalm,'D','Salvar',$grid_arreglo,&$error,&$articulo))
     {
         self::Actualizar_Artículos($catraalm,'S','Salvar',$grid_arreglo,&$error,&$articulo);
+
+        $correl=false;
+          if (Herramientas::getVerCorrelativo('almcorre','cadefart',&$r))
+            {
+                if ($catraalm->getCodtra()=='########')
+              {
+                $encontrado=false;
+                    while (!$encontrado)
+                    {
+                      $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+                      $sql="select codtra from Catraalm where codtra='".$numero."'";
+                      if (Herramientas::BuscarDatos($sql,&$result))
+                      {
+                        $r=$r+1;
+                      }
+                      else
+                      {
+                        $encontrado=true;
+                      }
+                    }
+                $catraalm->setCodtra(str_pad($r, 8, '0', STR_PAD_LEFT));
+                $correl=true;
+              }//if ($catraalm->getCodtra()=='########')
+              else
+              {
+                $catraalm->setCodtra(str_replace('#','0',$catraalm->getCodtra()));
+                $catraalm->setCodtra(str_pad($catraalm->getCodtra(), 8, '0', STR_PAD_LEFT));
+              }
+
+             }
           if ($correl) Herramientas::getSalvarCorrelativo('almcorre','cadefart','cadefart',$r,&$msg);
         $catraalm->save();
         // Se graban los detalles de la Transaccion
