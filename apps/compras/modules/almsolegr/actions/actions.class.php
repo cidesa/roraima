@@ -674,7 +674,12 @@ class almsolegrActions extends autoalmsolegrActions
 	        $dato3=$reg->getCodpar();
 	        if ($catbnubica=='S')
 	        $valuni="";
-	        else $valuni=$this->getRequestParameter('valuni');
+                    else { $valuni=$this->getRequestParameter('valuni');
+                      $codigopre=$valuni.'-'.$dato3;
+                      $codigpre=$this->getRequestParameter('codigpre');
+                       $javascript="$('$codigpre').value='".$codigopre."'; ";
+
+                       }
 
 	        $unires=$this->getRequestParameter('unires');
                     $catunires=$this->getRequestParameter('catunires');
@@ -682,10 +687,10 @@ class almsolegrActions extends autoalmsolegrActions
                     $manunicuni=H::getConfApp2('manunicuni', 'compras', 'almsolegr');
                     if ($manunicuni=='S')
                     {
-                       $javascript="$('$catunires').hide(); $('$unires').readOnly=true; $('$unires').focus(); $('$costo').focus();";
+                       $javascript=$javascript."$('$catunires').hide(); $('$unires').readOnly=true; $('$unires').focus(); $('$costo').focus();";
                     }
                     else
-	        $javascript="$('$unires').focus(); $('$costo').focus();";
+                        $javascript=$javascript."$('$unires').focus(); $('$costo').focus();";
 	        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$this->getRequestParameter('unidad').'","'.$dato1.'",""],["'.$this->getRequestParameter('costo').'","'.$dato2.'",""],["'.$this->getRequestParameter('partida').'","'.$dato3.'",""],["'.$this->getRequestParameter('unires').'","'.$valuni.'",""],["javascript","'.$javascript.'",""]]';
                   }else {
                     $valuni="";
@@ -984,7 +989,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col6->setAlineacionContenido(Columna::CENTRO);
        $col6->setHTML('type="text" size="55" maxlength="'.chr(39).$lonpre.chr(39).'"');
        $col6->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascarapresupuesto.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
-       if ($oculcol=='S') $col6->setOculta(true);
+      // if ($oculcol=='S') $col6->setOculta(true);
 
        $col7 = new Columna('Cant. Requerida');
        $col7->setEsGrabable(true);
@@ -1194,7 +1199,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col6->setAlineacionContenido(Columna::CENTRO);
        $col6->setHTML('type="text" size="55" maxlength="'.chr(39).$lonpre.chr(39).'" readonly="true"');
        $col6->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascarapresupuesto.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
-       if ($oculcol=='S') $col6->setOculta(true);
+      // if ($oculcol=='S') $col6->setOculta(true);
 
        $col7 = new Columna('Cant. Requerida');
        $col7->setEsGrabable(true);
