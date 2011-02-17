@@ -909,8 +909,15 @@ class almsolegrActions extends autoalmsolegrActions
        $opciones = new OpcionesGrid();
        $opciones->setEliminar(true);
        $opciones->setTabla('Caartsol');
-       $opciones->setAncho(2050);
-       $opciones->setAnchoGrid(1800);
+       if ($oculcol=='S') {
+           $opciones->setAncho(1300);
+           $opciones->setAnchoGrid(1200);
+       }
+       else  {
+           $opciones->setAncho(2050);
+           $opciones->setAnchoGrid(1800);
+       }
+       
        $opciones->setFilas(150);
        $opciones->setTitulo('');
        $opciones->setHTMLTotalFilas(' ');
@@ -1120,8 +1127,16 @@ class almsolegrActions extends autoalmsolegrActions
        $opciones = new OpcionesGrid();
        $opciones->setEliminar(false);
        $opciones->setTabla('Caartsol');
+              if ($oculcol=='S') {
+           $opciones->setAncho(1100);
+           $opciones->setAnchoGrid(1000);
+       }
+       else  {
        $opciones->setAncho(1700);
        $opciones->setAnchoGrid(1600);
+       }
+
+
        $opciones->setFilas(0);
        $opciones->setTitulo('');
        $opciones->setHTMLTotalFilas(' ');
