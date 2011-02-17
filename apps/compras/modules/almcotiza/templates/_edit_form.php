@@ -858,12 +858,16 @@ $('cacotiza_moncot').value=format(montot.toFixed(2),'.',',','.');
 
   function calcular(id)
   {
+    var habmon='<?php echo $cacotiza->getHabmon(); ?>';
+    
+    if (habmon!='S') {
     var numero1=toFloat(id);
     var numero2=toFloat('totales');
     var numero3=toFloat('cacotiza_mondes');
 
     var total=(numero2+numero1)-numero3;
     $('cacotiza_moncot').value=format(total.toFixed(2),'.',',','.');
+    }
   }
 
 </script>
