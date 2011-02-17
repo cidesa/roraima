@@ -2867,11 +2867,11 @@ $this->c= new Criteria();
     $this->c->addJoin(CaordcomPeer :: ORDCOM, CpcomproPeer :: REFCOM);
     $this->c->addJoin(CpcomproPeer :: TIPCOM, CpdoccomPeer :: TIPCOM);
     $this->c->add(CaordcomPeer :: STAORD, "N", Criteria :: NOT_EQUAL);
-    $sub = $this->c->getNewCriterion(CpdoccomPeer :: REFPRC, "N", Criteria :: NOT_EQUAL);
-    $sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFEPRC, "N", Criteria :: NOT_EQUAL));
-    $sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFECOM, "N", Criteria :: NOT_EQUAL));
-    $sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFEDIS, "N", Criteria :: NOT_EQUAL));
-    $this->c->add($sub);
+    //$sub = $this->c->getNewCriterion(CpdoccomPeer :: REFPRC, "N", Criteria :: NOT_EQUAL);
+    //$sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFEPRC, "N", Criteria :: NOT_EQUAL));
+    //$sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFECOM, "N", Criteria :: NOT_EQUAL));
+    //$sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFEDIS, "N", Criteria :: NOT_EQUAL));
+    //$this->c->add($sub);
 
     $this->c->addJoin(CaordcomPeer :: ORDCOM, CaartordPeer :: ORDCOM);
     $this->c->add(CaartordPeer::CERART,null);
@@ -6604,11 +6604,11 @@ public function Catdefcatman_Cattramo($params = '') {
                 $this->c->addJoin(CaordcomPeer :: ORDCOM, CaentordPeer ::ORDCOM);
 		$this->c->add(CaordcomPeer :: STAORD, "N", Criteria :: NOT_EQUAL);
                 $this->c->add(CaentordPeer :: CODALM, $params[0]);
-		$sub = $this->c->getNewCriterion(CpdoccomPeer :: REFPRC, "N", Criteria :: NOT_EQUAL);
-		$sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFEPRC, "N", Criteria :: NOT_EQUAL));
-		$sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFECOM, "N", Criteria :: NOT_EQUAL));
-		$sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFEDIS, "N", Criteria :: NOT_EQUAL));
-		$this->c->add($sub);
+		//$sub = $this->c->getNewCriterion(CpdoccomPeer :: REFPRC, "N", Criteria :: NOT_EQUAL);
+		//$sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFEPRC, "N", Criteria :: NOT_EQUAL));
+		//$sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFECOM, "N", Criteria :: NOT_EQUAL));
+		//$sub->addOr($this->c->getNewCriterion(CpdoccomPeer :: AFEDIS, "N", Criteria :: NOT_EQUAL));
+		//$this->c->add($sub);
 
 		$this->c->addJoin(CaordcomPeer :: ORDCOM, CaartordPeer :: ORDCOM);
 		$this->c->add(CaartordPeer :: CERART, null);
