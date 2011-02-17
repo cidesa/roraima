@@ -495,4 +495,25 @@ class Opordpag extends BaseOpordpag
   {
   	return $this->numfilas;
   }
+  public function getNumfilret()
+  {
+    $dato=300;
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('pagemiord',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('numfilas',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']))
+	       {
+	       	$dato=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['numfilret'];
+	       }
+         }
+     return $dato;
+  }
+
+  public function setNumfilret()
+  {
+  	return $this->numfilret;
+  }
 }

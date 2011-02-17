@@ -42,6 +42,7 @@
 <?php echo input_hidden_tag('opordpag[numfilas]', $opordpag->getNumfilas()) ?>
 <?php echo input_hidden_tag('opordpag[refcre]', $opordpag->getRefcre()) ?>
 <?php echo input_hidden_tag('opordpag[refsolpag]', $opordpag->getRefsolpag()) ?>
+<?php echo input_hidden_tag('opordpag[numfilret]', $opordpag->getNumfilret()) ?>
 <table width="100%">
   <tr>
     <th><strong><font color="<? print $color;?>" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <? print $eti;?></font></strong></th>

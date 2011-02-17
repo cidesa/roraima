@@ -1712,12 +1712,14 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $col10->setNombreCampo('base');
     $col10->setEsNumerico(true);
     $col10->setHTML('type="text" size="15" maxlength="21"');
-    $col10->setJScript('onKeypress="entermonto_e(event,this.id);modifico(event); cambioBase(this.id);"');
+    //$col10->setJScript('onKeypress="entermonto_e(event,this.id);modifico(event); cambioBase(this.id);"');
+    $col10->setJScript('onKeypress="entermonto_e(event,this.id);" onBlur="javascript:event.keyCode=13; modifico(event); cambioBase(this.id);"');
 
     $col11 = clone $col10;
     $col11->setTitulo('Monto Retencion');
     $col11->setNombreCampo('montorete');
-    $col11->setJScript('onKeypress="entermonto_e(event,this.id);modificar(event);"');
+    //$col11->setJScript('onKeypress="entermonto_e(event,this.id);modificar(event);"');
+    $col11->setJScript('onKeypress="entermonto_e(event,this.id);" onBlur="javascript:event.keyCode=13; modificar(event);"');
     $col11->setEsTotal(true,'totalmontorete');
 
     $col12 = clone $col3;
