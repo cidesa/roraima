@@ -577,10 +577,12 @@ function Totalrecargo(e,id)
     var coldes=col+1;
     var coluni=col+2;
    var colunres=col+3;
+   var colcodpre=col+4;
     var colcos=col+7;
     var colpar=col+11;
     var descripcion=name+"_"+fil+"_"+coldes;
     var unidad=name+"_"+fil+"_"+coluni;
+    var codigpre=name+"_"+fil+"_"+colcodpre;
     var costo=name+"_"+fil+"_"+colcos;
     var partida=name+"_"+fil+"_"+colpar;
     var unires=name+"_"+fil+"_"+colunres;
@@ -592,7 +594,7 @@ function Totalrecargo(e,id)
     {
       if ($(id).value!="")
       {
-    new Ajax.Request(getUrlModulo()+'ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&cajtexmos='+descripcion+'&cajtexcom='+id+'&unidad='+unidad+'&costo='+costo+'&unires='+unires+'&valuni='+unidadres+'&partida='+partida+'&catunires='+catunires+'&codigo='+cod})
+    new Ajax.Request(getUrlModulo()+'ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&cajtexmos='+descripcion+'&cajtexcom='+id+'&unidad='+unidad+'&costo='+costo+'&unires='+unires+'&valuni='+unidadres+'&partida='+partida+'&codigpre='+codigpre+'&catunires='+catunires+'&codigo='+cod})
     }
     }
  }
