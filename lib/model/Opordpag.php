@@ -78,6 +78,7 @@ class Opordpag extends BaseOpordpag
   protected $filordcbtp="";
   protected $limbaseret="";
   protected $numfilas=0;
+  protected $numfilret=300;
   protected $refcre='';
   protected $refsolpag='';
 
