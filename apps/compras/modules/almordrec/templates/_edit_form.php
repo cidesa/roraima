@@ -119,7 +119,7 @@
 {  
    echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/CaOrdCom_Almordrec2/clase/caordcom/frame/sf_admin_edit_form/obj1/carcpart_ordcom/campo1/ordcom/param1/'+$('carcpart_codalm').value+'",'','','botoncat');
 }else {
-    echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/CaOrdCom_Almordrec/clase/carcpart/frame/sf_admin_edit_form/obj1/carcpart_ordcom/campo1/ordcom",'','','botoncat');
+    echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/CaOrdCom_Almordrec/clase/caordcom/frame/sf_admin_edit_form/obj1/carcpart_ordcom/campo1/ordcom",'','','botoncat');
 }?>
 
     </div>
