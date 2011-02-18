@@ -307,6 +307,21 @@ $this->Bitacora('Guardo');
                              return $this->coderror;
                      }
                 }
+
+              $c= new Criteria();
+              $c->add(CaartalmubiPeer::CODALM,$catraalm->getAlmori());
+              $c->add(CaartalmubiPeer::CODUBI,$catraalm->getCodubiori());
+              $c->add(CaartalmubiPeer::CODART,$x[$j]->getCodart());
+              if ($manartlot=='S') $c->add(CaartalmubiPeer::NUMLOT,$x[$j]->getNumlotori());
+              $caartalm_up = CaartalmubiPeer::doSelectOne($c);
+              if ($caartalm_up)
+              {
+                if ((($caartalm_up->getExiact())-($x[$j]->getCanart()))<0)
+                {
+                    $this->coderror=125;
+                    return $this->coderror;
+             }
+              }
              }
              $j++;
           }

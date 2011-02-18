@@ -1066,13 +1066,13 @@ public static function Grabar_DetallesRetenciones($caretser,$grid)
                 $caartalm_up->setExiact(($caartalm_up->getExiact())-($grid_arreglo[$i]['canart']));
                 $caartalm_up->save();
               }
-              else
+              /*else
               {
                 $articulo=$grid_arreglo[$i]['codart'];
                 $error=125;
                 return false;
+              }*///else
               }//else
-            }//else
           }// if ($caartalm_up)
           else
           {//si  no existe el registro en la tabla CAARTALMUBI, hay q crearla con la disponibilidad transferida
