@@ -1110,6 +1110,8 @@ var nf=parseInt($('fafactur_numfilas').value);
       montot= montot - totaldesc;
     }else {montot=0;}
 
+    montot=redondear(montot,2);
+
     $('fafactur_monfac').value=format(montot.toFixed(2),'.',',','.');
     var ntotmonrgo=toFloat('fafactur_totmonrgo');
     var ntottotart=toFloat('fafactur_tottotart');
@@ -1618,17 +1620,18 @@ var nf=parseInt($('fafactur_numfilas').value);
     var tipo=name+"_"+fil+"_"+coltipo;
     var tiporet=name+"_"+fil+"_"+coltiporet;
     var cod=$(id).value;
-
-    var eldesc=montoDescuento(fil);
+    var valordes=montoDescuento(fil);
+    var otrodesc=format(valordes.toFixed(2),'.',',','.');
+    var eldesc=toFloat2(otrodesc);
     var nmonfac= toFloat('fafactur_monfac');
-	var ntotmonrgo= toFloat('fafactur_totmonrgo');
-	var ntotdesc= toFloat('fafactur_totdesc');
-	var porcentajedesc=toFloat('fafactur_porcentajedescto');
-	var monto=toFloat('fafactur_monto');
-	var aplicaclades=$('fafactur_apliclades').value;
-	var valmontodesc= toFloat(montodesc);
-	var valcant=toFloat(cantidad);
-	var totaltotarti= toFloat('fafactur_tottotart');
+    var ntotmonrgo= toFloat('fafactur_totmonrgo');
+    var ntotdesc= toFloat('fafactur_totdesc');
+    var porcentajedesc=toFloat('fafactur_porcentajedescto');
+    var monto=toFloat('fafactur_monto');
+    var aplicaclades=$('fafactur_apliclades').value;
+    var valmontodesc= toFloat(montodesc);
+    var valcant=toFloat(cantidad);
+    var totaltotarti= toFloat('fafactur_tottotart');
 
 
     if (e.keyCode==13 || e.keyCode==9)
