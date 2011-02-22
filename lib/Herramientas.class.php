@@ -1551,7 +1551,7 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
           }
         elseif ($tipos[$pos-1]=="m") {
           //print $caja.'=='.$form->getRequestParameter($caja);
-          $valor = self::FloatVEtoFloat($form->getRequestParameter($caja));
+          $valor = self::toFloat($form->getRequestParameter($caja));
           //print '  '.$valor.'  ';
         }elseif ($tipos[$pos-1]=="f"){
           $dateFormat = new sfDateFormat('es_VE');
