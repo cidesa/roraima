@@ -48,6 +48,7 @@ class Tscheemi extends BaseTscheemi
 	protected $filnumordfec="";
         protected $aprmonche="";
         protected $nomrep="";
+        protected $numord="";
 
 
     public function getNomben()

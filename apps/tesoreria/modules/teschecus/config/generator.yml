@@ -26,7 +26,7 @@ generator:
 
     list:
       title:          Cheques en Custodia
-      filters:        [numche, numcue]
+      filters:        [numche, numcue, numord]
       display:        [=numche, numcue, fecemi, cedrif, estatus, fecha]
       sort:           numche
       object_actions:
