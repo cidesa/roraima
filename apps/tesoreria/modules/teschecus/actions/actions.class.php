@@ -213,4 +213,44 @@ $this->Bitacora('Guardo');
     $tscheemi->save();
 
   }
+
+   protected function addFiltersCriteria($c)
+  {
+    if (isset($this->filters['numche_is_empty']))
+    {
+      $criterion = $c->getNewCriterion(TscheemiPeer::NUMCHE, '');
+      $criterion->addOr($c->getNewCriterion(TscheemiPeer::NUMCHE, null, Criteria::ISNULL));
+      $c->add($criterion);
+}
+    else if (isset($this->filters['numche']) && $this->filters['numche'] !== '')
+    {
+      $c->add(TscheemiPeer::NUMCHE, '%'.strtr($this->filters['numche'], '*', '%').'%', Criteria::LIKE);
+    $c->setIgnoreCase(true);
+    }
+    if (isset($this->filters['numcue_is_empty']))
+    {
+      $criterion = $c->getNewCriterion(TscheemiPeer::NUMCUE, '');
+      $criterion->addOr($c->getNewCriterion(TscheemiPeer::NUMCUE, null, Criteria::ISNULL));
+      $c->add($criterion);
+    }
+    else if (isset($this->filters['numcue']) && $this->filters['numcue'] !== '')
+    {
+      $c->add(TscheemiPeer::NUMCUE, '%'.strtr($this->filters['numcue'], '*', '%').'%', Criteria::LIKE);
+    $c->setIgnoreCase(true);
+    }
+    if (isset($this->filters['numord_is_empty']))
+    {
+      $criterion = $c->getNewCriterion(TscheemiPeer::NUMCUE, '');
+      $criterion->addOr($c->getNewCriterion(TscheemiPeer::NUMCUE, null, Criteria::ISNULL));
+      $c->add($criterion);
+    }
+    else if (isset($this->filters['numord']) && $this->filters['numord'] !== '')
+    {
+        $numche=H::getX_vacio('NUMORD', 'Opordpag', 'Numche', $this->filters['numord']);
+
+      $c->add(TscheemiPeer::NUMCHE, '%'.strtr($numche, '*', '%').'%', Criteria::LIKE);
+    $c->setIgnoreCase(true);
+    }
+  }
+
 }
