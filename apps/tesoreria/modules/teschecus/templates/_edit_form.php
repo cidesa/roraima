@@ -213,6 +213,27 @@ $val2, array('onClick' => 'push2();')); ?>
 &nbsp;&nbsp;&nbsp;
 <?php echo " Caja " . radiobutton_tag('tscheemi[status]', 'C',
 $val3, array('onClick' => 'push3();')); ?></div>
+<br>
+<ul class="sf_admin_actions">
+<li class="float-rigth">
+<?php $nomrep=H::getConfApp2('nomrepiva', 'tesoreria', 'teschecus');
+if ($nomrep!='') { ?>
+<input type="button" name="Submit" class="sf_admin_action_list" value="Comprobante de Retención IVA" onclick="javascript:MostrarCompIVA();" />
+<?php }?>
+</li>
+<li class="float-rigth">
+<?php $nomrep=H::getConfApp2('nomrepislr', 'tesoreria', 'teschecus');
+if ($nomrep!='') { ?>
+<input type="button" name="Submit" class="sf_admin_action_list" value="Comprobante de Retención ISLR" onclick="javascript:MostrarCompISLR();" />
+<?php }?>
+</li>
+<li class="float-rigth">
+<?php $nomrep=H::getConfApp2('nomrepltf', 'tesoreria', 'teschecus');
+if ($nomrep!='') { ?>
+<input type="button" name="Submit" class="sf_admin_action_list" value="Comprobante de Retención LTF" onclick="javascript:MostrarCompLTF();" />
+<?php }?>
+</li>
+</ul>
 </div>
 </fieldset>
 
@@ -233,7 +254,7 @@ $val3, array('onClick' => 'push3();')); ?></div>
 	  'control_name' => 'tscheemi[fecent]',
 	  'date_format' => 'dd/MM/yyyy',
           'onkeyup' => "javascript: mascara(this,'/',patron,true)",
-	)); echo $value ? $value : '&nbsp;' ?>
+	),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
 <?php } else { ?>
 	  <?php $value = object_input_date_tag($tscheemi, 'getFecent', array (
 	  'rich' => true,
@@ -445,6 +466,50 @@ function push4()
         }
 
 }
+
+  function MostrarCompIVA()
+  {
+      var  numord='<? echo $tscheemi->getOrden();?>';
+      var nomrep='<?php echo H::getConfApp2('nomrepiva', 'tesoreria', 'teschecus'); ?>';
+
+      var  ruta='http://'+'<?echo $this->getContext()->getRequest()->getHost();?>';
+
+      //pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/"+nomrep+".php?orde="+numord;
+
+      pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/r.php?r="+nomrep+".php&orde="+numord;
+
+      window.open(pagina,numord,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80");
+
+
+  }
+
+  function MostrarCompISLR()
+  {
+      var  numord='<? echo $tscheemi->getOrden();?>';
+      var nomrep='<?php echo H::getConfApp2('nomrepislr', 'tesoreria', 'teschecus'); ?>';
+      var  ruta='http://'+'<?echo $this->getContext()->getRequest()->getHost();?>';
+
+      //pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/"+nomrep+".php?orde="+numord;
+
+      pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/r.php?r="+nomrep+".php&orde="+numord;
+
+      window.open(pagina,numord,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80");
+  }
+
+  function MostrarCompLTF()
+  {
+      var  numord='<? echo $tscheemi->getOrden();?>';
+      var nomrep='<?php echo H::getConfApp2('nomrepltf', 'tesoreria', 'teschecus'); ?>';
+
+      var  ruta='http://'+'<?echo $this->getContext()->getRequest()->getHost();?>';
+
+      //pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/"+nomrep+".php?orde="+numord;
+
+      pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/r.php?r="+nomrep+".php&orde="+numord;
+
+      window.open(pagina,numord,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80");
+  }
+
 
 </script>
 
