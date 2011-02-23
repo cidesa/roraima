@@ -18,7 +18,7 @@ class Cadisrgo extends BaseCadisrgo
 	private $recargototal = 0.00;
 	private $codigo_recargo = 0.00;
 	private $tiprgodos='';
-	private $desart='';
+	//private $desart='';
 	private $por_monrgo=0.00;
 	//protected $codpar="";
 	public function getNomrgo()

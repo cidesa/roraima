@@ -48,6 +48,7 @@
     <?php echo input_tag('filters[numord]', isset($filters['numord']) ? $filters['numord'] : null, array (
   'size' => 15,
   'maxlength' => 8,
+  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '0',0);document.getElementById('filters_numord').value=valor;",
 )) ?>
     </div>
     </div>

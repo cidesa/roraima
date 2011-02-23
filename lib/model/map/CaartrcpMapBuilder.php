@@ -72,6 +72,8 @@ class CaartrcpMapBuilder {
 
 		$tMap->addColumn('MODELO', 'Modelo', 'string', CreoleTypes::VARCHAR, false, 20);
 
+		$tMap->addColumn('DESART', 'Desart', 'string', CreoleTypes::VARCHAR, false, 2000);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

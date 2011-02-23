@@ -1073,6 +1073,7 @@ class SolicituddeEgresos
   $x=$grid[0];
   $j=0;
   $requi=$solegreso->getReqart();
+  $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
 
   while ($j<count($x))
   {
@@ -1095,6 +1096,7 @@ class SolicituddeEgresos
         $c= new Criteria();
         $c->add(CadisrgoPeer::REQART,$requi);
         $c->add(CadisrgoPeer::CODART,$x[$j]->getCodart());
+        if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,$x[$j]->getDesart());
         $c->add(CadisrgoPeer::CODCAT,$x[$j]->getCodcat());
         $c->add(CadisrgoPeer::CODRGO,$aux2[0]);
         $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
@@ -1103,6 +1105,7 @@ class SolicituddeEgresos
             $distribucion = new Cadisrgo();
           $distribucion->setReqart($requi);
           $distribucion->setCodart($x[$j]->getCodart());
+          $distribucion->setDesart($x[$j]->getDesartsol());
           $distribucion->setCodcat($x[$j]->getCodcat());
           $distribucion->setCodrgo($aux2[0]);
 

@@ -23,6 +23,7 @@
 <?php echo input_hidden_tag('modifi', $modifico) ?>
 <?php echo input_hidden_tag('tiporecarg', $tiporec) ?>
 <?php echo object_input_hidden_tag($casolart, 'getPrecom') ?>
+<?php echo input_hidden_tag('casolart[claartdes]', $casolart->getClaartdes()) ?>
 <table width="100%">
   <tr>
     <th><strong><font color="#CC0000" size="2" face="Verdana, Arial, Helvetica, sans-serif"> <?php echo $casolart->getEtiqueta() ;?></font></strong></th>

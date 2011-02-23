@@ -75,6 +75,8 @@ class tesmovemicheActions extends autotesmovemicheActions
     {
         $this->tscheemi->setNumcue($this->getUser()->getAttribute('cuentabancaria',null,'tesmovemiche'));
         $this->tscheemi->setNomcue(H::getX_vacio('NUMCUE', 'Tsdefban', 'Nomcue', $this->tscheemi->getNumcue()));
+        $this->tscheemi->setTipdoc($this->getUser()->getAttribute('tipodocumento',null,'tesmovemiche'));
+        $this->tscheemi->setDestip(H::getX_vacio('TIPPAG', 'Cpdocpag', 'Nomext', $this->tscheemi->getTipdoc()));
     }
     $varemp = $this->getUser()->getAttribute('configemp');
     if ($varemp) {
@@ -1441,8 +1443,10 @@ class tesmovemicheActions extends autotesmovemicheActions
       $this->getUser()->getAttributeHolder()->remove('tschemi_operacion');
 
       $mismactaban=H::getConfApp2('mismactaban', 'tesoreria', 'tesmovemiche');
-      if ($mismactaban=='S')
+      if ($mismactaban=='S') {
           $this->getUser()->setAttribute('cuentabancaria', $tscheemi->getNumcue(),'tesmovemiche');
+          $this->getUser()->setAttribute('tipodocumento', $tscheemi->getTipdoc(),'tesmovemiche');
+      }
 
      }
 

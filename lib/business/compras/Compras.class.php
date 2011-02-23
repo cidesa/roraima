@@ -349,6 +349,7 @@ class Compras {
           $detalle = new Cadetcot();
           $detalle->setRefcot($refcot);
           $detalle->setCodart($x[$j]['codart']);
+          $detalle->setDesart($x[$j]['desart']);
           $detalle->setCanord($cantord);
           $detalle->setCosto($x[$j]['costo']);
           $detalle->setMondes($x[$j]['mondes']);
@@ -473,6 +474,7 @@ class Compras {
     }
 
     $error = -1;
+    $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
     if ($actsolegr == '1') {
       $c = new Criteria();
       $c->addJoin(CacotizaPeer :: REFCOT, CadetcotPeer :: REFCOT);
@@ -487,6 +489,7 @@ class Compras {
           $c = new Criteria();
           $c->add(CaartsolPeer :: REQART, $reqart);
           $c->add(CaartsolPeer :: CODART, $datos->getCodart());
+          if ($claartdes=='S') $c->add(CaartsolPeer :: DESART, $datos->getDesart());
           $resul = CaartsolPeer :: doSelect($c);
           if ($resul) {
           	foreach ($resul as $resul2)
@@ -526,6 +529,7 @@ class Compras {
                 $gridnuevo[$indice -1][9] = 0;
             $gridnuevo[$indice -1][10] = $resul2->getCodcat();
             $gridnuevo[$indice -1][11] = $resul2->getCosto(); //Costo viejo
+            if ($claartdes=='S') $gridnuevo[$indice -1][12] = $datos->getDesart();
           	}
           }
         }
@@ -547,6 +551,7 @@ class Compras {
           $gridnuevorec[$indice2 -1][4] = $resultado->getMonrgo();
           $gridnuevorec[$indice2 -1][5] = $resultado->getCodart();
           $gridnuevorec[$indice2 -1][6] = $resultado->getCodcat();
+          if ($claartdes=='S') $gridnuevorec[$indice2 -1][7] = $resultado->getDesart();
         }
       }
       $nopuedeaumentar=false;
@@ -670,13 +675,14 @@ class Compras {
         $genero='a';
       }
     }
-
+    $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
     $j = 0;
     while ($j < count($gridnuevo)) //Detalle
       {
       $c = new Criteria();
       $c->add(CaartsolPeer :: REQART, $reqart);
       $c->add(CaartsolPeer :: CODART, $gridnuevo[$j][0]);
+      if ($claartdes=='S') $c->add(CaartsolPeer :: DESART, $gridnuevo[$j][12]);
       $c->add(CaartsolPeer :: CODCAT, $gridnuevo[$j][10]);
       $dato = CaartsolPeer :: doSelect($c);
       if ($dato) {
@@ -758,6 +764,7 @@ class Compras {
             $c = new Criteria();
             $c->add(CadisrgoPeer :: REQART, $reqart);
             $c->add(CadisrgoPeer :: CODART, $gridnuevorec[$l][5]);
+            if ($claartdes=='S') $c->add(CadisrgoPeer :: DESART, $gridnuevorec[$l][7]);
             $c->add(CadisrgoPeer :: CODCAT, $gridnuevorec[$l][6]);
             $c->add(CadisrgoPeer :: CODRGO, $gridnuevorec[$l][0]);
             $dato2 = CadisrgoPeer :: doSelect($c);
@@ -902,31 +909,55 @@ class Compras {
   }*/
 
 
-  public static function calcularecargosxart($codart,$codcat,$monuni,&$monrgotot,&$gridnuevorec)
+  public static function calcularecargosxart($codart,$codcat,$monuni,&$monrgotot,&$gridnuevorec,$desart="")
   {
     $t = 0;
+    $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
     $monrgotot=0;
     while ($t < count($gridnuevorec)) {
       if ($gridnuevorec[$t][0] != "") {
-       if ($codart==$gridnuevorec[$t][5] && $codcat==$gridnuevorec[$t][6])
-       {
-        $c = new Criteria();
-        $c->add(CarecargPeer :: CODRGO, $gridnuevorec[$t][0]);
-        $dato = CarecargPeer :: doselectOne($c);
-        if ($dato) {
-          $gridnuevorec[$t][3] = $dato->getNomrgo();
-          if ($dato->getTiprgo() == 'M') {
-            $gridnuevorec[$t][1] = $dato->getMonrgo();
-          } else
-            if ($dato->getTiprgo() == 'P') {
-              $gridnuevorec[$t][1] = ($monuni * $dato->getMonrgo()) / 100;
-            } else {
-              $gridnuevorec[$t][1] = 0;
-              $gridnuevorec[$t][4] = 0;
+         if ($claartdes=='S')
+         {
+           if ($codart==$gridnuevorec[$t][5] && $codcat==$gridnuevorec[$t][6] && $desart==$gridnuevorec[$t][7])
+           {
+            $c = new Criteria();
+            $c->add(CarecargPeer :: CODRGO, $gridnuevorec[$t][0]);
+            $dato = CarecargPeer :: doselectOne($c);
+            if ($dato) {
+              $gridnuevorec[$t][3] = $dato->getNomrgo();
+              if ($dato->getTiprgo() == 'M') {
+                $gridnuevorec[$t][1] = $dato->getMonrgo();
+              } else
+                if ($dato->getTiprgo() == 'P') {
+                  $gridnuevorec[$t][1] = ($monuni * $dato->getMonrgo()) / 100;
+                } else {
+                  $gridnuevorec[$t][1] = 0;
+                  $gridnuevorec[$t][4] = 0;
+                }
+               $monrgotot=$monrgotot+$gridnuevorec[$t][1];
             }
-           $monrgotot=$monrgotot+$gridnuevorec[$t][1];
-        }
-      }//if ($codart==$gridnuevorec[$t][5] && $codcat==$gridnuevorec[$t][6])
+          }//if ($codart==$gridnuevorec[$t][5] && $codcat==$gridnuevorec[$t][6])
+         }else  {
+           if ($codart==$gridnuevorec[$t][5] && $codcat==$gridnuevorec[$t][6])
+           {
+            $c = new Criteria();
+            $c->add(CarecargPeer :: CODRGO, $gridnuevorec[$t][0]);
+            $dato = CarecargPeer :: doselectOne($c);
+            if ($dato) {
+              $gridnuevorec[$t][3] = $dato->getNomrgo();
+              if ($dato->getTiprgo() == 'M') {
+                $gridnuevorec[$t][1] = $dato->getMonrgo();
+              } else
+                if ($dato->getTiprgo() == 'P') {
+                  $gridnuevorec[$t][1] = ($monuni * $dato->getMonrgo()) / 100;
+                } else {
+                  $gridnuevorec[$t][1] = 0;
+                  $gridnuevorec[$t][4] = 0;
+                }
+               $monrgotot=$monrgotot+$gridnuevorec[$t][1];
+            }
+          }//if ($codart==$gridnuevorec[$t][5] && $codcat==$gridnuevorec[$t][6])
+      }
       }
       $t++;
     }
@@ -935,6 +966,7 @@ class Compras {
   public static function distribuirRecargos(& $gridnuevo2, & $gridnuevo, $sumaresta,&$gridnuevorec)
    {
     $monuni = 0;
+    $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
    if (count($gridnuevorec)>0)
    {
     if ($gridnuevorec[0][0] != "") {
@@ -943,7 +975,10 @@ class Compras {
           if ($gridnuevo[$l][6] == 1) {
             $monuni = ($gridnuevo[$l][2] * $gridnuevo[$l][1]);
             $mondes=$gridnuevo[$l][3];
-            self::calcularecargosxart($gridnuevo[$l][0],$gridnuevo[$l][10],$monuni,&$monrgotot,&$gridnuevorec);
+            if ($claartdes=='S')
+                self::calcularecargosxart($gridnuevo[$l][0],$gridnuevo[$l][10],$monuni,&$monrgotot,&$gridnuevorec,$gridnuevo[$l][12]);
+            else
+                self::calcularecargosxart($gridnuevo[$l][0],$gridnuevo[$l][10],$monuni,&$monrgotot,&$gridnuevorec);
             if ($sumaresta == 'S') {
               $gridnuevo[$l][4] = $monrgotot;
               $gridnuevo[$l][5] = $monuni-$mondes+$monrgotot;
@@ -977,6 +1012,7 @@ class Compras {
             $gridnuevo2[$cont][2] = $gridnuevorec[$h][2]; //tipdoc
             $gridnuevo2[$cont][3] = "";
             $gridnuevo2[$cont][4] = $gridnuevorec[$h][4];
+            if ($claartdes=='S') $gridnuevo2[$cont][5] = $gridnuevorec[$h][7]; //desart
         }
       $h++;
      }
@@ -2452,7 +2488,7 @@ class Compras {
 
   public static function asignarPrioridadCostArt($reqart,$casolart)
   {
-     $sql="select a.refcot,a.codart,a.canord,a.costo,a.totdet,b.codpro,
+     $sql="select a.refcot,a.codart, a.desart, a.canord,a.costo,a.totdet,b.codpro,
         (case when a.costo>0 then a.costo else 1000000000000000000000000 end) as orden,
         (case when a.costo=0 then null else (select count(x.*)+1
          from cadetcot x,cacotiza y
@@ -2467,24 +2503,41 @@ class Compras {
         and a.refcot=b.refcot
         order by a.codart,(case when a.costo>0 then a.costo else 1000000000000000000000000 end)";
 
+       $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
+
        Herramientas::BuscarDatos($sql,&$arr);
        $con=0;
        $priori=0;
        if ($arr)
        {
            $codartori=$arr[0]['codart'];
+           $desartori=$arr[0]['desart'];
            while ($con<count($arr))
            {
-            if ($codartori==$arr[$con]['codart'])
+            if ($claartdes=='S')
             {
-              $priori++;
+                if ($codartori==$arr[$con]['codart'] && $desartori==$arr[$con]['desart'])
+                {
+                  $priori++;
+                }
+                else
+                {
+                $priori=1;
+                }
+            }else {
+                if ($codartori==$arr[$con]['codart'])
+                {
+                  $priori++;
+                }
+                else
+                {
+                $priori=1;
+                }
             }
-            else
-            {
-            $priori=1;
-            }
+
             $c=new Criteria();
             $c->add(CadetcotPeer::CODART,$arr[$con]['codart']);
+            if ($claartdes=='S')  $c->add(CadetcotPeer::DESART,$arr[$con]['desart']);
             $c->add(CadetcotPeer::REFCOT,$arr[$con]['refcot']);
             $detcot=CadetcotPeer::doSelectOne($c);
             if ($detcot)
@@ -2495,6 +2548,7 @@ class Compras {
                 $detcot->save();
             }
             $codartori=$arr[$con]['codart'];
+            $desartori=$arr[$con]['desart'];
             $con++;
               }//while
        }//if ($arr)
@@ -2835,10 +2889,13 @@ class Compras {
 
   public static function asignarPrioridadTimEnt($reqart,$casolart)
   {
+      $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
+
       $c = new Criteria();
       $c->add(CacotizaPeer :: REFSOL, $reqart);
       $c->addJoin(CacotizaPeer :: REFCOT, CadetcotPeer :: REFCOT);
       $c->addAscendingOrderByColumn(CadetcotPeer::CODART);
+      if ($claartdes=='S') $c->addAscendingOrderByColumn(CadetcotPeer::DESART);
       $c->addAscendingOrderByColumn(CadetcotPeer::FECENT);
       $result = CadetcotPeer :: doSelect($c);
       if ($result)
@@ -2847,6 +2904,20 @@ class Compras {
       	$j=1;
       	foreach ($result as $datos)
       	{
+           if ($claartdes=='S')
+           {
+            if ($j==1) { $codartori=$datos->getCodart(); $desartori=$datos->getDesart(); }
+      	    if ($codartori==$datos->getCodart() && $desartori==$datos->getDesart())
+            {
+              $priori++;
+            }
+            else
+            {
+             $codartori=$datos->getCodart();
+             $desartori=$datos->getDesart();
+             $priori=1;
+            }
+           }else {
             if ($j==1) $codartori=$datos->getCodart();
       	    if ($codartori==$datos->getCodart())
             {
@@ -2857,6 +2928,7 @@ class Compras {
              $codartori=$datos->getCodart();
              $priori=1;
             }
+           }
 		  	$datos->setPriori($priori);
                         if ($priori==1 && $casolart->getObservaciones()!="")
                           $datos->setObservaciones($casolart->getObservaciones());

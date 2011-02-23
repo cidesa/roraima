@@ -25,7 +25,7 @@ class Cadetcot extends BaseCadetcot
        parent::hydrate($rs, $startcol);
 
        $reqart= Herramientas::getX('REFCOT','Cacotiza','Refsol',self::getRefcot());
-       $t= new Criteria();
+      /* $t= new Criteria();
        $t->add(CaartsolPeer::REQART,$reqart);
        $t->add(CaartsolPeer::CODART,self::getCodart());
        $reg= CaartsolPeer::doSelectOne($t);
@@ -34,7 +34,7 @@ class Cadetcot extends BaseCadetcot
            $this->desart= $reg->getDesart();
        }else {
             $this->desart= Herramientas::getX('CODART','Caregart','Desart',self::getCodart());
-       }
+       }*/
 
 	   $monrecargo=0;
 	   $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();

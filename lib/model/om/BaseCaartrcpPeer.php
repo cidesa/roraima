@@ -13,7 +13,7 @@ abstract class BaseCaartrcpPeer {
 	const CLASS_DEFAULT = 'lib.model.Caartrcp';
 
 	
-	const NUM_COLUMNS = 20;
+	const NUM_COLUMNS = 21;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -77,6 +77,9 @@ abstract class BaseCaartrcpPeer {
 	const MODELO = 'caartrcp.MODELO';
 
 	
+	const DESART = 'caartrcp.DESART';
+
+	
 	const ID = 'caartrcp.ID';
 
 	
@@ -85,18 +88,18 @@ abstract class BaseCaartrcpPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Rcpart', 'Codart', 'Ordcom', 'Codcat', 'Canrec', 'Candev', 'Cantot', 'Montot', 'Monrgo', 'Mondes', 'Canasilot', 'Codfal', 'Fecest', 'Serial', 'Codalm', 'Codubi', 'Numlot', 'Marca', 'Modelo', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CaartrcpPeer::RCPART, CaartrcpPeer::CODART, CaartrcpPeer::ORDCOM, CaartrcpPeer::CODCAT, CaartrcpPeer::CANREC, CaartrcpPeer::CANDEV, CaartrcpPeer::CANTOT, CaartrcpPeer::MONTOT, CaartrcpPeer::MONRGO, CaartrcpPeer::MONDES, CaartrcpPeer::CANASILOT, CaartrcpPeer::CODFAL, CaartrcpPeer::FECEST, CaartrcpPeer::SERIAL, CaartrcpPeer::CODALM, CaartrcpPeer::CODUBI, CaartrcpPeer::NUMLOT, CaartrcpPeer::MARCA, CaartrcpPeer::MODELO, CaartrcpPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('rcpart', 'codart', 'ordcom', 'codcat', 'canrec', 'candev', 'cantot', 'montot', 'monrgo', 'mondes', 'canasilot', 'codfal', 'fecest', 'serial', 'codalm', 'codubi', 'numlot', 'marca', 'modelo', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, )
+		BasePeer::TYPE_PHPNAME => array ('Rcpart', 'Codart', 'Ordcom', 'Codcat', 'Canrec', 'Candev', 'Cantot', 'Montot', 'Monrgo', 'Mondes', 'Canasilot', 'Codfal', 'Fecest', 'Serial', 'Codalm', 'Codubi', 'Numlot', 'Marca', 'Modelo', 'Desart', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CaartrcpPeer::RCPART, CaartrcpPeer::CODART, CaartrcpPeer::ORDCOM, CaartrcpPeer::CODCAT, CaartrcpPeer::CANREC, CaartrcpPeer::CANDEV, CaartrcpPeer::CANTOT, CaartrcpPeer::MONTOT, CaartrcpPeer::MONRGO, CaartrcpPeer::MONDES, CaartrcpPeer::CANASILOT, CaartrcpPeer::CODFAL, CaartrcpPeer::FECEST, CaartrcpPeer::SERIAL, CaartrcpPeer::CODALM, CaartrcpPeer::CODUBI, CaartrcpPeer::NUMLOT, CaartrcpPeer::MARCA, CaartrcpPeer::MODELO, CaartrcpPeer::DESART, CaartrcpPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('rcpart', 'codart', 'ordcom', 'codcat', 'canrec', 'candev', 'cantot', 'montot', 'monrgo', 'mondes', 'canasilot', 'codfal', 'fecest', 'serial', 'codalm', 'codubi', 'numlot', 'marca', 'modelo', 'desart', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Rcpart' => 0, 'Codart' => 1, 'Ordcom' => 2, 'Codcat' => 3, 'Canrec' => 4, 'Candev' => 5, 'Cantot' => 6, 'Montot' => 7, 'Monrgo' => 8, 'Mondes' => 9, 'Canasilot' => 10, 'Codfal' => 11, 'Fecest' => 12, 'Serial' => 13, 'Codalm' => 14, 'Codubi' => 15, 'Numlot' => 16, 'Marca' => 17, 'Modelo' => 18, 'Id' => 19, ),
-		BasePeer::TYPE_COLNAME => array (CaartrcpPeer::RCPART => 0, CaartrcpPeer::CODART => 1, CaartrcpPeer::ORDCOM => 2, CaartrcpPeer::CODCAT => 3, CaartrcpPeer::CANREC => 4, CaartrcpPeer::CANDEV => 5, CaartrcpPeer::CANTOT => 6, CaartrcpPeer::MONTOT => 7, CaartrcpPeer::MONRGO => 8, CaartrcpPeer::MONDES => 9, CaartrcpPeer::CANASILOT => 10, CaartrcpPeer::CODFAL => 11, CaartrcpPeer::FECEST => 12, CaartrcpPeer::SERIAL => 13, CaartrcpPeer::CODALM => 14, CaartrcpPeer::CODUBI => 15, CaartrcpPeer::NUMLOT => 16, CaartrcpPeer::MARCA => 17, CaartrcpPeer::MODELO => 18, CaartrcpPeer::ID => 19, ),
-		BasePeer::TYPE_FIELDNAME => array ('rcpart' => 0, 'codart' => 1, 'ordcom' => 2, 'codcat' => 3, 'canrec' => 4, 'candev' => 5, 'cantot' => 6, 'montot' => 7, 'monrgo' => 8, 'mondes' => 9, 'canasilot' => 10, 'codfal' => 11, 'fecest' => 12, 'serial' => 13, 'codalm' => 14, 'codubi' => 15, 'numlot' => 16, 'marca' => 17, 'modelo' => 18, 'id' => 19, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, )
+		BasePeer::TYPE_PHPNAME => array ('Rcpart' => 0, 'Codart' => 1, 'Ordcom' => 2, 'Codcat' => 3, 'Canrec' => 4, 'Candev' => 5, 'Cantot' => 6, 'Montot' => 7, 'Monrgo' => 8, 'Mondes' => 9, 'Canasilot' => 10, 'Codfal' => 11, 'Fecest' => 12, 'Serial' => 13, 'Codalm' => 14, 'Codubi' => 15, 'Numlot' => 16, 'Marca' => 17, 'Modelo' => 18, 'Desart' => 19, 'Id' => 20, ),
+		BasePeer::TYPE_COLNAME => array (CaartrcpPeer::RCPART => 0, CaartrcpPeer::CODART => 1, CaartrcpPeer::ORDCOM => 2, CaartrcpPeer::CODCAT => 3, CaartrcpPeer::CANREC => 4, CaartrcpPeer::CANDEV => 5, CaartrcpPeer::CANTOT => 6, CaartrcpPeer::MONTOT => 7, CaartrcpPeer::MONRGO => 8, CaartrcpPeer::MONDES => 9, CaartrcpPeer::CANASILOT => 10, CaartrcpPeer::CODFAL => 11, CaartrcpPeer::FECEST => 12, CaartrcpPeer::SERIAL => 13, CaartrcpPeer::CODALM => 14, CaartrcpPeer::CODUBI => 15, CaartrcpPeer::NUMLOT => 16, CaartrcpPeer::MARCA => 17, CaartrcpPeer::MODELO => 18, CaartrcpPeer::DESART => 19, CaartrcpPeer::ID => 20, ),
+		BasePeer::TYPE_FIELDNAME => array ('rcpart' => 0, 'codart' => 1, 'ordcom' => 2, 'codcat' => 3, 'canrec' => 4, 'candev' => 5, 'cantot' => 6, 'montot' => 7, 'monrgo' => 8, 'mondes' => 9, 'canasilot' => 10, 'codfal' => 11, 'fecest' => 12, 'serial' => 13, 'codalm' => 14, 'codubi' => 15, 'numlot' => 16, 'marca' => 17, 'modelo' => 18, 'desart' => 19, 'id' => 20, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
 	);
 
 	
@@ -187,6 +190,8 @@ abstract class BaseCaartrcpPeer {
 		$criteria->addSelectColumn(CaartrcpPeer::MARCA);
 
 		$criteria->addSelectColumn(CaartrcpPeer::MODELO);
+
+		$criteria->addSelectColumn(CaartrcpPeer::DESART);
 
 		$criteria->addSelectColumn(CaartrcpPeer::ID);
 

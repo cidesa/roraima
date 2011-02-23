@@ -411,6 +411,7 @@ class almordrecActions extends autoalmordrecActions
 
 	$col2 = new Columna('Descripción');
 	$col2->setTipo(Columna::TEXTAREA);
+	$col2->setEsGrabable(true);
 	$col2->setNombreCampo('desart');
 	$col2->setAlineacionObjeto(Columna::CENTRO);
 	$col2->setAlineacionContenido(Columna::CENTRO);

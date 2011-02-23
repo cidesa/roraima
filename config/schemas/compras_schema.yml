@@ -284,7 +284,7 @@ propel:
       type: DATE
     desart:
       type: VARCHAR
-      size: 250
+      size: 2000
     relart:
       type: NUMERIC
       size: 14
@@ -630,6 +630,9 @@ propel:
     observaciones:
       type: VARCHAR
       size: 1000
+    desart:
+      type: VARCHAR
+      size: 2000
     id:
       type: INTEGER
       required: true
@@ -717,6 +720,9 @@ propel:
     tipo:
       type: VARCHAR
       size: 1
+    desart:
+      type: VARCHAR
+      size: 2000
     id:
       type: INTEGER
       required: true
@@ -2707,6 +2713,9 @@ propel:
     modelo:
       type: VARCHAR
       size: 20
+    desart:
+      type: VARCHAR
+      size: 2000
     id:
       type: INTEGER
       required: true

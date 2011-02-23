@@ -38,10 +38,12 @@ class Caartsol extends BaseCaartsol
      $calculo= self::getCanreq() * self::getCosto();
      $this->cancost=number_format($calculo,2,',','.');
      $this->datosrecargo="";
+     $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
      $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
      $c= new Criteria();
 	 $c->add(CadisrgoPeer::REQART,self::getReqart());
 	 $c->add(CadisrgoPeer::CODART,self::getCodart());
+         if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,self::getDesart());
 	 $c->add(CadisrgoPeer::CODCAT,self::getCodcat());
 	 $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
 	 $result=CadisrgoPeer::doSelect($c);
