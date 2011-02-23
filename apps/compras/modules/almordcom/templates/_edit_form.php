@@ -240,7 +240,7 @@ echo input_tag('caordcom[refsol]', $caordcom->getRefsol(), array (
 <?php $value = object_textarea_tag($caordcom, 'getDesord', array (
   'size' => '106x3',
   'control_name' => 'caordcom[desord]',
-  'maxlength'=> 1000,
+  'maxlength'=> 2000,
   'onkeyup' => "javascript:return ismaxlength(this)",
 )); echo $value ? $value : '&nbsp;' ?>
 <div class="sf_admin_edit_help"><?php echo __('Introduzca una Descripción Valida') ?></div></div>

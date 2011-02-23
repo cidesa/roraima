@@ -40,7 +40,7 @@ class CaordcomMapBuilder {
 
 		$tMap->addForeignKey('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, 'caprovee', 'CODPRO', true, 15);
 
-		$tMap->addColumn('DESORD', 'Desord', 'string', CreoleTypes::VARCHAR, false, 1000);
+		$tMap->addColumn('DESORD', 'Desord', 'string', CreoleTypes::VARCHAR, false, 2500);
 
 		$tMap->addColumn('CRECON', 'Crecon', 'string', CreoleTypes::VARCHAR, false, 2);
 

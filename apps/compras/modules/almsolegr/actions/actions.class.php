@@ -915,8 +915,8 @@ class almsolegrActions extends autoalmsolegrActions
        $opciones->setEliminar(true);
        $opciones->setTabla('Caartsol');
        if ($oculcol=='S') {
-           $opciones->setAncho(1300);
-           $opciones->setAnchoGrid(1200);
+           $opciones->setAncho(1000);
+           $opciones->setAnchoGrid(800);
        }
        else  {
            $opciones->setAncho(2050);
@@ -1005,6 +1005,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col8->setTitulo('Cant. Recibida');
        $col8->setNombreCampo('canrec');
        $col8->setHTML('type="text" size="10" readonly=true');
+       if ($oculcol=='S') $col8->setOculta(true);
 
        $col9 = clone $col7;
        $col9->setTitulo('Costo');
@@ -1012,6 +1013,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col9->setHTML('type="text" size="10"');
        $col9->setJScript('onKeypress="Total(event,this.id); recalcularecargos(event,this.id);"');
        if ($precom=='' && $this->oculrecnoprc=='S') $col9->setOculta(true);
+       if ($oculcol=='S') $col9->setOculta(true);
 
        $col10 = clone $col7;
        $col10->setTitulo('Descuento');
@@ -1027,6 +1029,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col11->setHTML('type="text" size="10" readonly=true');
        if ($precom=='' && $this->oculrecnoprc=='S') $col11->setOculta(true);
        if ($naplrecdes=='S')  $col11->setOculta(true);
+       if ($oculcol=='S') $col11->setOculta(true);
 
        $col12 = clone $col7;
        $col12->setTitulo('Total');
@@ -1070,6 +1073,7 @@ class almsolegrActions extends autoalmsolegrActions
 	   $col16->setJScript('onClick="mostrargridrecargos(this.id)"');
 	   if ($precom=='' && $this->oculrecnoprc=='S') $col16->setOculta(true);
            if ($naplrecdes=='S')  $col16->setOculta(true);
+           if ($oculcol=='S') $col16->setOculta(true);
 
 
 	  $col17 = new Columna('cadena_datos_recargo');
@@ -1133,8 +1137,8 @@ class almsolegrActions extends autoalmsolegrActions
        $opciones->setEliminar(false);
        $opciones->setTabla('Caartsol');
               if ($oculcol=='S') {
-           $opciones->setAncho(1100);
-           $opciones->setAnchoGrid(1000);
+           $opciones->setAncho(900);
+           $opciones->setAnchoGrid(700);
        }
        else  {
        $opciones->setAncho(1700);
@@ -1215,12 +1219,14 @@ class almsolegrActions extends autoalmsolegrActions
        $col8->setTitulo('Cant. Recibida');
        $col8->setNombreCampo('canrec');
        $col8->setHTML('type="text" size="10" readonly=true');
+       if ($oculcol=='S') $col8->setOculta(true);
 
        $col9 = clone $col7;
        $col9->setTitulo('Costo');
        $col9->setNombreCampo('costo');
        $col9->setHTML('type="text" size="10" readonly="true"');
        $col9->setJScript('onKeypress="Total(event,this.id); recalcularecargos(event,this.id);"');
+       if ($oculcol=='S') $col9->setOculta(true);
 
        $col10 = clone $col7;
        $col10->setTitulo('Descuento');
@@ -1236,6 +1242,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col11->setHTML('type="text" size="10" readonly=true');
        if ($precom=='' && $this->oculrecnoprc=='S') $col11->setOculta(true);
        if ($naplrecdes=='S') $col11->setOculta(true);
+       if ($oculcol=='S') $col11->setOculta(true);
 
        $col12 = clone $col7;
        $col12->setTitulo('Total');
@@ -1274,6 +1281,7 @@ class almsolegrActions extends autoalmsolegrActions
 	   $col16->setJScript('onClick="mostrargridrecargos(this.id)"');
 	   if ($precom=='' && $this->oculrecnoprc=='S') $col16->setOculta(true);
            if ($naplrecdes=='S') $col16->setOculta(true);
+           if ($oculcol=='S') $col16->setOculta(true);
 
 	   $col17 = new Columna('cadena_datos_recargo');
        $col17->setTipo(Columna::TEXTO);
