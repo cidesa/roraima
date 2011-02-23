@@ -102,6 +102,7 @@ class Recepcion
 	  $codrec=$recepcion->getRcpart();
 	  $ordcom=$recepcion->getOrdcom();
           $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
+          $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
 	  $x=$grid[0];
 	  $j=0;
 
@@ -114,6 +115,7 @@ class Recepcion
 			      $detalle = new Caartrcp();
 			   	  $detalle->setRcpart($codrec);
 			   	  $detalle->setCodart($x[$j]->getCodart());
+                                  $detalle->setDesart($x[$j]->getDesart());
 			   	  $detalle->setOrdcom($ordcom);
 			  	  $detalle->setCanrec($x[$j]->getCanrecgri());
 			  	  $detalle->setCandev($x[$j]->getCandev());
@@ -139,6 +141,7 @@ class Recepcion
 	  	      	$c = new Criteria();
 				$c->add(CaartordPeer::ORDCOM,$ordcom);
 				$c->add(CaartordPeer::CODART,$x[$j]->getCodart());
+                                if ($claartdes=='S') $c->add(CaartordPeer::DESART,$x[$j]->getDesart());
 				$c->add(CaartordPeer::CODCAT,$x[$j]->getCodcat());
 				$per = CaartordPeer::doSelectOne($c);
 				if ($per)
@@ -165,6 +168,7 @@ class Recepcion
          // $calmacen=$recepcion->getCodalm();
          // $cubicacion=$recepcion->getCodubi();
          $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
+         $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
 	      $x=$grid[0];
 		  $j=0;
                   $acumcanrec=0;
@@ -193,6 +197,7 @@ class Recepcion
                              $r= new Criteria();
                              $r->add(CaartordPeer::ORDCOM,$recepcion->getOrdcom());
                              $r->add(CaartordPeer::CODART,$codarti);
+                             if ($claartdes=='S') $r->add(CaartordPeer::DESART,$dart);
                              $result= CaartordPeer::doSelectOne($r);
                              if ($result)
                              {
@@ -316,6 +321,7 @@ class Recepcion
     public static function Actualizar_ArticulosOrden($recepcion,$grid){
 	  $codrec=$recepcion->getRcpart();
 	  $ordcom=$recepcion->getOrdcom();
+          $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
 
 
 	      $x=$grid[0];
@@ -330,6 +336,7 @@ class Recepcion
 		  	  $c = new Criteria();
 		  	  $c->add(CaartordPeer::ORDCOM,$ordcom);
 		      $c->add(CaartordPeer::CODART,$codarti);
+                      if ($claartdes=='S') $c->add(CaartordPeer::DESART,$x[$j]->getDesart());
 		      $c->add(CaartordPeer::CODCAT,$codcat);
 
 	          $ordarti = CaartordPeer::doSelectOne($c);
@@ -493,6 +500,7 @@ class Recepcion
    {
 	  $codrec=$recepcion->getRcpart();
 	  $ordcom=$recepcion->getOrdcom();
+          $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
 
 	  $c= new Criteria();
 	  $c->add(CaartrcpPeer::RCPART,$codrec);
@@ -506,6 +514,7 @@ class Recepcion
   		  $c = new Criteria();
 	  	  $c->add(CaartordPeer::ORDCOM,$ordcom);
 	      $c->add(CaartordPeer::CODART,$codart);
+              if ($claartdes=='S') $c->add(CaartordPeer::DESART,$arreglo->getDesart());
 	      $c->add(CaartordPeer::CODCAT,$codcat);
 	      $datos = CaartordPeer::doSelectOne($c);
 	      if ($datos)

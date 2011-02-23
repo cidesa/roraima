@@ -380,6 +380,7 @@ class Orden_compra
     $result=array();
     $arreglo_codart=array();
     $tipopro=H::getX('RIFPRO','Caprovee','Tipo',trim($rifpro));
+    $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
     if (Orden_compra::Verificar_proveedor(trim($refsol),trim($rifpro),&$rifpro,&$msg,&$cancotpril,&$strrifpro,&$srtrefcot))
     {
       $detsinord=H::getConfApp2('detsinord', 'compras', 'almordcom');
@@ -400,7 +401,10 @@ class Orden_compra
               {
                 //ARTICULO DE LA COTIZACION CON PRIORIDAD #1 PARA EL NUMERO DE FILAS DEL GRID
                 $result1=array();
-                $sql1 = "select refcot,codart,canord,costo,totdet,fecent,priori,justifica,mondes from cadetcot where refcot='".$srtrefcot."' and codart='".$result[$i]['codart']."' and priori='1'";
+                if ($claartdes=='S')
+                    $sql1 = "select refcot,codart,canord,costo,totdet,fecent,priori,justifica,mondes from cadetcot where refcot='".$srtrefcot."' and codart='".$result[$i]['codart']."' and desart='".$result[$i]['desart']."' and priori='1'";
+                else
+                   $sql1 = "select refcot,codart,canord,costo,totdet,fecent,priori,justifica,mondes from cadetcot where refcot='".$srtrefcot."' and codart='".$result[$i]['codart']."' and priori='1'";
                 if (Herramientas::BuscarDatos($sql1,&$result1))
                 {
                   $result2=array();
@@ -487,7 +491,7 @@ class Orden_compra
 
                     $grid['anadir']="";
                     $grid['datosrecargo']="";
-                    if ($tipopro!='P') $grid['datosrecargo']=self::Cargartirarecargosgrid($refsol,$result[$i]['codart'],$result[$i]['codcat']);
+                    if ($tipopro!='P') $grid['datosrecargo']=self::Cargartirarecargosgrid($refsol,$result[$i]['codart'],$result[$i]['codcat'],$result[$i]['desart']);
                     $output[] = $grid;
                  }
                }
@@ -1973,16 +1977,19 @@ class Orden_compra
           $caartord_new->setRgoart(str_replace("'","",$grid_detalle[$i][$campo_col11]));
           $caartord_new->setCodrgo($codrgo);
           $caartord_new->setTotart(str_replace("'","",$grid_detalle[$i][$campo_col12]));
-          $caartord_new->setDesart(Herramientas::getX_vacio('codart','caregart','desart',$grid_detalle[$i]['codart']));
+          //$caartord_new->setDesart(Herramientas::getX_vacio('codart','caregart','desart',$grid_detalle[$i]['codart']));
+          $caartord_new->setDesart(str_replace("'","",$grid_detalle[$i]['desart']));
           $caartord_new->setUnimed(str_replace("'","",$grid_detalle[$i][$campo_col13]));
           $caartord_new->setCodpar($grid_detalle[$i]['codpar']);//Herramientas::getX_vacio('codart','CARegArt','codpar',$grid_detalle[$i]['codart']));
           $caartord_new->setPartida($vacio);
           $caartord_new->save();
+          $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
           if ($caordcom->getRefprc()=='S')
           {
             $c= new Criteria();
                 $c->add(CaartsolPeer::REQART,$caordcom->getRefsol());
                 $c->add(CaartsolPeer::CODART,$grid_detalle[$i]['codart']);
+                if ($claartdes=='S') $c->add(CaartsolPeer::DESART,$grid_detalle[$i]['desart']);
                 $c->add(CaartsolPeer::CODCAT,$grid_detalle[$i]['codcat']);
                 $caartsol2 = CaartsolPeer::doSelectOne($c);
             if (count($caartsol2)>0)
@@ -2302,6 +2309,7 @@ class Orden_compra
                   $i=0;
                   if ($caordcom->getRefsol()!='')
                   {
+                      $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
                     $sql="SELECT codart,codcat,canord FROM Caartord WHERE ordcom='".$caordcom->getOrdcom()."'";
                     $result=array();
                     if (Herramientas::BuscarDatos($sql,&$result))
@@ -2315,10 +2323,18 @@ class Orden_compra
                         $result1=array();
                         if (Herramientas::BuscarDatos($sql1,&$result1))
                         {
+                          if ($claartdes=='S')
+                          {
+                              if (($result1[0]['canord']-$result[$i]['canord'])>0)
+                              $sql2="Update Caartsol set canord=canord-".$result[$i][canord]." where reqart='".$caordcom->getRefsol()."' and codart='".$result[$i]['codart']."' and desart='".$result[$i]['desart']."' and codcat='".$result[$i]['codcat']."'";
+                            else
+                              $sql2="Update Caartsol set canord=0 where reqart='".$caordcom->getRefsol()."' and codart='".$result[$i]['codart']."' and desart='".$result[$i]['desart']."' and codcat='".$result[$i]['codcat']."'";
+                          }else {
                             if (($result1[0]['canord']-$result[$i]['canord'])>0)
                               $sql2="Update Caartsol set canord=canord-".$result[$i][canord]." where reqart='".$caordcom->getRefsol()."' and codart='".$result[$i]['codart']."' and codcat='".$result[$i]['codcat']."'";
                             else
                               $sql2="Update Caartsol set canord=0 where reqart='".$caordcom->getRefsol()."' and codart='".$result[$i]['codart']."' and codcat='".$result[$i]['codcat']."'";
+                          }
                             Herramientas::insertarRegistros($sql2);
                         }
                           }
@@ -2505,6 +2521,7 @@ class Orden_compra
       }
 
   $j=0;
+  $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
   while ($j<count($arreglo_grid))
   {
    $marcado=$arreglo_grid[$j]["check"];
@@ -2523,6 +2540,7 @@ class Orden_compra
 	    $c= new Criteria();
 	    $c->add(CadisrgoPeer::REQART,$caordcom->getRefsol());
 	    $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
+            if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,$arreglo_grid[$j]["desart"]);
 	    $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
 	    $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
 	    $recargos= CadisrgoPeer::doSelect($c);
@@ -2531,6 +2549,7 @@ class Orden_compra
            $distribucion = new Cadisrgo();
         $distribucion->setReqart($caordcom->getOrdcom());
         $distribucion->setCodart(str_replace("'","",$arreglo_grid[$j]["codart"]));
+        $distribucion->setDesart(str_replace("'","",$arreglo_grid[$j]["desart"]));
         $distribucion->setCodcat(str_replace("'","",$arreglo_grid[$j]["codcat"]));
         $distribucion->setCodrgo($cadisrgo_ordcom->getCodrgo());
            $distribucion->setCodpre($cadisrgo_ordcom->getCodpre());
@@ -2548,6 +2567,7 @@ class Orden_compra
 	              $c= new Criteria();
 		        $c->add(CadisrgoPeer::REQART,$caordcom->getOrdcom());
 		        $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
+                        if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,$arreglo_grid[$j]["desart"]);
 		        $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
 		        //$c->add(CadisrgoPeer::CODRGO,$aux2[0]);
 		        $c->add(CadisrgoPeer::TIPDOC,$caordcom->getDoccom());
@@ -2562,6 +2582,7 @@ class Orden_compra
 		            $distribucion = new Cadisrgo();
 		          $distribucion->setReqart($caordcom->getOrdcom());
 		          $distribucion->setCodart(str_replace("'","",$arreglo_grid[$j]["codart"]));
+                          $distribucion->setDesart(str_replace("'","",$arreglo_grid[$j]["desart"]));
 		          $distribucion->setCodcat(str_replace("'","",$arreglo_grid[$j]["codcat"]));
 		          $distribucion->setCodrgo($aux2[0]);
 
@@ -2610,6 +2631,7 @@ class Orden_compra
         $c= new Criteria();
         $c->add(CadisrgoPeer::REQART,$caordcom->getOrdcom());
         $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
+        if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,$arreglo_grid[$j]["desart"]);
         $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
         //$c->add(CadisrgoPeer::CODRGO,$aux2[0]);
         $c->add(CadisrgoPeer::TIPDOC,$caordcom->getDoccom());
@@ -2624,6 +2646,7 @@ class Orden_compra
             $distribucion = new Cadisrgo();
           $distribucion->setReqart($caordcom->getOrdcom());
           $distribucion->setCodart(str_replace("'","",$arreglo_grid[$j]["codart"]));
+          $distribucion->setDesart(str_replace("'","",$arreglo_grid[$j]["desart"]));
           $distribucion->setCodcat(str_replace("'","",$arreglo_grid[$j]["codcat"]));
           $distribucion->setCodrgo($aux2[0]);
 
@@ -2668,6 +2691,7 @@ class Orden_compra
         $c= new Criteria();
         $c->add(CadisrgoPeer::REQART,$caordcom->getOrdcom());
         $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
+        if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,$arreglo_grid[$j]["desart"]);
         $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
         $c->add(CadisrgoPeer::TIPDOC,$caordcom->getDoccom());
         CadisrgoPeer::doDelete($c);
@@ -2787,7 +2811,7 @@ class Orden_compra
   }//END SUB
 
 
- public static function Cargartirarecargosgrid($numordcom="",$codart="",$coduni="")
+ public static function Cargartirarecargosgrid($numordcom="",$codart="",$coduni="", $desart="")
  {
 
      $cadena="";
@@ -2795,6 +2819,7 @@ class Orden_compra
      $c = new Criteria();
      $c->add(CadisrgoPeer::REQART,$numordcom);
      $c->add(CadisrgoPeer::CODART,$codart);
+     if ($desart!="") $c->add(CadisrgoPeer::DESART,$desart);
      $c->add(CadisrgoPeer::CODCAT,$coduni);
      $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
      $c->addAscendingOrderByColumn(CadisrgoPeer::CODRGO);

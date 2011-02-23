@@ -2970,12 +2970,13 @@ class almordcomActions extends autoalmordcomActions
    * los datos del grid.
    *
    */
-  public function configGridRecargo($refere="",$codart="",$coduni="")
+  public function configGridRecargo($refere="",$codart="",$coduni="", $desart="")
    {
 
        $c = new Criteria();
        $c->add(CadisrgoPeer::REQART,$refere);
        $c->add(CadisrgoPeer::CODART,$codart);
+       if ($desart!="") $c->add(CadisrgoPeer::DESART,$desart);
        $c->add(CadisrgoPeer::CODCAT,$coduni);
        $c->addAscendingOrderByColumn(CadisrgoPeer::CODRGO);
        $reg = CadisrgoPeer::doSelect($c);
@@ -3065,11 +3066,12 @@ class almordcomActions extends autoalmordcomActions
    * los datos del grid.
    *
    */
-  public function configGridRecargoConsulta($refere="",$codart="",$coduni="",$ordcom="")
+  public function configGridRecargoConsulta($refere="",$codart="",$coduni="",$ordcom="",$desart="")
    {
        $c = new Criteria();
        $c->add(CadisrgoPeer::REQART,$refere);
        $c->add(CadisrgoPeer::CODART,$codart);
+       if ($desart!="") $c->add(CadisrgoPeer::DESART,$desart);
        $c->add(CadisrgoPeer::CODCAT,$coduni);
        $c->addAscendingOrderByColumn(CadisrgoPeer::CODRGO);
        $reg = CadisrgoPeer::doSelect($c);
@@ -3157,7 +3159,12 @@ class almordcomActions extends autoalmordcomActions
       $nuevo=$this->getRequestParameter('nuevo');
       $refsol=$this->getRequestParameter('refsol');
       $ordcom=$this->getRequestParameter('ordcom');
-      $doccom=$this->getRequestParameter('tipcom');
+      $doccom=$this->getRequestParameter('tipcom');      
+      $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
+      if ($claartdes=='S')
+          $desarticulo=$this->getRequestParameter('desarticulo');
+      else
+          $desarticulo="";
       $t= new Criteria();
       $t->add(CpdoccomPeer::TIPCOM,$doccom);
       $reg= CpdoccomPeer::doSelectOne($t);
@@ -3180,20 +3187,20 @@ class almordcomActions extends autoalmordcomActions
       {
         if ($refsol!=""){
 	    	if ($refprc=='N' && $afeprc=='S' && $afecom=='S' && $afedis=='R')
-	    	$this->configGridRecargo($ordcom,$articulo,$codunidad);
+	    	$this->configGridRecargo($ordcom,$articulo,$codunidad,$desarticulo);
 	    	else
-	          $this->configGridRecargoConsulta($refsol,$articulo,$codunidad);
+	          $this->configGridRecargoConsulta($refsol,$articulo,$codunidad,"",$desarticulo);
         }
         else
-            $this->configGridRecargo($ordcom,$articulo,$codunidad);
+            $this->configGridRecargo($ordcom,$articulo,$codunidad,$desarticulo);
       }
       else
       {
       	$refcom=H::getX_vacio('REFCOM','Cpcompro','REFCOM',$ordcom);
             if ($refcom=='')
-            $this->configGridRecargo($ordcom,$articulo,$codunidad);
+            $this->configGridRecargo($ordcom,$articulo,$codunidad,$desarticulo);
             else
-            $this->configGridRecargoConsulta($ordcom,$articulo,$codunidad);
+            $this->configGridRecargoConsulta($ordcom,$articulo,$codunidad,"",$desarticulo);
       }
       $output = '[["","",""]]';
       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');

@@ -925,6 +925,7 @@
 
 
     var codart=name+"_"+fil+"_2";
+    var desart=name+"_"+fil+"_3";
     var coduni=name+"_"+fil+"_4";
     var chk=name+"_"+fil+"_1";
     if ($(chk).checked==true)
@@ -936,6 +937,7 @@
       if ($('id').value!='') var nuevo="N"; else var nuevo="S";
 
       var articulo=$(codart).value;
+      var desarticulo=$(desart).value;
         var codunidad=$(coduni).value;
 
 
@@ -957,7 +959,7 @@
         $('actualfila').value=fil;
         var tipcom=$('caordcom_doccom').value;
 
-      new Ajax.Updater('grid_recargo', getUrlModulo()+'recargos', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json); distribuirRecargosenGrid(); $("recargos").show(); $("botonesmarcar").hide(); }, parameters:'articulo='+articulo+'&refsol='+refsol+'&codunidad='+codunidad+'&ordcom='+ordcom+'&tipcom='+tipcom+'&nuevo='+nuevo})
+      new Ajax.Updater('grid_recargo', getUrlModulo()+'recargos', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json); distribuirRecargosenGrid(); $("recargos").show(); $("botonesmarcar").hide(); }, parameters:'articulo='+articulo+'&refsol='+refsol+'&codunidad='+codunidad+'&ordcom='+ordcom+'&desarticulo='+desarticulo+'&tipcom='+tipcom+'&nuevo='+nuevo})
   }
   else
   {

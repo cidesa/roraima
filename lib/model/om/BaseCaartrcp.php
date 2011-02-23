@@ -85,6 +85,10 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 
 
 	
+	protected $desart;
+
+
+	
 	protected $id;
 
 	
@@ -249,6 +253,13 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
   {
 
     return trim($this->modelo);
+
+  }
+  
+  public function getDesart()
+  {
+
+    return trim($this->desart);
 
   }
   
@@ -465,6 +476,16 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setDesart($v)
+	{
+
+    if ($this->desart !== $v) {
+        $this->desart = $v;
+        $this->modifiedColumns[] = CaartrcpPeer::DESART;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -517,7 +538,9 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 
       $this->modelo = $rs->getString($startcol + 18);
 
-      $this->id = $rs->getInt($startcol + 19);
+      $this->desart = $rs->getString($startcol + 19);
+
+      $this->id = $rs->getInt($startcol + 20);
 
       $this->resetModified();
 
@@ -525,7 +548,7 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 20; 
+            return $startcol + 21; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Caartrcp object", $e);
     }
@@ -747,6 +770,9 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 				return $this->getModelo();
 				break;
 			case 19:
+				return $this->getDesart();
+				break;
+			case 20:
 				return $this->getId();
 				break;
 			default:
@@ -778,7 +804,8 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 			$keys[16] => $this->getNumlot(),
 			$keys[17] => $this->getMarca(),
 			$keys[18] => $this->getModelo(),
-			$keys[19] => $this->getId(),
+			$keys[19] => $this->getDesart(),
+			$keys[20] => $this->getId(),
 		);
 		return $result;
 	}
@@ -852,6 +879,9 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 				$this->setModelo($value);
 				break;
 			case 19:
+				$this->setDesart($value);
+				break;
+			case 20:
 				$this->setId($value);
 				break;
 		} 	}
@@ -880,7 +910,8 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[16], $arr)) $this->setNumlot($arr[$keys[16]]);
 		if (array_key_exists($keys[17], $arr)) $this->setMarca($arr[$keys[17]]);
 		if (array_key_exists($keys[18], $arr)) $this->setModelo($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setId($arr[$keys[19]]);
+		if (array_key_exists($keys[19], $arr)) $this->setDesart($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setId($arr[$keys[20]]);
 	}
 
 	
@@ -907,6 +938,7 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaartrcpPeer::NUMLOT)) $criteria->add(CaartrcpPeer::NUMLOT, $this->numlot);
 		if ($this->isColumnModified(CaartrcpPeer::MARCA)) $criteria->add(CaartrcpPeer::MARCA, $this->marca);
 		if ($this->isColumnModified(CaartrcpPeer::MODELO)) $criteria->add(CaartrcpPeer::MODELO, $this->modelo);
+		if ($this->isColumnModified(CaartrcpPeer::DESART)) $criteria->add(CaartrcpPeer::DESART, $this->desart);
 		if ($this->isColumnModified(CaartrcpPeer::ID)) $criteria->add(CaartrcpPeer::ID, $this->id);
 
 		return $criteria;
@@ -975,6 +1007,8 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 		$copyObj->setMarca($this->marca);
 
 		$copyObj->setModelo($this->modelo);
+
+		$copyObj->setDesart($this->desart);
 
 
 		$copyObj->setNew(true);

@@ -41,6 +41,10 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 
 
 	
+	protected $desart;
+
+
+	
 	protected $id;
 
 	
@@ -104,6 +108,13 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
   {
 
     return trim($this->tipo);
+
+  }
+  
+  public function getDesart()
+  {
+
+    return trim($this->desart);
 
   }
   
@@ -194,6 +205,16 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setDesart($v)
+	{
+
+    if ($this->desart !== $v) {
+        $this->desart = $v;
+        $this->modifiedColumns[] = CadisrgoPeer::DESART;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -224,7 +245,9 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 
       $this->tipo = $rs->getString($startcol + 7);
 
-      $this->id = $rs->getInt($startcol + 8);
+      $this->desart = $rs->getString($startcol + 8);
+
+      $this->id = $rs->getInt($startcol + 9);
 
       $this->resetModified();
 
@@ -232,7 +255,7 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 9; 
+            return $startcol + 10; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cadisrgo object", $e);
     }
@@ -404,6 +427,9 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 				return $this->getTipo();
 				break;
 			case 8:
+				return $this->getDesart();
+				break;
+			case 9:
 				return $this->getId();
 				break;
 			default:
@@ -424,7 +450,8 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 			$keys[5] => $this->getTipdoc(),
 			$keys[6] => $this->getCodpre(),
 			$keys[7] => $this->getTipo(),
-			$keys[8] => $this->getId(),
+			$keys[8] => $this->getDesart(),
+			$keys[9] => $this->getId(),
 		);
 		return $result;
 	}
@@ -465,6 +492,9 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 				$this->setTipo($value);
 				break;
 			case 8:
+				$this->setDesart($value);
+				break;
+			case 9:
 				$this->setId($value);
 				break;
 		} 	}
@@ -482,7 +512,8 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[5], $arr)) $this->setTipdoc($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setCodpre($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setTipo($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
+		if (array_key_exists($keys[8], $arr)) $this->setDesart($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
 	}
 
 	
@@ -498,6 +529,7 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CadisrgoPeer::TIPDOC)) $criteria->add(CadisrgoPeer::TIPDOC, $this->tipdoc);
 		if ($this->isColumnModified(CadisrgoPeer::CODPRE)) $criteria->add(CadisrgoPeer::CODPRE, $this->codpre);
 		if ($this->isColumnModified(CadisrgoPeer::TIPO)) $criteria->add(CadisrgoPeer::TIPO, $this->tipo);
+		if ($this->isColumnModified(CadisrgoPeer::DESART)) $criteria->add(CadisrgoPeer::DESART, $this->desart);
 		if ($this->isColumnModified(CadisrgoPeer::ID)) $criteria->add(CadisrgoPeer::ID, $this->id);
 
 		return $criteria;
@@ -544,6 +576,8 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 		$copyObj->setCodpre($this->codpre);
 
 		$copyObj->setTipo($this->tipo);
+
+		$copyObj->setDesart($this->desart);
 
 
 		$copyObj->setNew(true);

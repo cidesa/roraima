@@ -322,13 +322,37 @@ $this->Bitacora('Guardo');
     if (!$this->getRequestParameter($id))
     {
       $casolart = new Casolart();
-      $this->configGrid($this->getRequestParameter('casolart[reqart]'),$this->getRequestParameter('casolart[articulo]'));
+      $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
+        $valores= split('!',$this->getRequestParameter('casolart[articulo]'));
+        if ($claartdes=='S')
+          $this->configGrid($this->getRequestParameter('casolart[reqart]'),$valores[0],$valores[1]);
+        else
+          $this->configGrid($this->getRequestParameter('casolart[reqart]'),$valores[0]);
+
       $this->configGrid2($this->getRequestParameter('casolart[reqart]'));
     }
     else
     {
       $casolart = CasolartPeer::retrieveByPk($this->getRequestParameter($id));
-      $this->configGrid($casolart->getReqart(),$this->getRequestParameter('casolart[articulo]'));
+      $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
+    $valores= split('!',$this->getRequestParameter('casolart[articulo]'));
+    if ($this->getRequestParameter('casolart[articulo]')=="")
+    {
+         if ($claartdes=='S') {
+          $this->configGrid($casolart->getReqart());
+        }
+        else {
+          $this->configGrid($casolart->getReqart());
+        }
+    }else {
+        if ($claartdes=='S') {
+          $this->configGrid($casolart->getReqart(),$valores[0],$valores[1]);
+        }
+        else {
+          $this->configGrid($casolart->getReqart(),$valores[0]);
+        }
+    }
+
       $this->configGrid2($casolart->getReqart());
       $this->forward404Unless($casolart);
 
@@ -339,11 +363,13 @@ $this->Bitacora('Guardo');
 
   public function CargarArticulos($reqart)
 	{
+      $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
+
 	$c = new Criteria();
 	$c->add(CaartsolPeer::REQART,$reqart);
 	$c->addAscendingOrderByColumn(CaartsolPeer::CODART);
+        $c->addAscendingOrderByColumn(CaartsolPeer::DESART);
 	$articulos = CaartsolPeer::doSelect($c);
-
 
 /*
  	$c->add(CaartsolPeer::REQART,$reqart);
@@ -354,17 +380,25 @@ $this->Bitacora('Guardo');
  */
 
 
+
 	$tipos = array();
 	$result= array();
 
 	foreach($articulos as $art)
 	{
-	 $sql="select a.* from cadetcot a, cacotiza b where a.refcot=b.refcot  and b.refsol= '".$reqart."' and a.codart='".$art->getCodart()."' and ( not(a.priori) isnull and a.priori<>0)";
+         if ($claartdes=='S')
+             $sql="select a.* from cadetcot a, cacotiza b where a.refcot=b.refcot  and b.refsol= '".$reqart."' and a.codart='".$art->getCodart()."' and a.desart='".$art->getDesart()."' and ( not(a.priori) isnull and a.priori<>0)";
+         else
+             $sql="select a.* from cadetcot a, cacotiza b where a.refcot=b.refcot  and b.refsol= '".$reqart."' and a.codart='".$art->getCodart()."'  and ( not(a.priori) isnull and a.priori<>0)";
+
 	 if (!Herramientas::BuscarDatos($sql,&$result))
-     {
-	  $tipos += array($art->getCodart() => $art->getCodart()." - ".$art->getDesartsol());
-     }
+         {
+              $tipos += array($art->getCodart()."!".$art->getDesartsol() => $art->getCodart()." - ".$art->getDesartsol());
+
+         }
 	}
+
+
 	return $tipos;
     }
 
@@ -375,10 +409,12 @@ $this->Bitacora('Guardo');
    * los datos del grid.
    *
    */
-  public function configGrid($refsol=' ', $codart=' ')
+  public function configGrid($refsol=' ', $codart=' ', $desart='')
    {
 	$c = new Criteria();
 	$c->add(CadetcotPeer::CODART,$codart);
+        if ($desart!='')
+            $c->add(CadetcotPeer::DESART,$desart);
 	$c->add(CacotizaPeer::REFSOL,$refsol);
 	$c->addJoin(CadetcotPeer::REFCOT,CacotizaPeer::REFCOT);
 	$c->addAscendingOrderByColumn(CadetcotPeer::COSTO);
@@ -468,8 +504,14 @@ $this->Bitacora('Guardo');
 	{
 	  $this->ajax="";
 	  if ($this->getRequestParameter('ajax')=='1')
-	  { $this->ajax="1";
-        $this->configGrid($this->getRequestParameter('reqart'),$this->getRequestParameter('codart'));
+	  {
+            $this->ajax="1";
+            $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
+            $valores= split('!',$this->getRequestParameter('codart'));
+            if ($claartdes=='S')
+                $this->configGrid($this->getRequestParameter('reqart'),$valores[0],$valores[1]);
+            else
+                $this->configGrid($this->getRequestParameter('reqart'),$valores[0]);
 	  }
 	}
 
@@ -550,7 +592,7 @@ $this->Bitacora('Guardo');
 		 $tipos = array();
 		 foreach($articulos as $art)
 		 {
-		   $tipos += array($art->getCodart() => $art->getCodart()." - ".$art->getDesartsol());
+		   $tipos += array($art->getCodart()."!".$art->getDesartsol() => $art->getCodart()." - ".$art->getDesartsol());
 		 }
 		 $this->articulos= $tipos;
         break;

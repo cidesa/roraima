@@ -30,6 +30,7 @@ class Casolart extends BaseCasolart
   protected $portimeent='';
   protected $porprovee="";
   protected $observaciones="";
+  protected $claartdes="";
 
   public function getMonreq($val=false)
   {
@@ -179,6 +180,11 @@ class Casolart extends BaseCasolart
   public function getDescen()
   {
 	return Herramientas::getX('CODCEN','Cadefcen','Descen',self::getCodcen());
+  }
+
+  public function getClaartdes()
+  {
+      return H::getConfApp2('claartdes', 'Compras', 'almsolegr');
   }
 
 }
