@@ -388,7 +388,7 @@ class Orden_compra
       else
           $campo="codart";
 
-      $sql = "Select reqart,codart,codcat,canreq,canrec,montot,costo,monrgo,canord,mondes,relart,unimed,codpar,desart From CaArtSol Where ReqArt='".$refsol."' order By ".$campo;
+      $sql = "Select reqart,codart,codcat,canreq,canrec,montot,costo,monrgo,canord,mondes,relart,unimed,codpar,desart, unimed From CaArtSol Where ReqArt='".$refsol."' order By ".$campo;
       if (Herramientas::BuscarDatos($sql,&$result))
       {
         $i=0;
@@ -414,7 +414,7 @@ class Orden_compra
                       $grid['check'] = '0';
                   $grid['codart']=$result2[0]['codart'];
                   $grid['desart'] = $result[$i]['desart'];
-                  $grid['unimed'] = $result2[0]['unimed'];
+                  $grid['unimed'] = $result[0]['unimed'];
                   $partidaregart = $result2[0]['codpar'];
                     //BUSCAMOS LOS TIPOS De ARTICULOS (ARTICULOS O SERVICIOS)
                     //PARA SABER SI ES ORDEN DE COMPRA, SERVICIO O MIXTA

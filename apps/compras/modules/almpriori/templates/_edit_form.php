@@ -255,6 +255,15 @@
   </ul>
 
 <script language="JavaScript" type="text/javascript">
+    var marcar='<?php echo H::getConfApp2('marcar', 'compras', 'almpriori'); ?>';
+    if (marcar=='S')
+    {
+        $('casolart_actsolegr').checked=true;
+        $('casolart_porprovee').checked=true;
+        new Ajax.Updater('divGrid2', getUrlModuloAjax(), {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=2&reqart='+$('casolart_reqart').value});
+    }
+
+
  function colocar_prioridad()
  {
 		var filas=obtener_filas_grid('a','3');

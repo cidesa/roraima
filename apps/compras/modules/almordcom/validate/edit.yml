@@ -117,8 +117,8 @@ Validator_desord:
     param:
         min:       2
         min_error: La descripción no puede tener menos de 2 caracteres
-        max:       1000
-        max_error: La descripción no puede pasar mas de 1000 caracteres
+        max:       2000
+        max_error: La descripción no puede pasar mas de 2000 caracteres
 
 ExistValidator_doccom:
     class: CidesaExistValidator

@@ -1760,7 +1760,7 @@ propel:
       foreignReference: codpro
     desord:
       type: VARCHAR
-      size: 1000
+      size: 2500
     crecon:
       type: VARCHAR
       size: 2
