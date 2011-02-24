@@ -1885,7 +1885,7 @@ $this->Bitacora('Guardo');
     $col1->setAlineacionContenido(Columna::CENTRO);
     $col1->setNombreCampo('coddoc');
     $col1->setCatalogo('Npdocemp','sf_admin_edit_form',array('coddoc' => 1, 'desdoc' => 2),'Npdocemp_nonhojint');
-    $col1->setHTML('type="text" size="25" maxlength=4');
+    $col1->setHTML('type="text" size="10" maxlength=4');
     $col1->setAjax('nomhojint',7,2);
 
     $col2 = new Columna('Descripción');
@@ -1894,7 +1894,7 @@ $this->Bitacora('Guardo');
     $col2->setAlineacionObjeto(Columna::CENTRO);
     $col2->setAlineacionContenido(Columna::CENTRO);
     $col2->setNombreCampo('desdoc');
-    $col2->setHTML('type="text" size="25" readonly=true');
+    $col2->setHTML('type="text" size="60" readonly=true');
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
