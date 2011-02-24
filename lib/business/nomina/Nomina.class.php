@@ -6387,6 +6387,21 @@ class Nomina {
       } //if
       $j++;
     } //while
+    #ASIGNACION A CONTRATO
+    $sql="select codtipcon from  npasinomcont where codnom='".$registro->getCodnom()."' and '".$registro->getCodemp()."' not in (select codemp from npasiempcont ) ";
+    if(Herramientas :: BuscarDatos($sql, $rs))
+    {
+        $obj  =  new Npasiempcont();
+        $obj->setCodtipcon($rs[0]['codtipcon']);
+        $obj->setCodnom($registro->getCodnom());
+        $obj->setCodemp($registro->getCodemp());
+        $obj->setNomemp($registro->getNomemp());
+        $obj->setFeccal($registro->getFecasi());
+        $obj->setFecdes($registro->getFecasi());
+        $obj->setFechas('31/12/2090');
+        $obj->setStatus('A');
+        $obj->save();
+    }
 
     return -1;
   }
@@ -9044,6 +9059,7 @@ public static function salvarNpsalintind($npsalint, $grid) {
   /*	print "cod. nom :".$codnom; print "cod. car :". $codcar; print "cod. cat :".$codcat;
         H::printR($npasicaremp);
     exit;*/
+      $codnomnew=$codnom;
     if (($codnom && $codcar) || ($codnom == '' && $codcar != '')) {
 
           $c= new Criteria();
@@ -9227,6 +9243,52 @@ public static function salvarNpsalintind($npsalint, $grid) {
       $npasicaremp->setNomcat($npcatpre->getNomcat());
       $npasicaremp->save();
     }
+
+    if($codnomnew!='')
+    {
+        #ASIGNACION A CONTRATO
+        $sql="select codtipcon from  npasinomcont where codnom='$codnomnew' ";
+        if(Herramientas :: BuscarDatos($sql, $rs))
+        {
+            $c = new Criteria();
+            $c->add(NpasiempcontPeer::CODEMP,$npasicaremp->getCodemp());
+            $c->add(NpasiempcontPeer::STATUS,'A');
+            $per = NpasiempcontPeer::doSelectOne($c);
+            if($per)
+            {
+                if($rs[0]['codtipcon']!=$per->getCodtipcon())
+                {
+                    $per->getStatus('I');
+                    $obj->setFechas($feccam);
+                    $per->save();
+                    $obj  =  new Npasiempcont();
+                    $obj->setCodtipcon($rs[0]['codtipcon']);
+                    $obj->setCodnom($codnomnew);
+                    $obj->setCodemp($npasicaremp->getCodemp());
+                    $obj->setNomemp($npasicaremp->getNomemp());
+                    $obj->setFeccal($feccam);
+                    $obj->setFecdes($feccam);
+                    $obj->setFechas('31/12/2090');
+                    $obj->setStatus('A');
+                    $obj->save();
+                }
+            }else
+            {
+                $obj  =  new Npasiempcont();
+                $obj->setCodtipcon($rs[0]['codtipcon']);
+                $obj->setCodnom($codnomnew);
+                $obj->setCodemp($npasicaremp->getCodemp());
+                $obj->setNomemp($npasicaremp->getNomemp());
+                $obj->setFeccal($feccam);
+                $obj->setFecdes($feccam);
+                $obj->setFechas('31/12/2090');
+                $obj->setStatus('A');
+                $obj->save();
+            }
+
+        }
+    }
+
     return -1;
   }
 
