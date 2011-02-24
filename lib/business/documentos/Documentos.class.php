@@ -617,15 +617,11 @@ class Documentos
     if(!$dftabtip->getId()) if($dftabtip->getTipdoc()=='') return 1404;
 
     if($dftabtip->getId()) $tabtip = DftabtipPeer::retrieveByPK($dftabtip->getId());
-    else $tabtip = DftabtipPeer::retrieveByPK($dftabtip->getTipdoc());
-
-    if(!$dftabtip->getId()){
-      if($tabtip){
-        $c = new Criteria();
-        $c->add(DfrutadocPeer::ID_DFTABTIP,$tabtip->getId());
-        $rutadoc = DfrutadocPeer::doSelectOne($c);
-        if($rutadoc) return 1405;
-      }else return 1404;
+    else {
+      $c = new Criteria();
+      $c->add(DftabtipPeer::TIPDOC,$dftabtip->getTipdoc());
+      $tabtip = DftabtipPeer::doSelectOne($c);
+      if(!$tabtip) return 1404;
     }
 
     $grid = $grid[0];
@@ -634,7 +630,7 @@ class Documentos
       foreach($grid as $g){
         if($g->getIdAcunidad()=='' || $g->getDesrut()=='' || $g->getDiadoc()=='' || $g->getDesuni()=='' || $g->getRutdoc()=='') return 1403;
       }
-    }else return 1406;
+    }else return 1405;
     
     return -1;
 
