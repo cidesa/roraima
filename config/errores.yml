@@ -573,6 +573,9 @@
 585:
   cod: 585
   msj:  Existe un Código Presupuestario en el Contrato que no tiene Disponibilidad.
+586:
+  cod: 586
+  msj:  No se puede guardar ya que existe un código de cargo repetido
 3:
   cod: 3
   msj: La contraseña es diferente.
@@ -765,7 +768,9 @@
 1404:
   cod: 1404
   msj: Debe seleccionar el documento.
-
+1405:
+  cod: 1405
+  msj: Debe existir al menos una ruta para guardar.
 ###############NOMINA################
 400:
   cod: 400
@@ -1332,6 +1337,12 @@
 1159:
     cod: 1159
     msj: Verifique que los Artículos posean Cuenta de Contable asociada. No se puede generar el Comprobante.
+1160:
+    cod: 1160
+    msj: La venta debe contener al menos un recargo
+1161:
+    cod: 1161
+    msj: El recargo para la venta no existe
 ########## Licitaciones ########
 901:
     cod: 901
