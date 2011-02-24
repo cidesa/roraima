@@ -1,6 +1,5 @@
 <?php use_helper('Object', 'Validation', 'ObjectAdmin', 'I18N', 'Date', 'Grid') ?>
 
 <?
-echo grid_tag($obj);
+    echo grid_tag_v2($npasiempcont->getObjcon());
 ?>
-<?php echo input_hidden_tag('totalfilas', $totfil) ?>

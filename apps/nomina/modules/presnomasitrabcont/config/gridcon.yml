@@ -1,0 +1,71 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   npasiempcont
+  anchogrid:               900
+  ancho:                   900
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Marcar
+  tipo:                    k
+  nombrecampo:             check
+  esgrabable:			         true
+  html:                    [ ]
+2:       # Columna 2
+  titulo:                  Código de Nómina
+  tipo:                    t
+  nombrecampo:             codnom
+  esgrabable:              true
+  html:                    ["size=5 readOnly=true"]
+3:       # Columna 3
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomnom
+  html:                    ["size=30 readOnly=true"]
+4:       # Columna 4
+  titulo:                  Código de Empleado
+  tipo:                    t
+  nombrecampo:             codemp
+  esgrabable:              true
+  html:                    ["size=8 readOnly=true"]
+5:       # Columna 5
+  titulo:                  Nombre
+  tipo:                    t
+  nombrecampo:             nomemp
+  esgrabable:              true
+  html:                    ["size=30 readOnly=true"]
+6:       # Columna 6
+  titulo:                  Fecha Calculo
+  tipo:                    f
+  nombrecampo:             feccal
+  esgrabable:              true
+  html:                    ["size=30 readOnly=true"]
+7:       # Columna 7
+  titulo:                  Fecha Desde
+  tipo:                    f
+  nombrecampo:             fecdes
+  esgrabable:              true
+  html:                    ["size=30 readOnly=true"]
+8:       # Columna 8
+  titulo:                  Fecha Hasta
+  tipo:                    f
+  nombrecampo:             fechas
+  esgrabable:              true
+  html:                    ["size=40 readOnly=true"]
+9:       # Columna 9
+  titulo:                  Codigo Contrato
+  tipo:                    t
+  nombrecampo:             codtipcon2
+  esgrabable:              true
+  oculta:                  true
+  html:                    [ ]
+10:       # Columna 10
+  titulo:                  Estatus
+  tipo:                    t
+  nombrecampo:             status
+  esgrabable:              true
+  oculta:                  true
+  html:                    [ ]
+
