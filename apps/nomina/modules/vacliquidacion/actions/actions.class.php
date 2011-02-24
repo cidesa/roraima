@@ -189,6 +189,7 @@ private static $coderror=-1;
   public function configGrid($codemp="", $nuevo="",&$ultimosueldo=0,&$ultsue=0,&$suenor=0,$sal='')
   {
   	//PARA LA PORCION ADICIONAL
+                $totalliq=0;
 		$codnom='';
 		$sqlnom="select codnom from npasicaremp where codemp='$codemp' and status='V'";
 		if (H::BuscarDatos($sqlnom,$arrnom))
@@ -342,6 +343,7 @@ private static $coderror=-1;
            $perHis[$cont]['diasdisfutar']=$per[$i]['diadis'];
            $perHis[$cont]['diasdisfrutados']=H::tofloat($arr[$cont]['disfrutados']);
            $perHis[$cont]['id']=9;
+           $totalliq+=$monto;
            $i++;
           }
          else
@@ -394,6 +396,11 @@ private static $coderror=-1;
 	    $perHis = NpvacdisfrutePeer::doSelect($c);
 	    if($per)
 		{
+
+                        foreach($per as $r)
+                        {
+                            $totalliq+=$r->getMonto();
+                        }
 			$salarionor=$per[0]->getUltsue()/30;
 			$salario=$per[0]->getMontoinci()/30;
 		}
@@ -432,6 +439,8 @@ private static $coderror=-1;
 	$ultimosueldo=H::FormatoMonto($ultimosueldo);
 	$this->factorbonvf=$factorbonvf;
 	$this->factorvacv=$factorvacv;
+        $this->totalliq=H::FormatoMonto($totalliq);
+        $this->getUser()->setAttribute('totalliq',$this->totalliq,'vacliquidacion');
 
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(false);
