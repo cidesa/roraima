@@ -959,7 +959,7 @@
         $('actualfila').value=fil;
         var tipcom=$('caordcom_doccom').value;
 
-      new Ajax.Updater('grid_recargo', getUrlModulo()+'recargos', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json); distribuirRecargosenGrid(); $("recargos").show(); $("botonesmarcar").hide(); }, parameters:'articulo='+articulo+'&refsol='+refsol+'&codunidad='+codunidad+'&ordcom='+ordcom+'&desarticulo='+desarticulo+'&tipcom='+tipcom+'&nuevo='+nuevo})
+      new Ajax.Updater('grid_recargo', getUrlModulo()+'recargos', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json); distribuirRecargosenGrid(); $("recargos").show();}, parameters:'articulo='+articulo+'&refsol='+refsol+'&codunidad='+codunidad+'&ordcom='+ordcom+'&desarticulo='+desarticulo+'&tipcom='+tipcom+'&nuevo='+nuevo})
   }
   else
   {
