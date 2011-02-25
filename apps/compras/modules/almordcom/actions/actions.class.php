@@ -3181,15 +3181,19 @@ class almordcomActions extends autoalmordcomActions
       	$afedis="";
       }
       $this->setVars();
-
+      $js="";
 
       if ($nuevo=='S')
       {
         if ($refsol!=""){
-	    	if ($refprc=='N' && $afeprc=='S' && $afecom=='S' && $afedis=='R')
+	    	if ($refprc=='N' && $afeprc=='S' && $afecom=='S' && $afedis=='R') {
 	    	$this->configGridRecargo($ordcom,$articulo,$codunidad,$desarticulo);
-	    	else
+                $js="$('botonesmarcar').show();";
+                }
+	    	else {
 	          $this->configGridRecargoConsulta($refsol,$articulo,$codunidad,"",$desarticulo);
+                  $js="$('botonesmarcar').hide();";
+        }
         }
         else
             $this->configGridRecargo($ordcom,$articulo,$codunidad,$desarticulo);
@@ -3202,7 +3206,7 @@ class almordcomActions extends autoalmordcomActions
             else
             $this->configGridRecargoConsulta($ordcom,$articulo,$codunidad,"",$desarticulo);
       }
-      $output = '[["","",""]]';
+      $output = '[["javascript","'.$js.'",""]]';
       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     }
 }
