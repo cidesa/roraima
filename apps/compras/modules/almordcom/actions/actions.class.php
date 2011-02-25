@@ -3160,7 +3160,7 @@ class almordcomActions extends autoalmordcomActions
       $refsol=$this->getRequestParameter('refsol');
       $ordcom=$this->getRequestParameter('ordcom');
       $doccom=$this->getRequestParameter('tipcom');      
-      $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
+      $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
       if ($claartdes=='S')
           $desarticulo=$this->getRequestParameter('desarticulo');
       else
