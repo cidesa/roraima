@@ -1,8 +1,8 @@
 methods:
   post:
    - "tscheemi{fecent}"
-   - "tscheemi{obsent}"
-   - "tscheemi{nomrec}"
+   #- "tscheemi{obsent}"
+   #- "tscheemi{nomrec}"
    - "tscheemi{codent}"
 
 names:
@@ -11,15 +11,15 @@ names:
     required_msg: La Fecha de Entrega no puedo estar en Blanco
     validators: FechaValidator
 
-  tscheemi{nomrec}:
-    required:  Yes
-    required_msg: El Campo Recibido por no puedo estar en Blanco
-    validators: DescripcionValidator
+  #tscheemi{nomrec}:
+    #required:  Yes
+    #required_msg: El Campo Recibido por no puedo estar en Blanco
+    #validators: DescripcionValidator
 
-  tscheemi{obsent}:
-    required:  Yes
-    required_msg: La Observación por no puedo estar en Blanco
-    validators: ObservacionValidator
+  #tscheemi{obsent}:
+    #required:  Yes
+    #required_msg: La Observación por no puedo estar en Blanco
+    #validators: ObservacionValidator
 
   tscheemi{codent}:
     required:  Yes
