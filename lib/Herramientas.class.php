@@ -2715,6 +2715,58 @@ public static function restaFechas($dFecIni, $dFecFin)
     return $ruptura;
   }
 
+  public static function getX_vacio_Ord($campos=array(), $tabla, $result, $data=array(),$fil=array(),$tipo='ASC')
+    {
+	if (!empty($data[0]) or !empty($data)) {
+        if (is_array($campos))
+        {
+          if (!empty($campos[0]) && (!empty($data[0])))
+          {
+          $c = new Criteria();
+            for($a=0;$a<count($campos)-1;$a++)
+            {
+              //eval ('$field = '.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($campos[$a]).';');
+             eval('$c->add('.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($campos[$a]).','.chr(39).$data[$a].chr(39).');');
+}
+          }//if (!empty($campos[0]) && (!empty($data[0])))
+        }// if (is_array($campos))
+        else
+          {
+              eval ('$field = '.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($campos).';');
+         $c = new Criteria();
+         $c->add($field,$data);
+          }
+         if (is_array($fil))
+        {
+          if (!empty($fil[0]))
+          {
+             if ($tipo=='ASC') {
+                for($a=0;$a<count($fil)-1;$a++)
+                {
+                 eval('$c->addAscendingOrderByColumn('.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($fil[$a]).');');
+                }
+             }else {
+                for($a=0;$a<count($fil)-1;$a++)
+                {
+                 eval('$c->addDescendingOrderByColumn('.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($fil[$a]).');');
+                }
+             }
+          }//if (!empty($fil[0]))
+        }
+         eval ('$reg = '.ucfirst(strtolower($tabla)).'Peer::doSelectone($c);');
+         if ($reg)
+         {
+            eval('$r = $reg->get'.ucfirst(strtolower($result)).'();');
+             return $r;
+         }
+         else
+         {
+           return '';
+         }
+	}
+	      return '';
+      }//end function
+
 }
 
 class H extends Herramientas

@@ -216,6 +216,12 @@ $val3, array('onClick' => 'push3();')); ?></div>
 <br>
 <ul class="sf_admin_actions">
 <li class="float-rigth">
+<?php $nomrep=H::getConfApp2('nomrepcret', 'tesoreria', 'teschecus');
+if ($nomrep!='') { ?>
+<input type="button" name="Submit" class="sf_admin_action_list" value="Comprobante de Retenciones" onclick="javascript:MostrarCompRET();" />
+<?php }?>
+</li>
+<li class="float-rigth">
 <?php $nomrep=H::getConfApp2('nomrepiva', 'tesoreria', 'teschecus');
 if ($nomrep!='') { ?>
 <input type="button" name="Submit" class="sf_admin_action_list" value="Comprobante de Retención IVA" onclick="javascript:MostrarCompIVA();" />
@@ -501,11 +507,32 @@ function push4()
       var  numord='<? echo $tscheemi->getOrden();?>';
       var nomrep='<?php echo H::getConfApp2('nomrepltf', 'tesoreria', 'teschecus'); ?>';
 
+
       var  ruta='http://'+'<?echo $this->getContext()->getRequest()->getHost();?>';
 
       //pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/"+nomrep+".php?orde="+numord;
 
       pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/r.php?r="+nomrep+".php&orde="+numord;
+
+      window.open(pagina,numord,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80");
+  }
+
+  function MostrarCompRET()
+  {
+      var  numord='<? echo $tscheemi->getOrden();?>';
+      var nomrep='<?php echo H::getConfApp2('nomrepcret', 'tesoreria', 'teschecus'); ?>';
+      var ben1='<?php echo H::getX_vacio('NUMORD', 'Opordpag', 'Cedrif', $tscheemi->getOrden()); ?>';
+      var tipcau1='<?php echo H::getX_vacio('NUMORD', 'Opordpag', 'Tipcau', $tscheemi->getOrden()); ?>';
+      var tipret1='<?php echo H::getX_vacio_Ord('NUMORD', 'Opretord', 'Codtip', $tscheemi->getOrden(),array('CODTIP')); ?>';
+      var tipret2='<?php echo H::getX_vacio_Ord('NUMORD', 'Opretord', 'Codtip', $tscheemi->getOrden(),array('CODTIP'),'DESC'); ?>';
+      var fecreg1='<?php echo H::getX_vacio('NUMORD', 'Opordpag', 'Fecemi', $tscheemi->getOrden()); ?>';
+      var status='T';
+
+      var  ruta='http://'+'<?echo $this->getContext()->getRequest()->getHost();?>';
+
+      //pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/"+nomrep+".php?orde="+numord;
+
+      pagina=ruta+"/<?php echo $sf_user->getAttribute('reportes_web');?>/tesoreria/r.php?r="+nomrep+".php&nroord1="+numord+"&ben1="+ben1+"&ben2="+ben1+"&tipcau1="+tipcau1+"&tipcau2="+tipcau1+"&fecreg1="+fecreg1+"&fecreg2="+fecreg1+"&tipret1="+tipret1+"&tipret2="+tipret2+"&status="+status;
 
       window.open(pagina,numord,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80");
   }
