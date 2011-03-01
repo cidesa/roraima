@@ -414,7 +414,7 @@ $this->Bitacora('Guardo');
 	$c = new Criteria();
 	$c->add(CadetcotPeer::CODART,$codart);
         if ($desart!='')
-            $c->add(CadetcotPeer::DESART,$desart);
+            $c->add(CadetcotPeer::DESART,trim($desart));
 	$c->add(CacotizaPeer::REFSOL,$refsol);
 	$c->addJoin(CadetcotPeer::REFCOT,CacotizaPeer::REFCOT);
 	$c->addAscendingOrderByColumn(CadetcotPeer::COSTO);

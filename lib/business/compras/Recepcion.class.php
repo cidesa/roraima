@@ -141,7 +141,7 @@ class Recepcion
 	  	      	$c = new Criteria();
 				$c->add(CaartordPeer::ORDCOM,$ordcom);
 				$c->add(CaartordPeer::CODART,$x[$j]->getCodart());
-                                if ($claartdes=='S') $c->add(CaartordPeer::DESART,$x[$j]->getDesart());
+                                if ($claartdes=='S') $c->add(CaartordPeer::DESART,trim($x[$j]->getDesart()));
 				$c->add(CaartordPeer::CODCAT,$x[$j]->getCodcat());
 				$per = CaartordPeer::doSelectOne($c);
 				if ($per)
@@ -197,7 +197,7 @@ class Recepcion
                              $r= new Criteria();
                              $r->add(CaartordPeer::ORDCOM,$recepcion->getOrdcom());
                              $r->add(CaartordPeer::CODART,$codarti);
-                             if ($claartdes=='S') $r->add(CaartordPeer::DESART,$dart);
+                             if ($claartdes=='S') $r->add(CaartordPeer::DESART,trim($dart));
                              $result= CaartordPeer::doSelectOne($r);
                              if ($result)
                              {
@@ -336,7 +336,7 @@ class Recepcion
 		  	  $c = new Criteria();
 		  	  $c->add(CaartordPeer::ORDCOM,$ordcom);
 		      $c->add(CaartordPeer::CODART,$codarti);
-                      if ($claartdes=='S') $c->add(CaartordPeer::DESART,$x[$j]->getDesart());
+                      if ($claartdes=='S') $c->add(CaartordPeer::DESART,trim($x[$j]->getDesart()));
 		      $c->add(CaartordPeer::CODCAT,$codcat);
 
 	          $ordarti = CaartordPeer::doSelectOne($c);
@@ -514,7 +514,7 @@ class Recepcion
   		  $c = new Criteria();
 	  	  $c->add(CaartordPeer::ORDCOM,$ordcom);
 	      $c->add(CaartordPeer::CODART,$codart);
-              if ($claartdes=='S') $c->add(CaartordPeer::DESART,$arreglo->getDesart());
+              if ($claartdes=='S') $c->add(CaartordPeer::DESART,trim($arreglo->getDesart()));
 	      $c->add(CaartordPeer::CODCAT,$codcat);
 	      $datos = CaartordPeer::doSelectOne($c);
 	      if ($datos)

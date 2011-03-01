@@ -18,6 +18,7 @@ class Cacotiza extends BaseCacotiza
 	private $rifpro = '';
 	protected $justifica="";
 	protected $priori2="";
+        protected $modifico="";
 
 
 	public function getNompro()
@@ -61,4 +62,22 @@ class Cacotiza extends BaseCacotiza
     {
         return H::getConfApp2('habmon', 'compras', 'almcotiza');
 }
+
+    public function getModifico()
+    {
+      $sql="SELECT coalesce(SUM(CANORD),0) as CANORD FROM CAARTSOL WHERE REQART='".self::getRefsol()."'";
+      if (Herramientas::BuscarDatos($sql,&$result))
+      {
+      	if ($result[0]['canord']==0)
+      	{
+           return "S";
+
+        }else
+        {
+         return "N";
+        }
+      }else {
+          return "S";
+      }
+    }
 }

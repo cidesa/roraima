@@ -1989,7 +1989,7 @@ class Orden_compra
             $c= new Criteria();
                 $c->add(CaartsolPeer::REQART,$caordcom->getRefsol());
                 $c->add(CaartsolPeer::CODART,$grid_detalle[$i]['codart']);
-                if ($claartdes=='S') $c->add(CaartsolPeer::DESART,$grid_detalle[$i]['desart']);
+                if ($claartdes=='S') $c->add(CaartsolPeer::DESART,trim($grid_detalle[$i]['desart']));
                 $c->add(CaartsolPeer::CODCAT,$grid_detalle[$i]['codcat']);
                 $caartsol2 = CaartsolPeer::doSelectOne($c);
             if (count($caartsol2)>0)
@@ -2540,7 +2540,7 @@ class Orden_compra
 	    $c= new Criteria();
 	    $c->add(CadisrgoPeer::REQART,$caordcom->getRefsol());
 	    $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
-            if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,$arreglo_grid[$j]["desart"]);
+            if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,trim($arreglo_grid[$j]["desart"]));
 	    $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
 	    $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
 	    $recargos= CadisrgoPeer::doSelect($c);
@@ -2567,7 +2567,7 @@ class Orden_compra
 	              $c= new Criteria();
 		        $c->add(CadisrgoPeer::REQART,$caordcom->getOrdcom());
 		        $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
-                        if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,$arreglo_grid[$j]["desart"]);
+                        if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,trim($arreglo_grid[$j]["desart"]));
 		        $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
 		        //$c->add(CadisrgoPeer::CODRGO,$aux2[0]);
 		        $c->add(CadisrgoPeer::TIPDOC,$caordcom->getDoccom());
@@ -2631,7 +2631,7 @@ class Orden_compra
         $c= new Criteria();
         $c->add(CadisrgoPeer::REQART,$caordcom->getOrdcom());
         $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
-        if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,$arreglo_grid[$j]["desart"]);
+        if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,trim($arreglo_grid[$j]["desart"]));
         $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
         //$c->add(CadisrgoPeer::CODRGO,$aux2[0]);
         $c->add(CadisrgoPeer::TIPDOC,$caordcom->getDoccom());
@@ -2691,7 +2691,7 @@ class Orden_compra
         $c= new Criteria();
         $c->add(CadisrgoPeer::REQART,$caordcom->getOrdcom());
         $c->add(CadisrgoPeer::CODART,$arreglo_grid[$j]["codart"]);
-        if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,$arreglo_grid[$j]["desart"]);
+        if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,trim($arreglo_grid[$j]["desart"]));
         $c->add(CadisrgoPeer::CODCAT,$arreglo_grid[$j]["codcat"]);
         $c->add(CadisrgoPeer::TIPDOC,$caordcom->getDoccom());
         CadisrgoPeer::doDelete($c);
@@ -2819,7 +2819,7 @@ class Orden_compra
      $c = new Criteria();
      $c->add(CadisrgoPeer::REQART,$numordcom);
      $c->add(CadisrgoPeer::CODART,$codart);
-     if ($desart!="") $c->add(CadisrgoPeer::DESART,$desart);
+     if ($desart!="") $c->add(CadisrgoPeer::DESART,trim($desart));
      $c->add(CadisrgoPeer::CODCAT,$coduni);
      $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
      $c->addAscendingOrderByColumn(CadisrgoPeer::CODRGO);

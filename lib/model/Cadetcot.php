@@ -18,6 +18,9 @@ class Cadetcot extends BaseCadetcot
    protected $desart="";
    protected $priori="";
    protected $recargo=0;
+   protected $check="0";
+   protected $anadir="";
+   protected $datosrecargo="";
 
 
    public function hydrate(ResultSet $rs, $startcol = 1)
@@ -35,12 +38,14 @@ class Cadetcot extends BaseCadetcot
        }else {
             $this->desart= Herramientas::getX('CODART','Caregart','Desart',self::getCodart());
        }*/
-
+         $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
+         $aplrecar=H::getConfApp2('aplrecar', 'compras', 'almcotiza');
 	   $monrecargo=0;
 	   $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
        $cri = new Criteria();
        $cri->add(CaartsolPeer::REQART,$reqart);
        $cri->add(CaartsolPeer::CODART,self::getCodart());
+       if ($claartdes=='S') $cri->add(CaartsolPeer::DESART,trim(self::getDesart()));
        $cri->addAscendingOrderByColumn(CaartsolPeer::CODCAT);
        $reg = CaartsolPeer::doSelect($cri);
        foreach ($reg as $solegr)
@@ -48,6 +53,7 @@ class Cadetcot extends BaseCadetcot
              $c= new Criteria();
 			 $c->add(CadisrgoPeer::REQART,$reqart);
 			 $c->add(CadisrgoPeer::CODART,$solegr->getCodart());
+                         if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,trim(self::getDesart()));
 			 $c->add(CadisrgoPeer::CODCAT,$solegr->getCodcat());
 			 $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
 			 $result=CadisrgoPeer::doSelect($c);
@@ -72,8 +78,61 @@ class Cadetcot extends BaseCadetcot
                    $monrecargo=$monrecargo+$recargo;
 		        }// foreach ($result as $datos)
 			 }//if ($result)
+                         else {
+                             if ($aplrecar=='S')
+                             {
+                                 $c= new Criteria();
+                                 $c->add(CacotdisrgoPeer::REFCOT,self::getRefcot());
+                                 $c->add(CacotdisrgoPeer::CODART,$solegr->getCodart());
+                                 if ($claartdes=='S') $c->add(CacotdisrgoPeer::DESART,trim(self::getDesart()));
+                                 $c->add(CacotdisrgoPeer::CODCAT,$solegr->getCodcat());
+                                 $c->add(CacotdisrgoPeer::TIPDOC,$tipdoc);
+                                 $result=CacotdisrgoPeer::doSelect($c);
+                                 if ($result)
+                                 {
+                                    $this->check='1';
+                                    foreach ($result as $datos)
+                                    {
+                                       $monrgopor=$datos->getMonrgoc();
+                                       if ($datos->getTiprgo()=='M')
+                                               {
+                                                 $recargo= $monrgopor;
+                                               }
+                                               else if ($datos->getTiprgo()=='P')
+                                               {
+                                                     $monbase = $solegr->getCanreq()*self::getCosto();
+                                                 $recargo = (($monbase*$monrgopor)/100);
+                                               }
+                                               else
+                                               {
+                                                  $recargo=0;
+                                               }
+                               $monrecargo=$monrecargo+$recargo;
+                                    }// foreach ($result as $datos)
+                             }
+                         }
+                         }
 	   }//	 foreach ($reg as $solegr)
        $this->recargo=$monrecargo;
+
+       
+     $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
+     $c= new Criteria();
+	 $c->add(CacotdisrgoPeer::REFCOT,self::getRefcot());
+	 $c->add(CacotdisrgoPeer::CODART,self::getCodart());
+         if ($claartdes=='S') $c->add(CacotdisrgoPeer::DESART,trim(self::getDesart()));
+	 $c->add(CacotdisrgoPeer::CODCAT,self::getCodcat());
+	 $c->add(CacotdisrgoPeer::TIPDOC,$tipdoc);
+	 $result=CacotdisrgoPeer::doSelect($c);
+	 if ($result)
+	 {
+            foreach ($result as $datos)
+            {
+               $monrgo=number_format($datos->getMonrgo(),2,',','.');
+               $monrgoc=number_format($datos->getMonrgoc(),2,',','.');
+               $this->datosrecargo=$this->datosrecargo . $datos->getCodrgo().'_' . $datos->getNomrgo().'_' . $monrgoc .'_'. $datos->getTiprgo().'_' . $monrgo .'_'. $datos->getCodpar(). '!';
+            }
+	 }
    }
 
 

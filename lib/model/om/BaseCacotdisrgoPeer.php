@@ -1,62 +1,53 @@
 <?php
 
 
-abstract class BaseCadetcotPeer {
+abstract class BaseCacotdisrgoPeer {
 
 	
 	const DATABASE_NAME = 'propel';
 
 	
-	const TABLE_NAME = 'cadetcot';
+	const TABLE_NAME = 'cacotdisrgo';
 
 	
-	const CLASS_DEFAULT = 'lib.model.Cadetcot';
+	const CLASS_DEFAULT = 'lib.model.Cacotdisrgo';
 
 	
-	const NUM_COLUMNS = 13;
+	const NUM_COLUMNS = 10;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const REFCOT = 'cadetcot.REFCOT';
+	const REFCOT = 'cacotdisrgo.REFCOT';
 
 	
-	const CODART = 'cadetcot.CODART';
+	const CODCAT = 'cacotdisrgo.CODCAT';
 
 	
-	const CANORD = 'cadetcot.CANORD';
+	const CODART = 'cacotdisrgo.CODART';
 
 	
-	const COSTO = 'cadetcot.COSTO';
+	const CODRGO = 'cacotdisrgo.CODRGO';
 
 	
-	const TOTDET = 'cadetcot.TOTDET';
+	const MONRGO = 'cacotdisrgo.MONRGO';
 
 	
-	const FECENT = 'cadetcot.FECENT';
+	const TIPDOC = 'cacotdisrgo.TIPDOC';
 
 	
-	const PRIORI = 'cadetcot.PRIORI';
+	const CODPRE = 'cacotdisrgo.CODPRE';
 
 	
-	const JUSTIFICA = 'cadetcot.JUSTIFICA';
+	const TIPO = 'cacotdisrgo.TIPO';
 
 	
-	const MONDES = 'cadetcot.MONDES';
+	const DESART = 'cacotdisrgo.DESART';
 
 	
-	const OBSERVACIONES = 'cadetcot.OBSERVACIONES';
-
-
-	const DESART = 'cadetcot.DESART';
-
-	
-	const CODCAT = 'cadetcot.CODCAT';
-
-	
-	const ID = 'cadetcot.ID';
+	const ID = 'cacotdisrgo.ID';
 
 	
 	private static $phpNameMap = null;
@@ -64,31 +55,31 @@ abstract class BaseCadetcotPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Refcot', 'Codart', 'Canord', 'Costo', 'Totdet', 'Fecent', 'Priori', 'Justifica', 'Mondes', 'Observaciones', 'Desart', 'Codcat', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CadetcotPeer::REFCOT, CadetcotPeer::CODART, CadetcotPeer::CANORD, CadetcotPeer::COSTO, CadetcotPeer::TOTDET, CadetcotPeer::FECENT, CadetcotPeer::PRIORI, CadetcotPeer::JUSTIFICA, CadetcotPeer::MONDES, CadetcotPeer::OBSERVACIONES, CadetcotPeer::DESART, CadetcotPeer::CODCAT, CadetcotPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('refcot', 'codart', 'canord', 'costo', 'totdet', 'fecent', 'priori', 'justifica', 'mondes', 'observaciones', 'desart', 'codcat', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Refcot', 'Codcat', 'Codart', 'Codrgo', 'Monrgo', 'Tipdoc', 'Codpre', 'Tipo', 'Desart', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CacotdisrgoPeer::REFCOT, CacotdisrgoPeer::CODCAT, CacotdisrgoPeer::CODART, CacotdisrgoPeer::CODRGO, CacotdisrgoPeer::MONRGO, CacotdisrgoPeer::TIPDOC, CacotdisrgoPeer::CODPRE, CacotdisrgoPeer::TIPO, CacotdisrgoPeer::DESART, CacotdisrgoPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refcot', 'codcat', 'codart', 'codrgo', 'monrgo', 'tipdoc', 'codpre', 'tipo', 'desart', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Refcot' => 0, 'Codart' => 1, 'Canord' => 2, 'Costo' => 3, 'Totdet' => 4, 'Fecent' => 5, 'Priori' => 6, 'Justifica' => 7, 'Mondes' => 8, 'Observaciones' => 9, 'Desart' => 10, 'Codcat' => 11, 'Id' => 12, ),
-		BasePeer::TYPE_COLNAME => array (CadetcotPeer::REFCOT => 0, CadetcotPeer::CODART => 1, CadetcotPeer::CANORD => 2, CadetcotPeer::COSTO => 3, CadetcotPeer::TOTDET => 4, CadetcotPeer::FECENT => 5, CadetcotPeer::PRIORI => 6, CadetcotPeer::JUSTIFICA => 7, CadetcotPeer::MONDES => 8, CadetcotPeer::OBSERVACIONES => 9, CadetcotPeer::DESART => 10, CadetcotPeer::CODCAT => 11, CadetcotPeer::ID => 12, ),
-		BasePeer::TYPE_FIELDNAME => array ('refcot' => 0, 'codart' => 1, 'canord' => 2, 'costo' => 3, 'totdet' => 4, 'fecent' => 5, 'priori' => 6, 'justifica' => 7, 'mondes' => 8, 'observaciones' => 9, 'desart' => 10, 'codcat' => 11, 'id' => 12, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Refcot' => 0, 'Codcat' => 1, 'Codart' => 2, 'Codrgo' => 3, 'Monrgo' => 4, 'Tipdoc' => 5, 'Codpre' => 6, 'Tipo' => 7, 'Desart' => 8, 'Id' => 9, ),
+		BasePeer::TYPE_COLNAME => array (CacotdisrgoPeer::REFCOT => 0, CacotdisrgoPeer::CODCAT => 1, CacotdisrgoPeer::CODART => 2, CacotdisrgoPeer::CODRGO => 3, CacotdisrgoPeer::MONRGO => 4, CacotdisrgoPeer::TIPDOC => 5, CacotdisrgoPeer::CODPRE => 6, CacotdisrgoPeer::TIPO => 7, CacotdisrgoPeer::DESART => 8, CacotdisrgoPeer::ID => 9, ),
+		BasePeer::TYPE_FIELDNAME => array ('refcot' => 0, 'codcat' => 1, 'codart' => 2, 'codrgo' => 3, 'monrgo' => 4, 'tipdoc' => 5, 'codpre' => 6, 'tipo' => 7, 'desart' => 8, 'id' => 9, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
 	public static function getMapBuilder()
 	{
-		include_once 'lib/model/map/CadetcotMapBuilder.php';
-		return BasePeer::getMapBuilder('lib.model.map.CadetcotMapBuilder');
+		include_once 'lib/model/map/CacotdisrgoMapBuilder.php';
+		return BasePeer::getMapBuilder('lib.model.map.CacotdisrgoMapBuilder');
 	}
 	
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
-			$map = CadetcotPeer::getTableMap();
+			$map = CacotdisrgoPeer::getTableMap();
 			$columns = $map->getColumns();
 			$nameMap = array();
 			foreach ($columns as $column) {
@@ -122,43 +113,37 @@ abstract class BaseCadetcotPeer {
 	
 	public static function alias($alias, $column)
 	{
-		return str_replace(CadetcotPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(CacotdisrgoPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(CadetcotPeer::REFCOT);
+		$criteria->addSelectColumn(CacotdisrgoPeer::REFCOT);
 
-		$criteria->addSelectColumn(CadetcotPeer::CODART);
+		$criteria->addSelectColumn(CacotdisrgoPeer::CODCAT);
 
-		$criteria->addSelectColumn(CadetcotPeer::CANORD);
+		$criteria->addSelectColumn(CacotdisrgoPeer::CODART);
 
-		$criteria->addSelectColumn(CadetcotPeer::COSTO);
+		$criteria->addSelectColumn(CacotdisrgoPeer::CODRGO);
 
-		$criteria->addSelectColumn(CadetcotPeer::TOTDET);
+		$criteria->addSelectColumn(CacotdisrgoPeer::MONRGO);
 
-		$criteria->addSelectColumn(CadetcotPeer::FECENT);
+		$criteria->addSelectColumn(CacotdisrgoPeer::TIPDOC);
 
-		$criteria->addSelectColumn(CadetcotPeer::PRIORI);
+		$criteria->addSelectColumn(CacotdisrgoPeer::CODPRE);
 
-		$criteria->addSelectColumn(CadetcotPeer::JUSTIFICA);
+		$criteria->addSelectColumn(CacotdisrgoPeer::TIPO);
 
-		$criteria->addSelectColumn(CadetcotPeer::MONDES);
+		$criteria->addSelectColumn(CacotdisrgoPeer::DESART);
 
-		$criteria->addSelectColumn(CadetcotPeer::OBSERVACIONES);
-
-		$criteria->addSelectColumn(CadetcotPeer::DESART);
-
-		$criteria->addSelectColumn(CadetcotPeer::CODCAT);
-
-		$criteria->addSelectColumn(CadetcotPeer::ID);
+		$criteria->addSelectColumn(CacotdisrgoPeer::ID);
 
 	}
 
-	const COUNT = 'COUNT(cadetcot.ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT cadetcot.ID)';
+	const COUNT = 'COUNT(cacotdisrgo.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT cacotdisrgo.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -167,9 +152,9 @@ abstract class BaseCadetcotPeer {
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(CadetcotPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(CacotdisrgoPeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(CadetcotPeer::COUNT);
+			$criteria->addSelectColumn(CacotdisrgoPeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -177,7 +162,7 @@ abstract class BaseCadetcotPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$rs = CadetcotPeer::doSelectRS($criteria, $con);
+		$rs = CacotdisrgoPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -189,7 +174,7 @@ abstract class BaseCadetcotPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = CadetcotPeer::doSelect($critcopy, $con);
+		$objects = CacotdisrgoPeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -198,7 +183,7 @@ abstract class BaseCadetcotPeer {
 	
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
-		return CadetcotPeer::populateObjects(CadetcotPeer::doSelectRS($criteria, $con));
+		return CacotdisrgoPeer::populateObjects(CacotdisrgoPeer::doSelectRS($criteria, $con));
 	}
 	
 	public static function doSelectRS(Criteria $criteria, $con = null)
@@ -209,7 +194,7 @@ abstract class BaseCadetcotPeer {
 
 		if (!$criteria->getSelectColumns()) {
 			$criteria = clone $criteria;
-			CadetcotPeer::addSelectColumns($criteria);
+			CacotdisrgoPeer::addSelectColumns($criteria);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -221,7 +206,7 @@ abstract class BaseCadetcotPeer {
 	{
 		$results = array();
 	
-				$cls = CadetcotPeer::getOMClass();
+				$cls = CacotdisrgoPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
 		
@@ -241,7 +226,7 @@ abstract class BaseCadetcotPeer {
 	
 	public static function getOMClass()
 	{
-		return CadetcotPeer::CLASS_DEFAULT;
+		return CacotdisrgoPeer::CLASS_DEFAULT;
 	}
 
 	
@@ -255,7 +240,7 @@ abstract class BaseCadetcotPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(CadetcotPeer::ID); 
+		$criteria->remove(CacotdisrgoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -282,8 +267,8 @@ abstract class BaseCadetcotPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(CadetcotPeer::ID);
-			$selectCriteria->add(CadetcotPeer::ID, $criteria->remove(CadetcotPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(CacotdisrgoPeer::ID);
+			$selectCriteria->add(CacotdisrgoPeer::ID, $criteria->remove(CacotdisrgoPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -300,7 +285,7 @@ abstract class BaseCadetcotPeer {
 		}
 		$affectedRows = 0; 		try {
 									$con->begin();
-			$affectedRows += BasePeer::doDeleteAll(CadetcotPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(CacotdisrgoPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -313,16 +298,16 @@ abstract class BaseCadetcotPeer {
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(CadetcotPeer::DATABASE_NAME);
+			$con = Propel::getConnection(CacotdisrgoPeer::DATABASE_NAME);
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 		} elseif ($values instanceof Cadetcot) {
+			$criteria = clone $values; 		} elseif ($values instanceof Cacotdisrgo) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(CadetcotPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(CacotdisrgoPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -341,13 +326,13 @@ abstract class BaseCadetcotPeer {
 	}
 
 	
-	public static function doValidate(Cadetcot $obj, $cols = null)
+	public static function doValidate(Cacotdisrgo $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(CadetcotPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(CadetcotPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(CacotdisrgoPeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(CacotdisrgoPeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -363,11 +348,11 @@ abstract class BaseCadetcotPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(CadetcotPeer::DATABASE_NAME, CadetcotPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(CacotdisrgoPeer::DATABASE_NAME, CacotdisrgoPeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = CadetcotPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = CacotdisrgoPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
             $request->setError($col, $failed->getMessage());
         }
     }
@@ -382,12 +367,12 @@ abstract class BaseCadetcotPeer {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
 
-		$criteria = new Criteria(CadetcotPeer::DATABASE_NAME);
+		$criteria = new Criteria(CacotdisrgoPeer::DATABASE_NAME);
 
-		$criteria->add(CadetcotPeer::ID, $pk);
+		$criteria->add(CacotdisrgoPeer::ID, $pk);
 
 
-		$v = CadetcotPeer::doSelect($criteria, $con);
+		$v = CacotdisrgoPeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -404,8 +389,8 @@ abstract class BaseCadetcotPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(CadetcotPeer::ID, $pks, Criteria::IN);
-			$objs = CadetcotPeer::doSelect($criteria, $con);
+			$criteria->add(CacotdisrgoPeer::ID, $pks, Criteria::IN);
+			$objs = CacotdisrgoPeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
@@ -413,11 +398,11 @@ abstract class BaseCadetcotPeer {
 } 
 if (Propel::isInit()) {
 			try {
-		BaseCadetcotPeer::getMapBuilder();
+		BaseCacotdisrgoPeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
-			require_once 'lib/model/map/CadetcotMapBuilder.php';
-	Propel::registerMapBuilder('lib.model.map.CadetcotMapBuilder');
+			require_once 'lib/model/map/CacotdisrgoMapBuilder.php';
+	Propel::registerMapBuilder('lib.model.map.CacotdisrgoMapBuilder');
 }

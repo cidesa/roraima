@@ -243,7 +243,7 @@ class SolicituddeEgresos
       {
         $longcat=strlen($x[$j]->getCodcat()) +1;
         $x[$j]->setReqart($requisicion);
-        $x[$j]->setDesart($x[$j]->getDesartsol());
+        $x[$j]->setDesart(trim($x[$j]->getDesartsol()));
         $x[$j]->setCodpar($x[$j]->getCodpre());
         $x[$j]->save();
       }
@@ -1096,7 +1096,7 @@ class SolicituddeEgresos
         $c= new Criteria();
         $c->add(CadisrgoPeer::REQART,$requi);
         $c->add(CadisrgoPeer::CODART,$x[$j]->getCodart());
-        if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,$x[$j]->getDesart());
+        if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,trim($x[$j]->getDesart()));
         $c->add(CadisrgoPeer::CODCAT,$x[$j]->getCodcat());
         $c->add(CadisrgoPeer::CODRGO,$aux2[0]);
         $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
@@ -1105,7 +1105,7 @@ class SolicituddeEgresos
             $distribucion = new Cadisrgo();
           $distribucion->setReqart($requi);
           $distribucion->setCodart($x[$j]->getCodart());
-          $distribucion->setDesart($x[$j]->getDesartsol());
+          $distribucion->setDesart(trim($x[$j]->getDesartsol()));
           $distribucion->setCodcat($x[$j]->getCodcat());
           $distribucion->setCodrgo($aux2[0]);
 

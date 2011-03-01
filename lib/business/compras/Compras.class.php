@@ -354,7 +354,84 @@ class Compras {
           $detalle->setCosto($x[$j]['costo']);
           $detalle->setMondes($x[$j]['mondes']);
           $detalle->setTotdet($x[$j]['totdet']);
+          $detalle->setCodcat($x[$j]['codcat']);
           if ($x[$j]['fecent']!="")  { $detalle->setFecent($x[$j]['fecent']); }
+
+
+          if ($aplrecar=='S')
+          {
+              $marcado=$x[$j]['check'];
+               $unidad=$x[$j]['codcat'];
+               $codpresu=$x[$j]['codcat']."-".$x[$j]['codpar'];
+               if ($marcado=="1")
+               {
+                 if ($x[$j]['datosrecargo']!='')
+                 {
+                    $cadenarec=split('!',$x[$j]['datosrecargo']);
+                    $r=0;
+                    while ($r<(count($cadenarec)-1))
+                    {
+                      $aux=$cadenarec[$r];
+                      $aux2=split('_',$aux);
+                      if ($aux2[0]!="" )
+                      {
+                        $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
+                        $c= new Criteria();
+                        $c->add(CacotdisrgoPeer::REFCOT,$refcot);
+                        $c->add(CacotdisrgoPeer::CODART,$x[$j]['codart']);
+                        if ($claartdes=='S') $c->add(CacotdisrgoPeer::DESART,trim($x[$j]['desart']));
+                        $c->add(CacotdisrgoPeer::CODCAT,$x[$j]['codcat']);
+                        $c->add(CacotdisrgoPeer::CODRGO,$aux2[0]);
+                        $c->add(CacotdisrgoPeer::TIPDOC,$tipdoc);
+                        CacotdisrgoPeer::doDelete($c);
+
+                        $distribucion = new Cacotdisrgo();
+                      $distribucion->setRefcot($refcot);
+                      $distribucion->setCodart($x[$j]['codart']);
+                      $distribucion->setDesart($x[$j]['desart']);
+                      $distribucion->setCodcat($x[$j]['codcat']);
+                      $distribucion->setCodrgo($aux2[0]);
+
+                      $c = new Criteria();
+                      $tiporec = CadefartPeer::doSelectOne($c);
+                      if ($tiporec)
+                      {
+                      if ($tiporec->getAsiparrec()!='C')
+                      {
+                        $c = new Criteria();
+                        $c->add(CarecargPeer::CODRGO,$aux2[0]);
+                        $presupuesto = CarecargPeer::doSelectOne($c);
+                        if ($presupuesto)
+                        {
+                        if ($tiporec->getAsiparrec()=='P')
+                        {
+                        $distribucion->setCodpre($presupuesto->getCodpre());
+                        }
+                        else
+                        {
+                        $codigo= $unidad.'-'.$presupuesto->getCodpre();
+                        $distribucion->setCodpre($codigo);
+                        }
+                        }
+                      }
+                      else
+                      {
+                        $distribucion->setCodpre($codpresu);
+                      }
+                      }
+                      $tipdoc=Compras::ObtenerTipoDocumentoPrecompromiso();
+                      $montorecargo= Herramientas::toFloat($aux2[4]);
+                      $distribucion->setMonrgo($montorecargo);
+                      $distribucion->setTipdoc($tipdoc);
+                      $distribucion->save();
+                      }
+                      $r++;
+                    }//while
+                 }//if ($x[$j]->getDatosrecargo()!="")
+               }// if ($marcado=="1")
+          }
+
+
           $detalle->save();
         }
           $j++;
@@ -377,6 +454,9 @@ class Compras {
   public static function eliminarAlmcotiza($cacotiza) {
     try {
       Herramientas :: EliminarRegistro("Cadetcot", "Refcot", $cacotiza->getRefcot());
+      $aplrecar=H::getConfApp2('aplrecar', 'compras', 'almcotiza');
+      if ($aplrecar=='S')
+          Herramientas :: EliminarRegistro("Cacotdisrgo", "Refcot", $cacotiza->getRefcot());
       $cacotiza->delete();
       return -1;
     } catch (Exception $ex) {
@@ -475,6 +555,7 @@ class Compras {
 
     $error = -1;
     $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
+    $aplrecar=H::getConfApp2('aplrecar', 'compras', 'almcotiza');
     if ($actsolegr == '1') {
       $c = new Criteria();
       $c->addJoin(CacotizaPeer :: REFCOT, CadetcotPeer :: REFCOT);
@@ -483,6 +564,7 @@ class Compras {
       $result = CadetcotPeer :: doSelect($c);
       if ($result) {
         foreach ($result as $datos) {
+          $refcotiza=$datos->getRefcot();
           $rifpro=H::getX_vacio('REFCOT', 'Cacotiza', 'Rifpro', $datos->getRefcot());
           $tippro=H::getX_vacio('RIFPRO', 'Caprovee', 'Tipo', $rifpro);
 
@@ -513,12 +595,28 @@ class Compras {
             if ($tippro!='P') {
             $c=new Criteria();
             $c->add(CadisrgoPeer::REQART,$reqart);
+                $c->add(CadisrgoPeer::CODART,$datos->getCodart());
+                if ($claartdes=='S') $c->add(CadisrgoPeer :: DESART, trim($datos->getDesart()));
             $reg= CadisrgoPeer::doSelect($c);
             if ($reg) {
               $gridnuevo[$indice -1][6] = 1;
             } else {
-              $gridnuevo[$indice -1][6] = 0;
-            }
+                    if ($aplrecar=='S')
+                    {
+                       $c=new Criteria();
+                        $c->add(CacotdisrgoPeer::REFCOT,$refcotiza);
+                        $c->add(CacotdisrgoPeer::CODART,$datos->getCodart());
+                        if ($claartdes=='S') $c->add(CacotdisrgoPeer :: DESART, trim($datos->getDesart()));
+                        $reg= CacotdisrgoPeer::doSelect($c);
+                        if ($reg) {
+                          $gridnuevo[$indice -1][6] = 1;
+                        }else {
+                           $gridnuevo[$indice -1][6] = 0;
+                        }
+                    }else {               
+                      $gridnuevo[$indice -1][6] = 0;
+                    }
+                  }                
             }
             else $gridnuevo[$indice -1][6] = 0;
             $gridnuevo[$indice -1][7] = $resul2->getMontot();//$monuni -$gridnuevo[$indice -1][3];
@@ -553,6 +651,31 @@ class Compras {
           $gridnuevorec[$indice2 -1][6] = $resultado->getCodcat();
           if ($claartdes=='S') $gridnuevorec[$indice2 -1][7] = $resultado->getDesart();
         }
+      }else {
+          
+          if ($aplrecar=='S')
+          {
+          $c = new Criteria();
+          if ($tippro!='P')
+              $c->add(CacotdisrgoPeer :: REFCOT, $refcotiza);
+          else
+          $c->add(CacotdisrgoPeer :: REFCOT, '');
+          $dat = CacotdisrgoPeer :: doSelect($c);
+          if ($dat) {
+            foreach ($dat as $resultado) {
+              $indice2 = count($gridnuevorec) + 1;
+              $gridnuevorec[$indice2 -1][0] = $resultado->getCodrgo();
+              $gridnuevorec[$indice2 -1][1] = $resultado->getMonrgo();
+              $gridnuevorec[$indice2 -1][2] = $resultado->getTipdoc();
+              $gridnuevorec[$indice2 -1][3] = "";
+              $gridnuevorec[$indice2 -1][4] = $resultado->getMonrgo();
+              $gridnuevorec[$indice2 -1][5] = $resultado->getCodart();
+              $gridnuevorec[$indice2 -1][6] = $resultado->getCodcat();
+              if ($claartdes=='S') $gridnuevorec[$indice2 -1][7] = $resultado->getDesart();
+              $gridnuevorec[$indice2 -1][8] = $resultado->getCodpre();
+            }
+          }
+          }
       }
       $nopuedeaumentar=false;
       $z = 0;
@@ -759,6 +882,7 @@ class Compras {
     }
 
     $l = 0;
+    $aplrecar=H::getConfApp2('aplrecar', 'compras', 'almcotiza');
     while ($l < count($gridnuevorec)) //Distribucion de Recargos
       {
             $c = new Criteria();
@@ -774,7 +898,21 @@ class Compras {
                $dato3->setMonrgo($gridnuevorec[$l][1]);
                $dato3->save();
               }
-            }//if ($dato2) {
+            }else {
+                if ($aplrecar=='S')
+                {
+                    $newdisrecargo= new Cadisrgo();
+                    $newdisrecargo->setReqart($reqart);
+                    $newdisrecargo->setCodart($gridnuevorec[$l][5]);
+                    $newdisrecargo->setDesart($gridnuevorec[$l][7]);
+                    $newdisrecargo->setCodcat($gridnuevorec[$l][6]);
+                    $newdisrecargo->setCodrgo($gridnuevorec[$l][0]);
+                    $newdisrecargo->setMonrgo($gridnuevorec[$l][1]);
+                    $newdisrecargo->setCodpre($gridnuevorec[$l][8]);
+                    $newdisrecargo->setTipdoc($gridnuevorec[$l][2]);
+                    $newdisrecargo->save();
+                }
+            }
         $l++;
       }//while
 
@@ -1046,6 +1184,8 @@ class Compras {
       self :: distribuirRecargos(& $gridnuevo2, & $gridnuevo, $d, 'S',&$gridnuevorec);
       $d++;
     }*/
+
+      $aplrecar=H::getConfApp2('aplrecar', 'compras', 'almcotiza');
 
    if (count($gridnuevorec)>0)
    {
