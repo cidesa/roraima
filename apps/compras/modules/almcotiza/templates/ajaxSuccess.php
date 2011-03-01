@@ -10,7 +10,9 @@
 // date: 2007/04/09 17:27:37
 ?>
 <?php use_helper('Object', 'Validation', 'Javascript', 'Grid', 'SubmitClick') ?>
-<? echo grid_tag($obj);?>
+
+<?php if ($ajaxs=='5') { ?>
+<?php echo grid_tag($obj);?>
 <?php echo input_hidden_tag('fila', $numreg) ?>
 <script language="JavaScript" type="text/javascript">
 
@@ -44,3 +46,6 @@ saldos();
 
  }
 </script>
+<?php }else if ($ajaxs=='8') {?>
+<?php echo grid_tag($obj2); ?>
+<?php }?>

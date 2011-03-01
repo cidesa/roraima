@@ -2603,7 +2603,7 @@ class almordcomActions extends autoalmordcomActions
       {
                 $result=array();
                 $num_filas=0;
-          $sql = "Select reqart,codart,codcat,canreq,canrec,montot,costo,monrgo,canord,mondes,relart,unimed,codpar From CaArtSol Where ReqArt='".$this->getRequestParameter('refsol')."' order By CodArt";
+          $sql = "Select reqart,codart,codcat,canreq,canrec,montot,costo,monrgo,canord,mondes,relart,unimed,codpar,desart From CaArtSol Where ReqArt='".$this->getRequestParameter('refsol')."' order By CodArt";
         if (Herramientas::BuscarDatos($sql,&$result))
         {
           $i=0;
@@ -2617,6 +2617,10 @@ class almordcomActions extends autoalmordcomActions
                       {
                   //ARTICULO DE LA COTIZACION CON PRIORIDAD #1 PARA EL NUMERO DE FILAS DEL GRID
                             $result1=array();
+                     $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
+                     if ($claartdes=='S')
+                         $sql1 = "select refcot,codart,canord,costo,totdet,fecent,priori,justifica,mondes from cadetcot where refcot='".$srtrefcot."' and codart='".$result[$i]['codart']."' and desart='".$result[$i]['desart']."' and priori='1'";
+                     else
                   $sql1 = "select refcot,codart,canord,costo,totdet,fecent,priori,justifica,mondes from cadetcot where refcot='".$srtrefcot."' and codart='".$result[$i]['codart']."' and priori='1'";
                 if (Herramientas::BuscarDatos($sql1,&$result1))
                   $num_filas++;
@@ -2976,7 +2980,7 @@ class almordcomActions extends autoalmordcomActions
        $c = new Criteria();
        $c->add(CadisrgoPeer::REQART,$refere);
        $c->add(CadisrgoPeer::CODART,$codart);
-       if ($desart!="") $c->add(CadisrgoPeer::DESART,$desart);
+       if ($desart!="") $c->add(CadisrgoPeer::DESART,trim($desart));
        $c->add(CadisrgoPeer::CODCAT,$coduni);
        $c->addAscendingOrderByColumn(CadisrgoPeer::CODRGO);
        $reg = CadisrgoPeer::doSelect($c);
@@ -3071,7 +3075,7 @@ class almordcomActions extends autoalmordcomActions
        $c = new Criteria();
        $c->add(CadisrgoPeer::REQART,$refere);
        $c->add(CadisrgoPeer::CODART,$codart);
-       if ($desart!="") $c->add(CadisrgoPeer::DESART,$desart);
+       if ($desart!="") $c->add(CadisrgoPeer::DESART,trim($desart));
        $c->add(CadisrgoPeer::CODCAT,$coduni);
        $c->addAscendingOrderByColumn(CadisrgoPeer::CODRGO);
        $reg = CadisrgoPeer::doSelect($c);
@@ -3162,7 +3166,7 @@ class almordcomActions extends autoalmordcomActions
       $doccom=$this->getRequestParameter('tipcom');      
       $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
       if ($claartdes=='S')
-          $desarticulo=$this->getRequestParameter('desarticulo');
+          $desarticulo=trim($this->getRequestParameter('desarticulo'));
       else
           $desarticulo="";
       $t= new Criteria();

@@ -20,6 +20,7 @@
 <?php use_helper('Javascript', 'tabs', 'Grid') ?>
 <?php echo input_hidden_tag('fila2', $numreg) ?>
 <?php echo input_hidden_tag('montorecargo', $cacotiza->getMonrec(true)) ?>
+<?php echo input_hidden_tag('cacotiza[modifico]', $cacotiza->getModifico()) ?>
 
 <fieldset id="sf_fieldset_none" class="">
 <legend><?php echo __('Cotización')?></legend>
@@ -152,7 +153,7 @@
           'script'   => true,
           'complete' => 'AjaxJSON(request, json), verifica()',
           'condition' => "$('cacotiza_refsol').value != '' && $('id').value == ''",
-          'with' => "'ajax=5&cajtexcom=cacotiza_refsol&cajtexmos=cacotiza_desreq&codigo='+this.value",
+          'with' => "'ajax=5&cajtexcom=cacotiza_refsol&rifpro='+$('cacotiza_rifpro').value+'&cajtexmos=cacotiza_desreq&codigo='+this.value",
 
       ))),
      array('use_style' => 'true')
@@ -273,11 +274,69 @@
 <br>
 
 <?php tabMainJS("tp1","tabPane1", "tabPage1", 'Detalle de la Cotización');?>
+<div id="recargos" style="display:none">
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+<?
+ echo input_hidden_tag('totartsinrec', '0');
+ echo input_hidden_tag('actualfila', '0');
+?>
+<div id="grid_recargo">
+<?
+echo grid_tag($obj2);
+?>
+</div>
+<div align="center">
+<table>
+<tr>
+<th>
+<?php echo label_for('',__('Total') , 'class="required" Style="width:100px"') ?>
+<?php echo input_tag('totrecar','0,00', 'size=15 class=grid_txtright readonly=true') ?>
+</th>
+</tr>
+</table>
+</div>
+
+
+<div align="right">
+<?php if ($cacotiza->getModifico()=='S'){ ?>
+<?php echo link_to_function(image_tag('/images/salir.gif'), "salvarmontorecargos()")?>
+<?php }
+else
+{?>
+ <?php echo link_to_function(image_tag('/images/salir.gif'), "$('recargos').hide();")?>
+<?php }?>
+</div>
+</div>
+</fieldset>
+</div>
+
+<?php if ($cacotiza->getModifico()=='S'){ ?>
+<div align="left" id="botonesmarcar">
+<table>
+<tr>
+<th>
+<input type="button" name="Submit" value="Marcar" onClick="marcarTodo();"/>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+<input type="button" name="Submit" value="Desmarcar" onClick="desmarcarTodo();"/>
+</th>
+</tr>
+</table>
+</div>
+<?php } else {?>
+<div align="left" id="botonesmarcar">
+</div>
+<?php } ?>
+
 <div id="divGrid">
 <?php echo grid_tag($obj);?>
 </div>
 &nbsp;<?php echo input_hidden_tag('totales', '0,00') ?>
-
+<?php echo input_hidden_tag('totmarcadas', '0,00') ?>
 <?php tabPageOpenClose("tp1", "tabPage2", 'Condiciones de Pago');?>
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
@@ -547,9 +606,9 @@ function enter(e,valor)
                 var i=0;
                 while (i<am)
                 {
-                  var canti= "ax_"+i+"_3";
-                  var cost= "ax_"+i+"_4";
-                   var descuento= "ax_"+i+"_5";
+                  var canti= "ax_"+i+"_4";
+                  var cost= "ax_"+i+"_5";
+                   var descuento= "ax_"+i+"_6";
                    var num=toFloat(canti);
                    var num2=toFloat(cost);
 
@@ -631,9 +690,9 @@ $('cacotiza_moncot').value=format(montot.toFixed(2),'.',',','.');
   {
   	if ($('cacotiza_tipmon').value!="")
   	{
-    var cantidad="ax_0_3";
-    var costo="ax_0_4";
-    var descuento="ax_0_5";
+    var cantidad="ax_0_4";
+    var costo="ax_0_5";
+    var descuento="ax_0_6";
 
     var num2=toFloat(cantidad);
     var num3=toFloat(costo);
@@ -674,8 +733,8 @@ $('cacotiza_moncot').value=format(montot.toFixed(2),'.',',','.');
     var fil=0;
     while (fil<am)
     {
-     var cant= "ax_"+fil+"_3";
-     var costo= "ax_"+fil+"_4";
+     var cant= "ax_"+fil+"_4";
+     var costo= "ax_"+fil+"_5";
 
      var numero=toFloat(cant);
      var numero2=toFloat(costo);
@@ -689,9 +748,9 @@ $('cacotiza_moncot').value=format(montot.toFixed(2),'.',',','.');
      var j=1;
      while (j<am)
      {
-       var cant= "ax_"+j+"_3";
-       var costo= "ax_"+j+"_4";
-       var descuento= "ax_"+j+"_5";
+       var cant= "ax_"+j+"_4";
+       var costo= "ax_"+j+"_5";
+       var descuento= "ax_"+j+"_6";
 
        var numero=toFloat(cant);
        var numero2=toFloat(costo);
@@ -714,9 +773,9 @@ $('cacotiza_moncot').value=format(montot.toFixed(2),'.',',','.');
       var j=1;
      while (j<am)
      {
-       var cant= "ax_"+j+"_3";
-       var costo= "ax_"+j+"_4";
-       var descuento= "ax_"+j+"_5";
+       var cant= "ax_"+j+"_4";
+       var costo= "ax_"+j+"_5";
+       var descuento= "ax_"+j+"_6";
 
        var numero=toFloat(cant);
        var numero2=toFloat(costo);
@@ -754,10 +813,10 @@ $('cacotiza_moncot').value=format(montot.toFixed(2),'.',',','.');
 
    function calculadescuentos(fil)
   {
-    var cant="ax"+"_"+fil+"_3";
-    var costo="ax"+"_"+fil+"_4";
-    var descuen="ax"+"_"+fil+"_5";
-    var total="ax"+"_"+fil+"_6";
+    var cant="ax"+"_"+fil+"_4";
+    var costo="ax"+"_"+fil+"_5";
+    var descuen="ax"+"_"+fil+"_6";
+    var total="ax"+"_"+fil+"_7";
 
     var numero=toFloat(cant);
     var numero2=toFloat(costo);
@@ -791,8 +850,8 @@ $('cacotiza_moncot').value=format(montot.toFixed(2),'.',',','.');
                 var i=0;
                 while (i<am)
                 {
-                  var cant= "ax_"+i+"_3";
-                  var costo= "ax_"+i+"_4";
+                  var cant= "ax_"+i+"_4";
+                  var costo= "ax_"+i+"_5";
                    var num=toFloat(cant);
                    var num2=toFloat(costo);
 

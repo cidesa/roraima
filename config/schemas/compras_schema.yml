@@ -633,6 +633,9 @@ propel:
     desart:
       type: VARCHAR
       size: 2000
+    codcat:
+      type: VARCHAR
+      size: 32
     id:
       type: INTEGER
       required: true
@@ -697,7 +700,7 @@ propel:
       required: true
     codcat:
       type: VARCHAR
-      size: 32
+      size: 50
       required: true
     codart:
       type: VARCHAR
@@ -716,7 +719,7 @@ propel:
       size: 4
     codpre:
       type: VARCHAR
-      size: 32
+      size: 50
     tipo:
       type: VARCHAR
       size: 1
@@ -3512,6 +3515,45 @@ propel:
       type: VARCHAR
       size: 20
       required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  cacotdisrgo:
+    refcot:
+      type: VARCHAR
+      size: 8
+      required: true
+    codcat:
+      type: VARCHAR
+      size: 50
+      required: true
+    codart:
+      type: VARCHAR
+      size: 20
+      required: true
+    codrgo:
+      type: VARCHAR
+      size: 4
+      required: true
+    monrgo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    tipdoc:
+      type: VARCHAR
+      size: 4
+    codpre:
+      type: VARCHAR
+      size: 50
+    tipo:
+      type: VARCHAR
+      size: 1
+    desart:
+      type: VARCHAR
+      size: 2000
     id:
       type: INTEGER
       required: true

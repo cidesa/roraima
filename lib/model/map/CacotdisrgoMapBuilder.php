@@ -2,10 +2,10 @@
 
 
 
-class CadisrgoMapBuilder {
+class CacotdisrgoMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CadisrgoMapBuilder';
+	const CLASS_NAME = 'lib.model.map.CacotdisrgoMapBuilder';
 
 	
 	private $dbMap;
@@ -27,14 +27,14 @@ class CadisrgoMapBuilder {
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
 
-		$tMap = $this->dbMap->addTable('cadisrgo');
-		$tMap->setPhpName('Cadisrgo');
+		$tMap = $this->dbMap->addTable('cacotdisrgo');
+		$tMap->setPhpName('Cacotdisrgo');
 
 		$tMap->setUseIdGenerator(true);
 
-		$tMap->setPrimaryKeyMethodInfo('cadisrgo_SEQ');
+		$tMap->setPrimaryKeyMethodInfo('cacotdisrgo_SEQ');
 
-		$tMap->addColumn('REQART', 'Reqart', 'string', CreoleTypes::VARCHAR, true, 8);
+		$tMap->addColumn('REFCOT', 'Refcot', 'string', CreoleTypes::VARCHAR, true, 8);
 
 		$tMap->addColumn('CODCAT', 'Codcat', 'string', CreoleTypes::VARCHAR, true, 50);
 

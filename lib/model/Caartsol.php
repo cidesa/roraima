@@ -43,7 +43,7 @@ class Caartsol extends BaseCaartsol
      $c= new Criteria();
 	 $c->add(CadisrgoPeer::REQART,self::getReqart());
 	 $c->add(CadisrgoPeer::CODART,self::getCodart());
-         if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,self::getDesart());
+         if ($claartdes=='S') $c->add(CadisrgoPeer::DESART,trim(self::getDesart()));
 	 $c->add(CadisrgoPeer::CODCAT,self::getCodcat());
 	 $c->add(CadisrgoPeer::TIPDOC,$tipdoc);
 	 $result=CadisrgoPeer::doSelect($c);
