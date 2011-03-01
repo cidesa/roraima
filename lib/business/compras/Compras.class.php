@@ -489,7 +489,7 @@ class Compras {
           $c = new Criteria();
           $c->add(CaartsolPeer :: REQART, $reqart);
           $c->add(CaartsolPeer :: CODART, $datos->getCodart());
-          if ($claartdes=='S') $c->add(CaartsolPeer :: DESART, $datos->getDesart());
+          if ($claartdes=='S') $c->add(CaartsolPeer :: DESART, trim($datos->getDesart()));
           $resul = CaartsolPeer :: doSelect($c);
           if ($resul) {
           	foreach ($resul as $resul2)
@@ -682,7 +682,7 @@ class Compras {
       $c = new Criteria();
       $c->add(CaartsolPeer :: REQART, $reqart);
       $c->add(CaartsolPeer :: CODART, $gridnuevo[$j][0]);
-      if ($claartdes=='S') $c->add(CaartsolPeer :: DESART, $gridnuevo[$j][12]);
+      if ($claartdes=='S') $c->add(CaartsolPeer :: DESART, trim($gridnuevo[$j][12]));
       $c->add(CaartsolPeer :: CODCAT, $gridnuevo[$j][10]);
       $dato = CaartsolPeer :: doSelect($c);
       if ($dato) {
@@ -764,7 +764,7 @@ class Compras {
             $c = new Criteria();
             $c->add(CadisrgoPeer :: REQART, $reqart);
             $c->add(CadisrgoPeer :: CODART, $gridnuevorec[$l][5]);
-            if ($claartdes=='S') $c->add(CadisrgoPeer :: DESART, $gridnuevorec[$l][7]);
+            if ($claartdes=='S') $c->add(CadisrgoPeer :: DESART, trim($gridnuevorec[$l][7]));
             $c->add(CadisrgoPeer :: CODCAT, $gridnuevorec[$l][6]);
             $c->add(CadisrgoPeer :: CODRGO, $gridnuevorec[$l][0]);
             $dato2 = CadisrgoPeer :: doSelect($c);
@@ -2537,7 +2537,7 @@ class Compras {
 
             $c=new Criteria();
             $c->add(CadetcotPeer::CODART,$arr[$con]['codart']);
-            if ($claartdes=='S')  $c->add(CadetcotPeer::DESART,$arr[$con]['desart']);
+            if ($claartdes=='S')  $c->add(CadetcotPeer::DESART,trim($arr[$con]['desart']));
             $c->add(CadetcotPeer::REFCOT,$arr[$con]['refcot']);
             $detcot=CadetcotPeer::doSelectOne($c);
             if ($detcot)
