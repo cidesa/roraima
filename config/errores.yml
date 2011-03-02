@@ -1890,6 +1890,9 @@
 827:
   cod: 827
   msj: No se puede Salvar debido a que existe un artículo con partida diferente a los demás.
+828:
+  cod: 828
+  msj: No se puede modificar la Solicitud de Egresos debido a que ya tiene cotizaciones.
 9000:
   cod: 9000
   msj: Debe cargar informacion en el grid
