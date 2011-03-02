@@ -708,8 +708,19 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
       case when dias=5 then round(monpres,2) else $cadena end  as monpres, tasa,
       round(monint,2) as monint, round(intacu,2) as intacu, round(monant,2) as monant,
       round(monadeint,2) as monadeint, round(monto,2) as monto,round(aliuti,2) as aliuti,round(alivac,2) as alibono,round(aliadi,2) as aliadi,
-      antannosnuevoreg, antmesesnuevoreg, antdiasnuevoreg, (round(monto,2)+round(aliuti,2)+round(alivac,2)+round(aliadi,2)) as salint
-              from calculopres('$codemp','$fecha','$capital','$salario') order by fecini1";
+      antannosnuevoreg, antmesesnuevoreg, antdiasnuevoreg, (round(monto,2)+round(aliuti,2)+round(alivac,2)+round(aliadi,2)) as salint,
+      round(case when coalesce(b.redondeo,'N')='S'
+             and to_number(to_char(fecfin,'YYYY'),'9999')<2008 then
+             monant/1000
+       else monant end, 2) as monantbf,
+      round(case when coalesce(b.redondeo,'N')='S'
+             and to_number(to_char(fecfin,'YYYY'),'9999')<2008 then
+             monadeint/1000
+       else monadeint end,2) as monadeintbf,
+      round(case when tipo='DEPOSITADOS' then dias-5 else 0 end,2) as adicionales,
+      round(case when tipo='DEPOSITADOS' then (dias-5)*mondiapro  else 0 end,2) as montoadicionales,
+      round(case when tipo='DEPOSITADOS' then 5*mondia else 0 end,2) as monto5dias
+              from calculopres('$codemp','$fecha','$capital','$salario'),npdefgen b order by fecini1";
 
     Herramientas :: BuscarDatos($sql, & $result);
 
@@ -898,7 +909,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
       $col13->setAlineacionContenido(Columna :: CENTRO);
       $col13->setNombreCampo('monant'); //adeant
       $col13->setHTML('type="text" size="10" maxlength="10"  readonly=true');
-      $col13->setEsTotal(true, 'totmonant');
+      //$col13->setEsTotal(true, 'totmonant');
       $col13->setEsGrabable('true');
 
       $col14 = new Columna('Adelanto Intereses');
@@ -907,7 +918,7 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
       $col14->setAlineacionContenido(Columna :: CENTRO);
       $col14->setNombreCampo('monadeint');
       $col14->setHTML('type="text" size="10" maxlength="10"  readonly=true');
-      $col14->setEsTotal(true, 'totmonadeint');
+      //$col14->setEsTotal(true, 'totmonadeint');
       $col14->setEsGrabable('true');
 
       $col15 = new Columna('codtipcon');
@@ -968,7 +979,47 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
       //$col21->setOculta('true');
       $col21->setEsGrabable('true');
 
+      $col22 = new Columna('Adelanto Anticipo BsF');
+      $col22->setTipo(Columna :: MONTO);
+      $col22->setAlineacionObjeto(Columna :: CENTRO);
+      $col22->setAlineacionContenido(Columna :: CENTRO);
+      $col22->setNombreCampo('monantbf');
+      $col22->setOculta(true);
+      $col22->setEsTotal(true, 'totmonant');
+      $col22->setEsGrabable('false');
 
+      $col23 = new Columna('Adelanto Intereses BsF');
+      $col23->setTipo(Columna :: MONTO);
+      $col23->setAlineacionObjeto(Columna :: CENTRO);
+      $col23->setAlineacionContenido(Columna :: CENTRO);
+      $col23->setNombreCampo('monadeintbf');
+      $col23->setOculta(true);
+      $col23->setEsTotal(true, 'totmonadeint');
+      $col23->setEsGrabable('false');
+
+      $col24 = new Columna('Dias Adiconales');
+      $col24->setTipo(Columna :: MONTO);
+      $col24->setAlineacionObjeto(Columna :: CENTRO);
+      $col24->setAlineacionContenido(Columna :: CENTRO);
+      $col24->setNombreCampo('adicionales');
+      $col24->setOculta(false);
+      $col24->setEsGrabable('false');
+
+      $col25 = new Columna('Monto Dias Adiconales');
+      $col25->setTipo(Columna :: MONTO);
+      $col25->setAlineacionObjeto(Columna :: CENTRO);
+      $col25->setAlineacionContenido(Columna :: CENTRO);
+      $col25->setNombreCampo('montoadicionales');
+      $col25->setOculta(false);
+      $col25->setEsGrabable('false');
+
+      $col26 = new Columna('Monto 5 Dias');
+      $col26->setTipo(Columna :: MONTO);
+      $col26->setAlineacionObjeto(Columna :: CENTRO);
+      $col26->setAlineacionContenido(Columna :: CENTRO);
+      $col26->setNombreCampo('monto5dias');
+      $col26->setOculta(false);
+      $col26->setEsGrabable('false');
 
       //NO esta el campo de la funcion que hizo edgar
       //    $col5 = new Columna('Deposito');
@@ -1005,6 +1056,12 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
       $opciones->addColumna($col34);
       $opciones->addColumna($col4);
       $opciones->addColumna($col5);
+      // Desgloce Días Adicionales
+      if(H::getConfApp('predesdiaadi', 'nomina', 'presnomcalintpre')=='S'){
+        $opciones->addColumna($col24);
+        $opciones->addColumna($col25);
+        $opciones->addColumna($col26);
+      }
       $opciones->addColumna($col6);
       $opciones->addColumna($col7);
       $opciones->addColumna($col8);
@@ -1022,284 +1079,15 @@ class presnomcalintpreActions extends autopresnomcalintpreActions {
       $opciones->addColumna($col20);
       $opciones->addColumna($col21);
 
+      // Calculo de antiguedad e intereses en bsf
+      $opciones->addColumna($col22);
+      $opciones->addColumna($col23);
+
       ///FIN COLUMNAS///
 
       $this->obj = $opciones->getConfig($per);
 
   }
-
-
-  /**
-   * Esta función permite definir la configuración del grid de datos
-   * que contiene el formulario. Esta función debe ser llamada
-   * en las acciones, create, edit y handleError para recargar en todo momento
-   * los datos del grid.
-   *
-
-  public function configGridConsulta($codigo) {
-    /////PARA LA CONSULTA//////
-    $c = new Criteria();
-    $c->add(NppresocPeer :: CODEMP, $codigo);
-    $per = NppresocPeer :: doSelect($c);
-
-    if ($per)
-    {
-      $c = new Criteria();
-      $c->add(NpimppresocPeer :: CODEMP, $codigo);
-      $c->add(NpimppresocPeer :: TIPO, "(npimppresoc.TIPO<>'T' or npimppresoc.TIPO is null  )", Criteria :: CUSTOM);
-      $c->addAscendingOrderByColumn(NpimppresocPeer :: FECINI);
-      $c->addAscendingOrderByColumn(NpimppresocPeer :: TIPO);
-      $per = NpimppresocPeer :: doSelect($c);
-      ///FIN CONSULTA///
-
-    }
-    $this->tfil2 = count($per);
-//Nppresoc
-    ////OPCIONES DEL GRID//////
-    $opciones = new OpcionesGrid();
-    $opciones->setTabla('Npimppresoc');
-    $opciones->setAncho(1800);
-    $opciones->setAnchoGrid(1900);
-    $opciones->setFilas(0);
-    $opciones->setName('b');
-    $opciones->setEliminar(false);
-    $opciones->setTitulo('');
-    $opciones->setHTMLTotalFilas(' ');
-    ///FIN OPCIONES///
-
-    /////COLUMNAS///////
-      $col1 = new Columna('Del');
-      $col1->setTipo(Columna :: FECHA);
-      $col1->setAlineacionObjeto(Columna :: CENTRO);
-      $col1->setAlineacionContenido(Columna :: CENTRO);
-      $col1->setNombreCampo('fecini');
-      $col1->setHTML('type="text" size="14" maxlength="20"  readonly=true');
-      $col1->setEsGrabable('true');
-
-      $col2 = new Columna('Al');
-      $col2->setTipo(Columna :: FECHA);
-      $col2->setAlineacionObjeto(Columna :: CENTRO);
-      $col2->setAlineacionContenido(Columna :: CENTRO);
-      $col2->setNombreCampo('fecfin');
-      $col2->setHTML('type="text" size="14" maxlength="20"  readonly=true');
-      $col2->setEsGrabable('true');
-
-      $col3 = new Columna('salario');
-      $col3->setTipo(Columna :: MONTO);
-      $col3->setAlineacionObjeto(Columna :: CENTRO);
-      $col3->setAlineacionContenido(Columna :: CENTRO);
-      $col3->setNombreCampo('salemp');
-      $col3->setHTML('type="text" size="10" maxlength="10"  readonly=true');
-      $col3->setEsGrabable('true');
-
-      //    $col3 = new Columna('Salario');
-      //    $col3->setTipo(Columna::MONTO);f
-      //    $col3->setAlineacionObjeto(Columna::CENTRO);
-      //    $col3->setAlineacionContenido(Columna::CENTRO);
-      //    $col3->setNombreCampo('monpres'); //salemp
-      //    $col3->setHTML('type="text" size="20" maxlength="20"  readonly=true');
-
-      $col4 = new Columna('Dias Art.108');
-      $col4->setTipo(Columna :: TEXTO);
-      $col4->setAlineacionObjeto(Columna :: CENTRO);
-      $col4->setAlineacionContenido(Columna :: CENTRO);
-      $col4->setNombreCampo('dias');
-      $col4->setHTML('type="text" size="5" maxlength="5"  readonly=true');
-      $col4->setEsGrabable('true');
-      $col4->setEsTotal(true, 'totmonpres');
-
-
-//NO SE
-      $col5 = new Columna('Salario Dia Adicional');
-      $col5->setTipo(Columna :: MONTO);
-      $col5->setAlineacionObjeto(Columna :: CENTRO);
-      $col5->setAlineacionContenido(Columna :: CENTRO);
-      $col5->setNombreCampo('mondiapro');
-      $col5->setHTML('type="text" size="10" maxlength="10"  readonly=true');
-      $col5->setEsGrabable('true');
-
-      $col6 = new Columna('Capital');
-      $col6->setTipo(Columna :: MONTO);
-      $col6->setAlineacionObjeto(Columna :: CENTRO);
-      $col6->setAlineacionContenido(Columna :: CENTRO);
-      $col6->setNombreCampo('capital');
-      $col6->setHTML('type="text" size="10" maxlength="10"  readonly=true');
-      $col6->setEsGrabable('true');
-
-      $col7 = new Columna('Antiguedad Acumulada');
-      $col7->setTipo(Columna :: MONTO);
-      $col7->setAlineacionObjeto(Columna :: CENTRO);
-      $col7->setAlineacionContenido(Columna :: CENTRO);
-      $col7->setNombreCampo('antacum'); //antacum
-      $col7->setHTML('type="text" size="10" maxlength="20"  readonly=true');
-      $col7->setEsTotal(true, 'totcapitalact');
-      $col7->setEsGrabable('true');
-
-      $col8 = new Columna('Valor Art.108');
-      $col8->setTipo(Columna :: MONTO);
-      $col8->setAlineacionObjeto(Columna :: CENTRO);
-      $col8->setAlineacionContenido(Columna :: CENTRO);
-      $col8->setNombreCampo('valart108');
-      $col8->setHTML('type="text" size="10" maxlength="10"  readonly=true');
-
-      $col8->setEsGrabable('true');
-
-      $col9 = new Columna('Tasa');
-      $col9->setTipo(Columna :: MONTO);
-      $col9->setAlineacionObjeto(Columna :: CENTRO);
-      $col9->setAlineacionContenido(Columna :: CENTRO);
-      $col9->setNombreCampo('tasaint'); //tasint
-      $col9->setHTML('type="text" size="10" maxlength="10"  readonly=true');
-      $col9->setEsGrabable('true');
-
-      $col10 = new Columna('Dias Diferencia');
-      $col10->setTipo(Columna :: TEXTO);
-      $col10->setAlineacionObjeto(Columna :: CENTRO);
-      $col10->setAlineacionContenido(Columna :: CENTRO);
-      $col10->setNombreCampo('diadif'); //Dia del Mes
-      $col10->setHTML('type="text" size="10" maxlength="10"  readonly=true');
-      $col10->setEsGrabable('true');
-
-      $col11 = new Columna('Interes Devengado');
-      $col11->setTipo(Columna :: MONTO);
-      $col11->setAlineacionObjeto(Columna :: CENTRO);
-      $col11->setAlineacionContenido(Columna :: CENTRO);
-      $col11->setNombreCampo('intdev'); //intdev
-      $col11->setHTML('type="text" size="10" maxlength="20"  readonly=true');
-      $col11->setEsGrabable('true');
-
-      $col12 = new Columna('Interes Acumulado');
-      $col12->setTipo(Columna :: MONTO);
-      $col12->setAlineacionObjeto(Columna :: CENTRO);
-      $col12->setAlineacionContenido(Columna :: CENTRO);
-      $col12->setNombreCampo('intacum'); //intacum
-      $col12->setHTML('type="text" size="10" maxlength="20"  readonly=true');
-      $col12->setEsTotal(true, 'totintacu');
-      $col12->setEsGrabable('true');
-
-      $col13 = new Columna('Adelanto Anticipo');
-      $col13->setTipo(Columna :: MONTO);
-      $col13->setAlineacionObjeto(Columna :: CENTRO);
-      $col13->setAlineacionContenido(Columna :: CENTRO);
-      $col13->setNombreCampo('adeant'); //adeant
-      $col13->setHTML('type="text" size="10" maxlength="10"  readonly=true');
-      $col13->setEsTotal(true, 'totmonant');
-      $col13->setEsGrabable('true');
-
-      $col14 = new Columna('Adelanto Intereses');
-      $col14->setTipo(Columna :: MONTO);
-      $col14->setAlineacionObjeto(Columna :: CENTRO);
-      $col14->setAlineacionContenido(Columna :: CENTRO);
-      $col14->setNombreCampo('adepre');
-      $col14->setHTML('type="text" size="10" maxlength="10"  readonly=true');
-      $col14->setEsTotal(true, 'totmonadeint');
-      $col14->setEsGrabable('true');
-
-      $col15 = new Columna('codtipcon');
-      $col15->setTipo(Columna :: TEXTO);
-      $col15->setAlineacionObjeto(Columna :: CENTRO);
-      $col15->setAlineacionContenido(Columna :: CENTRO);
-      $col15->setNombreCampo('codtipcon');
-      $col15->setOculta('true');
-      $col15->setEsGrabable('true');
-
-      $col16 = new Columna('antmeses');
-      $col16->setTipo(Columna :: TEXTO);
-      $col16->setAlineacionObjeto(Columna :: CENTRO);
-      $col16->setAlineacionContenido(Columna :: CENTRO);
-      $col16->setNombreCampo('antmeses');
-      $col16->setOculta('true');
-      $col16->setEsGrabable('true');
-
-      $col17 = new Columna('antdias');
-      $col17->setTipo(Columna :: TEXTO);
-      $col17->setAlineacionObjeto(Columna :: CENTRO);
-      $col17->setAlineacionContenido(Columna :: CENTRO);
-      $col17->setNombreCampo('antdias');
-      $col17->setOculta('true');
-      $col17->setEsGrabable('true');
-
-      $col18 = new Columna('antannos');
-      $col18->setTipo(Columna :: TEXTO);
-      $col18->setAlineacionObjeto(Columna :: CENTRO);
-      $col18->setAlineacionContenido(Columna :: CENTRO);
-      $col18->setNombreCampo('antannos');
-      $col18->setOculta('true');
-      $col18->setEsGrabable('true');
-
-      $col19 = new Columna('monto');
-      $col19->setTipo(Columna :: MONTO);
-      $col19->setAlineacionObjeto(Columna :: CENTRO);
-      $col19->setAlineacionContenido(Columna :: CENTRO);
-      $col19->setNombreCampo('monto');
-      $col19->setOculta('true');
-      $col19->setEsGrabable('true');
-
-
-      $col20 = new Columna('mondia');
-      $col20->setTipo(Columna :: MONTO);
-      $col20->setAlineacionObjeto(Columna :: CENTRO);
-      $col20->setAlineacionContenido(Columna :: CENTRO);
-      $col20->setNombreCampo('mondia');
-      $col20->setOculta('true');
-      $col20->setEsGrabable('true');
-
-
-
-
-      //NO esta el campo de la funcion que hizo edgar
-      //    $col5 = new Columna('Deposito');
-      //    $col5->setTipo(Columna::TEXTO);
-      //    $col5->setAlineacionObjeto(Columna::CENTRO);
-      //    $col5->setAlineacionContenido(Columna::CENTRO);
-      //    $col5->setNombreCampo('tipo'); //capemp
-      //    $col5->setHTML('type="text" size="20" maxlength="20"  readonly=true');
-
-      //NO esta el campo de la funcion que hizo edgar
-      //    $col8 = new Columna('Años de Servicios');
-      //    $col8->setTipo(Columna::MONTO);
-      //    $col8->setAlineacionObjeto(Columna::CENTRO);
-      //    $col8->setAlineacionContenido(Columna::CENTRO);
-      //    $col8->setNombreCampo('anoser');
-      //    $col8->setHTML('type="text" size="20" maxlength="20"  readonly=true');
-      //    $col8->setOculta(true);
-
-      //NO esta el campo de la funcion que hizo edgar
-      //    $col11 = new Columna('Dias Difer.');
-      //    $col11->setTipo(Columna::MONTO);
-      //    $col11->setAlineacionObjeto(Columna::CENTRO);
-      //    $col11->setAlineacionContenido(Columna::CENTRO);
-      //    $col11->setNombreCampo('diadif');
-      //    $col11->setHTML('type="text" size="20" maxlength="20"  readonly=true');
-      //    $col11->setOculta(true);
-
-      $opciones->addColumna($col1);
-      $opciones->addColumna($col2);
-      $opciones->addColumna($col3);
-      $opciones->addColumna($col4);
-      $opciones->addColumna($col5);
-      $opciones->addColumna($col6);
-      $opciones->addColumna($col7);
-      $opciones->addColumna($col8);
-      $opciones->addColumna($col9);
-      $opciones->addColumna($col10);
-      $opciones->addColumna($col11);
-      $opciones->addColumna($col12);
-      $opciones->addColumna($col13);
-      $opciones->addColumna($col14);
-      $opciones->addColumna($col15);
-      $opciones->addColumna($col16);
-      $opciones->addColumna($col17);
-      $opciones->addColumna($col18);
-      $opciones->addColumna($col19);
-      $opciones->addColumna($col20);
-
-    ///FIN COLUMNAS///
-
-    $this->obj = $opciones->getConfig($per);
-  }
-*/
-
 
   public function executeAutocomplete() {
     if ($this->getRequestParameter('ajax') == '1') {
