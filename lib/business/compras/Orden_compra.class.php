@@ -2310,7 +2310,7 @@ class Orden_compra
                   if ($caordcom->getRefsol()!='')
                   {
                       $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
-                    $sql="SELECT codart,codcat,canord FROM Caartord WHERE ordcom='".$caordcom->getOrdcom()."'";
+                    $sql="SELECT codart,codcat,canord, desart FROM Caartord WHERE ordcom='".$caordcom->getOrdcom()."'";
                     $result=array();
                     if (Herramientas::BuscarDatos($sql,&$result))
                     {
