@@ -1073,7 +1073,7 @@ class SolicituddeEgresos
   $x=$grid[0];
   $j=0;
   $requi=$solegreso->getReqart();
-  $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
+  $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
 
   while ($j<count($x))
   {

@@ -184,7 +184,7 @@ class Casolart extends BaseCasolart
 
   public function getClaartdes()
   {
-      return H::getConfApp2('claartdes', 'Compras', 'almsolegr');
+      return H::getConfApp2('claartdes', 'compras', 'almsolegr');
   }
 
 }
