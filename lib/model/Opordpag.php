@@ -81,6 +81,7 @@ class Opordpag extends BaseOpordpag
   protected $numfilret=300;
   protected $refcre='';
   protected $refsolpag='';
+  protected  $sincalret="";
 
    public function afterHydrate()
    {
@@ -516,5 +517,27 @@ class Opordpag extends BaseOpordpag
   public function setNumfilret()
   {
   	return $this->numfilret;
+  }
+
+  public function getSincalret()
+  {
+    $dato="";;
+    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
+    if ($varemp)
+	if(array_key_exists('aplicacion',$varemp))
+	 if(array_key_exists('tesoreria',$varemp['aplicacion']))
+	   if(array_key_exists('modulos',$varemp['aplicacion']['tesoreria']))
+	     if(array_key_exists('pagemiord',$varemp['aplicacion']['tesoreria']['modulos'])){
+	       if(array_key_exists('sincalret',$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']))
+	       {
+	       	$dato=$varemp['aplicacion']['tesoreria']['modulos']['pagemiord']['sincalret'];
+}
+         }
+     return $dato;
+  }
+
+  public function setSincalret()
+  {
+  	return $this->sincalret;
   }
 }
