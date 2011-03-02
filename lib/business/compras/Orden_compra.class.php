@@ -1983,7 +1983,7 @@ class Orden_compra
           $caartord_new->setCodpar($grid_detalle[$i]['codpar']);//Herramientas::getX_vacio('codart','CARegArt','codpar',$grid_detalle[$i]['codart']));
           $caartord_new->setPartida($vacio);
           $caartord_new->save();
-          $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
+          $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
           if ($caordcom->getRefprc()=='S')
           {
             $c= new Criteria();
@@ -2309,7 +2309,7 @@ class Orden_compra
                   $i=0;
                   if ($caordcom->getRefsol()!='')
                   {
-                      $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
+                      $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
                     $sql="SELECT codart,codcat,canord FROM Caartord WHERE ordcom='".$caordcom->getOrdcom()."'";
                     $result=array();
                     if (Herramientas::BuscarDatos($sql,&$result))
@@ -2521,7 +2521,7 @@ class Orden_compra
       }
 
   $j=0;
-  $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
+  $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
   while ($j<count($arreglo_grid))
   {
    $marcado=$arreglo_grid[$j]["check"];
