@@ -250,11 +250,20 @@ $this->Bitacora('Guardo');
              $dato="";
 		   }else {
 	          $dato=CaproveePeer::getNompro($this->getRequestParameter('codigo'));
+                  $tipo=H::getX_vacio('RIFPRO', 'Caprovee', 'Tipo', $this->getRequestParameter('codigo'));
+                  if ($tipo=='P')
+	            $javascript="$('cacotiza_monrec').readOnly=true;";
+                  else
 	          $javascript="";
 		   }
 		}else {
 			 $dato=CaproveePeer::getNompro($this->getRequestParameter('codigo'));
+                         $tipo=H::getX_vacio('RIFPRO', 'Caprovee', 'Tipo', $this->getRequestParameter('codigo'));
+                          if ($tipo=='P')
+                            $javascript="$('cacotiza_monrec').readOnly=true;";
+                          else
 	         $javascript="";
+
 		}
 
      $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';

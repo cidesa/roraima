@@ -54,6 +54,12 @@ class almsolegrActions extends autoalmsolegrActions
 			{
 				return true;
 			}
+                        $refsol = Herramientas::getX_vacio('refsol','catotiza','refsol',$this->casolart->getReqart());
+			if ($refsol!="")
+			{
+		           $this->codeerror=828;
+                           return false;
+		}
 		}
 
                $valmonmay0= H::getConfApp2('valmonmay0', 'compras', 'almsolegr');
