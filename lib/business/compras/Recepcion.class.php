@@ -102,7 +102,7 @@ class Recepcion
 	  $codrec=$recepcion->getRcpart();
 	  $ordcom=$recepcion->getOrdcom();
           $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
-          $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
+          $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
 	  $x=$grid[0];
 	  $j=0;
 
@@ -168,7 +168,7 @@ class Recepcion
          // $calmacen=$recepcion->getCodalm();
          // $cubicacion=$recepcion->getCodubi();
          $manartlot=H::getConfApp2('manartlot', 'compras', 'almregart');
-         $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
+         $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
 	      $x=$grid[0];
 		  $j=0;
                   $acumcanrec=0;
@@ -321,7 +321,7 @@ class Recepcion
     public static function Actualizar_ArticulosOrden($recepcion,$grid){
 	  $codrec=$recepcion->getRcpart();
 	  $ordcom=$recepcion->getOrdcom();
-          $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
+          $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
 
 
 	      $x=$grid[0];
@@ -500,7 +500,7 @@ class Recepcion
    {
 	  $codrec=$recepcion->getRcpart();
 	  $ordcom=$recepcion->getOrdcom();
-          $claartdes=H::getConfApp2('claartdes', 'Compras', 'almsolegr');
+          $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
 
 	  $c= new Criteria();
 	  $c->add(CaartrcpPeer::RCPART,$codrec);
