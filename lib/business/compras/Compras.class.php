@@ -321,6 +321,8 @@ class Compras {
     try {
       $id = $datos->getId();
       $refcot = $datos->getRefcot();
+      $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
+      $aplrecar=H::getConfApp2('aplrecar', 'compras', 'almcotiza');
 
        if ($tipo=="M") //Modificacion
        {
