@@ -381,6 +381,12 @@ propel:
     conpar:        #Consecutivo de partidas genericas
       type: NUMERIC
       size: 2
+    repsoladidis1:
+      type: VARCHAR
+      size: 100
+    repsoladidis2:
+      type: VARCHAR
+      size: 100
     id:
       type: INTEGER
       required: true
@@ -1221,6 +1227,11 @@ propel:
     stamov:
       type: VARCHAR
       size: 1
+    nrores:
+      type: VARCHAR
+      size: 10
+    fecres:
+      type: DATE
     id:
       type: INTEGER
       required: true
@@ -1345,6 +1356,11 @@ propel:
     desniv6:
       type: VARCHAR
       size: 250
+    numofi:
+      type: VARCHAR
+      size: 10
+    fecofi:
+      type: DATE
     id:
       type: INTEGER
       required: true
