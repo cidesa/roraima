@@ -893,7 +893,14 @@
    if (posiciontiporetencion($(id).value,fil)!=0)
    { alert('El Tipo de Retencion ya fue Registrado');}
    else
-   { calcularetencion(fil); actualizarsaldos();}
+       {
+           if ($('opordpag_sincalret').value=='S') {
+               calcularetencion2(fil);
+    }else {
+               calcularetencion(fil); actualizarsaldos();
+           }
+
+       }
     }else {
         $(id).value='';
         $(descrip).value='';
@@ -904,7 +911,13 @@
    if (posiciontiporetencion($(id).value,fil)!=0)
    { alert('El Tipo de Retencion ya fue Registrado');}
    else
-   { calcularetencion(fil); actualizarsaldos();}
+   {
+       if ($('opordpag_sincalret').value=='S') {
+               calcularetencion2(fil);
+           }else {
+               calcularetencion(fil); actualizarsaldos();
+ }
+  }
  }
   }
  }
@@ -3263,3 +3276,51 @@ function monto1XMILN()
    //actualizarsaldos_b();
    actualizarTotfac();
   }
+
+function calcularetencion2(fil) //en VB se usaba dos parametros
+  {
+    var aux1="ex"+"_"+fil+"_4";
+    var aux2="ex"+"_"+fil+"_5";
+    var aux3="ex"+"_"+fil+"_10";
+    var aux4="ex"+"_"+fil+"_11";
+    var aux7="ex"+"_"+fil+"_1";
+    var aux15="ex"+"_"+fil+"_7";
+    var aux16="ex"+"_"+fil+"_8";
+    var aux17="ex"+"_"+fil+"_6";
+    var auxmil="ex"+"_"+fil+"_13";
+
+    var base=toFloat(aux3);
+    var monreten=toFloat(aux4);
+    var porcen=toFloat(aux2);
+    var porsus=toFloat(aux15);
+    var basimp=toFloat(aux1);
+    var unitri=toFloat(aux16);
+    var factor=toFloat(aux17);
+    var nfil=parseInt($('opordpag_numfilas').value);
+
+    if (porcen!=0)
+    {
+      if ($('modifico2').value=="true")
+      {
+        var cal=((porcen/100)*(basimp/100)*base);
+        $(aux4).value=format(cal.toFixed(2),'.',',','.');
+      }
+   }
+   else
+   {
+    var totcau=toFloat('opordpag_monord');
+
+    var porcbase=((base*100)/totcau);
+    var sustraendo=((porsus/100)*unitri*factor);
+    var retencion=((porsus/100)*(basimp/100)*base);
+
+     if (retencion>sustraendo)
+     {
+       var cal4=retencion-sustraendo;
+       $(aux4).value=format(cal4.toFixed(2),'.',',','.');
+     }
+     else { $(aux4).value=format(sustraendo.toFixed(2),'.',',','.');}
+
+   }
+
+ }
