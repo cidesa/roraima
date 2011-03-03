@@ -4,51 +4,59 @@
 abstract class BaseNpantpre extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $codemp;
 
 
-	
+
 	protected $fecant;
 
 
-	
+
 	protected $monant;
 
 
-	
+
 	protected $monto;
 
 
-	
+
+	protected $salpre;
+
+
+
+	protected $poroto;
+
+
+
 	protected $observacion;
 
 
-	
+
 	protected $fecsolant;
 
 
-	
+
 	protected $id;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getCodemp()
   {
 
     return trim($this->codemp);
 
   }
-  
+
   public function getFecant($format = 'Y-m-d')
   {
 
@@ -70,7 +78,7 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
     }
   }
 
-  
+
   public function getMonant($val=false)
   {
 
@@ -78,7 +86,7 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
     else return $this->monant;
 
   }
-  
+
   public function getMonto($val=false)
   {
 
@@ -86,14 +94,30 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
     else return $this->monto;
 
   }
-  
+
+  public function getSalpre($val=false)
+  {
+
+    if($val) return number_format($this->salpre,2,',','.');
+    else return $this->salpre;
+
+  }
+
+  public function getPoroto($val=false)
+  {
+
+    if($val) return number_format($this->poroto,2,',','.');
+    else return $this->poroto;
+
+  }
+
   public function getObservacion()
   {
 
     return trim($this->observacion);
 
   }
-  
+
   public function getFecsolant($format = 'Y-m-d')
   {
 
@@ -115,14 +139,14 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
     }
   }
 
-  
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setCodemp($v)
 	{
 
@@ -130,9 +154,9 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
         $this->codemp = $v;
         $this->modifiedColumns[] = NpantprePeer::CODEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFecant($v)
 	{
 
@@ -153,8 +177,8 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = NpantprePeer::FECANT;
     }
 
-	} 
-	
+	}
+
 	public function setMonant($v)
 	{
 
@@ -162,9 +186,9 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
         $this->monant = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpantprePeer::MONANT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setMonto($v)
 	{
 
@@ -172,9 +196,29 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
         $this->monto = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpantprePeer::MONTO;
       }
-  
-	} 
-	
+
+	}
+
+	public function setSalpre($v)
+	{
+
+    if ($this->salpre !== $v) {
+        $this->salpre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpantprePeer::SALPRE;
+      }
+
+	}
+
+	public function setPoroto($v)
+	{
+
+    if ($this->poroto !== $v) {
+        $this->poroto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpantprePeer::POROTO;
+      }
+
+	}
+
 	public function setObservacion($v)
 	{
 
@@ -182,9 +226,9 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
         $this->observacion = $v;
         $this->modifiedColumns[] = NpantprePeer::OBSERVACION;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFecsolant($v)
 	{
 
@@ -205,8 +249,8 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = NpantprePeer::FECSOLANT;
     }
 
-	} 
-	
+	}
+
 	public function setId($v)
 	{
 
@@ -214,9 +258,9 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = NpantprePeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -229,11 +273,15 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 
       $this->monto = $rs->getFloat($startcol + 3);
 
-      $this->observacion = $rs->getString($startcol + 4);
+      $this->salpre = $rs->getFloat($startcol + 4);
 
-      $this->fecsolant = $rs->getDate($startcol + 5, null);
+      $this->poroto = $rs->getFloat($startcol + 5);
 
-      $this->id = $rs->getInt($startcol + 6);
+      $this->observacion = $rs->getString($startcol + 6);
+
+      $this->fecsolant = $rs->getDate($startcol + 7, null);
+
+      $this->id = $rs->getInt($startcol + 8);
 
       $this->resetModified();
 
@@ -241,7 +289,7 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 7; 
+            return $startcol + 9;
     } catch (Exception $e) {
       throw new PropelException("Error populating Npantpre object", $e);
     }
@@ -252,8 +300,8 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -267,7 +315,7 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -289,7 +337,7 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -311,7 +359,7 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -321,8 +369,8 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = NpantprePeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpantprePeer::doUpdate($this, $con);
@@ -332,17 +380,17 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -355,7 +403,7 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -377,14 +425,14 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = NpantprePeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -401,12 +449,18 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 				return $this->getMonto();
 				break;
 			case 4:
-				return $this->getObservacion();
+				return $this->getSalpre();
 				break;
 			case 5:
-				return $this->getFecsolant();
+				return $this->getPoroto();
 				break;
 			case 6:
+				return $this->getObservacion();
+				break;
+			case 7:
+				return $this->getFecsolant();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -414,7 +468,7 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = NpantprePeer::getFieldNames($keyType);
@@ -423,21 +477,23 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 			$keys[1] => $this->getFecant(),
 			$keys[2] => $this->getMonant(),
 			$keys[3] => $this->getMonto(),
-			$keys[4] => $this->getObservacion(),
-			$keys[5] => $this->getFecsolant(),
-			$keys[6] => $this->getId(),
+			$keys[4] => $this->getSalpre(),
+			$keys[5] => $this->getPoroto(),
+			$keys[6] => $this->getObservacion(),
+			$keys[7] => $this->getFecsolant(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = NpantprePeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -454,17 +510,23 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 				$this->setMonto($value);
 				break;
 			case 4:
-				$this->setObservacion($value);
+				$this->setSalpre($value);
 				break;
 			case 5:
-				$this->setFecsolant($value);
+				$this->setPoroto($value);
 				break;
 			case 6:
+				$this->setObservacion($value);
+				break;
+			case 7:
+				$this->setFecsolant($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = NpantprePeer::getFieldNames($keyType);
@@ -473,12 +535,14 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setFecant($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setMonant($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setMonto($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setObservacion($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setFecsolant($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
+		if (array_key_exists($keys[4], $arr)) $this->setSalpre($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setPoroto($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setObservacion($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setFecsolant($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(NpantprePeer::DATABASE_NAME);
@@ -487,6 +551,8 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpantprePeer::FECANT)) $criteria->add(NpantprePeer::FECANT, $this->fecant);
 		if ($this->isColumnModified(NpantprePeer::MONANT)) $criteria->add(NpantprePeer::MONANT, $this->monant);
 		if ($this->isColumnModified(NpantprePeer::MONTO)) $criteria->add(NpantprePeer::MONTO, $this->monto);
+		if ($this->isColumnModified(NpantprePeer::SALPRE)) $criteria->add(NpantprePeer::SALPRE, $this->salpre);
+		if ($this->isColumnModified(NpantprePeer::POROTO)) $criteria->add(NpantprePeer::POROTO, $this->poroto);
 		if ($this->isColumnModified(NpantprePeer::OBSERVACION)) $criteria->add(NpantprePeer::OBSERVACION, $this->observacion);
 		if ($this->isColumnModified(NpantprePeer::FECSOLANT)) $criteria->add(NpantprePeer::FECSOLANT, $this->fecsolant);
 		if ($this->isColumnModified(NpantprePeer::ID)) $criteria->add(NpantprePeer::ID, $this->id);
@@ -494,7 +560,7 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(NpantprePeer::DATABASE_NAME);
@@ -504,19 +570,19 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -528,6 +594,10 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 
 		$copyObj->setMonto($this->monto);
 
+		$copyObj->setSalpre($this->salpre);
+
+		$copyObj->setPoroto($this->poroto);
+
 		$copyObj->setObservacion($this->observacion);
 
 		$copyObj->setFecsolant($this->fecsolant);
@@ -535,10 +605,10 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -547,7 +617,7 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -556,4 +626,4 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-} 
+}

@@ -6,6 +6,9 @@ generator:
     fields:
       codemp: { name: Cédula }
       nomemp: { name: Nombre }
+      nomcar: { name: Cargo }
+      desniv: { name: Unidad Administratica }
+      codmotfal: { name: Motivo }
     list:
       title:          Permisos
       filters:        [codemp, nomemp ]
@@ -16,4 +19,4 @@ generator:
       max_per_page:   10
     edit:
       title:          Edición Permisos
-      display:        [codemp, nomemp ]
+      display:        [codemp, nomemp, nomcar, desniv, codmotfal ]

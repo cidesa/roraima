@@ -11,6 +11,8 @@ generator:
       observacion: { name: Observacion}
       monant:    { name: Monto del Anticipo }
       fecsolant: { name: Fecha Solicitud Anticipo}
+      salpre:    { name: Saldo Prestaciones}
+      poroto:    { name: Porcentaje Otorgado }
 
     list:
       title:          Registro Histórico de Anticipos Otorgados
@@ -26,6 +28,6 @@ generator:
 
     edit:
       title:          Registro Histórico de Anticipos Otorgados
-      display:        [codemp, nomemp, fecsolant, fecant, monant, observacion]
+      display:        [codemp, nomemp, fecsolant, fecant, monant, salpre, poroto, observacion]
       actions:
         _list:         ~

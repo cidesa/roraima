@@ -3,64 +3,67 @@
 
 abstract class BaseNpmotfalPeer {
 
-	
+
 	const DATABASE_NAME = 'propel';
 
-	
+
 	const TABLE_NAME = 'npmotfal';
 
-	
+
 	const CLASS_DEFAULT = 'lib.model.nomina.Npmotfal';
 
-	
-	const NUM_COLUMNS = 5;
 
-	
+	const NUM_COLUMNS = 6;
+
+
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
-	
+
 	const CODMOTFAL = 'npmotfal.CODMOTFAL';
 
-	
+
 	const DESMOTFAL = 'npmotfal.DESMOTFAL';
 
-	
+
 	const CAUSA = 'npmotfal.CAUSA';
 
-	
+
 	const ESREMUN = 'npmotfal.ESREMUN';
 
-	
+
+	const TIPDIA = 'npmotfal.TIPDIA';
+
+
 	const ID = 'npmotfal.ID';
 
-	
+
 	private static $phpNameMap = null;
 
 
-	
+
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codmotfal', 'Desmotfal', 'Causa', 'Esremun', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpmotfalPeer::CODMOTFAL, NpmotfalPeer::DESMOTFAL, NpmotfalPeer::CAUSA, NpmotfalPeer::ESREMUN, NpmotfalPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codmotfal', 'desmotfal', 'causa', 'esremun', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codmotfal', 'Desmotfal', 'Causa', 'Esremun', 'Tipdia', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpmotfalPeer::CODMOTFAL, NpmotfalPeer::DESMOTFAL, NpmotfalPeer::CAUSA, NpmotfalPeer::ESREMUN, NpmotfalPeer::TIPDIA, NpmotfalPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codmotfal', 'desmotfal', 'causa', 'esremun', 'tipdia', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
-	
+
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codmotfal' => 0, 'Desmotfal' => 1, 'Causa' => 2, 'Esremun' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (NpmotfalPeer::CODMOTFAL => 0, NpmotfalPeer::DESMOTFAL => 1, NpmotfalPeer::CAUSA => 2, NpmotfalPeer::ESREMUN => 3, NpmotfalPeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('codmotfal' => 0, 'desmotfal' => 1, 'causa' => 2, 'esremun' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codmotfal' => 0, 'Desmotfal' => 1, 'Causa' => 2, 'Esremun' => 3, 'Tipdia' => 4, 'Id' => 5, ),
+		BasePeer::TYPE_COLNAME => array (NpmotfalPeer::CODMOTFAL => 0, NpmotfalPeer::DESMOTFAL => 1, NpmotfalPeer::CAUSA => 2, NpmotfalPeer::ESREMUN => 3, NpmotfalPeer::TIPDIA => 4, NpmotfalPeer::ID => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('codmotfal' => 0, 'desmotfal' => 1, 'causa' => 2, 'esremun' => 3, 'tipdia' => 4, 'id' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
-	
+
 	public static function getMapBuilder()
 	{
 		include_once 'lib/model/nomina/map/NpmotfalMapBuilder.php';
 		return BasePeer::getMapBuilder('lib.model.nomina.map.NpmotfalMapBuilder');
 	}
-	
+
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
@@ -74,7 +77,7 @@ abstract class BaseNpmotfalPeer {
 		}
 		return self::$phpNameMap;
 	}
-	
+
 	static public function translateFieldName($name, $fromType, $toType)
 	{
 		$toNames = self::getFieldNames($toType);
@@ -85,7 +88,7 @@ abstract class BaseNpmotfalPeer {
 		return $toNames[$key];
 	}
 
-	
+
 
 	static public function getFieldNames($type = BasePeer::TYPE_PHPNAME)
 	{
@@ -95,13 +98,13 @@ abstract class BaseNpmotfalPeer {
 		return self::$fieldNames[$type];
 	}
 
-	
+
 	public static function alias($alias, $column)
 	{
 		return str_replace(NpmotfalPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
-	
+
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
@@ -113,6 +116,8 @@ abstract class BaseNpmotfalPeer {
 
 		$criteria->addSelectColumn(NpmotfalPeer::ESREMUN);
 
+		$criteria->addSelectColumn(NpmotfalPeer::TIPDIA);
+
 		$criteria->addSelectColumn(NpmotfalPeer::ID);
 
 	}
@@ -120,7 +125,7 @@ abstract class BaseNpmotfalPeer {
 	const COUNT = 'COUNT(npmotfal.ID)';
 	const COUNT_DISTINCT = 'COUNT(DISTINCT npmotfal.ID)';
 
-	
+
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -144,7 +149,7 @@ abstract class BaseNpmotfalPeer {
 						return 0;
 		}
 	}
-	
+
 	public static function doSelectOne(Criteria $criteria, $con = null)
 	{
 		$critcopy = clone $criteria;
@@ -155,12 +160,12 @@ abstract class BaseNpmotfalPeer {
 		}
 		return null;
 	}
-	
+
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
 		return NpmotfalPeer::populateObjects(NpmotfalPeer::doSelectRS($criteria, $con));
 	}
-	
+
 	public static function doSelectRS(Criteria $criteria, $con = null)
 	{
 		if ($con === null) {
@@ -176,35 +181,35 @@ abstract class BaseNpmotfalPeer {
 
 						return BasePeer::doSelect($criteria, $con);
 	}
-	
+
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
-	
+
 				$cls = NpmotfalPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
-		
+
 			$obj = new $cls();
 			$obj->hydrate($rs);
 			$results[] = $obj;
-			
+
 		}
 		return $results;
 	}
-	
+
 	public static function getTableMap()
 	{
 		return Propel::getDatabaseMap(self::DATABASE_NAME)->getTable(self::TABLE_NAME);
 	}
 
-	
+
 	public static function getOMClass()
 	{
 		return NpmotfalPeer::CLASS_DEFAULT;
 	}
 
-	
+
 	public static function doInsert($values, $con = null)
 	{
 		if ($con === null) {
@@ -215,7 +220,7 @@ abstract class BaseNpmotfalPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(NpmotfalPeer::ID); 
+		$criteria->remove(NpmotfalPeer::ID);
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -231,7 +236,7 @@ abstract class BaseNpmotfalPeer {
 		return $pk;
 	}
 
-	
+
 	public static function doUpdate($values, $con = null)
 	{
 		if ($con === null) {
@@ -241,7 +246,7 @@ abstract class BaseNpmotfalPeer {
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
+			$criteria = clone $values;
 			$comparison = $criteria->getComparison(NpmotfalPeer::ID);
 			$selectCriteria->add(NpmotfalPeer::ID, $criteria->remove(NpmotfalPeer::ID), $comparison);
 
@@ -252,7 +257,7 @@ abstract class BaseNpmotfalPeer {
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
 
-	
+
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
@@ -269,7 +274,7 @@ abstract class BaseNpmotfalPeer {
 		}
 	}
 
-	
+
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
@@ -287,10 +292,10 @@ abstract class BaseNpmotfalPeer {
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
-		$affectedRows = 0; 
+		$affectedRows = 0;
 		try {
 									$con->begin();
-			
+
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
 			return $affectedRows;
@@ -300,7 +305,7 @@ abstract class BaseNpmotfalPeer {
 		}
 	}
 
-	
+
 	public static function doValidate(Npmotfal $obj, $cols = null)
 	{
 		$columns = array();
@@ -335,7 +340,7 @@ abstract class BaseNpmotfalPeer {
     return $res;
 	}
 
-	
+
 	public static function retrieveByPK($pk, $con = null)
 	{
 		if ($con === null) {
@@ -352,7 +357,7 @@ abstract class BaseNpmotfalPeer {
 		return !empty($v) > 0 ? $v[0] : null;
 	}
 
-	
+
 	public static function retrieveByPKs($pks, $con = null)
 	{
 		if ($con === null) {
@@ -370,7 +375,7 @@ abstract class BaseNpmotfalPeer {
 		return $objs;
 	}
 
-} 
+}
 if (Propel::isInit()) {
 			try {
 		BaseNpmotfalPeer::getMapBuilder();

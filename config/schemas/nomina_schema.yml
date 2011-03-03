@@ -102,6 +102,14 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    salpre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    poroto:
+      type: NUMERIC
+      size: 14
+      scale: 2
     observacion:
       type: VARCHAR
       size: 1000
@@ -2725,6 +2733,9 @@ propel:
     dedica:
       type: VARCHAR
       size: 100
+    status:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true
@@ -4611,6 +4622,9 @@ propel:
       required: true
     esremun:
       type: BOOLEAN
+    tipdia:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true

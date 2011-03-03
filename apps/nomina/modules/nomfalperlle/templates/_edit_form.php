@@ -5,7 +5,7 @@
  * @package    Roraima
  * @subpackage vistas
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id: _edit_form.php 41820 2010-12-22 21:49:52Z cramirez $
+ * @version    SVN: $Id: _edit_form.php 42892 2011-03-03 05:42:44Z cramirez $
  */
 // date: 2007/03/22 20:35:46
 ?>
@@ -166,6 +166,7 @@
 
   <?php $value = object_input_date_tag($npfalper, 'getFecdes', array (
   'rich' => true,
+  'onChange' => "toAjax(3,getUrlModulo()+'/ajax',this.value,'','&fecdes='+$('npfalper_fecdes').value+'&fechas='+$('npfalper_fechas').value+'&codmot='+$('npfalper_codmot').value+'&codemp='+$('npfalper_codemp').value)",
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'npfalper[fecdes]',
   'date_format' => 'dd/MM/yyyy',
@@ -194,7 +195,7 @@
 
   <?php $value = object_input_date_tag($npfalper, 'getFechas', array (
   'rich' => true,
-  'onChange' => "toAjax(3,getUrlModulo()+'/ajax',this.value,'','&fecdes='+$('npfalper_fecdes').value+'&fechas='+$('npfalper_fechas').value)",
+  'onChange' => "toAjax(3,getUrlModulo()+'/ajax',this.value,'','&fecdes='+$('npfalper_fecdes').value+'&fechas='+$('npfalper_fechas').value+'&codmot='+$('npfalper_codmot').value+'&codemp='+$('npfalper_codemp').value)",
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'npfalper[fechas]',
   'date_format' => 'dd/MM/yyyy',

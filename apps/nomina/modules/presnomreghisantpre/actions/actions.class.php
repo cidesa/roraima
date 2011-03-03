@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage presnomreghisantpre
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 42862 2011-03-02 21:58:28Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -38,7 +38,7 @@ class presnomreghisantpreActions extends autopresnomreghisantpreActions
   }
 
     /**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -109,6 +109,14 @@ class presnomreghisantpreActions extends autopresnomreghisantpreActions
     if (isset($npantpre['monant']))
     {
       $this->npantpre->setMonant($npantpre['monant']);
+    }
+    if (isset($npantpre['salpre']))
+    {
+      $this->npantpre->setSalpre($npantpre['salpre']);
+    }
+    if (isset($npantpre['poroto']))
+    {
+      $this->npantpre->setPoroto($npantpre['poroto']);
     }
     if (isset($npantpre['observacion']))
     {
@@ -332,12 +340,13 @@ class presnomreghisantpreActions extends autopresnomreghisantpreActions
 
   }
 
-  
-  
-  
+
+
+
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -357,7 +366,7 @@ class presnomreghisantpreActions extends autopresnomreghisantpreActions
 	 }else return true;
 
  }
-  // variable donde se debe colocar el código de error generado en el validateEdit 
+  // variable donde se debe colocar el código de error generado en el validateEdit
   // para que sea procesado por el handleErrorEdit.
   public static $coderror=-1;
   /**

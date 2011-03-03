@@ -4,108 +4,112 @@
 abstract class BaseNpexplab extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $codemp;
 
 
-	
+
 	protected $nomemp;
 
 
-	
+
 	protected $codcar;
 
 
-	
+
 	protected $descar;
 
 
-	
+
 	protected $fecini;
 
 
-	
+
 	protected $fecter;
 
 
-	
+
 	protected $sueobt;
 
 
-	
+
 	protected $stacar;
 
 
-	
+
 	protected $compobt;
 
 
-	
+
 	protected $durexp;
 
 
-	
+
 	protected $tiporg;
 
 
-	
+
 	protected $montopres;
 
 
-	
+
 	protected $codniv;
 
 
-	
+
 	protected $codnom;
 
 
-	
+
 	protected $dedica;
 
 
-	
+
+	protected $status;
+
+
+
 	protected $id;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getCodemp()
   {
 
     return trim($this->codemp);
 
   }
-  
+
   public function getNomemp()
   {
 
     return trim($this->nomemp);
 
   }
-  
+
   public function getCodcar()
   {
 
     return trim($this->codcar);
 
   }
-  
+
   public function getDescar()
   {
 
     return trim($this->descar);
 
   }
-  
+
   public function getFecini($format = 'Y-m-d')
   {
 
@@ -127,7 +131,7 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
     }
   }
 
-  
+
   public function getFecter($format = 'Y-m-d')
   {
 
@@ -149,7 +153,7 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
     }
   }
 
-  
+
   public function getSueobt($val=false)
   {
 
@@ -157,14 +161,14 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
     else return $this->sueobt;
 
   }
-  
+
   public function getStacar()
   {
 
     return trim($this->stacar);
 
   }
-  
+
   public function getCompobt($val=false)
   {
 
@@ -172,21 +176,21 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
     else return $this->compobt;
 
   }
-  
+
   public function getDurexp()
   {
 
     return trim($this->durexp);
 
   }
-  
+
   public function getTiporg()
   {
 
     return trim($this->tiporg);
 
   }
-  
+
   public function getMontopres($val=false)
   {
 
@@ -194,35 +198,42 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
     else return $this->montopres;
 
   }
-  
+
   public function getCodniv()
   {
 
     return trim($this->codniv);
 
   }
-  
+
   public function getCodnom()
   {
 
     return trim($this->codnom);
 
   }
-  
+
   public function getDedica()
   {
 
     return trim($this->dedica);
 
   }
-  
+
+  public function getStatus()
+  {
+
+    return trim($this->status);
+
+  }
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setCodemp($v)
 	{
 
@@ -230,9 +241,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
         $this->codemp = $v;
         $this->modifiedColumns[] = NpexplabPeer::CODEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNomemp($v)
 	{
 
@@ -240,9 +251,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
         $this->nomemp = $v;
         $this->modifiedColumns[] = NpexplabPeer::NOMEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodcar($v)
 	{
 
@@ -250,9 +261,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
         $this->codcar = $v;
         $this->modifiedColumns[] = NpexplabPeer::CODCAR;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDescar($v)
 	{
 
@@ -260,11 +271,16 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
         $this->descar = $v;
         $this->modifiedColumns[] = NpexplabPeer::DESCAR;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFecini($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -278,10 +294,15 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = NpexplabPeer::FECINI;
     }
 
-	} 
-	
+	}
+
 	public function setFecter($v)
 	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
@@ -295,8 +316,8 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
       $this->modifiedColumns[] = NpexplabPeer::FECTER;
     }
 
-	} 
-	
+	}
+
 	public function setSueobt($v)
 	{
 
@@ -304,9 +325,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
         $this->sueobt = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpexplabPeer::SUEOBT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setStacar($v)
 	{
 
@@ -314,9 +335,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
         $this->stacar = $v;
         $this->modifiedColumns[] = NpexplabPeer::STACAR;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCompobt($v)
 	{
 
@@ -324,9 +345,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
         $this->compobt = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpexplabPeer::COMPOBT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDurexp($v)
 	{
 
@@ -334,9 +355,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
         $this->durexp = $v;
         $this->modifiedColumns[] = NpexplabPeer::DUREXP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTiporg($v)
 	{
 
@@ -344,9 +365,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
         $this->tiporg = $v;
         $this->modifiedColumns[] = NpexplabPeer::TIPORG;
       }
-  
-	} 
-	
+
+	}
+
 	public function setMontopres($v)
 	{
 
@@ -354,9 +375,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
         $this->montopres = Herramientas::toFloat($v);
         $this->modifiedColumns[] = NpexplabPeer::MONTOPRES;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodniv($v)
 	{
 
@@ -364,9 +385,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
         $this->codniv = $v;
         $this->modifiedColumns[] = NpexplabPeer::CODNIV;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodnom($v)
 	{
 
@@ -374,9 +395,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
         $this->codnom = $v;
         $this->modifiedColumns[] = NpexplabPeer::CODNOM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDedica($v)
 	{
 
@@ -384,9 +405,19 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
         $this->dedica = $v;
         $this->modifiedColumns[] = NpexplabPeer::DEDICA;
       }
-  
-	} 
-	
+
+	}
+
+	public function setStatus($v)
+	{
+
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = NpexplabPeer::STATUS;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -394,9 +425,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = NpexplabPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -431,7 +462,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 
       $this->dedica = $rs->getString($startcol + 14);
 
-      $this->id = $rs->getInt($startcol + 15);
+      $this->status = $rs->getString($startcol + 15);
+
+      $this->id = $rs->getInt($startcol + 16);
 
       $this->resetModified();
 
@@ -439,7 +472,7 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 16; 
+            return $startcol + 17;
     } catch (Exception $e) {
       throw new PropelException("Error populating Npexplab object", $e);
     }
@@ -450,8 +483,8 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -465,7 +498,7 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -487,7 +520,7 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -509,7 +542,7 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -519,8 +552,8 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = NpexplabPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpexplabPeer::doUpdate($this, $con);
@@ -530,17 +563,17 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -553,7 +586,7 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -575,14 +608,14 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = NpexplabPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -632,6 +665,9 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 				return $this->getDedica();
 				break;
 			case 15:
+				return $this->getStatus();
+				break;
+			case 16:
 				return $this->getId();
 				break;
 			default:
@@ -639,7 +675,7 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = NpexplabPeer::getFieldNames($keyType);
@@ -659,19 +695,20 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 			$keys[12] => $this->getCodniv(),
 			$keys[13] => $this->getCodnom(),
 			$keys[14] => $this->getDedica(),
-			$keys[15] => $this->getId(),
+			$keys[15] => $this->getStatus(),
+			$keys[16] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = NpexplabPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -721,11 +758,14 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 				$this->setDedica($value);
 				break;
 			case 15:
+				$this->setStatus($value);
+				break;
+			case 16:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = NpexplabPeer::getFieldNames($keyType);
@@ -745,10 +785,11 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[12], $arr)) $this->setCodniv($arr[$keys[12]]);
 		if (array_key_exists($keys[13], $arr)) $this->setCodnom($arr[$keys[13]]);
 		if (array_key_exists($keys[14], $arr)) $this->setDedica($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setId($arr[$keys[15]]);
+		if (array_key_exists($keys[15], $arr)) $this->setStatus($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setId($arr[$keys[16]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(NpexplabPeer::DATABASE_NAME);
@@ -768,12 +809,13 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpexplabPeer::CODNIV)) $criteria->add(NpexplabPeer::CODNIV, $this->codniv);
 		if ($this->isColumnModified(NpexplabPeer::CODNOM)) $criteria->add(NpexplabPeer::CODNOM, $this->codnom);
 		if ($this->isColumnModified(NpexplabPeer::DEDICA)) $criteria->add(NpexplabPeer::DEDICA, $this->dedica);
+		if ($this->isColumnModified(NpexplabPeer::STATUS)) $criteria->add(NpexplabPeer::STATUS, $this->status);
 		if ($this->isColumnModified(NpexplabPeer::ID)) $criteria->add(NpexplabPeer::ID, $this->id);
 
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(NpexplabPeer::DATABASE_NAME);
@@ -783,19 +825,19 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -829,13 +871,15 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 
 		$copyObj->setDedica($this->dedica);
 
+		$copyObj->setStatus($this->status);
+
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -844,7 +888,7 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -853,4 +897,4 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-} 
+}

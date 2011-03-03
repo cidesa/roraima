@@ -8,13 +8,15 @@
  * @package    Roraima
  * @subpackage lib.model.nomina
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Nphojint.php 40981 2010-10-11 19:44:30Z cramirez $
+ * @version SVN: $Id: Nphojint.php 42878 2011-03-03 03:56:36Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class Nphojint extends BaseNphojint
 {
+  protected $sueldo="";
+  protected $codnomvig="";
   protected $prinom="";
   protected $segnom="";
   protected $priape="";
@@ -75,6 +77,7 @@ class Nphojint extends BaseNphojint
     $c = new Criteria();
     $c->addJoin(NpasicarempPeer::CODCAR,NpcargosPeer::CODCAR);
     $c->add(NpasicarempPeer::CODEMP,self::getCodemp());
+    $c->add(NpasicarempPeer::STATUS,'V');
     $registro = NpcargosPeer::doSelectOne($c);
     if($registro) return $registro->getNomcar();
     else return null;
@@ -188,101 +191,128 @@ class Nphojint extends BaseNphojint
     }
 	public function getPrinom()
     {
-    	if(strrpos(self::getNomemp(),','))
+        $nomemp = self::getNomemp();
+        $nomemp = str_replace("DEL ","DEL*",$nomemp);
+        $nomemp = str_replace("DE ","DE*",$nomemp);
+    	if(strrpos($nomemp,','))
 		{
-			$aux=split(',',self::getNomemp());
+			$aux=split(',',$nomemp);
 			if(count($aux)==2)
 			{
 				$auxnom=split(' ',trim($aux[1]));
-				return $auxnom[0];
+				$val =  $auxnom[0];
 			}else
 			{
-				$auxnom=split(' ',self::getNomemp());
-				return  count($auxnom)==2 ? $auxnom[1] : (count($auxnom)>2 ? $auxnom[2] : ' ');
+				$auxnom=split(' ',$nomemp);
+				$val = count($auxnom)==2 ? $auxnom[1] : (count($auxnom)>2 ? $auxnom[2] : ' ');
 			}
 		}else
 		{
-			$auxnom=split(' ',self::getNomemp());
-			return  count($auxnom)==2 ? $auxnom[1] : (count($auxnom)>2 ? $auxnom[2] : ' ');
+			$auxnom=split(' ',$nomemp);
+			$val = count($auxnom)==2 ? $auxnom[1] : (count($auxnom)>2 ? $auxnom[2] : ' ');
 		}
+        $val = str_replace("DEL*","DEL ",$val);
+        $val = str_replace("DE*","DE ",$val);
+        return  $val;
     }
 	public function getSegnom()
     {
-    	if(strrpos(self::getNomemp(),','))
+
+        $nomemp = self::getNomemp();
+        $nomemp = str_replace("DEL ","DEL*",$nomemp);
+        $nomemp = str_replace("DE ","DE*",$nomemp);
+    	if(strrpos($nomemp,','))
 		{
-			$aux=split(',',self::getNomemp());
+			$aux=split(',',$nomemp);
 			if(count($aux)==2)
 			{
 				$auxnom=split(' ',trim($aux[1]));
-        if(count($auxnom)>1){
-          $segnom = '';
-          foreach($auxnom as $i => $nom){
-            if($i!=0){
-              $segnom .= $nom.' ';
-            }
-          }
-          return trim($segnom);
-        }else return ' ';
+                                if(count($auxnom)>1){
+                                  $segnom = '';
+                                  foreach($auxnom as $i => $nom){
+                                    if($i!=0){
+                                      $segnom .= $nom.' ';
+                                    }
+                                  }
+                                  $val = trim($segnom);
+                                }else $val = ' ';
 
 			}else
 			{
-				$auxnom=split(' ',self::getNomemp());
-        if(count($auxnom)>3){
-          $segnom = '';
-          foreach($auxnom as $i => $nom){
-            if($i>2){
-              $segnom .= $nom.' ';
-            }
-          }
-          return trim($segnom);
-        }else return ' ';
+				$auxnom=split(' ',$nomemp);
+                                if(count($auxnom)>3){
+                                  $segnom = '';
+                                  foreach($auxnom as $i => $nom){
+                                    if($i>2){
+                                      $segnom .= $nom.' ';
+                                    }
+                                  }
+                                  $val = trim($segnom);
+                                }else $val = ' ';
 			}
 		}else
 		{
-			$auxnom=split(' ',self::getNomemp());
-			return  count($auxnom)>3 ? $auxnom[3] : ' ';
+			$auxnom=split(' ',$nomemp);
+			$val =  count($auxnom)>3 ? $auxnom[3] : ' ';
 		}
+
+        $val = str_replace("DEL*","DEL ",$val);
+        $val = str_replace("DE*","DE ",$val);
+        return  $val;
     }
 
 	public function getPriape()
     {
-    	if(strrpos(self::getNomemp(),','))
-		{
-			$aux=split(',',self::getNomemp());
-			if(count($aux)==2)
-			{
-				$auxnom=split(' ',trim($aux[0]));
-				return $auxnom[0];
-			}else
-			{
-				$auxnom=split(' ',self::getNomemp());
-				return  count($auxnom)==2 ? $auxnom[0] : (count($auxnom)>2 ? $auxnom[0] : ' ');
-			}
-		}else
-		{
-			$auxnom=split(' ',self::getNomemp());
-			return  count($auxnom)==2 ? $auxnom[0] : (count($auxnom)>2 ? $auxnom[0] : ' ');
-		}
+
+        $nomemp = self::getNomemp();
+        $nomemp = str_replace("DEL ","DEL*",$nomemp);
+        $nomemp = str_replace("DE ","DE*",$nomemp);
+    	if(strrpos($nomemp,','))
+            {
+                    $aux=split(',',$nomemp);
+                    if(count($aux)==2)
+                    {
+                            $auxnom=split(' ',trim($aux[0]));
+                            $val = $auxnom[0];
+                    }else
+                    {
+                            $auxnom=split(' ',$nomemp);
+                            $val = count($auxnom)==2 ? $auxnom[0] : (count($auxnom)>2 ? $auxnom[0] : ' ');
+                    }
+            }else
+            {
+                    $auxnom=split(' ',$nomemp);
+                    $val = count($auxnom)==2 ? $auxnom[0] : (count($auxnom)>2 ? $auxnom[0] : ' ');
+            }
+        $val = str_replace("DEL*","DEL ",$val);
+        $val = str_replace("DE*","DE ",$val);
+        return  $val;
     }
 	public function getSegape()
     {
-    	if(strrpos(self::getNomemp(),','))
+        $nomemp = self::getNomemp();
+        $nomemp = str_replace("DEL ","DEL*",$nomemp);
+        $nomemp = str_replace("DE ","DE*",$nomemp);
+    	if(strrpos($nomemp,','))
 		{
-			$aux=split(',',self::getNomemp());
+			$aux=split(',',$nomemp);
 			if(count($aux)==2)
 			{
 				$auxnom=split(' ',trim($aux[0]));
-				return count($auxnom)>1 ? $auxnom[1] : ' ';
+				$val =  count($auxnom)>1 ? $auxnom[1] : ' ';
 			}else
 			{
-				$auxnom=split(' ',self::getNomemp());
-				return  count($auxnom)>2 ? $auxnom[1] : ' ';
+				$auxnom=split(' ',$nomemp);
+				$val =  count($auxnom)>2 ? $auxnom[1] : ' ';
 			}
 		}else
 		{
-			$auxnom=split(' ',self::getNomemp());
-			return  count($auxnom)>2 ? $auxnom[1] : ' ';
+			$auxnom=split(' ',$nomemp);
+			$val =  count($auxnom)>2 ? $auxnom[1] : ' ';
 		}
+                $val = str_replace("DEL*","DEL ",$val);
+                $val = str_replace("DE*","DE ",$val);
+                return  $val;
     }
 
 	public function getDesniv()
@@ -353,7 +383,7 @@ class Nphojint extends BaseNphojint
   public function getCodempaco()
     {
     	return self::getCodemp();
-}
+    }
   public function getNomempaut()
     {
     	return self::getNomemp();
@@ -371,5 +401,38 @@ class Nphojint extends BaseNphojint
   public function getFecingfor()
   {
 	return self::getFecing('d/m/Y');
-}
+  }
+
+  public function getCodnomvig()
+  {
+    // Se obtiene Nomnom de la tabla Npasicaremp
+
+    $c = new Criteria();
+    $c->add(NpasicarempPeer::CODEMP,self::getCodemp());
+    $c->add(NpasicarempPeer::STATUS,'V');
+    $registro = NpasicarempPeer::doSelectOne($c);
+    if($registro) return $registro->getCodnom();
+    else return null;
+
+
+  }
+
+  public function getSueldo()
+  {
+      try {
+         $sql="select sueldoemp('".self::getCodnomvig()."','".$this->codemp."',(select to_char(fecnom,'dd/mm/yyyy') from nphiscon where codemp='".$this->codemp."' order by fecnom desc limit 1),'H') as sueldo";
+         if(H::BuscarDatos($sql,$rs))
+            return H::FormatoMonto($rs[0]['sueldo']);
+         else
+            return '0';
+      } catch (Exception $exc) {
+          #echo $exc->getTraceAsString();
+          return '0';
+      }
+
+
+
+
+
+  }
 }

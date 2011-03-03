@@ -4,14 +4,14 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 37463 2010-04-09 15:38:55Z lhernandez $
  */
 // date: 2008/02/14 11:49:27
 ?>
 <?php echo form_tag('presnomreghisantpre/save', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 
@@ -58,48 +58,89 @@
 </div>
 
 <br><br>
+<table>
+    <tr>
+        <th>
+            <?php echo label_for('npantpre[fecsolant]', __($labels['npantpre{fecsolant}']), 'class="required" ') ?>
+                  <div class="content<?php if ($sf_request->hasError('npantpre{fecsolant}')): ?> form-error<?php endif; ?>">
+                  <?php if ($sf_request->hasError('npantpre{fecsolant}')): ?>
+                    <?php echo form_error('npantpre{fecsolant}', array('class' => 'form-error-msg')) ?>
+                  <?php endif; ?>
 
-  <?php echo label_for('npantpre[fecsolant]', __($labels['npantpre{fecsolant}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npantpre{fecsolant}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npantpre{fecsolant}')): ?>
-    <?php echo form_error('npantpre{fecsolant}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
+                  <?php $value = object_input_date_tag($npantpre, 'getFecsolant', array (
+                  'rich' => true,
+                  'readonly' => $npantpre->getId()!='' ? true : false ,
+                  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+                  'control_name' => 'npantpre[fecsolant]',
+                  'date_format' => 'dd/MM/yyyy',
+                  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+                )); echo $value ? $value : '&nbsp;' ?>
+                    </div>
+        </th>
+        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        <th>
+            <?php echo label_for('npantpre[salpre]', __($labels['npantpre{salpre}']), 'class="required" ') ?>
+              <div class="content<?php if ($sf_request->hasError('npantpre{salpre}')): ?> form-error<?php endif; ?>">
+              <?php if ($sf_request->hasError('npantpre{salpre}')): ?>
+                <?php echo form_error('npantpre{salpre}', array('class' => 'form-error-msg')) ?>
+              <?php endif; ?>
 
-  <?php $value = object_input_date_tag($npantpre, 'getFecsolant', array (
-  'rich' => true,
-  'readonly' => $npantpre->getId()!='' ? true : false ,
-  'calendar_button_img' => '/sf/sf_admin/images/date.png',
-  'control_name' => 'npantpre[fecsolant]',
-  'date_format' => 'dd/MM/yyyy',
-  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+              <?php $value = object_input_tag($npantpre, array('getSalpre',true), array (
+              'size' => 20,
+              'control_name' => 'npantpre[salpre]',
+              'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)"
+            )); echo $value ? $value : '&nbsp;' ?>
+                </div>
+        </th>
+    </tr>
+</table>
 
 <br><br>
 
-  <?php echo label_for('npantpre[fecant]', __($labels['npantpre{fecant}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npantpre{fecant}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npantpre{fecant}')): ?>
-    <?php echo form_error('npantpre{fecant}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
+<table>
+    <tr>
+        <th>
+            <?php echo label_for('npantpre[fecant]', __($labels['npantpre{fecant}']), 'class="required" ') ?>
+                  <div class="content<?php if ($sf_request->hasError('npantpre{fecant}')): ?> form-error<?php endif; ?>">
+                  <?php if ($sf_request->hasError('npantpre{fecant}')): ?>
+                    <?php echo form_error('npantpre{fecant}', array('class' => 'form-error-msg')) ?>
+                  <?php endif; ?>
 
-  <?php $value = object_input_date_tag($npantpre, 'getFecant', array (
-  'rich' => true,
-  'readonly' => $npantpre->getId()!='' ? true : false ,
-  'calendar_button_img' => '/sf/sf_admin/images/date.png',
-  'control_name' => 'npantpre[fecant]',
-  'date_format' => 'dd/MM/yyyy',
-  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
-  'onChange'=> remote_function(array(
-  //        'update'   => 'mensaje',
-          'condition' =>  " $('npantpre_fecant').value != '' && $('id').value == ''",
-          'url'      => 'presnomreghisantpre/ajax',
-          'complete' => 'AjaxJSON(request, json)',
-          'script' => true,
-          'with' => "'ajax=2&cajtexmos=npantpre_monant&cajtexcom=npantpre_fecant&cod='+$('npantpre_codemp').value+'&codigo='+this.value",
-        )),
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+                  <?php $value = object_input_date_tag($npantpre, 'getFecant', array (
+                  'rich' => true,
+                  'readonly' => $npantpre->getId()!='' ? true : false ,
+                  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+                  'control_name' => 'npantpre[fecant]',
+                  'date_format' => 'dd/MM/yyyy',
+                  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+                  'onChange'=> remote_function(array(
+                  //        'update'   => 'mensaje',
+                          'condition' =>  " $('npantpre_fecant').value != '' && $('id').value == ''",
+                          'url'      => 'presnomreghisantpre/ajax',
+                          'complete' => 'AjaxJSON(request, json)',
+                          'script' => true,
+                          'with' => "'ajax=2&cajtexmos=npantpre_monant&cajtexcom=npantpre_fecant&cod='+$('npantpre_codemp').value+'&codigo='+this.value",
+                        )),
+                )); echo $value ? $value : '&nbsp;' ?>
+                    </div>
+        </th>
+        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        <th>
+            <?php echo label_for('npantpre[poroto]', __($labels['npantpre{poroto}']), 'class="required" ') ?>
+              <div class="content<?php if ($sf_request->hasError('npantpre{poroto}')): ?> form-error<?php endif; ?>">
+              <?php if ($sf_request->hasError('npantpre{poroto}')): ?>
+                <?php echo form_error('npantpre{poroto}', array('class' => 'form-error-msg')) ?>
+              <?php endif; ?>
+
+              <?php $value = object_input_tag($npantpre, array('getPoroto',true), array (
+              'size' => 20,
+              'control_name' => 'npantpre[poroto]',
+              'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)"
+            )); echo $value ? $value : '&nbsp;' ?>
+                </div>
+        </th>
+    </tr>
+</table>
 
 <br><br>
 

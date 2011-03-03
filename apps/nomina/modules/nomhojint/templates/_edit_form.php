@@ -5,7 +5,7 @@
  * @package    Roraima
  * @subpackage vistas
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id: _edit_form.php 40777 2010-09-28 17:01:02Z cramirez $
+ * @version    SVN: $Id: _edit_form.php 42859 2011-03-02 21:39:35Z cramirez $
  */
 // date: 2007/06/29 13:30:33
 ?>
@@ -74,7 +74,23 @@
   'control_name' => 'nphojint[nomemp]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div></th>
+
+   <th> <?php echo label_for('nphojint[nomcar]', __($labels['nphojint{nomcar}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('nphojint{nomcar}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nphojint{nomcar}')): ?>
+    <?php echo form_error('nphojint{nomcar}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($nphojint, 'getNomcar', array (
+  'size' => 60,
+  'readonly' => true,
+  'maxlength' => 100,
+  'control_name' => 'nphojint[nomcar]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div></th>
   </tr>
+  </table>
+  <table>
   <tr>
   	<th>&nbsp</th>
   </tr>
@@ -109,6 +125,23 @@
   		  'maxlength' => 25,
                   'onkeyUp' =>  "javascript: return this.value = this.value.toUpperCase();",
 		  'control_name' => 'nphojint[segnom]',
+		)); echo $value ? $value : '&nbsp;' ?>
+		    </div>
+
+	</th>
+        <th>
+
+		  <?php echo label_for('nphojint[sueldo]', __($labels['nphojint{sueldo}']), 'class="required"') ?>
+		  <div class="content<?php if ($sf_request->hasError('nphojint{sueldo}')): ?> form-error<?php endif; ?>">
+		  <?php if ($sf_request->hasError('nphojint{sueldo}')): ?>
+		    <?php echo form_error('nphojint{sueldo}', array('class' => 'form-error-msg')) ?>
+		  <?php endif; ?>
+
+		  <?php $value = object_input_tag($nphojint, 'getSueldo', array (
+		  'size' => 10,
+  		  'maxlength' => 10,
+                  'onkeyUp' =>  "javascript: return this.value = this.value.toUpperCase();",
+		  'control_name' => 'nphojint[sueldo]',
 		)); echo $value ? $value : '&nbsp;' ?>
 		    </div>
 
@@ -153,6 +186,50 @@
 
 
 	</th>
+        <th><?php echo label_for('nphojint[fecing]', __($labels['nphojint{fecing}']), 'class="required" ') ?>
+              <div class="content<?php if ($sf_request->hasError('nphojint{fecing}')): ?> form-error<?php endif; ?>">
+              <?php if ($sf_request->hasError('nphojint{fecing}')): ?>
+                <?php echo form_error('nphojint{fecing}', array('class' => 'form-error-msg')) ?>
+              <?php endif; ?>
+
+              <?php $value = object_input_date_tag($nphojint, 'getFecing', array (
+              'rich' => true,
+              'maxlength' => 10,
+              'size' => 10,
+              'calendar_button_img' => '/sf/sf_admin/images/date.png',
+              'control_name' => 'nphojint[fecing]',
+              'date_format' => 'dd/MM/yy',
+              'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+            )); echo $value ? $value : '&nbsp;' ?>
+                </div>
+        </th>
+  </tr>
+  </table>
+  <br>
+ <table>
+  <tr>
+   <th><?php echo label_for('nphojint[codniv]', __($labels['nphojint{codniv}']), 'class="required"') ?>
+      <div class="content<?php if ($sf_request->hasError('nphojint{codniv}')): ?> form-error<?php endif; ?>">
+      <?php if ($sf_request->hasError('nphojint{codniv}')): ?>
+        <?php echo form_error('nphojint{codniv}', array('class' => 'form-error-msg')) ?>
+      <?php endif; ?>
+
+      <?php $value = object_input_tag($nphojint, 'getCodniv', array (
+      'size' => 20,
+      'maxlength' => $lonnivel,
+      'control_name' => 'nphojint[codniv]',
+      'onKeyPress' => "javascript:cadena=rayaenter(event,this.value);",
+      'onBlur' => "nivel(event,1);",
+      'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaranivel')",
+
+    )); echo $value ? $value : '&nbsp;' ?></div></th>
+       <th>&nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npestorg_Nomhojint/clase/Npestorg/frame/sf_admin_edit_form/obj1/nphojint_codniv/obj2/nphojint_desniv/campo1/codniv/campo2/desniv/param1/'.$lonnivel)?></th>
+       <th> <?php $value = object_input_tag($nphojint, 'getDesniv', array (
+      'readonly' => true,
+      'size' => 60,
+      'control_name' => 'nphojint[desniv]',
+    )); echo $value ? $value : '&nbsp;' ?></th>
+
   </tr>
   </table>
 </div>
@@ -362,34 +439,7 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
    </tr>
   </table>
 
-<br>
 
- <table>
-  <tr>
-   <th><?php echo label_for('nphojint[codniv]', __($labels['nphojint{codniv}']), 'class="required" style="width: 150px"') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{codniv}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{codniv}')): ?>
-    <?php echo form_error('nphojint{codniv}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($nphojint, 'getCodniv', array (
-  'size' => 20,
-  'maxlength' => $lonnivel,
-  'control_name' => 'nphojint[codniv]',
-  'onKeyPress' => "javascript:cadena=rayaenter(event,this.value);",
-  'onBlur' => "nivel(event,1);",
-  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaranivel')",
-
-)); echo $value ? $value : '&nbsp;' ?></div></th>
-   <th>&nbsp;&nbsp;&nbsp;<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npestorg_Nomhojint/clase/Npestorg/frame/sf_admin_edit_form/obj1/nphojint_codniv/obj2/nphojint_desniv/campo1/codniv/campo2/desniv/param1/'.$lonnivel)?></th>
-   <th> <?php $value = object_input_tag($nphojint, 'getDesniv', array (
-  'readonly' => true,
-  'size' => 60,
-  'control_name' => 'nphojint[desniv]',
-)); echo $value ? $value : '&nbsp;' ?></th>
-
-  </tr>
- </table>
 
 <br>
 
@@ -753,22 +803,7 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
   {?>
   <table>
    <tr>
-    <th><?php echo label_for('nphojint[fecing]', __($labels['nphojint{fecing}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{fecing}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{fecing}')): ?>
-    <?php echo form_error('nphojint{fecing}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
 
-  <?php $value = object_input_date_tag($nphojint, 'getFecing', array (
-  'rich' => true,
-  'maxlength' => 10,
-  'size' => 10,
-  'calendar_button_img' => '/sf/sf_admin/images/date.png',
-  'control_name' => 'nphojint[fecing]',
-  'date_format' => 'dd/MM/yy',
-  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
-)); echo $value ? $value : '&nbsp;' ?>
-    </div></th>
     <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
     <th><?php echo label_for('nphojint[fecret]', __($labels['nphojint{fecret}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('nphojint{fecret}')): ?> form-error<?php endif; ?>">
@@ -811,23 +846,7 @@ $value = object_input_tag($nphojint, 'getPorseghcm', array (
 <?php }else {?>
   <table>
    <tr>
-    <th><?php echo label_for('nphojint[fecing]', __($labels['nphojint{fecing}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{fecing}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{fecing}')): ?>
-    <?php echo form_error('nphojint{fecing}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
 
-  <?php $value = object_input_date_tag($nphojint, 'getFecing', array (
-  'rich' => true,
-  'readonly' => true,
-  'maxlength' => 10,
-  'size' => 10,
-  'calendar_button_img' => '/sf/sf_admin/images/date.png',
-  'control_name' => 'nphojint[fecing]',
-  'date_format' => 'dd/MM/yy',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div></th>
-    <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
     <th><?php echo label_for('nphojint[fecret]', __($labels['nphojint{fecret}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('nphojint{fecret}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('nphojint{fecret}')): ?>

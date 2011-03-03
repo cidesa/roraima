@@ -3,97 +3,100 @@
 
 abstract class BaseNpexplabPeer {
 
-	
+
 	const DATABASE_NAME = 'propel';
 
-	
+
 	const TABLE_NAME = 'npexplab';
 
-	
+
 	const CLASS_DEFAULT = 'lib.model.nomina.Npexplab';
 
-	
-	const NUM_COLUMNS = 16;
 
-	
+	const NUM_COLUMNS = 17;
+
+
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
-	
+
 	const CODEMP = 'npexplab.CODEMP';
 
-	
+
 	const NOMEMP = 'npexplab.NOMEMP';
 
-	
+
 	const CODCAR = 'npexplab.CODCAR';
 
-	
+
 	const DESCAR = 'npexplab.DESCAR';
 
-	
+
 	const FECINI = 'npexplab.FECINI';
 
-	
+
 	const FECTER = 'npexplab.FECTER';
 
-	
+
 	const SUEOBT = 'npexplab.SUEOBT';
 
-	
+
 	const STACAR = 'npexplab.STACAR';
 
-	
+
 	const COMPOBT = 'npexplab.COMPOBT';
 
-	
+
 	const DUREXP = 'npexplab.DUREXP';
 
-	
+
 	const TIPORG = 'npexplab.TIPORG';
 
-	
+
 	const MONTOPRES = 'npexplab.MONTOPRES';
 
-	
+
 	const CODNIV = 'npexplab.CODNIV';
 
-	
+
 	const CODNOM = 'npexplab.CODNOM';
 
-	
+
 	const DEDICA = 'npexplab.DEDICA';
 
-	
+
+	const STATUS = 'npexplab.STATUS';
+
+
 	const ID = 'npexplab.ID';
 
-	
+
 	private static $phpNameMap = null;
 
 
-	
+
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nomemp', 'Codcar', 'Descar', 'Fecini', 'Fecter', 'Sueobt', 'Stacar', 'Compobt', 'Durexp', 'Tiporg', 'Montopres', 'Codniv', 'Codnom', 'Dedica', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpexplabPeer::CODEMP, NpexplabPeer::NOMEMP, NpexplabPeer::CODCAR, NpexplabPeer::DESCAR, NpexplabPeer::FECINI, NpexplabPeer::FECTER, NpexplabPeer::SUEOBT, NpexplabPeer::STACAR, NpexplabPeer::COMPOBT, NpexplabPeer::DUREXP, NpexplabPeer::TIPORG, NpexplabPeer::MONTOPRES, NpexplabPeer::CODNIV, NpexplabPeer::CODNOM, NpexplabPeer::DEDICA, NpexplabPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nomemp', 'codcar', 'descar', 'fecini', 'fecter', 'sueobt', 'stacar', 'compobt', 'durexp', 'tiporg', 'montopres', 'codniv', 'codnom', 'dedica', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nomemp', 'Codcar', 'Descar', 'Fecini', 'Fecter', 'Sueobt', 'Stacar', 'Compobt', 'Durexp', 'Tiporg', 'Montopres', 'Codniv', 'Codnom', 'Dedica', 'Status', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpexplabPeer::CODEMP, NpexplabPeer::NOMEMP, NpexplabPeer::CODCAR, NpexplabPeer::DESCAR, NpexplabPeer::FECINI, NpexplabPeer::FECTER, NpexplabPeer::SUEOBT, NpexplabPeer::STACAR, NpexplabPeer::COMPOBT, NpexplabPeer::DUREXP, NpexplabPeer::TIPORG, NpexplabPeer::MONTOPRES, NpexplabPeer::CODNIV, NpexplabPeer::CODNOM, NpexplabPeer::DEDICA, NpexplabPeer::STATUS, NpexplabPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nomemp', 'codcar', 'descar', 'fecini', 'fecter', 'sueobt', 'stacar', 'compobt', 'durexp', 'tiporg', 'montopres', 'codniv', 'codnom', 'dedica', 'status', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
 	);
 
-	
+
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nomemp' => 1, 'Codcar' => 2, 'Descar' => 3, 'Fecini' => 4, 'Fecter' => 5, 'Sueobt' => 6, 'Stacar' => 7, 'Compobt' => 8, 'Durexp' => 9, 'Tiporg' => 10, 'Montopres' => 11, 'Codniv' => 12, 'Codnom' => 13, 'Dedica' => 14, 'Id' => 15, ),
-		BasePeer::TYPE_COLNAME => array (NpexplabPeer::CODEMP => 0, NpexplabPeer::NOMEMP => 1, NpexplabPeer::CODCAR => 2, NpexplabPeer::DESCAR => 3, NpexplabPeer::FECINI => 4, NpexplabPeer::FECTER => 5, NpexplabPeer::SUEOBT => 6, NpexplabPeer::STACAR => 7, NpexplabPeer::COMPOBT => 8, NpexplabPeer::DUREXP => 9, NpexplabPeer::TIPORG => 10, NpexplabPeer::MONTOPRES => 11, NpexplabPeer::CODNIV => 12, NpexplabPeer::CODNOM => 13, NpexplabPeer::DEDICA => 14, NpexplabPeer::ID => 15, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nomemp' => 1, 'codcar' => 2, 'descar' => 3, 'fecini' => 4, 'fecter' => 5, 'sueobt' => 6, 'stacar' => 7, 'compobt' => 8, 'durexp' => 9, 'tiporg' => 10, 'montopres' => 11, 'codniv' => 12, 'codnom' => 13, 'dedica' => 14, 'id' => 15, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nomemp' => 1, 'Codcar' => 2, 'Descar' => 3, 'Fecini' => 4, 'Fecter' => 5, 'Sueobt' => 6, 'Stacar' => 7, 'Compobt' => 8, 'Durexp' => 9, 'Tiporg' => 10, 'Montopres' => 11, 'Codniv' => 12, 'Codnom' => 13, 'Dedica' => 14, 'Status' => 15, 'Id' => 16, ),
+		BasePeer::TYPE_COLNAME => array (NpexplabPeer::CODEMP => 0, NpexplabPeer::NOMEMP => 1, NpexplabPeer::CODCAR => 2, NpexplabPeer::DESCAR => 3, NpexplabPeer::FECINI => 4, NpexplabPeer::FECTER => 5, NpexplabPeer::SUEOBT => 6, NpexplabPeer::STACAR => 7, NpexplabPeer::COMPOBT => 8, NpexplabPeer::DUREXP => 9, NpexplabPeer::TIPORG => 10, NpexplabPeer::MONTOPRES => 11, NpexplabPeer::CODNIV => 12, NpexplabPeer::CODNOM => 13, NpexplabPeer::DEDICA => 14, NpexplabPeer::STATUS => 15, NpexplabPeer::ID => 16, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nomemp' => 1, 'codcar' => 2, 'descar' => 3, 'fecini' => 4, 'fecter' => 5, 'sueobt' => 6, 'stacar' => 7, 'compobt' => 8, 'durexp' => 9, 'tiporg' => 10, 'montopres' => 11, 'codniv' => 12, 'codnom' => 13, 'dedica' => 14, 'status' => 15, 'id' => 16, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
 	);
 
-	
+
 	public static function getMapBuilder()
 	{
 		include_once 'lib/model/nomina/map/NpexplabMapBuilder.php';
 		return BasePeer::getMapBuilder('lib.model.nomina.map.NpexplabMapBuilder');
 	}
-	
+
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
@@ -107,7 +110,7 @@ abstract class BaseNpexplabPeer {
 		}
 		return self::$phpNameMap;
 	}
-	
+
 	static public function translateFieldName($name, $fromType, $toType)
 	{
 		$toNames = self::getFieldNames($toType);
@@ -118,7 +121,7 @@ abstract class BaseNpexplabPeer {
 		return $toNames[$key];
 	}
 
-	
+
 
 	static public function getFieldNames($type = BasePeer::TYPE_PHPNAME)
 	{
@@ -128,13 +131,13 @@ abstract class BaseNpexplabPeer {
 		return self::$fieldNames[$type];
 	}
 
-	
+
 	public static function alias($alias, $column)
 	{
 		return str_replace(NpexplabPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
-	
+
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
@@ -168,6 +171,8 @@ abstract class BaseNpexplabPeer {
 
 		$criteria->addSelectColumn(NpexplabPeer::DEDICA);
 
+		$criteria->addSelectColumn(NpexplabPeer::STATUS);
+
 		$criteria->addSelectColumn(NpexplabPeer::ID);
 
 	}
@@ -175,7 +180,7 @@ abstract class BaseNpexplabPeer {
 	const COUNT = 'COUNT(npexplab.ID)';
 	const COUNT_DISTINCT = 'COUNT(DISTINCT npexplab.ID)';
 
-	
+
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -199,7 +204,7 @@ abstract class BaseNpexplabPeer {
 						return 0;
 		}
 	}
-	
+
 	public static function doSelectOne(Criteria $criteria, $con = null)
 	{
 		$critcopy = clone $criteria;
@@ -210,12 +215,12 @@ abstract class BaseNpexplabPeer {
 		}
 		return null;
 	}
-	
+
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
 		return NpexplabPeer::populateObjects(NpexplabPeer::doSelectRS($criteria, $con));
 	}
-	
+
 	public static function doSelectRS(Criteria $criteria, $con = null)
 	{
 		if ($con === null) {
@@ -231,35 +236,35 @@ abstract class BaseNpexplabPeer {
 
 						return BasePeer::doSelect($criteria, $con);
 	}
-	
+
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
-	
+
 				$cls = NpexplabPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
-		
+
 			$obj = new $cls();
 			$obj->hydrate($rs);
 			$results[] = $obj;
-			
+
 		}
 		return $results;
 	}
-	
+
 	public static function getTableMap()
 	{
 		return Propel::getDatabaseMap(self::DATABASE_NAME)->getTable(self::TABLE_NAME);
 	}
 
-	
+
 	public static function getOMClass()
 	{
 		return NpexplabPeer::CLASS_DEFAULT;
 	}
 
-	
+
 	public static function doInsert($values, $con = null)
 	{
 		if ($con === null) {
@@ -270,7 +275,7 @@ abstract class BaseNpexplabPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(NpexplabPeer::ID); 
+		$criteria->remove(NpexplabPeer::ID);
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -286,7 +291,7 @@ abstract class BaseNpexplabPeer {
 		return $pk;
 	}
 
-	
+
 	public static function doUpdate($values, $con = null)
 	{
 		if ($con === null) {
@@ -296,7 +301,7 @@ abstract class BaseNpexplabPeer {
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
+			$criteria = clone $values;
 			$comparison = $criteria->getComparison(NpexplabPeer::ID);
 			$selectCriteria->add(NpexplabPeer::ID, $criteria->remove(NpexplabPeer::ID), $comparison);
 
@@ -307,7 +312,7 @@ abstract class BaseNpexplabPeer {
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
 
-	
+
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
@@ -324,7 +329,7 @@ abstract class BaseNpexplabPeer {
 		}
 	}
 
-	
+
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
@@ -342,10 +347,10 @@ abstract class BaseNpexplabPeer {
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
-		$affectedRows = 0; 
+		$affectedRows = 0;
 		try {
 									$con->begin();
-			
+
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
 			return $affectedRows;
@@ -355,7 +360,7 @@ abstract class BaseNpexplabPeer {
 		}
 	}
 
-	
+
 	public static function doValidate(Npexplab $obj, $cols = null)
 	{
 		$columns = array();
@@ -390,7 +395,7 @@ abstract class BaseNpexplabPeer {
     return $res;
 	}
 
-	
+
 	public static function retrieveByPK($pk, $con = null)
 	{
 		if ($con === null) {
@@ -407,7 +412,7 @@ abstract class BaseNpexplabPeer {
 		return !empty($v) > 0 ? $v[0] : null;
 	}
 
-	
+
 	public static function retrieveByPKs($pks, $con = null)
 	{
 		if ($con === null) {
@@ -425,7 +430,7 @@ abstract class BaseNpexplabPeer {
 		return $objs;
 	}
 
-} 
+}
 if (Propel::isInit()) {
 			try {
 		BaseNpexplabPeer::getMapBuilder();

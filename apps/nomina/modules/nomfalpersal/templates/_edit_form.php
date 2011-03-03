@@ -4,14 +4,14 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 42893 2011-03-03 05:43:17Z cramirez $
  */
 // date: 2007/03/23 19:26:15
 ?>
 <?php echo form_tag('nomfalpersal/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 <?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
@@ -129,7 +129,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
-    <div class="form-row" id="desde" style= "display:none">
+    <div class="form-row" id="desde" style= "">
   <?php echo label_for('npfalper[fecdes]', __($labels['npfalper{fecdes}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npfalper{fecdes}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npfalper{fecdes}')): ?>
@@ -138,6 +138,7 @@
 
   <?php $value = object_input_date_tag($npfalper, 'getFecdes', array (
   'rich' => true,
+'onChange' => "toAjax(3,getUrlModulo()+'/ajax',this.value,'','&fecdes='+$('npfalper_fecdes').value+'&fechas='+$('npfalper_fechas').value+'&codmot='+$('npfalper_codmot').value+'&codemp='+$('npfalper_codemp').value)",
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'npfalper[fecdes]',
   'date_format' => 'dd/MM/yyyy',
@@ -153,6 +154,7 @@
 
   <?php $value = object_input_date_tag($npfalper, 'getFechas', array (
   'rich' => true,
+  'onChange' => "toAjax(3,getUrlModulo()+'/ajax',this.value,'','&fecdes='+$('npfalper_fecdes').value+'&fechas='+$('npfalper_fechas').value+'&codmot='+$('npfalper_codmot').value+'&codemp='+$('npfalper_codemp').value)",
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'npfalper[fechas]',
   'date_format' => 'dd/MM/yyyy',
