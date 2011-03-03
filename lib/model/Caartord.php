@@ -49,9 +49,9 @@ class Caartord extends BaseCaartord
   public function hydrate(ResultSet $rs, $startcol = 1)
    {
       parent::hydrate($rs, $startcol);
-      $this->canrecgri= self::getCanord() - self::getCanaju() - self::getCanrec();
+      $this->canrecgri= $this->canord - self::getCanaju() - self::getCanrec();
       $this->canfal=0.0;
-      $this->montot = ($this->canrecgri * self::getPreart()) -  self::getDtoart() +  self::getRgoart();
+      $this->montot = ($this->canrecgri * $this->preart) -  self::getDtoart() +  self::getRgoart();
       $calculo= self::getTotart() - self::getRgoart() + self::getDtoart();
       $this->cancost=number_format($calculo,2,',','.');
       $this->datosrecargo="";
@@ -214,7 +214,7 @@ class Caartord extends BaseCaartord
 
     // CAArtOrd!PreArt - Round( (CAArtOrd!DtoArt / CantOrd) , 2)
     if (self::getCanord()<>0)
-    $val = self::getPreart() - round(self::getDtoart() / (self::getCanord()),2);
+    $val = $this->preart - round(self::getDtoart() / (self::getCanord()),2);
     else $val = 0;
     //$val = self::getDtoart();
     //$val = self::getPreart();
@@ -414,7 +414,7 @@ class Caartord extends BaseCaartord
 
     // CAArtOrd!PreArt - Round( (CAArtOrd!DtoArt / CantOrd) , 2)
     if (self::getCanord()<>0)
-    $val = self::getPreart() - round(self::getDtoart() / (self::getCanord()),2);
+    $val = $this->preart - round(self::getDtoart() / (self::getCanord()),2);
     else $val = 0;
     //$val = self::getDtoart();
     //$val = self::getPreart();
@@ -436,6 +436,24 @@ class Caartord extends BaseCaartord
     if ($this->canord !== $v) {
         $this->canord = Herramientas::toFloat($v,3);
         $this->modifiedColumns[] = CaartordPeer::CANORD;
+      }
+
+	}
+
+  public function getPreart($val=false)
+  {
+
+    if($val) return number_format($this->preart,3,',','.');
+    else return $this->preart;
+
+ }
+
+	public function setPreart($v)
+	{
+
+    if ($this->preart !== $v) {
+        $this->preart = Herramientas::toFloat($v,3);
+        $this->modifiedColumns[] = CaartordPeer::PREART;
       }
 
 	}
