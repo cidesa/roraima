@@ -154,4 +154,22 @@ class Cadetcot extends BaseCadetcot
     $this->provee = $val;
 
   }
+
+    public function getCosto($val=false)
+  {
+
+    if($val) return number_format($this->costo,3,',','.');
+    else return $this->costo;
+
+}
+
+  	public function setCosto($v)
+	{
+
+    if ($this->costo !== $v) {
+        $this->costo = Herramientas::toFloat($v,3);
+        $this->modifiedColumns[] = CadetcotPeer::COSTO;
+      }
+
+	}
 }
