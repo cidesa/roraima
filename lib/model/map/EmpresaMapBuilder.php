@@ -4,25 +4,25 @@
 
 class EmpresaMapBuilder {
 
-	
+
 	const CLASS_NAME = 'lib.model.map.EmpresaMapBuilder';
 
-	
+
 	private $dbMap;
 
-	
+
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-	
+
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-	
+
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -118,7 +118,15 @@ class EmpresaMapBuilder {
 
 		$tMap->addColumn('CODCAT', 'Codcat', 'string', CreoleTypes::VARCHAR, true, 50);
 
+		$tMap->addColumn('NOMREC', 'Nomrec', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('NOMVICRECACA', 'Nomvicrecaca', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('NOMVICRECADM', 'Nomvicrecadm', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('NOMSEC', 'Nomsec', 'string', CreoleTypes::VARCHAR, false, 100);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	} 
+	}
 } 

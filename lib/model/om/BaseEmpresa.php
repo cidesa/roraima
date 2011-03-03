@@ -4,533 +4,533 @@
 abstract class BaseEmpresa extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $codemp;
 
 
-	
+
 	protected $nomemp;
 
 
-	
+
 	protected $diremp;
 
 
-	
+
 	protected $tlfemp;
 
 
-	
+
 	protected $ciuemp;
 
 
-	
+
 	protected $urlemp;
 
 
-	
+
 	protected $faxemp;
 
 
-	
+
 	protected $codpos;
 
 
-	
+
 	protected $gobedo;
 
 
-	
+
 	protected $conedo;
 
 
-	
+
 	protected $cleedo;
 
 
-	
+
 	protected $coopla;
 
 
-	
+
 	protected $dirpre;
 
 
-	
+
 	protected $munemp;
 
 
-	
+
 	protected $cieedo;
 
 
-	
+
 	protected $codctagas;
 
 
-	
+
 	protected $codctaban;
 
 
-	
+
 	protected $codctaret;
 
 
-	
+
 	protected $codctaben;
 
 
-	
+
 	protected $codctaart;
 
 
-	
+
 	protected $codctagashas;
 
 
-	
+
 	protected $codctabanhas;
 
 
-	
+
 	protected $codctarethas;
 
 
-	
+
 	protected $codctabenhas;
 
 
-	
+
 	protected $codctaarthas;
 
 
-	
+
 	protected $codctapageje;
 
 
-	
+
 	protected $codctaingdevn;
 
 
-	
+
 	protected $codctaingdev;
 
 
-	
+
 	protected $diradm;
 
 
-	
+
 	protected $dirfin;
 
 
-	
+
 	protected $dirper;
 
 
-	
+
 	protected $dirgen;
 
 
-	
+
 	protected $anapre;
 
 
-	
+
 	protected $anaper;
 
 
-	
+
 	protected $anaadm;
 
 
-	
+
 	protected $edoemp;
 
 
-	
+
 	protected $encabezado;
 
 
-	
+
 	protected $cooeje;
 
 
-	
+
 	protected $partidaiva;
 
 
-	
+
 	protected $codempfonava;
 
 
-	
+
 	protected $numlot;
 
 
-	
+
 	protected $codcat;
 
 
-	
+
 	protected $nomrec;
 
 
-	
+
 	protected $nomvicrecaca;
 
 
-	
+
 	protected $nomvicrecadm;
 
 
-	
+
 	protected $nomsec;
 
 
-	
+
 	protected $id;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getCodemp()
   {
 
     return trim($this->codemp);
 
   }
-  
+
   public function getNomemp()
   {
 
     return trim($this->nomemp);
 
   }
-  
+
   public function getDiremp()
   {
 
     return trim($this->diremp);
 
   }
-  
+
   public function getTlfemp()
   {
 
     return trim($this->tlfemp);
 
   }
-  
+
   public function getCiuemp()
   {
 
     return trim($this->ciuemp);
 
   }
-  
+
   public function getUrlemp()
   {
 
     return trim($this->urlemp);
 
   }
-  
+
   public function getFaxemp()
   {
 
     return trim($this->faxemp);
 
   }
-  
+
   public function getCodpos()
   {
 
     return trim($this->codpos);
 
   }
-  
+
   public function getGobedo()
   {
 
     return trim($this->gobedo);
 
   }
-  
+
   public function getConedo()
   {
 
     return trim($this->conedo);
 
   }
-  
+
   public function getCleedo()
   {
 
     return trim($this->cleedo);
 
   }
-  
+
   public function getCoopla()
   {
 
     return trim($this->coopla);
 
   }
-  
+
   public function getDirpre()
   {
 
     return trim($this->dirpre);
 
   }
-  
+
   public function getMunemp()
   {
 
     return trim($this->munemp);
 
   }
-  
+
   public function getCieedo()
   {
 
     return trim($this->cieedo);
 
   }
-  
+
   public function getCodctagas()
   {
 
     return trim($this->codctagas);
 
   }
-  
+
   public function getCodctaban()
   {
 
     return trim($this->codctaban);
 
   }
-  
+
   public function getCodctaret()
   {
 
     return trim($this->codctaret);
 
   }
-  
+
   public function getCodctaben()
   {
 
     return trim($this->codctaben);
 
   }
-  
+
   public function getCodctaart()
   {
 
     return trim($this->codctaart);
 
   }
-  
+
   public function getCodctagashas()
   {
 
     return trim($this->codctagashas);
 
   }
-  
+
   public function getCodctabanhas()
   {
 
     return trim($this->codctabanhas);
 
   }
-  
+
   public function getCodctarethas()
   {
 
     return trim($this->codctarethas);
 
   }
-  
+
   public function getCodctabenhas()
   {
 
     return trim($this->codctabenhas);
 
   }
-  
+
   public function getCodctaarthas()
   {
 
     return trim($this->codctaarthas);
 
   }
-  
+
   public function getCodctapageje()
   {
 
     return trim($this->codctapageje);
 
   }
-  
+
   public function getCodctaingdevn()
   {
 
     return trim($this->codctaingdevn);
 
   }
-  
+
   public function getCodctaingdev()
   {
 
     return trim($this->codctaingdev);
 
   }
-  
+
   public function getDiradm()
   {
 
     return trim($this->diradm);
 
   }
-  
+
   public function getDirfin()
   {
 
     return trim($this->dirfin);
 
   }
-  
+
   public function getDirper()
   {
 
     return trim($this->dirper);
 
   }
-  
+
   public function getDirgen()
   {
 
     return trim($this->dirgen);
 
   }
-  
+
   public function getAnapre()
   {
 
     return trim($this->anapre);
 
   }
-  
+
   public function getAnaper()
   {
 
     return trim($this->anaper);
 
   }
-  
+
   public function getAnaadm()
   {
 
     return trim($this->anaadm);
 
   }
-  
+
   public function getEdoemp()
   {
 
     return trim($this->edoemp);
 
   }
-  
+
   public function getEncabezado()
   {
 
     return trim($this->encabezado);
 
   }
-  
+
   public function getCooeje()
   {
 
     return trim($this->cooeje);
 
   }
-  
+
   public function getPartidaiva()
   {
 
     return trim($this->partidaiva);
 
   }
-  
+
   public function getCodempfonava()
   {
 
     return trim($this->codempfonava);
 
   }
-  
+
   public function getNumlot()
   {
 
     return trim($this->numlot);
 
   }
-  
+
   public function getCodcat()
   {
 
     return trim($this->codcat);
 
   }
-  
+
   public function getNomrec()
   {
 
     return trim($this->nomrec);
 
   }
-  
+
   public function getNomvicrecaca()
   {
 
     return trim($this->nomvicrecaca);
 
   }
-  
+
   public function getNomvicrecadm()
   {
 
     return trim($this->nomvicrecadm);
 
   }
-  
+
   public function getNomsec()
   {
 
     return trim($this->nomsec);
 
   }
-  
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setCodemp($v)
 	{
 
@@ -538,9 +538,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->codemp = $v;
         $this->modifiedColumns[] = EmpresaPeer::CODEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNomemp($v)
 	{
 
@@ -548,9 +548,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->nomemp = $v;
         $this->modifiedColumns[] = EmpresaPeer::NOMEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDiremp($v)
 	{
 
@@ -558,9 +558,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->diremp = $v;
         $this->modifiedColumns[] = EmpresaPeer::DIREMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setTlfemp($v)
 	{
 
@@ -568,9 +568,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->tlfemp = $v;
         $this->modifiedColumns[] = EmpresaPeer::TLFEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCiuemp($v)
 	{
 
@@ -578,9 +578,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->ciuemp = $v;
         $this->modifiedColumns[] = EmpresaPeer::CIUEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setUrlemp($v)
 	{
 
@@ -588,9 +588,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->urlemp = $v;
         $this->modifiedColumns[] = EmpresaPeer::URLEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setFaxemp($v)
 	{
 
@@ -598,9 +598,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->faxemp = $v;
         $this->modifiedColumns[] = EmpresaPeer::FAXEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodpos($v)
 	{
 
@@ -608,9 +608,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->codpos = $v;
         $this->modifiedColumns[] = EmpresaPeer::CODPOS;
       }
-  
-	} 
-	
+
+	}
+
 	public function setGobedo($v)
 	{
 
@@ -618,9 +618,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->gobedo = $v;
         $this->modifiedColumns[] = EmpresaPeer::GOBEDO;
       }
-  
-	} 
-	
+
+	}
+
 	public function setConedo($v)
 	{
 
@@ -628,9 +628,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->conedo = $v;
         $this->modifiedColumns[] = EmpresaPeer::CONEDO;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCleedo($v)
 	{
 
@@ -638,9 +638,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->cleedo = $v;
         $this->modifiedColumns[] = EmpresaPeer::CLEEDO;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCoopla($v)
 	{
 
@@ -648,9 +648,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->coopla = $v;
         $this->modifiedColumns[] = EmpresaPeer::COOPLA;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDirpre($v)
 	{
 
@@ -658,9 +658,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->dirpre = $v;
         $this->modifiedColumns[] = EmpresaPeer::DIRPRE;
       }
-  
-	} 
-	
+
+	}
+
 	public function setMunemp($v)
 	{
 
@@ -668,9 +668,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->munemp = $v;
         $this->modifiedColumns[] = EmpresaPeer::MUNEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCieedo($v)
 	{
 
@@ -678,9 +678,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->cieedo = $v;
         $this->modifiedColumns[] = EmpresaPeer::CIEEDO;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodctagas($v)
 	{
 
@@ -688,9 +688,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->codctagas = $v;
         $this->modifiedColumns[] = EmpresaPeer::CODCTAGAS;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodctaban($v)
 	{
 
@@ -698,9 +698,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->codctaban = $v;
         $this->modifiedColumns[] = EmpresaPeer::CODCTABAN;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodctaret($v)
 	{
 
@@ -708,9 +708,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->codctaret = $v;
         $this->modifiedColumns[] = EmpresaPeer::CODCTARET;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodctaben($v)
 	{
 
@@ -718,9 +718,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->codctaben = $v;
         $this->modifiedColumns[] = EmpresaPeer::CODCTABEN;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodctaart($v)
 	{
 
@@ -728,9 +728,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->codctaart = $v;
         $this->modifiedColumns[] = EmpresaPeer::CODCTAART;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodctagashas($v)
 	{
 
@@ -738,9 +738,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->codctagashas = $v;
         $this->modifiedColumns[] = EmpresaPeer::CODCTAGASHAS;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodctabanhas($v)
 	{
 
@@ -748,9 +748,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->codctabanhas = $v;
         $this->modifiedColumns[] = EmpresaPeer::CODCTABANHAS;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodctarethas($v)
 	{
 
@@ -758,9 +758,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->codctarethas = $v;
         $this->modifiedColumns[] = EmpresaPeer::CODCTARETHAS;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodctabenhas($v)
 	{
 
@@ -768,9 +768,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->codctabenhas = $v;
         $this->modifiedColumns[] = EmpresaPeer::CODCTABENHAS;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodctaarthas($v)
 	{
 
@@ -778,9 +778,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->codctaarthas = $v;
         $this->modifiedColumns[] = EmpresaPeer::CODCTAARTHAS;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodctapageje($v)
 	{
 
@@ -788,9 +788,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->codctapageje = $v;
         $this->modifiedColumns[] = EmpresaPeer::CODCTAPAGEJE;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodctaingdevn($v)
 	{
 
@@ -798,9 +798,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->codctaingdevn = $v;
         $this->modifiedColumns[] = EmpresaPeer::CODCTAINGDEVN;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodctaingdev($v)
 	{
 
@@ -808,9 +808,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->codctaingdev = $v;
         $this->modifiedColumns[] = EmpresaPeer::CODCTAINGDEV;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDiradm($v)
 	{
 
@@ -818,9 +818,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->diradm = $v;
         $this->modifiedColumns[] = EmpresaPeer::DIRADM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDirfin($v)
 	{
 
@@ -828,9 +828,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->dirfin = $v;
         $this->modifiedColumns[] = EmpresaPeer::DIRFIN;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDirper($v)
 	{
 
@@ -838,9 +838,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->dirper = $v;
         $this->modifiedColumns[] = EmpresaPeer::DIRPER;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDirgen($v)
 	{
 
@@ -848,9 +848,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->dirgen = $v;
         $this->modifiedColumns[] = EmpresaPeer::DIRGEN;
       }
-  
-	} 
-	
+
+	}
+
 	public function setAnapre($v)
 	{
 
@@ -858,9 +858,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->anapre = $v;
         $this->modifiedColumns[] = EmpresaPeer::ANAPRE;
       }
-  
-	} 
-	
+
+	}
+
 	public function setAnaper($v)
 	{
 
@@ -868,9 +868,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->anaper = $v;
         $this->modifiedColumns[] = EmpresaPeer::ANAPER;
       }
-  
-	} 
-	
+
+	}
+
 	public function setAnaadm($v)
 	{
 
@@ -878,9 +878,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->anaadm = $v;
         $this->modifiedColumns[] = EmpresaPeer::ANAADM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setEdoemp($v)
 	{
 
@@ -888,9 +888,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->edoemp = $v;
         $this->modifiedColumns[] = EmpresaPeer::EDOEMP;
       }
-  
-	} 
-	
+
+	}
+
 	public function setEncabezado($v)
 	{
 
@@ -898,9 +898,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->encabezado = $v;
         $this->modifiedColumns[] = EmpresaPeer::ENCABEZADO;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCooeje($v)
 	{
 
@@ -908,9 +908,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->cooeje = $v;
         $this->modifiedColumns[] = EmpresaPeer::COOEJE;
       }
-  
-	} 
-	
+
+	}
+
 	public function setPartidaiva($v)
 	{
 
@@ -918,9 +918,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->partidaiva = $v;
         $this->modifiedColumns[] = EmpresaPeer::PARTIDAIVA;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodempfonava($v)
 	{
 
@@ -928,9 +928,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->codempfonava = $v;
         $this->modifiedColumns[] = EmpresaPeer::CODEMPFONAVA;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNumlot($v)
 	{
 
@@ -938,9 +938,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->numlot = $v;
         $this->modifiedColumns[] = EmpresaPeer::NUMLOT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCodcat($v)
 	{
 
@@ -948,9 +948,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->codcat = $v;
         $this->modifiedColumns[] = EmpresaPeer::CODCAT;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNomrec($v)
 	{
 
@@ -958,9 +958,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->nomrec = $v;
         $this->modifiedColumns[] = EmpresaPeer::NOMREC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNomvicrecaca($v)
 	{
 
@@ -968,9 +968,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->nomvicrecaca = $v;
         $this->modifiedColumns[] = EmpresaPeer::NOMVICRECACA;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNomvicrecadm($v)
 	{
 
@@ -978,9 +978,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->nomvicrecadm = $v;
         $this->modifiedColumns[] = EmpresaPeer::NOMVICRECADM;
       }
-  
-	} 
-	
+
+	}
+
 	public function setNomsec($v)
 	{
 
@@ -988,9 +988,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->nomsec = $v;
         $this->modifiedColumns[] = EmpresaPeer::NOMSEC;
       }
-  
-	} 
-	
+
+	}
+
 	public function setId($v)
 	{
 
@@ -998,9 +998,9 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = EmpresaPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -1105,7 +1105,7 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 47; 
+            return $startcol + 47;
     } catch (Exception $e) {
       throw new PropelException("Error populating Empresa object", $e);
     }
@@ -1116,8 +1116,8 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -1131,7 +1131,7 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -1153,7 +1153,7 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -1175,7 +1175,7 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -1185,8 +1185,8 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = EmpresaPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += EmpresaPeer::doUpdate($this, $con);
@@ -1196,17 +1196,17 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -1219,7 +1219,7 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -1241,14 +1241,14 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = EmpresaPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -1398,7 +1398,7 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = EmpresaPeer::getFieldNames($keyType);
@@ -1454,14 +1454,14 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = EmpresaPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -1608,7 +1608,7 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = EmpresaPeer::getFieldNames($keyType);
@@ -1662,7 +1662,7 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[46], $arr)) $this->setId($arr[$keys[46]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(EmpresaPeer::DATABASE_NAME);
@@ -1718,7 +1718,7 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(EmpresaPeer::DATABASE_NAME);
@@ -1728,19 +1728,19 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -1839,10 +1839,10 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -1851,7 +1851,7 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
