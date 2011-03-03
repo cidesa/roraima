@@ -54,7 +54,7 @@ class almsolegrActions extends autoalmsolegrActions
 			{
 				return true;
 			}
-                        $refsol = Herramientas::getX_vacio('refsol','catotiza','refsol',$this->casolart->getReqart());
+                        $refsol = Herramientas::getX_vacio('refsol','cacotiza','refsol',$this->casolart->getReqart());
 			if ($refsol!="")
 			{
 		           $this->codeerror=828;
