@@ -356,6 +356,19 @@ $this->Bitacora('Guardo');
         $this->coderr1=529;
         return false;
   	  }
+          $escheque=H::getX_vacio('CODTIP', 'Tstipmov', 'Escheque', $this->getRequestParameter('tsmovtra[tipmovdesd]'));
+
+            if ($escheque==1) {
+              $t= new Criteria();
+              $t->add(TscheemiPeer::TIPDOC,$this->getRequestParameter('tsmovtra[tipmovdesd]'));
+              $t->add(TscheemiPeer::NUMCUE,$this->getRequestParameter('tsmovtra[ctaori]'));
+              $t->add(TscheemiPeer::NUMCHE,$this->getRequestParameter('tsmovtra[reftra]'));
+              $resul= TscheemiPeer::doSelectOne($t);
+              if ($resul) {
+                  $this->coderr=587;
+                return false;
+              }
+            }
 	   $this->comprobaut="";
 	   $varemp = $this->getUser()->getAttribute('configemp');
 	   if ($varemp)

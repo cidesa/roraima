@@ -707,6 +707,34 @@ class Tesoreria {
       self :: Actualiza_bancostra('A', 'C', $objeto->getCtaori(), $objeto->getMontra());
       self :: Actualiza_bancostra('A', 'D', $objeto->getCtades(), $objeto->getMontra());
     }
+    $escheque=H::getX_vacio('CODTIP', 'Tstipmov', 'Escheque', $tipmovdesd);
+    $reqfirma=H::getConfApp2('reqfirma', 'tesoreria', 'tesmovemiche');
+    if ($escheque==1) {
+
+      $t= new Criteria();
+      $t->add(TscheemiPeer::TIPDOC,$tipmovdesd);
+      $t->add(TscheemiPeer::NUMCUE,$objeto->getCtaori());
+      $t->add(TscheemiPeer::NUMCHE,$objeto->getReftra());
+      $resul= TscheemiPeer::doSelectOne($t);
+      if (!$resul) {
+      $tscheeminew= new Tscheemi();
+      $tscheeminew->setTipdoc($tipmovdesd);
+      $tscheeminew->setNumcue($objeto->getCtaori());
+      $tscheeminew->setFecemi($objeto->getFectra());
+      $tscheeminew->setCedrif(null);
+      $tscheeminew->setNumche($objeto->getReftra());
+      $tscheeminew->setNombensus(null);
+      $tscheeminew->setMonche($objeto->getMontra());
+      if ($reqfirma=='S')  $tscheeminew->setStatus("F");   //Firma
+      else $tscheeminew->setStatus("C");  //Caja
+      $tscheeminew->setCodent(null);
+      $tscheeminew->setObsent(null);
+      $tscheeminew->setFecanu(null);
+      $tscheeminew->setCedrec(null);
+      $tscheeminew->setNomrec(null);
+      $tscheeminew->save();
+  }
+    }
   }
 
   public static function Actualiza_bancostra($accion, $debcre, $numcta, $monto) {

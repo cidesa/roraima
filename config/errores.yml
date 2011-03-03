@@ -576,6 +576,9 @@
 586:
   cod: 586
   msj:  No se puede guardar ya que existe un código de cargo repetido
+587:
+  cod: 587
+  msj:  No puede salvar debido a que la referencia de la transferencia ya existe como número de cheque.
 3:
   cod: 3
   msj: La contraseña es diferente.
