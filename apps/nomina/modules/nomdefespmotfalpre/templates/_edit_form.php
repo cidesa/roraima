@@ -4,14 +4,14 @@
  *
  * @package    Roraima
  * @subpackage vistas
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version    SVN: $Id: _edit_form.php 42888 2011-03-03 05:39:29Z cramirez $
  */
 // date: 2007/03/21 13:10:48
 ?>
 <?php echo form_tag('nomdefespmotfalpre/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 
@@ -82,6 +82,20 @@
   'control_name' => 'npmotfal[esremun]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
+
+<br>
+<br>
+
+<?php echo label_for('npmotfal[tipdia]', __($labels['npmotfal{tipdia}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('npmotfal{tipdia}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npmotfal{tipdia}')): ?>
+    <?php echo form_error('npmotfal{tipdia}', array('class' => 'form-error-msg')) ?>
+     <?php endif; ?>
+
+  <?php echo select_tag('npmotfal[tipdia]', options_for_select(array(''=>'Seleccione...','H'=>'Habiles','C'=>'Continuos'),$npmotfal->getTipdia()), array (
+
+)); ?>
+  </div>
 </div>
 </fieldset>
 

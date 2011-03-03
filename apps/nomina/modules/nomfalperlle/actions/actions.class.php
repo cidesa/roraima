@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage nomfalperlle
- * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 41682 2010-12-09 19:30:41Z dmartinez $
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 42890 2011-03-03 05:41:09Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -164,7 +164,17 @@ class nomfalperlleActions extends autonomfalperlleActions
 	 {
                 $fecdes=$this->getRequestParameter('fecdes');
                 $fechas=$this->getRequestParameter('fechas');
-	 	$sql="select to_date('$fechas','dd/mm/yyyy')-to_date('$fecdes','dd/mm/yyyy') as dias";
+                $codmot=$this->getRequestParameter('codmot');
+                $codemp=$this->getRequestParameter('codemp');
+                $dato = H::GetX('Codmotfal','Npmotfal','Tipdia',$codmot);
+	 	$sql="select
+                        case when '$dato'='H' then
+                                diashab(codnom,to_date('$fecdes','dd/mm/yyyy'),to_date('$fechas','dd/mm/yyyy'))
+                        else
+                                to_date('$fechas','dd/mm/yyyy')-to_date('$fecdes','dd/mm/yyyy')
+                        end
+                        as dias
+                        from npasicaremp where codemp='$codemp' and status='V'";
                 if(H::BuscarDatos($sql, $rs))
                     $dias = $rs[0]['dias'];
                 else

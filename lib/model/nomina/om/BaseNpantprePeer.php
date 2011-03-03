@@ -3,70 +3,76 @@
 
 abstract class BaseNpantprePeer {
 
-	
+
 	const DATABASE_NAME = 'propel';
 
-	
+
 	const TABLE_NAME = 'npantpre';
 
-	
+
 	const CLASS_DEFAULT = 'lib.model.nomina.Npantpre';
 
-	
-	const NUM_COLUMNS = 7;
 
-	
+	const NUM_COLUMNS = 9;
+
+
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
-	
+
 	const CODEMP = 'npantpre.CODEMP';
 
-	
+
 	const FECANT = 'npantpre.FECANT';
 
-	
+
 	const MONANT = 'npantpre.MONANT';
 
-	
+
 	const MONTO = 'npantpre.MONTO';
 
-	
+
+	const SALPRE = 'npantpre.SALPRE';
+
+
+	const POROTO = 'npantpre.POROTO';
+
+
 	const OBSERVACION = 'npantpre.OBSERVACION';
 
-	
+
 	const FECSOLANT = 'npantpre.FECSOLANT';
 
-	
+
 	const ID = 'npantpre.ID';
 
-	
+
 	private static $phpNameMap = null;
 
 
-	
+
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Fecant', 'Monant', 'Monto', 'Observacion', 'Fecsolant', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpantprePeer::CODEMP, NpantprePeer::FECANT, NpantprePeer::MONANT, NpantprePeer::MONTO, NpantprePeer::OBSERVACION, NpantprePeer::FECSOLANT, NpantprePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'fecant', 'monant', 'monto', 'observacion', 'fecsolant', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Fecant', 'Monant', 'Monto', 'Salpre', 'Poroto', 'Observacion', 'Fecsolant', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpantprePeer::CODEMP, NpantprePeer::FECANT, NpantprePeer::MONANT, NpantprePeer::MONTO, NpantprePeer::SALPRE, NpantprePeer::POROTO, NpantprePeer::OBSERVACION, NpantprePeer::FECSOLANT, NpantprePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'fecant', 'monant', 'monto', 'salpre', 'poroto', 'observacion', 'fecsolant', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
-	
+
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Fecant' => 1, 'Monant' => 2, 'Monto' => 3, 'Observacion' => 4, 'Fecsolant' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (NpantprePeer::CODEMP => 0, NpantprePeer::FECANT => 1, NpantprePeer::MONANT => 2, NpantprePeer::MONTO => 3, NpantprePeer::OBSERVACION => 4, NpantprePeer::FECSOLANT => 5, NpantprePeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'fecant' => 1, 'monant' => 2, 'monto' => 3, 'observacion' => 4, 'fecsolant' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Fecant' => 1, 'Monant' => 2, 'Monto' => 3, 'Salpre' => 4, 'Poroto' => 5, 'Observacion' => 6, 'Fecsolant' => 7, 'Id' => 8, ),
+		BasePeer::TYPE_COLNAME => array (NpantprePeer::CODEMP => 0, NpantprePeer::FECANT => 1, NpantprePeer::MONANT => 2, NpantprePeer::MONTO => 3, NpantprePeer::SALPRE => 4, NpantprePeer::POROTO => 5, NpantprePeer::OBSERVACION => 6, NpantprePeer::FECSOLANT => 7, NpantprePeer::ID => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'fecant' => 1, 'monant' => 2, 'monto' => 3, 'salpre' => 4, 'poroto' => 5, 'observacion' => 6, 'fecsolant' => 7, 'id' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
-	
+
 	public static function getMapBuilder()
 	{
 		include_once 'lib/model/nomina/map/NpantpreMapBuilder.php';
 		return BasePeer::getMapBuilder('lib.model.nomina.map.NpantpreMapBuilder');
 	}
-	
+
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
@@ -80,7 +86,7 @@ abstract class BaseNpantprePeer {
 		}
 		return self::$phpNameMap;
 	}
-	
+
 	static public function translateFieldName($name, $fromType, $toType)
 	{
 		$toNames = self::getFieldNames($toType);
@@ -91,7 +97,7 @@ abstract class BaseNpantprePeer {
 		return $toNames[$key];
 	}
 
-	
+
 
 	static public function getFieldNames($type = BasePeer::TYPE_PHPNAME)
 	{
@@ -101,13 +107,13 @@ abstract class BaseNpantprePeer {
 		return self::$fieldNames[$type];
 	}
 
-	
+
 	public static function alias($alias, $column)
 	{
 		return str_replace(NpantprePeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
-	
+
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
@@ -118,6 +124,10 @@ abstract class BaseNpantprePeer {
 		$criteria->addSelectColumn(NpantprePeer::MONANT);
 
 		$criteria->addSelectColumn(NpantprePeer::MONTO);
+
+		$criteria->addSelectColumn(NpantprePeer::SALPRE);
+
+		$criteria->addSelectColumn(NpantprePeer::POROTO);
 
 		$criteria->addSelectColumn(NpantprePeer::OBSERVACION);
 
@@ -130,7 +140,7 @@ abstract class BaseNpantprePeer {
 	const COUNT = 'COUNT(npantpre.ID)';
 	const COUNT_DISTINCT = 'COUNT(DISTINCT npantpre.ID)';
 
-	
+
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -154,7 +164,7 @@ abstract class BaseNpantprePeer {
 						return 0;
 		}
 	}
-	
+
 	public static function doSelectOne(Criteria $criteria, $con = null)
 	{
 		$critcopy = clone $criteria;
@@ -165,12 +175,12 @@ abstract class BaseNpantprePeer {
 		}
 		return null;
 	}
-	
+
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
 		return NpantprePeer::populateObjects(NpantprePeer::doSelectRS($criteria, $con));
 	}
-	
+
 	public static function doSelectRS(Criteria $criteria, $con = null)
 	{
 		if ($con === null) {
@@ -186,35 +196,35 @@ abstract class BaseNpantprePeer {
 
 						return BasePeer::doSelect($criteria, $con);
 	}
-	
+
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
-	
+
 				$cls = NpantprePeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
-		
+
 			$obj = new $cls();
 			$obj->hydrate($rs);
 			$results[] = $obj;
-			
+
 		}
 		return $results;
 	}
-	
+
 	public static function getTableMap()
 	{
 		return Propel::getDatabaseMap(self::DATABASE_NAME)->getTable(self::TABLE_NAME);
 	}
 
-	
+
 	public static function getOMClass()
 	{
 		return NpantprePeer::CLASS_DEFAULT;
 	}
 
-	
+
 	public static function doInsert($values, $con = null)
 	{
 		if ($con === null) {
@@ -225,7 +235,7 @@ abstract class BaseNpantprePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(NpantprePeer::ID); 
+		$criteria->remove(NpantprePeer::ID);
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -241,7 +251,7 @@ abstract class BaseNpantprePeer {
 		return $pk;
 	}
 
-	
+
 	public static function doUpdate($values, $con = null)
 	{
 		if ($con === null) {
@@ -251,7 +261,7 @@ abstract class BaseNpantprePeer {
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
+			$criteria = clone $values;
 			$comparison = $criteria->getComparison(NpantprePeer::ID);
 			$selectCriteria->add(NpantprePeer::ID, $criteria->remove(NpantprePeer::ID), $comparison);
 
@@ -262,7 +272,7 @@ abstract class BaseNpantprePeer {
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
 
-	
+
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
@@ -279,7 +289,7 @@ abstract class BaseNpantprePeer {
 		}
 	}
 
-	
+
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
@@ -297,10 +307,10 @@ abstract class BaseNpantprePeer {
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
-		$affectedRows = 0; 
+		$affectedRows = 0;
 		try {
 									$con->begin();
-			
+
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
 			return $affectedRows;
@@ -310,7 +320,7 @@ abstract class BaseNpantprePeer {
 		}
 	}
 
-	
+
 	public static function doValidate(Npantpre $obj, $cols = null)
 	{
 		$columns = array();
@@ -345,7 +355,7 @@ abstract class BaseNpantprePeer {
     return $res;
 	}
 
-	
+
 	public static function retrieveByPK($pk, $con = null)
 	{
 		if ($con === null) {
@@ -362,7 +372,7 @@ abstract class BaseNpantprePeer {
 		return !empty($v) > 0 ? $v[0] : null;
 	}
 
-	
+
 	public static function retrieveByPKs($pks, $con = null)
 	{
 		if ($con === null) {
@@ -380,7 +390,7 @@ abstract class BaseNpantprePeer {
 		return $objs;
 	}
 
-} 
+}
 if (Propel::isInit()) {
 			try {
 		BaseNpantprePeer::getMapBuilder();

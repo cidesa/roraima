@@ -4,71 +4,82 @@
 abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $codmotfal;
 
 
-	
+
 	protected $desmotfal;
 
 
-	
+
 	protected $causa;
 
 
-	
+
 	protected $esremun;
 
 
-	
+
+	protected $tipdia;
+
+
+
 	protected $id;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-  
+
   public function getCodmotfal()
   {
 
     return trim($this->codmotfal);
 
   }
-  
+
   public function getDesmotfal()
   {
 
     return trim($this->desmotfal);
 
   }
-  
+
   public function getCausa()
   {
 
     return trim($this->causa);
 
   }
-  
+
   public function getEsremun()
   {
 
     return $this->esremun;
 
   }
-  
+
+  public function getTipdia()
+  {
+
+    return trim($this->tipdia);
+
+  }
+
   public function getId()
   {
 
     return $this->id;
 
   }
-	
+
 	public function setCodmotfal($v)
 	{
 
@@ -76,9 +87,9 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
         $this->codmotfal = $v;
         $this->modifiedColumns[] = NpmotfalPeer::CODMOTFAL;
       }
-  
-	} 
-	
+
+	}
+
 	public function setDesmotfal($v)
 	{
 
@@ -86,9 +97,9 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
         $this->desmotfal = $v;
         $this->modifiedColumns[] = NpmotfalPeer::DESMOTFAL;
       }
-  
-	} 
-	
+
+	}
+
 	public function setCausa($v)
 	{
 
@@ -96,9 +107,9 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
         $this->causa = $v;
         $this->modifiedColumns[] = NpmotfalPeer::CAUSA;
       }
-  
-	} 
-	
+
+	}
+
 	public function setEsremun($v)
 	{
 
@@ -106,9 +117,19 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
         $this->esremun = $v;
         $this->modifiedColumns[] = NpmotfalPeer::ESREMUN;
       }
-  
-	} 
-	
+
+	}
+
+	public function setTipdia($v)
+	{
+
+    if ($this->tipdia !== $v) {
+        $this->tipdia = $v;
+        $this->modifiedColumns[] = NpmotfalPeer::TIPDIA;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -116,9 +137,9 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
         $this->id = $v;
         $this->modifiedColumns[] = NpmotfalPeer::ID;
       }
-  
-	} 
-  
+
+	}
+
   public function hydrate(ResultSet $rs, $startcol = 1)
   {
     try {
@@ -131,7 +152,9 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 
       $this->esremun = $rs->getBoolean($startcol + 3);
 
-      $this->id = $rs->getInt($startcol + 4);
+      $this->tipdia = $rs->getString($startcol + 4);
+
+      $this->id = $rs->getInt($startcol + 5);
 
       $this->resetModified();
 
@@ -139,7 +162,7 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 5; 
+            return $startcol + 6;
     } catch (Exception $e) {
       throw new PropelException("Error populating Npmotfal object", $e);
     }
@@ -150,8 +173,8 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
   {
 
   }
-    
-  
+
+
   public function __call($m, $a)
     {
       $prefijo = substr($m,0,3);
@@ -165,7 +188,7 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 
     }
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -187,7 +210,7 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -209,7 +232,7 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -219,8 +242,8 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = NpmotfalPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpmotfalPeer::doUpdate($this, $con);
@@ -230,17 +253,17 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -253,7 +276,7 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -275,14 +298,14 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = NpmotfalPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -299,6 +322,9 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 				return $this->getEsremun();
 				break;
 			case 4:
+				return $this->getTipdia();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -306,7 +332,7 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = NpmotfalPeer::getFieldNames($keyType);
@@ -315,19 +341,20 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 			$keys[1] => $this->getDesmotfal(),
 			$keys[2] => $this->getCausa(),
 			$keys[3] => $this->getEsremun(),
-			$keys[4] => $this->getId(),
+			$keys[4] => $this->getTipdia(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = NpmotfalPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -344,11 +371,14 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 				$this->setEsremun($value);
 				break;
 			case 4:
+				$this->setTipdia($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = NpmotfalPeer::getFieldNames($keyType);
@@ -357,10 +387,11 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setDesmotfal($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCausa($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setEsremun($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[4], $arr)) $this->setTipdia($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(NpmotfalPeer::DATABASE_NAME);
@@ -369,12 +400,13 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpmotfalPeer::DESMOTFAL)) $criteria->add(NpmotfalPeer::DESMOTFAL, $this->desmotfal);
 		if ($this->isColumnModified(NpmotfalPeer::CAUSA)) $criteria->add(NpmotfalPeer::CAUSA, $this->causa);
 		if ($this->isColumnModified(NpmotfalPeer::ESREMUN)) $criteria->add(NpmotfalPeer::ESREMUN, $this->esremun);
+		if ($this->isColumnModified(NpmotfalPeer::TIPDIA)) $criteria->add(NpmotfalPeer::TIPDIA, $this->tipdia);
 		if ($this->isColumnModified(NpmotfalPeer::ID)) $criteria->add(NpmotfalPeer::ID, $this->id);
 
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(NpmotfalPeer::DATABASE_NAME);
@@ -384,19 +416,19 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -408,13 +440,15 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 
 		$copyObj->setEsremun($this->esremun);
 
+		$copyObj->setTipdia($this->tipdia);
+
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -423,7 +457,7 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -432,4 +466,4 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-} 
+}

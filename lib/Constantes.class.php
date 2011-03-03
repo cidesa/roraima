@@ -580,5 +580,10 @@ public static function PagoDoble()
     return array('Fiel Cumplimiento' => 'Fiel Cumplimiento', 'Anticipo' => 'Anticipo', 'Laboral' => 'Laboral', 'Garantía' => 'Garantía', 'Sostenimiento de Oferta' => 'Sostenimiento de Oferta');
   }
 
+   public static function listaStatusEmp()
+   {
+    return array('E' => 'Empleado', 'O' => 'Obrero');
+   }
+
 
 }

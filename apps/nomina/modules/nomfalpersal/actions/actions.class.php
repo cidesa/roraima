@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomfalpersal
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 42891 2011-03-03 05:42:10Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -37,7 +37,7 @@ class nomfalpersalActions extends autonomfalpersalActions
   }
 
 	/**
-   * Actualiza la informacion que viene de la vista 
+   * Actualiza la informacion que viene de la vista
    * luego de un get/post en el objeto principal del modelo base del formulario.
    *
    */
@@ -137,7 +137,7 @@ class nomfalpersalActions extends autonomfalpersalActions
      if (isset($npfalper['nrodia']))
     {
       $this->npfalper->setNrodia($npfalper['nrodia']);
-  }
+    }
     if (isset($npfalper['nrohoras']))
     {
       $this->npfalper->setNrohoras($npfalper['nrohoras']);
@@ -165,6 +165,29 @@ class nomfalpersalActions extends autonomfalpersalActions
 	 {
 	 	$dato=NpmotfalPeer::getDesmotfal_text(trim($this->getRequestParameter('codigo')));
 	 	$output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	 	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	 	return sfView::HEADER_ONLY;
+	 }
+         if ($this->getRequestParameter('ajax')=='3')
+	 {
+                $fecdes=$this->getRequestParameter('fecdes');
+                $fechas=$this->getRequestParameter('fechas');
+                $codmot=$this->getRequestParameter('codmot');
+                $codemp=$this->getRequestParameter('codemp');
+                $dato = H::GetX('Codmotfal','Npmotfal','Tipdia',$codmot);
+	 	$sql="select
+                        case when '$dato'='H' then
+                                diashab(codnom,to_date('$fecdes','dd/mm/yyyy'),to_date('$fechas','dd/mm/yyyy'))
+                        else
+                                to_date('$fechas','dd/mm/yyyy')-to_date('$fecdes','dd/mm/yyyy')
+                        end
+                        as dias
+                        from npasicaremp where codemp='$codemp' and status='V'";
+                if(H::BuscarDatos($sql, $rs))
+                    $dias = $rs[0]['dias'];
+                else
+                    $dias=null;
+	 	$output = '[["npfalper_nrodia","'.$dias.'",""]]';
 	 	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 	 	return sfView::HEADER_ONLY;
 	 }

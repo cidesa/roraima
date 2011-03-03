@@ -5,9 +5,9 @@
  *
  * @package    Roraima
  * @subpackage nomfalperper
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 42869 2011-03-02 23:00:45Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
@@ -27,11 +27,11 @@ class nomfalperperActions extends autonomfalperperActions
   public function executeEdit()
 	{
 		$this->codigoemp = $this->getRequestParameter('codigoemp');
-	    $this->nphojint = $this->getNphojintOrCreate();		
-		if($this->codigoemp!='')		
+	    $this->nphojint = $this->getNphojintOrCreate();
+		if($this->codigoemp!='')
 			if($this->nphojint->getCodemp()=='')
 		 		 $this->nphojint->setCodemp($this->codigoemp);
-		
+
 
 	    $this->pagerNpfalper = NpfalperPeer::getPagerByCodemp($this->nphojint->getCodemp(),$this->getRequestParameter('page',1));
 
@@ -69,8 +69,18 @@ $this->Bitacora('Guardo');
 	 if ($this->getRequestParameter('ajax')=='1')
 	 {
 	 	$dato=NphojintPeer::getNomemp(trim($this->getRequestParameter('codigo')));
-	 	$this->configGrid($this->getRequestParameter('codigo'));
-	 	$output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+                $c = new Criteria();
+                $c->addJoin(NpasicarempPeer::CODCAR,NpcargosPeer::CODCAR);
+                $c->add(NpasicarempPeer::CODEMP,trim($this->getRequestParameter('codigo')));
+                $c->add(NpasicarempPeer::STATUS,'V');
+                $per = NpasicarempPeer::doSelectOne($c);
+                $cargo='';
+                if($per)
+                    $cargo = $per->getNomcar();
+                $codniv = H::GetX_vacio('Codemp','Nphojint','Codniv',trim($this->getRequestParameter('codigo')));
+                $nivel= H::GetX_vacio('Codniv','Npestorg','Desniv',$codniv);
+	 	$this->configGrid($this->getRequestParameter('codigo'),$this->getRequestParameter('codmot'));
+	 	$output = '[["'.$cajtexmos.'","'.$dato.'",""],["nphojint_nomcar","'.$cargo.'",""],["nphojint_desniv","'.$nivel.'",""]]';
 	 	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 
 	 }
@@ -83,11 +93,17 @@ $this->Bitacora('Guardo');
    * los datos del grid.
    *
    */
-  public function configGrid($codigo='')
+  public function configGrid($codigo='',$codmot='')
   {
 
-		$sql = "select a.id as id,to_char(a.fecdes,'dd/mm/yyyy') as fecdes,to_char(a.fechas,'dd/mm/yyyy') as fechas,a.codmot as codmot,b.desmotfal as desmotfal
-			   from npfalper a,npmotfal b where codemp='$codigo' and a.codmot=b.codmotfal ";
+      if($codmot!='')
+          $sqlmot = "a.codmot='$codmot' and";
+      else
+          $sqlmot = "";
+
+		$sql = "select a.id as id,to_char(a.fecdes,'dd/mm/yyyy') as fecdes,to_char(a.fechas,'dd/mm/yyyy') as fechas,a.codmot as codmot,b.desmotfal as desmotfal, a.nrodia
+			   from npfalper a,npmotfal b where
+                           codemp='$codigo' and $sqlmot a.codmot=b.codmotfal ";
 	    if (Herramientas::BuscarDatos($sql,&$result))
 			$per = $result;
 		else
@@ -104,27 +120,27 @@ $this->Bitacora('Guardo');
 		$opciones->setFilas(0);
 		$opciones->setTabla('Npfalper');
 		$opciones->setName('a');
-		$opciones->setAnchoGrid(1000);
+		$opciones->setAnchoGrid(900);
 		$opciones->setTitulo('Datos de los Permisos');
 		$opciones->setHTMLTotalFilas(' ');
 
 		$col1 = new Columna('Fecha de Salida');
 		$col1->setNombreCampo('fecdes');
 		$col1->setTipo(Columna::TEXTO);
-		$col1->setHTML(' ');
+		$col1->setHTML(' type="text" size="10" readonly="true" ');
 
 		$col2 = new Columna('Fecha de Llegada');
 		$col2->setNombreCampo('fechas');
 		$col2->setTipo(Columna::TEXTO);
-		$col2->setHTML(' ');
+		$col2->setHTML(' type="text" size="10" readonly="true" ');
 
 
-		$col3 = new Columna('Cod. Motivo');
+		$col3 = new Columna('Nro Dias');
 		$col3->setTipo(Columna::TEXTO);
 
 		$col3->setAlineacionObjeto(Columna::CENTRO);
 		$col3->setAlineacionContenido(Columna::CENTRO);
-		$col3->setNombreCampo('codmot');
+		$col3->setNombreCampo('nrodia');
 		$col3->setHTML('type="text" size="5" readonly="true"');
 
 		$col4 = new Columna('Motivo Salida');

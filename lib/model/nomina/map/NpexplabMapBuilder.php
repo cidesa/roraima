@@ -4,25 +4,25 @@
 
 class NpexplabMapBuilder {
 
-	
+
 	const CLASS_NAME = 'lib.model.nomina.map.NpexplabMapBuilder';
 
-	
+
 	private $dbMap;
 
-	
+
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-	
+
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-	
+
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -64,7 +64,9 @@ class NpexplabMapBuilder {
 
 		$tMap->addColumn('DEDICA', 'Dedica', 'string', CreoleTypes::VARCHAR, false, 100);
 
+		$tMap->addColumn('STATUS', 'Status', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	} 
-} 
+	}
+}

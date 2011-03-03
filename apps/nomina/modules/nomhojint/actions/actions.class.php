@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage nomhojint
- * @author     $Author: dmartinez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 38281 2010-05-19 21:05:34Z dmartinez $
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 42879 2011-03-03 04:11:42Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -61,6 +61,7 @@ class nomhojintActions extends autonomhojintActions
          $this->coderr='N0001';
          return false;
      }
+
 
      if (isset($nphojint['prinom']) && isset($nphojint['prinom']))
 	 {
@@ -1494,6 +1495,13 @@ $this->Bitacora('Guardo');
     $col6->setCombo(Constantes::listaTiporg());
     $col6->setHTML(' ');
 
+    $col6a = new Columna('Estatus');
+    $col6a->setTipo(Columna::COMBO);
+    $col6a->setEsGrabable(true);
+    $col6a->setNombreCampo('status');
+    $col6a->setCombo(Constantes::listaStatusEmp());
+    $col6a->setHTML(' ');
+
 	$col7 = new Columna('Monto Prestaciones');
     $col7->setTipo(Columna::MONTO);
     $col7->setEsGrabable(true);
@@ -1510,6 +1518,7 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col4);
     $opciones->addColumna($col5);
     $opciones->addColumna($col6);
+    $opciones->addColumna($col6a);
 	$opciones->addColumna($col7);
 
     $this->obj3 = $opciones->getConfig($per);
@@ -1871,7 +1880,7 @@ $this->Bitacora('Guardo');
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(true);
     $opciones->setTabla('Npinfdoc');
-    $opciones->setAnchoGrid(600);
+    $opciones->setAnchoGrid(900);
     $opciones->setAncho(600);
     $opciones->setFilas(20);
     $opciones->setName('g');
@@ -1894,7 +1903,7 @@ $this->Bitacora('Guardo');
     $col2->setAlineacionObjeto(Columna::CENTRO);
     $col2->setAlineacionContenido(Columna::CENTRO);
     $col2->setNombreCampo('desdoc');
-    $col2->setHTML('type="text" size="60" readonly=true');
+    $col2->setHTML('type="text" size="110" readonly=true');
 
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
@@ -2140,6 +2149,8 @@ $this->Bitacora('Guardo');
             'nphojint{obsembret}' => 'Datos:',
             'nphojint{fecmat}' => 'Fecha en que se Caso:',
             'nphojint{fecingsso}' => 'Fecha Inscrip. SSO:',
+            'nphojint{nomcar}' => 'Cargo:',
+            'nphojint{sueldo}' => 'Sueldo Básico:',
 
 
         );
@@ -2234,6 +2245,8 @@ $this->Bitacora('Guardo');
         'nphojint{obsembret}' => 'Datos:',
             'nphojint{fecmat}' => 'Fecha en que se Caso:',
             'nphojint{fecingsso}' => 'Fecha Inscrip. SSO:',
+            'nphojint{nomcar}' => 'Cargo:',
+            'nphojint{sueldo}' => 'Sueldo Básico:',
 
     );
   }
