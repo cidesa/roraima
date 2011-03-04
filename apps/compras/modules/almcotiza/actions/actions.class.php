@@ -337,6 +337,7 @@ $this->Bitacora('Guardo');
           {
               $tipprove='P';
           }
+          if ($tipprove=='P') { $monrgo='0,00'; }
 
           $this->configGrid($this->getRequestParameter('codigo'),2,$tipprove);
 
