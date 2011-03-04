@@ -252,7 +252,7 @@ $this->Bitacora('Guardo');
 	          $dato=CaproveePeer::getNompro($this->getRequestParameter('codigo'));
                   $tipo=H::getX_vacio('RIFPRO', 'Caprovee', 'Tipo', $this->getRequestParameter('codigo'));
                   if ($tipo=='P')
-	            $javascript="$('cacotiza_monrec').readOnly=true;";
+	            $javascript="$('cacotiza_monrec').value='0,00'; $('cacotiza_monrec').readOnly=true;";
                   else
 	          $javascript="";
 		   }
@@ -260,7 +260,7 @@ $this->Bitacora('Guardo');
 			 $dato=CaproveePeer::getNompro($this->getRequestParameter('codigo'));
                          $tipo=H::getX_vacio('RIFPRO', 'Caprovee', 'Tipo', $this->getRequestParameter('codigo'));
                           if ($tipo=='P')
-                            $javascript="$('cacotiza_monrec').readOnly=true;";
+                            $javascript="$('cacotiza_monrec').value='0,00'; $('cacotiza_monrec').readOnly=true;";
                           else
 	         $javascript="";
 
