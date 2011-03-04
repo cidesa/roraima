@@ -6,7 +6,7 @@
  * @package    Roraima
  * @subpackage nomfalpersal
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 42891 2011-03-03 05:42:10Z cramirez $
+ * @version SVN: $Id: actions.class.php 42919 2011-03-03 18:32:45Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -184,10 +184,29 @@ class nomfalpersalActions extends autonomfalpersalActions
                         as dias
                         from npasicaremp where codemp='$codemp' and status='V'";
                 if(H::BuscarDatos($sql, $rs))
-                    $dias = $rs[0]['dias'];
+                    $dias = $rs[0]['dias']-1;
                 else
                     $dias=null;
 	 	$output = '[["npfalper_nrodia","'.$dias.'",""]]';
+	 	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	 	return sfView::HEADER_ONLY;
+	 }
+         if ($this->getRequestParameter('ajax')=='4')
+	 {
+                $fecdes=$this->getRequestParameter('fecdes');
+                $nrodia=$this->getRequestParameter('nrodia');
+                $codmot=$this->getRequestParameter('codmot');
+                $codemp=$this->getRequestParameter('codemp');
+                $dato = H::GetX('Codmotfal','Npmotfal','Tipdia',$codmot);
+	 	$sql="select to_char(fecharetorno(to_date('$fecdes','dd/mm/yyyy'),codnom,$nrodia,'$dato'),'dd/mm/yyyy') as fecha
+                        from npasicaremp
+                        where codemp='$codemp' and status='V'";
+
+                if(H::BuscarDatos($sql, $rs))
+                    $fec = $rs[0]['fecha'];
+                else
+                    $fec=null;
+	 	$output = '[["npfalper_fechas","'.$fec.'",""]]';
 	 	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 	 	return sfView::HEADER_ONLY;
 	 }

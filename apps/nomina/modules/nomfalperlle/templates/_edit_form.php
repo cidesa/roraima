@@ -5,7 +5,7 @@
  * @package    Roraima
  * @subpackage vistas
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id: _edit_form.php 42892 2011-03-03 05:42:44Z cramirez $
+ * @version    SVN: $Id: _edit_form.php 42917 2011-03-03 18:32:11Z cramirez $
  */
 // date: 2007/03/22 20:35:46
 ?>
@@ -111,6 +111,7 @@
   <?php $value = object_input_tag($npfalper, 'getNrodia', array (
   'size' => 7,
   'control_name' => 'npfalper[nrodia]',
+  'onBlur' => "toAjax(4,getUrlModulo()+'/ajax',this.value,'','&fecdes='+$('npfalper_fecdes').value+'&nrodia='+$('npfalper_nrodia').value+'&codmot='+$('npfalper_codmot').value+'&codemp='+$('npfalper_codemp').value)",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 

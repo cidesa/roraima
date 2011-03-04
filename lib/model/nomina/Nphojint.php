@@ -8,7 +8,7 @@
  * @package    Roraima
  * @subpackage lib.model.nomina
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Nphojint.php 42878 2011-03-03 03:56:36Z cramirez $
+ * @version SVN: $Id: Nphojint.php 42921 2011-03-03 18:34:11Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -424,10 +424,20 @@ class Nphojint extends BaseNphojint
          if(H::BuscarDatos($sql,$rs))
             return H::FormatoMonto($rs[0]['sueldo']);
          else
-            return '0';
+         {
+             $sql="select A.suecar from npasicaremp b,npcargos a where a.codcar=b.codcar and codemp='".$this->codemp."' and status='V'";
+             if(H::BuscarDatos($sql,$rs))
+                return H::FormatoMonto($rs[0]['suecar']);
+            else
+                return '0';
+         }
       } catch (Exception $exc) {
           #echo $exc->getTraceAsString();
-          return '0';
+          $sql="select A.suecar from npasicaremp b,npcargos a where a.codcar=b.codcar and codemp='".$this->codemp."' and status='V'";
+          if(H::BuscarDatos($sql,$rs))
+            return H::FormatoMonto($rs[0]['suecar']);
+          else
+            return '0';
       }
 
 
