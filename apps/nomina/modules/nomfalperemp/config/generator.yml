@@ -15,6 +15,8 @@ generator:
 
     list:
       title:          Registro de Faltas y Permisos por Empleado
+      fields:
+        codemp: { name: Empleado, params: maxlength=16 size=16 }
       filters:        [codemp ]
       display:        [=codemp, nomemp ]
       object_actions:
