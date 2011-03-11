@@ -219,6 +219,7 @@ $this->Bitacora('Guardo');
     		$reg= OptipretPeer::doSelectOne($a);
     		if ($reg){
     			$reg->setCodcon($optipret->getCodcon());
+                        $reg->setUnitri($optipret->getunitri());
     			$reg->save();
     		}
     	}else $optipret->save();
