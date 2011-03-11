@@ -17,7 +17,7 @@ class Bndismue extends BaseBndismue
 {
   public function getDesmue()
   {
-    return Herramientas::getX('Codmue','Bnregmue','Desmue',self::getCodmue());
+    return Herramientas::getXx('Bnregmue', array('CODMUE','CODACT'), array(self::getCodmue(),self::getCodact()), 'Desmue');
    }
 
   public function getDesmot()
