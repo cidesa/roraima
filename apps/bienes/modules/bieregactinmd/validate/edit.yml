@@ -209,8 +209,8 @@ Validator_desinm:
     param:
         min:       2
         min_error: La descripción no puede tener menos de 2 caracteres
-        max:       250
-        max_error: La descripción no puede pasar mas de 250 caracteres
+        max:       1000
+        max_error: La descripción no puede pasar mas de 1000 caracteres
 
 
 Validator_deninm:

@@ -72,7 +72,7 @@
   <?php endif; ?>
 
   <?php $value = object_textarea_tag($bnreginm, 'getDesinm', array (
-  'maxlength' => 250,
+  'maxlength' => 1000,
   'control_name' => 'bnreginm[desinm]',
       'cols' => '78'
 )); echo $value ? $value : '&nbsp;' ?>
