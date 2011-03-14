@@ -677,7 +677,7 @@ propel:
       required: true
     desinm:
       type: VARCHAR
-      size: 250
+      size: 1000
     codpro:
       type: VARCHAR
       size: 20
