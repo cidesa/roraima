@@ -6,7 +6,7 @@
  * @package    Roraima
  * @subpackage nomhojint
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: actions.class.php 42879 2011-03-03 04:11:42Z cramirez $
+ * @version SVN: $Id: actions.class.php 43005 2011-03-14 15:57:07Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -1283,9 +1283,36 @@ $this->Bitacora('Guardo');
     $col3->setNombreCampo('observ');
     $col3->setHTML('type="text" size="30" ');
 
+    $col4 = new Columna('Monto Liquidación');
+    $col4->setTipo(Columna::MONTO);
+    $col4->setEsGrabable(true);
+    $col4->setAlineacionObjeto(Columna::CENTRO);
+    $col4->setAlineacionContenido(Columna::CENTRO);
+    $col4->setNombreCampo('monliq');
+    $col4->setHTML('type="text" size="10" ');
+
+    $col5 = new Columna('Fecha Pago');
+    $col5->setTipo(Columna::FECHA);
+    $col5->setEsGrabable(true);
+    $col5->setHTML(' ');
+    $col5->setVacia(true);
+    $col5->setNombreCampo('fecpag');
+
+    $col6 = new Columna('Estatus');
+    $col6->setTipo(Columna::COMBO);
+    $col6->setCombo(Constantes::listaStatusEmp());
+    $col6->setEsGrabable(true);
+    $col6->setAlineacionObjeto(Columna::CENTRO);
+    $col6->setAlineacionContenido(Columna::CENTRO);
+    $col6->setNombreCampo('status');
+    $col6->setHTML(' ');
+
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
+    $opciones->addColumna($col4);
+    $opciones->addColumna($col5);
+    $opciones->addColumna($col6);
 
     $this->obj = $opciones->getConfig($per);
   }

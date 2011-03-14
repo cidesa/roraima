@@ -2988,7 +2988,16 @@ propel:
       required: true
     observ:
       type: VARCHAR
-      size: 250
+      size: 500
+    monliq:
+      type: NUMERIC
+      size: 20
+      scale: 2
+    fecpag:
+      type: DATE
+    status:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true
