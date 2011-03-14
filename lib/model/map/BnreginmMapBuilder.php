@@ -38,7 +38,7 @@ class BnreginmMapBuilder {
 
 		$tMap->addColumn('CODINM', 'Codinm', 'string', CreoleTypes::VARCHAR, true, 20);
 
-		$tMap->addColumn('DESINM', 'Desinm', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('DESINM', 'Desinm', 'string', CreoleTypes::VARCHAR, false, 1000);
 
 		$tMap->addColumn('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, false, 20);
 
