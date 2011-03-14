@@ -42,9 +42,24 @@
   </th>
   <th>
  <fieldset><legend><?php echo __('Tipo de Persona')?></legend>
-      <div class="form-row"><?php if($opbenefi->getTipper()=='N') $val = true; else $val=false; ?>
-      <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'."Natural ".radiobutton_tag('opbenefi[tipper]', 'N', $val).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' ?>
-      <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'."Jurídico ".radiobutton_tag('opbenefi[tipper]', 'J', !$val).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' ?>
+      <div class="form-row">
+ <?php if($opbenefi->getTipper()=='N') { ?>
+      <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'."Natural ".radiobutton_tag('opbenefi[tipper]', 'N', true).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' ?>
+      <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'."Jurídico ".radiobutton_tag('opbenefi[tipper]', 'J', false).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' ?>
+      <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'."Gubernamental ".radiobutton_tag('opbenefi[tipper]', 'G', false).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' ?>
+  <?php } elseif($opbenefi->getTipper()=='J') { ?>
+      <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'."Natural ".radiobutton_tag('opbenefi[tipper]', 'N', false).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' ?>
+      <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'."Jurídico ".radiobutton_tag('opbenefi[tipper]', 'J', true).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' ?>
+      <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'."Gubernamental ".radiobutton_tag('opbenefi[tipper]', 'G', false).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' ?>
+ <?php } elseif($opbenefi->getTipper()=='G') { ?>
+      <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'."Natural ".radiobutton_tag('opbenefi[tipper]', 'N', false).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' ?>
+      <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'."Jurídico ".radiobutton_tag('opbenefi[tipper]', 'J', false).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' ?>
+      <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'."Gubernamental ".radiobutton_tag('opbenefi[tipper]', 'G', true).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' ?>
+ <?php } else { ?>
+      <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'."Natural ".radiobutton_tag('opbenefi[tipper]', 'N', true).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' ?>
+      <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'."Jurídico ".radiobutton_tag('opbenefi[tipper]', 'J', false).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' ?>
+      <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'."Gubernamental ".radiobutton_tag('opbenefi[tipper]', 'G', false).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' ?>
+<?php } ?>
       </div>
       </fieldset>
   </th>

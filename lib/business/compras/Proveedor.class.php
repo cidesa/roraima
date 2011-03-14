@@ -244,6 +244,7 @@ class Proveedor
           $opbenefi->setNitben($caprovee->getNitpro());
           $opbenefi->setDirben($caprovee->getDirpro());
           $opbenefi->setTelben($caprovee->getTelpro());
+          $opbenefi->setTipper($caprovee->getNitpro());
           $opbenefi->save();
 
           return -1;
@@ -270,6 +271,7 @@ class Proveedor
           $opbenefi->setCodperconadi($caprovee->getCodperconadi());
           $opbenefi->setCodpercontra($caprovee->getCodordcontra());
           $opbenefi->setCodpercontra($caprovee->getCodpercontra());
+          $opbenefi->setTipper($caprovee->getNitpro());
 
           $opbenefi->save();
 
