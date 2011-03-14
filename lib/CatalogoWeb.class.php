@@ -6851,5 +6851,17 @@ public function Bnubica_Almordcom2() {
                                 LimemoranPeer :: NOMPRO => 'Proyecto',
                         );
         }
+
+	public function Tscheemi_Tesdefcueban($params = array ()) {
+		$numcue = $params[0];
+		$this->c = new Criteria();
+		$this->c->add(TscheemiPeer :: NUMCUE, $numcue);
+
+		$this->columnas = array (
+			TscheemiPeer :: NUMCHE => 'N° de Cheque',
+			TscheemiPeer :: FECEMI => 'Fecha de Emisión',
+                        TscheemiPeer :: CEDRIF => 'Beneficiario'
+		);
+}
 }
 ?>

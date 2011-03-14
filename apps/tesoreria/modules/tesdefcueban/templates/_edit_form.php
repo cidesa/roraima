@@ -232,8 +232,14 @@
         'condition' => "$('tsdefban_fecape').value != '' && $('id').value == ''",
           'with' => "'ajax=6&cuenta='+$('tsdefban_numcue').value+'&codigo='+this.value",
         )),
-),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?><?php echo input_hidden_tag('valida', '') ?>
+),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?><?php echo input_hidden_tag('valida', '') ?> <?php echo input_hidden_tag('numche2', '') ?>
+
     </div>
+</th>
+<th>
+&nbsp;
+ <?php echo  button_to_popup('Cheques Emitidos',cross_app_link_to('herramientas','catalogo').'/metodo/Tscheemi_Tesdefcueban/clase/Tscheemi/frame/sf_admin_edit_form/obj1/tsdefban_numche2/campo1/numche/param1/'.$tsdefban->getNumcue())?>
+&nbsp;
 </th>
 <?php if ($tsdefban->getMossalmin()=='S') {?>
 <th>

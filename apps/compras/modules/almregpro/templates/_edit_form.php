@@ -78,26 +78,65 @@
  <fieldset id="sf_fieldset_none" class="">
     <legend><h2><?php echo  __('Tipo de Persona:') ?></h2></legend>
     <div class="form-row"  align="left">
-   <?
-if ($caprovee->getNitpro()=='J')  {
+<?php $cametiper=H::getConfApp2('cametiper', 'compras', 'almregpro');
+if ($cametiper=='S') { ?>
+   <? if ($caprovee->getNitpro()=='J')  {
   ?><?php echo radiobutton_tag('caprovee[nitpro]', 'J', true, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false ))." Jurídica".'<br> ';
       echo radiobutton_tag('caprovee[nitpro]', 'N', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Natural".'<br> ';
-      echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Gubernamental".'<br>';  ?>
+      echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Gubernamental".'<br>';
+      echo radiobutton_tag('caprovee[nitpro]', 'C', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Cooperativa".'<br>';?>
 
 <? }else if ($caprovee->getNitpro()=='N'){?>
   <?php echo radiobutton_tag('caprovee[nitpro]', 'J', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Jurídica".'<br>';
   echo radiobutton_tag('caprovee[nitpro]', 'N', true, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Natural".'<br>';
-  echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Gubernamental".'<br>';?>
+  echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Gubernamental".'<br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'C', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Cooperativa".'<br>';?>
 <? }else if ($caprovee->getNitpro()=='G'){?>
   <?php echo radiobutton_tag('caprovee[nitpro]', 'J', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Jurídica".'<br>';
   echo radiobutton_tag('caprovee[nitpro]', 'N', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Natural".'<br>';
-  echo radiobutton_tag('caprovee[nitpro]', 'G', true, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Gubernamental".'<br>';?>
-
+  echo radiobutton_tag('caprovee[nitpro]', 'G', true, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Gubernamental".'<br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'C', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Cooperativa".'<br>';?>
+<? }else if ($caprovee->getNitpro()=='C'){?>
+  <?php echo radiobutton_tag('caprovee[nitpro]', 'J', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Jurídica".'<br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'N', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Natural".'<br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Gubernamental".'<br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'C', true, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Cooperativa".'<br>';?>
 <? } else { ?>
     <?php echo radiobutton_tag('caprovee[nitpro]', 'J', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Jurídica".'<br>';
     echo radiobutton_tag('caprovee[nitpro]', 'N', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Natural".'<br>';
-  echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false ))." Gubernamental".'<br>';  ?>
+  echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false ))." Gubernamental".'<br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'C', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Cooperativa".'<br>'; ?>
   <? } ?>
+<?php }else { ?>
+   <? if ($caprovee->getNitpro()=='J')  {
+  ?><?php echo radiobutton_tag('caprovee[nitpro]', 'J', true, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false ))." Jurídica".'<br> ';
+      echo radiobutton_tag('caprovee[nitpro]', 'N', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Natural".'<br> ';
+      echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Gubernamental".'<br>';
+      ?>
+
+<? }else if ($caprovee->getNitpro()=='N'){?>
+  <?php echo radiobutton_tag('caprovee[nitpro]', 'J', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Jurídica".'<br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'N', true, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Natural".'<br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Gubernamental".'<br>';
+  ?>
+<? }else if ($caprovee->getNitpro()=='G'){?>
+  <?php echo radiobutton_tag('caprovee[nitpro]', 'J', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Jurídica".'<br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'N', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Natural".'<br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'G', true, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Gubernamental".'<br>';
+  ?>
+<? }else if ($caprovee->getNitpro()=='C'){?>
+  <?php echo radiobutton_tag('caprovee[nitpro]', 'J', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Jurídica".'<br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'N', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Natural".'<br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Gubernamental".'<br>';
+  ?>
+<? } else { ?>
+    <?php echo radiobutton_tag('caprovee[nitpro]', 'J', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Jurídica".'<br>';
+    echo radiobutton_tag('caprovee[nitpro]', 'N', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false))." Natural".'<br>';
+  echo radiobutton_tag('caprovee[nitpro]', 'G', false, array('onClick' => 'colocaletra(this.value);', 'readonly'  =>  $caprovee->getId()!='' ? true : false ))." Gubernamental".'<br>';
+   ?>
+  <? } ?>
+<?php } ?>
+
  </div> </fieldset>
  </th>
    <th>
@@ -148,6 +187,28 @@ if ($caprovee->getNitpro()=='J')  {
  <th><fieldset id="sf_fieldset_none" class="">
     <legend><h2><?php echo  __('Actividad Profesional :') ?></h2></legend>
     <div class="form-row"  align="left">
+<?php $cametiact=H::getConfApp2('cametiact', 'compras', 'almregpro');
+  if ($cametiact=='S') { ?>
+    <?  if ($caprovee->getTipo()=='P'){
+      echo radiobutton_tag('caprovee[tipo]','P', true) .'&nbsp;&nbsp;'. "Cooperativa"."<br>";
+      echo radiobutton_tag('caprovee[tipo]','C', false) .'&nbsp;&nbsp;'. "Contratista(Obras)"."<br>";
+      echo radiobutton_tag('caprovee[tipo]','O', false) .'&nbsp;&nbsp;'. "Proveedor(Bienes y Servicios)"."<br>";
+
+    }elseif ($caprovee->getTipo()=='C'){
+      echo radiobutton_tag('caprovee[tipo]','P', false) .'&nbsp;&nbsp;'. "Cooperativa"."<br>";
+      echo radiobutton_tag('caprovee[tipo]','C', true) .'&nbsp;&nbsp;'. "Contratista(Obras)"."<br>";
+      echo radiobutton_tag('caprovee[tipo]','O', false) .'&nbsp;&nbsp;'. "Proveedor(Bienes y Servicios)"."<br>";
+    }elseif ($caprovee->getTipo()=='O'){
+      echo radiobutton_tag('caprovee[tipo]','P', false) .'&nbsp;&nbsp;'. "Cooperativa"."<br>";
+      echo radiobutton_tag('caprovee[tipo]','C', false) .'&nbsp;&nbsp;'. "Contratista(Obras)"."<br>";
+      echo radiobutton_tag('caprovee[tipo]','O', true) .'&nbsp;&nbsp;'. "Proveedor(Bienes y Servicios)"."<br>";
+
+    }else{
+      echo radiobutton_tag('caprovee[tipo]','P', true) .'&nbsp;&nbsp;'. "Cooperativa"."<br>";
+      echo radiobutton_tag('caprovee[tipo]','C', false) .'&nbsp;&nbsp;'. "Contratista(Obras)"."<br>";
+      echo radiobutton_tag('caprovee[tipo]','O', false) .'&nbsp;&nbsp;'. "Proveedor(Bienes y Servicios)"."<br>";
+    }    ?>
+<?php }else {?>
     <?  if ($caprovee->getTipo()=='P'){
       echo radiobutton_tag('caprovee[tipo]','P', true) .'&nbsp;&nbsp;'. "Cooperativa"."<br>";
       echo radiobutton_tag('caprovee[tipo]','C', false) .'&nbsp;&nbsp;'. "Contratista"."<br>";
@@ -167,6 +228,7 @@ if ($caprovee->getNitpro()=='J')  {
       echo radiobutton_tag('caprovee[tipo]','C', false) .'&nbsp;&nbsp;'. "Contratista"."<br>";
       echo radiobutton_tag('caprovee[tipo]','O', false) .'&nbsp;&nbsp;'. "Proveedor"."<br>";
     }    ?>
+<?php }?>
   </div> </fieldset></th>
  </tr>
  </table>
