@@ -4,25 +4,25 @@
 
 class NphiinegMapBuilder {
 
-	
+
 	const CLASS_NAME = 'lib.model.nomina.map.NphiinegMapBuilder';
 
-	
+
 	private $dbMap;
 
-	
+
 	public function isBuilt()
 	{
 		return ($this->dbMap !== null);
 	}
 
-	
+
 	public function getDatabaseMap()
 	{
 		return $this->dbMap;
 	}
 
-	
+
 	public function doBuild()
 	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
@@ -40,9 +40,15 @@ class NphiinegMapBuilder {
 
 		$tMap->addColumn('FECEGR', 'Fecegr', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('OBSERV', 'Observ', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('OBSERV', 'Observ', 'string', CreoleTypes::VARCHAR, false, 500);
+
+		$tMap->addColumn('MONLIQ', 'Monliq', 'double', CreoleTypes::NUMERIC, false, 20);
+
+		$tMap->addColumn('FECPAG', 'Fecpag', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('STATUS', 'Status', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-	} 
-} 
+	}
+}

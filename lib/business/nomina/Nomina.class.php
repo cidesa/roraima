@@ -3074,6 +3074,24 @@ class Nomina {
         }
 
         return $valor;
+      case "AAPE" :
+        $valor = 0;
+        $sql = "select antpubd('A','$empleado',to_date('$fecnom','yyyy-mm-dd'),'S','E') as valor";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $valor = $res[0]['valor'];
+        }
+
+        return $valor;
+      case "AAPO" :
+        $valor = 0;
+        $sql = "select antpubd('A','$empleado',to_date('$fecnom','yyyy-mm-dd'),'S','O') as valor";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $valor = $res[0]['valor'];
+        }
+
+        return $valor;
       default :
         $aux = 0;
 
@@ -5453,6 +5471,24 @@ class Nomina {
         if (Herramientas :: BuscarDatos($sql, & $res))
         {
             $valor = $res[0]['cincodias'];
+        }
+
+        return $valor;
+      case "AAPE" :
+        $valor = 0;
+        $sql = "select antpubd('A','$empleado',to_date('$hasta','dd/mm/yyyy'),'S','E') as valor";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $valor = $res[0]['valor'];
+        }
+
+        return $valor;
+      case "AAPO" :
+        $valor = 0;
+        $sql = "select antpubd('A','$empleado',to_date('$hasta','dd/mm/yyyy'),'S','O') as valor";
+        if (Herramientas :: BuscarDatos($sql, & $res))
+        {
+            $valor = $res[0]['valor'];
         }
 
         return $valor;

@@ -3,64 +3,73 @@
 
 abstract class BaseNphiinegPeer {
 
-	
+
 	const DATABASE_NAME = 'propel';
 
-	
+
 	const TABLE_NAME = 'nphiineg';
 
-	
+
 	const CLASS_DEFAULT = 'lib.model.nomina.Nphiineg';
 
-	
-	const NUM_COLUMNS = 5;
 
-	
+	const NUM_COLUMNS = 8;
+
+
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
-	
+
 	const CODEMP = 'nphiineg.CODEMP';
 
-	
+
 	const FECING = 'nphiineg.FECING';
 
-	
+
 	const FECEGR = 'nphiineg.FECEGR';
 
-	
+
 	const OBSERV = 'nphiineg.OBSERV';
 
-	
+
+	const MONLIQ = 'nphiineg.MONLIQ';
+
+
+	const FECPAG = 'nphiineg.FECPAG';
+
+
+	const STATUS = 'nphiineg.STATUS';
+
+
 	const ID = 'nphiineg.ID';
 
-	
+
 	private static $phpNameMap = null;
 
 
-	
+
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Fecing', 'Fecegr', 'Observ', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NphiinegPeer::CODEMP, NphiinegPeer::FECING, NphiinegPeer::FECEGR, NphiinegPeer::OBSERV, NphiinegPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'fecing', 'fecegr', 'observ', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Fecing', 'Fecegr', 'Observ', 'Monliq', 'Fecpag', 'Status', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NphiinegPeer::CODEMP, NphiinegPeer::FECING, NphiinegPeer::FECEGR, NphiinegPeer::OBSERV, NphiinegPeer::MONLIQ, NphiinegPeer::FECPAG, NphiinegPeer::STATUS, NphiinegPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'fecing', 'fecegr', 'observ', 'monliq', 'fecpag', 'status', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
-	
+
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Fecing' => 1, 'Fecegr' => 2, 'Observ' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (NphiinegPeer::CODEMP => 0, NphiinegPeer::FECING => 1, NphiinegPeer::FECEGR => 2, NphiinegPeer::OBSERV => 3, NphiinegPeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'fecing' => 1, 'fecegr' => 2, 'observ' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Fecing' => 1, 'Fecegr' => 2, 'Observ' => 3, 'Monliq' => 4, 'Fecpag' => 5, 'Status' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (NphiinegPeer::CODEMP => 0, NphiinegPeer::FECING => 1, NphiinegPeer::FECEGR => 2, NphiinegPeer::OBSERV => 3, NphiinegPeer::MONLIQ => 4, NphiinegPeer::FECPAG => 5, NphiinegPeer::STATUS => 6, NphiinegPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'fecing' => 1, 'fecegr' => 2, 'observ' => 3, 'monliq' => 4, 'fecpag' => 5, 'status' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
-	
+
 	public static function getMapBuilder()
 	{
 		include_once 'lib/model/nomina/map/NphiinegMapBuilder.php';
 		return BasePeer::getMapBuilder('lib.model.nomina.map.NphiinegMapBuilder');
 	}
-	
+
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
@@ -74,7 +83,7 @@ abstract class BaseNphiinegPeer {
 		}
 		return self::$phpNameMap;
 	}
-	
+
 	static public function translateFieldName($name, $fromType, $toType)
 	{
 		$toNames = self::getFieldNames($toType);
@@ -85,7 +94,7 @@ abstract class BaseNphiinegPeer {
 		return $toNames[$key];
 	}
 
-	
+
 
 	static public function getFieldNames($type = BasePeer::TYPE_PHPNAME)
 	{
@@ -95,13 +104,13 @@ abstract class BaseNphiinegPeer {
 		return self::$fieldNames[$type];
 	}
 
-	
+
 	public static function alias($alias, $column)
 	{
 		return str_replace(NphiinegPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
-	
+
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
@@ -113,6 +122,12 @@ abstract class BaseNphiinegPeer {
 
 		$criteria->addSelectColumn(NphiinegPeer::OBSERV);
 
+		$criteria->addSelectColumn(NphiinegPeer::MONLIQ);
+
+		$criteria->addSelectColumn(NphiinegPeer::FECPAG);
+
+		$criteria->addSelectColumn(NphiinegPeer::STATUS);
+
 		$criteria->addSelectColumn(NphiinegPeer::ID);
 
 	}
@@ -120,7 +135,7 @@ abstract class BaseNphiinegPeer {
 	const COUNT = 'COUNT(nphiineg.ID)';
 	const COUNT_DISTINCT = 'COUNT(DISTINCT nphiineg.ID)';
 
-	
+
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
@@ -144,7 +159,7 @@ abstract class BaseNphiinegPeer {
 						return 0;
 		}
 	}
-	
+
 	public static function doSelectOne(Criteria $criteria, $con = null)
 	{
 		$critcopy = clone $criteria;
@@ -155,12 +170,12 @@ abstract class BaseNphiinegPeer {
 		}
 		return null;
 	}
-	
+
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
 		return NphiinegPeer::populateObjects(NphiinegPeer::doSelectRS($criteria, $con));
 	}
-	
+
 	public static function doSelectRS(Criteria $criteria, $con = null)
 	{
 		if ($con === null) {
@@ -176,35 +191,35 @@ abstract class BaseNphiinegPeer {
 
 						return BasePeer::doSelect($criteria, $con);
 	}
-	
+
 	public static function populateObjects(ResultSet $rs)
 	{
 		$results = array();
-	
+
 				$cls = NphiinegPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
-		
+
 			$obj = new $cls();
 			$obj->hydrate($rs);
 			$results[] = $obj;
-			
+
 		}
 		return $results;
 	}
-	
+
 	public static function getTableMap()
 	{
 		return Propel::getDatabaseMap(self::DATABASE_NAME)->getTable(self::TABLE_NAME);
 	}
 
-	
+
 	public static function getOMClass()
 	{
 		return NphiinegPeer::CLASS_DEFAULT;
 	}
 
-	
+
 	public static function doInsert($values, $con = null)
 	{
 		if ($con === null) {
@@ -215,7 +230,7 @@ abstract class BaseNphiinegPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(NphiinegPeer::ID); 
+		$criteria->remove(NphiinegPeer::ID);
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -231,7 +246,7 @@ abstract class BaseNphiinegPeer {
 		return $pk;
 	}
 
-	
+
 	public static function doUpdate($values, $con = null)
 	{
 		if ($con === null) {
@@ -241,7 +256,7 @@ abstract class BaseNphiinegPeer {
 		$selectCriteria = new Criteria(self::DATABASE_NAME);
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 
+			$criteria = clone $values;
 			$comparison = $criteria->getComparison(NphiinegPeer::ID);
 			$selectCriteria->add(NphiinegPeer::ID, $criteria->remove(NphiinegPeer::ID), $comparison);
 
@@ -252,7 +267,7 @@ abstract class BaseNphiinegPeer {
 		return BasePeer::doUpdate($selectCriteria, $criteria, $con);
 	}
 
-	
+
 	public static function doDeleteAll($con = null)
 	{
 		if ($con === null) {
@@ -269,7 +284,7 @@ abstract class BaseNphiinegPeer {
 		}
 	}
 
-	
+
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
@@ -287,10 +302,10 @@ abstract class BaseNphiinegPeer {
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
-		$affectedRows = 0; 
+		$affectedRows = 0;
 		try {
 									$con->begin();
-			
+
 			$affectedRows += BasePeer::doDelete($criteria, $con);
 			$con->commit();
 			return $affectedRows;
@@ -300,7 +315,7 @@ abstract class BaseNphiinegPeer {
 		}
 	}
 
-	
+
 	public static function doValidate(Nphiineg $obj, $cols = null)
 	{
 		$columns = array();
@@ -335,7 +350,7 @@ abstract class BaseNphiinegPeer {
     return $res;
 	}
 
-	
+
 	public static function retrieveByPK($pk, $con = null)
 	{
 		if ($con === null) {
@@ -352,7 +367,7 @@ abstract class BaseNphiinegPeer {
 		return !empty($v) > 0 ? $v[0] : null;
 	}
 
-	
+
 	public static function retrieveByPKs($pks, $con = null)
 	{
 		if ($con === null) {
@@ -370,7 +385,7 @@ abstract class BaseNphiinegPeer {
 		return $objs;
 	}
 
-} 
+}
 if (Propel::isInit()) {
 			try {
 		BaseNphiinegPeer::getMapBuilder();
