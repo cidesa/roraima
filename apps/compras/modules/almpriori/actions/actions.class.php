@@ -96,6 +96,7 @@ class almprioriActions extends autoalmprioriActions
     {
         $t= new Criteria();
         $t->add(CaordcomPeer::REFSOL,$this->casolart->getReqart());
+        $t->add(CaordcomPeer::STAORD,'N',Criteria::NOT_EQUAL);
         $reg=CaordcomPeer::doSelectOne($t);
         if ($reg)
         {
