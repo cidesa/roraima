@@ -351,7 +351,7 @@ class Compras {
           $detalle = new Cadetcot();
           $detalle->setRefcot($refcot);
           $detalle->setCodart($x[$j]['codart']);
-          $detalle->setDesart($x[$j]['desart']);
+          $detalle->setDesart(trim($x[$j]['desart']));
           $detalle->setCanord($cantord);
           $detalle->setCosto($x[$j]['costo']);
           $detalle->setMondes($x[$j]['mondes']);
@@ -390,7 +390,7 @@ class Compras {
                         $distribucion = new Cacotdisrgo();
                       $distribucion->setRefcot($refcot);
                       $distribucion->setCodart($x[$j]['codart']);
-                      $distribucion->setDesart($x[$j]['desart']);
+                      $distribucion->setDesart(trim($x[$j]['desart']));
                       $distribucion->setCodcat($x[$j]['codcat']);
                       $distribucion->setCodrgo($aux2[0]);
 
