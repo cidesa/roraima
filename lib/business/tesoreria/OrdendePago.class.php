@@ -525,6 +525,7 @@ class OrdendePago
    $ben= OpbenefiPeer::doSelectOne($c);
    if ($ben) $orden->setNomben($ben->getNomben());
 
+   $orden->setDesord(strtoupper($orden->getDesord()));
    $orden->setStatus('N');
    $orden->setNumche(null);
    $orden->setCtaban(null);

@@ -200,6 +200,12 @@ if (deshab=='S')
 	$('tscheemi_fecemi').readOnly=true;
 } 
 
+var mostrardivg='<?php echo $sf_user->getAttribute('tipodocumento',null,'tesmovemiche');?>';
+if (mostrardivg!="")
+{
+    MostrarDivGrid();
+}
+
 var impche='<?php if($tscheemi->getEscheque()==true && $tscheemi->getId()!="") echo $impche; else echo 'N'?>';
 
 var numcomegr='<?php echo $numcomegr; ?>';
@@ -242,6 +248,13 @@ if (impche=='S')
 		window.open(pagina,anumche[r],"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80");
 		
 	  }
+    }
+}
+
+function MostrarDivGrid()
+{
+    if ($('tscheemi_tipdoc').value != '') {
+     new Ajax.Updater('divGrid', '/tesoreria_dev.php/tesmovemiche/ajax', {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=1&cajtexmos=tscheemi_destip&cajtexcom=tscheemi_tipdoc&mostrardato=N&tipdoc='+$('tscheemi_tipdoc').value});
     }
 }
 

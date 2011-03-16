@@ -46,6 +46,7 @@
   <?php $value = object_textarea_tag($optipben, 'getDestipben', array (
   'size' => '50x3',
   'maxlength' => 50,
+  'onkeyUp' =>  "javascript: return this.value = this.value.toUpperCase();",
   'control_name' => 'optipben[destipben]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
