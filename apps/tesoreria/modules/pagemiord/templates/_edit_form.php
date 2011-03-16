@@ -722,7 +722,15 @@ var nuevo='<?php echo $opordpag->getId()?>';
      }else{
       $('opordpag_numord').focus();
      }
+     var deshcta='<?php echo $opordpag->getCuendesh();?>';
+    if (deshcta)
+    {
+       $('opordpag_ctapag').readOnly=true;
+         $$('.botoncat')[2].disabled=true;
     }
+    }
+
+
 
 var ordpagval='<?echo $ordpagval;?>';
 if ($('opordpag_tipcau').value!='' && ($('opordpag_tipcau').value!=$('opnomina').value || $('opordpag_tipcau').value!='OPNN') && ($('opordpag_tipcau').value!=$('opaporte').value || $('opordpag_tipcau').value!='APOR') && ($('opordpag_tipcau').value!=$('opliquidacion').value || $('opordpag_tipcau').value!='LIQU') && ($('opordpag_tipcau').value!=$('opfideicomiso').value || $('opordpag_tipcau').value!='OPFD') && ($('opordpag_tipcau').value!=ordpagval || $('opordpag_tipcau').value!='OPVA'))

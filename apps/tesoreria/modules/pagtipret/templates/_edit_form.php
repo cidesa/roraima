@@ -48,6 +48,7 @@
   <?php $value = object_input_tag($optipret, 'getDestip', array (
   'size' => 80,
   'maxlength'=>250,
+  'onkeyUp' =>  "javascript: return this.value = this.value.toUpperCase();",
   'control_name' => 'optipret[destip]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>

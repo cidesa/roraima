@@ -102,7 +102,16 @@ class Casolart extends BaseCasolart
   	  {
   	  	if ($reqapr=='S') $eti="SOLICITUD NO APROBADA";
   	  	else $eti="";
+
+                $z= new Criteria();
+	  	  $z->add(CaordcomPeer::REFSOL,self::getReqart());
+	  	  $z->add(CaordcomPeer::STAORD,'N',Criteria::NOT_EQUAL);
+	  	  $resul2= CaordcomPeer::doSelectOne($z);
+	  	  if ($resul2)
+	  	  {
+                    $eti="LA SOLICITUD TIENE ASOCIADA UNA ORDEN DE COMPRA N° ".$resul2->getOrdcom()." DE FECHA ".date('d/m/Y',strtotime($resul2->getFecord()));
   	  }
+  	}
   	}
   	else if (self::getStareq()=='N')
   	{

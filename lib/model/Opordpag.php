@@ -540,4 +540,9 @@ class Opordpag extends BaseOpordpag
   {
   	return $this->sincalret;
   }
+
+  public function getCuendesh()
+  {
+  	return H::getConfApp2('cuentadesh', 'tesoreria', 'pagemiord');
+}
 }

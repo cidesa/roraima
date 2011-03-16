@@ -93,6 +93,7 @@
   <?php $value = object_input_tag($opbenefi, 'getNomben', array (
   'size' => 80,
   'maxlength' => 250,
+  'onkeyUp' =>  "javascript: return this.value = this.value.toUpperCase();",
   'control_name' => 'opbenefi[nomben]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
