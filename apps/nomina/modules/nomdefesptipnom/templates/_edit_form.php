@@ -126,11 +126,21 @@
 	  	'control_name' => 'npnomina[profec]',
 		)); echo $value ? $value : '&nbsp;' */ ?>
 
-	  <?php $value = object_input_tag($npnomina, 'getProfec_', array (
+	  <?php /*$value = object_input_tag($npnomina, 'getProfec_', array (
 	  	'maxlength' => 10,
 	  	'size' => 10,
-	  	'readonly' => true,
+	  	//'readonly' => true,
 	  	'control_name' => 'npnomina[profec_]',
+		)); echo $value ? $value : '&nbsp;' */?>
+          <?php $value = object_input_date_tag($npnomina, 'getProfec', array (
+          'rich' => true,
+          'maxlength' => 10,
+          'size' => 10,
+          'calendar_button_img' => '/sf/sf_admin/images/date.png',
+          'control_name' => 'npnomina[profec]',
+          'date_format' => 'dd/MM/yy',
+          'maxlength' => 10,
+          'onkeyup' => "javascript: mascara(this,'/',patron,true)",
 		)); echo $value ? $value : '&nbsp;' ?>
 
 	</div>
@@ -179,3 +189,8 @@
 )) ?><?php endif; ?>
 </li>
   </ul>
+
+<script type="text/javascript" language="JavaScript">
+$('npnomina_profec').readOnly=true;
+$('trigger_npnomina_profec').hide();
+</script>

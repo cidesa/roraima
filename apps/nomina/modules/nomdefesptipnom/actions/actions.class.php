@@ -107,7 +107,7 @@ $this->Bitacora('Guardo');
         $this->npnomina->setUltfec(null);
       }
     }
-    if (isset($npnomina['profec_']))
+    /*if (isset($npnomina['profec_']))
     {
       if ($npnomina['profec_'])
       {
@@ -128,6 +128,34 @@ $this->Bitacora('Guardo');
 
 //          echo $value;
 
+          $this->npnomina->setProfec($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->npnomina->setProfec(null);
+      }
+    }*/
+    if (isset($npnomina['profec']))
+    {
+      if ($npnomina['profec'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($npnomina['profec']))
+          {
+            $value = $dateFormat->format($npnomina['profec'], 'i', $dateFormat->getInputPattern('d'));
+    }
+          else
+          {
+            $value_array = $npnomina['profec'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
           $this->npnomina->setProfec($value);
         }
         catch (sfException $e)
@@ -221,6 +249,7 @@ $this->Bitacora('Guardo');
     $ajax = $this->getRequestParameter('ajax','');
     $ultfec=split('/',$this->ultfech);
     $newulfec=$ultfec[2].'-'.$ultfec[1].'-'.$ultfec[0];
+    $js="";
     switch ($ajax){
       case '1':
         switch($this->codigo)
@@ -307,7 +336,14 @@ $this->Bitacora('Guardo');
 			$numsem=$output[0]['fecha'];
 		}
 
-        $output = '[["npnomina_numsem","'.$numsem.'",""], ["npnomina_profec_","'.$profec.'",""]]';
+                if ($ultfec[0].'/'.$ultfec[1]=='01/01')
+                {
+                    $js="$('npnomina_profec').readOnly=false; $('trigger_npnomina_profec').show(); $('npnomina_numsem').readOnly=false;";
+                    $profec='';
+                    $numsem='';
+                }
+
+        $output = '[["npnomina_numsem","'.$numsem.'",""], ["npnomina_profec","'.$profec.'",""], ["javascript","'.$js.'",""]]';
 
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
