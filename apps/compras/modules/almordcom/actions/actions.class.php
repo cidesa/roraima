@@ -2678,6 +2678,20 @@ class almordcomActions extends autoalmordcomActions
     //darle formato a la fecha
     if ($numero_filas > 0)
     {
+
+      $result=array();
+      $sql = "Select reqart,sum(coalesce(canreq,0)) as canreq,sum(coalesce(canord,0)) as canrec From CAArtSol Where ReqArt = '".$this->getRequestParameter('ordcom')."' Group By ReqArt";
+      if (Herramientas::BuscarDatos($sql,&$result))
+      {
+        if (($result[0]['canreq']-$result[0]['canrec'])<=0)
+        {
+            $javascript="alert('La Solicitud se encuentra totalmente saldada...');";
+
+            $output = '[["caordcom_refsol",""],["javascript","'.$javascript.'"]]';
+            $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+            return sfView::HEADER_ONLY;
+        }else {
+
         if (trim($this->getRequestParameter('fecord'))!="")
         {
             $dateFormat = new sfDateFormat($this->getUser()->getCulture());
@@ -2722,6 +2736,8 @@ class almordcomActions extends autoalmordcomActions
           	$this->setVars();
           	$this->configGrid($this->getRequestParameter('ordcom'),$this->getRequestParameter('referencia'),$tipopro);
           }
+      }
+        }
       }
     }else{
 
