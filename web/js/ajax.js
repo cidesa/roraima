@@ -29,12 +29,12 @@
 
   Ajax.Responders.register({
     onCreate: function() {
-      //if($('cargando') && Ajax.activeRequestCount > 0)
-      //Effect.Appear('cargando',{duration: 0.25, queue: 'end'});
+      if($('cargando') && Ajax.activeRequestCount > 0)
+      Effect.Appear('cargando',{duration: 0.25, queue: 'end'});
     },
     onComplete: function() {
-      //OcultarCargando()
-    },
+      OcultarCargando();
+    }
 
   });
 
