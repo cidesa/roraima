@@ -712,6 +712,10 @@ class pagemiordActions extends autopagemiordActions {
     if (isset($opordpag['tipdoc'])) {
       $this->opordpag->setTipdoc($opordpag['tipdoc']);
     }
+     if (isset($opordpag['amortiza']))
+    {
+      $this->opordpag->setAmortiza($opordpag['amortiza']);
+    }
     if (isset($opordpag['refcre'])) {
       $this->opordpag->setRefcre($opordpag['refcre']);
     }
@@ -3063,6 +3067,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
               'opordpag{codconcepto}' => 'Concepto de Pago:',
               'opordpag{observe}' => 'Observe:',
               'opordpag{numforpre}' => $etiforma,
+      'opordpag{amortiza}' => 'Amortización:',
               'opordpag{cuades}' => 'Cuades:',
               'opordpag{numcta}' => 'Cuenta Bancaria:',
               'opordpag{tipdoc}' => 'Tipo de Pagado:',
@@ -3108,6 +3113,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
               'opordpag{codconcepto}' => 'Concepto de Pago:',
               'opordpag{observe}' => 'Observe:',
               'opordpag{numforpre}' => 'N° de Forma Preimpresa:',
+      'opordpag{amortiza}' => 'Amortización:',
               'opordpag{cuades}' => 'Cuades:',
               'opordpag{numcta}' => 'Cuenta Bancaria:',
               'opordpag{tipdoc}' => 'Tipo de Pagado:',

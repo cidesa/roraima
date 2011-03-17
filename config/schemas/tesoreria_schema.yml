@@ -1020,6 +1020,10 @@ propel:
     codfonant:
       type: VARCHAR
       size: 3
+    amortiza:
+      type: NUMERIC
+      size: 14
+      scale: 2
     id:
       type: INTEGER
       required: true

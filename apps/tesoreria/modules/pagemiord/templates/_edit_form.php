@@ -434,6 +434,23 @@
   'maxlength' => 15,
 )); echo $value ? $value : '&nbsp;' ?>
    </th>
+   <th>
+       &nbsp;&nbsp;
+   </th>
+   <th>
+     <?php echo label_for('opordpag[amortiza]', __($labels['opordpag{amortiza}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('opordpag{amortiza}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opordpag{amortiza}')): ?>
+    <?php echo form_error('opordpag{amortiza}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+       <?php $value = object_input_tag($opordpag, array('getAmortiza',true), array (
+    'size' => 15,
+    'control_name' => 'opordpag[amortiza]',
+    'onBlur' => "javascript:event.keyCode=13; return entermontootro(event, this.id)",
+  )); echo $value ? $value : '&nbsp;' ?>
+  </div>
+   </th>
    </tr>
   </table>
 <div id="comp">

@@ -170,6 +170,8 @@ class OpordpagMapBuilder {
 
 		$tMap->addColumn('CODFONANT', 'Codfonant', 'string', CreoleTypes::VARCHAR, false, 3);
 
+		$tMap->addColumn('AMORTIZA', 'Amortiza', 'double', CreoleTypes::NUMERIC, false, 14);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

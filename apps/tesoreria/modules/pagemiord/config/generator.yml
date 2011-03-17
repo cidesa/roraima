@@ -35,6 +35,7 @@ generator:
       nombensus: { name: Cesionario Autorizado}
       codconcepto: { name: Concepto de Pago}
       numforpre: { name: N° de Forma Preimpresa}
+      amortiza: { name: Amortización}
       numcta: { name: Cuenta Bancaria}
       tipdoc: { name: Tipo de Pagado}
 
@@ -48,7 +49,7 @@ generator:
         _edit:        ~
     edit:
       title:          Edición de la Orden de Pago
-      display:        [=numord, fecemi, tipcau, nomext, desord, cedrif, nomben, codctasec, ctapag, descta, coduni, desubi, tipfin, nomext2, obsord, monord, mondes, monret, numcom, feccom, status, idrefer, fecanu, desanu, referencias, documento, afectapre, totalcomprobantes, cuentarendicion, vacio, presiono, numsigecof, fecsigecof, expsigecof, nombensus, codconcepto, observe, numforpre, _cuades, numcta, tipdoc]
+      display:        [=numord, fecemi, tipcau, nomext, desord, cedrif, nomben, codctasec, ctapag, descta, coduni, desubi, tipfin, nomext2, obsord, monord, mondes, monret, numcom, feccom, status, idrefer, fecanu, desanu, referencias, documento, afectapre, totalcomprobantes, cuentarendicion, vacio, presiono, numsigecof, fecsigecof, expsigecof, nombensus, codconcepto, observe, numforpre, _cuades, numcta, tipdoc, amortiza]
       actions:
         _list:        ~
         _save:        ~

@@ -282,6 +282,10 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 	
 	protected $collOpdetsolpags;
 
+	protected $amortiza;
+
+
+
 	protected $id;
 	
 	protected $lastOpdetsolpagCriteria = null;
@@ -997,6 +1001,14 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
   {
 
     return trim($this->codfonant);
+
+  }
+
+  public function getAmortiza($val=false)
+  {
+
+    if($val) return number_format($this->amortiza,2,',','.');
+    else return $this->amortiza;
 
   }
 
@@ -1792,6 +1804,16 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
 	}
 
+	public function setAmortiza($v)
+	{
+
+    if ($this->amortiza !== $v) {
+        $this->amortiza = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpordpagPeer::AMORTIZA;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -1942,7 +1964,9 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
       $this->codfonant = $rs->getString($startcol + 67);
 
-      $this->id = $rs->getInt($startcol + 68);
+      $this->amortiza = $rs->getFloat($startcol + 68);
+
+      $this->id = $rs->getInt($startcol + 69);
 
       $this->resetModified();
 
@@ -1950,7 +1974,7 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 69;
+            return $startcol + 70;
     } catch (Exception $e) {
       throw new PropelException("Error populating Opordpag object", $e);
     }
@@ -2335,6 +2359,9 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 				return $this->getCodfonant();
 				break;
 			case 68:
+				return $this->getAmortiza();
+				break;
+			case 69:
 				return $this->getId();
 				break;
 			default:
@@ -2415,7 +2442,8 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 			$keys[65] => $this->getTipdoc(),
 			$keys[66] => $this->getLoguse(),
 			$keys[67] => $this->getCodfonant(),
-			$keys[68] => $this->getId(),
+			$keys[68] => $this->getAmortiza(),
+			$keys[69] => $this->getId(),
 		);
 		return $result;
 	}
@@ -2636,6 +2664,9 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 				$this->setCodfonant($value);
 				break;
 			case 68:
+				$this->setAmortiza($value);
+				break;
+			case 69:
 				$this->setId($value);
 				break;
 		} 	}
@@ -2713,7 +2744,8 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[65], $arr)) $this->setTipdoc($arr[$keys[65]]);
 		if (array_key_exists($keys[66], $arr)) $this->setLoguse($arr[$keys[66]]);
 		if (array_key_exists($keys[67], $arr)) $this->setCodfonant($arr[$keys[67]]);
-		if (array_key_exists($keys[68], $arr)) $this->setId($arr[$keys[68]]);
+		if (array_key_exists($keys[68], $arr)) $this->setAmortiza($arr[$keys[68]]);
+		if (array_key_exists($keys[69], $arr)) $this->setId($arr[$keys[69]]);
 	}
 
 	
@@ -2789,6 +2821,7 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OpordpagPeer::TIPDOC)) $criteria->add(OpordpagPeer::TIPDOC, $this->tipdoc);
 		if ($this->isColumnModified(OpordpagPeer::LOGUSE)) $criteria->add(OpordpagPeer::LOGUSE, $this->loguse);
 		if ($this->isColumnModified(OpordpagPeer::CODFONANT)) $criteria->add(OpordpagPeer::CODFONANT, $this->codfonant);
+		if ($this->isColumnModified(OpordpagPeer::AMORTIZA)) $criteria->add(OpordpagPeer::AMORTIZA, $this->amortiza);
 		if ($this->isColumnModified(OpordpagPeer::ID)) $criteria->add(OpordpagPeer::ID, $this->id);
 
 		return $criteria;
@@ -2955,6 +2988,8 @@ abstract class BaseOpordpag extends BaseObject  implements Persistent {
 		$copyObj->setLoguse($this->loguse);
 
 		$copyObj->setCodfonant($this->codfonant);
+
+                $copyObj->setAmortiza($this->amortiza);
 
 		if ($deepCopy) {
 									$copyObj->setNew(false);
