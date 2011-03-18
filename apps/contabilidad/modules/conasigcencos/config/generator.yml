@@ -12,6 +12,10 @@ generator:
       grid:    {name: .}
     list:
       title:          Comprobantes Contables
+      fields:
+        numcom:  {name: Número, params: size=10}
+        feccom:  {name: Fecha, params: date_format='dd/MM/yyyy'}
+        reftra:  {name: Referencia, params: size=10 }
       display:        [=numcom, feccom, descom]
       filters:        [numcom, feccom, reftra]
       object_actions:

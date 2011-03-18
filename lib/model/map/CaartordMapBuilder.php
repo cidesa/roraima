@@ -62,7 +62,7 @@ class CaartordMapBuilder {
 
 		$tMap->addColumn('FECENT', 'Fecent', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('DESART', 'Desart', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('DESART', 'Desart', 'string', CreoleTypes::VARCHAR, false, 2000);
 
 		$tMap->addColumn('RELART', 'Relart', 'double', CreoleTypes::NUMERIC, false, 14);
 
@@ -71,6 +71,14 @@ class CaartordMapBuilder {
 		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, false, 32);
 
 		$tMap->addColumn('PARTIDA', 'Partida', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('REFCOM', 'Refcom', 'string', CreoleTypes::VARCHAR, false, 8);
+
+		$tMap->addColumn('REQART', 'Reqart', 'string', CreoleTypes::VARCHAR, false, 8);
+
+		$tMap->addColumn('INDICE', 'Indice', 'string', CreoleTypes::VARCHAR, false, 6);
+
+                $tMap->addColumn('CODCEN', 'Codcen', 'string', CreoleTypes::VARCHAR, false, 4);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
