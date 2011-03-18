@@ -740,7 +740,7 @@ class Cheques
 			   {
 			     if ($reg->getGencomalc()=='S')
 			     {
-			       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,&$msjuno,&$arrcompro,$DesCtaCre);
+			       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,&$msjuno,&$arrcompro,$DesCtaCre,$MontRet,$monpagado,"ordpag",$OrdenDePago,$CtaDcto,$DescOp);
 			     }
 			     else
 			     {
@@ -766,7 +766,7 @@ class Cheques
 			   {
 			     if ($reg->getGencomalc()=='S')
 			     {
-			       self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,$DesCtaCre,&$numcom);
+			       self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,$DesCtaCre,&$numcom,$MontRet,"ordpag",$monpagado,$CtaDcto,$DescOp,$OrdenDePago,$DesCtaDeb);
 			     }
 			     else
 			     {
@@ -928,7 +928,7 @@ class Cheques
 			   {
 			     if ($reg->getGencomalc()=='S')
 			     {
-			       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,&$msjuno,&$arrcompro,$DesCtaCre);
+                               self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,&$msjuno,&$arrcompro,$DesCtaCre,$MontRet,$monpagado,"ordpag","",$CtaDcto,$DescOp);
 			     }
 			     else
 			     {
@@ -953,7 +953,7 @@ class Cheques
 			   {
 			     if ($reg->getGencomalc()=='S')
 			     {
-			       self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,$DesCtaCre,&$numcom);
+                               self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,$DesCtaCre,&$numcom,$MontRet,"ordpag",0,$CtaDcto,$DescOp,"",$DesCtaDeb);
 			     }
 			     else
 			     {
@@ -1023,7 +1023,7 @@ class Cheques
 		   {
 		     if ($reg->getGencomalc()=='S')
 		     {
-		       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,"S",0,$MontOP,$ctapag,&$msjuno,&$arrcompro,$desctacre);
+                       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,"S",0,$MontOP,$ctapag,&$msjuno,&$arrcompro,$desctacre,0,0,"compro","","","");
 		     }
 		     else
 		     {
@@ -1042,7 +1042,7 @@ class Cheques
 			   {
 			     if ($reg->getGencomalc()=='S')
 			     {
-			       self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,"S",0,$MontOP,$ctapag,$desctacre,&$numcom);
+                               self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,"S",0,$MontOP,$ctapag,$desctacre,&$numcom,0,"compro",0,"","","","");
 			     }
 			     else
 			     {
@@ -1108,7 +1108,7 @@ class Cheques
 		   {
 		     if ($reg->getGencomalc()=='S')
 		     {
-		       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,"S",0,$MontOP,$ctapag,&$msjuno,&$arrcompro,$desctacre);
+                       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,"S",0,$MontOP,$ctapag,&$msjuno,&$arrcompro,$desctacre,0,0,"precom","","","");
 		     }
 		     else
 		     {
@@ -1127,7 +1127,7 @@ class Cheques
 			   {
 			     if ($reg->getGencomalc()=='S')
 			     {
-			       self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,"S",0,$MontOP,$ctapag,$desctacre,&$numcom);
+                               self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,"S",0,$MontOP,$ctapag,$desctacre,&$numcom,0,"precom",0,"","","","");
 			     }
 			     else
 			     {
@@ -1195,7 +1195,7 @@ class Cheques
 		   {
 		     if ($reg->getGencomalc()=='S')
 		     {
-		       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,"S",Herramientas::tofloat($MontDcto),$total,$ctapag,&$msjuno,&$arrcompro,$desctacre);
+                       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,"S",Herramientas::tofloat($MontDcto),$total,$ctapag,&$msjuno,&$arrcompro,$desctacre,0,0,"pagdir","","","");
 		     }
 		     else
 		     {
@@ -1216,7 +1216,7 @@ class Cheques
 			   {
 			     if ($reg->getGencomalc()=='S')
 			     {
-			       self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,"S",Herramientas::tofloat($MontDcto),$total,$ctapag,$desctacre,&$numcom);
+                               self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,"S",Herramientas::tofloat($MontDcto),$total,$ctapag,$desctacre,&$numcom,0,"pagdir",0,"","","","");
 			     }
 			     else
 			     {
@@ -1271,7 +1271,7 @@ class Cheques
 		   {
 		     if ($reg->getGencomalc()=='S')
 		     {
-		       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,"S",Herramientas::tofloat($MontDcto),$total,$ctapag,&$msjuno,&$arrcompro,$desctacre);
+                       self::grabarComprobanteAlc($tscheemi,$grid,$DescOp,"S",Herramientas::tofloat($MontDcto),$total,$ctapag,&$msjuno,&$arrcompro,$desctacre,0,0,"pagnopre","","","");
 		     }
 		     else
 		     {
@@ -1292,7 +1292,7 @@ class Cheques
 			   {
 			     if ($reg->getGencomalc()=='S')
 			     {
-			       self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,"S",Herramientas::tofloat($MontDcto),$total,$ctapag,$desctacre,&$numcom);
+                               self::grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,"S",Herramientas::tofloat($MontDcto),$total,$ctapag,$desctacre,&$numcom,0,"pagnopre",0,"","","","");
 			     }
 			     else
 			     {
@@ -1562,7 +1562,7 @@ class Cheques
     return $validardisponibilidad;
   }
 
-  public static function grabarComprobanteAlc($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,&$msjuno,&$arrcompro,$desctacre)
+  public static function grabarComprobanteAlc($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,&$msjuno,&$arrcompro,$desctacre,$MontRet,$monpagado,$operacion,$ordendepago,$CtaDcto,$ConDto)
   {
     $mensaje="";
     $numerocomprob= '########';
@@ -1586,10 +1586,28 @@ class Cheques
     $msjuno="";
     $msjdos="";
     $mont=0;
+    $codigocuenta3="";
+    $tipo3="";
+    $des3="";
+    $monto3="";
+    $codigocuenta4="";
+    $tipo4="";
+    $des4="";
+    $monto4="";
+
+    $aplretcomalc=H::getConfApp2('aplretcomalc', 'tesoreria', 'tesmovemiche');
 
      if ($tippag=='S') //Pago Simple
      {
+       if ($aplretcomalc=='S') {
+         if ($monpagado==0 || is_null($monpagado))
+           $mont=$Monto+$MontDcto+$MontRet;
+         else
      	$mont=$Monto+$MontDcto;
+     }
+       else {
+           $mont=$Monto+$MontDcto;
+       }
      }
      else if ($tippag=='C')//pagos compuestos
      {
@@ -1599,7 +1617,14 @@ class Cheques
         {
           if ($x[$j]->getCheck()=="1")
           {
+            if ($aplretcomalc=='S') {
+             if ($monpagado==0 || is_null($monpagado))
+                 $mont= $mont + ($x[$j]->getMontotalGrid()+$x[$j]->getMondes()+$x[$j]->getMonret());
+             else
              $mont= $mont + ($x[$j]->getMontotalGrid()+$x[$j]->getMondes());
+            }else {
+                $mont= $mont + ($x[$j]->getMontotalGrid()+$x[$j]->getMondes());
+          }
           }
           $j++;
         }
@@ -1652,6 +1677,9 @@ class Cheques
        $codigocuenta2=$cuenta;
 	   $tipo2='C';
 	   $des2="";
+           if ($aplretcomalc=='S')
+               $monto2=$Monto;
+           else
 	   $monto2=$mont;
     }else {
     	$mensaje="El Código Contable asociado a la Cuenta Bancaria no es válido";
@@ -1660,13 +1688,120 @@ class Cheques
         $clscommpro->setMsgerr($mensaje);
         $arrcompro[]=$clscommpro;
 
-    	return true;}
+    	return true;
 
+        }
 
+    if ($aplretcomalc=='S')
+    {
+        if ($operacion=='ordpag')
+       {
+
+          if ($MontDcto > 0 && ($monpagado==0 || is_null($monpagado))) //Para que incluya la cuenta del descuento solo en primer pago
+          {
+            if (trim($codigocuenta3)!="") $codigocuenta3=$codigocuenta3."_".$CtaDcto; else  $codigocuenta3 = $CtaDcto;
+            if (trim($des3)!="") $des3=$des3."_".$ConDto; else  $des3 = $ConDto;
+            if (trim($tipo3)!="") $tipo3=$tipo3."_"."C"; else  $tipo3 = "C";
+            if (trim($monto3)!="") $monto3=$monto3."_".$MontDcto; else $monto3=$MontDcto;
+          }
+       }
+
+       if ($operacion=='ordpag')
+      {
+        if ($tippag=='S') //Pago Simple
+       {
+            $SQL = "Select codtip,SUM(MonRet) as montoret,numret,codtip from OPRetOrd where NumOrd= '".$ordendepago."' group by CodTip,Numret";
+            if (Herramientas::BuscarDatos($SQL,&$result))
+            {
+              $k=0;
+              while ($k<count($result))
+              {
+                  $strsql = "Select codcon,destip From OPTipRet where CodTip= '". trim($result[$k]['codtip']) ."'";
+                  if (Herramientas::BuscarDatos($strsql,&$optipret))
+                  {
+                   if ($result[$k]['montoret']>0)
+                   {
+                   if ($monpagado==0 || is_null($monpagado)) //Para que incluya la cuenta las retenciones solo en primer pago
+                   {
+                    if (trim($codigocuenta4)!="") $codigocuenta4=$codigocuenta4."_".$optipret[0]['codcon']; else  $codigocuenta4 = $optipret[0]['codcon'];
+                    if (trim($des4)!="") $des4=$des4."_".$optipret[0]['destip']; else  $des4 = $optipret[0]['destip'];
+                    if (trim($tipo4)!="") $tipo4=$tipo4."_"."C"; else  $tipo4 = "C";
+                    if (trim($monto4)!="") $monto4=$monto4."_".$result[$k]['montoret']; else $monto4=$result[$k]['montoret'];
+                  }
+                   }
+                  }
+                $k++;
+              }
+            }
+       }
+       else if ($tippag=='C')//pagos compuestos
+       {
+        $x=$grid[0];
+        $j=0;
+        while ($j<count($x))
+        {
+          if ($x[$j]->getCheck()=="1")
+          {
+               $strsql = "Select codtip,SUM(MonRet) as montoret,numret from OPRetOrd where NumOrd= '".$x[$j]->getNumord()."' group by codtip,Numret";
+               if (Herramientas::BuscarDatos($strsql,&$resultado))
+               {
+                $k=0;
+                while ($k<count($resultado))
+                {
+                    $strsql = "Select codcon,destip From OPTipRet where CodTip= '". trim($resultado[$k]['codtip']) ."'";
+                    if (Herramientas::BuscarDatos($strsql,&$optipret))
+                    {
+                       if ($resultado[$k]['montoret']>0)
+                      {
+                     if ($monpagado==0 || is_null($monpagado)) { //Para que incluya la cuenta las retenciones solo en primer pago
+                      if (trim($codigocuenta4)!="") $codigocuenta4=$codigocuenta4."_".$optipret[0]['codcon']; else  $codigocuenta4 = $optipret[0]['codcon'];
+                      if (trim($des4)!="") $des4=$des4."_".$optipret[0]['destip']; else  $des4 = $optipret[0]['destip'];
+                      if (trim($tipo4)!="") $tipo4=$tipo4."_"."C"; else  $tipo4 = "C";
+                      if (trim($monto4)!="") $monto4=$monto4."_".$resultado[$k]['montoret']; else $monto4=$resultado[$k]['montoret'];
+                    }
+                    }
+                    }
+                  $k++;
+                }
+              }
+          }
+          $j++;
+        }
+       }
+      }
+    }
+
+   if ($aplretcomalc=='S')
+   {
+       if ($operacion=='ordpag') {
+        if ($codigocuenta3=="" && $codigocuenta4=="") {
     $cuentas=$codigocuenta2.'_'.$codigocuenta;
     $tipos=$tipo2.'_'.$tipo;
     $descr=$des2.'_'.$des;
     $montos=$monto2.'_'.$monto;
+        }else if ($codigocuenta3=="") {
+        $cuentas=$codigocuenta.'_'.$codigocuenta2.'_'.$codigocuenta4;
+        $tipos=$tipo.'_'.$tipo2.'_'.$tipo4;
+        $descr=$des.'_'.$des2.'_'.$des4;
+        $montos=$monto.'_'.$monto2.'_'.$monto4;
+        } else {
+        $cuentas=$codigocuenta.'_'.$codigocuenta2.'_'.$codigocuenta3;
+        $tipos=$tipo.'_'.$tipo2.'_'.$tipo3;
+        $descr=$des.'_'.$des2.'_'.$des3;
+        $montos=$monto.'_'.$monto2.'_'.$monto3;
+        }
+       }else {
+        $cuentas=$codigocuenta2.'_'.$codigocuenta;
+        $tipos=$tipo2.'_'.$tipo;
+        $descr=$des2.'_'.$des;
+        $montos=$monto2.'_'.$monto;
+       }
+   }else {
+        $cuentas=$codigocuenta2.'_'.$codigocuenta;
+        $tipos=$tipo2.'_'.$tipo;
+        $descr=$des2.'_'.$des;
+        $montos=$monto2.'_'.$monto;
+   }
 
     $clscommpro=new Comprobante();
     $clscommpro->setGrabar("N");
@@ -2018,15 +2153,19 @@ class Cheques
   }//end function Genera_Comprobante_Automatico
 
 
-  public static function grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,$desctacre,&$correl3)
+  public static function grabarComprobanteAlcAutomatico($tscheemi,$grid,$DescOp,$tippag,$MontDcto,$Monto,$CtaPag,$desctacre,&$correl3,$MonRet,$operacion,$monpagado,$CtaDcto,$ConDto,$ordendepago,$DesCtaDeb)
   {
     $reftra = str_pad($tscheemi->getNumche(),8,"0",STR_PAD_LEFT);
     $codigocuenta="";  $tipo="";  $des="";  $monto="";  $codigocuentas="";  $tipo1="";  $desc="";  $monto1="";  $codigocuenta2="";  $tipo2="";  $des2="";  $monto2="";
+    $codigocuenta3="";  $tipo3="";  $des3="";  $monto3=""; $codigocuenta4="";  $tipo4="";  $des4="";  $monto4=""; $codigocuenta5="";  $tipo5="";  $des5="";  $monto5="";
     $cuentas="";  $tipos="";  $montos="";  $descr="";   $msjuno="";  $msjdos="";  $mont=0;
+    $aplretcomalc=H::getConfApp2('aplretcomalc', 'tesoreria', 'tesmovemiche');
 
      if ($tippag=='S') //Pago Simple
      {
+     	if ($monpagado==0 || is_null($monpagado))
      	$mont=$Monto+$MontDcto;
+        else $mont=$Monto+$MontDcto;
      }
      else if ($tippag=='C')//pagos compuestos
      {
@@ -2036,7 +2175,9 @@ class Cheques
         {
           if ($x[$j]->getCheck()=="1")
           {
+             if ($monpagado==0 || is_null($monpagado))
              $mont= $mont + ($x[$j]->getMontotalGrid()+$x[$j]->getMondes());
+             else  $mont= $mont + ($x[$j]->getMontotalGrid()+$x[$j]->getMondes());
           }
           $j++;
         }
@@ -2075,13 +2216,137 @@ class Cheques
        $codigocuenta2=$cuenta;
 	   $tipo2='C';
 	   $des2="";
+           if ($aplretcomalc=='S')
+               $monto2=$Monto;
+           else
 	   $monto2=$mont;
     }
 
+    if ($aplretcomalc=='S')
+    {
+        if ($operacion=='ordpag')
+       {
+          if ($MontDcto > 0 || is_null($monpagado))
+          {
+            if (trim($codigocuenta3)!="") $codigocuenta3=$codigocuenta3."_".$CtaDcto; else  $codigocuenta3 = $CtaDcto;
+            if (trim($des3)!="") $des3=$des3."_".$ConDto; else  $des3 = $ConDto;
+            if (trim($tipo3)!="") $tipo3=$tipo3."_"."C"; else  $tipo3 = "C";
+            if (trim($monto3)!="") $monto3=$monto3."_".$MontDcto; else $monto3=$MontDcto;
+          }
+       }
+       if ($operacion=='ordpag')
+      {
+       if (trim($codigocuenta4)!="") $codigocuenta4=$codigocuenta4."_".$CtaPag; else  $codigocuenta4 = $CtaPag;
+       if (trim($des4)!="") $des4=$des4."_".$DesCtaDeb; else  $des4 = $DesCtaDeb;
+       if (trim($tipo4)!="") $tipo4=$tipo4."_"."D"; else  $tipo4 = "D";
+       if (trim($monto4)!="") $monto4=$monto4."_".$MonRet; else $monto4=$MonRet;
+       if ($tippag=='S') //Pago Simple
+       {
+            $SQL = "Select codtip,SUM(MonRet) as montoret,numret,codtip from OPRetOrd where NumOrd= '".$ordendepago."' group by CodTip,Numret";
+            if (Herramientas::BuscarDatos($SQL,&$result))
+            {
+              $k=0;
+              while ($k<count($result))
+              {
+                  $strsql = "Select codcon,destip From OPTipRet where CodTip= '". trim($result[$k]['codtip']) ."'";
+                  if (Herramientas::BuscarDatos($strsql,&$optipret))
+                  {
+                    if ($result[$k]['montoret']>0)
+                   {
+                    if (trim($codigocuenta5)!="") $codigocuenta5=$codigocuenta5."_".$optipret[0]['codcon']; else  $codigocuenta5 = $optipret[0]['codcon'];
+                    if (trim($des5)!="") $des5=$des5."_".$optipret[0]['destip']; else  $des5 = $optipret[0]['destip'];
+                    if (trim($tipo5)!="") $tipo5=$tipo5."_"."C"; else  $tipo5 = "C";
+                    if (trim($monto5)!="") $monto5=$monto5."_".$result[$k]['montoret']; else $monto5=$result[$k]['montoret'];
+                  }
+                  }
+                $k++;
+              }
+            }
+       }
+       else if ($tippag=='C')//pagos compuestos
+       {
+        $x=$grid[0];
+        $j=0;
+        while ($j<count($x))
+        {
+          if ($x[$j]->getCheck()=="1")
+          {
+               $strsql = "Select codtip,SUM(MonRet) as montoret,numret from OPRetOrd where NumOrd= '".$x[$j]->getNumord()."' group by codtip,Numret";
+               if (Herramientas::BuscarDatos($strsql,&$resultado))
+               {
+                $k=0;
+                while ($k<count($resultado))
+                {
+                    $strsql = "Select codcon,destip From OPTipRet where CodTip= '". trim($resultado[$k]['codtip']) ."'";
+                    if (Herramientas::BuscarDatos($strsql,&$optipret))
+                    {
+                      if ($resultado[$k]['montoret']>0)
+                      {
+                      if (trim($codigocuenta5)!="") $codigocuenta5=$codigocuenta5."_".$optipret[0]['codcon']; else  $codigocuenta5 = $optipret[0]['codcon'];
+                      if (trim($des5)!="") $des5=$des5."_".$optipret[0]['destip']; else  $des5 = $optipret[0]['destip'];
+                      if (trim($tipo5)!="") $tipo5=$tipo5."_"."C"; else  $tipo5 = "C";
+                      if (trim($monto5)!="") $monto5=$monto5."_".$resultado[$k]['montoret']; else $monto5=$resultado[$k]['montoret'];
+                    }
+                    }
+                  $k++;
+                }
+              }
+          }
+          $j++;
+        }
+       }
+      }
+    }
+
+      if ($aplretcomalc=='S')
+    {
+        if ($operacion=='ordpag')
+       {
+        if ($codigocuenta5=="" && $codigocuenta4=="" && $codigocuenta3=="")
+        {
     $cuentas=$codigocuenta2.'_'.$codigocuenta;
     $tipos=$tipo2.'_'.$tipo;
     $descr=$des2.'_'.$des;
     $montos=$monto2.'_'.$monto;
+        }else if ($codigocuenta5=="" && $codigocuenta4=="") {
+            $cuentas=$codigocuenta3.'_'.$codigocuenta2.'_'.$codigocuenta;
+            $tipos=$tipo3.'_'.$tipo2.'_'.$tipo;
+            $descr=$des3.'_'.$des2.'_'.$des;
+            $montos=$monto3.'_'.$monto2.'_'.$monto;
+        }else if ($codigocuenta5=="" && $codigocuenta3==""){
+            $cuentas=$codigocuenta4.'_'.$codigocuenta2.'_'.$codigocuenta;
+            $tipos=$tipo4.'_'.$tipo2.'_'.$tipo;
+            $descr=$des4.'_'.$des2.'_'.$des;
+            $montos=$monto4.'_'.$monto2.'_'.$monto;
+        }else if ($codigocuenta4=="" && $codigocuenta3==""){
+            $cuentas=$codigocuenta5.'_'.$codigocuenta2.'_'.$codigocuenta;
+        $tipos=$tipo5.'_'.$tipo2.'_'.$tipo;
+        $descr=$des5.'_'.$des2.'_'.$des;
+        $montos=$monto5.'_'.$monto2.'_'.$monto;
+        }else  if ($codigocuenta3=="") {
+            $cuentas=$codigocuenta5.'_'.$codigocuenta4.'_'.$codigocuenta2.'_'.$codigocuenta;
+        $tipos=$tipo5.'_'.$tipo4.'_'.$tipo2.'_'.$tipo;
+        $descr=$des5.'_'.$des4.'_'.$des2.'_'.$des;
+        $montos=$monto5.'_'.$monto4.'_'.$monto2.'_'.$monto;
+        }else {
+        $cuentas=$codigocuenta5.'_'.$codigocuenta4.'_'.$codigocuenta3.'_'.$codigocuenta2.'_'.$codigocuenta;
+        $tipos=$tipo5.'_'.$tipo4.'_'.$tipo3.'_'.$tipo2.'_'.$tipo;
+        $descr=$des5.'_'.$des4.'_'.$des3.'_'.$des2.'_'.$des;
+        $montos=$monto5.'_'.$monto4.'_'.$monto3.'_'.$monto2.'_'.$monto;
+        }
+
+       }else {
+           $cuentas=$codigocuenta2.'_'.$codigocuenta;
+        $tipos=$tipo2.'_'.$tipo;
+        $descr=$des2.'_'.$des;
+        $montos=$monto2.'_'.$monto;
+       }
+    }else {
+        $cuentas=$codigocuenta2.'_'.$codigocuenta;
+        $tipos=$tipo2.'_'.$tipo;
+        $descr=$des2.'_'.$des;
+        $montos=$monto2.'_'.$monto;
+    }
 
 
     $arrecuentas=split("_",$cuentas);
