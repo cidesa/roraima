@@ -901,6 +901,7 @@ class almordcomActions extends autoalmordcomActions
     $this->getUser()->getAttributeHolder()->remove('referencia');
     $refcom="";
     $detsinord=H::getConfApp2('detsinord', 'compras', 'almordcom');
+    $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
     $c = new Criteria();
     if ($referencia==0)
     {
@@ -1001,6 +1002,9 @@ class almordcomActions extends autoalmordcomActions
     $col3->setAlineacionContenido(Columna::IZQUIERDA);
     $col3->setNombreCampo('Desart');
     $col3->setEsGrabable(true);
+    if  ($claartdes=='S')
+        $col3->setHTML('type="text" size="30x1"');
+    else
     $col3->setHTML('type="text" size="30x1" readonly=true');
 
     $col4 = new Columna('Cod. Unidad');
@@ -1165,6 +1169,24 @@ class almordcomActions extends autoalmordcomActions
     $col19->setNombreCampo('nompar');
     $col19->setHTML('type="text" size="20"');
 
+    $col20 = new Columna('Centro de Costo');
+    $col20->setTipo(Columna::TEXTO);
+    $col20->setEsGrabable(true);
+    $col20->setAlineacionObjeto(Columna::CENTRO);
+    $col20->setAlineacionContenido(Columna::CENTRO);
+    $col20->setNombreCampo('codcen');
+    $col20->setHTML('type="text" size="4" maxlength="4"');
+    $col20->setCatalogo('Cadefcen','sf_admin_edit_form', array('codcen' => 20,'descen' => 21),'Cadefcen_Almsolegr');
+    $col20->setAjax('almordcom',17,21);
+
+    $col21 = new Columna('Descripción');
+    $col21->setTipo(Columna::TEXTO);
+    $col21->setEsGrabable(true);
+    $col21->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col21->setAlineacionContenido(Columna::IZQUIERDA);
+    $col21->setNombreCampo('descen');
+    $col21->setHTML('type="text" size="25" readonly="true"');
+
     // Se guardan las columnas en el objetos de opciones
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
@@ -1184,6 +1206,9 @@ class almordcomActions extends autoalmordcomActions
     $opciones->addColumna($col16);
     $opciones->addColumna($col17);
     $opciones->addColumna($col18);
+    $opciones->addColumna($col19);
+    $opciones->addColumna($col20);
+    $opciones->addColumna($col21);
 
 
     // Ee genera el arreglo de opciones necesario para generar el grid
@@ -1362,6 +1387,32 @@ class almordcomActions extends autoalmordcomActions
     $col18->setNombreCampo('datosrecargo');
     $col18->setOculta(true);
 
+    $col19 = new Columna('Nombre Partida');
+    $col19->setTipo(Columna::TEXTO);
+    $col19->setOculta(true);
+    $col19->setAlineacionObjeto(Columna::CENTRO);
+    $col19->setAlineacionContenido(Columna::CENTRO);
+    $col19->setNombreCampo('nompar');
+    $col19->setHTML('type="text" size="20"');
+
+    $col20 = new Columna('Centro de Costo');
+    $col20->setTipo(Columna::TEXTO);
+    $col20->setEsGrabable(true);
+    $col20->setAlineacionObjeto(Columna::CENTRO);
+    $col20->setAlineacionContenido(Columna::CENTRO);
+    $col20->setNombreCampo('codcen');
+    $col20->setHTML('type="text" size="4" maxlength="4"');
+    $col20->setCatalogo('Cadefcen','sf_admin_edit_form', array('codcen' => 20,'descen' => 21),'Cadefcen_Almsolegr');
+    $col20->setAjax('almordcom',17,21);
+
+    $col21 = new Columna('Descripción');
+    $col21->setTipo(Columna::TEXTO);
+    $col21->setEsGrabable(true);
+    $col21->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col21->setAlineacionContenido(Columna::IZQUIERDA);
+    $col21->setNombreCampo('descen');
+    $col21->setHTML('type="text" size="25" readonly="true"');
+
     // Se guardan las columnas en el objetos de opciones
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
@@ -1381,6 +1432,9 @@ class almordcomActions extends autoalmordcomActions
     $opciones->addColumna($col16);
     $opciones->addColumna($col17);
     $opciones->addColumna($col18);
+    $opciones->addColumna($col19);
+    $opciones->addColumna($col20);
+    $opciones->addColumna($col21);
 
 
     // Ee genera el arreglo de opciones necesario para generar el grid

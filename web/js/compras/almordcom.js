@@ -295,9 +295,13 @@
      contador_repetido=0;
      articulorepetido=false;
      var col_fila_codigo_art_com = "ax_"+i+"_2";
+     var col_fila_descrip_art_com = "ax_"+i+"_3";
      var col_fila_codigo_uni_com = "ax_"+i+"_4";
      if ($(col_fila_codigo_art_com).value!="")
      {
+       if ($('caordcom_claartdes').value=='S')
+           artuni_com=$(col_fila_codigo_uni_com).value+'-'+$(col_fila_codigo_art_com).value+'-'+$(col_fila_descrip_art_com).value
+       else
        artuni_com=$(col_fila_codigo_uni_com).value+'-'+$(col_fila_codigo_art_com).value
        codartunis.each(function(item) {
          if (artuni_com==item)
@@ -366,6 +370,7 @@
         i=id.split('_');
         fil=i[1];
         var col_fila_codigo_art = "ax_"+fil+"_2";
+        var col_fila_descri_art = "ax_"+fil+"_3";
         var col_fila_unidad_art = "ax_"+fil+"_4";
         var col_fila_partida_art = "ax_"+fil+"_16";
         var col_fila_codigo_pre = "ax_"+fil+"_15";
@@ -378,6 +383,9 @@
         valor_cat_unidad=valor_cat_unidad.replace('--','-');
         $(col_fila_codigo_pre).value=valor_cat_unidad;
         codpres[fil] = valor_cat_unidad;
+        if ($('caordcom_claartdes').value=='S')
+            codartunis[fil] = $(col_fila_unidad_art).value + '-' + $(col_fila_codigo_art).value+ '-' + $(col_fila_descri_art).value;
+        else
         codartunis[fil] = $(col_fila_unidad_art).value + '-' + $(col_fila_codigo_art).value;
         codarts[fil] = $(col_fila_codigo_art).value;
      }

@@ -339,5 +339,8 @@ class Caordcom extends BaseCaordcom
   {
     return H::getConfApp2('manunialt', 'compras', 'almregart');
   }
-
+  public function getClaartdes()
+  {
+    return H::getConfApp2('claartdes', 'compras', 'almsolegr');
+  }
 }

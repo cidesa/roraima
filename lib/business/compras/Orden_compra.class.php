@@ -61,6 +61,32 @@ class Orden_compra
            }
        }
         
+       if (Herramientas::getX_vacio('ordcom','caordcom','ordcom',$caordcom->getOrdcom())!='' && $refere2=="")
+       {
+           $saveprocen=H::getConfApp2('saveprocen', 'compras', 'almordcom');
+           if ($saveprocen=='S')
+           {
+
+                  $c= new Criteria();
+                  $c->add(CaordcomPeer::ORDCOM,$caordcom->getOrdcom());
+                  $caordcom_mod= CaordcomPeer::doSelectOne($c);
+                  if (count($caordcom_mod)>0)
+                  {
+                     if ($caordcom_mod->getRefsol()=="") {
+                         $caordcom_mod->setCodpro(CaproveePeer::getCod_provee(trim($caordcom->getRifpro())));
+                         $caordcom_mod->setCodcen($caordcom->getCodcen());
+                         $caordcom_mod->save();
+
+                         $coderror=-1;
+                         return true;
+                     }
+
+                  }
+
+
+           }
+       }
+
 	//$refere2 = Herramientas::getX_vacio('refere','cpimpcau','refere',$caordcom->getOrdcom());
 	$refere0 = Herramientas::getX_vacio('refcom','cpimpcom','refcom',$caordcom->getOrdcom());
 
@@ -492,6 +518,10 @@ class Orden_compra
                     $grid['anadir']="";
                     $grid['datosrecargo']="";
                     if ($tipopro!='P') $grid['datosrecargo']=self::Cargartirarecargosgrid($refsol,$result[$i]['codart'],$result[$i]['codcat'],$result[$i]['desart']);
+
+                    $grid['nompar']="";
+                    $grid['codcen']="";
+                    $grid['descen']="";
                     $output[] = $grid;
                  }
                }
@@ -1668,6 +1698,8 @@ class Orden_compra
               $caordcom_new->setCodcenaco($caordcom->getCodcenaco());
               $caordcom_new->setForent($codforent);
               $caordcom_new->setConpag($codconpag);
+              $loguse=sfContext::getInstance()->getUser()->getAttribute('loguse');
+              $caordcom_new->setUsuroc($loguse);
               $caordcom_new->getMonord();
               $caordcom->getOrdcom();
 
@@ -1981,6 +2013,7 @@ class Orden_compra
           $caartord_new->setDesart(str_replace("'","",$grid_detalle[$i]['desart']));
           $caartord_new->setUnimed(str_replace("'","",$grid_detalle[$i][$campo_col13]));
           $caartord_new->setCodpar($grid_detalle[$i]['codpar']);//Herramientas::getX_vacio('codart','CARegArt','codpar',$grid_detalle[$i]['codart']));
+          $caartord_new->setCodcen($grid_detalle[$i]['codcen']);
           $caartord_new->setPartida($vacio);
           $caartord_new->save();
           $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');

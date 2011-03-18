@@ -85,6 +85,22 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 
 
 	
+	protected $refcom;
+
+
+
+	protected $reqart;
+
+
+
+	protected $indice;
+
+
+
+	protected $codcen;
+
+
+
 	protected $id;
 
 	
@@ -251,6 +267,34 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 
   }
   
+  public function getRefcom()
+  {
+
+    return trim($this->refcom);
+
+  }
+
+  public function getReqart()
+  {
+
+    return trim($this->reqart);
+
+  }
+
+  public function getIndice()
+  {
+
+    return trim($this->indice);
+
+  }
+
+  public function getCodcen()
+  {
+
+    return trim($this->codcen);
+
+  }
+
   public function getId()
   {
 
@@ -460,6 +504,46 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setRefcom($v)
+	{
+
+    if ($this->refcom !== $v) {
+        $this->refcom = $v;
+        $this->modifiedColumns[] = CaartordPeer::REFCOM;
+      }
+
+	}
+
+	public function setReqart($v)
+	{
+
+    if ($this->reqart !== $v) {
+        $this->reqart = $v;
+        $this->modifiedColumns[] = CaartordPeer::REQART;
+      }
+
+	}
+
+	public function setIndice($v)
+	{
+
+    if ($this->indice !== $v) {
+        $this->indice = $v;
+        $this->modifiedColumns[] = CaartordPeer::INDICE;
+      }
+
+	}
+
+	public function setCodcen($v)
+	{
+
+    if ($this->codcen !== $v) {
+        $this->codcen = $v;
+        $this->modifiedColumns[] = CaartordPeer::CODCEN;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -512,7 +596,15 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 
       $this->partida = $rs->getString($startcol + 18);
 
-      $this->id = $rs->getInt($startcol + 19);
+      $this->refcom = $rs->getString($startcol + 19);
+
+      $this->reqart = $rs->getString($startcol + 20);
+
+      $this->indice = $rs->getString($startcol + 21);
+
+      $this->codcen = $rs->getString($startcol + 22);
+
+      $this->id = $rs->getInt($startcol + 23);
 
       $this->resetModified();
 
@@ -520,7 +612,7 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 20; 
+            return $startcol + 24;
     } catch (Exception $e) {
       throw new PropelException("Error populating Caartord object", $e);
     }
@@ -725,6 +817,18 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 				return $this->getPartida();
 				break;
 			case 19:
+				return $this->getRefcom();
+				break;
+			case 20:
+				return $this->getReqart();
+				break;
+			case 21:
+				return $this->getIndice();
+				break;
+			case 22:
+				return $this->getCodcen();
+				break;
+			case 23:
 				return $this->getId();
 				break;
 			default:
@@ -756,7 +860,11 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 			$keys[16] => $this->getUnimed(),
 			$keys[17] => $this->getCodpar(),
 			$keys[18] => $this->getPartida(),
-			$keys[19] => $this->getId(),
+			$keys[19] => $this->getRefcom(),
+			$keys[20] => $this->getReqart(),
+			$keys[21] => $this->getIndice(),
+			$keys[22] => $this->getCodcen(),
+			$keys[23] => $this->getId(),
 		);
 		return $result;
 	}
@@ -830,6 +938,18 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 				$this->setPartida($value);
 				break;
 			case 19:
+				$this->setRefcom($value);
+				break;
+			case 20:
+				$this->setReqart($value);
+				break;
+			case 21:
+				$this->setIndice($value);
+				break;
+			case 22:
+				$this->setCodcen($value);
+				break;
+			case 23:
 				$this->setId($value);
 				break;
 		} 	}
@@ -858,7 +978,11 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[16], $arr)) $this->setUnimed($arr[$keys[16]]);
 		if (array_key_exists($keys[17], $arr)) $this->setCodpar($arr[$keys[17]]);
 		if (array_key_exists($keys[18], $arr)) $this->setPartida($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setId($arr[$keys[19]]);
+		if (array_key_exists($keys[19], $arr)) $this->setRefcom($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setReqart($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setIndice($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setCodcen($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setId($arr[$keys[23]]);
 	}
 
 	
@@ -885,6 +1009,10 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaartordPeer::UNIMED)) $criteria->add(CaartordPeer::UNIMED, $this->unimed);
 		if ($this->isColumnModified(CaartordPeer::CODPAR)) $criteria->add(CaartordPeer::CODPAR, $this->codpar);
 		if ($this->isColumnModified(CaartordPeer::PARTIDA)) $criteria->add(CaartordPeer::PARTIDA, $this->partida);
+		if ($this->isColumnModified(CaartordPeer::REFCOM)) $criteria->add(CaartordPeer::REFCOM, $this->refcom);
+		if ($this->isColumnModified(CaartordPeer::REQART)) $criteria->add(CaartordPeer::REQART, $this->reqart);
+		if ($this->isColumnModified(CaartordPeer::INDICE)) $criteria->add(CaartordPeer::INDICE, $this->indice);
+		if ($this->isColumnModified(CaartordPeer::CODCEN)) $criteria->add(CaartordPeer::CODCEN, $this->codcen);
 		if ($this->isColumnModified(CaartordPeer::ID)) $criteria->add(CaartordPeer::ID, $this->id);
 
 		return $criteria;
@@ -953,6 +1081,14 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 		$copyObj->setCodpar($this->codpar);
 
 		$copyObj->setPartida($this->partida);
+
+		$copyObj->setRefcom($this->refcom);
+
+		$copyObj->setReqart($this->reqart);
+
+		$copyObj->setIndice($this->indice);
+
+		$copyObj->setCodcen($this->codcen);
 
 
 		$copyObj->setNew(true);

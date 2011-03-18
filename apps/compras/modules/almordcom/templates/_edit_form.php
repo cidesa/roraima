@@ -45,6 +45,7 @@
 <?php echo input_hidden_tag('fechaanuserv', $fechaanuserv) ?>
 <?php echo input_hidden_tag('caordcom[manorddon]', $caordcom->getManorddon()) ?>
 <?php echo input_hidden_tag('caordcom[manunialt]', $caordcom->getManunialt()) ?>
+<?php echo input_hidden_tag('caordcom[claartdes]', $caordcom->getClaartdes()) ?>
 
 <input id="codigo_presupuestario_sin_disponibilidad" name="codigo_presupuestario_sin_disponibilidad" type="hidden">
 <script language="JavaScript" type="text/javascript">
@@ -213,7 +214,7 @@ echo input_tag('caordcom[refsol]', $caordcom->getRefsol(), array (
   'maxlength' => 15,
   'control_name' => 'caordcom[rifpro]',
   'onBlur'=> remote_function(array(
-            //  'update'   => 'div_recargo',
+          'condition' => "$('caordcom_rifpro').value != '' && $('id').value == ''",
           'script' => true,
         'url'      => 'almordcom/grid_recargos',
         'complete' => 'AjaxJSON(request, json),mensaje_rif_cambiado(),cargar_grid_orden_detalle_orden()',

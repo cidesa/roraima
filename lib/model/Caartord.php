@@ -458,6 +458,9 @@ class Caartord extends BaseCaartord
 
 	}
 
-
+  public function getDescen()
+  {
+	return Herramientas::getX_vacio('CODCEN','Cadefcen','Descen',self::getCodcen());
+  }
 
  }
