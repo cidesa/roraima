@@ -575,7 +575,7 @@ $this->Bitacora('Guardo');
     if ($this->getRequestParameter('ajax')=='1')
       {
         $c=new Criteria();
-        $c->add(CaramartPeer::RAMART,str_pad($this->getRequestParameter('codigo'), 6 , '0','STR_PAD_LEFT'));
+        $c->add(CaramartPeer::RAMART,$this->getRequestParameter('codigo'));
         $datos=CaramartPeer::doSelectOne($c);
         if ($datos)
         {
