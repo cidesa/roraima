@@ -580,7 +580,7 @@ $this->Bitacora('Guardo');
         if ($datos)
         {
            $nomram=$datos->getNomram();
-           $output = '[["'.$cajtexmos.'","'.$nomram.'",""],["'.$cajtexcom.'","6","c"]]';
+           $output = '[["'.$cajtexmos.'","'.$nomram.'",""]]';
         }
         else
         {
