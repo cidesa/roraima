@@ -90,6 +90,9 @@ class Cpimpcom extends BaseCpimpcom
   	  $datos= TsretivaPeer::doSelectOne($c);
   	  if ($datos)
   	  {
+  		if ($datos->getAnoant()=='S')
+  		return 'N';
+              else
   		return 'S';
   	  }else return 'N';
    }else if ($afectarecargo=='P')
@@ -99,6 +102,9 @@ class Cpimpcom extends BaseCpimpcom
   	  $datos= TsretivaPeer::doSelectOne($c);
   	  if ($datos)
   	  {
+  		if ($datos->getAnoant()=='S')
+  		return 'N';
+              else
   		return 'S';
   	  }else return 'N';
 

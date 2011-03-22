@@ -341,7 +341,14 @@ $this->Bitacora('Guardo');
 
           $this->configGrid($this->getRequestParameter('codigo'),2,$tipprove);
 
-          $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","8","c"],["cacotiza_mondes","'.$mondes.'",""],["cacotiza_monrec","'.$monrgo.'",""],["cacotiza_modifico","'.$mod.'",""]]';
+          $descripsol=H::getConfApp2('descripsol', 'compras', 'almcotiza');
+          $com='';
+          if ($descripsol=='S')
+          {
+              $com=',["cacotiza_descot","'.$dato.'",""]';
+          }
+
+          $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","8","c"],["cacotiza_mondes","'.$mondes.'",""],["cacotiza_monrec","'.$monrgo.'",""],["cacotiza_modifico","'.$mod.'",""]'.$com.']';
 
           $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         }

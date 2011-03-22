@@ -27,6 +27,12 @@ class Tesoreria {
     {
       if ($x[$j]->getCodret()!="" && $x[$j]->getCodrec()!="" && $x[$j]->getCodpar()!="")
       {
+          if ($x[$j]->getAnoant()=="1")
+          {
+              $x[$j]->setAnoant('S');
+          }else {
+              $x[$j]->setAnoant(null);
+          }
       $x[$j]->save();
       }
       $j++;

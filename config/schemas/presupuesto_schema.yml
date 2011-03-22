@@ -1229,9 +1229,12 @@ propel:
       size: 1
     nrores:
       type: VARCHAR
-      size: 10
+      size: 20
     fecres:
       type: DATE
+    tipo:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true

@@ -29,6 +29,18 @@ abstract class BaseCpsolmovadi extends BaseObject  implements Persistent {
 
 
 	
+	protected $nrores;
+
+
+
+	protected $fecres;
+
+
+
+	protected $tipo;
+
+
+
 	protected $id;
 
 	
@@ -77,6 +89,42 @@ abstract class BaseCpsolmovadi extends BaseObject  implements Persistent {
 
   }
   
+  public function getNrores()
+  {
+
+    return trim($this->nrores);
+
+  }
+
+  public function getFecres($format = 'Y-m-d')
+  {
+
+    if ($this->fecres === null || $this->fecres === '') {
+      return null;
+    } elseif (!is_int($this->fecres)) {
+            $ts = adodb_strtotime($this->fecres);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecres] as date/time value: " . var_export($this->fecres, true));
+      }
+    } else {
+      $ts = $this->fecres;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+
+  public function getTipo()
+  {
+
+    return trim($this->tipo);
+
+  }
+
   public function getId()
   {
 
@@ -138,6 +186,48 @@ abstract class BaseCpsolmovadi extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNrores($v)
+	{
+
+    if ($this->nrores !== $v) {
+        $this->nrores = $v;
+        $this->modifiedColumns[] = CpsolmovadiPeer::NRORES;
+      }
+
+	}
+
+	public function setFecres($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecres] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecres !== $ts) {
+      $this->fecres = $ts;
+      $this->modifiedColumns[] = CpsolmovadiPeer::FECRES;
+    }
+
+	}
+
+	public function setTipo($v)
+	{
+
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = CpsolmovadiPeer::TIPO;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -162,7 +252,13 @@ abstract class BaseCpsolmovadi extends BaseObject  implements Persistent {
 
       $this->stamov = $rs->getString($startcol + 4);
 
-      $this->id = $rs->getInt($startcol + 5);
+      $this->nrores = $rs->getString($startcol + 5);
+
+      $this->fecres = $rs->getDate($startcol + 6, null);
+
+      $this->tipo = $rs->getString($startcol + 7);
+
+      $this->id = $rs->getInt($startcol + 8);
 
       $this->resetModified();
 
@@ -170,7 +266,7 @@ abstract class BaseCpsolmovadi extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 6; 
+            return $startcol + 9;
     } catch (Exception $e) {
       throw new PropelException("Error populating Cpsolmovadi object", $e);
     }
@@ -350,6 +446,15 @@ abstract class BaseCpsolmovadi extends BaseObject  implements Persistent {
 				return $this->getStamov();
 				break;
 			case 5:
+				return $this->getNrores();
+				break;
+			case 6:
+				return $this->getFecres();
+				break;
+			case 7:
+				return $this->getTipo();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -367,7 +472,10 @@ abstract class BaseCpsolmovadi extends BaseObject  implements Persistent {
 			$keys[2] => $this->getPerpre(),
 			$keys[3] => $this->getMonmov(),
 			$keys[4] => $this->getStamov(),
-			$keys[5] => $this->getId(),
+			$keys[5] => $this->getNrores(),
+			$keys[6] => $this->getFecres(),
+			$keys[7] => $this->getTipo(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
@@ -399,6 +507,15 @@ abstract class BaseCpsolmovadi extends BaseObject  implements Persistent {
 				$this->setStamov($value);
 				break;
 			case 5:
+				$this->setNrores($value);
+				break;
+			case 6:
+				$this->setFecres($value);
+				break;
+			case 7:
+				$this->setTipo($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
@@ -413,7 +530,10 @@ abstract class BaseCpsolmovadi extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setPerpre($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setMonmov($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setStamov($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[5], $arr)) $this->setNrores($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setFecres($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setTipo($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
 	
@@ -426,6 +546,9 @@ abstract class BaseCpsolmovadi extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CpsolmovadiPeer::PERPRE)) $criteria->add(CpsolmovadiPeer::PERPRE, $this->perpre);
 		if ($this->isColumnModified(CpsolmovadiPeer::MONMOV)) $criteria->add(CpsolmovadiPeer::MONMOV, $this->monmov);
 		if ($this->isColumnModified(CpsolmovadiPeer::STAMOV)) $criteria->add(CpsolmovadiPeer::STAMOV, $this->stamov);
+		if ($this->isColumnModified(CpsolmovadiPeer::NRORES)) $criteria->add(CpsolmovadiPeer::NRORES, $this->nrores);
+		if ($this->isColumnModified(CpsolmovadiPeer::FECRES)) $criteria->add(CpsolmovadiPeer::FECRES, $this->fecres);
+		if ($this->isColumnModified(CpsolmovadiPeer::TIPO)) $criteria->add(CpsolmovadiPeer::TIPO, $this->tipo);
 		if ($this->isColumnModified(CpsolmovadiPeer::ID)) $criteria->add(CpsolmovadiPeer::ID, $this->id);
 
 		return $criteria;
@@ -466,6 +589,12 @@ abstract class BaseCpsolmovadi extends BaseObject  implements Persistent {
 		$copyObj->setMonmov($this->monmov);
 
 		$copyObj->setStamov($this->stamov);
+
+		$copyObj->setNrores($this->nrores);
+
+		$copyObj->setFecres($this->fecres);
+
+		$copyObj->setTipo($this->tipo);
 
 
 		$copyObj->setNew(true);

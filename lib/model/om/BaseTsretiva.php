@@ -21,6 +21,10 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 
 
 	
+	protected $anoant;
+
+
+
 	protected $id;
 
 	
@@ -54,6 +58,13 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 
   }
   
+  public function getAnoant()
+  {
+
+    return trim($this->anoant);
+
+  }
+
   public function getId()
   {
 
@@ -95,6 +106,16 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setAnoant($v)
+	{
+
+    if ($this->anoant !== $v) {
+        $this->anoant = $v;
+        $this->modifiedColumns[] = TsretivaPeer::ANOANT;
+      }
+
+	}
+
 	public function setId($v)
 	{
 
@@ -115,7 +136,9 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 
       $this->codpar = $rs->getString($startcol + 2);
 
-      $this->id = $rs->getInt($startcol + 3);
+      $this->anoant = $rs->getString($startcol + 3);
+
+      $this->id = $rs->getInt($startcol + 4);
 
       $this->resetModified();
 
@@ -123,7 +146,7 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 4; 
+            return $startcol + 5;
     } catch (Exception $e) {
       throw new PropelException("Error populating Tsretiva object", $e);
     }
@@ -297,6 +320,9 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 				return $this->getCodpar();
 				break;
 			case 3:
+				return $this->getAnoant();
+				break;
+			case 4:
 				return $this->getId();
 				break;
 			default:
@@ -312,7 +338,8 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 			$keys[0] => $this->getCodret(),
 			$keys[1] => $this->getCodrec(),
 			$keys[2] => $this->getCodpar(),
-			$keys[3] => $this->getId(),
+			$keys[3] => $this->getAnoant(),
+			$keys[4] => $this->getId(),
 		);
 		return $result;
 	}
@@ -338,6 +365,9 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 				$this->setCodpar($value);
 				break;
 			case 3:
+				$this->setAnoant($value);
+				break;
+			case 4:
 				$this->setId($value);
 				break;
 		} 	}
@@ -350,7 +380,8 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setCodret($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodrec($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCodpar($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
+		if (array_key_exists($keys[3], $arr)) $this->setAnoant($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
 	}
 
 	
@@ -361,6 +392,7 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(TsretivaPeer::CODRET)) $criteria->add(TsretivaPeer::CODRET, $this->codret);
 		if ($this->isColumnModified(TsretivaPeer::CODREC)) $criteria->add(TsretivaPeer::CODREC, $this->codrec);
 		if ($this->isColumnModified(TsretivaPeer::CODPAR)) $criteria->add(TsretivaPeer::CODPAR, $this->codpar);
+		if ($this->isColumnModified(TsretivaPeer::ANOANT)) $criteria->add(TsretivaPeer::ANOANT, $this->anoant);
 		if ($this->isColumnModified(TsretivaPeer::ID)) $criteria->add(TsretivaPeer::ID, $this->id);
 
 		return $criteria;
@@ -397,6 +429,8 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 		$copyObj->setCodrec($this->codrec);
 
 		$copyObj->setCodpar($this->codpar);
+
+		$copyObj->setAnoant($this->anoant);
 
 
 		$copyObj->setNew(true);

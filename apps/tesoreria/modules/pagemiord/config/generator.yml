@@ -42,7 +42,7 @@ generator:
     list:
       title:          Ordenes de Pago
       display:        [=numord, fecemi, tipcau, desord, nomext, monord, cedrif, nomben]
-      filters:        [numord, fecemi, tipcau, cedrif, nomben, status, codconcepto]
+      filters:        [numord, fecemi, tipcau, cedrif, nomben, status, codconcepto, desord, numforpre]
       max_per_page:   5
       sort:  numord
       object_actions:

@@ -13,7 +13,7 @@ abstract class BaseCpsolmovadiPeer {
 	const CLASS_DEFAULT = 'lib.model.presupuesto.Cpsolmovadi';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,6 +35,15 @@ abstract class BaseCpsolmovadiPeer {
 	const STAMOV = 'cpsolmovadi.STAMOV';
 
 	
+	const NRORES = 'cpsolmovadi.NRORES';
+
+
+	const FECRES = 'cpsolmovadi.FECRES';
+
+
+	const TIPO = 'cpsolmovadi.TIPO';
+
+
 	const ID = 'cpsolmovadi.ID';
 
 	
@@ -43,18 +52,18 @@ abstract class BaseCpsolmovadiPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Refadi', 'Codpre', 'Perpre', 'Monmov', 'Stamov', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CpsolmovadiPeer::REFADI, CpsolmovadiPeer::CODPRE, CpsolmovadiPeer::PERPRE, CpsolmovadiPeer::MONMOV, CpsolmovadiPeer::STAMOV, CpsolmovadiPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('refadi', 'codpre', 'perpre', 'monmov', 'stamov', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Refadi', 'Codpre', 'Perpre', 'Monmov', 'Stamov', 'Nrores', 'Fecres', 'Tipo', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CpsolmovadiPeer::REFADI, CpsolmovadiPeer::CODPRE, CpsolmovadiPeer::PERPRE, CpsolmovadiPeer::MONMOV, CpsolmovadiPeer::STAMOV, CpsolmovadiPeer::NRORES, CpsolmovadiPeer::FECRES, CpsolmovadiPeer::TIPO, CpsolmovadiPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refadi', 'codpre', 'perpre', 'monmov', 'stamov', 'nrores', 'fecres', 'tipo', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Refadi' => 0, 'Codpre' => 1, 'Perpre' => 2, 'Monmov' => 3, 'Stamov' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (CpsolmovadiPeer::REFADI => 0, CpsolmovadiPeer::CODPRE => 1, CpsolmovadiPeer::PERPRE => 2, CpsolmovadiPeer::MONMOV => 3, CpsolmovadiPeer::STAMOV => 4, CpsolmovadiPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('refadi' => 0, 'codpre' => 1, 'perpre' => 2, 'monmov' => 3, 'stamov' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Refadi' => 0, 'Codpre' => 1, 'Perpre' => 2, 'Monmov' => 3, 'Stamov' => 4, 'Nrores' => 5, 'Fecres' => 6, 'Tipo' => 7, 'Id' => 8, ),
+		BasePeer::TYPE_COLNAME => array (CpsolmovadiPeer::REFADI => 0, CpsolmovadiPeer::CODPRE => 1, CpsolmovadiPeer::PERPRE => 2, CpsolmovadiPeer::MONMOV => 3, CpsolmovadiPeer::STAMOV => 4, CpsolmovadiPeer::NRORES => 5, CpsolmovadiPeer::FECRES => 6, CpsolmovadiPeer::TIPO => 7, CpsolmovadiPeer::ID => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('refadi' => 0, 'codpre' => 1, 'perpre' => 2, 'monmov' => 3, 'stamov' => 4, 'nrores' => 5, 'fecres' => 6, 'tipo' => 7, 'id' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -117,6 +126,12 @@ abstract class BaseCpsolmovadiPeer {
 		$criteria->addSelectColumn(CpsolmovadiPeer::MONMOV);
 
 		$criteria->addSelectColumn(CpsolmovadiPeer::STAMOV);
+
+		$criteria->addSelectColumn(CpsolmovadiPeer::NRORES);
+
+		$criteria->addSelectColumn(CpsolmovadiPeer::FECRES);
+
+		$criteria->addSelectColumn(CpsolmovadiPeer::TIPO);
 
 		$criteria->addSelectColumn(CpsolmovadiPeer::ID);
 

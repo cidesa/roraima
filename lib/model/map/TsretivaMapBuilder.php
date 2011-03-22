@@ -40,6 +40,8 @@ class TsretivaMapBuilder {
 
 		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, true, 32);
 
+		$tMap->addColumn('ANOANT', 'Anoant', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

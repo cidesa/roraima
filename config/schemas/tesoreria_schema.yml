@@ -2267,6 +2267,9 @@ propel:
       type: VARCHAR
       size: 32
       required: true
+    anoant:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true

@@ -22,7 +22,8 @@ private static $coderror=-1;
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -240,6 +241,13 @@ $this->Bitacora('Guardo');
     $col7->setNombreCampo('codpar');
     $col7->setHTML('type="text" size="20" readonly=true');
 
+    $col8 = new Columna('¿Es Años Anteriores?');
+    $col8->setTipo(Columna::CHECK);
+    $col8->setNombreCampo('anoant');
+    $col8->setEsGrabable(true);
+    $col8->setHTML(' ');
+
+
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
@@ -247,6 +255,7 @@ $this->Bitacora('Guardo');
     $opciones->addColumna($col5);
     $opciones->addColumna($col6);
     $opciones->addColumna($col7);
+    $opciones->addColumna($col8);
 
     $this->obj = $opciones->getConfig($per);
 

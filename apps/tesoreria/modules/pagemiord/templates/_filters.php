@@ -88,6 +88,24 @@
     </div>
     </div>
 
+<div class="form-row">
+    <label for="filters_desord"><?php echo __('Concepto:') ?></label>
+    <div class="content">
+    <?php echo input_tag('filters[desord]', isset($filters['desord']) ? $filters['desord'] : null, array (
+  'size' => 15,
+)) ?>
+    </div>
+    </div>
+
+        <div class="form-row">
+    <label for="filters_numforpre"><?php $etiforma=H::getConfApp2('nometifor', 'tesoreria', 'pagemiord'); if ($etiforma!="") echo __($etiforma.':'); else echo __('N° de Forma Preimpresa:'); ?></label>
+    <div class="content">
+    <?php echo input_tag('filters[numforpre]', isset($filters['numforpre']) ? $filters['numforpre'] : null, array (
+  'size' => 15,
+)) ?>
+    </div>
+    </div>
+
       </fieldset>
 
   <ul class="sf_admin_actions">

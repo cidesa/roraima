@@ -13,7 +13,7 @@ abstract class BaseTsretivaPeer {
 	const CLASS_DEFAULT = 'lib.model.Tsretiva';
 
 	
-	const NUM_COLUMNS = 4;
+	const NUM_COLUMNS = 5;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -29,6 +29,9 @@ abstract class BaseTsretivaPeer {
 	const CODPAR = 'tsretiva.CODPAR';
 
 	
+	const ANOANT = 'tsretiva.ANOANT';
+
+
 	const ID = 'tsretiva.ID';
 
 	
@@ -37,18 +40,18 @@ abstract class BaseTsretivaPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codret', 'Codrec', 'Codpar', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (TsretivaPeer::CODRET, TsretivaPeer::CODREC, TsretivaPeer::CODPAR, TsretivaPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codret', 'codrec', 'codpar', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codret', 'Codrec', 'Codpar', 'Anoant', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (TsretivaPeer::CODRET, TsretivaPeer::CODREC, TsretivaPeer::CODPAR, TsretivaPeer::ANOANT, TsretivaPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codret', 'codrec', 'codpar', 'anoant', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codret' => 0, 'Codrec' => 1, 'Codpar' => 2, 'Id' => 3, ),
-		BasePeer::TYPE_COLNAME => array (TsretivaPeer::CODRET => 0, TsretivaPeer::CODREC => 1, TsretivaPeer::CODPAR => 2, TsretivaPeer::ID => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('codret' => 0, 'codrec' => 1, 'codpar' => 2, 'id' => 3, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codret' => 0, 'Codrec' => 1, 'Codpar' => 2, 'Anoant' => 3, 'Id' => 4, ),
+		BasePeer::TYPE_COLNAME => array (TsretivaPeer::CODRET => 0, TsretivaPeer::CODREC => 1, TsretivaPeer::CODPAR => 2, TsretivaPeer::ANOANT => 3, TsretivaPeer::ID => 4, ),
+		BasePeer::TYPE_FIELDNAME => array ('codret' => 0, 'codrec' => 1, 'codpar' => 2, 'anoant' => 3, 'id' => 4, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
@@ -107,6 +110,8 @@ abstract class BaseTsretivaPeer {
 		$criteria->addSelectColumn(TsretivaPeer::CODREC);
 
 		$criteria->addSelectColumn(TsretivaPeer::CODPAR);
+
+		$criteria->addSelectColumn(TsretivaPeer::ANOANT);
 
 		$criteria->addSelectColumn(TsretivaPeer::ID);
 
