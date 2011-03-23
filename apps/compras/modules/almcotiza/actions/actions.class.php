@@ -684,13 +684,15 @@ $this->Bitacora('Guardo');
     $col2->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraarticulo.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
     $col2->setAjax('almcotiza',3,3);
 
+    $moddescot=H::getConfApp2('moddescot', 'compras', 'almcotiza');
     $col3 = new Columna('Descripción');
     $col3->setTipo(Columna::TEXTAREA);
     $col3->setEsGrabable(true);
     $col3->setAlineacionObjeto(Columna::IZQUIERDA);
     $col3->setAlineacionContenido(Columna::IZQUIERDA);
     $col3->setNombreCampo('Desart');
-    $col3->setHTML('type="text"  size="25x1" readonly=true');
+    if ($moddescot=='S') $col3->setHTML('type="text"  size="25x1" maxlength="2000"');
+    else $col3->setHTML('type="text"  size="25x1" readonly=true');
 
     $col4 = new Columna('Cant. Cotizada');
     $col4->setTipo(Columna::MONTO);
