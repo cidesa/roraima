@@ -367,14 +367,16 @@ class Factura {
   public static function generarAsientos(&$fafactur,$grid1,$grid2,$grid3,$grid4,&$arrasientos,&$pos,&$msj3)
   {
   	$msj3=-1;
-  	//$salactual=H::toFloat($fafactur->getTottotart()) - H::toFloat($fafactur->getMondesc());
-        $salactual=H::toFloat($fafactur->getTottotart());
   	$numcomord="FA".substr($fafactur->getReffac(),2,6);
-  	//$correl=OrdendePago::Buscar_Correlativo();
-  	//$fafactur->setNumcom($correl);
   	$arrasientos=array();
   	$pos=0;
     $col=self::determinarReferenciaDoc($fafactur->getTipref());
+    if ($col=='candesp')
+    {
+        $salactual=H::toFloat($fafactur->getMonfac());
+    }else{
+        $salactual=H::toFloat($fafactur->getTottotart());
+    }
 
     if ($fafactur->getTipconpag()=='R') //Asiento Contable d Cta x Cobrar a Cliente
     {
