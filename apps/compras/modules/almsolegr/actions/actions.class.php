@@ -141,6 +141,40 @@ class almsolegrActions extends autoalmsolegrActions
                             }
                        }
 
+                           $x=$grid[0];
+                           $claartdes=H::getConfApp2('claartdes', 'compras', 'almsolegr');
+                           $j=0;
+                           $i=0;
+                           if (count($x))
+                           {
+                              while ($j<count($x))
+                              {
+                                  if ($x[$j]->getCodart()!="")
+                                  {
+                                        while ($i<count($x))
+                                        {
+                                          if ($j!=$i)
+                                          {
+                                            if ($claartdes=='S') {
+                                                $clave1=$x[$j]->getCodart().'-'.trim(strtoupper($x[$j]->getDesartsol())).'-'.$x[$j]->getCodcat();
+                                                $clave2=$x[$i]->getCodart().'-'.trim(strtoupper($x[$i]->getDesartsol())).'-'.$x[$i]->getCodcat();
+                                            }else {
+                                                $clave1=$x[$j]->getCodart().'-'.$x[$j]->getCodcat();
+                                                $clave2=$x[$i]->getCodart().'-'.$x[$i]->getCodcat();
+                                            }
+
+                                            if ($clave1==$clave2) {
+                                                $this->codeerror=829;
+                                                return false;
+                                            }
+                                          }
+                                          $i++;
+                                        }
+                                  }
+                                $j++;
+                              }
+                           }
+
                        $valpartidaiguales=H::getConfApp2('valparigua', 'compras', 'almsolegr');
                        if ($valpartidaiguales=='S')
                        {
@@ -963,7 +997,7 @@ class almsolegrActions extends autoalmsolegrActions
        $col3->setAlineacionContenido(Columna::IZQUIERDA);
        $col3->setNombreCampo('desartsol');
        $col3->setEsGrabable(true);
-       $col3->setHTML('type="text" size="25x1"');
+       $col3->setHTML('type="text" size="25x1" onkeyUp="javascript: return this.value = this.value.toUpperCase();"');
 
        $col4 = new Columna('Unidad de Medida');
        $col4->setTipo(Columna::TEXTO);
