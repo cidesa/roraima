@@ -1603,6 +1603,7 @@ var nf=parseInt($('fafactur_numfilas').value);
    var name=aux[0];
    var fil=parseInt(aux[1]);
    var col=parseInt(aux[2]);
+   var colum=determinarReferenciaDoc($('fafactur_tipref').value);
 
     var coldes=col+1;
     var colmonto=col+2;
@@ -1655,6 +1656,7 @@ var nf=parseInt($('fafactur_numfilas').value);
   {
     var miTot=0;
     var nf=parseInt($('fafactur_numfilas').value);
+    var colum=determinarReferenciaDoc($('fafactur_tipref').value);
     var regart=totalregistros2('ax',3,nf);
     var fil=0;
     while (fil<regart)
@@ -1689,7 +1691,7 @@ var nf=parseInt($('fafactur_numfilas').value);
 		  {
             var montodescto="ax_"+j+"_18";
 		    var apldescto="ax_"+j+"_20";
-		    var cant="ax_"+j+"_7";
+		    var cant="ax_"+j+"_"+colum;
 		    var precio="ax_"+j+"_10";
 		    var precioe="ax_"+j+"_11";
 		    var montrgo="ax_"+j+"_12";
@@ -1764,11 +1766,12 @@ var nf=parseInt($('fafactur_numfilas').value);
   {
     var montot=0;
     var nf=parseInt($('fafactur_numfilas').value);
+    var colum=determinarReferenciaDoc($('fafactur_tipref').value);
     var regart=totalregistros2('ax',3,nf);
     var fil=0;
     while (fil<regart)
     {
-      var cant="ax_"+fil+"_7";
+      var cant="ax_"+fil+"_"+colum;
       var totart="ax_"+fil+"_13";
       var precio="ax_"+fil+"_10";
       var precioe="ax_"+fil+"_11";
@@ -1806,7 +1809,7 @@ var nf=parseInt($('fafactur_numfilas').value);
   {
     var acumulador=0;
     var diferencia=0;
-    var nf=parseInt($('fafactur_numfilas').value);
+    var nf=parseInt($('fafactur_numfilas').value);    
     var regart=totalregistros2('ax',3,nf);
     var fil=0;
     while (fil<regart)
@@ -2285,12 +2288,13 @@ var nf=parseInt($('fafactur_numfilas').value);
  {
    var cant_entreg=0;
    var nf=parseInt($('fafactur_numfilas').value);
+   var colum=determinarReferenciaDoc($('fafactur_tipref').value);
    var am=totalregistros2('ax',3,nf);
    var i=0;
    while (i<am)
    {
     var codart1="ax"+"_"+i+"_3";
-    var cansol="ax"+"_"+i+"_7";
+    var cansol="ax"+"_"+i+"_"+colum;
     var canent="ax"+"_"+i+"_8";
     if ($(codart1)){
     var ncanent=toFloat(canent);
