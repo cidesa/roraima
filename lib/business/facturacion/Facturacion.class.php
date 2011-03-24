@@ -1883,6 +1883,8 @@ public static function entregas($nroped)
     $contabc->setTipcom(null);
     $contabc->setReftra($faajuste->getRefaju());
     $contabc->setMoncom($faajuste->getMonaju());
+    $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+    $contabc->setLoguse($loguse);
     $contabc->save();
 
     self::grabarComprobanteDetalle($faajuste,$correl,$arrasientos,&$pos);

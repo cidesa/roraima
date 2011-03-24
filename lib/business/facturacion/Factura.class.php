@@ -161,6 +161,8 @@ class Factura {
       $contabc->setStacom('D');
       $contabc->setTipcom(null);
       $contabc->setMoncom($monto);
+      $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+      $contabc->setLoguse($loguse);
 
       $numasi=0;
       if ($fafactur->getTipref()=='VC')
@@ -721,6 +723,8 @@ class Factura {
     $contabc->setStacom('D');
     $contabc->setTipcom(null);
     $contabc->setMoncom($fafactur->getMonfac());
+    $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+    $contabc->setLoguse($loguse);
     $contabc->save();
 
     $fafactur->setNumcom($correl3);
@@ -790,6 +794,8 @@ class Factura {
 	  $contabc->setStacom('D');
 	  $contabc->setTipcom(null);
 	  $contabc->setMoncom($montotot);
+          $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+          $contabc->setLoguse($loguse);
 
 
 	  $numasiento=0; //Grabamos el Debito. Costo de  Venta de cada Articulo
