@@ -606,6 +606,8 @@ class Tesoreria {
     }
     $contabc2->setTipcom(null);
     $contabc2->setMoncom($debito);
+    $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+    $contabc2->setLoguse($loguse);
     $compgene = $numcom;
     $contabc2->save();
 

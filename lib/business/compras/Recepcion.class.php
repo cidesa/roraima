@@ -662,6 +662,8 @@ class Recepcion
         $contabc->setStacom('D');
         $contabc->setTipcom('ART');
         $contabc->setMoncom($recepcion->getMonrcp());
+        $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+        $contabc->setLoguse($loguse);
         $contabc->save();
         
         if ($pos!=0)

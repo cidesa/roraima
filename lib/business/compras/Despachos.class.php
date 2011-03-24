@@ -892,6 +892,8 @@ class Despachos
             $contabc->setStacom('D');
             $contabc->setTipcom('ART');
             $contabc->setMoncom($acumdeb);
+            $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+            $contabc->setLoguse($loguse);
             $contabc->save();
 
        if ($pos!=0)

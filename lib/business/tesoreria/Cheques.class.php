@@ -2120,6 +2120,8 @@ class Cheques
 	    $contabc->setStacom('E');
 	    $contabc->setTipcom(null);
 	    $contabc->setMoncom($sumdeb);
+            $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+            $contabc->setLoguse($loguse);
 	    $contabc->save();
 
       $i=0;
@@ -2438,6 +2440,8 @@ class Cheques
 	    $contabc->setStacom('E');
 	    $contabc->setTipcom(null);
 	    $contabc->setMoncom($sumdeb);
+            $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+            $contabc->setLoguse($loguse);
 	    $contabc->save();
 
       $i=0;
