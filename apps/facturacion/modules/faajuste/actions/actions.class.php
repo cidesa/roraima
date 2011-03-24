@@ -211,6 +211,16 @@ $this->Bitacora('Guardo');
 				        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 				        $this->configGrid();
 					}else{
+                                            $a = new Criteria();
+                                            $a->add(FaajustePeer::CODREF,$codigo);
+                                            $regq = FaajustePeer::doSelectOne($a);
+                                            if ($regq){
+                                                $javascript = "alert('La Factura ya tiene un Ajuste'); $('faajuste_codref').value='';";
+                                                $output = '[["javascript","'.$javascript.'",""]]';
+                                                $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+                                                $this->configGrid();
+					}else {
+
 						$codpro = $datos->getCodcli();
 			  			$c2 = new Criteria();
 			  			$c2->add(FaclientePeer::CODPRO, $codpro);
@@ -227,6 +237,7 @@ $this->Bitacora('Guardo');
 				  		$output = '[["faajuste_codpro","'.$codpro.'",""],["faajuste_rifpro","'.$rifpro.'",""],["faajuste_nompro","'.$nompro.'",""],["faajuste_dirpro","'.$dirpro.'",""],["faajuste_telpro","'.$telpro.'",""],["javascript","'.$javascript.'",""]]';
 			         	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 						}
+                                        }
 
 					}
 					else{

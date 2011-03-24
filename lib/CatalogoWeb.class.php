@@ -4599,7 +4599,7 @@ public function Tsmovlib_tesmovdeglib2()
     $this->c = new Criteria();
     $this->c->add(FafacturPeer::STATUS, 'N', Criteria::NOT_EQUAL);
     $this->c->add(FafacturPeer::TIPREF, 'D', Criteria::NOT_EQUAL);
-    $sql = "(select sum(cantot) from faartfac where reffac=Fafactur.reffac)>(select sum(coalesce(candes,0)) from faartfac where reffac=Fafactur.reffac) ";
+    $sql = "fafactur.reffac not in (select codref from faajuste) and (select sum(cantot) from faartfac where reffac=Fafactur.reffac)>(select sum(coalesce(candes,0)) from faartfac where reffac=Fafactur.reffac) ";
     $this->c->add(FafacturPeer :: REFFAC, $sql, Criteria :: CUSTOM);
 
     $this->columnas = array (

@@ -1578,6 +1578,11 @@ public static function entregas($nroped)
   public static function eliminarFaajuste($faajuste)
   {
     self::devolverArticulosAju($faajuste);
+    if ($faajuste->getTipaju()=='F')
+    {
+        Herramientas :: EliminarRegistro('Contabc1', 'Refasi', $faajuste->getRefaju());
+        Herramientas :: EliminarRegistro('Contabc', 'Reftra', $faajuste->getRefaju());
+    }
     Herramientas :: EliminarRegistro('Famovaju', 'Refaju', $faajuste->getRefaju());
     Herramientas :: EliminarRegistro('Faajuste', 'Refaju', $faajuste->getRefaju());
   }
@@ -1666,19 +1671,6 @@ public static function entregas($nroped)
      }
 
      if ($faajuste->getTipaju()=='F'){
-        $numcomp="AJ".substr($faajuste->getCodref(),2,6);
-        $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
-        if ($confcorcom=='N')
-        {
-          $numcom=$numcomp;
-        }else $numcom='';
-
-        if ($numcom!='')
-        {
-            Herramientas :: EliminarRegistro('Contabc1', 'numcom', $numcom);
-            Herramientas :: EliminarRegistro('Contabc', 'numcom', $numcom);
-        }
-
       $q= new Criteria();
       $q->add(CobdocumePeer::REFFAC,$faajuste->getCodref());
       $registro= CobdocumePeer::doSelectOne($q);
@@ -1800,6 +1792,31 @@ public static function entregas($nroped)
             return false;
          }
        }
+
+      $i=0;
+      $acumdeb=0;
+      $acumcre=0;
+      while ($i<=($pos-1))
+      {
+            if ($arrasientos[$i]["2"]!="")
+            {
+              if ($arrasientos[$i]["2"]=='D')
+              {
+                  $acumdeb= $acumdeb + $arrasientos[$i]["3"];
+              }
+              else
+              {
+                    $acumcre= $acumcre + $arrasientos[$i]["3"];
+              }
+            }
+            $i++;
+      }
+      if (H::toFloat($acumdeb)!=H::toFloat($acumcre))
+      {
+         $msj3=519;
+         return false;
+      }
+
      return true;
   }
 
@@ -1837,8 +1854,19 @@ public static function entregas($nroped)
 
   public static function grabarComprobanteMaestro($faajuste,$arrasientos,&$pos)
   {
+    $prefijo=H::getConfApp2('prefijo', 'facturacion', 'faajuste');
     $periodocon=substr($faajuste->getFecaju(),0,4);
+    if ($prefijo=='S')
+    {
+      if ($faajuste->getTipo()=='DEBITO')
+      {
+         $numcomp="ND".substr($faajuste->getCodref(),2,6);
+      }else {
+          $numcomp="NC".substr($faajuste->getCodref(),2,6);
+      }
+    }else {
     $numcomp="AJ".substr($faajuste->getCodref(),2,6);
+    }
     $confcorcom=sfContext::getInstance()->getUser()->getAttribute('confcorcom');
     if ($confcorcom=='N')
     {
@@ -1853,6 +1881,7 @@ public static function entregas($nroped)
     else $contabc->setDescom('FACTURACION');
     $contabc->setStacom('D');
     $contabc->setTipcom(null);
+    $contabc->setReftra($faajuste->getRefaju());
     $contabc->setMoncom($faajuste->getMonaju());
     $contabc->save();
 
