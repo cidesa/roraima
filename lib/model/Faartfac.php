@@ -138,7 +138,7 @@ class Faartfac extends BaseFaartfac
     $this->preart=number_format(self::getPrecio() - self::getPreaju(), 2, ',', '.');
     $val=self::getPrecio() * self::getCantot();
     $this->montot=number_format($val, 2, ',', '.');
-    $this->preaju=number_format(self::getPrecio(), 2, ',', '.');
+    $this->preaju=$this->precio;
      $indicalm=H::getConfApp2('indicalm', 'facturacion', 'fadesp');
         if ($indicalm!='S')
         {
