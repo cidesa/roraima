@@ -120,6 +120,8 @@ class FaartfacMapBuilder {
 
 		$tMap->addColumn('IER', 'Ier', 'string', CreoleTypes::VARCHAR, false, 15);
 
+		$tMap->addColumn('RECAJU', 'Recaju', 'double', CreoleTypes::NUMERIC, false, 14);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	}

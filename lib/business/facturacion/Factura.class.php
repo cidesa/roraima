@@ -1228,10 +1228,12 @@ class Factura {
 
           if ($grabar==true)
           {
-          	$z[$j]->setCodart($x[$i]->getCodart());
-          	$z[$j]->setRefdoc($fafactur->getReffac());
-          	$z[$j]->setTipdoc('F');
-          	$z[$j]->save();
+               $fargoart= new Fargoart();
+               $fargoart->setCodart($x[$i]->getCodart());
+               $fargoart->setRefdoc($fafactur->getReffac());
+               $fargoart->setMonrgo($z[$j]->getMonrgo());
+               $fargoart->setTipdoc('F');
+               $fargoart->save();
           }
           $i++;
         }

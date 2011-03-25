@@ -528,75 +528,81 @@ class Facturacion {
          $famovaju->save();
          $tipo=H::getX('CODART','Caregart','Tipo',$codarti);
 
-         if ($tipo=='A'){
-		 if ($faajuste->getTipaju() == 'NE'){
-		 	$p= new Criteria();
-		 	$p->add(FaartnotPeer::NRONOT,$faajuste->getCodref());
-		 	$p->add(FaartnotPeer::CODART,$codarti);
-		 	$datos= FaartnotPeer::doSelectOne($p);
-			if ($datos){
-		 	$l= new Criteria();
-		 	$l->add(CaregartPeer::CODART,$codarti);
-		 	$data= CaregartPeer::doSelectOne($l);
-		 	if ($data)
-		 	{
-              if ($x[$j]->getCanaju() < $x[$j]->getCanord())
-              {
-              	$data->setDistot($data->getDistot() + ($x[$j]->getCanord() - $x[$j]->getCanaju()));
-              	$data->save();
-              }else{
-              	$data->setDistot($data->getDistot() - ($x[$j]->getCanaju() - $x[$j]->getCanord()));
-              	$data->save();
-              }
-		 	}
-                             $datos->setCanaju($datos->getCanaju() + $facantaju);
-	         $datos->save();
-			}
-		 }
-		 else if ($faajuste->getTipaju() == 'P'){
-			 $p= new Criteria();
-			 $p->add(FaartpedPeer::NROPED,$faajuste->getCodref());
-			 $p->add(FaartpedPeer::CODART,$codarti);
-  			 $datos= FaartpedPeer::doSelectOne($p);
-  			 if ($datos){
-                           $datos->setCanaju($datos->getCanaju() + $facantaju);
-	           $datos->save();
-			 }
-		 }
-		 else if ($faajuste->getTipaju() == 'F'){
-		 	 $p= new Criteria();
-			 $p->add(FaartfacPeer::REFFAC,$faajuste->getCodref());
-			 $p->add(FaartfacPeer::CODART,$codarti);
-  			 $datos= FaartfacPeer::doSelectOne($p);
-  			 if ($datos){
-		 	$l= new Criteria();
-		 	$l->add(CaregartPeer::CODART,$codarti);
-		 	$data= CaregartPeer::doSelectOne($l);
-		 	if ($data)
-		 	{
-              if ($facantaju < $x[$j]->getCanord())
-              {
-              	$data->setDistot($data->getDistot() - $facantaju);
-              	$data->save();
-              }else{
-              	$data->setDistot($data->getDistot() - ($facantaju - $x[$j]->getCanord()));
-              	$data->save();
-              }
-		 	}
-                            $sql="select preaju as preajureal from faartfac where reffac='".$faajuste->getCodref()."' and codart='".$codarti."'";
-                            if (Herramientas::BuscarDatos($sql,&$result))
-                              {
-                                $precioajureal=$result[0]["preajureal"];
-                              }
-                           if ($x[$j]->getAjupre()==0)
-	           $datos->setCanaju($datos->getCanaju() + $facantaju);
-                           else
-                            $datos->setPreaju($precioajureal + $fapreaju);
+         if ($faajuste->getTipaju() == 'NE'){
+                $p= new Criteria();
+                $p->add(FaartnotPeer::NRONOT,$faajuste->getCodref());
+                $p->add(FaartnotPeer::CODART,$codarti);
+                $datos= FaartnotPeer::doSelectOne($p);
+                if ($datos){
 
-	           $datos->save();
-			 }
-		 }
-        }
+                if ($tipo=='A') {
+                    $l= new Criteria();
+                    $l->add(CaregartPeer::CODART,$codarti);
+                    $data= CaregartPeer::doSelectOne($l);
+                    if ($data)
+                    {
+                      if ($x[$j]->getCanaju() < $x[$j]->getCanord())
+                      {
+                        $data->setDistot($data->getDistot() + ($x[$j]->getCanord() - $x[$j]->getCanaju()));
+                        $data->save();
+                      }else{
+                        $data->setDistot($data->getDistot() - ($x[$j]->getCanaju() - $x[$j]->getCanord()));
+                        $data->save();
+                      }
+                    }
+                }
+                 $datos->setCanaju($datos->getCanaju() + $facantaju);
+                 $datos->save();
+                }
+         }
+         else if ($faajuste->getTipaju() == 'P'){
+                 $p= new Criteria();
+                 $p->add(FaartpedPeer::NROPED,$faajuste->getCodref());
+                 $p->add(FaartpedPeer::CODART,$codarti);
+                 $datos= FaartpedPeer::doSelectOne($p);
+                 if ($datos){
+                   $datos->setCanaju($datos->getCanaju() + $facantaju);
+                   $datos->save();
+                 }
+         }
+         else if ($faajuste->getTipaju() == 'F'){
+                 $p= new Criteria();
+                 $p->add(FaartfacPeer::REFFAC,$faajuste->getCodref());
+                 $p->add(FaartfacPeer::CODART,$codarti);
+                 $datos= FaartfacPeer::doSelectOne($p);
+                 if ($datos){
+
+                 if ($tipo=='A') {
+                    $l= new Criteria();
+                    $l->add(CaregartPeer::CODART,$codarti);
+                    $data= CaregartPeer::doSelectOne($l);
+                    if ($data)
+                    {
+                      if ($facantaju < $x[$j]->getCanord())
+                      {
+                        $data->setDistot($data->getDistot() - $facantaju);
+                        $data->save();
+                      }else{
+                        $data->setDistot($data->getDistot() - ($facantaju - $x[$j]->getCanord()));
+                        $data->save();
+                      }
+                    }
+                 }
+                 $sql="select preaju as preajureal from faartfac where reffac='".$faajuste->getCodref()."' and codart='".$codarti."'";
+                 if (Herramientas::BuscarDatos($sql,&$result))
+                 {
+                    $precioajureal=$result[0]["preajureal"];
+                 }
+                   if ($x[$j]->getAjupre()==0)
+                       $datos->setCanaju($datos->getCanaju() + $facantaju);
+                   else
+                        $datos->setPreaju($precioajureal + $fapreaju);
+
+                   $datos->setRecaju($x[$j]->getRecaju());
+
+                   $datos->save();                   
+                 }
+         }
        }
        $j++;
       }
