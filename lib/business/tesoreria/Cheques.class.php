@@ -2238,7 +2238,7 @@ class Cheques
        }
        if ($operacion=='ordpag')
       {
-       if (trim($codigocuenta4)!="") $codigocuenta4=$codigocuenta4."_".$CtaPag; else  $codigocuenta4 = $CtaPag;
+       if (trim($codigocuenta4)!="") $codigocuenta4=$codigocuenta4."_".$codigocuenta; else  $codigocuenta4 = $codigocuenta;
        if (trim($des4)!="") $des4=$des4."_".$DesCtaDeb; else  $des4 = $DesCtaDeb;
        if (trim($tipo4)!="") $tipo4=$tipo4."_"."D"; else  $tipo4 = "D";
        if (trim($monto4)!="") $monto4=$monto4."_".$MonRet; else $monto4=$MonRet;
