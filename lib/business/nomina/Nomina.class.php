@@ -5645,27 +5645,27 @@ class Nomina {
           return intval($aux);
         } // end fint
         ////// MESF
-        elseif (Herramientas :: StringPos($campo, "MESF*", 0) != -1)
+        elseif (Herramientas :: StringPos($campo, "MESF", 0) != -1)
         //( Herramientas::instr($campo,'MESF*',0,1) != 0 )
         {
           $movconbar = substr($campo, Herramientas :: instr($campo, '(', 0, 1), strlen($campo) - Herramientas :: instr($campo, '(', 0, 1) - 1);
           if (substr($movconbar, 0, 1) == 'E' || Herramientas :: StringPos($movconbar, "FECN", 0) != -1) //Herramientas::instr($movconbar,'FECN',0,1) != 0)
             {
-            // ???????? recursividad
-            return date('m', strtotime(self :: evaluar_Campo($movconbar)));
+            // ???????? recursividad           
+            return date('m', strtotime(self :: evaluar_Campo($movconbar,$valor,$pila, $guardar, $empleado, $cargo, $concepto, $nomina, $fecnom, $fechanac, $fechaing, $sexo, $especial, $desde, $hasta, $ultfec,$profec)));
           } else {
             return date('m', strtotime($movconbar));
           }
         } // end MESF
         //////// DIAF*
-        elseif (Herramientas :: StringPos($campo, "DIAF*", 0) != -1)
+        elseif (Herramientas :: StringPos($campo, "DIAF", 0) != -1)
         // if ( Herramientas::instr($campo,'DIAF*',0,1) != 0 )
         {
           $movconbar = substr($campo, Herramientas :: instr($campo, '(', 0, 1), strlen($campo) - Herramientas :: instr($campo, '(', 0, 1) - 1);
           if (substr($movconbar, 0, 1) == 'E' || Herramientas :: StringPos($movconbar, "FECN", 0) != -1) //Herramientas::instr($movconbar,'FECN',0,1) != 0)
             {
             // ???????? recursividad
-            return date('d', strtotime(self :: evaluar_Campo($movconbar)));
+            return date('d', strtotime(self :: evaluar_Campo($movconbar,$valor,$pila, $guardar, $empleado, $cargo, $concepto, $nomina, $fecnom, $fechanac, $fechaing, $sexo, $especial, $desde, $hasta, $ultfec,$profec)));
           } else {
             return date('d', strtotime($movconbar));
           }
@@ -5678,7 +5678,7 @@ class Nomina {
           if (substr($movconbar, 0, 1) == 'E' || Herramientas :: StringPos($movconbar, "FECN", 0) != -1) //Herramientas::instr($movconbar,'FECN',0,1) != 0)
             {
             // ???????? recursividad
-            return date('Y', strtotime(self :: evaluar_Campo($movconbar)));
+            return date('Y', strtotime(self :: evaluar_Campo($movconbar,$valor,$pila, $guardar, $empleado, $cargo, $concepto, $nomina, $fecnom, $fechanac, $fechaing, $sexo, $especial, $desde, $hasta, $ultfec,$profec)));
           } else {
             return date('Y', strtotime($movconbar));
           }
