@@ -19,6 +19,8 @@ class Contaba extends BaseContaba{
 	protected $descta2 = "";
 	protected $esqori = "";
 	protected $esqdes = "";
+        protected $obj=array();
+        protected $archivo="";
 
 
   public function afterHydrate(){

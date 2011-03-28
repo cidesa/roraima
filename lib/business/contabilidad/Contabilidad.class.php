@@ -853,6 +853,149 @@ class Contabilidad
     return -1;
   }
 
+  public static function cargarComprobantes($archivo,&$arreglo)
+  {
+    $file = fopen(sfConfig::get('sf_upload_dir')."/".$archivo,  "r");
+    $arreglo=array();
+    if ($file)
+    {
+        $acumdeb=0;
+        $acumcre=0;
+        $numcom="";
+        $numcom2="";
+        while(!feof($file)) {
+	    $comprobantes=fgets($file, 335);
+            if (trim($comprobantes)!='' && trim($comprobantes)!='/n')
+            {
+              $tipo=trim(substr($comprobantes,0,1));
+              if ($tipo=='M')
+              {
+                 $j=count($arreglo)+1;
+                 $arreglo[$j-1]["numcom"]=trim(substr($comprobantes,1,8));
+                 $arreglo[$j-1]["feccom"]=trim(substr($comprobantes,9,10));
+                 $arreglo[$j-1]["descom"]=trim(substr($comprobantes,19,250));
+                 $montor=trim(substr($comprobantes,269,17));
+                 if (is_numeric(H::toFloat($montor)))
+                 {
+                   $monto=H::toFloat($montor);
+                 }else $monto=0;
+                 $arreglo[$j-1]["moncom"]=number_format($monto,2,',','.');
+                 $arreglo[$j-1]["stacom"]=trim(substr($comprobantes,286,1));
+                 if ($numcom!=$arreglo[$j-1]["numcom"] && $numcom!="")
+                 {
+                     if ($acumdeb!=$acumcre) $arreglo[$j-2]["cuadrado"]='N';
+                     else $arreglo[$j-2]["cuadrado"]='S';
 
+                     $acumcre=0;
+                     $acumdeb=0;
+}
+              }
+              $numcom=$arreglo[$j-1]["numcom"];
+              if ($tipo=='A')
+              {
+                $numcom2=trim(substr($comprobantes,1,8));
+
+                if ($numcom==$numcom2)
+                {
+                  $debcre=trim(substr($comprobantes,19,1));
+                  $montora=trim(substr($comprobantes,313,17));
+                 if (is_numeric(H::toFloat($montora)))
+                 {
+                   $montoa=H::toFloat($montora);
+                 }else $montoa=0;
+                  if ($debcre=='D')
+                      $acumdeb=$acumdeb+$montoa;
+                  else
+                      $acumcre=$acumcre+$montoa;
+                }
+              }
+	   }
+    }
+    if (count($arreglo)>0)
+    {
+         if ($acumdeb!=$acumcre) $arreglo[$j-1]["cuadrado"]='N';
+         else $arreglo[$j-1]["cuadrado"]='S';
+    }
+    }
+  }
+
+  public static function grabarComprobantesMigrados($contaba,$grid)
+  {
+    $file = fopen(sfConfig::get('sf_upload_dir')."/".$contaba->getArchivo(),  "r");
+    if ($file)
+    {
+        $acumdeb=0;
+        $acumcre=0;
+        while(!feof($file)) {
+            $comprobantes=fgets($file, 335);
+            if (trim($comprobantes)!='' && trim($comprobantes)!='/n')
+            {
+              $numcom=trim(substr($comprobantes,1,8));
+              $esta=self::buscarComprobante($numcom,$grid);
+              if ($esta)
+              {
+                $tipo=trim(substr($comprobantes,0,1));
+                $feccom=trim(substr($comprobantes,9,10));
+                $dateFormat = new sfDateFormat('es_VE');
+                $fecha = $dateFormat->format($feccom, 'i', $dateFormat->getInputPattern('d'));
+                if ($tipo=='M')
+                {
+                    $contabcq = new Contabc();
+                    $contabcq->setNumcom($numcom);
+                    $contabcq->setFeccom($fecha);
+                    $contabcq->setDescom(trim(substr($comprobantes,19,250)));
+                    $contabcq->setStacom('D');
+                    $contabcq->setTipcom(trim(substr($comprobantes,287,3)));
+                    $montor=trim(substr($comprobantes,269,17));
+                    if (is_numeric(H::toFloat($montor)))
+                    {
+                      $monto=H::toFloat($montor);
+                    }else $monto=0;
+                    $contabcq->setMoncom($monto);
+                    $loguse= sfContext::getInstance()->getUser()->getAttribute('loguse');
+                    $contabcq->setLoguse($loguse);
+                    $contabcq->save();
+                }else {
+                    $contabc1q= new Contabc1();
+                    $contabc1q->setNumcom($numcom);
+                    $contabc1q->setFeccom($fecha);
+                    $contabc1q->setCodcta(trim(substr($comprobantes,20,32)));
+                    $contabc1q->setNumasi(trim(substr($comprobantes,52,3)));
+                    $contabc1q->setRefasi(trim(substr($comprobantes,55,8)));
+                    $contabc1q->setDesasi(trim(substr($comprobantes,63,250)));
+                    $contabc1q->setDebcre(trim(substr($comprobantes,19,1)));
+                    $montora=trim(substr($comprobantes,313,17));
+                    if (is_numeric(H::toFloat($montora)))
+                    {
+                      $montoa=H::toFloat($montora);
+                    }else $montoa=0;
+                    $contabc1q->setMonasi($montoa);
+                    $contabc1q->save();
+                }
+              }
+            }
+        }
+   }
+    return -1;
+  }
+
+  public static function buscarComprobante($numcom,$grid)
+  {
+      $esta=false;
+
+      $x=$grid[0];
+      $j=0;
+      while ($j<count($x))
+      {
+        if ($x[$j]->getCheck()=="1" && $x[$j]->getNumcom()==$numcom)
+        {
+           $esta=true;
+           break;
+        }
+        $j++;
+      }
+
+      return $esta;
+  }
 }
 ?>

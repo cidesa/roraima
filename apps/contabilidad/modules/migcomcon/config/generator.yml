@@ -1,0 +1,20 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Contaba
+    theme:            cidesaGenerator
+    fields:
+      archivo: { name: Archivo Txt, type: admin_input_file_tag }
+      grid:    { name: .}
+      btncargar:    { name: .}
+    edit:
+      title:          Migración de Comprobantes Contables
+      display:
+        "NONE":     [archivo, _btncargar]
+        "Comprobantes Contables":     [_grid]
+      actions:
+        _list:        NONE
+        _save:
+          name:  Migrar Comprobantes Contables
+        _create:      NONE
+        _delete:      NONE

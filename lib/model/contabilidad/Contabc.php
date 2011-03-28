@@ -23,6 +23,7 @@ class Contabc extends BaseContabc
         protected $obj=array();
         protected $bloqfec="";
         protected $numfilas=50;
+        protected $cuadrado="";
 
     public function getStapin(){
     	switch ($this->getStacom()){
