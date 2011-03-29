@@ -198,7 +198,7 @@ class nomfalpersalActions extends autonomfalpersalActions
                 $codmot=$this->getRequestParameter('codmot');
                 $codemp=$this->getRequestParameter('codemp');
                 $dato = H::GetX('Codmotfal','Npmotfal','Tipdia',$codmot);
-	 	$sql="select to_char(fecharetorno(to_date('$fecdes','dd/mm/yyyy'),codnom,$nrodia,'$dato'),'dd/mm/yyyy') as fecha
+	 	$sql="select to_char(fecharetorno(to_date('$fecdes','dd/mm/yyyy'),codnom,$nrodia,'$dato')-1,'dd/mm/yyyy') as fecha
                         from npasicaremp
                         where codemp='$codemp' and status='V'";
 
