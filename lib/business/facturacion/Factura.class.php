@@ -1231,6 +1231,7 @@ class Factura {
                $fargoart= new Fargoart();
                $fargoart->setCodart($x[$i]->getCodart());
                $fargoart->setRefdoc($fafactur->getReffac());
+               $fargoart->setCodrgo($z[$j]->getCodrgo());
                $fargoart->setMonrgo($z[$j]->getMonrgo());
                $fargoart->setTipdoc('F');
                $fargoart->save();
