@@ -226,7 +226,7 @@ class nomfalpersalActions extends autonomfalpersalActions
   protected function saveNpfalper($npfalper)
   {
   	$this->updateNpfalperFromRequest();
-  	$this->npfalper->setFecdes(date('Y-m-d'));
+  	//$this->npfalper->setFecdes(date('Y-m-d'));
     $npfalper->save();
 	$c= new Criteria();
 	$c->add(NphojintPeer::CODEMP,$npfalper->getCodemp());
