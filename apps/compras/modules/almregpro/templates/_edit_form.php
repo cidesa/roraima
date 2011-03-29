@@ -1072,9 +1072,18 @@ function seguirvalidarRif()
 function colocaletra(valor)
 {
   var idpro='<?php echo $caprovee->getId() ?>';
+  var otrlet='<?php echo H::getConfApp2('otrlet', 'compras', 'almregpro'); ?>';
   if (idpro==''){
+    if (valor=='N')
+    {
+        if (otrlet=='S')
+          $('caprovee_rifpro').value='V';
+        else
   $('caprovee_rifpro').value=valor;
+    }else {
+      $('caprovee_rifpro').value=valor;
   }
+}
 }
 
 function colocaletra2(valor)

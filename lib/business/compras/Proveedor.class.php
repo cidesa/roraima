@@ -181,6 +181,8 @@ class Proveedor
 
     if ($mascararif=='S')
         {
+           $otralet=H::getConfApp2('otrlet', 'compras', 'almordcom');
+           if ($otralet!='S')
             $caprovee->setRifpro($caprovee->getNitpro()."-".substr($caprovee->getRifpro(),2,10));
         }
      if ($caprovee->getId())
