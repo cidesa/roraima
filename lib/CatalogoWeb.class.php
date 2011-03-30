@@ -7068,5 +7068,27 @@ public function Bnubica_Almordcom2() {
 		);
 	}
 
+         public function Lirecomen_numrecofe() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			LirecomenPeer :: NUMRECOFE=> 'Número Recomendacion',
+			LirecomenPeer :: NUMEXP=> 'Expediente',
+			LirecomenPeer :: FECREG => 'Fecha Registro',
+		);
+	}
+
+        public function Liptocuecon_numptocuecon() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			LiptocueconPeer :: NUMPTOCUECON=> 'Número Punto de Cuenta',
+			LiptocueconPeer :: NUMEXP=> 'Expediente',
+			LiptocueconPeer :: FECREG => 'Fecha Registro',
+		);
+	}
+
 }
 ?>

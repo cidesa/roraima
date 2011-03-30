@@ -5,7 +5,7 @@
  * @package    Roraima
  * @subpackage licitacion
  * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Licitacion.class.php 43226 2011-03-29 22:40:34Z cramirez $
+ * @version SVN: $Id: Licitacion.class.php 43251 2011-03-30 07:47:18Z cramirez $
  *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -379,6 +379,37 @@ class Licitacion
             $obj->save();
         }
     }
+
+    public static function SalvarGridRecomen($clase, $grid)
+    {
+        self::EliminarGridRecomen($clase);
+        foreach($grid[0] as $reg)
+        {
+            $obj = new Lirecomendet();
+            $obj->setNumrecofe($clase->getNumrecofe());
+            $obj->setCodpro($reg['codpro']);
+            $obj->setPunleg($reg['punleg']);
+            $obj->setPuntec($reg['puntec']);
+            $obj->setPunfin($reg['punfin']);
+            $obj->setPunfia($reg['punfia']);
+            $obj->setPuntipemp($reg['puntipemp']);
+            $obj->setPunvan($reg['punvan']);
+            $obj->setPunmin($reg['punmin']);
+            $obj->setPuntot($reg['puntot']);
+            $obj->save();
+        }
+    }
+
+    public static function EliminarGridRecomen($clase)
+    {
+        $c = new Criteria();
+        $c->add(LirecomendetPeer::NUMRECOFE,$clase->getNumrecofe());
+        $per = LirecomendetPeer::doSelect($c);
+        foreach($per as $r)
+            $r->delete();
+    }
+
+
 
 }
 ?>
