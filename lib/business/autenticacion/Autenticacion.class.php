@@ -330,19 +330,19 @@ class Autenticacion {
      if ($empresa->getMovtra()=='1')
      {
       $anoperiodo=self::anoPeriodo($coddestino);
-      $sql3='Delete "'.$coddestino.'".TSCheEmi Where to_char(fecemi,\'YYYY\')< \''.$anoperiodo.'\'';
+      $sql3='Delete from "'.$coddestino.'".TSCheEmi Where to_char(fecemi,\'YYYY\')< \''.$anoperiodo.'\'';
       Herramientas::insertarRegistros($sql3);
 
-      $sql4='Delete "'.$coddestino.'".TSMovLib Where to_char(feclib,\'YYYY\')< \''.$anoperiodo.'\'';
+      $sql4='Delete from "'.$coddestino.'".TSMovLib Where to_char(feclib,\'YYYY\')< \''.$anoperiodo.'\'';
       Herramientas::insertarRegistros($sql4);
 
-      $sql5='Delete "'.$coddestino.'".TSMovBan  Where to_char(fecban,\'YYYY\')< \''.$anoperiodo.'\'';
+      $sql5='Delete from "'.$coddestino.'".TSMovBan  Where to_char(fecban,\'YYYY\')< \''.$anoperiodo.'\'';
       Herramientas::insertarRegistros($sql5);
 
-      $sql6='Delete "'.$coddestino.'".TSConcil Where to_char(feclib,\'YYYY\')< \''.$anoperiodo.'\'';
+      $sql6='Delete from "'.$coddestino.'".TSConcil Where to_char(feclib,\'YYYY\')< \''.$anoperiodo.'\'';
       Herramientas::insertarRegistros($sql6);
 
-      $sql7='Delete "'.$coddestino.'".TSConcilhis Where to_char(feclib,\'YYYY\')< \''.$anoperiodo.'\'';
+      $sql7='Delete from "'.$coddestino.'".TSConcilhis Where to_char(feclib,\'YYYY\')< \''.$anoperiodo.'\'';
       Herramientas::insertarRegistros($sql7);
 
       $sql8='Insert into "'.$coddestino.'".TSmovlib Select * From "'.$codorigen.'".TsMovlib where stacon<>\'C\'';
