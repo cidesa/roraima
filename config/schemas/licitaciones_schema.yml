@@ -33,6 +33,26 @@ propel:
       type: INTEGER
     expdie:
       type: INTEGER
+    numemo:
+      type: INTEGER
+    solegr:
+      type: INTEGER
+    comint:
+      type: INTEGER
+    pliego:
+      type: INTEGER
+    aclara:
+      type: INTEGER
+    oferta:
+      type: INTEGER
+    anaofe:
+      type: INTEGER
+    recome:
+      type: INTEGER
+    ptocuecon:
+      type: INTEGER
+    notifi:
+      type: INTEGER
     id:
       type: INTEGER
       required: true
@@ -89,9 +109,6 @@ propel:
     emaste:
       type: VARCHAR
       size: 100
-    codemp:
-      type: VARCHAR
-      size: 16
     codpai:
       type: VARCHAR
       size: 4
@@ -107,6 +124,20 @@ propel:
     codsec:
       type: VARCHAR
       size: 4
+    codemp:
+      type: VARCHAR
+      size: 16
+    nomemp:
+      type: VARCHAR
+      size: 100
+    nomcar:
+      type: VARCHAR
+      size: 100
+    resolu:
+      type: VARCHAR
+      size: 20
+    fecres:
+      type: DATE
     id:
       type: INTEGER
       required: true
@@ -257,6 +288,10 @@ propel:
       autoIncrement: true
       description: Identificador Único del registro
   litiplic:
+    codtiplic:
+      type: VARCHAR
+      size: 4
+      required: true
     destiplic:
       type: VARCHAR
       size: 500
@@ -419,23 +454,23 @@ propel:
       autoIncrement: true
       description: Identificador Único del registro
   liemppar:
-    lireglic_id:
-      type: INTEGER
-      required: true
-      foreignTable: lireglic
-      foreignReference: id
-      onDelete:
-      onUpdate:
-    codlic:
+    numplie:
       type: VARCHAR
-      size: 32
+      size: 8
+      required: true
+    numexp:
+      type: VARCHAR
+      size: 8
       required: true
     codpro:
       type: VARCHAR
       size: 15
       required: true
-    fecins:
+    fecret:
       type: DATE
+    nomrepleg:
+      type: VARCHAR
+      size: 100
     observaciones:
       type: VARCHAR
       size: 1000
@@ -446,34 +481,27 @@ propel:
       autoIncrement: true
       description: Identificador Único del registro
   liempofe:
-    lireglic_id:
-      type: INTEGER
-      required: true
-      foreignTable: lireglic
-      foreignReference: id
-      onDelete:
-      onUpdate:
-    codlic:
+    numplie:
       type: VARCHAR
-      size: 32
+      size: 8
+      required: true
+    numexp:
+      type: VARCHAR
+      size: 8
       required: true
     codpro:
       type: VARCHAR
       size: 15
       required: true
-    fecins:
+    fecofe:
       type: DATE
-    precal:
+    observaciones:
       type: VARCHAR
-      size: 1
+      size: 1000
     montot:
       type: NUMERIC
       size: 14
       scale: 2
-      required: true
-    observaciones:
-      type: VARCHAR
-      size: 1000
     id:
       type: INTEGER
       required: true
@@ -548,34 +576,19 @@ propel:
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
-  liasplegcrieva:
-    lireglic_id:
-      type: INTEGER
-      required: true
-      foreignTable: lireglic
-      foreignReference: id
-      onDelete:
-      onUpdate:
-    codlic:
+  liasplegcrieva:                        # Aspecto Legal Criterios de Evaluacion
+    codcri:
       type: VARCHAR
-      size: 32
+      size: 4
       required: true
-    codpro:
+    descri:
       type: VARCHAR
-      size: 15
+      size: 100
       required: true
-    lirecaud_id:
-      type: INTEGER
-      required: true
-      foreignTable: lirecaud
-      foreignReference: id
-      onDelete:
-      onUpdate:
     puntaje:
       type: NUMERIC
       size: 14
       scale: 2
-      required: true
     id:
       type: INTEGER
       required: true
@@ -595,7 +608,6 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
-      required: true
     id:
       type: INTEGER
       required: true
@@ -615,7 +627,6 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
-      required: true
     id:
       type: INTEGER
       required: true
@@ -773,77 +784,100 @@ propel:
       autoIncrement: true
       description: Identificador Único del registro
   liprebas:
-    reqart:
+    numpre:
       type: VARCHAR
       size: 8
-      required: true
-    fecreq:
-      type: DATE
-      required: true
-    desreq:
-      type: VARCHAR
-      size: 1000
-    monreq:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    stareq:
-      type: VARCHAR
-      size: 1
-    motreq:
-      type: VARCHAR
-      size: 1000
-    benreq:
-      type: VARCHAR
-      size: 1000
-    mondes:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    obsreq:
-      type: VARCHAR
-      size: 5000
-    unires:
-      type: VARCHAR
-      size: 32
-    tipmon:
-      type: VARCHAR
-      size: 3
-      required: true
-      foreignTable: tsdesmon
-      foreignReference: codmon
-    valmon:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    fecanu:
-      type: DATE
-    codpro:
-      type: VARCHAR
-      size: 15
-    reqcom:
-      type: VARCHAR
-      size: 8
-    tipfin:
-      type: VARCHAR
-      size: 4
-    tipreq:
-      type: CHAR
-      size: 1
-    aprreq:
-      type: CHAR
-      size: 1
-    usuapr:
-      type: CHAR
-      size: 1
-    fecapr:
-      type: DATE
-    codemp:
+    codempadm:
       type: VARCHAR
       size: 16
-    codcen:
+    coduniadm:
       type: VARCHAR
       size: 4
+    codempeje:
+      type: VARCHAR
+      size: 16
+    coduniste:
+      type: VARCHAR
+      size: 4
+    codclacomp:
+      type: VARCHAR
+      size: 5
+    fecreg:
+      type: date
+    horreg:
+      type: VARCHAR
+      size: 10
+    dias:
+      type: INTEGER
+    fecven:
+      type: DATE
+    tipcom:
+      type: VARCHAR
+      size: 1
+    codpre:
+      type: VARCHAR
+      size: 55
+    nompre:
+      type: VARCHAR
+      size: 250
+    codprio:
+      type: VARCHAR
+      size: 3
+    despro:
+      type: VARCHAR
+      size: 1000
+    monpre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codmon:
+      type: VARCHAR
+      size: 3
+    valcam:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    feccam:
+      type: TIMESTAMP
+    docane1:
+      type: VARCHAR
+      size: 100
+    docane2:
+      type: VARCHAR
+      size: 100
+    docane3:
+      type: VARCHAR
+      size: 100
+    status:
+      type: VARCHAR
+      size: 1
+    lisicact_id:
+      type: INTEGER
+      foreignTable: lisicact
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    detdecmod:
+      type: VARCHAR
+      size: 1000
+    prepor:
+      type: VARCHAR
+      size: 100
+    cargopre:
+      type: VARCHAR
+      size: 100
+    aprpor:
+      type: VARCHAR
+      size: 100
+    cargoapr:
+      type: VARCHAR
+      size: 8
+    tipcon:
+      type: VARCHAR
+      size: 1
+    acto:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true
@@ -851,30 +885,26 @@ propel:
       autoIncrement: true
       description: Identificador Único del registro
   liprebasdet:
-    reqart:
+    numpre:
       type: VARCHAR
       size: 8
-      required: true
     codart:
       type: VARCHAR
       size: 20
-      required: true
-    desart:
-      type: VARCHAR
-      size: 2000
     codcat:
       type: VARCHAR
       size: 32
-      required: true
-    canreq:
+    codpre:
+      type: VARCHAR
+      size: 55
+    unimed:
+      type: VARCHAR
+      size: 15
+    cansol:
       type: NUMERIC
       size: 14
       scale: 2
-    canrec:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    montot:
+    canapr:
       type: NUMERIC
       size: 14
       scale: 2
@@ -882,48 +912,57 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
-    monrgo:
+    subtot:
       type: NUMERIC
       size: 14
       scale: 2
-    canord:
+    monrec:
       type: NUMERIC
       size: 14
       scale: 2
-    mondes:
+    montot:
       type: NUMERIC
       size: 14
       scale: 2
-    relart:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    unimed:
+    status:
       type: VARCHAR
-      size: 50
-    codpar:
+      size: 1
+    codmon:
       type: VARCHAR
-      size: 32
+      size: 3
+    valcam:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codfin:
+      type: VARCHAR
+      size: 4
     id:
       type: INTEGER
       required: true
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
-    _indexes:
-      i_liprebasdet:
-        - codart
-  liprebasraz:
-    numsol:
+  liprergo:
+    numpre:
       type: VARCHAR
       size: 8
-      required: true
-    codrazcom:
+    codcat:
+      type: VARCHAR
+      size: 32
+    codart:
+      type: VARCHAR
+      size: 20
+    codrgo:
       type: VARCHAR
       size: 4
-      required: true
-      foreignTable: carazcom
-      foreignReference: codrazcom
+    monrgo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codpre:
+      type: VARCHAR
+      size: 55
     id:
       type: INTEGER
       required: true
@@ -931,39 +970,62 @@ propel:
       autoIncrement: true
       description: Identificador Único del registro
   limemoran:
-    numexp:
-      type: VARCHAR
-      size: 8
-      required: true
     numemo:
       type: VARCHAR
       size: 8
       required: true
-    nompro:
+    numpre:
       type: VARCHAR
-      size: 250
+      size: 8
       required: true
-    fecha:
-      type: DATE
-      required: true
-    codfin:
+    codempadm:
+      type: VARCHAR
+      size: 16
+    coduniadm:
       type: VARCHAR
       size: 4
-    codcom:
+    codempeje:
       type: VARCHAR
-      size: 4
+      size: 16
     coduniste:
       type: VARCHAR
       size: 4
-    codclacomp:
-      type: VARCHAR
-      size: 5
-    tipcom:
-      type: VARCHAR
-      size: 1
-    detmemo:
+    despro:
       type: VARCHAR
       size: 5000
+    docane1:
+      type: VARCHAR
+      size: 100
+    docane2:
+      type: VARCHAR
+      size: 100
+    docane3:
+      type: VARCHAR
+      size: 100
+    prepor:
+      type: VARCHAR
+      size: 100
+    preporcar:
+      type: VARCHAR
+      size: 100
+    lisicact_id:
+      type: INTEGER
+      foreignTable: lisicact
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    detdecmod:
+      type: VARCHAR
+      size: 1000
+    anapor:
+      type: VARCHAR
+      size: 100
+    anaporcar:
+      type: VARCHAR
+      size: 100
+    status:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true
@@ -1003,14 +1065,43 @@ propel:
     numcomint:
       type: VARCHAR
       size: 8
-    numexp:
+    codempadm:
       type: VARCHAR
-      size: 8
-    feccomint:
-      type: DATE
-    codcom:
+      size: 16
+    coduniadm:
       type: VARCHAR
       size: 4
+    codempeje:
+      type: VARCHAR
+      size: 16
+    coduniste:
+      type: VARCHAR
+      size: 4
+    tipcon:
+      type: VARCHAR
+      size: 1
+    fecreg:
+      type: DATE
+    dias:
+      type: INTEGER
+    fecven:
+      type: DATE
+    codclacomp:
+      type: VARCHAR
+      size: 5
+    moncom:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codtiplic:
+      type: VARCHAR
+      size: 4
+    codmon:
+      type: VARCHAR
+      size: 3
+    tipcom:
+      type: VARCHAR
+      size: 1
     status:
       type: VARCHAR
       size: 1
@@ -1024,27 +1115,9 @@ propel:
     numcomint:
       type: VARCHAR
       size: 8
-    feccomint:
-      type: DATE
-    codart:
-      type: VARCHAR
-      size: 20
-    reqart:
+    numsol:
       type: VARCHAR
       size: 8
-    fecreq  :
-      type: DATE
-    unires:
-      type: VARCHAR
-      size: 32
-    canreq:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    costo:
-      type: NUMERIC
-      size: 14
-      scale: 2
     montot:
       type: NUMERIC
       size: 14
@@ -1056,14 +1129,114 @@ propel:
       autoIncrement: true
       description: Identificador Único del registro
   lirecomen:
-    fecrec:
+    numrecofe:
+      type: VARCHAR
+      size: 8
+    numplie:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    codempadm:
+      type: VARCHAR
+      size: 16
+    coduniadm:
+      type: VARCHAR
+      size: 4
+    codempeje:
+      type: VARCHAR
+      size: 16
+    coduniste:
+      type: VARCHAR
+      size: 4
+    fecreg:
       type: DATE
-    codlic:
+    dias:
+      type: INTEGER
+    fecven:
+      type: DATE
+    docane1:
       type: VARCHAR
-      size: 32
-    rif:
+      size: 100
+    docane2:
       type: VARCHAR
-      size: 32
+      size: 100
+    docane3:
+      type: VARCHAR
+      size: 100
+    prepor:
+      type: VARCHAR
+      size: 100
+    cargopre:
+      type: VARCHAR
+      size: 100
+    lisicact_id:
+      type: INTEGER
+      foreignTable: lisicact
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    detdecmod:
+      type: VARCHAR
+      size: 1000
+    anapor:
+      type: VARCHAR
+      size: 100
+    cargoana:
+      type: VARCHAR
+      size: 100
+    status:
+      type: VARCHAR
+      size: 1
+    recomen:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  lirecomendet:
+    numrecofe:
+      type: VARCHAR
+      size: 8
+    codpro:
+      type: VARCHAR
+      size: 15
+    punleg:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    puntec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    punfin:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    punfia:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    puntipemp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    punvan:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    punmin:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    puntot:
+      type: NUMERIC
+      size: 14
+      scale: 2
     id:
       type: INTEGER
       required: true
@@ -1074,14 +1247,1340 @@ propel:
     numptocue:
       type: VARCHAR
       size: 8
-    fecrec:
-      type: DATE
-    codlic:
+    numemo:
       type: VARCHAR
-      size: 32
+      size: 8
+      required: true
+    numpre:
+      type: VARCHAR
+      size: 8
+      required: true
+    codempadm:
+      type: VARCHAR
+      size: 16
+    coduniadm:
+      type: VARCHAR
+      size: 4
+    codempeje:
+      type: VARCHAR
+      size: 16
+    coduniste:
+      type: VARCHAR
+      size: 4
+    despro:
+      type: VARCHAR
+      size: 5000
+    docane1:
+      type: VARCHAR
+      size: 100
+    docane2:
+      type: VARCHAR
+      size: 100
+    docane3:
+      type: VARCHAR
+      size: 100
+    prepor:
+      type: VARCHAR
+      size: 100
+    preporcar:
+      type: VARCHAR
+      size: 100
+    lisicact_id:
+      type: INTEGER
+      foreignTable: lisicact
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    detdecmod:
+      type: VARCHAR
+      size: 1000
+    anapor:
+      type: VARCHAR
+      size: 100
+    anaporcar:
+      type: VARCHAR
+      size: 100
+    status:
+      type: VARCHAR
+      size: 1
     id:
       type: INTEGER
       required: true
       primaryKey: true
       autoIncrement: true
       description: Identificador Único del registro
+  litipemp:
+    codemp:
+      type: VARCHAR
+      size: 3
+    desemp:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  lipriocon:
+    codprio:
+      type: VARCHAR
+      size: 3
+    desprio:
+      type: VARCHAR
+      size: 100
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  liuniadm:
+    coduniadm:
+      type: VARCHAR
+      size: 3
+    desuniadm:
+      type: VARCHAR
+      size: 100
+    codemp:
+      type: VARCHAR
+      size: 16
+    nomemp:
+      type: VARCHAR
+      size: 100
+    nomcar:
+      type: VARCHAR
+      size: 100
+    resolu:
+      type: VARCHAR
+      size: 20
+    fecres:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  lisolegr:
+    numsol:
+      type: VARCHAR
+      size: 8
+    numpre:
+      type: VARCHAR
+      size: 8
+    codempadm:
+      type: VARCHAR
+      size: 16
+    coduniadm:
+      type: VARCHAR
+      size: 4
+    codempeje:
+      type: VARCHAR
+      size: 16
+    coduniste:
+      type: VARCHAR
+      size: 4
+    despro:
+      type: VARCHAR
+      size: 1000
+    monsol:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codmon:
+      type: VARCHAR
+      size: 3
+    valcam:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    feccam:
+      type: TIMESTAMP
+    docane1:
+      type: VARCHAR
+      size: 100
+    docane2:
+      type: VARCHAR
+      size: 100
+    docane3:
+      type: VARCHAR
+      size: 100
+    status:
+      type: VARCHAR
+      size: 1
+    lisicact_id:
+      type: INTEGER
+      foreignTable: lisicact
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    detdecmod:
+      type: VARCHAR
+      size: 1000
+    prepor:
+      type: VARCHAR
+      size: 100
+    cargopre:
+      type: VARCHAR
+      size: 100
+    aprpor:
+      type: VARCHAR
+      size: 100
+    cargoapr:
+      type: VARCHAR
+      size: 100
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  lisolegrdet:
+    numsol:
+      type: VARCHAR
+      size: 8
+    codart:
+      type: VARCHAR
+      size: 20
+    codcat:
+      type: VARCHAR
+      size: 32
+    codpre:
+      type: VARCHAR
+      size: 55
+    unimed:
+      type: VARCHAR
+      size: 15
+    cansol:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    costo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    subtot:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    montot:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    status:
+      type: VARCHAR
+      size: 1
+    codmon:
+      type: VARCHAR
+      size: 3
+    valcam:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  lisolegrrgo:
+    numsol:
+      type: VARCHAR
+      size: 8
+    codcat:
+      type: VARCHAR
+      size: 32
+    codart:
+      type: VARCHAR
+      size: 20
+    codrgo:
+      type: VARCHAR
+      size: 4
+    monrgo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codpre:
+      type: VARCHAR
+      size: 55
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  lisolegrdir:
+    numsol:
+      type: VARCHAR
+      size: 8
+    codart:
+      type: VARCHAR
+      size: 32
+    cantid:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    coduniste:
+      type: VARCHAR
+      size: 4
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  limeccon:
+    codmec:
+      type: VARCHAR
+      size: 3
+    desmec:
+      type: VARCHAR
+      size: 100
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  liplieesp:
+    numplie:
+      type: VARCHAR
+      size: 8
+    numcomint:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    codempadm:
+      type: VARCHAR
+      size: 16
+    coduniadm:
+      type: VARCHAR
+      size: 4
+    codempeje:
+      type: VARCHAR
+      size: 16
+    coduniste:
+      type: VARCHAR
+      size: 4
+    fecreg:
+      type: DATE
+    dias:
+      type: INTEGER
+    fecven:
+      type: DATE
+    idioma:
+      type: VARCHAR
+      size: 50
+    cosplie:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    resolu:
+      type: VARCHAR
+      size: 8
+    fecrel:
+      type: DATE
+    decret:
+      type: VARCHAR
+      size: 8
+    fecdec:
+      type: DATE
+    descrip:
+      type: VARCHAR
+      size: 1000
+    docane1:
+      type: VARCHAR
+      size: 100
+    docane2:
+      type: VARCHAR
+      size: 100
+    docane3:
+      type: VARCHAR
+      size: 100
+    prepor:
+      type: VARCHAR
+      size: 100
+    preporcar:
+      type: VARCHAR
+      size: 100
+    lisicact_id:
+      type: INTEGER
+      foreignTable: lisicact
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    detdecmod:
+      type: VARCHAR
+      size: 1000
+    anapor:
+      type: VARCHAR
+      size: 100
+    anaporcar:
+      type: VARCHAR
+      size: 100
+    status:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  lipliedep:
+    numplie:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    numcue:
+      type: VARCHAR
+      size: 20
+    nomcue:
+      type: VARCHAR
+      size: 100
+    tipcue:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
+  lipliemec:
+    numplie:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    codmec:
+      type: VARCHAR
+      size: 3
+    fecsob1:
+      type: DATE
+    horsob1:
+      type: VARCHAR
+      size: 10
+    fecsob2:
+      type: DATE
+    horsob2:
+      type: VARCHAR
+      size: 10
+    dirofe:
+      type: VARCHAR
+      size: 100
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  liplieact:
+    numplie:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    desact:
+      type: VARCHAR
+      size: 500
+    fecdes:
+      type: DATE
+    hordes:
+      type: VARCHAR
+      size: 10
+    fechas:
+      type: DATE
+    horhas:
+      type: VARCHAR
+      size: 10
+    lugar:
+      type: VARCHAR
+      size: 250
+    direc:
+      type: VARCHAR
+      size: 500
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  lipliepub:
+    numplie:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    medio:
+      type: VARCHAR
+      size: 100
+    fecini:
+      type: DATE
+    fecfin:
+      type: DATE
+    dias:
+      type: INTEGER
+    pagina:
+      type: VARCHAR
+      size: 5
+    cuerpo:
+      type: VARCHAR
+      size: 5
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  lipliecrileg:
+    numplie:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    codcri:
+      type: VARCHAR
+      size: 4
+    puntua:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    porcen:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    limit:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  lipliecritec:
+    numplie:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    codcri:
+      type: VARCHAR
+      size: 4
+    puntua:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    porcen:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    limit:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  lipliecrifin:
+    numplie:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    codcri:
+      type: VARCHAR
+      size: 4
+    puntua:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    porcen:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    limit:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  lipliecrifian:
+    numplie:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    codcomres:
+      type: VARCHAR
+      size: 4
+    puntua:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    porcen:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    empresa:
+      type: VARCHAR
+      size: 100
+    fecemi:
+      type: DATE
+    fecven:
+      type: DATE
+    limit:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  liplietipemp:
+    numplie:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    codtipemp:
+      type: VARCHAR
+      size: 4
+    puntua:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    porcen:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecemi:
+      type: DATE
+    fecven:
+      type: DATE
+    limit:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  liplieart:
+    numplie:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    codart:
+      type: VARCHAR
+      size: 32
+    cantid:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  liaclara:
+    numplie:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    numacla:
+      type: VARCHAR
+      size: 8
+    codempadm:
+      type: VARCHAR
+      size: 16
+    coduniadm:
+      type: VARCHAR
+      size: 4
+    codempeje:
+      type: VARCHAR
+      size: 16
+    coduniste:
+      type: VARCHAR
+      size: 4
+    fecreg:
+      type: DATE
+    dias:
+      type: INTEGER
+    fecven:
+      type: DATE
+    detpre:
+      type: VARCHAR
+      size: 1000
+    fecpre:
+      type: DATE
+    detres:
+      type: VARCHAR
+      size: 1000
+    fecres:
+      type: DATE
+    docane1:
+      type: VARCHAR
+      size: 100
+    docane2:
+      type: VARCHAR
+      size: 100
+    docane3:
+      type: VARCHAR
+      size: 100
+    prepor:
+      type: VARCHAR
+      size: 100
+    cargopre:
+      type: VARCHAR
+      size: 100
+    codpro:
+      type: VARCHAR
+      size: 15
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  liregofe:
+    numofe:
+      type: VARCHAR
+      size: 8
+    numplie:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    codempadm:
+      type: VARCHAR
+      size: 16
+    coduniadm:
+      type: VARCHAR
+      size: 4
+    codempeje:
+      type: VARCHAR
+      size: 16
+    coduniste:
+      type: VARCHAR
+      size: 4
+    fecreg:
+      type: DATE
+    dias:
+      type: INTEGER
+    fecven:
+      type: DATE
+    codpro:
+      type: VARCHAR
+      size: 15
+    codtipemp:
+      type: VARCHAR
+      size: 3
+    ofenro:
+      type: VARCHAR
+      size: 8
+    fecofe:
+      type: DATE
+    docane1:
+      type: VARCHAR
+      size: 100
+    docane2:
+      type: VARCHAR
+      size: 100
+    docane3:
+      type: VARCHAR
+      size: 100
+    docane4:
+      type: VARCHAR
+      size: 100
+    prepor:
+      type: VARCHAR
+      size: 100
+    cargopre:
+      type: VARCHAR
+      size: 100
+    lisicact_id:
+      type: INTEGER
+      foreignTable: lisicact
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    detdecmod:
+      type: VARCHAR
+      size: 1000
+    anapor:
+      type: VARCHAR
+      size: 100
+    cargoana:
+      type: VARCHAR
+      size: 100
+    status:
+      type: VARCHAR
+      size: 1
+    monofe:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monrecofe:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    porvan:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    declar:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  liregofedet:
+    numofe:
+      type: VARCHAR
+      size: 8
+    codart:
+      type: VARCHAR
+      size: 20
+    unimed:
+      type: VARCHAR
+      size: 15
+    cantid:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    preuni:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    subtot:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  liregofergo:
+    numofe:
+      type: VARCHAR
+      size: 8
+    codrgo:
+      type: VARCHAR
+      size: 4
+    monrgo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  liforpag:
+    numofe:
+      type: VARCHAR
+      size: 8
+    desant:
+      type: VARCHAR
+      size: 1000
+    porant:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    montot:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    subtot:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    poramoant:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    netpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecant:
+      type: DATE
+    condic:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  licroent:
+    numofe:
+      type: VARCHAR
+      size: 8
+    codart:
+      type: VARCHAR
+      size: 20
+    cantid:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    coduniadm:
+      type: VARCHAR
+      size: 4
+    fecent:
+      type: DATE
+    condic:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  liregofeleg:
+    numofe:
+      type: VARCHAR
+      size: 8
+    codcri:
+      type: VARCHAR
+      size: 4
+    observ:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  liregofetec:
+    numofe:
+      type: VARCHAR
+      size: 8
+    codcri:
+      type: VARCHAR
+      size: 4
+    observ:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  liregofefin:
+    numofe:
+      type: VARCHAR
+      size: 8
+    codcri:
+      type: VARCHAR
+      size: 4
+    observ:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  liregofefia:
+    numofe:
+      type: VARCHAR
+      size: 8
+    codcomres:
+      type: VARCHAR
+      size: 4
+    observ:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  lianaofe:
+    numanaofe:
+      type: VARCHAR
+      size: 8
+    numplie:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    codempadm:
+      type: VARCHAR
+      size: 16
+    coduniadm:
+      type: VARCHAR
+      size: 4
+    codempeje:
+      type: VARCHAR
+      size: 16
+    coduniste:
+      type: VARCHAR
+      size: 4
+    fecreg:
+      type: DATE
+    dias:
+      type: INTEGER
+    fecven:
+      type: DATE
+    numofe:
+      type: VARCHAR
+      size: 8
+    docane1:
+      type: VARCHAR
+      size: 100
+    docane2:
+      type: VARCHAR
+      size: 100
+    docane3:
+      type: VARCHAR
+      size: 100
+    docane4:
+      type: VARCHAR
+      size: 100
+    prepor:
+      type: VARCHAR
+      size: 100
+    cargopre:
+      type: VARCHAR
+      size: 100
+    lisicact_id:
+      type: INTEGER
+      foreignTable: lisicact
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    detdecmod:
+      type: VARCHAR
+      size: 1000
+    anapor:
+      type: VARCHAR
+      size: 100
+    cargoana:
+      type: VARCHAR
+      size: 100
+    status:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  lianaofeleg:
+    numanaofe:
+      type: VARCHAR
+      size: 8
+    codcri:
+      type: VARCHAR
+      size: 4
+    punemp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    poremp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    observ:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  lianaofetec:
+    numanaofe:
+      type: VARCHAR
+      size: 8
+    codcri:
+      type: VARCHAR
+      size: 4
+    punemp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    poremp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    observ:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  lianaofefin:
+    numanaofe:
+      type: VARCHAR
+      size: 8
+    codcri:
+      type: VARCHAR
+      size: 4
+    punemp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    poremp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    observ:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  lianaofefia:
+    numanaofe:
+      type: VARCHAR
+      size: 8
+    codcomres:
+      type: VARCHAR
+      size: 4
+    punemp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    poremp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    observ:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  lianaofetipemp:
+    numanaofe:
+      type: VARCHAR
+      size: 8
+    codtipemp:
+      type: VARCHAR
+      size: 4
+    punemp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    poremp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    observ:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  liptocuecon:
+    numptocuecon:
+      type: VARCHAR
+      size: 8
+    numplie:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    codempadm:
+      type: VARCHAR
+      size: 16
+    coduniadm:
+      type: VARCHAR
+      size: 4
+    codempeje:
+      type: VARCHAR
+      size: 16
+    coduniste:
+      type: VARCHAR
+      size: 4
+    fecreg:
+      type: DATE
+    dias:
+      type: INTEGER
+    fecven:
+      type: DATE
+    detrecomen:
+      type: VARCHAR
+      size: 1000
+    numrecofe:
+      type: VARCHAR
+      size: 8
+    codpro:
+      type: VARCHAR
+      size: 15
+    resolu:
+      type: VARCHAR
+      size: 8
+    fecrel:
+      type: DATE
+    decret:
+      type: VARCHAR
+      size: 8
+    fecdec:
+      type: DATE
+    detdecret:
+      type: VARCHAR
+      size: 1000
+    docane1:
+      type: VARCHAR
+      size: 100
+    docane2:
+      type: VARCHAR
+      size: 100
+    docane3:
+      type: VARCHAR
+      size: 100
+    prepor:
+      type: VARCHAR
+      size: 100
+    cargopre:
+      type: VARCHAR
+      size: 100
+    lisicact_id:
+      type: INTEGER
+      foreignTable: lisicact
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    detdecmod:
+      type: VARCHAR
+      size: 1000
+    anapor:
+      type: VARCHAR
+      size: 100
+    cargoana:
+      type: VARCHAR
+      size: 100
+    status:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+  linotific:
+    numnotif:
+      type: VARCHAR
+      size: 8
+    numptocuecon:
+      type: VARCHAR
+      size: 8
+    numplie:
+      type: VARCHAR
+      size: 8
+    numexp:
+      type: VARCHAR
+      size: 8
+    codempadm:
+      type: VARCHAR
+      size: 16
+    coduniadm:
+      type: VARCHAR
+      size: 4
+    codempeje:
+      type: VARCHAR
+      size: 16
+    coduniste:
+      type: VARCHAR
+      size: 4
+    fecreg:
+      type: DATE
+    dias:
+      type: INTEGER
+    fecven:
+      type: DATE
+    detrecomen:
+      type: VARCHAR
+      size: 1000
+    codpro:
+      type: VARCHAR
+      size: 15
+    direnvcor:
+      type: VARCHAR
+      size: 1000
+    docane1:
+      type: VARCHAR
+      size: 100
+    docane2:
+      type: VARCHAR
+      size: 100
+    docane3:
+      type: VARCHAR
+      size: 100
+    prepor:
+      type: VARCHAR
+      size: 100
+    cargopre:
+      type: VARCHAR
+      size: 100
+    lisicact_id:
+      type: INTEGER
+      foreignTable: lisicact
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    detdecmod:
+      type: VARCHAR
+      size: 1000
+    anapor:
+      type: VARCHAR
+      size: 100
+    cargoana:
+      type: VARCHAR
+      size: 100
+    status:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true

@@ -1,61 +1,45 @@
 contratacionespublicas:
   opciones:
     activo: true
-    descripcion: Módulo de Contrataciones Públicas
+    descripcion: Módulo de Contrataciones Públicas Bienes y Servicios
     imagen: licitaciones.gif
-    nombre: Contrataciones Públicas
+    nombre: Contrataciones Públicas Bienes y Servicios
     urls:
       default:
         modulo: licitaciones.php
         modulo_dev: licitaciones_dev.php
-      Presupuesto ONAPRE:
+      Catálogo Presupuestario del Ente:
+        #LISTO
         modulo: presupuesto.php
         modulo_dev: presupuesto_dev.php
-      Propios de la Institución  para Contratación de Obras(Partidas de Obras):
+      Partidas para la Contratacion de Obras particulares del Ente:
+        #LISTO
         modulo: obras.php
         modulo_dev: obras_dev.php
       Artículos SNC:
+        #LISTO
         modulo: compras.php
         modulo_dev: compras_dev.php
-      Clasificación de Compras:
-        modulo: obras.php
-        modulo_dev: obras_dev.php
+      Catálogo de Artículos/Servicios del Ente:
+        #LISTO
+        modulo: compras.php
+        modulo_dev: compras_dev.php
       Unidades de Medida:
+        #LISTO
         modulo: obras.php
         modulo_dev: obras_dev.php
-      Organismos Participantes:
-        modulo: obras.php
-        modulo_dev: obras_dev.php
-      Tipos de Financiamiento:
+      Fuente de Financiamiento:
+        #LISTO
         modulo: formulacion.php
         modulo_dev: formulacion_dev.php
       División Territorial:
+        #LISTO
         modulo: obras.php
         modulo_dev: obras_dev.php
-      Pedidos:
-        modulo: compras.php
-        modulo_dev: compras_dev.php
-      Orden de Compra/Servicio:
-        modulo: compras.php
-        modulo_dev: compras_dev.php
-      Aprobación de Pedidos:
-        modulo: compras.php
-        modulo_dev: compras_dev.php
-      Registro de Contratos:
-        modulo: compras.php
-        modulo_dev: compras_dev.php
-      Registro de Obras:
+      Solicitud de Contratación:
+        #LISTO
         modulo: obras.php
         modulo_dev: obras_dev.php
-      Bien/Servicio u Obra:
-        modulo: obras.php
-        modulo_dev: obras_dev.php
-      Recepción de Ordenes de Compra:
-        modulo: compras.php
-        modulo_dev: compras_dev.php
-      Registro de Ofertas:
-        modulo: compras.php
-        modulo_dev: compras_dev.php
       Cambiar Contraseña:
         modulo: autenticacion.php
         modulo_dev: autenticacion_dev.php
@@ -69,24 +53,24 @@ contratacionespublicas:
       Ley de Contrataciones Públicas:                           licleycon
       Catálogos Requeridos:
         Normas COVENIN:                                         licnorcov
-        Propios de la Institución  para Contratación de Obras(Partidas de Obras):  oycdefpar
-        Presupuesto ONAPRE:                                     pretitpre
+        Partidas para la Contratacion de Obras particulares del Ente:  oycdefpar
+        (*)Presupuesto ONAPRE:                                  preonapre
+        Catálogo Presupuestario del Ente:                       pretitpre
         Artículos SNC:                                          almdefcatsnc
+        Catálogo de Artículos/Servicios del Ente:               AlmRegArt
+        Tipo de Empresa:                                        lictipemp
+        Prioridad de Contratación:                              licpriocon
       Modalidad de Contratación:                                lictiplic
       Declaratoria Modalidad de Contratación:                   licsicact
       Unidades de Medida:                                       oycdefuni
-      Personalidad Jurídica:                                    lictiprecpro
-      Recaudos y Garantías Contratistas/Proveedor:              licregrec
-      Bien/Servicio u Obra:                                     oycclacomp
-      Organismos Participantes:
-        Tipo:                                                   oycdeftiporg
-        Registro:                                               oycdeforg
-      Unidad Ejecutora:
+      Solicitud de Contratación:                                oycclacomp
+      Mecanismos de Concurso:                                   licmeccon
+      #Unidad Administrativa:                                    licuniadm
+      Unidad Ejecutora Local:
         Tipo:                                                   lictipuniste
         Registro:                                               licuniste
-      #Concurso:                                                 licconcurso
-      Integración Comisión de Contratación:                     liccomlic
-      Tipos de Financiamiento:                                  pretitfin
+      Integrantes Comisión de Contratación:                     liccomlic
+      Fuente de Financiamiento:                                 pretitfin
       División Territorial:
         Pais:                                                   oycdefdivpai
         Estado:                                                 oycdefdivest
@@ -94,41 +78,41 @@ contratacionespublicas:
         Municipio:                                              oycdefdivmun
         Parroquia:                                              oycdefdivpar
         Sector:                                                 oycdefdivsec
-      Compromiso de Responsabilidad Social:                     liccomres
-      Criterios de Evaluación Técnico:                          licaspteccriterios
-      Criterios de Evaluación Financieros:                      licaspfincriterios
-    Procesos:
-      Solicitud de Suministro:
+      Criterios de Calificación Recaudos y Garantias:
+        Legales:                                                licasplegcriterios
+        Técnico:                                                licaspteccriterios
+        Financieros:                                            licaspfincriterios
+        Fianzas/Garantias:                                      liccomres
+    Proceso de Contratación:
+      Solicitud de Bien/Servicio:
         Presupuesto Base:                                       licprebas
-        Memorando:                                              licmemoran
-        Aprobación de Presupuesto Base:                         licaprprebas
-        Pedidos:                                                almsolegr
-        Aprobación de Pedidos:                                  AlmAprSolEgr
-        Compra Integral:                                        liccomint
-        Aprobación de Compra Integral:                          licaprcomint
-        Punto de Cuenta Inicial:                                licptocue
-      Contrataciones:
-        Registro de Contrataciones:                             licreglic
-        Participantes:                                          liemppar
-        Oferentes:                                              licempofe
-        Registro de Ofertas:                                    AlmCotiza
-        Análisis de Ofertas:
-          Aspecto Legal(Análisis):                              licasplegcriterios
-          Aspecto Técnico(Análisis):                            licasptecanalisis
-          Aspecto Financiero:
-            Análisis:                                           licaspfinanalisis
-            Presupuesto:                                        licoferpresupuesto
-          Cálculo del V.A.N.:                                   liccalculovan
-        Recomendación:                                          licrecomen
-        Punto de Cuenta Final:                                  licptocue
-        #Notificación(*):                                        licdefemp
-      Adjudicación:
-        Registro de Contratos:                                  almcontratonew
-        Registro de Obras:                                      oycdesobr
-        Orden de Compra/Servicio:                               almOrdComv2
-      Recepción del bien:
-        #Control Perceptivo(*):                                  licdefemp
-        Recepción de Ordenes de Compra:                         AlmOrdRec
+        Memorando Solicitud de Aprobación Egreso:               licmemoran
+        Punto de Cuenta Solicitud de Aprobación Egreso:         licptocue
+        Requisición/Solicitud de Egresos:                       licsolegr
+        Adquisición/Compra Integral:                            liccomint
+      Pliego de Condiciones:
+        Especificaciones del Pliego de Condiciones:             licplieesp
+        Participantes:                                          licemppar
+        Aclaratoria/Respuestas:                                 licaclara
+        (*)Prorrogas:                                              licprorro
+      Oferentes:                                                licempofe
+      Ofertas:
+        Registro de Ofertas:                                    licregofe
+        Analisis de Ofertas:                                    licanaofe
+      Recomendación:                                            licrecomen
+      Punto de Cuenta/Aprobación Contratación:                  licptocuecon
+      Notificación de Adjudicación:                             licnotific
+    Declaratorias:
+      (**)Presupuesto Base:                                       licaprprebas
+      (*)Memorando Solicitud de Egreso:                          licaprprebas
+      (*)Requisición:                                            AlmAprSolEgr
+      Compra Integral/Pedido:                                 licaprcomint
+      (*)Piego de Condiciones:                                   licaprcomint
+      (*)Punto de Cuenta Aprobación de Egreso:                   licaprcomint
+      (*)Punto de Cuenta Aprobación de Contratación:             licaprcomint
+      (*)Aclaratoria/Respuestas:                                 licaprcomint
+      (*)Prorroga:                                               licaprcomint
+      (*)Medidas:                                                licaprcomint
     Reportes:
       Definiciones:                                             lic
     Mantenimiento:

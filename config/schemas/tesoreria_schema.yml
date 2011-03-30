@@ -1797,6 +1797,25 @@ propel:
     _uniques:
       unique_tsdesmon_codmon:
         - codmon
+  tscammon:
+    codmon:
+      type: VARCHAR
+      size: 3
+      required: true
+    valmon:
+      type: NUMERIC
+      size: 12
+      scale: 2
+      required: true
+    fecmon:
+      type: TIMESTAMP
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      primaryKey: true
+      autoIncrement: true
+      description: Identificador Único del registro
   tsdettra:
     #_attributes:
       #idMethod: native

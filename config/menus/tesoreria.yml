@@ -24,6 +24,7 @@ tesoreria:
       Tipos de Movimientos Bancarios:                         TesDefTipMov
       Tipos de Rendimiento:                                   TesDefTipRen
       Tipos de Monedas:                                       TesDefTipMon
+      Cambios de Monedas:                                     tesdefcammon
       Tipos de Retenciones:                                   PagTipRet
       Tipos de Financiamiento:                                PreTipFin
       Conceptos de Pago:                                      tesconpag
