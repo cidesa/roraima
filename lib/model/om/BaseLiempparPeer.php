@@ -13,23 +13,26 @@ abstract class BaseLiempparPeer {
 	const CLASS_DEFAULT = 'lib.model.Liemppar';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const LIREGLIC_ID = 'liemppar.LIREGLIC_ID';
+	const NUMPLIE = 'liemppar.NUMPLIE';
 
 	
-	const CODLIC = 'liemppar.CODLIC';
+	const NUMEXP = 'liemppar.NUMEXP';
 
 	
 	const CODPRO = 'liemppar.CODPRO';
 
 	
-	const FECINS = 'liemppar.FECINS';
+	const FECRET = 'liemppar.FECRET';
+
+	
+	const NOMREPLEG = 'liemppar.NOMREPLEG';
 
 	
 	const OBSERVACIONES = 'liemppar.OBSERVACIONES';
@@ -43,18 +46,18 @@ abstract class BaseLiempparPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('LireglicId', 'Codlic', 'Codpro', 'Fecins', 'Observaciones', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (LiempparPeer::LIREGLIC_ID, LiempparPeer::CODLIC, LiempparPeer::CODPRO, LiempparPeer::FECINS, LiempparPeer::OBSERVACIONES, LiempparPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('lireglic_id', 'codlic', 'codpro', 'fecins', 'observaciones', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Numplie', 'Numexp', 'Codpro', 'Fecret', 'Nomrepleg', 'Observaciones', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (LiempparPeer::NUMPLIE, LiempparPeer::NUMEXP, LiempparPeer::CODPRO, LiempparPeer::FECRET, LiempparPeer::NOMREPLEG, LiempparPeer::OBSERVACIONES, LiempparPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numplie', 'numexp', 'codpro', 'fecret', 'nomrepleg', 'observaciones', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('LireglicId' => 0, 'Codlic' => 1, 'Codpro' => 2, 'Fecins' => 3, 'Observaciones' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (LiempparPeer::LIREGLIC_ID => 0, LiempparPeer::CODLIC => 1, LiempparPeer::CODPRO => 2, LiempparPeer::FECINS => 3, LiempparPeer::OBSERVACIONES => 4, LiempparPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('lireglic_id' => 0, 'codlic' => 1, 'codpro' => 2, 'fecins' => 3, 'observaciones' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Numplie' => 0, 'Numexp' => 1, 'Codpro' => 2, 'Fecret' => 3, 'Nomrepleg' => 4, 'Observaciones' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (LiempparPeer::NUMPLIE => 0, LiempparPeer::NUMEXP => 1, LiempparPeer::CODPRO => 2, LiempparPeer::FECRET => 3, LiempparPeer::NOMREPLEG => 4, LiempparPeer::OBSERVACIONES => 5, LiempparPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('numplie' => 0, 'numexp' => 1, 'codpro' => 2, 'fecret' => 3, 'nomrepleg' => 4, 'observaciones' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -108,13 +111,15 @@ abstract class BaseLiempparPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(LiempparPeer::LIREGLIC_ID);
+		$criteria->addSelectColumn(LiempparPeer::NUMPLIE);
 
-		$criteria->addSelectColumn(LiempparPeer::CODLIC);
+		$criteria->addSelectColumn(LiempparPeer::NUMEXP);
 
 		$criteria->addSelectColumn(LiempparPeer::CODPRO);
 
-		$criteria->addSelectColumn(LiempparPeer::FECINS);
+		$criteria->addSelectColumn(LiempparPeer::FECRET);
+
+		$criteria->addSelectColumn(LiempparPeer::NOMREPLEG);
 
 		$criteria->addSelectColumn(LiempparPeer::OBSERVACIONES);
 
@@ -197,167 +202,6 @@ abstract class BaseLiempparPeer {
 		}
 		return $results;
 	}
-
-	
-	public static function doCountJoinLireglic(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(LiempparPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(LiempparPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-		$criteria->addJoin(LiempparPeer::LIREGLIC_ID, LireglicPeer::ID);
-
-		$rs = LiempparPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
-	
-	public static function doSelectJoinLireglic(Criteria $c, $con = null)
-	{
-		$c = clone $c;
-
-				if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		LiempparPeer::addSelectColumns($c);
-		$startcol = (LiempparPeer::NUM_COLUMNS - LiempparPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-		LireglicPeer::addSelectColumns($c);
-
-		$c->addJoin(LiempparPeer::LIREGLIC_ID, LireglicPeer::ID);
-		$rs = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while($rs->next()) {
-
-			$omClass = LiempparPeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj1 = new $cls();
-			$obj1->hydrate($rs);
-
-			$omClass = LireglicPeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol);
-
-			$newObject = true;
-			foreach($results as $temp_obj1) {
-				$temp_obj2 = $temp_obj1->getLireglic(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-										$temp_obj2->addLiemppar($obj1); 					break;
-				}
-			}
-			if ($newObject) {
-				$obj2->initLiemppars();
-				$obj2->addLiemppar($obj1); 			}
-			$results[] = $obj1;
-		}
-		return $results;
-	}
-
-
-	
-	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
-	{
-		$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(LiempparPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(LiempparPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-			$criteria->addJoin(LiempparPeer::LIREGLIC_ID, LireglicPeer::ID);
-	
-		$rs = LiempparPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
-	
-	public static function doSelectJoinAll(Criteria $c, $con = null)
-	{
-		$c = clone $c;
-
-				if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		LiempparPeer::addSelectColumns($c);
-		$startcol2 = (LiempparPeer::NUM_COLUMNS - LiempparPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-
-			LireglicPeer::addSelectColumns($c);
-			$startcol3 = $startcol2 + LireglicPeer::NUM_COLUMNS;
-	
-			$c->addJoin(LiempparPeer::LIREGLIC_ID, LireglicPeer::ID);
-	
-		$rs = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while($rs->next()) {
-
-			$omClass = LiempparPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj1 = new $cls();
-			$obj1->hydrate($rs);
-
-
-							
-				$omClass = LireglicPeer::getOMClass();
-	
-
-				$cls = Propel::import($omClass);
-				$obj2 = new $cls();
-				$obj2->hydrate($rs, $startcol2);
-
-				$newObject = true;
-				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-					$temp_obj1 = $results[$j];
-					$temp_obj2 = $temp_obj1->getLireglic(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-						$newObject = false;
-						$temp_obj2->addLiemppar($obj1); 						break;
-					}
-				}
-
-				if ($newObject) {
-					$obj2->initLiemppars();
-					$obj2->addLiemppar($obj1);
-				}
-	
-			$results[] = $obj1;
-		}
-		return $results;
-	}
-
 	
 	public static function getTableMap()
 	{

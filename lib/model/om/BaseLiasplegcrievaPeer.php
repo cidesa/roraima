@@ -13,23 +13,17 @@ abstract class BaseLiasplegcrievaPeer {
 	const CLASS_DEFAULT = 'lib.model.Liasplegcrieva';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 4;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const LIREGLIC_ID = 'liasplegcrieva.LIREGLIC_ID';
+	const CODCRI = 'liasplegcrieva.CODCRI';
 
 	
-	const CODLIC = 'liasplegcrieva.CODLIC';
-
-	
-	const CODPRO = 'liasplegcrieva.CODPRO';
-
-	
-	const LIRECAUD_ID = 'liasplegcrieva.LIRECAUD_ID';
+	const DESCRI = 'liasplegcrieva.DESCRI';
 
 	
 	const PUNTAJE = 'liasplegcrieva.PUNTAJE';
@@ -43,18 +37,18 @@ abstract class BaseLiasplegcrievaPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('LireglicId', 'Codlic', 'Codpro', 'LirecaudId', 'Puntaje', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (LiasplegcrievaPeer::LIREGLIC_ID, LiasplegcrievaPeer::CODLIC, LiasplegcrievaPeer::CODPRO, LiasplegcrievaPeer::LIRECAUD_ID, LiasplegcrievaPeer::PUNTAJE, LiasplegcrievaPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('lireglic_id', 'codlic', 'codpro', 'lirecaud_id', 'puntaje', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codcri', 'Descri', 'Puntaje', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (LiasplegcrievaPeer::CODCRI, LiasplegcrievaPeer::DESCRI, LiasplegcrievaPeer::PUNTAJE, LiasplegcrievaPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcri', 'descri', 'puntaje', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('LireglicId' => 0, 'Codlic' => 1, 'Codpro' => 2, 'LirecaudId' => 3, 'Puntaje' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (LiasplegcrievaPeer::LIREGLIC_ID => 0, LiasplegcrievaPeer::CODLIC => 1, LiasplegcrievaPeer::CODPRO => 2, LiasplegcrievaPeer::LIRECAUD_ID => 3, LiasplegcrievaPeer::PUNTAJE => 4, LiasplegcrievaPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('lireglic_id' => 0, 'codlic' => 1, 'codpro' => 2, 'lirecaud_id' => 3, 'puntaje' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codcri' => 0, 'Descri' => 1, 'Puntaje' => 2, 'Id' => 3, ),
+		BasePeer::TYPE_COLNAME => array (LiasplegcrievaPeer::CODCRI => 0, LiasplegcrievaPeer::DESCRI => 1, LiasplegcrievaPeer::PUNTAJE => 2, LiasplegcrievaPeer::ID => 3, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcri' => 0, 'descri' => 1, 'puntaje' => 2, 'id' => 3, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
@@ -108,13 +102,9 @@ abstract class BaseLiasplegcrievaPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(LiasplegcrievaPeer::LIREGLIC_ID);
+		$criteria->addSelectColumn(LiasplegcrievaPeer::CODCRI);
 
-		$criteria->addSelectColumn(LiasplegcrievaPeer::CODLIC);
-
-		$criteria->addSelectColumn(LiasplegcrievaPeer::CODPRO);
-
-		$criteria->addSelectColumn(LiasplegcrievaPeer::LIRECAUD_ID);
+		$criteria->addSelectColumn(LiasplegcrievaPeer::DESCRI);
 
 		$criteria->addSelectColumn(LiasplegcrievaPeer::PUNTAJE);
 
@@ -197,442 +187,6 @@ abstract class BaseLiasplegcrievaPeer {
 		}
 		return $results;
 	}
-
-	
-	public static function doCountJoinLireglic(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(LiasplegcrievaPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(LiasplegcrievaPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-		$criteria->addJoin(LiasplegcrievaPeer::LIREGLIC_ID, LireglicPeer::ID);
-
-		$rs = LiasplegcrievaPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
-	
-	public static function doCountJoinLirecaud(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(LiasplegcrievaPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(LiasplegcrievaPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-		$criteria->addJoin(LiasplegcrievaPeer::LIRECAUD_ID, LirecaudPeer::ID);
-
-		$rs = LiasplegcrievaPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
-	
-	public static function doSelectJoinLireglic(Criteria $c, $con = null)
-	{
-		$c = clone $c;
-
-				if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		LiasplegcrievaPeer::addSelectColumns($c);
-		$startcol = (LiasplegcrievaPeer::NUM_COLUMNS - LiasplegcrievaPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-		LireglicPeer::addSelectColumns($c);
-
-		$c->addJoin(LiasplegcrievaPeer::LIREGLIC_ID, LireglicPeer::ID);
-		$rs = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while($rs->next()) {
-
-			$omClass = LiasplegcrievaPeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj1 = new $cls();
-			$obj1->hydrate($rs);
-
-			$omClass = LireglicPeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol);
-
-			$newObject = true;
-			foreach($results as $temp_obj1) {
-				$temp_obj2 = $temp_obj1->getLireglic(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-										$temp_obj2->addLiasplegcrieva($obj1); 					break;
-				}
-			}
-			if ($newObject) {
-				$obj2->initLiasplegcrievas();
-				$obj2->addLiasplegcrieva($obj1); 			}
-			$results[] = $obj1;
-		}
-		return $results;
-	}
-
-
-	
-	public static function doSelectJoinLirecaud(Criteria $c, $con = null)
-	{
-		$c = clone $c;
-
-				if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		LiasplegcrievaPeer::addSelectColumns($c);
-		$startcol = (LiasplegcrievaPeer::NUM_COLUMNS - LiasplegcrievaPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-		LirecaudPeer::addSelectColumns($c);
-
-		$c->addJoin(LiasplegcrievaPeer::LIRECAUD_ID, LirecaudPeer::ID);
-		$rs = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while($rs->next()) {
-
-			$omClass = LiasplegcrievaPeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj1 = new $cls();
-			$obj1->hydrate($rs);
-
-			$omClass = LirecaudPeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol);
-
-			$newObject = true;
-			foreach($results as $temp_obj1) {
-				$temp_obj2 = $temp_obj1->getLirecaud(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-										$temp_obj2->addLiasplegcrieva($obj1); 					break;
-				}
-			}
-			if ($newObject) {
-				$obj2->initLiasplegcrievas();
-				$obj2->addLiasplegcrieva($obj1); 			}
-			$results[] = $obj1;
-		}
-		return $results;
-	}
-
-
-	
-	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
-	{
-		$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(LiasplegcrievaPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(LiasplegcrievaPeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-			$criteria->addJoin(LiasplegcrievaPeer::LIREGLIC_ID, LireglicPeer::ID);
-	
-			$criteria->addJoin(LiasplegcrievaPeer::LIRECAUD_ID, LirecaudPeer::ID);
-	
-		$rs = LiasplegcrievaPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
-	
-	public static function doSelectJoinAll(Criteria $c, $con = null)
-	{
-		$c = clone $c;
-
-				if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		LiasplegcrievaPeer::addSelectColumns($c);
-		$startcol2 = (LiasplegcrievaPeer::NUM_COLUMNS - LiasplegcrievaPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-
-			LireglicPeer::addSelectColumns($c);
-			$startcol3 = $startcol2 + LireglicPeer::NUM_COLUMNS;
-	
-			LirecaudPeer::addSelectColumns($c);
-			$startcol4 = $startcol3 + LirecaudPeer::NUM_COLUMNS;
-	
-			$c->addJoin(LiasplegcrievaPeer::LIREGLIC_ID, LireglicPeer::ID);
-	
-			$c->addJoin(LiasplegcrievaPeer::LIRECAUD_ID, LirecaudPeer::ID);
-	
-		$rs = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while($rs->next()) {
-
-			$omClass = LiasplegcrievaPeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj1 = new $cls();
-			$obj1->hydrate($rs);
-
-
-							
-				$omClass = LireglicPeer::getOMClass();
-	
-
-				$cls = Propel::import($omClass);
-				$obj2 = new $cls();
-				$obj2->hydrate($rs, $startcol2);
-
-				$newObject = true;
-				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-					$temp_obj1 = $results[$j];
-					$temp_obj2 = $temp_obj1->getLireglic(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-						$newObject = false;
-						$temp_obj2->addLiasplegcrieva($obj1); 						break;
-					}
-				}
-
-				if ($newObject) {
-					$obj2->initLiasplegcrievas();
-					$obj2->addLiasplegcrieva($obj1);
-				}
-	
-
-							
-				$omClass = LirecaudPeer::getOMClass();
-	
-
-				$cls = Propel::import($omClass);
-				$obj3 = new $cls();
-				$obj3->hydrate($rs, $startcol3);
-
-				$newObject = true;
-				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-					$temp_obj1 = $results[$j];
-					$temp_obj3 = $temp_obj1->getLirecaud(); 					if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
-						$newObject = false;
-						$temp_obj3->addLiasplegcrieva($obj1); 						break;
-					}
-				}
-
-				if ($newObject) {
-					$obj3->initLiasplegcrievas();
-					$obj3->addLiasplegcrieva($obj1);
-				}
-	
-			$results[] = $obj1;
-		}
-		return $results;
-	}
-
-
-		
-		public static function doCountJoinAllExceptLireglic(Criteria $criteria, $distinct = false, $con = null)
-		{
-						$criteria = clone $criteria;
-
-						$criteria->clearSelectColumns()->clearOrderByColumns();
-			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-				$criteria->addSelectColumn(LiasplegcrievaPeer::COUNT_DISTINCT);
-			} else {
-				$criteria->addSelectColumn(LiasplegcrievaPeer::COUNT);
-			}
-
-						foreach($criteria->getGroupByColumns() as $column)
-			{
-				$criteria->addSelectColumn($column);
-			}
-	
-				$criteria->addJoin(LiasplegcrievaPeer::LIRECAUD_ID, LirecaudPeer::ID);
-		
-			$rs = LiasplegcrievaPeer::doSelectRS($criteria, $con);
-			if ($rs->next()) {
-				return $rs->getInt(1);
-			} else {
-								return 0;
-			}
-		}
-	
-
-		
-		public static function doCountJoinAllExceptLirecaud(Criteria $criteria, $distinct = false, $con = null)
-		{
-						$criteria = clone $criteria;
-
-						$criteria->clearSelectColumns()->clearOrderByColumns();
-			if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-				$criteria->addSelectColumn(LiasplegcrievaPeer::COUNT_DISTINCT);
-			} else {
-				$criteria->addSelectColumn(LiasplegcrievaPeer::COUNT);
-			}
-
-						foreach($criteria->getGroupByColumns() as $column)
-			{
-				$criteria->addSelectColumn($column);
-			}
-	
-				$criteria->addJoin(LiasplegcrievaPeer::LIREGLIC_ID, LireglicPeer::ID);
-		
-			$rs = LiasplegcrievaPeer::doSelectRS($criteria, $con);
-			if ($rs->next()) {
-				return $rs->getInt(1);
-			} else {
-								return 0;
-			}
-		}
-	
-
-	
-	public static function doSelectJoinAllExceptLireglic(Criteria $c, $con = null)
-	{
-		$c = clone $c;
-
-								if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		LiasplegcrievaPeer::addSelectColumns($c);
-		$startcol2 = (LiasplegcrievaPeer::NUM_COLUMNS - LiasplegcrievaPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-
-			LirecaudPeer::addSelectColumns($c);
-			$startcol3 = $startcol2 + LirecaudPeer::NUM_COLUMNS;
-	
-			$c->addJoin(LiasplegcrievaPeer::LIRECAUD_ID, LirecaudPeer::ID);
-	
-
-		$rs = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while($rs->next()) {
-
-			$omClass = LiasplegcrievaPeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj1 = new $cls();
-			$obj1->hydrate($rs);
-
-				$omClass = LirecaudPeer::getOMClass();
-	
-
-				$cls = Propel::import($omClass);
-				$obj2  = new $cls();
-				$obj2->hydrate($rs, $startcol2);
-
-				$newObject = true;
-				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-					$temp_obj1 = $results[$j];
-					$temp_obj2 = $temp_obj1->getLirecaud(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-						$newObject = false;
-						$temp_obj2->addLiasplegcrieva($obj1);
-						break;
-					}
-				}
-
-				if ($newObject) {
-					$obj2->initLiasplegcrievas();
-					$obj2->addLiasplegcrieva($obj1);
-				}
-	
-			$results[] = $obj1;
-		}
-		return $results;
-	}
-
-
-	
-	public static function doSelectJoinAllExceptLirecaud(Criteria $c, $con = null)
-	{
-		$c = clone $c;
-
-								if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		LiasplegcrievaPeer::addSelectColumns($c);
-		$startcol2 = (LiasplegcrievaPeer::NUM_COLUMNS - LiasplegcrievaPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-
-			LireglicPeer::addSelectColumns($c);
-			$startcol3 = $startcol2 + LireglicPeer::NUM_COLUMNS;
-	
-			$c->addJoin(LiasplegcrievaPeer::LIREGLIC_ID, LireglicPeer::ID);
-	
-
-		$rs = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while($rs->next()) {
-
-			$omClass = LiasplegcrievaPeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj1 = new $cls();
-			$obj1->hydrate($rs);
-
-				$omClass = LireglicPeer::getOMClass();
-	
-
-				$cls = Propel::import($omClass);
-				$obj2  = new $cls();
-				$obj2->hydrate($rs, $startcol2);
-
-				$newObject = true;
-				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-					$temp_obj1 = $results[$j];
-					$temp_obj2 = $temp_obj1->getLireglic(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-						$newObject = false;
-						$temp_obj2->addLiasplegcrieva($obj1);
-						break;
-					}
-				}
-
-				if ($newObject) {
-					$obj2->initLiasplegcrievas();
-					$obj2->addLiasplegcrieva($obj1);
-				}
-	
-			$results[] = $obj1;
-		}
-		return $results;
-	}
-
 	
 	public static function getTableMap()
 	{

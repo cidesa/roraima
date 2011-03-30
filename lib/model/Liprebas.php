@@ -15,134 +15,139 @@
  */ 
 class Liprebas extends BaseLiprebas
 {
-    private $tipo = '';
-  protected $actsolegr = '';
-  protected $articulo = '';
-  protected $modifico= '';
-  protected $check= '';
-  protected $obj = array();
-  protected $etiqueta="";
-  protected $porcostart='';
-  protected $pormoncot='';
-  protected $precom="";
-  protected $cambiareti="";
-  protected $nometifor="";
-  protected $portimeent='';
-  protected $porprovee="";
-  protected $observaciones="";
 
-  public function getMonreq($val=false)
+  protected  $grid=array();
+  protected  $grid_rec=array();
+
+  public function afterHydrate()
   {
-	return parent::getMonreq(true);
+    #$this->feccam =
   }
 
-  public function getNomcat()
+  public function getFeccam($format = 'Y-m-d H:i:s')
   {
-    $catbnubica="";
-    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
-    if ($varemp)
-	if(array_key_exists('aplicacion',$varemp))
-	 if(array_key_exists('compras',$varemp['aplicacion']))
-	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
-	     if(array_key_exists('almsolegr',$varemp['aplicacion']['compras']['modulos'])){
-	       if(array_key_exists('catbnubica',$varemp['aplicacion']['compras']['modulos']['almsolegr']))
-	       {
-	       	$catbnubica=$varemp['aplicacion']['compras']['modulos']['almsolegr']['catbnubica'];
-	       }
-         }
-
-  	if ($catbnubica=='S')
-  	 return Herramientas::getX('CODUBI','Bnubica','Desubi',self::getUnires());
-  	else
-	return Herramientas::getX('CODCAT','Npcatpre','Nomcat',self::getUnires());
+     return parent::getFeccam('d/m/Y H:i:s');
   }
 
-  public function getNomext()
+  public function getCodempadm()
   {
-	return Herramientas::getX('CODFIN','Fortipfin','Nomext',self::getTipfin());
+    return H::GetX('Codemp','lidatste','Codemp',$this->codempadm);
   }
 
-  public function setTipo($val)
+  public function getCodempeje()
   {
-	$this->tipo = $val;
+    return H::GetX('Codemp','Lidatste','Codemp',$this->codempeje);
+  }
+  
+  public function getEjepre()
+  {
+      $sql="select to_char(fecini,'yyyy') as anofis from contaba";
+      if(H::BuscarDatos($sql, $rs))
+         return $rs[0]['anofis'];
+      else
+         return '';
   }
 
-  public function getTipo()
+  public function getNomempadm()
   {
-	return $this->tipo;
+      return H::GetX('Codemp','Lidatste','Nomemp',$this->codempadm);
   }
 
-  public function getMondes($val=false)
+  public function getNomempeje()
   {
-	return parent::getMondes(true);
+      return H::GetX('Codemp','Lidatste','Nomemp',$this->codempeje);
   }
 
-  public function getEtiqueta()
+  public function getNomcaradm()
   {
-  	if (self::getStareq()=='A')
-  	{
-            $eti="PRESUPUESTO APROBADA";
-  	}
-  	else if (self::getStareq()=='N')
-  	{
-  	  $eti="PRESUPUESTO ANULADA";
-  	}
-  	else
-  	{
-  	 $eti="PRESUPUESTO POR APROBAR";
-  	}
-  	return $eti;
+      return H::GetX('Codemp','Lidatste','Nomcar',$this->codempadm);
   }
 
-
-    public function getCambiareti()
+  public function getNomcareje()
   {
-
-    $dato="";
-    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
-    if ($varemp)
-	if(array_key_exists('aplicacion',$varemp))
-	 if(array_key_exists('compras',$varemp['aplicacion']))
-	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
-	     if(array_key_exists('almaprsolegr',$varemp['aplicacion']['compras']['modulos'])){
-	       if(array_key_exists('cambiareti',$varemp['aplicacion']['compras']['modulos']['almaprsolegr']))
-	       {
-	       	$dato=$varemp['aplicacion']['compras']['modulos']['almaprsolegr']['cambiareti'];
-	       }
-         }
-     return $dato;
+      return H::GetX('Codemp','Lidatste','Nomcar',$this->codempeje);
   }
 
-  public function setCambiareti()
+  public function getDesuniadm()
   {
-  	return $this->cambiareti;
+      return H::GetX('Coduniste','Lidatste','Desuniste',$this->coduniadm);
   }
 
-  public function getNometifor()
+  public function getDesuniste()
   {
-
-    $dato="";
-    $varemp = sfContext::getInstance()->getUser()->getAttribute('configemp');
-    if ($varemp)
-	if(array_key_exists('aplicacion',$varemp))
-	 if(array_key_exists('compras',$varemp['aplicacion']))
-	   if(array_key_exists('modulos',$varemp['aplicacion']['compras']))
-	     if(array_key_exists('almaprsolegr',$varemp['aplicacion']['compras']['modulos'])){
-	       if(array_key_exists('nometifor',$varemp['aplicacion']['compras']['modulos']['almaprsolegr']))
-	       {
-	       	$dato=$varemp['aplicacion']['compras']['modulos']['almaprsolegr']['nometifor'];
-	       }
-         }
-     return $dato;
+      return H::GetX('Coduniste','Lidatste','Desuniste',$this->coduniste);
   }
 
-  public function setNometifor()
+  public function getDirunieje()
   {
-  	return $this->nometifor;
+      return H::GetX('Coduniste','Lidatste','Dirste',$this->coduniste);
   }
 
-  public function getDescen()
+  public function getPai()
   {
-	return Herramientas::getX('CODCEN','Cadefcen','Descen',self::getCodcen());
+      $cod = H::GetX('Coduniste','Lidatste','Codpai',$this->coduniste);
+      return H::GetX('Codpai','Ocpais','Nompai',$cod);
   }
+
+  public function getEdo()
+  {
+      $cod = H::GetX('Coduniste','Lidatste','Codedo',$this->coduniste);
+      return H::GetX('Codedo','Ocestado','Nomedo',$cod);
+  }
+
+  public function getMun()
+  {
+      $cod = H::GetX('Coduniste','Lidatste','Codmun',$this->coduniste);
+      return H::GetX('Codmun','Ocmunici','Nommun',$cod);
+  }
+
+  public function getPar()
+  {
+      $cod = H::GetX('Coduniste','Lidatste','Codpar',$this->coduniste);
+      return H::GetX('Codpar','Ocparroq','Nompar',$cod);
+  }
+
+  public function getSec()
+  {
+      $cod = H::GetX('Coduniste','Lidatste','Codsec',$this->coduniste);
+      return H::GetX('Codsec','Ocsector','Nomsec',$cod);
+  }
+
+  public function getEnte()
+  {
+      $sql="select nomemp from Lidefemp";
+      if(H::BuscarDatos($sql, $rs))
+         return $rs[0]['nomemp'];
+      else
+         return '';
+  }
+
+  public function getDesclacomp()
+  {
+    return H::GetX('Codclacomp','Occlacomp','Desclacomp',$this->codclacomp);
+  }
+
+  public function getDesprio()
+  {
+    return H::GetX('Codprio','Lipriocon','Desprio',$this->codprio);
+  }
+
+  public function getMonpreletras()
+  {
+    return self::getMonpre()==0 ? '' : H::obtenermontoescrito(self::getMonpre());
+  }
+  
+  public function getMonpreext()
+  {
+      if(self::getValcam()>0)
+        return H::FormatoMonto(self::getMonpre()/self::getValcam());
+      else
+        return '';
+  }
+
+  public function getMonpreextletras()
+  {
+    return self::getMonpreext()==0 ? '' : H::obtenermontoescrito(H::FormatoNum(self::getMonpreext()));
+  }
+
 }

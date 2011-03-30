@@ -9,27 +9,23 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
 
 
 	
-	protected $numexp;
-
-
-	
 	protected $numemo;
 
 
 	
-	protected $nompro;
+	protected $numpre;
 
 
 	
-	protected $fecha;
+	protected $codempadm;
 
 
 	
-	protected $codfin;
+	protected $coduniadm;
 
 
 	
-	protected $codcom;
+	protected $codempeje;
 
 
 	
@@ -37,19 +33,54 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
 
 
 	
-	protected $codclacomp;
+	protected $despro;
 
 
 	
-	protected $tipcom;
+	protected $docane1;
 
 
 	
-	protected $detmemo;
+	protected $docane2;
+
+
+	
+	protected $docane3;
+
+
+	
+	protected $prepor;
+
+
+	
+	protected $preporcar;
+
+
+	
+	protected $lisicact_id;
+
+
+	
+	protected $detdecmod;
+
+
+	
+	protected $anapor;
+
+
+	
+	protected $anaporcar;
+
+
+	
+	protected $status;
 
 
 	
 	protected $id;
+
+	
+	protected $aLisicact;
 
 	
 	protected $alreadyInSave = false;
@@ -58,13 +89,6 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
 	protected $alreadyInValidation = false;
 
   
-  public function getNumexp()
-  {
-
-    return trim($this->numexp);
-
-  }
-  
   public function getNumemo()
   {
 
@@ -72,46 +96,31 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
 
   }
   
-  public function getNompro()
+  public function getNumpre()
   {
 
-    return trim($this->nompro);
+    return trim($this->numpre);
 
   }
   
-  public function getFecha($format = 'Y-m-d')
+  public function getCodempadm()
   {
 
-    if ($this->fecha === null || $this->fecha === '') {
-      return null;
-    } elseif (!is_int($this->fecha)) {
-            $ts = adodb_strtotime($this->fecha);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecha] as date/time value: " . var_export($this->fecha, true));
-      }
-    } else {
-      $ts = $this->fecha;
-    }
-    if ($format === null) {
-      return $ts;
-    } elseif (strpos($format, '%') !== false) {
-      return adodb_strftime($format, $ts);
-    } else {
-      return @adodb_date($format, $ts);
-    }
-  }
-
-  
-  public function getCodfin()
-  {
-
-    return trim($this->codfin);
+    return trim($this->codempadm);
 
   }
   
-  public function getCodcom()
+  public function getCoduniadm()
   {
 
-    return trim($this->codcom);
+    return trim($this->coduniadm);
+
+  }
+  
+  public function getCodempeje()
+  {
+
+    return trim($this->codempeje);
 
   }
   
@@ -122,24 +131,80 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
 
   }
   
-  public function getCodclacomp()
+  public function getDespro()
   {
 
-    return trim($this->codclacomp);
+    return trim($this->despro);
 
   }
   
-  public function getTipcom()
+  public function getDocane1()
   {
 
-    return trim($this->tipcom);
+    return trim($this->docane1);
 
   }
   
-  public function getDetmemo()
+  public function getDocane2()
   {
 
-    return trim($this->detmemo);
+    return trim($this->docane2);
+
+  }
+  
+  public function getDocane3()
+  {
+
+    return trim($this->docane3);
+
+  }
+  
+  public function getPrepor()
+  {
+
+    return trim($this->prepor);
+
+  }
+  
+  public function getPreporcar()
+  {
+
+    return trim($this->preporcar);
+
+  }
+  
+  public function getLisicactId()
+  {
+
+    return $this->lisicact_id;
+
+  }
+  
+  public function getDetdecmod()
+  {
+
+    return trim($this->detdecmod);
+
+  }
+  
+  public function getAnapor()
+  {
+
+    return trim($this->anapor);
+
+  }
+  
+  public function getAnaporcar()
+  {
+
+    return trim($this->anaporcar);
+
+  }
+  
+  public function getStatus()
+  {
+
+    return trim($this->status);
 
   }
   
@@ -149,16 +214,6 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
     return $this->id;
 
   }
-	
-	public function setNumexp($v)
-	{
-
-    if ($this->numexp !== $v) {
-        $this->numexp = $v;
-        $this->modifiedColumns[] = LimemoranPeer::NUMEXP;
-      }
-  
-	} 
 	
 	public function setNumemo($v)
 	{
@@ -170,54 +225,42 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
   
 	} 
 	
-	public function setNompro($v)
+	public function setNumpre($v)
 	{
 
-    if ($this->nompro !== $v) {
-        $this->nompro = $v;
-        $this->modifiedColumns[] = LimemoranPeer::NOMPRO;
+    if ($this->numpre !== $v) {
+        $this->numpre = $v;
+        $this->modifiedColumns[] = LimemoranPeer::NUMPRE;
       }
   
 	} 
 	
-	public function setFecha($v)
+	public function setCodempadm($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
-    if ($v !== null && !is_int($v)) {
-      $ts = adodb_strtotime($v);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecha] from input: " . var_export($v, true));
-      }
-    } else {
-      $ts = $v;
-    }
-    if ($this->fecha !== $ts) {
-      $this->fecha = $ts;
-      $this->modifiedColumns[] = LimemoranPeer::FECHA;
-    }
-
-	} 
-	
-	public function setCodfin($v)
-	{
-
-    if ($this->codfin !== $v) {
-        $this->codfin = $v;
-        $this->modifiedColumns[] = LimemoranPeer::CODFIN;
+    if ($this->codempadm !== $v) {
+        $this->codempadm = $v;
+        $this->modifiedColumns[] = LimemoranPeer::CODEMPADM;
       }
   
 	} 
 	
-	public function setCodcom($v)
+	public function setCoduniadm($v)
 	{
 
-    if ($this->codcom !== $v) {
-        $this->codcom = $v;
-        $this->modifiedColumns[] = LimemoranPeer::CODCOM;
+    if ($this->coduniadm !== $v) {
+        $this->coduniadm = $v;
+        $this->modifiedColumns[] = LimemoranPeer::CODUNIADM;
+      }
+  
+	} 
+	
+	public function setCodempeje($v)
+	{
+
+    if ($this->codempeje !== $v) {
+        $this->codempeje = $v;
+        $this->modifiedColumns[] = LimemoranPeer::CODEMPEJE;
       }
   
 	} 
@@ -232,32 +275,116 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
   
 	} 
 	
-	public function setCodclacomp($v)
+	public function setDespro($v)
 	{
 
-    if ($this->codclacomp !== $v) {
-        $this->codclacomp = $v;
-        $this->modifiedColumns[] = LimemoranPeer::CODCLACOMP;
+    if ($this->despro !== $v) {
+        $this->despro = $v;
+        $this->modifiedColumns[] = LimemoranPeer::DESPRO;
       }
   
 	} 
 	
-	public function setTipcom($v)
+	public function setDocane1($v)
 	{
 
-    if ($this->tipcom !== $v) {
-        $this->tipcom = $v;
-        $this->modifiedColumns[] = LimemoranPeer::TIPCOM;
+    if ($this->docane1 !== $v) {
+        $this->docane1 = $v;
+        $this->modifiedColumns[] = LimemoranPeer::DOCANE1;
       }
   
 	} 
 	
-	public function setDetmemo($v)
+	public function setDocane2($v)
 	{
 
-    if ($this->detmemo !== $v) {
-        $this->detmemo = $v;
-        $this->modifiedColumns[] = LimemoranPeer::DETMEMO;
+    if ($this->docane2 !== $v) {
+        $this->docane2 = $v;
+        $this->modifiedColumns[] = LimemoranPeer::DOCANE2;
+      }
+  
+	} 
+	
+	public function setDocane3($v)
+	{
+
+    if ($this->docane3 !== $v) {
+        $this->docane3 = $v;
+        $this->modifiedColumns[] = LimemoranPeer::DOCANE3;
+      }
+  
+	} 
+	
+	public function setPrepor($v)
+	{
+
+    if ($this->prepor !== $v) {
+        $this->prepor = $v;
+        $this->modifiedColumns[] = LimemoranPeer::PREPOR;
+      }
+  
+	} 
+	
+	public function setPreporcar($v)
+	{
+
+    if ($this->preporcar !== $v) {
+        $this->preporcar = $v;
+        $this->modifiedColumns[] = LimemoranPeer::PREPORCAR;
+      }
+  
+	} 
+	
+	public function setLisicactId($v)
+	{
+
+    if ($this->lisicact_id !== $v) {
+        $this->lisicact_id = $v;
+        $this->modifiedColumns[] = LimemoranPeer::LISICACT_ID;
+      }
+  
+		if ($this->aLisicact !== null && $this->aLisicact->getId() !== $v) {
+			$this->aLisicact = null;
+		}
+
+	} 
+	
+	public function setDetdecmod($v)
+	{
+
+    if ($this->detdecmod !== $v) {
+        $this->detdecmod = $v;
+        $this->modifiedColumns[] = LimemoranPeer::DETDECMOD;
+      }
+  
+	} 
+	
+	public function setAnapor($v)
+	{
+
+    if ($this->anapor !== $v) {
+        $this->anapor = $v;
+        $this->modifiedColumns[] = LimemoranPeer::ANAPOR;
+      }
+  
+	} 
+	
+	public function setAnaporcar($v)
+	{
+
+    if ($this->anaporcar !== $v) {
+        $this->anaporcar = $v;
+        $this->modifiedColumns[] = LimemoranPeer::ANAPORCAR;
+      }
+  
+	} 
+	
+	public function setStatus($v)
+	{
+
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = LimemoranPeer::STATUS;
       }
   
 	} 
@@ -276,27 +403,41 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
   {
     try {
 
-      $this->numexp = $rs->getString($startcol + 0);
+      $this->numemo = $rs->getString($startcol + 0);
 
-      $this->numemo = $rs->getString($startcol + 1);
+      $this->numpre = $rs->getString($startcol + 1);
 
-      $this->nompro = $rs->getString($startcol + 2);
+      $this->codempadm = $rs->getString($startcol + 2);
 
-      $this->fecha = $rs->getDate($startcol + 3, null);
+      $this->coduniadm = $rs->getString($startcol + 3);
 
-      $this->codfin = $rs->getString($startcol + 4);
+      $this->codempeje = $rs->getString($startcol + 4);
 
-      $this->codcom = $rs->getString($startcol + 5);
+      $this->coduniste = $rs->getString($startcol + 5);
 
-      $this->coduniste = $rs->getString($startcol + 6);
+      $this->despro = $rs->getString($startcol + 6);
 
-      $this->codclacomp = $rs->getString($startcol + 7);
+      $this->docane1 = $rs->getString($startcol + 7);
 
-      $this->tipcom = $rs->getString($startcol + 8);
+      $this->docane2 = $rs->getString($startcol + 8);
 
-      $this->detmemo = $rs->getString($startcol + 9);
+      $this->docane3 = $rs->getString($startcol + 9);
 
-      $this->id = $rs->getInt($startcol + 10);
+      $this->prepor = $rs->getString($startcol + 10);
+
+      $this->preporcar = $rs->getString($startcol + 11);
+
+      $this->lisicact_id = $rs->getInt($startcol + 12);
+
+      $this->detdecmod = $rs->getString($startcol + 13);
+
+      $this->anapor = $rs->getString($startcol + 14);
+
+      $this->anaporcar = $rs->getString($startcol + 15);
+
+      $this->status = $rs->getString($startcol + 16);
+
+      $this->id = $rs->getInt($startcol + 17);
 
       $this->resetModified();
 
@@ -304,7 +445,7 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 11; 
+            return $startcol + 18; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Limemoran object", $e);
     }
@@ -381,6 +522,15 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aLisicact !== null) {
+				if ($this->aLisicact->isModified()) {
+					$affectedRows += $this->aLisicact->save($con);
+				}
+				$this->setLisicact($this->aLisicact);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = LimemoranPeer::doInsert($this, $con);
@@ -428,6 +578,14 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
+												
+			if ($this->aLisicact !== null) {
+				if (!$this->aLisicact->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aLisicact->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = LimemoranPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
@@ -452,36 +610,57 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getNumexp();
-				break;
-			case 1:
 				return $this->getNumemo();
 				break;
+			case 1:
+				return $this->getNumpre();
+				break;
 			case 2:
-				return $this->getNompro();
+				return $this->getCodempadm();
 				break;
 			case 3:
-				return $this->getFecha();
+				return $this->getCoduniadm();
 				break;
 			case 4:
-				return $this->getCodfin();
+				return $this->getCodempeje();
 				break;
 			case 5:
-				return $this->getCodcom();
-				break;
-			case 6:
 				return $this->getCoduniste();
 				break;
+			case 6:
+				return $this->getDespro();
+				break;
 			case 7:
-				return $this->getCodclacomp();
+				return $this->getDocane1();
 				break;
 			case 8:
-				return $this->getTipcom();
+				return $this->getDocane2();
 				break;
 			case 9:
-				return $this->getDetmemo();
+				return $this->getDocane3();
 				break;
 			case 10:
+				return $this->getPrepor();
+				break;
+			case 11:
+				return $this->getPreporcar();
+				break;
+			case 12:
+				return $this->getLisicactId();
+				break;
+			case 13:
+				return $this->getDetdecmod();
+				break;
+			case 14:
+				return $this->getAnapor();
+				break;
+			case 15:
+				return $this->getAnaporcar();
+				break;
+			case 16:
+				return $this->getStatus();
+				break;
+			case 17:
 				return $this->getId();
 				break;
 			default:
@@ -494,17 +673,24 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
 	{
 		$keys = LimemoranPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getNumexp(),
-			$keys[1] => $this->getNumemo(),
-			$keys[2] => $this->getNompro(),
-			$keys[3] => $this->getFecha(),
-			$keys[4] => $this->getCodfin(),
-			$keys[5] => $this->getCodcom(),
-			$keys[6] => $this->getCoduniste(),
-			$keys[7] => $this->getCodclacomp(),
-			$keys[8] => $this->getTipcom(),
-			$keys[9] => $this->getDetmemo(),
-			$keys[10] => $this->getId(),
+			$keys[0] => $this->getNumemo(),
+			$keys[1] => $this->getNumpre(),
+			$keys[2] => $this->getCodempadm(),
+			$keys[3] => $this->getCoduniadm(),
+			$keys[4] => $this->getCodempeje(),
+			$keys[5] => $this->getCoduniste(),
+			$keys[6] => $this->getDespro(),
+			$keys[7] => $this->getDocane1(),
+			$keys[8] => $this->getDocane2(),
+			$keys[9] => $this->getDocane3(),
+			$keys[10] => $this->getPrepor(),
+			$keys[11] => $this->getPreporcar(),
+			$keys[12] => $this->getLisicactId(),
+			$keys[13] => $this->getDetdecmod(),
+			$keys[14] => $this->getAnapor(),
+			$keys[15] => $this->getAnaporcar(),
+			$keys[16] => $this->getStatus(),
+			$keys[17] => $this->getId(),
 		);
 		return $result;
 	}
@@ -521,36 +707,57 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setNumexp($value);
-				break;
-			case 1:
 				$this->setNumemo($value);
 				break;
+			case 1:
+				$this->setNumpre($value);
+				break;
 			case 2:
-				$this->setNompro($value);
+				$this->setCodempadm($value);
 				break;
 			case 3:
-				$this->setFecha($value);
+				$this->setCoduniadm($value);
 				break;
 			case 4:
-				$this->setCodfin($value);
+				$this->setCodempeje($value);
 				break;
 			case 5:
-				$this->setCodcom($value);
-				break;
-			case 6:
 				$this->setCoduniste($value);
 				break;
+			case 6:
+				$this->setDespro($value);
+				break;
 			case 7:
-				$this->setCodclacomp($value);
+				$this->setDocane1($value);
 				break;
 			case 8:
-				$this->setTipcom($value);
+				$this->setDocane2($value);
 				break;
 			case 9:
-				$this->setDetmemo($value);
+				$this->setDocane3($value);
 				break;
 			case 10:
+				$this->setPrepor($value);
+				break;
+			case 11:
+				$this->setPreporcar($value);
+				break;
+			case 12:
+				$this->setLisicactId($value);
+				break;
+			case 13:
+				$this->setDetdecmod($value);
+				break;
+			case 14:
+				$this->setAnapor($value);
+				break;
+			case 15:
+				$this->setAnaporcar($value);
+				break;
+			case 16:
+				$this->setStatus($value);
+				break;
+			case 17:
 				$this->setId($value);
 				break;
 		} 	}
@@ -560,17 +767,24 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
 	{
 		$keys = LimemoranPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setNumexp($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setNumemo($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setNompro($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setFecha($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setCodfin($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setCodcom($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setCoduniste($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setCodclacomp($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setTipcom($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setDetmemo($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
+		if (array_key_exists($keys[0], $arr)) $this->setNumemo($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setNumpre($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setCodempadm($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setCoduniadm($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCodempeje($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCoduniste($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setDespro($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setDocane1($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setDocane2($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setDocane3($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setPrepor($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setPreporcar($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setLisicactId($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setDetdecmod($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setAnapor($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setAnaporcar($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setStatus($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setId($arr[$keys[17]]);
 	}
 
 	
@@ -578,16 +792,23 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(LimemoranPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(LimemoranPeer::NUMEXP)) $criteria->add(LimemoranPeer::NUMEXP, $this->numexp);
 		if ($this->isColumnModified(LimemoranPeer::NUMEMO)) $criteria->add(LimemoranPeer::NUMEMO, $this->numemo);
-		if ($this->isColumnModified(LimemoranPeer::NOMPRO)) $criteria->add(LimemoranPeer::NOMPRO, $this->nompro);
-		if ($this->isColumnModified(LimemoranPeer::FECHA)) $criteria->add(LimemoranPeer::FECHA, $this->fecha);
-		if ($this->isColumnModified(LimemoranPeer::CODFIN)) $criteria->add(LimemoranPeer::CODFIN, $this->codfin);
-		if ($this->isColumnModified(LimemoranPeer::CODCOM)) $criteria->add(LimemoranPeer::CODCOM, $this->codcom);
+		if ($this->isColumnModified(LimemoranPeer::NUMPRE)) $criteria->add(LimemoranPeer::NUMPRE, $this->numpre);
+		if ($this->isColumnModified(LimemoranPeer::CODEMPADM)) $criteria->add(LimemoranPeer::CODEMPADM, $this->codempadm);
+		if ($this->isColumnModified(LimemoranPeer::CODUNIADM)) $criteria->add(LimemoranPeer::CODUNIADM, $this->coduniadm);
+		if ($this->isColumnModified(LimemoranPeer::CODEMPEJE)) $criteria->add(LimemoranPeer::CODEMPEJE, $this->codempeje);
 		if ($this->isColumnModified(LimemoranPeer::CODUNISTE)) $criteria->add(LimemoranPeer::CODUNISTE, $this->coduniste);
-		if ($this->isColumnModified(LimemoranPeer::CODCLACOMP)) $criteria->add(LimemoranPeer::CODCLACOMP, $this->codclacomp);
-		if ($this->isColumnModified(LimemoranPeer::TIPCOM)) $criteria->add(LimemoranPeer::TIPCOM, $this->tipcom);
-		if ($this->isColumnModified(LimemoranPeer::DETMEMO)) $criteria->add(LimemoranPeer::DETMEMO, $this->detmemo);
+		if ($this->isColumnModified(LimemoranPeer::DESPRO)) $criteria->add(LimemoranPeer::DESPRO, $this->despro);
+		if ($this->isColumnModified(LimemoranPeer::DOCANE1)) $criteria->add(LimemoranPeer::DOCANE1, $this->docane1);
+		if ($this->isColumnModified(LimemoranPeer::DOCANE2)) $criteria->add(LimemoranPeer::DOCANE2, $this->docane2);
+		if ($this->isColumnModified(LimemoranPeer::DOCANE3)) $criteria->add(LimemoranPeer::DOCANE3, $this->docane3);
+		if ($this->isColumnModified(LimemoranPeer::PREPOR)) $criteria->add(LimemoranPeer::PREPOR, $this->prepor);
+		if ($this->isColumnModified(LimemoranPeer::PREPORCAR)) $criteria->add(LimemoranPeer::PREPORCAR, $this->preporcar);
+		if ($this->isColumnModified(LimemoranPeer::LISICACT_ID)) $criteria->add(LimemoranPeer::LISICACT_ID, $this->lisicact_id);
+		if ($this->isColumnModified(LimemoranPeer::DETDECMOD)) $criteria->add(LimemoranPeer::DETDECMOD, $this->detdecmod);
+		if ($this->isColumnModified(LimemoranPeer::ANAPOR)) $criteria->add(LimemoranPeer::ANAPOR, $this->anapor);
+		if ($this->isColumnModified(LimemoranPeer::ANAPORCAR)) $criteria->add(LimemoranPeer::ANAPORCAR, $this->anaporcar);
+		if ($this->isColumnModified(LimemoranPeer::STATUS)) $criteria->add(LimemoranPeer::STATUS, $this->status);
 		if ($this->isColumnModified(LimemoranPeer::ID)) $criteria->add(LimemoranPeer::ID, $this->id);
 
 		return $criteria;
@@ -619,25 +840,39 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setNumexp($this->numexp);
-
 		$copyObj->setNumemo($this->numemo);
 
-		$copyObj->setNompro($this->nompro);
+		$copyObj->setNumpre($this->numpre);
 
-		$copyObj->setFecha($this->fecha);
+		$copyObj->setCodempadm($this->codempadm);
 
-		$copyObj->setCodfin($this->codfin);
+		$copyObj->setCoduniadm($this->coduniadm);
 
-		$copyObj->setCodcom($this->codcom);
+		$copyObj->setCodempeje($this->codempeje);
 
 		$copyObj->setCoduniste($this->coduniste);
 
-		$copyObj->setCodclacomp($this->codclacomp);
+		$copyObj->setDespro($this->despro);
 
-		$copyObj->setTipcom($this->tipcom);
+		$copyObj->setDocane1($this->docane1);
 
-		$copyObj->setDetmemo($this->detmemo);
+		$copyObj->setDocane2($this->docane2);
+
+		$copyObj->setDocane3($this->docane3);
+
+		$copyObj->setPrepor($this->prepor);
+
+		$copyObj->setPreporcar($this->preporcar);
+
+		$copyObj->setLisicactId($this->lisicact_id);
+
+		$copyObj->setDetdecmod($this->detdecmod);
+
+		$copyObj->setAnapor($this->anapor);
+
+		$copyObj->setAnaporcar($this->anaporcar);
+
+		$copyObj->setStatus($this->status);
 
 
 		$copyObj->setNew(true);
@@ -661,6 +896,38 @@ abstract class BaseLimemoran extends BaseObject  implements Persistent {
 			self::$peer = new LimemoranPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setLisicact($v)
+	{
+
+
+		if ($v === null) {
+			$this->setLisicactId(NULL);
+		} else {
+			$this->setLisicactId($v->getId());
+		}
+
+
+		$this->aLisicact = $v;
+	}
+
+
+	
+	public function getLisicact($con = null)
+	{
+		if ($this->aLisicact === null && ($this->lisicact_id !== null)) {
+						include_once 'lib/model/om/BaseLisicactPeer.php';
+
+      $c = new Criteria();
+      $c->add(LisicactPeer::ID,$this->lisicact_id);
+      
+			$this->aLisicact = LisicactPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aLisicact;
 	}
 
 } 

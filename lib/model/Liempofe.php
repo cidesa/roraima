@@ -15,25 +15,21 @@
  */
 class Liempofe extends BaseLiempofe
 {
-  protected $objempresas=array();
-  protected $deslic = '';
-  protected $destiplic = '';
-  protected $fecreglic='';
-  protected $nompro='';
-  protected $oferente=false;
+    protected $grid=array();
+    protected $check='';
 
-  public function afterHydrate()
-  {
-    $this->nompro=Herramientas::getX('CODPRO','Caprovee','Nompro',self::getCodpro());
-    $lireglic = $this->getLireglic();
-
-    if($lireglic)
+    public function getDescrip()
     {
-      $this->deslic = $lireglic->getDeslic();
-      $this->fecreglic = date('d/m/Y',strtotime($lireglic->getFecreg()));
-      $litiplic = $lireglic->getLitiplic();
-	  if ($litiplic) $this->destiplic = $litiplic->getDestiplic();
+        return H::GetX('Numexp','Liplieesp','Descrip',$this->numexp);
     }
 
-  }
+    public function getNumplie()
+    {
+        return H::GetX('Numexp','Liplieesp','Numplie',$this->numexp);
+    }
+
+    public function getNompro()
+    {
+        return H::GetX('Codpro','Caprovee','Nompro',$this->codpro);
+    }
 }

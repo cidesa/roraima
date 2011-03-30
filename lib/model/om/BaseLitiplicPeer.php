@@ -13,11 +13,14 @@ abstract class BaseLitiplicPeer {
 	const CLASS_DEFAULT = 'lib.model.Litiplic';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
+
+	
+	const CODTIPLIC = 'litiplic.CODTIPLIC';
 
 	
 	const DESTIPLIC = 'litiplic.DESTIPLIC';
@@ -43,18 +46,18 @@ abstract class BaseLitiplicPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Destiplic', 'Maxunitri', 'Artley', 'Canunitribie', 'Canunitriobr', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (LitiplicPeer::DESTIPLIC, LitiplicPeer::MAXUNITRI, LitiplicPeer::ARTLEY, LitiplicPeer::CANUNITRIBIE, LitiplicPeer::CANUNITRIOBR, LitiplicPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('destiplic', 'maxunitri', 'artley', 'canunitribie', 'canunitriobr', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codtiplic', 'Destiplic', 'Maxunitri', 'Artley', 'Canunitribie', 'Canunitriobr', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (LitiplicPeer::CODTIPLIC, LitiplicPeer::DESTIPLIC, LitiplicPeer::MAXUNITRI, LitiplicPeer::ARTLEY, LitiplicPeer::CANUNITRIBIE, LitiplicPeer::CANUNITRIOBR, LitiplicPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codtiplic', 'destiplic', 'maxunitri', 'artley', 'canunitribie', 'canunitriobr', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Destiplic' => 0, 'Maxunitri' => 1, 'Artley' => 2, 'Canunitribie' => 3, 'Canunitriobr' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (LitiplicPeer::DESTIPLIC => 0, LitiplicPeer::MAXUNITRI => 1, LitiplicPeer::ARTLEY => 2, LitiplicPeer::CANUNITRIBIE => 3, LitiplicPeer::CANUNITRIOBR => 4, LitiplicPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('destiplic' => 0, 'maxunitri' => 1, 'artley' => 2, 'canunitribie' => 3, 'canunitriobr' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codtiplic' => 0, 'Destiplic' => 1, 'Maxunitri' => 2, 'Artley' => 3, 'Canunitribie' => 4, 'Canunitriobr' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (LitiplicPeer::CODTIPLIC => 0, LitiplicPeer::DESTIPLIC => 1, LitiplicPeer::MAXUNITRI => 2, LitiplicPeer::ARTLEY => 3, LitiplicPeer::CANUNITRIBIE => 4, LitiplicPeer::CANUNITRIOBR => 5, LitiplicPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('codtiplic' => 0, 'destiplic' => 1, 'maxunitri' => 2, 'artley' => 3, 'canunitribie' => 4, 'canunitriobr' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -107,6 +110,8 @@ abstract class BaseLitiplicPeer {
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
+
+		$criteria->addSelectColumn(LitiplicPeer::CODTIPLIC);
 
 		$criteria->addSelectColumn(LitiplicPeer::DESTIPLIC);
 

@@ -3232,7 +3232,7 @@ $this->c= new Criteria();
     $this->c= new Criteria();
     $this->c->addJoin(CpasiiniPeer :: CODPRE,CpdeftitPeer :: CODPRE);
     $this->c->add(CpasiiniPeer :: PERPRE, '00');
-    //$this->c->add(CpasiiniPeer :: MONDIS, 0, Criteria::GREATER_THAN);
+    $this->c->add(CpasiiniPeer :: MONDIS, 0, Criteria::GREATER_THAN);
 // $this->c->add(AtayudasPeer::ID,"ID NOT IN (SELECT atayudas_id FROM atestsoceco)",Criteria::CUSTOM);
     $this->c->addAscendingOrderByColumn(CpasiiniPeer::CODPRE);
 
@@ -3362,7 +3362,6 @@ $this->c= new Criteria();
       ContabcPeer :: FECCOM => 'Fecha',
       ContabcPeer :: STACOM => 'Estatus',
       ContabcPeer :: REFTRA => 'Referencia',
-      ContabcPeer :: MONCOM => 'Monto',
     );
   }
 
@@ -4100,15 +4099,16 @@ public function Tsmovlib_tesmovdeglib2()
   }
 
     public function Liemppar_caprovee() {
-    $this->c = new Criteria();
-    $this->c->add(CaproveePeer::ESTPRO,'A');
-    $this->c->addAscendingOrderByColumn(CaproveePeer :: CODPRO);
+		$this->c = new Criteria();
+		$this->c->add(CaproveePeer :: ESTPRO, 'A');
+		$this->c->addAscendingOrderByColumn(CaproveePeer :: CODPRO);
 
-    $this->columnas = array (
-      CaproveePeer :: CODPRO => 'Cod. Empresa',
-      CaproveePeer :: NOMPRO => 'Nombre'
-    );
-  }
+		$this->columnas = array (
+			CaproveePeer :: CODPRO => 'Cod. Empresa',
+			CaproveePeer :: NOMPRO => 'Nombre',
+                        CaproveePeer :: NOMREPLEG => 'Representante Legal'
+		);
+	}
 
   public function Licasplegcriterios_caprovee($param=array())
   {
@@ -4482,6 +4482,7 @@ public function Tsmovlib_tesmovdeglib2()
     $this->columnas = array (
       CaregartPeer :: CODART => 'Código',
       CaregartPeer :: DESART => 'Descripción',
+      CaregartPeer :: UNIMED => 'Unidad de Medida',
     );
   }
 
@@ -4599,7 +4600,7 @@ public function Tsmovlib_tesmovdeglib2()
     $this->c = new Criteria();
     $this->c->add(FafacturPeer::STATUS, 'N', Criteria::NOT_EQUAL);
     $this->c->add(FafacturPeer::TIPREF, 'D', Criteria::NOT_EQUAL);
-    $sql = "fafactur.reffac not in (select codref from faajuste) and (select sum(cantot) from faartfac where reffac=Fafactur.reffac)>(select sum(coalesce(candes,0)) from faartfac where reffac=Fafactur.reffac) ";
+    $sql = "(select sum(cantot) from faartfac where reffac=Fafactur.reffac)>(select sum(coalesce(candes,0)) from faartfac where reffac=Fafactur.reffac) ";
     $this->c->add(FafacturPeer :: REFFAC, $sql, Criteria :: CUSTOM);
 
     $this->columnas = array (
@@ -5274,6 +5275,9 @@ A.CODREDE"
     $this->columnas = array (
       TsdefbanPeer :: NUMCUE => 'Número',
       TsdefbanPeer :: NOMCUE => 'Descripción',
+       #AGREGADO PARA REUTILIZAR CODIGO,SE USA EN EL FORMULARIO licplieesp
+      TsdefbanPeer :: TIPCUE => 'Tipo de Cuenta',
+      'tsdefban.destip' => 'Descripción Tipo de Cuenta',
     );
   }
 
@@ -6843,16 +6847,6 @@ public function Bnubica_Almordcom2() {
                         );
         }
 
-        public function Limemoran_numemo()
-        {
-                $this->c = new Criteria();
-                $this->c->addAscendingOrderByColumn(LimemoranPeer :: NUMEMO);
-                $this->columnas = array (
-                                LimemoranPeer :: NUMEMO=> 'Nro',
-                                LimemoranPeer :: NOMPRO => 'Proyecto',
-                        );
-        }
-
 	public function Tscheemi_Tesdefcueban($params = array ()) {
 		$numcue = $params[0];
 		$this->c = new Criteria();
@@ -6863,6 +6857,216 @@ public function Bnubica_Almordcom2() {
 			TscheemiPeer :: FECEMI => 'Fecha de Emisión',
                         TscheemiPeer :: CEDRIF => 'Beneficiario'
 		);
-}
+        }
+
+        public function Tscheemi_Tsdesmon() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			TsdesmonPeer :: CODMON => 'Código',
+			TsdesmonPeer :: NOMMON => 'Nombre Moneda',
+		);
+	}
+        public function Liuniadm() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			LiuniadmPeer :: CODUNIADM => 'Código',
+			LiuniadmPeer :: DESUNIADM => 'Descripción',
+		);
+	}
+
+        public function Lipriocon() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			LiprioconPeer :: CODPRIO => 'Código',
+			LiprioconPeer :: DESPRIO => 'Descripción',
+		);
+	}
+
+        public function Liuniadm_codemp() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			LiuniadmPeer :: CODEMP=> 'Código',
+			LiuniadmPeer :: NOMEMP => 'Descripción',
+		);
+	}
+
+        public function Lidatste_codemp() {
+
+		$this->c = new Criteria();
+                $this->c->addJoin(LidatstePeer::CODEMP,NphojintPeer::CODEMP);
+
+		$this->columnas = array (
+			LidatstePeer :: CODEMP=> 'Código',
+			NphojintPeer :: NOMEMP => 'Descripción',
+		);
+	}
+
+        public function Tscammon_codmon($params = array ()) {
+
+		$this->c = new Criteria();
+
+                if(count($params))
+                {
+                    $this->c->add(TscammonPeer::CODMON,$params[0]);
+                }
+
+		$this->columnas = array (
+			TscammonPeer :: VALMON=> 'Valor',
+                        "tscammon.FECCAM" => 'Fecha del Cambio',
+		);
+	}
+
+        public function Liprebas_numpre() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			LiprebasPeer :: NUMPRE=> 'Presupuesto Base',
+			LiprebasPeer :: DESPRO => 'Descripción',
+		);
+	}
+
+        public function Limemoran_numemo() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			LimemoranPeer :: NUMEMO=> 'Memorando',
+			LimemoranPeer :: DESPRO => 'Descripción',
+		);
+	}
+
+        public function Lidatste_coduniste() {
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			LidatstePeer :: CODUNISTE => 'Código',
+			LidatstePeer :: DESUNISTE => 'Descripción',
+                        'lidatste.nompai'=> 'Pais',
+                        'lidatste.nomedo'=> 'Estado',
+                        'lidatste.nommun'=> 'Municipio',
+                        'lidatste.nompar'=> 'Parroquia',
+                        'lidatste.nomsec'=> 'Sector',
+		);
+	}
+
+        public function Limeccon_codmec() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			LimecconPeer :: CODMEC=> 'Mecanismo de Consulta',
+			LimecconPeer :: DESMEC => 'Descripción',
+		);
+	}
+
+        public function Liasplegcrieva_codcri() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			LiasplegcrievaPeer :: CODCRI=> 'Codigo',
+			LiasplegcrievaPeer :: DESCRI => 'Descripción',
+		);
+	}
+
+        public function Liaspteccrieva_codcri() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			LiaspteccrievaPeer :: CODCRI=> 'Codigo',
+			LiaspteccrievaPeer :: DESCRI => 'Descripción',
+		);
+	}
+
+        public function Liaspfincrieva_codcri() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			LiaspfincrievaPeer :: CODCRI=> 'Codigo',
+			LiaspfincrievaPeer :: DESCRI => 'Descripción',
+		);
+	}
+
+        public function Liccomres_codcomres() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			LiccomresPeer :: CODCOMRES=> 'Codigo',
+			LiccomresPeer :: DESCOMRES => 'Descripción',
+                        LiccomresPeer :: PORCENTAJE => 'Porcentaje',
+		);
+	}
+
+        public function Litipemp_codemp() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			LitipempPeer :: CODEMP=> 'Codigo',
+			LitipempPeer :: DESEMP => 'Descripción',
+		);
+	}
+
+        public function Licomint_numconint() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			LicomintPeer :: NUMCOMINT=> 'Codigo',
+			LicomintPeer :: CODCLACOMP => 'Solicitud de Contratacion',
+                        'licomint.desclacomp'    =>   'Descripcion'
+		);
+	}
+
+        public function Liplieesp_numexp() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			LiplieespPeer :: NUMEXP=> 'Expediente',
+			LiplieespPeer :: NUMPLIE=> 'Pliego',
+			LiplieespPeer :: DESCRIP => 'Descripción',
+		);
+	}
+
+        public function Liempofe_codpro($params=array()) {
+		$this->c = new Criteria();
+                if(count($params)>0)
+                {
+                    $this->c->add(LiempparPeer::NUMEXP,$params[0]);
+                    $this->c->addJoin(LiempparPeer::CODPRO,CaproveePeer::CODPRO);
+                }
+		$this->c->addAscendingOrderByColumn(LiempparPeer :: CODPRO);
+
+		$this->columnas = array (
+			CaproveePeer :: CODPRO => 'Codigo',
+			CaproveePeer :: NOMPRO => 'Nombre',
+                        CaproveePeer :: NOMREPLEG => 'Representante Legal'
+		);
+	}
+
+        public function Liregofe_numofe() {
+
+		$this->c = new Criteria();
+
+		$this->columnas = array (
+			LiregofePeer :: NUMOFE=> 'Número Oferta',
+			LiregofePeer :: OFENRO=> 'Oferta Contratista',
+			LiregofePeer :: FECOFE => 'Fecha Oferta',
+		);
+	}
+
 }
 ?>

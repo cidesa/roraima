@@ -15,151 +15,86 @@
  */ 
 class Liprebasdet extends BaseLiprebasdet
 {
-    protected $codpre = "";
-  private $canaju = 0.00;
-  private $check = '';
-  private $fecent = '';
-  private $montot2 = 0.00;
-  private $monrgo2 = 0.00;
-  protected $codigopre="";
-  protected $desartsol="";
-  protected $datosrecargo="";
-  protected $cancost="0,00";
+    protected $cadena='';
 
-   public function hydrate(ResultSet $rs, $startcol = 1)
-   {
-     parent::hydrate($rs, $startcol);
-     $this->codigopre= self::getCodcat() ."-". self::getCodpar();
-     if (self::getDesart())
-      	$this->desartsol = self::getDesart();
+    public function afterHydrate()
+    {
+        $c = new Criteria();
+        $c->add(LiprergoPeer::NUMPRE,self::getNumpre());
+        $c->add(LiprergoPeer::CODART,self::getCodart());
+        $per = LiprergoPeer::doSelect($c);
+        $cadena='';
+        foreach($per as $r)
+        {
+            $cadena.=$r->getCodart().'_'.$r->getCodcat().'_'.$r->getMonrgo().'_'.$r->getCodrgo().'!';
+        }
+        $this->cadena=$cadena;
+        if(!self::getUnimed())
+        {
+            $this->unimed = H::GetX('Codart','Caregart','Unimed',$this->codart);
+        }
+    }
+
+    public function getDesart()
+    {
+        return H::GetX('Codart','Caregart','Desart',$this->codart);
+    }
+
+    public function getNomcat()
+    {
+        return H::GetX('Codcat','Npcatpre','Nomcat',$this->codcat);
+    }
+
+    public function getDispo()
+    {
+        $mondis=0;
+        $sql="select mondis from cpasiini where perpre='00' and codpre='".$this->codpre."'";
+        if(H::BuscarDatos($sql, $rs))
+        {
+            $mondis = $rs[0]['mondis'];
+        }
+        return H::FormatoMonto($mondis);
+    }
+
+    public function getCostoe()
+    {
+      if(self::getValcam()>0)
+        return H::FormatoMonto(self::getCosto()/self::getValcam());
       else
-      	$this->desartsol =Herramientas::getX('CODART','Caregart','Desart',self::getCodart());
-    //Cargar en el campo datosrecargo del Grid Recargos, los recargo por artículo de la tabla Cadisrgo
-     $calculo= self::getCanreq() * self::getCosto();
-     $this->cancost=number_format($calculo,2,',','.');
-
-      $this->codpre=self::getCodpar();
-
-   }
-
-
-  public function getUnimed2()
-  {
-    return Herramientas::getX('CODART','Caregart','Unimed',self::getCodart());
-  }
-
-  public function getCospro()
-  {
-    return Herramientas::getX('CODART','Caregart','Cospro',self::getCodart());
-  }
-
-    public function setCheck($val)
-    {
-    $this->check = $val;
-  }
-
-  public function getCheck()
-  {
-    if (self::getMonrgo()!=0 && self::getId()!="")
-    { $this->check=1;}
-    else { $this->check;}
-    return $this->check;
-  }
-
-  public function getTotdet()
-  {
-      $totdet= self::getCanreq() * self::getCosto();
-    return number_format($totdet,2,',','.');
-  }
-
-  public function setTotdet($val){
-
-    $this->Totdev= $val;
-  }
-
-   public function setFecent($val)
-    {
-    $this->fecent = $val;
-  }
-
-  public function getFecent()
-  {
-    return $this->fecent;
-  }
-
-  public function getCanaju()
-  {
-    $var = number_format(0,2,',','.');
-    return $var;
-  }
-
-
-  public function getCanaju_()
-  {
-    return $this->canaju;
-  }
-
-
-    public function setCanaju($val)
-    {
-       $this->canaju = $val;
+        return '';
     }
 
-
-
-  /*public function getCodPre()
-  {
-     $var=self::getCodpar();
-
-    return $var;
-  }*/
-
-
-  public function getCodPre()
-  {
-    return $this->codpre;
-  }
-
-
-    /*public function setCodPre($val)
+    public function getSubtote()
     {
-       $this->codpre = $val;
-    }*/
-
-  public function getMontot2($va=false)
-  {
-    if (self::getId()!="")
-    {
-     $var = parent::getMontot($va);
-    }
-    else
-    {
-      $var= $this->montot2;
-    }
-    return $var;
-  }
-
-  public function setMontot2($val)
-    {
-       $this->montot2 = $val;
+      if(self::getValcam()>0)
+        return H::FormatoMonto(self::getSubtot()/self::getValcam());
+      else
+        return '';
     }
 
-    public function getMonrgo2($va=false)
-  {
-    if (self::getId()!="")
+    public function getTotale()
     {
-      $var = parent::getMonrgo($va);
-    }
-    else
-    {
-      $var=$this->monrgo2;
-    }
-    return $var;
-  }
-
-  public function setMonrgo2($val)
-    {
-       $this->monrgo2 = $val;
+      if(self::getValcam()>0)
+        return H::FormatoMonto(self::getTotal()/self::getValcam());
+      else
+        return '';
     }
 
+    public function getMontote()
+    {
+      if(self::getValcam()>0)
+        return H::FormatoMonto(self::getMontot()/self::getValcam());
+      else
+        return '';
+    }
+
+    public function getNomext()
+    {
+       return H::GetX('Codfin','Fortipfin','Nomext',$this->codfin);
+    }
+
+    public function getCantid()
+    {
+        return H::FormatoMonto(self::getCansol());
+    }
 }

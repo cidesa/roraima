@@ -13,7 +13,7 @@ abstract class BaseLidetcomintPeer {
 	const CLASS_DEFAULT = 'lib.model.Lidetcomint';
 
 	
-	const NUM_COLUMNS = 10;
+	const NUM_COLUMNS = 4;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -23,25 +23,7 @@ abstract class BaseLidetcomintPeer {
 	const NUMCOMINT = 'lidetcomint.NUMCOMINT';
 
 	
-	const FECCOMINT = 'lidetcomint.FECCOMINT';
-
-	
-	const CODART = 'lidetcomint.CODART';
-
-	
-	const REQART = 'lidetcomint.REQART';
-
-	
-	const FECREQ = 'lidetcomint.FECREQ';
-
-	
-	const UNIRES = 'lidetcomint.UNIRES';
-
-	
-	const CANREQ = 'lidetcomint.CANREQ';
-
-	
-	const COSTO = 'lidetcomint.COSTO';
+	const NUMSOL = 'lidetcomint.NUMSOL';
 
 	
 	const MONTOT = 'lidetcomint.MONTOT';
@@ -55,18 +37,18 @@ abstract class BaseLidetcomintPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcomint', 'Feccomint', 'Codart', 'Reqart', 'Fecreq', 'Unires', 'Canreq', 'Costo', 'Montot', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (LidetcomintPeer::NUMCOMINT, LidetcomintPeer::FECCOMINT, LidetcomintPeer::CODART, LidetcomintPeer::REQART, LidetcomintPeer::FECREQ, LidetcomintPeer::UNIRES, LidetcomintPeer::CANREQ, LidetcomintPeer::COSTO, LidetcomintPeer::MONTOT, LidetcomintPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcomint', 'feccomint', 'codart', 'reqart', 'fecreq', 'unires', 'canreq', 'costo', 'montot', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Numcomint', 'Numsol', 'Montot', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (LidetcomintPeer::NUMCOMINT, LidetcomintPeer::NUMSOL, LidetcomintPeer::MONTOT, LidetcomintPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcomint', 'numsol', 'montot', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcomint' => 0, 'Feccomint' => 1, 'Codart' => 2, 'Reqart' => 3, 'Fecreq' => 4, 'Unires' => 5, 'Canreq' => 6, 'Costo' => 7, 'Montot' => 8, 'Id' => 9, ),
-		BasePeer::TYPE_COLNAME => array (LidetcomintPeer::NUMCOMINT => 0, LidetcomintPeer::FECCOMINT => 1, LidetcomintPeer::CODART => 2, LidetcomintPeer::REQART => 3, LidetcomintPeer::FECREQ => 4, LidetcomintPeer::UNIRES => 5, LidetcomintPeer::CANREQ => 6, LidetcomintPeer::COSTO => 7, LidetcomintPeer::MONTOT => 8, LidetcomintPeer::ID => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcomint' => 0, 'feccomint' => 1, 'codart' => 2, 'reqart' => 3, 'fecreq' => 4, 'unires' => 5, 'canreq' => 6, 'costo' => 7, 'montot' => 8, 'id' => 9, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Numcomint' => 0, 'Numsol' => 1, 'Montot' => 2, 'Id' => 3, ),
+		BasePeer::TYPE_COLNAME => array (LidetcomintPeer::NUMCOMINT => 0, LidetcomintPeer::NUMSOL => 1, LidetcomintPeer::MONTOT => 2, LidetcomintPeer::ID => 3, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcomint' => 0, 'numsol' => 1, 'montot' => 2, 'id' => 3, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
@@ -122,19 +104,7 @@ abstract class BaseLidetcomintPeer {
 
 		$criteria->addSelectColumn(LidetcomintPeer::NUMCOMINT);
 
-		$criteria->addSelectColumn(LidetcomintPeer::FECCOMINT);
-
-		$criteria->addSelectColumn(LidetcomintPeer::CODART);
-
-		$criteria->addSelectColumn(LidetcomintPeer::REQART);
-
-		$criteria->addSelectColumn(LidetcomintPeer::FECREQ);
-
-		$criteria->addSelectColumn(LidetcomintPeer::UNIRES);
-
-		$criteria->addSelectColumn(LidetcomintPeer::CANREQ);
-
-		$criteria->addSelectColumn(LidetcomintPeer::COSTO);
+		$criteria->addSelectColumn(LidetcomintPeer::NUMSOL);
 
 		$criteria->addSelectColumn(LidetcomintPeer::MONTOT);
 

@@ -13,15 +13,55 @@ abstract class BaseLicomint extends BaseObject  implements Persistent {
 
 
 	
-	protected $numexp;
+	protected $codempadm;
 
 
 	
-	protected $feccomint;
+	protected $coduniadm;
 
 
 	
-	protected $codcom;
+	protected $codempeje;
+
+
+	
+	protected $coduniste;
+
+
+	
+	protected $tipcon;
+
+
+	
+	protected $fecreg;
+
+
+	
+	protected $dias;
+
+
+	
+	protected $fecven;
+
+
+	
+	protected $codclacomp;
+
+
+	
+	protected $moncom;
+
+
+	
+	protected $codtiplic;
+
+
+	
+	protected $codmon;
+
+
+	
+	protected $tipcom;
 
 
 	
@@ -45,24 +85,52 @@ abstract class BaseLicomint extends BaseObject  implements Persistent {
 
   }
   
-  public function getNumexp()
+  public function getCodempadm()
   {
 
-    return trim($this->numexp);
+    return trim($this->codempadm);
 
   }
   
-  public function getFeccomint($format = 'Y-m-d')
+  public function getCoduniadm()
   {
 
-    if ($this->feccomint === null || $this->feccomint === '') {
+    return trim($this->coduniadm);
+
+  }
+  
+  public function getCodempeje()
+  {
+
+    return trim($this->codempeje);
+
+  }
+  
+  public function getCoduniste()
+  {
+
+    return trim($this->coduniste);
+
+  }
+  
+  public function getTipcon()
+  {
+
+    return trim($this->tipcon);
+
+  }
+  
+  public function getFecreg($format = 'Y-m-d')
+  {
+
+    if ($this->fecreg === null || $this->fecreg === '') {
       return null;
-    } elseif (!is_int($this->feccomint)) {
-            $ts = adodb_strtotime($this->feccomint);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccomint] as date/time value: " . var_export($this->feccomint, true));
+    } elseif (!is_int($this->fecreg)) {
+            $ts = adodb_strtotime($this->fecreg);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
       }
     } else {
-      $ts = $this->feccomint;
+      $ts = $this->fecreg;
     }
     if ($format === null) {
       return $ts;
@@ -74,10 +142,68 @@ abstract class BaseLicomint extends BaseObject  implements Persistent {
   }
 
   
-  public function getCodcom()
+  public function getDias()
   {
 
-    return trim($this->codcom);
+    return $this->dias;
+
+  }
+  
+  public function getFecven($format = 'Y-m-d')
+  {
+
+    if ($this->fecven === null || $this->fecven === '') {
+      return null;
+    } elseif (!is_int($this->fecven)) {
+            $ts = adodb_strtotime($this->fecven);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
+      }
+    } else {
+      $ts = $this->fecven;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getCodclacomp()
+  {
+
+    return trim($this->codclacomp);
+
+  }
+  
+  public function getMoncom($val=false)
+  {
+
+    if($val) return number_format($this->moncom,2,',','.');
+    else return $this->moncom;
+
+  }
+  
+  public function getCodtiplic()
+  {
+
+    return trim($this->codtiplic);
+
+  }
+  
+  public function getCodmon()
+  {
+
+    return trim($this->codmon);
+
+  }
+  
+  public function getTipcom()
+  {
+
+    return trim($this->tipcom);
 
   }
   
@@ -105,17 +231,57 @@ abstract class BaseLicomint extends BaseObject  implements Persistent {
   
 	} 
 	
-	public function setNumexp($v)
+	public function setCodempadm($v)
 	{
 
-    if ($this->numexp !== $v) {
-        $this->numexp = $v;
-        $this->modifiedColumns[] = LicomintPeer::NUMEXP;
+    if ($this->codempadm !== $v) {
+        $this->codempadm = $v;
+        $this->modifiedColumns[] = LicomintPeer::CODEMPADM;
       }
   
 	} 
 	
-	public function setFeccomint($v)
+	public function setCoduniadm($v)
+	{
+
+    if ($this->coduniadm !== $v) {
+        $this->coduniadm = $v;
+        $this->modifiedColumns[] = LicomintPeer::CODUNIADM;
+      }
+  
+	} 
+	
+	public function setCodempeje($v)
+	{
+
+    if ($this->codempeje !== $v) {
+        $this->codempeje = $v;
+        $this->modifiedColumns[] = LicomintPeer::CODEMPEJE;
+      }
+  
+	} 
+	
+	public function setCoduniste($v)
+	{
+
+    if ($this->coduniste !== $v) {
+        $this->coduniste = $v;
+        $this->modifiedColumns[] = LicomintPeer::CODUNISTE;
+      }
+  
+	} 
+	
+	public function setTipcon($v)
+	{
+
+    if ($this->tipcon !== $v) {
+        $this->tipcon = $v;
+        $this->modifiedColumns[] = LicomintPeer::TIPCON;
+      }
+  
+	} 
+	
+	public function setFecreg($v)
 	{
 
 		if (is_array($v)){
@@ -125,24 +291,96 @@ abstract class BaseLicomint extends BaseObject  implements Persistent {
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccomint] from input: " . var_export($v, true));
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
       }
     } else {
       $ts = $v;
     }
-    if ($this->feccomint !== $ts) {
-      $this->feccomint = $ts;
-      $this->modifiedColumns[] = LicomintPeer::FECCOMINT;
+    if ($this->fecreg !== $ts) {
+      $this->fecreg = $ts;
+      $this->modifiedColumns[] = LicomintPeer::FECREG;
     }
 
 	} 
 	
-	public function setCodcom($v)
+	public function setDias($v)
 	{
 
-    if ($this->codcom !== $v) {
-        $this->codcom = $v;
-        $this->modifiedColumns[] = LicomintPeer::CODCOM;
+    if ($this->dias !== $v) {
+        $this->dias = $v;
+        $this->modifiedColumns[] = LicomintPeer::DIAS;
+      }
+  
+	} 
+	
+	public function setFecven($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecven !== $ts) {
+      $this->fecven = $ts;
+      $this->modifiedColumns[] = LicomintPeer::FECVEN;
+    }
+
+	} 
+	
+	public function setCodclacomp($v)
+	{
+
+    if ($this->codclacomp !== $v) {
+        $this->codclacomp = $v;
+        $this->modifiedColumns[] = LicomintPeer::CODCLACOMP;
+      }
+  
+	} 
+	
+	public function setMoncom($v)
+	{
+
+    if ($this->moncom !== $v) {
+        $this->moncom = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = LicomintPeer::MONCOM;
+      }
+  
+	} 
+	
+	public function setCodtiplic($v)
+	{
+
+    if ($this->codtiplic !== $v) {
+        $this->codtiplic = $v;
+        $this->modifiedColumns[] = LicomintPeer::CODTIPLIC;
+      }
+  
+	} 
+	
+	public function setCodmon($v)
+	{
+
+    if ($this->codmon !== $v) {
+        $this->codmon = $v;
+        $this->modifiedColumns[] = LicomintPeer::CODMON;
+      }
+  
+	} 
+	
+	public function setTipcom($v)
+	{
+
+    if ($this->tipcom !== $v) {
+        $this->tipcom = $v;
+        $this->modifiedColumns[] = LicomintPeer::TIPCOM;
       }
   
 	} 
@@ -173,15 +411,35 @@ abstract class BaseLicomint extends BaseObject  implements Persistent {
 
       $this->numcomint = $rs->getString($startcol + 0);
 
-      $this->numexp = $rs->getString($startcol + 1);
+      $this->codempadm = $rs->getString($startcol + 1);
 
-      $this->feccomint = $rs->getDate($startcol + 2, null);
+      $this->coduniadm = $rs->getString($startcol + 2);
 
-      $this->codcom = $rs->getString($startcol + 3);
+      $this->codempeje = $rs->getString($startcol + 3);
 
-      $this->status = $rs->getString($startcol + 4);
+      $this->coduniste = $rs->getString($startcol + 4);
 
-      $this->id = $rs->getInt($startcol + 5);
+      $this->tipcon = $rs->getString($startcol + 5);
+
+      $this->fecreg = $rs->getDate($startcol + 6, null);
+
+      $this->dias = $rs->getInt($startcol + 7);
+
+      $this->fecven = $rs->getDate($startcol + 8, null);
+
+      $this->codclacomp = $rs->getString($startcol + 9);
+
+      $this->moncom = $rs->getFloat($startcol + 10);
+
+      $this->codtiplic = $rs->getString($startcol + 11);
+
+      $this->codmon = $rs->getString($startcol + 12);
+
+      $this->tipcom = $rs->getString($startcol + 13);
+
+      $this->status = $rs->getString($startcol + 14);
+
+      $this->id = $rs->getInt($startcol + 15);
 
       $this->resetModified();
 
@@ -189,7 +447,7 @@ abstract class BaseLicomint extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 6; 
+            return $startcol + 16; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Licomint object", $e);
     }
@@ -340,18 +598,48 @@ abstract class BaseLicomint extends BaseObject  implements Persistent {
 				return $this->getNumcomint();
 				break;
 			case 1:
-				return $this->getNumexp();
+				return $this->getCodempadm();
 				break;
 			case 2:
-				return $this->getFeccomint();
+				return $this->getCoduniadm();
 				break;
 			case 3:
-				return $this->getCodcom();
+				return $this->getCodempeje();
 				break;
 			case 4:
-				return $this->getStatus();
+				return $this->getCoduniste();
 				break;
 			case 5:
+				return $this->getTipcon();
+				break;
+			case 6:
+				return $this->getFecreg();
+				break;
+			case 7:
+				return $this->getDias();
+				break;
+			case 8:
+				return $this->getFecven();
+				break;
+			case 9:
+				return $this->getCodclacomp();
+				break;
+			case 10:
+				return $this->getMoncom();
+				break;
+			case 11:
+				return $this->getCodtiplic();
+				break;
+			case 12:
+				return $this->getCodmon();
+				break;
+			case 13:
+				return $this->getTipcom();
+				break;
+			case 14:
+				return $this->getStatus();
+				break;
+			case 15:
 				return $this->getId();
 				break;
 			default:
@@ -365,11 +653,21 @@ abstract class BaseLicomint extends BaseObject  implements Persistent {
 		$keys = LicomintPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getNumcomint(),
-			$keys[1] => $this->getNumexp(),
-			$keys[2] => $this->getFeccomint(),
-			$keys[3] => $this->getCodcom(),
-			$keys[4] => $this->getStatus(),
-			$keys[5] => $this->getId(),
+			$keys[1] => $this->getCodempadm(),
+			$keys[2] => $this->getCoduniadm(),
+			$keys[3] => $this->getCodempeje(),
+			$keys[4] => $this->getCoduniste(),
+			$keys[5] => $this->getTipcon(),
+			$keys[6] => $this->getFecreg(),
+			$keys[7] => $this->getDias(),
+			$keys[8] => $this->getFecven(),
+			$keys[9] => $this->getCodclacomp(),
+			$keys[10] => $this->getMoncom(),
+			$keys[11] => $this->getCodtiplic(),
+			$keys[12] => $this->getCodmon(),
+			$keys[13] => $this->getTipcom(),
+			$keys[14] => $this->getStatus(),
+			$keys[15] => $this->getId(),
 		);
 		return $result;
 	}
@@ -389,18 +687,48 @@ abstract class BaseLicomint extends BaseObject  implements Persistent {
 				$this->setNumcomint($value);
 				break;
 			case 1:
-				$this->setNumexp($value);
+				$this->setCodempadm($value);
 				break;
 			case 2:
-				$this->setFeccomint($value);
+				$this->setCoduniadm($value);
 				break;
 			case 3:
-				$this->setCodcom($value);
+				$this->setCodempeje($value);
 				break;
 			case 4:
-				$this->setStatus($value);
+				$this->setCoduniste($value);
 				break;
 			case 5:
+				$this->setTipcon($value);
+				break;
+			case 6:
+				$this->setFecreg($value);
+				break;
+			case 7:
+				$this->setDias($value);
+				break;
+			case 8:
+				$this->setFecven($value);
+				break;
+			case 9:
+				$this->setCodclacomp($value);
+				break;
+			case 10:
+				$this->setMoncom($value);
+				break;
+			case 11:
+				$this->setCodtiplic($value);
+				break;
+			case 12:
+				$this->setCodmon($value);
+				break;
+			case 13:
+				$this->setTipcom($value);
+				break;
+			case 14:
+				$this->setStatus($value);
+				break;
+			case 15:
 				$this->setId($value);
 				break;
 		} 	}
@@ -411,11 +739,21 @@ abstract class BaseLicomint extends BaseObject  implements Persistent {
 		$keys = LicomintPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setNumcomint($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setNumexp($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setFeccomint($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setCodcom($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setStatus($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[1], $arr)) $this->setCodempadm($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setCoduniadm($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setCodempeje($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCoduniste($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setTipcon($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setFecreg($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setDias($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setFecven($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCodclacomp($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setMoncom($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setCodtiplic($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setCodmon($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setTipcom($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setStatus($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setId($arr[$keys[15]]);
 	}
 
 	
@@ -424,9 +762,19 @@ abstract class BaseLicomint extends BaseObject  implements Persistent {
 		$criteria = new Criteria(LicomintPeer::DATABASE_NAME);
 
 		if ($this->isColumnModified(LicomintPeer::NUMCOMINT)) $criteria->add(LicomintPeer::NUMCOMINT, $this->numcomint);
-		if ($this->isColumnModified(LicomintPeer::NUMEXP)) $criteria->add(LicomintPeer::NUMEXP, $this->numexp);
-		if ($this->isColumnModified(LicomintPeer::FECCOMINT)) $criteria->add(LicomintPeer::FECCOMINT, $this->feccomint);
-		if ($this->isColumnModified(LicomintPeer::CODCOM)) $criteria->add(LicomintPeer::CODCOM, $this->codcom);
+		if ($this->isColumnModified(LicomintPeer::CODEMPADM)) $criteria->add(LicomintPeer::CODEMPADM, $this->codempadm);
+		if ($this->isColumnModified(LicomintPeer::CODUNIADM)) $criteria->add(LicomintPeer::CODUNIADM, $this->coduniadm);
+		if ($this->isColumnModified(LicomintPeer::CODEMPEJE)) $criteria->add(LicomintPeer::CODEMPEJE, $this->codempeje);
+		if ($this->isColumnModified(LicomintPeer::CODUNISTE)) $criteria->add(LicomintPeer::CODUNISTE, $this->coduniste);
+		if ($this->isColumnModified(LicomintPeer::TIPCON)) $criteria->add(LicomintPeer::TIPCON, $this->tipcon);
+		if ($this->isColumnModified(LicomintPeer::FECREG)) $criteria->add(LicomintPeer::FECREG, $this->fecreg);
+		if ($this->isColumnModified(LicomintPeer::DIAS)) $criteria->add(LicomintPeer::DIAS, $this->dias);
+		if ($this->isColumnModified(LicomintPeer::FECVEN)) $criteria->add(LicomintPeer::FECVEN, $this->fecven);
+		if ($this->isColumnModified(LicomintPeer::CODCLACOMP)) $criteria->add(LicomintPeer::CODCLACOMP, $this->codclacomp);
+		if ($this->isColumnModified(LicomintPeer::MONCOM)) $criteria->add(LicomintPeer::MONCOM, $this->moncom);
+		if ($this->isColumnModified(LicomintPeer::CODTIPLIC)) $criteria->add(LicomintPeer::CODTIPLIC, $this->codtiplic);
+		if ($this->isColumnModified(LicomintPeer::CODMON)) $criteria->add(LicomintPeer::CODMON, $this->codmon);
+		if ($this->isColumnModified(LicomintPeer::TIPCOM)) $criteria->add(LicomintPeer::TIPCOM, $this->tipcom);
 		if ($this->isColumnModified(LicomintPeer::STATUS)) $criteria->add(LicomintPeer::STATUS, $this->status);
 		if ($this->isColumnModified(LicomintPeer::ID)) $criteria->add(LicomintPeer::ID, $this->id);
 
@@ -461,11 +809,31 @@ abstract class BaseLicomint extends BaseObject  implements Persistent {
 
 		$copyObj->setNumcomint($this->numcomint);
 
-		$copyObj->setNumexp($this->numexp);
+		$copyObj->setCodempadm($this->codempadm);
 
-		$copyObj->setFeccomint($this->feccomint);
+		$copyObj->setCoduniadm($this->coduniadm);
 
-		$copyObj->setCodcom($this->codcom);
+		$copyObj->setCodempeje($this->codempeje);
+
+		$copyObj->setCoduniste($this->coduniste);
+
+		$copyObj->setTipcon($this->tipcon);
+
+		$copyObj->setFecreg($this->fecreg);
+
+		$copyObj->setDias($this->dias);
+
+		$copyObj->setFecven($this->fecven);
+
+		$copyObj->setCodclacomp($this->codclacomp);
+
+		$copyObj->setMoncom($this->moncom);
+
+		$copyObj->setCodtiplic($this->codtiplic);
+
+		$copyObj->setCodmon($this->codmon);
+
+		$copyObj->setTipcom($this->tipcom);
 
 		$copyObj->setStatus($this->status);
 

@@ -16,23 +16,61 @@
 class Lidatste extends BaseLidatste
 {
 
-	protected $nomemp = '';
-	protected $cedemp = '';
-	protected $telemp = '';
-	protected $diremp = '';
-	public function afterHydrate()
-	{
-         $c = new Criteria();
-         $c->add(NphojintPeer::CODEMP,self::getCodemp());
-         $empleado = NphojintPeer::doSelectOne($c);
-         if ($empleado)
-         {
-         	$this->cedemp=$empleado->getCedemp();
-         	$this->nomemp=$empleado->getNomemp();
-            $this->diremp=$empleado->getDirhab();
-            $this->telemp=$empleado->getTelhab();
-         }
+	protected $grid=array();
+        
+        public function getCodempeje()
+        {
+            return self::getCodemp();
+        }
 
-  }
+        public function getNomempeje()
+        {
+            return self::getNomemp();
+        }
+
+        public function getCodempadm()
+        {
+            return self::getCodemp();
+        }
+
+        public function getNomempadm()
+        {
+            return self::getNomemp();
+        }
+
+        public function getCoduniadm()
+        {
+            return self::getCoduniste();
+        }
+
+        public function getDesuniadm()
+        {
+            return self::getDesuniste();
+        }
+
+        public function getNompai()
+        {
+            return  H::GetX('Codpai','Ocpais','Nompai',$this->codpai);
+        }
+
+        public function getNomedo()
+          {
+              return H::GetX('Codedo','Ocestado','Nomedo',$this->codedo);
+          }
+
+          public function getNommun()
+          {
+              return H::GetX('Codmun','Ocmunici','Nommun',$this->codmun);
+          }
+
+          public function getNompar()
+          {
+              return H::GetX('Codpar','Ocparroq','Nompar',$this->codpar);
+          }
+
+          public function getNomsec()
+          {
+              return H::GetX('Codsec','Ocsector','Nomsec',$this->codsec);
+          }
 
 }

@@ -15,19 +15,87 @@
  */ 
 class Licomint extends BaseLicomint
 {
-    protected  $respon;
-    protected  $objreq=array();
-    protected  $objart=array();
-    protected  $obj=array();
-    protected  $check=false;
-
-    public function getRespon()
+    protected $grid=array();
+    public function getEjepre()
     {
-        return H::getX('Codcom','Licomlic','Respon',$this->codcom);
+      $sql="select to_char(fecini,'yyyy') as anofis from contaba";
+      if(H::BuscarDatos($sql, $rs))
+         return $rs[0]['anofis'];
+      else
+         return '';
     }
 
-    public function getDescom()
+    public function getEnte()
     {
-        return H::getX('Codcom','Licomlic','Descom',$this->codcom);
+      $sql="select nomemp from Lidefemp";
+      if(H::BuscarDatos($sql, $rs))
+         return $rs[0]['nomemp'];
+      else
+         return '';
     }
+
+    public function getNomempeje()
+    {
+        return H::getX('Codemp','Lidatste','Nomemp',$this->codempeje);
+    }
+
+    public function getNomcareje()
+    {
+        return H::getX('Codemp','Lidatste','Nomcar',$this->codempeje);
+    }
+
+    public function getDesuniste()
+    {
+        return H::getX('Coduniste','Lidatste','Desuniste',$this->coduniste);
+    }
+
+    public function getNomempadm()
+    {
+        return H::getX('Codemp','lidatste','Nomemp',$this->codempadm);
+    }
+
+    public function getNomcaradm()
+    {
+        return H::getX('Codemp','lidatste','Nomcar',$this->codempadm);
+    }
+
+    public function getDesuniadm()
+    {
+        return H::getX('Coduniste','lidatste','Desuniste',$this->coduniadm);
+    }
+
+    public function getDesclacomp()
+    {
+        return H::GetX('Codclacomp','Occlacomp','Desclacomp',$this->codclacomp);
+    }
+
+    public function getMoncomlet()
+    {
+        return self::getMoncom()==0 ? '' : H::obtenermontoescrito(self::getMoncom());
+    }
+
+    public function getDestiplic()
+    {
+        return H::GetX('Codtiplic','Litiplic','destiplic',$this->codtiplic);
+    }
+    public function getMoncomext()
+    {
+      $c = new Criteria();
+      $c->add(LidetcomintPeer::NUMCOMINT,$this->numcomint);
+      $per = LidetcomintPeer::doSelect($c);
+      $moncom = 0;
+      foreach($per as $r)
+      {
+            $val = H::GetX('Numsol','Lisolegr','Valcam',$r->getNumsol());
+            if($val>0)
+               $moncom+=$r->getMontot()/$val;
+      }
+      return H::FormatoMonto($moncom);
+    }
+
+    public function getMoncomextlet()
+    {
+        return H::obtenermontoescrito(H::FormatoNum(self::getMoncomext()));
+    }
+
 }

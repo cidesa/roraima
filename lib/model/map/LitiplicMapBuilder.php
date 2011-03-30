@@ -34,6 +34,8 @@ class LitiplicMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('litiplic_SEQ');
 
+		$tMap->addColumn('CODTIPLIC', 'Codtiplic', 'string', CreoleTypes::VARCHAR, true, 4);
+
 		$tMap->addColumn('DESTIPLIC', 'Destiplic', 'string', CreoleTypes::VARCHAR, true, 500);
 
 		$tMap->addColumn('MAXUNITRI', 'Maxunitri', 'double', CreoleTypes::NUMERIC, false, 14);

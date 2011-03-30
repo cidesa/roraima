@@ -13,20 +13,74 @@ abstract class BaseLirecomenPeer {
 	const CLASS_DEFAULT = 'lib.model.Lirecomen';
 
 	
-	const NUM_COLUMNS = 4;
+	const NUM_COLUMNS = 22;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const FECREC = 'lirecomen.FECREC';
+	const NUMRECOFE = 'lirecomen.NUMRECOFE';
 
 	
-	const CODLIC = 'lirecomen.CODLIC';
+	const NUMPLIE = 'lirecomen.NUMPLIE';
 
 	
-	const RIF = 'lirecomen.RIF';
+	const NUMEXP = 'lirecomen.NUMEXP';
+
+	
+	const CODEMPADM = 'lirecomen.CODEMPADM';
+
+	
+	const CODUNIADM = 'lirecomen.CODUNIADM';
+
+	
+	const CODEMPEJE = 'lirecomen.CODEMPEJE';
+
+	
+	const CODUNISTE = 'lirecomen.CODUNISTE';
+
+	
+	const FECREG = 'lirecomen.FECREG';
+
+	
+	const DIAS = 'lirecomen.DIAS';
+
+	
+	const FECVEN = 'lirecomen.FECVEN';
+
+	
+	const DOCANE1 = 'lirecomen.DOCANE1';
+
+	
+	const DOCANE2 = 'lirecomen.DOCANE2';
+
+	
+	const DOCANE3 = 'lirecomen.DOCANE3';
+
+	
+	const PREPOR = 'lirecomen.PREPOR';
+
+	
+	const CARGOPRE = 'lirecomen.CARGOPRE';
+
+	
+	const LISICACT_ID = 'lirecomen.LISICACT_ID';
+
+	
+	const DETDECMOD = 'lirecomen.DETDECMOD';
+
+	
+	const ANAPOR = 'lirecomen.ANAPOR';
+
+	
+	const CARGOANA = 'lirecomen.CARGOANA';
+
+	
+	const STATUS = 'lirecomen.STATUS';
+
+	
+	const RECOMEN = 'lirecomen.RECOMEN';
 
 	
 	const ID = 'lirecomen.ID';
@@ -37,18 +91,18 @@ abstract class BaseLirecomenPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Fecrec', 'Codlic', 'Rif', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (LirecomenPeer::FECREC, LirecomenPeer::CODLIC, LirecomenPeer::RIF, LirecomenPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('fecrec', 'codlic', 'rif', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Numrecofe', 'Numplie', 'Numexp', 'Codempadm', 'Coduniadm', 'Codempeje', 'Coduniste', 'Fecreg', 'Dias', 'Fecven', 'Docane1', 'Docane2', 'Docane3', 'Prepor', 'Cargopre', 'LisicactId', 'Detdecmod', 'Anapor', 'Cargoana', 'Status', 'Recomen', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (LirecomenPeer::NUMRECOFE, LirecomenPeer::NUMPLIE, LirecomenPeer::NUMEXP, LirecomenPeer::CODEMPADM, LirecomenPeer::CODUNIADM, LirecomenPeer::CODEMPEJE, LirecomenPeer::CODUNISTE, LirecomenPeer::FECREG, LirecomenPeer::DIAS, LirecomenPeer::FECVEN, LirecomenPeer::DOCANE1, LirecomenPeer::DOCANE2, LirecomenPeer::DOCANE3, LirecomenPeer::PREPOR, LirecomenPeer::CARGOPRE, LirecomenPeer::LISICACT_ID, LirecomenPeer::DETDECMOD, LirecomenPeer::ANAPOR, LirecomenPeer::CARGOANA, LirecomenPeer::STATUS, LirecomenPeer::RECOMEN, LirecomenPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numrecofe', 'numplie', 'numexp', 'codempadm', 'coduniadm', 'codempeje', 'coduniste', 'fecreg', 'dias', 'fecven', 'docane1', 'docane2', 'docane3', 'prepor', 'cargopre', 'lisicact_id', 'detdecmod', 'anapor', 'cargoana', 'status', 'recomen', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Fecrec' => 0, 'Codlic' => 1, 'Rif' => 2, 'Id' => 3, ),
-		BasePeer::TYPE_COLNAME => array (LirecomenPeer::FECREC => 0, LirecomenPeer::CODLIC => 1, LirecomenPeer::RIF => 2, LirecomenPeer::ID => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('fecrec' => 0, 'codlic' => 1, 'rif' => 2, 'id' => 3, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Numrecofe' => 0, 'Numplie' => 1, 'Numexp' => 2, 'Codempadm' => 3, 'Coduniadm' => 4, 'Codempeje' => 5, 'Coduniste' => 6, 'Fecreg' => 7, 'Dias' => 8, 'Fecven' => 9, 'Docane1' => 10, 'Docane2' => 11, 'Docane3' => 12, 'Prepor' => 13, 'Cargopre' => 14, 'LisicactId' => 15, 'Detdecmod' => 16, 'Anapor' => 17, 'Cargoana' => 18, 'Status' => 19, 'Recomen' => 20, 'Id' => 21, ),
+		BasePeer::TYPE_COLNAME => array (LirecomenPeer::NUMRECOFE => 0, LirecomenPeer::NUMPLIE => 1, LirecomenPeer::NUMEXP => 2, LirecomenPeer::CODEMPADM => 3, LirecomenPeer::CODUNIADM => 4, LirecomenPeer::CODEMPEJE => 5, LirecomenPeer::CODUNISTE => 6, LirecomenPeer::FECREG => 7, LirecomenPeer::DIAS => 8, LirecomenPeer::FECVEN => 9, LirecomenPeer::DOCANE1 => 10, LirecomenPeer::DOCANE2 => 11, LirecomenPeer::DOCANE3 => 12, LirecomenPeer::PREPOR => 13, LirecomenPeer::CARGOPRE => 14, LirecomenPeer::LISICACT_ID => 15, LirecomenPeer::DETDECMOD => 16, LirecomenPeer::ANAPOR => 17, LirecomenPeer::CARGOANA => 18, LirecomenPeer::STATUS => 19, LirecomenPeer::RECOMEN => 20, LirecomenPeer::ID => 21, ),
+		BasePeer::TYPE_FIELDNAME => array ('numrecofe' => 0, 'numplie' => 1, 'numexp' => 2, 'codempadm' => 3, 'coduniadm' => 4, 'codempeje' => 5, 'coduniste' => 6, 'fecreg' => 7, 'dias' => 8, 'fecven' => 9, 'docane1' => 10, 'docane2' => 11, 'docane3' => 12, 'prepor' => 13, 'cargopre' => 14, 'lisicact_id' => 15, 'detdecmod' => 16, 'anapor' => 17, 'cargoana' => 18, 'status' => 19, 'recomen' => 20, 'id' => 21, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
 	);
 
 	
@@ -102,11 +156,47 @@ abstract class BaseLirecomenPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(LirecomenPeer::FECREC);
+		$criteria->addSelectColumn(LirecomenPeer::NUMRECOFE);
 
-		$criteria->addSelectColumn(LirecomenPeer::CODLIC);
+		$criteria->addSelectColumn(LirecomenPeer::NUMPLIE);
 
-		$criteria->addSelectColumn(LirecomenPeer::RIF);
+		$criteria->addSelectColumn(LirecomenPeer::NUMEXP);
+
+		$criteria->addSelectColumn(LirecomenPeer::CODEMPADM);
+
+		$criteria->addSelectColumn(LirecomenPeer::CODUNIADM);
+
+		$criteria->addSelectColumn(LirecomenPeer::CODEMPEJE);
+
+		$criteria->addSelectColumn(LirecomenPeer::CODUNISTE);
+
+		$criteria->addSelectColumn(LirecomenPeer::FECREG);
+
+		$criteria->addSelectColumn(LirecomenPeer::DIAS);
+
+		$criteria->addSelectColumn(LirecomenPeer::FECVEN);
+
+		$criteria->addSelectColumn(LirecomenPeer::DOCANE1);
+
+		$criteria->addSelectColumn(LirecomenPeer::DOCANE2);
+
+		$criteria->addSelectColumn(LirecomenPeer::DOCANE3);
+
+		$criteria->addSelectColumn(LirecomenPeer::PREPOR);
+
+		$criteria->addSelectColumn(LirecomenPeer::CARGOPRE);
+
+		$criteria->addSelectColumn(LirecomenPeer::LISICACT_ID);
+
+		$criteria->addSelectColumn(LirecomenPeer::DETDECMOD);
+
+		$criteria->addSelectColumn(LirecomenPeer::ANAPOR);
+
+		$criteria->addSelectColumn(LirecomenPeer::CARGOANA);
+
+		$criteria->addSelectColumn(LirecomenPeer::STATUS);
+
+		$criteria->addSelectColumn(LirecomenPeer::RECOMEN);
 
 		$criteria->addSelectColumn(LirecomenPeer::ID);
 
@@ -187,6 +277,167 @@ abstract class BaseLirecomenPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinLisicact(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(LirecomenPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(LirecomenPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(LirecomenPeer::LISICACT_ID, LisicactPeer::ID);
+
+		$rs = LirecomenPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinLisicact(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		LirecomenPeer::addSelectColumns($c);
+		$startcol = (LirecomenPeer::NUM_COLUMNS - LirecomenPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		LisicactPeer::addSelectColumns($c);
+
+		$c->addJoin(LirecomenPeer::LISICACT_ID, LisicactPeer::ID);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = LirecomenPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = LisicactPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getLisicact(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addLirecomen($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initLirecomens();
+				$obj2->addLirecomen($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(LirecomenPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(LirecomenPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+			$criteria->addJoin(LirecomenPeer::LISICACT_ID, LisicactPeer::ID);
+	
+		$rs = LirecomenPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		LirecomenPeer::addSelectColumns($c);
+		$startcol2 = (LirecomenPeer::NUM_COLUMNS - LirecomenPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			LisicactPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + LisicactPeer::NUM_COLUMNS;
+	
+			$c->addJoin(LirecomenPeer::LISICACT_ID, LisicactPeer::ID);
+	
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = LirecomenPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+							
+				$omClass = LisicactPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getLisicact(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addLirecomen($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initLirecomens();
+					$obj2->addLirecomen($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{

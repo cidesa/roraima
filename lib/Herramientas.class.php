@@ -2354,7 +2354,7 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
   $melones=" MILLONES ";
   $billones=" BILLONES ";
   //Formatear el N�mero en Estudio
-  $monchar=number_format($numero,2,".",",")."";
+  $monchar=number_format((float)$numero,2,".",",")."";
   $monchar=trim($monchar);
   $pospunto=strpos($monchar,'.'); //Posici�n del Punto Decimal
   $indchar=$pospunto;             //Comienzo del recorrido de lectura

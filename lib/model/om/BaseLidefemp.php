@@ -49,6 +49,46 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 
 
 	
+	protected $numemo;
+
+
+	
+	protected $solegr;
+
+
+	
+	protected $comint;
+
+
+	
+	protected $pliego;
+
+
+	
+	protected $aclara;
+
+
+	
+	protected $oferta;
+
+
+	
+	protected $anaofe;
+
+
+	
+	protected $recome;
+
+
+	
+	protected $ptocuecon;
+
+
+	
+	protected $notifi;
+
+
+	
 	protected $id;
 
 	
@@ -126,6 +166,76 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
   {
 
     return $this->expdie;
+
+  }
+  
+  public function getNumemo()
+  {
+
+    return $this->numemo;
+
+  }
+  
+  public function getSolegr()
+  {
+
+    return $this->solegr;
+
+  }
+  
+  public function getComint()
+  {
+
+    return $this->comint;
+
+  }
+  
+  public function getPliego()
+  {
+
+    return $this->pliego;
+
+  }
+  
+  public function getAclara()
+  {
+
+    return $this->aclara;
+
+  }
+  
+  public function getOferta()
+  {
+
+    return $this->oferta;
+
+  }
+  
+  public function getAnaofe()
+  {
+
+    return $this->anaofe;
+
+  }
+  
+  public function getRecome()
+  {
+
+    return $this->recome;
+
+  }
+  
+  public function getPtocuecon()
+  {
+
+    return $this->ptocuecon;
+
+  }
+  
+  public function getNotifi()
+  {
+
+    return $this->notifi;
 
   }
   
@@ -236,6 +346,106 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNumemo($v)
+	{
+
+    if ($this->numemo !== $v) {
+        $this->numemo = $v;
+        $this->modifiedColumns[] = LidefempPeer::NUMEMO;
+      }
+  
+	} 
+	
+	public function setSolegr($v)
+	{
+
+    if ($this->solegr !== $v) {
+        $this->solegr = $v;
+        $this->modifiedColumns[] = LidefempPeer::SOLEGR;
+      }
+  
+	} 
+	
+	public function setComint($v)
+	{
+
+    if ($this->comint !== $v) {
+        $this->comint = $v;
+        $this->modifiedColumns[] = LidefempPeer::COMINT;
+      }
+  
+	} 
+	
+	public function setPliego($v)
+	{
+
+    if ($this->pliego !== $v) {
+        $this->pliego = $v;
+        $this->modifiedColumns[] = LidefempPeer::PLIEGO;
+      }
+  
+	} 
+	
+	public function setAclara($v)
+	{
+
+    if ($this->aclara !== $v) {
+        $this->aclara = $v;
+        $this->modifiedColumns[] = LidefempPeer::ACLARA;
+      }
+  
+	} 
+	
+	public function setOferta($v)
+	{
+
+    if ($this->oferta !== $v) {
+        $this->oferta = $v;
+        $this->modifiedColumns[] = LidefempPeer::OFERTA;
+      }
+  
+	} 
+	
+	public function setAnaofe($v)
+	{
+
+    if ($this->anaofe !== $v) {
+        $this->anaofe = $v;
+        $this->modifiedColumns[] = LidefempPeer::ANAOFE;
+      }
+  
+	} 
+	
+	public function setRecome($v)
+	{
+
+    if ($this->recome !== $v) {
+        $this->recome = $v;
+        $this->modifiedColumns[] = LidefempPeer::RECOME;
+      }
+  
+	} 
+	
+	public function setPtocuecon($v)
+	{
+
+    if ($this->ptocuecon !== $v) {
+        $this->ptocuecon = $v;
+        $this->modifiedColumns[] = LidefempPeer::PTOCUECON;
+      }
+  
+	} 
+	
+	public function setNotifi($v)
+	{
+
+    if ($this->notifi !== $v) {
+        $this->notifi = $v;
+        $this->modifiedColumns[] = LidefempPeer::NOTIFI;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -270,7 +480,27 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 
       $this->expdie = $rs->getInt($startcol + 9);
 
-      $this->id = $rs->getInt($startcol + 10);
+      $this->numemo = $rs->getInt($startcol + 10);
+
+      $this->solegr = $rs->getInt($startcol + 11);
+
+      $this->comint = $rs->getInt($startcol + 12);
+
+      $this->pliego = $rs->getInt($startcol + 13);
+
+      $this->aclara = $rs->getInt($startcol + 14);
+
+      $this->oferta = $rs->getInt($startcol + 15);
+
+      $this->anaofe = $rs->getInt($startcol + 16);
+
+      $this->recome = $rs->getInt($startcol + 17);
+
+      $this->ptocuecon = $rs->getInt($startcol + 18);
+
+      $this->notifi = $rs->getInt($startcol + 19);
+
+      $this->id = $rs->getInt($startcol + 20);
 
       $this->resetModified();
 
@@ -278,7 +508,7 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 11; 
+            return $startcol + 21; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Lidefemp object", $e);
     }
@@ -456,6 +686,36 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 				return $this->getExpdie();
 				break;
 			case 10:
+				return $this->getNumemo();
+				break;
+			case 11:
+				return $this->getSolegr();
+				break;
+			case 12:
+				return $this->getComint();
+				break;
+			case 13:
+				return $this->getPliego();
+				break;
+			case 14:
+				return $this->getAclara();
+				break;
+			case 15:
+				return $this->getOferta();
+				break;
+			case 16:
+				return $this->getAnaofe();
+				break;
+			case 17:
+				return $this->getRecome();
+				break;
+			case 18:
+				return $this->getPtocuecon();
+				break;
+			case 19:
+				return $this->getNotifi();
+				break;
+			case 20:
 				return $this->getId();
 				break;
 			default:
@@ -478,7 +738,17 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 			$keys[7] => $this->getPtocta(),
 			$keys[8] => $this->getPrebas(),
 			$keys[9] => $this->getExpdie(),
-			$keys[10] => $this->getId(),
+			$keys[10] => $this->getNumemo(),
+			$keys[11] => $this->getSolegr(),
+			$keys[12] => $this->getComint(),
+			$keys[13] => $this->getPliego(),
+			$keys[14] => $this->getAclara(),
+			$keys[15] => $this->getOferta(),
+			$keys[16] => $this->getAnaofe(),
+			$keys[17] => $this->getRecome(),
+			$keys[18] => $this->getPtocuecon(),
+			$keys[19] => $this->getNotifi(),
+			$keys[20] => $this->getId(),
 		);
 		return $result;
 	}
@@ -525,6 +795,36 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 				$this->setExpdie($value);
 				break;
 			case 10:
+				$this->setNumemo($value);
+				break;
+			case 11:
+				$this->setSolegr($value);
+				break;
+			case 12:
+				$this->setComint($value);
+				break;
+			case 13:
+				$this->setPliego($value);
+				break;
+			case 14:
+				$this->setAclara($value);
+				break;
+			case 15:
+				$this->setOferta($value);
+				break;
+			case 16:
+				$this->setAnaofe($value);
+				break;
+			case 17:
+				$this->setRecome($value);
+				break;
+			case 18:
+				$this->setPtocuecon($value);
+				break;
+			case 19:
+				$this->setNotifi($value);
+				break;
+			case 20:
 				$this->setId($value);
 				break;
 		} 	}
@@ -544,7 +844,17 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[7], $arr)) $this->setPtocta($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setPrebas($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setExpdie($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
+		if (array_key_exists($keys[10], $arr)) $this->setNumemo($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setSolegr($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setComint($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setPliego($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setAclara($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setOferta($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setAnaofe($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setRecome($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setPtocuecon($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setNotifi($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setId($arr[$keys[20]]);
 	}
 
 	
@@ -562,6 +872,16 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(LidefempPeer::PTOCTA)) $criteria->add(LidefempPeer::PTOCTA, $this->ptocta);
 		if ($this->isColumnModified(LidefempPeer::PREBAS)) $criteria->add(LidefempPeer::PREBAS, $this->prebas);
 		if ($this->isColumnModified(LidefempPeer::EXPDIE)) $criteria->add(LidefempPeer::EXPDIE, $this->expdie);
+		if ($this->isColumnModified(LidefempPeer::NUMEMO)) $criteria->add(LidefempPeer::NUMEMO, $this->numemo);
+		if ($this->isColumnModified(LidefempPeer::SOLEGR)) $criteria->add(LidefempPeer::SOLEGR, $this->solegr);
+		if ($this->isColumnModified(LidefempPeer::COMINT)) $criteria->add(LidefempPeer::COMINT, $this->comint);
+		if ($this->isColumnModified(LidefempPeer::PLIEGO)) $criteria->add(LidefempPeer::PLIEGO, $this->pliego);
+		if ($this->isColumnModified(LidefempPeer::ACLARA)) $criteria->add(LidefempPeer::ACLARA, $this->aclara);
+		if ($this->isColumnModified(LidefempPeer::OFERTA)) $criteria->add(LidefempPeer::OFERTA, $this->oferta);
+		if ($this->isColumnModified(LidefempPeer::ANAOFE)) $criteria->add(LidefempPeer::ANAOFE, $this->anaofe);
+		if ($this->isColumnModified(LidefempPeer::RECOME)) $criteria->add(LidefempPeer::RECOME, $this->recome);
+		if ($this->isColumnModified(LidefempPeer::PTOCUECON)) $criteria->add(LidefempPeer::PTOCUECON, $this->ptocuecon);
+		if ($this->isColumnModified(LidefempPeer::NOTIFI)) $criteria->add(LidefempPeer::NOTIFI, $this->notifi);
 		if ($this->isColumnModified(LidefempPeer::ID)) $criteria->add(LidefempPeer::ID, $this->id);
 
 		return $criteria;
@@ -612,6 +932,26 @@ abstract class BaseLidefemp extends BaseObject  implements Persistent {
 		$copyObj->setPrebas($this->prebas);
 
 		$copyObj->setExpdie($this->expdie);
+
+		$copyObj->setNumemo($this->numemo);
+
+		$copyObj->setSolegr($this->solegr);
+
+		$copyObj->setComint($this->comint);
+
+		$copyObj->setPliego($this->pliego);
+
+		$copyObj->setAclara($this->aclara);
+
+		$copyObj->setOferta($this->oferta);
+
+		$copyObj->setAnaofe($this->anaofe);
+
+		$copyObj->setRecome($this->recome);
+
+		$copyObj->setPtocuecon($this->ptocuecon);
+
+		$copyObj->setNotifi($this->notifi);
 
 
 		$copyObj->setNew(true);

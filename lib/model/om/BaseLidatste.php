@@ -37,10 +37,6 @@ abstract class BaseLidatste extends BaseObject  implements Persistent {
 
 
 	
-	protected $codemp;
-
-
-	
 	protected $codpai;
 
 
@@ -58,6 +54,26 @@ abstract class BaseLidatste extends BaseObject  implements Persistent {
 
 	
 	protected $codsec;
+
+
+	
+	protected $codemp;
+
+
+	
+	protected $nomemp;
+
+
+	
+	protected $nomcar;
+
+
+	
+	protected $resolu;
+
+
+	
+	protected $fecres;
 
 
 	
@@ -128,13 +144,6 @@ abstract class BaseLidatste extends BaseObject  implements Persistent {
 
   }
   
-  public function getCodemp()
-  {
-
-    return trim($this->codemp);
-
-  }
-  
   public function getCodpai()
   {
 
@@ -169,6 +178,56 @@ abstract class BaseLidatste extends BaseObject  implements Persistent {
     return trim($this->codsec);
 
   }
+  
+  public function getCodemp()
+  {
+
+    return trim($this->codemp);
+
+  }
+  
+  public function getNomemp()
+  {
+
+    return trim($this->nomemp);
+
+  }
+  
+  public function getNomcar()
+  {
+
+    return trim($this->nomcar);
+
+  }
+  
+  public function getResolu()
+  {
+
+    return trim($this->resolu);
+
+  }
+  
+  public function getFecres($format = 'Y-m-d')
+  {
+
+    if ($this->fecres === null || $this->fecres === '') {
+      return null;
+    } elseif (!is_int($this->fecres)) {
+            $ts = adodb_strtotime($this->fecres);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecres] as date/time value: " . var_export($this->fecres, true));
+      }
+    } else {
+      $ts = $this->fecres;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
   
   public function getId()
   {
@@ -251,16 +310,6 @@ abstract class BaseLidatste extends BaseObject  implements Persistent {
   
 	} 
 	
-	public function setCodemp($v)
-	{
-
-    if ($this->codemp !== $v) {
-        $this->codemp = $v;
-        $this->modifiedColumns[] = LidatstePeer::CODEMP;
-      }
-  
-	} 
-	
 	public function setCodpai($v)
 	{
 
@@ -311,6 +360,68 @@ abstract class BaseLidatste extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodemp($v)
+	{
+
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = LidatstePeer::CODEMP;
+      }
+  
+	} 
+	
+	public function setNomemp($v)
+	{
+
+    if ($this->nomemp !== $v) {
+        $this->nomemp = $v;
+        $this->modifiedColumns[] = LidatstePeer::NOMEMP;
+      }
+  
+	} 
+	
+	public function setNomcar($v)
+	{
+
+    if ($this->nomcar !== $v) {
+        $this->nomcar = $v;
+        $this->modifiedColumns[] = LidatstePeer::NOMCAR;
+      }
+  
+	} 
+	
+	public function setResolu($v)
+	{
+
+    if ($this->resolu !== $v) {
+        $this->resolu = $v;
+        $this->modifiedColumns[] = LidatstePeer::RESOLU;
+      }
+  
+	} 
+	
+	public function setFecres($v)
+	{
+
+		if (is_array($v)){
+        	$value_array = $v;
+        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+		}
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecres] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecres !== $ts) {
+      $this->fecres = $ts;
+      $this->modifiedColumns[] = LidatstePeer::FECRES;
+    }
+
+	} 
+	
 	public function setId($v)
 	{
 
@@ -339,19 +450,27 @@ abstract class BaseLidatste extends BaseObject  implements Persistent {
 
       $this->emaste = $rs->getString($startcol + 6);
 
-      $this->codemp = $rs->getString($startcol + 7);
+      $this->codpai = $rs->getString($startcol + 7);
 
-      $this->codpai = $rs->getString($startcol + 8);
+      $this->codedo = $rs->getString($startcol + 8);
 
-      $this->codedo = $rs->getString($startcol + 9);
+      $this->codmun = $rs->getString($startcol + 9);
 
-      $this->codmun = $rs->getString($startcol + 10);
+      $this->codpar = $rs->getString($startcol + 10);
 
-      $this->codpar = $rs->getString($startcol + 11);
+      $this->codsec = $rs->getString($startcol + 11);
 
-      $this->codsec = $rs->getString($startcol + 12);
+      $this->codemp = $rs->getString($startcol + 12);
 
-      $this->id = $rs->getInt($startcol + 13);
+      $this->nomemp = $rs->getString($startcol + 13);
+
+      $this->nomcar = $rs->getString($startcol + 14);
+
+      $this->resolu = $rs->getString($startcol + 15);
+
+      $this->fecres = $rs->getDate($startcol + 16, null);
+
+      $this->id = $rs->getInt($startcol + 17);
 
       $this->resetModified();
 
@@ -359,7 +478,7 @@ abstract class BaseLidatste extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 14; 
+            return $startcol + 18; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Lidatste object", $e);
     }
@@ -561,24 +680,36 @@ abstract class BaseLidatste extends BaseObject  implements Persistent {
 				return $this->getEmaste();
 				break;
 			case 7:
-				return $this->getCodemp();
-				break;
-			case 8:
 				return $this->getCodpai();
 				break;
-			case 9:
+			case 8:
 				return $this->getCodedo();
 				break;
-			case 10:
+			case 9:
 				return $this->getCodmun();
 				break;
-			case 11:
+			case 10:
 				return $this->getCodpar();
 				break;
-			case 12:
+			case 11:
 				return $this->getCodsec();
 				break;
+			case 12:
+				return $this->getCodemp();
+				break;
 			case 13:
+				return $this->getNomemp();
+				break;
+			case 14:
+				return $this->getNomcar();
+				break;
+			case 15:
+				return $this->getResolu();
+				break;
+			case 16:
+				return $this->getFecres();
+				break;
+			case 17:
 				return $this->getId();
 				break;
 			default:
@@ -598,13 +729,17 @@ abstract class BaseLidatste extends BaseObject  implements Persistent {
 			$keys[4] => $this->getTelste(),
 			$keys[5] => $this->getFaxste(),
 			$keys[6] => $this->getEmaste(),
-			$keys[7] => $this->getCodemp(),
-			$keys[8] => $this->getCodpai(),
-			$keys[9] => $this->getCodedo(),
-			$keys[10] => $this->getCodmun(),
-			$keys[11] => $this->getCodpar(),
-			$keys[12] => $this->getCodsec(),
-			$keys[13] => $this->getId(),
+			$keys[7] => $this->getCodpai(),
+			$keys[8] => $this->getCodedo(),
+			$keys[9] => $this->getCodmun(),
+			$keys[10] => $this->getCodpar(),
+			$keys[11] => $this->getCodsec(),
+			$keys[12] => $this->getCodemp(),
+			$keys[13] => $this->getNomemp(),
+			$keys[14] => $this->getNomcar(),
+			$keys[15] => $this->getResolu(),
+			$keys[16] => $this->getFecres(),
+			$keys[17] => $this->getId(),
 		);
 		return $result;
 	}
@@ -642,24 +777,36 @@ abstract class BaseLidatste extends BaseObject  implements Persistent {
 				$this->setEmaste($value);
 				break;
 			case 7:
-				$this->setCodemp($value);
-				break;
-			case 8:
 				$this->setCodpai($value);
 				break;
-			case 9:
+			case 8:
 				$this->setCodedo($value);
 				break;
-			case 10:
+			case 9:
 				$this->setCodmun($value);
 				break;
-			case 11:
+			case 10:
 				$this->setCodpar($value);
 				break;
-			case 12:
+			case 11:
 				$this->setCodsec($value);
 				break;
+			case 12:
+				$this->setCodemp($value);
+				break;
 			case 13:
+				$this->setNomemp($value);
+				break;
+			case 14:
+				$this->setNomcar($value);
+				break;
+			case 15:
+				$this->setResolu($value);
+				break;
+			case 16:
+				$this->setFecres($value);
+				break;
+			case 17:
 				$this->setId($value);
 				break;
 		} 	}
@@ -676,13 +823,17 @@ abstract class BaseLidatste extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setTelste($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setFaxste($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setEmaste($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setCodemp($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setCodpai($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setCodedo($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setCodmun($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setCodpar($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setCodsec($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCodpai($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setCodedo($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCodmun($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setCodpar($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setCodsec($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setCodemp($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setNomemp($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setNomcar($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setResolu($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setFecres($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setId($arr[$keys[17]]);
 	}
 
 	
@@ -697,12 +848,16 @@ abstract class BaseLidatste extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(LidatstePeer::TELSTE)) $criteria->add(LidatstePeer::TELSTE, $this->telste);
 		if ($this->isColumnModified(LidatstePeer::FAXSTE)) $criteria->add(LidatstePeer::FAXSTE, $this->faxste);
 		if ($this->isColumnModified(LidatstePeer::EMASTE)) $criteria->add(LidatstePeer::EMASTE, $this->emaste);
-		if ($this->isColumnModified(LidatstePeer::CODEMP)) $criteria->add(LidatstePeer::CODEMP, $this->codemp);
 		if ($this->isColumnModified(LidatstePeer::CODPAI)) $criteria->add(LidatstePeer::CODPAI, $this->codpai);
 		if ($this->isColumnModified(LidatstePeer::CODEDO)) $criteria->add(LidatstePeer::CODEDO, $this->codedo);
 		if ($this->isColumnModified(LidatstePeer::CODMUN)) $criteria->add(LidatstePeer::CODMUN, $this->codmun);
 		if ($this->isColumnModified(LidatstePeer::CODPAR)) $criteria->add(LidatstePeer::CODPAR, $this->codpar);
 		if ($this->isColumnModified(LidatstePeer::CODSEC)) $criteria->add(LidatstePeer::CODSEC, $this->codsec);
+		if ($this->isColumnModified(LidatstePeer::CODEMP)) $criteria->add(LidatstePeer::CODEMP, $this->codemp);
+		if ($this->isColumnModified(LidatstePeer::NOMEMP)) $criteria->add(LidatstePeer::NOMEMP, $this->nomemp);
+		if ($this->isColumnModified(LidatstePeer::NOMCAR)) $criteria->add(LidatstePeer::NOMCAR, $this->nomcar);
+		if ($this->isColumnModified(LidatstePeer::RESOLU)) $criteria->add(LidatstePeer::RESOLU, $this->resolu);
+		if ($this->isColumnModified(LidatstePeer::FECRES)) $criteria->add(LidatstePeer::FECRES, $this->fecres);
 		if ($this->isColumnModified(LidatstePeer::ID)) $criteria->add(LidatstePeer::ID, $this->id);
 
 		return $criteria;
@@ -748,8 +903,6 @@ abstract class BaseLidatste extends BaseObject  implements Persistent {
 
 		$copyObj->setEmaste($this->emaste);
 
-		$copyObj->setCodemp($this->codemp);
-
 		$copyObj->setCodpai($this->codpai);
 
 		$copyObj->setCodedo($this->codedo);
@@ -759,6 +912,16 @@ abstract class BaseLidatste extends BaseObject  implements Persistent {
 		$copyObj->setCodpar($this->codpar);
 
 		$copyObj->setCodsec($this->codsec);
+
+		$copyObj->setCodemp($this->codemp);
+
+		$copyObj->setNomemp($this->nomemp);
+
+		$copyObj->setNomcar($this->nomcar);
+
+		$copyObj->setResolu($this->resolu);
+
+		$copyObj->setFecres($this->fecres);
 
 
 		if ($deepCopy) {

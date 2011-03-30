@@ -13,7 +13,7 @@ abstract class BaseLiptocuePeer {
 	const CLASS_DEFAULT = 'lib.model.Liptocue';
 
 	
-	const NUM_COLUMNS = 4;
+	const NUM_COLUMNS = 19;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -23,10 +23,55 @@ abstract class BaseLiptocuePeer {
 	const NUMPTOCUE = 'liptocue.NUMPTOCUE';
 
 	
-	const FECREC = 'liptocue.FECREC';
+	const NUMEMO = 'liptocue.NUMEMO';
 
 	
-	const CODLIC = 'liptocue.CODLIC';
+	const NUMPRE = 'liptocue.NUMPRE';
+
+	
+	const CODEMPADM = 'liptocue.CODEMPADM';
+
+	
+	const CODUNIADM = 'liptocue.CODUNIADM';
+
+	
+	const CODEMPEJE = 'liptocue.CODEMPEJE';
+
+	
+	const CODUNISTE = 'liptocue.CODUNISTE';
+
+	
+	const DESPRO = 'liptocue.DESPRO';
+
+	
+	const DOCANE1 = 'liptocue.DOCANE1';
+
+	
+	const DOCANE2 = 'liptocue.DOCANE2';
+
+	
+	const DOCANE3 = 'liptocue.DOCANE3';
+
+	
+	const PREPOR = 'liptocue.PREPOR';
+
+	
+	const PREPORCAR = 'liptocue.PREPORCAR';
+
+	
+	const LISICACT_ID = 'liptocue.LISICACT_ID';
+
+	
+	const DETDECMOD = 'liptocue.DETDECMOD';
+
+	
+	const ANAPOR = 'liptocue.ANAPOR';
+
+	
+	const ANAPORCAR = 'liptocue.ANAPORCAR';
+
+	
+	const STATUS = 'liptocue.STATUS';
 
 	
 	const ID = 'liptocue.ID';
@@ -37,18 +82,18 @@ abstract class BaseLiptocuePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numptocue', 'Fecrec', 'Codlic', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (LiptocuePeer::NUMPTOCUE, LiptocuePeer::FECREC, LiptocuePeer::CODLIC, LiptocuePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numptocue', 'fecrec', 'codlic', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Numptocue', 'Numemo', 'Numpre', 'Codempadm', 'Coduniadm', 'Codempeje', 'Coduniste', 'Despro', 'Docane1', 'Docane2', 'Docane3', 'Prepor', 'Preporcar', 'LisicactId', 'Detdecmod', 'Anapor', 'Anaporcar', 'Status', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (LiptocuePeer::NUMPTOCUE, LiptocuePeer::NUMEMO, LiptocuePeer::NUMPRE, LiptocuePeer::CODEMPADM, LiptocuePeer::CODUNIADM, LiptocuePeer::CODEMPEJE, LiptocuePeer::CODUNISTE, LiptocuePeer::DESPRO, LiptocuePeer::DOCANE1, LiptocuePeer::DOCANE2, LiptocuePeer::DOCANE3, LiptocuePeer::PREPOR, LiptocuePeer::PREPORCAR, LiptocuePeer::LISICACT_ID, LiptocuePeer::DETDECMOD, LiptocuePeer::ANAPOR, LiptocuePeer::ANAPORCAR, LiptocuePeer::STATUS, LiptocuePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numptocue', 'numemo', 'numpre', 'codempadm', 'coduniadm', 'codempeje', 'coduniste', 'despro', 'docane1', 'docane2', 'docane3', 'prepor', 'preporcar', 'lisicact_id', 'detdecmod', 'anapor', 'anaporcar', 'status', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numptocue' => 0, 'Fecrec' => 1, 'Codlic' => 2, 'Id' => 3, ),
-		BasePeer::TYPE_COLNAME => array (LiptocuePeer::NUMPTOCUE => 0, LiptocuePeer::FECREC => 1, LiptocuePeer::CODLIC => 2, LiptocuePeer::ID => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('numptocue' => 0, 'fecrec' => 1, 'codlic' => 2, 'id' => 3, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Numptocue' => 0, 'Numemo' => 1, 'Numpre' => 2, 'Codempadm' => 3, 'Coduniadm' => 4, 'Codempeje' => 5, 'Coduniste' => 6, 'Despro' => 7, 'Docane1' => 8, 'Docane2' => 9, 'Docane3' => 10, 'Prepor' => 11, 'Preporcar' => 12, 'LisicactId' => 13, 'Detdecmod' => 14, 'Anapor' => 15, 'Anaporcar' => 16, 'Status' => 17, 'Id' => 18, ),
+		BasePeer::TYPE_COLNAME => array (LiptocuePeer::NUMPTOCUE => 0, LiptocuePeer::NUMEMO => 1, LiptocuePeer::NUMPRE => 2, LiptocuePeer::CODEMPADM => 3, LiptocuePeer::CODUNIADM => 4, LiptocuePeer::CODEMPEJE => 5, LiptocuePeer::CODUNISTE => 6, LiptocuePeer::DESPRO => 7, LiptocuePeer::DOCANE1 => 8, LiptocuePeer::DOCANE2 => 9, LiptocuePeer::DOCANE3 => 10, LiptocuePeer::PREPOR => 11, LiptocuePeer::PREPORCAR => 12, LiptocuePeer::LISICACT_ID => 13, LiptocuePeer::DETDECMOD => 14, LiptocuePeer::ANAPOR => 15, LiptocuePeer::ANAPORCAR => 16, LiptocuePeer::STATUS => 17, LiptocuePeer::ID => 18, ),
+		BasePeer::TYPE_FIELDNAME => array ('numptocue' => 0, 'numemo' => 1, 'numpre' => 2, 'codempadm' => 3, 'coduniadm' => 4, 'codempeje' => 5, 'coduniste' => 6, 'despro' => 7, 'docane1' => 8, 'docane2' => 9, 'docane3' => 10, 'prepor' => 11, 'preporcar' => 12, 'lisicact_id' => 13, 'detdecmod' => 14, 'anapor' => 15, 'anaporcar' => 16, 'status' => 17, 'id' => 18, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
 	);
 
 	
@@ -104,9 +149,39 @@ abstract class BaseLiptocuePeer {
 
 		$criteria->addSelectColumn(LiptocuePeer::NUMPTOCUE);
 
-		$criteria->addSelectColumn(LiptocuePeer::FECREC);
+		$criteria->addSelectColumn(LiptocuePeer::NUMEMO);
 
-		$criteria->addSelectColumn(LiptocuePeer::CODLIC);
+		$criteria->addSelectColumn(LiptocuePeer::NUMPRE);
+
+		$criteria->addSelectColumn(LiptocuePeer::CODEMPADM);
+
+		$criteria->addSelectColumn(LiptocuePeer::CODUNIADM);
+
+		$criteria->addSelectColumn(LiptocuePeer::CODEMPEJE);
+
+		$criteria->addSelectColumn(LiptocuePeer::CODUNISTE);
+
+		$criteria->addSelectColumn(LiptocuePeer::DESPRO);
+
+		$criteria->addSelectColumn(LiptocuePeer::DOCANE1);
+
+		$criteria->addSelectColumn(LiptocuePeer::DOCANE2);
+
+		$criteria->addSelectColumn(LiptocuePeer::DOCANE3);
+
+		$criteria->addSelectColumn(LiptocuePeer::PREPOR);
+
+		$criteria->addSelectColumn(LiptocuePeer::PREPORCAR);
+
+		$criteria->addSelectColumn(LiptocuePeer::LISICACT_ID);
+
+		$criteria->addSelectColumn(LiptocuePeer::DETDECMOD);
+
+		$criteria->addSelectColumn(LiptocuePeer::ANAPOR);
+
+		$criteria->addSelectColumn(LiptocuePeer::ANAPORCAR);
+
+		$criteria->addSelectColumn(LiptocuePeer::STATUS);
 
 		$criteria->addSelectColumn(LiptocuePeer::ID);
 
@@ -187,6 +262,167 @@ abstract class BaseLiptocuePeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinLisicact(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(LiptocuePeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(LiptocuePeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(LiptocuePeer::LISICACT_ID, LisicactPeer::ID);
+
+		$rs = LiptocuePeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinLisicact(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		LiptocuePeer::addSelectColumns($c);
+		$startcol = (LiptocuePeer::NUM_COLUMNS - LiptocuePeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		LisicactPeer::addSelectColumns($c);
+
+		$c->addJoin(LiptocuePeer::LISICACT_ID, LisicactPeer::ID);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = LiptocuePeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = LisicactPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getLisicact(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addLiptocue($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initLiptocues();
+				$obj2->addLiptocue($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(LiptocuePeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(LiptocuePeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+			$criteria->addJoin(LiptocuePeer::LISICACT_ID, LisicactPeer::ID);
+	
+		$rs = LiptocuePeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		LiptocuePeer::addSelectColumns($c);
+		$startcol2 = (LiptocuePeer::NUM_COLUMNS - LiptocuePeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			LisicactPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + LisicactPeer::NUM_COLUMNS;
+	
+			$c->addJoin(LiptocuePeer::LISICACT_ID, LisicactPeer::ID);
+	
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = LiptocuePeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+							
+				$omClass = LisicactPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getLisicact(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addLiptocue($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initLiptocues();
+					$obj2->addLiptocue($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{

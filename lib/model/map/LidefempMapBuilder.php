@@ -54,6 +54,26 @@ class LidefempMapBuilder {
 
 		$tMap->addColumn('EXPDIE', 'Expdie', 'int', CreoleTypes::INTEGER, false, null);
 
+		$tMap->addColumn('NUMEMO', 'Numemo', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('SOLEGR', 'Solegr', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('COMINT', 'Comint', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('PLIEGO', 'Pliego', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('ACLARA', 'Aclara', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('OFERTA', 'Oferta', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('ANAOFE', 'Anaofe', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('RECOME', 'Recome', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('PTOCUECON', 'Ptocuecon', 'int', CreoleTypes::INTEGER, false, null);
+
+		$tMap->addColumn('NOTIFI', 'Notifi', 'int', CreoleTypes::INTEGER, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

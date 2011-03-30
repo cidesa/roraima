@@ -9,6 +9,10 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 
 
 	
+	protected $codtiplic;
+
+
+	
 	protected $destiplic;
 
 
@@ -43,6 +47,13 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
+  
+  public function getCodtiplic()
+  {
+
+    return trim($this->codtiplic);
+
+  }
   
   public function getDestiplic()
   {
@@ -88,6 +99,16 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
     return $this->id;
 
   }
+	
+	public function setCodtiplic($v)
+	{
+
+    if ($this->codtiplic !== $v) {
+        $this->codtiplic = $v;
+        $this->modifiedColumns[] = LitiplicPeer::CODTIPLIC;
+      }
+  
+	} 
 	
 	public function setDestiplic($v)
 	{
@@ -153,17 +174,19 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
   {
     try {
 
-      $this->destiplic = $rs->getString($startcol + 0);
+      $this->codtiplic = $rs->getString($startcol + 0);
 
-      $this->maxunitri = $rs->getFloat($startcol + 1);
+      $this->destiplic = $rs->getString($startcol + 1);
 
-      $this->artley = $rs->getString($startcol + 2);
+      $this->maxunitri = $rs->getFloat($startcol + 2);
 
-      $this->canunitribie = $rs->getFloat($startcol + 3);
+      $this->artley = $rs->getString($startcol + 3);
 
-      $this->canunitriobr = $rs->getFloat($startcol + 4);
+      $this->canunitribie = $rs->getFloat($startcol + 4);
 
-      $this->id = $rs->getInt($startcol + 5);
+      $this->canunitriobr = $rs->getFloat($startcol + 5);
+
+      $this->id = $rs->getInt($startcol + 6);
 
       $this->resetModified();
 
@@ -171,7 +194,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 6; 
+            return $startcol + 7; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Litiplic object", $e);
     }
@@ -335,21 +358,24 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getDestiplic();
+				return $this->getCodtiplic();
 				break;
 			case 1:
-				return $this->getMaxunitri();
+				return $this->getDestiplic();
 				break;
 			case 2:
-				return $this->getArtley();
+				return $this->getMaxunitri();
 				break;
 			case 3:
-				return $this->getCanunitribie();
+				return $this->getArtley();
 				break;
 			case 4:
-				return $this->getCanunitriobr();
+				return $this->getCanunitribie();
 				break;
 			case 5:
+				return $this->getCanunitriobr();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -362,12 +388,13 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 	{
 		$keys = LitiplicPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getDestiplic(),
-			$keys[1] => $this->getMaxunitri(),
-			$keys[2] => $this->getArtley(),
-			$keys[3] => $this->getCanunitribie(),
-			$keys[4] => $this->getCanunitriobr(),
-			$keys[5] => $this->getId(),
+			$keys[0] => $this->getCodtiplic(),
+			$keys[1] => $this->getDestiplic(),
+			$keys[2] => $this->getMaxunitri(),
+			$keys[3] => $this->getArtley(),
+			$keys[4] => $this->getCanunitribie(),
+			$keys[5] => $this->getCanunitriobr(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -384,21 +411,24 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setDestiplic($value);
+				$this->setCodtiplic($value);
 				break;
 			case 1:
-				$this->setMaxunitri($value);
+				$this->setDestiplic($value);
 				break;
 			case 2:
-				$this->setArtley($value);
+				$this->setMaxunitri($value);
 				break;
 			case 3:
-				$this->setCanunitribie($value);
+				$this->setArtley($value);
 				break;
 			case 4:
-				$this->setCanunitriobr($value);
+				$this->setCanunitribie($value);
 				break;
 			case 5:
+				$this->setCanunitriobr($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -408,12 +438,13 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 	{
 		$keys = LitiplicPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setDestiplic($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setMaxunitri($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setArtley($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setCanunitribie($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setCanunitriobr($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[0], $arr)) $this->setCodtiplic($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setDestiplic($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setMaxunitri($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setArtley($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCanunitribie($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCanunitriobr($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -421,6 +452,7 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(LitiplicPeer::DATABASE_NAME);
 
+		if ($this->isColumnModified(LitiplicPeer::CODTIPLIC)) $criteria->add(LitiplicPeer::CODTIPLIC, $this->codtiplic);
 		if ($this->isColumnModified(LitiplicPeer::DESTIPLIC)) $criteria->add(LitiplicPeer::DESTIPLIC, $this->destiplic);
 		if ($this->isColumnModified(LitiplicPeer::MAXUNITRI)) $criteria->add(LitiplicPeer::MAXUNITRI, $this->maxunitri);
 		if ($this->isColumnModified(LitiplicPeer::ARTLEY)) $criteria->add(LitiplicPeer::ARTLEY, $this->artley);
@@ -456,6 +488,8 @@ abstract class BaseLitiplic extends BaseObject  implements Persistent {
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setCodtiplic($this->codtiplic);
 
 		$copyObj->setDestiplic($this->destiplic);
 

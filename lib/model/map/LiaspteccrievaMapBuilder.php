@@ -38,7 +38,7 @@ class LiaspteccrievaMapBuilder {
 
 		$tMap->addColumn('DESCRI', 'Descri', 'string', CreoleTypes::VARCHAR, true, 100);
 
-		$tMap->addColumn('PUNTAJE', 'Puntaje', 'double', CreoleTypes::NUMERIC, true, 14);
+		$tMap->addColumn('PUNTAJE', 'Puntaje', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

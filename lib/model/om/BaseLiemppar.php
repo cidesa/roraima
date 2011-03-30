@@ -9,11 +9,11 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
 
 
 	
-	protected $lireglic_id;
+	protected $numplie;
 
 
 	
-	protected $codlic;
+	protected $numexp;
 
 
 	
@@ -21,7 +21,11 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
 
 
 	
-	protected $fecins;
+	protected $fecret;
+
+
+	
+	protected $nomrepleg;
 
 
 	
@@ -32,26 +36,23 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
 	protected $id;
 
 	
-	protected $aLireglic;
-
-	
 	protected $alreadyInSave = false;
 
 	
 	protected $alreadyInValidation = false;
 
   
-  public function getLireglicId()
+  public function getNumplie()
   {
 
-    return $this->lireglic_id;
+    return trim($this->numplie);
 
   }
   
-  public function getCodlic()
+  public function getNumexp()
   {
 
-    return trim($this->codlic);
+    return trim($this->numexp);
 
   }
   
@@ -62,17 +63,17 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
 
   }
   
-  public function getFecins($format = 'Y-m-d')
+  public function getFecret($format = 'Y-m-d')
   {
 
-    if ($this->fecins === null || $this->fecins === '') {
+    if ($this->fecret === null || $this->fecret === '') {
       return null;
-    } elseif (!is_int($this->fecins)) {
-            $ts = adodb_strtotime($this->fecins);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecins] as date/time value: " . var_export($this->fecins, true));
+    } elseif (!is_int($this->fecret)) {
+            $ts = adodb_strtotime($this->fecret);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecret] as date/time value: " . var_export($this->fecret, true));
       }
     } else {
-      $ts = $this->fecins;
+      $ts = $this->fecret;
     }
     if ($format === null) {
       return $ts;
@@ -83,6 +84,13 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
     }
   }
 
+  
+  public function getNomrepleg()
+  {
+
+    return trim($this->nomrepleg);
+
+  }
   
   public function getObservaciones()
   {
@@ -98,26 +106,22 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
 
   }
 	
-	public function setLireglicId($v)
+	public function setNumplie($v)
 	{
 
-    if ($this->lireglic_id !== $v) {
-        $this->lireglic_id = $v;
-        $this->modifiedColumns[] = LiempparPeer::LIREGLIC_ID;
+    if ($this->numplie !== $v) {
+        $this->numplie = $v;
+        $this->modifiedColumns[] = LiempparPeer::NUMPLIE;
       }
   
-		if ($this->aLireglic !== null && $this->aLireglic->getId() !== $v) {
-			$this->aLireglic = null;
-		}
-
 	} 
 	
-	public function setCodlic($v)
+	public function setNumexp($v)
 	{
 
-    if ($this->codlic !== $v) {
-        $this->codlic = $v;
-        $this->modifiedColumns[] = LiempparPeer::CODLIC;
+    if ($this->numexp !== $v) {
+        $this->numexp = $v;
+        $this->modifiedColumns[] = LiempparPeer::NUMEXP;
       }
   
 	} 
@@ -132,7 +136,7 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
   
 	} 
 	
-	public function setFecins($v)
+	public function setFecret($v)
 	{
 
 		if (is_array($v)){
@@ -142,16 +146,26 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecins] from input: " . var_export($v, true));
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecret] from input: " . var_export($v, true));
       }
     } else {
       $ts = $v;
     }
-    if ($this->fecins !== $ts) {
-      $this->fecins = $ts;
-      $this->modifiedColumns[] = LiempparPeer::FECINS;
+    if ($this->fecret !== $ts) {
+      $this->fecret = $ts;
+      $this->modifiedColumns[] = LiempparPeer::FECRET;
     }
 
+	} 
+	
+	public function setNomrepleg($v)
+	{
+
+    if ($this->nomrepleg !== $v) {
+        $this->nomrepleg = $v;
+        $this->modifiedColumns[] = LiempparPeer::NOMREPLEG;
+      }
+  
 	} 
 	
 	public function setObservaciones($v)
@@ -178,17 +192,19 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
   {
     try {
 
-      $this->lireglic_id = $rs->getInt($startcol + 0);
+      $this->numplie = $rs->getString($startcol + 0);
 
-      $this->codlic = $rs->getString($startcol + 1);
+      $this->numexp = $rs->getString($startcol + 1);
 
       $this->codpro = $rs->getString($startcol + 2);
 
-      $this->fecins = $rs->getDate($startcol + 3, null);
+      $this->fecret = $rs->getDate($startcol + 3, null);
 
-      $this->observaciones = $rs->getString($startcol + 4);
+      $this->nomrepleg = $rs->getString($startcol + 4);
 
-      $this->id = $rs->getInt($startcol + 5);
+      $this->observaciones = $rs->getString($startcol + 5);
+
+      $this->id = $rs->getInt($startcol + 6);
 
       $this->resetModified();
 
@@ -196,7 +212,7 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 6; 
+            return $startcol + 7; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Liemppar object", $e);
     }
@@ -273,15 +289,6 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
-												
-			if ($this->aLireglic !== null) {
-				if ($this->aLireglic->isModified()) {
-					$affectedRows += $this->aLireglic->save($con);
-				}
-				$this->setLireglic($this->aLireglic);
-			}
-
-
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = LiempparPeer::doInsert($this, $con);
@@ -329,14 +336,6 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-												
-			if ($this->aLireglic !== null) {
-				if (!$this->aLireglic->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aLireglic->getValidationFailures());
-				}
-			}
-
-
 			if (($retval = LiempparPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
@@ -361,21 +360,24 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getLireglicId();
+				return $this->getNumplie();
 				break;
 			case 1:
-				return $this->getCodlic();
+				return $this->getNumexp();
 				break;
 			case 2:
 				return $this->getCodpro();
 				break;
 			case 3:
-				return $this->getFecins();
+				return $this->getFecret();
 				break;
 			case 4:
-				return $this->getObservaciones();
+				return $this->getNomrepleg();
 				break;
 			case 5:
+				return $this->getObservaciones();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -388,12 +390,13 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
 	{
 		$keys = LiempparPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getLireglicId(),
-			$keys[1] => $this->getCodlic(),
+			$keys[0] => $this->getNumplie(),
+			$keys[1] => $this->getNumexp(),
 			$keys[2] => $this->getCodpro(),
-			$keys[3] => $this->getFecins(),
-			$keys[4] => $this->getObservaciones(),
-			$keys[5] => $this->getId(),
+			$keys[3] => $this->getFecret(),
+			$keys[4] => $this->getNomrepleg(),
+			$keys[5] => $this->getObservaciones(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -410,21 +413,24 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setLireglicId($value);
+				$this->setNumplie($value);
 				break;
 			case 1:
-				$this->setCodlic($value);
+				$this->setNumexp($value);
 				break;
 			case 2:
 				$this->setCodpro($value);
 				break;
 			case 3:
-				$this->setFecins($value);
+				$this->setFecret($value);
 				break;
 			case 4:
-				$this->setObservaciones($value);
+				$this->setNomrepleg($value);
 				break;
 			case 5:
+				$this->setObservaciones($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -434,12 +440,13 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
 	{
 		$keys = LiempparPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setLireglicId($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setCodlic($arr[$keys[1]]);
+		if (array_key_exists($keys[0], $arr)) $this->setNumplie($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setNumexp($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCodpro($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setFecins($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setObservaciones($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[3], $arr)) $this->setFecret($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setNomrepleg($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setObservaciones($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -447,10 +454,11 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(LiempparPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(LiempparPeer::LIREGLIC_ID)) $criteria->add(LiempparPeer::LIREGLIC_ID, $this->lireglic_id);
-		if ($this->isColumnModified(LiempparPeer::CODLIC)) $criteria->add(LiempparPeer::CODLIC, $this->codlic);
+		if ($this->isColumnModified(LiempparPeer::NUMPLIE)) $criteria->add(LiempparPeer::NUMPLIE, $this->numplie);
+		if ($this->isColumnModified(LiempparPeer::NUMEXP)) $criteria->add(LiempparPeer::NUMEXP, $this->numexp);
 		if ($this->isColumnModified(LiempparPeer::CODPRO)) $criteria->add(LiempparPeer::CODPRO, $this->codpro);
-		if ($this->isColumnModified(LiempparPeer::FECINS)) $criteria->add(LiempparPeer::FECINS, $this->fecins);
+		if ($this->isColumnModified(LiempparPeer::FECRET)) $criteria->add(LiempparPeer::FECRET, $this->fecret);
+		if ($this->isColumnModified(LiempparPeer::NOMREPLEG)) $criteria->add(LiempparPeer::NOMREPLEG, $this->nomrepleg);
 		if ($this->isColumnModified(LiempparPeer::OBSERVACIONES)) $criteria->add(LiempparPeer::OBSERVACIONES, $this->observaciones);
 		if ($this->isColumnModified(LiempparPeer::ID)) $criteria->add(LiempparPeer::ID, $this->id);
 
@@ -483,13 +491,15 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setLireglicId($this->lireglic_id);
+		$copyObj->setNumplie($this->numplie);
 
-		$copyObj->setCodlic($this->codlic);
+		$copyObj->setNumexp($this->numexp);
 
 		$copyObj->setCodpro($this->codpro);
 
-		$copyObj->setFecins($this->fecins);
+		$copyObj->setFecret($this->fecret);
+
+		$copyObj->setNomrepleg($this->nomrepleg);
 
 		$copyObj->setObservaciones($this->observaciones);
 
@@ -515,38 +525,6 @@ abstract class BaseLiemppar extends BaseObject  implements Persistent {
 			self::$peer = new LiempparPeer();
 		}
 		return self::$peer;
-	}
-
-	
-	public function setLireglic($v)
-	{
-
-
-		if ($v === null) {
-			$this->setLireglicId(NULL);
-		} else {
-			$this->setLireglicId($v->getId());
-		}
-
-
-		$this->aLireglic = $v;
-	}
-
-
-	
-	public function getLireglic($con = null)
-	{
-		if ($this->aLireglic === null && ($this->lireglic_id !== null)) {
-						include_once 'lib/model/om/BaseLireglicPeer.php';
-
-      $c = new Criteria();
-      $c->add(LireglicPeer::ID,$this->lireglic_id);
-      
-			$this->aLireglic = LireglicPeer::doSelectOne($c, $con);
-
-			
-		}
-		return $this->aLireglic;
 	}
 
 } 

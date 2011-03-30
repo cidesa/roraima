@@ -34,19 +34,17 @@ class LiempofeMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('liempofe_SEQ');
 
-		$tMap->addForeignKey('LIREGLIC_ID', 'LireglicId', 'int', CreoleTypes::INTEGER, 'lireglic', 'ID', true, null);
+		$tMap->addColumn('NUMPLIE', 'Numplie', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('CODLIC', 'Codlic', 'string', CreoleTypes::VARCHAR, true, 32);
+		$tMap->addColumn('NUMEXP', 'Numexp', 'string', CreoleTypes::VARCHAR, true, 8);
 
 		$tMap->addColumn('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, true, 15);
 
-		$tMap->addColumn('FECINS', 'Fecins', 'int', CreoleTypes::DATE, false, null);
-
-		$tMap->addColumn('PRECAL', 'Precal', 'string', CreoleTypes::VARCHAR, false, 1);
-
-		$tMap->addColumn('MONTOT', 'Montot', 'double', CreoleTypes::NUMERIC, true, 14);
+		$tMap->addColumn('FECOFE', 'Fecofe', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('OBSERVACIONES', 'Observaciones', 'string', CreoleTypes::VARCHAR, false, 1000);
+
+		$tMap->addColumn('MONTOT', 'Montot', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

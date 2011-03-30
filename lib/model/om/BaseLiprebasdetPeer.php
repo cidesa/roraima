@@ -13,53 +13,56 @@ abstract class BaseLiprebasdetPeer {
 	const CLASS_DEFAULT = 'lib.model.Liprebasdet';
 
 	
-	const NUM_COLUMNS = 15;
+	const NUM_COLUMNS = 16;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const REQART = 'liprebasdet.REQART';
+	const NUMPRE = 'liprebasdet.NUMPRE';
 
 	
 	const CODART = 'liprebasdet.CODART';
 
 	
-	const DESART = 'liprebasdet.DESART';
-
-	
 	const CODCAT = 'liprebasdet.CODCAT';
 
 	
-	const CANREQ = 'liprebasdet.CANREQ';
-
-	
-	const CANREC = 'liprebasdet.CANREC';
-
-	
-	const MONTOT = 'liprebasdet.MONTOT';
-
-	
-	const COSTO = 'liprebasdet.COSTO';
-
-	
-	const MONRGO = 'liprebasdet.MONRGO';
-
-	
-	const CANORD = 'liprebasdet.CANORD';
-
-	
-	const MONDES = 'liprebasdet.MONDES';
-
-	
-	const RELART = 'liprebasdet.RELART';
+	const CODPRE = 'liprebasdet.CODPRE';
 
 	
 	const UNIMED = 'liprebasdet.UNIMED';
 
 	
-	const CODPAR = 'liprebasdet.CODPAR';
+	const CANSOL = 'liprebasdet.CANSOL';
+
+	
+	const CANAPR = 'liprebasdet.CANAPR';
+
+	
+	const COSTO = 'liprebasdet.COSTO';
+
+	
+	const SUBTOT = 'liprebasdet.SUBTOT';
+
+	
+	const MONREC = 'liprebasdet.MONREC';
+
+	
+	const MONTOT = 'liprebasdet.MONTOT';
+
+	
+	const STATUS = 'liprebasdet.STATUS';
+
+	
+	const CODMON = 'liprebasdet.CODMON';
+
+	
+	const VALCAM = 'liprebasdet.VALCAM';
+
+	
+	const CODFIN = 'liprebasdet.CODFIN';
 
 	
 	const ID = 'liprebasdet.ID';
@@ -70,18 +73,18 @@ abstract class BaseLiprebasdetPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Reqart', 'Codart', 'Desart', 'Codcat', 'Canreq', 'Canrec', 'Montot', 'Costo', 'Monrgo', 'Canord', 'Mondes', 'Relart', 'Unimed', 'Codpar', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (LiprebasdetPeer::REQART, LiprebasdetPeer::CODART, LiprebasdetPeer::DESART, LiprebasdetPeer::CODCAT, LiprebasdetPeer::CANREQ, LiprebasdetPeer::CANREC, LiprebasdetPeer::MONTOT, LiprebasdetPeer::COSTO, LiprebasdetPeer::MONRGO, LiprebasdetPeer::CANORD, LiprebasdetPeer::MONDES, LiprebasdetPeer::RELART, LiprebasdetPeer::UNIMED, LiprebasdetPeer::CODPAR, LiprebasdetPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('reqart', 'codart', 'desart', 'codcat', 'canreq', 'canrec', 'montot', 'costo', 'monrgo', 'canord', 'mondes', 'relart', 'unimed', 'codpar', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
+		BasePeer::TYPE_PHPNAME => array ('Numpre', 'Codart', 'Codcat', 'Codpre', 'Unimed', 'Cansol', 'Canapr', 'Costo', 'Subtot', 'Monrec', 'Montot', 'Status', 'Codmon', 'Valcam', 'Codfin', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (LiprebasdetPeer::NUMPRE, LiprebasdetPeer::CODART, LiprebasdetPeer::CODCAT, LiprebasdetPeer::CODPRE, LiprebasdetPeer::UNIMED, LiprebasdetPeer::CANSOL, LiprebasdetPeer::CANAPR, LiprebasdetPeer::COSTO, LiprebasdetPeer::SUBTOT, LiprebasdetPeer::MONREC, LiprebasdetPeer::MONTOT, LiprebasdetPeer::STATUS, LiprebasdetPeer::CODMON, LiprebasdetPeer::VALCAM, LiprebasdetPeer::CODFIN, LiprebasdetPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numpre', 'codart', 'codcat', 'codpre', 'unimed', 'cansol', 'canapr', 'costo', 'subtot', 'monrec', 'montot', 'status', 'codmon', 'valcam', 'codfin', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Reqart' => 0, 'Codart' => 1, 'Desart' => 2, 'Codcat' => 3, 'Canreq' => 4, 'Canrec' => 5, 'Montot' => 6, 'Costo' => 7, 'Monrgo' => 8, 'Canord' => 9, 'Mondes' => 10, 'Relart' => 11, 'Unimed' => 12, 'Codpar' => 13, 'Id' => 14, ),
-		BasePeer::TYPE_COLNAME => array (LiprebasdetPeer::REQART => 0, LiprebasdetPeer::CODART => 1, LiprebasdetPeer::DESART => 2, LiprebasdetPeer::CODCAT => 3, LiprebasdetPeer::CANREQ => 4, LiprebasdetPeer::CANREC => 5, LiprebasdetPeer::MONTOT => 6, LiprebasdetPeer::COSTO => 7, LiprebasdetPeer::MONRGO => 8, LiprebasdetPeer::CANORD => 9, LiprebasdetPeer::MONDES => 10, LiprebasdetPeer::RELART => 11, LiprebasdetPeer::UNIMED => 12, LiprebasdetPeer::CODPAR => 13, LiprebasdetPeer::ID => 14, ),
-		BasePeer::TYPE_FIELDNAME => array ('reqart' => 0, 'codart' => 1, 'desart' => 2, 'codcat' => 3, 'canreq' => 4, 'canrec' => 5, 'montot' => 6, 'costo' => 7, 'monrgo' => 8, 'canord' => 9, 'mondes' => 10, 'relart' => 11, 'unimed' => 12, 'codpar' => 13, 'id' => 14, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
+		BasePeer::TYPE_PHPNAME => array ('Numpre' => 0, 'Codart' => 1, 'Codcat' => 2, 'Codpre' => 3, 'Unimed' => 4, 'Cansol' => 5, 'Canapr' => 6, 'Costo' => 7, 'Subtot' => 8, 'Monrec' => 9, 'Montot' => 10, 'Status' => 11, 'Codmon' => 12, 'Valcam' => 13, 'Codfin' => 14, 'Id' => 15, ),
+		BasePeer::TYPE_COLNAME => array (LiprebasdetPeer::NUMPRE => 0, LiprebasdetPeer::CODART => 1, LiprebasdetPeer::CODCAT => 2, LiprebasdetPeer::CODPRE => 3, LiprebasdetPeer::UNIMED => 4, LiprebasdetPeer::CANSOL => 5, LiprebasdetPeer::CANAPR => 6, LiprebasdetPeer::COSTO => 7, LiprebasdetPeer::SUBTOT => 8, LiprebasdetPeer::MONREC => 9, LiprebasdetPeer::MONTOT => 10, LiprebasdetPeer::STATUS => 11, LiprebasdetPeer::CODMON => 12, LiprebasdetPeer::VALCAM => 13, LiprebasdetPeer::CODFIN => 14, LiprebasdetPeer::ID => 15, ),
+		BasePeer::TYPE_FIELDNAME => array ('numpre' => 0, 'codart' => 1, 'codcat' => 2, 'codpre' => 3, 'unimed' => 4, 'cansol' => 5, 'canapr' => 6, 'costo' => 7, 'subtot' => 8, 'monrec' => 9, 'montot' => 10, 'status' => 11, 'codmon' => 12, 'valcam' => 13, 'codfin' => 14, 'id' => 15, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
 	);
 
 	
@@ -135,33 +138,35 @@ abstract class BaseLiprebasdetPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(LiprebasdetPeer::REQART);
+		$criteria->addSelectColumn(LiprebasdetPeer::NUMPRE);
 
 		$criteria->addSelectColumn(LiprebasdetPeer::CODART);
 
-		$criteria->addSelectColumn(LiprebasdetPeer::DESART);
-
 		$criteria->addSelectColumn(LiprebasdetPeer::CODCAT);
 
-		$criteria->addSelectColumn(LiprebasdetPeer::CANREQ);
-
-		$criteria->addSelectColumn(LiprebasdetPeer::CANREC);
-
-		$criteria->addSelectColumn(LiprebasdetPeer::MONTOT);
-
-		$criteria->addSelectColumn(LiprebasdetPeer::COSTO);
-
-		$criteria->addSelectColumn(LiprebasdetPeer::MONRGO);
-
-		$criteria->addSelectColumn(LiprebasdetPeer::CANORD);
-
-		$criteria->addSelectColumn(LiprebasdetPeer::MONDES);
-
-		$criteria->addSelectColumn(LiprebasdetPeer::RELART);
+		$criteria->addSelectColumn(LiprebasdetPeer::CODPRE);
 
 		$criteria->addSelectColumn(LiprebasdetPeer::UNIMED);
 
-		$criteria->addSelectColumn(LiprebasdetPeer::CODPAR);
+		$criteria->addSelectColumn(LiprebasdetPeer::CANSOL);
+
+		$criteria->addSelectColumn(LiprebasdetPeer::CANAPR);
+
+		$criteria->addSelectColumn(LiprebasdetPeer::COSTO);
+
+		$criteria->addSelectColumn(LiprebasdetPeer::SUBTOT);
+
+		$criteria->addSelectColumn(LiprebasdetPeer::MONREC);
+
+		$criteria->addSelectColumn(LiprebasdetPeer::MONTOT);
+
+		$criteria->addSelectColumn(LiprebasdetPeer::STATUS);
+
+		$criteria->addSelectColumn(LiprebasdetPeer::CODMON);
+
+		$criteria->addSelectColumn(LiprebasdetPeer::VALCAM);
+
+		$criteria->addSelectColumn(LiprebasdetPeer::CODFIN);
 
 		$criteria->addSelectColumn(LiprebasdetPeer::ID);
 

@@ -13,77 +13,104 @@ abstract class BaseLiprebasPeer {
 	const CLASS_DEFAULT = 'lib.model.Liprebas';
 
 	
-	const NUM_COLUMNS = 23;
+	const NUM_COLUMNS = 32;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const REQART = 'liprebas.REQART';
+	const NUMPRE = 'liprebas.NUMPRE';
 
 	
-	const FECREQ = 'liprebas.FECREQ';
+	const CODEMPADM = 'liprebas.CODEMPADM';
 
 	
-	const DESREQ = 'liprebas.DESREQ';
+	const CODUNIADM = 'liprebas.CODUNIADM';
 
 	
-	const MONREQ = 'liprebas.MONREQ';
+	const CODEMPEJE = 'liprebas.CODEMPEJE';
 
 	
-	const STAREQ = 'liprebas.STAREQ';
+	const CODUNISTE = 'liprebas.CODUNISTE';
 
 	
-	const MOTREQ = 'liprebas.MOTREQ';
+	const CODCLACOMP = 'liprebas.CODCLACOMP';
 
 	
-	const BENREQ = 'liprebas.BENREQ';
+	const FECREG = 'liprebas.FECREG';
 
 	
-	const MONDES = 'liprebas.MONDES';
+	const HORREG = 'liprebas.HORREG';
 
 	
-	const OBSREQ = 'liprebas.OBSREQ';
+	const DIAS = 'liprebas.DIAS';
 
 	
-	const UNIRES = 'liprebas.UNIRES';
+	const FECVEN = 'liprebas.FECVEN';
 
 	
-	const TIPMON = 'liprebas.TIPMON';
+	const TIPCOM = 'liprebas.TIPCOM';
 
 	
-	const VALMON = 'liprebas.VALMON';
+	const CODPRE = 'liprebas.CODPRE';
 
 	
-	const FECANU = 'liprebas.FECANU';
+	const NOMPRE = 'liprebas.NOMPRE';
 
 	
-	const CODPRO = 'liprebas.CODPRO';
+	const CODPRIO = 'liprebas.CODPRIO';
 
 	
-	const REQCOM = 'liprebas.REQCOM';
+	const DESPRO = 'liprebas.DESPRO';
 
 	
-	const TIPFIN = 'liprebas.TIPFIN';
+	const MONPRE = 'liprebas.MONPRE';
 
 	
-	const TIPREQ = 'liprebas.TIPREQ';
+	const CODMON = 'liprebas.CODMON';
 
 	
-	const APRREQ = 'liprebas.APRREQ';
+	const VALCAM = 'liprebas.VALCAM';
 
 	
-	const USUAPR = 'liprebas.USUAPR';
+	const FECCAM = 'liprebas.FECCAM';
 
 	
-	const FECAPR = 'liprebas.FECAPR';
+	const DOCANE1 = 'liprebas.DOCANE1';
 
 	
-	const CODEMP = 'liprebas.CODEMP';
+	const DOCANE2 = 'liprebas.DOCANE2';
 
 	
-	const CODCEN = 'liprebas.CODCEN';
+	const DOCANE3 = 'liprebas.DOCANE3';
+
+	
+	const STATUS = 'liprebas.STATUS';
+
+	
+	const LISICACT_ID = 'liprebas.LISICACT_ID';
+
+	
+	const DETDECMOD = 'liprebas.DETDECMOD';
+
+	
+	const PREPOR = 'liprebas.PREPOR';
+
+	
+	const CARGOPRE = 'liprebas.CARGOPRE';
+
+	
+	const APRPOR = 'liprebas.APRPOR';
+
+	
+	const CARGOAPR = 'liprebas.CARGOAPR';
+
+	
+	const TIPCON = 'liprebas.TIPCON';
+
+	
+	const ACTO = 'liprebas.ACTO';
 
 	
 	const ID = 'liprebas.ID';
@@ -94,18 +121,18 @@ abstract class BaseLiprebasPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Reqart', 'Fecreq', 'Desreq', 'Monreq', 'Stareq', 'Motreq', 'Benreq', 'Mondes', 'Obsreq', 'Unires', 'Tipmon', 'Valmon', 'Fecanu', 'Codpro', 'Reqcom', 'Tipfin', 'Tipreq', 'Aprreq', 'Usuapr', 'Fecapr', 'Codemp', 'Codcen', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (LiprebasPeer::REQART, LiprebasPeer::FECREQ, LiprebasPeer::DESREQ, LiprebasPeer::MONREQ, LiprebasPeer::STAREQ, LiprebasPeer::MOTREQ, LiprebasPeer::BENREQ, LiprebasPeer::MONDES, LiprebasPeer::OBSREQ, LiprebasPeer::UNIRES, LiprebasPeer::TIPMON, LiprebasPeer::VALMON, LiprebasPeer::FECANU, LiprebasPeer::CODPRO, LiprebasPeer::REQCOM, LiprebasPeer::TIPFIN, LiprebasPeer::TIPREQ, LiprebasPeer::APRREQ, LiprebasPeer::USUAPR, LiprebasPeer::FECAPR, LiprebasPeer::CODEMP, LiprebasPeer::CODCEN, LiprebasPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('reqart', 'fecreq', 'desreq', 'monreq', 'stareq', 'motreq', 'benreq', 'mondes', 'obsreq', 'unires', 'tipmon', 'valmon', 'fecanu', 'codpro', 'reqcom', 'tipfin', 'tipreq', 'aprreq', 'usuapr', 'fecapr', 'codemp', 'codcen', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
+		BasePeer::TYPE_PHPNAME => array ('Numpre', 'Codempadm', 'Coduniadm', 'Codempeje', 'Coduniste', 'Codclacomp', 'Fecreg', 'Horreg', 'Dias', 'Fecven', 'Tipcom', 'Codpre', 'Nompre', 'Codprio', 'Despro', 'Monpre', 'Codmon', 'Valcam', 'Feccam', 'Docane1', 'Docane2', 'Docane3', 'Status', 'LisicactId', 'Detdecmod', 'Prepor', 'Cargopre', 'Aprpor', 'Cargoapr', 'Tipcon', 'Acto', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (LiprebasPeer::NUMPRE, LiprebasPeer::CODEMPADM, LiprebasPeer::CODUNIADM, LiprebasPeer::CODEMPEJE, LiprebasPeer::CODUNISTE, LiprebasPeer::CODCLACOMP, LiprebasPeer::FECREG, LiprebasPeer::HORREG, LiprebasPeer::DIAS, LiprebasPeer::FECVEN, LiprebasPeer::TIPCOM, LiprebasPeer::CODPRE, LiprebasPeer::NOMPRE, LiprebasPeer::CODPRIO, LiprebasPeer::DESPRO, LiprebasPeer::MONPRE, LiprebasPeer::CODMON, LiprebasPeer::VALCAM, LiprebasPeer::FECCAM, LiprebasPeer::DOCANE1, LiprebasPeer::DOCANE2, LiprebasPeer::DOCANE3, LiprebasPeer::STATUS, LiprebasPeer::LISICACT_ID, LiprebasPeer::DETDECMOD, LiprebasPeer::PREPOR, LiprebasPeer::CARGOPRE, LiprebasPeer::APRPOR, LiprebasPeer::CARGOAPR, LiprebasPeer::TIPCON, LiprebasPeer::ACTO, LiprebasPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numpre', 'codempadm', 'coduniadm', 'codempeje', 'coduniste', 'codclacomp', 'fecreg', 'horreg', 'dias', 'fecven', 'tipcom', 'codpre', 'nompre', 'codprio', 'despro', 'monpre', 'codmon', 'valcam', 'feccam', 'docane1', 'docane2', 'docane3', 'status', 'lisicact_id', 'detdecmod', 'prepor', 'cargopre', 'aprpor', 'cargoapr', 'tipcon', 'acto', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Reqart' => 0, 'Fecreq' => 1, 'Desreq' => 2, 'Monreq' => 3, 'Stareq' => 4, 'Motreq' => 5, 'Benreq' => 6, 'Mondes' => 7, 'Obsreq' => 8, 'Unires' => 9, 'Tipmon' => 10, 'Valmon' => 11, 'Fecanu' => 12, 'Codpro' => 13, 'Reqcom' => 14, 'Tipfin' => 15, 'Tipreq' => 16, 'Aprreq' => 17, 'Usuapr' => 18, 'Fecapr' => 19, 'Codemp' => 20, 'Codcen' => 21, 'Id' => 22, ),
-		BasePeer::TYPE_COLNAME => array (LiprebasPeer::REQART => 0, LiprebasPeer::FECREQ => 1, LiprebasPeer::DESREQ => 2, LiprebasPeer::MONREQ => 3, LiprebasPeer::STAREQ => 4, LiprebasPeer::MOTREQ => 5, LiprebasPeer::BENREQ => 6, LiprebasPeer::MONDES => 7, LiprebasPeer::OBSREQ => 8, LiprebasPeer::UNIRES => 9, LiprebasPeer::TIPMON => 10, LiprebasPeer::VALMON => 11, LiprebasPeer::FECANU => 12, LiprebasPeer::CODPRO => 13, LiprebasPeer::REQCOM => 14, LiprebasPeer::TIPFIN => 15, LiprebasPeer::TIPREQ => 16, LiprebasPeer::APRREQ => 17, LiprebasPeer::USUAPR => 18, LiprebasPeer::FECAPR => 19, LiprebasPeer::CODEMP => 20, LiprebasPeer::CODCEN => 21, LiprebasPeer::ID => 22, ),
-		BasePeer::TYPE_FIELDNAME => array ('reqart' => 0, 'fecreq' => 1, 'desreq' => 2, 'monreq' => 3, 'stareq' => 4, 'motreq' => 5, 'benreq' => 6, 'mondes' => 7, 'obsreq' => 8, 'unires' => 9, 'tipmon' => 10, 'valmon' => 11, 'fecanu' => 12, 'codpro' => 13, 'reqcom' => 14, 'tipfin' => 15, 'tipreq' => 16, 'aprreq' => 17, 'usuapr' => 18, 'fecapr' => 19, 'codemp' => 20, 'codcen' => 21, 'id' => 22, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
+		BasePeer::TYPE_PHPNAME => array ('Numpre' => 0, 'Codempadm' => 1, 'Coduniadm' => 2, 'Codempeje' => 3, 'Coduniste' => 4, 'Codclacomp' => 5, 'Fecreg' => 6, 'Horreg' => 7, 'Dias' => 8, 'Fecven' => 9, 'Tipcom' => 10, 'Codpre' => 11, 'Nompre' => 12, 'Codprio' => 13, 'Despro' => 14, 'Monpre' => 15, 'Codmon' => 16, 'Valcam' => 17, 'Feccam' => 18, 'Docane1' => 19, 'Docane2' => 20, 'Docane3' => 21, 'Status' => 22, 'LisicactId' => 23, 'Detdecmod' => 24, 'Prepor' => 25, 'Cargopre' => 26, 'Aprpor' => 27, 'Cargoapr' => 28, 'Tipcon' => 29, 'Acto' => 30, 'Id' => 31, ),
+		BasePeer::TYPE_COLNAME => array (LiprebasPeer::NUMPRE => 0, LiprebasPeer::CODEMPADM => 1, LiprebasPeer::CODUNIADM => 2, LiprebasPeer::CODEMPEJE => 3, LiprebasPeer::CODUNISTE => 4, LiprebasPeer::CODCLACOMP => 5, LiprebasPeer::FECREG => 6, LiprebasPeer::HORREG => 7, LiprebasPeer::DIAS => 8, LiprebasPeer::FECVEN => 9, LiprebasPeer::TIPCOM => 10, LiprebasPeer::CODPRE => 11, LiprebasPeer::NOMPRE => 12, LiprebasPeer::CODPRIO => 13, LiprebasPeer::DESPRO => 14, LiprebasPeer::MONPRE => 15, LiprebasPeer::CODMON => 16, LiprebasPeer::VALCAM => 17, LiprebasPeer::FECCAM => 18, LiprebasPeer::DOCANE1 => 19, LiprebasPeer::DOCANE2 => 20, LiprebasPeer::DOCANE3 => 21, LiprebasPeer::STATUS => 22, LiprebasPeer::LISICACT_ID => 23, LiprebasPeer::DETDECMOD => 24, LiprebasPeer::PREPOR => 25, LiprebasPeer::CARGOPRE => 26, LiprebasPeer::APRPOR => 27, LiprebasPeer::CARGOAPR => 28, LiprebasPeer::TIPCON => 29, LiprebasPeer::ACTO => 30, LiprebasPeer::ID => 31, ),
+		BasePeer::TYPE_FIELDNAME => array ('numpre' => 0, 'codempadm' => 1, 'coduniadm' => 2, 'codempeje' => 3, 'coduniste' => 4, 'codclacomp' => 5, 'fecreg' => 6, 'horreg' => 7, 'dias' => 8, 'fecven' => 9, 'tipcom' => 10, 'codpre' => 11, 'nompre' => 12, 'codprio' => 13, 'despro' => 14, 'monpre' => 15, 'codmon' => 16, 'valcam' => 17, 'feccam' => 18, 'docane1' => 19, 'docane2' => 20, 'docane3' => 21, 'status' => 22, 'lisicact_id' => 23, 'detdecmod' => 24, 'prepor' => 25, 'cargopre' => 26, 'aprpor' => 27, 'cargoapr' => 28, 'tipcon' => 29, 'acto' => 30, 'id' => 31, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, )
 	);
 
 	
@@ -159,49 +186,67 @@ abstract class BaseLiprebasPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(LiprebasPeer::REQART);
+		$criteria->addSelectColumn(LiprebasPeer::NUMPRE);
 
-		$criteria->addSelectColumn(LiprebasPeer::FECREQ);
+		$criteria->addSelectColumn(LiprebasPeer::CODEMPADM);
 
-		$criteria->addSelectColumn(LiprebasPeer::DESREQ);
+		$criteria->addSelectColumn(LiprebasPeer::CODUNIADM);
 
-		$criteria->addSelectColumn(LiprebasPeer::MONREQ);
+		$criteria->addSelectColumn(LiprebasPeer::CODEMPEJE);
 
-		$criteria->addSelectColumn(LiprebasPeer::STAREQ);
+		$criteria->addSelectColumn(LiprebasPeer::CODUNISTE);
 
-		$criteria->addSelectColumn(LiprebasPeer::MOTREQ);
+		$criteria->addSelectColumn(LiprebasPeer::CODCLACOMP);
 
-		$criteria->addSelectColumn(LiprebasPeer::BENREQ);
+		$criteria->addSelectColumn(LiprebasPeer::FECREG);
 
-		$criteria->addSelectColumn(LiprebasPeer::MONDES);
+		$criteria->addSelectColumn(LiprebasPeer::HORREG);
 
-		$criteria->addSelectColumn(LiprebasPeer::OBSREQ);
+		$criteria->addSelectColumn(LiprebasPeer::DIAS);
 
-		$criteria->addSelectColumn(LiprebasPeer::UNIRES);
+		$criteria->addSelectColumn(LiprebasPeer::FECVEN);
 
-		$criteria->addSelectColumn(LiprebasPeer::TIPMON);
+		$criteria->addSelectColumn(LiprebasPeer::TIPCOM);
 
-		$criteria->addSelectColumn(LiprebasPeer::VALMON);
+		$criteria->addSelectColumn(LiprebasPeer::CODPRE);
 
-		$criteria->addSelectColumn(LiprebasPeer::FECANU);
+		$criteria->addSelectColumn(LiprebasPeer::NOMPRE);
 
-		$criteria->addSelectColumn(LiprebasPeer::CODPRO);
+		$criteria->addSelectColumn(LiprebasPeer::CODPRIO);
 
-		$criteria->addSelectColumn(LiprebasPeer::REQCOM);
+		$criteria->addSelectColumn(LiprebasPeer::DESPRO);
 
-		$criteria->addSelectColumn(LiprebasPeer::TIPFIN);
+		$criteria->addSelectColumn(LiprebasPeer::MONPRE);
 
-		$criteria->addSelectColumn(LiprebasPeer::TIPREQ);
+		$criteria->addSelectColumn(LiprebasPeer::CODMON);
 
-		$criteria->addSelectColumn(LiprebasPeer::APRREQ);
+		$criteria->addSelectColumn(LiprebasPeer::VALCAM);
 
-		$criteria->addSelectColumn(LiprebasPeer::USUAPR);
+		$criteria->addSelectColumn(LiprebasPeer::FECCAM);
 
-		$criteria->addSelectColumn(LiprebasPeer::FECAPR);
+		$criteria->addSelectColumn(LiprebasPeer::DOCANE1);
 
-		$criteria->addSelectColumn(LiprebasPeer::CODEMP);
+		$criteria->addSelectColumn(LiprebasPeer::DOCANE2);
 
-		$criteria->addSelectColumn(LiprebasPeer::CODCEN);
+		$criteria->addSelectColumn(LiprebasPeer::DOCANE3);
+
+		$criteria->addSelectColumn(LiprebasPeer::STATUS);
+
+		$criteria->addSelectColumn(LiprebasPeer::LISICACT_ID);
+
+		$criteria->addSelectColumn(LiprebasPeer::DETDECMOD);
+
+		$criteria->addSelectColumn(LiprebasPeer::PREPOR);
+
+		$criteria->addSelectColumn(LiprebasPeer::CARGOPRE);
+
+		$criteria->addSelectColumn(LiprebasPeer::APRPOR);
+
+		$criteria->addSelectColumn(LiprebasPeer::CARGOAPR);
+
+		$criteria->addSelectColumn(LiprebasPeer::TIPCON);
+
+		$criteria->addSelectColumn(LiprebasPeer::ACTO);
 
 		$criteria->addSelectColumn(LiprebasPeer::ID);
 
@@ -284,6 +329,81 @@ abstract class BaseLiprebasPeer {
 	}
 
 	
+	public static function doCountJoinLisicact(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(LiprebasPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(LiprebasPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(LiprebasPeer::LISICACT_ID, LisicactPeer::ID);
+
+		$rs = LiprebasPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinLisicact(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		LiprebasPeer::addSelectColumns($c);
+		$startcol = (LiprebasPeer::NUM_COLUMNS - LiprebasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		LisicactPeer::addSelectColumns($c);
+
+		$c->addJoin(LiprebasPeer::LISICACT_ID, LisicactPeer::ID);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = LiprebasPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = LisicactPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getLisicact(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addLiprebas($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initLiprebass();
+				$obj2->addLiprebas($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
 	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
 	{
 		$criteria = clone $criteria;
@@ -300,6 +420,8 @@ abstract class BaseLiprebasPeer {
 			$criteria->addSelectColumn($column);
 		}
 
+			$criteria->addJoin(LiprebasPeer::LISICACT_ID, LisicactPeer::ID);
+	
 		$rs = LiprebasPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
@@ -321,6 +443,11 @@ abstract class BaseLiprebasPeer {
 		LiprebasPeer::addSelectColumns($c);
 		$startcol2 = (LiprebasPeer::NUM_COLUMNS - LiprebasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
+			LisicactPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + LisicactPeer::NUM_COLUMNS;
+	
+			$c->addJoin(LiprebasPeer::LISICACT_ID, LisicactPeer::ID);
+	
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -333,6 +460,29 @@ abstract class BaseLiprebasPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
+
+							
+				$omClass = LisicactPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getLisicact(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addLiprebas($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initLiprebass();
+					$obj2->addLiprebas($obj1);
+				}
+	
 			$results[] = $obj1;
 		}
 		return $results;

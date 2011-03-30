@@ -13,7 +13,7 @@ abstract class BaseLicomintPeer {
 	const CLASS_DEFAULT = 'lib.model.Licomint';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 16;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -23,13 +23,43 @@ abstract class BaseLicomintPeer {
 	const NUMCOMINT = 'licomint.NUMCOMINT';
 
 	
-	const NUMEXP = 'licomint.NUMEXP';
+	const CODEMPADM = 'licomint.CODEMPADM';
 
 	
-	const FECCOMINT = 'licomint.FECCOMINT';
+	const CODUNIADM = 'licomint.CODUNIADM';
 
 	
-	const CODCOM = 'licomint.CODCOM';
+	const CODEMPEJE = 'licomint.CODEMPEJE';
+
+	
+	const CODUNISTE = 'licomint.CODUNISTE';
+
+	
+	const TIPCON = 'licomint.TIPCON';
+
+	
+	const FECREG = 'licomint.FECREG';
+
+	
+	const DIAS = 'licomint.DIAS';
+
+	
+	const FECVEN = 'licomint.FECVEN';
+
+	
+	const CODCLACOMP = 'licomint.CODCLACOMP';
+
+	
+	const MONCOM = 'licomint.MONCOM';
+
+	
+	const CODTIPLIC = 'licomint.CODTIPLIC';
+
+	
+	const CODMON = 'licomint.CODMON';
+
+	
+	const TIPCOM = 'licomint.TIPCOM';
 
 	
 	const STATUS = 'licomint.STATUS';
@@ -43,18 +73,18 @@ abstract class BaseLicomintPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcomint', 'Numexp', 'Feccomint', 'Codcom', 'Status', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (LicomintPeer::NUMCOMINT, LicomintPeer::NUMEXP, LicomintPeer::FECCOMINT, LicomintPeer::CODCOM, LicomintPeer::STATUS, LicomintPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcomint', 'numexp', 'feccomint', 'codcom', 'status', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Numcomint', 'Codempadm', 'Coduniadm', 'Codempeje', 'Coduniste', 'Tipcon', 'Fecreg', 'Dias', 'Fecven', 'Codclacomp', 'Moncom', 'Codtiplic', 'Codmon', 'Tipcom', 'Status', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (LicomintPeer::NUMCOMINT, LicomintPeer::CODEMPADM, LicomintPeer::CODUNIADM, LicomintPeer::CODEMPEJE, LicomintPeer::CODUNISTE, LicomintPeer::TIPCON, LicomintPeer::FECREG, LicomintPeer::DIAS, LicomintPeer::FECVEN, LicomintPeer::CODCLACOMP, LicomintPeer::MONCOM, LicomintPeer::CODTIPLIC, LicomintPeer::CODMON, LicomintPeer::TIPCOM, LicomintPeer::STATUS, LicomintPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcomint', 'codempadm', 'coduniadm', 'codempeje', 'coduniste', 'tipcon', 'fecreg', 'dias', 'fecven', 'codclacomp', 'moncom', 'codtiplic', 'codmon', 'tipcom', 'status', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcomint' => 0, 'Numexp' => 1, 'Feccomint' => 2, 'Codcom' => 3, 'Status' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (LicomintPeer::NUMCOMINT => 0, LicomintPeer::NUMEXP => 1, LicomintPeer::FECCOMINT => 2, LicomintPeer::CODCOM => 3, LicomintPeer::STATUS => 4, LicomintPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcomint' => 0, 'numexp' => 1, 'feccomint' => 2, 'codcom' => 3, 'status' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Numcomint' => 0, 'Codempadm' => 1, 'Coduniadm' => 2, 'Codempeje' => 3, 'Coduniste' => 4, 'Tipcon' => 5, 'Fecreg' => 6, 'Dias' => 7, 'Fecven' => 8, 'Codclacomp' => 9, 'Moncom' => 10, 'Codtiplic' => 11, 'Codmon' => 12, 'Tipcom' => 13, 'Status' => 14, 'Id' => 15, ),
+		BasePeer::TYPE_COLNAME => array (LicomintPeer::NUMCOMINT => 0, LicomintPeer::CODEMPADM => 1, LicomintPeer::CODUNIADM => 2, LicomintPeer::CODEMPEJE => 3, LicomintPeer::CODUNISTE => 4, LicomintPeer::TIPCON => 5, LicomintPeer::FECREG => 6, LicomintPeer::DIAS => 7, LicomintPeer::FECVEN => 8, LicomintPeer::CODCLACOMP => 9, LicomintPeer::MONCOM => 10, LicomintPeer::CODTIPLIC => 11, LicomintPeer::CODMON => 12, LicomintPeer::TIPCOM => 13, LicomintPeer::STATUS => 14, LicomintPeer::ID => 15, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcomint' => 0, 'codempadm' => 1, 'coduniadm' => 2, 'codempeje' => 3, 'coduniste' => 4, 'tipcon' => 5, 'fecreg' => 6, 'dias' => 7, 'fecven' => 8, 'codclacomp' => 9, 'moncom' => 10, 'codtiplic' => 11, 'codmon' => 12, 'tipcom' => 13, 'status' => 14, 'id' => 15, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
 	);
 
 	
@@ -110,11 +140,31 @@ abstract class BaseLicomintPeer {
 
 		$criteria->addSelectColumn(LicomintPeer::NUMCOMINT);
 
-		$criteria->addSelectColumn(LicomintPeer::NUMEXP);
+		$criteria->addSelectColumn(LicomintPeer::CODEMPADM);
 
-		$criteria->addSelectColumn(LicomintPeer::FECCOMINT);
+		$criteria->addSelectColumn(LicomintPeer::CODUNIADM);
 
-		$criteria->addSelectColumn(LicomintPeer::CODCOM);
+		$criteria->addSelectColumn(LicomintPeer::CODEMPEJE);
+
+		$criteria->addSelectColumn(LicomintPeer::CODUNISTE);
+
+		$criteria->addSelectColumn(LicomintPeer::TIPCON);
+
+		$criteria->addSelectColumn(LicomintPeer::FECREG);
+
+		$criteria->addSelectColumn(LicomintPeer::DIAS);
+
+		$criteria->addSelectColumn(LicomintPeer::FECVEN);
+
+		$criteria->addSelectColumn(LicomintPeer::CODCLACOMP);
+
+		$criteria->addSelectColumn(LicomintPeer::MONCOM);
+
+		$criteria->addSelectColumn(LicomintPeer::CODTIPLIC);
+
+		$criteria->addSelectColumn(LicomintPeer::CODMON);
+
+		$criteria->addSelectColumn(LicomintPeer::TIPCOM);
 
 		$criteria->addSelectColumn(LicomintPeer::STATUS);
 

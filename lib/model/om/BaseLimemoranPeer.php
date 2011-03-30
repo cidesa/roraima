@@ -13,41 +13,62 @@ abstract class BaseLimemoranPeer {
 	const CLASS_DEFAULT = 'lib.model.Limemoran';
 
 	
-	const NUM_COLUMNS = 11;
+	const NUM_COLUMNS = 18;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const NUMEXP = 'limemoran.NUMEXP';
-
-	
 	const NUMEMO = 'limemoran.NUMEMO';
 
 	
-	const NOMPRO = 'limemoran.NOMPRO';
+	const NUMPRE = 'limemoran.NUMPRE';
 
 	
-	const FECHA = 'limemoran.FECHA';
+	const CODEMPADM = 'limemoran.CODEMPADM';
 
 	
-	const CODFIN = 'limemoran.CODFIN';
+	const CODUNIADM = 'limemoran.CODUNIADM';
 
 	
-	const CODCOM = 'limemoran.CODCOM';
+	const CODEMPEJE = 'limemoran.CODEMPEJE';
 
 	
 	const CODUNISTE = 'limemoran.CODUNISTE';
 
 	
-	const CODCLACOMP = 'limemoran.CODCLACOMP';
+	const DESPRO = 'limemoran.DESPRO';
 
 	
-	const TIPCOM = 'limemoran.TIPCOM';
+	const DOCANE1 = 'limemoran.DOCANE1';
 
 	
-	const DETMEMO = 'limemoran.DETMEMO';
+	const DOCANE2 = 'limemoran.DOCANE2';
+
+	
+	const DOCANE3 = 'limemoran.DOCANE3';
+
+	
+	const PREPOR = 'limemoran.PREPOR';
+
+	
+	const PREPORCAR = 'limemoran.PREPORCAR';
+
+	
+	const LISICACT_ID = 'limemoran.LISICACT_ID';
+
+	
+	const DETDECMOD = 'limemoran.DETDECMOD';
+
+	
+	const ANAPOR = 'limemoran.ANAPOR';
+
+	
+	const ANAPORCAR = 'limemoran.ANAPORCAR';
+
+	
+	const STATUS = 'limemoran.STATUS';
 
 	
 	const ID = 'limemoran.ID';
@@ -58,18 +79,18 @@ abstract class BaseLimemoranPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numexp', 'Numemo', 'Nompro', 'Fecha', 'Codfin', 'Codcom', 'Coduniste', 'Codclacomp', 'Tipcom', 'Detmemo', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (LimemoranPeer::NUMEXP, LimemoranPeer::NUMEMO, LimemoranPeer::NOMPRO, LimemoranPeer::FECHA, LimemoranPeer::CODFIN, LimemoranPeer::CODCOM, LimemoranPeer::CODUNISTE, LimemoranPeer::CODCLACOMP, LimemoranPeer::TIPCOM, LimemoranPeer::DETMEMO, LimemoranPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numexp', 'numemo', 'nompro', 'fecha', 'codfin', 'codcom', 'coduniste', 'codclacomp', 'tipcom', 'detmemo', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Numemo', 'Numpre', 'Codempadm', 'Coduniadm', 'Codempeje', 'Coduniste', 'Despro', 'Docane1', 'Docane2', 'Docane3', 'Prepor', 'Preporcar', 'LisicactId', 'Detdecmod', 'Anapor', 'Anaporcar', 'Status', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (LimemoranPeer::NUMEMO, LimemoranPeer::NUMPRE, LimemoranPeer::CODEMPADM, LimemoranPeer::CODUNIADM, LimemoranPeer::CODEMPEJE, LimemoranPeer::CODUNISTE, LimemoranPeer::DESPRO, LimemoranPeer::DOCANE1, LimemoranPeer::DOCANE2, LimemoranPeer::DOCANE3, LimemoranPeer::PREPOR, LimemoranPeer::PREPORCAR, LimemoranPeer::LISICACT_ID, LimemoranPeer::DETDECMOD, LimemoranPeer::ANAPOR, LimemoranPeer::ANAPORCAR, LimemoranPeer::STATUS, LimemoranPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numemo', 'numpre', 'codempadm', 'coduniadm', 'codempeje', 'coduniste', 'despro', 'docane1', 'docane2', 'docane3', 'prepor', 'preporcar', 'lisicact_id', 'detdecmod', 'anapor', 'anaporcar', 'status', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numexp' => 0, 'Numemo' => 1, 'Nompro' => 2, 'Fecha' => 3, 'Codfin' => 4, 'Codcom' => 5, 'Coduniste' => 6, 'Codclacomp' => 7, 'Tipcom' => 8, 'Detmemo' => 9, 'Id' => 10, ),
-		BasePeer::TYPE_COLNAME => array (LimemoranPeer::NUMEXP => 0, LimemoranPeer::NUMEMO => 1, LimemoranPeer::NOMPRO => 2, LimemoranPeer::FECHA => 3, LimemoranPeer::CODFIN => 4, LimemoranPeer::CODCOM => 5, LimemoranPeer::CODUNISTE => 6, LimemoranPeer::CODCLACOMP => 7, LimemoranPeer::TIPCOM => 8, LimemoranPeer::DETMEMO => 9, LimemoranPeer::ID => 10, ),
-		BasePeer::TYPE_FIELDNAME => array ('numexp' => 0, 'numemo' => 1, 'nompro' => 2, 'fecha' => 3, 'codfin' => 4, 'codcom' => 5, 'coduniste' => 6, 'codclacomp' => 7, 'tipcom' => 8, 'detmemo' => 9, 'id' => 10, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Numemo' => 0, 'Numpre' => 1, 'Codempadm' => 2, 'Coduniadm' => 3, 'Codempeje' => 4, 'Coduniste' => 5, 'Despro' => 6, 'Docane1' => 7, 'Docane2' => 8, 'Docane3' => 9, 'Prepor' => 10, 'Preporcar' => 11, 'LisicactId' => 12, 'Detdecmod' => 13, 'Anapor' => 14, 'Anaporcar' => 15, 'Status' => 16, 'Id' => 17, ),
+		BasePeer::TYPE_COLNAME => array (LimemoranPeer::NUMEMO => 0, LimemoranPeer::NUMPRE => 1, LimemoranPeer::CODEMPADM => 2, LimemoranPeer::CODUNIADM => 3, LimemoranPeer::CODEMPEJE => 4, LimemoranPeer::CODUNISTE => 5, LimemoranPeer::DESPRO => 6, LimemoranPeer::DOCANE1 => 7, LimemoranPeer::DOCANE2 => 8, LimemoranPeer::DOCANE3 => 9, LimemoranPeer::PREPOR => 10, LimemoranPeer::PREPORCAR => 11, LimemoranPeer::LISICACT_ID => 12, LimemoranPeer::DETDECMOD => 13, LimemoranPeer::ANAPOR => 14, LimemoranPeer::ANAPORCAR => 15, LimemoranPeer::STATUS => 16, LimemoranPeer::ID => 17, ),
+		BasePeer::TYPE_FIELDNAME => array ('numemo' => 0, 'numpre' => 1, 'codempadm' => 2, 'coduniadm' => 3, 'codempeje' => 4, 'coduniste' => 5, 'despro' => 6, 'docane1' => 7, 'docane2' => 8, 'docane3' => 9, 'prepor' => 10, 'preporcar' => 11, 'lisicact_id' => 12, 'detdecmod' => 13, 'anapor' => 14, 'anaporcar' => 15, 'status' => 16, 'id' => 17, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
 	);
 
 	
@@ -123,25 +144,39 @@ abstract class BaseLimemoranPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(LimemoranPeer::NUMEXP);
-
 		$criteria->addSelectColumn(LimemoranPeer::NUMEMO);
 
-		$criteria->addSelectColumn(LimemoranPeer::NOMPRO);
+		$criteria->addSelectColumn(LimemoranPeer::NUMPRE);
 
-		$criteria->addSelectColumn(LimemoranPeer::FECHA);
+		$criteria->addSelectColumn(LimemoranPeer::CODEMPADM);
 
-		$criteria->addSelectColumn(LimemoranPeer::CODFIN);
+		$criteria->addSelectColumn(LimemoranPeer::CODUNIADM);
 
-		$criteria->addSelectColumn(LimemoranPeer::CODCOM);
+		$criteria->addSelectColumn(LimemoranPeer::CODEMPEJE);
 
 		$criteria->addSelectColumn(LimemoranPeer::CODUNISTE);
 
-		$criteria->addSelectColumn(LimemoranPeer::CODCLACOMP);
+		$criteria->addSelectColumn(LimemoranPeer::DESPRO);
 
-		$criteria->addSelectColumn(LimemoranPeer::TIPCOM);
+		$criteria->addSelectColumn(LimemoranPeer::DOCANE1);
 
-		$criteria->addSelectColumn(LimemoranPeer::DETMEMO);
+		$criteria->addSelectColumn(LimemoranPeer::DOCANE2);
+
+		$criteria->addSelectColumn(LimemoranPeer::DOCANE3);
+
+		$criteria->addSelectColumn(LimemoranPeer::PREPOR);
+
+		$criteria->addSelectColumn(LimemoranPeer::PREPORCAR);
+
+		$criteria->addSelectColumn(LimemoranPeer::LISICACT_ID);
+
+		$criteria->addSelectColumn(LimemoranPeer::DETDECMOD);
+
+		$criteria->addSelectColumn(LimemoranPeer::ANAPOR);
+
+		$criteria->addSelectColumn(LimemoranPeer::ANAPORCAR);
+
+		$criteria->addSelectColumn(LimemoranPeer::STATUS);
 
 		$criteria->addSelectColumn(LimemoranPeer::ID);
 
@@ -222,6 +257,167 @@ abstract class BaseLimemoranPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinLisicact(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(LimemoranPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(LimemoranPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(LimemoranPeer::LISICACT_ID, LisicactPeer::ID);
+
+		$rs = LimemoranPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinLisicact(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		LimemoranPeer::addSelectColumns($c);
+		$startcol = (LimemoranPeer::NUM_COLUMNS - LimemoranPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		LisicactPeer::addSelectColumns($c);
+
+		$c->addJoin(LimemoranPeer::LISICACT_ID, LisicactPeer::ID);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = LimemoranPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = LisicactPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getLisicact(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addLimemoran($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initLimemorans();
+				$obj2->addLimemoran($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(LimemoranPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(LimemoranPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+			$criteria->addJoin(LimemoranPeer::LISICACT_ID, LisicactPeer::ID);
+	
+		$rs = LimemoranPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		LimemoranPeer::addSelectColumns($c);
+		$startcol2 = (LimemoranPeer::NUM_COLUMNS - LimemoranPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+			LisicactPeer::addSelectColumns($c);
+			$startcol3 = $startcol2 + LisicactPeer::NUM_COLUMNS;
+	
+			$c->addJoin(LimemoranPeer::LISICACT_ID, LisicactPeer::ID);
+	
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = LimemoranPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+							
+				$omClass = LisicactPeer::getOMClass();
+	
+
+				$cls = Propel::import($omClass);
+				$obj2 = new $cls();
+				$obj2->hydrate($rs, $startcol2);
+
+				$newObject = true;
+				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+					$temp_obj1 = $results[$j];
+					$temp_obj2 = $temp_obj1->getLisicact(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+						$newObject = false;
+						$temp_obj2->addLimemoran($obj1); 						break;
+					}
+				}
+
+				if ($newObject) {
+					$obj2->initLimemorans();
+					$obj2->addLimemoran($obj1);
+				}
+	
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{

@@ -13,7 +13,7 @@ abstract class BaseLidefempPeer {
 	const CLASS_DEFAULT = 'lib.model.Lidefemp';
 
 	
-	const NUM_COLUMNS = 11;
+	const NUM_COLUMNS = 21;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -50,6 +50,36 @@ abstract class BaseLidefempPeer {
 	const EXPDIE = 'lidefemp.EXPDIE';
 
 	
+	const NUMEMO = 'lidefemp.NUMEMO';
+
+	
+	const SOLEGR = 'lidefemp.SOLEGR';
+
+	
+	const COMINT = 'lidefemp.COMINT';
+
+	
+	const PLIEGO = 'lidefemp.PLIEGO';
+
+	
+	const ACLARA = 'lidefemp.ACLARA';
+
+	
+	const OFERTA = 'lidefemp.OFERTA';
+
+	
+	const ANAOFE = 'lidefemp.ANAOFE';
+
+	
+	const RECOME = 'lidefemp.RECOME';
+
+	
+	const PTOCUECON = 'lidefemp.PTOCUECON';
+
+	
+	const NOTIFI = 'lidefemp.NOTIFI';
+
+	
 	const ID = 'lidefemp.ID';
 
 	
@@ -58,18 +88,18 @@ abstract class BaseLidefempPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nomemp', 'Diremp', 'Telemp', 'Faxemp', 'Emaemp', 'Unitri', 'Ptocta', 'Prebas', 'Expdie', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (LidefempPeer::CODEMP, LidefempPeer::NOMEMP, LidefempPeer::DIREMP, LidefempPeer::TELEMP, LidefempPeer::FAXEMP, LidefempPeer::EMAEMP, LidefempPeer::UNITRI, LidefempPeer::PTOCTA, LidefempPeer::PREBAS, LidefempPeer::EXPDIE, LidefempPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nomemp', 'diremp', 'telemp', 'faxemp', 'emaemp', 'unitri', 'ptocta', 'prebas', 'expdie', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nomemp', 'Diremp', 'Telemp', 'Faxemp', 'Emaemp', 'Unitri', 'Ptocta', 'Prebas', 'Expdie', 'Numemo', 'Solegr', 'Comint', 'Pliego', 'Aclara', 'Oferta', 'Anaofe', 'Recome', 'Ptocuecon', 'Notifi', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (LidefempPeer::CODEMP, LidefempPeer::NOMEMP, LidefempPeer::DIREMP, LidefempPeer::TELEMP, LidefempPeer::FAXEMP, LidefempPeer::EMAEMP, LidefempPeer::UNITRI, LidefempPeer::PTOCTA, LidefempPeer::PREBAS, LidefempPeer::EXPDIE, LidefempPeer::NUMEMO, LidefempPeer::SOLEGR, LidefempPeer::COMINT, LidefempPeer::PLIEGO, LidefempPeer::ACLARA, LidefempPeer::OFERTA, LidefempPeer::ANAOFE, LidefempPeer::RECOME, LidefempPeer::PTOCUECON, LidefempPeer::NOTIFI, LidefempPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nomemp', 'diremp', 'telemp', 'faxemp', 'emaemp', 'unitri', 'ptocta', 'prebas', 'expdie', 'numemo', 'solegr', 'comint', 'pliego', 'aclara', 'oferta', 'anaofe', 'recome', 'ptocuecon', 'notifi', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nomemp' => 1, 'Diremp' => 2, 'Telemp' => 3, 'Faxemp' => 4, 'Emaemp' => 5, 'Unitri' => 6, 'Ptocta' => 7, 'Prebas' => 8, 'Expdie' => 9, 'Id' => 10, ),
-		BasePeer::TYPE_COLNAME => array (LidefempPeer::CODEMP => 0, LidefempPeer::NOMEMP => 1, LidefempPeer::DIREMP => 2, LidefempPeer::TELEMP => 3, LidefempPeer::FAXEMP => 4, LidefempPeer::EMAEMP => 5, LidefempPeer::UNITRI => 6, LidefempPeer::PTOCTA => 7, LidefempPeer::PREBAS => 8, LidefempPeer::EXPDIE => 9, LidefempPeer::ID => 10, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nomemp' => 1, 'diremp' => 2, 'telemp' => 3, 'faxemp' => 4, 'emaemp' => 5, 'unitri' => 6, 'ptocta' => 7, 'prebas' => 8, 'expdie' => 9, 'id' => 10, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nomemp' => 1, 'Diremp' => 2, 'Telemp' => 3, 'Faxemp' => 4, 'Emaemp' => 5, 'Unitri' => 6, 'Ptocta' => 7, 'Prebas' => 8, 'Expdie' => 9, 'Numemo' => 10, 'Solegr' => 11, 'Comint' => 12, 'Pliego' => 13, 'Aclara' => 14, 'Oferta' => 15, 'Anaofe' => 16, 'Recome' => 17, 'Ptocuecon' => 18, 'Notifi' => 19, 'Id' => 20, ),
+		BasePeer::TYPE_COLNAME => array (LidefempPeer::CODEMP => 0, LidefempPeer::NOMEMP => 1, LidefempPeer::DIREMP => 2, LidefempPeer::TELEMP => 3, LidefempPeer::FAXEMP => 4, LidefempPeer::EMAEMP => 5, LidefempPeer::UNITRI => 6, LidefempPeer::PTOCTA => 7, LidefempPeer::PREBAS => 8, LidefempPeer::EXPDIE => 9, LidefempPeer::NUMEMO => 10, LidefempPeer::SOLEGR => 11, LidefempPeer::COMINT => 12, LidefempPeer::PLIEGO => 13, LidefempPeer::ACLARA => 14, LidefempPeer::OFERTA => 15, LidefempPeer::ANAOFE => 16, LidefempPeer::RECOME => 17, LidefempPeer::PTOCUECON => 18, LidefempPeer::NOTIFI => 19, LidefempPeer::ID => 20, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nomemp' => 1, 'diremp' => 2, 'telemp' => 3, 'faxemp' => 4, 'emaemp' => 5, 'unitri' => 6, 'ptocta' => 7, 'prebas' => 8, 'expdie' => 9, 'numemo' => 10, 'solegr' => 11, 'comint' => 12, 'pliego' => 13, 'aclara' => 14, 'oferta' => 15, 'anaofe' => 16, 'recome' => 17, 'ptocuecon' => 18, 'notifi' => 19, 'id' => 20, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
 	);
 
 	
@@ -142,6 +172,26 @@ abstract class BaseLidefempPeer {
 		$criteria->addSelectColumn(LidefempPeer::PREBAS);
 
 		$criteria->addSelectColumn(LidefempPeer::EXPDIE);
+
+		$criteria->addSelectColumn(LidefempPeer::NUMEMO);
+
+		$criteria->addSelectColumn(LidefempPeer::SOLEGR);
+
+		$criteria->addSelectColumn(LidefempPeer::COMINT);
+
+		$criteria->addSelectColumn(LidefempPeer::PLIEGO);
+
+		$criteria->addSelectColumn(LidefempPeer::ACLARA);
+
+		$criteria->addSelectColumn(LidefempPeer::OFERTA);
+
+		$criteria->addSelectColumn(LidefempPeer::ANAOFE);
+
+		$criteria->addSelectColumn(LidefempPeer::RECOME);
+
+		$criteria->addSelectColumn(LidefempPeer::PTOCUECON);
+
+		$criteria->addSelectColumn(LidefempPeer::NOTIFI);
 
 		$criteria->addSelectColumn(LidefempPeer::ID);
 

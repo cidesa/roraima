@@ -9,19 +9,11 @@ abstract class BaseLiasplegcrieva extends BaseObject  implements Persistent {
 
 
 	
-	protected $lireglic_id;
+	protected $codcri;
 
 
 	
-	protected $codlic;
-
-
-	
-	protected $codpro;
-
-
-	
-	protected $lirecaud_id;
+	protected $descri;
 
 
 	
@@ -32,43 +24,23 @@ abstract class BaseLiasplegcrieva extends BaseObject  implements Persistent {
 	protected $id;
 
 	
-	protected $aLireglic;
-
-	
-	protected $aLirecaud;
-
-	
 	protected $alreadyInSave = false;
 
 	
 	protected $alreadyInValidation = false;
 
   
-  public function getLireglicId()
+  public function getCodcri()
   {
 
-    return $this->lireglic_id;
+    return trim($this->codcri);
 
   }
   
-  public function getCodlic()
+  public function getDescri()
   {
 
-    return trim($this->codlic);
-
-  }
-  
-  public function getCodpro()
-  {
-
-    return trim($this->codpro);
-
-  }
-  
-  public function getLirecaudId()
-  {
-
-    return $this->lirecaud_id;
+    return trim($this->descri);
 
   }
   
@@ -87,52 +59,24 @@ abstract class BaseLiasplegcrieva extends BaseObject  implements Persistent {
 
   }
 	
-	public function setLireglicId($v)
+	public function setCodcri($v)
 	{
 
-    if ($this->lireglic_id !== $v) {
-        $this->lireglic_id = $v;
-        $this->modifiedColumns[] = LiasplegcrievaPeer::LIREGLIC_ID;
-      }
-  
-		if ($this->aLireglic !== null && $this->aLireglic->getId() !== $v) {
-			$this->aLireglic = null;
-		}
-
-	} 
-	
-	public function setCodlic($v)
-	{
-
-    if ($this->codlic !== $v) {
-        $this->codlic = $v;
-        $this->modifiedColumns[] = LiasplegcrievaPeer::CODLIC;
+    if ($this->codcri !== $v) {
+        $this->codcri = $v;
+        $this->modifiedColumns[] = LiasplegcrievaPeer::CODCRI;
       }
   
 	} 
 	
-	public function setCodpro($v)
+	public function setDescri($v)
 	{
 
-    if ($this->codpro !== $v) {
-        $this->codpro = $v;
-        $this->modifiedColumns[] = LiasplegcrievaPeer::CODPRO;
+    if ($this->descri !== $v) {
+        $this->descri = $v;
+        $this->modifiedColumns[] = LiasplegcrievaPeer::DESCRI;
       }
   
-	} 
-	
-	public function setLirecaudId($v)
-	{
-
-    if ($this->lirecaud_id !== $v) {
-        $this->lirecaud_id = $v;
-        $this->modifiedColumns[] = LiasplegcrievaPeer::LIRECAUD_ID;
-      }
-  
-		if ($this->aLirecaud !== null && $this->aLirecaud->getId() !== $v) {
-			$this->aLirecaud = null;
-		}
-
 	} 
 	
 	public function setPuntaje($v)
@@ -159,17 +103,13 @@ abstract class BaseLiasplegcrieva extends BaseObject  implements Persistent {
   {
     try {
 
-      $this->lireglic_id = $rs->getInt($startcol + 0);
+      $this->codcri = $rs->getString($startcol + 0);
 
-      $this->codlic = $rs->getString($startcol + 1);
+      $this->descri = $rs->getString($startcol + 1);
 
-      $this->codpro = $rs->getString($startcol + 2);
+      $this->puntaje = $rs->getFloat($startcol + 2);
 
-      $this->lirecaud_id = $rs->getInt($startcol + 3);
-
-      $this->puntaje = $rs->getFloat($startcol + 4);
-
-      $this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 3);
 
       $this->resetModified();
 
@@ -177,7 +117,7 @@ abstract class BaseLiasplegcrieva extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 6; 
+            return $startcol + 4; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Liasplegcrieva object", $e);
     }
@@ -254,22 +194,6 @@ abstract class BaseLiasplegcrieva extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
-												
-			if ($this->aLireglic !== null) {
-				if ($this->aLireglic->isModified()) {
-					$affectedRows += $this->aLireglic->save($con);
-				}
-				$this->setLireglic($this->aLireglic);
-			}
-
-			if ($this->aLirecaud !== null) {
-				if ($this->aLirecaud->isModified()) {
-					$affectedRows += $this->aLirecaud->save($con);
-				}
-				$this->setLirecaud($this->aLirecaud);
-			}
-
-
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = LiasplegcrievaPeer::doInsert($this, $con);
@@ -317,20 +241,6 @@ abstract class BaseLiasplegcrieva extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-												
-			if ($this->aLireglic !== null) {
-				if (!$this->aLireglic->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aLireglic->getValidationFailures());
-				}
-			}
-
-			if ($this->aLirecaud !== null) {
-				if (!$this->aLirecaud->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aLirecaud->getValidationFailures());
-				}
-			}
-
-
 			if (($retval = LiasplegcrievaPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
@@ -355,21 +265,15 @@ abstract class BaseLiasplegcrieva extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getLireglicId();
+				return $this->getCodcri();
 				break;
 			case 1:
-				return $this->getCodlic();
+				return $this->getDescri();
 				break;
 			case 2:
-				return $this->getCodpro();
-				break;
-			case 3:
-				return $this->getLirecaudId();
-				break;
-			case 4:
 				return $this->getPuntaje();
 				break;
-			case 5:
+			case 3:
 				return $this->getId();
 				break;
 			default:
@@ -382,12 +286,10 @@ abstract class BaseLiasplegcrieva extends BaseObject  implements Persistent {
 	{
 		$keys = LiasplegcrievaPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getLireglicId(),
-			$keys[1] => $this->getCodlic(),
-			$keys[2] => $this->getCodpro(),
-			$keys[3] => $this->getLirecaudId(),
-			$keys[4] => $this->getPuntaje(),
-			$keys[5] => $this->getId(),
+			$keys[0] => $this->getCodcri(),
+			$keys[1] => $this->getDescri(),
+			$keys[2] => $this->getPuntaje(),
+			$keys[3] => $this->getId(),
 		);
 		return $result;
 	}
@@ -404,21 +306,15 @@ abstract class BaseLiasplegcrieva extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setLireglicId($value);
+				$this->setCodcri($value);
 				break;
 			case 1:
-				$this->setCodlic($value);
+				$this->setDescri($value);
 				break;
 			case 2:
-				$this->setCodpro($value);
-				break;
-			case 3:
-				$this->setLirecaudId($value);
-				break;
-			case 4:
 				$this->setPuntaje($value);
 				break;
-			case 5:
+			case 3:
 				$this->setId($value);
 				break;
 		} 	}
@@ -428,12 +324,10 @@ abstract class BaseLiasplegcrieva extends BaseObject  implements Persistent {
 	{
 		$keys = LiasplegcrievaPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setLireglicId($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setCodlic($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setCodpro($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setLirecaudId($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setPuntaje($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[0], $arr)) $this->setCodcri($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setDescri($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setPuntaje($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
 	}
 
 	
@@ -441,10 +335,8 @@ abstract class BaseLiasplegcrieva extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(LiasplegcrievaPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(LiasplegcrievaPeer::LIREGLIC_ID)) $criteria->add(LiasplegcrievaPeer::LIREGLIC_ID, $this->lireglic_id);
-		if ($this->isColumnModified(LiasplegcrievaPeer::CODLIC)) $criteria->add(LiasplegcrievaPeer::CODLIC, $this->codlic);
-		if ($this->isColumnModified(LiasplegcrievaPeer::CODPRO)) $criteria->add(LiasplegcrievaPeer::CODPRO, $this->codpro);
-		if ($this->isColumnModified(LiasplegcrievaPeer::LIRECAUD_ID)) $criteria->add(LiasplegcrievaPeer::LIRECAUD_ID, $this->lirecaud_id);
+		if ($this->isColumnModified(LiasplegcrievaPeer::CODCRI)) $criteria->add(LiasplegcrievaPeer::CODCRI, $this->codcri);
+		if ($this->isColumnModified(LiasplegcrievaPeer::DESCRI)) $criteria->add(LiasplegcrievaPeer::DESCRI, $this->descri);
 		if ($this->isColumnModified(LiasplegcrievaPeer::PUNTAJE)) $criteria->add(LiasplegcrievaPeer::PUNTAJE, $this->puntaje);
 		if ($this->isColumnModified(LiasplegcrievaPeer::ID)) $criteria->add(LiasplegcrievaPeer::ID, $this->id);
 
@@ -477,13 +369,9 @@ abstract class BaseLiasplegcrieva extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setLireglicId($this->lireglic_id);
+		$copyObj->setCodcri($this->codcri);
 
-		$copyObj->setCodlic($this->codlic);
-
-		$copyObj->setCodpro($this->codpro);
-
-		$copyObj->setLirecaudId($this->lirecaud_id);
+		$copyObj->setDescri($this->descri);
 
 		$copyObj->setPuntaje($this->puntaje);
 
@@ -509,70 +397,6 @@ abstract class BaseLiasplegcrieva extends BaseObject  implements Persistent {
 			self::$peer = new LiasplegcrievaPeer();
 		}
 		return self::$peer;
-	}
-
-	
-	public function setLireglic($v)
-	{
-
-
-		if ($v === null) {
-			$this->setLireglicId(NULL);
-		} else {
-			$this->setLireglicId($v->getId());
-		}
-
-
-		$this->aLireglic = $v;
-	}
-
-
-	
-	public function getLireglic($con = null)
-	{
-		if ($this->aLireglic === null && ($this->lireglic_id !== null)) {
-						include_once 'lib/model/om/BaseLireglicPeer.php';
-
-      $c = new Criteria();
-      $c->add(LireglicPeer::ID,$this->lireglic_id);
-      
-			$this->aLireglic = LireglicPeer::doSelectOne($c, $con);
-
-			
-		}
-		return $this->aLireglic;
-	}
-
-	
-	public function setLirecaud($v)
-	{
-
-
-		if ($v === null) {
-			$this->setLirecaudId(NULL);
-		} else {
-			$this->setLirecaudId($v->getId());
-		}
-
-
-		$this->aLirecaud = $v;
-	}
-
-
-	
-	public function getLirecaud($con = null)
-	{
-		if ($this->aLirecaud === null && ($this->lirecaud_id !== null)) {
-						include_once 'lib/model/om/BaseLirecaudPeer.php';
-
-      $c = new Criteria();
-      $c->add(LirecaudPeer::ID,$this->lirecaud_id);
-      
-			$this->aLirecaud = LirecaudPeer::doSelectOne($c, $con);
-
-			
-		}
-		return $this->aLirecaud;
 	}
 
 } 

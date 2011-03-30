@@ -36,19 +36,7 @@ class LidetcomintMapBuilder {
 
 		$tMap->addColumn('NUMCOMINT', 'Numcomint', 'string', CreoleTypes::VARCHAR, false, 8);
 
-		$tMap->addColumn('FECCOMINT', 'Feccomint', 'int', CreoleTypes::DATE, false, null);
-
-		$tMap->addColumn('CODART', 'Codart', 'string', CreoleTypes::VARCHAR, false, 20);
-
-		$tMap->addColumn('REQART', 'Reqart', 'string', CreoleTypes::VARCHAR, false, 8);
-
-		$tMap->addColumn('FECREQ', 'Fecreq', 'int', CreoleTypes::DATE, false, null);
-
-		$tMap->addColumn('UNIRES', 'Unires', 'string', CreoleTypes::VARCHAR, false, 32);
-
-		$tMap->addColumn('CANREQ', 'Canreq', 'double', CreoleTypes::NUMERIC, false, 14);
-
-		$tMap->addColumn('COSTO', 'Costo', 'double', CreoleTypes::NUMERIC, false, 14);
+		$tMap->addColumn('NUMSOL', 'Numsol', 'string', CreoleTypes::VARCHAR, false, 8);
 
 		$tMap->addColumn('MONTOT', 'Montot', 'double', CreoleTypes::NUMERIC, false, 14);
 

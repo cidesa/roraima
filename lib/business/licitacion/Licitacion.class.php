@@ -4,276 +4,381 @@
  *
  * @package    Roraima
  * @subpackage licitacion
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
- * 
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Licitacion.class.php 43226 2011-03-29 22:40:34Z cramirez $
+ *
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
  */
 class Licitacion
 {
-
-
-public static function salvarLicitacion($lireglic, $grid)
-{
-  $lireglic->save();
-  $x=$grid[0];
-  $j=0;
-  while ($j<count($x))
-  {
-     if ($x[$j]->getPeriodico()!='')
-     {
-     $x[$j]->setCodlic($lireglic->getCodlic());
-     $x[$j]->save();
-     }
-     $j++;
-  }
-
-  $z=$grid[1];
-  $j=0;
-  while ($j<count($z))
-  {
-    $z[$j]->delete();
-    $j++;
-  }
-}
-
-  public static function salvarEmpresasOfertas($liemppar,$grid)
-  {
-  	$codlic=$liemppar->getCodlic();
-  	$idlic=$liemppar->getLireglicId();
-
-    $x=$grid[0];
-    $j=0;
-    while ($j<count($x))
+    public static function SalvarGridPliego($clase,$gridart,$griddep, $gridmec, $gridact, $gridpub, $gridleg, $gridtec, $gridfin, $gridfia, $gridtipemp)
     {
-     if ($x[$j]->getCodpro()!="")
-     {
-      $x[$j]->setCodlic($codlic);
-      $x[$j]->setLireglicId($idlic);
-      if ($x[$j]->getPrecal()==0)
-      {
-       $x[$j]->setPrecal(null);
-      }
-      $x[$j]->save();
-     }
-     $j++;
+        self::EliminarGridPLiegoArt($clase);
+        self::SalvarGridPLiegoArt($clase,$gridart);
+        $arrget=array('Numplie','Numexp');
+        H::Guardar_Grid($griddep, $arrget, $clase);
+        H::Guardar_Grid($gridmec, $arrget, $clase);
+        H::Guardar_Grid($gridact, $arrget, $clase);
+        H::Guardar_Grid($gridpub, $arrget, $clase);
+        H::Guardar_Grid($gridleg, $arrget, $clase);
+        H::Guardar_Grid($gridtec, $arrget, $clase);
+        H::Guardar_Grid($gridfin, $arrget, $clase);
+        H::Guardar_Grid($gridfia, $arrget, $clase);
+        H::Guardar_Grid($gridtipemp, $arrget, $clase);
     }
 
-    $z=$grid[1];
-    $j=0;
-    while ($j<count($z))
+    public static function EliminarGridPliego($clase)
     {
-      $z[$j]->delete();
-      $j++;
-    }
-  }
-
-  public static function salvarEmpresasOferentes($liempofe,$grid)
-  {
-  	$codlic=$liempofe->getCodlic();
-  	$idlic=$liempofe->getLireglicId();
-
-    $c= new Criteria();
-  	$c->add(LiempofePeer::LIREGLIC_ID,$idlic);
-  	LiempofePeer::doDelete($c);
-    $x=$grid[0];
-  //  H::PrintR($x);exit;
-    $j=0;
-    while ($j<count($x))
-    {
-     if ($x[$j]->getOferente())
-     {
-      $regaux= new Liempofe();
-      $regaux->setCodlic($codlic);
-      $regaux->setLireglicId($idlic);
-      if ($x[$j]->getPrecal()==0)
-      {
-       $regaux->setPrecal(null);
-      }
-      $regaux->setCodpro($x[$j]->getCodpro());
-      $regaux->setFecins($x[$j]->getFecins());
-      $regaux->setMontot($x[$j]->getMontot());
-      $regaux->setObservaciones($x[$j]->getObservaciones());
-      $regaux->save();
-     }
-     $j++;
-    }
-  }
-
-  public static function salvarEmpresasRecaudos($liasplegcrieva,$grid)
-  {
-  	$codpro=$liasplegcrieva->getCodpro();
-  	$codlic=$liasplegcrieva->getCodlic();
-  	$idlic=$liasplegcrieva->getLireglicId();
-
-    $c= new Criteria();
-  	$c->add(LiasplegcrievaPeer::CODLIC,$codlic);
-  	$c->add(LiasplegcrievaPeer::CODPRO,$codpro);
-  	LiasplegcrievaPeer::doDelete($c);
-    $x=$grid[0];
-
-    $j=0;
-    while ($j<count($x))
-    {
-     if ($x[$j]->getSeleccionado())
-     {
-      $regaux= new Liasplegcrieva();
-      $regaux->setCodlic($codlic);
-      $regaux->setLireglicId($idlic);
-      $regaux->setCodpro($codpro);
-      $regaux->setLirecaudId($x[$j]->getLirecaudId());
-      $regaux->setPuntaje($x[$j]->getPuntaje());
-      $regaux->save();
-     }
-     $j++;
-    }
-  }
-
-  public static function salvarEmpresasCriteriosTecnicos($liasptecanalis,$grid)
-  {
-  	$codpro=$liasptecanalis->getCodpro();
-  	$codlic=$liasptecanalis->getCodlic();
-  	$idlic=$liasptecanalis->getLireglicId();
-
-    $c= new Criteria();
-  	$c->add(LiasptecanalisPeer::CODLIC,$codlic);
-  	$c->add(LiasptecanalisPeer::CODPRO,$codpro);
-  	LiasptecanalisPeer::doDelete($c);
-    $x=$grid[0];
-
-    $j=0;
-    while ($j<count($x))
-    {
-     if ($x[$j]->getSeleccionado())
-     {
-      $regaux= new Liasptecanalis();
-      $regaux->setCodlic($codlic);
-      $regaux->setLireglicId($idlic);
-      $regaux->setCodpro($codpro);
-      $regaux->setLiaspteccrievaId($x[$j]->getLiaspteccrievaId());
-      $regaux->setPuntaje($x[$j]->getPuntaje());
-      $regaux->save();
-     }
-     $j++;
-    }
-  }
-
-  public static function salvarEmpresasCriteriosFinancieros($liaspfinanalis,$grid)
-  {
-  	$codpro=$liaspfinanalis->getCodpro();
-  	$codlic=$liaspfinanalis->getCodlic();
-  	$idlic=$liaspfinanalis->getLireglicId();
-
-    $c= new Criteria();
-  	$c->add(LiaspfinanalisPeer::CODLIC,$codlic);
-  	$c->add(LiaspfinanalisPeer::CODPRO,$codpro);
-  	LiaspfinanalisPeer::doDelete($c);
-    $x=$grid[0];
-
-    $j=0;
-    while ($j<count($x))
-    {
-     if ($x[$j]->getSeleccionado())
-     {
-      $regaux= new Liaspfinanalis();
-      $regaux->setCodlic($codlic);
-      $regaux->setLireglicId($idlic);
-      $regaux->setCodpro($codpro);
-      $regaux->setLiaspfincrievaId($x[$j]->getLiaspfincrievaId());
-      $regaux->setPuntaje($x[$j]->getPuntaje());
-      $regaux->save();
-     }
-     $j++;
-    }
-  }
-
-  public static function salvarComisionLicitacion($licomlic,$grid)
-  {
-
-  	$licomlic->save();
-
-    $x=$grid[0];
-    $j=0;
-    while ($j<count($x))
-    {
-     if ($x[$j]->getCodemp()!="")
-     {
-      $x[$j]->setLicomlicId($licomlic->getId());
-      $x[$j]->save();
-     }
-     $j++;
+        self::EliminarGridPLiegoArt($clase);
     }
 
-    $z=$grid[1];
-    $j=0;
-    while ($j<count($z))
+    public static function EliminarGridPLiegoArt($clase)
     {
-      $z[$j]->delete();
-      $j++;
-    }
-  }
-
- public static function salvarOferPre($lioferpre,$grid)
-  {
-  	$codlic=$lioferpre->getCodlic();
-  	$idlic=$lioferpre->getLireglicId();
-    $codpro=$lioferpre->getCodpro();
-
-    $c= new Criteria();
-    $c->add(LioferprePeer::CODLIC,$lioferpre->getCodlic());
-    $c->add(LioferprePeer::CODPRO,$lioferpre->getCodpro());
-    LioferprePeer::doDelete($c);
-
-    $x=$grid[0];
-    $j=0;
-    while ($j<count($x))
-    {
-     if ($x[$j]->getCodpar()!="")
-     {
-      $regaux= new Lioferpre();
-      $regaux->setCodlic($codlic);
-      $regaux->setLireglicId($idlic);
-      $regaux->setCodpro($codpro);
-      $regaux->setCodpar($x[$j]->getCodpar());
-      $regaux->setCant($x[$j]->getCant());
-      $regaux->setPrecio($x[$j]->getPrecio());
-      $regaux->setMonsiniva($x[$j]->getMonsiniva());
-      $regaux->setIva($x[$j]->getIva());
-      $regaux->setMontot($x[$j]->getMontot());
-      $regaux->save();
-     }
-     $j++;
+        $c = new Criteria();
+        $c->add(LiplieartPeer::NUMPLIE,$clase->getNumplie());
+        $c->add(LiplieartPeer::NUMEXP,$clase->getNumexp());
+        $per = LiplieartPeer::doselect($c);
+        foreach($per as $r)
+          $r->delete();
     }
 
-    $z=$grid[1];
-    $j=0;
-    while ($j<count($z))
+    public static function SalvarGridPLiegoArt($clase,$gridart)
     {
-      $z[$j]->delete();
-      $j++;
+        foreach($gridart[0] as $reg)
+        {
+            $obj = new Liplieart();
+            $obj->setNumplie($clase->getNumplie());
+            $obj->setNumexp($clase->getNumexp());
+            $obj->setCodart($reg['codart']);
+            $obj->setCantid($reg['cantid']);
+            $obj->save();
+        }
     }
-  }
 
-
-  public static function salvarCalculoVAN($licalvan,$grid)
-  {
-  	$codlic=$licalvan->getCodlic();
- 	$idlic=$licalvan->getLireglicId();
-
-
-    $x=$grid[0];
-    $j=0;
-    while ($j<count($x))
+    public static function SalvarGridOferta($clase,$gridart,$gridrgo, $gridforpag, $gridcroent, $gridleg, $gridtec, $gridfin, $gridfia)
     {
-     if ($x[$j]->getCodpro())
-     {
-      $x[$j]->setCodlic($codlic);
-      $x[$j]->setLireglicId($idlic);
-      $x[$j]->save();
-     }
-     $j++;
+        self::EliminarGridOferta($clase);
+        self::SalvarGridOfertaArt($clase, $gridart);
+        $arrget=array('Numofe');
+        H::Guardar_Grid($gridrgo, $arrget, $clase);
+        H::Guardar_Grid($gridforpag, $arrget, $clase);
+        self::SalvarGridOfertaCroEnt($clase, $gridcroent);
+        self::SalvarGridOfertaCriLeg($clase, $gridleg);
+        self::SalvarGridOfertaCriTec($clase, $gridtec);
+        self::SalvarGridOfertaCriFin($clase, $gridfin);
+        self::SalvarGridOfertaCriFia($clase, $gridfia);
     }
-  }
+
+    public static function SalvarGridOfertaArt($clase,$grid)
+    {
+        foreach($grid[0] as $reg)
+        {
+            $obj = new Liregofedet();
+            $obj->setNumofe($clase->getNumofe());
+            $obj->setCodart($reg['codart']);
+            $obj->setUnimed($reg['unimed']);
+            $obj->setCantid($reg['cantid']);
+            $obj->setPreuni($reg['preuni']);
+            $obj->setMonrec($reg['monrec']);
+            $obj->setSubtot($reg['subtot']);
+            $obj->save();
+        }
+    }
+
+    public static function EliminarGridOferta($clase)
+    {
+        self::EliminarGridOfertaArt($clase);
+        #self::EliminarGridOfertaRgo($clase);
+        #self::EliminarGridOfertaForPag($clase);
+        self::EliminarGridOfertaCroEnt($clase);
+        self::EliminarGridOfertaCriLeg($clase);
+        self::EliminarGridOfertaCriTec($clase);
+        self::EliminarGridOfertaCriFin($clase);
+        self::EliminarGridOfertaCriFia($clase);
+    }
+
+    public static function EliminarGridOfertaArt($clase)
+    {
+        $c = new Criteria();
+        $c->add(LiregofedetPeer::NUMOFE,$clase->getNumofe());
+        $per = LiregofedetPeer::doselect($c);
+        foreach($per as $r)
+          $r->delete();
+    }
+
+    public static function EliminarGridOfertaRgo($clase)
+    {
+        $c = new Criteria();
+        $c->add(LiregofergoPeer::NUMOFE,$clase->getNumofe());
+        $per = LiregofergoPeer::doselect($c);
+        foreach($per as $r)
+          $r->delete();
+    }
+
+    public static function EliminarGridOfertaForPag($clase)
+    {
+        $c = new Criteria();
+        $c->add(LiforpagPeer::NUMOFE,$clase->getNumofe());
+        $per = LiforpagPeer::doselect($c);
+        foreach($per as $r)
+          $r->delete();
+    }
+
+    public static function EliminarGridOfertaCroEnt($clase)
+    {
+        $c = new Criteria();
+        $c->add(LicroentPeer::NUMOFE,$clase->getNumofe());
+        $per = LicroentPeer::doselect($c);
+        foreach($per as $r)
+          $r->delete();
+    }
+
+    public static function EliminarGridOfertaCriLeg($clase)
+    {
+        $c = new Criteria();
+        $c->add(LiregofelegPeer::NUMOFE,$clase->getNumofe());
+        $per = LiregofelegPeer::doselect($c);
+        foreach($per as $r)
+          $r->delete();
+    }
+
+    public static function EliminarGridOfertaCriTec($clase)
+    {
+        $c = new Criteria();
+        $c->add(LiregofetecPeer::NUMOFE,$clase->getNumofe());
+        $per = LiregofetecPeer::doselect($c);
+        foreach($per as $r)
+          $r->delete();
+    }
+
+    public static function EliminarGridOfertaCriFin($clase)
+    {
+        $c = new Criteria();
+        $c->add(LiregofefinPeer::NUMOFE,$clase->getNumofe());
+        $per = LiregofefinPeer::doselect($c);
+        foreach($per as $r)
+          $r->delete();
+    }
+
+    public static function EliminarGridOfertaCrifia($clase)
+    {
+        $c = new Criteria();
+        $c->add(LiregofefiaPeer::NUMOFE,$clase->getNumofe());
+        $per = LiregofefiaPeer::doselect($c);
+        foreach($per as $r)
+          $r->delete();
+    }
+
+    public static function SalvarGridOfertaCroEnt($clase,$grid)
+    {
+        foreach($grid[0] as $reg)
+        {
+            $obj = new Licroent();
+            $obj->setNumofe($clase->getNumofe());
+            $obj->setCodart($reg['codart']);
+            $obj->setCantid($reg['cantid']);
+            $obj->setCoduniadm($reg['coduniadm']);
+            $obj->setFecent($reg['fecent']);
+            $obj->setCondic($reg['condic']);
+            $obj->save();
+        }
+    }
+
+    public static function SalvarGridOfertaCriLeg($clase,$grid)
+    {
+        foreach($grid[0] as $reg)
+        {
+            if($reg['check']=='1')
+            {
+                $obj = new Liregofeleg();
+                $obj->setNumofe($clase->getNumofe());
+                $obj->setCodcri($reg['codcri']);
+                $obj->setObserv($reg['observ']);
+                $obj->save();
+            }
+        }
+    }
+
+    public static function SalvarGridOfertaCriTec($clase,$grid)
+    {
+        foreach($grid[0] as $reg)
+        {
+            if($reg['check']=='1')
+            {
+                $obj = new Liregofetec();
+                $obj->setNumofe($clase->getNumofe());
+                $obj->setCodcri($reg['codcri']);
+                $obj->setObserv($reg['observ']);
+                $obj->save();
+            }
+        }
+    }
+
+    public static function SalvarGridOfertaCriFin($clase,$grid)
+    {
+        foreach($grid[0] as $reg)
+        {
+            if($reg['check']=='1')
+            {
+                $obj = new Liregofefin();
+                $obj->setNumofe($clase->getNumofe());
+                $obj->setCodcri($reg['codcri']);
+                $obj->setObserv($reg['observ']);
+                $obj->save();
+            }
+        }
+    }
+
+    public static function SalvarGridOfertaCriFia($clase,$grid)
+    {
+        foreach($grid[0] as $reg)
+        {
+            if($reg['check']=='1')
+            {
+                $obj = new Liregofefia();
+                $obj->setNumofe($clase->getNumofe());
+                $obj->setCodcomres($reg['codcomres']);
+                $obj->setObserv($reg['observ']);
+                $obj->save();
+            }
+        }
+    }
+
+    public static function SalvarGridAnalisisOferta($clase, $gridleg, $gridtec, $gridfin, $gridfia, $gridtipemp)
+    {
+        self::EliminarGridAnalisisOferta($clase);
+        self::SalvarGridAnaOfeLeg($clase, $gridleg);
+        self::SalvarGridAnaOfeTec($clase, $gridtec);
+        self::SalvarGridAnaOfeFin($clase, $gridfin);
+        self::SalvarGridAnaOfeFia($clase, $gridfia);
+        self::SalvarGridAnaOfeTipEmp($clase, $gridtipemp);
+    }
+
+    public static function EliminarGridAnalisisOferta($clase)
+    {
+        self::EliminarGridanaOfeLeg($clase);
+        self::EliminarGridanaOfeTec($clase);
+        self::EliminarGridanaOfeFin($clase);
+        self::EliminarGridanaOfeFia($clase);
+        self::EliminarGridanaOfeTipEmp($clase);
+    }
+
+
+    public static function EliminarGridanaOfeLeg($clase)
+    {
+        $c = new Criteria();
+        $c->add(LianaofelegPeer::NUMANAOFE,$clase->getNumanaofe());
+        $per = LianaofelegPeer::doselect($c);
+        foreach($per as $r)
+          $r->delete();
+    }
+
+    public static function EliminarGridanaOfeTec($clase)
+    {
+        $c = new Criteria();
+        $c->add(LianaofetecPeer::NUMANAOFE,$clase->getNumanaofe());
+        $per = LianaofetecPeer::doselect($c);
+        foreach($per as $r)
+          $r->delete();
+    }
+
+    public static function EliminarGridanaOfeFin($clase)
+    {
+        $c = new Criteria();
+        $c->add(LianaofefinPeer::NUMANAOFE,$clase->getNumanaofe());
+        $per = LianaofefinPeer::doselect($c);
+        foreach($per as $r)
+          $r->delete();
+    }
+
+    public static function EliminarGridanaOfeFia($clase)
+    {
+        $c = new Criteria();
+        $c->add(LianaofefiaPeer::NUMANAOFE,$clase->getNumanaofe());
+        $per = LianaofefiaPeer::doselect($c);
+        foreach($per as $r)
+          $r->delete();
+    }
+
+    public static function EliminarGridanaOfeTipEmp($clase)
+    {
+        $c = new Criteria();
+        $c->add(LianaofetipempPeer::NUMANAOFE,$clase->getNumanaofe());
+        $per = LianaofetipempPeer::doselect($c);
+        foreach($per as $r)
+          $r->delete();
+    }
+
+    public static function SalvarGridAnaOfeLeg($clase,$grid)
+    {
+        foreach($grid[0] as $reg)
+        {
+            $obj = new Lianaofeleg();
+            $obj->setNumanaofe($clase->getNumanaofe());
+            $obj->setCodcri($reg['codcri']);
+            $obj->setPunemp($reg['punemp']);
+            $obj->setPoremp($reg['poremp']);
+            $obj->setObserv($reg['observ']);
+            $obj->save();
+        }
+    }
+
+    public static function SalvarGridAnaOfeTec($clase,$grid)
+    {
+        foreach($grid[0] as $reg)
+        {
+            $obj = new Lianaofetec();
+            $obj->setNumanaofe($clase->getNumanaofe());
+            $obj->setCodcri($reg['codcri']);
+            $obj->setPunemp($reg['punemp']);
+            $obj->setPoremp($reg['poremp']);
+            $obj->setObserv($reg['observ']);
+            $obj->save();
+        }
+    }
+
+    public static function SalvarGridAnaOfeFin($clase,$grid)
+    {
+        foreach($grid[0] as $reg)
+        {
+            $obj = new Lianaofefin();
+            $obj->setNumanaofe($clase->getNumanaofe());
+            $obj->setCodcri($reg['codcri']);
+            $obj->setPunemp($reg['punemp']);
+            $obj->setPoremp($reg['poremp']);
+            $obj->setObserv($reg['observ']);
+            $obj->save();
+        }
+    }
+
+    public static function SalvarGridAnaOfeFia($clase,$grid)
+    {
+        foreach($grid[0] as $reg)
+        {
+            $obj = new Lianaofefia();
+            $obj->setNumanaofe($clase->getNumanaofe());
+            $obj->setCodcomres($reg['codcomres']);
+            $obj->setPunemp($reg['punemp']);
+            $obj->setPoremp($reg['poremp']);
+            $obj->setObserv($reg['observ']);
+            $obj->save();
+        }
+    }
+
+    public static function SalvarGridAnaOfeTipEmp($clase,$grid)
+    {
+        foreach($grid[0] as $reg)
+        {
+            $obj = new Lianaofetipemp();
+            $obj->setNumanaofe($clase->getNumanaofe());
+            $obj->setCodtipemp($reg['codtipemp']);
+            $obj->setPunemp($reg['punemp']);
+            $obj->setPoremp($reg['poremp']);
+            $obj->setObserv($reg['observ']);
+            $obj->save();
+        }
+    }
+
 }
 ?>

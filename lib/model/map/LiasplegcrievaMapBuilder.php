@@ -34,15 +34,11 @@ class LiasplegcrievaMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('liasplegcrieva_SEQ');
 
-		$tMap->addForeignKey('LIREGLIC_ID', 'LireglicId', 'int', CreoleTypes::INTEGER, 'lireglic', 'ID', true, null);
+		$tMap->addColumn('CODCRI', 'Codcri', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('CODLIC', 'Codlic', 'string', CreoleTypes::VARCHAR, true, 32);
+		$tMap->addColumn('DESCRI', 'Descri', 'string', CreoleTypes::VARCHAR, true, 100);
 
-		$tMap->addColumn('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, true, 15);
-
-		$tMap->addForeignKey('LIRECAUD_ID', 'LirecaudId', 'int', CreoleTypes::INTEGER, 'lirecaud', 'ID', true, null);
-
-		$tMap->addColumn('PUNTAJE', 'Puntaje', 'double', CreoleTypes::NUMERIC, true, 14);
+		$tMap->addColumn('PUNTAJE', 'Puntaje', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

@@ -9,7 +9,7 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
 
 
 	
-	protected $reqart;
+	protected $numpre;
 
 
 	
@@ -17,43 +17,11 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
 
 
 	
-	protected $desart;
-
-
-	
 	protected $codcat;
 
 
 	
-	protected $canreq;
-
-
-	
-	protected $canrec;
-
-
-	
-	protected $montot;
-
-
-	
-	protected $costo;
-
-
-	
-	protected $monrgo;
-
-
-	
-	protected $canord;
-
-
-	
-	protected $mondes;
-
-
-	
-	protected $relart;
+	protected $codpre;
 
 
 	
@@ -61,7 +29,43 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
 
 
 	
-	protected $codpar;
+	protected $cansol;
+
+
+	
+	protected $canapr;
+
+
+	
+	protected $costo;
+
+
+	
+	protected $subtot;
+
+
+	
+	protected $monrec;
+
+
+	
+	protected $montot;
+
+
+	
+	protected $status;
+
+
+	
+	protected $codmon;
+
+
+	
+	protected $valcam;
+
+
+	
+	protected $codfin;
 
 
 	
@@ -74,10 +78,10 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
 	protected $alreadyInValidation = false;
 
   
-  public function getReqart()
+  public function getNumpre()
   {
 
-    return trim($this->reqart);
+    return trim($this->numpre);
 
   }
   
@@ -88,13 +92,6 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
 
   }
   
-  public function getDesart()
-  {
-
-    return trim($this->desart);
-
-  }
-  
   public function getCodcat()
   {
 
@@ -102,27 +99,33 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
 
   }
   
-  public function getCanreq($val=false)
+  public function getCodpre()
   {
 
-    if($val) return number_format($this->canreq,2,',','.');
-    else return $this->canreq;
+    return trim($this->codpre);
 
   }
   
-  public function getCanrec($val=false)
+  public function getUnimed()
   {
 
-    if($val) return number_format($this->canrec,2,',','.');
-    else return $this->canrec;
+    return trim($this->unimed);
 
   }
   
-  public function getMontot($val=false)
+  public function getCansol($val=false)
   {
 
-    if($val) return number_format($this->montot,2,',','.');
-    else return $this->montot;
+    if($val) return number_format($this->cansol,2,',','.');
+    else return $this->cansol;
+
+  }
+  
+  public function getCanapr($val=false)
+  {
+
+    if($val) return number_format($this->canapr,2,',','.');
+    else return $this->canapr;
 
   }
   
@@ -134,49 +137,56 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
 
   }
   
-  public function getMonrgo($val=false)
+  public function getSubtot($val=false)
   {
 
-    if($val) return number_format($this->monrgo,2,',','.');
-    else return $this->monrgo;
+    if($val) return number_format($this->subtot,2,',','.');
+    else return $this->subtot;
 
   }
   
-  public function getCanord($val=false)
+  public function getMonrec($val=false)
   {
 
-    if($val) return number_format($this->canord,2,',','.');
-    else return $this->canord;
+    if($val) return number_format($this->monrec,2,',','.');
+    else return $this->monrec;
 
   }
   
-  public function getMondes($val=false)
+  public function getMontot($val=false)
   {
 
-    if($val) return number_format($this->mondes,2,',','.');
-    else return $this->mondes;
+    if($val) return number_format($this->montot,2,',','.');
+    else return $this->montot;
 
   }
   
-  public function getRelart($val=false)
+  public function getStatus()
   {
 
-    if($val) return number_format($this->relart,2,',','.');
-    else return $this->relart;
+    return trim($this->status);
 
   }
   
-  public function getUnimed()
+  public function getCodmon()
   {
 
-    return trim($this->unimed);
+    return trim($this->codmon);
 
   }
   
-  public function getCodpar()
+  public function getValcam($val=false)
   {
 
-    return trim($this->codpar);
+    if($val) return number_format($this->valcam,2,',','.');
+    else return $this->valcam;
+
+  }
+  
+  public function getCodfin()
+  {
+
+    return trim($this->codfin);
 
   }
   
@@ -187,12 +197,12 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
 
   }
 	
-	public function setReqart($v)
+	public function setNumpre($v)
 	{
 
-    if ($this->reqart !== $v) {
-        $this->reqart = $v;
-        $this->modifiedColumns[] = LiprebasdetPeer::REQART;
+    if ($this->numpre !== $v) {
+        $this->numpre = $v;
+        $this->modifiedColumns[] = LiprebasdetPeer::NUMPRE;
       }
   
 	} 
@@ -207,16 +217,6 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
   
 	} 
 	
-	public function setDesart($v)
-	{
-
-    if ($this->desart !== $v) {
-        $this->desart = $v;
-        $this->modifiedColumns[] = LiprebasdetPeer::DESART;
-      }
-  
-	} 
-	
 	public function setCodcat($v)
 	{
 
@@ -227,82 +227,12 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
   
 	} 
 	
-	public function setCanreq($v)
+	public function setCodpre($v)
 	{
 
-    if ($this->canreq !== $v) {
-        $this->canreq = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = LiprebasdetPeer::CANREQ;
-      }
-  
-	} 
-	
-	public function setCanrec($v)
-	{
-
-    if ($this->canrec !== $v) {
-        $this->canrec = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = LiprebasdetPeer::CANREC;
-      }
-  
-	} 
-	
-	public function setMontot($v)
-	{
-
-    if ($this->montot !== $v) {
-        $this->montot = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = LiprebasdetPeer::MONTOT;
-      }
-  
-	} 
-	
-	public function setCosto($v)
-	{
-
-    if ($this->costo !== $v) {
-        $this->costo = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = LiprebasdetPeer::COSTO;
-      }
-  
-	} 
-	
-	public function setMonrgo($v)
-	{
-
-    if ($this->monrgo !== $v) {
-        $this->monrgo = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = LiprebasdetPeer::MONRGO;
-      }
-  
-	} 
-	
-	public function setCanord($v)
-	{
-
-    if ($this->canord !== $v) {
-        $this->canord = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = LiprebasdetPeer::CANORD;
-      }
-  
-	} 
-	
-	public function setMondes($v)
-	{
-
-    if ($this->mondes !== $v) {
-        $this->mondes = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = LiprebasdetPeer::MONDES;
-      }
-  
-	} 
-	
-	public function setRelart($v)
-	{
-
-    if ($this->relart !== $v) {
-        $this->relart = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = LiprebasdetPeer::RELART;
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = LiprebasdetPeer::CODPRE;
       }
   
 	} 
@@ -317,12 +247,102 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
   
 	} 
 	
-	public function setCodpar($v)
+	public function setCansol($v)
 	{
 
-    if ($this->codpar !== $v) {
-        $this->codpar = $v;
-        $this->modifiedColumns[] = LiprebasdetPeer::CODPAR;
+    if ($this->cansol !== $v) {
+        $this->cansol = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = LiprebasdetPeer::CANSOL;
+      }
+  
+	} 
+	
+	public function setCanapr($v)
+	{
+
+    if ($this->canapr !== $v) {
+        $this->canapr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = LiprebasdetPeer::CANAPR;
+      }
+  
+	} 
+	
+	public function setCosto($v)
+	{
+
+    if ($this->costo !== $v) {
+        $this->costo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = LiprebasdetPeer::COSTO;
+      }
+  
+	} 
+	
+	public function setSubtot($v)
+	{
+
+    if ($this->subtot !== $v) {
+        $this->subtot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = LiprebasdetPeer::SUBTOT;
+      }
+  
+	} 
+	
+	public function setMonrec($v)
+	{
+
+    if ($this->monrec !== $v) {
+        $this->monrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = LiprebasdetPeer::MONREC;
+      }
+  
+	} 
+	
+	public function setMontot($v)
+	{
+
+    if ($this->montot !== $v) {
+        $this->montot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = LiprebasdetPeer::MONTOT;
+      }
+  
+	} 
+	
+	public function setStatus($v)
+	{
+
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = LiprebasdetPeer::STATUS;
+      }
+  
+	} 
+	
+	public function setCodmon($v)
+	{
+
+    if ($this->codmon !== $v) {
+        $this->codmon = $v;
+        $this->modifiedColumns[] = LiprebasdetPeer::CODMON;
+      }
+  
+	} 
+	
+	public function setValcam($v)
+	{
+
+    if ($this->valcam !== $v) {
+        $this->valcam = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = LiprebasdetPeer::VALCAM;
+      }
+  
+	} 
+	
+	public function setCodfin($v)
+	{
+
+    if ($this->codfin !== $v) {
+        $this->codfin = $v;
+        $this->modifiedColumns[] = LiprebasdetPeer::CODFIN;
       }
   
 	} 
@@ -341,35 +361,37 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
   {
     try {
 
-      $this->reqart = $rs->getString($startcol + 0);
+      $this->numpre = $rs->getString($startcol + 0);
 
       $this->codart = $rs->getString($startcol + 1);
 
-      $this->desart = $rs->getString($startcol + 2);
+      $this->codcat = $rs->getString($startcol + 2);
 
-      $this->codcat = $rs->getString($startcol + 3);
+      $this->codpre = $rs->getString($startcol + 3);
 
-      $this->canreq = $rs->getFloat($startcol + 4);
+      $this->unimed = $rs->getString($startcol + 4);
 
-      $this->canrec = $rs->getFloat($startcol + 5);
+      $this->cansol = $rs->getFloat($startcol + 5);
 
-      $this->montot = $rs->getFloat($startcol + 6);
+      $this->canapr = $rs->getFloat($startcol + 6);
 
       $this->costo = $rs->getFloat($startcol + 7);
 
-      $this->monrgo = $rs->getFloat($startcol + 8);
+      $this->subtot = $rs->getFloat($startcol + 8);
 
-      $this->canord = $rs->getFloat($startcol + 9);
+      $this->monrec = $rs->getFloat($startcol + 9);
 
-      $this->mondes = $rs->getFloat($startcol + 10);
+      $this->montot = $rs->getFloat($startcol + 10);
 
-      $this->relart = $rs->getFloat($startcol + 11);
+      $this->status = $rs->getString($startcol + 11);
 
-      $this->unimed = $rs->getString($startcol + 12);
+      $this->codmon = $rs->getString($startcol + 12);
 
-      $this->codpar = $rs->getString($startcol + 13);
+      $this->valcam = $rs->getFloat($startcol + 13);
 
-      $this->id = $rs->getInt($startcol + 14);
+      $this->codfin = $rs->getString($startcol + 14);
+
+      $this->id = $rs->getInt($startcol + 15);
 
       $this->resetModified();
 
@@ -377,7 +399,7 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 15; 
+            return $startcol + 16; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Liprebasdet object", $e);
     }
@@ -525,48 +547,51 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getReqart();
+				return $this->getNumpre();
 				break;
 			case 1:
 				return $this->getCodart();
 				break;
 			case 2:
-				return $this->getDesart();
-				break;
-			case 3:
 				return $this->getCodcat();
 				break;
+			case 3:
+				return $this->getCodpre();
+				break;
 			case 4:
-				return $this->getCanreq();
+				return $this->getUnimed();
 				break;
 			case 5:
-				return $this->getCanrec();
+				return $this->getCansol();
 				break;
 			case 6:
-				return $this->getMontot();
+				return $this->getCanapr();
 				break;
 			case 7:
 				return $this->getCosto();
 				break;
 			case 8:
-				return $this->getMonrgo();
+				return $this->getSubtot();
 				break;
 			case 9:
-				return $this->getCanord();
+				return $this->getMonrec();
 				break;
 			case 10:
-				return $this->getMondes();
+				return $this->getMontot();
 				break;
 			case 11:
-				return $this->getRelart();
+				return $this->getStatus();
 				break;
 			case 12:
-				return $this->getUnimed();
+				return $this->getCodmon();
 				break;
 			case 13:
-				return $this->getCodpar();
+				return $this->getValcam();
 				break;
 			case 14:
+				return $this->getCodfin();
+				break;
+			case 15:
 				return $this->getId();
 				break;
 			default:
@@ -579,21 +604,22 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
 	{
 		$keys = LiprebasdetPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getReqart(),
+			$keys[0] => $this->getNumpre(),
 			$keys[1] => $this->getCodart(),
-			$keys[2] => $this->getDesart(),
-			$keys[3] => $this->getCodcat(),
-			$keys[4] => $this->getCanreq(),
-			$keys[5] => $this->getCanrec(),
-			$keys[6] => $this->getMontot(),
+			$keys[2] => $this->getCodcat(),
+			$keys[3] => $this->getCodpre(),
+			$keys[4] => $this->getUnimed(),
+			$keys[5] => $this->getCansol(),
+			$keys[6] => $this->getCanapr(),
 			$keys[7] => $this->getCosto(),
-			$keys[8] => $this->getMonrgo(),
-			$keys[9] => $this->getCanord(),
-			$keys[10] => $this->getMondes(),
-			$keys[11] => $this->getRelart(),
-			$keys[12] => $this->getUnimed(),
-			$keys[13] => $this->getCodpar(),
-			$keys[14] => $this->getId(),
+			$keys[8] => $this->getSubtot(),
+			$keys[9] => $this->getMonrec(),
+			$keys[10] => $this->getMontot(),
+			$keys[11] => $this->getStatus(),
+			$keys[12] => $this->getCodmon(),
+			$keys[13] => $this->getValcam(),
+			$keys[14] => $this->getCodfin(),
+			$keys[15] => $this->getId(),
 		);
 		return $result;
 	}
@@ -610,48 +636,51 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setReqart($value);
+				$this->setNumpre($value);
 				break;
 			case 1:
 				$this->setCodart($value);
 				break;
 			case 2:
-				$this->setDesart($value);
-				break;
-			case 3:
 				$this->setCodcat($value);
 				break;
+			case 3:
+				$this->setCodpre($value);
+				break;
 			case 4:
-				$this->setCanreq($value);
+				$this->setUnimed($value);
 				break;
 			case 5:
-				$this->setCanrec($value);
+				$this->setCansol($value);
 				break;
 			case 6:
-				$this->setMontot($value);
+				$this->setCanapr($value);
 				break;
 			case 7:
 				$this->setCosto($value);
 				break;
 			case 8:
-				$this->setMonrgo($value);
+				$this->setSubtot($value);
 				break;
 			case 9:
-				$this->setCanord($value);
+				$this->setMonrec($value);
 				break;
 			case 10:
-				$this->setMondes($value);
+				$this->setMontot($value);
 				break;
 			case 11:
-				$this->setRelart($value);
+				$this->setStatus($value);
 				break;
 			case 12:
-				$this->setUnimed($value);
+				$this->setCodmon($value);
 				break;
 			case 13:
-				$this->setCodpar($value);
+				$this->setValcam($value);
 				break;
 			case 14:
+				$this->setCodfin($value);
+				break;
+			case 15:
 				$this->setId($value);
 				break;
 		} 	}
@@ -661,21 +690,22 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
 	{
 		$keys = LiprebasdetPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setReqart($arr[$keys[0]]);
+		if (array_key_exists($keys[0], $arr)) $this->setNumpre($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodart($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setDesart($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setCodcat($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setCanreq($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setCanrec($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setMontot($arr[$keys[6]]);
+		if (array_key_exists($keys[2], $arr)) $this->setCodcat($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setCodpre($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setUnimed($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCansol($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setCanapr($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setCosto($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setMonrgo($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setCanord($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setMondes($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setRelart($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setUnimed($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setCodpar($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setId($arr[$keys[14]]);
+		if (array_key_exists($keys[8], $arr)) $this->setSubtot($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setMonrec($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setMontot($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setStatus($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setCodmon($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setValcam($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setCodfin($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setId($arr[$keys[15]]);
 	}
 
 	
@@ -683,20 +713,21 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(LiprebasdetPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(LiprebasdetPeer::REQART)) $criteria->add(LiprebasdetPeer::REQART, $this->reqart);
+		if ($this->isColumnModified(LiprebasdetPeer::NUMPRE)) $criteria->add(LiprebasdetPeer::NUMPRE, $this->numpre);
 		if ($this->isColumnModified(LiprebasdetPeer::CODART)) $criteria->add(LiprebasdetPeer::CODART, $this->codart);
-		if ($this->isColumnModified(LiprebasdetPeer::DESART)) $criteria->add(LiprebasdetPeer::DESART, $this->desart);
 		if ($this->isColumnModified(LiprebasdetPeer::CODCAT)) $criteria->add(LiprebasdetPeer::CODCAT, $this->codcat);
-		if ($this->isColumnModified(LiprebasdetPeer::CANREQ)) $criteria->add(LiprebasdetPeer::CANREQ, $this->canreq);
-		if ($this->isColumnModified(LiprebasdetPeer::CANREC)) $criteria->add(LiprebasdetPeer::CANREC, $this->canrec);
-		if ($this->isColumnModified(LiprebasdetPeer::MONTOT)) $criteria->add(LiprebasdetPeer::MONTOT, $this->montot);
-		if ($this->isColumnModified(LiprebasdetPeer::COSTO)) $criteria->add(LiprebasdetPeer::COSTO, $this->costo);
-		if ($this->isColumnModified(LiprebasdetPeer::MONRGO)) $criteria->add(LiprebasdetPeer::MONRGO, $this->monrgo);
-		if ($this->isColumnModified(LiprebasdetPeer::CANORD)) $criteria->add(LiprebasdetPeer::CANORD, $this->canord);
-		if ($this->isColumnModified(LiprebasdetPeer::MONDES)) $criteria->add(LiprebasdetPeer::MONDES, $this->mondes);
-		if ($this->isColumnModified(LiprebasdetPeer::RELART)) $criteria->add(LiprebasdetPeer::RELART, $this->relart);
+		if ($this->isColumnModified(LiprebasdetPeer::CODPRE)) $criteria->add(LiprebasdetPeer::CODPRE, $this->codpre);
 		if ($this->isColumnModified(LiprebasdetPeer::UNIMED)) $criteria->add(LiprebasdetPeer::UNIMED, $this->unimed);
-		if ($this->isColumnModified(LiprebasdetPeer::CODPAR)) $criteria->add(LiprebasdetPeer::CODPAR, $this->codpar);
+		if ($this->isColumnModified(LiprebasdetPeer::CANSOL)) $criteria->add(LiprebasdetPeer::CANSOL, $this->cansol);
+		if ($this->isColumnModified(LiprebasdetPeer::CANAPR)) $criteria->add(LiprebasdetPeer::CANAPR, $this->canapr);
+		if ($this->isColumnModified(LiprebasdetPeer::COSTO)) $criteria->add(LiprebasdetPeer::COSTO, $this->costo);
+		if ($this->isColumnModified(LiprebasdetPeer::SUBTOT)) $criteria->add(LiprebasdetPeer::SUBTOT, $this->subtot);
+		if ($this->isColumnModified(LiprebasdetPeer::MONREC)) $criteria->add(LiprebasdetPeer::MONREC, $this->monrec);
+		if ($this->isColumnModified(LiprebasdetPeer::MONTOT)) $criteria->add(LiprebasdetPeer::MONTOT, $this->montot);
+		if ($this->isColumnModified(LiprebasdetPeer::STATUS)) $criteria->add(LiprebasdetPeer::STATUS, $this->status);
+		if ($this->isColumnModified(LiprebasdetPeer::CODMON)) $criteria->add(LiprebasdetPeer::CODMON, $this->codmon);
+		if ($this->isColumnModified(LiprebasdetPeer::VALCAM)) $criteria->add(LiprebasdetPeer::VALCAM, $this->valcam);
+		if ($this->isColumnModified(LiprebasdetPeer::CODFIN)) $criteria->add(LiprebasdetPeer::CODFIN, $this->codfin);
 		if ($this->isColumnModified(LiprebasdetPeer::ID)) $criteria->add(LiprebasdetPeer::ID, $this->id);
 
 		return $criteria;
@@ -728,33 +759,35 @@ abstract class BaseLiprebasdet extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setReqart($this->reqart);
+		$copyObj->setNumpre($this->numpre);
 
 		$copyObj->setCodart($this->codart);
 
-		$copyObj->setDesart($this->desart);
-
 		$copyObj->setCodcat($this->codcat);
 
-		$copyObj->setCanreq($this->canreq);
-
-		$copyObj->setCanrec($this->canrec);
-
-		$copyObj->setMontot($this->montot);
-
-		$copyObj->setCosto($this->costo);
-
-		$copyObj->setMonrgo($this->monrgo);
-
-		$copyObj->setCanord($this->canord);
-
-		$copyObj->setMondes($this->mondes);
-
-		$copyObj->setRelart($this->relart);
+		$copyObj->setCodpre($this->codpre);
 
 		$copyObj->setUnimed($this->unimed);
 
-		$copyObj->setCodpar($this->codpar);
+		$copyObj->setCansol($this->cansol);
+
+		$copyObj->setCanapr($this->canapr);
+
+		$copyObj->setCosto($this->costo);
+
+		$copyObj->setSubtot($this->subtot);
+
+		$copyObj->setMonrec($this->monrec);
+
+		$copyObj->setMontot($this->montot);
+
+		$copyObj->setStatus($this->status);
+
+		$copyObj->setCodmon($this->codmon);
+
+		$copyObj->setValcam($this->valcam);
+
+		$copyObj->setCodfin($this->codfin);
 
 
 		$copyObj->setNew(true);

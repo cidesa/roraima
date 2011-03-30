@@ -13,32 +13,29 @@ abstract class BaseLiempofePeer {
 	const CLASS_DEFAULT = 'lib.model.Liempofe';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const LIREGLIC_ID = 'liempofe.LIREGLIC_ID';
+	const NUMPLIE = 'liempofe.NUMPLIE';
 
 	
-	const CODLIC = 'liempofe.CODLIC';
+	const NUMEXP = 'liempofe.NUMEXP';
 
 	
 	const CODPRO = 'liempofe.CODPRO';
 
 	
-	const FECINS = 'liempofe.FECINS';
-
-	
-	const PRECAL = 'liempofe.PRECAL';
-
-	
-	const MONTOT = 'liempofe.MONTOT';
+	const FECOFE = 'liempofe.FECOFE';
 
 	
 	const OBSERVACIONES = 'liempofe.OBSERVACIONES';
+
+	
+	const MONTOT = 'liempofe.MONTOT';
 
 	
 	const ID = 'liempofe.ID';
@@ -49,18 +46,18 @@ abstract class BaseLiempofePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('LireglicId', 'Codlic', 'Codpro', 'Fecins', 'Precal', 'Montot', 'Observaciones', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (LiempofePeer::LIREGLIC_ID, LiempofePeer::CODLIC, LiempofePeer::CODPRO, LiempofePeer::FECINS, LiempofePeer::PRECAL, LiempofePeer::MONTOT, LiempofePeer::OBSERVACIONES, LiempofePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('lireglic_id', 'codlic', 'codpro', 'fecins', 'precal', 'montot', 'observaciones', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Numplie', 'Numexp', 'Codpro', 'Fecofe', 'Observaciones', 'Montot', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (LiempofePeer::NUMPLIE, LiempofePeer::NUMEXP, LiempofePeer::CODPRO, LiempofePeer::FECOFE, LiempofePeer::OBSERVACIONES, LiempofePeer::MONTOT, LiempofePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numplie', 'numexp', 'codpro', 'fecofe', 'observaciones', 'montot', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('LireglicId' => 0, 'Codlic' => 1, 'Codpro' => 2, 'Fecins' => 3, 'Precal' => 4, 'Montot' => 5, 'Observaciones' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (LiempofePeer::LIREGLIC_ID => 0, LiempofePeer::CODLIC => 1, LiempofePeer::CODPRO => 2, LiempofePeer::FECINS => 3, LiempofePeer::PRECAL => 4, LiempofePeer::MONTOT => 5, LiempofePeer::OBSERVACIONES => 6, LiempofePeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('lireglic_id' => 0, 'codlic' => 1, 'codpro' => 2, 'fecins' => 3, 'precal' => 4, 'montot' => 5, 'observaciones' => 6, 'id' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Numplie' => 0, 'Numexp' => 1, 'Codpro' => 2, 'Fecofe' => 3, 'Observaciones' => 4, 'Montot' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (LiempofePeer::NUMPLIE => 0, LiempofePeer::NUMEXP => 1, LiempofePeer::CODPRO => 2, LiempofePeer::FECOFE => 3, LiempofePeer::OBSERVACIONES => 4, LiempofePeer::MONTOT => 5, LiempofePeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('numplie' => 0, 'numexp' => 1, 'codpro' => 2, 'fecofe' => 3, 'observaciones' => 4, 'montot' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -114,19 +111,17 @@ abstract class BaseLiempofePeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(LiempofePeer::LIREGLIC_ID);
+		$criteria->addSelectColumn(LiempofePeer::NUMPLIE);
 
-		$criteria->addSelectColumn(LiempofePeer::CODLIC);
+		$criteria->addSelectColumn(LiempofePeer::NUMEXP);
 
 		$criteria->addSelectColumn(LiempofePeer::CODPRO);
 
-		$criteria->addSelectColumn(LiempofePeer::FECINS);
-
-		$criteria->addSelectColumn(LiempofePeer::PRECAL);
-
-		$criteria->addSelectColumn(LiempofePeer::MONTOT);
+		$criteria->addSelectColumn(LiempofePeer::FECOFE);
 
 		$criteria->addSelectColumn(LiempofePeer::OBSERVACIONES);
+
+		$criteria->addSelectColumn(LiempofePeer::MONTOT);
 
 		$criteria->addSelectColumn(LiempofePeer::ID);
 
@@ -207,167 +202,6 @@ abstract class BaseLiempofePeer {
 		}
 		return $results;
 	}
-
-	
-	public static function doCountJoinLireglic(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(LiempofePeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(LiempofePeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-		$criteria->addJoin(LiempofePeer::LIREGLIC_ID, LireglicPeer::ID);
-
-		$rs = LiempofePeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
-	
-	public static function doSelectJoinLireglic(Criteria $c, $con = null)
-	{
-		$c = clone $c;
-
-				if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		LiempofePeer::addSelectColumns($c);
-		$startcol = (LiempofePeer::NUM_COLUMNS - LiempofePeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-		LireglicPeer::addSelectColumns($c);
-
-		$c->addJoin(LiempofePeer::LIREGLIC_ID, LireglicPeer::ID);
-		$rs = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while($rs->next()) {
-
-			$omClass = LiempofePeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj1 = new $cls();
-			$obj1->hydrate($rs);
-
-			$omClass = LireglicPeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol);
-
-			$newObject = true;
-			foreach($results as $temp_obj1) {
-				$temp_obj2 = $temp_obj1->getLireglic(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-										$temp_obj2->addLiempofe($obj1); 					break;
-				}
-			}
-			if ($newObject) {
-				$obj2->initLiempofes();
-				$obj2->addLiempofe($obj1); 			}
-			$results[] = $obj1;
-		}
-		return $results;
-	}
-
-
-	
-	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
-	{
-		$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(LiempofePeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(LiempofePeer::COUNT);
-		}
-
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-			$criteria->addJoin(LiempofePeer::LIREGLIC_ID, LireglicPeer::ID);
-	
-		$rs = LiempofePeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
-	
-	public static function doSelectJoinAll(Criteria $c, $con = null)
-	{
-		$c = clone $c;
-
-				if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		LiempofePeer::addSelectColumns($c);
-		$startcol2 = (LiempofePeer::NUM_COLUMNS - LiempofePeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-
-			LireglicPeer::addSelectColumns($c);
-			$startcol3 = $startcol2 + LireglicPeer::NUM_COLUMNS;
-	
-			$c->addJoin(LiempofePeer::LIREGLIC_ID, LireglicPeer::ID);
-	
-		$rs = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while($rs->next()) {
-
-			$omClass = LiempofePeer::getOMClass();
-
-
-			$cls = Propel::import($omClass);
-			$obj1 = new $cls();
-			$obj1->hydrate($rs);
-
-
-							
-				$omClass = LireglicPeer::getOMClass();
-	
-
-				$cls = Propel::import($omClass);
-				$obj2 = new $cls();
-				$obj2->hydrate($rs, $startcol2);
-
-				$newObject = true;
-				for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-					$temp_obj1 = $results[$j];
-					$temp_obj2 = $temp_obj1->getLireglic(); 					if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-						$newObject = false;
-						$temp_obj2->addLiempofe($obj1); 						break;
-					}
-				}
-
-				if ($newObject) {
-					$obj2->initLiempofes();
-					$obj2->addLiempofe($obj1);
-				}
-	
-			$results[] = $obj1;
-		}
-		return $results;
-	}
-
 	
 	public static function getTableMap()
 	{

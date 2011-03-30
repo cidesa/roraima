@@ -9,95 +9,134 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
 
 
 	
-	protected $reqart;
+	protected $numpre;
 
 
 	
-	protected $fecreq;
+	protected $codempadm;
 
 
 	
-	protected $desreq;
+	protected $coduniadm;
 
 
 	
-	protected $monreq;
+	protected $codempeje;
 
 
 	
-	protected $stareq;
+	protected $coduniste;
 
 
 	
-	protected $motreq;
+	protected $codclacomp;
 
 
 	
-	protected $benreq;
+	protected $fecreg;
 
 
 	
-	protected $mondes;
+	protected $horreg;
 
 
 	
-	protected $obsreq;
+	protected $dias;
 
 
 	
-	protected $unires;
+	protected $fecven;
 
 
 	
-	protected $tipmon;
+	protected $tipcom;
 
 
 	
-	protected $valmon;
+	protected $codpre;
 
 
 	
-	protected $fecanu;
+	protected $nompre;
 
 
 	
-	protected $codpro;
+	protected $codprio;
 
 
 	
-	protected $reqcom;
+	protected $despro;
 
 
 	
-	protected $tipfin;
+	protected $monpre;
 
 
 	
-	protected $tipreq;
+	protected $codmon;
 
 
 	
-	protected $aprreq;
+	protected $valcam;
 
 
 	
-	protected $usuapr;
+	protected $feccam;
 
 
 	
-	protected $fecapr;
+	protected $docane1;
 
 
 	
-	protected $codemp;
+	protected $docane2;
 
 
 	
-	protected $codcen;
+	protected $docane3;
+
+
+	
+	protected $status;
+
+
+	
+	protected $lisicact_id;
+
+
+	
+	protected $detdecmod;
+
+
+	
+	protected $prepor;
+
+
+	
+	protected $cargopre;
+
+
+	
+	protected $aprpor;
+
+
+	
+	protected $cargoapr;
+
+
+	
+	protected $tipcon;
+
+
+	
+	protected $acto;
 
 
 	
 	protected $id;
+
+	
+	protected $aLisicact;
 
 	
 	protected $alreadyInSave = false;
@@ -106,24 +145,59 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
 	protected $alreadyInValidation = false;
 
   
-  public function getReqart()
+  public function getNumpre()
   {
 
-    return trim($this->reqart);
+    return trim($this->numpre);
 
   }
   
-  public function getFecreq($format = 'Y-m-d')
+  public function getCodempadm()
   {
 
-    if ($this->fecreq === null || $this->fecreq === '') {
+    return trim($this->codempadm);
+
+  }
+  
+  public function getCoduniadm()
+  {
+
+    return trim($this->coduniadm);
+
+  }
+  
+  public function getCodempeje()
+  {
+
+    return trim($this->codempeje);
+
+  }
+  
+  public function getCoduniste()
+  {
+
+    return trim($this->coduniste);
+
+  }
+  
+  public function getCodclacomp()
+  {
+
+    return trim($this->codclacomp);
+
+  }
+  
+  public function getFecreg($format = 'Y-m-d')
+  {
+
+    if ($this->fecreg === null || $this->fecreg === '') {
       return null;
-    } elseif (!is_int($this->fecreq)) {
-            $ts = adodb_strtotime($this->fecreq);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreq] as date/time value: " . var_export($this->fecreq, true));
+    } elseif (!is_int($this->fecreg)) {
+            $ts = adodb_strtotime($this->fecreg);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
       }
     } else {
-      $ts = $this->fecreq;
+      $ts = $this->fecreg;
     }
     if ($format === null) {
       return $ts;
@@ -135,90 +209,31 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
   }
 
   
-  public function getDesreq()
+  public function getHorreg()
   {
 
-    return trim($this->desreq);
+    return trim($this->horreg);
 
   }
   
-  public function getMonreq($val=false)
+  public function getDias()
   {
 
-    if($val) return number_format($this->monreq,2,',','.');
-    else return $this->monreq;
+    return $this->dias;
 
   }
   
-  public function getStareq()
+  public function getFecven($format = 'Y-m-d')
   {
 
-    return trim($this->stareq);
-
-  }
-  
-  public function getMotreq()
-  {
-
-    return trim($this->motreq);
-
-  }
-  
-  public function getBenreq()
-  {
-
-    return trim($this->benreq);
-
-  }
-  
-  public function getMondes($val=false)
-  {
-
-    if($val) return number_format($this->mondes,2,',','.');
-    else return $this->mondes;
-
-  }
-  
-  public function getObsreq()
-  {
-
-    return trim($this->obsreq);
-
-  }
-  
-  public function getUnires()
-  {
-
-    return trim($this->unires);
-
-  }
-  
-  public function getTipmon()
-  {
-
-    return trim($this->tipmon);
-
-  }
-  
-  public function getValmon($val=false)
-  {
-
-    if($val) return number_format($this->valmon,2,',','.');
-    else return $this->valmon;
-
-  }
-  
-  public function getFecanu($format = 'Y-m-d')
-  {
-
-    if ($this->fecanu === null || $this->fecanu === '') {
+    if ($this->fecven === null || $this->fecven === '') {
       return null;
-    } elseif (!is_int($this->fecanu)) {
-            $ts = adodb_strtotime($this->fecanu);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+    } elseif (!is_int($this->fecven)) {
+            $ts = adodb_strtotime($this->fecven);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
       }
     } else {
-      $ts = $this->fecanu;
+      $ts = $this->fecven;
     }
     if ($format === null) {
       return $ts;
@@ -230,81 +245,167 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
   }
 
   
-  public function getCodpro()
+  public function getTipcom()
   {
 
-    return trim($this->codpro);
+    return trim($this->tipcom);
 
   }
   
-  public function getReqcom()
+  public function getCodpre()
   {
 
-    return trim($this->reqcom);
+    return trim($this->codpre);
 
   }
   
-  public function getTipfin()
+  public function getNompre()
   {
 
-    return trim($this->tipfin);
+    return trim($this->nompre);
 
   }
   
-  public function getTipreq()
+  public function getCodprio()
   {
 
-    return $this->tipreq;
+    return trim($this->codprio);
 
   }
   
-  public function getAprreq()
+  public function getDespro()
   {
 
-    return $this->aprreq;
+    return trim($this->despro);
 
   }
   
-  public function getUsuapr()
+  public function getMonpre($val=false)
   {
 
-    return $this->usuapr;
+    if($val) return number_format($this->monpre,2,',','.');
+    else return $this->monpre;
 
   }
   
-  public function getFecapr($format = 'Y-m-d')
+  public function getCodmon()
   {
 
-    if ($this->fecapr === null || $this->fecapr === '') {
+    return trim($this->codmon);
+
+  }
+  
+  public function getValcam($val=false)
+  {
+
+    if($val) return number_format($this->valcam,2,',','.');
+    else return $this->valcam;
+
+  }
+  
+  public function getFeccam($format = 'Y-m-d H:i:s')
+  {
+
+    if ($this->feccam === null || $this->feccam === '') {
       return null;
-    } elseif (!is_int($this->fecapr)) {
-            $ts = adodb_strtotime($this->fecapr);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecapr] as date/time value: " . var_export($this->fecapr, true));
+    } elseif (!is_int($this->feccam)) {
+            $ts = strtotime($this->feccam);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccam] as date/time value: " . var_export($this->feccam, true));
       }
     } else {
-      $ts = $this->fecapr;
+      $ts = $this->feccam;
     }
     if ($format === null) {
       return $ts;
     } elseif (strpos($format, '%') !== false) {
-      return adodb_strftime($format, $ts);
+      return strftime($format, $ts);
     } else {
-      return @adodb_date($format, $ts);
+      return date($format, $ts);
     }
   }
 
   
-  public function getCodemp()
+  public function getDocane1()
   {
 
-    return trim($this->codemp);
+    return trim($this->docane1);
 
   }
   
-  public function getCodcen()
+  public function getDocane2()
   {
 
-    return trim($this->codcen);
+    return trim($this->docane2);
+
+  }
+  
+  public function getDocane3()
+  {
+
+    return trim($this->docane3);
+
+  }
+  
+  public function getStatus()
+  {
+
+    return trim($this->status);
+
+  }
+  
+  public function getLisicactId()
+  {
+
+    return $this->lisicact_id;
+
+  }
+  
+  public function getDetdecmod()
+  {
+
+    return trim($this->detdecmod);
+
+  }
+  
+  public function getPrepor()
+  {
+
+    return trim($this->prepor);
+
+  }
+  
+  public function getCargopre()
+  {
+
+    return trim($this->cargopre);
+
+  }
+  
+  public function getAprpor()
+  {
+
+    return trim($this->aprpor);
+
+  }
+  
+  public function getCargoapr()
+  {
+
+    return trim($this->cargoapr);
+
+  }
+  
+  public function getTipcon()
+  {
+
+    return trim($this->tipcon);
+
+  }
+  
+  public function getActo()
+  {
+
+    return trim($this->acto);
 
   }
   
@@ -315,17 +416,67 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
 
   }
 	
-	public function setReqart($v)
+	public function setNumpre($v)
 	{
 
-    if ($this->reqart !== $v) {
-        $this->reqart = $v;
-        $this->modifiedColumns[] = LiprebasPeer::REQART;
+    if ($this->numpre !== $v) {
+        $this->numpre = $v;
+        $this->modifiedColumns[] = LiprebasPeer::NUMPRE;
       }
   
 	} 
 	
-	public function setFecreq($v)
+	public function setCodempadm($v)
+	{
+
+    if ($this->codempadm !== $v) {
+        $this->codempadm = $v;
+        $this->modifiedColumns[] = LiprebasPeer::CODEMPADM;
+      }
+  
+	} 
+	
+	public function setCoduniadm($v)
+	{
+
+    if ($this->coduniadm !== $v) {
+        $this->coduniadm = $v;
+        $this->modifiedColumns[] = LiprebasPeer::CODUNIADM;
+      }
+  
+	} 
+	
+	public function setCodempeje($v)
+	{
+
+    if ($this->codempeje !== $v) {
+        $this->codempeje = $v;
+        $this->modifiedColumns[] = LiprebasPeer::CODEMPEJE;
+      }
+  
+	} 
+	
+	public function setCoduniste($v)
+	{
+
+    if ($this->coduniste !== $v) {
+        $this->coduniste = $v;
+        $this->modifiedColumns[] = LiprebasPeer::CODUNISTE;
+      }
+  
+	} 
+	
+	public function setCodclacomp($v)
+	{
+
+    if ($this->codclacomp !== $v) {
+        $this->codclacomp = $v;
+        $this->modifiedColumns[] = LiprebasPeer::CODCLACOMP;
+      }
+  
+	} 
+	
+	public function setFecreg($v)
 	{
 
 		if (is_array($v)){
@@ -335,119 +486,39 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreq] from input: " . var_export($v, true));
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
       }
     } else {
       $ts = $v;
     }
-    if ($this->fecreq !== $ts) {
-      $this->fecreq = $ts;
-      $this->modifiedColumns[] = LiprebasPeer::FECREQ;
+    if ($this->fecreg !== $ts) {
+      $this->fecreg = $ts;
+      $this->modifiedColumns[] = LiprebasPeer::FECREG;
     }
 
 	} 
 	
-	public function setDesreq($v)
+	public function setHorreg($v)
 	{
 
-    if ($this->desreq !== $v) {
-        $this->desreq = $v;
-        $this->modifiedColumns[] = LiprebasPeer::DESREQ;
+    if ($this->horreg !== $v) {
+        $this->horreg = $v;
+        $this->modifiedColumns[] = LiprebasPeer::HORREG;
       }
   
 	} 
 	
-	public function setMonreq($v)
+	public function setDias($v)
 	{
 
-    if ($this->monreq !== $v) {
-        $this->monreq = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = LiprebasPeer::MONREQ;
+    if ($this->dias !== $v) {
+        $this->dias = $v;
+        $this->modifiedColumns[] = LiprebasPeer::DIAS;
       }
   
 	} 
 	
-	public function setStareq($v)
-	{
-
-    if ($this->stareq !== $v) {
-        $this->stareq = $v;
-        $this->modifiedColumns[] = LiprebasPeer::STAREQ;
-      }
-  
-	} 
-	
-	public function setMotreq($v)
-	{
-
-    if ($this->motreq !== $v) {
-        $this->motreq = $v;
-        $this->modifiedColumns[] = LiprebasPeer::MOTREQ;
-      }
-  
-	} 
-	
-	public function setBenreq($v)
-	{
-
-    if ($this->benreq !== $v) {
-        $this->benreq = $v;
-        $this->modifiedColumns[] = LiprebasPeer::BENREQ;
-      }
-  
-	} 
-	
-	public function setMondes($v)
-	{
-
-    if ($this->mondes !== $v) {
-        $this->mondes = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = LiprebasPeer::MONDES;
-      }
-  
-	} 
-	
-	public function setObsreq($v)
-	{
-
-    if ($this->obsreq !== $v) {
-        $this->obsreq = $v;
-        $this->modifiedColumns[] = LiprebasPeer::OBSREQ;
-      }
-  
-	} 
-	
-	public function setUnires($v)
-	{
-
-    if ($this->unires !== $v) {
-        $this->unires = $v;
-        $this->modifiedColumns[] = LiprebasPeer::UNIRES;
-      }
-  
-	} 
-	
-	public function setTipmon($v)
-	{
-
-    if ($this->tipmon !== $v) {
-        $this->tipmon = $v;
-        $this->modifiedColumns[] = LiprebasPeer::TIPMON;
-      }
-  
-	} 
-	
-	public function setValmon($v)
-	{
-
-    if ($this->valmon !== $v) {
-        $this->valmon = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = LiprebasPeer::VALMON;
-      }
-  
-	} 
-	
-	public function setFecanu($v)
+	public function setFecven($v)
 	{
 
 		if (is_array($v)){
@@ -457,79 +528,99 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
       }
     } else {
       $ts = $v;
     }
-    if ($this->fecanu !== $ts) {
-      $this->fecanu = $ts;
-      $this->modifiedColumns[] = LiprebasPeer::FECANU;
+    if ($this->fecven !== $ts) {
+      $this->fecven = $ts;
+      $this->modifiedColumns[] = LiprebasPeer::FECVEN;
     }
 
 	} 
 	
-	public function setCodpro($v)
+	public function setTipcom($v)
 	{
 
-    if ($this->codpro !== $v) {
-        $this->codpro = $v;
-        $this->modifiedColumns[] = LiprebasPeer::CODPRO;
+    if ($this->tipcom !== $v) {
+        $this->tipcom = $v;
+        $this->modifiedColumns[] = LiprebasPeer::TIPCOM;
       }
   
 	} 
 	
-	public function setReqcom($v)
+	public function setCodpre($v)
 	{
 
-    if ($this->reqcom !== $v) {
-        $this->reqcom = $v;
-        $this->modifiedColumns[] = LiprebasPeer::REQCOM;
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = LiprebasPeer::CODPRE;
       }
   
 	} 
 	
-	public function setTipfin($v)
+	public function setNompre($v)
 	{
 
-    if ($this->tipfin !== $v) {
-        $this->tipfin = $v;
-        $this->modifiedColumns[] = LiprebasPeer::TIPFIN;
+    if ($this->nompre !== $v) {
+        $this->nompre = $v;
+        $this->modifiedColumns[] = LiprebasPeer::NOMPRE;
       }
   
 	} 
 	
-	public function setTipreq($v)
+	public function setCodprio($v)
 	{
 
-    if ($this->tipreq !== $v) {
-        $this->tipreq = $v;
-        $this->modifiedColumns[] = LiprebasPeer::TIPREQ;
+    if ($this->codprio !== $v) {
+        $this->codprio = $v;
+        $this->modifiedColumns[] = LiprebasPeer::CODPRIO;
       }
   
 	} 
 	
-	public function setAprreq($v)
+	public function setDespro($v)
 	{
 
-    if ($this->aprreq !== $v) {
-        $this->aprreq = $v;
-        $this->modifiedColumns[] = LiprebasPeer::APRREQ;
+    if ($this->despro !== $v) {
+        $this->despro = $v;
+        $this->modifiedColumns[] = LiprebasPeer::DESPRO;
       }
   
 	} 
 	
-	public function setUsuapr($v)
+	public function setMonpre($v)
 	{
 
-    if ($this->usuapr !== $v) {
-        $this->usuapr = $v;
-        $this->modifiedColumns[] = LiprebasPeer::USUAPR;
+    if ($this->monpre !== $v) {
+        $this->monpre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = LiprebasPeer::MONPRE;
       }
   
 	} 
 	
-	public function setFecapr($v)
+	public function setCodmon($v)
+	{
+
+    if ($this->codmon !== $v) {
+        $this->codmon = $v;
+        $this->modifiedColumns[] = LiprebasPeer::CODMON;
+      }
+  
+	} 
+	
+	public function setValcam($v)
+	{
+
+    if ($this->valcam !== $v) {
+        $this->valcam = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = LiprebasPeer::VALCAM;
+      }
+  
+	} 
+	
+	public function setFeccam($v)
 	{
 
 		if (is_array($v)){
@@ -538,35 +629,139 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
 		}
 
     if ($v !== null && !is_int($v)) {
-      $ts = adodb_strtotime($v);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecapr] from input: " . var_export($v, true));
+      $ts = strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccam] from input: " . var_export($v, true));
       }
     } else {
       $ts = $v;
     }
-    if ($this->fecapr !== $ts) {
-      $this->fecapr = $ts;
-      $this->modifiedColumns[] = LiprebasPeer::FECAPR;
+    if ($this->feccam !== $ts) {
+      $this->feccam = $ts;
+      $this->modifiedColumns[] = LiprebasPeer::FECCAM;
     }
 
 	} 
 	
-	public function setCodemp($v)
+	public function setDocane1($v)
 	{
 
-    if ($this->codemp !== $v) {
-        $this->codemp = $v;
-        $this->modifiedColumns[] = LiprebasPeer::CODEMP;
+    if ($this->docane1 !== $v) {
+        $this->docane1 = $v;
+        $this->modifiedColumns[] = LiprebasPeer::DOCANE1;
       }
   
 	} 
 	
-	public function setCodcen($v)
+	public function setDocane2($v)
 	{
 
-    if ($this->codcen !== $v) {
-        $this->codcen = $v;
-        $this->modifiedColumns[] = LiprebasPeer::CODCEN;
+    if ($this->docane2 !== $v) {
+        $this->docane2 = $v;
+        $this->modifiedColumns[] = LiprebasPeer::DOCANE2;
+      }
+  
+	} 
+	
+	public function setDocane3($v)
+	{
+
+    if ($this->docane3 !== $v) {
+        $this->docane3 = $v;
+        $this->modifiedColumns[] = LiprebasPeer::DOCANE3;
+      }
+  
+	} 
+	
+	public function setStatus($v)
+	{
+
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = LiprebasPeer::STATUS;
+      }
+  
+	} 
+	
+	public function setLisicactId($v)
+	{
+
+    if ($this->lisicact_id !== $v) {
+        $this->lisicact_id = $v;
+        $this->modifiedColumns[] = LiprebasPeer::LISICACT_ID;
+      }
+  
+		if ($this->aLisicact !== null && $this->aLisicact->getId() !== $v) {
+			$this->aLisicact = null;
+		}
+
+	} 
+	
+	public function setDetdecmod($v)
+	{
+
+    if ($this->detdecmod !== $v) {
+        $this->detdecmod = $v;
+        $this->modifiedColumns[] = LiprebasPeer::DETDECMOD;
+      }
+  
+	} 
+	
+	public function setPrepor($v)
+	{
+
+    if ($this->prepor !== $v) {
+        $this->prepor = $v;
+        $this->modifiedColumns[] = LiprebasPeer::PREPOR;
+      }
+  
+	} 
+	
+	public function setCargopre($v)
+	{
+
+    if ($this->cargopre !== $v) {
+        $this->cargopre = $v;
+        $this->modifiedColumns[] = LiprebasPeer::CARGOPRE;
+      }
+  
+	} 
+	
+	public function setAprpor($v)
+	{
+
+    if ($this->aprpor !== $v) {
+        $this->aprpor = $v;
+        $this->modifiedColumns[] = LiprebasPeer::APRPOR;
+      }
+  
+	} 
+	
+	public function setCargoapr($v)
+	{
+
+    if ($this->cargoapr !== $v) {
+        $this->cargoapr = $v;
+        $this->modifiedColumns[] = LiprebasPeer::CARGOAPR;
+      }
+  
+	} 
+	
+	public function setTipcon($v)
+	{
+
+    if ($this->tipcon !== $v) {
+        $this->tipcon = $v;
+        $this->modifiedColumns[] = LiprebasPeer::TIPCON;
+      }
+  
+	} 
+	
+	public function setActo($v)
+	{
+
+    if ($this->acto !== $v) {
+        $this->acto = $v;
+        $this->modifiedColumns[] = LiprebasPeer::ACTO;
       }
   
 	} 
@@ -585,51 +780,69 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
   {
     try {
 
-      $this->reqart = $rs->getString($startcol + 0);
+      $this->numpre = $rs->getString($startcol + 0);
 
-      $this->fecreq = $rs->getDate($startcol + 1, null);
+      $this->codempadm = $rs->getString($startcol + 1);
 
-      $this->desreq = $rs->getString($startcol + 2);
+      $this->coduniadm = $rs->getString($startcol + 2);
 
-      $this->monreq = $rs->getFloat($startcol + 3);
+      $this->codempeje = $rs->getString($startcol + 3);
 
-      $this->stareq = $rs->getString($startcol + 4);
+      $this->coduniste = $rs->getString($startcol + 4);
 
-      $this->motreq = $rs->getString($startcol + 5);
+      $this->codclacomp = $rs->getString($startcol + 5);
 
-      $this->benreq = $rs->getString($startcol + 6);
+      $this->fecreg = $rs->getDate($startcol + 6, null);
 
-      $this->mondes = $rs->getFloat($startcol + 7);
+      $this->horreg = $rs->getString($startcol + 7);
 
-      $this->obsreq = $rs->getString($startcol + 8);
+      $this->dias = $rs->getInt($startcol + 8);
 
-      $this->unires = $rs->getString($startcol + 9);
+      $this->fecven = $rs->getDate($startcol + 9, null);
 
-      $this->tipmon = $rs->getString($startcol + 10);
+      $this->tipcom = $rs->getString($startcol + 10);
 
-      $this->valmon = $rs->getFloat($startcol + 11);
+      $this->codpre = $rs->getString($startcol + 11);
 
-      $this->fecanu = $rs->getDate($startcol + 12, null);
+      $this->nompre = $rs->getString($startcol + 12);
 
-      $this->codpro = $rs->getString($startcol + 13);
+      $this->codprio = $rs->getString($startcol + 13);
 
-      $this->reqcom = $rs->getString($startcol + 14);
+      $this->despro = $rs->getString($startcol + 14);
 
-      $this->tipfin = $rs->getString($startcol + 15);
+      $this->monpre = $rs->getFloat($startcol + 15);
 
-      $this->tipreq = $rs->getString($startcol + 16);
+      $this->codmon = $rs->getString($startcol + 16);
 
-      $this->aprreq = $rs->getString($startcol + 17);
+      $this->valcam = $rs->getFloat($startcol + 17);
 
-      $this->usuapr = $rs->getString($startcol + 18);
+      $this->feccam = $rs->getTimestamp($startcol + 18, null);
 
-      $this->fecapr = $rs->getDate($startcol + 19, null);
+      $this->docane1 = $rs->getString($startcol + 19);
 
-      $this->codemp = $rs->getString($startcol + 20);
+      $this->docane2 = $rs->getString($startcol + 20);
 
-      $this->codcen = $rs->getString($startcol + 21);
+      $this->docane3 = $rs->getString($startcol + 21);
 
-      $this->id = $rs->getInt($startcol + 22);
+      $this->status = $rs->getString($startcol + 22);
+
+      $this->lisicact_id = $rs->getInt($startcol + 23);
+
+      $this->detdecmod = $rs->getString($startcol + 24);
+
+      $this->prepor = $rs->getString($startcol + 25);
+
+      $this->cargopre = $rs->getString($startcol + 26);
+
+      $this->aprpor = $rs->getString($startcol + 27);
+
+      $this->cargoapr = $rs->getString($startcol + 28);
+
+      $this->tipcon = $rs->getString($startcol + 29);
+
+      $this->acto = $rs->getString($startcol + 30);
+
+      $this->id = $rs->getInt($startcol + 31);
 
       $this->resetModified();
 
@@ -637,7 +850,7 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 23; 
+            return $startcol + 32; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Liprebas object", $e);
     }
@@ -715,11 +928,11 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
 
 
 												
-			if ($this->aTableError !== null) {
-				if ($this->aTableError->isModified()) {
-					$affectedRows += $this->aTableError->save($con);
+			if ($this->aLisicact !== null) {
+				if ($this->aLisicact->isModified()) {
+					$affectedRows += $this->aLisicact->save($con);
 				}
-				$this->setTableError($this->aTableError);
+				$this->setLisicact($this->aLisicact);
 			}
 
 
@@ -771,9 +984,9 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
 
 
 												
-			if ($this->aTableError !== null) {
-				if (!$this->aTableError->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aTableError->getValidationFailures());
+			if ($this->aLisicact !== null) {
+				if (!$this->aLisicact->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aLisicact->getValidationFailures());
 				}
 			}
 
@@ -802,72 +1015,99 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getReqart();
+				return $this->getNumpre();
 				break;
 			case 1:
-				return $this->getFecreq();
+				return $this->getCodempadm();
 				break;
 			case 2:
-				return $this->getDesreq();
+				return $this->getCoduniadm();
 				break;
 			case 3:
-				return $this->getMonreq();
+				return $this->getCodempeje();
 				break;
 			case 4:
-				return $this->getStareq();
+				return $this->getCoduniste();
 				break;
 			case 5:
-				return $this->getMotreq();
+				return $this->getCodclacomp();
 				break;
 			case 6:
-				return $this->getBenreq();
+				return $this->getFecreg();
 				break;
 			case 7:
-				return $this->getMondes();
+				return $this->getHorreg();
 				break;
 			case 8:
-				return $this->getObsreq();
+				return $this->getDias();
 				break;
 			case 9:
-				return $this->getUnires();
+				return $this->getFecven();
 				break;
 			case 10:
-				return $this->getTipmon();
+				return $this->getTipcom();
 				break;
 			case 11:
-				return $this->getValmon();
+				return $this->getCodpre();
 				break;
 			case 12:
-				return $this->getFecanu();
+				return $this->getNompre();
 				break;
 			case 13:
-				return $this->getCodpro();
+				return $this->getCodprio();
 				break;
 			case 14:
-				return $this->getReqcom();
+				return $this->getDespro();
 				break;
 			case 15:
-				return $this->getTipfin();
+				return $this->getMonpre();
 				break;
 			case 16:
-				return $this->getTipreq();
+				return $this->getCodmon();
 				break;
 			case 17:
-				return $this->getAprreq();
+				return $this->getValcam();
 				break;
 			case 18:
-				return $this->getUsuapr();
+				return $this->getFeccam();
 				break;
 			case 19:
-				return $this->getFecapr();
+				return $this->getDocane1();
 				break;
 			case 20:
-				return $this->getCodemp();
+				return $this->getDocane2();
 				break;
 			case 21:
-				return $this->getCodcen();
+				return $this->getDocane3();
 				break;
 			case 22:
+				return $this->getStatus();
+				break;
+			case 23:
+				return $this->getLisicactId();
+				break;
+			case 24:
+				return $this->getDetdecmod();
+				break;
+			case 25:
+				return $this->getPrepor();
+				break;
+			case 26:
+				return $this->getCargopre();
+				break;
+			case 27:
+				return $this->getAprpor();
+				break;
+			case 28:
+				return $this->getCargoapr();
+				break;
+			case 29:
+				return $this->getTipcon();
+				break;
+			case 30:
+				return $this->getActo();
+				break;
+			case 31:
 				return $this->getId();
 				break;
 			default:
@@ -880,29 +1120,38 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
 	{
 		$keys = LiprebasPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getReqart(),
-			$keys[1] => $this->getFecreq(),
-			$keys[2] => $this->getDesreq(),
-			$keys[3] => $this->getMonreq(),
-			$keys[4] => $this->getStareq(),
-			$keys[5] => $this->getMotreq(),
-			$keys[6] => $this->getBenreq(),
-			$keys[7] => $this->getMondes(),
-			$keys[8] => $this->getObsreq(),
-			$keys[9] => $this->getUnires(),
-			$keys[10] => $this->getTipmon(),
-			$keys[11] => $this->getValmon(),
-			$keys[12] => $this->getFecanu(),
-			$keys[13] => $this->getCodpro(),
-			$keys[14] => $this->getReqcom(),
-			$keys[15] => $this->getTipfin(),
-			$keys[16] => $this->getTipreq(),
-			$keys[17] => $this->getAprreq(),
-			$keys[18] => $this->getUsuapr(),
-			$keys[19] => $this->getFecapr(),
-			$keys[20] => $this->getCodemp(),
-			$keys[21] => $this->getCodcen(),
-			$keys[22] => $this->getId(),
+			$keys[0] => $this->getNumpre(),
+			$keys[1] => $this->getCodempadm(),
+			$keys[2] => $this->getCoduniadm(),
+			$keys[3] => $this->getCodempeje(),
+			$keys[4] => $this->getCoduniste(),
+			$keys[5] => $this->getCodclacomp(),
+			$keys[6] => $this->getFecreg(),
+			$keys[7] => $this->getHorreg(),
+			$keys[8] => $this->getDias(),
+			$keys[9] => $this->getFecven(),
+			$keys[10] => $this->getTipcom(),
+			$keys[11] => $this->getCodpre(),
+			$keys[12] => $this->getNompre(),
+			$keys[13] => $this->getCodprio(),
+			$keys[14] => $this->getDespro(),
+			$keys[15] => $this->getMonpre(),
+			$keys[16] => $this->getCodmon(),
+			$keys[17] => $this->getValcam(),
+			$keys[18] => $this->getFeccam(),
+			$keys[19] => $this->getDocane1(),
+			$keys[20] => $this->getDocane2(),
+			$keys[21] => $this->getDocane3(),
+			$keys[22] => $this->getStatus(),
+			$keys[23] => $this->getLisicactId(),
+			$keys[24] => $this->getDetdecmod(),
+			$keys[25] => $this->getPrepor(),
+			$keys[26] => $this->getCargopre(),
+			$keys[27] => $this->getAprpor(),
+			$keys[28] => $this->getCargoapr(),
+			$keys[29] => $this->getTipcon(),
+			$keys[30] => $this->getActo(),
+			$keys[31] => $this->getId(),
 		);
 		return $result;
 	}
@@ -919,72 +1168,99 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setReqart($value);
+				$this->setNumpre($value);
 				break;
 			case 1:
-				$this->setFecreq($value);
+				$this->setCodempadm($value);
 				break;
 			case 2:
-				$this->setDesreq($value);
+				$this->setCoduniadm($value);
 				break;
 			case 3:
-				$this->setMonreq($value);
+				$this->setCodempeje($value);
 				break;
 			case 4:
-				$this->setStareq($value);
+				$this->setCoduniste($value);
 				break;
 			case 5:
-				$this->setMotreq($value);
+				$this->setCodclacomp($value);
 				break;
 			case 6:
-				$this->setBenreq($value);
+				$this->setFecreg($value);
 				break;
 			case 7:
-				$this->setMondes($value);
+				$this->setHorreg($value);
 				break;
 			case 8:
-				$this->setObsreq($value);
+				$this->setDias($value);
 				break;
 			case 9:
-				$this->setUnires($value);
+				$this->setFecven($value);
 				break;
 			case 10:
-				$this->setTipmon($value);
+				$this->setTipcom($value);
 				break;
 			case 11:
-				$this->setValmon($value);
+				$this->setCodpre($value);
 				break;
 			case 12:
-				$this->setFecanu($value);
+				$this->setNompre($value);
 				break;
 			case 13:
-				$this->setCodpro($value);
+				$this->setCodprio($value);
 				break;
 			case 14:
-				$this->setReqcom($value);
+				$this->setDespro($value);
 				break;
 			case 15:
-				$this->setTipfin($value);
+				$this->setMonpre($value);
 				break;
 			case 16:
-				$this->setTipreq($value);
+				$this->setCodmon($value);
 				break;
 			case 17:
-				$this->setAprreq($value);
+				$this->setValcam($value);
 				break;
 			case 18:
-				$this->setUsuapr($value);
+				$this->setFeccam($value);
 				break;
 			case 19:
-				$this->setFecapr($value);
+				$this->setDocane1($value);
 				break;
 			case 20:
-				$this->setCodemp($value);
+				$this->setDocane2($value);
 				break;
 			case 21:
-				$this->setCodcen($value);
+				$this->setDocane3($value);
 				break;
 			case 22:
+				$this->setStatus($value);
+				break;
+			case 23:
+				$this->setLisicactId($value);
+				break;
+			case 24:
+				$this->setDetdecmod($value);
+				break;
+			case 25:
+				$this->setPrepor($value);
+				break;
+			case 26:
+				$this->setCargopre($value);
+				break;
+			case 27:
+				$this->setAprpor($value);
+				break;
+			case 28:
+				$this->setCargoapr($value);
+				break;
+			case 29:
+				$this->setTipcon($value);
+				break;
+			case 30:
+				$this->setActo($value);
+				break;
+			case 31:
 				$this->setId($value);
 				break;
 		} 	}
@@ -994,29 +1270,38 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
 	{
 		$keys = LiprebasPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setReqart($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setFecreq($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setDesreq($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setMonreq($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setStareq($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setMotreq($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setBenreq($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setMondes($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setObsreq($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setUnires($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setTipmon($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setValmon($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setFecanu($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setCodpro($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setReqcom($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setTipfin($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setTipreq($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setAprreq($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setUsuapr($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setFecapr($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setCodemp($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setCodcen($arr[$keys[21]]);
-		if (array_key_exists($keys[22], $arr)) $this->setId($arr[$keys[22]]);
+		if (array_key_exists($keys[0], $arr)) $this->setNumpre($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setCodempadm($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setCoduniadm($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setCodempeje($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCoduniste($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCodclacomp($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setFecreg($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setHorreg($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setDias($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setFecven($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setTipcom($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setCodpre($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setNompre($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setCodprio($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setDespro($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setMonpre($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setCodmon($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setValcam($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setFeccam($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setDocane1($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setDocane2($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setDocane3($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setStatus($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setLisicactId($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setDetdecmod($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setPrepor($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setCargopre($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setAprpor($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setCargoapr($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setTipcon($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setActo($arr[$keys[30]]);
+		if (array_key_exists($keys[31], $arr)) $this->setId($arr[$keys[31]]);
 	}
 
 	
@@ -1024,28 +1309,37 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(LiprebasPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(LiprebasPeer::REQART)) $criteria->add(LiprebasPeer::REQART, $this->reqart);
-		if ($this->isColumnModified(LiprebasPeer::FECREQ)) $criteria->add(LiprebasPeer::FECREQ, $this->fecreq);
-		if ($this->isColumnModified(LiprebasPeer::DESREQ)) $criteria->add(LiprebasPeer::DESREQ, $this->desreq);
-		if ($this->isColumnModified(LiprebasPeer::MONREQ)) $criteria->add(LiprebasPeer::MONREQ, $this->monreq);
-		if ($this->isColumnModified(LiprebasPeer::STAREQ)) $criteria->add(LiprebasPeer::STAREQ, $this->stareq);
-		if ($this->isColumnModified(LiprebasPeer::MOTREQ)) $criteria->add(LiprebasPeer::MOTREQ, $this->motreq);
-		if ($this->isColumnModified(LiprebasPeer::BENREQ)) $criteria->add(LiprebasPeer::BENREQ, $this->benreq);
-		if ($this->isColumnModified(LiprebasPeer::MONDES)) $criteria->add(LiprebasPeer::MONDES, $this->mondes);
-		if ($this->isColumnModified(LiprebasPeer::OBSREQ)) $criteria->add(LiprebasPeer::OBSREQ, $this->obsreq);
-		if ($this->isColumnModified(LiprebasPeer::UNIRES)) $criteria->add(LiprebasPeer::UNIRES, $this->unires);
-		if ($this->isColumnModified(LiprebasPeer::TIPMON)) $criteria->add(LiprebasPeer::TIPMON, $this->tipmon);
-		if ($this->isColumnModified(LiprebasPeer::VALMON)) $criteria->add(LiprebasPeer::VALMON, $this->valmon);
-		if ($this->isColumnModified(LiprebasPeer::FECANU)) $criteria->add(LiprebasPeer::FECANU, $this->fecanu);
-		if ($this->isColumnModified(LiprebasPeer::CODPRO)) $criteria->add(LiprebasPeer::CODPRO, $this->codpro);
-		if ($this->isColumnModified(LiprebasPeer::REQCOM)) $criteria->add(LiprebasPeer::REQCOM, $this->reqcom);
-		if ($this->isColumnModified(LiprebasPeer::TIPFIN)) $criteria->add(LiprebasPeer::TIPFIN, $this->tipfin);
-		if ($this->isColumnModified(LiprebasPeer::TIPREQ)) $criteria->add(LiprebasPeer::TIPREQ, $this->tipreq);
-		if ($this->isColumnModified(LiprebasPeer::APRREQ)) $criteria->add(LiprebasPeer::APRREQ, $this->aprreq);
-		if ($this->isColumnModified(LiprebasPeer::USUAPR)) $criteria->add(LiprebasPeer::USUAPR, $this->usuapr);
-		if ($this->isColumnModified(LiprebasPeer::FECAPR)) $criteria->add(LiprebasPeer::FECAPR, $this->fecapr);
-		if ($this->isColumnModified(LiprebasPeer::CODEMP)) $criteria->add(LiprebasPeer::CODEMP, $this->codemp);
-		if ($this->isColumnModified(LiprebasPeer::CODCEN)) $criteria->add(LiprebasPeer::CODCEN, $this->codcen);
+		if ($this->isColumnModified(LiprebasPeer::NUMPRE)) $criteria->add(LiprebasPeer::NUMPRE, $this->numpre);
+		if ($this->isColumnModified(LiprebasPeer::CODEMPADM)) $criteria->add(LiprebasPeer::CODEMPADM, $this->codempadm);
+		if ($this->isColumnModified(LiprebasPeer::CODUNIADM)) $criteria->add(LiprebasPeer::CODUNIADM, $this->coduniadm);
+		if ($this->isColumnModified(LiprebasPeer::CODEMPEJE)) $criteria->add(LiprebasPeer::CODEMPEJE, $this->codempeje);
+		if ($this->isColumnModified(LiprebasPeer::CODUNISTE)) $criteria->add(LiprebasPeer::CODUNISTE, $this->coduniste);
+		if ($this->isColumnModified(LiprebasPeer::CODCLACOMP)) $criteria->add(LiprebasPeer::CODCLACOMP, $this->codclacomp);
+		if ($this->isColumnModified(LiprebasPeer::FECREG)) $criteria->add(LiprebasPeer::FECREG, $this->fecreg);
+		if ($this->isColumnModified(LiprebasPeer::HORREG)) $criteria->add(LiprebasPeer::HORREG, $this->horreg);
+		if ($this->isColumnModified(LiprebasPeer::DIAS)) $criteria->add(LiprebasPeer::DIAS, $this->dias);
+		if ($this->isColumnModified(LiprebasPeer::FECVEN)) $criteria->add(LiprebasPeer::FECVEN, $this->fecven);
+		if ($this->isColumnModified(LiprebasPeer::TIPCOM)) $criteria->add(LiprebasPeer::TIPCOM, $this->tipcom);
+		if ($this->isColumnModified(LiprebasPeer::CODPRE)) $criteria->add(LiprebasPeer::CODPRE, $this->codpre);
+		if ($this->isColumnModified(LiprebasPeer::NOMPRE)) $criteria->add(LiprebasPeer::NOMPRE, $this->nompre);
+		if ($this->isColumnModified(LiprebasPeer::CODPRIO)) $criteria->add(LiprebasPeer::CODPRIO, $this->codprio);
+		if ($this->isColumnModified(LiprebasPeer::DESPRO)) $criteria->add(LiprebasPeer::DESPRO, $this->despro);
+		if ($this->isColumnModified(LiprebasPeer::MONPRE)) $criteria->add(LiprebasPeer::MONPRE, $this->monpre);
+		if ($this->isColumnModified(LiprebasPeer::CODMON)) $criteria->add(LiprebasPeer::CODMON, $this->codmon);
+		if ($this->isColumnModified(LiprebasPeer::VALCAM)) $criteria->add(LiprebasPeer::VALCAM, $this->valcam);
+		if ($this->isColumnModified(LiprebasPeer::FECCAM)) $criteria->add(LiprebasPeer::FECCAM, $this->feccam);
+		if ($this->isColumnModified(LiprebasPeer::DOCANE1)) $criteria->add(LiprebasPeer::DOCANE1, $this->docane1);
+		if ($this->isColumnModified(LiprebasPeer::DOCANE2)) $criteria->add(LiprebasPeer::DOCANE2, $this->docane2);
+		if ($this->isColumnModified(LiprebasPeer::DOCANE3)) $criteria->add(LiprebasPeer::DOCANE3, $this->docane3);
+		if ($this->isColumnModified(LiprebasPeer::STATUS)) $criteria->add(LiprebasPeer::STATUS, $this->status);
+		if ($this->isColumnModified(LiprebasPeer::LISICACT_ID)) $criteria->add(LiprebasPeer::LISICACT_ID, $this->lisicact_id);
+		if ($this->isColumnModified(LiprebasPeer::DETDECMOD)) $criteria->add(LiprebasPeer::DETDECMOD, $this->detdecmod);
+		if ($this->isColumnModified(LiprebasPeer::PREPOR)) $criteria->add(LiprebasPeer::PREPOR, $this->prepor);
+		if ($this->isColumnModified(LiprebasPeer::CARGOPRE)) $criteria->add(LiprebasPeer::CARGOPRE, $this->cargopre);
+		if ($this->isColumnModified(LiprebasPeer::APRPOR)) $criteria->add(LiprebasPeer::APRPOR, $this->aprpor);
+		if ($this->isColumnModified(LiprebasPeer::CARGOAPR)) $criteria->add(LiprebasPeer::CARGOAPR, $this->cargoapr);
+		if ($this->isColumnModified(LiprebasPeer::TIPCON)) $criteria->add(LiprebasPeer::TIPCON, $this->tipcon);
+		if ($this->isColumnModified(LiprebasPeer::ACTO)) $criteria->add(LiprebasPeer::ACTO, $this->acto);
 		if ($this->isColumnModified(LiprebasPeer::ID)) $criteria->add(LiprebasPeer::ID, $this->id);
 
 		return $criteria;
@@ -1077,49 +1371,67 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setReqart($this->reqart);
+		$copyObj->setNumpre($this->numpre);
 
-		$copyObj->setFecreq($this->fecreq);
+		$copyObj->setCodempadm($this->codempadm);
 
-		$copyObj->setDesreq($this->desreq);
+		$copyObj->setCoduniadm($this->coduniadm);
 
-		$copyObj->setMonreq($this->monreq);
+		$copyObj->setCodempeje($this->codempeje);
 
-		$copyObj->setStareq($this->stareq);
+		$copyObj->setCoduniste($this->coduniste);
 
-		$copyObj->setMotreq($this->motreq);
+		$copyObj->setCodclacomp($this->codclacomp);
 
-		$copyObj->setBenreq($this->benreq);
+		$copyObj->setFecreg($this->fecreg);
 
-		$copyObj->setMondes($this->mondes);
+		$copyObj->setHorreg($this->horreg);
 
-		$copyObj->setObsreq($this->obsreq);
+		$copyObj->setDias($this->dias);
 
-		$copyObj->setUnires($this->unires);
+		$copyObj->setFecven($this->fecven);
 
-		$copyObj->setTipmon($this->tipmon);
+		$copyObj->setTipcom($this->tipcom);
 
-		$copyObj->setValmon($this->valmon);
+		$copyObj->setCodpre($this->codpre);
 
-		$copyObj->setFecanu($this->fecanu);
+		$copyObj->setNompre($this->nompre);
 
-		$copyObj->setCodpro($this->codpro);
+		$copyObj->setCodprio($this->codprio);
 
-		$copyObj->setReqcom($this->reqcom);
+		$copyObj->setDespro($this->despro);
 
-		$copyObj->setTipfin($this->tipfin);
+		$copyObj->setMonpre($this->monpre);
 
-		$copyObj->setTipreq($this->tipreq);
+		$copyObj->setCodmon($this->codmon);
 
-		$copyObj->setAprreq($this->aprreq);
+		$copyObj->setValcam($this->valcam);
 
-		$copyObj->setUsuapr($this->usuapr);
+		$copyObj->setFeccam($this->feccam);
 
-		$copyObj->setFecapr($this->fecapr);
+		$copyObj->setDocane1($this->docane1);
 
-		$copyObj->setCodemp($this->codemp);
+		$copyObj->setDocane2($this->docane2);
 
-		$copyObj->setCodcen($this->codcen);
+		$copyObj->setDocane3($this->docane3);
+
+		$copyObj->setStatus($this->status);
+
+		$copyObj->setLisicactId($this->lisicact_id);
+
+		$copyObj->setDetdecmod($this->detdecmod);
+
+		$copyObj->setPrepor($this->prepor);
+
+		$copyObj->setCargopre($this->cargopre);
+
+		$copyObj->setAprpor($this->aprpor);
+
+		$copyObj->setCargoapr($this->cargoapr);
+
+		$copyObj->setTipcon($this->tipcon);
+
+		$copyObj->setActo($this->acto);
 
 
 		$copyObj->setNew(true);
@@ -1143,6 +1455,38 @@ abstract class BaseLiprebas extends BaseObject  implements Persistent {
 			self::$peer = new LiprebasPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setLisicact($v)
+	{
+
+
+		if ($v === null) {
+			$this->setLisicactId(NULL);
+		} else {
+			$this->setLisicactId($v->getId());
+		}
+
+
+		$this->aLisicact = $v;
+	}
+
+
+	
+	public function getLisicact($con = null)
+	{
+		if ($this->aLisicact === null && ($this->lisicact_id !== null)) {
+						include_once 'lib/model/om/BaseLisicactPeer.php';
+
+      $c = new Criteria();
+      $c->add(LisicactPeer::ID,$this->lisicact_id);
+      
+			$this->aLisicact = LisicactPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aLisicact;
 	}
 
 } 

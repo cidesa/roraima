@@ -7,8 +7,8 @@
  *
  * @package    Roraima
  * @subpackage lib.model
- * @author     $Author: lhernandez $ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id: Lireglic.php 32428 2009-09-02 04:18:52Z lhernandez $
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: Lireglic.php 42741 2011-02-23 20:29:20Z cramirez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2

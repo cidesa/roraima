@@ -150,28 +150,10 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 	protected $aLisicact;
 
 	
-	protected $collLiemppars;
-
-	
-	protected $lastLiempparCriteria = null;
-
-	
-	protected $collLiempofes;
-
-	
-	protected $lastLiempofeCriteria = null;
-
-	
 	protected $collLioferpres;
 
 	
 	protected $lastLioferpreCriteria = null;
-
-	
-	protected $collLiasplegcrievas;
-
-	
-	protected $lastLiasplegcrievaCriteria = null;
 
 	
 	protected $collLiasptecanaliss;
@@ -1129,32 +1111,8 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
-			if ($this->collLiemppars !== null) {
-				foreach($this->collLiemppars as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
-			if ($this->collLiempofes !== null) {
-				foreach($this->collLiempofes as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
 			if ($this->collLioferpres !== null) {
 				foreach($this->collLioferpres as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
-			if ($this->collLiasplegcrievas !== null) {
-				foreach($this->collLiasplegcrievas as $referrerFK) {
 					if (!$referrerFK->isDeleted()) {
 						$affectedRows += $referrerFK->save($con);
 					}
@@ -1240,32 +1198,8 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 			}
 
 
-				if ($this->collLiemppars !== null) {
-					foreach($this->collLiemppars as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
-
-				if ($this->collLiempofes !== null) {
-					foreach($this->collLiempofes as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
-
 				if ($this->collLioferpres !== null) {
 					foreach($this->collLioferpres as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
-
-				if ($this->collLiasplegcrievas !== null) {
-					foreach($this->collLiasplegcrievas as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -1759,20 +1693,8 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 		if ($deepCopy) {
 									$copyObj->setNew(false);
 
-			foreach($this->getLiemppars() as $relObj) {
-				$copyObj->addLiemppar($relObj->copy($deepCopy));
-			}
-
-			foreach($this->getLiempofes() as $relObj) {
-				$copyObj->addLiempofe($relObj->copy($deepCopy));
-			}
-
 			foreach($this->getLioferpres() as $relObj) {
 				$copyObj->addLioferpre($relObj->copy($deepCopy));
-			}
-
-			foreach($this->getLiasplegcrievas() as $relObj) {
-				$copyObj->addLiasplegcrieva($relObj->copy($deepCopy));
 			}
 
 			foreach($this->getLiasptecanaliss() as $relObj) {
@@ -1877,146 +1799,6 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 	}
 
 	
-	public function initLiemppars()
-	{
-		if ($this->collLiemppars === null) {
-			$this->collLiemppars = array();
-		}
-	}
-
-	
-	public function getLiemppars($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseLiempparPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collLiemppars === null) {
-			if ($this->isNew()) {
-			   $this->collLiemppars = array();
-			} else {
-
-				$criteria->add(LiempparPeer::LIREGLIC_ID, $this->getId());
-
-				LiempparPeer::addSelectColumns($criteria);
-				$this->collLiemppars = LiempparPeer::doSelect($criteria, $con);
-			}
-		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(LiempparPeer::LIREGLIC_ID, $this->getId());
-
-				LiempparPeer::addSelectColumns($criteria);
-				if (!isset($this->lastLiempparCriteria) || !$this->lastLiempparCriteria->equals($criteria)) {
-					$this->collLiemppars = LiempparPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastLiempparCriteria = $criteria;
-		return $this->collLiemppars;
-	}
-
-	
-	public function countLiemppars($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/om/BaseLiempparPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(LiempparPeer::LIREGLIC_ID, $this->getId());
-
-		return LiempparPeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addLiemppar(Liemppar $l)
-	{
-		$this->collLiemppars[] = $l;
-		$l->setLireglic($this);
-	}
-
-	
-	public function initLiempofes()
-	{
-		if ($this->collLiempofes === null) {
-			$this->collLiempofes = array();
-		}
-	}
-
-	
-	public function getLiempofes($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseLiempofePeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collLiempofes === null) {
-			if ($this->isNew()) {
-			   $this->collLiempofes = array();
-			} else {
-
-				$criteria->add(LiempofePeer::LIREGLIC_ID, $this->getId());
-
-				LiempofePeer::addSelectColumns($criteria);
-				$this->collLiempofes = LiempofePeer::doSelect($criteria, $con);
-			}
-		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(LiempofePeer::LIREGLIC_ID, $this->getId());
-
-				LiempofePeer::addSelectColumns($criteria);
-				if (!isset($this->lastLiempofeCriteria) || !$this->lastLiempofeCriteria->equals($criteria)) {
-					$this->collLiempofes = LiempofePeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastLiempofeCriteria = $criteria;
-		return $this->collLiempofes;
-	}
-
-	
-	public function countLiempofes($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/om/BaseLiempofePeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(LiempofePeer::LIREGLIC_ID, $this->getId());
-
-		return LiempofePeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addLiempofe(Liempofe $l)
-	{
-		$this->collLiempofes[] = $l;
-		$l->setLireglic($this);
-	}
-
-	
 	public function initLioferpres()
 	{
 		if ($this->collLioferpres === null) {
@@ -2084,111 +1866,6 @@ abstract class BaseLireglic extends BaseObject  implements Persistent {
 	{
 		$this->collLioferpres[] = $l;
 		$l->setLireglic($this);
-	}
-
-	
-	public function initLiasplegcrievas()
-	{
-		if ($this->collLiasplegcrievas === null) {
-			$this->collLiasplegcrievas = array();
-		}
-	}
-
-	
-	public function getLiasplegcrievas($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseLiasplegcrievaPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collLiasplegcrievas === null) {
-			if ($this->isNew()) {
-			   $this->collLiasplegcrievas = array();
-			} else {
-
-				$criteria->add(LiasplegcrievaPeer::LIREGLIC_ID, $this->getId());
-
-				LiasplegcrievaPeer::addSelectColumns($criteria);
-				$this->collLiasplegcrievas = LiasplegcrievaPeer::doSelect($criteria, $con);
-			}
-		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(LiasplegcrievaPeer::LIREGLIC_ID, $this->getId());
-
-				LiasplegcrievaPeer::addSelectColumns($criteria);
-				if (!isset($this->lastLiasplegcrievaCriteria) || !$this->lastLiasplegcrievaCriteria->equals($criteria)) {
-					$this->collLiasplegcrievas = LiasplegcrievaPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastLiasplegcrievaCriteria = $criteria;
-		return $this->collLiasplegcrievas;
-	}
-
-	
-	public function countLiasplegcrievas($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/om/BaseLiasplegcrievaPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(LiasplegcrievaPeer::LIREGLIC_ID, $this->getId());
-
-		return LiasplegcrievaPeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addLiasplegcrieva(Liasplegcrieva $l)
-	{
-		$this->collLiasplegcrievas[] = $l;
-		$l->setLireglic($this);
-	}
-
-
-	
-	public function getLiasplegcrievasJoinLirecaud($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseLiasplegcrievaPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collLiasplegcrievas === null) {
-			if ($this->isNew()) {
-				$this->collLiasplegcrievas = array();
-			} else {
-
-				$criteria->add(LiasplegcrievaPeer::LIREGLIC_ID, $this->getId());
-
-				$this->collLiasplegcrievas = LiasplegcrievaPeer::doSelectJoinLirecaud($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(LiasplegcrievaPeer::LIREGLIC_ID, $this->getId());
-
-			if (!isset($this->lastLiasplegcrievaCriteria) || !$this->lastLiasplegcrievaCriteria->equals($criteria)) {
-				$this->collLiasplegcrievas = LiasplegcrievaPeer::doSelectJoinLirecaud($criteria, $con);
-			}
-		}
-		$this->lastLiasplegcrievaCriteria = $criteria;
-
-		return $this->collLiasplegcrievas;
 	}
 
 	

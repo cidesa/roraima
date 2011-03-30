@@ -9,11 +9,11 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 
 
 	
-	protected $lireglic_id;
+	protected $numplie;
 
 
 	
-	protected $codlic;
+	protected $numexp;
 
 
 	
@@ -21,15 +21,7 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 
 
 	
-	protected $fecins;
-
-
-	
-	protected $precal;
-
-
-	
-	protected $montot;
+	protected $fecofe;
 
 
 	
@@ -37,10 +29,11 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 
 
 	
-	protected $id;
+	protected $montot;
+
 
 	
-	protected $aLireglic;
+	protected $id;
 
 	
 	protected $alreadyInSave = false;
@@ -49,17 +42,17 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 	protected $alreadyInValidation = false;
 
   
-  public function getLireglicId()
+  public function getNumplie()
   {
 
-    return $this->lireglic_id;
+    return trim($this->numplie);
 
   }
   
-  public function getCodlic()
+  public function getNumexp()
   {
 
-    return trim($this->codlic);
+    return trim($this->numexp);
 
   }
   
@@ -70,17 +63,17 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 
   }
   
-  public function getFecins($format = 'Y-m-d')
+  public function getFecofe($format = 'Y-m-d')
   {
 
-    if ($this->fecins === null || $this->fecins === '') {
+    if ($this->fecofe === null || $this->fecofe === '') {
       return null;
-    } elseif (!is_int($this->fecins)) {
-            $ts = adodb_strtotime($this->fecins);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecins] as date/time value: " . var_export($this->fecins, true));
+    } elseif (!is_int($this->fecofe)) {
+            $ts = adodb_strtotime($this->fecofe);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecofe] as date/time value: " . var_export($this->fecofe, true));
       }
     } else {
-      $ts = $this->fecins;
+      $ts = $this->fecofe;
     }
     if ($format === null) {
       return $ts;
@@ -92,10 +85,10 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
   }
 
   
-  public function getPrecal()
+  public function getObservaciones()
   {
 
-    return trim($this->precal);
+    return trim($this->observaciones);
 
   }
   
@@ -107,13 +100,6 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 
   }
   
-  public function getObservaciones()
-  {
-
-    return trim($this->observaciones);
-
-  }
-  
   public function getId()
   {
 
@@ -121,26 +107,22 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 
   }
 	
-	public function setLireglicId($v)
+	public function setNumplie($v)
 	{
 
-    if ($this->lireglic_id !== $v) {
-        $this->lireglic_id = $v;
-        $this->modifiedColumns[] = LiempofePeer::LIREGLIC_ID;
+    if ($this->numplie !== $v) {
+        $this->numplie = $v;
+        $this->modifiedColumns[] = LiempofePeer::NUMPLIE;
       }
   
-		if ($this->aLireglic !== null && $this->aLireglic->getId() !== $v) {
-			$this->aLireglic = null;
-		}
-
 	} 
 	
-	public function setCodlic($v)
+	public function setNumexp($v)
 	{
 
-    if ($this->codlic !== $v) {
-        $this->codlic = $v;
-        $this->modifiedColumns[] = LiempofePeer::CODLIC;
+    if ($this->numexp !== $v) {
+        $this->numexp = $v;
+        $this->modifiedColumns[] = LiempofePeer::NUMEXP;
       }
   
 	} 
@@ -155,7 +137,7 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
   
 	} 
 	
-	public function setFecins($v)
+	public function setFecofe($v)
 	{
 
 		if (is_array($v)){
@@ -165,24 +147,24 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 
     if ($v !== null && !is_int($v)) {
       $ts = adodb_strtotime($v);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecins] from input: " . var_export($v, true));
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecofe] from input: " . var_export($v, true));
       }
     } else {
       $ts = $v;
     }
-    if ($this->fecins !== $ts) {
-      $this->fecins = $ts;
-      $this->modifiedColumns[] = LiempofePeer::FECINS;
+    if ($this->fecofe !== $ts) {
+      $this->fecofe = $ts;
+      $this->modifiedColumns[] = LiempofePeer::FECOFE;
     }
 
 	} 
 	
-	public function setPrecal($v)
+	public function setObservaciones($v)
 	{
 
-    if ($this->precal !== $v) {
-        $this->precal = $v;
-        $this->modifiedColumns[] = LiempofePeer::PRECAL;
+    if ($this->observaciones !== $v) {
+        $this->observaciones = $v;
+        $this->modifiedColumns[] = LiempofePeer::OBSERVACIONES;
       }
   
 	} 
@@ -193,16 +175,6 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
     if ($this->montot !== $v) {
         $this->montot = Herramientas::toFloat($v);
         $this->modifiedColumns[] = LiempofePeer::MONTOT;
-      }
-  
-	} 
-	
-	public function setObservaciones($v)
-	{
-
-    if ($this->observaciones !== $v) {
-        $this->observaciones = $v;
-        $this->modifiedColumns[] = LiempofePeer::OBSERVACIONES;
       }
   
 	} 
@@ -221,21 +193,19 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
   {
     try {
 
-      $this->lireglic_id = $rs->getInt($startcol + 0);
+      $this->numplie = $rs->getString($startcol + 0);
 
-      $this->codlic = $rs->getString($startcol + 1);
+      $this->numexp = $rs->getString($startcol + 1);
 
       $this->codpro = $rs->getString($startcol + 2);
 
-      $this->fecins = $rs->getDate($startcol + 3, null);
+      $this->fecofe = $rs->getDate($startcol + 3, null);
 
-      $this->precal = $rs->getString($startcol + 4);
+      $this->observaciones = $rs->getString($startcol + 4);
 
       $this->montot = $rs->getFloat($startcol + 5);
 
-      $this->observaciones = $rs->getString($startcol + 6);
-
-      $this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 6);
 
       $this->resetModified();
 
@@ -243,7 +213,7 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 8; 
+            return $startcol + 7; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Liempofe object", $e);
     }
@@ -320,15 +290,6 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
-												
-			if ($this->aLireglic !== null) {
-				if ($this->aLireglic->isModified()) {
-					$affectedRows += $this->aLireglic->save($con);
-				}
-				$this->setLireglic($this->aLireglic);
-			}
-
-
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = LiempofePeer::doInsert($this, $con);
@@ -376,14 +337,6 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-												
-			if ($this->aLireglic !== null) {
-				if (!$this->aLireglic->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aLireglic->getValidationFailures());
-				}
-			}
-
-
 			if (($retval = LiempofePeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
@@ -408,27 +361,24 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getLireglicId();
+				return $this->getNumplie();
 				break;
 			case 1:
-				return $this->getCodlic();
+				return $this->getNumexp();
 				break;
 			case 2:
 				return $this->getCodpro();
 				break;
 			case 3:
-				return $this->getFecins();
+				return $this->getFecofe();
 				break;
 			case 4:
-				return $this->getPrecal();
+				return $this->getObservaciones();
 				break;
 			case 5:
 				return $this->getMontot();
 				break;
 			case 6:
-				return $this->getObservaciones();
-				break;
-			case 7:
 				return $this->getId();
 				break;
 			default:
@@ -441,14 +391,13 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 	{
 		$keys = LiempofePeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getLireglicId(),
-			$keys[1] => $this->getCodlic(),
+			$keys[0] => $this->getNumplie(),
+			$keys[1] => $this->getNumexp(),
 			$keys[2] => $this->getCodpro(),
-			$keys[3] => $this->getFecins(),
-			$keys[4] => $this->getPrecal(),
+			$keys[3] => $this->getFecofe(),
+			$keys[4] => $this->getObservaciones(),
 			$keys[5] => $this->getMontot(),
-			$keys[6] => $this->getObservaciones(),
-			$keys[7] => $this->getId(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -465,27 +414,24 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setLireglicId($value);
+				$this->setNumplie($value);
 				break;
 			case 1:
-				$this->setCodlic($value);
+				$this->setNumexp($value);
 				break;
 			case 2:
 				$this->setCodpro($value);
 				break;
 			case 3:
-				$this->setFecins($value);
+				$this->setFecofe($value);
 				break;
 			case 4:
-				$this->setPrecal($value);
+				$this->setObservaciones($value);
 				break;
 			case 5:
 				$this->setMontot($value);
 				break;
 			case 6:
-				$this->setObservaciones($value);
-				break;
-			case 7:
 				$this->setId($value);
 				break;
 		} 	}
@@ -495,14 +441,13 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 	{
 		$keys = LiempofePeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setLireglicId($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setCodlic($arr[$keys[1]]);
+		if (array_key_exists($keys[0], $arr)) $this->setNumplie($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setNumexp($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCodpro($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setFecins($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setPrecal($arr[$keys[4]]);
+		if (array_key_exists($keys[3], $arr)) $this->setFecofe($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setObservaciones($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setMontot($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setObservaciones($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -510,13 +455,12 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(LiempofePeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(LiempofePeer::LIREGLIC_ID)) $criteria->add(LiempofePeer::LIREGLIC_ID, $this->lireglic_id);
-		if ($this->isColumnModified(LiempofePeer::CODLIC)) $criteria->add(LiempofePeer::CODLIC, $this->codlic);
+		if ($this->isColumnModified(LiempofePeer::NUMPLIE)) $criteria->add(LiempofePeer::NUMPLIE, $this->numplie);
+		if ($this->isColumnModified(LiempofePeer::NUMEXP)) $criteria->add(LiempofePeer::NUMEXP, $this->numexp);
 		if ($this->isColumnModified(LiempofePeer::CODPRO)) $criteria->add(LiempofePeer::CODPRO, $this->codpro);
-		if ($this->isColumnModified(LiempofePeer::FECINS)) $criteria->add(LiempofePeer::FECINS, $this->fecins);
-		if ($this->isColumnModified(LiempofePeer::PRECAL)) $criteria->add(LiempofePeer::PRECAL, $this->precal);
-		if ($this->isColumnModified(LiempofePeer::MONTOT)) $criteria->add(LiempofePeer::MONTOT, $this->montot);
+		if ($this->isColumnModified(LiempofePeer::FECOFE)) $criteria->add(LiempofePeer::FECOFE, $this->fecofe);
 		if ($this->isColumnModified(LiempofePeer::OBSERVACIONES)) $criteria->add(LiempofePeer::OBSERVACIONES, $this->observaciones);
+		if ($this->isColumnModified(LiempofePeer::MONTOT)) $criteria->add(LiempofePeer::MONTOT, $this->montot);
 		if ($this->isColumnModified(LiempofePeer::ID)) $criteria->add(LiempofePeer::ID, $this->id);
 
 		return $criteria;
@@ -548,19 +492,17 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setLireglicId($this->lireglic_id);
+		$copyObj->setNumplie($this->numplie);
 
-		$copyObj->setCodlic($this->codlic);
+		$copyObj->setNumexp($this->numexp);
 
 		$copyObj->setCodpro($this->codpro);
 
-		$copyObj->setFecins($this->fecins);
-
-		$copyObj->setPrecal($this->precal);
-
-		$copyObj->setMontot($this->montot);
+		$copyObj->setFecofe($this->fecofe);
 
 		$copyObj->setObservaciones($this->observaciones);
+
+		$copyObj->setMontot($this->montot);
 
 
 		$copyObj->setNew(true);
@@ -584,38 +526,6 @@ abstract class BaseLiempofe extends BaseObject  implements Persistent {
 			self::$peer = new LiempofePeer();
 		}
 		return self::$peer;
-	}
-
-	
-	public function setLireglic($v)
-	{
-
-
-		if ($v === null) {
-			$this->setLireglicId(NULL);
-		} else {
-			$this->setLireglicId($v->getId());
-		}
-
-
-		$this->aLireglic = $v;
-	}
-
-
-	
-	public function getLireglic($con = null)
-	{
-		if ($this->aLireglic === null && ($this->lireglic_id !== null)) {
-						include_once 'lib/model/om/BaseLireglicPeer.php';
-
-      $c = new Criteria();
-      $c->add(LireglicPeer::ID,$this->lireglic_id);
-      
-			$this->aLireglic = LireglicPeer::doSelectOne($c, $con);
-
-			
-		}
-		return $this->aLireglic;
 	}
 
 } 

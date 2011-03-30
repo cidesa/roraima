@@ -13,15 +13,78 @@ abstract class BaseLiptocue extends BaseObject  implements Persistent {
 
 
 	
-	protected $fecrec;
+	protected $numemo;
 
 
 	
-	protected $codlic;
+	protected $numpre;
+
+
+	
+	protected $codempadm;
+
+
+	
+	protected $coduniadm;
+
+
+	
+	protected $codempeje;
+
+
+	
+	protected $coduniste;
+
+
+	
+	protected $despro;
+
+
+	
+	protected $docane1;
+
+
+	
+	protected $docane2;
+
+
+	
+	protected $docane3;
+
+
+	
+	protected $prepor;
+
+
+	
+	protected $preporcar;
+
+
+	
+	protected $lisicact_id;
+
+
+	
+	protected $detdecmod;
+
+
+	
+	protected $anapor;
+
+
+	
+	protected $anaporcar;
+
+
+	
+	protected $status;
 
 
 	
 	protected $id;
+
+	
+	protected $aLisicact;
 
 	
 	protected $alreadyInSave = false;
@@ -37,32 +100,122 @@ abstract class BaseLiptocue extends BaseObject  implements Persistent {
 
   }
   
-  public function getFecrec($format = 'Y-m-d')
+  public function getNumemo()
   {
 
-    if ($this->fecrec === null || $this->fecrec === '') {
-      return null;
-    } elseif (!is_int($this->fecrec)) {
-            $ts = adodb_strtotime($this->fecrec);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
-      }
-    } else {
-      $ts = $this->fecrec;
-    }
-    if ($format === null) {
-      return $ts;
-    } elseif (strpos($format, '%') !== false) {
-      return adodb_strftime($format, $ts);
-    } else {
-      return @adodb_date($format, $ts);
-    }
+    return trim($this->numemo);
+
   }
-
   
-  public function getCodlic()
+  public function getNumpre()
   {
 
-    return trim($this->codlic);
+    return trim($this->numpre);
+
+  }
+  
+  public function getCodempadm()
+  {
+
+    return trim($this->codempadm);
+
+  }
+  
+  public function getCoduniadm()
+  {
+
+    return trim($this->coduniadm);
+
+  }
+  
+  public function getCodempeje()
+  {
+
+    return trim($this->codempeje);
+
+  }
+  
+  public function getCoduniste()
+  {
+
+    return trim($this->coduniste);
+
+  }
+  
+  public function getDespro()
+  {
+
+    return trim($this->despro);
+
+  }
+  
+  public function getDocane1()
+  {
+
+    return trim($this->docane1);
+
+  }
+  
+  public function getDocane2()
+  {
+
+    return trim($this->docane2);
+
+  }
+  
+  public function getDocane3()
+  {
+
+    return trim($this->docane3);
+
+  }
+  
+  public function getPrepor()
+  {
+
+    return trim($this->prepor);
+
+  }
+  
+  public function getPreporcar()
+  {
+
+    return trim($this->preporcar);
+
+  }
+  
+  public function getLisicactId()
+  {
+
+    return $this->lisicact_id;
+
+  }
+  
+  public function getDetdecmod()
+  {
+
+    return trim($this->detdecmod);
+
+  }
+  
+  public function getAnapor()
+  {
+
+    return trim($this->anapor);
+
+  }
+  
+  public function getAnaporcar()
+  {
+
+    return trim($this->anaporcar);
+
+  }
+  
+  public function getStatus()
+  {
+
+    return trim($this->status);
 
   }
   
@@ -83,34 +236,176 @@ abstract class BaseLiptocue extends BaseObject  implements Persistent {
   
 	} 
 	
-	public function setFecrec($v)
+	public function setNumemo($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
-    if ($v !== null && !is_int($v)) {
-      $ts = adodb_strtotime($v);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
+    if ($this->numemo !== $v) {
+        $this->numemo = $v;
+        $this->modifiedColumns[] = LiptocuePeer::NUMEMO;
       }
-    } else {
-      $ts = $v;
-    }
-    if ($this->fecrec !== $ts) {
-      $this->fecrec = $ts;
-      $this->modifiedColumns[] = LiptocuePeer::FECREC;
-    }
+  
+	} 
+	
+	public function setNumpre($v)
+	{
+
+    if ($this->numpre !== $v) {
+        $this->numpre = $v;
+        $this->modifiedColumns[] = LiptocuePeer::NUMPRE;
+      }
+  
+	} 
+	
+	public function setCodempadm($v)
+	{
+
+    if ($this->codempadm !== $v) {
+        $this->codempadm = $v;
+        $this->modifiedColumns[] = LiptocuePeer::CODEMPADM;
+      }
+  
+	} 
+	
+	public function setCoduniadm($v)
+	{
+
+    if ($this->coduniadm !== $v) {
+        $this->coduniadm = $v;
+        $this->modifiedColumns[] = LiptocuePeer::CODUNIADM;
+      }
+  
+	} 
+	
+	public function setCodempeje($v)
+	{
+
+    if ($this->codempeje !== $v) {
+        $this->codempeje = $v;
+        $this->modifiedColumns[] = LiptocuePeer::CODEMPEJE;
+      }
+  
+	} 
+	
+	public function setCoduniste($v)
+	{
+
+    if ($this->coduniste !== $v) {
+        $this->coduniste = $v;
+        $this->modifiedColumns[] = LiptocuePeer::CODUNISTE;
+      }
+  
+	} 
+	
+	public function setDespro($v)
+	{
+
+    if ($this->despro !== $v) {
+        $this->despro = $v;
+        $this->modifiedColumns[] = LiptocuePeer::DESPRO;
+      }
+  
+	} 
+	
+	public function setDocane1($v)
+	{
+
+    if ($this->docane1 !== $v) {
+        $this->docane1 = $v;
+        $this->modifiedColumns[] = LiptocuePeer::DOCANE1;
+      }
+  
+	} 
+	
+	public function setDocane2($v)
+	{
+
+    if ($this->docane2 !== $v) {
+        $this->docane2 = $v;
+        $this->modifiedColumns[] = LiptocuePeer::DOCANE2;
+      }
+  
+	} 
+	
+	public function setDocane3($v)
+	{
+
+    if ($this->docane3 !== $v) {
+        $this->docane3 = $v;
+        $this->modifiedColumns[] = LiptocuePeer::DOCANE3;
+      }
+  
+	} 
+	
+	public function setPrepor($v)
+	{
+
+    if ($this->prepor !== $v) {
+        $this->prepor = $v;
+        $this->modifiedColumns[] = LiptocuePeer::PREPOR;
+      }
+  
+	} 
+	
+	public function setPreporcar($v)
+	{
+
+    if ($this->preporcar !== $v) {
+        $this->preporcar = $v;
+        $this->modifiedColumns[] = LiptocuePeer::PREPORCAR;
+      }
+  
+	} 
+	
+	public function setLisicactId($v)
+	{
+
+    if ($this->lisicact_id !== $v) {
+        $this->lisicact_id = $v;
+        $this->modifiedColumns[] = LiptocuePeer::LISICACT_ID;
+      }
+  
+		if ($this->aLisicact !== null && $this->aLisicact->getId() !== $v) {
+			$this->aLisicact = null;
+		}
 
 	} 
 	
-	public function setCodlic($v)
+	public function setDetdecmod($v)
 	{
 
-    if ($this->codlic !== $v) {
-        $this->codlic = $v;
-        $this->modifiedColumns[] = LiptocuePeer::CODLIC;
+    if ($this->detdecmod !== $v) {
+        $this->detdecmod = $v;
+        $this->modifiedColumns[] = LiptocuePeer::DETDECMOD;
+      }
+  
+	} 
+	
+	public function setAnapor($v)
+	{
+
+    if ($this->anapor !== $v) {
+        $this->anapor = $v;
+        $this->modifiedColumns[] = LiptocuePeer::ANAPOR;
+      }
+  
+	} 
+	
+	public function setAnaporcar($v)
+	{
+
+    if ($this->anaporcar !== $v) {
+        $this->anaporcar = $v;
+        $this->modifiedColumns[] = LiptocuePeer::ANAPORCAR;
+      }
+  
+	} 
+	
+	public function setStatus($v)
+	{
+
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = LiptocuePeer::STATUS;
       }
   
 	} 
@@ -131,11 +426,41 @@ abstract class BaseLiptocue extends BaseObject  implements Persistent {
 
       $this->numptocue = $rs->getString($startcol + 0);
 
-      $this->fecrec = $rs->getDate($startcol + 1, null);
+      $this->numemo = $rs->getString($startcol + 1);
 
-      $this->codlic = $rs->getString($startcol + 2);
+      $this->numpre = $rs->getString($startcol + 2);
 
-      $this->id = $rs->getInt($startcol + 3);
+      $this->codempadm = $rs->getString($startcol + 3);
+
+      $this->coduniadm = $rs->getString($startcol + 4);
+
+      $this->codempeje = $rs->getString($startcol + 5);
+
+      $this->coduniste = $rs->getString($startcol + 6);
+
+      $this->despro = $rs->getString($startcol + 7);
+
+      $this->docane1 = $rs->getString($startcol + 8);
+
+      $this->docane2 = $rs->getString($startcol + 9);
+
+      $this->docane3 = $rs->getString($startcol + 10);
+
+      $this->prepor = $rs->getString($startcol + 11);
+
+      $this->preporcar = $rs->getString($startcol + 12);
+
+      $this->lisicact_id = $rs->getInt($startcol + 13);
+
+      $this->detdecmod = $rs->getString($startcol + 14);
+
+      $this->anapor = $rs->getString($startcol + 15);
+
+      $this->anaporcar = $rs->getString($startcol + 16);
+
+      $this->status = $rs->getString($startcol + 17);
+
+      $this->id = $rs->getInt($startcol + 18);
 
       $this->resetModified();
 
@@ -143,7 +468,7 @@ abstract class BaseLiptocue extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 4; 
+            return $startcol + 19; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Liptocue object", $e);
     }
@@ -220,6 +545,15 @@ abstract class BaseLiptocue extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aLisicact !== null) {
+				if ($this->aLisicact->isModified()) {
+					$affectedRows += $this->aLisicact->save($con);
+				}
+				$this->setLisicact($this->aLisicact);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = LiptocuePeer::doInsert($this, $con);
@@ -267,6 +601,14 @@ abstract class BaseLiptocue extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
+												
+			if ($this->aLisicact !== null) {
+				if (!$this->aLisicact->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aLisicact->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = LiptocuePeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
@@ -294,12 +636,57 @@ abstract class BaseLiptocue extends BaseObject  implements Persistent {
 				return $this->getNumptocue();
 				break;
 			case 1:
-				return $this->getFecrec();
+				return $this->getNumemo();
 				break;
 			case 2:
-				return $this->getCodlic();
+				return $this->getNumpre();
 				break;
 			case 3:
+				return $this->getCodempadm();
+				break;
+			case 4:
+				return $this->getCoduniadm();
+				break;
+			case 5:
+				return $this->getCodempeje();
+				break;
+			case 6:
+				return $this->getCoduniste();
+				break;
+			case 7:
+				return $this->getDespro();
+				break;
+			case 8:
+				return $this->getDocane1();
+				break;
+			case 9:
+				return $this->getDocane2();
+				break;
+			case 10:
+				return $this->getDocane3();
+				break;
+			case 11:
+				return $this->getPrepor();
+				break;
+			case 12:
+				return $this->getPreporcar();
+				break;
+			case 13:
+				return $this->getLisicactId();
+				break;
+			case 14:
+				return $this->getDetdecmod();
+				break;
+			case 15:
+				return $this->getAnapor();
+				break;
+			case 16:
+				return $this->getAnaporcar();
+				break;
+			case 17:
+				return $this->getStatus();
+				break;
+			case 18:
 				return $this->getId();
 				break;
 			default:
@@ -313,9 +700,24 @@ abstract class BaseLiptocue extends BaseObject  implements Persistent {
 		$keys = LiptocuePeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getNumptocue(),
-			$keys[1] => $this->getFecrec(),
-			$keys[2] => $this->getCodlic(),
-			$keys[3] => $this->getId(),
+			$keys[1] => $this->getNumemo(),
+			$keys[2] => $this->getNumpre(),
+			$keys[3] => $this->getCodempadm(),
+			$keys[4] => $this->getCoduniadm(),
+			$keys[5] => $this->getCodempeje(),
+			$keys[6] => $this->getCoduniste(),
+			$keys[7] => $this->getDespro(),
+			$keys[8] => $this->getDocane1(),
+			$keys[9] => $this->getDocane2(),
+			$keys[10] => $this->getDocane3(),
+			$keys[11] => $this->getPrepor(),
+			$keys[12] => $this->getPreporcar(),
+			$keys[13] => $this->getLisicactId(),
+			$keys[14] => $this->getDetdecmod(),
+			$keys[15] => $this->getAnapor(),
+			$keys[16] => $this->getAnaporcar(),
+			$keys[17] => $this->getStatus(),
+			$keys[18] => $this->getId(),
 		);
 		return $result;
 	}
@@ -335,12 +737,57 @@ abstract class BaseLiptocue extends BaseObject  implements Persistent {
 				$this->setNumptocue($value);
 				break;
 			case 1:
-				$this->setFecrec($value);
+				$this->setNumemo($value);
 				break;
 			case 2:
-				$this->setCodlic($value);
+				$this->setNumpre($value);
 				break;
 			case 3:
+				$this->setCodempadm($value);
+				break;
+			case 4:
+				$this->setCoduniadm($value);
+				break;
+			case 5:
+				$this->setCodempeje($value);
+				break;
+			case 6:
+				$this->setCoduniste($value);
+				break;
+			case 7:
+				$this->setDespro($value);
+				break;
+			case 8:
+				$this->setDocane1($value);
+				break;
+			case 9:
+				$this->setDocane2($value);
+				break;
+			case 10:
+				$this->setDocane3($value);
+				break;
+			case 11:
+				$this->setPrepor($value);
+				break;
+			case 12:
+				$this->setPreporcar($value);
+				break;
+			case 13:
+				$this->setLisicactId($value);
+				break;
+			case 14:
+				$this->setDetdecmod($value);
+				break;
+			case 15:
+				$this->setAnapor($value);
+				break;
+			case 16:
+				$this->setAnaporcar($value);
+				break;
+			case 17:
+				$this->setStatus($value);
+				break;
+			case 18:
 				$this->setId($value);
 				break;
 		} 	}
@@ -351,9 +798,24 @@ abstract class BaseLiptocue extends BaseObject  implements Persistent {
 		$keys = LiptocuePeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setNumptocue($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setFecrec($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setCodlic($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
+		if (array_key_exists($keys[1], $arr)) $this->setNumemo($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setNumpre($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setCodempadm($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCoduniadm($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCodempeje($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setCoduniste($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setDespro($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setDocane1($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setDocane2($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setDocane3($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setPrepor($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setPreporcar($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setLisicactId($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setDetdecmod($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setAnapor($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setAnaporcar($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setStatus($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setId($arr[$keys[18]]);
 	}
 
 	
@@ -362,8 +824,23 @@ abstract class BaseLiptocue extends BaseObject  implements Persistent {
 		$criteria = new Criteria(LiptocuePeer::DATABASE_NAME);
 
 		if ($this->isColumnModified(LiptocuePeer::NUMPTOCUE)) $criteria->add(LiptocuePeer::NUMPTOCUE, $this->numptocue);
-		if ($this->isColumnModified(LiptocuePeer::FECREC)) $criteria->add(LiptocuePeer::FECREC, $this->fecrec);
-		if ($this->isColumnModified(LiptocuePeer::CODLIC)) $criteria->add(LiptocuePeer::CODLIC, $this->codlic);
+		if ($this->isColumnModified(LiptocuePeer::NUMEMO)) $criteria->add(LiptocuePeer::NUMEMO, $this->numemo);
+		if ($this->isColumnModified(LiptocuePeer::NUMPRE)) $criteria->add(LiptocuePeer::NUMPRE, $this->numpre);
+		if ($this->isColumnModified(LiptocuePeer::CODEMPADM)) $criteria->add(LiptocuePeer::CODEMPADM, $this->codempadm);
+		if ($this->isColumnModified(LiptocuePeer::CODUNIADM)) $criteria->add(LiptocuePeer::CODUNIADM, $this->coduniadm);
+		if ($this->isColumnModified(LiptocuePeer::CODEMPEJE)) $criteria->add(LiptocuePeer::CODEMPEJE, $this->codempeje);
+		if ($this->isColumnModified(LiptocuePeer::CODUNISTE)) $criteria->add(LiptocuePeer::CODUNISTE, $this->coduniste);
+		if ($this->isColumnModified(LiptocuePeer::DESPRO)) $criteria->add(LiptocuePeer::DESPRO, $this->despro);
+		if ($this->isColumnModified(LiptocuePeer::DOCANE1)) $criteria->add(LiptocuePeer::DOCANE1, $this->docane1);
+		if ($this->isColumnModified(LiptocuePeer::DOCANE2)) $criteria->add(LiptocuePeer::DOCANE2, $this->docane2);
+		if ($this->isColumnModified(LiptocuePeer::DOCANE3)) $criteria->add(LiptocuePeer::DOCANE3, $this->docane3);
+		if ($this->isColumnModified(LiptocuePeer::PREPOR)) $criteria->add(LiptocuePeer::PREPOR, $this->prepor);
+		if ($this->isColumnModified(LiptocuePeer::PREPORCAR)) $criteria->add(LiptocuePeer::PREPORCAR, $this->preporcar);
+		if ($this->isColumnModified(LiptocuePeer::LISICACT_ID)) $criteria->add(LiptocuePeer::LISICACT_ID, $this->lisicact_id);
+		if ($this->isColumnModified(LiptocuePeer::DETDECMOD)) $criteria->add(LiptocuePeer::DETDECMOD, $this->detdecmod);
+		if ($this->isColumnModified(LiptocuePeer::ANAPOR)) $criteria->add(LiptocuePeer::ANAPOR, $this->anapor);
+		if ($this->isColumnModified(LiptocuePeer::ANAPORCAR)) $criteria->add(LiptocuePeer::ANAPORCAR, $this->anaporcar);
+		if ($this->isColumnModified(LiptocuePeer::STATUS)) $criteria->add(LiptocuePeer::STATUS, $this->status);
 		if ($this->isColumnModified(LiptocuePeer::ID)) $criteria->add(LiptocuePeer::ID, $this->id);
 
 		return $criteria;
@@ -397,9 +874,39 @@ abstract class BaseLiptocue extends BaseObject  implements Persistent {
 
 		$copyObj->setNumptocue($this->numptocue);
 
-		$copyObj->setFecrec($this->fecrec);
+		$copyObj->setNumemo($this->numemo);
 
-		$copyObj->setCodlic($this->codlic);
+		$copyObj->setNumpre($this->numpre);
+
+		$copyObj->setCodempadm($this->codempadm);
+
+		$copyObj->setCoduniadm($this->coduniadm);
+
+		$copyObj->setCodempeje($this->codempeje);
+
+		$copyObj->setCoduniste($this->coduniste);
+
+		$copyObj->setDespro($this->despro);
+
+		$copyObj->setDocane1($this->docane1);
+
+		$copyObj->setDocane2($this->docane2);
+
+		$copyObj->setDocane3($this->docane3);
+
+		$copyObj->setPrepor($this->prepor);
+
+		$copyObj->setPreporcar($this->preporcar);
+
+		$copyObj->setLisicactId($this->lisicact_id);
+
+		$copyObj->setDetdecmod($this->detdecmod);
+
+		$copyObj->setAnapor($this->anapor);
+
+		$copyObj->setAnaporcar($this->anaporcar);
+
+		$copyObj->setStatus($this->status);
 
 
 		$copyObj->setNew(true);
@@ -423,6 +930,38 @@ abstract class BaseLiptocue extends BaseObject  implements Persistent {
 			self::$peer = new LiptocuePeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setLisicact($v)
+	{
+
+
+		if ($v === null) {
+			$this->setLisicactId(NULL);
+		} else {
+			$this->setLisicactId($v->getId());
+		}
+
+
+		$this->aLisicact = $v;
+	}
+
+
+	
+	public function getLisicact($con = null)
+	{
+		if ($this->aLisicact === null && ($this->lisicact_id !== null)) {
+						include_once 'lib/model/om/BaseLisicactPeer.php';
+
+      $c = new Criteria();
+      $c->add(LisicactPeer::ID,$this->lisicact_id);
+      
+			$this->aLisicact = LisicactPeer::doSelectOne($c, $con);
+
+			
+		}
+		return $this->aLisicact;
 	}
 
 } 

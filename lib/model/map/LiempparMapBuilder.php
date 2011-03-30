@@ -34,13 +34,15 @@ class LiempparMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('liemppar_SEQ');
 
-		$tMap->addForeignKey('LIREGLIC_ID', 'LireglicId', 'int', CreoleTypes::INTEGER, 'lireglic', 'ID', true, null);
+		$tMap->addColumn('NUMPLIE', 'Numplie', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('CODLIC', 'Codlic', 'string', CreoleTypes::VARCHAR, true, 32);
+		$tMap->addColumn('NUMEXP', 'Numexp', 'string', CreoleTypes::VARCHAR, true, 8);
 
 		$tMap->addColumn('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, true, 15);
 
-		$tMap->addColumn('FECINS', 'Fecins', 'int', CreoleTypes::DATE, false, null);
+		$tMap->addColumn('FECRET', 'Fecret', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('NOMREPLEG', 'Nomrepleg', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('OBSERVACIONES', 'Observaciones', 'string', CreoleTypes::VARCHAR, false, 1000);
 

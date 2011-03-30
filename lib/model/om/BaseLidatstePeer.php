@@ -13,7 +13,7 @@ abstract class BaseLidatstePeer {
 	const CLASS_DEFAULT = 'lib.model.Lidatste';
 
 	
-	const NUM_COLUMNS = 14;
+	const NUM_COLUMNS = 18;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -41,9 +41,6 @@ abstract class BaseLidatstePeer {
 	const EMASTE = 'lidatste.EMASTE';
 
 	
-	const CODEMP = 'lidatste.CODEMP';
-
-	
 	const CODPAI = 'lidatste.CODPAI';
 
 	
@@ -59,6 +56,21 @@ abstract class BaseLidatstePeer {
 	const CODSEC = 'lidatste.CODSEC';
 
 	
+	const CODEMP = 'lidatste.CODEMP';
+
+	
+	const NOMEMP = 'lidatste.NOMEMP';
+
+	
+	const NOMCAR = 'lidatste.NOMCAR';
+
+	
+	const RESOLU = 'lidatste.RESOLU';
+
+	
+	const FECRES = 'lidatste.FECRES';
+
+	
 	const ID = 'lidatste.ID';
 
 	
@@ -67,18 +79,18 @@ abstract class BaseLidatstePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Coduniste', 'Desuniste', 'LitipsteId', 'Dirste', 'Telste', 'Faxste', 'Emaste', 'Codemp', 'Codpai', 'Codedo', 'Codmun', 'Codpar', 'Codsec', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (LidatstePeer::CODUNISTE, LidatstePeer::DESUNISTE, LidatstePeer::LITIPSTE_ID, LidatstePeer::DIRSTE, LidatstePeer::TELSTE, LidatstePeer::FAXSTE, LidatstePeer::EMASTE, LidatstePeer::CODEMP, LidatstePeer::CODPAI, LidatstePeer::CODEDO, LidatstePeer::CODMUN, LidatstePeer::CODPAR, LidatstePeer::CODSEC, LidatstePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('coduniste', 'desuniste', 'litipste_id', 'dirste', 'telste', 'faxste', 'emaste', 'codemp', 'codpai', 'codedo', 'codmun', 'codpar', 'codsec', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('Coduniste', 'Desuniste', 'LitipsteId', 'Dirste', 'Telste', 'Faxste', 'Emaste', 'Codpai', 'Codedo', 'Codmun', 'Codpar', 'Codsec', 'Codemp', 'Nomemp', 'Nomcar', 'Resolu', 'Fecres', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (LidatstePeer::CODUNISTE, LidatstePeer::DESUNISTE, LidatstePeer::LITIPSTE_ID, LidatstePeer::DIRSTE, LidatstePeer::TELSTE, LidatstePeer::FAXSTE, LidatstePeer::EMASTE, LidatstePeer::CODPAI, LidatstePeer::CODEDO, LidatstePeer::CODMUN, LidatstePeer::CODPAR, LidatstePeer::CODSEC, LidatstePeer::CODEMP, LidatstePeer::NOMEMP, LidatstePeer::NOMCAR, LidatstePeer::RESOLU, LidatstePeer::FECRES, LidatstePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('coduniste', 'desuniste', 'litipste_id', 'dirste', 'telste', 'faxste', 'emaste', 'codpai', 'codedo', 'codmun', 'codpar', 'codsec', 'codemp', 'nomemp', 'nomcar', 'resolu', 'fecres', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Coduniste' => 0, 'Desuniste' => 1, 'LitipsteId' => 2, 'Dirste' => 3, 'Telste' => 4, 'Faxste' => 5, 'Emaste' => 6, 'Codemp' => 7, 'Codpai' => 8, 'Codedo' => 9, 'Codmun' => 10, 'Codpar' => 11, 'Codsec' => 12, 'Id' => 13, ),
-		BasePeer::TYPE_COLNAME => array (LidatstePeer::CODUNISTE => 0, LidatstePeer::DESUNISTE => 1, LidatstePeer::LITIPSTE_ID => 2, LidatstePeer::DIRSTE => 3, LidatstePeer::TELSTE => 4, LidatstePeer::FAXSTE => 5, LidatstePeer::EMASTE => 6, LidatstePeer::CODEMP => 7, LidatstePeer::CODPAI => 8, LidatstePeer::CODEDO => 9, LidatstePeer::CODMUN => 10, LidatstePeer::CODPAR => 11, LidatstePeer::CODSEC => 12, LidatstePeer::ID => 13, ),
-		BasePeer::TYPE_FIELDNAME => array ('coduniste' => 0, 'desuniste' => 1, 'litipste_id' => 2, 'dirste' => 3, 'telste' => 4, 'faxste' => 5, 'emaste' => 6, 'codemp' => 7, 'codpai' => 8, 'codedo' => 9, 'codmun' => 10, 'codpar' => 11, 'codsec' => 12, 'id' => 13, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('Coduniste' => 0, 'Desuniste' => 1, 'LitipsteId' => 2, 'Dirste' => 3, 'Telste' => 4, 'Faxste' => 5, 'Emaste' => 6, 'Codpai' => 7, 'Codedo' => 8, 'Codmun' => 9, 'Codpar' => 10, 'Codsec' => 11, 'Codemp' => 12, 'Nomemp' => 13, 'Nomcar' => 14, 'Resolu' => 15, 'Fecres' => 16, 'Id' => 17, ),
+		BasePeer::TYPE_COLNAME => array (LidatstePeer::CODUNISTE => 0, LidatstePeer::DESUNISTE => 1, LidatstePeer::LITIPSTE_ID => 2, LidatstePeer::DIRSTE => 3, LidatstePeer::TELSTE => 4, LidatstePeer::FAXSTE => 5, LidatstePeer::EMASTE => 6, LidatstePeer::CODPAI => 7, LidatstePeer::CODEDO => 8, LidatstePeer::CODMUN => 9, LidatstePeer::CODPAR => 10, LidatstePeer::CODSEC => 11, LidatstePeer::CODEMP => 12, LidatstePeer::NOMEMP => 13, LidatstePeer::NOMCAR => 14, LidatstePeer::RESOLU => 15, LidatstePeer::FECRES => 16, LidatstePeer::ID => 17, ),
+		BasePeer::TYPE_FIELDNAME => array ('coduniste' => 0, 'desuniste' => 1, 'litipste_id' => 2, 'dirste' => 3, 'telste' => 4, 'faxste' => 5, 'emaste' => 6, 'codpai' => 7, 'codedo' => 8, 'codmun' => 9, 'codpar' => 10, 'codsec' => 11, 'codemp' => 12, 'nomemp' => 13, 'nomcar' => 14, 'resolu' => 15, 'fecres' => 16, 'id' => 17, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
 	);
 
 	
@@ -146,8 +158,6 @@ abstract class BaseLidatstePeer {
 
 		$criteria->addSelectColumn(LidatstePeer::EMASTE);
 
-		$criteria->addSelectColumn(LidatstePeer::CODEMP);
-
 		$criteria->addSelectColumn(LidatstePeer::CODPAI);
 
 		$criteria->addSelectColumn(LidatstePeer::CODEDO);
@@ -157,6 +167,16 @@ abstract class BaseLidatstePeer {
 		$criteria->addSelectColumn(LidatstePeer::CODPAR);
 
 		$criteria->addSelectColumn(LidatstePeer::CODSEC);
+
+		$criteria->addSelectColumn(LidatstePeer::CODEMP);
+
+		$criteria->addSelectColumn(LidatstePeer::NOMEMP);
+
+		$criteria->addSelectColumn(LidatstePeer::NOMCAR);
+
+		$criteria->addSelectColumn(LidatstePeer::RESOLU);
+
+		$criteria->addSelectColumn(LidatstePeer::FECRES);
 
 		$criteria->addSelectColumn(LidatstePeer::ID);
 

@@ -13,31 +13,7 @@ abstract class BaseLidetcomint extends BaseObject  implements Persistent {
 
 
 	
-	protected $feccomint;
-
-
-	
-	protected $codart;
-
-
-	
-	protected $reqart;
-
-
-	
-	protected $fecreq;
-
-
-	
-	protected $unires;
-
-
-	
-	protected $canreq;
-
-
-	
-	protected $costo;
+	protected $numsol;
 
 
 	
@@ -61,84 +37,10 @@ abstract class BaseLidetcomint extends BaseObject  implements Persistent {
 
   }
   
-  public function getFeccomint($format = 'Y-m-d')
+  public function getNumsol()
   {
 
-    if ($this->feccomint === null || $this->feccomint === '') {
-      return null;
-    } elseif (!is_int($this->feccomint)) {
-            $ts = adodb_strtotime($this->feccomint);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccomint] as date/time value: " . var_export($this->feccomint, true));
-      }
-    } else {
-      $ts = $this->feccomint;
-    }
-    if ($format === null) {
-      return $ts;
-    } elseif (strpos($format, '%') !== false) {
-      return adodb_strftime($format, $ts);
-    } else {
-      return @adodb_date($format, $ts);
-    }
-  }
-
-  
-  public function getCodart()
-  {
-
-    return trim($this->codart);
-
-  }
-  
-  public function getReqart()
-  {
-
-    return trim($this->reqart);
-
-  }
-  
-  public function getFecreq($format = 'Y-m-d')
-  {
-
-    if ($this->fecreq === null || $this->fecreq === '') {
-      return null;
-    } elseif (!is_int($this->fecreq)) {
-            $ts = adodb_strtotime($this->fecreq);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreq] as date/time value: " . var_export($this->fecreq, true));
-      }
-    } else {
-      $ts = $this->fecreq;
-    }
-    if ($format === null) {
-      return $ts;
-    } elseif (strpos($format, '%') !== false) {
-      return adodb_strftime($format, $ts);
-    } else {
-      return @adodb_date($format, $ts);
-    }
-  }
-
-  
-  public function getUnires()
-  {
-
-    return trim($this->unires);
-
-  }
-  
-  public function getCanreq($val=false)
-  {
-
-    if($val) return number_format($this->canreq,2,',','.');
-    else return $this->canreq;
-
-  }
-  
-  public function getCosto($val=false)
-  {
-
-    if($val) return number_format($this->costo,2,',','.');
-    else return $this->costo;
+    return trim($this->numsol);
 
   }
   
@@ -167,96 +69,12 @@ abstract class BaseLidetcomint extends BaseObject  implements Persistent {
   
 	} 
 	
-	public function setFeccomint($v)
+	public function setNumsol($v)
 	{
 
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
-    if ($v !== null && !is_int($v)) {
-      $ts = adodb_strtotime($v);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccomint] from input: " . var_export($v, true));
-      }
-    } else {
-      $ts = $v;
-    }
-    if ($this->feccomint !== $ts) {
-      $this->feccomint = $ts;
-      $this->modifiedColumns[] = LidetcomintPeer::FECCOMINT;
-    }
-
-	} 
-	
-	public function setCodart($v)
-	{
-
-    if ($this->codart !== $v) {
-        $this->codart = $v;
-        $this->modifiedColumns[] = LidetcomintPeer::CODART;
-      }
-  
-	} 
-	
-	public function setReqart($v)
-	{
-
-    if ($this->reqart !== $v) {
-        $this->reqart = $v;
-        $this->modifiedColumns[] = LidetcomintPeer::REQART;
-      }
-  
-	} 
-	
-	public function setFecreq($v)
-	{
-
-		if (is_array($v)){
-        	$value_array = $v;
-        	$v = (isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-		}
-
-    if ($v !== null && !is_int($v)) {
-      $ts = adodb_strtotime($v);
-      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreq] from input: " . var_export($v, true));
-      }
-    } else {
-      $ts = $v;
-    }
-    if ($this->fecreq !== $ts) {
-      $this->fecreq = $ts;
-      $this->modifiedColumns[] = LidetcomintPeer::FECREQ;
-    }
-
-	} 
-	
-	public function setUnires($v)
-	{
-
-    if ($this->unires !== $v) {
-        $this->unires = $v;
-        $this->modifiedColumns[] = LidetcomintPeer::UNIRES;
-      }
-  
-	} 
-	
-	public function setCanreq($v)
-	{
-
-    if ($this->canreq !== $v) {
-        $this->canreq = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = LidetcomintPeer::CANREQ;
-      }
-  
-	} 
-	
-	public function setCosto($v)
-	{
-
-    if ($this->costo !== $v) {
-        $this->costo = Herramientas::toFloat($v);
-        $this->modifiedColumns[] = LidetcomintPeer::COSTO;
+    if ($this->numsol !== $v) {
+        $this->numsol = $v;
+        $this->modifiedColumns[] = LidetcomintPeer::NUMSOL;
       }
   
 	} 
@@ -287,23 +105,11 @@ abstract class BaseLidetcomint extends BaseObject  implements Persistent {
 
       $this->numcomint = $rs->getString($startcol + 0);
 
-      $this->feccomint = $rs->getDate($startcol + 1, null);
+      $this->numsol = $rs->getString($startcol + 1);
 
-      $this->codart = $rs->getString($startcol + 2);
+      $this->montot = $rs->getFloat($startcol + 2);
 
-      $this->reqart = $rs->getString($startcol + 3);
-
-      $this->fecreq = $rs->getDate($startcol + 4, null);
-
-      $this->unires = $rs->getString($startcol + 5);
-
-      $this->canreq = $rs->getFloat($startcol + 6);
-
-      $this->costo = $rs->getFloat($startcol + 7);
-
-      $this->montot = $rs->getFloat($startcol + 8);
-
-      $this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 3);
 
       $this->resetModified();
 
@@ -311,7 +117,7 @@ abstract class BaseLidetcomint extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 10; 
+            return $startcol + 4; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Lidetcomint object", $e);
     }
@@ -462,30 +268,12 @@ abstract class BaseLidetcomint extends BaseObject  implements Persistent {
 				return $this->getNumcomint();
 				break;
 			case 1:
-				return $this->getFeccomint();
+				return $this->getNumsol();
 				break;
 			case 2:
-				return $this->getCodart();
-				break;
-			case 3:
-				return $this->getReqart();
-				break;
-			case 4:
-				return $this->getFecreq();
-				break;
-			case 5:
-				return $this->getUnires();
-				break;
-			case 6:
-				return $this->getCanreq();
-				break;
-			case 7:
-				return $this->getCosto();
-				break;
-			case 8:
 				return $this->getMontot();
 				break;
-			case 9:
+			case 3:
 				return $this->getId();
 				break;
 			default:
@@ -499,15 +287,9 @@ abstract class BaseLidetcomint extends BaseObject  implements Persistent {
 		$keys = LidetcomintPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getNumcomint(),
-			$keys[1] => $this->getFeccomint(),
-			$keys[2] => $this->getCodart(),
-			$keys[3] => $this->getReqart(),
-			$keys[4] => $this->getFecreq(),
-			$keys[5] => $this->getUnires(),
-			$keys[6] => $this->getCanreq(),
-			$keys[7] => $this->getCosto(),
-			$keys[8] => $this->getMontot(),
-			$keys[9] => $this->getId(),
+			$keys[1] => $this->getNumsol(),
+			$keys[2] => $this->getMontot(),
+			$keys[3] => $this->getId(),
 		);
 		return $result;
 	}
@@ -527,30 +309,12 @@ abstract class BaseLidetcomint extends BaseObject  implements Persistent {
 				$this->setNumcomint($value);
 				break;
 			case 1:
-				$this->setFeccomint($value);
+				$this->setNumsol($value);
 				break;
 			case 2:
-				$this->setCodart($value);
-				break;
-			case 3:
-				$this->setReqart($value);
-				break;
-			case 4:
-				$this->setFecreq($value);
-				break;
-			case 5:
-				$this->setUnires($value);
-				break;
-			case 6:
-				$this->setCanreq($value);
-				break;
-			case 7:
-				$this->setCosto($value);
-				break;
-			case 8:
 				$this->setMontot($value);
 				break;
-			case 9:
+			case 3:
 				$this->setId($value);
 				break;
 		} 	}
@@ -561,15 +325,9 @@ abstract class BaseLidetcomint extends BaseObject  implements Persistent {
 		$keys = LidetcomintPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setNumcomint($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setFeccomint($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setCodart($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setReqart($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setFecreq($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setUnires($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setCanreq($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setCosto($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setMontot($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
+		if (array_key_exists($keys[1], $arr)) $this->setNumsol($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setMontot($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
 	}
 
 	
@@ -578,13 +336,7 @@ abstract class BaseLidetcomint extends BaseObject  implements Persistent {
 		$criteria = new Criteria(LidetcomintPeer::DATABASE_NAME);
 
 		if ($this->isColumnModified(LidetcomintPeer::NUMCOMINT)) $criteria->add(LidetcomintPeer::NUMCOMINT, $this->numcomint);
-		if ($this->isColumnModified(LidetcomintPeer::FECCOMINT)) $criteria->add(LidetcomintPeer::FECCOMINT, $this->feccomint);
-		if ($this->isColumnModified(LidetcomintPeer::CODART)) $criteria->add(LidetcomintPeer::CODART, $this->codart);
-		if ($this->isColumnModified(LidetcomintPeer::REQART)) $criteria->add(LidetcomintPeer::REQART, $this->reqart);
-		if ($this->isColumnModified(LidetcomintPeer::FECREQ)) $criteria->add(LidetcomintPeer::FECREQ, $this->fecreq);
-		if ($this->isColumnModified(LidetcomintPeer::UNIRES)) $criteria->add(LidetcomintPeer::UNIRES, $this->unires);
-		if ($this->isColumnModified(LidetcomintPeer::CANREQ)) $criteria->add(LidetcomintPeer::CANREQ, $this->canreq);
-		if ($this->isColumnModified(LidetcomintPeer::COSTO)) $criteria->add(LidetcomintPeer::COSTO, $this->costo);
+		if ($this->isColumnModified(LidetcomintPeer::NUMSOL)) $criteria->add(LidetcomintPeer::NUMSOL, $this->numsol);
 		if ($this->isColumnModified(LidetcomintPeer::MONTOT)) $criteria->add(LidetcomintPeer::MONTOT, $this->montot);
 		if ($this->isColumnModified(LidetcomintPeer::ID)) $criteria->add(LidetcomintPeer::ID, $this->id);
 
@@ -619,19 +371,7 @@ abstract class BaseLidetcomint extends BaseObject  implements Persistent {
 
 		$copyObj->setNumcomint($this->numcomint);
 
-		$copyObj->setFeccomint($this->feccomint);
-
-		$copyObj->setCodart($this->codart);
-
-		$copyObj->setReqart($this->reqart);
-
-		$copyObj->setFecreq($this->fecreq);
-
-		$copyObj->setUnires($this->unires);
-
-		$copyObj->setCanreq($this->canreq);
-
-		$copyObj->setCosto($this->costo);
+		$copyObj->setNumsol($this->numsol);
 
 		$copyObj->setMontot($this->montot);
 
