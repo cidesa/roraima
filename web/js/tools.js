@@ -720,6 +720,15 @@ function totalregistros(letra,posicion,filas)
     return 'http://'+host+'/'+apparray[1]+'/'+apparray[2]+'/';
   }
 
+  function getUrlModulo()
+  {
+    host = location.host;
+    app=location.pathname;
+    apparray=app.split('/');
+
+    return 'http://'+host+'/'+apparray[1]+'/'+apparray[2]+'/';
+  }
+
   function getUrlModuloAjax()
   {
      return getUrlModulo()+"ajax"
