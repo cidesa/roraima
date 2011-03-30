@@ -171,10 +171,10 @@ class licunisteActions extends autolicunisteActions
    *
    */
   public function saving($clasemodelo)
-  {
+  {      
     $grid = Herramientas::CargarDatosGridv2($this,$this->obj);
-    $arrget=array('Coduniste','Desuniste');
-    H::Guardar_Grid($grid, $arrget, $clasemodelo);
+    $arrget=array('Coduniste','Desuniste','LitipsteId','Dirste','Telste','Faxste','Emaste','Codpai','Codedo','Codmun','Codpar','Codsec');
+    H::Guardar_Grid($grid, $arrget, $clasemodelo);    
     return '-1';
   }
 
