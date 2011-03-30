@@ -711,13 +711,13 @@ function totalregistros(letra,posicion,filas)
     return total;
   }
 
-  function getUrlModulo()
+  function getUrl()
   {
     host = location.host;
     app=location.pathname;
     apparray=app.split('/');
 
-    return 'http://'+host+'/'+apparray[1]+'/'+apparray[2]+'/';
+    return 'http://'+host+'/'+apparray[1]+'/';
   }
 
   function getUrlModulo()
