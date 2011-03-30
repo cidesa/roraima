@@ -1,0 +1,34 @@
+opciones:                  # Opciones generales
+  name:                    c
+  eliminar:                true
+  tabla:                   lipliedep
+  anchogrid:               900
+  ancho:                   850
+  filas:                   1
+  titulo:                  ' Informacion para el Deposito '
+  htmltotalfilas:          ' '
+1:
+  titulo:                  Cuenta No.
+  tipo:                    t
+  nombrecampo:             numcue
+  html:                    [ readonly=true ]
+  catalogo:                [tsdefban, sf_admin_edit_form, {Numcue: 1, Nomcue: 2, Tipcue: 3, Destip: 4 }, Opdefemp_tsdefban ]
+  esgrabable:              true
+2:       # Columna 1
+  titulo:                  Banco
+  tipo:                    t
+  nombrecampo:             nomcue
+  html:                    [ readonly=true ]
+  esgrabable:              true
+3:
+  titulo:                  Codigo Tipo Cuenta
+  tipo:                    t
+  nombrecampo:             tipcue
+  html:                    [ readonly=true ]
+  esgrabable:              true
+4:
+  titulo:                  Tipo Cuenta
+  tipo:                    t
+  nombrecampo:             destip
+  html:                    [ readonly=true ]
+  esgrabable:              false

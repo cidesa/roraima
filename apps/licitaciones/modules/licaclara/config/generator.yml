@@ -1,0 +1,116 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Liaclara
+    theme:            cidesaGenerator
+    fields:
+      ente:           { name: Ente Contratante, params: readonly=true size=60 style=border:none}
+      codempadm:
+        name: Para
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_codemp
+          clase: Lidatste
+          ajax: 2
+          parametros: getprincipal="getCodempadm" getsecundario="getNomempadm" campoprincipal="codempadm" camposecundario="nomempadm" campobase = "id"
+      nomcaradm:      { name: Cargo, params: style=border:none}
+      coduniadm:
+        name: Unidad
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_licregsol
+          clase: Lidatste
+          ajax: 3
+          parametros: getprincipal="getCoduniadm" getsecundario="getDesuniadm" campoprincipal="coduniadm" camposecundario="desuniadm" campobase = "id"
+      codempeje:
+        name: De
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_codemp
+          clase: Lidatste
+          ajax: 4
+          parametros: getprincipal="getCodempeje" getsecundario="getNomempeje" campoprincipal="codempeje" camposecundario="nomempeje" campobase = "id"
+      nomcareje:      { name: Cargo, params: style=border:none}
+      coduniste:
+        name: Unidad
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_licregsol
+          clase: Lidatste
+          ajax: 5
+          parametros: getprincipal="getCoduniste" getsecundario="getDesuniste" campoprincipal="coduniste" camposecundario="desuniste" campobase = "id"
+      numexp:
+        name: No Expedientes
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Liplieesp_numexp
+          clase: Liplieesp
+          ajax: 1
+          parametros: getprincipal="getNumexp" getsecundario="getDesnumexp" campoprincipal="numexp" camposecundario="desnumexp" campobase = "id"
+      numplie:        { name: Número de Pliego, params: readonly=true style=border:none }
+      ejepre:         { name: Ejercicio Prespuestario Año, params: style="border:none"}
+      desclacomp:     { name: Solicitud de Compra, params: style="border:none" size=80}
+      destiplic:      { name: Modalidad de Contratación, params: style="border:none" size=80}
+      tipcom:         { name: Compra, params: style="border:none" size=80}
+      codpro:
+        name: Empresa Solicitante
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Liempofe_codpro
+          clase: Caprovee
+          ajax: 7
+          parametros: getprincipal="getCodpro" getsecundario="getNompro" campoprincipal="codpro" camposecundario="nompro" campobase = "id"
+          catalogoparams: /param1/'."'+$('liaclara_numexp').value+'".'
+      rif:            { name: R.I.F, params: readonly=true style=border:none}
+      nomrepleg:      { name: Representante Legal, params: readonly=true style=border:none size=80}
+      numacla:        { name: Número Aclaratoria, params: size=10 maxlength=8 onBlur=Correl(this.id) }
+      fecreg:         { name: Fecha Registro, params: onChange=CalculaFecha(this.value)}
+      dias:           { name: Dias para el Vencimiento, params: onChange=CalculaFecha(this.value)}
+      fecven:         { name: Fecha Vencimiento, params: readonly=true style=border:none}
+      fecpre:         { name: Fecha de Preguntas}
+      detpre:         { name: Detalle de Preguntas Formuladas, type: textarea_tag, params: size=80x10 }
+      fecres:         { name: Fecha de Respuestas}
+      detres:         { name: Detalle de Respuestas, type: textarea_tag, params: size=80x10 }
+      docane1:
+        name:  Documento Anexo 1
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Anexo 1***********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      docane2:
+        name:  Documento Anexo 2
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Anexo 2***********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      docane3:
+        name:  Documento Anexo 3
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Anexo 3***********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      prepor:         { name: Preparado Por, params: size=80 }
+      cargopre:      { name: Cargo, params: size=80 }
+      js:             { name: .}
+
+    list:
+      title:           Aclaratorias
+      display:         [=numacla, numexp, nompro, desuniadm, desuniste]
+      filters:         [numacla, numexp]
+      object_actions:
+        _edit:          ~
+        _delete:        ~
+      max_per_page:    10
+      sort:            numacla
+
+    edit:
+      title:           Aclaratorias
+      display:
+        Datos Generales:    [ente, codempadm, nomcaradm, coduniadm, codempeje, nomcareje, coduniste, numexp, numplie, ejepre, desclacomp, destiplic, tipcom, codpro, nomrepleg, rif, numacla, fecreg, dias, fecven]
+        Información de Preguntas:   [fecpre, detpre]
+        Información de Respuestas:  [fecres, detres]
+        Otros Datos: [docane1, docane2, docane3, prepor, cargopre, _js]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

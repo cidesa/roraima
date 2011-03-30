@@ -1,0 +1,69 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                false
+  tabla:                   lisolegrdir
+  anchogrid:               900
+  ancho:                   850
+  filas:                   0
+  titulo:                  ' Presentar Cronograma de Entrega de acuerdo al siguiente Cuadro '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código Artículo
+  tipo:                    t
+  nombrecampo:             codart
+  html:                    [ readonly=true ]
+  esgrabable:              false
+2:
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desart
+  html:                    [ readonly=true ]
+  esgrabable:              false
+3:
+  titulo:                  Cantidad
+  tipo:                    t
+  nombrecampo:             cantid
+  html:                    [ readonly=true ]
+  esgrabable:              false
+4:
+  titulo:                  Sede Administradora Receptora
+  tipo:                    t
+  nombrecampo:             desuniste
+  html:                    [ readonly=true ]
+  esgrabable:              false
+5:
+  titulo:                  Dirección
+  tipo:                    t
+  nombrecampo:             dirste
+  html:                    [ readonly=true ]
+  esgrabable:              false
+6:
+  titulo:                  Pais
+  tipo:                    t
+  nombrecampo:             nompai
+  html:                    [ readonly=true ]
+  esgrabable:              false
+7:
+  titulo:                  Estado
+  tipo:                    t
+  nombrecampo:             nomedo
+  html:                    [ readonly=true ]
+  esgrabable:              false
+8:
+  titulo:                  Municipio
+  tipo:                    t
+  nombrecampo:             nommun
+  html:                    [ readonly=true ]
+  esgrabable:              false
+9:
+  titulo:                  Parroquia
+  tipo:                    t
+  nombrecampo:             nompar
+  html:                    [ readonly=true ]
+  esgrabable:              false
+10:
+  titulo:                  Sector
+  tipo:                    t
+  nombrecampo:             nomsec
+  html:                    [ readonly=true ]
+  esgrabable:              false

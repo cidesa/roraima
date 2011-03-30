@@ -1,0 +1,137 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Lianaofe
+    theme:            cidesaGenerator
+    fields:
+      ente:           { name: Ente Contratante, params: readonly=true size=60 style=border:none}
+      codempadm:
+        name: Para
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_codemp
+          clase: Lidatste
+          ajax: 2
+          parametros: getprincipal="getCodempadm" getsecundario="getNomempadm" campoprincipal="codempadm" camposecundario="nomempadm" campobase = "id"
+      nomcaradm:      { name: Cargo, params: style=border:none}
+      coduniadm:
+        name: Unidad
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_licregsol
+          clase: Lidatste
+          ajax: 3
+          parametros: getprincipal="getCoduniadm" getsecundario="getDesuniadm" campoprincipal="coduniadm" camposecundario="desuniadm" campobase = "id"
+      codempeje:
+        name: De
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_codemp
+          clase: Lidatste
+          ajax: 4
+          parametros: getprincipal="getCodempeje" getsecundario="getNomempeje" campoprincipal="codempeje" camposecundario="nomempeje" campobase = "id"
+      nomcareje:      { name: Cargo, params: style=border:none}
+      coduniste:
+        name: Unidad
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_licregsol
+          clase: Lidatste
+          ajax: 5
+          parametros: getprincipal="getCoduniste" getsecundario="getDesuniste" campoprincipal="coduniste" camposecundario="desuniste" campobase = "id"
+      numanaofe:      { name: Número Analisis Oferta, params: size=10 maxlength=8 onBlur=Correl(this.id) }
+      numofe:
+        name: Número de Oferta
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Liregofe_numofe
+          clase: Liregofe
+          ajax: 1
+          parametros: getprincipal="getNumofe" getsecundario="getDesnumofe" campoprincipal="numofe" camposecundario="desnumofe" campobase = "id"
+          divupdate:  divgridleg
+      numexp:         { name: Número Expediente }
+      numplie:        { name: Número de Pliego }
+      ejepre:         { name: Ejercicio Prespuestario Año, params: style="border:none"}
+      desclacomp:     { name: Solicitud de Compra, params: style="border:none" size=80}
+      destiplic:      { name: Modalidad de Contratación, params: style="border:none" size=80}
+      tipcom:         { name: Compra, params: style="border:none" size=80}
+      tipcon:         { name: Bienes/servicios, params: style="border:none" size=80}
+      nompro:         { name: Empresa, params: style="border:none" size=80}
+      rif:            { name: R.I.F, params: readonly=true style=border:none}
+      nomrepleg:      { name: Representante Legal, params: readonly=true style=border:none size=80}
+      fecreg:         { name: Fecha Registro, params: onChange=CalculaFecha(this.value)}
+      dias:           { name: Dias para el Vencimiento, params: onChange=CalculaFecha(this.value)}
+      fecven:         { name: Fecha Vencimiento, params: readonly=true style=border:none}
+      ofenro:         { name: Oferta No., params: readonly=true style=border:none}
+      fecofe:         { name: Fecha Oferta, params: readonly=true style=border:none}
+      monofe:         { name: Monto Oferta, params: readonly=true style=border:none }
+      monofelet:      { name: Son, params: readonly=true style=border:none size=80 }
+      porvan:         { name: Porcentaje (%) , params: readonly=true style=border:none}
+      declar:         { name: Declaración Jurada de Auto Cálculo del Valor Agregado Nacional (VAN) , params: readonly=true style=border:none }
+      espacio:        { name: . , params: readonly=true style=border:none}
+      gridleg:        { name: .}
+      gridtec:        { name: .}
+      gridfin:        { name: .}
+      gridfia:        { name: .}
+      gridtipemp:     { name: .}
+      docane1:
+        name:  Documento Anexo 1
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Anexo 1***********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      docane2:
+        name:  Documento Anexo 2
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Anexo 2***********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      docane3:
+        name:  Documento Anexo 3
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Anexo 3***********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      docane4:
+        name:  Documento Anexo 4
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Anexo 4***********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      prepor:         { name: Preparado Por, params: size=80 }
+      preporcar:      { name: Cargo, params: size=80 }
+      lisicact_id:    { name: Declaratoria Modalidad, params: include_blank="Seleccione..." }
+      detdecmod:      { name: Detalle Declaratoria Modalidad, type: textarea_tag, params: size="80x10" }
+      anapor:         { name: Preparado Por, params: size=80 }
+      anaporcar:      { name: Cargo, params: size=80 }
+      js:             {name: .}
+
+    list:
+      title:           Analisis de Ofertas
+      display:         [=numanaofe, numplie, numexp, desuniadm, desuniste, fecreg ]
+      filters:         [numanaofe, numplie, numexp, coduniadm, coduniste, fecreg]
+      fields:
+        desuniadm:     { name: Para}
+        desuniste:     { name: De}
+      object_actions:
+        _edit:          ~
+        _delete:        ~
+      max_per_page:    10
+      sort:            numanaofe
+
+    edit:
+      title:           Analisis de Ofertas
+      display:
+        Datos Generales:    [ente, codempadm, nomcaradm, coduniadm, codempeje, nomcareje, coduniste, numanaofe, numofe, numexp, numplie, ejepre, destiplic, desclacomp, tipcom, tipcon, nompro, rif, nomrepleg, ofenro, fecofe, monofe, monofelet, fecreg, dias, fecven]
+        Criterios de Calificación:   [_gridleg, _gridtec, _gridfin, _gridfia]
+        Valor Agregado Nacional: [porvan, declar, espacio]
+        Criterios Tipo de Empresa:  [_gridtipemp]
+        Otros:  [docane1, docane2, docane3, docane4]
+        Delcaratoria: [prepor, cargopre, lisicact_id, detdecmod, anapor, cargoana, _js]
+      fields:
+        numexp:       {params: readonly=true style=border:none}
+        numplie:      {params: readonly=true style=border:none}
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

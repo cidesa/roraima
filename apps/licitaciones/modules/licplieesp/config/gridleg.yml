@@ -1,0 +1,40 @@
+opciones:                  # Opciones generales
+  name:                    g
+  eliminar:                true
+  tabla:                   lipliecrileg
+  anchogrid:               900
+  ancho:                   850
+  filas:                   1
+  titulo:                  ' Criterios Para Calificación Legal '
+  htmltotalfilas:          ' '
+1:
+  titulo:                  Criterio
+  tipo:                    t
+  nombrecampo:             codcri
+  html:                    [ readonly=true ]
+  catalogo:                [liasplegcrieva, sf_admin_edit_form, {Codcri: 1, Descri: 2}, Liasplegcrieva_codcri ]
+  esgrabable:              true
+2:
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             descri
+  html:                    [ readonly=true ]
+  esgrabable:              false
+3:
+  titulo:                  Puntuación
+  tipo:                    m
+  nombrecampo:             puntua
+  html:                    [  ]
+  esgrabable:              true
+4:
+  titulo:                  %
+  tipo:                    m
+  nombrecampo:             porcen
+  html:                    [  ]
+  esgrabable:              true
+5:
+  titulo:                  Limitante
+  tipo:                    k
+  nombrecampo:             limita
+  html:                    [  ]
+  esgrabable:              true

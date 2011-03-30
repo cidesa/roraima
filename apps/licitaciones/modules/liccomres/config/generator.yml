@@ -9,7 +9,7 @@ generator:
       porcentaje:     { name: Porcentaje, params: size=5 maxlength=5}
 
     list:
-      title:          Compromiso de Responsabilidad Social
+      title:          Fianzas/Garantias
       display:        [=codcomres, descomres]
       object_actions:
         _edit:        ~
@@ -17,7 +17,7 @@ generator:
       filters:        [codcomres, descomres]
       max_per_page:   5
     edit:
-      title:          Compromiso de Responsabilidad Social
+      title:          Fianzas/Garantias
       display:
         Datos Concurso:  [codcomres, descomres, porcentaje]
       actions:

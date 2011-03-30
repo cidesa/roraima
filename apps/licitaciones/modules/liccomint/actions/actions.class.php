@@ -16,66 +16,43 @@ class liccomintActions extends autoliccomintActions
   // Para incluir funcionalidades al executeEdit()
   public function editing()
   {
-
-    $this->configGrid();
-  }
-
-  public function configGrid()
-  {
-    if($this->licomint->getNumcomint()=='')
-        $this->configGridArt();
-    $this->configGridReq();
-  }
-
-  public function configGridArt($reg = array(),$regelim = array())
-  {
-    $this->regelim = $regelim;
-    if(!count($reg)>0)
+    $c = new Criteria();
+    $per = TsdesmonPeer::doSelect($c);
+    $arrmon=array(''=>'Seleccione...');
+    foreach($per as $d)
     {
-        $sql = "select '0' as check,a.codart, a.desart, a.unimed, max(a.id) as id
-                from caregart a, caartsol b, casolart c
-                where
-                a.codart=b.codart and
-                b.reqart=c.reqart and
-                c.stareq='A'
-                group by
-                a.codart, a.desart, a.unimed
-                order by codart
-                ";
-        H::BuscarDatos($sql, $reg);
+        $arrmon[$d->getCodmon()] = $d->getNommon();
     }
-    $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/liccomint/'.sfConfig::get('sf_app_module_config_dir_name').'/gridart');
-    $this->obj2 =$this->columnas[0]->getConfig($reg);
-    $this->licomint->setObjart($this->obj2);
+    $this->params=array('arrmon'=>$arrmon);
+    $this->configGrid($this->licomint->getCodmon());
   }
 
-  public function configGridReq($codart='')
+  public function configGrid($codmon='', $reg = array(),$a='')
   {
-    if($this->licomint->getNumcomint()=='')
-       $sqlli = "b.codart||b.reqart not in (select codart||reqart from lidetcomint) and b.codart='$codart' and";
-    else
-       $sqlli = "b.codart||b.reqart in (select codart||reqart from lidetcomint where numcomint='".$this->licomint->getNumcomint()."') and";
-    
-        $sql = "select '0' as check,c.unires,d.desubi,b.reqart,to_char(c.fecreq,'dd/mm/yyyy') as fecreq,
-            FormatoNum(b.canreq) as canreq,FormatoNum(b.costo) as costo,Formatonum(b.montot) as montot, max(a.id) as id, '$codart' as codart
-            from caregart a, caartsol b, casolart c, bnubica d
-            where
-            $sqlli
-            a.codart=b.codart and
-            b.reqart=c.reqart and
-            d.codubi=c.unires and
-            c.stareq='A'            
-            group by
-            c.unires,d.desubi,b.reqart,c.fecreq,b.canreq,b.costo,b.montot
-            order by b.reqart
-            ";
 
-    H::BuscarDatos($sql, $reg);
-    
-    $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/liccomint/'.sfConfig::get('sf_app_module_config_dir_name').'/gridreq');
-    $this->columnas[1][0]->setHtml('size=5 disabled=true');
-    $this->obj =$this->columnas[0]->getConfig($reg);
-    $this->licomint->setObjreq($this->obj);
+    if(!count($reg)>0 && $a=='')
+    {
+      // Aquí va el código para traernos los registros que contendrá el grid
+      $reg = array();
+      // Aquí va el código para generar arreglo de configuración del grid
+      $c = new Criteria();
+      $c->add(LidetcomintPeer::NUMCOMINT,$this->licomint->getNumcomint());
+      $reg = LidetcomintPeer::doSelect($c);
+      $this->obj = array();
+    }
+    $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/liccomint/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
+
+    if($codmon=='' || $codmon=='001')
+    {
+        $this->obj[1][6]->setOculta(true);
+    }else
+    {
+        $this->obj[1][6]->setOculta(false);
+    }
+
+    $this->obj = $this->obj[0]->getConfig($reg);
+    $this->licomint->setGrid($this->obj);
+
   }
 
   public function executeAjax()
@@ -96,19 +73,110 @@ class liccomintActions extends autoliccomintActions
         // La variable $output es usada para retornar datos en formato de arreglo para actualizar
         // objetos en la vista. mas informacion en
         // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
-        $dato = H::GetX('Codcom','Licomlic','Descom',$codigo);
-        $dato2 = H::GetX('Codcom','Licomlic','Respon',$codigo);
-        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["licomint_respon","'.$dato2.'",""],["","",""]]';
+          $tipcom = $this->getRequestParameter('tipcom','');
+          $codclacomp = $this->getRequestParameter('codclacomp','');
+          $this->licomint = $this->getLicomintOrCreate();
+          $this->updateLicomintFromRequest();
+          $c = new Criteria();
+          $c->add(LiprebasPeer::CODMON,$codigo);
+          $c->add(LiprebasPeer::CODCLACOMP,$codclacomp);
+          $c->add(LiprebasPeer::TIPCOM,$tipcom);
+          $c->addJoin(LiprebasPeer::NUMPRE,  LisolegrPeer::NUMPRE);
+          $sql = "  lisolegr.numsol not in (select lidetcomint.numsol from lidetcomint )";
+          $c->add(LisolegrPeer :: NUMSOL, $sql, Criteria :: CUSTOM);
+          $reg = LisolegrPeer::doSelect($c);
+          $this->configGrid($codigo,$reg,'X');
+          $moncom=0;
+          $moncomext=0;
+          $valcam=0;
+          if($reg)
+              $valcam = $reg[0]->getValcam();
+          foreach($reg as $r)
+            $moncom+=$r->getMonsol();
+          if($valcam>0)
+            $moncomext=$moncom/$valcam;
+          $sw=false;
+          if($codigo=='001' || $codigo=='')
+            $js="$('divmoncomext').hide();
+                 $('divmoncomextlet').hide();";
+          else
+            $js="$('divmoncomext').show();
+                 $('divmoncomextlet').show();";
+        $output = '[["licomint_moncom","'.H::FormatoMonto($moncom).'",""],["licomint_moncomlet","'.H::obtenermontoescrito($moncom).'",""],
+                    ["licomint_moncomext","'.H::FormatoMonto($moncomext).'",""],["licomint_moncomextlet","'.H::obtenermontoescrito($moncomext).'",""],
+                    ["javascript","'.$js.'",""]]';
         break;
       case '2':
-        // La variable $output es usada para retornar datos en formato de arreglo para actualizar
-        // objetos en la vista. mas informacion en
-        // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
-        $sw=false;
-        $this->licomint = $this->getLicomintOrCreate();
-        $this->updateLicomintFromRequest();
-        $this->configGridReq($codigo);        
-        $output = '[["","",""],["","",""],["","",""]]';
+            $nomemp = '';
+            $nomcar = '';
+            $coduniadm = '';
+            $desuniadm = '';
+            $c = new Criteria();
+            $c->add(LidatstePeer::CODEMP,$codigo);
+            $per = LidatstePeer::doSelectOne($c);
+            if($per)
+            {
+                $nomemp = $per->getNomemp();
+                $nomcar = $per->getNomcar();
+                $coduniadm = $per->getCoduniste();
+                $desuniadm = $per->getDesuniste();
+            }
+            $output = '[["licomint_nomempadm","'.$nomemp.'",""],["licomint_nomcaradm","'.$nomcar.'",""],["licomint_coduniadm","'.$coduniadm.'",""],["licomint_desuniadm","'.$desuniadm.'",""]]';
+        break;
+      case '3':
+            $coduniadm = '';
+            $desuniadm = '';
+            $c = new Criteria();
+            $c->add(LidatstePeer::CODUNISTE,$codigo);
+            $per = LidatstePeer::doSelectOne($c);
+            if($per)
+            {
+                $coduniadm = $per->getCoduniste();
+                $desuniadm = $per->getDesuniste();
+            }
+            $output = '[["licomint_coduniadm","'.$coduniadm.'",""],["licomint_desuniadm","'.$desuniadm.'",""],["","",""]]';
+        break;
+      case '4':
+            $nomemp = '';
+            $nomcar = '';
+            $coduniste = '';
+            $desuniste = '';
+            $c = new Criteria();
+            $c->add(LidatstePeer::CODEMP,$codigo);
+            $per = LidatstePeer::doSelectOne($c);
+            if($per)
+            {
+                $nomemp = $per->getNomemp();
+                $nomcar = $per->getNomcar();
+                $coduniste = $per->getCoduniste();
+                $desuniste = $per->getDesuniste();
+            }
+            $output = '[["licomint_nomempeje","'.$nomemp.'",""],["licomint_nomcareje","'.$nomcar.'",""],["licomint_coduniste","'.$coduniste.'",""],["licomint_desuniste","'.$desuniste.'",""]]';
+        break;
+      case '5':
+            $coduniste = '';
+            $desuniste = '';
+            $c = new Criteria();
+            $c->add(LidatstePeer::CODUNISTE,$codigo);
+            $per = LidatstePeer::doSelectOne($c);
+            if($per)
+            {
+                $coduniste = $per->getCoduniste();
+                $desuniste = $per->getDesuniste();
+            }
+            $output = '[["licomint_coduniste","'.$coduniste.'",""],["licomint_desuniste","'.$desuniste.'",""],["","",""]]';
+        break;
+      case '6':
+          $fecha = $this->getRequestParameter('fecha','');
+          $dias = $this->getRequestParameter('dias','');
+          if($fecha && $dias)
+          {
+              $sql="select to_char(to_date('$fecha','dd/mm/yyyy')+$dias,'dd/mm/yyyy') as fecven";
+              if(H::BuscarDatos($sql, $rs))
+                 $fecven = $rs[0]['fecven'];
+          }else
+             $fecven=null;
+          $output = '[["licomint_fecven","'.$fecven.'",""],["","",""],["","",""]]';
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
@@ -183,41 +251,66 @@ class liccomintActions extends autoliccomintActions
    */
   public function updateError()
   {
+    $c = new Criteria();
+    $per = TsdesmonPeer::doSelect($c);
+    $arrmon=array(''=>'Seleccione...');
+    foreach($per as $d)
+    {
+        $arrmon[$d->getCodmon()] = $d->getNommon();
+    }
+    $this->params=array('arrmon'=>$arrmon);
     $this->configGrid();
 
-    $gridart = Herramientas::CargarDatosGridv2($this,$this->obj2,true);
-    $gridreq = Herramientas::CargarDatosGridv2($this,$this->obj,true);
+    $grid = Herramientas::CargarDatosGridv2($this,$this->obj,true);
+
 
   }
 
   public function saving($clasemodelo)
   {
-    $gridreq = Herramientas::CargarDatosGridv2($this,$this->obj,true);
-
-    if($clasemodelo->getStatus()=='P')
+    $c = new Criteria();
+    $per = LidefempPeer::doSelectOne($c);
+    if($clasemodelo->getNumcomint()=='########')
     {
-        foreach($gridreq[0] as $r)
-        {
-            if($r['check']==true)
-            {
-                $obj = new Lidetcomint();
-                $obj->setNumcomint($clasemodelo->getNumcomint());
-                $obj->setFeccomint($clasemodelo->getFeccomint());
-                $obj->setCodart($r['codart']);
-                $obj->setReqart($r['reqart']);
-                $obj->setFecreq($r['fecreq']);
-                $obj->setUnires($r['unires']);
-                $obj->setCanreq(H::FormatoNum($r['canreq']));
-                $obj->setCosto(H::FormatoNum($r['costo']));
-                $obj->setMontot(H::FormatoNum($r['montot']));
-                $obj->save();
-            }
-        }
-        $clasemodelo->setStatus('P');
-        return parent::saving($clasemodelo);
-    }else
-        return 'LI001';
+        $numero = str_pad($per->getComint(),8,'0',STR_PAD_LEFT);
+        $val = H::GetX('Numcomint','Licomint','Numcomint',$numero);
+        if($val==$numero)
+            return 'V008';
+        $clasemodelo->setNumcomint($numero);
+        $sql="update lidefemp set comint='".($per->getComint()+1)."'";
+        H::BuscarDatos($sql,$rs);
+    }
+    if($clasemodelo->getStatus()=='') $clasemodelo->setStatus('P');
+    $canuni=0;
+    if($per->getUnitri()>0)
+       $canuni = $clasemodelo->getMoncom()/$per->getUnitri();
+    $codtiplic='';
+    $sql="select codtiplic from litiplic where canunitribie>=$canuni order by canunitribie limit 1";
+    if(H::BuscarDatos($sql, $rs))    
+        $codtiplic = $rs[0]['codtiplic'];
+    else
+    {
+        $sql="select codtiplic from litiplic order by canunitribie desc limit 1";
+            if(H::BuscarDatos($sql, $rs))
+                $codtiplic = $rs[0]['codtiplic'];
+    }
+    $clasemodelo->setCodtiplic($codtiplic);
+    $c = new Criteria();
+    $c->add(LidetcomintPeer::NUMCOMINT,$clasemodelo->getNumcomint());
+    $per = LidetcomintPeer::doSelect($c);
+    foreach($per as  $r)
+        $r->delete();
     
+    $grid = Herramientas::CargarDatosGridv2($this,$this->obj,true);
+    foreach($grid[0] as $reg)
+    {
+        $obj = new Lidetcomint();
+        $obj->setNumcomint($clasemodelo->getNumcomint());
+        $obj->setNumsol($reg['numsol']);
+        $obj->setMontot($reg['montot']);
+        $obj->save();
+    }
+    return parent::saving($clasemodelo);
   }
 
   public function deleting($clasemodelo)
@@ -225,7 +318,7 @@ class liccomintActions extends autoliccomintActions
     $c = new Criteria();
     $c->add(LidetcomintPeer::NUMCOMINT,$clasemodelo->getNumcomint());
     $per = LidetcomintPeer::doSelect($c);
-    foreach($per as $r)
+    foreach($per as  $r)
         $r->delete();
 
     return parent::deleting($clasemodelo);

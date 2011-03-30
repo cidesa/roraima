@@ -1,0 +1,54 @@
+opciones:                  # Opciones generales
+  name:                    k
+  eliminar:                true
+  tabla:                   liplietipemp
+  anchogrid:               900
+  ancho:                   850
+  filas:                   1
+  titulo:                  ' Criterios de Calificación de Tipo de Empresa '
+  htmltotalfilas:          ' '
+1:
+  titulo:                  Criterio
+  tipo:                    t
+  nombrecampo:             codtipemp
+  html:                    [ readonly=true ]
+  catalogo:                [litipemp, sf_admin_edit_form, {Codemp: 1, Desemp: 2}, Litipemp_codemp]
+  esgrabable:              true
+2:
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desemp
+  html:                    [ readonly=true ]
+  esgrabable:              false
+3:
+  titulo:                  Puntuación
+  tipo:                    m
+  nombrecampo:             puntua
+  html:                    [  ]
+  esgrabable:              true
+4:
+  titulo:                  %
+  tipo:                    m
+  nombrecampo:             porcen
+  html:                    [  ]
+  esgrabable:              true
+5:
+  titulo:                  Fecha Emisión
+  tipo:                    f
+  nombrecampo:             fecemi
+  html:                    [  ]
+  vacia:                   true
+  esgrabable:              true
+6:
+  titulo:                  Fecha Vencimiento
+  tipo:                    f
+  nombrecampo:             fecven
+  html:                    [  ]
+  vacia:                   true
+  esgrabable:              true
+7:
+  titulo:                  Limitante
+  tipo:                    k
+  nombrecampo:             limita
+  html:                    [  ]
+  esgrabable:              true

@@ -1,0 +1,57 @@
+opciones:                  # Opciones generales
+  name:                    d
+  eliminar:                false
+  tabla:                   Lianaofefia
+  anchogrid:               900
+  ancho:                   850
+  filas:                   0
+  titulo:                  ' Fianzas/Garantias'
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Criterio
+  tipo:                    t
+  nombrecampo:             codcomres
+  html:                    [ size=10 readonly=true ]
+  esgrabable:              true
+2:
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             descomres
+  html:                    [ size=20 readonly=true ]
+  esgrabable:              false
+3:
+  titulo:                  Puntación Pliego
+  tipo:                    m
+  nombrecampo:             puntua
+  html:                    [ readonly=true size=10 ]
+  esgrabable:              false
+4:
+  titulo:                  % Pliego
+  tipo:                    m
+  nombrecampo:             porcen
+  html:                    [ readonly=true size=10 ]
+  esgrabable:              false
+5:
+  titulo:                  Puntación Empresa
+  tipo:                    m
+  nombrecampo:             punemp
+  html:                    [ size=10 ]
+  esgrabable:              true
+6:
+  titulo:                  % Empresa
+  tipo:                    m
+  nombrecampo:             poremp
+  html:                    [  size=10 ]
+  esgrabable:              true
+7:
+  titulo:                  Limitante
+  tipo:                    t
+  nombrecampo:             limit
+  html:                    [ size=5 readonly=true ]
+  esgrabable:              false
+8:
+  titulo:                  Observaciones
+  tipo:                    t
+  nombrecampo:             observ
+  html:                    [ size=40 ]
+  esgrabable:              true

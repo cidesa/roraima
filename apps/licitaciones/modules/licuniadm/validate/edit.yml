@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "liuniadm{coduniadm}"
+   - "liuniadm{desuniadm}"
+
+names:
+  liuniadm{coduniadm}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_coduniadm
+
+  liuniadm{desuniadm}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_desuniadm
+
+Validator_coduniadm:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Liuniadm
+        column:       coduniadm
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desuniadm:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripción no puede pasar mas de 100 caracteres

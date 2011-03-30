@@ -1,8 +1,13 @@
 methods:
   post:
+   - "litiplic{codtiplic}"
    - "litiplic{destiplic}"
 
 names:
+  litiplic{codtiplic}:
+    required:  Yes
+    required_msg: El Código es un campo requerido
+
   litiplic{destiplic}:
     required:  Yes
     required_msg: La Descripción es un campo requerido

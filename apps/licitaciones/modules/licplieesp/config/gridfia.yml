@@ -1,0 +1,60 @@
+opciones:                  # Opciones generales
+  name:                    j
+  eliminar:                true
+  tabla:                   lipliecrifian
+  anchogrid:               900
+  ancho:                   850
+  filas:                   1
+  titulo:                  ' Criterios de Calificación Fianzas/Garantias '
+  htmltotalfilas:          ' '
+1:
+  titulo:                  Criterio
+  tipo:                    t
+  nombrecampo:             codcomres
+  html:                    [ readonly=true ]
+  catalogo:                [liccomres, sf_admin_edit_form, {Codcomres: 1, Descomres: 2, Porcentaje: 4}, Liccomres_codcomres ]
+  esgrabable:              true
+2:
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             descomres
+  html:                    [ readonly=true ]
+  esgrabable:              false
+3:
+  titulo:                  Puntuación
+  tipo:                    m
+  nombrecampo:             puntua
+  html:                    [  ]
+  esgrabable:              true
+4:
+  titulo:                  %
+  tipo:                    m
+  nombrecampo:             porcen
+  html:                    [  ]
+  esgrabable:              true
+5:
+  titulo:                  Empresa
+  tipo:                    t
+  nombrecampo:             empresa
+  html:                    [  ]
+  esgrabable:              true
+6:
+  titulo:                  Fecha Emisión
+  tipo:                    f
+  nombrecampo:             fecemi
+  vacia:                   true
+  html:                    [  ]
+  esgrabable:              true
+7:
+  titulo:                  Fecha Vencimiento
+  tipo:                    f
+  nombrecampo:             fecven
+  vacia:                   true
+  html:                    [  ]
+  esgrabable:              true
+8:
+  titulo:                  Limitante
+  tipo:                    k
+  nombrecampo:             limita
+  html:                    [  ]
+  esgrabable:              true

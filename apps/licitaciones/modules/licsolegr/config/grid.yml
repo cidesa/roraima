@@ -1,0 +1,132 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   Lisolegrdet
+  anchogrid:               900
+  ancho:                   850
+  filas:                   0
+  titulo:                  ' Artículos '
+  htmltotalfilas:          ' '
+1:       # Columna 2
+  titulo:                  Artículo
+  tipo:                    t
+  nombrecampo:             codart
+  esgrabable:              true
+  html:                    [size=15 readonly=true ]
+2:       # Columna 3
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desart
+  esgrabable:              false
+  html:                    [size=20 readonly=true ]
+3:       # Columna 4
+  titulo:                  Categoria Presupuestaria
+  tipo:                    t
+  nombrecampo:             codcat
+  esgrabable:              true
+  ajaxfila:                true
+  html:                    [ size=15 readonly=true ]
+4:       # Columna 5
+  titulo:                  Nombre
+  tipo:                    t
+  nombrecampo:             nomcat
+  esgrabable:              false
+  html:                    [ size=20 readonly=true ]
+5:       # Columna 4
+  titulo:                  Codigo Presupuestario
+  tipo:                    t
+  nombrecampo:             codpre
+  esgrabable:              true
+  html:                    [ readonly=true size=30 ]
+6:       # Columna 4
+  titulo:                  Disponibilidad
+  tipo:                    m
+  nombrecampo:             dispo
+  esgrabable:              false
+  html:                    [ readonly=true ]
+7:       # Columna 5
+  titulo:                  Unidad de Medida
+  tipo:                    t
+  nombrecampo:             unimed
+  esgrabable:              true
+  html:                    [ readonly=true ]
+8:       # Columna 5
+  titulo:                  Cantidad Aprobada
+  tipo:                    m
+  nombrecampo:             cansol
+  esgrabable:              true
+  ajaxfila:                true
+  html:                    [ ]
+9:       # Columna 5
+  titulo:                  Precio Unitario Moneda Origen
+  tipo:                    m
+  nombrecampo:             costo
+  esgrabable:              true
+  ajaxfila:                true
+  html:                    [  readonly=true ]
+10:       # Columna 5
+  titulo:                  Precio Unitario Moneda Extranjera
+  tipo:                    m
+  nombrecampo:             costoe
+  esgrabable:              true
+  oculta:                  true
+  ajaxfila:                true
+  html:                    [ readonly=true ]
+11:       # Columna 5
+  titulo:                  Sub-Total Moneda Origen
+  tipo:                    m
+  nombrecampo:             subtot
+  esgrabable:              true
+  html:                    [ readonly=true ]
+12:       # Columna 5
+  titulo:                  Sub-Total Moneda Extranjera
+  tipo:                    m
+  nombrecampo:             subtote
+  esgrabable:              true
+  oculta:                  true
+  html:                    [ readonly=true ]
+13:       # Columna 5
+  titulo:                  Total Recargos
+  tipo:                    m
+  nombrecampo:             monrec
+  esgrabable:              true
+  html:                    [ readonly=true ]
+14:       # Columna 5
+  titulo:                  Total Moneda Origen
+  tipo:                    m
+  nombrecampo:             montot
+  esgrabable:              true
+  #estotal:                 [true, liprebas_monpre ]
+  html:                    [ readonly=true ]
+15:       # Columna 5
+  titulo:                  Total Moneda Extranjera
+  tipo:                    m
+  nombrecampo:             montote
+  esgrabable:              true
+  oculta:                  true
+  #estotal:                 [true, liprebas_monpreext ]
+  html:                    [ readonly=true ]
+16:       # Columna 5
+  titulo:                  Valor Cambio
+  tipo:                    m
+  nombrecampo:             valcam
+  esgrabable:              true 
+  html:                    [ readonly=true ]
+17:       # Columna 5
+  titulo:                  Recargos
+  tipo:                    t
+  nombrecampo:             recarg
+  esgrabable:              false
+  html:                    [  ]
+18:       # Columna 2
+  titulo:                  Financiamiento
+  tipo:                    t
+  nombrecampo:             codfin
+  esgrabable:              true
+  html:                    [size=10 readonly=true ]
+29:       # Columna 3
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomext
+  esgrabable:              false
+  html:                    [size=20 readonly=true ]

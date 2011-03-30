@@ -1,0 +1,47 @@
+opciones:                  # Opciones generales
+  name:                    f
+  eliminar:                true
+  tabla:                   lipliepub
+  anchogrid:               900
+  ancho:                   850
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:
+  titulo:                  Medio
+  tipo:                    t
+  nombrecampo:             medio
+  html:                    [  ]
+  esgrabable:              true
+2:
+  titulo:                  Fecha Inicio
+  tipo:                    f
+  nombrecampo:             fecini
+  vacia:                   true
+  html:                    [  ]
+  esgrabable:              true
+3:
+  titulo:                  Fecha Fin
+  tipo:                    f
+  nombrecampo:             fecfin
+  vacia:                   true
+  html:                    [  ]
+  esgrabable:              true
+4:
+  titulo:                  No. de Dias
+  tipo:                    m
+  nombrecampo:             dias
+  html:                    [ size=5 ]
+  esgrabable:              true
+5:
+  titulo:                  Pagina
+  tipo:                    t
+  nombrecampo:             pagina
+  html:                    [ size=5 maxlength=5]
+  esgrabable:              true
+6:
+  titulo:                  Cuerpo
+  tipo:                    t
+  nombrecampo:             cuerpo
+  html:                    [ size=5 maxlength=5 ]
+  esgrabable:              true

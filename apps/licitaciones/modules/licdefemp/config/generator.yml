@@ -11,9 +11,20 @@ generator:
       faxemp:    { name: Fax, params: size=20 maxlength=30}
       emaemp:    { name: Email, params: size=80 maxlength=100}
       unitri:    { name: Monto en Bolívares (Bs.)}
-      ptocta:    { name: Punto de Cuenta}
+      ptocta:    { name: Punto de Cuenta Egreso}
       prebas:    { name: Presupuesto Base}
       expdie:    { name: Expediente}
+      memora:    { name: Memorando}
+      solegr:    { name: Requisición/Solicitud}
+      comint:    { name: Compra Integral/Pedido}
+      pliego:    { name: Pliego de Condiciones}
+      aclara:    { name: Aclaratoria}
+      oferta:    { name: Oferta}
+      anaofe:    { name: Analisis Oferta}
+      recome:    { name: Recomendación}
+      ptocuecon: { name: Punto de Cuenta Contratacion}
+      notifi:    { name: Notificación}
+
     list:
       title:          Registro Información del Sistema
       display:        [=codemp, nomemp, diremp]
@@ -28,6 +39,6 @@ generator:
       display:
         Datos Principales:   [nomemp, diremp, telemp, faxemp, emaemp]
         Valor Actual Unidad Tributaria: [unitri]
-        Correlativos: [ptocta, prebas, expdie]
+        Correlativos: [ptocta, prebas, expdie, memora, solegr, comint, pliego, aclara]
       actions:
         _save:        ~

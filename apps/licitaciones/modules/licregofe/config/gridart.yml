@@ -1,0 +1,51 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   liregofedet
+  anchogrid:               900
+  ancho:                   850
+  filas:                   0
+  titulo:                  ' Articulos '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código Artículo
+  tipo:                    t
+  nombrecampo:             codart
+  html:                    [ readonly=true ]
+  esgrabable:              true
+2:
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desart
+  html:                    [ readonly=true ]
+  esgrabable:              false
+3:
+  titulo:                  Unidad Medida
+  tipo:                    t
+  nombrecampo:             unimed
+  html:                    [ readonly=true ]
+  esgrabable:              true
+4:
+  titulo:                  Cantidad
+  tipo:                    m
+  nombrecampo:             cantid
+  html:                    [ onBlur="obj=this; ValidarMontoGridv2(obj); CalculaTotal(this.id);" ]
+  esgrabable:              true
+5:
+  titulo:                  Precio Unitario
+  tipo:                    m
+  nombrecampo:             preuni
+  html:                    [ onBlur="obj=this; ValidarMontoGridv2(obj); CalculaTotal(this.id);" ]
+  esgrabable:              true
+6:
+  titulo:                  Recargo
+  tipo:                    m
+  nombrecampo:             monrec
+  html:                    [ onBlur="obj=this; ValidarMontoGridv2(obj); CalculaTotal(this.id);" ]
+  esgrabable:              true
+7:
+  titulo:                  Sub-Total
+  tipo:                    m
+  nombrecampo:             subtot
+  html:                    [  ]
+  esgrabable:              true

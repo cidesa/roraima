@@ -4,7 +4,7 @@
 ?>
 <?php echo form_tag('licuniste/save', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form', 'onsubmit'  => 'return false;',
   'multipart' => true,
 )) ?>
 
@@ -199,59 +199,27 @@
 <fieldset id="sf_fieldset_datos_del_responsable" class="">
 
 <div class="form-row" id="divDatos del Responsable">
-<div id="divcodemp">
-  <?php echo label_for('lidatste[codemp]', __($labels['lidatste{codemp}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
-  <div class="content<?php if ($sf_request->hasError('lidatste{codemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('lidatste{codemp}')): ?>
-    <?php echo form_error('lidatste{codemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
 
-  <?php $value = get_partial('codemp', array('type' => 'edit', 'lidatste' => $lidatste)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-<br/>
-<div id="divcedemp">
-  <?php echo label_for('lidatste[cedemp]', __($labels['lidatste{cedemp}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
-  <div class="content<?php if ($sf_request->hasError('lidatste{cedemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('lidatste{cedemp}')): ?>
-    <?php echo form_error('lidatste{cedemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
+    <div id="divgrid">
+  <?php if($labels['lidatste{grid}']!='.:') { ?>
+  <?php echo label_for('lidatste[grid]', __($labels['lidatste{grid}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('lidatste{grid}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('lidatste{grid}')): ?>
+    <?php echo form_error('lidatste{grid}', array('class' => 'form-error-msg')) ?>
+  <?php endif; }?>
 
-  <?php $value = object_input_tag($lidatste, 'getCedemp', array (
-  'disabled' => true,
-  'control_name' => 'lidatste[cedemp]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-<br/>
-<div id="divdiremp">
-  <?php echo label_for('lidatste[diremp]', __($labels['lidatste{diremp}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
-  <div class="content<?php if ($sf_request->hasError('lidatste{diremp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('lidatste{diremp}')): ?>
-    <?php echo form_error('lidatste{diremp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
 
-  <?php $value = object_textarea_tag($lidatste, 'getDiremp', array (
-  'control_name' => 'lidatste[diremp]',
-  'size' => '70x3',
-  'readonly' => true,
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-<br/>
-<div id="divtelemp">
-  <?php echo label_for('lidatste[telemp]', __($labels['lidatste{telemp}' ]), 'class="required" Style="text-align:left; width:150px"') ?>
-  <div class="content<?php if ($sf_request->hasError('lidatste{telemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('lidatste{telemp}')): ?>
-    <?php echo form_error('lidatste{telemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
 
-  <?php $value = object_input_tag($lidatste, 'getTelemp', array (
-  'disabled' => true,
-  'control_name' => 'lidatste[telemp]',
-  'readonly' => true,
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+  <?php $value = get_partial('grid', array('type' => 'edit', 'lidatste' => $lidatste,'labels' => $labels,'params' => $params)); echo $value ? $value : '&nbsp;' ?>
+
+
+  <?php if($labels['lidatste{grid}']!='.:') { ?>
+
+
+
+  </div>
+  <?php  } ?>
+
 </div>
 <br/>
 </div>

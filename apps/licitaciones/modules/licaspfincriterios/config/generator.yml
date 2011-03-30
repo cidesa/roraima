@@ -8,7 +8,7 @@ generator:
       descri:      { name: Descripción, params: size=80 maxlength=100 }
       puntaje:     { name: Puntaje }
     list:
-      title:          Aspecto Financiero. Criterios de Evaluación
+      title:          Aspecto Financiero
       display:        [=codcri, descri]
       object_actions:
         _edit:        ~
@@ -20,8 +20,8 @@ generator:
       max_per_page:   5
       sort:  codcri
     edit:
-      title:          Aspecto Financiero. Criterios de Evaluación
-      display:        [codcri, descri, puntaje]
+      title:          Aspecto Financiero
+      display:        [codcri, descri]
       actions:
         _list:        ~
         _save:        ~

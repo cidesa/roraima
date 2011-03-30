@@ -1,0 +1,48 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                false
+  tabla:                   Lisolegrrgo
+  anchogrid:               900
+  ancho:                   850
+  filas:                   0
+  titulo:                  ' Recargos Artículos '
+  htmltotalfilas:          ' '
+1:       # Columna 2
+  titulo:                  Artículo
+  tipo:                    t
+  nombrecampo:             codart
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size=15 readonly=true ]
+2:       # Columna 5
+  titulo:                  Categoria
+  tipo:                    t
+  nombrecampo:             codcat
+  oculta:                  true
+  esgrabable:              true
+  html:                    [ ]
+3:       # Columna 5
+  titulo:                  Codigo
+  tipo:                    t
+  nombrecampo:             codpre
+  esgrabable:              true
+  oculta:                  true
+  html:                    [ ]
+4:       # Columna 2
+  titulo:                  Recargo
+  tipo:                    t
+  nombrecampo:             codrgo
+  esgrabable:              true
+  html:                    [size=10 readonly=true ]
+5:       # Columna 3
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomrgo
+  esgrabable:              false
+  html:                    [size=20 readonly=true ]
+5:       # Columna 3
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monrgo
+  esgrabable:              true
+  html:                    [size=20 readonly=true ]

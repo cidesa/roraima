@@ -1,0 +1,41 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   liemppar
+  anchogrid:               900
+  ancho:                   850
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Empresa Participante
+  tipo:                    t
+  nombrecampo:             codpro
+  catalogo:                [caprovee, sf_admin_edit_form, {Codpro: 1, Nompro: 2, Nomrepleg: 3}, Liemppar_caprovee ]
+  html:                    [ readonly=true ]
+  esgrabable:              true
+2:
+  titulo:                  Nombre
+  tipo:                    t
+  nombrecampo:             nompro
+  html:                    [ readonly=true ]
+  esgrabable:              false
+3:
+  titulo:                  Representante Legal
+  tipo:                    t
+  nombrecampo:             nomrepleg
+  html:                    [  ]
+  esgrabable:              true
+4:
+  titulo:                  Fecha Retiro Pliego
+  tipo:                    f
+  nombrecampo:             fecret
+  vacia:                   true
+  html:                    [  ]
+  esgrabable:              true
+5:
+  titulo:                  Observaciones
+  tipo:                    t
+  nombrecampo:             observaciones
+  html:                    [  ]
+  esgrabable:              true

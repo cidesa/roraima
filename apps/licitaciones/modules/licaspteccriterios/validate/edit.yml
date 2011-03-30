@@ -16,7 +16,7 @@ names:
     validators: MyStringValidator2
 
   liaspteccrieva{puntaje}:
-    required:  Yes
+    required:  No
     required_msg: El puntaje es un campo obligatorio
 
 MyStringValidator1:

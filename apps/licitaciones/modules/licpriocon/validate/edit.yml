@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "lipriocon{codprio}"
+   - "lipriocon{desprio}"
+
+names:
+  lipriocon{codprio}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codprio
+
+  lipriocon{desprio}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_desprio
+
+Validator_codprio:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Lipriocon
+        column:       codprio
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desprio:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripción no puede pasar mas de 100 caracteres

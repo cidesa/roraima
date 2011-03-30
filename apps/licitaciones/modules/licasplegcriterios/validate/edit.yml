@@ -1,31 +1,44 @@
 methods:
   post:
-   - "liasplegcrieva{lireglic_id}"
-   - "liasplegcrieva{codpro}"
+   - "liasplegcrieva{codcri}"
+   - "liasplegcrieva{descri}"
+   - "liasplegcrieva{puntaje}"
 
 names:
-  liasplegcrieva{lireglic_id}:
+  liasplegcrieva{codcri}:
     required:  Yes
-    required_msg: El Código de la Licitación no puede estar en Blanco
-    validators: Validator_numsol
+    required_msg: Debe introducir el Código del Criterio de Selección
+    validators: MyStringValidator1, Validator_codcri
 
-  liasplegcrieva{codpro}:
+  liasplegcrieva{descri}:
     required:  Yes
-    required_msg: El Código de la Empresa Oferente no puede estar en Blanco
-    validators: Validator_codpro
+    required_msg: Debe introducir la Descripción del Criterio de Selección
+    validators: MyStringValidator2
 
+  liasplegcrieva{puntaje}:
+    required:  No
+    required_msg: El puntaje es un campo obligatorio
 
-Validator_numsol:
-    class: CidesaExistValidator
+MyStringValidator1:
+    class: sfStringValidator
     param:
-        class:    Lireglic
-        column:   id
-        unique_error: El Código de la Licitación no existe.
+        min:       1
+        min_error: El código del Criterio de Selección debe tener mas de 1 caracter
+        max:       4
+        max_error: El código del Criterio de Selección debe tener menos de 4 caracteres
 
-Validator_codpro:
-    class: CidesaExistValidator
+MyStringValidator2:
+    class: sfStringValidator
     param:
-        class:    Caprovee
-        column:   codpro
-        unique_error: El Código de la Empresa no existe.
+        min:       1
+        min_error: La descripción del Criterio de Selección debe tener mas de 1 caracter
+        max:       100
+        max_error: La descripción del Criterio de Selección debe tener menos de 100 Caracteres
+
+Validator_codcri:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Liasplegcrieva
+        column:   codcri
+        unique_error:   El código del Criterio de Selección ya existe. Por Favor, Intente con otro.
 

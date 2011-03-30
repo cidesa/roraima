@@ -1,0 +1,52 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   licomintdet
+  anchogrid:               900
+  ancho:                   600
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          '  '
+1:       # Columna 1
+  titulo:                  Ver
+  tipo:                    t
+  nombrecampo:             solreq
+  html:                    [ size=1  class=imagenalmacen readonly=true  onClick="VerSolicitud(this.id)" ]
+  esgrabable:              false
+2:       # Columna 2
+  titulo:                  Solicitud de Egreso
+  tipo:                    t
+  nombrecampo:             numsol
+  html:                    [size="10" ]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Unidad Ejecutora
+  tipo:                    t
+  nombrecampo:             coduniste
+  html:                    [size="5" ]
+  esgrabable:              false
+4:       # Columna 3
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desuniste
+  html:                    [size="50" ]
+  esgrabable:              false
+5:       # Columna 4
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             montot
+  html:                    [size="15" ]
+  esgrabable:              true
+6:       # Columna 2
+  titulo:                  Id
+  tipo:                    t
+  nombrecampo:             campoid
+  html:                    [size="5" ]
+  esgrabable:              false
+  oculta:                  true
+7:       # Columna 4
+  titulo:                  Monto Moneda Extranjera
+  tipo:                    m
+  nombrecampo:             montote
+  html:                    [size="15" ]
+  esgrabable:              false

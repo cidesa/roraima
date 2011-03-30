@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage licasplegcriterios
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 43231 2011-03-30 00:04:18Z cramirez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -16,7 +16,7 @@ class licasplegcriteriosActions extends autolicasplegcriteriosActions
 
   // Para incluir funcionalidades al executeEdit()
   /**
-   * Función para colocar el codigo necesario en  
+   * Función para colocar el codigo necesario en
    * el proceso de edición.
    * Aquí se pueden buscar datos adicionales que necesite la vista
    * Esta función es parte de la acción executeEdit, que maneja tanto
@@ -27,65 +27,79 @@ class licasplegcriteriosActions extends autolicasplegcriteriosActions
    */
   public function editing()
   {
-    if ($this->liasplegcrieva->getId())
-      $this->configGrid($this->liasplegcrieva->getCodlic(),$this->liasplegcrieva->getCodpro() );
-    else $this->configGrid($this->getRequestParameter('liasplegcrieva[codlic]'),$this->getRequestParameter('liasplegcrieva[codpro]'));
+
 
   }
 
-   /**
+  /**
    * Esta función permite definir la configuración del grid de datos
    * que contiene el formulario. Esta función debe ser llamada
    * en las acciones, create, edit y handleError para recargar en todo momento
    * los datos del grid.
    *
    */
-  public function configGrid($codlic,$codpro)
-   {
-    $c = new Criteria();
-    $c->add(LiasplegcrievaPeer::CODLIC,$codlic);
-    $c->add(LiasplegcrievaPeer::CODPRO,$codpro);
-    $regrecaudoferentes =  LiasplegcrievaPeer::doSelect($c);;
+  public function configGrid($reg = array(),$regelim = array())
+  {
+    $this->regelim = $regelim;
 
-    $regfinal = array();
-
-    $c = new Criteria();
-    $c->addAscendingOrderByColumn(LirecaudPeer :: CODREC);
-    $regrecaudos = LirecaudPeer::doSelect($c);
-
-    if($regrecaudos){
-      foreach($regrecaudos as $rec){
-        $idrecaud = $rec->getId();
-        $encontrado=false;
-        $id="";
-        if($regrecaudoferentes){
-          foreach($regrecaudoferentes as $r){
-            if($r->getLirecaudId()==$idrecaud){
-              $encontrado=true;
-              $id=$r->getId();
-            }
-          }
-        }
-
-        if($id!=''){
-          $regaxu = LiasplegcrievaPeer::retrieveByPK($id);
-          $regaxu->setSeleccionado(true);
-        }else{
-          $regaxu = new Liasplegcrieva();
-          $regaxu->setLirecaudId($idrecaud);
-          $regaxu->setCodlic($codlic);
-          $regaxu->setCodpro($codpro);
-          $regaxu->afterHydrate();
-        }
-
-        $regfinal[] = $regaxu;
-      }
+    if(!count($reg)>0)
+    {
+      // Aquí va el código para traernos los registros que contendrá el grid
+      $reg = array();
+      // Aquí va el código para generar arreglo de configuración del grid
+    $this->obj = array();
     }
 
-    $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/licasplegcriterios/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_recaudos');
-    $this->obj = $this->columnas[0]->getConfig($regfinal);
+    // Insertar el criterio de la busqueda de registros del Grid
+    // Por ejemplo:
 
-    $this->liasplegcrieva->setObjrecaudos($this->obj);
+    // $c = new Criteria();
+    // $c->add(CaartaocPeer::AJUOC ,$this->caajuoc->getAjuoc());
+    // $reg = CaartaocPeer::doSelect($c);
+
+    // De esta forma se carga la configuración del grid de un archivo yml
+    // y se le pasa el parámetro de los registros encontrados ($reg)
+    //                                                                            /nombreformulario/
+    // $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/formulario/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_caartaoc',$reg);
+
+    // Si no se quiere cargar la configuración del grid de un .yml, sedebe hacer a pie.
+    // Por ejemplo:
+
+    /*
+    // Se crea el objeto principal de la clase OpcionesGrid
+    $opciones = new OpcionesGrid();
+    // Se configuran las opciones globales del Grid
+    $opciones->setEliminar(true);
+    $opciones->setTabla('Caartalm');
+    $opciones->setAnchoGrid(1150);
+    $opciones->setTitulo('Existencia por Almacenes');
+    $opciones->setHTMLTotalFilas(' ');
+    // Se generan las columnas
+    $col1 = new Columna('Cod. Almacen');
+    $col1->setTipo(Columna::TEXTO);
+    $col1->setEsGrabable(true);
+    $col1->setAlineacionObjeto(Columna::CENTRO);
+    $col1->setAlineacionContenido(Columna::CENTRO);
+    $col1->setNombreCampo('codalm');
+    $col1->setCatalogo('cadefalm','sf_admin_edit_form','2');
+    $col1->setAjax(2,2);
+
+    $col2 = new Columna('Descripción');
+    $col2->setTipo(Columna::TEXTO);
+    $col2->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col2->setAlineacionContenido(Columna::IZQUIERDA);
+    $col2->setNombreCampo('codalm');
+    $col2->setHTML('type="text" size="25" disabled=true');
+
+    // Se guardan las columnas en el objetos de opciones
+    $opciones->addColumna($col1);
+    $opciones->addColumna($col2);
+
+    // Se genera el arreglo de opciones necesario para generar el grid
+    $this->obj = $opciones->getConfig($per);
+     */
+
+
   }
 
   /**
@@ -98,97 +112,45 @@ class licasplegcriteriosActions extends autolicasplegcriteriosActions
   {
 
     $codigo = $this->getRequestParameter('codigo','');
+    // Esta variable ajax debe ser usada en cada llamado para identificar
+    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
     $ajax = $this->getRequestParameter('ajax','');
-    $javascript="";
+
+    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
+    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
+    // los datos de los objetos de la vista como pasa en un submit normal.
+
     switch ($ajax){
       case '1':
-       $c= new Criteria();
-	   $c->add(LireglicPeer::CODLIC,$codigo);
-       $reg=LireglicPeer::doSelectOne($c);
-       if ($reg)
-       {
-       	$cri= new Criteria();
-	    $cri->add(LiempofePeer::CODLIC,$codigo);
-        $regemp=LiempofePeer::doSelectOne($cri);
-		if ($regemp)
-        {
-	       	$dato=$reg->getDeslic();
-	       	$id=$reg->getId();
-	       	$dato1=$reg->getLitiplic()->getDestiplic();
-	       	$dato2=date("d/m/Y",strtotime($reg->getFecreg()));
-        }
-        else//la licitacion no tiene empresas participantes asociadas
-        {
-        	$dato="";
-         	$id="";
-        	$dato1="";
-        	$dato2="";
-            $javascript="alert('La Licitación no tiene empresas oferentes registradas');";
-        }
-       }else {
-       	$dato="";
-       	$id="";
-       	$dato1="";
-       	$dato2="";
-        $javascript="alert('La Licitación no esta Registrada');";
-       }
-       $output = '[["liasplegcrieva_deslic","'.$dato.'",""],["liasplegcrieva_destiplic","'.$dato1.'",""],["liasplegcrieva_lireglic_id","'.$id.'",""],["liasplegcrieva_fecreglic","'.$dato2.'",""],["javascript","'.$javascript.'",""]]';
-       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-       return sfView::HEADER_ONLY;
-       break;
-     case '2':
-      $codlic = $this->getRequestParameter('codlic','');
-      if ($codlic=='')
-      {
-        $dato="";
-        $javascript="alert('Primero debe seleccionar el Código de la Licitación');";
-      }
-      else
-      {
-       $c= new Criteria();
-	   $c->add(CaproveePeer::CODPRO,$codigo);
-       $reg=CaproveePeer::doSelectOne($c);
-       if ($reg)
-       {
-       	$cri= new Criteria();
-	    $cri->add(LiempofePeer::CODPRO,$codigo);
-	    $cri->add(LiempofePeer::CODLIC,$codlic);
-        $regemp=LiempofePeer::doSelectOne($cri);
-		if ($regemp)
-        {
-	       	$dato=$reg->getNompro();
-	       	$javascript="";
-        }
-        else//la licitacion no tiene empresas participantes asociadas
-        {
-        	$dato="";
-            $javascript="alert('Esta empresa no es oferente para la Licitación Seleccionada');";
-        }
-       }else {
-       	$dato="";
-        $javascript="alert('La Empresa no esta Registrada');";
-       }
-      }// if ($codlic=='')
-       $output = '[["liasplegcrieva_nompro","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
-       $this->liasplegcrieva =  new Liasplegcrieva();
-       $this->liasplegcrieva->setCodlic($codlic);
-       $this->liasplegcrieva->setCodpro($codigo);
-       $this->configGrid($codlic, $codigo);
-       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-       break;
-
-     default:
+        // La variable $output es usada para retornar datos en formato de arreglo para actualizar
+        // objetos en la vista. mas informacion en
+        // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
+        $output = '[["","",""],["","",""],["","",""]]';
+        break;
+      default:
         $output = '[["","",""],["","",""],["","",""]]';
     }
+
+    // Instruccion para escribir en la cabecera los datos a enviar a la vista
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+
+    // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
+    // mantener habilitar esta instrucción
+    return sfView::HEADER_ONLY;
+
+    // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
+    // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
+
   }
 
 
-  
-  
-  
+
+
+
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -196,38 +158,16 @@ class licasplegcriteriosActions extends autolicasplegcriteriosActions
   {
     $this->coderr =-1;
 
-
     if($this->getRequest()->getMethod() == sfRequest::POST){
-
       $this->liasplegcrieva= $this->getLiasplegcrievaOrCreate();
-      $this->updateLiasplegcrievaFromRequest();
-      $this->configGrid($this->liasplegcrieva->getCodlic(), $this->liasplegcrieva->getCodpro());
-
-      $grid=Herramientas::CargarDatosGridv2($this,$this->obj);
-
-	 if ($this->liasplegcrieva->getCodpro() and $this->liasplegcrieva->getCodlic())
-      {
-		  $cri= new Criteria();
-		  $cri->add(LiempofePeer::CODPRO,$this->liasplegcrieva->getCodpro());
-		  $cri->add(LiempofePeer::CODLIC,$this->liasplegcrieva->getCodlic());
-		  $regemp=LiempofePeer::doSelectOne($cri);
-		  if (!$regemp) { $this->coderr = 905; return false;}
-      }
-
-      $oferente=false;
-      foreach($grid[0] as $item){
-        if($item->getSeleccionado()){
-          $oferente=true;
-          if ($item->getPuntaje()<=0){ $this->coderr = 904; return false;}
-        }
-      }
-      if (!$oferente) { $this->coderr = 903; return false;}
+      $this->updateLiasplegcrievaFromRequest();      
 
       if($this->coderr!=-1){
         return false;
       } else return true;
 
     }else return true;
+
 
 
   }
@@ -239,91 +179,40 @@ class licasplegcriteriosActions extends autolicasplegcriteriosActions
    */
   public function updateError()
   {
-      $this->liasplegcrieva= $this->getLiasplegcrievaOrCreate();
-      $this->updateLiasplegcrievaFromRequest();
-      $this->configGrid($this->liasplegcrieva->getCodlic(), $this->liasplegcrieva->getCodpro());
-      $this->liasplegcrieva->afterHydrate();
+    //$this->configGrid();
+
+    //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
+
+    //$this->configGrid($grid[0],$grid[1]);
 
   }
 
   /**
-   * Función para colocar el codigo necesario para 
+   * Función para colocar el codigo necesario para
    * el proceso de guardar.
-   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Esta función debe retornar un valor igual a -1 si no hubo
    * Inconvenientes al guardar, y != de -1 si existe algún error.
    * Si es diferente de -1 el valor devuelto debe ser un código de error
    * Válido que exista en el archivo config/errores.yml
    *
    */
-  public function saving($liasplegcrieva)
+  public function saving($clasemodelo)
   {
-    $grid=Herramientas::CargarDatosGridv2($this,$this->obj);
-  	Licitacion::salvarEmpresasRecaudos($liasplegcrieva,$grid);
-    return -1;
+    return parent::saving($clasemodelo);
   }
 
   /**
-   * Función principal para el manejo de la accion list
-   * del formulario.
-   *
-   */
-  public function executeList()
-  {
-    $this->processSort();
-
-    $this->processFilters();
-
-    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/liasplegcrieva/filters');
-
-    // pager
-    $this->pager = new sfPropelPager('Liempofe', 10);
-    $c = new Criteria();
-    $c->addJoin(LiempofePeer::LIREGLIC_ID,LiasplegcrievaPeer::LIREGLIC_ID);
-    $c->addJoin(LiempofePeer::CODPRO,LiasplegcrievaPeer::CODPRO);
-	$c->setDistinct();
-    $this->addSortCriteria($c);
-    $this->addFiltersCriteria($c);
-    $this->pager->setCriteria($c);
-    $this->pager->setPage($this->getRequestParameter('page', 1));
-    $this->pager->init();
-  }
-
-  protected function getLiasplegcrievaOrCreate($id = 'id', $codlic = 'codlic', $codpro = 'codpro')
-  {
-    if (!$this->getRequestParameter($codlic))
-    {
-      $liasplegcrieva = new Liasplegcrieva();
-    }
-    else
-    {
-      $c = new Criteria();
-  	  $c->add(LiasplegcrievaPeer::CODLIC,$this->getRequestParameter($codlic));
-  	  $c->add(LiasplegcrievaPeer::CODPRO,$this->getRequestParameter($codpro));
-  	  $liasplegcrieva = LiasplegcrievaPeer::doSelectOne($c);
-
-      $this->forward404Unless($liasplegcrieva);
-    }
-
-    return $liasplegcrieva;
-  }
-
-  /**
-   * Función para colocar el codigo necesario para 
+   * Función para colocar el codigo necesario para
    * el proceso de eliminar.
-   * Esta función debe retornar un valor igual a -1 si no hubo 
+   * Esta función debe retornar un valor igual a -1 si no hubo
    * Inconvenientes al guardar, y != de -1 si existe algún error.
    * Si es diferente de -1 el valor devuelto debe ser un código de error
    * Válido que exista en el archivo config/errores.yml
    *
    */
-  public function deleting($liasplegcrieva)
+  public function deleting($clasemodelo)
   {
-    $c= new Criteria();
-    $c->add(LiasplegcrievaPeer::CODLIC,$liasplegcrieva->getCodlic());
-    $c->add(LiasplegcrievaPeer::CODPRO,$liasplegcrieva->getCodpro());
-    LiasplegcrievaPeer::doDelete($c);
-
-    return -1;
+    return parent::deleting($clasemodelo);
   }
 
   /**
@@ -342,10 +231,11 @@ class licasplegcriteriosActions extends autolicasplegcriteriosActions
     {
       if($this->coderr!=-1){
         $err = Herramientas::obtenerMensajeError($this->coderr);
-        $this->getRequest()->setError('',$err);
+        $this->getRequest()->setError('liasplegcrieva{puntaje}',$err);
 
       }
     }
     return sfView::SUCCESS;
   }
-}
+
+ }

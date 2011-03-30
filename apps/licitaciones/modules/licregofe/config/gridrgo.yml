@@ -1,0 +1,42 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                true
+  tabla:                   Liregofergo
+  anchogrid:               900
+  ancho:                   850
+  filas:                   1
+  titulo:                  ' Recargos  '
+  htmltotalfilas:          ' '
+1:       # Columna 4
+  titulo:                  Recargo
+  tipo:                    t
+  nombrecampo:             codrgo
+  esgrabable:              true
+  catalogo:                [Carecarg, sf_admin_edit_form, {Codrgo: 1, Nomrgo: 2, Tiprgo: 4, Monrgo: 5 }, Optipret_Carecarg ]
+  html:                    [ size=10 readonly=true onBlur="CalculaRecargo(this.id)"]
+2:       # Columna 5
+  titulo:                  Nombre
+  tipo:                    t
+  nombrecampo:             nomrgo
+  esgrabable:              false
+  html:                    [ size=20 readonly=true ]
+3:       # Columna 4
+  titulo:                  Monto Calculado
+  tipo:                    m
+  nombrecampo:             monrgo
+  esgrabable:              true
+  html:                    [ readonly=true size=10]
+4:       # Columna 4
+  titulo:                  Tipo
+  tipo:                    t
+  nombrecampo:             tiprgo
+  oculta:                  true
+  esgrabable:              false
+  html:                    [ readonly=true size=5 ]
+5:       # Columna 4
+  titulo:                  Monto Recargo
+  tipo:                    m
+  nombrecampo:             monto
+  oculta:                  true
+  esgrabable:              false
+  html:                    [ readonly=true size=10 ]

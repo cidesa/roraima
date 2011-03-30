@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage licaspteccriterios
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 43231 2011-03-30 00:04:18Z cramirez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -149,7 +149,8 @@ class licaspteccriteriosActions extends autolicaspteccriteriosActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -159,11 +160,7 @@ class licaspteccriteriosActions extends autolicaspteccriteriosActions
 
     if($this->getRequest()->getMethod() == sfRequest::POST){
       $this->liaspteccrieva= $this->getLiaspteccrievaOrCreate();
-      $this->updateLiaspteccrievaFromRequest();
-      if ($this->liaspteccrieva->getPuntaje()<=0)
-      {
-      	$this->coderr = 906; return false;
-      }
+      $this->updateLiaspteccrievaFromRequest();      
 
       if($this->coderr!=-1){
         return false;

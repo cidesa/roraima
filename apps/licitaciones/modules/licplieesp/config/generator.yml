@@ -1,0 +1,135 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Liplieesp
+    theme:            cidesaGenerator
+    fields:
+      ente:           { name: Ente Contratante, params: readonly=true size=60 style=border:none}      
+      codempadm:
+        name: Para
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_codemp
+          clase: Lidatste
+          ajax: 2
+          parametros: getprincipal="getCodempadm" getsecundario="getNomempadm" campoprincipal="codempadm" camposecundario="nomempadm" campobase = "id"
+      nomcaradm:      { name: Cargo, params: style=border:none}
+      coduniadm:
+        name: Unidad
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_licregsol
+          clase: Lidatste
+          ajax: 3
+          parametros: getprincipal="getCoduniadm" getsecundario="getDesuniadm" campoprincipal="coduniadm" camposecundario="desuniadm" campobase = "id"
+      codempeje:
+        name: De
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_codemp
+          clase: Lidatste
+          ajax: 4
+          parametros: getprincipal="getCodempeje" getsecundario="getNomempeje" campoprincipal="codempeje" camposecundario="nomempeje" campobase = "id"
+      nomcareje:      { name: Cargo, params: style=border:none}
+      coduniste:
+        name: Unidad
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_licregsol
+          clase: Lidatste
+          ajax: 5
+          parametros: getprincipal="getCoduniste" getsecundario="getDesuniste" campoprincipal="coduniste" camposecundario="desuniste" campobase = "id"
+      numplie:         { name: Número Pliego de Condiciones, params: size=10 maxlength=8 onBlur=Correl(this.id) }
+      numexp:          { name: Número Expediente, params: size=10 maxlength=8 onBlur=Correl(this.id) }      
+      ejepre:         { name: Ejercicio Prespuestario Año, params: style="border:none"}
+      fecreg:         { name: Fecha Registro, params: onChange=CalculaFecha(this.value)}
+      dias:           { name: Dias para el Vencimiento, params: onChange=CalculaFecha(this.value)}
+      fecven:         { name: Fecha Vencimiento, params: readonly=true style=border:none}
+      idioma:         { name: Idioma, params: maxlength=50 size=30 }
+      numcomint:
+        name: Compra Integral/Pedido
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Licomint_numconint
+          clase: Licomint
+          ajax: 1
+          parametros: getprincipal="getNumcomint" getsecundario="getDesnumcomint" campoprincipal="numcomint" camposecundario="desnumcomint" campobase = "id"
+          divupdate:  divgridart
+      tipcom:         { name: Compra, params: size=80 style=border:none}
+      destiplic:      { name: Modalidad de Contratación, params: size=80 style=border:none}
+      desclacomp:     { name: Solicitud de Compra, params: size=80 style=border:none}
+      gridart:        { name: .}
+      griduniart:     { name: .}
+      resolu:         { name: Resolución No.}
+      fecrel:         { name: Fecha}
+      decret:         { name: Decreto/Punto de Cuenta No.}
+      fecdec:         { name: Fecha}
+      descrip:        { name: Breve Descripción, type: textarea_tag, params: size="80x5"}
+      moneda:         { name: Moneda, params: size=80 style=border:none }
+      cosplie:        { name: Costo del Pliego, params: size=10 onBlur="event.keyCode=13;formatoDecimal(event,this.id);toAjax('8',getUrlModuloAjax(),this.value,'','');"}
+      cosplielet:     { name: Son, params: size=80 style=border:none}
+      griddep:        { name: .}
+      gridmec:        { name: .}
+      gridact:        { name: .}
+      gridpub:        { name: .}
+      gridleg:        { name: .}
+      gridtec:        { name: .}
+      gridfin:        { name: .}
+      gridfia:        { name: .}
+      van:            { name: .}
+      gridtipemp:     { name: .}
+      docane1:
+        name:  Documento Anexo 1
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Anexo 1***********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      docane2:
+        name:  Documento Anexo 2
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Anexo 2***********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      docane3:
+        name:  Documento Anexo 3
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Anexo 3***********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      prepor:         { name: Preparado Por, params: size=80 }
+      preporcar:      { name: Cargo, params: size=80 }
+      lisicact_id:    { name: Declaratoria Modalidad, params: include_blank="Seleccione..." }
+      detdecmod:      { name: Detalle Declaratoria Modalidad, type: textarea_tag, params: size="80x10" }
+      anapor:         { name: Preparado Por, params: size=80 }
+      anaporcar:      { name: Cargo, params: size=80 }
+      js:             {name: .}
+
+    list:
+      title:           Pliego de Condiciones
+      display:         [=numplie, numexp, desuniadm, desuniste, fecreg ]
+      filters:         [numplie, numexp, coduniadm, coduniste, fecreg]
+      fields:
+        desuniadm:     { name: Para}
+        desuniste:     { name: De}
+      object_actions:
+        _edit:          ~
+        _delete:        ~
+      max_per_page:    10
+      sort:            numplie
+
+    edit:
+      title:           Pliego de Condiciones
+      display:
+        Datos Generales:    [ente, codempadm, nomcaradm, coduniadm, codempeje, nomcareje, coduniste, numplie, numexp, ejepre, fecreg, dias, fecven, idioma, numcomint, tipcom, destiplic, desclacomp]
+        Bienes o Servicio a Adquirir: [_gridart, _griduniart]
+        Otros Datos del Pliego de Condiciones: [resolu, fecrel, decret, fecdec, descrip]
+        Datos para Adquisición del Pliego: [moneda, cosplie, cosplielet, _griddep]
+        Fechas/Horas Limites para Cumplir las Actividades Siguientes:  [_gridmec, _gridact]
+        Datos Publicación:  [_gridpub]
+        Puntuación Requerida para Calificar: [_gridleg, _gridtec, _gridfin, _gridfia, _van, _gridtipemp]
+        Otros:  [docane1, docane2, docane3]
+        Aprobacion: [prepor, preporcar, lisicact_id, detdecmod, anapor, anaporcar, _js]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

@@ -1,14 +1,6 @@
 methods:
   post:
    - "limemoran{numemo}"
-   - "limemoran{numexp}"
-   - "limemoran{nompro}"
-   - "limemoran{fecha}"
-   - "limemoran{codfin}"
-   - "limemoran{codcom}"
-   - "limemoran{coduniste}"
-   - "limemoran{codclacomp}"
-   - "limemoran{detmemo}"
 
 names:
   limemoran{numemo}:
@@ -16,117 +8,9 @@ names:
     required_msg: El Número de Memorando no puedo estar en Blanco
     validators: UniqueValidator
 
-  limemoran{numexp}:
-    required:  Yes
-    required_msg: El Número de Expediente no puedo estar en Blanco
-    validators: UniqueValidator2
-
-  limemoran{nompro}:
-    required:  Yes
-    required_msg: La Descripción no puedo estar en Blanco
-    validators: DescripcionValidator
-
-
-  limemoran{fecha}:
-    required:  Yes
-    required_msg: La Fecha no puedo estar en Blanco
-    validators: FechaValidator, FechaValidator1
-
-  limemoran{codfin}:
-    required:  Yes
-    required_msg: El Tipo de Financiamiento no puedo estar en Blanco
-    validators: FinanciamientoValidator
-
-  limemoran{codcom}:
-    required:  Yes
-    required_msg: El Código de Comisión  no puedo estar en Blanco
-    validators: ComisionValidator
-
-  limemoran{coduniste}:
-    required:  Yes
-    required_msg: El Código de Unidad  no puedo estar en Blanco
-    validators: UnidadValidator
-  
-  limemoran{codclacomp}:
-    required:  Yes
-    required_msg: El Tipo no puedo estar en Blanco
-    validators: TipoValidator
-
-  limemoran{detmemo}:
-    required:  Yes
-    required_msg: El Detalle no puedo estar en Blanco
-    validators: DetalleValidator
-
-FechaValidator1:
-    class:         CidesaDateNow
-    param:
-        compare: 'now'
-        compare_error: La Fecha no puede ser mayor a la Fecha Actual
-        operator: '<='
-        date_error:  Fecha Inválida
-
-DescripcionValidator:
-    class: sfStringValidator
-    param:
-        min:       5
-        min_error: La Descripción de la Solicitud no puede tener menos de 5 caracteres
-        max:       1000
-        max_error: La Descripción de la Solicitud no puede tener más de 1000 caracteres
-
-DetalleValidator:
-    class: sfStringValidator
-    param:
-        min:       5
-        min_error: Las Observaciones de la Solicitud no puede tener menos de 5 caracteres
-        max:       1000
-        max_error: Las Observaciones de la Solicitud no puede tener más de 1000 caracteres
-
 UniqueValidator:
     class: sfPropelUniqueValidator
     param:
         class:    Limemoran
         column:   numemo
         unique_error:   El Numero de Memorando ya existe. Por Favor, Cambiélo por otro.
-
-UniqueValidator2:
-    class: sfPropelUniqueValidator
-    param:
-        class:    Limemoran
-        column:   numexp
-        unique_error:   El Numero de Expediente ya existe. Por Favor, Cambiélo por otro.
-
-FinanciamientoValidator:
-    class: CidesaExistValidator
-    param:
-        class:    Fortipfin
-        column:   codfin
-        unique_error:   El Código del Financiamiento no existe.
-
-ComisionValidator:
-    class: CidesaExistValidator
-    param:
-        class:    Licomlic
-        column:   codcom
-        unique_error:   El Código de Comisión no existe.
-
-UnidadValidator:
-    class: CidesaExistValidator
-    param:
-        class:    Lidatste
-        column:   coduniste
-        unique_error:   El Código de Unidad no existe.
-
-TipoValidator:
-    class: CidesaExistValidator
-    param:
-        class:    Occlacomp
-        column:   codclacomp
-        unique_error:   El Tipo no existe.
-
-
-FechaValidator:
-    class: sfRegexValidator
-    param:
-        match:      yes
-        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
-        match_error: La Fecha introducida es invalida

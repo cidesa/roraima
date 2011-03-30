@@ -102,9 +102,101 @@ class licmemoranActions extends autolicmemoranActions
         // La variable $output es usada para retornar datos en formato de arreglo para actualizar
         // objetos en la vista. mas informacion en
         // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
-        $dato = H::GetX('Codcom','Licomlic','Respon',$codigo);
-        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["","",""],["","",""]]';
-        $output = '[["","",""],["","",""],["","",""]]';
+        $c = new Criteria();
+        $c->add(LiprebasPeer::NUMPRE,$codigo);
+        $per = LiprebasPeer::doSelectOne($c);
+        if($per)
+        {
+            $tipcon = $per->getTipcon()=='B' ? 'BIENES' : 'SERVICIO';
+            $desclacomp = H::GetX('Codclacomp','Occlacomp','Desclacomp',$per->getCodclacomp());
+            $fecreg = $per->getFecreg('d/m/Y');
+            $dias = $per->getDias();
+            $fecven = $per->getFecven('d/m/Y');
+            $tipcom = $per->getTipcom()=='N' ? 'NACIONAL' : 'INTERNACIONAL';
+            $acto = $per->getActo()=='S' ? 'SI' : 'NO';
+            $nompre= H::GetX('Codpre','Cpdeftit','Nompre',$per->getCodpre());
+            $nomext= H::GetX('Codfin','Fortipfin','Nomext',$per->getCodfin());
+            $desprio = H::GetX('Codprio','Lipriocon','Desprio',$per->getCodprio());
+            $despro = $per->getDespro();
+            $monpre = H::obtenermontoescrito($per->getMonpre()).' ( '.H::FormatoMonto($per->getMonpre()).' )';            
+            if($per->getValcam()>0)
+            {
+                $monpreext= $per->getMonpre()/$per->getValcam();
+                $js="$('divmonpreext').show()";
+            }else
+            {
+                $monpreext=0;
+                $js="$('divmonpreext').hide()";
+            }
+            $monpreext = H::obtenermontoescrito($monpreext).' ( '.H::FormatoMonto($monpreext).' )';                
+            $output = '[["limemoran_desclacomp","'.$desclacomp.'",""],["limemoran_tipcon","'.$tipcon.'",""],["limemoran_acto","'.$acto.'",""],
+                        ["limemoran_fecreg","'.$fecreg.'",""],["limemoran_dias","'.$dias.'",""],["limemoran_fecven","'.$fecven.'",""],["limemoran_tipcom","'.$tipcom.'",""],
+                        ["limemoran_nomext","'.$nomext.'",""],["limemoran_nompre","'.$nompre.'",""],["limemoran_desprio","'.$desprio.'",""],["limemoran_despro","'.$despro.'",""],
+                        ["limemoran_monpre","'.$monpre.'",""],["limemoran_monpreext","'.$monpreext.'",""],["javascript","'.$js.'",""]]';
+        }else
+        {
+            $output = '[["","",""],["","",""],["","",""]]';
+        }        
+        break;
+      case '2':
+            $nomemp = '';
+            $nomcar = '';
+            $coduniadm = '';
+            $desuniadm = '';
+            $c = new Criteria();
+            $c->add(LidatstePeer::CODEMP,$codigo);
+            $per = LidatstePeer::doSelectOne($c);
+            if($per)
+            {
+                $nomemp = $per->getNomemp();
+                $nomcar = $per->getNomcar();
+                $coduniadm = $per->getCoduniste();
+                $desuniadm = $per->getDesuniste();                
+            }
+            $output = '[["limemoran_nomempadm","'.$nomemp.'",""],["limemoran_nomcaradm","'.$nomcar.'",""],["limemoran_coduniadm","'.$coduniadm.'",""],["limemoran_desuniadm","'.$desuniadm.'",""]]';
+        break;
+      case '3':
+            $coduniadm = '';
+            $desuniadm = '';
+            $c = new Criteria();
+            $c->add(LidatstePeer::CODUNISTE,$codigo);
+            $per = LidatstePeer::doSelectOne($c);
+            if($per)
+            {
+                $coduniadm = $per->getCoduniste();
+                $desuniadm = $per->getDesuniste();                
+            }
+            $output = '[["limemoran_coduniadm","'.$coduniadm.'",""],["limemoran_desuniadm","'.$desuniadm.'",""],["","",""]]';
+        break;
+      case '4':
+            $nomemp = '';
+            $nomcar = '';
+            $coduniste = '';
+            $desuniste = '';
+            $c = new Criteria();
+            $c->add(LidatstePeer::CODEMP,$codigo);
+            $per = LidatstePeer::doSelectOne($c);
+            if($per)
+            {
+                $nomemp = $per->getNomemp();
+                $nomcar = $per->getNomcar();
+                $coduniste = $per->getCoduniste();
+                $desuniste = $per->getDesuniste();                
+            }
+            $output = '[["limemoran_nomempeje","'.$nomemp.'",""],["limemoran_nomcareje","'.$nomcar.'",""],["limemoran_coduniste","'.$coduniste.'",""],["limemoran_desuniste","'.$desuniste.'",""]]';
+        break;
+      case '5':
+            $coduniste = '';
+            $desuniste = '';
+            $c = new Criteria();
+            $c->add(LidatstePeer::CODUNISTE,$codigo);
+            $per = LidatstePeer::doSelectOne($c);
+            if($per)
+            {
+                $coduniste = $per->getCoduniste();
+                $desuniste = $per->getDesuniste();                
+            }
+            $output = '[["limemoran_coduniste","'.$coduniste.'",""],["limemoran_desuniste","'.$desuniste.'",""],["","",""]]';
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
@@ -183,6 +275,19 @@ class licmemoranActions extends autolicmemoranActions
 
   public function saving($clasemodelo)
   {
+    if($clasemodelo->getNumemo()=='########')
+    {
+        $c = new Criteria();
+        $per = LidefempPeer::doSelectOne($c);
+        $numemo = str_pad($per->getNumemo(),8,'0',STR_PAD_LEFT);
+        $val = H::GetX('Numemo','Limemoran','Numemo',$numemo);
+        if($val==$numemo)
+            return 'V008';
+        $clasemodelo->setNumemo($numemo);
+        $sql="update lidefemp set numemo='".($per->getNumemo()+1)."'";
+        H::BuscarDatos($sql,$rs);
+    }
+    if($clasemodelo->getStatus()=='') $clasemodelo->setStatus('P');
     return parent::saving($clasemodelo);
   }
 

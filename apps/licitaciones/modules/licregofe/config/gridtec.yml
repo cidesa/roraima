@@ -1,0 +1,39 @@
+opciones:                  # Opciones generales
+  name:                    f
+  eliminar:                false
+  tabla:                   Liregofetec
+  anchogrid:               900
+  ancho:                   850
+  filas:                   0
+  titulo:                  ' Tecnicos'
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Criterio
+  tipo:                    t
+  nombrecampo:             codcri
+  html:                    [ size=10 readonly=true ]
+  esgrabable:              true
+2:
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             descri
+  html:                    [ size=20 readonly=true ]
+  esgrabable:              false
+3:
+  titulo:                  Si/No
+  tipo:                    k
+  nombrecampo:             check
+  html:                    [  ]
+  esgrabable:              true
+4:
+  titulo:                  Limitante
+  tipo:                    t
+  nombrecampo:             limit
+  html:                    [ readonly=true size=10 ]
+  esgrabable:              false
+5:
+  titulo:                  Observaciones
+  tipo:                    t
+  nombrecampo:             observ
+  html:                    [ size=40 ]
+  esgrabable:              true

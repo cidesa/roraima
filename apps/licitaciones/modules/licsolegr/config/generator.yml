@@ -1,0 +1,123 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Lisolegr
+    theme:            cidesaGenerator
+    fields:
+      numpre:
+        name: Presupuesto Base
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Liprebas_numpre
+          clase: Liprebas
+          ajax: 1
+          parametros: getprincipal="getNumpre" getsecundario="getDesnumpre" campoprincipal="numpre" camposecundario="desnumpre" campobase = "id"
+          divupdate:  divgrid1
+      ejepre:         { name: Ejercicio Prespuestario Año, params: style="border:none"}
+      codempadm:
+        name: Para
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_codemp
+          clase: Lidatste
+          ajax: 2
+          parametros: getprincipal="getCodempadm" getsecundario="getNomempadm" campoprincipal="codempadm" camposecundario="nomempadm" campobase = "id"
+      nomcaradm:      { name: Cargo, params: style=border:none}
+      coduniadm:
+        name: Unidad
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_licregsol
+          clase: Lidatste
+          ajax: 3
+          parametros: getprincipal="getCoduniadm" getsecundario="getDesuniadm" campoprincipal="coduniadm" camposecundario="desuniadm" campobase = "id"
+      codempeje:
+        name: De
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_codemp
+          clase: Lidatste
+          ajax: 4
+          parametros: getprincipal="getCodempeje" getsecundario="getNomempeje" campoprincipal="codempeje" camposecundario="nomempeje" campobase = "id"
+      nomcareje:      { name: Cargo, params: style=border:none}
+      coduniste:
+        name: Unidad
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_licregsol
+          clase: Lidatste
+          ajax: 5
+          parametros: getprincipal="getCoduniste" getsecundario="getDesuniste" campoprincipal="coduniste" camposecundario="desuniste" campobase = "id"
+      numsol:         { name: Número Solicitud de Egreso, params: size=10 maxlength=8 onBlur=Correl(this.id) }
+      ente:           { name: Ente Contratante, params: size=80 style=border:none}
+      desclacomp:     { name: Solicitud de Contratación, params: size=80 style=border:none}
+      fecreg:         { name: Fecha Registro, params: size=10 style=border:none}
+      dias:           { name: Dias para el Vencimiento, params: size=5 style=border:none}
+      fecven:         { name: Fecha Vencimiento, params: size=10 style=border:none}
+      tipcon:         { name: Tipo Solicitud Bien/Servicio, params: size=80 style=border:none}
+      tipcom:         { name: Compra, params: size=80 style=border:none}
+      acto:           { name: Acto Motivado, params: size=80 style=border:none}
+      nomext:         { name: Financiamiento, params: size=80 style=border:none}
+      nompre:         { name: Proyecto, params: size=80 style=border:none}
+      desprio:        { name: Prioridad, params: size=80 style=border:none}
+      despro:         { name: Breve Descripción, type: textarea_tag, params: size="80x5" }
+      codmon:         { name: Moneda, params: size=60 style=border:none}
+      valcam:         { name: Valor, params: size=30 style=border:none}
+      feccam:         { name: Fecha de Cambio, params: size=30 style=border:none}
+      monsol:          { name: Monto Solicitud Moneda Original, params: readonly=true style=border:none}
+      monsolletras:    { name: Son,  params: readonly=true style=border:none size=80}
+      monsolext:       { name: Monto Solicitud Moneda Extranjera, params: readonly=true style=border:none}
+      monsolextletras: { name: Son,  params: readonly=true style=border:none size=80}
+      docane1:
+        name:  Documento Anexo 1
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Anexo 1***********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      docane2:
+        name:  Documento Anexo 2
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Anexo 2***********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      docane3:
+        name:  Documento Anexo 3
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Anexo 3***********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      prepor:          { name: Preparado Por, params: size=80}
+      cargopre:        { name: Cargo, params: size=80}
+      lisicact_id:     { name: Declaratoria Modalidad, params: include_blank="Seleccione..." }
+      detdecmod:       { name: Declaratoria Modalidad, type: textarea_tag, params: size="80x5"}
+      aprpor:          { name: Analisado Por, params: size=80}
+      cargoapr:        { name: Cargo, params: size=80}
+      js:              { name: .}
+      grid_rec:        { name: .}
+      grid_uni:        { name: .}
+      grid:           { name: .}
+
+    list:
+      title:         Requisición/Solicitud de Egreso
+      display: [=numsol, numpre,  nompre, ejepre, coduniadm, desuniadm, coduniste, desuniste]
+      filters: [numsol, nompro]
+      fields:
+        desuniadm:     { name: Descripción}
+        desuniste:     { name: Descripción}
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page: 15
+      sort: numsol
+
+    edit:
+      title:          Requisición/Solicitud de Egreso
+      display:
+        Datos Generales:     [ente, codempadm, nomcaradm, coduniadm, codempeje, nomcareje, coduniste, numsol, numpre, ejepre, tipcon, desclacomp, fecreg, dias, fecven, tipcom, acto, nomext, nompre, desprio, despro, codmon, valcam, feccam ]
+        Materiales Bienes/Servicios: [_grid_rec, _grid, monsol, monsolletras, monsolext, monsolextletras]
+        Direccion de Lugar y Entrega: [_grid_uni]
+        Detalle:              [prepor, cargopre, lisicact_id, detdecmod, aprpor, cargoapr, _js]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

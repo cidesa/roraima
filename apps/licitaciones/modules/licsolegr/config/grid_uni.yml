@@ -1,0 +1,76 @@
+opciones:                  # Opciones generales
+  name:                    c
+  eliminar:                false
+  tabla:                   Lisolegrdir
+  anchogrid:               900
+  ancho:                   850
+  filas:                   0
+  titulo:                  ' Artículos '
+  htmltotalfilas:          ' '
+1:       # Columna 2
+  titulo:                  Artículo
+  tipo:                    t
+  nombrecampo:             codart
+  esgrabable:              true
+  html:                    [size=15 readonly=true ]
+2:       # Columna 3
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desart
+  esgrabable:              false
+  html:                    [size=20 readonly=true ]
+3:       # Columna 5
+  titulo:                  Cantidad
+  tipo:                    m
+  nombrecampo:             cantid
+  esgrabable:              true
+  html:                    [ ]
+4:       # Columna 2
+  titulo:                  Sede Administrativa Receptora
+  tipo:                    t
+  nombrecampo:             coduniste
+  esgrabable:              true
+  catalogo:                [lidatste, sf_admin_edit_form, {Coduniste: 4, Desuniste: 5, Dirste: 6, Nompai: 7, Nomedo: 8, Nommun: 9, Nompar: 10, Nomsec: 11 }, Lidatste_coduniste ]
+  html:                    [size=10 readonly=true ]
+5:       # Columna 3
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desuniste
+  esgrabable:              false
+  html:                    [size=20 readonly=true ]
+6:       # Columna 3
+  titulo:                  Dirección
+  tipo:                    t
+  nombrecampo:             dir
+  esgrabable:              false
+  html:                    [size=20 readonly=true ]
+7:       # Columna 3
+  titulo:                  Pais
+  tipo:                    t
+  nombrecampo:             pai
+  esgrabable:              false
+  html:                    [size=20 readonly=true ]
+8:       # Columna 3
+  titulo:                  Estado
+  tipo:                    t
+  nombrecampo:             edo
+  esgrabable:              false
+  html:                    [size=20 readonly=true ]
+9:       # Columna 3
+  titulo:                  Municipio
+  tipo:                    t
+  nombrecampo:             mun
+  esgrabable:              false
+  html:                    [size=20 readonly=true ]
+10:       # Columna 3
+  titulo:                  Parroquia
+  tipo:                    t
+  nombrecampo:             par
+  esgrabable:              false
+  html:                    [size=20 readonly=true ]
+11:       # Columna 3
+  titulo:                  Sector
+  tipo:                    t
+  nombrecampo:             sec
+  esgrabable:              false
+  html:                    [size=20 readonly=true ]

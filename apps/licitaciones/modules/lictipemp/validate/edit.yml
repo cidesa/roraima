@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "litipemp{codemp}"
+   - "litipemp{desemp}"
+
+names:
+  litipemp{codemp}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codemp
+
+  litipemp{desemp}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_desemp
+
+Validator_codemp:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Litipemp
+        column:       codemp
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desemp:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 250 caracteres

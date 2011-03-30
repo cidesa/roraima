@@ -15,7 +15,7 @@ generator:
       liregsol_id:    { name: Número Memorando}
       coduniste:    { name: Unidad Ejecutora}
       nummemo:    { name: Numeo Memorando}
-      nompro:    { name: Nombre Proyecto}
+      nompro:    { name: Nombre Proyecto}      
       plamodifi: { name: Plazo Modificaciones, params: size=10 maxlength=3}
       plaaclara: { name: Plazo Aclaratorias, params: size=10 maxlength=3}
       plaprorro: { name: Plazo Prorroga, params: size=10 maxlength=3}

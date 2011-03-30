@@ -3,7 +3,6 @@ generator:
   param:
     model_class:      Lidatste
     theme:            cidesaGenerator
-
     fields:
       coduniste:    { name: Código}
       desuniste:    { name: Nombre}
@@ -19,11 +18,12 @@ generator:
       codpar:    { name: Parroquia}
       codsec:    { name: Sector}
       cedemp:    { name: C.I., params: readonly=true}
-      diremp: 	{ name: Dirección, type: textarea_tag, params: size=70x3 readonly=true  }
+      diremp: 	 { name: Dirección, type: textarea_tag, params: size=70x3 readonly=true  }
       telemp:    { name: Telefono Hab., params: readonly=true}
+      grid:      { name: .}
     list:
       title:          Unidad Ejecutora
-      filters:        [coduniste, desuniste]
+      filters:        [coduniste, desuniste, codemp, nomemp ]
       display:        [=coduniste, desuniste]
       sort:   coduniste
       object_actions:
@@ -35,7 +35,7 @@ generator:
       display:
         Datos Principales:     [coduniste, desuniste, litipste_id, dirste, telste, faxste, emaste]
         Ubicación:  [codpai, codedo, codmun, codpar, codsec]
-        Datos del Responsable: [_codemp, cedemp, diremp, telemp]
+        Datos del Responsable: [_grid]
       actions:
         _list:        ~
         _save:        ~

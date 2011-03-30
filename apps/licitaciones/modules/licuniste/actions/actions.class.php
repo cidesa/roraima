@@ -5,8 +5,8 @@
  *
  * @package    Roraima
  * @subpackage licuniste
- * @author     $Author$ <desarrollo@cidesa.com.ve>
- * @version SVN: $Id$
+ * @author     $Author: cramirez $ <desarrollo@cidesa.com.ve>
+ * @version SVN: $Id: actions.class.php 43235 2011-03-30 00:08:02Z cramirez $
  * 
  * @copyright  Copyright 2007, Cide S.A.
  * @license    http://opensource.org/licenses/gpl-2.0.php GPLv2
@@ -28,6 +28,7 @@ class licunisteActions extends autolicunisteActions
   public function editing()
   {
     $this->funciones_combos();
+    $this->configGrid();
 
   }
 
@@ -47,58 +48,14 @@ class licunisteActions extends autolicunisteActions
       // Aquí va el código para traernos los registros que contendrá el grid
       $reg = array();
       // Aquí va el código para generar arreglo de configuración del grid
-    $this->obj = array();
+      $this->obj = array();
     }
-
-    // Insertar el criterio de la busqueda de registros del Grid
-    // Por ejemplo:
-
-    // $c = new Criteria();
-    // $c->add(CaartaocPeer::AJUOC ,$this->caajuoc->getAjuoc());
-    // $reg = CaartaocPeer::doSelect($c);
-
-    // De esta forma se carga la configuración del grid de un archivo yml
-    // y se le pasa el parámetro de los registros encontrados ($reg)
-    //                                                                            /nombreformulario/
-    // $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/formulario/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_caartaoc',$reg);
-
-    // Si no se quiere cargar la configuración del grid de un .yml, sedebe hacer a pie.
-    // Por ejemplo:
-
-    /*
-    // Se crea el objeto principal de la clase OpcionesGrid
-    $opciones = new OpcionesGrid();
-    // Se configuran las opciones globales del Grid
-    $opciones->setEliminar(true);
-    $opciones->setTabla('Caartalm');
-    $opciones->setAnchoGrid(1150);
-    $opciones->setTitulo('Existencia por Almacenes');
-    $opciones->setHTMLTotalFilas(' ');
-    // Se generan las columnas
-    $col1 = new Columna('Cod. Almacen');
-    $col1->setTipo(Columna::TEXTO);
-    $col1->setEsGrabable(true);
-    $col1->setAlineacionObjeto(Columna::CENTRO);
-    $col1->setAlineacionContenido(Columna::CENTRO);
-    $col1->setNombreCampo('codalm');
-    $col1->setCatalogo('cadefalm','sf_admin_edit_form','2');
-    $col1->setAjax(2,2);
-
-    $col2 = new Columna('Descripción');
-    $col2->setTipo(Columna::TEXTO);
-    $col2->setAlineacionObjeto(Columna::IZQUIERDA);
-    $col2->setAlineacionContenido(Columna::IZQUIERDA);
-    $col2->setNombreCampo('codalm');
-    $col2->setHTML('type="text" size="25" disabled=true');
-
-    // Se guardan las columnas en el objetos de opciones
-    $opciones->addColumna($col1);
-    $opciones->addColumna($col2);
-
-    // Se genera el arreglo de opciones necesario para generar el grid
-    $this->obj = $opciones->getConfig($per);
-     */
-
+    $c = new Criteria();
+    $c->add(LidatstePeer::CODUNISTE,$this->lidatste->getCoduniste());
+    $reg = LidatstePeer::doSelect($c);
+    $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/licuniste/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
+    $this->obj = $this->obj[0]->getConfig($reg);
+    $this->lidatste->setGrid($this->obj);
 
   }
 
@@ -122,24 +79,8 @@ class licunisteActions extends autolicunisteActions
 
     switch ($ajax){
       case '1':
-         $ced = 'lidatste_cedemp';
-         $nom = 'lidatste_nomemp';
-         $id = 'lidatste_nphojint_id';
-         $tel = 'lidatste_telemp';
-         $dir = 'lidatste_diremp';
-         $c = new Criteria();
-         $c->add(NphojintPeer::CODEMP,trim($codigo));
 
-          $empleado = NphojintPeer::doSelectOne($c);
-
-          if($empleado){
-            $output = '[["'.$nom.'","'.$empleado->getNomemp().'",""],["'.$id.'","'.$empleado->getId().'",""],["'.$ced.'","'.$empleado->getCedemp().'",""],["'.$dir.'","'.$empleado->getDirhab().'",""],["'.$tel.'","'.$empleado->getTelhab().'",""]]';
-          }else{
-            $output = '[["'.$nom.'","'.H::REGVACIO.'",""],["'.$id.'","",""],["'.$ced.'","",""],["","",""]]';
-          }
         break;
-
-
       default:
         $output = '[["","",""],["","",""],["","",""]]';
     }
@@ -162,7 +103,8 @@ class licunisteActions extends autolicunisteActions
   
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -211,9 +153,9 @@ class licunisteActions extends autolicunisteActions
    */
   public function updateError()
   {
-    //$this->configGrid();
+    $this->configGrid();
 
-    //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
+    $grid = Herramientas::CargarDatosGridv2($this,$this->obj);
 
     //$this->configGrid($grid[0],$grid[1]);
 
@@ -230,7 +172,10 @@ class licunisteActions extends autolicunisteActions
    */
   public function saving($clasemodelo)
   {
-    return parent::saving($clasemodelo);
+    $grid = Herramientas::CargarDatosGridv2($this,$this->obj);
+    $arrget=array('Coduniste','Desuniste');
+    H::Guardar_Grid($grid, $arrget, $clasemodelo);
+    return '-1';
   }
 
   /**
@@ -244,7 +189,14 @@ class licunisteActions extends autolicunisteActions
    */
   public function deleting($clasemodelo)
   {
-    return parent::deleting($clasemodelo);
+    $c = new Criteria();
+    $c->add(LidatstePeer::CODUNISTE,$clasemodelo->getCoduniste());
+    $per = LidatstePeer::doSelect($c);
+    foreach($per as $r)
+    {
+        $r->delete();
+    }
+    return '-1';
   }
 
 	public function Cargarpais()

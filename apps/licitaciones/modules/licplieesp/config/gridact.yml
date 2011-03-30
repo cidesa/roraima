@@ -1,0 +1,53 @@
+opciones:                  # Opciones generales
+  name:                    e
+  eliminar:                true
+  tabla:                   liplieact
+  anchogrid:               900
+  ancho:                   850
+  filas:                   1
+  titulo:                  ' Otras Actividades '
+  htmltotalfilas:          ' '
+1:
+  titulo:                  Descripción de Actividad
+  tipo:                    t
+  nombrecampo:             desact
+  html:                    [  ]
+  esgrabable:              true
+2:
+  titulo:                  Fecha Desde
+  tipo:                    f
+  nombrecampo:             fecdes
+  vacia:                   true
+  html:                    [  ]
+  esgrabable:              true
+3:
+  titulo:                  Hora Desde
+  tipo:                    t
+  nombrecampo:             hordes
+  html:                    [  ]
+  esgrabable:              true
+4:
+  titulo:                  Fecha Hasta
+  tipo:                    f
+  nombrecampo:             fechas
+  vacia:                   true
+  html:                    [  ]
+  esgrabable:              true
+5:
+  titulo:                  Hora Hasta
+  tipo:                    t
+  nombrecampo:             horhas
+  html:                    [  ]
+  esgrabable:              true
+6:
+  titulo:                  Lugar
+  tipo:                    t
+  nombrecampo:             lugar
+  html:                    [  ]
+  esgrabable:              true
+7:
+  titulo:                  Dirección
+  tipo:                    t
+  nombrecampo:             direc
+  html:                    [  ]
+  esgrabable:              true

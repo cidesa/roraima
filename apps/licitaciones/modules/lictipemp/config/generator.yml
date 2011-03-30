@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Litipemp
+    theme:            cidesaGenerator
+    fields:
+      codemp:    { name: Código, params: maxlength=3 size=5 onBlur="$(this.id).value=$(this.id).value.pad(3,'0',0)" }
+      desemp:    { name: Descripción, params: maxlength=250 }
+
+    list:
+      title:          Tipo de Empresa
+      display:        [codemp, desemp]
+      filters:        [codemp, desemp]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort: codemp
+
+    edit:
+      title:          Tipo de Empresa
+      display:
+        Datos Empresa:   [codemp, desemp]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

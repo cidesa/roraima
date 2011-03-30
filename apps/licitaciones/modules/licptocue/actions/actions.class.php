@@ -101,34 +101,103 @@ class licptocueActions extends autolicptocueActions
         // La variable $output es usada para retornar datos en formato de arreglo para actualizar
         // objetos en la vista. mas informacion en
         // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
-        $fecreg = H::GetX('codlic','Lireglic','fecreg',$codigo);
-        $dato = H::GetX('codlic','Lireglic','numemo',$codigo);
-        $numexp = H::GetX('numemo','Limemoran','numexp',$dato);
-        $dato = H::GetX('Codlic','Lireglic','numemo',$codigo);
-        $dato2 = H::GetX('Numemo','Limemoran','Coduniste',$dato);
-        $unidad = H::GetX('Coduniste','Lidatste','Desuniste',$dato2);
-        $dato = H::GetX('Codlic','Lireglic','numemo',$codigo);
-        $dato2 = H::GetX('Numemo','Limemoran','Coduniste',$dato);
-        $dato3 =  H::GetX('Coduniste','Lidatste','codemp',$dato2);
-        $respon =  H::GetX('Codemp','Nphojint','Nomemp',$dato3);
-        $dato = H::GetX('Codlic','Lireglic','numemo',$codigo);
-        $dato2 = H::GetX('Numemo','Limemoran','codcom',$dato);
-        $comision = H::GetX('Codcom','Licomlic','descom',$dato2);
-        $dato = H::GetX('Codlic','Lireglic','numemo',$codigo);
-        $dato2 = H::GetX('Numemo','Limemoran','codfin',$dato);
-        $tipfin = H::GetX('Codfin','Fortipfin','nomext',$dato2);
-        $dato = H::GetX('Codlic','Lireglic','numemo',$codigo);
-        $nompro = H::GetX('Numemo','Limemoran','nompro',$dato);
-        $deslic = H::GetX('Codlic','Lireglic','deslic',$codigo);
-        $decretos = H::GetX('Codlic','Lireglic','decretos',$codigo);
-        $dato = H::GetX('Codlic','Lireglic','litiplic_id',$codigo);
-        $modad = H::GetX('id','Litiplic','destiplic  ',$dato);
-
-
-        $output = '[["liptocue_fecreg","'.$fecreg.'",""],["liptocue_numexp","'.$numexp.'",""],["liptocue_unidad","'.$unidad.'",""],
-                    ["liptocue_comision","'.$comision.'",""],["liptocue_respon","'.$respon.'",""],["liptocue_tipfin","'.$tipfin.'",""],
-                    ["liptocue_nompro","'.$nompro.'",""],["liptocue_deslic","'.$deslic.'",""],["liptocue_decretos","'.$decretos.'",""],
-                    ["liptocue_modad","'.$modad.'",""]]';
+        $c = new Criteria();        
+        $c->add(LimemoranPeer::NUMEMO,$codigo);
+        $c->addJoin(LiprebasPeer::NUMPRE,  LimemoranPeer::NUMPRE);
+        $per = LiprebasPeer::doSelectOne($c);
+        if($per)
+        {
+            $numpre = $per->getNumpre();
+            $tipcon = $per->getTipcon()=='B' ? 'BIENES' : 'SERVICIO';
+            $desclacomp = H::GetX('Codclacomp','Occlacomp','Desclacomp',$per->getCodclacomp());
+            $fecreg = $per->getFecreg('d/m/Y');
+            $dias = $per->getDias();
+            $fecven = $per->getFecven('d/m/Y');
+            $tipcom = $per->getTipcom()=='N' ? 'NACIONAL' : 'INTERNACIONAL';
+            $acto = $per->getActo()=='S' ? 'SI' : 'NO';
+            $nompre= H::GetX('Codpre','Cpdeftit','Nompre',$per->getCodpre());
+            $nomext= H::GetX('Codfin','Fortipfin','Nomext',$per->getCodfin());
+            $desprio = H::GetX('Codprio','Lipriocon','Desprio',$per->getCodprio());
+            $despro = $per->getDespro();
+            $monpre = H::obtenermontoescrito($per->getMonpre()).' ( '.H::FormatoMonto($per->getMonpre()).' )';
+            if($per->getValcam()>0)
+            {
+                $monpreext= $per->getMonpre()/$per->getValcam();
+                $js="$('divmonpreext').show()";
+            }else
+            {
+                $monpreext=0;
+                $js="$('divmonpreext').hide()";
+            }
+            $monpreext = H::obtenermontoescrito($monpreext).' ( '.H::FormatoMonto($monpreext).' )';
+            $output = '[["liptocue_desclacomp","'.$desclacomp.'",""],["liptocue_tipcon","'.$tipcon.'",""],["liptocue_acto","'.$acto.'",""],
+                        ["liptocue_fecreg","'.$fecreg.'",""],["liptocue_dias","'.$dias.'",""],["liptocue_fecven","'.$fecven.'",""],["liptocue_tipcom","'.$tipcom.'",""],
+                        ["liptocue_nomext","'.$nomext.'",""],["liptocue_nompre","'.$nompre.'",""],["liptocue_desprio","'.$desprio.'",""],["liptocue_despro","'.$despro.'",""],
+                        ["liptocue_monpre","'.$monpre.'",""],["liptocue_monpreext","'.$monpreext.'",""],["liptocue_numpre","'.$numpre.'",""],["javascript","'.$js.'",""]]';
+        }else
+        {
+            $output = '[["","",""],["","",""],["","",""]]';
+        }
+        break;
+      case '2':
+            $nomemp = '';
+            $nomcar = '';
+            $coduniadm = '';
+            $desuniadm = '';
+            $c = new Criteria();
+            $c->add(LidatstePeer::CODEMP,$codigo);
+            $per = LidatstePeer::doSelectOne($c);
+            if($per)
+            {
+                $nomemp = $per->getNomemp();
+                $nomcar = $per->getNomcar();
+                $coduniadm = $per->getCoduniste();
+                $desuniadm = $per->getDesuniste();
+            }
+            $output = '[["liptocue_nomempadm","'.$nomemp.'",""],["liptocue_nomcaradm","'.$nomcar.'",""],["liptocue_coduniadm","'.$coduniadm.'",""],["liptocue_desuniadm","'.$desuniadm.'",""]]';
+        break;
+      case '3':
+            $coduniadm = '';
+            $desuniadm = '';
+            $c = new Criteria();
+            $c->add(LidatstePeer::CODUNISTE,$codigo);
+            $per = LidatstePeer::doSelectOne($c);
+            if($per)
+            {
+                $coduniadm = $per->getCoduniste();
+                $desuniadm = $per->getDesuniste();
+            }
+            $output = '[["liptocue_coduniadm","'.$coduniadm.'",""],["liptocue_desuniadm","'.$desuniadm.'",""],["","",""]]';
+        break;
+      case '4':
+            $nomemp = '';
+            $nomcar = '';
+            $coduniste = '';
+            $desuniste = '';
+            $c = new Criteria();
+            $c->add(LidatstePeer::CODEMP,$codigo);
+            $per = LidatstePeer::doSelectOne($c);
+            if($per)
+            {
+                $nomemp = $per->getNomemp();
+                $nomcar = $per->getNomcar();
+                $coduniste = $per->getCoduniste();
+                $desuniste = $per->getDesuniste();
+            }
+            $output = '[["liptocue_nomempeje","'.$nomemp.'",""],["liptocue_nomcareje","'.$nomcar.'",""],["liptocue_coduniste","'.$coduniste.'",""],["liptocue_desuniste","'.$desuniste.'",""]]';
+        break;
+      case '5':
+            $coduniste = '';
+            $desuniste = '';
+            $c = new Criteria();
+            $c->add(LidatstePeer::CODUNISTE,$codigo);
+            $per = LidatstePeer::doSelectOne($c);
+            if($per)
+            {
+                $coduniste = $per->getCoduniste();
+                $desuniste = $per->getDesuniste();
+            }
+            $output = '[["liptocue_coduniste","'.$coduniste.'",""],["liptocue_desuniste","'.$desuniste.'",""],["","",""]]';
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
@@ -207,6 +276,19 @@ class licptocueActions extends autolicptocueActions
 
   public function saving($clasemodelo)
   {
+    if($clasemodelo->getNumptocue()=='########')
+    {
+        $c = new Criteria();
+        $per = LidefempPeer::doSelectOne($c);
+        $numptocue = str_pad($per->getPtocta(),8,'0',STR_PAD_LEFT);
+        $val = H::GetX('Numptocue','Liptocue','Numptocue',$numptocue);
+        if($val==$numptocue)
+            return 'V008';
+        $clasemodelo->setNumptocue($numptocue);
+        $sql="update lidefemp set ptocta='".($per->getPtocta()+1)."'";
+        H::BuscarDatos($sql,$rs);
+    }
+    if($clasemodelo->getStatus()=='') $clasemodelo->setStatus('P');
     return parent::saving($clasemodelo);
   }
 

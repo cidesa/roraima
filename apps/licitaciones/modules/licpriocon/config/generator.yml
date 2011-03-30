@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Lipriocon
+    theme:            cidesaGenerator
+    fields:
+      codprio:    { name: Código, params: maxlength=3 size=5 onBlur="$(this.id).value=$(this.id).value.pad(3,'0',0)" }
+      desprio:    { name: Descripción, params: maxlength=100 }
+
+    list:
+      title:          Prioridad de Contratación
+      display:        [codprio, desprio]
+      filters:        [codprio, desprio]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort: codprio
+
+    edit:
+      title:          Prioridad de Contratación
+      display:
+        Datos Empresa:   [codprio, desprio]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

@@ -4,41 +4,107 @@ generator:
     model_class:      Liptocue
     theme:            cidesaGenerator
     fields:
-      numptocue:    { name: Nro Punto de Cuenta}
-      codlic:
-        name: Contratación
+      numptocue:      { name: Nro Punto de Cuenta para Aprobación de Egreso, params: size=10 maxlength=8 onBlur=Correl(this.id)}
+      numemo:
+        name: Memorandon Solicitud de Aprobación Egreso
         msj_error: El Código es necesario
         catalogo:
-          catalogoweb: Liemppar_licreglic
-          clase: Lireglic
+          catalogoweb: Limemoran_numemo
+          clase: Limemoran
           ajax: 1
-          parametros: getprincipal="getCodlic" getsecundario="getDescri" campoprincipal="codlic" camposecundario="descri" campobase = "id"
-      descri:    { name: . , params: style='display:none'}
-      fecrec:    { name: Fecha Registro}
-      fecreg:    { name: Fecha, params: size="10"}
-      numexp:    { name: Nro Expediente, params: size="10"}
-      unidad:    { name: Unidad Ejecutora, params: size="80"}
-      respon:    { name: Responsable, params: size="80"}
-      comision:    { name: Comision, params: size="80"}
-      tipfin:    { name: Fuente Financiamiento, params: size="80"}
-      nompro:    { name: Proyecto, params: size="80"}
-      deslic:    { name: Breve Descripción, type: textarea_tag, params: size="80x5"}
-      decretos:  { name: Decretos/Punto de Cuenta, type: textarea_tag, params: size="80x5"}
-      modad:     { name: Modalidad, params: size="60"}
+          parametros: getprincipal="getNumemo" getsecundario="getDesnumemo" campoprincipal="numemo" camposecundario="desnumemo" campobase = "id"
+      numpre:         { name: Número Presupuesto Base , params: readonly=true style="border:none"}
+      ejepre:         { name: Ejercicio Prespuestario Año, params: style="border:none"}
+      codempadm:
+        name: Para
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_codemp
+          clase: Lidatste
+          ajax: 2
+          parametros: getprincipal="getCodempadm" getsecundario="getNomempadm" campoprincipal="codempadm" camposecundario="nomempadm" campobase = "id"
+      nomcaradm:      { name: Cargo, params: style=border:none}
+      coduniadm:
+        name: Unidad
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_licregsol
+          clase: Lidatste
+          ajax: 3
+          parametros: getprincipal="getCoduniadm" getsecundario="getDesuniadm" campoprincipal="coduniadm" camposecundario="desuniadm" campobase = "id"
+      codempeje:
+        name: De
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_codemp
+          clase: Lidatste
+          ajax: 4
+          parametros: getprincipal="getCodempeje" getsecundario="getNomempeje" campoprincipal="codempeje" camposecundario="nomempeje" campobase = "id"
+      nomcareje:      { name: Cargo, params: style=border:none}
+      coduniste:
+        name: Unidad
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_licregsol
+          clase: Lidatste
+          ajax: 5
+          parametros: getprincipal="getCoduniste" getsecundario="getDesuniste" campoprincipal="coduniste" camposecundario="desuniste" campobase = "id"      
+      desclacomp:     { name: Solicitud de Contratación, params: size=80 style=border:none}
+      fecreg:         { name: Fecha Registro, params: size=10 style=border:none}
+      dias:           { name: Dias para el Vencimiento, params: size=5 style=border:none}
+      fecven:         { name: Fecha Vencimiento, params: size=10 style=border:none}
+      ente:           { name: Ente Contratante, params: size=80 style=border:none}
+      tipcon:         { name: Tipo Solicitud Bien/Servicio, params: size=80 style=border:none}
+      tipcom:         { name: Compra, params: size=80 style=border:none}
+      acto:           { name: Acto Motivado, params: size=80 style=border:none}
+      nomext:         { name: Financiamiento, params: size=80 style=border:none}
+      nompre:         { name: Proyecto, params: size=80 style=border:none}
+      desprio:        { name: Prioridad, params: size=80 style=border:none}
+      despro:         { name: Breve Descripción, type: textarea_tag, params: size="80x5" }
+      monpre:         { name: Monto Moneda Original, params: size=80 style=border:none}
+      monpreext:      { name: Monto Moneda Extranjera, params: size=80 style=border:none}
+      docane1:
+        name:  Documento Anexo 1
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Anexo 1***********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      docane2:
+        name:  Documento Anexo 2
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Anexo 2***********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      docane3:
+        name:  Documento Anexo 3
+        type:  admin_input_file_tag
+        params:  include_link=assets include_text="*********Anexo 3***********" include_remove=true
+        upload_dir:  assets
+        help:       Favor cargar solo archivos con extension (pdf,doc,ppt)
+      prepor:         { name: Preparado Por, params: size=80 }
+      preporcar:      { name: Cargo, params: size=80 }
+      lisicact_id:    { name: Declaratoria Modalidad, params: include_blank="Seleccione..." }
+      detdecmod:      { name: Detalle Declaratoria Modalidad, type: textarea_tag, params: size="80x10" }
+      anapor:         { name: Preparado Por, params: size=80 }
+      anaporcar:      { name: Cargo, params: size=80 }
+      js:             {name: .}
 
     list:
-      title:          Punto de Cuenta
-      display:        [numptocue, codlic, fecreg, numexp, unidad, comision, modad]
-      filters:        [numptocue, codlic, fecrec]
+      title:             Punto de Cuenta Solicitud de Aprobación Egreso
+      display:           [=numptocue, despro, ejepre, desuniadm, desuniste]
+      filters:           [numptocue, despro]
       object_actions:
         _edit:        ~
         _delete:      ~
-      sort: codlic
+      max_per_page:      15
+      sort:              numemo
 
     edit:
-      title:          Punto de Cuenta
+      title:             Punto de Cuenta Solicitud de Aprobación Egreso
       display:
-        Punto de Cuenta:   [numptocue, fecrec, codlic, fecreg, numexp, unidad, respon, comision, tipfin, nompro, deslic, decretos, modad]
+        Datos Memorando:      [ente, codempadm, nomcaradm, coduniadm, codempeje, nomcareje, coduniste, numptocue, numemo, numpre, ejepre, tipcon, desclacomp, fecreg, dias, fecven, tipcom, acto, nomext, nompre, desprio, despro, monpre, monpreext]
+        Carga de Documentos:  [docane1, docane2, docane3]
+        Detalle:              [prepor, preporcar, lisicact_id, detdecmod, anapor, anaporcar, _js]
       actions:
         _list:        ~
         _save:        ~

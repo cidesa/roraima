@@ -1,0 +1,27 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   liplieart
+  anchogrid:               900
+  ancho:                   850
+  filas:                   0
+  titulo:                  ' Articulos '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código Artículo
+  tipo:                    t
+  nombrecampo:             codart
+  html:                    [ readonly=true ]
+  esgrabable:              true
+2:
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desart
+  html:                    [ readonly=true ]
+  esgrabable:              false
+3:
+  titulo:                  Cantidad
+  tipo:                    m
+  nombrecampo:             cantid
+  html:                    [ readonly=true ]
+  esgrabable:              true

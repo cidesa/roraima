@@ -1,0 +1,41 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   lidatste
+  anchogrid:               900
+  ancho:                   850
+  filas:                   1
+  titulo:                  ' Responsables '
+  htmltotalfilas:          ' '
+1:       # Columna 2
+  titulo:                  Empleado
+  tipo:                    t
+  nombrecampo:             codemp
+  esgrabable:              true
+  catalogo:                [nphojint, sf_admin_edit_form, {Codemp: 1, Nomemp: 2, Nomcar: 3 }, Nphojint_Nomfalperper ]
+  html:                    [ ]
+2:       # Columna 3
+  titulo:                  Nombre
+  tipo:                    t
+  nombrecampo:             nomemp
+  esgrabable:              true
+  html:                    [ ]
+3:       # Columna 4
+  titulo:                  Cargo
+  tipo:                    t
+  nombrecampo:             nomcar
+  esgrabable:              true
+  html:                    [  ]
+4:       # Columna 5
+  titulo:                  Resolución
+  tipo:                    t
+  nombrecampo:             resolu
+  esgrabable:              true
+  html:                    [ ]
+5:       # Columna 5
+  titulo:                  Fecha
+  tipo:                    f
+  nombrecampo:             fecres
+  esgrabable:              true
+  vacia:                   true
+  html:                    [  ]

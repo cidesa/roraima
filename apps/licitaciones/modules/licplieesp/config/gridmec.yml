@@ -1,0 +1,55 @@
+opciones:                  # Opciones generales
+  name:                    d
+  eliminar:                true
+  tabla:                   lipliemec
+  anchogrid:               900
+  ancho:                   850
+  filas:                   1
+  titulo:                  ' Actos del Concurso '
+  htmltotalfilas:          ' '
+1:
+  titulo:                  Mecanismo de Concurso
+  tipo:                    t
+  nombrecampo:             codmec
+  html:                    [ size=10 ]
+  catalogo:                [limeccon, sf_admin_edit_form, {Codmec: 1, Desmec: 2}, Limeccon_codmec ]
+  esgrabable:              true
+2:       # Columna 1
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desmec
+  html:                    [ readonly=true ]
+  esgrabable:              false
+3:
+  titulo:                  Fecha Sobre 1
+  tipo:                    f
+  nombrecampo:             fecsob1
+  vacia:                   true
+  html:                    [  ]
+  esgrabable:              true
+4:
+  titulo:                  Hora Sobre 1
+  tipo:                    t
+  nombrecampo:             horsob1
+  html:                    [  ]
+  esgrabable:              true
+5:
+  titulo:                  Fecha Sobre 2
+  tipo:                    f
+  nombrecampo:             fecsob2
+  vacia:                   true
+  html:                    [  ]
+  esgrabable:              true
+6:
+  titulo:                  Hora Sobre 2
+  tipo:                    t
+  nombrecampo:             horsob2
+  html:                    [  ]
+  esgrabable:              true
+7:
+  titulo:                  Direccion del Oferente para Enviar Comunicación
+  tipo:                    t
+  nombrecampo:             horsob2
+  html:                    [  ]
+  esgrabable:              true
+

@@ -1,0 +1,64 @@
+opciones:                  # Opciones generales
+  name:                    c
+  eliminar:                true
+  tabla:                   Liforpag
+  anchogrid:               900
+  ancho:                   850
+  filas:                   1
+  titulo:                  ' Anticipos '
+  htmltotalfilas:          ' '
+1:       # Columna 4
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desant
+  esgrabable:              true
+  html:                    [ size=30 ]
+2:       # Columna 5
+  titulo:                  Porcentaje (%) del Monto Total del Contrato
+  tipo:                    m
+  nombrecampo:             porant
+  esgrabable:              true
+  html:                    [ size=15 ]
+3:       # Columna 4
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             montot
+  esgrabable:              true
+  html:                    [ size=10]
+4:       # Columna 4
+  titulo:                  Recargo
+  tipo:                    m
+  nombrecampo:             monrec
+  esgrabable:              true
+  html:                    [ size=10 ]
+5:       # Columna 4
+  titulo:                  Sub Total
+  tipo:                    m
+  nombrecampo:             subtot
+  esgrabable:              true
+  html:                    [ size=10 ]
+6:       # Columna 4
+  titulo:                  Porcentaje (%) de Amortización del Anticipo
+  tipo:                    m
+  nombrecampo:             poramoant
+  esgrabable:              true
+  html:                    [ size=10 ]
+7:       # Columna 4
+  titulo:                  Neto a Pagar
+  tipo:                    m
+  nombrecampo:             netpag
+  esgrabable:              true
+  html:                    [ size=10 ]
+8:       # Columna 4
+  titulo:                  Fecha
+  tipo:                    f
+  nombrecampo:             fecant
+  esgrabable:              true
+  vacia:                   true
+  html:                    [ size=10 ]
+9:       # Columna 4
+  titulo:                  Condición
+  tipo:                    t
+  nombrecampo:             condic
+  esgrabable:              true
+  html:                    [ size=40 ]

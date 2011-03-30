@@ -4,38 +4,83 @@ generator:
     model_class:      Licomint
     theme:            cidesaGenerator
     fields:
-      numcomint:                      {name: Nro. Compra Integral, params: size=10 maxlength=8}
-      numexp:                         {name: Nro. Expediente, params: size=10 maxlength=8}
-      feccomint:                      {name: Fecha}
-      codcom:
-        name: Comision de Contratación
+      numcomint:                      {name: Nro. Compra Integral, params: size=10 maxlength=8 onblur="Correl(this.id)"}
+      ejepre:         { name: Ejercicio Prespuestario Año, params: style="border:none"}
+      ente:           { name: Ente Contratante, params: size=80 style=border:none}
+      codempadm:
+        name: Para
         msj_error: El Código es necesario
         catalogo:
-          catalogoweb: Licomlic_licregsol
-          clase: Licomlic
-          ajax: 1
-          parametros: getprincipal="getCodcom" getsecundario="getDescom" campoprincipal="codcom" camposecundario="descom" campobase = "id"
-      respon:         {name: Responsable, params:  size="80"}
-      gridreq:        {name: .}
-      gridart:        {name: .}
+          catalogoweb: Lidatste_codemp
+          clase: Lidatste
+          ajax: 2
+          parametros: getprincipal="getCodempadm" getsecundario="getNomempadm" campoprincipal="codempadm" camposecundario="nomempadm" campobase = "id"
+      nomcaradm:      { name: Cargo, params: style=border:none}
+      coduniadm:
+        name: Unidad
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_licregsol
+          clase: Lidatste
+          ajax: 3
+          parametros: getprincipal="getCoduniadm" getsecundario="getDesuniadm" campoprincipal="coduniadm" camposecundario="desuniadm" campobase = "id"
+      codempeje:
+        name: De
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_codemp
+          clase: Lidatste
+          ajax: 4
+          parametros: getprincipal="getCodempeje" getsecundario="getNomempeje" campoprincipal="codempeje" camposecundario="nomempeje" campobase = "id"
+      nomcareje:      { name: Cargo, params: style=border:none}
+      coduniste:
+        name: Unidad
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Lidatste_licregsol
+          clase: Lidatste
+          ajax: 5
+          parametros: getprincipal="getCoduniste" getsecundario="getDesuniste" campoprincipal="coduniste" camposecundario="desuniste" campobase = "id"
+      tipcon:      { name: Tipo Solicitud Bienes/Servicio}
+      fecreg:         { name: Fecha Registro, params: onChange=CalculaFecha(this.value)}
+      dias:           { name: Dias para el Vencimiento, params: size=5 onChange=CalculaFecha(this.value) }
+      fecven:         { name: Fecha Vencimiento, params: readonly=true style="border:none" }
+      codclacomp:
+        name: Solicitud de Contratacion
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Clacomp_Ocreglic
+          clase: Occlacomp
+          ajax: 0
+          parametros: getprincipal="getCodclacomp" getsecundario="getDesclacomp" campoprincipal="codclacomp" camposecundario="desclacomp" campobase = "id"
+      ptipcon:     { name: .}
+      grid:        { name: .}
+      moncom:      { name: Monto General de Compra, params: readonly=true style="border:none"}
+      moncomlet:   { name: Son, params: readonly=true size=60 style="border:none"}
+      moncomext:   { name: Monto Moneda Extranjera, params: readonly=true style="border:none"}
+      moncomextlet: { name: Son, params: readonly=true size=60 style="border:none"}
+      destiplic:   { name: Modalidad de Contratacion, params: size=60 style="border:none"}
+      tipcom:      { name: Compra}
+      codmon:      { name: Moneda}
+      pcodmon:    { name: .}
+      ptipcom:    { name: .}
+      js:          { name: .}
 
     list:
-      title:         Compra Integral
-      display:       [=numcomint, numexp, feccomint, codcom, descom, respon]
-      filters:       [numcomint, numexp, feccomint, codcom]
+      title:         Compra Integral/Pedido
+      display:       [=numcomint, coduniadm, desuniadm, coduniste, desuniste, codclacomp, desclacomp]
+      filters:       [numcomint, coduniadm, coduniste, codclacomp]
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:	  10
       sort:          numcomint
-      fields:
-        descom:      {name: Descripción}
 
     edit:
-      title:          Compra Integral
+      title:         Compra Integral/Pedido
       display:
-        Datos Generales:              [numcomint, numexp, feccomint, codcom, respon]
-        Requisiciones de Articulos:   [_gridart, _gridreq]
+        Datos Generales:              [ente, codempadm, nomcaradm, coduniadm, codempeje, nomcareje, coduniste, numcomint, ejepre, _ptipcon, fecreg, dias, fecven, _ptipcom, codclacomp, _pcodmon]
+        Requisiciones/Solicitud de Egreso:   [_grid, moncom, moncomlet, moncomext, moncomextlet, destiplic, _js]
       actions:
         _list:        ~
         _save:        ~
