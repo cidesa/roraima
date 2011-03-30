@@ -101,7 +101,138 @@ class licptocueconActions extends autolicptocueconActions
         // La variable $output es usada para retornar datos en formato de arreglo para actualizar
         // objetos en la vista. mas informacion en
         // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
-        $output = '[["","",""],["","",""],["","",""]]';
+           $bieser = '';
+           $compra = '';
+           $modcon = '';
+           $desclacomp = '';
+           $numplie = '';
+           $numexp = '';
+           $codpro='';
+           $numofe='';
+           $fecofe='';
+           $monofe='';
+           $recomen='';
+           $nompro='';
+           $rifpro='';
+           $nomrepleg='';
+           $direccion='';
+           $c = new Criteria();
+           $c->add(LirecomenPeer::NUMRECOFE,  $codigo);
+           $c->addJoin(LiplieespPeer::NUMEXP,LirecomenPeer::NUMEXP);
+           $c->addJoin(LiplieespPeer::NUMCOMINT,LicomintPeer::NUMCOMINT);
+           $per = LicomintPeer::doSelectOne($c);
+           if($per)
+           {
+               $compra = $per->getTipcom()=='N' ? 'NACIONAL' : ($per->getTipcom()=='I' ? 'INTERNACIONAL' : '');
+               $modcon = H::GetX('Codtiplic','Litiplic','Destiplic',$per->getCodtiplic());
+               $desclacomp = H::GetX('Codclacomp','Occlacomp','Desclacomp',$per->getCodclacomp());
+               $bieser= $per->getTipcon()=='B' ? 'BIENES' : ($per->getTipcon()=='S' ? 'SERVICIO' : '');               
+           }
+           $c = new Criteria();
+           $c->add(LirecomenPeer::NUMRECOFE,  $codigo);
+           $c->addJoin(LiregofePeer::NUMEXP,LirecomenPeer::NUMEXP);
+           $per = LiregofePeer::doSelectOne($c);
+           if($per)
+           {
+                $numplie = $per->getNumplie();
+                $numexp = $per->getNumexp();
+                $codpro = $per->getCodpro();
+                $numofe = $per->getNumofe();
+                $fecofe = $per->getFecofe('d/m/Y');
+                $monofe = $per->getMonofe();                
+           }
+           $c = new Criteria();
+           $c->add(LirecomenPeer::NUMRECOFE,  $codigo);
+           $c->addJoin(LiregofePeer::NUMEXP,LirecomenPeer::NUMEXP);
+           $c->addJoin(LiregofePeer::CODPRO,CaproveePeer::CODPRO);
+           $per = CaproveePeer::doSelectOne($c);
+           if($per)
+           {
+               $nompro=$per->getNompro();
+               $rifpro=$per->getrifpro();
+               $nomrepleg=$per->getNomrepleg();
+               $direccion=$per->getdirpro();
+           }
+           $recomen = H::GetX('Numrecofe','Lirecomen','Recomen',$codigo);
+           $js='';
+           $output = '[["liptocuecon_tipcom","'.$compra.'",""],["liptocuecon_destiplic","'.$modcon.'",""],["liptocuecon_tipcon","'.$bieser.'",""],
+                       ["liptocuecon_desclacomp","'.$desclacomp.'",""],["liptocuecon_numplie","'.$numplie.'",""],["liptocuecon_numexp","'.$numexp.'",""],
+                       ["liptocuecon_codpro","'.$codpro.'",""],["liptocuecon_numofe","'.$numofe.'",""],["liptocuecon_fecofe","'.$fecofe.'",""],
+                       ["liptocuecon_monofe","'.H::FormatoMonto($monofe).'",""],["liptocuecon_detrecomen","'.$recomen.'",""],["liptocuecon_nompro","'.$nompro.'",""],
+                       ["liptocuecon_rifpro","'.$rifpro.'",""],["liptocuecon_nomrepleg","'.$nomrepleg.'",""],["liptocuecon_direccion","'.$direccion.'",""],
+                       ["javascript","'.$js.'",""]]';
+        break;
+      case '2':
+            $nomemp = '';
+            $nomcar = '';
+            $coduniadm = '';
+            $desuniadm = '';
+            $c = new Criteria();
+            $c->add(LidatstePeer::CODEMP,$codigo);
+            $per = LidatstePeer::doSelectOne($c);
+            if($per)
+            {
+                $nomemp = $per->getNomemp();
+                $nomcar = $per->getNomcar();
+                $coduniadm = $per->getCoduniste();
+                $desuniadm = $per->getDesuniste();
+            }
+            $output = '[["liptocuecon_nomempadm","'.$nomemp.'",""],["liptocuecon_nomcaradm","'.$nomcar.'",""],["liptocuecon_coduniadm","'.$coduniadm.'",""],["liptocuecon_desuniadm","'.$desuniadm.'",""]]';
+        break;
+      case '3':
+            $coduniadm = '';
+            $desuniadm = '';
+            $c = new Criteria();
+            $c->add(LidatstePeer::CODUNISTE,$codigo);
+            $per = LidatstePeer::doSelectOne($c);
+            if($per)
+            {
+                $coduniadm = $per->getCoduniste();
+                $desuniadm = $per->getDesuniste();
+            }
+            $output = '[["liptocuecon_coduniadm","'.$coduniadm.'",""],["liptocuecon_desuniadm","'.$desuniadm.'",""],["","",""]]';
+        break;
+      case '4':
+            $nomemp = '';
+            $nomcar = '';
+            $coduniste = '';
+            $desuniste = '';
+            $c = new Criteria();
+            $c->add(LidatstePeer::CODEMP,$codigo);
+            $per = LidatstePeer::doSelectOne($c);
+            if($per)
+            {
+                $nomemp = $per->getNomemp();
+                $nomcar = $per->getNomcar();
+                $coduniste = $per->getCoduniste();
+                $desuniste = $per->getDesuniste();
+            }
+            $output = '[["liptocuecon_nomempeje","'.$nomemp.'",""],["liptocuecon_nomcareje","'.$nomcar.'",""],["liptocuecon_coduniste","'.$coduniste.'",""],["liptocuecon_desuniste","'.$desuniste.'",""]]';
+        break;
+      case '5':
+            $coduniste = '';
+            $desuniste = '';
+            $c = new Criteria();
+            $c->add(LidatstePeer::CODUNISTE,$codigo);
+            $per = LidatstePeer::doSelectOne($c);
+            if($per)
+            {
+                $coduniste = $per->getCoduniste();
+                $desuniste = $per->getDesuniste();
+            }
+            $output = '[["liptocuecon_coduniste","'.$coduniste.'",""],["liptocuecon_desuniste","'.$desuniste.'",""],["","",""]]';
+        break;
+      case '6':
+          $fecha = $this->getRequestParameter('fecha','');
+          $dias = $this->getRequestParameter('dias','');
+          if($fecha && $dias)
+          {
+              $sql="select to_char(to_date('$fecha','dd/mm/yyyy')+$dias,'dd/mm/yyyy') as fecven";
+              if(H::BuscarDatos($sql, $rs))
+                 $fecven = $rs[0]['fecven'];
+          }else
+             $fecven=null;
+          $output = '[["liptocuecon_fecven","'.$fecven.'",""],["","",""],["","",""]]';
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
@@ -122,7 +253,8 @@ class licptocueconActions extends autolicptocueconActions
 
   /**
    *
-   * Función que se ejecuta luego los validadores del negocio (validators)   * Para realizar validaciones específicas del negocio del formulario
+   * Función que se ejecuta luego los validadores del negocio (validators)
+   * Para realizar validaciones específicas del negocio del formulario
    * Para mayor información vease http://www.symfony-project.org/book/1_0/06-Inside-the-Controller-Layer#chapter_06_validation_and_error_handling_methods
    *
    */
@@ -179,6 +311,19 @@ class licptocueconActions extends autolicptocueconActions
 
   public function saving($clasemodelo)
   {
+    if($clasemodelo->getNumptocuecon()=='########')
+    {
+        $c = new Criteria();
+        $per = LidefempPeer::doSelectOne($c);
+        $numero = str_pad($per->getPtocuecon(),8,'0',STR_PAD_LEFT);
+        $val = H::GetX('Numptocuecon','Liptocuecon','Numptocuecon',$numero);
+        if($val==$numero)
+            return 'V008';
+        $clasemodelo->setNumptocuecon($numero);
+        $sql="update lidefemp set ptocuecon='".($per->getPtocuecon()+1)."'";
+        H::BuscarDatos($sql,$rs);
+    }
+    if($clasemodelo->getStatus()=='') $clasemodelo->setStatus('P');
     return parent::saving($clasemodelo);
   }
 

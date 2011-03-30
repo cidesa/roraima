@@ -39,15 +39,17 @@
       var tmonpreext=0;
       for(i=0;i<tfil;i++)
       {
-
-        monpre = $('ax_'+i+'_15').value;
-        monpre = monpre.replace('.','');
-        monpre = monpre.replace(',','.');
+        monpre = $('ax_'+i+'_15').value;        
         monpreext = $('ax_'+i+'_16').value;
-        monpreext = monpreext.replace('.','');
-        monpreext = monpreext.replace(',','.');
-        tmonpre= parseFloat(tmonpre) + parseFloat(monpre);
-        tmonpreext= parseFloat(tmonpreext) + parseFloat(monpreext);
+        if(isNaN(monpre))
+        {
+            monpre = monpre.replace('.','');
+            monpre = monpre.replace(',','.');
+            monpreext = monpreext.replace('.','');
+            monpreext = monpreext.replace(',','.');
+            tmonpre= parseFloat(tmonpre) + parseFloat(monpre);
+            tmonpreext= parseFloat(tmonpreext) + parseFloat(monpreext);
+        }
       }
       toAjax('5',getUrlModulo()+'ajax','0','','&monpre='+tmonpre+'&monpreext='+tmonpreext);
   }

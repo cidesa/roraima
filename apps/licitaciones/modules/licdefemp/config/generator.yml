@@ -14,7 +14,7 @@ generator:
       ptocta:    { name: Punto de Cuenta Egreso}
       prebas:    { name: Presupuesto Base}
       expdie:    { name: Expediente}
-      memora:    { name: Memorando}
+      numemo:    { name: Memorando}
       solegr:    { name: Requisición/Solicitud}
       comint:    { name: Compra Integral/Pedido}
       pliego:    { name: Pliego de Condiciones}
@@ -39,6 +39,6 @@ generator:
       display:
         Datos Principales:   [nomemp, diremp, telemp, faxemp, emaemp]
         Valor Actual Unidad Tributaria: [unitri]
-        Correlativos: [ptocta, prebas, expdie, memora, solegr, comint, pliego, aclara]
+        Correlativos: [ptocta, prebas, expdie, numemo, solegr, comint, pliego, aclara, recome, ptocuecon, notifi]
       actions:
         _save:        ~

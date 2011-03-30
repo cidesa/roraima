@@ -1,88 +1,41 @@
 <?php
 
 /**
- * licnotific actions.
+ * licrecomen actions.
  *
  * @package    siga
- * @subpackage licnotific
+ * @subpackage licrecomen
  * @author     $Auhor$ <desarrollo@cidesa.com.ve>
  * @version    SVN: $Id: actions.class.php 32371 2009-09-01 16:06:59Z lhernandez $
  * @copyright  Copyright 2007, Cidesa C.A.
  */
 
-class licnotificActions extends autolicnotificActions
+class licrecomenActions extends autolicrecomenActions
 {
 
   // Para incluir funcionalidades al executeEdit()
   public function editing()
   {
-
-
+    $this->configGrid();
   }
 
   public function configGrid($reg = array(),$regelim = array())
-  {
+   {
     $this->regelim = $regelim;
 
-    if(!count($reg)>0)
+    if(!(count($reg)>0))
     {
       // Aquí va el código para traernos los registros que contendrá el grid
-      $reg = array();
-      // Aquí va el código para generar arreglo de configuración del grid
-    $this->obj = array();
+      $c = new Criteria();
+      $c->add(LirecomendetPeer::NUMRECOFE,$this->lirecomen->getNumrecofe());
+      $reg = LirecomendetPeer::doSelect($c);
     }
+    $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/licrecomen/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
 
-    // Insertar el criterio de la busqueda de registros del Grid
-    // Por ejemplo:
+    $this->obj = $this->obj[0]->getConfig($reg);
+    $this->lirecomen->setGrid($this->obj);
 
-    // $c = new Criteria();
-    // $c->add(CaartaocPeer::AJUOC ,$this->caajuoc->getAjuoc());
-    // $reg = CaartaocPeer::doSelect($c);
-
-    // De esta forma se carga la configuración del grid de un archivo yml
-    // y se le pasa el parámetro de los registros encontrados ($reg)
-    //                                                                            /nombreformulario/
-    // $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/formulario/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_caartaoc',$reg);
-
-    // Si no se quiere cargar la configuración del grid de un .yml, sedebe hacer a pie.
-    // Por ejemplo:
-
-    /*
-    // Se crea el objeto principal de la clase OpcionesGrid
-    $opciones = new OpcionesGrid();
-    // Se configuran las opciones globales del Grid
-    $opciones->setEliminar(true);
-    $opciones->setTabla('Caartalm');
-    $opciones->setAnchoGrid(1150);
-    $opciones->setTitulo('Existencia por Almacenes');
-    $opciones->setHTMLTotalFilas(' ');
-    // Se generan las columnas
-    $col1 = new Columna('Cod. Almacen');
-    $col1->setTipo(Columna::TEXTO);
-    $col1->setEsGrabable(true);
-    $col1->setAlineacionObjeto(Columna::CENTRO);
-    $col1->setAlineacionContenido(Columna::CENTRO);
-    $col1->setNombreCampo('codalm');
-    $col1->setCatalogo('cadefalm','sf_admin_edit_form','2');
-    $col1->setAjax(2,2);
-
-    $col2 = new Columna('Descripción');
-    $col2->setTipo(Columna::TEXTO);
-    $col2->setAlineacionObjeto(Columna::IZQUIERDA);
-    $col2->setAlineacionContenido(Columna::IZQUIERDA);
-    $col2->setNombreCampo('codalm');
-    $col2->setHTML('type="text" size="25" disabled=true');
-
-    // Se guardan las columnas en el objetos de opciones
-    $opciones->addColumna($col1);
-    $opciones->addColumna($col2);
-
-    // Se genera el arreglo de opciones necesario para generar el grid
-    $this->obj = $opciones->getConfig($per);
-     */
-
-
-  }
+   }
 
   public function executeAjax()
   {
@@ -91,6 +44,7 @@ class licnotificActions extends autolicnotificActions
     // Esta variable ajax debe ser usada en cada llamado para identificar
     // que objeto hace el llamado y por consiguiente ejecutar el código necesario
     $ajax = $this->getRequestParameter('ajax','');
+    $sw=true;
 
     // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
     // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
@@ -101,24 +55,14 @@ class licnotificActions extends autolicnotificActions
         // La variable $output es usada para retornar datos en formato de arreglo para actualizar
         // objetos en la vista. mas informacion en
         // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
+           $sw=false;
            $bieser = '';
            $compra = '';
            $modcon = '';
            $desclacomp = '';
            $numplie = '';
-           $numexp = '';
-           $codpro='';
-           $numofe='';
-           $fecofe='';
-           $monofe='';
-           $recomen='';
-           $nompro='';
-           $rifpro='';
-           $nomrepleg='';
-           $direccion='';
            $c = new Criteria();
-           $c->add(LiptocueconPeer::NUMPTOCUECON,  $codigo);
-           $c->addJoin(LiplieespPeer::NUMEXP,LiptocueconPeer::NUMEXP);
+           $c->add(LiplieespPeer::NUMEXP,  $codigo);
            $c->addJoin(LiplieespPeer::NUMCOMINT,LicomintPeer::NUMCOMINT);
            $per = LicomintPeer::doSelectOne($c);
            if($per)
@@ -127,40 +71,40 @@ class licnotificActions extends autolicnotificActions
                $modcon = H::GetX('Codtiplic','Litiplic','Destiplic',$per->getCodtiplic());
                $desclacomp = H::GetX('Codclacomp','Occlacomp','Desclacomp',$per->getCodclacomp());
                $bieser= $per->getTipcon()=='B' ? 'BIENES' : ($per->getTipcon()=='S' ? 'SERVICIO' : '');
+               $numplie = H::GetX('Numexp','Liplieesp','Numplie',$codigo);
            }
-           $c = new Criteria();
-           $c->add(LiptocueconPeer::NUMPTOCUECON,  $codigo);
-           $c->addJoin(LiregofePeer::NUMEXP,LiptocueconPeer::NUMEXP);
-           $per = LiregofePeer::doSelectOne($c);
-           if($per)
-           {
-                $numplie = $per->getNumplie();
-                $numexp = $per->getNumexp();
-                $codpro = $per->getCodpro();
-                $numofe = $per->getNumofe();
-                $fecofe = $per->getFecofe('d/m/Y');
-                $monofe = $per->getMonofe();
-           }
-           $c = new Criteria();
-           $c->add(LiptocueconPeer::NUMPTOCUECON,  $codigo);
-           $c->addJoin(LiregofePeer::NUMEXP,LiptocueconPeer::NUMEXP);
-           $c->addJoin(LiregofePeer::CODPRO,CaproveePeer::CODPRO);
-           $per = CaproveePeer::doSelectOne($c);
-           if($per)
-           {
-               $nompro=$per->getNompro();
-               $rifpro=$per->getrifpro();
-               $nomrepleg=$per->getNomrepleg();
-               $direccion=$per->getdirpro();
-           }
-           $recomen = H::GetX('Numptocuecon','Liptocuecon','Detrecomen',$codigo);
+           $this->lirecomen = $this->getLirecomenOrCreate();
+           $this->updateLirecomenFromRequest();
+           $sql="select b.codpro, c.nompro, c.rifpro, d.desemp as destipemp,
+                    FormatoNum(sum(e.punemp)) as punleg,
+                    FormatoNum(sum(f.punemp)) as puntec,
+                    FormatoNum(sum(g.punemp)) as punfin,
+                    FormatoNum(sum(h.punemp)) as punfia,
+                    FormatoNum(b.porvan) as punvan,
+                    FormatoNum(sum(i.punemp)) as puntipemp,
+                    FormatoNum(0) as punmin,
+                    FormatoNum(sum(e.punemp+f.punemp+g.punemp+h.punemp+i.punemp)+b.porvan) as puntot,
+                    max(a.id) as id
+                    from lianaofe a, liregofe b, caprovee c, litipemp d,
+                    lianaofeleg e, lianaofetec f, lianaofefin g, lianaofefin h, lianaofetipemp i
+                    where
+                    a.numexp='$codigo' and
+                    a.numofe=b.numofe and
+                    b.codpro=c.codpro and
+                    b.codtipemp=d.codemp and
+                    e.numanaofe=a.numanaofe and
+                    f.numanaofe=a.numanaofe and
+                    g.numanaofe=a.numanaofe and
+                    h.numanaofe=a.numanaofe and
+                    i.numanaofe=a.numanaofe
+                    group by
+                    b.codpro, c.nompro, c.rifpro, d.desemp,b.porvan
+                    order by puntot desc";
+           H::BuscarDatos($sql, $reg);
+           $this->configGrid($reg);
            $js='';
-           $output = '[["linotific_tipcom","'.$compra.'",""],["linotific_destiplic","'.$modcon.'",""],["linotific_tipcon","'.$bieser.'",""],
-                       ["linotific_desclacomp","'.$desclacomp.'",""],["linotific_numplie","'.$numplie.'",""],["linotific_numexp","'.$numexp.'",""],
-                       ["linotific_codpro","'.$codpro.'",""],["linotific_numofe","'.$numofe.'",""],["linotific_fecofe","'.$fecofe.'",""],
-                       ["linotific_monofe","'.H::FormatoMonto($monofe).'",""],["linotific_detrecomen","'.$recomen.'",""],["linotific_nompro","'.$nompro.'",""],
-                       ["linotific_rifpro","'.$rifpro.'",""],["linotific_nomrepleg","'.$nomrepleg.'",""],["linotific_direccion","'.$direccion.'",""],
-                       ["javascript","'.$js.'",""]]';
+           $output = '[["lirecomen_tipcom","'.$compra.'",""],["lirecomen_destiplic","'.$modcon.'",""],["lirecomen_tipcon","'.$bieser.'",""],
+                       ["lirecomen_desclacomp","'.$desclacomp.'",""],["lirecomen_numplie","'.$numplie.'",""],["javascript","'.$js.'",""]]';
         break;
       case '2':
             $nomemp = '';
@@ -177,7 +121,7 @@ class licnotificActions extends autolicnotificActions
                 $coduniadm = $per->getCoduniste();
                 $desuniadm = $per->getDesuniste();
             }
-            $output = '[["linotific_nomempadm","'.$nomemp.'",""],["linotific_nomcaradm","'.$nomcar.'",""],["linotific_coduniadm","'.$coduniadm.'",""],["linotific_desuniadm","'.$desuniadm.'",""]]';
+            $output = '[["lirecomen_nomempadm","'.$nomemp.'",""],["lirecomen_nomcaradm","'.$nomcar.'",""],["lirecomen_coduniadm","'.$coduniadm.'",""],["lirecomen_desuniadm","'.$desuniadm.'",""]]';
         break;
       case '3':
             $coduniadm = '';
@@ -190,7 +134,7 @@ class licnotificActions extends autolicnotificActions
                 $coduniadm = $per->getCoduniste();
                 $desuniadm = $per->getDesuniste();
             }
-            $output = '[["linotific_coduniadm","'.$coduniadm.'",""],["linotific_desuniadm","'.$desuniadm.'",""],["","",""]]';
+            $output = '[["lirecomen_coduniadm","'.$coduniadm.'",""],["lirecomen_desuniadm","'.$desuniadm.'",""],["","",""]]';
         break;
       case '4':
             $nomemp = '';
@@ -207,7 +151,7 @@ class licnotificActions extends autolicnotificActions
                 $coduniste = $per->getCoduniste();
                 $desuniste = $per->getDesuniste();
             }
-            $output = '[["linotific_nomempeje","'.$nomemp.'",""],["linotific_nomcareje","'.$nomcar.'",""],["linotific_coduniste","'.$coduniste.'",""],["linotific_desuniste","'.$desuniste.'",""]]';
+            $output = '[["lirecomen_nomempeje","'.$nomemp.'",""],["lirecomen_nomcareje","'.$nomcar.'",""],["lirecomen_coduniste","'.$coduniste.'",""],["lirecomen_desuniste","'.$desuniste.'",""]]';
         break;
       case '5':
             $coduniste = '';
@@ -220,7 +164,7 @@ class licnotificActions extends autolicnotificActions
                 $coduniste = $per->getCoduniste();
                 $desuniste = $per->getDesuniste();
             }
-            $output = '[["linotific_coduniste","'.$coduniste.'",""],["linotific_desuniste","'.$desuniste.'",""],["","",""]]';
+            $output = '[["lirecomen_coduniste","'.$coduniste.'",""],["lirecomen_desuniste","'.$desuniste.'",""],["","",""]]';
         break;
       case '6':
           $fecha = $this->getRequestParameter('fecha','');
@@ -232,7 +176,7 @@ class licnotificActions extends autolicnotificActions
                  $fecven = $rs[0]['fecven'];
           }else
              $fecven=null;
-          $output = '[["linotific_fecven","'.$fecven.'",""],["","",""],["","",""]]';
+          $output = '[["lirecomen_fecven","'.$fecven.'",""],["","",""],["","",""]]';
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
@@ -243,7 +187,8 @@ class licnotificActions extends autolicnotificActions
 
     // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
     // mantener habilitar esta instrucción
-    return sfView::HEADER_ONLY;
+    if($sw)
+        return sfView::HEADER_ONLY;
 
     // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
     // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
@@ -301,9 +246,9 @@ class licnotificActions extends autolicnotificActions
    */
   public function updateError()
   {
-    //$this->configGrid();
+    $this->configGrid();
 
-    //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
+    $grid = Herramientas::CargarDatosGridv2($this,$this->obj,true);
 
     //$this->configGrid($grid[0],$grid[1]);
 
@@ -311,24 +256,27 @@ class licnotificActions extends autolicnotificActions
 
   public function saving($clasemodelo)
   {
-    if($clasemodelo->getNumnotif()=='########')
+    if($clasemodelo->getNumrecofe()=='########')
     {
         $c = new Criteria();
         $per = LidefempPeer::doSelectOne($c);
-        $numero = str_pad($per->getNotifi(),8,'0',STR_PAD_LEFT);
-        $val = H::GetX('Numnotif','Linotific','Numnotif',$numero);
+        $numero = str_pad($per->getRecome(),8,'0',STR_PAD_LEFT);
+        $val = H::GetX('Numrecofe','Lirecomen','Numrecofe',$numero);
         if($val==$numero)
             return 'V008';
-        $clasemodelo->setNumnotif($numero);
-        $sql="update lidefemp set notifi='".($per->getNotifi()+1)."'";
+        $clasemodelo->setNumrecofe($numero);
+        $sql="update lidefemp set recome='".($per->getRecome()+1)."'";
         H::BuscarDatos($sql,$rs);
     }
     if($clasemodelo->getStatus()=='') $clasemodelo->setStatus('P');
+    $grid = Herramientas::CargarDatosGridv2($this,$this->obj,true);
+    Licitacion::SalvarGridRecomen($clasemodelo,$grid);
     return parent::saving($clasemodelo);
   }
 
   public function deleting($clasemodelo)
   {
+    Licitacion::EliminarGridRecomen($clase);
     return parent::deleting($clasemodelo);
   }
 
