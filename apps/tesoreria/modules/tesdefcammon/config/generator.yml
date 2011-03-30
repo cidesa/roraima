@@ -1,0 +1,34 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Tscammon
+    theme:            cidesaGenerator
+    fields:
+      codmon:
+        name: Moneda
+        msj_error: El Código es necesario
+        catalogo:
+          catalogoweb: Tscheemi_Tsdesmon
+          clase: Tsdesmon
+          ajax: 0
+          parametros: getprincipal="getCodmon" getsecundario="getNommon" campoprincipal="codmon" camposecundario="nommon" campobase = "id"
+      valmon:         { name: Monto del Cambio }
+      fecmon:         { name: Fecha del Cambio }
+
+    list:
+      title: Listado de Cambios de Monedas
+      display: [=codmon, nommon, fecmon]
+      filters: [codmon, fecmon]
+      sort:    codmon
+      objects_actions:
+        _edit:        ~
+        _delete:        ~
+
+    edit: 
+      title: Edición de Cambios de Monedas
+      display:
+        Datos Generales: [codmon, fecmon, valmon]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

@@ -1,0 +1,37 @@
+methods:
+  post:
+   - "tscammon{codmon}"
+   - "tscammon{fecmon}"
+   - "tscammon{valmon}"
+
+names:
+  tscammon{codmon}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: Validator_codmon
+
+  tscammon{fecmon}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+
+  tscammon{valmon}:
+    required:  Yes
+    required_msg: Este campo no puede estar en Blanco
+    validators: MyNumberValidator
+
+Validator_codmon:
+    class: CidesaExistValidator
+    param:
+        class:    Tsdesmon
+        column:   codmon
+        unique_error:   El Código del Moneda no Existe
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Debe ser un Numero Valido
+        nan_error:    Debe ser un Numero Valido
+        min:          0000000001,00
+        min_error:    Los numeros estan Incorrectos
+        max:          9999999999,99
